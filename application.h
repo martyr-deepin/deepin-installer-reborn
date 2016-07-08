@@ -15,9 +15,11 @@ namespace ui {
 class MainWindow;
 }  // namespace ui
 
+// Application is used as a container to holder global single instance of
+// service objects and main window object. Both in main thread and background
+// threads.
 class Application : public QApplication {
   Q_OBJECT
-
  public:
   Application(int& argc, char** argv) : QApplication(argc, argv) { }
   // Destroy service objects in destructor.

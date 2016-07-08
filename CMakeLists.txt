@@ -54,9 +54,15 @@ add_executable(deepin-installer-reborn
 
                ${SERVICE_FILES}
                ${UI_FILES}
+
+               resources/misc.qrc
                )
 
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+install(FILES resources/misc/deepin-installer-reborn.desktop
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications")
+install(FILES resources/misc/deepin-installer-reborn.svg
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps")
