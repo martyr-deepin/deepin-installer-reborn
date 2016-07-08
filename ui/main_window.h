@@ -6,6 +6,7 @@
 #define DEEPIN_INSTALLER_UI_MAIN_WINDOW_H
 
 #include <QWidget>
+class QLabel;
 
 namespace ui {
 
@@ -21,6 +22,12 @@ class MainWindow : public QWidget {
  public:
   MainWindow();
 
+ private:
+  void initUI();
+  void registerShortcut();
+  void updateBackground();
+
+  QLabel* background_label_ = nullptr;
 };
 
 }  // namespace ui

@@ -33,15 +33,18 @@ find_package(Qt5X11Extras REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(PkgConfig REQUIRED)
 
+set(BASE_FILES
+    base/consts.h)
+
 set(SERVICE_FILES
     service/signal_manager.cpp service/signal_manager.h
-    )
+    service/settings_manager.cpp service/settings_manager.h)
 
 set(SOURCE_FILES main.cpp
     application.cpp application.h)
 
 set(UI_FILES
-    ui/main_window.cpp ui/main_window.h)
+    ui/main_window.cpp ui/main_window.h service/settings_manager.cpp service/settings_manager.h)
 
 set(LINK_LIBS
     Qt5::Widgets
@@ -52,6 +55,7 @@ set(LINK_LIBS
 add_executable(deepin-installer-reborn
                ${SOURCE_FILES}
 
+               ${BASE_FILES}
                ${SERVICE_FILES}
                ${UI_FILES}
 

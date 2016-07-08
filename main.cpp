@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
   // TODO(xushaohua): Do some filter job here.
 
   app->initMainWindow();
-  app->main_window->show();
+  app->main_window->showFullScreen();
 
   const int state = app->exec();
   delete app;
