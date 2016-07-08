@@ -40,6 +40,9 @@ set(SERVICE_FILES
 set(SOURCE_FILES main.cpp
     application.cpp application.h)
 
+set(UI_FILES
+    ui/main_window.cpp ui/main_window.h)
+
 set(LINK_LIBS
     Qt5::Widgets
     Qt5::X11Extras
@@ -50,6 +53,7 @@ add_executable(deepin_installer
                ${SOURCE_FILES}
 
                ${SERVICE_FILES}
+               ${UI_FILES}
                )
 
 target_link_libraries(deepin_installer ${LINK_LIBS})

@@ -11,6 +11,10 @@ namespace service {
 class SignalManager;
 }  // namespace service
 
+namespace ui {
+class MainWindow;
+}  // namespace ui
+
 class Application : public QApplication {
   Q_OBJECT
 
@@ -20,8 +24,10 @@ class Application : public QApplication {
   ~Application();
 
   service::SignalManager* signal_manager = nullptr;
+  ui::MainWindow* main_window = nullptr;
 
   void initServiceObjects();
+  void initMainWindow();
 };
 
 // Global instance.
