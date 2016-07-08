@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(deepin_installer)
+project(deepin-installer-reborn)
 
 # Only generate Debug and Release configuration types.
 set(CMAKE_CONFIGURATION_TYPES Debug Release)
@@ -49,11 +49,14 @@ set(LINK_LIBS
     Qt5::Gui
     )
 
-add_executable(deepin_installer
+add_executable(deepin-installer-reborn
                ${SOURCE_FILES}
 
                ${SERVICE_FILES}
                ${UI_FILES}
                )
 
-target_link_libraries(deepin_installer ${LINK_LIBS})
+target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
+
+install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
