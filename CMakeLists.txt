@@ -59,7 +59,8 @@ set(UI_FILES
     ui/frames/confirm_quit_frame.cpp ui/frames/confirm_quit_frame.h
     ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h
     ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
-    ui/frames/install_success_frame.cpp ui/frames/install_success_frame.h)
+    ui/frames/install_success_frame.cpp ui/frames/install_success_frame.h
+    ui/frames/install_failed_frame.cpp ui/frames/install_failed_frame.h)
 
 set(SOURCE_FILES main.cpp
     application.cpp application.h
