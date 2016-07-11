@@ -19,6 +19,7 @@
 #include "ui/frames/disk_space_insufficient_frame.h"
 #include "ui/frames/install_failed_frame.h"
 #include "ui/frames/install_success_frame.h"
+#include "ui/frames/partition_table_warning_frame.h"
 #include "ui/frames/select_language_frame.h"
 #include "ui/frames/system_info_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
@@ -35,6 +36,7 @@ const char kConfirmQuitFrameName[] = "confirm_quit_frame";
 const char kDiskSpaceInsufficientFrameName[] = "disk_space_insufficient_frame";
 const char kInstallFailedFrameName[] = "install_failed_frame";
 const char kInstallSuccessFrameName[] = "install_success_frame";
+const char kPartitionTableWarningFrameName[] = "partition_table_warning_frame";
 const char kSelectLanguageFrameName[] = "select_language_frame";
 const char kSystemInfoFrameName[] = "system_info_frame";
 const char kVirtualMachineFrameName[] = "virtual_machine_frame";
@@ -95,6 +97,11 @@ void MainWindow::initPages() {
   InstallSuccessFrame* install_success_frame = new InstallSuccessFrame(this);
   pages_.insert(kInstallSuccessFrameName,
                 main_layout_->addWidget(install_success_frame));
+
+  PartitionTableWarningFrame* partition_table_warning_frame =
+      new PartitionTableWarningFrame(this);
+  pages_.insert(kPartitionTableWarningFrameName,
+                main_layout_->addWidget(partition_table_warning_frame));
 
   SelectLanguageFrame* select_language_frame = new SelectLanguageFrame(this);
   pages_.insert(kSelectLanguageFrameName,
