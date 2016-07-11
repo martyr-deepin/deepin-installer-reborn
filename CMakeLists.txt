@@ -56,7 +56,10 @@ set(UI_FILES
     ui/widgets/flat_button.cpp ui/widgets/flat_button.h
     ui/utils/xutil.cpp ui/utils/xutil.h
     ui/widgets/icon_button.cpp ui/widgets/icon_button.h
-    ui/frames/confirm_quit_frame.cpp ui/frames/confirm_quit_frame.h ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h)
+    ui/frames/confirm_quit_frame.cpp ui/frames/confirm_quit_frame.h
+    ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h
+    ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
+    )
 
 set(SOURCE_FILES main.cpp
     application.cpp application.h

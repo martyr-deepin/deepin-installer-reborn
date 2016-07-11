@@ -16,6 +16,7 @@
 #include "application.h"
 #include "service/settings_manager.h"
 #include "ui/frames/confirm_quit_frame.h"
+#include "ui/frames/select_language_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
 #include "ui/widgets/icon_button.h"
 
@@ -27,6 +28,8 @@ const int kCloseButtonSize = 32;
 
 // Frame page names.
 const char kConfirmQuitFrameName[] = "confirm_quit_frame";
+const char kSelectLanguageFrameName[] = "select_language_frame";
+const char kVirtualMachineFrameName[] = "virtual_machine_frame";
 
 }
 
@@ -71,6 +74,14 @@ void MainWindow::initPages() {
   ConfirmQuitFrame* confirm_quit_frame = new ConfirmQuitFrame(this);
   pages_.insert(kConfirmQuitFrameName,
                 main_layout_->addWidget(confirm_quit_frame));
+
+  SelectLanguageFrame* select_language_frame = new SelectLanguageFrame(this);
+  pages_.insert(kSelectLanguageFrameName,
+                main_layout_->addWidget(select_language_frame));
+
+  VirtualMachineFrame* virtual_machine_frame = new VirtualMachineFrame(this);
+  pages_.insert(kVirtualMachineFrameName,
+                main_layout_->addWidget(virtual_machine_frame));
 }
 
 void MainWindow::initUI() {
