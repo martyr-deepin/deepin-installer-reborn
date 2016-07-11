@@ -18,6 +18,7 @@
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/disk_space_insufficient_frame.h"
 #include "ui/frames/install_failed_frame.h"
+#include "ui/frames/install_progress_frame.h"
 #include "ui/frames/install_success_frame.h"
 #include "ui/frames/partition_table_warning_frame.h"
 #include "ui/frames/select_language_frame.h"
@@ -35,6 +36,7 @@ const int kCloseButtonSize = 32;
 const char kConfirmQuitFrameName[] = "confirm_quit_frame";
 const char kDiskSpaceInsufficientFrameName[] = "disk_space_insufficient_frame";
 const char kInstallFailedFrameName[] = "install_failed_frame";
+const char kInstallProgressFrameName[] = "install_progress_frame";
 const char kInstallSuccessFrameName[] = "install_success_frame";
 const char kPartitionTableWarningFrameName[] = "partition_table_warning_frame";
 const char kSelectLanguageFrameName[] = "select_language_frame";
@@ -93,6 +95,10 @@ void MainWindow::initPages() {
   InstallFailedFrame* install_failed_frame = new InstallFailedFrame(this);
   pages_.insert(kInstallFailedFrameName,
                 main_layout_->addWidget(install_failed_frame));
+
+  InstallProgressFrame* install_progress_frame = new InstallProgressFrame(this);
+  pages_.insert(kInstallProgressFrameName,
+                main_layout_->addWidget(install_progress_frame));
 
   InstallSuccessFrame* install_success_frame = new InstallSuccessFrame(this);
   pages_.insert(kInstallSuccessFrameName,

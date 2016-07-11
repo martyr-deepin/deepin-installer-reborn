@@ -63,7 +63,9 @@ set(UI_FILES
     ui/frames/install_failed_frame.cpp ui/frames/install_failed_frame.h
     ui/frames/disk_space_insufficient_frame.cpp ui/frames/disk_space_insufficient_frame.h
     ui/frames/system_info_frame.cpp ui/frames/system_info_frame.h
-    ui/frames/partition_table_warning_frame.cpp ui/frames/partition_table_warning_frame.h)
+    ui/frames/partition_table_warning_frame.cpp ui/frames/partition_table_warning_frame.h
+    ui/frames/install_progress_frame.cpp ui/frames/install_progress_frame.h
+    )
 
 set(SOURCE_FILES main.cpp
     application.cpp application.h
