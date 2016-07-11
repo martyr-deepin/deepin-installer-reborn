@@ -11,6 +11,7 @@ namespace service {
 
 class SettingsManager : public QObject {
   Q_OBJECT
+
  public:
   SettingsManager();
 

@@ -21,6 +21,7 @@ class MainWindow;
 // threads.
 class Application : public QApplication {
   Q_OBJECT
+
  public:
   Application(int& argc, char** argv);
   // Destroy service objects in destructor.

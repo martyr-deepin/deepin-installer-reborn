@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/resources">
+    <file>deepin-installer-reborn.desktop</file>
+    <file>deepin-installer-reborn.svg</file>
+    <file>fallback-wallpaper.jpg</file>
+  </qresource>
+</RCC>
+

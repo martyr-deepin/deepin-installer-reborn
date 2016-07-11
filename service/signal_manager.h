@@ -11,6 +11,7 @@ namespace service {
 
 class SignalManager : public QObject {
   Q_OBJECT
+
  public:
   SignalManager();
 };

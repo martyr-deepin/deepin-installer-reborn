@@ -33,23 +33,42 @@ find_package(Qt5X11Extras REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(PkgConfig REQUIRED)
 
+pkg_search_module(X11 REQUIRED x11)
+pkg_search_module(X11EXT REQUIRED xext)
+pkg_search_module(X11TST REQUIRED xtst)
+
+include_directories(AFTER ${X11_INCLUDE_DIRS})
+include_directories(AFTER ${X11EXT_INCLUDE_DIRS})
+include_directories(AFTER ${X11TST_INCLUDE_DIRS})
+
 set(BASE_FILES
-    base/consts.h)
+    base/consts.h
+    base/file_util.cpp base/file_util.h
+    )
 
 set(SERVICE_FILES
     service/signal_manager.cpp service/signal_manager.h
-    service/settings_manager.cpp service/settings_manager.h)
-
-set(SOURCE_FILES main.cpp
-    application.cpp application.h)
+    service/settings_manager.cpp service/settings_manager.h
+    )
 
 set(UI_FILES
-    ui/main_window.cpp ui/main_window.h service/settings_manager.cpp service/settings_manager.h)
+    ui/main_window.cpp ui/main_window.h
+    ui/widgets/flat_button.cpp ui/widgets/flat_button.h
+    ui/utils/xutil.cpp ui/utils/xutil.h
+    )
+
+set(SOURCE_FILES main.cpp
+    application.cpp application.h
+    )
 
 set(LINK_LIBS
     Qt5::Widgets
     Qt5::X11Extras
     Qt5::Gui
+
+    ${X11_LIBRARIES}
+    ${X11EXT_LIBRARIES}
+    ${X11TST_LIBRARIES}
     )
 
 add_executable(deepin-installer-reborn
@@ -59,14 +78,16 @@ add_executable(deepin-installer-reborn
                ${SERVICE_FILES}
                ${UI_FILES}
 
-               resources/misc.qrc
+               resources/resources.qrc
+               ui/images/images.qrc
+               ui/styles/styles.qrc
                )
 
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
-install(FILES resources/misc/deepin-installer-reborn.desktop
+install(FILES resources/deepin-installer-reborn.desktop
         DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications")
-install(FILES resources/misc/deepin-installer-reborn.svg
+install(FILES resources/deepin-installer-reborn.svg
         DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps")

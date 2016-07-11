@@ -20,7 +20,7 @@ QString SettingsManager::getWindowBackground() {
     return in_system;
   }
 
-  return QStringLiteral(":/misc/fallback-wallpaper.jpg");
+  return QStringLiteral(":/resources/fallback-wallpaper.jpg");
 }
 
 }  // namespace service

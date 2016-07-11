@@ -10,6 +10,8 @@ class QLabel;
 
 namespace ui {
 
+class FlatButton;
+
 // MainWindow is a fullscreen window.
 // All of ui frames are placed in MainWindow.
 // It does following jobs:
@@ -19,15 +21,22 @@ namespace ui {
 //   * quit / abort installation process.
 class MainWindow : public QWidget {
   Q_OBJECT
+
  public:
   MainWindow();
 
+  // Show/hide close button.
+  void setCloseButtonVisible(bool visible);
+  bool isCloseButtonVisible() const;
+
  private:
+  void initConnections();
   void initUI();
   void registerShortcut();
   void updateBackground();
 
   QLabel* background_label_ = nullptr;
+  FlatButton* close_button_ = nullptr;
 };
 
 }  // namespace ui
