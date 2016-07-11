@@ -55,6 +55,7 @@ set(UI_FILES
     ui/main_window.cpp ui/main_window.h
     ui/widgets/flat_button.cpp ui/widgets/flat_button.h
     ui/utils/xutil.cpp ui/utils/xutil.h
+    ui/widgets/icon_button.cpp ui/widgets/icon_button.h
     )
 
 set(SOURCE_FILES main.cpp

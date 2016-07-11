@@ -7,10 +7,11 @@
 
 #include <QWidget>
 class QLabel;
+class QResizeEvent;
 
 namespace ui {
 
-class FlatButton;
+class IconButton;
 
 // MainWindow is a fullscreen window.
 // All of ui frames are placed in MainWindow.
@@ -29,6 +30,10 @@ class MainWindow : public QWidget {
   void setCloseButtonVisible(bool visible);
   bool isCloseButtonVisible() const;
 
+ protected:
+  // Move close button to appropriate position when window is resized.
+  void resizeEvent(QResizeEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
@@ -36,7 +41,7 @@ class MainWindow : public QWidget {
   void updateBackground();
 
   QLabel* background_label_ = nullptr;
-  FlatButton* close_button_ = nullptr;
+  IconButton* close_button_ = nullptr;
 };
 
 }  // namespace ui
