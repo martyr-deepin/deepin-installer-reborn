@@ -6,13 +6,17 @@
 
 #include <QDebug>
 #include <QGraphicsBlurEffect>
+#include <QHash>
 #include <QIcon>
 #include <QLabel>
 #include <QPainter>
 #include <QResizeEvent>
 #include <QShowEvent>
+#include <QStackedLayout>
 #include "application.h"
 #include "service/settings_manager.h"
+#include "ui/frames/confirm_quit_frame.h"
+#include "ui/frames/virtual_machine_frame.h"
 #include "ui/widgets/icon_button.h"
 
 namespace ui {
@@ -21,12 +25,18 @@ namespace {
 
 const int kCloseButtonSize = 32;
 
+// Frame page names.
+const char kConfirmQuitFrameName[] = "confirm_quit_frame";
+
 }
 
-MainWindow::MainWindow() : QWidget() {
+MainWindow::MainWindow()
+    : QWidget(),
+      pages_() {
   this->setObjectName(QStringLiteral("main_window"));
 
   this->initUI();
+  this->initPages();
   this->registerShortcut();
   this->initConnections();
 }
@@ -53,6 +63,14 @@ void MainWindow::resizeEvent(QResizeEvent* event) {
 }
 
 void MainWindow::initConnections() {
+  connect(close_button_, &QPushButton::clicked,
+          this, &MainWindow::onCloseButtonClicked);
+}
+
+void MainWindow::initPages() {
+  ConfirmQuitFrame* confirm_quit_frame = new ConfirmQuitFrame(this);
+  pages_.insert(kConfirmQuitFrameName,
+                main_layout_->addWidget(confirm_quit_frame));
 }
 
 void MainWindow::initUI() {
@@ -64,6 +82,9 @@ void MainWindow::initUI() {
                                  kCloseButtonSize,
                                  kCloseButtonSize,
                                  this);
+
+  main_layout_ = new QStackedLayout(this);
+  this->setLayout(main_layout_);
 
   this->setWindowFlags(Qt::FramelessWindowHint);
 }
@@ -81,6 +102,10 @@ void MainWindow::updateBackground() {
                                 background_pixmap.height());
   QPainter painter(&tmp_background_pixmap);
   background_label_->render(&painter);
+}
+
+void MainWindow::onCloseButtonClicked() {
+  main_layout_->setCurrentIndex(pages_.value(kConfirmQuitFrameName));
 }
 
 }  // namespace ui

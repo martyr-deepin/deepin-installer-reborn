@@ -6,8 +6,10 @@
 #define DEEPIN_INSTALLER_UI_MAIN_WINDOW_H
 
 #include <QWidget>
+#include <QHash>
 class QLabel;
 class QResizeEvent;
+class QStackedLayout;
 
 namespace ui {
 
@@ -36,12 +38,24 @@ class MainWindow : public QWidget {
 
  private:
   void initConnections();
+  void initPages();
   void initUI();
   void registerShortcut();
   void updateBackground();
 
   QLabel* background_label_ = nullptr;
   IconButton* close_button_ = nullptr;
+
+  // All of frame pages are stored in this layout.
+  // And they are referenced by id in |pages_|.
+  QStackedLayout* main_layout_ = nullptr;
+
+  // To store frame pages, page_name => page_id.
+  QHash<QString, int> pages_;
+
+ private slots:
+  // Show ConfirmQuitFrame when close_button_ is clicked.
+  void onCloseButtonClicked();
 };
 
 }  // namespace ui
