@@ -16,6 +16,7 @@
 #include "application.h"
 #include "service/settings_manager.h"
 #include "ui/frames/confirm_quit_frame.h"
+#include "ui/frames/disk_space_insufficient_frame.h"
 #include "ui/frames/install_failed_frame.h"
 #include "ui/frames/install_success_frame.h"
 #include "ui/frames/select_language_frame.h"
@@ -30,6 +31,7 @@ const int kCloseButtonSize = 32;
 
 // Frame page names.
 const char kConfirmQuitFrameName[] = "confirm_quit_frame";
+const char kDiskSpaceInsufficientFrameName[] = "disk_space_insufficient_frame";
 const char kInstallFailedFrameName[] = "install_failed_frame";
 const char kInstallSuccessFrameName[] = "install_success_frame";
 const char kSelectLanguageFrameName[] = "select_language_frame";
@@ -78,6 +80,11 @@ void MainWindow::initPages() {
   ConfirmQuitFrame* confirm_quit_frame = new ConfirmQuitFrame(this);
   pages_.insert(kConfirmQuitFrameName,
                 main_layout_->addWidget(confirm_quit_frame));
+
+  DiskSpaceInsufficientFrame* disk_space_insufficient_frame =
+      new DiskSpaceInsufficientFrame(this);
+  pages_.insert(kDiskSpaceInsufficientFrameName,
+                main_layout_->addWidget(disk_space_insufficient_frame));
 
   InstallFailedFrame* install_failed_frame = new InstallFailedFrame(this);
   pages_.insert(kInstallFailedFrameName,
