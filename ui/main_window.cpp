@@ -20,6 +20,7 @@
 #include "ui/frames/install_failed_frame.h"
 #include "ui/frames/install_success_frame.h"
 #include "ui/frames/select_language_frame.h"
+#include "ui/frames/system_info_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
 #include "ui/widgets/icon_button.h"
 
@@ -35,9 +36,10 @@ const char kDiskSpaceInsufficientFrameName[] = "disk_space_insufficient_frame";
 const char kInstallFailedFrameName[] = "install_failed_frame";
 const char kInstallSuccessFrameName[] = "install_success_frame";
 const char kSelectLanguageFrameName[] = "select_language_frame";
+const char kSystemInfoFrameName[] = "system_info_frame";
 const char kVirtualMachineFrameName[] = "virtual_machine_frame";
 
-}
+}  // namespace
 
 MainWindow::MainWindow()
     : QWidget(),
@@ -97,6 +99,10 @@ void MainWindow::initPages() {
   SelectLanguageFrame* select_language_frame = new SelectLanguageFrame(this);
   pages_.insert(kSelectLanguageFrameName,
                 main_layout_->addWidget(select_language_frame));
+
+  SystemInfoFrame* system_info_frame = new SystemInfoFrame(this);
+  pages_.insert(kSystemInfoFrameName,
+                main_layout_->addWidget(system_info_frame));
 
   VirtualMachineFrame* virtual_machine_frame = new VirtualMachineFrame(this);
   pages_.insert(kVirtualMachineFrameName,
