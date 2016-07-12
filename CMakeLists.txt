@@ -49,7 +49,7 @@ set(BASE_FILES
 set(SERVICE_FILES
     service/signal_manager.cpp service/signal_manager.h
     service/settings_manager.cpp service/settings_manager.h
-    )
+    service/log_manager.cpp service/log_manager.h)
 
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
@@ -71,6 +71,9 @@ set(SOURCE_FILES main.cpp
     application.cpp application.h
     )
 
+add_subdirectory(third_party/CuteLogger)
+include_directories(third_party/CuteLogger)
+
 set(LINK_LIBS
     Qt5::Widgets
     Qt5::X11Extras
@@ -79,6 +82,8 @@ set(LINK_LIBS
     ${X11_LIBRARIES}
     ${X11EXT_LIBRARIES}
     ${X11TST_LIBRARIES}
+
+    CuteLogger
     )
 
 add_executable(deepin-installer-reborn

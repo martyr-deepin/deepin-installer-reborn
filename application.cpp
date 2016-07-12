@@ -5,6 +5,7 @@
 #include "application.h"
 
 #include "base/consts.h"
+#include "service/log_manager.h"
 #include "service/settings_manager.h"
 #include "service/signal_manager.h"
 #include "ui/main_window.h"
@@ -44,6 +45,8 @@ void Application::initMainWindow() {
 }
 
 void Application::initServiceObjects() {
+  service::InitLogService();
+
   signal_manager = new service::SignalManager();
   settings_manager = new service::SettingsManager();
 }
