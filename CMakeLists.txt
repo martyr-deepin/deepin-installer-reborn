@@ -51,6 +51,10 @@ set(SERVICE_FILES
     service/settings_manager.cpp service/settings_manager.h
     service/log_manager.cpp service/log_manager.h)
 
+set(SYSINFO_FILES
+    sysinfo/users.cpp sysinfo/users.h
+    )
+
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
     ui/widgets/flat_button.cpp ui/widgets/flat_button.h
@@ -91,6 +95,7 @@ add_executable(deepin-installer-reborn
 
                ${BASE_FILES}
                ${SERVICE_FILES}
+               ${SYSINFO_FILES}
                ${UI_FILES}
 
                resources/resources.qrc
