@@ -41,6 +41,11 @@ include_directories(AFTER ${X11_INCLUDE_DIRS})
 include_directories(AFTER ${X11EXT_INCLUDE_DIRS})
 include_directories(AFTER ${X11TST_INCLUDE_DIRS})
 
+add_subdirectory(third_party/CuteLogger)
+include_directories(third_party/CuteLogger)
+add_subdirectory(third_party/googletest)
+include_directories(third_party/googletest)
+
 set(BASE_FILES
     base/consts.h
     base/file_util.cpp base/file_util.h
@@ -75,8 +80,9 @@ set(SOURCE_FILES main.cpp
     application.cpp application.h
     )
 
-add_subdirectory(third_party/CuteLogger)
-include_directories(third_party/CuteLogger)
+set(UNITTEST_FILES
+    sysinfo/users_test.cpp
+    )
 
 set(LINK_LIBS
     Qt5::Widgets
@@ -90,6 +96,7 @@ set(LINK_LIBS
     CuteLogger
     )
 
+# Main executable
 add_executable(deepin-installer-reborn
                ${SOURCE_FILES}
 
@@ -105,6 +112,20 @@ add_executable(deepin-installer-reborn
 
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 
+# Unittest
+add_executable(deepin-installer-reborn-tests
+               "tests/test_main.cpp"
+
+               ${SYSINFO_FILES}
+               ${UNITTEST_FILES}
+               )
+target_link_libraries(deepin-installer-reborn-tests
+
+                      ${LINK_LIBS}
+                      gtest
+                      )
+
+## Installation
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 install(FILES resources/deepin-installer-reborn.desktop

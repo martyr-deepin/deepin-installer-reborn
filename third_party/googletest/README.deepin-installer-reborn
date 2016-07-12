@@ -1,0 +1,6 @@
+Name: GoogleTest
+Authro: Google
+Version: master
+License: BSD
+Home: https://github.com/google/googletest
+Description: Google C++ test framework
