@@ -7,6 +7,7 @@
 
 #include <QDir>
 #include <QObject>
+class QSettings;
 
 namespace service {
 
@@ -16,7 +17,16 @@ class SettingsManager : public QObject {
  public:
   SettingsManager();
 
-  QString getLanguageListFile();
+  // Get boolean option value from settings file.
+  // If |key| does not exist, returns false.
+  bool getSettingsBool(const QString& key);
+
+  // Get string option value from settings file.
+  // If |key| does not exist, returns an empty string.
+  QString getSettingsString(const QString& key);
+
+  // Get variant option value from settings file.
+  QVariant getSettingsValue(const QString& key);
 
   // Get image path of window background.
   // First try to find in root of iso.
@@ -26,6 +36,8 @@ class SettingsManager : public QObject {
 
  private:
   QDir oem_dir_;
+  QSettings* oem_settings_ = nullptr;
+  QSettings* default_settings_ = nullptr;
 };
 
 }  // namespace service

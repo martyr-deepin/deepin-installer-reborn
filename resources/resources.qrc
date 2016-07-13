@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/resources">
+    <file>default-settings.ini</file>
     <file>deepin-installer-reborn.desktop</file>
     <file>deepin-installer-reborn.svg</file>
     <file>fallback-wallpaper.jpg</file>

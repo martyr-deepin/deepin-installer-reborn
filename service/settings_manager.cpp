@@ -4,7 +4,9 @@
 
 #include "service/settings_manager.h"
 
+#include <QDebug>
 #include <QFile>
+#include <QSettings>
 
 namespace service {
 
@@ -20,6 +22,43 @@ SettingsManager::SettingsManager()
     : QObject(),
       oem_dir_(kOemDir) {
   this->setObjectName(QStringLiteral("settings_manager"));
+
+  const QString oem_file =
+      oem_dir_.absoluteFilePath(QStringLiteral("settings.ini"));
+  oem_settings_ = new QSettings(oem_file , QSettings::IniFormat, this);
+  default_settings_ = new QSettings(
+      QStringLiteral(":/resources/default-settings.ini"),
+      QSettings::IniFormat, this);
+}
+
+bool SettingsManager::getSettingsBool(const QString& key) {
+  const QVariant value = this->getSettingsValue(key);
+  if (value.isValid()) {
+    return value.toBool();
+  }
+  return false;
+}
+
+QString SettingsManager::getSettingsString(const QString& key) {
+  const QVariant value = this->getSettingsValue(key);
+  if (value.isValid()) {
+    return value.toString();
+  }
+  return QStringLiteral("");
+}
+
+QVariant SettingsManager::getSettingsValue(const QString& key) {
+  if (oem_settings_->contains(key)) {
+    return oem_settings_->value(key);
+  }
+
+  if (default_settings_->contains(key)) {
+    return default_settings_->value(key);
+  }
+
+  qWarning() << "[SettingsManager]::getSettingsValue() Invalid key:" << key;
+
+  return QVariant();
 }
 
 QString SettingsManager::getWindowBackground() {
