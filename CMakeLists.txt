@@ -59,7 +59,7 @@ set(SERVICE_FILES
 set(SYSINFO_FILES
     sysinfo/users.cpp sysinfo/users.h
     sysinfo/validate_username.cpp sysinfo/validate_username.h
-    )
+    sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h)
 
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
@@ -83,7 +83,9 @@ set(SOURCE_FILES main.cpp
 
 set(UNITTEST_FILES
     sysinfo/users_test.cpp
-    sysinfo/validate_username_test.cpp)
+    sysinfo/validate_username_test.cpp
+    sysinfo/validate_hostname_test.cpp
+    )
 
 set(LINK_LIBS
     Qt5::Widgets
