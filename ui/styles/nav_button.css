@@ -2,7 +2,7 @@
 
 QPushButton {
   text-align: center;
-  min-width: 180px;
+  min-width: 260px;
   color: white;
   font-size: 16pt;
   border: none;
@@ -11,6 +11,10 @@ QPushButton {
   padding: 5px;
 }
 
-QPushButton::hover, QPushButton::clicked {
+QPushButton::hover {
   background-color: rgba(221, 221, 221, 0.5);
+}
+
+QPushButton::activate {
+  background-color: rgba(221, 221, 221, 0.6);
 }

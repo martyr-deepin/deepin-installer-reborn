@@ -4,6 +4,14 @@
 
 #include "ui/frames/confirm_quit_frame.h"
 
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+
+#include "ui/frames/consts.h"
+#include "ui/widgets/comment_label.h"
+#include "ui/widgets/nav_button.h"
+#include "ui/widgets/title_label.h"
+
 namespace ui {
 
 ConfirmQuitFrame::ConfirmQuitFrame(QWidget* parent) : QFrame(parent) {
@@ -13,7 +21,40 @@ ConfirmQuitFrame::ConfirmQuitFrame(QWidget* parent) : QFrame(parent) {
 }
 
 void ConfirmQuitFrame::initUI() {
-  this->setAttribute(Qt::WA_TranslucentBackground, true);
+  TitleLabel* title_label = new TitleLabel(tr("Abort Installation"));
+  QHBoxLayout* title_layout = new QHBoxLayout();
+  title_layout->addWidget(title_label);
+
+  CommentLabel* comment_label = new CommentLabel(
+      tr("Relevant operations you made in the installation process will not "
+         "take effect, abort or continue installation?"));
+  QHBoxLayout* comment_layout = new QHBoxLayout();
+  comment_layout->addWidget(comment_label);
+
+  NavButton* continue_button = new NavButton(tr("Continue"));
+  QHBoxLayout* continue_layout = new QHBoxLayout();
+  continue_layout->addWidget(continue_button);
+
+  NavButton* abort_button = new NavButton(tr("Abort"));
+  QHBoxLayout* abort_layout = new QHBoxLayout();
+  abort_layout->addWidget(abort_button);
+
+  QVBoxLayout* layout = new QVBoxLayout();
+  layout->setSpacing(kMainLayoutSpacing);
+  layout->addStretch(3);
+  layout->addLayout(title_layout);
+  layout->addLayout(comment_layout);
+  layout->addStretch(3);
+  layout->addLayout(continue_layout);
+  layout->addLayout(abort_layout);
+  layout->addStretch(1);
+
+  this->setLayout(layout);
+
+  connect(continue_button, &QPushButton::clicked,
+          this, &ConfirmQuitFrame::quitCancelled);
+  connect(abort_button, &QPushButton::clicked,
+          this, &ConfirmQuitFrame::quitConfirmed);
 }
 
 }  // namespace ui

@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
+#include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
@@ -38,8 +39,7 @@ void VirtualMachineFrame::initUI() {
   nav_layout->addWidget(nav_button);
 
   QVBoxLayout* layout = new QVBoxLayout(this);
-  layout->setContentsMargins(0, 0, 0, 0);
-  layout->setSpacing(5);
+  layout->setSpacing(kMainLayoutSpacing);
   layout->setAlignment(Qt::AlignCenter);
   layout->addStretch(4);
   layout->addLayout(title_layout);

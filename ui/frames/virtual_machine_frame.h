@@ -9,6 +9,7 @@
 
 namespace ui {
 
+// This page is displayed when system is running in a virtual machine.
 class VirtualMachineFrame : public QFrame {
   Q_OBJECT
   

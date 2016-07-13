@@ -9,11 +9,19 @@
 
 namespace ui {
 
+// This frame is displayed when close-button is clicked.
 class ConfirmQuitFrame : public QFrame {
   Q_OBJECT
 
  public:
   explicit ConfirmQuitFrame(QWidget* parent = nullptr);
+
+ signals:
+  // Emitted when cancel-button is clicked.
+  void quitCancelled();
+
+  // Emitted when users confirms to quit this program.
+  void quitConfirmed();
 
  private:
   void initUI();

@@ -52,45 +52,47 @@ set(BASE_FILES
     )
 
 set(SERVICE_FILES
-    service/signal_manager.cpp service/signal_manager.h
+    service/log_manager.cpp service/log_manager.h
     service/settings_manager.cpp service/settings_manager.h
-    service/log_manager.cpp service/log_manager.h)
+    service/signal_manager.cpp service/signal_manager.h
+    )
 
 set(SYSINFO_FILES
-    sysinfo/users.cpp sysinfo/users.h
-    sysinfo/validate_username.cpp sysinfo/validate_username.h
-    sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h
-    sysinfo/virtual_machine.cpp sysinfo/virtual_machine.h
     sysinfo/timezone.cpp sysinfo/timezone.h
+    sysinfo/users.cpp sysinfo/users.h
+    sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h
+    sysinfo/validate_username.cpp sysinfo/validate_username.h
+    sysinfo/virtual_machine.cpp sysinfo/virtual_machine.h
     )
 
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
-    ui/widgets/flat_button.cpp ui/widgets/flat_button.h
     ui/utils/xutil.cpp ui/utils/xutil.h
-    ui/widgets/icon_button.cpp ui/widgets/icon_button.h
     ui/frames/confirm_quit_frame.cpp ui/frames/confirm_quit_frame.h
-    ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h
-    ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
-    ui/frames/install_success_frame.cpp ui/frames/install_success_frame.h
-    ui/frames/install_failed_frame.cpp ui/frames/install_failed_frame.h
     ui/frames/disk_space_insufficient_frame.cpp ui/frames/disk_space_insufficient_frame.h
-    ui/frames/system_info_frame.cpp ui/frames/system_info_frame.h
-    ui/frames/partition_table_warning_frame.cpp ui/frames/partition_table_warning_frame.h
+    ui/frames/install_failed_frame.cpp ui/frames/install_failed_frame.h
     ui/frames/install_progress_frame.cpp ui/frames/install_progress_frame.h
-    ui/widgets/title_label.cpp ui/widgets/title_label.h
+    ui/frames/install_success_frame.cpp ui/frames/install_success_frame.h
+    ui/frames/partition_table_warning_frame.cpp ui/frames/partition_table_warning_frame.h
+    ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
+    ui/frames/system_info_frame.cpp ui/frames/system_info_frame.h
+    ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h
+    ui/widgets/comment_label.cpp ui/widgets/comment_label.h
+    ui/widgets/flat_button.cpp ui/widgets/flat_button.h
+    ui/widgets/icon_button.cpp ui/widgets/icon_button.h
     ui/widgets/nav_button.cpp ui/widgets/nav_button.h
-    ui/widgets/comment_label.cpp ui/widgets/comment_label.h)
+    ui/widgets/title_label.cpp ui/widgets/title_label.h
+    ui/frames/consts.h)
 
 set(SOURCE_FILES main.cpp
     application.cpp application.h
     )
 
 set(UNITTEST_FILES
+    sysinfo/timezone_test.cpp
     sysinfo/users_test.cpp
     sysinfo/validate_username_test.cpp
     sysinfo/validate_hostname_test.cpp
-    sysinfo/timezone_test.cpp
     )
 
 set(LINK_LIBS

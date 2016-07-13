@@ -9,6 +9,7 @@
 
 namespace ui {
 
+// CommentLabel displays description text below TitleLabel.
 class CommentLabel : public QLabel {
   Q_OBJECT
 
