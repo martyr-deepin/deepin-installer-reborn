@@ -9,11 +9,19 @@
 
 namespace ui {
 
+// This frame is displayed when no enough disk space is detected.
 class DiskSpaceInsufficientFrame : public QFrame {
   Q_OBJECT
 
  public:
   explicit DiskSpaceInsufficientFrame(QWidget* parent = nullptr);
+
+ signals:
+  // Emitted when abort-button is clicked.
+  void finished();
+
+ private:
+  void initUI();
 };
 
 }  // namespace ui
