@@ -8,12 +8,26 @@
 
 namespace service {
 
-SettingsManager::SettingsManager() : QObject() {
+namespace {
+
+// Absolute path to oem dir in system ISO.
+// Note that iso image is mounted at "/lib/live/mount/medium/".
+const char kOemDir[] = "/lib/live/mount/medium/oem";
+
+}  // namespace
+
+SettingsManager::SettingsManager()
+    : QObject(),
+      oem_dir_(kOemDir) {
   this->setObjectName(QStringLiteral("settings_manager"));
 }
 
 QString SettingsManager::getWindowBackground() {
-  // TODO(xushaohua): Find image in root of iso.
+  const QString in_oem =
+      oem_dir_.absoluteFilePath(QStringLiteral("background.jpg"));
+  if (QFile::exists(in_oem)) {
+    return in_oem;
+  }
 
   const QString in_system(QStringLiteral("/usr/share/backgrounds/default.jpg"));
   if (QFile::exists(in_system)) {

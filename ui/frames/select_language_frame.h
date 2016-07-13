@@ -9,11 +9,24 @@
 
 namespace ui {
 
+// Select system language.
 class SelectLanguageFrame : public QFrame {
   Q_OBJECT
 
  public:
   explicit SelectLanguageFrame(QWidget* parent = nullptr);
+
+ signals:
+  // Emitted when system language is selected.
+  void finished();
+
+ private:
+  void initUI();
+
+  bool language_is_selected_ = false;
+
+ private slots:
+  void onNextButtonClicked();
 };
 
 }  // namespace ui

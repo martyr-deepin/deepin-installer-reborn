@@ -5,6 +5,7 @@
 #ifndef DEEPIN_INSTALLER_REBORN_SETTINGS_MANAGER_H
 #define DEEPIN_INSTALLER_REBORN_SETTINGS_MANAGER_H
 
+#include <QDir>
 #include <QObject>
 
 namespace service {
@@ -15,11 +16,16 @@ class SettingsManager : public QObject {
  public:
   SettingsManager();
 
+  QString getLanguageListFile();
+
   // Get image path of window background.
   // First try to find in root of iso.
   // Then read from /usr/share/backgrounds/.
   // If not appropriate image is found, use the fallback image.
   QString getWindowBackground();
+
+ private:
+  QDir oem_dir_;
 };
 
 }  // namespace service

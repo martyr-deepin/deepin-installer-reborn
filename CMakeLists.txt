@@ -55,7 +55,7 @@ set(SERVICE_FILES
     service/log_manager.cpp service/log_manager.h
     service/settings_manager.cpp service/settings_manager.h
     service/signal_manager.cpp service/signal_manager.h
-    )
+    service/system_language.cpp service/system_language.h)
 
 set(SYSINFO_FILES
     sysinfo/timezone.cpp sysinfo/timezone.h
@@ -93,7 +93,7 @@ set(UNITTEST_FILES
     sysinfo/users_test.cpp
     sysinfo/validate_username_test.cpp
     sysinfo/validate_hostname_test.cpp
-    )
+    service/system_languages_test.cpp)
 
 set(LINK_LIBS
     Qt5::Widgets
@@ -128,8 +128,11 @@ add_executable(deepin-installer-reborn-tests
                "tests/test_main.cpp"
 
                ${BASE_FILES}
+               ${SERVICE_FILES}
                ${SYSINFO_FILES}
                ${UNITTEST_FILES}
+
+               resources/resources.qrc
                )
 target_link_libraries(deepin-installer-reborn-tests
 
