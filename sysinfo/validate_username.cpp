@@ -20,7 +20,6 @@ ValidateUsernameState ValidateUsername(const QString& username) {
   }
 
   const uint first_char = username.at(0).unicode();
-
   if (first_char < 'a' || first_char > 'z') {
     return ValidateUsernameState::FirstCharError;
   }

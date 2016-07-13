@@ -59,7 +59,9 @@ set(SERVICE_FILES
 set(SYSINFO_FILES
     sysinfo/users.cpp sysinfo/users.h
     sysinfo/validate_username.cpp sysinfo/validate_username.h
-    sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h)
+    sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h
+    sysinfo/virtual_machine.cpp sysinfo/virtual_machine.h
+    )
 
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
@@ -119,6 +121,7 @@ target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 add_executable(deepin-installer-reborn-tests
                "tests/test_main.cpp"
 
+               ${BASE_FILES}
                ${SYSINFO_FILES}
                ${UNITTEST_FILES}
                )
