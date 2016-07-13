@@ -13,6 +13,7 @@
 #include <QResizeEvent>
 #include <QShowEvent>
 #include <QStackedLayout>
+
 #include "application.h"
 #include "service/settings_manager.h"
 #include "ui/frames/confirm_quit_frame.h"

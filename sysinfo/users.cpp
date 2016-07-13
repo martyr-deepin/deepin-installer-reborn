@@ -23,6 +23,17 @@ QStringList GetSystemUsers() {
   return users;
 }
 
+QStringList GetUsers() {
+  QStringList users;
+  struct passwd* pwd;
+  while ((pwd = getpwent()) != NULL) {
+    users.append(pwd->pw_name);
+  }
+  endpwent();
+
+  return users;
+}
+
 bool HasRootPrivilege() {
   return getuid() == 0;
 }

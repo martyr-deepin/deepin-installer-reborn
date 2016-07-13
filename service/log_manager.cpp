@@ -5,6 +5,7 @@
 #include "service/log_manager.h"
 
 #include <QFile>
+
 #include "third_party/CuteLogger/CuteLogger/ConsoleAppender.h"
 #include "third_party/CuteLogger/CuteLogger/FileAppender.h"
 #include "third_party/CuteLogger/CuteLogger/Logger.h"

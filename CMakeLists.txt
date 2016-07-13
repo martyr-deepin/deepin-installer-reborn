@@ -58,6 +58,7 @@ set(SERVICE_FILES
 
 set(SYSINFO_FILES
     sysinfo/users.cpp sysinfo/users.h
+    sysinfo/validate_username.cpp sysinfo/validate_username.h
     )
 
 set(UI_FILES
@@ -82,7 +83,7 @@ set(SOURCE_FILES main.cpp
 
 set(UNITTEST_FILES
     sysinfo/users_test.cpp
-    )
+    sysinfo/validate_username_test.cpp)
 
 set(LINK_LIBS
     Qt5::Widgets

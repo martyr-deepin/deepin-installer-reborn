@@ -5,6 +5,7 @@
 #include "sysinfo/users.h"
 
 #include <QString>
+
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
 namespace sysinfo {
@@ -12,6 +13,10 @@ namespace {
 
 TEST(UsersTest, GetSystemUsers) {
   EXPECT_TRUE(GetSystemUsers().contains(QStringLiteral("root")));
+}
+
+TEST(UserTest, GetUsers) {
+  EXPECT_TRUE(GetUsers().length() > 0);
 }
 
 }  // namespace
