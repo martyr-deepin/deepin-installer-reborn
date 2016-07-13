@@ -61,6 +61,7 @@ set(SYSINFO_FILES
     sysinfo/validate_username.cpp sysinfo/validate_username.h
     sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h
     sysinfo/virtual_machine.cpp sysinfo/virtual_machine.h
+    sysinfo/timezone.cpp sysinfo/timezone.h
     )
 
 set(UI_FILES
@@ -87,6 +88,7 @@ set(UNITTEST_FILES
     sysinfo/users_test.cpp
     sysinfo/validate_username_test.cpp
     sysinfo/validate_hostname_test.cpp
+    sysinfo/timezone_test.cpp
     )
 
 set(LINK_LIBS
