@@ -1,7 +1,8 @@
 <RCC>
   <qresource prefix="/styles">
+    <file>comment_label.css</file>
     <file>flat_button.css</file>
-    <file>header_label.css</file>
+    <file>title_label.css</file>
     <file>nav_button.css</file>
   </qresource>
 </RCC>

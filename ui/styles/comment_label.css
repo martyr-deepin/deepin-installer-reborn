@@ -1,0 +1,7 @@
+/** Used by CommentLabel class **/
+
+QLabel {
+  color: #eaeaea;
+  font-size: 16pt;
+  max-width: 840px;
+}
