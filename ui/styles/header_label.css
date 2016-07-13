@@ -1,0 +1,6 @@
+/** Used by HeaderLabel class **/
+
+QLabel {
+  font-size: 32pt;
+  color: white;
+}

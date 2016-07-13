@@ -78,7 +78,7 @@ set(UI_FILES
     ui/frames/system_info_frame.cpp ui/frames/system_info_frame.h
     ui/frames/partition_table_warning_frame.cpp ui/frames/partition_table_warning_frame.h
     ui/frames/install_progress_frame.cpp ui/frames/install_progress_frame.h
-    )
+    ui/widgets/header_label.cpp ui/widgets/header_label.h ui/widgets/nav_button.cpp ui/widgets/nav_button.h)
 
 set(SOURCE_FILES main.cpp
     application.cpp application.h

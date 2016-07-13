@@ -14,6 +14,13 @@ class VirtualMachineFrame : public QFrame {
   
  public:
   explicit VirtualMachineFrame(QWidget* parent = nullptr);
+
+ signals:
+  // This signal is emitted when continue-button is clicked.
+  void finished();
+
+ private:
+  void initUI();
 };
 
 }  // namespace ui

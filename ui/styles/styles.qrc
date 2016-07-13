@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/styles">
     <file>flat_button.css</file>
+    <file>header_label.css</file>
+    <file>nav_button.css</file>
   </qresource>
 </RCC>

@@ -7,12 +7,13 @@
 #include <QDebug>
 #include <QGraphicsBlurEffect>
 #include <QHash>
+#include <QHBoxLayout>
 #include <QIcon>
 #include <QLabel>
 #include <QPainter>
 #include <QResizeEvent>
-#include <QShowEvent>
 #include <QStackedLayout>
+#include <QVBoxLayout>
 
 #include "application.h"
 #include "service/settings_manager.h"
@@ -55,6 +56,8 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
+
+  this->setCurrentPage(kVirtualMachineFrameName);
 }
 
 void MainWindow::setCloseButtonVisible(bool visible) {
@@ -86,41 +89,41 @@ void MainWindow::initConnections() {
 void MainWindow::initPages() {
   ConfirmQuitFrame* confirm_quit_frame = new ConfirmQuitFrame(this);
   pages_.insert(kConfirmQuitFrameName,
-                main_layout_->addWidget(confirm_quit_frame));
+                stacked_layout_->addWidget(confirm_quit_frame));
 
   DiskSpaceInsufficientFrame* disk_space_insufficient_frame =
       new DiskSpaceInsufficientFrame(this);
   pages_.insert(kDiskSpaceInsufficientFrameName,
-                main_layout_->addWidget(disk_space_insufficient_frame));
+                stacked_layout_->addWidget(disk_space_insufficient_frame));
 
   InstallFailedFrame* install_failed_frame = new InstallFailedFrame(this);
   pages_.insert(kInstallFailedFrameName,
-                main_layout_->addWidget(install_failed_frame));
+                stacked_layout_->addWidget(install_failed_frame));
 
   InstallProgressFrame* install_progress_frame = new InstallProgressFrame(this);
   pages_.insert(kInstallProgressFrameName,
-                main_layout_->addWidget(install_progress_frame));
+                stacked_layout_->addWidget(install_progress_frame));
 
   InstallSuccessFrame* install_success_frame = new InstallSuccessFrame(this);
   pages_.insert(kInstallSuccessFrameName,
-                main_layout_->addWidget(install_success_frame));
+                stacked_layout_->addWidget(install_success_frame));
 
   PartitionTableWarningFrame* partition_table_warning_frame =
       new PartitionTableWarningFrame(this);
   pages_.insert(kPartitionTableWarningFrameName,
-                main_layout_->addWidget(partition_table_warning_frame));
+                stacked_layout_->addWidget(partition_table_warning_frame));
 
   SelectLanguageFrame* select_language_frame = new SelectLanguageFrame(this);
   pages_.insert(kSelectLanguageFrameName,
-                main_layout_->addWidget(select_language_frame));
+                stacked_layout_->addWidget(select_language_frame));
 
   SystemInfoFrame* system_info_frame = new SystemInfoFrame(this);
   pages_.insert(kSystemInfoFrameName,
-                main_layout_->addWidget(system_info_frame));
+                stacked_layout_->addWidget(system_info_frame));
 
   VirtualMachineFrame* virtual_machine_frame = new VirtualMachineFrame(this);
   pages_.insert(kVirtualMachineFrameName,
-                main_layout_->addWidget(virtual_machine_frame));
+                stacked_layout_->addWidget(virtual_machine_frame));
 }
 
 void MainWindow::initUI() {
@@ -131,11 +134,22 @@ void MainWindow::initUI() {
                                  QStringLiteral(":/images/close_press.png"),
                                  kCloseButtonSize,
                                  kCloseButtonSize,
-                                 this);
+                                 nullptr);
+  QHBoxLayout* top_layout = new QHBoxLayout();
+  top_layout->setContentsMargins(0, 0, 0, 0);
+  top_layout->setSpacing(0);
+  top_layout->setAlignment(Qt::AlignRight);
+  top_layout->addWidget(close_button_);
 
-  main_layout_ = new QStackedLayout(this);
-  this->setLayout(main_layout_);
+  stacked_layout_ = new QStackedLayout();
 
+  QVBoxLayout* vbox_layout = new QVBoxLayout();
+  vbox_layout->setContentsMargins(0, 0, 0, 0);
+  vbox_layout->setSpacing(0);
+  vbox_layout->addLayout(top_layout);
+  vbox_layout->addLayout(stacked_layout_);
+
+  this->setLayout(vbox_layout);
   this->setWindowFlags(Qt::FramelessWindowHint);
 }
 
@@ -143,19 +157,25 @@ void MainWindow::registerShortcut() {
   // TODO(xushaohua): Register Ctrl+L and Ctrl+P actions
 }
 
+void MainWindow::setCurrentPage(const QString& frame_name) {
+  Q_ASSERT(pages_.contains(frame_name));
+  stacked_layout_->setCurrentIndex(pages_.value(frame_name));
+}
+
 void MainWindow::updateBackground() {
   QPixmap background_pixmap;
   background_pixmap.load(app->settings_manager->getWindowBackground());
   background_label_->setPixmap(background_pixmap);
-  background_label_->setGraphicsEffect(new QGraphicsBlurEffect());
-  QPixmap tmp_background_pixmap(background_pixmap.width(),
-                                background_pixmap.height());
-  QPainter painter(&tmp_background_pixmap);
-  background_label_->render(&painter);
+  background_label_->setFixedSize(size());
+//  background_label_->setGraphicsEffect(new QGraphicsBlurEffect());
+//  QPixmap tmp_background_pixmap(background_pixmap.width(),
+//                                background_pixmap.height());
+//  QPainter painter(&tmp_background_pixmap);
+//  background_label_->render(&painter);
 }
 
 void MainWindow::onCloseButtonClicked() {
-  main_layout_->setCurrentIndex(pages_.value(kConfirmQuitFrameName));
+  stacked_layout_->setCurrentIndex(pages_.value(kConfirmQuitFrameName));
 }
 
 }  // namespace ui

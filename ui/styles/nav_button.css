@@ -1,0 +1,16 @@
+/** Used by NavButton class **/
+
+QPushButton {
+  text-align: center;
+  min-width: 200px;
+  color: white;
+  font-size: 16pt;
+  border: none;
+  outline: none;
+  background-color: rgba(221, 221, 221, 0.3);
+  padding: 5px;
+}
+
+QPushButton::hover, QPushButton::clicked {
+  background-color: rgba(221, 221, 221, 0.5);
+}

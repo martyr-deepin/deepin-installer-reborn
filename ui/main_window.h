@@ -41,6 +41,8 @@ class MainWindow : public QWidget {
   void initPages();
   void initUI();
   void registerShortcut();
+  // Swtich frame page based on name.
+  void setCurrentPage(const QString& frame_name);
   void updateBackground();
 
   QLabel* background_label_ = nullptr;
@@ -48,7 +50,7 @@ class MainWindow : public QWidget {
 
   // All of frame pages are stored in this layout.
   // And they are referenced by id in |pages_|.
-  QStackedLayout* main_layout_ = nullptr;
+  QStackedLayout* stacked_layout_ = nullptr;
 
   // To store frame pages, page_name => page_id.
   QHash<QString, int> pages_;
