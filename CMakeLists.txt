@@ -68,6 +68,7 @@ set(SYSINFO_FILES
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
     ui/utils/xutil.cpp ui/utils/xutil.h
+    ui/frames/consts.h
     ui/frames/confirm_quit_frame.cpp ui/frames/confirm_quit_frame.h
     ui/frames/disk_space_insufficient_frame.cpp ui/frames/disk_space_insufficient_frame.h
     ui/frames/install_failed_frame.cpp ui/frames/install_failed_frame.h
@@ -81,8 +82,9 @@ set(UI_FILES
     ui/widgets/flat_button.cpp ui/widgets/flat_button.h
     ui/widgets/icon_button.cpp ui/widgets/icon_button.h
     ui/widgets/nav_button.cpp ui/widgets/nav_button.h
+    ui/widgets/page_indicator.cpp ui/widgets/page_indicator.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
-    ui/frames/consts.h)
+    )
 
 set(SOURCE_FILES main.cpp
     application.cpp application.h

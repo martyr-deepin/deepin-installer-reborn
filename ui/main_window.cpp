@@ -26,6 +26,7 @@
 #include "ui/frames/system_info_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
 #include "ui/widgets/icon_button.h"
+#include "ui/widgets/page_indicator.h"
 
 namespace ui {
 
@@ -135,18 +136,29 @@ void MainWindow::initUI() {
                                  kCloseButtonSize,
                                  nullptr);
   QHBoxLayout* top_layout = new QHBoxLayout();
-  top_layout->setContentsMargins(0, 0, 0, 0);
   top_layout->setSpacing(0);
+  top_layout->setContentsMargins(0, 0, 0, 0);
   top_layout->setAlignment(Qt::AlignRight);
   top_layout->addWidget(close_button_);
 
   stacked_layout_ = new QStackedLayout();
+
+  // Use a wrapper to hold its position.
+  QFrame* page_indicator_wrapper = new QFrame();
+  page_indicator_wrapper->setFixedHeight(48);
+  page_indicator_ = new PageIndicator(visible_pages_, page_indicator_wrapper);
+  QHBoxLayout* indicator_layout = new QHBoxLayout();
+  indicator_layout->addWidget(page_indicator_);
+  page_indicator_wrapper->setLayout(indicator_layout);
 
   QVBoxLayout* vbox_layout = new QVBoxLayout();
   vbox_layout->setContentsMargins(0, 0, 0, 0);
   vbox_layout->setSpacing(0);
   vbox_layout->addLayout(top_layout);
   vbox_layout->addLayout(stacked_layout_);
+  vbox_layout->addSpacing(48);
+  vbox_layout->addWidget(page_indicator_wrapper);
+  vbox_layout->addSpacing(32);
 
   this->setLayout(vbox_layout);
   this->setWindowFlags(Qt::FramelessWindowHint);

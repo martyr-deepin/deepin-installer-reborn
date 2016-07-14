@@ -41,12 +41,11 @@ void VirtualMachineFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout(this);
   layout->setSpacing(kMainLayoutSpacing);
   layout->setAlignment(Qt::AlignCenter);
-  layout->addStretch(4);
+  layout->addStretch();
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
-  layout->addStretch(4);
+  layout->addStretch();
   layout->addLayout(nav_layout);
-  layout->addStretch(1);
 
   this->setLayout(layout);
 

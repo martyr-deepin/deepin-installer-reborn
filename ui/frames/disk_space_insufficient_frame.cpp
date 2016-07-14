@@ -38,12 +38,11 @@ void DiskSpaceInsufficientFrame::initUI() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addStretch(4);
+  layout->addStretch();
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
-  layout->addStretch(4);
+  layout->addStretch();
   layout->addLayout(abort_layout);
-  layout->addStretch(1);
 
   this->setLayout(layout);
 

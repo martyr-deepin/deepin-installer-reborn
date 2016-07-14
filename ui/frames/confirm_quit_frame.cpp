@@ -41,13 +41,12 @@ void ConfirmQuitFrame::initUI() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addStretch(3);
+  layout->addStretch();
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
-  layout->addStretch(3);
+  layout->addStretch();
   layout->addLayout(continue_layout);
   layout->addLayout(abort_layout);
-  layout->addStretch(1);
 
   this->setLayout(layout);
 

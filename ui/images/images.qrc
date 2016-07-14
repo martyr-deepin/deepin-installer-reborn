@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/images">
+    <file>indicator-active.png</file>
+    <file>indicator-inactive.png</file>
     <file>add_part_active.png</file>
     <file>add_part.png</file>
     <file>animation_bg.png</file>

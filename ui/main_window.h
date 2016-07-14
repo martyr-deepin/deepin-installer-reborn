@@ -14,6 +14,7 @@ class QStackedLayout;
 namespace ui {
 
 class IconButton;
+class PageIndicator;
 
 // MainWindow is a fullscreen window.
 // All of ui frames are placed in MainWindow.
@@ -47,6 +48,10 @@ class MainWindow : public QWidget {
 
   QLabel* background_label_ = nullptr;
   IconButton* close_button_ = nullptr;
+  PageIndicator* page_indicator_ = nullptr;
+  // Number of page used by |page_indicator_|.
+  // This can be different based on installation configuration.
+  int visible_pages_ = 4;
 
   // All of frame pages are stored in this layout.
   // And they are referenced by id in |pages_|.
