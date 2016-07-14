@@ -49,7 +49,7 @@ include_directories(third_party/googletest)
 set(BASE_FILES
     base/consts.h
     base/file_util.cpp base/file_util.h
-    )
+    base/gaussian_blur.cpp base/gaussian_blur.h)
 
 set(SERVICE_FILES
     service/log_manager.cpp service/log_manager.h

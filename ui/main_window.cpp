@@ -5,17 +5,16 @@
 #include "ui/main_window.h"
 
 #include <QDebug>
-#include <QGraphicsBlurEffect>
 #include <QHash>
 #include <QHBoxLayout>
 #include <QIcon>
 #include <QLabel>
-#include <QPainter>
 #include <QResizeEvent>
 #include <QStackedLayout>
 #include <QVBoxLayout>
 
 #include "application.h"
+#include "base/gaussian_blur.h"
 #include "service/settings_manager.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/disk_space_insufficient_frame.h"
@@ -163,15 +162,9 @@ void MainWindow::setCurrentPage(const QString& frame_name) {
 }
 
 void MainWindow::updateBackground() {
-  QPixmap background_pixmap;
-  background_pixmap.load(app->settings_manager->getWindowBackground());
-  background_label_->setPixmap(background_pixmap);
+  const QString image_path = app->settings_manager->getWindowBackground();
+  background_label_->setPixmap(base::FastGaussianBlur(image_path, 32));
   background_label_->setFixedSize(size());
-//  background_label_->setGraphicsEffect(new QGraphicsBlurEffect());
-//  QPixmap tmp_background_pixmap(background_pixmap.width(),
-//                                background_pixmap.height());
-//  QPainter painter(&tmp_background_pixmap);
-//  background_label_->render(&painter);
 }
 
 void MainWindow::onCloseButtonClicked() {
