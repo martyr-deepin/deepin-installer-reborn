@@ -22,6 +22,7 @@
 #include "ui/frames/install_failed_frame.h"
 #include "ui/frames/install_progress_frame.h"
 #include "ui/frames/install_success_frame.h"
+#include "ui/frames/partition_frame.h"
 #include "ui/frames/partition_table_warning_frame.h"
 #include "ui/frames/select_language_frame.h"
 #include "ui/frames/system_info_frame.h"
@@ -75,6 +76,8 @@ void MainWindow::initConnections() {
           this, &MainWindow::rebootSystem);
   connect(install_success_frame_, &InstallSuccessFrame::finished,
           this, &MainWindow::rebootSystem);
+  connect(partition_frame_, &PartitionFrame::finished,
+          this, &MainWindow::goNextPage);
   connect(partition_table_warning_frame_, &PartitionTableWarningFrame::declined,
           this, &MainWindow::rebootSystem);
   connect(partition_table_warning_frame_, &PartitionTableWarningFrame::accepted,
@@ -107,6 +110,10 @@ void MainWindow::initPages() {
   install_success_frame_ = new InstallSuccessFrame(this);
   pages_.insert(PageId::InstallSuccessId,
                 stacked_layout_->addWidget(install_success_frame_));
+
+  partition_frame_ = new PartitionFrame(this);
+  pages_.insert(PageId::PartitionId,
+                stacked_layout_->addWidget(partition_frame_));
 
   partition_table_warning_frame_ = new PartitionTableWarningFrame(this);
   pages_.insert(PageId::PartitionTableWarningId,
@@ -194,7 +201,6 @@ void MainWindow::goNextPage() {
   //   * select language page;
   //   * system info page;
   //   * partition page;
-  //   * confirm installation page;
   //   * install progress page;
   //   * install success page or install failed page;
   // And confirm quit page can be displayed at any moment.
@@ -215,6 +221,14 @@ void MainWindow::goNextPage() {
         current_page_ = PageId::VirtualMachineId;
         this->goNextPage();
       }
+      break;
+    }
+
+    case PageId::PartitionId: {
+      // Show InstallProgressPage.
+      page_indicator_->setVisible(true);
+      page_indicator_->goNextPage();
+      this->setCurrentPage(PageId::InstallProgressId);
       break;
     }
 
@@ -241,6 +255,20 @@ void MainWindow::goNextPage() {
       } else {
         prev_page_ = current_page_;
         current_page_ = PageId::SystemInfoId;
+        this->goNextPage();
+      }
+      break;
+    }
+
+    case PageId::SystemInfoId: {
+      // Check whether to show PartitionPage.
+      if (true) {
+        page_indicator_->setVisible(true);
+        page_indicator_->goNextPage();
+        this->setCurrentPage(PageId::PartitionId);
+      } else {
+        prev_page_ = current_page_;
+        current_page_ = PageId::PartitionId;
         this->goNextPage();
       }
       break;

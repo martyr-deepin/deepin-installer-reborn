@@ -20,6 +20,7 @@ class DiskSpaceInsufficientFrame;
 class InstallFailedFrame;
 class InstallProgressFrame;
 class InstallSuccessFrame;
+class PartitionFrame;
 class PartitionTableWarningFrame;
 class SelectLanguageFrame;
 class SystemInfoFrame;
@@ -55,6 +56,7 @@ class MainWindow : public QWidget {
     InstallFailedId,
     InstallProgressId,
     InstallSuccessId,
+    PartitionId,
     PartitionTableWarningId,
     SelectLanguageId,
     SystemInfoId,
@@ -81,6 +83,7 @@ class MainWindow : public QWidget {
   InstallFailedFrame* install_failed_frame_ = nullptr;
   InstallProgressFrame* install_progress_frame_ = nullptr;
   InstallSuccessFrame* install_success_frame_ = nullptr;
+  PartitionFrame* partition_frame_ = nullptr;
   PartitionTableWarningFrame* partition_table_warning_frame_ = nullptr;
   SelectLanguageFrame* select_language_frame_ = nullptr;
   SystemInfoFrame* system_info_frame_ = nullptr;

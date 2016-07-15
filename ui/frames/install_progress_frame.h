@@ -9,11 +9,32 @@
 
 namespace ui {
 
+// Displays when system is being installed to disk.
+// A progress bar is shown at bottom of page.
 class InstallProgressFrame : public QFrame {
   Q_OBJECT
 
  public:
   explicit InstallProgressFrame(QWidget* parent = nullptr);
+
+  enum class State {
+    Failed,
+    Finished,
+    InProcess,
+  };
+
+  State state() const { return state_; };
+
+ signals:
+  // Emitted when installation finished or failed.
+  // Call state() to check its status.
+  void finished();
+
+ private:
+  void initConnections();
+  void initUI();
+
+  State state_;
 };
 
 }  // namespace ui
