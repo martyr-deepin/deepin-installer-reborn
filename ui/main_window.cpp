@@ -16,6 +16,7 @@
 #include "application.h"
 #include "base/gaussian_blur.h"
 #include "service/settings_manager.h"
+#include "sysinfo/virtual_machine.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/disk_space_insufficient_frame.h"
 #include "ui/frames/install_failed_frame.h"
@@ -30,26 +31,11 @@
 
 namespace ui {
 
-namespace {
-
-const int kCloseButtonSize = 32;
-
-// Frame page names.
-const char kConfirmQuitFrameName[] = "confirm_quit_frame";
-const char kDiskSpaceInsufficientFrameName[] = "disk_space_insufficient_frame";
-const char kInstallFailedFrameName[] = "install_failed_frame";
-const char kInstallProgressFrameName[] = "install_progress_frame";
-const char kInstallSuccessFrameName[] = "install_success_frame";
-const char kPartitionTableWarningFrameName[] = "partition_table_warning_frame";
-const char kSelectLanguageFrameName[] = "select_language_frame";
-const char kSystemInfoFrameName[] = "system_info_frame";
-const char kVirtualMachineFrameName[] = "virtual_machine_frame";
-
-}  // namespace
-
 MainWindow::MainWindow()
     : QWidget(),
-      pages_() {
+      pages_(),
+      prev_page_(PageId::NullId),
+      current_page_(PageId::NullId) {
   this->setObjectName(QStringLiteral("main_window"));
 
   this->initUI();
@@ -57,7 +43,7 @@ MainWindow::MainWindow()
   this->registerShortcut();
   this->initConnections();
 
-  this->setCurrentPage(kVirtualMachineFrameName);
+  this->goNextPage();
 }
 
 void MainWindow::setCloseButtonVisible(bool visible) {
@@ -70,13 +56,7 @@ bool MainWindow::isCloseButtonVisible() const {
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
   Q_ASSERT(background_label_);
-  Q_ASSERT(close_button_);
-
   this->updateBackground();
-
-  // Move close button to top-right corner of main window.
-  // Do not call event->size().width(), which stores an incorrect value.
-  close_button_->move(this->width() - kCloseButtonSize - 10, 10);
 
   QWidget::resizeEvent(event);
 }
@@ -84,62 +64,80 @@ void MainWindow::resizeEvent(QResizeEvent* event) {
 void MainWindow::initConnections() {
   connect(close_button_, &QPushButton::clicked,
           this, &MainWindow::onCloseButtonClicked);
+
+  connect(confirm_quit_frame_, &ConfirmQuitFrame::quitCancelled,
+          this, &MainWindow::goNextPage);
+  connect(confirm_quit_frame_, &ConfirmQuitFrame::quitConfirmed,
+          this, &MainWindow::rebootSystem);
+  connect(disk_space_insufficient_frame_, &DiskSpaceInsufficientFrame::finished,
+          this, &MainWindow::rebootSystem);
+  connect(install_failed_frame_, &InstallFailedFrame::finished,
+          this, &MainWindow::rebootSystem);
+  connect(install_success_frame_, &InstallSuccessFrame::finished,
+          this, &MainWindow::rebootSystem);
+  connect(partition_table_warning_frame_, &PartitionTableWarningFrame::declined,
+          this, &MainWindow::rebootSystem);
+  connect(partition_table_warning_frame_, &PartitionTableWarningFrame::accepted,
+          this, &MainWindow::goNextPage);
+  connect(select_language_frame_, &SelectLanguageFrame::finished,
+          this, &MainWindow::goNextPage);
+  connect(system_info_frame_, &SystemInfoFrame::finished,
+          this, &MainWindow::goNextPage);
+  connect(virtual_machine_frame_, &VirtualMachineFrame::finished,
+          this, &MainWindow::goNextPage);
 }
 
 void MainWindow::initPages() {
-  ConfirmQuitFrame* confirm_quit_frame = new ConfirmQuitFrame(this);
-  pages_.insert(kConfirmQuitFrameName,
-                stacked_layout_->addWidget(confirm_quit_frame));
+  confirm_quit_frame_ = new ConfirmQuitFrame(this);
+  pages_.insert(PageId::ConfirmQuitId,
+                stacked_layout_->addWidget(confirm_quit_frame_));
 
-  DiskSpaceInsufficientFrame* disk_space_insufficient_frame =
-      new DiskSpaceInsufficientFrame(this);
-  pages_.insert(kDiskSpaceInsufficientFrameName,
-                stacked_layout_->addWidget(disk_space_insufficient_frame));
+  disk_space_insufficient_frame_ = new DiskSpaceInsufficientFrame(this);
+  pages_.insert(PageId::DiskSpaceInsufficientId,
+                stacked_layout_->addWidget(disk_space_insufficient_frame_));
 
-  InstallFailedFrame* install_failed_frame = new InstallFailedFrame(this);
-  pages_.insert(kInstallFailedFrameName,
-                stacked_layout_->addWidget(install_failed_frame));
+  install_failed_frame_ = new InstallFailedFrame(this);
+  pages_.insert(PageId::InstallFailedId,
+                stacked_layout_->addWidget(install_failed_frame_));
 
-  InstallProgressFrame* install_progress_frame = new InstallProgressFrame(this);
-  pages_.insert(kInstallProgressFrameName,
-                stacked_layout_->addWidget(install_progress_frame));
+  install_progress_frame_ = new InstallProgressFrame(this);
+  pages_.insert(PageId::InstallProgressId,
+                stacked_layout_->addWidget(install_progress_frame_));
 
-  InstallSuccessFrame* install_success_frame = new InstallSuccessFrame(this);
-  pages_.insert(kInstallSuccessFrameName,
-                stacked_layout_->addWidget(install_success_frame));
+  install_success_frame_ = new InstallSuccessFrame(this);
+  pages_.insert(PageId::InstallSuccessId,
+                stacked_layout_->addWidget(install_success_frame_));
 
-  PartitionTableWarningFrame* partition_table_warning_frame =
-      new PartitionTableWarningFrame(this);
-  pages_.insert(kPartitionTableWarningFrameName,
-                stacked_layout_->addWidget(partition_table_warning_frame));
+  partition_table_warning_frame_ = new PartitionTableWarningFrame(this);
+  pages_.insert(PageId::PartitionTableWarningId,
+                stacked_layout_->addWidget(partition_table_warning_frame_));
 
-  SelectLanguageFrame* select_language_frame = new SelectLanguageFrame(this);
-  pages_.insert(kSelectLanguageFrameName,
-                stacked_layout_->addWidget(select_language_frame));
+  select_language_frame_ = new SelectLanguageFrame(this);
+  pages_.insert(PageId::SelectLanguageId,
+                stacked_layout_->addWidget(select_language_frame_));
 
-  SystemInfoFrame* system_info_frame = new SystemInfoFrame(this);
-  pages_.insert(kSystemInfoFrameName,
-                stacked_layout_->addWidget(system_info_frame));
+  system_info_frame_ = new SystemInfoFrame(this);
+  pages_.insert(PageId::SystemInfoId,
+                stacked_layout_->addWidget(system_info_frame_));
 
-  VirtualMachineFrame* virtual_machine_frame = new VirtualMachineFrame(this);
-  pages_.insert(kVirtualMachineFrameName,
-                stacked_layout_->addWidget(virtual_machine_frame));
+  virtual_machine_frame_ = new VirtualMachineFrame(this);
+  pages_.insert(PageId::VirtualMachineId,
+                stacked_layout_->addWidget(virtual_machine_frame_));
 }
 
 void MainWindow::initUI() {
   background_label_ = new QLabel(this);
 
+  QFrame* close_button_wrapper = new QFrame();
+  close_button_wrapper->setFixedHeight(36);
   close_button_ = new IconButton(QStringLiteral(":/images/close_normal.png"),
                                  QStringLiteral(":/images/close_hover.png"),
                                  QStringLiteral(":/images/close_press.png"),
-                                 kCloseButtonSize,
-                                 kCloseButtonSize,
-                                 nullptr);
-  QHBoxLayout* top_layout = new QHBoxLayout();
-  top_layout->setSpacing(0);
-  top_layout->setContentsMargins(0, 0, 0, 0);
-  top_layout->setAlignment(Qt::AlignRight);
-  top_layout->addWidget(close_button_);
+                                 32, 32, close_button_wrapper);
+  QHBoxLayout* close_layout = new QHBoxLayout();
+  close_layout->setAlignment(Qt::AlignRight);
+  close_layout->addWidget(close_button_);
+  close_button_wrapper->setLayout(close_layout);
 
   stacked_layout_ = new QStackedLayout();
 
@@ -154,7 +152,7 @@ void MainWindow::initUI() {
   QVBoxLayout* vbox_layout = new QVBoxLayout();
   vbox_layout->setContentsMargins(0, 0, 0, 0);
   vbox_layout->setSpacing(0);
-  vbox_layout->addLayout(top_layout);
+  vbox_layout->addWidget(close_button_wrapper);
   vbox_layout->addLayout(stacked_layout_);
   vbox_layout->addSpacing(48);
   vbox_layout->addWidget(page_indicator_wrapper);
@@ -168,9 +166,13 @@ void MainWindow::registerShortcut() {
   // TODO(xushaohua): Register Ctrl+L and Ctrl+P actions
 }
 
-void MainWindow::setCurrentPage(const QString& frame_name) {
-  Q_ASSERT(pages_.contains(frame_name));
-  stacked_layout_->setCurrentIndex(pages_.value(frame_name));
+void MainWindow::setCurrentPage(PageId page_id) {
+  Q_ASSERT(pages_.contains(page_id));
+  Q_ASSERT(page_id != PageId::NullId);
+
+  prev_page_ = current_page_;
+  current_page_ = page_id;
+  stacked_layout_->setCurrentIndex(pages_.value(page_id));
 }
 
 void MainWindow::updateBackground() {
@@ -180,7 +182,112 @@ void MainWindow::updateBackground() {
 }
 
 void MainWindow::onCloseButtonClicked() {
-  stacked_layout_->setCurrentIndex(pages_.value(kConfirmQuitFrameName));
+  this->setCurrentPage(PageId::ConfirmQuitId);
+}
+
+
+void MainWindow::goNextPage() {
+  // Page order:
+  //   * disk space insufficient page;
+  //   * virtual machine page;
+  //   * partition table warning page;
+  //   * select language page;
+  //   * system info page;
+  //   * partition page;
+  //   * confirm installation page;
+  //   * install progress page;
+  //   * install success page or install failed page;
+  // And confirm quit page can be displayed at any moment.
+  switch (current_page_) {
+    case PageId::ConfirmQuitId: {
+      // Go previous page.
+      this->setCurrentPage(prev_page_);
+      break;
+    }
+
+    case PageId::DiskSpaceInsufficientId: {
+      // Check whether to show VirtualMachinePage.
+      if (sysinfo::IsVirtualMachine()) {
+        page_indicator_->setVisible(false);
+        this->setCurrentPage(PageId::VirtualMachineId);
+      } else {
+        prev_page_ = current_page_;
+        current_page_ = PageId::VirtualMachineId;
+        this->goNextPage();
+      }
+      break;
+    }
+
+    case PageId::PartitionTableWarningId: {
+      // Check whether to show SelectLanguagePage.
+      if (true) {
+        page_indicator_->setVisible(true);
+        page_indicator_->goNextPage();
+        this->setCurrentPage(PageId::SelectLanguageId);
+      } else {
+        prev_page_ = current_page_;
+        current_page_ = PageId::SelectLanguageId;
+        this->goNextPage();
+      }
+      break;
+    }
+
+    case PageId::SelectLanguageId: {
+      // Check whether to show SystemInfoPage.
+      if (true) {
+        page_indicator_->setVisible(true);
+        page_indicator_->goNextPage();
+        this->setCurrentPage(PageId::SystemInfoId);
+      } else {
+        prev_page_ = current_page_;
+        current_page_ = PageId::SystemInfoId;
+        this->goNextPage();
+      }
+      break;
+    }
+
+    case PageId::VirtualMachineId: {
+      // Check whether to show PartitionTableWarningPage.
+      if (false) {
+        page_indicator_->setVisible(false);
+        this->setCurrentPage(PageId::PartitionTableWarningId);
+      } else {
+        prev_page_ = current_page_;
+        current_page_ = PageId::PartitionTableWarningId;
+        this->goNextPage();
+      }
+      break;
+    }
+
+    case PageId::NullId: {
+      // Displays the first page.
+      // Check whether to show DiskSpaceInsufficientPage.
+      if (false) {
+        page_indicator_->setVisible(false);
+        this->setCurrentPage(PageId::DiskSpaceInsufficientId);
+      } else {
+        prev_page_ = current_page_;
+        current_page_ = PageId::DiskSpaceInsufficientId;
+        this->goNextPage();
+      }
+      break;
+    }
+
+    default: {
+      qWarning() << "[MainWindow]::goNextPage() We shall never reach here";
+      break;
+    }
+  }
+}
+
+void MainWindow::rebootSystem() {
+  // TODO(xushaohua): reboot system
+  this->close();
+}
+
+void MainWindow::shutdownSystem() {
+  // TODO(xushaohua): Poweroff system.
+  this->close();
 }
 
 }  // namespace ui

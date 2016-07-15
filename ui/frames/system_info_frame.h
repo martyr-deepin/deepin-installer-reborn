@@ -14,6 +14,13 @@ class SystemInfoFrame : public QFrame {
 
  public:
   explicit SystemInfoFrame(QWidget* parent = nullptr);
+
+ signals:
+  void finished();
+
+ private slots:
+  // Validate form content.
+  void onNextButtonClicked();
 };
 
 }  // namespace ui

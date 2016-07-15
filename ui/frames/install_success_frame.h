@@ -14,6 +14,10 @@ class InstallSuccessFrame : public QFrame {
 
  public:
   explicit InstallSuccessFrame(QWidget* parent = nullptr);
+
+ signals:
+  // Emitted when reboot button is clicked.
+  void finished();
 };
 
 }  // namespace ui

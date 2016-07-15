@@ -26,6 +26,7 @@ class SelectLanguageFrame : public QFrame {
   bool language_is_selected_ = false;
 
  private slots:
+  // Check if a language item is selected.
   void onNextButtonClicked();
 };
 

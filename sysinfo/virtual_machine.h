@@ -8,7 +8,7 @@
 namespace sysinfo {
 
 // Check whether current system is running in a virtual machine.
-bool IsVirutalMachine();
+bool IsVirtualMachine();
 
 }  // namespace
 

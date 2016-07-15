@@ -14,6 +14,10 @@ class InstallFailedFrame : public QFrame {
 
  public:
   explicit InstallFailedFrame(QWidget* parent = nullptr);
+
+ signals:
+  // Emitted when poweroff button is clocked.
+  void finished();
 };
 
 }  // namespace ui

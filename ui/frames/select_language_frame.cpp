@@ -37,6 +37,7 @@ void SelectLanguageFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addLayout(comment_layout);
+  layout->addStretch();
   layout->addLayout(next_layout);
 
   this->setLayout(layout);
@@ -46,7 +47,9 @@ void SelectLanguageFrame::initUI() {
 }
 
 void SelectLanguageFrame::onNextButtonClicked() {
-  if (language_is_selected_) {
+  // TODO(xushaohua): For test only.
+//  if (language_is_selected_) {
+  if (true) {
     emit this->finished();
   }
 }

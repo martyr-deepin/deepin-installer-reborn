@@ -12,7 +12,7 @@ namespace ui {
 PageIndicator::PageIndicator(int pages, QWidget* parent)
   : QFrame(parent),
     pages_(pages),
-    current_page_(0),
+    current_page_(-1),
     indicator_active_(QStringLiteral(":/images/indicator-active.png")),
     indicator_inactive_(QStringLiteral(":/images/indicator-inactive.png")) {
   Q_ASSERT(pages > 0);
@@ -22,9 +22,14 @@ PageIndicator::PageIndicator(int pages, QWidget* parent)
   this->updateIndicators();
 }
 
+void PageIndicator::goNextPage() {
+  Q_ASSERT(current_page_ + 1 < pages_);
+  this->setCurrentPage(current_page_ + 1);
+}
+
 void PageIndicator::setCurrentPage(int page) {
   current_page_ = page;
-  this->update();
+  this->updateIndicators();
 }
 
 void PageIndicator::initUI() {

@@ -14,6 +14,13 @@ class PartitionTableWarningFrame : public QFrame {
 
  public:
   explicit PartitionTableWarningFrame(QWidget* parent = nullptr);
+
+ signals:
+  // Emitted when reboot button is clicked.
+  void declined();
+
+  // Emitted when continue button is clicked.
+  void accepted();
 };
 
 }  // namespace ui

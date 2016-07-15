@@ -18,6 +18,8 @@ class PageIndicator : public QFrame {
  public:
   PageIndicator(int pages, QWidget* parent = nullptr);
 
+  // Switch to next page indicator.
+  void goNextPage();
   void setCurrentPage(int page);
   int currentPage() const { return current_page_; };
 

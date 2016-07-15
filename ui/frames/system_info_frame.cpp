@@ -10,4 +10,8 @@ SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("system_info_frame"));
 }
 
+void SystemInfoFrame::onNextButtonClicked() {
+
+}
+
 }  // namespace ui
