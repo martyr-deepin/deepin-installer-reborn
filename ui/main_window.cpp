@@ -191,7 +191,6 @@ void MainWindow::onCloseButtonClicked() {
   this->setCurrentPage(PageId::ConfirmQuitId);
 }
 
-
 void MainWindow::goNextPage() {
   // Page order:
   //   * disk space insufficient page;

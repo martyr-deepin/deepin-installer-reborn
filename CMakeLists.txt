@@ -82,6 +82,9 @@ set(UI_FILES
     ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
     ui/frames/system_info_frame.cpp ui/frames/system_info_frame.h
     ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h
+    ui/frames/inner/system_info_avatar_frame.cpp ui/frames/inner/system_info_avatar_frame.h
+    ui/frames/inner/system_info_form_frame.cpp ui/frames/inner/system_info_form_frame.h
+    ui/frames/inner/system_info_timezone_frame.cpp ui/frames/inner/system_info_timezone_frame.h
     ui/widgets/comment_label.cpp ui/widgets/comment_label.h
     ui/widgets/flat_button.cpp ui/widgets/flat_button.h
     ui/widgets/icon_button.cpp ui/widgets/icon_button.h

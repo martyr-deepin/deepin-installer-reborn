@@ -4,13 +4,13 @@
 
 #include "ui/frames/system_info_frame.h"
 
-#include <QHBoxLayout>
-#include <QVBoxLayout>
+#include <QStackedLayout>
 
+#include "ui/frames/inner/system_info_avatar_frame.h"
+#include "ui/frames/inner/system_info_form_frame.h"
+#include "ui/frames/inner/system_info_timezone_frame.h"
 #include "ui/frames/consts.h"
-#include "ui/widgets/comment_label.h"
-#include "ui/widgets/nav_button.h"
-#include "ui/widgets/title_label.h"
+#include "ui/widgets/icon_button.h"
 
 namespace ui {
 
@@ -19,42 +19,65 @@ SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
 
   this->initUI();
   this->initConnections();
+
+  this->showFormPage();
+}
+
+void SystemInfoFrame::initConnections() {
+  connect(timezone_button_, &QPushButton::clicked,
+          this, &SystemInfoFrame::showTimezonePage);
+
+  connect(avatar_frame_, &SystemInfoAvatarFrame::finished,
+          this, &SystemInfoFrame::showFormPage);
+  connect(form_frame_, &SystemInfoFormFrame::finished,
+          this, &SystemInfoFrame::finished);
+  connect(form_frame_, &SystemInfoFormFrame::avatarClicked,
+          this, &SystemInfoFrame::showAvatarPage);
+  connect(timezone_frame_, &SystemInfoTimezoneFrame::finished,
+          this, &SystemInfoFrame::showFormPage);
 }
 
 void SystemInfoFrame::initUI() {
-  TitleLabel* title_label = new TitleLabel(tr("Create User Account"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
+  avatar_frame_ = new SystemInfoAvatarFrame();
+  form_frame_ = new SystemInfoFormFrame();
+  timezone_frame_ = new SystemInfoTimezoneFrame();
 
-  CommentLabel* comment_label =
-      new CommentLabel(tr("Input username and password"));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
+  stacked_layout_ = new QStackedLayout();
+  stacked_layout_->addWidget(avatar_frame_);
+  stacked_layout_->addWidget(form_frame_);
+  stacked_layout_->addWidget(timezone_frame_);
 
-  next_button_ = new NavButton(tr("Next"));
-  QHBoxLayout* next_layout = new QHBoxLayout();
-  next_layout->addWidget(next_button_);
+  timezone_button_ = new IconButton(QStringLiteral(":/images/timezone.png"),
+                                    QStringLiteral(":/images/timezone.png"),
+                                    QStringLiteral(":/images/timezone.png"),
+                                    128, 32, nullptr);
+  // TODO(xushaohua): Remove timezone text.
+  timezone_button_->setText("Beijing");
+  QHBoxLayout* timezone_layout = new QHBoxLayout();
+  timezone_layout->setAlignment(Qt::AlignLeft);
+  timezone_layout->addWidget(timezone_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addStretch();
-  layout->addLayout(title_layout);
-  layout->addLayout(comment_layout);
-  layout->addStretch();
-  layout->addLayout(next_layout);
+  layout->addLayout(timezone_layout);
+  layout->addLayout(stacked_layout_);
 
   this->setLayout(layout);
 }
 
-void SystemInfoFrame::initConnections() {
-  connect(next_button_, &QPushButton::clicked,
-          this, &SystemInfoFrame::onNextButtonClicked);
+void SystemInfoFrame::showAvatarPage() {
+  timezone_button_->setVisible(true);
+  stacked_layout_->setCurrentWidget(avatar_frame_);
 }
 
-void SystemInfoFrame::onNextButtonClicked() {
-  if (true) {
-    emit this->finished();
-  }
+void SystemInfoFrame::showFormPage() {
+  timezone_button_->setVisible(true);
+  stacked_layout_->setCurrentWidget(form_frame_);
+}
+
+void SystemInfoFrame::showTimezonePage() {
+  timezone_button_->setVisible(false);
+  stacked_layout_->setCurrentWidget(timezone_frame_);
 }
 
 }  // namespace ui
