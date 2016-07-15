@@ -2,21 +2,24 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "application.h"
+#include <QApplication>
+
+#include "base/consts.h"
+#include "service/log_manager.h"
 #include "ui/main_window.h"
 
-Application* app;
-
 int main(int argc, char* argv[]) {
-  app = new Application(argc, argv);
+  QApplication app(argc, argv);
 
-  app->initServiceObjects();
-  // TODO(xushaohua): Do some filter job here.
+  // TODO(xushaohua): Set i18n
+  app.setApplicationDisplayName(base::kAppDisplayName);
+  app.setApplicationName(base::kAppName);
+  app.setOrganizationDomain(QStringLiteral("deepin.org"));
 
-  app->initMainWindow();
-  app->main_window->showFullScreen();
+  service::InitLogService();
 
-  const int state = app->exec();
-  delete app;
-  return state;
+  ui::MainWindow main_window;
+  main_window.showFullScreen();
+
+  return app.exec();
 }

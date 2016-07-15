@@ -10,6 +10,12 @@ Deepin Installer, reborn version.
 * No window drag/drop operations
 * No cut/copy/paste operations
 
+# Unit test
+Run `deepin-installer-reborn-tests`
+
+# Check settings ini file
+Run `deepin-installer-check-settings`
+
 # Copyright
 This project is released under General Public License which can be found in
 LICENSE file.

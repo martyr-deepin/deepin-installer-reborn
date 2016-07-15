@@ -8,7 +8,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-#include "application.h"
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 

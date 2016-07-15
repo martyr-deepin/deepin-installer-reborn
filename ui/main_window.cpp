@@ -13,7 +13,6 @@
 #include <QStackedLayout>
 #include <QVBoxLayout>
 
-#include "application.h"
 #include "base/gaussian_blur.h"
 #include "service/settings_manager.h"
 #include "sysinfo/virtual_machine.h"
@@ -183,7 +182,7 @@ void MainWindow::setCurrentPage(PageId page_id) {
 }
 
 void MainWindow::updateBackground() {
-  const QString image_path = app->settings_manager->getWindowBackground();
+  const QString image_path = service::GetWindowBackground();
   background_label_->setPixmap(base::FastGaussianBlur(image_path, 32));
   background_label_->setFixedSize(size());
 }

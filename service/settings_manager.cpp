@@ -5,6 +5,7 @@
 #include "service/settings_manager.h"
 
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QSettings>
 
@@ -18,52 +19,51 @@ const char kOemDir[] = "/lib/live/mount/medium/oem";
 
 }  // namespace
 
-SettingsManager::SettingsManager()
-    : QObject(),
-      oem_dir_(kOemDir) {
-  this->setObjectName(QStringLiteral("settings_manager"));
-
-  const QString oem_file =
-      oem_dir_.absoluteFilePath(QStringLiteral("settings.ini"));
-  oem_settings_ = new QSettings(oem_file , QSettings::IniFormat, this);
-  default_settings_ = new QSettings(
-      QStringLiteral(":/resources/default-settings.ini"),
-      QSettings::IniFormat, this);
-}
-
-bool SettingsManager::getSettingsBool(const QString& key) {
-  const QVariant value = this->getSettingsValue(key);
+bool GetSettingsBool(const QString& key) {
+  const QVariant value = GetSettingsValue(key);
   if (value.isValid()) {
     return value.toBool();
   }
+
+  qCritical() << "GetSettingsBool() failed with key:" << key;
   return false;
 }
 
-QString SettingsManager::getSettingsString(const QString& key) {
-  const QVariant value = this->getSettingsValue(key);
+QString GetSettingsString(const QString& key) {
+  const QVariant value = GetSettingsValue(key);
   if (value.isValid()) {
     return value.toString();
   }
+
+  qCritical() << "GetSettingsString() failed with key:" << key;
   return QStringLiteral("");
 }
 
-QVariant SettingsManager::getSettingsValue(const QString& key) {
-  if (oem_settings_->contains(key)) {
-    return oem_settings_->value(key);
+QVariant GetSettingsValue(const QString& key) {
+  const QString oem_file =
+      QDir(kOemDir).absoluteFilePath(QStringLiteral("settings.ini"));
+
+  // TODO(xushaohua): Set as static variables to speed up.
+  QSettings oem_settings(oem_file , QSettings::IniFormat);
+  QSettings default_settings(
+      QStringLiteral(":/resources/default-settings.ini"),
+      QSettings::IniFormat);
+
+  if (oem_settings.contains(key)) {
+    return oem_settings.value(key);
   }
 
-  if (default_settings_->contains(key)) {
-    return default_settings_->value(key);
+  if (default_settings.contains(key)) {
+    return default_settings.value(key);
   }
 
   qWarning() << "[SettingsManager]::getSettingsValue() Invalid key:" << key;
-
   return QVariant();
 }
 
-QString SettingsManager::getWindowBackground() {
+QString GetWindowBackground() {
   const QString in_oem =
-      oem_dir_.absoluteFilePath(QStringLiteral("background.jpg"));
+      QDir(kOemDir).absoluteFilePath(QStringLiteral("background.jpg"));
   if (QFile::exists(in_oem)) {
     return in_oem;
   }

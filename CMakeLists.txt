@@ -49,13 +49,16 @@ include_directories(third_party/googletest)
 set(BASE_FILES
     base/consts.h
     base/file_util.cpp base/file_util.h
-    base/gaussian_blur.cpp base/gaussian_blur.h)
+    base/gaussian_blur.cpp base/gaussian_blur.h
+    )
 
 set(SERVICE_FILES
     service/log_manager.cpp service/log_manager.h
     service/settings_manager.cpp service/settings_manager.h
     service/signal_manager.cpp service/signal_manager.h
-    service/system_language.cpp service/system_language.h)
+    service/system_language.cpp service/system_language.h
+    service/settings_name.h
+    )
 
 set(SYSINFO_FILES
     sysinfo/timezone.cpp sysinfo/timezone.h
@@ -87,16 +90,13 @@ set(UI_FILES
     ui/widgets/title_label.cpp ui/widgets/title_label.h
     )
 
-set(SOURCE_FILES main.cpp
-    application.cpp application.h
-    )
-
 set(UNITTEST_FILES
     sysinfo/timezone_test.cpp
     sysinfo/users_test.cpp
     sysinfo/validate_username_test.cpp
     sysinfo/validate_hostname_test.cpp
-    service/system_languages_test.cpp)
+    service/system_languages_test.cpp
+    )
 
 set(LINK_LIBS
     Qt5::Widgets
@@ -112,7 +112,7 @@ set(LINK_LIBS
 
 # Main executable
 add_executable(deepin-installer-reborn
-               ${SOURCE_FILES}
+               "main.cpp"
 
                ${BASE_FILES}
                ${SERVICE_FILES}
@@ -128,7 +128,7 @@ target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 
 # Unittest
 add_executable(deepin-installer-reborn-tests
-               "tests/test_main.cpp"
+               "misc/test_main.cpp"
 
                ${BASE_FILES}
                ${SERVICE_FILES}
@@ -141,6 +141,20 @@ target_link_libraries(deepin-installer-reborn-tests
 
                       ${LINK_LIBS}
                       gtest
+                      )
+
+# Check settings ini file
+add_executable(deepin-installer-check-settings
+               "misc/check_settings.cpp"
+
+               ${BASE_FILES}
+               ${SERVICE_FILES}
+
+               resources/resources.qrc
+               )
+target_link_libraries(deepin-installer-check-settings
+
+                      ${LINK_LIBS}
                       )
 
 ## Installation

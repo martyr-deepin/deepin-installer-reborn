@@ -5,40 +5,29 @@
 #ifndef DEEPIN_INSTALLER_REBORN_SETTINGS_MANAGER_H
 #define DEEPIN_INSTALLER_REBORN_SETTINGS_MANAGER_H
 
-#include <QDir>
-#include <QObject>
-class QSettings;
+#include <QString>
+#include <QVariant>
 
 namespace service {
 
-class SettingsManager : public QObject {
-  Q_OBJECT
+// Read settings value from ini file.
 
- public:
-  SettingsManager();
+// Get boolean option value from settings file.
+// If |key| does not exist, returns false.
+bool GetSettingsBool(const QString& key);
 
-  // Get boolean option value from settings file.
-  // If |key| does not exist, returns false.
-  bool getSettingsBool(const QString& key);
+// Get string option value from settings file.
+// If |key| does not exist, returns an empty string.
+QString GetSettingsString(const QString& key);
 
-  // Get string option value from settings file.
-  // If |key| does not exist, returns an empty string.
-  QString getSettingsString(const QString& key);
+// Get variant option value from settings file.
+QVariant GetSettingsValue(const QString& key);
 
-  // Get variant option value from settings file.
-  QVariant getSettingsValue(const QString& key);
-
-  // Get image path of window background.
-  // First try to find in root of iso.
-  // Then read from /usr/share/backgrounds/.
-  // If not appropriate image is found, use the fallback image.
-  QString getWindowBackground();
-
- private:
-  QDir oem_dir_;
-  QSettings* oem_settings_ = nullptr;
-  QSettings* default_settings_ = nullptr;
-};
+// Get image path of window background.
+// First try to find in root of iso.
+// Then read from /usr/share/backgrounds/.
+// If not appropriate image is found, use the fallback image.
+QString GetWindowBackground();
 
 }  // namespace service
 
