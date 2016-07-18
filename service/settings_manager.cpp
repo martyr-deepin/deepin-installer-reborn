@@ -4,10 +4,14 @@
 
 #include "service/settings_manager.h"
 
+#include <time.h>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
+#include <QFileInfoList>
 #include <QSettings>
+
+#include "service/settings_name.h"
 
 namespace service {
 
@@ -16,6 +20,25 @@ namespace {
 // Absolute path to oem dir in system ISO.
 // Note that iso image is mounted at "/lib/live/mount/medium/".
 const char kOemDir[] = "/lib/live/mount/medium/oem";
+
+QStringList ListPngFiles(const QString& dir_name) {
+  QStringList result;
+  QDir dir(dir_name);
+  if (!dir.exists()) {
+    return result;
+  }
+
+  const QStringList name_filters = { "*.png", "*.jpg" };
+  const QFileInfoList info_list =
+      dir.entryInfoList(name_filters, QDir::NoDotAndDotDot | QDir::Files);
+  for (const QFileInfo& info : info_list) {
+    if (info.size() > 0) {
+      result.append(info.absoluteFilePath());
+    }
+  }
+
+  return result;
+}
 
 }  // namespace
 
@@ -59,6 +82,37 @@ QVariant GetSettingsValue(const QString& key) {
 
   qWarning() << "[SettingsManager]::getSettingsValue() Invalid key:" << key;
   return QVariant();
+}
+
+QStringList GetAvatars() {
+  QStringList avatars;
+
+  // First, check oem/ dir.
+  const QString oem_dir(QDir(kOemDir).absoluteFilePath("avatar"));
+  avatars = ListPngFiles(oem_dir);
+  if (!avatars.isEmpty()) {
+    return avatars;
+  }
+
+  // Then, check dde-account-faces dir.
+  avatars = ListPngFiles(QStringLiteral("/var/lib/AccountsService/icons/"));
+  return avatars;
+}
+
+QString GetDefaultAvatar() {
+  // Return user specified avatar.
+  if (GetSettingsBool(kSystemInfoUseDefaultAvator)) {
+    return GetSettingsString(kSystemInfoDefaultAvator);
+  }
+
+  // Pick a random avatar.
+  const int num = static_cast<int>(time(NULL));
+  const QStringList avatars = GetAvatars();
+  if (avatars.isEmpty()) {
+    return "";
+  }
+  const int index = num % avatars.length();
+  return avatars.at(index);
 }
 
 QString GetWindowBackground() {

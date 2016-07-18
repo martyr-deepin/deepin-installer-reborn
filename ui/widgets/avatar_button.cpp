@@ -21,6 +21,7 @@ const int kIconSize = 80;
 AvatarButton::AvatarButton(const QString& icon, QWidget* parent)
   : FlatButton(parent),
     icon_(icon) {
+//  Q_ASSERT(!icon.isEmpty());
   this->setObjectName(QStringLiteral("avatar_button"));
 
   this->setFixedSize(kIconSize, kIconSize);

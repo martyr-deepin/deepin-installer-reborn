@@ -8,6 +8,8 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/avatar_button.h"
 #include "ui/widgets/comment_label.h"
@@ -41,7 +43,7 @@ void SystemInfoFormFrame::initUI() {
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->addWidget(comment_label);
 
-  avatar_button_ = new AvatarButton("/tmp/foo.png");
+  avatar_button_ = new AvatarButton(service::GetDefaultAvatar());
   QHBoxLayout* avatar_layout = new QHBoxLayout();
   avatar_layout->addWidget(avatar_button_);
 

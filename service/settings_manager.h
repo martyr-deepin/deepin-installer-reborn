@@ -6,6 +6,7 @@
 #define DEEPIN_INSTALLER_REBORN_SETTINGS_MANAGER_H
 
 #include <QString>
+#include <QStringList>
 #include <QVariant>
 
 namespace service {
@@ -22,6 +23,12 @@ QString GetSettingsString(const QString& key);
 
 // Get variant option value from settings file.
 QVariant GetSettingsValue(const QString& key);
+
+// Get all available avatars in avatar folder.
+QStringList GetAvatars();
+
+// Get default user avatar, is specified. Or else returns a random avatar.
+QString GetDefaultAvatar();
 
 // Get image path of window background.
 // First try to find in root of iso.
