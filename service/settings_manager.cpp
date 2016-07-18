@@ -21,7 +21,7 @@ namespace {
 // Note that iso image is mounted at "/lib/live/mount/medium/".
 const char kOemDir[] = "/lib/live/mount/medium/oem";
 
-QStringList ListPngFiles(const QString& dir_name) {
+QStringList ListImageFiles(const QString& dir_name) {
   QStringList result;
   QDir dir(dir_name);
   if (!dir.exists()) {
@@ -89,13 +89,13 @@ QStringList GetAvatars() {
 
   // First, check oem/ dir.
   const QString oem_dir(QDir(kOemDir).absoluteFilePath("avatar"));
-  avatars = ListPngFiles(oem_dir);
+  avatars = ListImageFiles(oem_dir);
   if (!avatars.isEmpty()) {
     return avatars;
   }
 
   // Then, check dde-account-faces dir.
-  avatars = ListPngFiles(QStringLiteral("/var/lib/AccountsService/icons/"));
+  avatars = ListImageFiles(QStringLiteral("/var/lib/AccountsService/icons/"));
   return avatars;
 }
 

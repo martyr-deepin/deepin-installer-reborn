@@ -5,7 +5,6 @@
 #include "ui/frames/inner/system_info_form_frame.h"
 
 #include <QHBoxLayout>
-#include <QLineEdit>
 #include <QVBoxLayout>
 
 #include "service/settings_manager.h"
@@ -13,6 +12,7 @@
 #include "ui/frames/consts.h"
 #include "ui/widgets/avatar_button.h"
 #include "ui/widgets/comment_label.h"
+#include "ui/widgets/line_edit.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
@@ -39,7 +39,7 @@ void SystemInfoFormFrame::initUI() {
   title_layout->addWidget(title_label);
 
   CommentLabel* comment_label =
-      new CommentLabel(tr("Input username and password"));
+   new CommentLabel(tr("Input username and password"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->addWidget(comment_label);
 
@@ -47,20 +47,36 @@ void SystemInfoFormFrame::initUI() {
   QHBoxLayout* avatar_layout = new QHBoxLayout();
   avatar_layout->addWidget(avatar_button_);
 
-  QLineEdit* username_edit = new QLineEdit();
-  QLineEdit* hostname_edit = new QLineEdit();
-  QLineEdit* password_edit = new QLineEdit();
-  QLineEdit* password2_edit = new QLineEdit();
+  LineEdit* username_edit =
+      new LineEdit(QStringLiteral(":/images/username.png"));
+  username_edit->setPlaceholderText(tr("Username"));
+  LineEdit* hostname_edit =
+      new LineEdit(QStringLiteral(":/images/hostname.png"));
+  hostname_edit->setPlaceholderText(tr("Computer name"));
+  LineEdit* password_edit =
+      new LineEdit(QStringLiteral(":/images/password.png"));
+  password_edit->setPlaceholderText(tr("Password"));
+  LineEdit* password2_edit =
+      new LineEdit(QStringLiteral(":/images/password.png"));
+  password2_edit->setPlaceholderText(tr("Reenter password"));
 
   QVBoxLayout* form_layout = new QVBoxLayout();
+  form_layout->setContentsMargins(0, 0, 0, 0);
+  form_layout->setMargin(0);
+  form_layout->setSpacing(20);
   form_layout->addWidget(username_edit);
   form_layout->addWidget(hostname_edit);
   form_layout->addWidget(password_edit);
   form_layout->addWidget(password2_edit);
 
+  QFrame* form_wrapper = new QFrame();
+  form_wrapper->setFixedWidth(400);
+  form_wrapper->setLayout(form_layout);
   QHBoxLayout* form_wrapper_layout = new QHBoxLayout();
+  form_wrapper_layout->setContentsMargins(0, 0, 0, 0);
+  form_wrapper_layout->setSpacing(0);
   form_wrapper_layout->addStretch();
-  form_wrapper_layout->addLayout(form_layout);
+  form_wrapper_layout->addWidget(form_wrapper);
   form_wrapper_layout->addStretch();
 
   next_button_ = new NavButton(tr("Next"));
@@ -69,14 +85,14 @@ void SystemInfoFormFrame::initUI() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addStretch();
+  layout->addStretch(1);
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
-  layout->addStretch();
+  layout->addStretch(1);
   layout->addLayout(avatar_layout);
-  layout->addStretch();
+  layout->addStretch(1);
   layout->addLayout(form_wrapper_layout);
-  layout->addStretch();
+  layout->addStretch(3);
   layout->addLayout(next_layout);
 
   this->setLayout(layout);

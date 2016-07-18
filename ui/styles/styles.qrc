@@ -5,10 +5,10 @@
     <file>expanded_nav_button.css</file>
     <file>flat_button.css</file>
     <file>frosted_frame.css</file>
+    <file>line_edit.css</file>
     <file>list_label.css</file>
     <file>list_title_label.css</file>
     <file>nav_button.css</file>
     <file>title_label.css</file>
-
   </qresource>
 </RCC>
