@@ -9,6 +9,8 @@
 
 namespace ui {
 
+class IconButton;
+
 class SystemInfoAvatarFrame : public QFrame {
   Q_OBJECT
 
@@ -19,9 +21,18 @@ class SystemInfoAvatarFrame : public QFrame {
   // Emitted when an avatar is selected.
   void finished();
 
+  // Emitted when timezone button is clicked.
+  void timezoneClicked();
+
+ public slots:
+  // Update text in timezone button.
+  void updateTimezone(const QString& timezone);
+
  private:
   void initConnections();
   void initUI();
+
+  IconButton* timezone_button_ = nullptr;
 };
 
 }  // namespace ui

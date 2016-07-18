@@ -22,6 +22,9 @@ class SystemInfoTimezoneFrame : public QFrame {
   // Emitted when back button is clicked.
   void finished();
 
+  // Emitted when a new timezone is chosen.
+  void timezoneUpdated(const QString& timezone);
+
  private:
   void initConnections();
   void initUI();

@@ -10,7 +10,6 @@ class QStackedLayout;
 
 namespace ui {
 
-class IconButton;
 class SystemInfoAvatarFrame;
 class SystemInfoFormFrame;
 class SystemInfoTimezoneFrame;
@@ -31,7 +30,6 @@ class SystemInfoFrame : public QFrame {
   void initConnections();
   void initUI();
 
-  IconButton* timezone_button_ = nullptr;
   QStackedLayout* stacked_layout_ = nullptr;
   SystemInfoAvatarFrame* avatar_frame_ = nullptr;
   SystemInfoFormFrame* form_frame_ = nullptr;

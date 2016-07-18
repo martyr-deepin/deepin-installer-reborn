@@ -12,6 +12,7 @@
 #include "ui/frames/consts.h"
 #include "ui/widgets/avatar_button.h"
 #include "ui/widgets/comment_label.h"
+#include "ui/widgets/icon_button.h"
 #include "ui/widgets/line_edit.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
@@ -26,14 +27,30 @@ SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
   this->initConnections();
 }
 
+void SystemInfoFormFrame::updateTimezone(const QString& timezone) {
+  timezone_button_->setText(timezone);
+}
+
 void SystemInfoFormFrame::initConnections() {
   connect(avatar_button_, &QPushButton::clicked,
           this, &SystemInfoFormFrame::avatarClicked);
   connect(next_button_, &QPushButton::clicked,
           this, &SystemInfoFormFrame::onNextButtonClicked);
+  connect(timezone_button_, &QPushButton::clicked,
+          this, &SystemInfoFormFrame::timezoneClicked);
 }
 
 void SystemInfoFormFrame::initUI() {
+  timezone_button_ = new IconButton(QStringLiteral(":/images/timezone.png"),
+                                    QStringLiteral(":/images/timezone.png"),
+                                    QStringLiteral(":/images/timezone.png"),
+                                    128, 32, nullptr);
+  // TODO(xushaohua): Remove timezone text.
+  timezone_button_->setText("Beijing");
+  QHBoxLayout* timezone_layout = new QHBoxLayout();
+  timezone_layout->setAlignment(Qt::AlignLeft);
+  timezone_layout->addWidget(timezone_button_);
+
   TitleLabel* title_label = new TitleLabel(tr("Create User Account"));
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->addWidget(title_label);
@@ -85,6 +102,7 @@ void SystemInfoFormFrame::initUI() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
+  layout->addLayout(timezone_layout);
   layout->addStretch(1);
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);

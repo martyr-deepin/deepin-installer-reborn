@@ -10,6 +10,7 @@
 namespace ui {
 
 class AvatarButton;
+class IconButton;
 class NavButton;
 
 class SystemInfoFormFrame : public QFrame {
@@ -25,10 +26,18 @@ class SystemInfoFormFrame : public QFrame {
   // Emitted when form is validated.
   void finished();
 
+  // Emitted when timezone button is clicked.
+  void timezoneClicked();
+
+ public slots:
+  // Update text in timezone button.
+  void updateTimezone(const QString& timezone);
+
  private:
   void initConnections();
   void initUI();
 
+  IconButton* timezone_button_ = nullptr;
   AvatarButton* avatar_button_ = nullptr;
   NavButton* next_button_ = nullptr;
 

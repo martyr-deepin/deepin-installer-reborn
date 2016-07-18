@@ -32,7 +32,8 @@ void SystemInfoTimezoneFrame::initUI() {
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->addWidget(title_label);
 
-  CommentLabel* comment_label = new CommentLabel(tr("Mark your zone in the map"));
+  CommentLabel* comment_label =
+      new CommentLabel(tr("Mark your zone in the map"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->addWidget(comment_label);
 
