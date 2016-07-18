@@ -211,7 +211,7 @@ void MainWindow::goNextPage() {
 
     case PageId::DiskSpaceInsufficientId: {
       // Check whether to show VirtualMachinePage.
-      if (sysinfo::IsVirtualMachine()) {
+      if (false && sysinfo::IsVirtualMachine()) {
         page_indicator_->setVisible(false);
         this->setCurrentPage(PageId::VirtualMachineId);
       } else {
