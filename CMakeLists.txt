@@ -86,8 +86,11 @@ set(UI_FILES
     ui/frames/inner/system_info_form_frame.cpp ui/frames/inner/system_info_form_frame.h
     ui/frames/inner/system_info_timezone_frame.cpp ui/frames/inner/system_info_timezone_frame.h
     ui/widgets/comment_label.cpp ui/widgets/comment_label.h
+    ui/widgets/expanded_nav_button.cpp ui/widgets/expanded_nav_button.h
     ui/widgets/flat_button.cpp ui/widgets/flat_button.h
+    ui/widgets/frosted_frame.cpp ui/widgets/frosted_frame.h
     ui/widgets/icon_button.cpp ui/widgets/icon_button.h
+    ui/widgets/list_label.cpp ui/widgets/list_label.h
     ui/widgets/nav_button.cpp ui/widgets/nav_button.h
     ui/widgets/page_indicator.cpp ui/widgets/page_indicator.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h

@@ -274,7 +274,7 @@ void MainWindow::goNextPage() {
 
     case PageId::VirtualMachineId: {
       // Check whether to show PartitionTableWarningPage.
-      if (false) {
+      if (true) {
         page_indicator_->setVisible(false);
         this->setCurrentPage(PageId::PartitionTableWarningId);
       } else {

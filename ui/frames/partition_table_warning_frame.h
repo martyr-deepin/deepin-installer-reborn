@@ -6,9 +6,13 @@
 #define DEEPIN_INSTALLER_REBORN_UI_FRAMES_PARTITION_TABLE_WARNING_FRAME_H
 
 #include <QFrame>
+#include <ui/widgets/nav_button.h>
 
 namespace ui {
 
+class ExpandedNavButton;
+
+// Displayed when partition table type and system boot method does not match.
 class PartitionTableWarningFrame : public QFrame {
   Q_OBJECT
 
@@ -21,6 +25,13 @@ class PartitionTableWarningFrame : public QFrame {
 
   // Emitted when continue button is clicked.
   void accepted();
+
+ private:
+  void initConnections();
+  void initUI();
+
+  ExpandedNavButton* reject_button_ = nullptr;
+  ExpandedNavButton* accept_button_ = nullptr;
 };
 
 }  // namespace ui

@@ -1,0 +1,6 @@
+/** Used by ListLabel class **/
+
+QLabel {
+  color: #eaeaea;
+  font-size: 16pt;
+}
