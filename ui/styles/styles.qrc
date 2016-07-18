@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/styles">
+    <file>avatar_button.css</file>
     <file>comment_label.css</file>
     <file>expanded_nav_button.css</file>
     <file>flat_button.css</file>

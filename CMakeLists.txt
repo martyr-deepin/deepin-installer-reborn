@@ -95,7 +95,7 @@ set(UI_FILES
     ui/widgets/nav_button.cpp ui/widgets/nav_button.h
     ui/widgets/page_indicator.cpp ui/widgets/page_indicator.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
-    )
+    ui/widgets/avatar_button.cpp ui/widgets/avatar_button.h)
 
 set(UNITTEST_FILES
     sysinfo/timezone_test.cpp

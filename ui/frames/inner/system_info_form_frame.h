@@ -9,6 +9,7 @@
 
 namespace ui {
 
+class AvatarButton;
 class NavButton;
 
 class SystemInfoFormFrame : public QFrame {
@@ -28,6 +29,7 @@ class SystemInfoFormFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  AvatarButton* avatar_button_ = nullptr;
   NavButton* next_button_ = nullptr;
 
  private slots:

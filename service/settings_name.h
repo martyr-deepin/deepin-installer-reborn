@@ -33,6 +33,12 @@ const char kSystemInfoDefaultPasswordName[] = "system_info_default_password";
 const char kSystemInfoUseDefaultHostnameName[] =
     "system_info_use_default_hostname";
 const char kSystemInfoDefaultHostnameName[] = "system_info_default_hostname";
+const char kSystemInfoUseRandomAvator[] = "system_info_use_random_avator";
+const char kSystemInfoUseDefaultAvator[] = "system_info_use_default_avatar";
+const char kSystemInfoDefaultAvator[] = "system_info_default_avatar";
+const char kSystemInfoDisableAvatorPage[] = "system_info_disable_avatar_page";
+const char kSystemInfoDisableTimezonePage[] =
+    "system_info_disable_timezone_page";
 
 }  // namespace service
 

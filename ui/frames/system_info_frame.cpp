@@ -6,6 +6,8 @@
 
 #include <QStackedLayout>
 
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/frames/inner/system_info_avatar_frame.h"
 #include "ui/frames/inner/system_info_form_frame.h"
 #include "ui/frames/inner/system_info_timezone_frame.h"
@@ -66,6 +68,9 @@ void SystemInfoFrame::initUI() {
 }
 
 void SystemInfoFrame::showAvatarPage() {
+  if (service::GetSettingsBool(service::kSystemInfoDisableAvatorPage)) {
+    return;
+  }
   timezone_button_->setVisible(true);
   stacked_layout_->setCurrentWidget(avatar_frame_);
 }
@@ -76,6 +81,9 @@ void SystemInfoFrame::showFormPage() {
 }
 
 void SystemInfoFrame::showTimezonePage() {
+  if (service::GetSettingsBool(service::kSystemInfoDisableTimezonePage)) {
+    return;
+  }
   timezone_button_->setVisible(false);
   stacked_layout_->setCurrentWidget(timezone_frame_);
 }

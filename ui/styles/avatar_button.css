@@ -1,0 +1,11 @@
+/** Used by AvatarButton class **/
+
+QPushButton {
+}
+
+/* Remove borders */
+QPushButton[flat="true"] {
+  border: none;
+  outline: none;
+  color: #eaeaea;
+}
