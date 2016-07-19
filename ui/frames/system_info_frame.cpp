@@ -30,6 +30,8 @@ void SystemInfoFrame::initConnections() {
           this, &SystemInfoFrame::showFormPage);
   connect(avatar_frame_, &SystemInfoAvatarFrame::timezoneClicked,
           this, &SystemInfoFrame::showTimezonePage);
+  connect(avatar_frame_, &SystemInfoAvatarFrame::avatarUpdated,
+          form_frame_, &SystemInfoFormFrame::updateAvatar);
   connect(form_frame_, &SystemInfoFormFrame::avatarClicked,
           this, &SystemInfoFrame::showAvatarPage);
   connect(form_frame_, &SystemInfoFormFrame::finished,

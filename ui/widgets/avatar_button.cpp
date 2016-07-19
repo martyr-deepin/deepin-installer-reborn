@@ -28,6 +28,11 @@ AvatarButton::AvatarButton(const QString& icon, QWidget* parent)
   this->setStyleSheet(base::ReadTextFileContent(":/styles/avatar_button.css"));
 }
 
+void AvatarButton::updateIcon(const QString& icon) {
+  icon_ = icon;
+  this->update();
+}
+
 void AvatarButton::paintEvent(QPaintEvent* event) {
   Q_UNUSED(event);
 

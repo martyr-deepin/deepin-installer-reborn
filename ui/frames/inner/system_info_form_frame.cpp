@@ -27,6 +27,10 @@ SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
   this->initConnections();
 }
 
+void SystemInfoFormFrame::updateAvatar(const QString& avatar) {
+  avatar_button_->updateIcon(avatar);
+}
+
 void SystemInfoFormFrame::updateTimezone(const QString& timezone) {
   timezone_button_->setText(timezone);
 }

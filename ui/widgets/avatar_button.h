@@ -18,6 +18,8 @@ class AvatarButton : public FlatButton {
  public:
   AvatarButton(const QString& icon, QWidget* parent = nullptr);
 
+  void updateIcon(const QString& icon);
+
  protected:
   void paintEvent(QPaintEvent* event) override;
 
