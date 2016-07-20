@@ -29,3 +29,10 @@
 注意, 图片分辨率应该在`64x64`到`256x256`之间, 支持png和jpg格式.
 
 如果要指定用户的默认头像, 需要在 `oem/settings.ini` 文件里修改.
+
+
+### hooks
+根据安装阶段的不同, 分为 `before_chroot`, `in_chroot` 以及 `after_chroot`.
+在 `oem/hooks/` 目录里, 创建相应的目录, 并写需要的hook脚本即可.
+
+可以参考安装器 `hooks/` 目录里的脚本的写法.

@@ -60,7 +60,7 @@ void SystemInfoFrame::initUI() {
 }
 
 void SystemInfoFrame::showAvatarPage() {
-  if (service::GetSettingsBool(service::kSystemInfoDisableAvatorPage)) {
+  if (service::GetSettingsBool(service::kSystemInfoDisableAvatorPageName)) {
     return;
   }
   stacked_layout_->setCurrentWidget(avatar_frame_);
@@ -71,7 +71,7 @@ void SystemInfoFrame::showFormPage() {
 }
 
 void SystemInfoFrame::showTimezonePage() {
-  if (service::GetSettingsBool(service::kSystemInfoDisableTimezonePage)) {
+  if (service::GetSettingsBool(service::kSystemInfoDisableTimezonePageName)) {
     return;
   }
   stacked_layout_->setCurrentWidget(timezone_frame_);

@@ -23,6 +23,8 @@ const char kSelectLanguageDefaultLocaleName[] =
     "select_language_default_locale";
 
 // System Info
+const char kSystemInfoDdeDefaultWallpaperName[] =
+    "system_info_dde_default_wallpaper";
 const char kSystemInfoSetupAfterRebootName[] = "system_info_setup_after_reboot";
 const char kSystemInfoUseDefaultUsernameName[] =
     "system_info_use_default_username";
@@ -33,11 +35,13 @@ const char kSystemInfoDefaultPasswordName[] = "system_info_default_password";
 const char kSystemInfoUseDefaultHostnameName[] =
     "system_info_use_default_hostname";
 const char kSystemInfoDefaultHostnameName[] = "system_info_default_hostname";
-const char kSystemInfoUseRandomAvator[] = "system_info_use_random_avator";
-const char kSystemInfoUseDefaultAvator[] = "system_info_use_default_avatar";
-const char kSystemInfoDefaultAvator[] = "system_info_default_avatar";
-const char kSystemInfoDisableAvatorPage[] = "system_info_disable_avatar_page";
-const char kSystemInfoDisableTimezonePage[] =
+const char kSystemInfoUseRandomAvatorName[] = "system_info_use_random_avator";
+const char kSystemInfoUseDefaultAvatorName[] = "system_info_use_default_avatar";
+const char kSystemInfoDefaultAvatorName[] = "system_info_default_avatar";
+const char kSystemInfoDdeAvatarDirName[] = "system_info_dde_avatar_dir";
+const char kSystemInfoDisableAvatorPageName[] =
+    "system_info_disable_avatar_page";
+const char kSystemInfoDisableTimezonePageName[] =
     "system_info_disable_timezone_page";
 
 }  // namespace service

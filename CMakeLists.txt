@@ -53,6 +53,7 @@ set(BASE_FILES
     )
 
 set(SERVICE_FILES
+    service/hooks_manager.cpp service/hooks_manager.h
     service/log_manager.cpp service/log_manager.h
     service/settings_manager.cpp service/settings_manager.h
     service/signal_manager.cpp service/signal_manager.h

@@ -85,24 +85,21 @@ QVariant GetSettingsValue(const QString& key) {
 }
 
 QStringList GetAvatars() {
-  QStringList avatars;
-
   // First, check oem/ dir.
   const QString oem_dir(QDir(kOemDir).absoluteFilePath("avatar"));
-  avatars = ListImageFiles(oem_dir);
+  QStringList avatars = ListImageFiles(oem_dir);
   if (!avatars.isEmpty()) {
     return avatars;
   }
 
   // Then, check dde-account-faces dir.
-  avatars = ListImageFiles(QStringLiteral("/var/lib/AccountsService/icons/"));
-  return avatars;
+  return ListImageFiles(GetSettingsString(kSystemInfoDdeAvatarDirName));
 }
 
 QString GetDefaultAvatar() {
   // Return user specified avatar.
-  if (GetSettingsBool(kSystemInfoUseDefaultAvator)) {
-    return GetSettingsString(kSystemInfoDefaultAvator);
+  if (GetSettingsBool(kSystemInfoUseDefaultAvatorName)) {
+    return GetSettingsString(kSystemInfoDefaultAvatorName);
   }
 
   // Pick a random avatar.
@@ -122,7 +119,8 @@ QString GetWindowBackground() {
     return in_oem;
   }
 
-  const QString in_system(QStringLiteral("/usr/share/backgrounds/default.jpg"));
+  const QString in_system =
+      GetSettingsString(kSystemInfoDdeDefaultWallpaperName);
   if (QFile::exists(in_system)) {
     return in_system;
   }
