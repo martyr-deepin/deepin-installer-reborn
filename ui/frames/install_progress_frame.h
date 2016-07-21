@@ -7,6 +7,10 @@
 
 #include <QFrame>
 
+namespace service {
+class HooksManager;
+}  // namespace service
+
 namespace ui {
 
 // Displays when system is being installed to disk.
@@ -16,6 +20,7 @@ class InstallProgressFrame : public QFrame {
 
  public:
   explicit InstallProgressFrame(QWidget* parent = nullptr);
+  ~InstallProgressFrame();
 
   enum class State {
     Failed,
@@ -23,7 +28,14 @@ class InstallProgressFrame : public QFrame {
     InProcess,
   };
 
-  State state() const { return state_; };
+  // Returns true is installation process failed.
+  bool failed() const { return failed_; }
+
+  // Returns error message when installation process failed.
+  QString error_message() const { return error_message_; }
+
+  // Initialize hooks manager.
+  void initHooks();
 
  signals:
   // Emitted when installation finished or failed.
@@ -34,7 +46,16 @@ class InstallProgressFrame : public QFrame {
   void initConnections();
   void initUI();
 
-  State state_;
+  bool failed_;
+  QString error_message_;
+
+  bool hooks_inited_;
+
+  service::HooksManager* hooks_manager_ = nullptr;
+
+ private slots:
+  void onErrorOccurred(const QString& msg);
+  void onInstallProgressUpdated(int progress);
 };
 
 }  // namespace ui

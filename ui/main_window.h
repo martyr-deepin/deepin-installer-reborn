@@ -89,10 +89,6 @@ class MainWindow : public QWidget {
   SystemInfoFrame* system_info_frame_ = nullptr;
   VirtualMachineFrame* virtual_machine_frame_ = nullptr;
 
-  // Number of page used by |page_indicator_|.
-  // This can be different based on installation configuration.
-  int visible_pages_ = 4;
-
   // To store frame pages, page_name => page_id.
   QHash<PageId, int> pages_;
 

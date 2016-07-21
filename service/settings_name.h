@@ -15,6 +15,7 @@ const char kSkipDiskSpaceInsufficientPageName[] =
 const char kSkipVirtualMachinePageName[] = "skip_virtual_machine_page";
 const char kSkipSelectLanguagePageName[] = "skip_select_language_page";
 const char kSkipSystemInfoPageName[] = "skip_system_info_page";
+const char kSkipPartitionPageName[] = "skip_partition_page";
 
 // System Language List
 const char kSelectLanguageUseDefaultLocaleName[] =

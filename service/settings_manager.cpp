@@ -112,6 +112,10 @@ QString GetDefaultAvatar() {
   return avatars.at(index);
 }
 
+QString GetOemHooksDir() {
+  return QDir(kOemDir).absoluteFilePath(QStringLiteral("hooks"));
+}
+
 QString GetWindowBackground() {
   const QString in_oem =
       QDir(kOemDir).absoluteFilePath(QStringLiteral("background.jpg"));

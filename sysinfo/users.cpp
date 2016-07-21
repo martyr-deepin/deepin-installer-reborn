@@ -35,7 +35,7 @@ QStringList GetUsers() {
 }
 
 bool HasRootPrivilege() {
-  return getuid() == 0;
+  return geteuid() == 0;
 }
 
 }  // namespace sysinfo

@@ -15,6 +15,7 @@
 
 #include "base/gaussian_blur.h"
 #include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/disk_space_insufficient_frame.h"
@@ -30,6 +31,26 @@
 #include "ui/widgets/page_indicator.h"
 
 namespace ui {
+
+namespace {
+
+int GetVisiblePages() {
+  int pages = 0;
+  if (!service::GetSettingsBool(service::kSkipSelectLanguagePageName)) {
+    pages += 1;
+  }
+  if (!service::GetSettingsBool(service::kSkipSystemInfoPageName)) {
+    pages += 1;
+  }
+  if (!service::GetSettingsBool(service::kSkipPartitionPageName)) {
+    pages += 1;
+  }
+  // For install-progress page.
+  pages += 1;
+  return pages;
+}
+
+}  // namespace
 
 MainWindow::MainWindow()
     : QWidget(),
@@ -73,6 +94,8 @@ void MainWindow::initConnections() {
           this, &MainWindow::rebootSystem);
   connect(install_failed_frame_, &InstallFailedFrame::finished,
           this, &MainWindow::rebootSystem);
+  connect(install_progress_frame_, &InstallProgressFrame::finished,
+          this, &MainWindow::goNextPage);
   connect(install_success_frame_, &InstallSuccessFrame::finished,
           this, &MainWindow::rebootSystem);
   connect(partition_frame_, &PartitionFrame::finished,
@@ -150,7 +173,8 @@ void MainWindow::initUI() {
   // Use a wrapper to hold its position.
   QFrame* page_indicator_wrapper = new QFrame();
   page_indicator_wrapper->setFixedHeight(48);
-  page_indicator_ = new PageIndicator(visible_pages_, page_indicator_wrapper);
+  page_indicator_ = new PageIndicator(GetVisiblePages(),
+                                      page_indicator_wrapper);
   QHBoxLayout* indicator_layout = new QHBoxLayout();
   indicator_layout->addWidget(page_indicator_);
   page_indicator_wrapper->setLayout(indicator_layout);
@@ -222,11 +246,24 @@ void MainWindow::goNextPage() {
       break;
     }
 
+    case PageId::InstallProgressId: {
+      page_indicator_->setVisible(false);
+      if (install_progress_frame_->failed()) {
+        install_failed_frame_->setErrorMessage(
+            install_progress_frame_->error_message());
+        this->setCurrentPage(PageId::InstallFailedId);
+      } else {
+        this->setCurrentPage(PageId::InstallSuccessId);
+      }
+      break;
+    }
+
     case PageId::PartitionId: {
       // Show InstallProgressPage.
       page_indicator_->setVisible(true);
       page_indicator_->goNextPage();
       this->setCurrentPage(PageId::InstallProgressId);
+      install_progress_frame_->initHooks();
       break;
     }
 

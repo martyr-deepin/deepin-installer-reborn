@@ -62,6 +62,7 @@ set(SERVICE_FILES
     )
 
 set(SYSINFO_FILES
+    sysinfo/machine.cpp sysinfo/machine.h
     sysinfo/timezone.cpp sysinfo/timezone.h
     sysinfo/users.cpp sysinfo/users.h
     sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h

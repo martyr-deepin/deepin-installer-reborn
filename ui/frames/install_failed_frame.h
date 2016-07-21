@@ -9,15 +9,25 @@
 
 namespace ui {
 
+class NavButton;
+
 class InstallFailedFrame : public QFrame {
   Q_OBJECT
 
  public:
   explicit InstallFailedFrame(QWidget* parent = nullptr);
 
+  void setErrorMessage(const QString& msg);
+
  signals:
-  // Emitted when poweroff button is clocked.
+  // Emitted when reboot button is clocked.
   void finished();
+
+ private:
+  void initConnections();
+  void initUI();
+
+  NavButton* reboot_button_ = nullptr;
 };
 
 }  // namespace ui

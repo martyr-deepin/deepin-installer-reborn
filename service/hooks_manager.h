@@ -6,6 +6,7 @@
 #define DEEPIN_INSTALLER_REBORN_SERVICE_HOOKS_MANAGER_H
 
 #include <QObject>
+#include <QStringList>
 
 namespace service {
 
@@ -15,6 +16,7 @@ namespace service {
 //   * manage chroot environment;
 //   * manage installation process;
 //   * manage installation error message;
+// This object runs in background thread.
 class HooksManager : public QObject {
   Q_OBJECT
 
@@ -22,12 +24,37 @@ class HooksManager : public QObject {
   explicit HooksManager(QObject* parent = nullptr);
 
  signals:
+  // Emitted when critical error has occurred.
+  // Installation process will be stopped and |msg| will be displayed
+  // in install-error page.
+  void errorOccurred(const QString& msg);
+
   // Installation process is split into four stages:
-  //   * disk partition: 0-15
-  //   * before_chroot: 15-60
+  //   * before_chroot: 0-60
   //   * in_chroot: 60-80
   //   * after_chroot: 80-100
   void processUpdate(int process);
+
+  // Emit this signal in other objects to run hooks in background thread.
+  void runHooks();
+
+ private:
+  enum class HookType {
+    BeforeChroot,
+    InChroot,
+    AfterChroot,
+  };
+
+  QStringList listHooks(HookType hook_type);
+  bool runHooksPack(HookType hook_type, int progress_begin, int progress_end);
+
+  bool enterChroot();
+  bool leaveChroot();
+  // A file descriptor object used to escape chroot environment.
+  int chroot_fd_;
+
+ private slots:
+  void handleRunHooks();
 };
 
 }  // namespace service

@@ -9,6 +9,8 @@
 
 namespace ui {
 
+class NavButton;
+
 class InstallSuccessFrame : public QFrame {
   Q_OBJECT
 
@@ -18,6 +20,12 @@ class InstallSuccessFrame : public QFrame {
  signals:
   // Emitted when reboot button is clicked.
   void finished();
+
+ private:
+  void initConnections();
+  void initUI();
+
+  NavButton* reboot_button_ = nullptr;
 };
 
 }  // namespace ui

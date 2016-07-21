@@ -23,7 +23,7 @@ PageIndicator::PageIndicator(int pages, QWidget* parent)
 }
 
 void PageIndicator::goNextPage() {
-  Q_ASSERT(current_page_ + 1 < pages_);
+  Q_ASSERT(current_page_ < pages_);
   this->setCurrentPage(current_page_ + 1);
 }
 

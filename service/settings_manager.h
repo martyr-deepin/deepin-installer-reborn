@@ -30,6 +30,9 @@ QStringList GetAvatars();
 // Get default user avatar, is specified. Or else returns a random avatar.
 QString GetDefaultAvatar();
 
+// Get absolute path to oem hooks folder.
+QString GetOemHooksDir();
+
 // Get image path of window background.
 // First try to find in root of iso.
 // Then read from /usr/share/backgrounds/.
