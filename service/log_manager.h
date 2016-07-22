@@ -10,11 +10,17 @@
 namespace service {
 
 // If current user has no write permission in /var/log, keep log file in /tmp.
-// TODO(xushaohua): Rotate log file.
 QString GetLogFilepath();
 
 // Initialize console log and file log.
 void InitLogService();
+
+// Redirect console output to log file.
+// Call this before QCoreApplication instance is initialized.
+void RedirectLogFile();
+
+// Close log file handler.
+void ShutdownLogService();
 
 }  // namespace service
 

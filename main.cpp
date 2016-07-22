@@ -9,17 +9,18 @@
 #include "ui/main_window.h"
 
 int main(int argc, char* argv[]) {
-  QApplication app(argc, argv);
+  service::RedirectLogFile();
 
+  QApplication app(argc, argv);
   // TODO(xushaohua): Set i18n
   app.setApplicationDisplayName(base::kAppDisplayName);
   app.setApplicationName(base::kAppName);
   app.setOrganizationDomain(QStringLiteral("deepin.org"));
 
-//  service::InitLogService();
-
   ui::MainWindow main_window;
   main_window.showFullScreen();
 
-  return app.exec();
+  const int result = app.exec();
+  service::ShutdownLogService();
+  return result;
 }
