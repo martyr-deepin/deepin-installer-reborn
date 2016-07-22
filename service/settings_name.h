@@ -26,6 +26,8 @@ const char kSelectLanguageDefaultLocaleName[] =
 // System Info
 const char kSystemInfoDdeDefaultWallpaperName[] =
     "system_info_dde_default_wallpaper";
+const char kSystemInfoUseOemWallpaperName[] = "system_info_oem_wallpaper";
+const char kSystemInfoOemWallpaperName[] = "system_info_oem_wallpaper";
 const char kSystemInfoSetupAfterRebootName[] = "system_info_setup_after_reboot";
 const char kSystemInfoUseDefaultUsernameName[] =
     "system_info_use_default_username";

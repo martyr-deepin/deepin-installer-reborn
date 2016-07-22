@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "[$0]"
+set -x
+
+# extract 1440x900 from "LVDS1 connected primary 1440x900+0+0 (normal left inverted right x axis y axis)"
+resolution=$(xrandr | grep primary | awk '{print $4}' | sed 's/\+.*$//')
+
+if [ -z "$resolution" ];then
+    resolution="1024x768"
+fi
+
+echo "DI_CUR_RESOLUTION=$resolution" >> /etc/deepin-installer.conf

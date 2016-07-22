@@ -17,7 +17,7 @@ class InstallFailedFrame : public QFrame {
  public:
   explicit InstallFailedFrame(QWidget* parent = nullptr);
 
-  void setErrorMessage(const QString& msg);
+  void updateErrorMessage();
 
  signals:
   // Emitted when reboot button is clocked.

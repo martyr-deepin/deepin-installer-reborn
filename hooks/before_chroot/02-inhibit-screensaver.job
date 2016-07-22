@@ -1,0 +1,10 @@
+#!/bin/sh
+
+DISPLAY=:0 gsettings set com.deepin.dde.power battery-screen-black-delay 0
+DISPLAY=:0 gsettings set com.deepin.dde.power battery-sleep-delay 0
+DISPLAY=:0 gsettings set com.deepin.dde.power line-power-screen-black-delay 0
+DISPLAY=:0 gsettings set com.deepin.dde.power line-power-sleep-delay 0
+
+setterm -powersave off -blank 0 || true
+
+exit 0

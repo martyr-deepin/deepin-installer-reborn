@@ -1,0 +1,56 @@
+#!/bin/bash
+
+echo "[$0]"
+set -e
+
+if [ -f /deepinhost/etc/deepin-installer.conf ];then
+    . /deepinhost/etc/deepin-installer.conf
+fi
+
+[ -z ${DI_USERNAME} ] && { echo >&2 "[ERROR] Variable DI_USERNAME not set. Aborting"; exit 1; }
+[ -z ${DI_PASSWORD} ] && { echo >&2 "[ERROR] Variable DI_PASSWORD not set. Aborting."; exit 1; }
+[ -z ${DI_HOSTNAME} ] && DI_HOSTNAME="deepin"
+
+if [ -x /bin/zsh ] ;then
+    useradd -U -m --skel /etc/skel --shell /bin/zsh ${DI_USERNAME} 
+else
+    useradd -U -m --skel /etc/skel --shell /bin/bash ${DI_USERNAME} 
+fi
+REAL_PASSWD=`echo ${DI_PASSWORD} | base64 -d -`
+echo ${DI_USERNAME}:"${REAL_PASSWD}" | chpasswd
+set +e
+gpasswd -a ${DI_USERNAME} users
+gpasswd -a ${DI_USERNAME} cdrom
+gpasswd -a ${DI_USERNAME} floppy
+gpasswd -a ${DI_USERNAME} audio
+gpasswd -a ${DI_USERNAME} video
+gpasswd -a ${DI_USERNAME} plugdev
+gpasswd -a ${DI_USERNAME} sambashare
+gpasswd -a ${DI_USERNAME} adm
+gpasswd -a ${DI_USERNAME} wheel
+gpasswd -a ${DI_USERNAME} lp
+gpasswd -a ${DI_USERNAME} netdev
+gpasswd -a ${DI_USERNAME} scanner
+gpasswd -a ${DI_USERNAME} lpadmin
+gpasswd -a ${DI_USERNAME} sudo
+gpasswd -a ${DI_USERNAME} storage
+gpasswd -a ${DI_USERNAME} network
+set -e 
+
+echo "[INFO] Fix Home directory permission to ${DI_USERNAME}."
+chown -hR ${DI_USERNAME}:${DI_USERNAME} /home/${DI_USERNAME}
+
+echo "[INFO] Set Hostname to ${DI_HOSTNAME}"
+echo "${DI_HOSTNAME}" | tee /etc/hostname
+
+cat > /etc/hosts <<EOF
+127.0.0.1	localhost
+127.0.1.1   ${DI_HOSTNAME}
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+EOF

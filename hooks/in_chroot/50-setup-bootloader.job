@@ -1,0 +1,153 @@
+#!/bin/bash
+# install grub to detect machine
+
+echo "[$0]"
+set -x
+
+config_item()
+{
+    if [ -f /etc/default/grub ];then
+        . /etc/default/grub || return
+    fi
+    eval echo "\$$1"
+}
+
+export DEBIAN_FRONTEND="noninteractive"
+
+if [ -f /deepinhost/etc/deepin-installer.conf ];then
+    . /deepinhost/etc/deepin-installer.conf
+fi
+
+# if no DI_BOOTLOADER, treat as not installing bootloader
+[ -z ${DI_BOOTLOADER} ] && { echo >&2 "[WARN] DI_BOOTLOADER not set. Treat as not install bootloader. Skip."; exit 0;}
+
+if [ x${DI_UEFI} = xtrue ];then
+    BOOT="uefi"
+else
+    BOOT="legacy"
+fi
+
+if [ x${BOOT} = xuefi ];then
+    value=$(od -An -t u1 /sys/firmware/efi/vars/SecureBoot-8be4df61-93ca-11d2-aa0d-00e098032b8c/data 2>/dev/null | sed s/[[:space:]]//g)
+    [ x${value} = x1 ] && BOOT="uefi-secureboot"
+fi
+
+case ${BOOT} in
+    "legacy")
+        if [ -e /etc/deepin-version ];then
+            _version=$(grep '^Version=' /etc/deepin-version | cut -d '=' -f2)
+            _type=$(grep '^Type=' /etc/deepin-version | cut -d '=' -f2)
+            BOOTLOADER_ID="Deepin ${_type} ${_version}"
+         fi
+	 ;;
+    "uefi*")
+        BOOTLOADER_ID="$(config_item GRUB_DISTRIBUTOR | tr A-Z a-z | cut -d' ' -f1)"
+	;;
+esac
+
+BOOTLOADER_ID="${BOOTLOADER_ID:-deepin}"
+
+case ${BOOT} in
+    "legacy")
+        echo "INFO: Detected legacy machine, installing grub to ${DI_BOOTLOADER}"
+        apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" --force-yes --no-install-recommends --allow-unauthenticated install grub-pc
+	if [ x${DI_LUPIN} = xtrue ];then
+        echo "Fix grub install failed in lupin"
+        [ -d /boot/grub ] || mkdir /boot/grub
+	    echo "(hd0) ${DI_BOOTLOADER}" > /boot/grub/device.map
+	    mkdir /host
+	    mount ${DI_HOST_DEV} /host
+        echo "Mount DI_HOST_DEV: " ${DI_HOST_DEV}
+	fi
+        grub-install --no-floppy ${DI_BOOTLOADER} --target=i386-pc --force|| exit 101
+        ;;
+    "uefi|uefi-secureboot")
+	# clover efi loader cannot grub.efi currectly, so we may patch grub or use grub.efi.signed.
+        apt-get install --no-install-recommends -y --force-yes --allow-unauthenticated shim-signed grub-efi-amd64-signed efibootmgr
+	# uefi-secure-boot options is enabled by default
+        grub-install --target=x86_64-efi --uefi-secure-boot --efi-directory=/boot/efi --bootloader-id="${BOOTLOADER_ID}" --recheck || exit 101
+	[ -d /boot/efi/EFI/ubuntu ] || mkdir -p /boot/efi/EFI/ubuntu
+	[ -f /boot/efi/EFI/${BOOTLOADER_ID}/grub.cfg ] && cp /boot/efi/EFI/${BOOTLOADER_ID}/grub.cfg /boot/efi/EFI/ubuntu/grub.cfg
+        ;;
+esac
+
+# Try to avoid kernel update error when create symbol link
+case ${BOOT} in
+    "uefi*")
+        echo "# avoid kernel update fails with /boot on FAT32
+do_symlinks = no" | tee /etc/kernel-img.conf
+    ;;
+esac
+
+fix_boot_order(){
+    command -v efibootmgr >/dev/null 2>&1 || { echo >&2 "Require efibootmgr installed but not found.Skip"; exit 0;}
+    local bootinfo=$(efibootmgr)
+    IFS=$'\n'
+    for line in $bootinfo;do
+        case $line in
+            Boot[0-9A-F][0-9A-F][0-9A-F][0-9A-F]\*\ "${BOOTLOADER_ID}")
+                line="${line%%\**}"
+                default_bootid="${line##Boot}"
+            ;;
+        esac
+    done
+
+    [ -z ${default_bootid} ] && { echo >&2 "No ${BOOTLOADER_ID} found, exit..."; exit 0; }
+
+    declare -a orderids
+    for line in $bootinfo;do
+        case $line in
+            Boot[0-9A-F][0-9A-F][0-9A-F][0-9A-F]\*\ "${BOOTLOADER_ID}")
+            ;;
+            Boot[0-9A-F][0-9A-F][0-9A-F][0-9A-F]\*\ ?*)
+                line="${line%%\**}"
+                orderids[${#orderids[@]}]="${line##Boot}"
+            ;;
+        esac
+    done
+
+    local cmdargs=${default_bootid}
+    for arg in ${orderids[@]};do cmdargs=${cmdargs}","${arg};done
+    efibootmgr -o ${cmdargs}
+}
+
+set_boot_flag(){
+    if [ x${DI_LUPIN} = xtrue ]; then 
+	echo "Lupin install method. Skip set boot flag"
+	return 0
+    fi
+
+    if mount -l | grep -q /boot ;then
+	BOOTBLK=$(mount -l | grep /boot | awk '{print $1}')
+    else
+	BOOTBLK=${DI_ROOT_PARTITION}
+    fi
+    ROOTBLK=$(echo ${BOOTBLK} | tr -d '[:digit:]')
+    if [ -b ${ROOTBLK} ];then
+        BOOTNUM=$(echo $BOOTBLK | tr -d ${ROOTBLK})
+    	parted ${ROOTBLK} set ${BOOTNUM} boot on
+    fi
+}
+
+case ${BOOT} in
+    uefi*)
+        echo "Try to fix efi boot order to deepin first"
+        fix_boot_order
+        ;;
+    legacy)
+	echo "Try to set boot flag on"
+	set_boot_flag
+	;;
+    *)
+        ;;
+esac
+
+[ -x /usr/lib/deepin-daemon/grub2 ] && /usr/lib/deepin-daemon/grub2 --setup --gfxmode="$DI_CUR_RESOLUTION"
+[ -e /etc/default/grub ] && sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT=.*$|GRUB_CMDLINE_LINUX_DEFAULT="splash quiet"|g' /etc/default/grub
+
+# ignore uefi checking for windows partitions which effect by
+# /usr/lib/os-probes/mounted/20microsoft
+#mkdir -p /var/lib/partman
+#touch /var/lib/partman/ignore_uefi
+
+/usr/sbin/update-grub

@@ -27,6 +27,9 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+
+add_definitions("-DBUILTIN_HOOKS_DIR=\"${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn/hooks\"")
+
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5X11Extras REQUIRED)
@@ -160,6 +163,7 @@ add_executable(deepin-installer-check-settings
 
                ${BASE_FILES}
                ${SERVICE_FILES}
+               ${SYSINFO_FILES}
 
                resources/resources.qrc
                )
@@ -175,3 +179,9 @@ install(FILES resources/deepin-installer-reborn.desktop
         DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications")
 install(FILES resources/deepin-installer-reborn.svg
         DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps")
+install(
+    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hooks
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn
+    FILES_MATCHING PATTERN "*"
+    PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+)

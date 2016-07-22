@@ -117,10 +117,8 @@ QString GetOemHooksDir() {
 }
 
 QString GetWindowBackground() {
-  const QString in_oem =
-      QDir(kOemDir).absoluteFilePath(QStringLiteral("background.jpg"));
-  if (QFile::exists(in_oem)) {
-    return in_oem;
+  if (GetSettingsBool(kSystemInfoUseOemWallpaperName)) {
+    return GetSettingsString(kSystemInfoOemWallpaperName);
   }
 
   const QString in_system =

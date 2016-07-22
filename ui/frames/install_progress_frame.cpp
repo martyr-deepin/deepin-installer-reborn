@@ -6,6 +6,7 @@
 
 #include <QDebug>
 #include <QHBoxLayout>
+#include <QThread>
 #include <QVBoxLayout>
 
 #include "service/hooks_manager.h"
@@ -18,12 +19,12 @@ namespace ui {
 InstallProgressFrame::InstallProgressFrame(QWidget* parent)
     : QFrame(parent),
       failed_(false),
-      error_message_(),
-      hooks_inited_(false) {
+      hooks_manager_(new service::HooksManager()),
+      hooks_manager_thread_(new QThread()) {
   this->setObjectName(QStringLiteral("install_progress_frame"));
 
-  hooks_manager_ = new service::HooksManager();
-  // hooks_manager_->moveToThread();
+  hooks_manager_thread_->start();
+  hooks_manager_->moveToThread(hooks_manager_thread_);
 
   this->initUI();
   this->initConnections();
@@ -36,10 +37,7 @@ InstallProgressFrame::~InstallProgressFrame() {
 
 void InstallProgressFrame::initHooks() {
   qDebug() << "init hooks()";
-  if (!hooks_inited_) {
-    hooks_inited_ = true;
-    emit hooks_manager_->runHooks();
-  }
+  emit hooks_manager_->runHooks();
 }
 
 void InstallProgressFrame::initConnections() {
@@ -47,6 +45,8 @@ void InstallProgressFrame::initConnections() {
           this, &InstallProgressFrame::onErrorOccurred);
   connect(hooks_manager_, &service::HooksManager::processUpdate,
           this, &InstallProgressFrame::onInstallProgressUpdated);
+  connect(hooks_manager_, &service::HooksManager::finished,
+          this, &InstallProgressFrame::finished);
 }
 
 void InstallProgressFrame::initUI() {
@@ -70,10 +70,8 @@ void InstallProgressFrame::initUI() {
   this->setLayout(layout);
 }
 
-void InstallProgressFrame::onErrorOccurred(const QString& msg) {
-  qDebug() << "[InstallProgressFrame]::onErrorOccurred()" << msg;
+void InstallProgressFrame::onErrorOccurred() {
   failed_ = true;
-  error_message_ = msg;
   emit this->finished();
 }
 

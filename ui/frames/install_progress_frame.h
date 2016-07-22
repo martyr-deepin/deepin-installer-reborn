@@ -6,6 +6,7 @@
 #define DEEPIN_INSTALLER_REBORN_UI_FRAMES_INSTALL_PROGRESS_FRAME_H
 
 #include <QFrame>
+class QThread;
 
 namespace service {
 class HooksManager;
@@ -31,9 +32,6 @@ class InstallProgressFrame : public QFrame {
   // Returns true is installation process failed.
   bool failed() const { return failed_; }
 
-  // Returns error message when installation process failed.
-  QString error_message() const { return error_message_; }
-
   // Initialize hooks manager.
   void initHooks();
 
@@ -47,14 +45,12 @@ class InstallProgressFrame : public QFrame {
   void initUI();
 
   bool failed_;
-  QString error_message_;
-
-  bool hooks_inited_;
 
   service::HooksManager* hooks_manager_ = nullptr;
+  QThread* hooks_manager_thread_ = nullptr;
 
  private slots:
-  void onErrorOccurred(const QString& msg);
+  void onErrorOccurred();
   void onInstallProgressUpdated(int progress);
 };
 

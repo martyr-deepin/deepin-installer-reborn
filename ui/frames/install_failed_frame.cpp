@@ -21,7 +21,7 @@ InstallFailedFrame::InstallFailedFrame(QWidget* parent) : QFrame(parent) {
   this->initConnections();
 }
 
-void InstallFailedFrame::setErrorMessage(const QString& msg) {
+void InstallFailedFrame::updateErrorMessage() {
 
 }
 
@@ -47,8 +47,10 @@ void InstallFailedFrame::initUI() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->addSpacing(kMainLayoutSpacing);
+  layout->addStretch();
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
+  layout->addStretch();
   layout->addLayout(reboot_layout);
 
   this->setLayout(layout);

@@ -25,9 +25,10 @@ class HooksManager : public QObject {
 
  signals:
   // Emitted when critical error has occurred.
-  // Installation process will be stopped and |msg| will be displayed
-  // in install-error page.
-  void errorOccurred(const QString& msg);
+  void errorOccurred();
+
+  // Emitted when installation process finished successfully.
+  void finished();
 
   // Installation process is split into four stages:
   //   * before_chroot: 0-60
@@ -45,6 +46,9 @@ class HooksManager : public QObject {
     AfterChroot,
   };
 
+  // Mount hooks folder to /dev/shm
+  bool bindHooks(HookType hook_type);
+  bool unbindHooks();
   QStringList listHooks(HookType hook_type);
   bool runHooksPack(HookType hook_type, int progress_begin, int progress_end);
 

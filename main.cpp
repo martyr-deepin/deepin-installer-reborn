@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
   app.setApplicationName(base::kAppName);
   app.setOrganizationDomain(QStringLiteral("deepin.org"));
 
-  service::InitLogService();
+//  service::InitLogService();
 
   ui::MainWindow main_window;
   main_window.showFullScreen();
