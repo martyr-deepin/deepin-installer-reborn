@@ -31,9 +31,8 @@ void InstallSuccessFrame::initUI() {
   QLabel* status_label = new QLabel();
   status_label->setPixmap(QPixmap(":/images/succeed.png"));
   QHBoxLayout* status_layout = new QHBoxLayout();
-  status_layout->addStretch();
+  status_layout->setAlignment(Qt::AlignCenter);
   status_layout->addWidget(status_label);
-  status_layout->addStretch();
 
   TitleLabel* title_label = new TitleLabel(tr("Successfully Installed"));
   QHBoxLayout* title_layout = new QHBoxLayout();
@@ -52,7 +51,6 @@ void InstallSuccessFrame::initUI() {
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addLayout(status_layout);
-  layout->addSpacing(kMainLayoutSpacing * 2);
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
   layout->addStretch();

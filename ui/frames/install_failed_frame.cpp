@@ -5,6 +5,7 @@
 #include "ui/frames/install_failed_frame.h"
 
 #include <QHBoxLayout>
+#include <QLabel>
 #include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
@@ -31,6 +32,12 @@ void InstallFailedFrame::initConnections() {
 }
 
 void InstallFailedFrame::initUI() {
+  QLabel* status_label = new QLabel();
+  status_label->setPixmap(QPixmap(":/images/failed.png"));
+  QHBoxLayout* status_layout = new QHBoxLayout();
+  status_layout->setAlignment(Qt::AlignCenter);
+  status_layout->addWidget(status_label);
+
   TitleLabel* title_label = new TitleLabel(tr("Installation Failed"));
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->addWidget(title_label);
@@ -46,8 +53,9 @@ void InstallFailedFrame::initUI() {
   reboot_layout->addWidget(reboot_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
-  layout->addSpacing(kMainLayoutSpacing);
+  layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
+  layout->addLayout(status_layout);
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
   layout->addStretch();
