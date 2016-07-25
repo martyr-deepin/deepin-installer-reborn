@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>drive-harddisk-windows-32px</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="50%" y1="0.410554847%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#9DDA00" offset="0%"></stop>
+            <stop stop-color="#73C300" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="drive-harddisk-windows-32px">
+            <g id="Group-2" filter="url(#filter-1)" transform="translate(5.000000, 3.000000)">
+                <path d="M9.93406957e-09,1.00307054 C9.93406957e-09,0.449089968 0.439458363,-1.38311407e-08 1.00246171,-1.38311407e-08 L20.9975389,-1.38311407e-08 C21.5511832,-1.38311407e-08 22.0000006,0.438917742 22.0000006,1.00307054 L22,23 L9.93406957e-09,23 L9.93406957e-09,1.00307054 Z" id="Rectangle-1" fill="url(#linearGradient-2)"></path>
+                <path d="M15.9874997,3 L11,3.8380951 L11,8 L15.9874997,8 L15.9874997,3 Z M6,4.49662544 L6,8 L10,8 L10,4 L6,4.49662544 Z M11,9 L11,13.022222 L16,14 L16,9 L11,9 Z M6,9 L6,12.2786054 L10,13 L10,9 L6,9 Z" id="Page-1" fill="#FFFFFF"></path>
+                <path d="M9.93406957e-09,20.0093689 C9.93406957e-09,19.4519098 0.43945835,19 1.00246168,19 L20.9975383,19 C21.5511826,19 22,19.4433532 22,20.0093689 L22,23 L9.11022949,23 L9.93406957e-09,23 L9.93406957e-09,20.0093689 Z" id="Rectangle-3" fill="#FFFFFF"></path>
+                <path d="M9.8068398e-09,23.0093689 C9.8068398e-09,22.4519099 0.43945835,22 1.00246168,22 L20.9975383,22 C21.5511826,22 22,22.4433532 22,23.0093689 L22,24.9906311 C22,25.5480902 21.5605417,26 20.9975383,26 L1.00246168,26.0000001 C0.448817388,26.0000001 9.8068398e-09,25.5566469 9.8068398e-09,24.9906312 L9.8068398e-09,23.0093689 Z" id="Rectangle-1" fill="#DCDDDD"></path>
+                <path d="M19,23 L20,23 L20,25 L19,25 L19,23 Z M17,23 L18,23 L18,25 L17,25 L17,23 Z M15,23 L16,23 L16,25 L15,25 L15,23 Z M13,23 L14,23 L14,25 L13,25 L13,23 Z" id="Combined-Shape" fill="#75C500"></path>
+                <path d="M3,25 C3.55228475,25 4,24.5522847 4,24 C4,23.4477153 3.55228475,23 3,23 C2.44771525,23 2,23.4477153 2,24 C2,24.5522847 2.44771525,25 3,25 Z" id="Oval" fill="#75C600"></path>
+            </g>
+        </g>
+    </g>
+</svg>
