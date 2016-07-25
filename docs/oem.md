@@ -12,14 +12,15 @@
 
 ### 安装器背景
 默认情况下, 会使用系统默认壁纸, 位于`/usr/share/backgrounds/default.jpg`.
-如果需要使用别的壁纸, 只需要放到 `oem/background.jpg` 即可.
+如果需要使用别的壁纸, 只需要放到 `oem/background.jpg`, 同时设置
+ `system_info_use_oem_wallpaper` 选项
 
 注意图片分辨率和大小.
 
 
 ### Logo
 在语言选择页面的正上方, 会显示系统 logo, 默认是 deepin 的官方logo, 如果需要
-自定义, 可以放到 `oem/logo.png`.
+自定义, 可以放到 `oem/logo.png`. 记得设置 `system_info_use_vendor_logo` 选项
 
 
 ### 用户头像

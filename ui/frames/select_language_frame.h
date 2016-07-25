@@ -6,8 +6,12 @@
 #define DEEPIN_INSTALLER_REBORN_UI_FRAMES_SELECT_LANGUAGE_FRAME_H
 
 #include <QFrame>
+class QListView;
 
 namespace ui {
+
+class LanguageListModel;
+class NavButton;
 
 // Select system language.
 class SelectLanguageFrame : public QFrame {
@@ -21,11 +25,19 @@ class SelectLanguageFrame : public QFrame {
   void finished();
 
  private:
+  void initConnections();
   void initUI();
 
   bool language_is_selected_ = false;
 
+  QListView* list_view_ = nullptr;
+  LanguageListModel* list_model_ = nullptr;
+
+  NavButton* next_button_ = nullptr;
+
  private slots:
+  void onLanguageListSelected();
+
   // Check if a language item is selected.
   void onNextButtonClicked();
 };

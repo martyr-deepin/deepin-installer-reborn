@@ -33,6 +33,9 @@ QString GetDefaultAvatar();
 // Get absolute path to oem hooks folder.
 QString GetOemHooksDir();
 
+// Get vendor logo.
+QString GetVendorLogo();
+
 // Get image path of window background.
 // First try to find in root of iso.
 // Then read from /usr/share/backgrounds/.

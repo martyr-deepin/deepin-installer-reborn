@@ -1,0 +1,64 @@
+/** Used in SelectLanguageFrame class **/
+
+QListView,
+QHeaderView,
+QHeaderView::section,
+QListCornerButton::section {
+  background-color: transparent;
+}
+
+QListView {
+  /*
+  show-decoration-selected: 1;
+  alternate-background-color: rgba(127, 127, 127, 30);
+  selection-background-color: rgba(255, 255, 255, 1);
+  */
+  font-size: 14pt;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+QListView,
+QListView::item {
+  border: none;
+}
+
+QListView::item {
+  background: transparent;
+  color: #eaeaea;
+  height: 38px;
+  padding: 5px 10px;
+}
+
+QListView::item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+QListView::item:focus {
+  background: rgba(255, 255, 255, 0.3);
+  /*background: url(:/ui/images/arrow.png) no-repeat;*/
+}
+
+QScrollArea {
+  background-color: transparent;
+  border: none;
+}
+
+QScrollBar::add-page,
+QScrollBar::sub-page,
+QScrollBar::add-line,
+QScrollBar::sub-line,
+QScrollBar::up-arrow,
+QScrollBar::down-arrow {
+  background: none;
+}
+
+QScrollBar {
+  margin: 0;
+  width: 0;
+  background-color: transparent;
+}
+
+QScrollBar::handle {
+  border-width: 0;
+}

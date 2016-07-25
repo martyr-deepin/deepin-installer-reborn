@@ -116,9 +116,16 @@ QString GetOemHooksDir() {
   return QDir(kOemDir).absoluteFilePath(QStringLiteral("hooks"));
 }
 
+QString GetVendorLogo() {
+  if (GetSettingsBool(kSystemInfoUseVendorLogoName)) {
+    return QDir(kOemDir).absoluteFilePath("logo.png");
+  }
+  return QStringLiteral(":/images/logo.png");
+}
+
 QString GetWindowBackground() {
   if (GetSettingsBool(kSystemInfoUseOemWallpaperName)) {
-    return GetSettingsString(kSystemInfoOemWallpaperName);
+    return QDir(kOemDir).absoluteFilePath("background.jpg");
   }
 
   const QString in_system =
