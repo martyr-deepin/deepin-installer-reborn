@@ -76,7 +76,7 @@ void InstallProgressFrame::onErrorOccurred() {
 }
 
 void InstallProgressFrame::onInstallProgressUpdated(int progress) {
-
+  Q_UNUSED(progress);
 }
 
 }  // namespace ui

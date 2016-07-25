@@ -17,10 +17,10 @@ if (CMAKE_BUILD_TYPE MATCHES Release)
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O2  -Wl,-O1 -Wl,--gc-sections")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2 -Wl,-O1 -Wl,--gc-sections")
 else()
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra -Wno-unused-variable -Wno-unused-parameter -Wno-unused-function")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra")
   # -fno-rtti       = Disable real-time type information
   # -fno-exceptions = Disable exceptions
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -Wno-unused-variable -Wno-unused-parameter -Wno-unused-function -fno-rtti -fno-exceptions")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -fno-rtti -fno-exceptions")
 endif()
 
 set(CMAKE_AUTOMOC ON)
@@ -36,10 +36,12 @@ find_package(Qt5X11Extras REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(PkgConfig REQUIRED)
 
+pkg_search_module(QREncode REQUIRED libqrencode)
 pkg_search_module(X11 REQUIRED x11)
 pkg_search_module(X11EXT REQUIRED xext)
 pkg_search_module(X11TST REQUIRED xtst)
 
+include_directories(AFTER ${QREncode_INCLUDE_DIRS})
 include_directories(AFTER ${X11_INCLUDE_DIRS})
 include_directories(AFTER ${X11EXT_INCLUDE_DIRS})
 include_directories(AFTER ${X11TST_INCLUDE_DIRS})
@@ -58,6 +60,7 @@ set(BASE_FILES
 set(SERVICE_FILES
     service/hooks_manager.cpp service/hooks_manager.h
     service/log_manager.cpp service/log_manager.h
+    service/partition_manager.cpp service/partition_manager.h
     service/settings_manager.cpp service/settings_manager.h
     service/signal_manager.cpp service/signal_manager.h
     service/system_language.cpp service/system_language.h
@@ -77,6 +80,11 @@ set(UI_FILES
     ui/main_window.cpp ui/main_window.h
     ui/utils/xutil.cpp ui/utils/xutil.h
     ui/frames/consts.h
+    ui/frames/delegates/language_list_delegate.cpp ui/frames/delegates/language_list_delegate.h
+    ui/frames/inner/system_info_avatar_frame.cpp ui/frames/inner/system_info_avatar_frame.h
+    ui/frames/inner/system_info_form_frame.cpp ui/frames/inner/system_info_form_frame.h
+    ui/frames/inner/system_info_timezone_frame.cpp ui/frames/inner/system_info_timezone_frame.h
+    ui/frames/models/language_list_model.cpp ui/frames/models/language_list_model.h
     ui/frames/confirm_quit_frame.cpp ui/frames/confirm_quit_frame.h
     ui/frames/disk_space_insufficient_frame.cpp ui/frames/disk_space_insufficient_frame.h
     ui/frames/install_failed_frame.cpp ui/frames/install_failed_frame.h
@@ -87,9 +95,6 @@ set(UI_FILES
     ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
     ui/frames/system_info_frame.cpp ui/frames/system_info_frame.h
     ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h
-    ui/frames/inner/system_info_avatar_frame.cpp ui/frames/inner/system_info_avatar_frame.h
-    ui/frames/inner/system_info_form_frame.cpp ui/frames/inner/system_info_form_frame.h
-    ui/frames/inner/system_info_timezone_frame.cpp ui/frames/inner/system_info_timezone_frame.h
     ui/widgets/avatar_button.cpp ui/widgets/avatar_button.h
     ui/widgets/comment_label.cpp ui/widgets/comment_label.h
     ui/widgets/expanded_nav_button.cpp ui/widgets/expanded_nav_button.h
@@ -101,8 +106,9 @@ set(UI_FILES
     ui/widgets/list_title_label.cpp ui/widgets/list_title_label.h
     ui/widgets/nav_button.cpp ui/widgets/nav_button.h
     ui/widgets/page_indicator.cpp ui/widgets/page_indicator.h
+    ui/widgets/qr_widget.cpp ui/widgets/qr_widget.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
-    ui/frames/models/language_list_model.cpp ui/frames/models/language_list_model.h ui/frames/delegates/language_list_delegate.cpp ui/frames/delegates/language_list_delegate.h)
+    )
 
 set(UNITTEST_FILES
     sysinfo/timezone_test.cpp
@@ -117,6 +123,7 @@ set(LINK_LIBS
     Qt5::X11Extras
     Qt5::Gui
 
+    ${QREncode_LIBRARIES}
     ${X11_LIBRARIES}
     ${X11EXT_LIBRARIES}
     ${X11TST_LIBRARIES}

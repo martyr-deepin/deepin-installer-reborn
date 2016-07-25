@@ -32,31 +32,48 @@ const char kLogFileName[] = "deepin-installer-reborn.log";
 // Define customized QDebug handler.
 void MessageOutput(QtMsgType type, const QMessageLogContext& context,
                    const QString& msg) {
-  const QByteArray localMsg = msg.toLocal8Bit();
-  const char* filename =
-      QFileInfo(context.file).fileName().toUtf8().constData();
-  switch (type) {
-    case QtDebugMsg:
-      fprintf(stdout, "[Debug] [%s %u]: %s\n", filename, context.line,
-              localMsg.constData());
-      break;
-    case QtInfoMsg:
-      fprintf(stdout, "[Info] [%s:%u]: %s\n", filename, context.line,
-              localMsg.constData());
-      break;
-    case QtWarningMsg:
-      fprintf(stdout, "[Warning] [%s %u]: %s\n", filename, context.line,
-              localMsg.constData());
-      break;
-    case QtCriticalMsg:
-      fprintf(stderr, "[Error] [%s %u]: %s\n", filename, context.line,
-              localMsg.constData());
-      break;
-    case QtFatalMsg:
-      fprintf(stderr, "[Fatal] [%s %u]: %s\n", filename, context.line,
-              localMsg.constData());
-      abort();
+  Q_UNUSED(type);
+  Q_UNUSED(context);
+  if (write(STDOUT_FILENO, msg.toUtf8().constData(),
+            static_cast<size_t>(msg.length())) > -1 &&
+      write(STDOUT_FILENO, "\n", 1) > -1) {
+    return;
+  } else {
+    perror("");
   }
+  // To reduce duplicated log message, remove all flags.
+//  switch (type) {
+//    case QtDebugMsg: {
+//      const QString content = QString("[Debug] [%1 %2]: %3\n")
+//          .arg(filename).arg(context.line).arg(localMsg.constData());
+//      write(STDOUT_FILENO, content.toUtf8().constData(), content.length());
+//      break;
+//    }
+//    case QtInfoMsg: {
+//      const QString content = QString("[Info] [%1 %2]: %3\n")
+//          .arg(filename).arg(context.line).arg(localMsg.constData());
+//      write(STDOUT_FILENO, content.toUtf8().constData(), content.length());
+//      break;
+//    }
+//    case QtWarningMsg: {
+//      const QString content = QString("[Warning] [%1 %2]: %3\n")
+//          .arg(filename).arg(context.line).arg(localMsg.constData());
+//      write(STDOUT_FILENO, content.toUtf8().constData(), content.length());
+//      break;
+//    }
+//    case QtCriticalMsg: {
+//      const QString content = QString("[Critical] [%1 %2]: %3\n")
+//          .arg(filename).arg(context.line).arg(localMsg.constData());
+//      write(STDOUT_FILENO, content.toUtf8().constData(), content.length());
+//      break;
+//    }
+//    case QtFatalMsg: {
+//      const QString content = QString("[Fatal] [%1 %2]: %3\n")
+//          .arg(filename).arg(context.line).arg(localMsg.constData());
+//      write(STDOUT_FILENO, content.toUtf8().constData(), content.length());
+//      abort();
+//    }
+//  }
 }
 
 }  // namespace
@@ -65,17 +82,10 @@ QString GetLogFilepath() {
   const QString var_log = QStringLiteral("/var/log/%1").arg(kLogFileName);
   QFile var_log_file(var_log);
   if (var_log_file.isWritable()) {
-    if (var_log_file.exists()) {
-      var_log_file.remove();
-    }
     return var_log;
   }
 
   const QString tmp_log = QStringLiteral("/tmp/%1").arg(kLogFileName);
-  QFile tmp_log_file(tmp_log);
-  if (tmp_log_file.exists()) {
-    tmp_log_file.remove();
-  }
   return tmp_log;
 }
 

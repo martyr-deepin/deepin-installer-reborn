@@ -47,6 +47,11 @@ const char kSystemInfoDisableAvatorPageName[] =
 const char kSystemInfoDisableTimezonePageName[] =
     "system_info_disable_timezone_page";
 
+
+// Install failed pag
+const char kInstallFailedFeedbackServerName[] =
+    "install_failed_feedback_server";
+
 }  // namespace service
 
 #endif  // DEEPIN_INSTALLER_REBORN_SERVICE_SETTINGS_NAME_H

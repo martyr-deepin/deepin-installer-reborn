@@ -13,6 +13,8 @@ namespace {
 }  // namespace
 
 QPixmap FastGaussianBlur(const QString& image_path, int radius) {
+  // TODO(xushaohua):
+  Q_UNUSED(radius);
   return QPixmap(image_path);
 }
 

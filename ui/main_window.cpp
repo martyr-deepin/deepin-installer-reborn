@@ -249,6 +249,7 @@ void MainWindow::goNextPage() {
     case PageId::InstallProgressId: {
       page_indicator_->setVisible(false);
       if (install_progress_frame_->failed()) {
+        install_failed_frame_->updateErrorMessage();
         this->setCurrentPage(PageId::InstallFailedId);
       } else {
         this->setCurrentPage(PageId::InstallSuccessId);

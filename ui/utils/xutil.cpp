@@ -293,9 +293,8 @@ void SetMouseTransparent(QWidget* widget, bool on) {
   }
   Q_UNUSED(XRect);
   Q_UNUSED(nRects);
-//  XShapeCombineRectangles(display, widget->winId(), ShapeInput,
-//                          0, 0,
-//                          &XRect, nRects, ShapeSet, YXBanded);
+  XShapeCombineRectangles(display, widget->winId(), ShapeInput,
+                          0, 0, &XRect, nRects, ShapeSet, YXBanded);
 }
 
 void SetStayOnTop(QWidget* widget, bool on) {

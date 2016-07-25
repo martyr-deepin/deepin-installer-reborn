@@ -2,6 +2,7 @@
   <qresource prefix="/images">
     <file>startover_normal.png</file>
     <file>drive-harddisk-deepin-32px.png</file>
+    <file>code_hover.png</file>
     <file>capslock.png</file>
     <file>mode.png</file>
     <file>succeed.png</file>
@@ -16,12 +17,15 @@
     <file>light.png</file>
     <file>timezone_normal.png</file>
     <file>complete2.png</file>
+    <file>code_normal.png</file>
     <file>timezone_hover.png</file>
     <file>logo.png</file>
+    <file>QR_press.png</file>
     <file>check-06.png</file>
     <file>arrow_left_press.png</file>
     <file>checkbox_checked.png</file>
     <file>drive-nstall-here-128px.png</file>
+    <file>code_press.png</file>
     <file>drive-harddisk-mac-32px.svg</file>
     <file>progress_failed.png</file>
     <file>startover_hover.png</file>
@@ -55,6 +59,7 @@
     <file>increase_press.png</file>
     <file>drive-harddisk-linux-128px.svg</file>
     <file>generate-qrc.py</file>
+    <file>QR_hover.png</file>
     <file>check-05.png</file>
     <file>next_hover.png</file>
     <file>ubuntu.png</file>
@@ -109,6 +114,7 @@
     <file>lock.png</file>
     <file>detect_layout.png</file>
     <file>add_part_active.png</file>
+    <file>QR_normal.png</file>
     <file>checkbox_unchecked.png</file>
   </qresource>
 </RCC>
