@@ -5,6 +5,7 @@
 #include "ui/frames/install_success_frame.h"
 
 #include <QHBoxLayout>
+#include <QLabel>
 #include <QVBoxLayout>
 
 #include "ui/widgets/comment_label.h"
@@ -27,6 +28,13 @@ void InstallSuccessFrame::initConnections() {
 }
 
 void InstallSuccessFrame::initUI() {
+  QLabel* status_label = new QLabel();
+  status_label->setPixmap(QPixmap(":/images/succeed.png"));
+  QHBoxLayout* status_layout = new QHBoxLayout();
+  status_layout->addStretch();
+  status_layout->addWidget(status_label);
+  status_layout->addStretch();
+
   TitleLabel* title_label = new TitleLabel(tr("Successfully Installed"));
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->addWidget(title_label);
@@ -43,6 +51,8 @@ void InstallSuccessFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
+  layout->addLayout(status_layout);
+  layout->addSpacing(kMainLayoutSpacing * 2);
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
   layout->addStretch();
