@@ -36,11 +36,13 @@ find_package(Qt5X11Extras REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(PkgConfig REQUIRED)
 
+pkg_search_module(Parted REQUIRED libparted)
 pkg_search_module(QREncode REQUIRED libqrencode)
 pkg_search_module(X11 REQUIRED x11)
 pkg_search_module(X11EXT REQUIRED xext)
 pkg_search_module(X11TST REQUIRED xtst)
 
+include_directories(AFTER ${Parted_INCLUDE_DIRS})
 include_directories(AFTER ${QREncode_INCLUDE_DIRS})
 include_directories(AFTER ${X11_INCLUDE_DIRS})
 include_directories(AFTER ${X11EXT_INCLUDE_DIRS})
@@ -123,6 +125,7 @@ set(LINK_LIBS
     Qt5::X11Extras
     Qt5::Gui
 
+    ${Parted_LIBRARIES}
     ${QREncode_LIBRARIES}
     ${X11_LIBRARIES}
     ${X11EXT_LIBRARIES}
