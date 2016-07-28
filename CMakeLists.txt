@@ -71,6 +71,7 @@ set(SERVICE_FILES
 
 set(SYSINFO_FILES
     sysinfo/machine.cpp sysinfo/machine.h
+    sysinfo/proc_partitions.cpp sysinfo/proc_partitions.h
     sysinfo/timezone.cpp sysinfo/timezone.h
     sysinfo/users.cpp sysinfo/users.h
     sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h
@@ -113,11 +114,12 @@ set(UI_FILES
     )
 
 set(UNITTEST_FILES
+    sysinfo/proc_partitions_test.cpp
+    service/system_languages_test.cpp
     sysinfo/timezone_test.cpp
     sysinfo/users_test.cpp
     sysinfo/validate_username_test.cpp
     sysinfo/validate_hostname_test.cpp
-    service/system_languages_test.cpp
     )
 
 set(LINK_LIBS
