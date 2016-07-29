@@ -88,6 +88,7 @@ set(UI_FILES
     ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
     ui/frames/inner/edit_partition_frame.cpp ui/frames/inner/edit_partition_frame.h
     ui/frames/inner/new_partition_frame.cpp ui/frames/inner/new_partition_frame.h
+    ui/frames/inner/select_bootloader_frame.cpp ui/frames/inner/select_bootloader_frame.h
     ui/frames/inner/simple_partition_frame.cpp ui/frames/inner/simple_partition_frame.h
     ui/frames/inner/system_info_avatar_frame.cpp ui/frames/inner/system_info_avatar_frame.h
     ui/frames/inner/system_info_form_frame.cpp ui/frames/inner/system_info_form_frame.h
