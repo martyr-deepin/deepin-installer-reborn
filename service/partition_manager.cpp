@@ -7,6 +7,7 @@
 #include <parted/parted.h>
 #include <string.h>
 #include <QDebug>
+#include <QDir>
 
 namespace service {
 
@@ -149,11 +150,14 @@ void PartitionManager::doRefreshDevices() {
 
     device.partitions = partitions;
     devices.append(device);
-
     //ped_disk_print(disk);
 //    ped_device_destroy(p_device);
 //    ped_disk_destroy(disk);
   }
+}
+
+bool EfiIsEnabled() {
+  return QDir(QStringLiteral("/sys/firmware/efi")).exists();
 }
 
 }  // namespace service

@@ -59,6 +59,9 @@ class PartitionManager : public QObject {
   void doRefreshDevices();
 };
 
+// Check if EFI feature is enabled in this machine.
+bool EfiIsEnabled();
+
 }  // namespace service
 
 #endif  // DEEPIN_INSTALLER_REBORN_SERVICE_PARTITION_MANAGER_H
