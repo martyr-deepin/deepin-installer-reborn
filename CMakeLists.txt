@@ -86,6 +86,7 @@ set(UI_FILES
     ui/frames/consts.h
     ui/frames/delegates/language_list_delegate.cpp ui/frames/delegates/language_list_delegate.h
     ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
+    ui/frames/inner/new_partition_frame.cpp ui/frames/inner/new_partition_frame.h
     ui/frames/inner/simple_partition_frame.cpp ui/frames/inner/simple_partition_frame.h
     ui/frames/inner/system_info_avatar_frame.cpp ui/frames/inner/system_info_avatar_frame.h
     ui/frames/inner/system_info_form_frame.cpp ui/frames/inner/system_info_form_frame.h
