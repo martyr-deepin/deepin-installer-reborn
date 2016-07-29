@@ -9,6 +9,7 @@
 
 namespace ui {
 
+class AvatarButton;
 class IconButton;
 
 class SystemInfoAvatarFrame : public QFrame {
@@ -33,7 +34,11 @@ class SystemInfoAvatarFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  AvatarButton* chosen_avatar_button_ = nullptr;
   IconButton* timezone_button_ = nullptr;
+
+ private slots:
+  void onAvatarButtonClicked();
 };
 
 }  // namespace ui
