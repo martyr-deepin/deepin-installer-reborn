@@ -26,6 +26,7 @@ void DiskSpaceInsufficientFrame::initUI() {
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->addWidget(title_label);
 
+  // TODO(xushaohua): Move 8GB and 15GB to variables.
   CommentLabel* comment_label = new CommentLabel(
       tr("It takes at lease 8GB disk space to install deepin, "
          "for better performance, 15GB and more space is recommended"));

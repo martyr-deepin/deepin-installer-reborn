@@ -10,7 +10,7 @@ namespace sysinfo {
 namespace {
 
 TEST(ParsePartitionItemsTest, ParsePartitionItems) {
-  const QList<PartitionItem> items = ParsePartitionItems();
+  const PartitionItemList items = ParsePartitionItems();
   EXPECT_GT(items.length(), 0);
 }
 

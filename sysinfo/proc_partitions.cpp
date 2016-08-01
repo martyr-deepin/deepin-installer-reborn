@@ -11,7 +11,7 @@
 namespace sysinfo {
 
 QList<PartitionItem> ParsePartitionItems() {
-  QList<PartitionItem> result;
+  PartitionItemList result;
 
   const QString content =
       base::ReadTextFileContent(QStringLiteral("/proc/partitions"));

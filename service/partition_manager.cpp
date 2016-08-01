@@ -9,11 +9,13 @@
 #include <QDebug>
 #include <QDir>
 
+#include "sysinfo/proc_partitions.h"
+
 namespace service {
 
 namespace {
 
-const char kPartationTableGpt[] = "gpt";
+const char kPartationTableGPT[] = "gpt";
 const char kPartationTableMsDos[] = "msdos";
 
 //// Flush linux kernel caches. Ensure coherency between the caches of the whole
@@ -95,9 +97,10 @@ void PartitionManager::doRefreshDevices() {
     if (device_type == NULL) {
       // Raw disk found.
       // TODO(xushaohua): Check proper partition type.
-      disk = ped_disk_new_fresh(p_device, ped_disk_type_get("gpt"));
+      disk = ped_disk_new_fresh(p_device,
+                                ped_disk_type_get(kPartationTableGPT));
       device_type = ped_disk_probe(p_device);
-    } else if (QString(kPartationTableGpt) == device_type->name ||
+    } else if (QString(kPartationTableGPT) == device_type->name ||
                QString(kPartationTableMsDos) == device_type->name) {
       disk = ped_disk_new(p_device);
     } else {
@@ -116,7 +119,11 @@ void PartitionManager::doRefreshDevices() {
     Device device;
     device.model = p_device->model;
     device.path = p_device->path;
-    device.table = device_type->name;
+    if (strncmp(kPartationTableGPT, device_type->name, 3)) {
+      device.table = PartitionTableType::GPT;
+    } else if (strncmp(kPartationTableMsDos, device_type->name, 5)) {
+      device.table = PartitionTableType::MsDos;
+    }
     device.heads = p_device->bios_geom.heads;
     device.sectors = p_device->bios_geom.sectors;
     device.cylinders = p_device->bios_geom.cylinders;
@@ -156,8 +163,36 @@ void PartitionManager::doRefreshDevices() {
   }
 }
 
-bool EfiIsEnabled() {
+bool IsEfiEnabled() {
   return QDir(QStringLiteral("/sys/firmware/efi")).exists();
+}
+
+qint64 GetMaximumDeviceSize() {
+  const sysinfo::PartitionItemList list = sysinfo::ParsePartitionItems();
+  qint64 result = 0;
+  for (const sysinfo::PartitionItem item : list) {
+    result = qMax(result, item.blocks);
+  }
+  return result;
+}
+
+PartitionTableType GetPrimaryDiskPartitionTable() {
+  // TODO(xushaohua): Read path to the first device.
+  PedDevice* device = ped_device_get("/dev/sda");
+  if (device == NULL) {
+    return PartitionTableType::Unknown;
+  }
+  PedDiskType* disk_type = ped_disk_probe(device);
+  if (disk_type == NULL) {
+    return PartitionTableType::Empty;
+  }
+  if (strncmp(kPartationTableGPT, disk_type->name, 3)) {
+    return PartitionTableType::GPT;
+  }
+  if (strncmp(kPartationTableMsDos, disk_type->name, 5)) {
+    return PartitionTableType::MsDos;
+  }
+  return PartitionTableType::Others;
 }
 
 }  // namespace service

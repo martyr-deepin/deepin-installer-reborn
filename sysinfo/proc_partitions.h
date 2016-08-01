@@ -18,7 +18,9 @@ struct PartitionItem {
   QString name;
 };
 
-QList<PartitionItem> ParsePartitionItems();
+typedef QList<PartitionItem> PartitionItemList;
+
+PartitionItemList ParsePartitionItems();
 
 }  // namespace sysinfo
 

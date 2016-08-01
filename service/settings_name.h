@@ -47,8 +47,13 @@ const char kSystemInfoDisableAvatorPageName[] =
 const char kSystemInfoDisableTimezonePageName[] =
     "system_info_disable_timezone_page";
 
+// Partition
+const char kPartitionMinimumDiskSpaceRequiredName[] =
+    "partition_minimum_disk_space_required";
+const char kPartitionRecommendedDiskSpaceName[] =
+    "partition_recommended_disk_space";
 
-// Install failed pag
+// Install failed page
 const char kInstallFailedFeedbackServerName[] =
     "install_failed_feedback_server";
 

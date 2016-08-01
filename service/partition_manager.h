@@ -10,6 +10,36 @@
 
 namespace service {
 
+enum class PartitionTableType {
+  Empty,  // Raw disk has empty partition table type.
+  GPT,
+  MsDos,
+  Others,  // Not supported partition types.
+  Unknown,
+};
+
+enum class FsType {
+  Empty,
+  Btrfs,
+  EFI,
+  Ext2,
+  Ext3,
+  Ext4,
+  Fat16,
+  Fat32,
+  Hfs,
+  HfsPlus,
+  Jfs,
+  LinuxSwap,
+  LVM2PV,
+  NTFS,
+  Others,
+  Reiser4,
+  Reiserfs,
+  Xfs,
+  Unknown,
+};
+
 struct Partition {
   // File system
   QString fs;  // file system type.
@@ -30,9 +60,9 @@ struct Partition {
 };
 
 struct Device {
-  QString model;
+  QString model;  // Human readable device name (manufacture).
   QString path;
-  QString table; // partition table.
+  PartitionTableType table;
   qint64 freespace;
   qint64 length;  // total sectors / disk capacity.
   int heads;
@@ -60,7 +90,13 @@ class PartitionManager : public QObject {
 };
 
 // Check if EFI feature is enabled in this machine.
-bool EfiIsEnabled();
+bool IsEfiEnabled();
+
+// Get maximum device size, by parsing /proc/partitions.
+qint64 GetMaximumDeviceSize();
+
+// Returns partition table type of the first disk device.
+PartitionTableType GetPrimaryDiskPartitionTable();
 
 }  // namespace service
 

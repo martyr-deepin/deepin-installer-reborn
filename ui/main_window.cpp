@@ -14,6 +14,7 @@
 #include <QVBoxLayout>
 
 #include "base/gaussian_blur.h"
+#include "service/partition_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
@@ -48,6 +49,26 @@ int GetVisiblePages() {
   // For install-progress page.
   pages += 1;
   return pages;
+}
+
+bool IsDiskSpaceInsufficient() {
+  const qint64 maximum_device_size = service::GetMaximumDeviceSize();
+  const int required_device_size = service::GetSettingsValue(
+      service::kPartitionMinimumDiskSpaceRequiredName).toInt();
+  return required_device_size * 1024 * 1024 > maximum_device_size;
+}
+
+// Check whether partition table matches machine settings.
+bool IsPartitionTableMatch() {
+  service::PartitionTableType type = service::GetPrimaryDiskPartitionTable();
+  if (type == service::PartitionTableType::Empty) {
+    return true;
+  }
+  if (service::IsEfiEnabled()) {
+    return type == service::PartitionTableType::GPT;
+  } else {
+    return type == service::PartitionTableType::MsDos;
+  }
 }
 
 }  // namespace
@@ -235,7 +256,7 @@ void MainWindow::goNextPage() {
 
     case PageId::DiskSpaceInsufficientId: {
       // Check whether to show VirtualMachinePage.
-      if (false && sysinfo::IsVirtualMachine()) {
+      if (sysinfo::IsVirtualMachine()) {
         page_indicator_->setVisible(false);
         this->setCurrentPage(PageId::VirtualMachineId);
       } else {
@@ -268,7 +289,7 @@ void MainWindow::goNextPage() {
 
     case PageId::PartitionTableWarningId: {
       // Check whether to show SelectLanguagePage.
-      if (true) {
+      if (!service::GetSettingsBool(service::kSkipSelectLanguagePageName)) {
         page_indicator_->setVisible(true);
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::SelectLanguageId);
@@ -282,7 +303,7 @@ void MainWindow::goNextPage() {
 
     case PageId::SelectLanguageId: {
       // Check whether to show SystemInfoPage.
-      if (true) {
+      if (!service::GetSettingsBool(service::kSkipSystemInfoPageName)) {
         page_indicator_->setVisible(true);
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::SystemInfoId);
@@ -296,7 +317,7 @@ void MainWindow::goNextPage() {
 
     case PageId::SystemInfoId: {
       // Check whether to show PartitionPage.
-      if (true) {
+      if (!service::GetSettingsBool(service::kSkipPartitionPageName)) {
         page_indicator_->setVisible(true);
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::PartitionId);
@@ -310,7 +331,7 @@ void MainWindow::goNextPage() {
 
     case PageId::VirtualMachineId: {
       // Check whether to show PartitionTableWarningPage.
-      if (false) {
+      if (IsPartitionTableMatch()) {
         page_indicator_->setVisible(false);
         this->setCurrentPage(PageId::PartitionTableWarningId);
       } else {
@@ -324,7 +345,7 @@ void MainWindow::goNextPage() {
     case PageId::NullId: {
       // Displays the first page.
       // Check whether to show DiskSpaceInsufficientPage.
-      if (false) {
+      if (IsDiskSpaceInsufficient()) {
         page_indicator_->setVisible(false);
         this->setCurrentPage(PageId::DiskSpaceInsufficientId);
       } else {

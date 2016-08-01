@@ -10,7 +10,7 @@ namespace sysinfo {
 namespace {
 
 TEST(ParseMountItemsTest, ParseMountItems) {
-  const QList<MountItem> items = ParseMountItems();
+  const MountItemList items = ParseMountItems();
   EXPECT_GT(items.length(), 0);
 }
 

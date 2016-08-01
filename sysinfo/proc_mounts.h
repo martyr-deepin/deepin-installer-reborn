@@ -19,8 +19,10 @@ struct MountItem {
   // int passno;
 };
 
+typedef QList<MountItem> MountItemList;
+
 // Parse /proc/mounts file.
-QList<MountItem> ParseMountItems();
+MountItemList ParseMountItems();
 
 }  // namespace sysinfo
 

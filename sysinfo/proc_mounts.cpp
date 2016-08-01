@@ -10,7 +10,7 @@
 namespace sysinfo {
 
 QList<MountItem> ParseMountItems() {
-  QList<MountItem> result;
+  MountItemList result;
   const QString content =
       base::ReadTextFileContent(QStringLiteral("/proc/mounts"));
   const QStringList lines = content.split("\n");

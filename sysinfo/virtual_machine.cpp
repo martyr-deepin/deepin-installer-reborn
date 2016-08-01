@@ -13,7 +13,7 @@ bool IsVirtualMachine() {
   // Check "hypervisor" flag is added in /proc/cpuinfo.
   const QString content =
       base::ReadTextFileContent(QStringLiteral("/proc/cpuinfo"));
-  return content.indexOf(QStringLiteral("hypervisor"));
+  return content.contains(QStringLiteral("hypervisor"));
 }
 
 }  // namespace sysinfo
