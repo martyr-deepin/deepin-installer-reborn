@@ -32,6 +32,13 @@
 如果要指定用户的默认头像, 需要在 `oem/settings.ini` 文件里修改.
 
 
+### 自动分区
+需要把 `skip_partition_page` 设置为`1`, 然后把 `partition_do_auto_part`
+设置为 `1`, 最后, 把需要分区的操作写到 `oem/auto-part.sh` 这个脚本文件里.
+分区操作使用 `parted` 命令, 同时, 记得把分区结果写入到 `/etc/deepin-installer.conf`
+这个配置文件里. 要注意的是, `oem/auto-part.sh` 这个文件需要拥有可执行权限才行.
+
+
 ### hooks
 根据安装阶段的不同, 分为 `before_chroot`, `in_chroot` 以及 `after_chroot`.
 在 `oem/hooks/` 目录里, 创建相应的目录, 并写需要的hook脚本即可.

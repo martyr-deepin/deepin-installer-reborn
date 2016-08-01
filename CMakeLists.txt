@@ -54,6 +54,7 @@ add_subdirectory(third_party/googletest)
 include_directories(third_party/googletest)
 
 set(BASE_FILES
+    base/command.cpp base/command.h
     base/consts.h
     base/file_util.cpp base/file_util.h
     base/gaussian_blur.cpp base/gaussian_blur.h

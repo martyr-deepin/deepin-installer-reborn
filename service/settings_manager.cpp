@@ -17,9 +17,23 @@ namespace service {
 
 namespace {
 
+// Absolute path to installer config file.
+const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
+
 // Absolute path to oem dir in system ISO.
 // Note that iso image is mounted at "/lib/live/mount/medium/".
 const char kOemDir[] = "/lib/live/mount/medium/oem";
+
+bool AppendToConfigFile(const QString& line) {
+  QFile file(kInstallerConfigFile);
+  if (!file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
+    qWarning() << "Failed to append to config file:" << line;
+    return false;
+  }
+  file.write(line.toUtf8());
+  file.close();
+  return true;
+}
 
 QStringList ListImageFiles(const QString& dir_name) {
   QStringList result;
@@ -84,6 +98,10 @@ QVariant GetSettingsValue(const QString& key) {
   return QVariant();
 }
 
+QString GetAutoPartFile() {
+  return QDir(kOemDir).absoluteFilePath("auto-part.sh");
+}
+
 QStringList GetAvatars() {
   // First, check oem/ dir.
   const QString oem_dir(QDir(kOemDir).absoluteFilePath("avatar"));
@@ -135,6 +153,58 @@ QString GetWindowBackground() {
   }
 
   return QStringLiteral(":/resources/fallback-wallpaper.jpg");
+}
+
+bool DeleteConfigFile() {
+  QFile file(kInstallerConfigFile);
+  if (file.exists()) {
+    if (!file.remove()) {
+      qCritical() << "Failed to delete installer config file!";
+      return false;
+    }
+  }
+  return true;
+}
+
+void WriteLocale(const QString& locale) {
+  const QString line = QString("DI_LOCALE=%1\n").arg(locale);
+  AppendToConfigFile(line);
+}
+
+void WriteUsername(const QString& username) {
+  const QString line = QString("DI_USERNAME=%1\n").arg(username);
+  AppendToConfigFile(line);
+}
+
+void WriteHostname(const QString& hostname) {
+  const QString line = QString("DI_HOSTNAME=%1\n").arg(hostname);
+  AppendToConfigFile(line);
+}
+
+void WritePassword(const QString& password) {
+  // TODO(xushaohua): base64 encode
+  const QString line = QString("DI_PASSWORD=%1\n").arg(password);
+  AppendToConfigFile(line);
+}
+
+void WriteTimezone(const QString& timezone) {
+  const QString line = QString("DI_TIMEZONE=%1\n").arg(timezone);
+  AppendToConfigFile(line);
+}
+
+void WriteKeyboard(const QString& layout, const QString& variant) {
+  const QString line = QString("DI_LAYOUT=%1\n").arg(layout);
+  AppendToConfigFile(line);
+  const QString line2 = QString("DI_LAYOUT_VARIANT=%1\n").arg(variant);
+  AppendToConfigFile(line2);
+}
+
+void WritePartitionInfo(const QString& root, const QString& mount_points) {
+  const QString line = QString("DI_ROOT_PARTITION=%1\n").arg(root);
+  AppendToConfigFile(line);
+  const QString line2 = QString("DI_MOUNTPOINTS=%1\n").arg(mount_points);
+  AppendToConfigFile(line2);
+  // TODO(xushaohua): Add DI_ROOT_DISK
 }
 
 }  // namespace service

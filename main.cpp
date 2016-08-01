@@ -3,9 +3,12 @@
 // in the LICENSE file.
 
 #include <QApplication>
+#include <QDebug>
 
 #include "base/consts.h"
 #include "service/log_manager.h"
+#include "service/settings_manager.h"
+#include "sysinfo/users.h"
 #include "ui/main_window.h"
 
 int main(int argc, char* argv[]) {
@@ -16,6 +19,12 @@ int main(int argc, char* argv[]) {
   app.setApplicationDisplayName(base::kAppDisplayName);
   app.setApplicationName(base::kAppName);
   app.setOrganizationDomain(QStringLiteral("deepin.org"));
+
+  // Delete last installer config file as soon as possible.
+  service::DeleteConfigFile();
+  if (!sysinfo::HasRootPrivilege()) {
+    qCritical() << "Root privilege is required!";
+  }
 
   ui::MainWindow main_window;
   main_window.showFullScreen();

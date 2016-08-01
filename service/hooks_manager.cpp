@@ -13,8 +13,8 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
-#include <QProcess>
 
+#include "base/command.h"
 #include "service/settings_manager.h"
 #include "sysinfo/machine.h"
 
@@ -65,14 +65,7 @@ bool MatchArchitecture(const QString& name) {
 // Runs a specific hook at |hook|.
 bool RunHook(const QString& hook) {
   qDebug() << "RunHook():" << hook;
-  // Change working directory.
-  if (!QDir::setCurrent(QFileInfo(hook).absolutePath())) {
-    qCritical() << "RunHooks() failed to change working directory:"
-                << hook;
-    return false;
-  }
-  const QStringList args = { hook };
-  return (QProcess::execute(hook, args) == 0);
+  return base::RunScriptFile(hook);
 }
 
 }  // namespace

@@ -24,6 +24,9 @@ QString GetSettingsString(const QString& key);
 // Get variant option value from settings file.
 QVariant GetSettingsValue(const QString& key);
 
+// Returns absolute path to oem/auto-part.sh
+QString GetAutoPartFile();
+
 // Get all available avatars in avatar folder.
 QStringList GetAvatars();
 
@@ -41,6 +44,19 @@ QString GetVendorLogo();
 // Then read from /usr/share/backgrounds/.
 // If not appropriate image is found, use the fallback image.
 QString GetWindowBackground();
+
+// Operations of /etc/deepin-installer.conf
+bool DeleteConfigFile();
+//void WriteBootloader(const QString& path);
+//void WriteUEFI(bool is_efi);
+//void WriteInstallerMode(bool is_simple_mode);
+void WriteLocale(const QString& locale);
+void WriteUsername(const QString& username);
+void WriteHostname(const QString& hostname);
+void WritePassword(const QString& password);
+void WriteTimezone(const QString& timezone);
+void WriteKeyboard(const QString& layout, const QString& variant);
+void WritePartitionInfo(const QString& root, const QString& mount_points);
 
 }  // namespace service
 

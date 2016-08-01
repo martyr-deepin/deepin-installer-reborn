@@ -52,6 +52,8 @@ const char kPartitionMinimumDiskSpaceRequiredName[] =
     "partition_minimum_disk_space_required";
 const char kPartitionRecommendedDiskSpaceName[] =
     "partition_recommended_disk_space";
+const char kPartitionDoAutoPartName[] = "partition_do_auto_part";
+
 
 // Install failed page
 const char kInstallFailedFeedbackServerName[] =
