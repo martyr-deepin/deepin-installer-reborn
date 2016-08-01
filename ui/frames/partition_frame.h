@@ -7,6 +7,10 @@
 
 #include <QFrame>
 
+namespace service {
+class PartitionManager;
+}  // namespace service
+
 namespace ui {
 
 class NavButton;
@@ -18,6 +22,8 @@ class PartitionFrame : public QFrame {
  public:
   explicit PartitionFrame(QWidget* parent = nullptr);
 
+  void autoPart();
+
  signals:
   void finished();
 
@@ -26,6 +32,7 @@ class PartitionFrame : public QFrame {
   void initUI();
 
   NavButton* next_button_ = nullptr;
+  service::PartitionManager* partition_manager_ = nullptr;
 
  private slots:
   void onNextButtonClicked();

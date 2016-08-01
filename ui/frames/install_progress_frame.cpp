@@ -10,6 +10,7 @@
 #include <QVBoxLayout>
 
 #include "service/hooks_manager.h"
+#include "service/signal_manager.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/title_label.h"
@@ -35,11 +36,6 @@ InstallProgressFrame::~InstallProgressFrame() {
   hooks_manager_ = nullptr;
 }
 
-void InstallProgressFrame::initHooks() {
-  qDebug() << "init hooks()";
-  emit hooks_manager_->runHooks();
-}
-
 void InstallProgressFrame::initConnections() {
   connect(hooks_manager_, &service::HooksManager::errorOccurred,
           this, &InstallProgressFrame::onErrorOccurred);
@@ -47,6 +43,12 @@ void InstallProgressFrame::initConnections() {
           this, &InstallProgressFrame::onInstallProgressUpdated);
   connect(hooks_manager_, &service::HooksManager::finished,
           this, &InstallProgressFrame::finished);
+
+  service::SignalManager* signal_manager = service::SignalManager::instance();
+  connect(signal_manager, &service::SignalManager::autoPartDone,
+          this, &InstallProgressFrame::onPartitionDone);
+  connect(signal_manager, &service::SignalManager::manualPartDone,
+          this, &InstallProgressFrame::onPartitionDone);
 }
 
 void InstallProgressFrame::initUI() {
@@ -77,6 +79,15 @@ void InstallProgressFrame::onErrorOccurred() {
 
 void InstallProgressFrame::onInstallProgressUpdated(int progress) {
   Q_UNUSED(progress);
+}
+
+void InstallProgressFrame::onPartitionDone(bool ok) {
+  if (ok) {
+    onInstallProgressUpdated(5);
+    emit hooks_manager_->runHooks();
+  } else {
+    this->onErrorOccurred();
+  }
 }
 
 }  // namespace ui

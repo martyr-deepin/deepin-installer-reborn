@@ -278,7 +278,7 @@ void HooksManager::handleRunHooks() {
   }
 
   // Run hooks one by one, if some job fails, returns immediately.
-  if (!runHooksPack(HookType::BeforeChroot, 0, 60)) {
+  if (!runHooksPack(HookType::BeforeChroot, 5, 60)) {
     qCritical() << "handleRunHooks() error occurs in Before_Chroot";
     unbindHooks();
     return;

@@ -32,9 +32,6 @@ class InstallProgressFrame : public QFrame {
   // Returns true is installation process failed.
   bool failed() const { return failed_; }
 
-  // Initialize hooks manager.
-  void initHooks();
-
  signals:
   // Emitted when installation finished or failed.
   // Call state() to check its status.
@@ -52,6 +49,8 @@ class InstallProgressFrame : public QFrame {
  private slots:
   void onErrorOccurred();
   void onInstallProgressUpdated(int progress);
+
+  void onPartitionDone(bool ok);
 };
 
 }  // namespace ui

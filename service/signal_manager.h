@@ -9,10 +9,20 @@
 
 namespace service {
 
+// This class is used to send signals cross objects.
+// It keeps a global instance.
 class SignalManager : public QObject {
   Q_OBJECT
 
  public:
+  static SignalManager* instance();
+
+ signals:
+  // PartitionFrame
+  void autoPartDone(bool ok);
+  void manualPartDone(bool ok);
+
+ private:
   SignalManager();
 };
 

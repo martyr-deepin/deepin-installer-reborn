@@ -82,11 +82,22 @@ class PartitionManager : public QObject {
   void refreshDevices();
   void devicesRefreshed();
 
+  // Run oem/auto-part.sh script.
+  void autoPart();
+  // Emitted after oem/auto-part.sh script is executed and exited.
+  // |ok| is true if that script exited 0.
+  void autoPartDone(bool ok);
+
+  void manualPart();
+  void manualPartDone(bool ok);
+
  private:
   void initConnections();
 
  private slots:
   void doRefreshDevices();
+  void doAutoPart();
+  void doManualPart();
 };
 
 // Check if EFI feature is enabled in this machine.

@@ -283,7 +283,6 @@ void MainWindow::goNextPage() {
       page_indicator_->setVisible(true);
       page_indicator_->goNextPage();
       this->setCurrentPage(PageId::InstallProgressId);
-      install_progress_frame_->initHooks();
       break;
     }
 
@@ -322,6 +321,9 @@ void MainWindow::goNextPage() {
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::PartitionId);
       } else {
+        if (service::GetSettingsBool(service::kPartitionDoAutoPartName)) {
+          partition_frame_->autoPart();
+        }
         prev_page_ = current_page_;
         current_page_ = PageId::PartitionId;
         this->goNextPage();

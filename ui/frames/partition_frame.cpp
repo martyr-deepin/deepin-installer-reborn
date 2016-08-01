@@ -7,6 +7,8 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
+#include "service/partition_manager.h"
+#include "service/signal_manager.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
@@ -14,16 +16,30 @@
 
 namespace ui {
 
-PartitionFrame::PartitionFrame(QWidget* parent) : QFrame(parent) {
+PartitionFrame::PartitionFrame(QWidget* parent)
+    : QFrame(parent),
+      partition_manager_(new service::PartitionManager()) {
   this->setObjectName(QStringLiteral("partition_frame"));
+
+//  partition_manager_->moveToThread();
 
   this->initUI();
   this->initConnections();
 }
 
+void PartitionFrame::autoPart() {
+  emit partition_manager_->autoPart();
+}
+
 void PartitionFrame::initConnections() {
   connect(next_button_, &QPushButton::clicked,
           this, &PartitionFrame::onNextButtonClicked);
+
+  service::SignalManager* signal_manager = service::SignalManager::instance();
+  connect(partition_manager_, &service::PartitionManager::autoPartDone,
+          signal_manager, &service::SignalManager::autoPartDone);
+  connect(partition_manager_, &service::PartitionManager::manualPartDone,
+          signal_manager, &service::SignalManager::manualPartDone);
 }
 
 void PartitionFrame::initUI() {

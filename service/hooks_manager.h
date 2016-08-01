@@ -31,7 +31,7 @@ class HooksManager : public QObject {
   void finished();
 
   // Installation process is split into four stages:
-  //   * before_chroot: 0-60
+  //   * before_chroot: 5-60
   //   * in_chroot: 60-80
   //   * after_chroot: 80-100
   void processUpdate(int process);

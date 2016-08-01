@@ -9,6 +9,8 @@
 #include <QDebug>
 #include <QDir>
 
+#include "base/command.h"
+#include "service/settings_manager.h"
 #include "sysinfo/proc_partitions.h"
 
 namespace service {
@@ -62,6 +64,10 @@ PartitionManager::PartitionManager(QObject* parent) : QObject(parent) {
 void PartitionManager::initConnections() {
   connect(this, &PartitionManager::refreshDevices,
           this, &PartitionManager::doRefreshDevices);
+  connect(this, &PartitionManager::autoPart,
+          this, &PartitionManager::doAutoPart);
+  connect(this, &PartitionManager::manualPart,
+          this, &PartitionManager::doManualPart);
 }
 
 void PartitionManager::doRefreshDevices() {
@@ -161,6 +167,21 @@ void PartitionManager::doRefreshDevices() {
 //    ped_device_destroy(p_device);
 //    ped_disk_destroy(disk);
   }
+}
+
+void PartitionManager::doAutoPart() {
+  const QString filepath = GetAutoPartFile();
+  if (!QFile::exists(filepath)) {
+    qCritical() << "oem/auto-part.js not found!";
+  }
+  const bool ok = base::RunScriptFile(filepath);
+  emit this->autoPartDone(ok);
+}
+
+void PartitionManager::doManualPart() {
+  bool ok = true;
+  // TODO(xushaohua):
+  emit this->manualPartDone(ok);
 }
 
 bool IsEfiEnabled() {
