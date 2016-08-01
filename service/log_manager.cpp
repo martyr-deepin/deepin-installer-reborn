@@ -12,6 +12,8 @@
 #include <QFileInfo>
 #include <QtGlobal>
 
+#include "sysinfo/users.h"
+
 #include "third_party/CuteLogger/CuteLogger/ConsoleAppender.h"
 #include "third_party/CuteLogger/CuteLogger/FileAppender.h"
 #include "third_party/CuteLogger/CuteLogger/Logger.h"
@@ -79,13 +81,11 @@ void MessageOutput(QtMsgType type, const QMessageLogContext& context,
 }  // namespace
 
 QString GetLogFilepath() {
-  const QString var_log = QStringLiteral("/var/log/%1").arg(kLogFileName);
-  QFile var_log_file(var_log);
-  if (var_log_file.isWritable()) {
-    return var_log;
+  if (sysinfo::HasRootPrivilege()) {
+    return QString("/var/log/%1").arg(kLogFileName);
   }
 
-  const QString tmp_log = QStringLiteral("/tmp/%1").arg(kLogFileName);
+  const QString tmp_log = QString("/tmp/%1").arg(kLogFileName);
   return tmp_log;
 }
 
