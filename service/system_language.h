@@ -20,9 +20,6 @@ typedef QList<LanguageItem> LanguageList;
 
 LanguageList GetLanguageList();
 
-// Save system language configuration.
-void SetSystemLanguage(const QString& locale);
-
 }  // namespace service
 
 #endif  // DEEPIN_INSTALLER_REBORN_SERVICE_SYSTEM_LANGUAGE_H

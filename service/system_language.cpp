@@ -29,12 +29,8 @@ LanguageList GetLanguageList() {
     result.append(item);
   }
 
-  return result;
-}
 
-void SetSystemLanguage(const QString& locale) {
-  Q_UNUSED(locale);
-  // TODO(xushaohua):
+  return result;
 }
 
 }  // namespace service

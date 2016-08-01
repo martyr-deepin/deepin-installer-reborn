@@ -34,4 +34,11 @@ QVariant LanguageListModel::data(const QModelIndex& index, int role) const {
   return lang_list_.at(index.row()).local_name;
 }
 
+QString LanguageListModel::locale(const QModelIndex& index) const {
+  if (index.isValid()) {
+    return lang_list_.at(index.row()).locale;
+  }
+  return QString();
+}
+
 }  // namespace ui

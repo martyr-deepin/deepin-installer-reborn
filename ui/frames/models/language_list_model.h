@@ -20,6 +20,9 @@ class LanguageListModel : public QAbstractListModel {
 
   virtual QVariant data(const QModelIndex& index, int role) const override;
 
+  // Get locale name at |index|.
+  QString locale(const QModelIndex& index) const;
+
  private:
   service::LanguageList lang_list_;
 };

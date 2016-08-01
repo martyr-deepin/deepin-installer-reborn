@@ -4,6 +4,7 @@
 
 #include "ui/frames/select_language_frame.h"
 
+#include <QDebug>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QListView>
@@ -99,7 +100,16 @@ void SelectLanguageFrame::onLanguageListSelected() {
 void SelectLanguageFrame::onNextButtonClicked() {
   if (language_is_selected_) {
     // TODO(xushaohua): Set language
-    emit this->finished();
+    const QModelIndexList selected_items =
+        list_view_->selectionModel()->selectedIndexes();
+    if (selected_items.length() == 1) {
+      const QString locale = list_model_->locale(selected_items.at(0));
+      service::WriteLocale(locale);
+
+      emit this->finished();
+    } else {
+      qWarning() << "No locale is selected!";
+    }
   }
 }
 
