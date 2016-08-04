@@ -293,6 +293,7 @@ void MainWindow::goNextPage() {
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::SelectLanguageId);
       } else {
+        select_language_frame_->autoConf();
         prev_page_ = current_page_;
         current_page_ = PageId::SelectLanguageId;
         this->goNextPage();
@@ -307,6 +308,7 @@ void MainWindow::goNextPage() {
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::SystemInfoId);
       } else {
+        system_info_frame_->autoConf();
         prev_page_ = current_page_;
         current_page_ = PageId::SystemInfoId;
         this->goNextPage();

@@ -9,6 +9,8 @@
 
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "sysinfo/validate_hostname.h"
+#include "sysinfo/validate_username.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/avatar_button.h"
 #include "ui/widgets/comment_label.h"
@@ -20,7 +22,11 @@
 namespace ui {
 
 SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
-  : QFrame(parent) {
+  : QFrame(parent),
+    is_username_validated_(false),
+    is_hostname_validated_(false),
+    is_password_validated_(false),
+    is_password2_validated_(false) {
   this->setObjectName(QStringLiteral("system_info_form_frame"));
 
   this->initUI();
@@ -42,6 +48,15 @@ void SystemInfoFormFrame::initConnections() {
           this, &SystemInfoFormFrame::onNextButtonClicked);
   connect(timezone_button_, &QPushButton::clicked,
           this, &SystemInfoFormFrame::timezoneClicked);
+
+  connect(username_edit_, &QLineEdit::textChanged,
+          this, &SystemInfoFormFrame::onUsernameChanged);
+  connect(hostname_edit_, &QLineEdit::textChanged,
+          this, &SystemInfoFormFrame::onHostnameChanged);
+  connect(password_edit_, &QLineEdit::textChanged,
+          this, &SystemInfoFormFrame::onPasswordChanged);
+  connect(password2_edit_, &QLineEdit::textChanged,
+          this, &SystemInfoFormFrame::onPassword2Changed);
 }
 
 void SystemInfoFormFrame::initUI() {
@@ -68,27 +83,23 @@ void SystemInfoFormFrame::initUI() {
   QHBoxLayout* avatar_layout = new QHBoxLayout();
   avatar_layout->addWidget(avatar_button_);
 
-  LineEdit* username_edit =
-      new LineEdit(QStringLiteral(":/images/username.png"));
-  username_edit->setPlaceholderText(tr("Username"));
-  LineEdit* hostname_edit =
-      new LineEdit(QStringLiteral(":/images/hostname.png"));
-  hostname_edit->setPlaceholderText(tr("Computer name"));
-  LineEdit* password_edit =
-      new LineEdit(QStringLiteral(":/images/password.png"));
-  password_edit->setPlaceholderText(tr("Password"));
-  LineEdit* password2_edit =
-      new LineEdit(QStringLiteral(":/images/password.png"));
-  password2_edit->setPlaceholderText(tr("Reenter password"));
+  username_edit_ = new LineEdit(QStringLiteral(":/images/username.png"));
+  username_edit_->setPlaceholderText(tr("Username"));
+  hostname_edit_ = new LineEdit(QStringLiteral(":/images/hostname.png"));
+  hostname_edit_->setPlaceholderText(tr("Computer name"));
+  password_edit_ = new LineEdit(QStringLiteral(":/images/password.png"));
+  password_edit_->setPlaceholderText(tr("Password"));
+  password2_edit_ = new LineEdit(QStringLiteral(":/images/password.png"));
+  password2_edit_->setPlaceholderText(tr("Reenter password"));
 
   QVBoxLayout* form_layout = new QVBoxLayout();
   form_layout->setContentsMargins(0, 0, 0, 0);
   form_layout->setMargin(0);
   form_layout->setSpacing(20);
-  form_layout->addWidget(username_edit);
-  form_layout->addWidget(hostname_edit);
-  form_layout->addWidget(password_edit);
-  form_layout->addWidget(password2_edit);
+  form_layout->addWidget(username_edit_);
+  form_layout->addWidget(hostname_edit_);
+  form_layout->addWidget(password_edit_);
+  form_layout->addWidget(password2_edit_);
 
   QFrame* form_wrapper = new QFrame();
   form_wrapper->setFixedWidth(400);
@@ -120,10 +131,105 @@ void SystemInfoFormFrame::initUI() {
   this->setLayout(layout);
 }
 
-void SystemInfoFormFrame::onNextButtonClicked() {
-  if (true) {
-    emit this->finished();
+void SystemInfoFormFrame::validateUsername(bool empty_ok) {
+  const sysinfo::ValidateUsernameState state =
+      sysinfo::ValidateUsername(username_edit_->text());
+  switch (state) {
+    case sysinfo::ValidateUsernameState::AlreadyUsedError: {
+      username_edit_->setToolTip(tr("Username is already in use"));
+      break;
+    }
+
+    case sysinfo::ValidateUsernameState::EmptyError: {
+      if (!empty_ok) {
+        username_edit_->setToolTip(tr("Username is empty!"));
+      }
+      break;
+    }
+
+    case sysinfo::ValidateUsernameState::FirstCharError: {
+      username_edit_->setToolTip("First character is invalid");
+      break;
+    }
+
+    case sysinfo::ValidateUsernameState::InvalidCharError: {
+      username_edit_->setToolTip(tr("Invalid character!"));
+      break;
+    }
+
+    case sysinfo::ValidateUsernameState::Ok: {
+      username_edit_->setToolTip("");
+      break;
+    }
+
+    case sysinfo::ValidateUsernameState::TooLongError: {
+      username_edit_->setToolTip(tr("User name has too many characters"));
+      break;
+    }
   }
+
+  is_username_validated_ = (state == sysinfo::ValidateUsernameState::Ok);
+}
+
+void SystemInfoFormFrame::validateHostname(bool empty_ok) {
+  if (empty_ok) {
+    is_hostname_validated_ =
+        sysinfo::ValidateHostnameTemp(hostname_edit_->text());
+  } else {
+    is_hostname_validated_ = sysinfo::ValidateHostname(hostname_edit_->text());
+  }
+  if (!is_hostname_validated_) {
+    hostname_edit_->setToolTip(tr("Invalid hostname!"));
+  }
+}
+
+void SystemInfoFormFrame::validatePassword(bool empty_ok) {
+  Q_UNUSED(empty_ok);
+  is_password_validated_ = true;
+}
+
+void SystemInfoFormFrame::validatePassword2(bool empty_ok) {
+  Q_UNUSED(empty_ok);
+  is_password2_validated_ = true;
+}
+
+void SystemInfoFormFrame::onNextButtonClicked() {
+  if (is_username_validated_ && is_hostname_validated_ &&
+      is_password_validated_ && is_password2_validated_) {
+    service::WriteUsername(username_edit_->text());
+    service::WriteHostname(hostname_edit_->text());
+    service::WritePassword(password_edit_->text());
+
+    emit this->finished();
+  } else {
+    if (!is_username_validated_) {
+      validateUsername(false);
+    }
+
+    if (!is_hostname_validated_) {
+      validateHostname(false);
+    }
+
+    if (!is_password_validated_) {
+      validatePassword(false);
+    }
+  }
+}
+
+void SystemInfoFormFrame::onUsernameChanged() {
+  validateUsername(true);
+}
+
+void SystemInfoFormFrame::onHostnameChanged() {
+  validateHostname(true);
+}
+
+void SystemInfoFormFrame::onPasswordChanged() {
+  validatePassword(true);
+}
+
+void SystemInfoFormFrame::onPassword2Changed() {
+  validatePassword2(true);
 }
 
 }  // namespace ui

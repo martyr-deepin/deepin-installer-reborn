@@ -54,6 +54,7 @@ void WriteLocale(const QString& locale);
 void WriteUsername(const QString& username);
 void WriteHostname(const QString& hostname);
 void WritePassword(const QString& password);
+void WriteAvatar(const QString& avatar);
 void WriteTimezone(const QString& timezone);
 void WriteKeyboard(const QString& layout, const QString& variant);
 void WritePartitionInfo(const QString& root, const QString& mount_points);

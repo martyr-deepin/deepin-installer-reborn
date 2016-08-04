@@ -187,6 +187,11 @@ void WritePassword(const QString& password) {
   AppendToConfigFile(line);
 }
 
+void WriteAvatar(const QString& avatar) {
+  const QString line = QString("DI_AVATAR=%1\n").arg(avatar);
+  AppendToConfigFile(line);
+}
+
 void WriteTimezone(const QString& timezone) {
   const QString line = QString("DI_TIMEZONE=%1\n").arg(timezone);
   AppendToConfigFile(line);

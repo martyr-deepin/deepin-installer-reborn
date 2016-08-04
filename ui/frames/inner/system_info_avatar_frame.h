@@ -18,6 +18,8 @@ class SystemInfoAvatarFrame : public QFrame {
  public:
   explicit SystemInfoAvatarFrame(QWidget* parent = nullptr);
 
+  void autoConf();
+
  signals:
   // Emitted when an avatar is selected.
   void avatarUpdated(const QString& avatar);

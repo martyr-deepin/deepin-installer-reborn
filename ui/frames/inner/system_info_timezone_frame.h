@@ -18,6 +18,8 @@ class SystemInfoTimezoneFrame : public QFrame {
  public:
   explicit SystemInfoTimezoneFrame(QWidget* parent = nullptr);
 
+  void autoConf();
+
  signals:
   // Emitted when back button is clicked.
   void finished();

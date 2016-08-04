@@ -7,6 +7,8 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
@@ -20,6 +22,12 @@ SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
 
   this->initUI();
   this->initConnections();
+}
+
+void SystemInfoTimezoneFrame::autoConf() {
+  const QString timezone =
+      service::GetSettingsString(service::kSystemInfoDefaultTimezoneName);
+  service::WriteTimezone(timezone);
 }
 
 void SystemInfoTimezoneFrame::initConnections() {

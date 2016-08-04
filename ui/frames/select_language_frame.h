@@ -20,6 +20,8 @@ class SelectLanguageFrame : public QFrame {
  public:
   explicit SelectLanguageFrame(QWidget* parent = nullptr);
 
+  void autoConf();
+
  signals:
   // Emitted when system language is selected.
   void finished();

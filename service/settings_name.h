@@ -42,6 +42,9 @@ const char kSystemInfoUseRandomAvatorName[] = "system_info_use_random_avator";
 const char kSystemInfoUseDefaultAvatorName[] = "system_info_use_default_avatar";
 const char kSystemInfoDefaultAvatorName[] = "system_info_default_avatar";
 const char kSystemInfoDdeAvatarDirName[] = "system_info_dde_avatar_dir";
+const char kSystemInfoUseDefaultTimezoneName[] =
+    "system_info_use_default_timezone";
+const char kSystemInfoDefaultTimezoneName[] = "system_info_default_timezone";
 const char kSystemInfoDisableAvatorPageName[] =
     "system_info_disable_avatar_page";
 const char kSystemInfoDisableTimezonePageName[] =

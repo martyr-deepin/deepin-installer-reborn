@@ -23,7 +23,7 @@ namespace {
 
 const int kAvatarButtonsPerRow = 7;
 
-}
+}  // namespace
 
 SystemInfoAvatarFrame::SystemInfoAvatarFrame(QWidget* parent)
   : QFrame(parent) {
@@ -31,6 +31,12 @@ SystemInfoAvatarFrame::SystemInfoAvatarFrame(QWidget* parent)
 
   this->initUI();
   this->initConnections();
+}
+
+void SystemInfoAvatarFrame::autoConf() {
+  const QString avatar =
+      service::GetSettingsString(service::kSystemInfoDefaultAvatorName);
+  service::WriteAvatar(avatar);
 }
 
 void SystemInfoAvatarFrame::updateTimezone(const QString& timezone) {
@@ -113,6 +119,8 @@ void SystemInfoAvatarFrame::onAvatarButtonClicked() {
 
   const QString avatar = button->avatar();
   chosen_avatar_button_->updateIcon(avatar);
+  service::WriteAvatar(avatar);
+
   emit this->avatarUpdated(avatar);
   emit this->finished();
 }

@@ -30,6 +30,13 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent) : QFrame(parent) {
 
   this->initUI();
   this->initConnections();
+  // TODO(xushaohua): Load default locale.
+}
+
+void SelectLanguageFrame::autoConf() {
+  const QString locale =
+      service::GetSettingsString(service::kSelectLanguageDefaultLocaleName);
+  service::WriteLocale(locale);
 }
 
 void SelectLanguageFrame::initConnections() {
@@ -99,7 +106,6 @@ void SelectLanguageFrame::onLanguageListSelected() {
 
 void SelectLanguageFrame::onNextButtonClicked() {
   if (language_is_selected_) {
-    // TODO(xushaohua): Set language
     const QModelIndexList selected_items =
         list_view_->selectionModel()->selectedIndexes();
     if (selected_items.length() == 1) {

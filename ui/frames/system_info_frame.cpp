@@ -25,6 +25,21 @@ SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
   this->showFormPage();
 }
 
+void SystemInfoFrame::autoConf() {
+  const QString username =
+      service::GetSettingsString(service::kSystemInfoDefaultUsernameName);
+  service::WriteUsername(username);
+  const QString hostname =
+      service::GetSettingsString(service::kSystemInfoDefaultHostnameName);
+  service::WriteHostname(hostname);
+  const QString password =
+      service::GetSettingsString(service::kSystemInfoDefaultPasswordName);
+  service::WritePassword(password);
+
+  timezone_frame_->autoConf();
+  avatar_frame_->autoConf();
+}
+
 void SystemInfoFrame::initConnections() {
   connect(avatar_frame_, &SystemInfoAvatarFrame::finished,
           this, &SystemInfoFrame::showFormPage);
