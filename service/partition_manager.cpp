@@ -62,16 +62,13 @@ void ReadLabel(Partition& partition) {
       partition.label = ReadBtrfsLabel(partition.path);
       break;
     }
-    case FsType::EFI: {
-      partition.label = ReadEFILabel(partition.path);
-      break;
-    }
     case FsType::Ext2:
     case FsType::Ext3:
     case FsType::Ext4: {
       partition.label = ReadExt2Label(partition.path);
       break;
     }
+    case FsType::EFI:
     case FsType::Fat16:
     case FsType::Fat32: {
       partition.label = ReadFat16Label(partition.path);
@@ -87,7 +84,7 @@ void ReadLabel(Partition& partition) {
       break;
     }
     case FsType::NTFS: {
-      partition.label = ReadNtfsLabel(partition.path);
+      partition.label = ReadNTFSLabel(partition.path);
       break;
     }
     case FsType::Reiser4: {
@@ -111,20 +108,24 @@ void ReadLabel(Partition& partition) {
 
 // Update partition usage.
 void ReadUsage(Partition& partition) {
+  bool ok = false;
+  qint64 total = 0;
+  qint64 freespace = 0;
   switch (partition.fs) {
     case FsType::Btrfs: {
-      break;
-    }
-    case FsType::EFI: {
+      ok = ReadBtrfsUsage(partition.path, freespace, total);
       break;
     }
     case FsType::Ext2:
     case FsType::Ext3:
     case FsType::Ext4: {
+      ok = ReadExt2Usage(partition.path, freespace, total);
       break;
     }
+    case FsType::EFI:
     case FsType::Fat16:
     case FsType::Fat32: {
+      ok = ReadFat16Usage(partition.path, freespace, total);
       break;
     }
     case FsType::Hfs:
@@ -132,23 +133,35 @@ void ReadUsage(Partition& partition) {
       break;
     }
     case FsType::Jfs: {
+      ok = ReadJfsUsage(partition.path, freespace, total);
       break;
     }
     case FsType::NTFS: {
+      ok = ReadNTFSUsage(partition.path, freespace, total);
       break;
     }
     case FsType::Reiser4: {
+      ok = ReadReiser4Usage(partition.path, freespace, total);
       break;
     }
     case FsType::Reiserfs: {
+      ok = ReadReiserfsUsage(partition.path, freespace, total);
       break;
     }
     case FsType::Xfs: {
+      ok = ReadXfsUsage(partition.path, freespace, total);
       break;
     }
     default: {
       break;
     }
+  }
+  if (ok) {
+    partition.length = total;
+    partition.freespace = freespace;
+  } else {
+    partition.length = 0;
+    partition.freespace = 0;
   }
 }
 

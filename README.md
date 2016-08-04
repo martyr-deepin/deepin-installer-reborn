@@ -3,6 +3,13 @@ Deepin Installer, reborn version.
 
 # Dependencies
 * Qt5.5
+* btrfs-progs - btrfs filesystem utility
+* e2fsprogs - ext2/ext3/ext4 filesystem utility
+// TODO(xushaohua): Add hfsxxx
+* jfsutils - utilities for managing the JFS filesystem
+* mtools - tools for manipulating MSDOS files
+* ntfs-3g - read/write NTFS driver for FUSE
+
 
 # Restrictions
 * No DBus connections

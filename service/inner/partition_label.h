@@ -11,12 +11,11 @@
 namespace service {
 
 QString ReadBtrfsLabel(const QString& path);
-QString ReadEFILabel(const QString& path);
 QString ReadExt2Label(const QString& path);
 QString ReadFat16Label(const QString& path);
 QString ReadHfsLabel(const QString& path);
 QString ReadJfsLabel(const QString& path);
-QString ReadNtfsLabel(const QString& path);
+QString ReadNTFSLabel(const QString& path);
 QString ReadReiser4Label(const QString& path);
 QString ReadReiserfsLabel(const QString& path);
 QString ReadXfsLabel(const QString& path);
