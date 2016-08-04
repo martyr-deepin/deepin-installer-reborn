@@ -58,6 +58,7 @@ set(BASE_FILES
     base/consts.h
     base/file_util.cpp base/file_util.h
     base/gaussian_blur.cpp base/gaussian_blur.h
+    base/string_util.cpp base/string_util.h
     )
 
 set(SERVICE_FILES
@@ -68,6 +69,8 @@ set(SERVICE_FILES
     service/signal_manager.cpp service/signal_manager.h
     service/system_language.cpp service/system_language.h
     service/settings_name.h
+    service/inner/partition_label.cpp service/inner/partition_label.h
+    service/inner/partition_usage.cpp service/inner/partition_usage.h
     )
 
 set(SYSINFO_FILES
@@ -122,6 +125,8 @@ set(UI_FILES
     )
 
 set(UNITTEST_FILES
+    base/command_test.cpp
+    base/string_util_test.cpp
     sysinfo/proc_mounts_test.cpp
     sysinfo/proc_partitions_test.cpp
     service/system_languages_test.cpp

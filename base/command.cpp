@@ -24,4 +24,21 @@ bool RunScriptFile(const QString& filepath, bool change_working_dir) {
   return (QProcess::execute(filepath, args) == 0);
 }
 
+bool SpawnCmd(const QString& cmd, const QStringList& args, QString& output) {
+  QString err;
+  return SpawnCmd(cmd, args, output, err);
+}
+
+bool SpawnCmd(const QString& cmd, const QStringList& args,
+              QString& output, QString& err) {
+  QProcess process;
+  process.setProgram(cmd);
+  process.setArguments(args);
+  process.start();
+  process.waitForFinished();
+  output = process.readAllStandardOutput();
+  err = process.readAllStandardError();
+  return process.exitCode() == 0;
+}
+
 }  // namespace base

@@ -5,7 +5,7 @@
 #ifndef DEEPIN_INSTALLER_REBORN_BASE_COMMAND_H
 #define DEEPIN_INSTALLER_REBORN_BASE_COMMAND_H
 
-#include <QString>
+#include <QStringList>
 
 namespace base {
 
@@ -14,6 +14,11 @@ namespace base {
 // folder of |filepath|.
 // Returns true if |filepath| executed and exited with 0.
 bool RunScriptFile(const QString& filepath, bool change_working_dir = true);
+
+// Run |cmd| with |args| in background and returns its result.
+bool SpawnCmd(const QString& cmd, const QStringList& args, QString& output);
+bool SpawnCmd(const QString& cmd, const QStringList& args,
+              QString& output, QString& err);
 
 }  // namespace base
 

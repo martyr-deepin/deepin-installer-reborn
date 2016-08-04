@@ -40,9 +40,12 @@ enum class FsType {
   Unknown,
 };
 
+QString GetFsTypeName(FsType fs_type);
+FsType GetFsTypeByName(const QString& name);
+
 struct Partition {
   // File system
-  QString fs;  // file system type.
+  FsType fs;
   qint64 freespace;
   qint64 length;
   QString label;
