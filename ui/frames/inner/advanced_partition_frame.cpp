@@ -4,6 +4,8 @@
 
 #include "ui/frames/inner/advanced_partition_frame.h"
 
+#include <QLabel>
+
 namespace ui {
 
 AdvancedPartitionFrame::AdvancedPartitionFrame(QWidget* parent)
@@ -19,7 +21,7 @@ void AdvancedPartitionFrame::initConnections() {
 }
 
 void AdvancedPartitionFrame::initUI() {
-
+  QLabel* label = new QLabel("Advanced page", this);
 }
 
 }  // namespace ui

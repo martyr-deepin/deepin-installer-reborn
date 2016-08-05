@@ -4,6 +4,8 @@
 
 #include "ui/frames/inner/simple_partition_frame.h"
 
+#include <QLabel>
+
 namespace ui {
 
 SimplePartitionFrame::SimplePartitionFrame(QWidget* parent) : QFrame(parent) {
@@ -18,7 +20,8 @@ void SimplePartitionFrame::initConnections() {
 }
 
 void SimplePartitionFrame::initUI() {
-
+  QLabel* label = new QLabel("Simple page", this);
+  this->setStyleSheet("background: red;");
 }
 
 }  // namespace ui

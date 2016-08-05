@@ -4,12 +4,22 @@
 
 #include "ui/frames/partition_frame.h"
 
+#include <QButtonGroup>
 #include <QHBoxLayout>
+#include <QPushButton>
+#include <QStackedLayout>
+#include <QThread>
 #include <QVBoxLayout>
 
 #include "service/partition_manager.h"
 #include "service/signal_manager.h"
 #include "ui/frames/consts.h"
+#include "ui/frames/inner/advanced_partition_frame.h"
+#include "ui/frames/inner/edit_partition_frame.h"
+#include "ui/frames/inner/new_partition_frame.h"
+#include "ui/frames/inner/prepare_install_frame.h"
+#include "ui/frames/inner/select_bootloader_frame.h"
+#include "ui/frames/inner/simple_partition_frame.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
@@ -21,7 +31,9 @@ PartitionFrame::PartitionFrame(QWidget* parent)
       partition_manager_(new service::PartitionManager()) {
   this->setObjectName(QStringLiteral("partition_frame"));
 
-//  partition_manager_->moveToThread();
+  QThread* partition_thread = new QThread(this);
+  partition_thread->start();
+  partition_manager_->moveToThread(partition_thread);
 
   this->initUI();
   this->initConnections();
@@ -32,6 +44,10 @@ void PartitionFrame::autoPart() {
 }
 
 void PartitionFrame::initConnections() {
+  connect(simple_frame_button_, &QPushButton::toggle,
+          this, &PartitionFrame::onSimpleFrameButtonToggled);
+  connect(advanced_frame_button_, &QPushButton::toggle,
+          this, &PartitionFrame::onAdvancedFrameButtonToggled);
   connect(next_button_, &QPushButton::clicked,
           this, &PartitionFrame::onNextButtonClicked);
 
@@ -43,6 +59,13 @@ void PartitionFrame::initConnections() {
 }
 
 void PartitionFrame::initUI() {
+  advanced_partition_frame_ = new AdvancedPartitionFrame();
+  edit_partition_frame_ = new EditPartitionFrame();
+  new_partition_frame_ = new NewPartitionFrame();
+  prepare_install_frame_ = new PrepareInstallFrame();
+  select_bootloader_frame_ = new SelectBootloaderFrame();
+  simple_partition_frame_ = new SimplePartitionFrame();
+
   TitleLabel* title_label = new TitleLabel(tr("Select Installation Location"));
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->addWidget(title_label);
@@ -53,6 +76,28 @@ void PartitionFrame::initUI() {
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->addWidget(comment_label);
 
+  QButtonGroup* button_group = new QButtonGroup(this);
+  simple_frame_button_ = new QPushButton(tr("Simple"));
+  simple_frame_button_->setCheckable(true);
+  simple_frame_button_->setChecked(true);
+  simple_frame_button_->setFlat(true);
+  advanced_frame_button_ = new QPushButton(tr("Advanced"));
+  advanced_frame_button_->setCheckable(true);
+  advanced_frame_button_->setFlat(true);
+  button_group->addButton(simple_frame_button_);
+  button_group->addButton(advanced_frame_button_);
+  QHBoxLayout* button_layout = new QHBoxLayout();
+  button_layout->setSpacing(0);
+  button_layout->setContentsMargins(0, 0, 0, 0);
+  button_layout->addStretch();
+  button_layout->addWidget(simple_frame_button_);
+  button_layout->addWidget(advanced_frame_button_);
+  button_layout->addStretch();
+
+  partition_stacked_layout_ = new QStackedLayout();
+  partition_stacked_layout_->addWidget(simple_partition_frame_);
+  partition_stacked_layout_->addWidget(advanced_partition_frame_);
+
   next_button_ = new NavButton(tr("Start installation"));
   QHBoxLayout* next_layout = new QHBoxLayout();
   next_layout->addWidget(next_button_);
@@ -62,15 +107,36 @@ void PartitionFrame::initUI() {
   layout->addStretch();
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
+  layout->addLayout(button_layout);
+  layout->addLayout(partition_stacked_layout_);
   layout->addStretch();
   layout->addLayout(next_layout);
 
-  this->setLayout(layout);
+  main_frame_ = new QFrame();
+  main_frame_->setLayout(layout);
+
+  main_layout_ = new QStackedLayout();
+  main_layout_->addWidget(main_frame_);
+  main_layout_->addWidget(edit_partition_frame_);
+  main_layout_->addWidget(new_partition_frame_);
+  main_layout_->addWidget(prepare_install_frame_);
+  main_layout_->addWidget(select_bootloader_frame_);
+
+  this->setLayout(main_layout_);
+}
+
+void PartitionFrame::onSimpleFrameButtonToggled() {
+  partition_stacked_layout_->setCurrentWidget(simple_partition_frame_);
+}
+
+void PartitionFrame::onAdvancedFrameButtonToggled() {
+  partition_stacked_layout_->setCurrentWidget(advanced_partition_frame_);
 }
 
 void PartitionFrame::onNextButtonClicked() {
+  // Show prepare-install-frame page if target partition is selected.
   if (true) {
-    emit this->finished();
+    main_layout_->setCurrentWidget(prepare_install_frame_);
   }
 }
 
