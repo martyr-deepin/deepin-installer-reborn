@@ -7,9 +7,9 @@
 
 #include <QString>
 
-// Read partition label.
 namespace service {
 
+// Read partition label.
 QString ReadBtrfsLabel(const QString& path);
 QString ReadExt2Label(const QString& path);
 QString ReadFat16Label(const QString& path);

@@ -9,6 +9,7 @@
 
 namespace service {
 
+// Read partition usage.
 bool ReadBtrfsUsage(const QString& path, qint64& freespace, qint64& total);
 bool ReadExt2Usage(const QString& path, qint64& freespace, qint64& total);
 bool ReadFat16Usage(const QString& path, qint64& freespace, qint64& total);

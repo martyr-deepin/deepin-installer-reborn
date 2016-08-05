@@ -14,6 +14,7 @@
 #include "service/inner/partition_format.h"
 #include "service/inner/partition_label.h"
 #include "service/inner/partition_usage.h"
+#include "sysinfo/dev_uuid.h"
 #include "sysinfo/proc_partitions.h"
 
 namespace service {
@@ -328,6 +329,7 @@ void PartitionManager::doRefreshDevices() {
   ped_device_probe_all();
 
   QList<Device> devices;
+  const sysinfo::UUIDItems uuid_items = sysinfo::ParseUUIDDir();
 
   PedDevice* p_device = NULL;
   while ((p_device = ped_device_get_next(p_device)) != NULL) {
@@ -375,7 +377,7 @@ void PartitionManager::doRefreshDevices() {
       // Avoid reading additional filesystem information if there is no path.
       if (!partition.path.isEmpty()) {
         // Read uuid from /dev/disk/by-uuid/
-        //partition.uuid;
+        partition.uuid = uuid_items.value(partition.path);
 
         // Read label based on filesystem type
         ReadUsage(partition);

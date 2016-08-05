@@ -9,6 +9,7 @@
 
 namespace service {
 
+// Format filesystem.
 bool FormatBtrfs(const QString& path, const QString& label);
 bool FormatExt2(const QString& path, const QString& label);
 bool FormatExt3(const QString& path, const QString& label);
