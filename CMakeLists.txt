@@ -83,7 +83,7 @@ set(SYSINFO_FILES
     sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h
     sysinfo/validate_username.cpp sysinfo/validate_username.h
     sysinfo/virtual_machine.cpp sysinfo/virtual_machine.h
-    sysinfo/proc_swaps.cpp sysinfo/proc_swaps.h)
+    sysinfo/proc_swaps.cpp sysinfo/proc_swaps.h sysinfo/dev_uuid.cpp sysinfo/dev_uuid.h)
 
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
@@ -131,6 +131,7 @@ set(UNITTEST_FILES
     sysinfo/proc_mounts_test.cpp
     sysinfo/proc_partitions_test.cpp
     service/system_languages_test.cpp
+    sysinfo/dev_uuid_test.cpp
     sysinfo/timezone_test.cpp
     sysinfo/users_test.cpp
     sysinfo/validate_username_test.cpp
