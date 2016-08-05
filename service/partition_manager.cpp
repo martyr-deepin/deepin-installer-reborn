@@ -11,6 +11,7 @@
 
 #include "base/command.h"
 #include "service/settings_manager.h"
+#include "service/inner/partition_format.h"
 #include "service/inner/partition_label.h"
 #include "service/inner/partition_usage.h"
 #include "sysinfo/proc_partitions.h"
@@ -55,6 +56,73 @@ const char kPartationTableMsDos[] = "msdos";
 //  return success;
 //}
 
+// Make filesystem on |partition| based on its fs type.
+void Mkfs(Partition& partition) {
+  switch (partition.fs) {
+    case FsType::Btrfs: {
+      FormatBtrfs(partition.path, partition.label);
+      break;
+    }
+    case FsType::Ext2: {
+      FormatExt2(partition.path, partition.label);
+      break;
+    }
+    case FsType::Ext3: {
+      FormatExt3(partition.path, partition.label);
+      break;
+    }
+    case FsType::Ext4: {
+      FormatExt4(partition.path, partition.label);
+      break;
+    }
+    case FsType::Fat16: {
+      FormatFat16(partition.path, partition.label);
+      break;
+    }
+    case FsType::EFI:
+    case FsType::Fat32: {
+      FormatFat32(partition.path, partition.label);
+      break;
+    }
+    case FsType::Hfs: {
+      FormatHfs(partition.path, partition.label);
+      break;
+    }
+    case FsType::HfsPlus: {
+      FormatHfsPlus(partition.path, partition.label);
+      break;
+    }
+    case FsType::Jfs: {
+      FormatJfs(partition.path, partition.label);
+      break;
+    }
+    case FsType::LinuxSwap: {
+      FormatLinuxSwap(partition.path, partition.label);
+      break;
+    }
+    case FsType::NTFS: {
+      FormatNTFS(partition.path, partition.label);
+      break;
+    }
+    case FsType::Reiser4: {
+      FormatReiser4(partition.path, partition.label);
+      break;
+    }
+    case FsType::Reiserfs: {
+      FormatReiserfs(partition.path, partition.label);
+      break;
+    }
+    case FsType::Xfs: {
+      FormatXfs(partition.path, partition.label);
+      break;
+    }
+    default: {
+      qWarning() << "Unsupported filesystem to format:"
+                 << GetFsTypeName(partition.fs);
+    }
+  }
+}
+
 // Update partition label.
 void ReadLabel(Partition& partition) {
   switch (partition.fs) {
@@ -81,6 +149,10 @@ void ReadLabel(Partition& partition) {
     }
     case FsType::Jfs: {
       partition.label = ReadJfsLabel(partition.path);
+      break;
+    }
+    case FsType::LinuxSwap: {
+      partition.label = ReadLinuxSwapLabel(partition.path);
       break;
     }
     case FsType::NTFS: {
@@ -134,6 +206,10 @@ void ReadUsage(Partition& partition) {
     }
     case FsType::Jfs: {
       ok = ReadJfsUsage(partition.path, freespace, total);
+      break;
+    }
+    case FsType::LinuxSwap: {
+      ok = ReadLinuxSwapUsage(partition.path, freespace, total);
       break;
     }
     case FsType::NTFS: {

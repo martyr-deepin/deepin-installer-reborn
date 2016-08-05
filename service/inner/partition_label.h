@@ -15,6 +15,7 @@ QString ReadExt2Label(const QString& path);
 QString ReadFat16Label(const QString& path);
 QString ReadHfsLabel(const QString& path);
 QString ReadJfsLabel(const QString& path);
+QString ReadLinuxSwapLabel(const QString& path);
 QString ReadNTFSLabel(const QString& path);
 QString ReadReiser4Label(const QString& path);
 QString ReadReiserfsLabel(const QString& path);

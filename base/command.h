@@ -16,6 +16,7 @@ namespace base {
 bool RunScriptFile(const QString& filepath, bool change_working_dir = true);
 
 // Run |cmd| with |args| in background and returns its result.
+bool SpawnCmd(const QString& cmd, const QStringList& args);
 bool SpawnCmd(const QString& cmd, const QStringList& args, QString& output);
 bool SpawnCmd(const QString& cmd, const QStringList& args,
               QString& output, QString& err);

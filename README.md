@@ -6,6 +6,7 @@ Deepin Installer, reborn version.
 * btrfs-progs - btrfs filesystem utility
 * e2fsprogs - ext2/ext3/ext4 filesystem utility
 // TODO(xushaohua): Add hfsxxx
+// TODO(xushaohua): Add mkfs.msdos
 * jfsutils - utilities for managing the JFS filesystem
 * mtools - tools for manipulating MSDOS files
 * ntfs-3g - read/write NTFS driver for FUSE

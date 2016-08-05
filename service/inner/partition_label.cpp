@@ -54,6 +54,14 @@ QString ReadJfsLabel(const QString& path) {
   return QString();
 }
 
+QString ReadLinuxSwapLabel(const QString& path) {
+  QString output;
+  if (base::SpawnCmd("swaplabel", {path}, output)) {
+    return output;
+  }
+  return QString();
+}
+
 QString ReadNTFSLabel(const QString& path) {
   QString output;
   if (base::SpawnCmd("ntfslabel", {"--force", path}, output)) {

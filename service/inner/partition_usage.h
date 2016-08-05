@@ -13,6 +13,7 @@ bool ReadBtrfsUsage(const QString& path, qint64& freespace, qint64& total);
 bool ReadExt2Usage(const QString& path, qint64& freespace, qint64& total);
 bool ReadFat16Usage(const QString& path, qint64& freespace, qint64& total);
 bool ReadJfsUsage(const QString& path, qint64& freespace, qint64& total);
+bool ReadLinuxSwapUsage(const QString& path, qint64& freespace, qint64& total);
 bool ReadNTFSUsage(const QString& path, qint64& freespace, qint64& total);
 bool ReadReiser4Usage(const QString& path, qint64& freespace, qint64& total);
 bool ReadReiserfsUsage(const QString& path, qint64& freespace, qint64& total);

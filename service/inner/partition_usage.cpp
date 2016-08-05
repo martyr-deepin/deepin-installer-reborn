@@ -9,6 +9,7 @@
 #include "base/command.h"
 #include "base/string_util.h"
 #include "service/partition_manager.h"
+#include "sysinfo/proc_swaps.h"
 
 namespace service {
 
@@ -130,6 +131,18 @@ bool ReadJfsUsage(const QString& path, qint64& freespace, qint64& total) {
   }
   freespace = total - used;
   return true;
+}
+
+bool ReadLinuxSwapUsage(const QString& path, qint64& freespace, qint64& total) {
+  const sysinfo::SwapItemList swap_items = sysinfo::ParseSwaps();
+  for (const sysinfo::SwapItem& item : swap_items) {
+    if (item.filename == path) {
+      total = item.size;
+      freespace = item.size - item.used;
+      return true;
+    }
+  }
+  return false;
 }
 
 bool ReadNTFSUsage(const QString& path, qint64& freespace, qint64& total) {

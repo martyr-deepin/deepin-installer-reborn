@@ -69,6 +69,7 @@ set(SERVICE_FILES
     service/signal_manager.cpp service/signal_manager.h
     service/system_language.cpp service/system_language.h
     service/settings_name.h
+    service/inner/partition_format.cpp service/inner/partition_format.h
     service/inner/partition_label.cpp service/inner/partition_label.h
     service/inner/partition_usage.cpp service/inner/partition_usage.h
     )
@@ -82,7 +83,7 @@ set(SYSINFO_FILES
     sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h
     sysinfo/validate_username.cpp sysinfo/validate_username.h
     sysinfo/virtual_machine.cpp sysinfo/virtual_machine.h
-    )
+    sysinfo/proc_swaps.cpp sysinfo/proc_swaps.h)
 
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
