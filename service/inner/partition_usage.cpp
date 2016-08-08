@@ -64,18 +64,18 @@ bool ReadExt2Usage(const QString& path, qint64& freespace, qint64& total) {
   }
 
   int block_size = 0;
-  int total_blocks = 0;
-  int free_blocks = 0;
+  qint64 total_blocks = 0;
+  qint64 free_blocks = 0;
   for (const QString& line : output.split('\n')) {
     if (line.contains("Block count:")) {
       const QString m = base::RegexpLabel("Block count:\\s+(\\d+)", line);
       if (!m.isEmpty()) {
-        total_blocks = m.toInt();
+        total_blocks = m.toLongLong();
       }
     } else if (line.contains("Free blocks:")) {
       const QString m = base::RegexpLabel("Free blocks:\\s+(\\d+)", line);
       if (!m.isEmpty()) {
-        free_blocks = m.toInt();
+        free_blocks = m.toLongLong();
       }
     } else if (line.contains("Block size:")) {
       const QString m = base::RegexpLabel("Block size:\\s+(\\d+)", line);
@@ -97,19 +97,19 @@ bool ReadFat16Usage(const QString& path, qint64& freespace, qint64& total) {
   }
 
   int cluster_size = 0;
-  int start_byte = 0;
-  int total_clusters = 0;
-  int used_clusters = 0;
+  qint64 start_byte = 0;
+  qint64 total_clusters = 0;
+  qint64 used_clusters = 0;
 
   for (const QString& line : output.split('\n')) {
     if (line.contains("bytes per cluster")) {
       cluster_size = line.trimmed().split(' ').at(0).trimmed().toInt();
     } else if (line.contains("Data area starts at")) {
-      start_byte = line.split(' ').at(5).toInt();
+      start_byte = line.split(' ').at(5).toLongLong();
     } else if (line.contains(path)) {
       const QStringList parts = line.split(' ').at(3).split('/');
-      total_clusters = parts.at(1).toInt();
-      used_clusters = parts.at(0).toInt();
+      total_clusters = parts.at(1).toLongLong();
+      used_clusters = parts.at(0).toLongLong();
     }
   }
 
@@ -138,6 +138,8 @@ bool ReadJfsUsage(const QString& path, qint64& freespace, qint64& total) {
 bool ReadLinuxSwapUsage(const QString& path, qint64& freespace, qint64& total) {
   const sysinfo::SwapItemList swap_items = sysinfo::ParseSwaps();
   for (const sysinfo::SwapItem& item : swap_items) {
+    qDebug() << "filename:" << item.filename
+        << "size:" << item.size << ", used:" << item.used;
     if (item.filename == path) {
       total = item.size;
       freespace = item.size - item.used;
@@ -153,8 +155,8 @@ bool ReadNTFSUsage(const QString& path, qint64& freespace, qint64& total) {
     return false;
   }
   int cluster_size = 0;
-  int free_clusters = 0;
-  int total_clusters = 0;
+  qint64 free_clusters = 0;
+  qint64 total_clusters = 0;
   for (const QString& line : output.split('\n')) {
     if (line.contains("Cluster Size:")) {
       const QString m = base::RegexpLabel("Cluster Size:\\s+(\\d+)", line);
@@ -165,12 +167,12 @@ bool ReadNTFSUsage(const QString& path, qint64& freespace, qint64& total) {
       const QString m = base::RegexpLabel("Volume Size in Clusters:\\s+(\\d+)",
                                           line);
       if (!m.isEmpty()) {
-        total_clusters = m.toInt();
+        total_clusters = m.toLongLong();
       }
     } else if (line.contains("Free Clusters:")) {
       const QString m = base::RegexpLabel("Free Clusters:\\s+(\\d+)", line);
       if (!m.isEmpty()) {
-        free_clusters = m.toInt();
+        free_clusters = m.toLongLong();
       }
     }
   }
@@ -188,15 +190,15 @@ bool ReadReiser4Usage(const QString& path, qint64& freespace, qint64& total) {
   }
 
   int block_size = 0;
-  int free_blocks = 0;
-  int total_blocks = 0;
+  qint64 free_blocks = 0;
+  qint64 total_blocks = 0;
   for (const QString& line : output.split('\n')) {
     if (line.contains("blksize:")) {
       block_size = line.split(':').at(1).trimmed().toInt();
     } else if (line.contains("blocks:")) {
-      total_blocks = line.split(':').at(1).trimmed().toInt();
+      total_blocks = line.split(':').at(1).trimmed().toLongLong();
     } else if (line.contains("free blocks:")) {
-      free_blocks = line.split(':').at(1).trimmed().toInt();
+      free_blocks = line.split(':').at(1).trimmed().toLongLong();
     }
   }
   total = total_blocks * block_size;
