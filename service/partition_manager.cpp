@@ -24,38 +24,38 @@ namespace {
 const char kPartationTableGPT[] = "gpt";
 const char kPartationTableMsDos[] = "msdos";
 
-//// Flush linux kernel caches. Ensure coherency between the caches of the whole
-//// disk device and the partition devices.
-//bool FlushDevice(PedDevice* device) {
-//  bool success = false;
-//  if (ped_device_open(device)) {
-//    success = static_cast<bool>(ped_device_sync(device));
-//    ped_device_close(device);
-//  }
-//  return success;
-//}
-//
-//// Refers: http://stackoverflow.com/questions/14127210/
-//// After the kernel boots, `udevd` is used to create device nodes for
-//// all detected devices. That is a relatively time consuming task that
-//// has to be completed for the boot process to continue, otherwise
-//// there is a risk of services failing due to missing device nodes.
-//// `udevadm settle` waits for udevd to process the device creation events
-//// for all hardware devices, thus ensuring that any device nodes
-//// have been created successfully before proceeding.
-//void SettleDevice(int timeout) {
-//  const QString cmd = QString("udevadm settle --timeout=%1").arg(timeout);
-//  // TODO(xushaohua):
-//  Q_UNUSED(cmd);
-//}
-//
-//bool CommitDiskChanges(PedDisk* disk) {
-//  bool success = static_cast<bool>(ped_disk_commit_to_dev(disk));
-//  if (success) {
-//    success = static_cast<bool>(ped_disk_commit_to_os(disk));
-//  }
-//  return success;
-//}
+// Flush linux kernel caches. Ensure coherency between the caches of the whole
+// disk device and the partition devices.
+bool FlushDevice(PedDevice* device) {
+  bool success = false;
+  if (ped_device_open(device)) {
+    success = static_cast<bool>(ped_device_sync(device));
+    ped_device_close(device);
+  }
+  return success;
+}
+
+// Refers: http://stackoverflow.com/questions/14127210/
+// After the kernel boots, `udevd` is used to create device nodes for
+// all detected devices. That is a relatively time consuming task that
+// has to be completed for the boot process to continue, otherwise
+// there is a risk of services failing due to missing device nodes.
+// `udevadm settle` waits for udevd to process the device creation events
+// for all hardware devices, thus ensuring that any device nodes
+// have been created successfully before proceeding.
+void SettleDevice(int timeout) {
+  const QString cmd = QString("udevadm settle --timeout=%1").arg(timeout);
+  // TODO(xushaohua):
+  Q_UNUSED(cmd);
+}
+
+bool CommitDiskChanges(PedDisk* disk) {
+  bool success = static_cast<bool>(ped_disk_commit_to_dev(disk));
+  if (success) {
+    success = static_cast<bool>(ped_disk_commit_to_os(disk));
+  }
+  return success;
+}
 
 // Make filesystem on |partition| based on its fs type.
 void Mkfs(Partition& partition) {
@@ -247,52 +247,6 @@ void ReadUsage(Partition& partition) {
 
 }  // namespace
 
-QString GetFsTypeName(FsType fs_type) {
-  switch (fs_type) {
-    case FsType::Btrfs: return "btrfs";
-    case FsType::EFI: return "efi";
-    case FsType::Ext2: return "ext2";
-    case FsType::Ext3: return "ext3";
-    case FsType::Ext4: return "ext4";
-    case FsType::Fat16: return "fat16";
-    case FsType::Fat32: return "fat32";
-    case FsType::Hfs: return "hfs";
-    case FsType::HfsPlus: return "hfs+";
-    case FsType::Jfs: return "jfs";
-    case FsType::LinuxSwap: return "linux-swap";
-    case FsType::LVM2PV: return "lvm2pv";
-    case FsType::NTFS: return "ntfs";
-    case FsType::Others: return "others";
-    case FsType::Reiser4: return "reiser4";
-    case FsType::Reiserfs: return "reiserfs";
-    case FsType::Xfs: return "xfs";
-    default: return "unknown";
-  }
-}
-
-FsType GetFsTypeByName(const QString& name) {
-  const QString lower = name.toLower();
-  if (lower.isEmpty()) return FsType::Empty;
-  if (lower == "btrfs") return FsType::Btrfs;
-  if (lower == "efi") return FsType::EFI;
-  if (lower == "ext2") return FsType::Ext2;
-  if (lower == "ext3") return FsType::Ext3;
-  if (lower == "ext4") return FsType::Ext4;
-  if (lower == "fat16") return FsType::Fat16;
-  if (lower == "fat32") return FsType::Fat32;
-  if (lower == "hfs") return FsType::Hfs;
-  if (lower == "hfs+") return FsType::HfsPlus;
-  if (lower == "jfs") return FsType::Jfs;
-  if (lower.startsWith("linux-swap")) return FsType::LinuxSwap;
-  if (lower == "lvm2pv") return FsType::LVM2PV;
-  if (lower == "ntfs") return FsType::NTFS;
-  if (lower == "others") return FsType::Others;
-  if (lower == "reiser4") return FsType::Reiser4;
-  if (lower == "resierfs") return FsType::Reiserfs;
-  if (lower == "xfs") return FsType::Xfs;
-  return FsType::Unknown;
-}
-
 PartitionManager::PartitionManager(QObject* parent) : QObject(parent) {
   this->setObjectName(QStringLiteral("partition_manager"));
 
@@ -391,6 +345,9 @@ void PartitionManager::doRefreshDevices() {
       //partition.flags = {};
       if (false) {
         Mkfs(partition);
+        FlushDevice(p_device);
+        SettleDevice(5);
+        CommitDiskChanges(disk);
       }
     }
 
@@ -420,6 +377,52 @@ void PartitionManager::doManualPart() {
 
 bool IsEfiEnabled() {
   return QDir(QStringLiteral("/sys/firmware/efi")).exists();
+}
+
+QString GetFsTypeName(FsType fs_type) {
+  switch (fs_type) {
+    case FsType::Btrfs: return "btrfs";
+    case FsType::EFI: return "efi";
+    case FsType::Ext2: return "ext2";
+    case FsType::Ext3: return "ext3";
+    case FsType::Ext4: return "ext4";
+    case FsType::Fat16: return "fat16";
+    case FsType::Fat32: return "fat32";
+    case FsType::Hfs: return "hfs";
+    case FsType::HfsPlus: return "hfs+";
+    case FsType::Jfs: return "jfs";
+    case FsType::LinuxSwap: return "linux-swap";
+    case FsType::LVM2PV: return "lvm2pv";
+    case FsType::NTFS: return "ntfs";
+    case FsType::Others: return "others";
+    case FsType::Reiser4: return "reiser4";
+    case FsType::Reiserfs: return "reiserfs";
+    case FsType::Xfs: return "xfs";
+    default: return "unknown";
+  }
+}
+
+FsType GetFsTypeByName(const QString& name) {
+  const QString lower = name.toLower();
+  if (lower.isEmpty()) return FsType::Empty;
+  if (lower == "btrfs") return FsType::Btrfs;
+  if (lower == "efi") return FsType::EFI;
+  if (lower == "ext2") return FsType::Ext2;
+  if (lower == "ext3") return FsType::Ext3;
+  if (lower == "ext4") return FsType::Ext4;
+  if (lower == "fat16") return FsType::Fat16;
+  if (lower == "fat32") return FsType::Fat32;
+  if (lower == "hfs") return FsType::Hfs;
+  if (lower == "hfs+") return FsType::HfsPlus;
+  if (lower == "jfs") return FsType::Jfs;
+  if (lower.startsWith("linux-swap")) return FsType::LinuxSwap;
+  if (lower == "lvm2pv") return FsType::LVM2PV;
+  if (lower == "ntfs") return FsType::NTFS;
+  if (lower == "others") return FsType::Others;
+  if (lower == "reiser4") return FsType::Reiser4;
+  if (lower == "resierfs") return FsType::Reiserfs;
+  if (lower == "xfs") return FsType::Xfs;
+  return FsType::Unknown;
 }
 
 qint64 GetMaximumDeviceSize() {

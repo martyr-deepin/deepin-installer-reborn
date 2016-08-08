@@ -66,6 +66,7 @@ set(SERVICE_FILES
     service/log_manager.cpp service/log_manager.h
     service/partition_manager.cpp service/partition_manager.h
     service/settings_manager.cpp service/settings_manager.h
+    service/partition_manager_structs.h
     service/signal_manager.cpp service/signal_manager.h
     service/system_language.cpp service/system_language.h
     service/settings_name.h
