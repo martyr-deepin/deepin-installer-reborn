@@ -4,6 +4,7 @@
 
 #include "sysinfo/proc_swaps.h"
 
+#include <QRegExp>
 #include <QStringList>
 
 #include "base/file_util.h"
@@ -17,15 +18,17 @@ SwapItemList ParseSwaps() {
 
   for (const QString& line : content.split('\n')) {
     if ((!line.isEmpty()) && (!line.startsWith("Filename"))) {
-      const QStringList parts = line.split(' ');
-      SwapItem item = {
-          parts.at(0),
-          parts.at(1) == "partition" ? SwapType::Partition : SwapType::File,
-          parts.at(2).toLongLong(),
-          parts.at(3).toLongLong(),
-          parts.at(4).toInt(),
-      };
-      result.append(item);
+      const QStringList parts = line.split(QRegExp("\\s+"));
+      if (parts.length() == 5) {
+        SwapItem item = {
+            parts.at(0),
+            parts.at(1) == "partition" ? SwapType::Partition : SwapType::File,
+            parts.at(2).toLongLong(),
+            parts.at(3).toLongLong(),
+            parts.at(4).toInt(),
+        };
+        result.append(item);
+      }
     }
   }
 

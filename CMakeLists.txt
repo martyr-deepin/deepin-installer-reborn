@@ -131,6 +131,7 @@ set(UNITTEST_FILES
     base/string_util_test.cpp
     sysinfo/proc_mounts_test.cpp
     sysinfo/proc_partitions_test.cpp
+    sysinfo/proc_swaps_test.cpp
     service/system_languages_test.cpp
     sysinfo/dev_uuid_test.cpp
     sysinfo/timezone_test.cpp
