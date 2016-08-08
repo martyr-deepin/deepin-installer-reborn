@@ -45,19 +45,18 @@ FsType GetFsTypeByName(const QString& name);
 
 struct Partition {
   // File system
-  FsType fs;
-  qint64 freespace;
-  qint64 length;
+  FsType fs = FsType::Unknown;
+  qint64 freespace = 0;
+  qint64 length = 0;
   QString label;
   QString uuid;
   QStringList mounts;
 
   // Partition
   QString path;
-  qint64 first_sector;
-  qint64 last_sector;
-  qint64 total_sectors;
-  QString name;
+  qint64 first_sector = 0;
+  qint64 last_sector = 0;
+  qint64 total_sectors = 0;
   QStringList flags;
   QString os;
 };
@@ -65,13 +64,13 @@ struct Partition {
 struct Device {
   QString model;  // Human readable device name (manufacture).
   QString path;
-  PartitionTableType table;
-  qint64 freespace;
-  qint64 length;  // total sectors / disk capacity.
-  int heads;
-  int sectors;
-  int cylinders;
-  qint64 sector_size;
+  PartitionTableType table = PartitionTableType::Unknown;
+  qint64 freespace = 0;
+  qint64 length = 0;  // total sectors / disk capacity.
+  int heads = 0;
+  int sectors = 0;
+  int cylinders = 0;
+  qint64 sector_size = 0;
   QList<Partition> partitions;
 };
 

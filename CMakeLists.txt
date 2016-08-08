@@ -93,6 +93,7 @@ set(UI_FILES
     ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
     ui/frames/inner/edit_partition_frame.cpp ui/frames/inner/edit_partition_frame.h
     ui/frames/inner/new_partition_frame.cpp ui/frames/inner/new_partition_frame.h
+    ui/frames/inner/partition_loading_frame.cpp ui/frames/inner/partition_loading_frame.h
     ui/frames/inner/prepare_install_frame.cpp ui/frames/inner/prepare_install_frame.h
     ui/frames/inner/select_bootloader_frame.cpp ui/frames/inner/select_bootloader_frame.h
     ui/frames/inner/simple_partition_frame.cpp ui/frames/inner/simple_partition_frame.h
@@ -123,7 +124,7 @@ set(UI_FILES
     ui/widgets/page_indicator.cpp ui/widgets/page_indicator.h
     ui/widgets/qr_widget.cpp ui/widgets/qr_widget.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
-    )
+    ui/frames/delegates/partition_delegate.cpp ui/frames/delegates/partition_delegate.h)
 
 set(UNITTEST_FILES
     base/command_test.cpp

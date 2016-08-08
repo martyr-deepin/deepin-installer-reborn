@@ -11,12 +11,12 @@
 #include <QThread>
 #include <QVBoxLayout>
 
-#include "service/partition_manager.h"
-#include "service/signal_manager.h"
 #include "ui/frames/consts.h"
+#include "ui/frames/delegates/partition_delegate.h"
 #include "ui/frames/inner/advanced_partition_frame.h"
 #include "ui/frames/inner/edit_partition_frame.h"
 #include "ui/frames/inner/new_partition_frame.h"
+#include "ui/frames/inner/partition_loading_frame.h"
 #include "ui/frames/inner/prepare_install_frame.h"
 #include "ui/frames/inner/select_bootloader_frame.h"
 #include "ui/frames/inner/simple_partition_frame.h"
@@ -26,42 +26,36 @@
 
 namespace ui {
 
-PartitionFrame::PartitionFrame(QWidget* parent)
-    : QFrame(parent),
-      partition_manager_(new service::PartitionManager()) {
+PartitionFrame::PartitionFrame(QWidget* parent) :
+    QFrame(parent),
+    partition_delegate_(new PartitionDelegate(this)) {
   this->setObjectName(QStringLiteral("partition_frame"));
-
-  QThread* partition_thread = new QThread(this);
-  partition_thread->start();
-  partition_manager_->moveToThread(partition_thread);
 
   this->initUI();
   this->initConnections();
 }
 
 void PartitionFrame::autoPart() {
-  emit partition_manager_->autoPart();
+  partition_delegate_->autoConf();
 }
 
 void PartitionFrame::initConnections() {
-  connect(simple_frame_button_, &QPushButton::toggle,
+  connect(simple_frame_button_, &QPushButton::toggled,
           this, &PartitionFrame::onSimpleFrameButtonToggled);
-  connect(advanced_frame_button_, &QPushButton::toggle,
+  connect(advanced_frame_button_, &QPushButton::toggled,
           this, &PartitionFrame::onAdvancedFrameButtonToggled);
   connect(next_button_, &QPushButton::clicked,
           this, &PartitionFrame::onNextButtonClicked);
 
-  service::SignalManager* signal_manager = service::SignalManager::instance();
-  connect(partition_manager_, &service::PartitionManager::autoPartDone,
-          signal_manager, &service::SignalManager::autoPartDone);
-  connect(partition_manager_, &service::PartitionManager::manualPartDone,
-          signal_manager, &service::SignalManager::manualPartDone);
+  connect(partition_delegate_, &PartitionDelegate::deviceRefreshed,
+          this, &PartitionFrame::onDeviceRefreshed);
 }
 
 void PartitionFrame::initUI() {
   advanced_partition_frame_ = new AdvancedPartitionFrame();
   edit_partition_frame_ = new EditPartitionFrame();
   new_partition_frame_ = new NewPartitionFrame();
+  partition_loading_frame_ = new PartitionLoadingFrame();
   prepare_install_frame_ = new PrepareInstallFrame();
   select_bootloader_frame_ = new SelectBootloaderFrame();
   simple_partition_frame_ = new SimplePartitionFrame();
@@ -116,6 +110,7 @@ void PartitionFrame::initUI() {
   main_frame_->setLayout(layout);
 
   main_layout_ = new QStackedLayout();
+  main_layout_->addWidget(partition_loading_frame_);
   main_layout_->addWidget(main_frame_);
   main_layout_->addWidget(edit_partition_frame_);
   main_layout_->addWidget(new_partition_frame_);
@@ -138,6 +133,10 @@ void PartitionFrame::onNextButtonClicked() {
   if (true) {
     main_layout_->setCurrentWidget(prepare_install_frame_);
   }
+}
+
+void PartitionFrame::onDeviceRefreshed() {
+  main_layout_->setCurrentWidget(main_frame_);
 }
 
 }  // namespace ui

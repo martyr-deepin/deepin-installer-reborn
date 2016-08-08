@@ -21,6 +21,7 @@ void SimplePartitionFrame::initConnections() {
 
 void SimplePartitionFrame::initUI() {
   QLabel* label = new QLabel("Simple page", this);
+  Q_UNUSED(label);
   this->setStyleSheet("background: red;");
 }
 

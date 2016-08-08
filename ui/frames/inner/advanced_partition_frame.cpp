@@ -22,6 +22,8 @@ void AdvancedPartitionFrame::initConnections() {
 
 void AdvancedPartitionFrame::initUI() {
   QLabel* label = new QLabel("Advanced page", this);
+  Q_UNUSED(label);
+  this->setStyleSheet("background: white;");
 }
 
 }  // namespace ui

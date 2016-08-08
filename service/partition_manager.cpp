@@ -126,50 +126,51 @@ void Mkfs(Partition& partition) {
 
 // Update partition label.
 void ReadLabel(Partition& partition) {
+  QString label;
   switch (partition.fs) {
     case FsType::Btrfs: {
-      partition.label = ReadBtrfsLabel(partition.path);
+      label = ReadBtrfsLabel(partition.path);
       break;
     }
     case FsType::Ext2:
     case FsType::Ext3:
     case FsType::Ext4: {
-      partition.label = ReadExt2Label(partition.path);
+      label = ReadExt2Label(partition.path);
       break;
     }
     case FsType::EFI:
     case FsType::Fat16:
     case FsType::Fat32: {
-      partition.label = ReadFat16Label(partition.path);
+      label = ReadFat16Label(partition.path);
       break;
     }
     case FsType::Hfs:
     case FsType::HfsPlus: {
-      partition.label = ReadHfsLabel(partition.path);
+      label = ReadHfsLabel(partition.path);
       break;
     }
     case FsType::Jfs: {
-      partition.label = ReadJfsLabel(partition.path);
+      label = ReadJfsLabel(partition.path);
       break;
     }
     case FsType::LinuxSwap: {
-      partition.label = ReadLinuxSwapLabel(partition.path);
+      label = ReadLinuxSwapLabel(partition.path);
       break;
     }
     case FsType::NTFS: {
-      partition.label = ReadNTFSLabel(partition.path);
+      label = ReadNTFSLabel(partition.path);
       break;
     }
     case FsType::Reiser4: {
-      partition.label = ReadReiser4Label(partition.path);
+      label = ReadReiser4Label(partition.path);
       break;
     }
     case FsType::Reiserfs: {
-      partition.label = ReadReiserfsLabel(partition.path);
+      label = ReadReiserfsLabel(partition.path);
       break;
     }
     case FsType::Xfs: {
-      partition.label = ReadXfsLabel(partition.path);
+      label = ReadXfsLabel(partition.path);
       break;
     }
     default: {
@@ -177,6 +178,7 @@ void ReadLabel(Partition& partition) {
       break;
     }
   }
+  partition.label = label.trimmed();
 }
 
 // Update partition usage.
@@ -237,6 +239,7 @@ void ReadUsage(Partition& partition) {
     partition.length = total;
     partition.freespace = freespace;
   } else {
+    qWarning() << "Failed to read usage:" << partition.path;
     partition.length = 0;
     partition.freespace = 0;
   }
@@ -269,7 +272,7 @@ QString GetFsTypeName(FsType fs_type) {
 
 FsType GetFsTypeByName(const QString& name) {
   const QString lower = name.toLower();
-  if (lower == "") return FsType::Empty;
+  if (lower.isEmpty()) return FsType::Empty;
   if (lower == "btrfs") return FsType::Btrfs;
   if (lower == "efi") return FsType::EFI;
   if (lower == "ext2") return FsType::Ext2;
@@ -280,7 +283,7 @@ FsType GetFsTypeByName(const QString& name) {
   if (lower == "hfs") return FsType::Hfs;
   if (lower == "hfs+") return FsType::HfsPlus;
   if (lower == "jfs") return FsType::Jfs;
-  if (lower == "linux-swap") return FsType::LinuxSwap;
+  if (lower.startsWith("linux-swap")) return FsType::LinuxSwap;
   if (lower == "lvm2pv") return FsType::LVM2PV;
   if (lower == "ntfs") return FsType::NTFS;
   if (lower == "others") return FsType::Others;
@@ -306,24 +309,10 @@ void PartitionManager::initConnections() {
 }
 
 void PartitionManager::doRefreshDevices() {
-// 1. List Devices
-// 1.1. Retrieve metadata of each device.
-//   * partition-table type
-//   * label
-//   * path
-//   * capacity
-//   * freespace
-// 2. List partitions of each device.
-// 3. Retrieve partition metadata.
-//   * partition label.
-//   * path
-//   * uuid
-//   * os-probe
-//   * filesystem type
-//   * freespace
-//   * total capacity
-//   * mounted ?
-//   * mount paths
+  // 1. List Devices
+  // 1.1. Retrieve metadata of each device.
+  // 2. List partitions of each device.
+  // 3. Retrieve partition metadata.
 
   // Let libparted detect all devices and construct device list.
   ped_device_probe_all();
@@ -333,30 +322,30 @@ void PartitionManager::doRefreshDevices() {
 
   PedDevice* p_device = NULL;
   while ((p_device = ped_device_get_next(p_device)) != NULL) {
-    PedDiskType* device_type = ped_disk_probe(p_device);
+    PedDiskType* disk_type = ped_disk_probe(p_device);
     PedDisk* disk = NULL;
     // TODO(xushaohua): Filters USB device.
-    if (device_type == NULL) {
+    if (disk_type == NULL) {
       // Raw disk found.
       // TODO(xushaohua): Check proper partition type.
       disk = ped_disk_new_fresh(p_device,
                                 ped_disk_type_get(kPartationTableGPT));
-      device_type = ped_disk_probe(p_device);
-    } else if (QString(kPartationTableGPT) == device_type->name ||
-               QString(kPartationTableMsDos) == device_type->name) {
+      disk_type = ped_disk_probe(p_device);
+    } else if (QString(kPartationTableGPT) == disk_type->name ||
+               QString(kPartationTableMsDos) == disk_type->name) {
       disk = ped_disk_new(p_device);
     } else {
       // Ignores other type of device.
-      qWarning() << "Ignores other type of device:" << device_type->name;
+      qWarning() << "Ignores other type of device:" << disk_type->name;
       continue;
     }
 
     Device device;
     device.model = p_device->model;
     device.path = p_device->path;
-    if (strncmp(kPartationTableGPT, device_type->name, 3)) {
+    if (strncmp(kPartationTableGPT, disk_type->name, 3)) {
       device.table = PartitionTableType::GPT;
-    } else if (strncmp(kPartationTableMsDos, device_type->name, 5)) {
+    } else if (strncmp(kPartationTableMsDos, disk_type->name, 5)) {
       device.table = PartitionTableType::MsDos;
     }
     device.heads = p_device->bios_geom.heads;
@@ -367,26 +356,42 @@ void PartitionManager::doRefreshDevices() {
     QList<Partition> partitions;
     PedPartition* p_partition = NULL;
     while ((p_partition = ped_disk_next_partition(disk, p_partition)) != NULL) {
+      qDebug() << "============================";
       Partition partition;
-      partition.fs = GetFsTypeByName(p_partition->fs_type->name);
-      ReadLabel(partition);
+      if (p_partition->fs_type) {
+        partition.fs = GetFsTypeByName(p_partition->fs_type->name);
+        qDebug() << "fs type:" << GetFsTypeName(partition.fs);
+      } else {
+        partition.fs = FsType::Unknown;
+      }
       partition.first_sector = p_partition->geom.start;
+      qDebug() << "first sector:" << partition.first_sector;
       partition.total_sectors = p_partition->geom.length;
+      qDebug() << "total sectors:" << partition.total_sectors;
       partition.last_sector = p_partition->geom.end;
+      qDebug() << "last sector:" << partition.last_sector;
       partition.path = ped_partition_get_path(p_partition);
+      qDebug() << "partition path:" << partition.path;
       // Avoid reading additional filesystem information if there is no path.
       if (!partition.path.isEmpty()) {
+        ReadLabel(partition);
+        qDebug() << "partition label:" << partition.label;
+
         // Read uuid from /dev/disk/by-uuid/
         partition.uuid = uuid_items.value(partition.path);
+        qDebug() << "UUID:" << partition.uuid;
 
         // Read label based on filesystem type
         ReadUsage(partition);
+        qDebug() << "length:" << partition.length
+                 << ",freespace:" << partition.freespace;
  
         // Read possible Operating System version by calling `os-prober`.
-
-        partition.name = ped_partition_get_name(p_partition);
       }
       //partition.flags = {};
+      if (false) {
+        Mkfs(partition);
+      }
     }
 
     device.partitions = partitions;
@@ -395,6 +400,7 @@ void PartitionManager::doRefreshDevices() {
 //    ped_device_destroy(p_device);
 //    ped_disk_destroy(disk);
   }
+  emit this->devicesRefreshed();
 }
 
 void PartitionManager::doAutoPart() {

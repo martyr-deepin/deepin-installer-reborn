@@ -4,6 +4,8 @@
 
 #include "service/inner/partition_usage.h"
 
+#include <QDebug>
+#include <QProcess>
 #include <QRegExp>
 
 #include "base/command.h"
@@ -101,7 +103,7 @@ bool ReadFat16Usage(const QString& path, qint64& freespace, qint64& total) {
 
   for (const QString& line : output.split('\n')) {
     if (line.contains("bytes per cluster")) {
-      cluster_size = line.split(' ').at(0).trimmed().toInt();
+      cluster_size = line.trimmed().split(' ').at(0).trimmed().toInt();
     } else if (line.contains("Data area starts at")) {
       start_byte = line.split(' ').at(5).toInt();
     } else if (line.contains(path)) {

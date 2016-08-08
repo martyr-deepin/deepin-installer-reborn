@@ -44,7 +44,7 @@ bool SpawnCmd(const QString& cmd, const QStringList& args,
   process.waitForFinished();
   output = process.readAllStandardOutput();
   err = process.readAllStandardError();
-  return process.exitCode() == 0;
+  return process.exitStatus() == QProcess::NormalExit;
 }
 
 }  // namespace base
