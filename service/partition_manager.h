@@ -19,7 +19,7 @@ class PartitionManager : public QObject {
 
  signals:
   void refreshDevices();
-  void devicesRefreshed();
+  void devicesRefreshed(const DeviceList& devices);
 
   // Run oem/auto-part.sh script.
   void autoPart();

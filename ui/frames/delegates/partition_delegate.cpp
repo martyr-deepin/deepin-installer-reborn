@@ -36,13 +36,12 @@ void PartitionDelegate::initConnections() {
           signal_manager, &service::SignalManager::manualPartDone);
 
   connect(partition_manager_, &service::PartitionManager::devicesRefreshed,
-          this, &PartitionDelegate::deviceRefreshed);
-  connect(partition_manager_, &service::PartitionManager::devicesRefreshed,
           this, &PartitionDelegate::onDevicesRefreshed);
 }
 
-void PartitionDelegate::onDevicesRefreshed() {
-
+void PartitionDelegate::onDevicesRefreshed(const service::DeviceList& devices) {
+  this->devices = devices;
+  emit this->deviceRefreshed();
 }
 
 }  // namespace ui

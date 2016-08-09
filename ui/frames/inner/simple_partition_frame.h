@@ -9,15 +9,23 @@
 
 namespace ui {
 
+class PartitionDelegate;
+
 class SimplePartitionFrame : public QFrame {
   Q_OBJECT
 
  public:
-  explicit SimplePartitionFrame(QWidget* parent = nullptr);
+  SimplePartitionFrame(PartitionDelegate* partition_delegate,
+                       QWidget* parent = nullptr);
 
  private:
   void initConnections();
   void initUI();
+
+  PartitionDelegate* partition_delegate_ = nullptr;
+
+ private slots:
+  void onDeviceRefreshed();
 };
 
 }  // namespace ui

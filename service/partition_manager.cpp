@@ -250,6 +250,7 @@ void ReadUsage(Partition& partition) {
 PartitionManager::PartitionManager(QObject* parent) : QObject(parent) {
   this->setObjectName(QStringLiteral("partition_manager"));
 
+  qRegisterMetaType<DeviceList>("DeviceList");
   this->initConnections();
 }
 
@@ -271,7 +272,7 @@ void PartitionManager::doRefreshDevices() {
   // Let libparted detect all devices and construct device list.
   ped_device_probe_all();
 
-  QList<Device> devices;
+  DeviceList devices;
   const sysinfo::UUIDItems uuid_items = sysinfo::ParseUUIDDir();
 
   PedDevice* p_device = NULL;
@@ -310,8 +311,46 @@ void PartitionManager::doRefreshDevices() {
     QList<Partition> partitions;
     PedPartition* p_partition = NULL;
     while ((p_partition = ped_disk_next_partition(disk, p_partition)) != NULL) {
+//      if (p_partition->type != PED_PARTITION_LOGICAL &&
+//          p_partition->type != PED_PARTITION_FREESPACE &&
+//          p_partition->type != PED_PARTITION_NORMAL) {
+//        continue;
+//      }
       qDebug() << "============================";
       Partition partition;
+      switch (p_partition->type) {
+        case PED_PARTITION_NORMAL: {
+          partition.type = PartitionType::Normal;
+          qDebug() << "normal";
+          break;
+        }
+        case PED_PARTITION_FREESPACE: {
+          partition.type = PartitionType::Freespace;
+          qDebug() << "freespace";
+          break;
+        }
+        case PED_PARTITION_LOGICAL: {
+          partition.type = PartitionType::Logical;
+          qDebug() << "logical";
+          break;
+        }
+        case PED_PARTITION_EXTENDED: {
+          partition.type = PartitionType::Extended;
+          qDebug() << "extended";
+          break;
+        }
+        case PED_PARTITION_METADATA: {
+          partition.type = PartitionType::Metadata;
+          qDebug() << "metadata";
+          break;
+        }
+        case PED_PARTITION_PROTECTED: {
+          partition.type = PartitionType::Protected;
+          qDebug() << "protected";
+          break;
+        }
+      }
+
       if (p_partition->fs_type) {
         partition.fs = GetFsTypeByName(p_partition->fs_type->name);
         qDebug() << "fs type:" << GetFsTypeName(partition.fs);
@@ -349,6 +388,7 @@ void PartitionManager::doRefreshDevices() {
         SettleDevice(5);
         CommitDiskChanges(disk);
       }
+      partitions.append(partition);
     }
 
     device.partitions = partitions;
@@ -357,7 +397,7 @@ void PartitionManager::doRefreshDevices() {
 //    ped_device_destroy(p_device);
 //    ped_disk_destroy(disk);
   }
-  emit this->devicesRefreshed();
+  emit this->devicesRefreshed(devices);
 }
 
 void PartitionManager::doAutoPart() {

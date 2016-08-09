@@ -1,0 +1,26 @@
+/** Used by SipmlePartitionButton class **/
+
+QPushButton[flat="true"] {
+  border: none;
+  outline: none;
+  color: #eaeaea;
+}
+
+QPushButton {
+  background-color: transparent;
+  border-radius: 0;
+}
+
+QPushButton::checked {
+  background-color: rgba(221, 221, 221, 0.3);
+  border-radius: 10px;
+}
+
+QLabel#path_label {
+  color: #f8f8f8;
+}
+
+QLabel#usage_label {
+  color: #c8c8c8;
+}
+

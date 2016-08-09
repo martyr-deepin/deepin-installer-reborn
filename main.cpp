@@ -12,7 +12,7 @@
 #include "ui/main_window.h"
 
 int main(int argc, char* argv[]) {
-  service::RedirectLogFile();
+//  service::RedirectLogFile();
 
   QApplication app(argc, argv);
   // TODO(xushaohua): Set i18n
@@ -30,6 +30,6 @@ int main(int argc, char* argv[]) {
   main_window.showFullScreen();
 
   const int result = app.exec();
-  service::ShutdownLogService();
+//  service::ShutdownLogService();
   return result;
 }

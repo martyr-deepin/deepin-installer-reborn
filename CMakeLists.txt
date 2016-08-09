@@ -88,9 +88,9 @@ set(SYSINFO_FILES
 
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
-    ui/utils/xutil.cpp ui/utils/xutil.h
     ui/frames/consts.h
     ui/frames/delegates/language_list_delegate.cpp ui/frames/delegates/language_list_delegate.h
+    ui/frames/delegates/partition_delegate.cpp ui/frames/delegates/partition_delegate.h
     ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
     ui/frames/inner/edit_partition_frame.cpp ui/frames/inner/edit_partition_frame.h
     ui/frames/inner/new_partition_frame.cpp ui/frames/inner/new_partition_frame.h
@@ -123,9 +123,13 @@ set(UI_FILES
     ui/widgets/list_title_label.cpp ui/widgets/list_title_label.h
     ui/widgets/nav_button.cpp ui/widgets/nav_button.h
     ui/widgets/page_indicator.cpp ui/widgets/page_indicator.h
+    ui/widgets/partition_usage_bar.cpp ui/widgets/partition_usage_bar.h
     ui/widgets/qr_widget.cpp ui/widgets/qr_widget.h
+    ui/widgets/simple_partition_button.cpp ui/widgets/simple_partition_button.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
-    ui/frames/delegates/partition_delegate.cpp ui/frames/delegates/partition_delegate.h)
+    ui/utils/partition_util.cpp ui/utils/partition_util.h
+    ui/utils/xutil.cpp ui/utils/xutil.h
+    )
 
 set(UNITTEST_FILES
     base/command_test.cpp

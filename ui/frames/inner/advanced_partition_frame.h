@@ -9,15 +9,20 @@
 
 namespace ui {
 
+class PartitionDelegate;
+
 class AdvancedPartitionFrame : public QFrame {
   Q_OBJECT
 
  public:
-  explicit AdvancedPartitionFrame(QWidget* parent = nullptr);
+  AdvancedPartitionFrame(PartitionDelegate* partition_delegate,
+                         QWidget* parent = nullptr);
 
  private:
   void initConnections();
   void initUI();
+
+  PartitionDelegate* partition_delegate_ = nullptr;
 };
 
 }  // namespace ui

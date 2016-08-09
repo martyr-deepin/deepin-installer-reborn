@@ -8,12 +8,14 @@
 #include <QObject>
 class QThread;
 
+#include "service/partition_manager_structs.h"
 namespace service {
 class PartitionManager;
 }  // namespace service
 
 namespace ui {
 
+// PartitionManager proxy layer.
 class PartitionDelegate : public QObject {
   Q_OBJECT
 
@@ -21,6 +23,8 @@ class PartitionDelegate : public QObject {
   explicit PartitionDelegate(QObject* parent = nullptr);
 
   void autoConf();
+
+  service::DeviceList devices;
 
  signals:
   void deviceRefreshed();
@@ -32,7 +36,7 @@ class PartitionDelegate : public QObject {
   QThread* partition_thread_ = nullptr;
 
  private slots:
-  void onDevicesRefreshed();
+  void onDevicesRefreshed(const service::DeviceList& devices);
 };
 
 }  // namespace ui

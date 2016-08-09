@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/images">
+    <file>drive-install-here-32px.png</file>
     <file>startover_normal.png</file>
     <file>drive-harddisk-deepin-32px.png</file>
     <file>code_hover.png</file>
@@ -24,7 +25,6 @@
     <file>check-06.png</file>
     <file>arrow_left_press.png</file>
     <file>checkbox_checked.png</file>
-    <file>drive-nstall-here-128px.png</file>
     <file>code_press.png</file>
     <file>drive-harddisk-mac-32px.svg</file>
     <file>progress_failed.png</file>
@@ -32,8 +32,10 @@
     <file>drive-harddisk-deepin-32px.svg</file>
     <file>drive-harddisk-windows-128px.svg</file>
     <file>zonemap.png</file>
+    <file>drive-install-here-128px.svg</file>
     <file>down_arrow.png</file>
     <file>drive-harddisk-deepin-128px.svg</file>
+    <file>drive-install-here-32px.svg</file>
     <file>drive-harddisk-deepin-128px.png</file>
     <file>arrow_left_normal.png</file>
     <file>computer.png</file>
@@ -43,7 +45,6 @@
     <file>close_press.png</file>
     <file>position.png</file>
     <file>progress_account.png</file>
-    <file>drive-nstall-here-32px.png</file>
     <file>indicator-inactive.png</file>
     <file>decrease_hover.png</file>
     <file>drive-harddisk-128px.png</file>
@@ -63,7 +64,6 @@
     <file>check-05.png</file>
     <file>next_hover.png</file>
     <file>ubuntu.png</file>
-    <file>drive-nstall-here-32px.svg</file>
     <file>next_normal.png</file>
     <file>drive-harddisk-mac-128px.png</file>
     <file>arrow_right_normal.png</file>
@@ -95,7 +95,6 @@
     <file>drive-harddisk-mac-32px.png</file>
     <file>keyboard.png</file>
     <file>progress_logo.png</file>
-    <file>drive-nstall-here-128px.svg</file>
     <file>drive-harddisk-32px.png</file>
     <file>reboot_hover.png</file>
     <file>failed.png</file>
@@ -105,6 +104,7 @@
     <file>deepin.png</file>
     <file>close_normal.png</file>
     <file>check-01.png</file>
+    <file>drive-install-here-128px.png</file>
     <file>drive-harddisk-linux-32px.png</file>
     <file>progress_extract.png</file>
     <file>images.qrc</file>

@@ -6,10 +6,14 @@
 
 #include <QLabel>
 
+#include "ui/frames/delegates/partition_delegate.h"
+
 namespace ui {
 
-AdvancedPartitionFrame::AdvancedPartitionFrame(QWidget* parent)
-    : QFrame(parent) {
+AdvancedPartitionFrame::AdvancedPartitionFrame(
+    PartitionDelegate* partition_delegate, QWidget* parent)
+    : QFrame(parent),
+      partition_delegate_(partition_delegate) {
   this->setObjectName(QStringLiteral("advanced_partition_frame"));
 
   this->initUI();

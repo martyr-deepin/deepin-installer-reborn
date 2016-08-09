@@ -40,6 +40,23 @@ enum class FsType {
   Unknown,
 };
 
+enum class OsType {
+  Empty,
+  Linux,
+  Mac,
+  Unknown,
+  Windows,
+};
+
+enum class PartitionType {
+  Normal,
+  Logical,
+  Extended,
+  Freespace,
+  Metadata,
+  Protected,
+};
+
 struct Partition {
   // File system
   FsType fs = FsType::Unknown;
@@ -55,8 +72,11 @@ struct Partition {
   qint64 last_sector = 0;
   qint64 total_sectors = 0;
   QStringList flags;
-  QString os;
+  OsType os = OsType::Empty;
+  PartitionType type;
 };
+
+typedef QList<Partition> PartitionList;
 
 struct Device {
   QString model;  // Human readable device name (manufacture).
@@ -68,8 +88,10 @@ struct Device {
   int sectors = 0;
   int cylinders = 0;
   qint64 sector_size = 0;
-  QList<Partition> partitions;
+  PartitionList partitions;
 };
+
+typedef QList<Device> DeviceList;
 
 }  // namespace service
 

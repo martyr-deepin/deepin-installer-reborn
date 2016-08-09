@@ -11,6 +11,7 @@
     <file>list_label.css</file>
     <file>list_title_label.css</file>
     <file>nav_button.css</file>
+    <file>simple_partition_button.css</file>
     <file>title_label.css</file>
   </qresource>
 </RCC>

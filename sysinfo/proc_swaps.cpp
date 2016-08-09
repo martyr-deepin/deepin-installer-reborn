@@ -23,8 +23,8 @@ SwapItemList ParseSwaps() {
         SwapItem item = {
             parts.at(0),
             parts.at(1) == "partition" ? SwapType::Partition : SwapType::File,
-            parts.at(2).toLongLong(),
-            parts.at(3).toLongLong(),
+            parts.at(2).toLongLong() * 1000,  // from kilobytes
+            parts.at(3).toLongLong() * 1000,  // from kilobytes
             parts.at(4).toInt(),
         };
         result.append(item);

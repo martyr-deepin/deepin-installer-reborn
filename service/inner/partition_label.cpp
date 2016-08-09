@@ -57,7 +57,9 @@ QString ReadJfsLabel(const QString& path) {
 QString ReadLinuxSwapLabel(const QString& path) {
   QString output;
   if (base::SpawnCmd("swaplabel", {path}, output)) {
-    return output;
+    if (!output.isEmpty()){
+      return base::RegexpLabel("LABEL:\\s*([^\\n]*)", output);
+    }
   }
   return QString();
 }

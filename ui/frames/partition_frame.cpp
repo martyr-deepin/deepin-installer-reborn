@@ -52,13 +52,13 @@ void PartitionFrame::initConnections() {
 }
 
 void PartitionFrame::initUI() {
-  advanced_partition_frame_ = new AdvancedPartitionFrame();
+  advanced_partition_frame_ = new AdvancedPartitionFrame(partition_delegate_);
   edit_partition_frame_ = new EditPartitionFrame();
   new_partition_frame_ = new NewPartitionFrame();
   partition_loading_frame_ = new PartitionLoadingFrame();
   prepare_install_frame_ = new PrepareInstallFrame();
   select_bootloader_frame_ = new SelectBootloaderFrame();
-  simple_partition_frame_ = new SimplePartitionFrame();
+  simple_partition_frame_ = new SimplePartitionFrame(partition_delegate_);
 
   TitleLabel* title_label = new TitleLabel(tr("Select Installation Location"));
   QHBoxLayout* title_layout = new QHBoxLayout();
