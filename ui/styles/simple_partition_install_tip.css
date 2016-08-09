@@ -1,0 +1,5 @@
+/** Used in SimplePartitionFrame::install_tip_ **/
+
+QLabel#tip_label {
+  color: #c9663c;
+}

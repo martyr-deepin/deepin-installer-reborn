@@ -28,6 +28,8 @@ class SimplePartitionButton : public FlatButton {
 
   QLabel* fs_label_ = nullptr;
 
+ private slots:
+  void onButtonToggled();
 };
 
 }  // namespace ui

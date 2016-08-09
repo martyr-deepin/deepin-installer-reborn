@@ -6,6 +6,9 @@
 #define DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_SIMPLE_PARTITION_FRAME_H
 
 #include <QFrame>
+class QAbstractButton;
+class QButtonGroup;
+class QFrame;
 
 namespace ui {
 
@@ -22,10 +25,13 @@ class SimplePartitionFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  QButtonGroup* partition_button_group_ = nullptr;
+  QFrame* install_tip_ = nullptr;
   PartitionDelegate* partition_delegate_ = nullptr;
 
  private slots:
   void onDeviceRefreshed();
+  void onPartitionButtonToggled(QAbstractButton* button, bool checked);
 };
 
 }  // namespace ui

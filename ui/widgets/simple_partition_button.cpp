@@ -57,7 +57,8 @@ SimplePartitionButton::SimplePartitionButton(
 }
 
 void SimplePartitionButton::initConnections() {
-
+  connect(this, &QPushButton::toggled,
+          this, &SimplePartitionButton::onButtonToggled);
 }
 
 void SimplePartitionButton::initUI() {
@@ -102,6 +103,16 @@ void SimplePartitionButton::initUI() {
   this->setCheckable(true);
   this->setStyleSheet(base::ReadTextFileContent(
       QStringLiteral(":/styles/simple_partition_button.css")));
+}
+
+void SimplePartitionButton::onButtonToggled() {
+  if (this->isChecked()) {
+    QPixmap pixmap(QStringLiteral(":/images/drive-install-here-128px.png"));
+    fs_label_->setPixmap(pixmap);
+  } else {
+    QPixmap pixmap(GetImageByOsType(partition_.os));
+    fs_label_->setPixmap(pixmap);
+  }
 }
 
 }  // namespace ui

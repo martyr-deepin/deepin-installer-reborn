@@ -7,8 +7,11 @@
 #include <QButtonGroup>
 #include <QDebug>
 #include <QGridLayout>
+#include <QHBoxLayout>
+#include <QLabel>
 #include <QVBoxLayout>
 
+#include "base/file_util.h"
 #include "service/partition_manager_structs.h"
 #include "ui/frames/delegates/partition_delegate.h"
 #include "ui/widgets/simple_partition_button.h"
@@ -28,9 +31,32 @@ SimplePartitionFrame::SimplePartitionFrame(
 void SimplePartitionFrame::initConnections() {
   connect(partition_delegate_, &PartitionDelegate::deviceRefreshed,
           this, &SimplePartitionFrame::onDeviceRefreshed);
+  connect(partition_button_group_,
+          static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>
+          (&QButtonGroup::buttonToggled),
+          this, &SimplePartitionFrame::onPartitionButtonToggled);
 }
 
 void SimplePartitionFrame::initUI() {
+  partition_button_group_ = new QButtonGroup(this);
+
+  QHBoxLayout* tip_layout = new QHBoxLayout();
+  QLabel* tip_label = new QLabel(tr("Install here"));
+  tip_label->setObjectName("tip_label");
+  tip_label->setAlignment(Qt::AlignCenter);
+
+  tip_layout->addStretch();
+  // TODO(xushaohua): Add an icon.
+  tip_layout->addWidget(tip_label);
+  tip_layout->addStretch();
+
+  install_tip_ = new QFrame(this);
+  // Same width as SimplePartitionButton.
+  install_tip_->setFixedWidth(220);
+  install_tip_->setLayout(tip_layout);
+  install_tip_->hide();
+  install_tip_->setStyleSheet(
+      base::ReadTextFileContent(":/styles/simple_partition_install_tip.css"));
 }
 
 void SimplePartitionFrame::onDeviceRefreshed() {
@@ -38,7 +64,6 @@ void SimplePartitionFrame::onDeviceRefreshed() {
   // Draw partitions.
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setAlignment(Qt::AlignCenter);
-  QButtonGroup* button_group = new QButtonGroup(this);
   for (const service::Device& device : partition_delegate_->devices) {
     qDebug() << "=======================";
     qDebug() << device.model;
@@ -57,7 +82,7 @@ void SimplePartitionFrame::onDeviceRefreshed() {
         continue;
       }
       SimplePartitionButton* button = new SimplePartitionButton(partition);
-      button_group->addButton(button);
+      partition_button_group_->addButton(button);
       grid_layout->addWidget(button, row, column);
       qDebug() << "add button:" << row << column;
 
@@ -71,6 +96,17 @@ void SimplePartitionFrame::onDeviceRefreshed() {
   }
 
   this->setLayout(layout);
+}
+
+void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
+                                                    bool checked) {
+  if (checked) {
+    qDebug() << "pos:" << button->pos() << ",size:" << button->size();
+    const QPoint pos = button->pos();
+    const QSize size = button->size();
+    install_tip_->move(pos.x(), pos.y() + size.height());
+    install_tip_->show();
+  }
 }
 
 }  // namespace ui
