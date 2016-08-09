@@ -89,13 +89,15 @@ void SimplePartitionButton::initUI() {
 
   PartitionUsageBar* usage_bar = new PartitionUsageBar(partition_.freespace,
                                                        partition_.length);
+  QHBoxLayout* usage_bar_layout = new QHBoxLayout();
+  usage_bar_layout->addWidget(usage_bar);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setAlignment(Qt::AlignCenter);
   layout->addLayout(fs_layout);
   layout->addWidget(path_label);
   layout->addWidget(usage_label);
-  layout->addWidget(usage_bar);
+  layout->addLayout(usage_bar_layout);
 
   this->setLayout(layout);
 
