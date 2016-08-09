@@ -55,6 +55,7 @@ enum class PartitionType {
   Freespace,
   Metadata,
   Protected,
+  Invalid,
 };
 
 struct Partition {
@@ -73,7 +74,7 @@ struct Partition {
   qint64 total_sectors = 0;
   QStringList flags;
   OsType os = OsType::Empty;
-  PartitionType type;
+  PartitionType type = PartitionType::Invalid;
 };
 
 typedef QList<Partition> PartitionList;

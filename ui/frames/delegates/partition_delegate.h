@@ -15,6 +15,9 @@ class PartitionManager;
 
 namespace ui {
 
+// 100M, filter partition size.
+const qint64 kMinimumPartitionSizeToDisplay = 100 * 1024 * 1024;
+
 // PartitionManager proxy layer.
 class PartitionDelegate : public QObject {
   Q_OBJECT

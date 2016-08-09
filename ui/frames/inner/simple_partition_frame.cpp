@@ -76,11 +76,18 @@ void SimplePartitionFrame::onDeviceRefreshed() {
     qDebug() << "partition size:" << device.partitions.length();
     for (const service::Partition& partition : device.partitions) {
       qDebug() << "partition:" << partition.path;
-      if (partition.type != service::PartitionType::Normal &&
-          partition.type != service::PartitionType::Logical &&
-          partition.type != service::PartitionType::Freespace) {
+      if ((partition.type != service::PartitionType::Normal) &&
+          (partition.type != service::PartitionType::Logical) &&
+          (partition.type != service::PartitionType::Freespace)) {
         continue;
       }
+
+      // Filters freespace partition based on size.
+      if (partition.type == service::PartitionType::Freespace &&
+          partition.length < kMinimumPartitionSizeToDisplay) {
+        continue;
+      }
+
       SimplePartitionButton* button = new SimplePartitionButton(partition);
       partition_button_group_->addButton(button);
       grid_layout->addWidget(button, row, column);
