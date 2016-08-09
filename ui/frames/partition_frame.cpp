@@ -11,6 +11,7 @@
 #include <QThread>
 #include <QVBoxLayout>
 
+#include "base/file_util.h"
 #include "ui/frames/consts.h"
 #include "ui/frames/delegates/partition_delegate.h"
 #include "ui/frames/inner/advanced_partition_frame.h"
@@ -72,10 +73,13 @@ void PartitionFrame::initUI() {
 
   QButtonGroup* button_group = new QButtonGroup(this);
   simple_frame_button_ = new QPushButton(tr("Simple"));
+  simple_frame_button_->setObjectName(QStringLiteral("simple_frame_button"));
   simple_frame_button_->setCheckable(true);
   simple_frame_button_->setChecked(true);
   simple_frame_button_->setFlat(true);
   advanced_frame_button_ = new QPushButton(tr("Advanced"));
+  advanced_frame_button_->setObjectName(
+      QStringLiteral("advanced_frame_button"));
   advanced_frame_button_->setCheckable(true);
   advanced_frame_button_->setFlat(true);
   button_group->addButton(simple_frame_button_);
@@ -108,6 +112,8 @@ void PartitionFrame::initUI() {
 
   main_frame_ = new QFrame();
   main_frame_->setLayout(layout);
+  main_frame_->setStyleSheet(
+      base::ReadTextFileContent(":/styles/partition_frame_main_frame.css"));
 
   main_layout_ = new QStackedLayout();
   main_layout_->addWidget(partition_loading_frame_);
