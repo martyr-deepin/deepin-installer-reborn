@@ -9,15 +9,27 @@
 
 namespace ui {
 
+class NavButton;
+
 class PrepareInstallFrame : public QFrame {
   Q_OBJECT
 
  public:
   explicit PrepareInstallFrame(QWidget* parent = nullptr);
 
+ signals:
+  // Emitted when abort-button is clicked, returning to previous page.
+  void aborted();
+
+  // Emitted when continue-button is clicked. Start actual installation process.
+  void finished();
+
  private:
   void initConnections();
   void initUI();
+
+  NavButton* abort_button_ = nullptr;
+  NavButton* continue_button_ = nullptr;
 };
 
 }  // namespace ui

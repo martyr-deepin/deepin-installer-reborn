@@ -9,6 +9,7 @@
 
 namespace ui {
 
+// List item label.
 class ListLabel : public QLabel {
   Q_OBJECT
 

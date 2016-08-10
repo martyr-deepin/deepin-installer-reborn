@@ -60,7 +60,7 @@ class PartitionFrame : public QFrame {
   void onAdvancedFrameButtonToggled();
   void onNextButtonClicked();
 
-  void onDeviceRefreshed();
+  void showMainFrame();
 };
 
 }  // namespace ui

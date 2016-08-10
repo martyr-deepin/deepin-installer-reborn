@@ -11,9 +11,9 @@ namespace ui {
 ListLabel::ListLabel(const QString& text, QWidget* parent)
     : QLabel(text, parent) {
   this->setObjectName(QStringLiteral("list_label"));
-  this->setStyleSheet(base::ReadTextFileContent(":/styles/list_label.css"));
   this->setAlignment(Qt::AlignLeft);
   this->setWordWrap(true);
+  this->setStyleSheet(base::ReadTextFileContent(":/styles/list_label.css"));
 }
 
 }  // namespace ui

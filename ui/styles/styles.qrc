@@ -14,6 +14,7 @@
     <file>partition_frame_main_frame.css</file>
     <file>simple_partition_button.css</file>
     <file>simple_partition_install_tip.css</file>
+    <file>subhead_label.css</file>
     <file>title_label.css</file>
   </qresource>
 </RCC>

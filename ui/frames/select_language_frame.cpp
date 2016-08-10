@@ -19,9 +19,9 @@
 #include "ui/frames/consts.h"
 #include "ui/frames/delegates/language_list_delegate.h"
 #include "ui/frames/models/language_list_model.h"
-#include "ui/widgets/comment_label.h"
 #include "ui/widgets/frosted_frame.h"
 #include "ui/widgets/nav_button.h"
+#include "ui/widgets/subhead_label.h"
 
 namespace ui {
 
@@ -53,11 +53,10 @@ void SelectLanguageFrame::initUI() {
   logo_layout->setAlignment(Qt::AlignCenter);
   logo_layout->addWidget(logo_label);
 
-  CommentLabel* comment_label =
-      new CommentLabel("Please select the language you want to use\n"
-                       "请选择您的语言");
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
+  SubheadLabel* subhead_label = new SubheadLabel(
+      "Please select the language you want to use\n请选择您的语言");
+  QHBoxLayout* subhead_layout = new QHBoxLayout();
+  subhead_layout->addWidget(subhead_label);
 
   list_view_ = new QListView();
   list_view_->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -91,7 +90,7 @@ void SelectLanguageFrame::initUI() {
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addLayout(logo_layout);
-  layout->addLayout(comment_layout);
+  layout->addLayout(subhead_layout);
   layout->addStretch();
   layout->addLayout(list_layout);
   layout->addStretch();

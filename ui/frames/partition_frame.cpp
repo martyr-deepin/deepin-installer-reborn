@@ -49,7 +49,12 @@ void PartitionFrame::initConnections() {
           this, &PartitionFrame::onNextButtonClicked);
 
   connect(partition_delegate_, &PartitionDelegate::deviceRefreshed,
-          this, &PartitionFrame::onDeviceRefreshed);
+          this, &PartitionFrame::showMainFrame);
+
+  connect(prepare_install_frame_, &PrepareInstallFrame::aborted,
+          this, &PartitionFrame::showMainFrame);
+  connect(prepare_install_frame_, &PrepareInstallFrame::finished,
+          this, &PartitionFrame::finished);
 }
 
 void PartitionFrame::initUI() {
@@ -141,7 +146,7 @@ void PartitionFrame::onNextButtonClicked() {
   }
 }
 
-void PartitionFrame::onDeviceRefreshed() {
+void PartitionFrame::showMainFrame() {
   main_layout_->setCurrentWidget(main_frame_);
 }
 
