@@ -13,6 +13,7 @@
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
+#include "ui/widgets/table_combo_box.h"
 #include "ui/widgets/table_item_label.h"
 #include "ui/widgets/title_label.h"
 
@@ -59,12 +60,32 @@ void NewPartitionFrame::initUI() {
   TableItemLabel* mount_point_label = new TableItemLabel(tr("Mount point"));
   TableItemLabel* size_label = new TableItemLabel(tr("Size"));
 
+  type_box_ = new TableComboBox();
+  type_box_->addItems({tr("Primary"), tr("Logical")});
+  location_box_ = new TableComboBox();
+  location_box_->addItems({tr("Start"), tr("End")});
+  fs_box_ = new TableComboBox();
+  // TODO(xushaohua): Convert fs_type to string.
+  fs_box_->addItems({"Ext4", "Ext3", "LinuxSwap"});
+  mount_point_box_ = new TableComboBox();
+  mount_point_box_->addItems({"/", "/boot", "/home"});
+  size_box_ = new TableComboBox();
+
   QGridLayout* grid_layout = new QGridLayout();
   grid_layout->addWidget(type_label, 0, 0);
   grid_layout->addWidget(location_label, 1, 0);
   grid_layout->addWidget(fs_label, 2, 0);
   grid_layout->addWidget(mount_point_label, 3, 0);
   grid_layout->addWidget(size_label, 4, 0);
+  grid_layout->addWidget(type_box_, 0, 1);
+  grid_layout->addWidget(location_box_, 1, 1);
+  grid_layout->addWidget(fs_box_, 2, 1);
+  grid_layout->addWidget(mount_point_box_, 3, 1);
+  grid_layout->addWidget(size_box_, 4, 1);
+  QHBoxLayout* grid_wrapper_layout = new QHBoxLayout();;
+  grid_wrapper_layout->addStretch();
+  grid_wrapper_layout->addLayout(grid_layout);
+  grid_wrapper_layout->addStretch();
 
   cancel_button_ = new NavButton(tr("Cancel"));
   QHBoxLayout* cancel_layout = new QHBoxLayout();
@@ -81,7 +102,7 @@ void NewPartitionFrame::initUI() {
   layout->addLayout(comment_layout);
   layout->addLayout(fs_img_layout);
   layout->addStretch();
-  layout->addLayout(grid_layout);
+  layout->addLayout(grid_wrapper_layout);
   layout->addStretch();
   layout->addLayout(cancel_layout);
   layout->addLayout(create_layout);

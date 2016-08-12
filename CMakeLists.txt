@@ -126,10 +126,13 @@ set(UI_FILES
     ui/widgets/partition_usage_bar.cpp ui/widgets/partition_usage_bar.h
     ui/widgets/qr_widget.cpp ui/widgets/qr_widget.h
     ui/widgets/simple_partition_button.cpp ui/widgets/simple_partition_button.h
+    ui/widgets/subhead_label.cpp ui/widgets/subhead_label.h
+    ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
+    ui/widgets/table_item_label.cpp ui/widgets/table_item_label.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
     ui/utils/partition_util.cpp ui/utils/partition_util.h
     ui/utils/xutil.cpp ui/utils/xutil.h
-    ui/widgets/subhead_label.cpp ui/widgets/subhead_label.h ui/widgets/table_item_label.cpp ui/widgets/table_item_label.h)
+    )
 
 set(UNITTEST_FILES
     base/command_test.cpp

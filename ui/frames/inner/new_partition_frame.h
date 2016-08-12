@@ -6,10 +6,12 @@
 #define DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_NEW_PARTITION_FRAME_H
 
 #include <QFrame>
+#include <ui/widgets/table_combo_box.h>
 
 namespace ui {
 
 class NavButton;
+class TableComboBox;
 
 class NewPartitionFrame : public QFrame {
   Q_OBJECT
@@ -29,6 +31,12 @@ class NewPartitionFrame : public QFrame {
  private:
   void initConnections();
   void initUI();
+
+  TableComboBox* type_box_ = nullptr;
+  TableComboBox* location_box_ = nullptr;
+  TableComboBox* fs_box_ = nullptr;
+  TableComboBox* mount_point_box_ = nullptr;
+  TableComboBox* size_box_ = nullptr;
 
   NavButton* cancel_button_ = nullptr;
   NavButton* create_button_ = nullptr;

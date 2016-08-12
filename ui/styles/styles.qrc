@@ -15,6 +15,7 @@
     <file>simple_partition_button.css</file>
     <file>simple_partition_install_tip.css</file>
     <file>subhead_label.css</file>
+    <file>table_combo_box.css</file>
     <file>table_item_label.css</file>
     <file>title_label.css</file>
   </qresource>
