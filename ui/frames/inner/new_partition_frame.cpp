@@ -26,7 +26,7 @@ NewPartitionFrame::NewPartitionFrame(QWidget* parent) : QFrame(parent) {
   this->initConnections();
 }
 
-void NewPartitionFrame::reset() {
+void NewPartitionFrame::setPartition() {
 
 }
 
@@ -106,7 +106,6 @@ void NewPartitionFrame::initUI() {
   layout->addStretch();
   layout->addLayout(cancel_layout);
   layout->addLayout(create_layout);
-  layout->addStretch();
 
   this->setLayout(layout);
 }

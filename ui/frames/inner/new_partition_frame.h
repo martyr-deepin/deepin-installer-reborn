@@ -19,7 +19,7 @@ class NewPartitionFrame : public QFrame {
  public:
   explicit NewPartitionFrame(QWidget* parent = nullptr);
 
-  void reset();
+  void setPartition();
 
  signals:
   // Emitted when aborting creating new partition.
