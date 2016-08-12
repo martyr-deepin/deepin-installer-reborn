@@ -129,7 +129,7 @@ set(UI_FILES
     ui/widgets/title_label.cpp ui/widgets/title_label.h
     ui/utils/partition_util.cpp ui/utils/partition_util.h
     ui/utils/xutil.cpp ui/utils/xutil.h
-    ui/widgets/subhead_label.cpp ui/widgets/subhead_label.h)
+    ui/widgets/subhead_label.cpp ui/widgets/subhead_label.h ui/widgets/table_item_label.cpp ui/widgets/table_item_label.h)
 
 set(UNITTEST_FILES
     base/command_test.cpp

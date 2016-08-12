@@ -9,15 +9,29 @@
 
 namespace ui {
 
+class NavButton;
+
 class NewPartitionFrame : public QFrame {
   Q_OBJECT
 
  public:
   explicit NewPartitionFrame(QWidget* parent = nullptr);
 
+  void reset();
+
+ signals:
+  // Emitted when aborting creating new partition.
+  void canceled();
+
+  // Emitted when a new partition is created.
+  void created();
+
  private:
   void initConnections();
   void initUI();
+
+  NavButton* cancel_button_ = nullptr;
+  NavButton* create_button_ = nullptr;
 };
 
 }  // namespace ui
