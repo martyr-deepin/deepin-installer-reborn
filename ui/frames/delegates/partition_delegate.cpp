@@ -24,6 +24,14 @@ PartitionDelegate::PartitionDelegate(QObject* parent) :
   emit partition_manager_->refreshDevices();
 }
 
+PartitionDelegate::~PartitionDelegate() {
+  // Quit background thread explicitly.
+  partition_thread_->quit();
+  partition_thread_->wait();
+  delete partition_thread_;
+  partition_thread_ = nullptr;
+}
+
 void PartitionDelegate::autoConf() {
   emit partition_manager_->autoPart();
 }

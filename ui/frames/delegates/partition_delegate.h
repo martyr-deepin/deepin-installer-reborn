@@ -24,6 +24,7 @@ class PartitionDelegate : public QObject {
 
  public:
   explicit PartitionDelegate(QObject* parent = nullptr);
+  ~PartitionDelegate();
 
   void autoConf();
 
