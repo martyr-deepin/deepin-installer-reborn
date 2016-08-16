@@ -9,15 +9,22 @@
 
 namespace ui {
 
+class NavButton;
+
 class SelectBootloaderFrame : public QFrame {
   Q_OBJECT
 
  public:
   explicit SelectBootloaderFrame(QWidget* parent = nullptr);
 
+ signals:
+  void finished();
+
  private:
   void initConnections();
   void initUI();
+
+  NavButton* back_button_ = nullptr;
 };
 
 }  // namespace ui

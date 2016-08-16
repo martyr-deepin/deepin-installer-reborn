@@ -15,7 +15,7 @@ if (CMAKE_BUILD_TYPE MATCHES Release)
   # -Wl, -O1 = Enable linker optimizations
   #-Wl, --gc-sections = Remove unused code resulting from -fdsta-sections and -ffunction-sections
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O2  -Wl,-O1 -Wl,--gc-sections")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2 -Wl,-O1 -Wl,--gc-sections")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2 -Wl,-O1 -Wl,--gc-sections -fsanitize=address")
 else()
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra")
   # -fno-rtti       = Disable real-time type information
@@ -76,15 +76,17 @@ set(SERVICE_FILES
     )
 
 set(SYSINFO_FILES
+    sysinfo/dev_uuid.cpp sysinfo/dev_uuid.h
     sysinfo/machine.cpp sysinfo/machine.h
     sysinfo/proc_mounts.cpp sysinfo/proc_mounts.h
     sysinfo/proc_partitions.cpp sysinfo/proc_partitions.h
+    sysinfo/proc_swaps.cpp sysinfo/proc_swaps.h
     sysinfo/timezone.cpp sysinfo/timezone.h
     sysinfo/users.cpp sysinfo/users.h
     sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h
     sysinfo/validate_username.cpp sysinfo/validate_username.h
     sysinfo/virtual_machine.cpp sysinfo/virtual_machine.h
-    sysinfo/proc_swaps.cpp sysinfo/proc_swaps.h sysinfo/dev_uuid.cpp sysinfo/dev_uuid.h)
+    )
 
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
