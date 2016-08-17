@@ -114,6 +114,7 @@ set(UI_FILES
     ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
     ui/frames/system_info_frame.cpp ui/frames/system_info_frame.h
     ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h
+    ui/widgets/advanced_partition_item.cpp ui/widgets/advanced_partition_item.h
     ui/widgets/avatar_button.cpp ui/widgets/avatar_button.h
     ui/widgets/comment_label.cpp ui/widgets/comment_label.h
     ui/widgets/expanded_nav_button.cpp ui/widgets/expanded_nav_button.h

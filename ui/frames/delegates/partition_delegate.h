@@ -18,6 +18,29 @@ namespace ui {
 // 100M, filter partition size.
 const qint64 kMinimumPartitionSizeToDisplay = 100 * 1024 * 1024;
 
+enum class PartitionOperations {
+  Null,
+  Create,
+  Delete,
+  Format,
+};
+
+struct PartitionWrap {
+  service::Partition partition;
+  PartitionOperations ops = PartitionOperations::Null;
+  QString mount_point;
+  service::FsType new_fs_type = service::FsType::Empty;
+};
+
+typedef QList<PartitionWrap> PartitionWrapList;
+
+struct DeviceWrap {
+  service::Device device;
+  PartitionWrapList partitions;
+};
+
+typedef QList<DeviceWrap> DeviceWrapList;
+
 // PartitionManager proxy layer.
 class PartitionDelegate : public QObject {
   Q_OBJECT
@@ -28,10 +51,17 @@ class PartitionDelegate : public QObject {
 
   void autoConf();
 
-  service::DeviceList devices;
+  DeviceWrapList devices;
 
  signals:
+  // Emitted after scanning local disk devices.
   void deviceRefreshed();
+
+  // Emitted when a specific partition is created/edited/deleted.
+  void partitionEdited();
+
+  // Emitted when system root partition is updated.
+  void rootPartitionUpdated();
 
  private:
   void initConnections();

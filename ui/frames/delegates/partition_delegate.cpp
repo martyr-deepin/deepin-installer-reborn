@@ -13,6 +13,7 @@ namespace ui {
 
 PartitionDelegate::PartitionDelegate(QObject* parent) :
     QObject(parent),
+    devices(),
     partition_manager_(new service::PartitionManager()),
     partition_thread_(new QThread(this)) {
   this->setObjectName(QStringLiteral("partition_delegate"));
@@ -48,7 +49,21 @@ void PartitionDelegate::initConnections() {
 }
 
 void PartitionDelegate::onDevicesRefreshed(const service::DeviceList& devices) {
-  this->devices = devices;
+  this->devices.clear();
+  for (const service::Device& device : devices) {
+    DeviceWrap device_wrap;
+    device_wrap.device = device;
+    PartitionWrapList partitions;
+    for (const service::Partition& partition : device.partitions) {
+      PartitionWrap partition_wrap;
+      partition_wrap.partition = partition;
+      partitions.append(partition_wrap);
+    }
+    device_wrap.partitions = partitions;
+
+    this->devices.append(device_wrap);
+  }
+
   emit this->deviceRefreshed();
 }
 

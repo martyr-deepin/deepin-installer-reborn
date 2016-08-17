@@ -6,6 +6,7 @@
 #define DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_ADVANCED_PARTITION_FRAME_H
 
 #include <QFrame>
+class QVBoxLayout;
 
 namespace ui {
 
@@ -23,6 +24,11 @@ class AdvancedPartitionFrame : public QFrame {
   void initUI();
 
   PartitionDelegate* partition_delegate_ = nullptr;
+
+  QVBoxLayout* partition_layout_ = nullptr;
+
+ private slots:
+  void onDeviceRefreshed();
 };
 
 }  // namespace ui

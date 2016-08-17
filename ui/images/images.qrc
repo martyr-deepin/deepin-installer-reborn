@@ -8,7 +8,6 @@
     <file>mode.png</file>
     <file>succeed.png</file>
     <file>decrease.png</file>
-    <file>delete.png</file>
     <file>progress_part.png</file>
     <file>hostname.png</file>
     <file>install_icon.png</file>
@@ -38,6 +37,7 @@
     <file>drive-install-here-32px.svg</file>
     <file>drive-harddisk-deepin-128px.png</file>
     <file>arrow_left_normal.png</file>
+    <file>edit_partition.png</file>
     <file>computer.png</file>
     <file>previous_hover.png</file>
     <file>delete_part_active.png</file>
@@ -71,6 +71,7 @@
     <file>check-02.png</file>
     <file>indicator-active.png</file>
     <file>timezone_press.png</file>
+    <file>delete_partition.png</file>
     <file>drive-harddisk-windows-32px.svg</file>
     <file>delete_part.png</file>
     <file>increase_hover.png</file>
@@ -82,7 +83,6 @@
     <file>complete.png</file>
     <file>warning.png</file>
     <file>win.png</file>
-    <file>edit.png</file>
     <file>windows.png</file>
     <file>drive-harddisk-128px.svg</file>
     <file>reboot_normal.png</file>
@@ -112,7 +112,6 @@
     <file>username.png</file>
     <file>user.png</file>
     <file>lock.png</file>
-    <file>detect_layout.png</file>
     <file>add_part_active.png</file>
     <file>QR_normal.png</file>
     <file>checkbox_unchecked.png</file>

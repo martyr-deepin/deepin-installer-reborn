@@ -100,6 +100,10 @@ void PartitionFrame::initUI() {
   partition_stacked_layout_ = new QStackedLayout();
   partition_stacked_layout_->addWidget(simple_partition_frame_);
   partition_stacked_layout_->addWidget(advanced_partition_frame_);
+  QHBoxLayout* partition_stacked_wrapper_layout = new QHBoxLayout();
+  partition_stacked_wrapper_layout->addStretch();
+  partition_stacked_wrapper_layout->addLayout(partition_stacked_layout_);
+  partition_stacked_wrapper_layout->addStretch();
 
   next_button_ = new NavButton(tr("Start installation"));
   QHBoxLayout* next_layout = new QHBoxLayout();
@@ -111,7 +115,7 @@ void PartitionFrame::initUI() {
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
   layout->addLayout(button_layout);
-  layout->addLayout(partition_stacked_layout_);
+  layout->addLayout(partition_stacked_wrapper_layout);
   layout->addStretch();
   layout->addLayout(next_layout);
 
