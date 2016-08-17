@@ -55,6 +55,19 @@ void AdvancedPartitionFrame::onDeviceRefreshed() {
     QLabel* model_label = new QLabel(device.device.model);
     partition_layout_->addWidget(model_label);
     for (const PartitionWrap& partition : device.partitions) {
+      qDebug() << "partition:" << partition.partition.path;
+      if ((partition.partition.type != service::PartitionType::Normal) &&
+          (partition.partition.type != service::PartitionType::Logical) &&
+          (partition.partition.type != service::PartitionType::Freespace)) {
+        continue;
+      }
+
+      // Filters freespace partition based on size.
+      if (partition.partition.type == service::PartitionType::Freespace &&
+          partition.partition.length < kMinimumPartitionSizeToDisplay) {
+        continue;
+      }
+
       AdvancedPartitionItem* item = new AdvancedPartitionItem(partition);
       partition_layout_->addWidget(item);
     }

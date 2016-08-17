@@ -6,8 +6,18 @@
 
 #include <math.h>
 #include <QDebug>
+#include <QFileInfo>
 
 namespace ui {
+
+QString GetPartitionName(const QString& path) {
+  return QFileInfo(path).fileName();
+}
+
+QString GetPartitionUsage(qint64 freespace, qint64 total) {
+  const qint64 used = total - freespace;
+  return QString("%1/%2G").arg(ToGigByte(used)).arg(ToGigByte(total));
+}
 
 int ToGigByte(qint64 size) {
   const double m_size = static_cast<double>(size) / 1024.0;

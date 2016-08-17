@@ -9,6 +9,12 @@
 
 namespace ui {
 
+// Get partition name based on |path|.
+QString GetPartitionName(const QString& path);
+
+// Get human readable partition usage.
+QString GetPartitionUsage(qint64 freespace, qint64 total);
+
 // Convert |size| in byte to gigbyte.
 int ToGigByte(qint64 size);
 

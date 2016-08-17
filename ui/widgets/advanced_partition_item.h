@@ -6,6 +6,7 @@
 #define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H
 
 #include <QFrame>
+class QLabel;
 
 #include "ui/frames/delegates/partition_delegate.h"
 
@@ -29,6 +30,9 @@ class AdvancedPartitionItem : public QFrame {
   // Update edit-delete-button state.
   void setEditDeleteButtonState(EditDeleteButtonState state);
 
+  void setMountPoint(const QString& mount_point);
+  void setFilesystemType(const QString& fs);
+
  signals:
   // Emitted when delete partition button is clicked.
   void deletePartitionTriggered();
@@ -44,6 +48,13 @@ class AdvancedPartitionItem : public QFrame {
 
   FlatButton* edit_delete_button_ = nullptr;
   EditDeleteButtonState edit_delete_button_state_;
+
+  QLabel* partition_label_ = nullptr;
+  QLabel* partition_path_label_ = nullptr;
+  QLabel* usage_label_ = nullptr;
+  QLabel* mount_point_label_ = nullptr;
+  QLabel* tip_label_ = nullptr;
+  QLabel* fs_type_label_ = nullptr;
 
  private slots:
   void onEditDeleteButtonClicked();

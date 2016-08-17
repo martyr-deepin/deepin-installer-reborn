@@ -38,12 +38,6 @@ QString GetImageByOsType(service::OsType os_type) {
   return QString();
 }
 
-// Format partition usage.
-QString GetPartitionUsageText(qint64 freespace, qint64 total) {
-  const qint64 used = total - freespace;
-  return QString("%1/%2G").arg(ToGigByte(used)).arg(ToGigByte(total));
-}
-
 }  // namespace
 
 SimplePartitionButton::SimplePartitionButton(
@@ -83,7 +77,7 @@ void SimplePartitionButton::initUI() {
 
   QLabel* usage_label = new QLabel();
   usage_label->setText(
-      GetPartitionUsageText(partition_.freespace, partition_.length));
+      GetPartitionUsage(partition_.freespace, partition_.length));
   usage_label->setObjectName(QStringLiteral("usage_label"));
   usage_label->setAlignment(Qt::AlignCenter);
 
