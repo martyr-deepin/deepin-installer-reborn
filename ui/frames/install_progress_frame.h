@@ -6,6 +6,7 @@
 #define DEEPIN_INSTALLER_REBORN_UI_FRAMES_INSTALL_PROGRESS_FRAME_H
 
 #include <QFrame>
+class QLabel;
 class QThread;
 
 namespace service {
@@ -45,6 +46,8 @@ class InstallProgressFrame : public QFrame {
 
   service::HooksManager* hooks_manager_ = nullptr;
   QThread* hooks_manager_thread_ = nullptr;
+
+  QLabel* progress_label_ = nullptr;
 
  private slots:
   void onErrorOccurred();

@@ -6,6 +6,7 @@
 
 #include <QDebug>
 #include <QHBoxLayout>
+#include <QLabel>
 #include <QThread>
 #include <QVBoxLayout>
 
@@ -62,11 +63,19 @@ void InstallProgressFrame::initUI() {
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->addWidget(comment_label);
 
+  progress_label_ = new QLabel();
+  progress_label_->setAlignment(Qt::AlignCenter);
+  progress_label_->setStyleSheet("font-size: 64px; color:#eaeaea;");
+  QHBoxLayout* progress_layout = new QHBoxLayout();
+  progress_layout->addWidget(progress_label_);
+
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
+  layout->addStretch();
+  layout->addLayout(progress_layout);
   layout->addStretch();
 
   this->setLayout(layout);
@@ -78,12 +87,16 @@ void InstallProgressFrame::onErrorOccurred() {
 }
 
 void InstallProgressFrame::onInstallProgressUpdated(int progress) {
-  Q_UNUSED(progress);
+  const QString text = QString("%1%").arg(progress);
+  progress_label_->setText(text);
 }
 
 void InstallProgressFrame::onPartitionDone(bool ok) {
   if (ok) {
+    // Partition operations take 5% progress.
     onInstallProgressUpdated(5);
+
+    // Run hooks/ in background thread.
     emit hooks_manager_->runHooks();
   } else {
     this->onErrorOccurred();
