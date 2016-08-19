@@ -5,6 +5,7 @@ set -x
 
 . /etc/deepin-installer.conf
 L=${DI_LOCALE%.*}
+PROGRESS_FILE=/dev/shm/unsquashfs_base_progress
 
 extract_overlay_filesystem() {
     case ${L} in
@@ -19,10 +20,11 @@ extract_overlay_filesystem() {
             ;;
     esac
 
+    # FIXME(xushaohua): Do not send overlay progress
     if [ -f ${MODULE} ];then
         for file in $(cat ${MODULE});do
-            script -c "unsquashfs -f -d /target ${CDROM}/overlay/${file}" /dev/null | \
-            unsquashfs-progress-reborn /tmp/deepin-installer/unsquashfs_lang_progress
+            script -c "unsquashfs -f -d /target ${CDROM}/overlay/${file}" \
+              /dev/null | unsquashfs-progress-reborn $PROGRESS_FILE || exit 2
         done
     fi
 }
@@ -45,8 +47,8 @@ if [ $MEM -le 3000000 ] ;then
     ./extract_base_filesystem --lang ${L} --live ${LIVE} || exit 1
 else
     echo "[Info] Detect free memory more than 3G"
-    script -c "unsquashfs -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs" /dev/null | \
-    unsquashfs-progress-reborn /tmp/deepin-installer/unsquashfs_base_progress || exit 2
+    script -c "unsquashfs -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs"\
+      /dev/null | unsquashfs-progress-reborn $PROGRESS_FILE || exit 2
 fi
 
 # Finally extract_overlay_filesystem 
