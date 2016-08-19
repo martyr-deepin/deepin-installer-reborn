@@ -11,16 +11,16 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-if (CMAKE_BUILD_TYPE MATCHES Release)
-  # -Wl, -O1 = Enable linker optimizations
-  #-Wl, --gc-sections = Remove unused code resulting from -fdsta-sections and -ffunction-sections
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O2  -Wl,-O1 -Wl,--gc-sections")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2 -Wl,-O1 -Wl,--gc-sections -fsanitize=address")
-else()
+if (CMAKE_BUILD_TYPE MATCHES Debug)
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wextra")
   # -fno-rtti       = Disable real-time type information
   # -fno-exceptions = Disable exceptions
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra -fno-rtti -fno-exceptions")
+else()
+  # -Wl, -O1 = Enable linker optimizations
+  #-Wl, --gc-sections = Remove unused code resulting from -fdsta-sections and -ffunction-sections
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O2  -Wl,-O1 -Wl,--gc-sections")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2 -Wl,-O1 -Wl,--gc-sections -fsanitize=address -Wno-unused-result")
 endif()
 
 set(CMAKE_AUTOMOC ON)
@@ -151,11 +151,14 @@ set(UNITTEST_FILES
     sysinfo/validate_hostname_test.cpp
     )
 
-set(LINK_LIBS
+set(Qt_LIBS
     Qt5::Widgets
     Qt5::X11Extras
     Qt5::Gui
+    )
 
+set(LINK_LIBS
+    ${Qt_LIBS}
     ${Parted_LIBRARIES}
     ${QREncode_LIBRARIES}
     ${X11_LIBRARIES}
@@ -193,7 +196,6 @@ add_executable(deepin-installer-reborn-tests
                resources/resources.qrc
                )
 target_link_libraries(deepin-installer-reborn-tests
-
                       ${LINK_LIBS}
                       gtest
                       )
@@ -208,10 +210,16 @@ add_executable(deepin-installer-check-settings
 
                resources/resources.qrc
                )
-target_link_libraries(deepin-installer-check-settings
+target_link_libraries(deepin-installer-check-settings ${LINK_LIBS})
 
-                      ${LINK_LIBS}
-                      )
+
+# unsquasfs_progress
+add_executable(unsquashfs_progress
+               "misc/unsquashfs_progress.cpp"
+               
+               ${BASE_FILES}
+               )
+target_link_libraries(unsquashfs_progress ${Qt_LIBS})
 
 ## Installation
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
