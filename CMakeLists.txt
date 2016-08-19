@@ -214,15 +214,17 @@ target_link_libraries(deepin-installer-check-settings ${LINK_LIBS})
 
 
 # unsquasfs_progress
-add_executable(unsquashfs_progress
+add_executable(unsquashfs-progress-reborn
                "misc/unsquashfs_progress.cpp"
                
                ${BASE_FILES}
                )
-target_link_libraries(unsquashfs_progress ${Qt_LIBS})
+target_link_libraries(unsquashfs-progress-reborn ${Qt_LIBS})
 
 ## Installation
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/unsquashfs-progress-reborn"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 install(FILES resources/deepin-installer-reborn.desktop
         DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications")
