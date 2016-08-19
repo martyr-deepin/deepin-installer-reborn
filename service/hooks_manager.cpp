@@ -249,14 +249,16 @@ bool HooksManager::runHooksPack(HooksManager::HookType hook_type,
     }
   }
 
-  foreach (const QString& hook, hooks) {
+  for (int i = 0; i < hooks.length(); ++i) {
+    const QString& hook = hooks.at(i);
     if (!RunHook(hook)) {
       qCritical() << QString(
           "[HooksManager]::runHooksPack() job failed: %1").arg(hook);
       emit this->errorOccurred();
       return false;
     }
-    // TODO(xushaohua): emit processUpdate() signal.
+    const int progress = progress_begin + progress_end * i / hooks.length();
+    emit this->processUpdate(progress);
   }
 
   if (hook_type == HookType::InChroot) {
