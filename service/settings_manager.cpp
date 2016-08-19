@@ -134,6 +134,10 @@ QString GetOemHooksDir() {
   return QDir(kOemDir).absoluteFilePath(QStringLiteral("hooks"));
 }
 
+QString GetOverlayFilesystemDir() {
+  return QDir(kOemDir).absoluteFilePath(QStringLiteral("overlay"));
+}
+
 QString GetVendorLogo() {
   if (GetSettingsBool(kSystemInfoUseVendorLogoName)) {
     return QDir(kOemDir).absoluteFilePath("logo.png");

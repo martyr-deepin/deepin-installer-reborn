@@ -7,8 +7,12 @@
 
 #include <QObject>
 #include <QStringList>
+class QTimer;
 
 namespace service {
+
+// Expose this value explicitly.
+const int kBeforeChrootStartVal = 5;
 
 // HookManager is used to do:
 //   * run hook jobs one by one;
@@ -40,6 +44,8 @@ class HooksManager : public QObject {
   void runHooks();
 
  private:
+  void initConnections();
+
   enum class HookType {
     BeforeChroot,
     InChroot,
@@ -57,8 +63,21 @@ class HooksManager : public QObject {
   // A file descriptor object used to escape chroot environment.
   int chroot_fd_;
 
+  // Monitors unsquashfs progress file changing.
+  void monitorProgressFiles();
+  // This timer is used to read progress file each second.
+  QTimer* unsquashfs_timer_ = nullptr;
+  enum class UnsquashfsStage {
+    UnInitialized,
+    ReadBase,
+    ReadLang,
+  };
+  UnsquashfsStage unsquashfs_stage_;
+  bool overlay_filesystem_exists_;
+
  private slots:
   void handleRunHooks();
+  void handleReadUnsquashfsTimeout();
 };
 
 }  // namespace service

@@ -13,8 +13,10 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
+#include <QTimer>
 
 #include "base/command.h"
+#include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "sysinfo/machine.h"
 
@@ -24,8 +26,20 @@ namespace {
 
 const char kTargetDir[] = "/target";
 
+// Target folder hooks/ will be moved to.
 const char kBuiltinBindDir[] = "/dev/shm/di-builtin";
 const char kOemBindDir[] = "/dev/shm/di-oem";
+
+const int kBeforeChrootEndVal = 60;
+const int kInChrootStartVal = 60;
+const int kInChrootEndVal = 80;
+const int kAfterChrootStartVal = 80;
+const int kAfterChrootEndVal = 100;
+
+const char kUnsquashfsBaseProgressFile[] = "/dev/shm/unsquashfs_base_progress";
+const char kUnsquashfsLangProgressFile[] = "/dev/shm/unsquashfs_lang_progress";
+// Interval to read unsquashfs progress file, 1000ms.
+const int kReadUnsquashfsInterval = 1000;
 
 bool MatchArchitecture(const QString& name) {
   sysinfo::MachineArch arch = sysinfo::GetMachineArch();
@@ -62,6 +76,21 @@ bool MatchArchitecture(const QString& name) {
   return true;
 }
 
+// Check whether ISO/overlay/ contains *.module files.
+bool IsOverlayModuleExists() {
+  QDir overlay_dir(GetOverlayFilesystemDir());
+  const QStringList modules = overlay_dir.entryList({"*.module"});
+  return !modules.isEmpty();
+}
+
+int ReadProgressValue(const QString& file) {
+  const QString val = base::ReadTextFileContent(kUnsquashfsBaseProgressFile);
+  if (val.isEmpty()) {
+    return -1;
+  }
+  return val.toInt();
+}
+
 // Runs a specific hook at |hook|.
 bool RunHook(const QString& hook) {
   qDebug() << "RunHook():" << hook;
@@ -72,11 +101,22 @@ bool RunHook(const QString& hook) {
 
 HooksManager::HooksManager(QObject* parent)
     : QObject(parent),
-      chroot_fd_(0) {
+      chroot_fd_(0),
+      unsquashfs_timer_(new QTimer(this)),
+      unsquashfs_stage_(UnsquashfsStage::UnInitialized),
+      overlay_filesystem_exists_(false) {
   this->setObjectName(QStringLiteral("hooks_manager"));
 
+
+  unsquashfs_timer_->setInterval(kReadUnsquashfsInterval);
+}
+
+void HooksManager::initConnections() {
   connect(this, &HooksManager::runHooks,
           this, &HooksManager::handleRunHooks);
+
+  connect(unsquashfs_timer_, &QTimer::timeout,
+          this, &HooksManager::handleReadUnsquashfsTimeout);
 }
 
 bool HooksManager::bindHooks(HooksManager::HookType hook_type) {
@@ -270,6 +310,14 @@ bool HooksManager::leaveChroot() {
   return true;
 }
 
+void HooksManager::monitorProgressFiles() {
+  // Remove old progress files first.
+  QFile::remove(kUnsquashfsLangProgressFile);
+  QFile::remove(kUnsquashfsBaseProgressFile);
+  overlay_filesystem_exists_ = IsOverlayModuleExists();
+  unsquashfs_timer_->start();
+}
+
 void HooksManager::handleRunHooks() {
   if (!bindHooks(HookType::BeforeChroot)) {
     qCritical() << "handleRunHooks() failed to call bindHooks()";
@@ -277,8 +325,12 @@ void HooksManager::handleRunHooks() {
     return;
   }
 
+  // Setup filesystem watch of unsquashfs progress file.
+  this->monitorProgressFiles();
+
   // Run hooks one by one, if some job fails, returns immediately.
-  if (!runHooksPack(HookType::BeforeChroot, 5, 60)) {
+  if (!runHooksPack(HookType::BeforeChroot, kBeforeChrootStartVal,
+                    kBeforeChrootEndVal)) {
     qCritical() << "handleRunHooks() error occurs in Before_Chroot";
     unbindHooks();
     return;
@@ -289,19 +341,61 @@ void HooksManager::handleRunHooks() {
     emit this->errorOccurred();
     return;
   }
-  if (!runHooksPack(HookType::InChroot, 60, 80)) {
+  if (!runHooksPack(HookType::InChroot, kInChrootStartVal, kInChrootEndVal)) {
     qCritical() << "handleRunHooks() error occurs in In_Chroot";
     unbindHooks();
     return;
   }
 
-  if (!runHooksPack(HookType::AfterChroot, 80, 100)) {
+  if (!runHooksPack(HookType::AfterChroot, kAfterChrootStartVal,
+                    kAfterChrootEndVal)) {
     qCritical() << "handleRunHooks() error occurs in After_Chroot";
     unbindHooks();
     return;
   }
   unbindHooks();
   emit this->finished();
+}
+
+void HooksManager::handleReadUnsquashfsTimeout() {
+  switch (unsquashfs_stage_) {
+    case UnsquashfsStage::UnInitialized: {
+      const int val = ReadProgressValue(kUnsquashfsBaseProgressFile);
+      if (val != -1) {
+        unsquashfs_stage_ = UnsquashfsStage::ReadBase;
+      }
+    }
+    case UnsquashfsStage::ReadBase: {
+      const int val = ReadProgressValue(kUnsquashfsBaseProgressFile);
+      int progress;
+      if (overlay_filesystem_exists_) {
+        progress = kBeforeChrootStartVal +
+                   (kBeforeChrootEndVal - 10) * val / 100;
+      } else {
+        progress = kBeforeChrootStartVal + kBeforeChrootEndVal * val / 100;
+      }
+      emit this->processUpdate(progress);
+
+      if (val >= 99) {
+        if (overlay_filesystem_exists_) {
+          unsquashfs_stage_ = UnsquashfsStage::ReadLang;
+        } else {
+          // No need to read overlay progress, so stop timer right now.
+          unsquashfs_timer_->stop();
+        }
+      }
+    }
+    case UnsquashfsStage::ReadLang: {
+      const int val = ReadProgressValue(kUnsquashfsBaseProgressFile);
+      const int progress = kBeforeChrootStartVal + kBeforeChrootEndVal -
+                           10 + 10 * val / 100;
+      emit this->processUpdate(progress);
+
+      if (progress >= 99) {
+        unsquashfs_timer_->stop();
+      }
+    }
+  }
 }
 
 }  // namespace service

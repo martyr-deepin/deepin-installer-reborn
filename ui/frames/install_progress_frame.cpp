@@ -94,7 +94,7 @@ void InstallProgressFrame::onInstallProgressUpdated(int progress) {
 void InstallProgressFrame::onPartitionDone(bool ok) {
   if (ok) {
     // Partition operations take 5% progress.
-    onInstallProgressUpdated(5);
+    onInstallProgressUpdated(service::kBeforeChrootStartVal);
 
     // Run hooks/ in background thread.
     emit hooks_manager_->runHooks();
