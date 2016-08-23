@@ -61,6 +61,10 @@ set(BASE_FILES
     base/string_util.cpp base/string_util.h
     )
 
+set(PARTMAN_FILES
+    partman/structs.h
+    )
+
 set(SERVICE_FILES
     service/hooks_manager.cpp service/hooks_manager.h
     service/log_manager.cpp service/log_manager.h
