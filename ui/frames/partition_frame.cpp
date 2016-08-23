@@ -27,9 +27,9 @@
 
 namespace ui {
 
-PartitionFrame::PartitionFrame(QWidget* parent) :
-    QFrame(parent),
-    partition_delegate_(new PartitionDelegate(this)) {
+PartitionFrame::PartitionFrame(QWidget* parent)
+    : QFrame(parent),
+      partition_delegate_(new PartitionDelegate(this)) {
   this->setObjectName(QStringLiteral("partition_frame"));
 
   this->initUI();

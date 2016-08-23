@@ -22,11 +22,11 @@
 namespace ui {
 
 SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
-  : QFrame(parent),
-    is_username_validated_(false),
-    is_hostname_validated_(false),
-    is_password_validated_(false),
-    is_password2_validated_(false) {
+    : QFrame(parent),
+      is_username_validated_(false),
+      is_hostname_validated_(false),
+      is_password_validated_(false),
+      is_password2_validated_(false) {
   this->setObjectName(QStringLiteral("system_info_form_frame"));
 
   this->initUI();
@@ -64,8 +64,6 @@ void SystemInfoFormFrame::initUI() {
                                     QStringLiteral(":/images/timezone.png"),
                                     QStringLiteral(":/images/timezone.png"),
                                     128, 32, nullptr);
-  // TODO(xushaohua): Remove timezone text.
-  timezone_button_->setText("Beijing");
   QHBoxLayout* timezone_layout = new QHBoxLayout();
   timezone_layout->setAlignment(Qt::AlignLeft);
   timezone_layout->addWidget(timezone_button_);
@@ -79,7 +77,7 @@ void SystemInfoFormFrame::initUI() {
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->addWidget(comment_label);
 
-  avatar_button_ = new AvatarButton(service::GetDefaultAvatar());
+  avatar_button_ = new AvatarButton();
   QHBoxLayout* avatar_layout = new QHBoxLayout();
   avatar_layout->addWidget(avatar_button_);
 

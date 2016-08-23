@@ -31,6 +31,8 @@ class SystemInfoTimezoneFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  QString timezone_;
+
   NavButton* back_button_ = nullptr;
 };
 

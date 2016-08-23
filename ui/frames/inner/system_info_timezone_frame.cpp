@@ -4,11 +4,13 @@
 
 #include "ui/frames/inner/system_info_timezone_frame.h"
 
+#include <QDebug>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "sysinfo/timezone.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
@@ -17,7 +19,8 @@
 namespace ui {
 
 SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
-  : QFrame(parent) {
+    : QFrame(parent),
+      timezone_() {
   this->setObjectName(QStringLiteral("system_info_timezone_frame"));
 
   this->initUI();
@@ -25,8 +28,23 @@ SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
 }
 
 void SystemInfoTimezoneFrame::autoConf() {
-  const QString timezone =
-      service::GetSettingsString(service::kSystemInfoDefaultTimezoneName);
+  QString timezone;
+  if (service::GetSettingsBool(service::kSystemInfoUseDefaultTimezoneName)) {
+    timezone = service::GetSettingsString(
+        service::kSystemInfoDefaultTimezoneName);
+  }
+
+  if (!sysinfo::IsValidTimezone(timezone)) {
+    timezone = sysinfo::GetCurrentTimezone();
+  }
+
+  if (!sysinfo::IsValidTimezone(timezone)) {
+    qWarning() << "autoConf() got invalid timezone:" << timezone;
+    return;
+  }
+
+  timezone_ = timezone;
+  emit this->timezoneUpdated(sysinfo::GetTimezoneName(timezone));
   service::WriteTimezone(timezone);
 }
 

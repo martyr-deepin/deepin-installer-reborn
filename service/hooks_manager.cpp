@@ -84,7 +84,7 @@ bool IsOverlayModuleExists() {
 }
 
 int ReadProgressValue(const QString& file) {
-  const QString val = base::ReadTextFileContent(kUnsquashfsBaseProgressFile);
+  const QString val = base::ReadTextFileContent(file);
   if (val.isEmpty()) {
     return -1;
   }

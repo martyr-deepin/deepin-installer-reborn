@@ -15,6 +15,15 @@ QStringList GetZoneInfo();
 // Read current timezone in /etc/timezone file.
 QString GetCurrentTimezone();
 
+// Get preferenced timezone based on locale.
+QString GetPreferTimezone();
+
+// Returns name of timezone, excluding continent name.
+QString GetTimezoneName(const QString& timezone);
+
+// Validate |timezone|.
+bool IsValidTimezone(const QString& timezone);
+
 }  // namespace sysinfo
 
 #endif  // DEEPIN_INSTALLER_REBORN_SYSINFO_TIMEZONE_H

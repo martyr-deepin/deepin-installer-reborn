@@ -11,11 +11,11 @@
 
 namespace ui {
 
-PartitionDelegate::PartitionDelegate(QObject* parent) :
-    QObject(parent),
-    devices(),
-    partition_manager_(new service::PartitionManager()),
-    partition_thread_(new QThread(this)) {
+PartitionDelegate::PartitionDelegate(QObject* parent)
+    : QObject(parent),
+      devices(),
+      partition_manager_(new service::PartitionManager()),
+      partition_thread_(new QThread(this)) {
   this->setObjectName(QStringLiteral("partition_delegate"));
 
   partition_manager_->moveToThread(partition_thread_);

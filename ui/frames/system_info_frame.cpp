@@ -22,6 +22,9 @@ SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
   this->initUI();
   this->initConnections();
 
+  avatar_frame_->autoConf();
+  timezone_frame_->autoConf();
+
   this->showFormPage();
 }
 

@@ -4,6 +4,8 @@
 
 #include "ui/frames/inner/system_info_avatar_frame.h"
 
+#include <QDebug>
+#include <QFile>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -23,6 +25,14 @@ namespace {
 
 const int kAvatarButtonsPerRow = 7;
 
+// Check whether |avatar| is valid.
+bool IsValidAvatar(const QString& avatar) {
+  if (avatar.isEmpty()) {
+    return false;
+  }
+  return QFile::exists(avatar);
+}
+
 }  // namespace
 
 SystemInfoAvatarFrame::SystemInfoAvatarFrame(QWidget* parent)
@@ -34,8 +44,13 @@ SystemInfoAvatarFrame::SystemInfoAvatarFrame(QWidget* parent)
 }
 
 void SystemInfoAvatarFrame::autoConf() {
-  const QString avatar =
-      service::GetSettingsString(service::kSystemInfoDefaultAvatorName);
+  const QString avatar = service::GetDefaultAvatar();
+  if (!IsValidAvatar(avatar)) {
+    qWarning() << "autoConf() got invalid avatar: " << avatar;
+    return;
+  }
+
+  emit this->avatarUpdated(avatar);
   service::WriteAvatar(avatar);
 }
 
@@ -55,8 +70,6 @@ void SystemInfoAvatarFrame::initUI() {
                                     QStringLiteral(":/images/timezone.png"),
                                     QStringLiteral(":/images/timezone.png"),
                                     128, 32, nullptr);
-  // TODO(xushaohua): Remove timezone text.
-  timezone_button_->setText("Beijing");
   QHBoxLayout* timezone_layout = new QHBoxLayout();
   timezone_layout->setAlignment(Qt::AlignLeft);
   timezone_layout->addWidget(timezone_button_);

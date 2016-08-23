@@ -41,4 +41,23 @@ QString GetCurrentTimezone() {
   return content.trimmed();
 }
 
+QString GetPreferTimezone() {
+  // TODO(xushaohua): Read locale info.
+  return "UTC";
+}
+
+QString GetTimezoneName(const QString& timezone) {
+  const int index = timezone.indexOf('/');
+  return (index > -1) ? timezone.mid(index + 1) : timezone;
+}
+
+bool IsValidTimezone(const QString& timezone) {
+  // Ignores empty timezone.
+  if (timezone.isEmpty()) {
+    return false;
+  }
+  const QStringList timezones = GetZoneInfo();
+  return timezones.contains(timezone);
+}
+
 }  // namespace sysinfo

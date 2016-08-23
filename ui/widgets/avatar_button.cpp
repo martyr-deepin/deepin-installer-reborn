@@ -18,10 +18,11 @@ const int kIconSize = 80;
 
 }  // namespace
 
+AvatarButton::AvatarButton(QWidget* parent) : AvatarButton("", parent) { }
+
 AvatarButton::AvatarButton(const QString& icon, QWidget* parent)
-  : FlatButton(parent),
-    icon_(icon) {
-//  Q_ASSERT(!icon.isEmpty());
+    : FlatButton(parent),
+      icon_(icon) {
   this->setObjectName(QStringLiteral("avatar_button"));
 
   this->setFixedSize(kIconSize, kIconSize);

@@ -16,6 +16,7 @@ class AvatarButton : public FlatButton {
   Q_OBJECT
 
  public:
+  explicit AvatarButton(QWidget* parent = nullptr);
   AvatarButton(const QString& icon, QWidget* parent = nullptr);
 
   void updateIcon(const QString& icon);
