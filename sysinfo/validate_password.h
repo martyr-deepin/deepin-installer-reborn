@@ -13,6 +13,7 @@ enum class ValidatePasswordState {
   Ok,
   TooShortError,  // Too few characters in password.
   TooLongError,  // Too many characters in password.
+  NoNumberError,  // No number in password.
   NoLowerCharError,  // No lower case characters in password.
   NoUpperCharError,  // No upper case characters in password.
   NoSpecialCharError,  // No special characters in password.

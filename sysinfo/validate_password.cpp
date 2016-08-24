@@ -36,6 +36,12 @@ ValidatePasswordState ValidatePassword(const QString& password) {
     return ValidatePasswordState::TooLongError;
   }
 
+  const bool need_number = service::GetSettingsBool(
+      service::kSystemInfoPasswordShallContainNumber);
+  if (need_number && (!ContainsChar(password, QStringLiteral("1234567890")))) {
+    return ValidatePasswordState::NoNumberError;
+  }
+
   const bool need_lower_case = service::GetSettingsBool(
       service::kSystemInfoPasswordShallContainLowerCase);
   if (need_lower_case &&

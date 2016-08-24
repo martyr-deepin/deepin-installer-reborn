@@ -37,8 +37,10 @@ const char kSystemInfoUseDefaultPasswordName[] =
 const char kSystemInfoDefaultPasswordName[] = "system_info_default_password";
 const char kSystemInfoPasswordMinLength[] = "system_info_password_min_length";
 const char kSystemInfoPasswordMaxLength[] = "system_info_password_max_length";
-const char kSystemInfoPasswordShallContainLowerCase[] =
+const char kSystemInfoPasswordShallContainNumber[] =
     "system_info_password_shall_contain_number";
+const char kSystemInfoPasswordShallContainLowerCase[] =
+    "system_info_password_shall_contain_lower_case";
 const char kSystemInfoPasswordShallContainUpperCase[] =
     "system_info_password_shall_contain_upper_case";
 const char kSystemInfoPasswordShallContainSpecialChar[] =
