@@ -88,6 +88,7 @@ set(SYSINFO_FILES
     sysinfo/timezone.cpp sysinfo/timezone.h
     sysinfo/users.cpp sysinfo/users.h
     sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h
+    sysinfo/validate_password.cpp sysinfo/validate_password.h
     sysinfo/validate_username.cpp sysinfo/validate_username.h
     sysinfo/virtual_machine.cpp sysinfo/virtual_machine.h
     )
@@ -142,17 +143,15 @@ set(UI_FILES
     )
 
 set(UNITTEST_FILES
-    base/command_test.cpp
-    base/string_util_test.cpp
+    sysinfo/dev_uuid_test.cpp
     sysinfo/proc_mounts_test.cpp
     sysinfo/proc_partitions_test.cpp
     sysinfo/proc_swaps_test.cpp
-    service/system_languages_test.cpp
-    sysinfo/dev_uuid_test.cpp
     sysinfo/timezone_test.cpp
     sysinfo/users_test.cpp
-    sysinfo/validate_username_test.cpp
     sysinfo/validate_hostname_test.cpp
+    sysinfo/validate_password_test.cpp
+    sysinfo/validate_username_test.cpp
     )
 
 set(Qt_LIBS
