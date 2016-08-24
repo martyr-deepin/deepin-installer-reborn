@@ -1,0 +1,9 @@
+/** Used by LogViewerFrame class **/
+
+QTextEdit {
+  color: #000;
+  background-color: rgba(230, 230, 230, 0.9);
+  font-size: 20px;
+  selection-color: #3a3a3a;
+  selection-background-color: #f1f1f1;
+}

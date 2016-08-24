@@ -9,6 +9,7 @@
 #include <QHash>
 class QLabel;
 class QResizeEvent;
+class QShortcut;
 class QStackedLayout;
 
 namespace ui {
@@ -20,6 +21,7 @@ class DiskSpaceInsufficientFrame;
 class InstallFailedFrame;
 class InstallProgressFrame;
 class InstallSuccessFrame;
+class LogViewerFrame;
 class PartitionFrame;
 class PartitionTableWarningFrame;
 class SelectLanguageFrame;
@@ -83,6 +85,7 @@ class MainWindow : public QWidget {
   InstallFailedFrame* install_failed_frame_ = nullptr;
   InstallProgressFrame* install_progress_frame_ = nullptr;
   InstallSuccessFrame* install_success_frame_ = nullptr;
+  LogViewerFrame* log_viewer_frame_ = nullptr;
   PartitionFrame* partition_frame_ = nullptr;
   PartitionTableWarningFrame* partition_table_warning_frame_ = nullptr;
   SelectLanguageFrame* select_language_frame_ = nullptr;
@@ -95,6 +98,8 @@ class MainWindow : public QWidget {
   // Keep previous page id. It is used by ConfirmQuitPage.
   PageId prev_page_;
   PageId current_page_;
+
+  QShortcut* log_viewer_shortcut_ = nullptr;
 
  private slots:
   // Show ConfirmQuitFrame when close_button_ is clicked.

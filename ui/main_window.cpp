@@ -8,8 +8,10 @@
 #include <QHash>
 #include <QHBoxLayout>
 #include <QIcon>
+#include <QKeySequence>
 #include <QLabel>
 #include <QResizeEvent>
+#include <QShortcut>
 #include <QStackedLayout>
 #include <QVBoxLayout>
 
@@ -23,6 +25,7 @@
 #include "ui/frames/install_failed_frame.h"
 #include "ui/frames/install_progress_frame.h"
 #include "ui/frames/install_success_frame.h"
+#include "ui/frames/log_viewer_frame.h"
 #include "ui/frames/partition_frame.h"
 #include "ui/frames/partition_table_warning_frame.h"
 #include "ui/frames/select_language_frame.h"
@@ -131,6 +134,9 @@ void MainWindow::initConnections() {
           this, &MainWindow::goNextPage);
   connect(virtual_machine_frame_, &VirtualMachineFrame::finished,
           this, &MainWindow::goNextPage);
+
+  connect(log_viewer_shortcut_, &QShortcut::activated,
+          log_viewer_frame_, &LogViewerFrame::toggleVisible);
 }
 
 void MainWindow::initPages() {
@@ -173,6 +179,10 @@ void MainWindow::initPages() {
   virtual_machine_frame_ = new VirtualMachineFrame(this);
   pages_.insert(PageId::VirtualMachineId,
                 stacked_layout_->addWidget(virtual_machine_frame_));
+
+  log_viewer_frame_ = new LogViewerFrame();
+  // TODO(xushaohua): Move to center of parent window.
+  log_viewer_frame_->hide();
 }
 
 void MainWindow::initUI() {
@@ -214,7 +224,8 @@ void MainWindow::initUI() {
 }
 
 void MainWindow::registerShortcut() {
-  // TODO(xushaohua): Register Ctrl+L and Ctrl+P actions
+  log_viewer_shortcut_ = new QShortcut(QKeySequence("Ctrl+L"), this);
+  log_viewer_shortcut_->setContext(Qt::ApplicationShortcut);
 }
 
 void MainWindow::setCurrentPage(PageId page_id) {

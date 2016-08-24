@@ -114,6 +114,7 @@ set(UI_FILES
     ui/frames/install_failed_frame.cpp ui/frames/install_failed_frame.h
     ui/frames/install_progress_frame.cpp ui/frames/install_progress_frame.h
     ui/frames/install_success_frame.cpp ui/frames/install_success_frame.h
+    ui/frames/log_viewer_frame.cpp ui/frames/log_viewer_frame.h
     ui/frames/partition_frame.cpp ui/frames/partition_frame.h
     ui/frames/partition_table_warning_frame.cpp ui/frames/partition_table_warning_frame.h
     ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
