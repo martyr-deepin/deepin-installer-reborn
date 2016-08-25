@@ -13,6 +13,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
+#include <QHash>
 #include <QTimer>
 
 #include "base/command.h"
@@ -29,6 +30,10 @@ const char kTargetDir[] = "/target";
 // Target folder hooks/ will be moved to.
 const char kBuiltinBindDir[] = "/dev/shm/di-builtin";
 const char kOemBindDir[] = "/dev/shm/di-oem";
+
+const char kBeforeChrootDir[] = "before_chroot";
+const char kInChrootDir[] = "in_chroot";
+const char kAfterChrootDir[] = "after_chroot";
 
 const int kBeforeChrootEndVal = 60;
 const int kInChrootStartVal = 60;
@@ -190,24 +195,26 @@ bool HooksManager::unbindHooks() {
 }
 
 QStringList HooksManager::listHooks(HooksManager::HookType hook_type) {
-  QStringList hooks;
+  // filename => abs-filepath
+  QHash<QString, QString> hooks;
   QString folder_name;
   switch (hook_type) {
     case HookType::BeforeChroot: {
-      folder_name = "before_chroot";
+      folder_name = kBeforeChrootDir;
       break;
     }
 
     case HookType::InChroot: {
-      folder_name = "in_chroot";
+      folder_name = kInChrootDir;
       break;
     }
 
     case HookType::AfterChroot: {
-      folder_name = "after_chroot";
+      folder_name = kAfterChrootDir;
       break;
     }
   }
+
   QDir builtin_dir(QDir(kBuiltinBindDir).absoluteFilePath(folder_name));
 
   const QStringList filter = { "*.job" };
@@ -215,7 +222,7 @@ QStringList HooksManager::listHooks(HooksManager::HookType hook_type) {
       builtin_dir.entryList(filter, QDir::Files | QDir::NoDotAndDotDot);
   foreach(const QString& file, builtin_files) {
     if (MatchArchitecture(file)) {
-      hooks.append(builtin_dir.absoluteFilePath(file));
+      hooks.insert(file, builtin_dir.absoluteFilePath(file));
     }
   }
 
@@ -225,16 +232,21 @@ QStringList HooksManager::listHooks(HooksManager::HookType hook_type) {
         oem_dir.entryList(filter, QDir::Files | QDir::NoDotAndDotDot);
     foreach(const QString& file, oem_files) {
       if (MatchArchitecture(file)) {
-        hooks.append(oem_dir.absoluteFilePath(file));
+        // Also override hook file with same name.
+        hooks.insert(file, oem_dir.absoluteFilePath(file));
       }
     }
   }
 
-  // Sort hooks
-  // FIXME(xushaohua): Sort files by name.
-  std::sort(hooks.begin(), hooks.end());
-  qDebug() << "hooks:" << hooks;
-  return hooks;
+  QStringList filename_list = hooks.keys();
+  // Sort files by name.
+  std::sort(filename_list.begin(), filename_list.end());
+  QStringList result;
+  for (const QString& filename : filename_list) {
+    result.append(hooks.value(filename));
+  }
+  qDebug() << "hooks:" << result;
+  return result;
 }
 
 bool HooksManager::runHooksPack(HooksManager::HookType hook_type,

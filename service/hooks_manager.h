@@ -54,8 +54,11 @@ class HooksManager : public QObject {
 
   // Mount hooks folder to /dev/shm
   bool bindHooks(HookType hook_type);
+  // Umount hooks folder.
   bool unbindHooks();
+  // Returns a list of sorted hook scripts with |hook_type|.
   QStringList listHooks(HookType hook_type);
+  // Run hook scripts with |hook_type|.
   bool runHooksPack(HookType hook_type, int progress_begin, int progress_end);
 
   bool enterChroot();
