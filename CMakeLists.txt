@@ -57,7 +57,6 @@ set(BASE_FILES
     base/command.cpp base/command.h
     base/consts.h
     base/file_util.cpp base/file_util.h
-    base/gaussian_blur.cpp base/gaussian_blur.h
     base/string_util.cpp base/string_util.h
     )
 

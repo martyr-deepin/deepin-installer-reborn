@@ -154,19 +154,23 @@ QString GetOverlayFilesystemDir() {
 }
 
 QString GetVendorLogo() {
-  if (GetSettingsBool(kSystemInfoUseVendorLogoName)) {
-    return QDir(kOemDir).absoluteFilePath("logo.png");
+  const QString oem_file = QDir(kOemDir).absoluteFilePath("logo.png");
+  if (QFile::exists(oem_file)) {
+    return oem_file;
   }
+
+  // Returns builtin logo.
   return QStringLiteral(":/images/logo.png");
 }
 
 QString GetWindowBackground() {
-  if (GetSettingsBool(kSystemInfoUseOemWallpaperName)) {
-    return QDir(kOemDir).absoluteFilePath("background.jpg");
+  const QString oem_file = QDir(kOemDir).absoluteFilePath("background.jpg");
+  if (QFile::exists(oem_file)) {
+    return oem_file;
   }
 
-  const QString in_system =
-      GetSettingsString(kSystemInfoDdeDefaultWallpaperName);
+  const QString in_system = GetSettingsString(
+      kSystemInfoDdeDefaultWallpaperName);
   if (QFile::exists(in_system)) {
     return in_system;
   }

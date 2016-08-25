@@ -11,16 +11,17 @@
 
 ### 各类图片
 * 安装器背景. 默认情况下, 会使用系统默认壁纸, 位于`/usr/share/backgrounds/default.jpg`.
-如果需要使用别的壁纸, 只需要放到 `oem/background.jpg`, 同时设置
- `system_info_use_oem_wallpaper` 选项, 注意图片分辨率和大小.
+ 如果需要使用别的图片, 只需要放到 `oem/background.jpg`, 注意图片分辨率和大小. 如果
+ 需要模糊效果的话, 可以用 `convert input.jpg -blur 0x32 background.jpg`
+ 命令来生成模糊图片.
 * Logo. 在语言选择页面的正上方, 会显示系统 logo, 默认是 deepin 的官方logo, 如果需要
-自定义, 可以放到 `oem/logo.png`. 记得设置 `system_info_use_vendor_logo` 选项.
+ 自定义, 可以放到 `oem/logo.png`.
 * 应用图标. `oem/icons/` 目录用于存放应用图标, 其目录结构应与
  `/usr/share/icons/hicolor` 相同.
 * 用户头像. 用户头像默认会使用 `dde-account-faces` 这个包提供的头像, 如果需要
-自定义, 可以把头像图片放到 `oem/avatar/` 目录里. 注意, 图片分辨率应该在
-`64x64`到`256x256`之间, 支持png和jpg格式. 如果要指定用户的默认头像, 需要
-设定 `system_info_default_avatar`.
+ 自定义, 可以把头像图片放到 `oem/avatar/` 目录里. 注意, 图片分辨率应该在
+ `64x64`到`256x256`之间, 支持png和jpg格式. 如果要指定用户的默认头像, 需要
+ 设定 `system_info_default_avatar`.
 * GRUB引导画面背景. 可以把图片放到 `oem/grub.png`.
 * 登录界面背景. 可以放到 `oem/lightdm.png`
 * plymouth 开机动画. 这个待补充.
@@ -50,7 +51,7 @@
 
 ### deb包
 * 需要额外安装的deb包, 都应该放到 `oem/deb/` 目录里, 并且, 它们的依赖关系应该能被
-自动满足, 否则可能无法正常安装.
+ 自动满足, 否则可能无法正常安装.
 * 卸载deb包, 可以在 `package_uninstall_packages` 里面设置.
 * 禁止卸载某些deb包, 可以在 `package_hold_packages` 里面设定.
 
@@ -69,7 +70,7 @@
 * `system_info_setup_after_reboot` 用于跳过帐户设置, 在下次重启系统再设定.
 * `skip_system_info_page` 跳过帐户设置页面, 但可以读取默认值.
 * `system_info_password_min_length`, `system_info_password_max_length`,
-`system_info_password_shall_contain_number`,
-`system_info_password_shall_contain_lower_case`,
-`system_info_password_shall_contain_upper_case` 以及
-`system_info_password_shall_contain_special_char` 用于设定密码策略.
+ `system_info_password_shall_contain_number`,
+ `system_info_password_shall_contain_lower_case`,
+ `system_info_password_shall_contain_upper_case` 以及
+ `system_info_password_shall_contain_special_char` 用于设定密码策略.
