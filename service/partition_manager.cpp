@@ -403,7 +403,9 @@ void PartitionManager::doRefreshDevices() {
 void PartitionManager::doAutoPart() {
   const QString filepath = GetAutoPartFile();
   if (!QFile::exists(filepath)) {
-    qCritical() << "oem/auto-part.js not found!";
+    qCritical() << "partition script file not found!";
+    emit this->autoPartDone(false);
+    return;
   }
   const bool ok = base::RunScriptFile(filepath);
   emit this->autoPartDone(ok);

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# TODO(xushaohua): Update partition policy.
 # Automatically create disk partitions.
 #  * Create label of /dev/sda to MS-DOS.
 #  * Create /dev/sda1 with 4G as linux-swap.

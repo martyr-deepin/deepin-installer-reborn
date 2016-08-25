@@ -231,6 +231,7 @@ QStringList HooksManager::listHooks(HooksManager::HookType hook_type) {
   }
 
   // Sort hooks
+  // FIXME(xushaohua): Sort files by name.
   std::sort(hooks.begin(), hooks.end());
   qDebug() << "hooks:" << hooks;
   return hooks;

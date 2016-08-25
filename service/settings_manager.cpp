@@ -20,6 +20,9 @@ namespace {
 // Absolute path to installer config file.
 const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
 
+// File name of auto partition script.
+const char kAutoPartFile[] = "auto-part.sh";
+
 // Absolute path to oem dir in system ISO.
 // Note that iso image is mounted at "/lib/live/mount/medium/".
 const char kOemDir[] = "/lib/live/mount/medium/oem";
@@ -99,7 +102,19 @@ QVariant GetSettingsValue(const QString& key) {
 }
 
 QString GetAutoPartFile() {
-  return QDir(kOemDir).absoluteFilePath("auto-part.sh");
+  const QString oem_file = QDir(kOemDir).absoluteFilePath(kAutoPartFile);
+  if (QFile::exists(oem_file)) {
+    return oem_file;
+  }
+
+  const QString builtin_file =
+      QDir(BUILTIN_HOOKS_DIR).absoluteFilePath(kAutoPartFile);
+  if (QFile::exists(builtin_file)) {
+    return builtin_file;
+  }
+
+  qCritical() << "GetAutoPartFile() not partition script found!";
+  return QString();
 }
 
 QStringList GetAvatars() {
