@@ -234,6 +234,13 @@ void MainWindow::setCurrentPage(PageId page_id) {
   prev_page_ = current_page_;
   current_page_ = page_id;
   stacked_layout_->setCurrentIndex(pages_.value(page_id));
+  if (page_id == PageId::ConfirmQuitId ||
+      page_id == PageId::InstallProgressId) {
+    // Hide close button in ConfirmQuit page and InstallProgress page
+    close_button_->hide();
+  } else {
+    close_button_->show();
+  }
 }
 
 void MainWindow::updateBackground() {
