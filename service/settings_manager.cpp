@@ -104,6 +104,11 @@ bool ScanLatestOemDirInUsbStorage() {
   QString latest_device;
   const QStringList usb_devices = GetUsbStorage();
   qDebug() << "usb devices:" << usb_devices;
+  if (usb_devices.isEmpty()) {
+    // If no usb device is found, use ISO folder instead.
+    g_oem_dir = kIsoOemDir;
+    return true;
+  }
 
   for (const QString& usb_device : usb_devices) {
     qDebug() << "Scanning:" << usb_device;
