@@ -5,6 +5,7 @@
 #include "ui/main_window.h"
 
 #include <QDebug>
+#include <QDesktopWidget>
 #include <QHash>
 #include <QHBoxLayout>
 #include <QIcon>
@@ -86,8 +87,16 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
-
   this->goNextPage();
+}
+
+void MainWindow::fullscreen() {
+  // TODO(xushaohua): Support changing display mode.
+  this->showFullScreen();
+  const QRect geometry = QDesktopWidget().screenGeometry();
+  this->setFixedSize(geometry.size());
+  this->move(geometry.topLeft());
+  this->show();
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
@@ -206,7 +215,6 @@ void MainWindow::initUI() {
   vbox_layout->setSpacing(0);
   vbox_layout->addWidget(close_button_wrapper);
   vbox_layout->addLayout(stacked_layout_);
-  vbox_layout->addSpacing(48);
   vbox_layout->addWidget(page_indicator_wrapper);
   vbox_layout->addSpacing(32);
 

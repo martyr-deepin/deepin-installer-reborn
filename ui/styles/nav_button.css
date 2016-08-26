@@ -2,14 +2,14 @@
 
 QPushButton {
   text-align: center;
-  min-width: 260px;
+  min-width: 220px;
   color: white;
-  font-size: 16pt;
+  font-size: 12pt;
   border: none;
-  border-radius: 5px;
+  border-radius: 3px;
   outline: none;
   background-color: rgba(221, 221, 221, 0.3);
-  padding: 5px;
+  padding: 3px;
 }
 
 QPushButton::hover {

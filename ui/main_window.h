@@ -41,6 +41,10 @@ class MainWindow : public QWidget {
  public:
   MainWindow();
 
+  // Show fullscreen. Do not call showFullscreen(), which does not work well
+  // with deepin-wm.
+  void fullscreen();
+
  protected:
   // Move close button to appropriate position when window is resized.
   void resizeEvent(QResizeEvent* event) override;

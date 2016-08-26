@@ -24,7 +24,6 @@ SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
 
   avatar_frame_->autoConf();
   timezone_frame_->autoConf();
-
   this->showFormPage();
 }
 

@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
   }
 
   ui::MainWindow main_window;
-  main_window.showFullScreen();
+  main_window.fullscreen();
 
   const int result = app.exec();
   service::ShutdownLogService();

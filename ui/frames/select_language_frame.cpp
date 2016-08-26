@@ -68,7 +68,7 @@ void SelectLanguageFrame::initUI() {
   list_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   list_model_ = new LanguageListModel(this);
   list_view_->setModel(list_model_);
-  list_view_->setFixedSize(400, 500);
+  list_view_->setFixedWidth(400);
 //  LanguageListDelegate* list_delegate = new LanguageListDelegate(this);
 //  list_view_->setItemDelegate(list_delegate);
   list_view_->setStyleSheet(
@@ -88,12 +88,9 @@ void SelectLanguageFrame::initUI() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addStretch();
   layout->addLayout(logo_layout);
   layout->addLayout(subhead_layout);
-  layout->addStretch();
   layout->addLayout(list_layout);
-  layout->addStretch();
   layout->addLayout(next_layout);
 
   this->setLayout(layout);

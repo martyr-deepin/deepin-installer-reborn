@@ -13,7 +13,7 @@ QListView {
   alternate-background-color: rgba(127, 127, 127, 30);
   selection-background-color: rgba(255, 255, 255, 1);
   */
-  font-size: 14pt;
+  font-size: 12pt;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.2);
 }
@@ -26,8 +26,8 @@ QListView::item {
 QListView::item {
   background: transparent;
   color: #eaeaea;
-  height: 38px;
-  padding: 5px 10px;
+  height: 30px;
+  padding: 3px 7px;
 }
 
 QListView::item:hover {
