@@ -41,10 +41,6 @@ class MainWindow : public QWidget {
  public:
   MainWindow();
 
-  // Show/hide close button.
-  void setCloseButtonVisible(bool visible);
-  bool isCloseButtonVisible() const;
-
  protected:
   // Move close button to appropriate position when window is resized.
   void resizeEvent(QResizeEvent* event) override;

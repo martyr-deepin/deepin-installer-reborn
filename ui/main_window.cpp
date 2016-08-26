@@ -90,14 +90,6 @@ MainWindow::MainWindow()
   this->goNextPage();
 }
 
-void MainWindow::setCloseButtonVisible(bool visible) {
-  close_button_->setVisible(visible);
-}
-
-bool MainWindow::isCloseButtonVisible() const {
-  return close_button_->isVisible();
-}
-
 void MainWindow::resizeEvent(QResizeEvent* event) {
   Q_ASSERT(background_label_);
   this->updateBackground();
