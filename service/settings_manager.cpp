@@ -330,7 +330,8 @@ void WriteHostname(const QString& hostname) {
 
 void WritePassword(const QString& password) {
   // TODO(xushaohua): base64 encode
-  const QString line = QString("DI_PASSWORD=%1\n").arg(password);
+  const QString encoded_password = password.toUtf8().toBase64();
+  const QString line = QString("DI_PASSWORD=%1\n").arg(encoded_password);
   AppendToConfigFile(line);
 }
 

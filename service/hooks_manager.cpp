@@ -112,8 +112,8 @@ HooksManager::HooksManager(QObject* parent)
       overlay_filesystem_exists_(false) {
   this->setObjectName(QStringLiteral("hooks_manager"));
 
-
   unsquashfs_timer_->setInterval(kReadUnsquashfsInterval);
+  this->initConnections();
 }
 
 void HooksManager::initConnections() {
@@ -125,6 +125,7 @@ void HooksManager::initConnections() {
 }
 
 bool HooksManager::bindHooks(HooksManager::HookType hook_type) {
+  qDebug() << "bindHooks()";
   QString builtin_dir;
   QString oem_dir;
   if (hook_type == HookType::InChroot) {
@@ -200,6 +201,7 @@ bool HooksManager::unbindHooks() {
 }
 
 QStringList HooksManager::listHooks(HooksManager::HookType hook_type) {
+  qDebug() << "listHooks()";
   // filename => abs-filepath
   QHash<QString, QString> hooks;
   QString folder_name;
@@ -276,6 +278,7 @@ bool HooksManager::runHooksPack(HooksManager::HookType hook_type,
       return false;
     }
     const int progress = progress_begin + progress_end * i / hooks.length();
+    qDebug() << "processUpdate():" << progress;
     emit this->processUpdate(progress);
   }
 
@@ -331,6 +334,7 @@ bool HooksManager::leaveChroot() {
 }
 
 void HooksManager::monitorProgressFiles() {
+  qDebug() << "monitorProgressFiles()";
   // Remove old progress files first.
   QFile::remove(kUnsquashfsLangProgressFile);
   QFile::remove(kUnsquashfsBaseProgressFile);
@@ -339,6 +343,7 @@ void HooksManager::monitorProgressFiles() {
 }
 
 void HooksManager::handleRunHooks() {
+  qDebug() << "handleRunHooks()";
   if (!bindHooks(HookType::BeforeChroot)) {
     qCritical() << "handleRunHooks() failed to call bindHooks()";
     emit this->errorOccurred();
