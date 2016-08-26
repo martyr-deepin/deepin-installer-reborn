@@ -27,7 +27,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-
 add_definitions("-DBUILTIN_HOOKS_DIR=\"${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn/hooks\"")
 
 find_package(Qt5Core REQUIRED)

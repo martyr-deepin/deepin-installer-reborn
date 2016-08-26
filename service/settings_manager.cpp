@@ -90,6 +90,7 @@ QStringList GetUsbStorage() {
   return result;
 }
 
+// TODO(xushaohua): Scan usb devices explicitly.
 bool ScanLatestOemDirInUsbStorage() {
   QDir root_dir("/");
   if (root_dir.exists(kUsbMountDir)) {

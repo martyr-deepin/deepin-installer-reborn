@@ -4,10 +4,10 @@ project( googletest-distribution )
 
 enable_testing()
 
-option(BUILD_GTEST "Builds the googletest subproject" OFF)
+option(BUILD_GTEST "Builds the googletest subproject" ON)
 
 #Note that googlemock target already builds googletest
-option(BUILD_GMOCK "Builds the googlemock subproject" ON)
+option(BUILD_GMOCK "Builds the googlemock subproject" OFF)
 
 if(BUILD_GMOCK)
   add_subdirectory( googlemock )
