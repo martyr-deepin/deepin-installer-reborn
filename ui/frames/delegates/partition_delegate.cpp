@@ -17,7 +17,7 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
     : QObject(parent),
       devices(),
       partition_manager_(new service::PartitionManager()),
-      partition_thread_(new QThread(this)) {
+      partition_thread_(new QThread()) {
   this->setObjectName(QStringLiteral("partition_delegate"));
 
   partition_manager_->moveToThread(partition_thread_);
@@ -32,6 +32,9 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
 }
 
 PartitionDelegate::~PartitionDelegate() {
+  delete partition_manager_;
+  partition_manager_ = nullptr;
+
   // Quit background thread explicitly.
   partition_thread_->quit();
   partition_thread_->wait();

@@ -25,8 +25,8 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
       hooks_manager_thread_(new QThread()) {
   this->setObjectName(QStringLiteral("install_progress_frame"));
 
-  hooks_manager_thread_->start();
   hooks_manager_->moveToThread(hooks_manager_thread_);
+  hooks_manager_thread_->start();
 
   this->initUI();
   this->initConnections();
@@ -35,6 +35,11 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
 InstallProgressFrame::~InstallProgressFrame() {
   delete hooks_manager_;
   hooks_manager_ = nullptr;
+
+  hooks_manager_thread_->quit();
+  hooks_manager_thread_->wait();
+  delete hooks_manager_thread_;
+  hooks_manager_thread_ = nullptr;
 }
 
 void InstallProgressFrame::initConnections() {
@@ -92,10 +97,13 @@ void InstallProgressFrame::onInstallProgressUpdated(int progress) {
 }
 
 void InstallProgressFrame::onPartitionDone(bool ok) {
+  qDebug() << "onPartitionDone()" << ok;
+
   if (ok) {
     // Partition operations take 5% progress.
     onInstallProgressUpdated(service::kBeforeChrootStartVal);
 
+    qDebug() << "emit runHooks() signal";
     // Run hooks/ in background thread.
     emit hooks_manager_->runHooks();
   } else {
