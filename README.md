@@ -10,7 +10,7 @@ Deepin Installer, reborn version.
 * jfsutils - utilities for managing the JFS filesystem
 * mtools - tools for manipulating MSDOS files
 * ntfs-3g - read/write NTFS driver for FUSE
-
+* util-linux - miscellanous system utilities
 
 # Restrictions
 * No DBus connections
