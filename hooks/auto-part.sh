@@ -39,6 +39,11 @@ get_max_capacity_device() {
   done && echo /dev/$DEVICE)
 }
 
+# Flush kernel message
+flush_message() {
+  udevadm settle --timeout=5
+}
+
 # Umount all swap partitions.
 swapoff -a || error_exit "Failed to umount swap!"
 
@@ -55,11 +60,11 @@ if [ $DEVICE_SIZE -lt $MINIMUM_DISK_SIZE ]; then
   error_exit 'Error: At least 30G is required to install!';
 fi
 
-REMAINING_SIZE=$((DEVICE_SIZE - SWAP_SIZE))
+REMAINING_SIZE=$((DEVICE_SIZE - SWAP_SIZE - ROOT_SIZE))
 
 # Write bootloader info to conf.
-sed -i "s|DI_BOOTLOADER=.*$|DI_BOOTLOADER=\"$DEVICE\"|" $CONF_FILE
-sed -i "s|DI_ROOT_DISK=.*$|DI_ROOT_DISK=\"$DEVICE\"|" $CONF_FILE
+echo "DI_BOOTLOADER=\"$DEVICE\"" >> $CONF_FILE
+echo "DI_ROOT_DISK=\"$DEVICE\"" >> $CONF_FILE
 
 # First create a msdos partition table.
 parted -s $DEVICE mktable msdos || \
@@ -68,21 +73,25 @@ parted -s $DEVICE mktable msdos || \
 # Then create a swap partition with 4G.
 parted -s $DEVICE mkpart primary linux-swap 1M ${SWAP_SIZE}M || \
   error_exit "Failed to create linux-swap on ${DEVICE}1";
+flush_message
 mkswap ${DEVICE}1 || \
   error_exit "Failed to call mkswap ${DEVICE}1";
 
 # And then create an ext4 partition with 20G capacity to mount /var/log
 parted -s $DEVICE mkpart primary ext4 ${SWAP_SIZE}M ${ROOT_SIZE}M || \
   error_exit "Failed to create partition ${DEVICE}2";
+flush_message
 mkfs.ext4 -F ${DEVICE}2 || \
   error_exit "Failed to make ext4 filesystem on ${DEVICE}2";
-sed -i "s|DI_ROOT_PARTITION=.*$|DI_ROOT_PARTITION=\"${DEVICE}2\"|" $CONF_FILE
+echo "DI_ROOT_PARTITION=\"${DEVICE}2\"" >> $CONF_FILE
 
 # All remaining space is used as backup partition.
-parted -s $DEVICE mkpart primary ext4 ${LOG_SIZE}M 100% || \
-  error_exit "Failed to create partition ${DEVICE}4";
+parted -s $DEVICE mkpart primary ext4 ${REMAINING_SIZE}M 100% || \
+  error_exit "Failed to create partition ${DEVICE}3";
+flush_message
 mkfs.ext4 -F ${DEVICE}3 || \
   error_exit "Failed to make ext4 filesystem on ${DEVICE}3";
+echo "DI_MOUNTPOINTS=\"${DEVICE}1=swap;${DEVICE}3=/home\"" >> $CONF_FILE
 
 # Commit to kernel.
 partprobe
