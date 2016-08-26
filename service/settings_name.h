@@ -10,29 +10,28 @@ namespace service {
 // Keys used in settings ini file.
 
 // Pages
-const char kSkipDiskSpaceInsufficientPageName[] =
+const char kSkipDiskSpaceInsufficientPage[] =
     "skip_disk_space_insufficient_page";
-const char kSkipVirtualMachinePageName[] = "skip_virtual_machine_page";
-const char kSkipSelectLanguagePageName[] = "skip_select_language_page";
-const char kSkipSystemInfoPageName[] = "skip_system_info_page";
-const char kSkipPartitionPageName[] = "skip_partition_page";
+const char kSkipVirtualMachinePage[] = "skip_virtual_machine_page";
+const char kSkipSelectLanguagePage[] = "skip_select_language_page";
+const char kSkipSystemInfoPage[] = "skip_system_info_page";
+const char kSkipPartitionPage[] = "skip_partition_page";
 
 // System Language List
-const char kSelectLanguageUseDefaultLocaleName[] =
+const char kSelectLanguageUseDefaultLocale[] =
     "select_language_use_default_lcoale";
-const char kSelectLanguageDefaultLocaleName[] =
-    "select_language_default_locale";
+const char kSelectLanguageDefaultLocale[] = "select_language_default_locale";
 
 // System Info
-const char kSystemInfoDdeDefaultWallpaperName[] =
+const char kSystemInfoDdeDefaultWallpaper[] =
     "system_info_dde_default_wallpaper";
-const char kSystemInfoSetupAfterRebootName[] = "system_info_setup_after_reboot";
-const char kSystemInfoUseDefaultUsernameName[] =
+const char kSystemInfoSetupAfterReboot[] = "system_info_setup_after_reboot";
+const char kSystemInfoUseDefaultUsername[] =
     "system_info_use_default_username";
-const char kSystemInfoDefaultUsernameName[] = "system_info_default_username";
+const char kSystemInfoDefaultUsername[] = "system_info_default_username";
 const char kSystemInfoUseDefaultPasswordName[] =
     "system_info_use_default_password";
-const char kSystemInfoDefaultPasswordName[] = "system_info_default_password";
+const char kSystemInfoDefaultPassword[] = "system_info_default_password";
 const char kSystemInfoPasswordMinLength[] = "system_info_password_min_length";
 const char kSystemInfoPasswordMaxLength[] = "system_info_password_max_length";
 const char kSystemInfoPasswordShallContainNumber[] =
@@ -43,32 +42,30 @@ const char kSystemInfoPasswordShallContainUpperCase[] =
     "system_info_password_shall_contain_upper_case";
 const char kSystemInfoPasswordShallContainSpecialChar[] =
     "system_info_password_shall_contain_special_char";
-const char kSystemInfoUseDefaultHostnameName[] =
+const char kSystemInfoUseDefaultHostname[] =
     "system_info_use_default_hostname";
-const char kSystemInfoDefaultHostnameName[] = "system_info_default_hostname";
-const char kSystemInfoUseRandomAvatorName[] = "system_info_use_random_avator";
-const char kSystemInfoUseDefaultAvatorName[] = "system_info_use_default_avatar";
-const char kSystemInfoDefaultAvatorName[] = "system_info_default_avatar";
-const char kSystemInfoDdeAvatarDirName[] = "system_info_dde_avatar_dir";
-const char kSystemInfoUseDefaultTimezoneName[] =
+const char kSystemInfoDefaultHostname[] = "system_info_default_hostname";
+const char kSystemInfoUseRandomAvator[] = "system_info_use_random_avator";
+const char kSystemInfoUseDefaultAvator[] = "system_info_use_default_avatar";
+const char kSystemInfoDefaultAvator[] = "system_info_default_avatar";
+const char kSystemInfoDdeAvatarDir[] = "system_info_dde_avatar_dir";
+const char kSystemInfoUseDefaultTimezone[] =
     "system_info_use_default_timezone";
-const char kSystemInfoDefaultTimezoneName[] = "system_info_default_timezone";
-const char kSystemInfoDisableAvatorPageName[] =
-    "system_info_disable_avatar_page";
-const char kSystemInfoDisableTimezonePageName[] =
+const char kSystemInfoDefaultTimezone[] = "system_info_default_timezone";
+const char kSystemInfoDisableAvatorPage[] = "system_info_disable_avatar_page";
+const char kSystemInfoDisableTimezonePage[] =
     "system_info_disable_timezone_page";
 
 // Partition
-const char kPartitionMinimumDiskSpaceRequiredName[] =
+const char kPartitionMinimumDiskSpaceRequired[] =
     "partition_minimum_disk_space_required";
-const char kPartitionRecommendedDiskSpaceName[] =
+const char kPartitionRecommendedDiskSpace[] =
     "partition_recommended_disk_space";
-const char kPartitionDoAutoPartName[] = "partition_do_auto_part";
+const char kPartitionDoAutoPart[] = "partition_do_auto_part";
 
 
 // Install failed page
-const char kInstallFailedFeedbackServerName[] =
-    "install_failed_feedback_server";
+const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";
 
 }  // namespace service
 

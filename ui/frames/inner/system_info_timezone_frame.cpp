@@ -29,9 +29,8 @@ SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
 
 void SystemInfoTimezoneFrame::autoConf() {
   QString timezone;
-  if (service::GetSettingsBool(service::kSystemInfoUseDefaultTimezoneName)) {
-    timezone = service::GetSettingsString(
-        service::kSystemInfoDefaultTimezoneName);
+  if (service::GetSettingsBool(service::kSystemInfoUseDefaultTimezone)) {
+    timezone = service::GetSettingsString(service::kSystemInfoDefaultTimezone);
   }
 
   if (!sysinfo::IsValidTimezone(timezone)) {

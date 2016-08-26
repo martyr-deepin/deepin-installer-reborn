@@ -30,13 +30,13 @@ SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
 
 void SystemInfoFrame::autoConf() {
   const QString username =
-      service::GetSettingsString(service::kSystemInfoDefaultUsernameName);
+      service::GetSettingsString(service::kSystemInfoDefaultUsername);
   service::WriteUsername(username);
   const QString hostname =
-      service::GetSettingsString(service::kSystemInfoDefaultHostnameName);
+      service::GetSettingsString(service::kSystemInfoDefaultHostname);
   service::WriteHostname(hostname);
   const QString password =
-      service::GetSettingsString(service::kSystemInfoDefaultPasswordName);
+      service::GetSettingsString(service::kSystemInfoDefaultPassword);
   service::WritePassword(password);
 
   timezone_frame_->autoConf();
@@ -78,7 +78,7 @@ void SystemInfoFrame::initUI() {
 }
 
 void SystemInfoFrame::showAvatarPage() {
-  if (service::GetSettingsBool(service::kSystemInfoDisableAvatorPageName)) {
+  if (service::GetSettingsBool(service::kSystemInfoDisableAvatorPage)) {
     return;
   }
   stacked_layout_->setCurrentWidget(avatar_frame_);
@@ -89,7 +89,7 @@ void SystemInfoFrame::showFormPage() {
 }
 
 void SystemInfoFrame::showTimezonePage() {
-  if (service::GetSettingsBool(service::kSystemInfoDisableTimezonePageName)) {
+  if (service::GetSettingsBool(service::kSystemInfoDisableTimezonePage)) {
     return;
   }
   stacked_layout_->setCurrentWidget(timezone_frame_);

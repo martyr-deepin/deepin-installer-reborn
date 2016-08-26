@@ -39,13 +39,13 @@ namespace {
 
 int GetVisiblePages() {
   int pages = 0;
-  if (!service::GetSettingsBool(service::kSkipSelectLanguagePageName)) {
+  if (!service::GetSettingsBool(service::kSkipSelectLanguagePage)) {
     pages += 1;
   }
-  if (!service::GetSettingsBool(service::kSkipSystemInfoPageName)) {
+  if (!service::GetSettingsBool(service::kSkipSystemInfoPage)) {
     pages += 1;
   }
-  if (!service::GetSettingsBool(service::kSkipPartitionPageName)) {
+  if (!service::GetSettingsBool(service::kSkipPartitionPage)) {
     pages += 1;
   }
   // For install-progress page.
@@ -56,7 +56,7 @@ int GetVisiblePages() {
 bool IsDiskSpaceInsufficient() {
   const qint64 maximum_device_size = service::GetMaximumDeviceSize();
   const int required_device_size = service::GetSettingsValue(
-      service::kPartitionMinimumDiskSpaceRequiredName).toInt();
+      service::kPartitionMinimumDiskSpaceRequired).toInt();
   return required_device_size * 1024 * 1024 > maximum_device_size;
 }
 
@@ -305,7 +305,7 @@ void MainWindow::goNextPage() {
 
     case PageId::PartitionTableWarningId: {
       // Check whether to show SelectLanguagePage.
-      if (!service::GetSettingsBool(service::kSkipSelectLanguagePageName)) {
+      if (!service::GetSettingsBool(service::kSkipSelectLanguagePage)) {
         page_indicator_->setVisible(true);
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::SelectLanguageId);
@@ -320,7 +320,7 @@ void MainWindow::goNextPage() {
 
     case PageId::SelectLanguageId: {
       // Check whether to show SystemInfoPage.
-      if (!service::GetSettingsBool(service::kSkipSystemInfoPageName)) {
+      if (!service::GetSettingsBool(service::kSkipSystemInfoPage)) {
         page_indicator_->setVisible(true);
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::SystemInfoId);
@@ -335,12 +335,12 @@ void MainWindow::goNextPage() {
 
     case PageId::SystemInfoId: {
       // Check whether to show PartitionPage.
-      if (!service::GetSettingsBool(service::kSkipPartitionPageName)) {
+      if (!service::GetSettingsBool(service::kSkipPartitionPage)) {
         page_indicator_->setVisible(true);
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::PartitionId);
       } else {
-        if (service::GetSettingsBool(service::kPartitionDoAutoPartName)) {
+        if (service::GetSettingsBool(service::kPartitionDoAutoPart)) {
           partition_frame_->autoPart();
         }
         prev_page_ = current_page_;

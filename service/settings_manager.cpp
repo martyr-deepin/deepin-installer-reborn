@@ -251,13 +251,13 @@ QStringList GetAvatars() {
   }
 
   // Then, check dde-account-faces dir.
-  return ListImageFiles(GetSettingsString(kSystemInfoDdeAvatarDirName));
+  return ListImageFiles(GetSettingsString(kSystemInfoDdeAvatarDir));
 }
 
 QString GetDefaultAvatar() {
   // Return user specified avatar.
-  if (GetSettingsBool(kSystemInfoUseDefaultAvatorName)) {
-    return GetSettingsString(kSystemInfoDefaultAvatorName);
+  if (GetSettingsBool(kSystemInfoUseDefaultAvator)) {
+    return GetSettingsString(kSystemInfoDefaultAvator);
   }
 
   // Pick a random avatar.
@@ -294,8 +294,7 @@ QString GetWindowBackground() {
     return oem_file;
   }
 
-  const QString in_system = GetSettingsString(
-      kSystemInfoDdeDefaultWallpaperName);
+  const QString in_system = GetSettingsString(kSystemInfoDdeDefaultWallpaper);
   if (QFile::exists(in_system)) {
     return in_system;
   }

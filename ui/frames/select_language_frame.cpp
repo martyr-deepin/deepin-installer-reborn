@@ -35,7 +35,7 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent) : QFrame(parent) {
 
 void SelectLanguageFrame::autoConf() {
   const QString locale =
-      service::GetSettingsString(service::kSelectLanguageDefaultLocaleName);
+      service::GetSettingsString(service::kSelectLanguageDefaultLocale);
   service::WriteLocale(locale);
 }
 

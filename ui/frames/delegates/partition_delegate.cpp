@@ -7,6 +7,8 @@
 #include <QThread>
 
 #include "service/partition_manager.h"
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "service/signal_manager.h"
 
 namespace ui {
@@ -22,7 +24,11 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
   partition_thread_->start();
 
   this->initConnections();
-  emit partition_manager_->refreshDevices();
+
+  // If auto-part is not set, scan devices right now.
+  if (!service::GetSettingsBool(service::kPartitionDoAutoPart)) {
+    emit partition_manager_->refreshDevices();
+  }
 }
 
 PartitionDelegate::~PartitionDelegate() {

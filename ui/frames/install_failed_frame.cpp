@@ -51,7 +51,7 @@ void InstallFailedFrame::updateErrorMessage() {
   const QString base64_content =
       content.right(kQRContentStripped).toUtf8().toBase64();
   const QString prefix =
-      service::GetSettingsString(service::kInstallFailedFeedbackServerName);
+      service::GetSettingsString(service::kInstallFailedFeedbackServer);
   qr_widget_->setText(prefix.arg(base64_content));
 }
 
