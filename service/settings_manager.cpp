@@ -56,6 +56,11 @@ bool AppendToConfigFile(const QString& line) {
   return true;
 }
 
+bool AppendToConfigFile(const QString& key, const QString& val) {
+  const QString line = key + "=" + val + "\n";
+  return AppendToConfigFile(line);
+}
+
 QStringList ListImageFiles(const QString& dir_name) {
   QStringList result;
   QDir dir(dir_name);
@@ -314,50 +319,65 @@ bool DeleteConfigFile() {
 }
 
 void WriteLocale(const QString& locale) {
-  const QString line = QString("DI_LOCALE=%1\n").arg(locale);
-  AppendToConfigFile(line);
+  AppendToConfigFile("DI_LOCALE", locale);
 }
 
 void WriteUsername(const QString& username) {
-  const QString line = QString("DI_USERNAME=%1\n").arg(username);
-  AppendToConfigFile(line);
+  AppendToConfigFile("DI_USERNAME", username);
 }
 
 void WriteHostname(const QString& hostname) {
-  const QString line = QString("DI_HOSTNAME=%1\n").arg(hostname);
-  AppendToConfigFile(line);
+  AppendToConfigFile("DI_HOSTNAME", hostname);
 }
 
 void WritePassword(const QString& password) {
-  // TODO(xushaohua): base64 encode
   const QString encoded_password = password.toUtf8().toBase64();
-  const QString line = QString("DI_PASSWORD=%1\n").arg(encoded_password);
-  AppendToConfigFile(line);
+  AppendToConfigFile("DI_PASSWORD", encoded_password);
 }
 
 void WriteAvatar(const QString& avatar) {
-  const QString line = QString("DI_AVATAR=%1\n").arg(avatar);
-  AppendToConfigFile(line);
+  AppendToConfigFile("DI_AVATAR", avatar);
 }
 
 void WriteTimezone(const QString& timezone) {
-  const QString line = QString("DI_TIMEZONE=%1\n").arg(timezone);
-  AppendToConfigFile(line);
+  AppendToConfigFile("DI_TIMEZONE", timezone);
 }
 
 void WriteKeyboard(const QString& layout, const QString& variant) {
-  const QString line = QString("DI_LAYOUT=%1\n").arg(layout);
-  AppendToConfigFile(line);
-  const QString line2 = QString("DI_LAYOUT_VARIANT=%1\n").arg(variant);
-  AppendToConfigFile(line2);
+  AppendToConfigFile("DI_KEYBOARD_LAYOUT", layout);
+  AppendToConfigFile("DI_KEYBOARD_LAYOUT_VARIANT", variant);
 }
 
 void WritePartitionInfo(const QString& root, const QString& mount_points) {
-  const QString line = QString("DI_ROOT_PARTITION=%1\n").arg(root);
-  AppendToConfigFile(line);
-  const QString line2 = QString("DI_MOUNTPOINTS=%1\n").arg(mount_points);
-  AppendToConfigFile(line2);
+  AppendToConfigFile("DI_ROOT_PARTITION", root);
+  AppendToConfigFile("DI_MOUNTPOINTS", mount_points);
   // TODO(xushaohua): Add DI_ROOT_DISK
+}
+
+void WriteSettingsToConfigFile() {
+  const QHash<QString, QString> map = {
+      {"system_info_setup_after_reboot", "DI_SKIP_USER_INFO"},
+      {"system_info_vendor_name", "DI_VENDOR_NAME"},
+      {"system_info_os_name", "DI_OS_NAME"},
+      {"system_info_os_version", "DI_OS_VERSION"},
+      {"partition_default_fs", "DI_DEFAULT_FS"},
+      {"grub_timeout", "DI_GRUB_TIMEOUT"},
+      {"grub_block_windows", "DI_GRUB_BLOCK_WINDOWS"},
+      {"package_uninstalled_packages", "DI_UNINSTALLED_PACKAGES"},
+      {"package_hold_packages", "DI_HOLD_PACKAGES"},
+      {"service_enabled_services", "DI_ENABLED_SERVICES"},
+      {"service_disabled_services", "DI_DISABLED_SERVICES"},
+      {"dock_append_apps_to_dock", "DI_APPEND_APPS_TO_DOCK"},
+  };
+
+  QHashIterator<QString, QString> iter(map);
+  while (iter.hasNext()) {
+    iter.next();
+    const QString value = GetSettingsString(iter.key());
+    if (!AppendToConfigFile(iter.value(), value)) {
+      qWarning() << "Failed to write to conf file:" << iter.value() << value;
+    }
+  }
 }
 
 }  // namespace service

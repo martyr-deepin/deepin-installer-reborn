@@ -72,7 +72,7 @@ void LogViewerFrame::initUI() {
   this->setWindowFlags(Qt::FramelessWindowHint);
   this->setWindowModality(Qt::WindowModal);
   this->setAttribute(Qt::WA_TranslucentBackground, true);
-  //this->resize(860, 640);
+  this->resize(860, 640);
 }
 
 void LogViewerFrame::onTimerTimeout() {

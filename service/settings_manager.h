@@ -62,6 +62,9 @@ void WriteTimezone(const QString& timezone);
 void WriteKeyboard(const QString& layout, const QString& variant);
 void WritePartitionInfo(const QString& root, const QString& mount_points);
 
+// Write options in settings.ini to deepin-installer.conf
+void WriteSettingsToConfigFile();
+
 }  // namespace service
 
 #endif  // DEEPIN_INSTALLER_REBORN_SETTINGS_MANAGER_H
