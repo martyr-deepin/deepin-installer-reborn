@@ -8,11 +8,11 @@
 #     * /dev/sda1 /boot/efi efi 512M
 #     * /dev/sda2 / ext4
 #   Else if /dev/sda is less than 60G:
-#     * /dev/sda1 /boot/efi efi 500M
+#     * /dev/sda1 /boot/efi efi 512M
 #     * /dev/sda2 / ext4
 #     * /dev/sda3 linux-swap 4G
 #   Else:
-#     * /dev/sda1 /boot/efi efi 500M
+#     * /dev/sda1 /boot/efi efi 512M
 #     * /dev/sda2 / ext4 30G
 #     * /dev/sda3 linux-swap 4G
 #     * /dev/sda4 /home ext4
