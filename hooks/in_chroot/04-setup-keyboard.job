@@ -8,8 +8,8 @@ if [ -f /deepinhost/etc/deepin-installer.conf ];then
     . /deepinhost/etc/deepin-installer.conf
 fi
 
-XKBMODEL=${DI_MODEL:-pc105}
-XKBLAYOUT=${DI_LAYOUT:-us}
+XKBMODEL=${DI_KEYBOARD_MODEL:-pc105}
+XKBLAYOUT=${DI_KEYBOARD_LAYOUT:-us}
 
 cat > /etc/default/keyboard << EOF
 # Check /usr/share/doc/keyboard-configuration/README.Debian for
@@ -21,8 +21,8 @@ cat > /etc/default/keyboard << EOF
 
 XKBMODEL="${XKBMODEL}"
 XKBLAYOUT="${XKBLAYOUT}"
-XKBVARIANT="${DI_LAYOUT_VARIANT}"
-XKBOPTIONS="${DI_XKBOPTIONS}"
+XKBVARIANT="${DI_KEYBOARD_LAYOUT_VARIANT}"
+XKBOPTIONS="${DI_KEYBOARD_OPTIONS}"
 
 # If you don't want to use the XKB layout on the console, you can
 # specify an alternative keymap.  Make sure it will be accessible
