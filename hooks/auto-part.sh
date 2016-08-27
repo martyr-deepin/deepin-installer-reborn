@@ -1,29 +1,53 @@
 #!/bin/bash
 
-# TODO(xushaohua): Update partition policy.
-# Automatically create disk partitions.
-#  * Create label of /dev/sda to MS-DOS.
-#  * Create /dev/sda1 with 4G as linux-swap.
-#  * Create /dev/sda2 with 15G as / with ext4 filesystem type.
-#  * Use the remaining space as /home with ext4 filesystem type.
+# Automatically create disk partitions based on this policy:
+# Assumes /dev/sda is the deivce which has the largest capacity.
+# If UEFI is enabled:
+#   * Create label of /dev/sda to GPT
+#   If /dev/sda is less than 15G:
+#     * /dev/sda1 /boot/efi efi 512M
+#     * /dev/sda2 / ext4
+#   Else if /dev/sda is less than 60G:
+#     * /dev/sda1 /boot/efi efi 500M
+#     * /dev/sda2 / ext4
+#     * /dev/sda3 linux-swap 4G
+#   Else:
+#     * /dev/sda1 /boot/efi efi 500M
+#     * /dev/sda2 / ext4 30G
+#     * /dev/sda3 linux-swap 4G
+#     * /dev/sda4 /home ext4
+#   EndIf
+# Else:
+#   * Create label of /dev/sda to msdos
+#   If /dev/sda is less than 15G:
+#     * /dev/sda1 / ext4
+#   Else if /dev/sda is less than 60G:
+#     * /dev/sda1 / ext4
+#     * /dev/sda2 linux-swap 4G
+#   Else:
+#     * /dev/sda1 / ext4 30G
+#     * /dev/sda2 linux-swap 4G
+#     * /dev/sda3 /home ext4
+#   EndIf
+# EndIf
+
+# Path to installer configuration file.
+CONF_FILE=/etc/deepin-installer.conf
+
+kGibiByte=1048576
+k4Gb=4096
+k15Gb=15360
+k30Gb=30720
+k60Gb=61440
+
+# Minimum disk capacity required, 15G.
+MINIMUM_DISK_SIZE=$k15Gb
 
 # Print error message and exit current context.
 error_exit() {
   echo $*
   exit 1;
 }
-
-# Path to installer configuration file.
-CONF_FILE='/etc/deepin-installer.conf'
-
-# Minimum disk capacity required, 30G.
-MINIMUM_DISK_SIZE=30000
-
-# 4G space for linux-swap.
-SWAP_SIZE=4096
-
-# 15G space for /
-ROOT_SIZE=15360
 
 # The disk with largest storage capacity is used as system device.
 get_max_capacity_device() {
@@ -44,6 +68,23 @@ flush_message() {
   udevadm settle --timeout=5
 }
 
+# Create a EFI partition on /dev/sda1 with 512M
+make_efi() {
+  parted -s $DEVICE mkpart primary fat32 1M 512M || \
+    error_exit "Failed to create partition ${DEVICE}1"
+  parted -s $DEVICE set 1 esp on || \
+    error_exit "Failed to set esp flag on ${DEVICE}1"
+  flush_message
+  mkfs.msdos -F32 -v ${DEVICE}1 || \
+    error_exit "Failed to make fat32 filesystem on ${DEVICE}1"
+}
+
+# Add boot flag to ${DEVICE}1
+mark_device1_bootable() {
+  parted -s $DEVICE set 1 boot on || \
+    error_exit "Failed to set esp flag on ${DEVICE}1"
+}
+
 # Umount all swap partitions.
 swapoff -a || error_exit "Failed to umount swap!"
 
@@ -55,43 +96,159 @@ if [ -z $DEVICE ]; then
 fi
 
 DEVICE_SIZE=$(blockdev --getsize64 $DEVICE)
-DEVICE_SIZE=$((DEVICE_SIZE / 1048576))
+DEVICE_SIZE=$((DEVICE_SIZE / kGibiByte))
 if [ $DEVICE_SIZE -lt $MINIMUM_DISK_SIZE ]; then
-  error_exit 'Error: At least 30G is required to install!';
+  # TODO(xushaohua): Read minimum size from conf file
+  #error_exit 'Error: At least 30G is required to install!';
+  echo 'Error: At least 30G is required to install!';
 fi
-
-REMAINING_SIZE=$((DEVICE_SIZE - SWAP_SIZE - ROOT_SIZE))
 
 # Write bootloader info to conf.
 echo "DI_BOOTLOADER=\"$DEVICE\"" >> $CONF_FILE
 echo "DI_ROOT_DISK=\"$DEVICE\"" >> $CONF_FILE
 
-# First create a msdos partition table.
-parted -s $DEVICE mktable msdos || \
-  error_exit "Failed to create msdos partition on $DEVICE";
+if [ -d '/sys/firmware/efi' ]; then
+  # First create a GPT partition table.
+  parted -s $DEVICE mktable gpt || \
+    error_exit "Failed to create msdos partition on $DEVICE";
 
-# Then create a swap partition with 4G.
-parted -s $DEVICE mkpart primary linux-swap 1M ${SWAP_SIZE}M || \
-  error_exit "Failed to create linux-swap on ${DEVICE}1";
-flush_message
-mkswap ${DEVICE}1 || \
-  error_exit "Failed to call mkswap ${DEVICE}1";
+  if [ $DEVICE_SIZE -le $k15Gb ]; then
+    make_efi
 
-# And then create an ext4 partition with 20G capacity to mount /var/log
-parted -s $DEVICE mkpart primary ext4 ${SWAP_SIZE}M ${ROOT_SIZE}M || \
-  error_exit "Failed to create partition ${DEVICE}2";
-flush_message
-mkfs.ext4 -F ${DEVICE}2 || \
-  error_exit "Failed to make ext4 filesystem on ${DEVICE}2";
-echo "DI_ROOT_PARTITION=\"${DEVICE}2\"" >> $CONF_FILE
+    parted -s $DEVICE mkpart primary ext4 512M 100% || \
+      error_exit "Failed to create partition ${DEVICE}2";
+    flush_message
+    mkfs.ext4 -F ${DEVICE}2 || \
+      error_exit "Failed to make ext4 filesystem on ${DEVICE}2";
 
-# All remaining space is used as backup partition.
-parted -s $DEVICE mkpart primary ext4 ${REMAINING_SIZE}M 100% || \
-  error_exit "Failed to create partition ${DEVICE}3";
-flush_message
-mkfs.ext4 -F ${DEVICE}3 || \
-  error_exit "Failed to make ext4 filesystem on ${DEVICE}3";
-echo "DI_MOUNTPOINTS=\"${DEVICE}1=swap;${DEVICE}3=/home\"" >> $CONF_FILE
+    echo "DI_ROOT_PARTITION=\"${DEVICE}2\"" >> $CONF_FILE
+    echo "DI_MOUNTPOINTS=\"${DEVICE}1=/boot/efi\"" >> $CONF_FILE
+
+  elif [ $DEVICE_SIZE -le $k60Gb ]; then
+    make_efi
+
+    # / on /dev/sda2
+    START_SIZE=512
+    END_SIZE=$((DEVICE_SIZE - k4Gb + START_SIZE))
+    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}M ${END_SIZE}M || \
+      error_exit "Failed to create linux-swap on ${DEVICE}2";
+    flush_message
+    mkfs.ext4 -F ${DEVICE}2 || \
+      error_exit "Failed to call mkswap ${DEVICE}2";
+
+    # linux-swap on /dev/sda3
+    START_SIZE=$END_SIZE
+    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}M 100% || \
+      error_exit "Failed to create partition ${DEVICE}3";
+    flush_message
+    mkswap ${DEVICE}3 || \
+      error_exit "Failed to make linux-swap filesystem on ${DEVICE}3";
+
+    echo "DI_ROOT_PARTITION=\"${DEVICE}2\"" >> $CONF_FILE
+    echo "DI_MOUNTPOINTS=\"${DEVICE}1=/boot/efi;${DEVICE}3=swap\"" >> $CONF_FILE
+
+  else
+    make_efi
+
+    # / on /dev/sda2
+    START_SIZE=512
+    END_SIZE=$((START_SIZE + k30Gb))
+    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}M ${END_SIZE}M || \
+      error_exit "Failed to create partition ${DEVICE}2";
+    flush_message
+    mkfs.ext4 -F ${DEVICE}2 || \
+      error_exit "Failed to make ext4 filesystem on ${DEVICE}2";
+
+    START_SIZE=$END_SIZE
+    END_SIZE=$((START_SIZE + k4Gb))
+    # linux-swap on /dev/sda3
+    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}M ${END_SIZE}M || \
+      error_exit "Failed to create linux-swap on ${DEVICE}3";
+    flush_message
+    mkswap ${DEVICE}3 || \
+      error_exit "Failed to call mkswap ${DEVICE}3";
+
+    # /home on /dev/sda4
+    START_SIZE=$END_SIZE
+    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}M 100% || \
+      error_exit "Failed to create partition ${DEVICE}4";
+    flush_message
+    mkfs.ext4 -F ${DEVICE}4 || \
+      error_exit "Failed to make ext4 filesystem on ${DEVICE}4";
+
+    echo "DI_ROOT_PARTITION=\"${DEVICE}2\"" >> $CONF_FILE
+    echo "DI_MOUNTPOINTS=\"${DEVICE}1=/boot/efi;${DEVICE}3=swap;${DEVICE}4=/home\"" >> $CONF_FILE
+  fi
+else
+  # First create a msdos partition table.
+  parted -s $DEVICE mktable msdos || \
+    error_exit "Failed to create msdos partition on $DEVICE";
+
+  if [ $DEVICE_SIZE -le $k15Gb ]; then
+    # / on /dev/sda1
+    parted -s $DEVICE mkpart primary ext4 1M 100% || \
+      error_exit "Failed to create partition ${DEVICE}1";
+    flush_message
+    mark_device1_bootable
+    mkfs.ext4 -F ${DEVICE}1 || \
+      error_exit "Failed to make ext4 filesystem on ${DEVICE}1";
+
+    echo "DI_ROOT_PARTITION=\"${DEVICE}1\"" >> $CONF_FILE
+    echo "DI_MOUNTPOINTS=\"\"" >> $CONF_FILE
+
+  elif [ $DEVICE_SIZE -le $k60Gb ]; then
+    # / on /dev/sda1
+    END_SIZE=$((DEVICE_SIZE - k4Gb))
+    parted -s $DEVICE mkpart primary ext4 1M ${END_SIZE}M || \
+      error_exit "Failed to create partition ${DEVICE}1";
+    flush_message
+    mark_device1_bootable
+    mkfs.ext4 -F ${DEVICE}1 || \
+      error_exit "Failed to make ext4 filesystem on ${DEVICE}1";
+
+    # linux-swap on /dev/sda2
+    START_SIZE=$END_SIZE
+    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}M 100% || \
+      error_exit "Failed to create linux-swap on ${DEVICE}2";
+    flush_message
+    mkswap ${DEVICE}2 || \
+      error_exit "Failed to call mkswap ${DEVICE}2";
+
+    echo "DI_ROOT_PARTITION=\"${DEVICE}1\"" >> $CONF_FILE
+    echo "DI_MOUNTPOINTS=\"${DEVICE}2=swap\"" >> $CONF_FILE
+
+  else
+    # / on /dev/sda1
+    START_SIZE=1
+    END_SIZE=$k30Gb
+    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}M ${END_SIZE}M || \
+      error_exit "Failed to create partition ${DEVICE}1";
+    flush_message
+    mark_device1_bootable
+    mkfs.ext4 -F ${DEVICE}1 || \
+      error_exit "Failed to make ext4 filesystem on ${DEVICE}1";
+
+    # linux-swap on /dev/sda2
+    START_SIZE=$END_SIZE
+    END_SIZE=$((START_SIZE + k4Gb))
+    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}M ${END_SIZE}M || \
+      error_exit "Failed to create linux-swap on ${DEVICE}2";
+    flush_message
+    mkswap ${DEVICE}2 || \
+      error_exit "Failed to call mkswap ${DEVICE}2";
+
+    # /home on /dev/sda3
+    START_SIZE=$END_SIZE
+    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}M 100% || \
+      error_exit "Failed to create partition ${DEVICE}3";
+    flush_message
+    mkfs.ext4 -F ${DEVICE}3 || \
+      error_exit "Failed to make ext4 filesystem on ${DEVICE}3";
+
+    echo "DI_ROOT_PARTITION=\"${DEVICE}1\"" >> $CONF_FILE
+    echo "DI_MOUNTPOINTS=\"${DEVICE}2=swap;${DEVICE}3=/home\"" >> $CONF_FILE
+  fi
+fi
 
 # Commit to kernel.
 partprobe

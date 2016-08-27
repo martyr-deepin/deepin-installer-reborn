@@ -26,8 +26,9 @@ extract_overlay_filesystem() {
     # FIXME(xushaohua): Do not send overlay progress
     if [ -f ${MODULE} ];then
         for file in $(cat ${MODULE});do
-            script -c "unsquashfs -f -d /target ${CDROM}/overlay/${file}" \
-              /dev/null | unsquashfs-progress-reborn $LANG_PROGRESS_FILE || exit 2
+            unsquashfs -f -d /target ${CDROM}/overlay/${file} || exit 2
+            #script -c "unsquashfs -f -d /target ${CDROM}/overlay/${file}" \
+            #  /dev/null | unsquashfs-progress-reborn $LANG_PROGRESS_FILE || exit 2
         done
     fi
 }
@@ -50,8 +51,9 @@ if [ $MEM -le 3000000 ] ;then
     ./extract_base_filesystem --lang ${L} --live ${LIVE} || exit 1
 else
     echo "[Info] Detect free memory more than 3G"
-    script -c "unsquashfs -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs"\
-      /dev/null | unsquashfs-progress-reborn $BASE_PROGRESS_FILE || exit 2
+    unsquashfs -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs || exit 2
+    #script -c "unsquashfs -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs"\
+    #  /dev/null | unsquashfs-progress-reborn $BASE_PROGRESS_FILE || exit 2
 fi
 
 # Finally extract_overlay_filesystem 
