@@ -30,6 +30,9 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
 
   this->initUI();
   this->initConnections();
+
+  // Initialize progress value.
+  this->onInstallProgressUpdated(0);
 }
 
 InstallProgressFrame::~InstallProgressFrame() {
