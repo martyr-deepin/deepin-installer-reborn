@@ -1,6 +1,5 @@
 
 # 关于
-
 hooks 里面的任务, 是按照排序, 串行运行的. 如果某个hook里一个重要的步骤执行失败了, 
 之后的所有任务都不会被执行, 这时, 安装器会直接转到错误提醒界面. 所以, hook脚本内部
 最好做好各自的清理工作.
@@ -15,7 +14,7 @@ hooks 里面的任务, 是按照排序, 串行运行的. 如果某个hook里一�
 与64位. 当然, 直接在hook脚本内部判断平台构架也是可以的
 
 ## oem
-目录`ISO_ROOT/oem/hooks` 用来存放自定义的 hooks, 其写法与目录结构需要与安装器
+目录`oem/hooks` 用来存放自定义的 hooks, 其写法与目录结构需要与安装器
 自带的hooks一致.
  
 下面列举一些oem hook的可能写法:
@@ -25,3 +24,8 @@ hooks 里面的任务, 是按照排序, 串行运行的. 如果某个hook里一�
 deb包
 * 修改桌面的默认壁纸, 创建 `oem/hooks/in_chroot/44-update-wallpaper.job` 并
 在这里脚本里, 把指定的壁纸复制到新系统即可
+
+## HooksManager
+HooksManager 计算进度条时, 在 before_chroot 阶段, 使用 unsquashfs 的进度
+作为当前的进度度; 在 in_chroot 和 after_chroot 阶段, 则把进度条平均分配给每个
+hook 脚本.
