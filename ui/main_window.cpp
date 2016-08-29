@@ -100,7 +100,6 @@ void MainWindow::fullscreen() {
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
-  Q_ASSERT(background_label_);
   this->updateBackground();
 
   QWidget::resizeEvent(event);
@@ -244,8 +243,16 @@ void MainWindow::setCurrentPage(PageId page_id) {
 }
 
 void MainWindow::updateBackground() {
+  if (!background_label_) {
+    qWarning() << "background_label is not initialized!";
+    return;
+  }
   const QString image_path = service::GetWindowBackground();
-  background_label_->setPixmap(QPixmap(image_path));
+  // TODO(xushaohua): Only scale background image in x86 architecture.
+  // Other platforms may have performance issue.
+  const QPixmap pixmap = QPixmap(image_path).scaled(
+      size(), Qt::KeepAspectRatioByExpanding);
+  background_label_->setPixmap(pixmap);
   background_label_->setFixedSize(size());
 }
 
