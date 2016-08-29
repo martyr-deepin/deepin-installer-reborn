@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
   // TODO(xushaohua): Set i18n
   app.setApplicationDisplayName(base::kAppDisplayName);
   app.setApplicationName(base::kAppName);
-  app.setOrganizationDomain(QStringLiteral("deepin.org"));
+  app.setOrganizationDomain(base::kDomainName);
 
   // Delete last installer config file as soon as possible.
   if (!sysinfo::HasRootPrivilege()) {

@@ -13,6 +13,8 @@ const char kAppName[] = "deepin-installer-reborn";
 // Human readable application name.
 const char kAppDisplayName[] = "Deepin Installer Reborn";
 
+const char kDomainName[] = "deepin.org";
+
 }
 
 #endif  // DEEPIN_INSTALLER_REBORN_CONSTS_H

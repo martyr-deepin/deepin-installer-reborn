@@ -172,7 +172,7 @@ set(LINK_LIBS
 
 # Main executable
 add_executable(deepin-installer-reborn
-               "main.cpp"
+               main.cpp
 
                ${BASE_FILES}
                ${SERVICE_FILES}
@@ -188,7 +188,7 @@ target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 
 # Unittest
 add_executable(deepin-installer-reborn-tests
-               "misc/test_main.cpp"
+               misc/test_main.cpp
 
                ${BASE_FILES}
                ${SERVICE_FILES}
@@ -202,9 +202,24 @@ target_link_libraries(deepin-installer-reborn-tests
                       gtest
                       )
 
+
+# deepin-installer-oem-tool
+add_executable(deepin-installer-oem-tool
+               misc/oem_tool.cpp
+               misc/oem/oem_window.cpp misc/oem/oem_window.h
+
+               ${BASE_FILES}
+               ${SERVICE_FILES}
+               ${SYSINFO_FILES}
+
+               resources/resources.qrc
+               )
+target_link_libraries(deepin-installer-oem-tool ${LINK_LIBS})
+
 # Check settings ini file
+# TODO(xushaohua): Remove check_settings
 add_executable(deepin-installer-check-settings
-               "misc/check_settings.cpp"
+               misc/check_settings.cpp
 
                ${BASE_FILES}
                ${SERVICE_FILES}
@@ -217,14 +232,17 @@ target_link_libraries(deepin-installer-check-settings ${LINK_LIBS})
 
 # unsquasfs_progress
 add_executable(unsquashfs-progress-reborn
-               "misc/unsquashfs_progress.cpp"
+               misc/unsquashfs_progress.cpp
                
                ${BASE_FILES}
                )
 target_link_libraries(unsquashfs-progress-reborn ${Qt_LIBS})
 
+
 ## Installation
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem-tool"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/unsquashfs-progress-reborn"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
