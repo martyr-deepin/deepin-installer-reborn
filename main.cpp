@@ -13,6 +13,7 @@
 
 int main(int argc, char* argv[]) {
   service::RedirectLogFile();
+  service::InitLogService();
 
   QApplication app(argc, argv);
   // TODO(xushaohua): Set i18n

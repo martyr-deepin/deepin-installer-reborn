@@ -26,8 +26,10 @@ namespace {
 int g_log_fd = 0;
 
 // Defines log format.
-const char kLogFormat[] =
-    "%{time}{MM-dd, HH:mm:ss} [%{type:-7}] [%{file:-25} %{line}] %{message}\n";
+const char kDebugLogFormat[] =
+    "[%{type:-7}] [%{file:-25} %{line}] %{message}\n";
+
+const char kReleaseLogFormat[] = "[%{type:-7}] %{message}\n";
 
 const char kLogFileName[] = "deepin-installer-reborn.log";
 
@@ -94,19 +96,21 @@ void InitLogService() {
   ConsoleAppender* console_appender = new ConsoleAppender();
 #ifndef NDEBUG
   console_appender->setDetailsLevel(Logger::Debug);
+  console_appender->setFormat(kDebugLogFormat);
 #else
   console_appender->setDetailsLevel(Logger::Warning);
+  console_appender->setFormat(kReleaseLogFormat);
 #endif
-  console_appender->setFormat(kLogFormat);
   logger->registerAppender(console_appender);
 
   FileAppender* file_appender = new FileAppender(GetLogFilepath());
 #ifndef NDEBUG
   file_appender->setDetailsLevel(Logger::Debug);
+  file_appender->setFormat(kDebugLogFormat);
 #else
   file_appender->setDetailsLevel(Logger::Warning);
+  file_appender->setFormat(kReleaseLogFormat);
 #endif
-  file_appender->setFormat(kLogFormat);
   logger->registerAppender(file_appender);
 }
 
