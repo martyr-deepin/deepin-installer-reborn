@@ -51,6 +51,7 @@ bool MatchArchitecture(const QString& name) {
   const QString lower_name = name.toLower();
   if (arch == sysinfo::MachineArch::Unknown) {
     qWarning() << "MatchArchitecture() unknown architecture";
+    return false;
   }
 
   if (lower_name.lastIndexOf("alpha.job") > 0 &&
@@ -277,7 +278,8 @@ bool HooksManager::runHooksPack(HooksManager::HookType hook_type,
       emit this->errorOccurred();
       return false;
     }
-    const int progress = progress_begin + progress_end * i / hooks.length();
+    const int progress = progress_begin +
+        (progress_end - progress_begin) / hooks.length() * i;
     qDebug() << "processUpdate():" << progress;
     emit this->processUpdate(progress);
   }
@@ -395,9 +397,10 @@ void HooksManager::handleReadUnsquashfsTimeout() {
       int progress;
       if (overlay_filesystem_exists_) {
         progress = kBeforeChrootStartVal +
-                   (kBeforeChrootEndVal - 10) * val / 100;
+            (kBeforeChrootEndVal - kBeforeChrootStartVal - 10) * val / 100;
       } else {
-        progress = kBeforeChrootStartVal + kBeforeChrootEndVal * val / 100;
+        progress = kBeforeChrootStartVal +
+            (kBeforeChrootEndVal -kBeforeChrootStartVal) * val / 100;
       }
       emit this->processUpdate(progress);
 
@@ -412,8 +415,7 @@ void HooksManager::handleReadUnsquashfsTimeout() {
     }
     case UnsquashfsStage::ReadLang: {
       const int val = ReadProgressValue(kUnsquashfsBaseProgressFile);
-      const int progress = kBeforeChrootStartVal + kBeforeChrootEndVal -
-                           10 + 10 * val / 100;
+      const int progress = kBeforeChrootEndVal - 10 + 10 * val / 100;
       emit this->processUpdate(progress);
 
       if (progress >= 99) {
