@@ -6,6 +6,8 @@
 #define DEEPIN_INSTALLER_REBORN_MISC_OEM_MAIN_WINDOW_H
 
 #include <QFrame>
+#include <QtWidgets/QLineEdit>
+
 class QCheckBox;
 class QComboBox;
 class QLabel;
@@ -49,6 +51,10 @@ class OemWindow : public QFrame {
   QLabel* grub_timeout_value_label_ = nullptr;
   QSlider* grub_timeout_slider_ = nullptr;
   QCheckBox* grub_disable_windows_button_ = nullptr;
+
+  // Packages
+  QLineEdit* uninstalled_packages_edit_ = nullptr;
+  QLineEdit* hold_packages_edit_ = nullptr;
 
  private slots:
   void onGrubTimeoutSliderValueChanged(int value);

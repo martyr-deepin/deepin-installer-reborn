@@ -89,9 +89,15 @@ void OemWindow::initUI() {
   grub_timeout_layout->addWidget(grub_timeout_label);
   grub_timeout_layout->addWidget(grub_timeout_slider_);
   grub_timeout_layout->addWidget(grub_timeout_value_label_);
-
   grub_disable_windows_button_ = new QCheckBox("Disable Windows in grub menu");
   grub_disable_windows_button_->setCheckable(true);
+
+  // Packages
+  uninstalled_packages_edit_ = new QLineEdit();
+  uninstalled_packages_edit_->setPlaceholderText("packages to be uninstalled");
+  hold_packages_edit_ = new QLineEdit();
+  hold_packages_edit_->setPlaceholderText(
+      "packages to be prevented from uninstalling");
 
   QVBoxLayout* right_layout = new QVBoxLayout();
   right_layout->addWidget(skip_disk_space_insufficient_page_button_);
@@ -115,6 +121,9 @@ void OemWindow::initUI() {
 
   right_layout->addLayout(grub_timeout_layout);
   right_layout->addWidget(grub_disable_windows_button_);
+
+  right_layout->addWidget(uninstalled_packages_edit_);
+  right_layout->addWidget(hold_packages_edit_);
 
   QHBoxLayout* layout = new QHBoxLayout();
   layout->addLayout(right_layout);
