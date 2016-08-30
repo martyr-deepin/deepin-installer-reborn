@@ -123,8 +123,7 @@ bool ScanLatestOemDirInUsbStorage() {
 
     // Filesystem type of usb device is hard-coded!
     if (mount(device_path, kUsbMountPoint, "vfat", MS_NOATIME, NULL) != 0) {
-      qCritical() << "Failed to mount:" << usb_device;
-      perror("mount()");
+      qCritical() << "Failed to mount:" << usb_device << strerror(errno);
       return false;
     }
     // check folder and file exists
@@ -162,8 +161,7 @@ bool ScanLatestOemDirInUsbStorage() {
     // Mount that usb device.
     if (mount(latest_device.toStdString().c_str(), kUsbMountPoint,
               "vfat", MS_NOATIME, NULL) != 0) {
-      qCritical() << "Failed to mount:" << latest_device;
-      perror("mount()");
+      qCritical() << "Failed to mount:" << latest_device << strerror(errno);
       return false;
     }
     qDebug() << "Use usb device:" << latest_device;

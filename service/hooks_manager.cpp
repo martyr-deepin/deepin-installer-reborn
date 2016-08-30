@@ -148,7 +148,7 @@ bool HooksManager::bindHooks(HooksManager::HookType hook_type) {
             NULL, MS_BIND | MS_REC, NULL) != 0) {
     qCritical() << "bindHooks() failed to mount builtin hooks folder:"
                 << BUILTIN_HOOKS_DIR;
-    perror("mount()");
+    qCritical() << strerror(errno);
     return false;
   }
 
@@ -163,7 +163,7 @@ bool HooksManager::bindHooks(HooksManager::HookType hook_type) {
   if (mount(oem_src_dir.toStdString().c_str(), oem_dir.toStdString().c_str(),
             NULL, MS_BIND | MS_REC, NULL) != 0) {
     qCritical() << "bindHooks() failed to mount oem hooks folder" << oem_dir;
-    perror("mount()");
+    qCritical() << strerror(errno);
     return false;
   }
   return true;
@@ -172,16 +172,16 @@ bool HooksManager::bindHooks(HooksManager::HookType hook_type) {
 bool HooksManager::unbindHooks() {
   qDebug() << "unbindHooks()";
   if (umount(kBuiltinBindDir) != 0) {
-    qCritical() << "unbindHooks() failed to unmount builtin bind folder";
-    perror("umount()");
+    qCritical() << "unbindHooks() failed to unmount builtin bind folder!\n"
+                << strerror(errno);
     return false;
   }
 
   const QString chroot_builtin_dir =
       QString("%1%2").arg(kTargetDir).arg(kBuiltinBindDir);
   if (umount(chroot_builtin_dir.toStdString().c_str()) != 0) {
-    qCritical() << "unbindHooks() failed to unmount target builtin bind folder";
-    perror("umount()");
+    qCritical() << "unbindHooks() failed to unmount target builtin bind folder!"
+                << strerror(errno);
     return false;
   }
 
@@ -193,8 +193,8 @@ bool HooksManager::unbindHooks() {
   const QString chroot_oem_dir =
       QString("%1%2").arg(kTargetDir).arg(kOemBindDir);
   if (umount(chroot_oem_dir.toStdString().c_str()) != 0) {
-    qCritical() << "unbindHooks() failed to unmount target oem bind folder";
-    perror("umount()");
+    qCritical() << "unbindHooks() failed to unmount target oem bind folder!"
+                << strerror(errno);
     return false;
   }
   return true;
