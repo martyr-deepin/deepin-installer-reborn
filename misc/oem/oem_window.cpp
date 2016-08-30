@@ -21,6 +21,9 @@ namespace {
 const int kGrubTimeoutMinimum = 0;
 const int kGrubTimeoutMaximum = 30;
 
+// Add 20px between sections
+const int kSectionSpace = 20;
+
 }  // namespace
 
 OemWindow::OemWindow(QWidget* parent) : QFrame(parent) {
@@ -77,6 +80,10 @@ void OemWindow::initUI() {
   default_password_edit_ = new QLineEdit();
   default_password_edit_->setPlaceholderText("default password");
 
+  // Partition
+  default_fs_combo_ = new QComboBox();
+  default_fs_combo_->addItems({"btrfs", "ext4", "ext3", "xfs"});
+
   // Grub tab
   QLabel* grub_timeout_label = new QLabel();
   grub_timeout_label->setText("Grub menu timeout:");
@@ -99,6 +106,16 @@ void OemWindow::initUI() {
   hold_packages_edit_->setPlaceholderText(
       "packages to be prevented from uninstalling");
 
+  // Dock
+  append_apps_to_dock_edit_ = new QLineEdit();
+  append_apps_to_dock_edit_->setPlaceholderText("apps appending to dock");
+
+  // Services
+  enabled_services_edit_ = new QLineEdit();
+  enabled_services_edit_->setPlaceholderText("enabled services");
+  disabled_services_edit_ = new QLineEdit();
+  disabled_services_edit_->setPlaceholderText("disabled services");
+
   QVBoxLayout* right_layout = new QVBoxLayout();
   right_layout->addWidget(skip_disk_space_insufficient_page_button_);
   right_layout->addWidget(skip_virtual_machine_page_button_);
@@ -106,9 +123,11 @@ void OemWindow::initUI() {
   right_layout->addWidget(skip_system_info_page_button_);
   right_layout->addWidget(skip_partition_page_button_);
 
+  right_layout->addSpacing(kSectionSpace);
   right_layout->addWidget(use_default_locale_button_);
   right_layout->addLayout(default_locale_layout);
 
+  right_layout->addSpacing(kSectionSpace);
   right_layout->addWidget(vendor_name_edit_);
   right_layout->addWidget(os_name_edit_);
   right_layout->addWidget(os_version_edit_);
@@ -119,14 +138,38 @@ void OemWindow::initUI() {
   right_layout->addWidget(use_default_password_button_);
   right_layout->addWidget(default_password_edit_);
 
+  right_layout->addSpacing(kSectionSpace);
+  right_layout->addWidget(default_fs_combo_);
+
+  right_layout->addSpacing(kSectionSpace);
   right_layout->addLayout(grub_timeout_layout);
   right_layout->addWidget(grub_disable_windows_button_);
 
+  right_layout->addSpacing(kSectionSpace);
   right_layout->addWidget(uninstalled_packages_edit_);
   right_layout->addWidget(hold_packages_edit_);
 
+  right_layout->addSpacing(kSectionSpace);
+  right_layout->addWidget(append_apps_to_dock_edit_);
+
+  right_layout->addSpacing(kSectionSpace);
+  right_layout->addWidget(enabled_services_edit_);
+  right_layout->addWidget(disabled_services_edit_);
+
+  QVBoxLayout* left_layout = new QVBoxLayout();
+  QFrame* left_frame = new QFrame();
+  left_frame->setLayout(left_layout);
+  QScrollArea* left_scroll_area = new QScrollArea();
+  left_scroll_area->setWidget(left_frame);
+
+  QFrame* right_frame = new QFrame();
+  right_frame->setLayout(right_layout);
+  right_scroll_area_ = new QScrollArea();
+  right_scroll_area_->setWidget(right_frame);
+
   QHBoxLayout* layout = new QHBoxLayout();
-  layout->addLayout(right_layout);
+  layout->addWidget(left_scroll_area);
+  layout->addWidget(right_scroll_area_);
   this->setLayout(layout);
 }
 

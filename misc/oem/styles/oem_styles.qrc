@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/oem_styles">
+    <file>section_label.css</file>
+  </qresource>
+</RCC>

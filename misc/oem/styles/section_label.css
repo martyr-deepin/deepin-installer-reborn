@@ -1,0 +1,6 @@
+/** Used in SectionLabel class **/
+
+QLabel {
+  padding: 20px 5px 5px 5px;
+  font-weight: bold;
+}

@@ -59,6 +59,12 @@ set(BASE_FILES
     base/string_util.cpp base/string_util.h
     )
 
+set(OEM_FILES
+    misc/oem_tool.cpp
+    misc/oem/oem_window.cpp misc/oem/oem_window.h
+    misc/oem/section_label.cpp misc/oem/section_label.h
+    )
+
 set(PARTMAN_FILES
     partman/structs.h
     )
@@ -205,13 +211,12 @@ target_link_libraries(deepin-installer-reborn-tests
 
 # deepin-installer-oem-tool
 add_executable(deepin-installer-oem-tool
-               misc/oem_tool.cpp
-               misc/oem/oem_window.cpp misc/oem/oem_window.h
-
+               ${OEM_FILES}
                ${BASE_FILES}
                ${SERVICE_FILES}
                ${SYSINFO_FILES}
 
+               misc/oem/styles/oem_styles.qrc
                resources/resources.qrc
                )
 target_link_libraries(deepin-installer-oem-tool ${LINK_LIBS})

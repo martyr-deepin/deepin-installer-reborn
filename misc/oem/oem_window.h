@@ -7,6 +7,8 @@
 
 #include <QFrame>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QScrollArea>
 
 class QCheckBox;
 class QComboBox;
@@ -47,6 +49,9 @@ class OemWindow : public QFrame {
   QLineEdit* os_name_edit_ = nullptr;
   QLineEdit* os_version_edit_ = nullptr;
 
+  // Partition
+  QComboBox* default_fs_combo_ = nullptr;
+
   // Grub
   QLabel* grub_timeout_value_label_ = nullptr;
   QSlider* grub_timeout_slider_ = nullptr;
@@ -55,6 +60,15 @@ class OemWindow : public QFrame {
   // Packages
   QLineEdit* uninstalled_packages_edit_ = nullptr;
   QLineEdit* hold_packages_edit_ = nullptr;
+
+  // Dock
+  QLineEdit* append_apps_to_dock_edit_ = nullptr;
+
+  // Service
+  QLineEdit* enabled_services_edit_ = nullptr;
+  QLineEdit* disabled_services_edit_ = nullptr;
+
+  QScrollArea* right_scroll_area_ = nullptr;
 
  private slots:
   void onGrubTimeoutSliderValueChanged(int value);
