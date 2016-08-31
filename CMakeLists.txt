@@ -66,6 +66,8 @@ set(OEM_FILES
     )
 
 set(PARTMAN_FILES
+    partman/device.cpp partman/device.h
+    partman/partition.cpp partman/partition.h
     partman/structs.h
     )
 
@@ -181,6 +183,7 @@ add_executable(deepin-installer-reborn
                main.cpp
 
                ${BASE_FILES}
+               ${PARTMAN_FILES}
                ${SERVICE_FILES}
                ${SYSINFO_FILES}
                ${UI_FILES}

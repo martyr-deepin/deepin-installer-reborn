@@ -18,9 +18,9 @@ typedef long long ByteValue;
 const ByteValue kKibiByte = 1024;
 const ByteValue kMebiByte = kKibiByte * kKibiByte;
 const ByteValue kGibiByte = kMebiByte * kKibiByte;
-const ByteValue kTebiByte = kGibiByte * kKibiByte;
-const ByteValue kPebiByte = kTebiByte * kKibiByte;
-const ByteValue kExbiByte = kPebiByte * kKibiByte;
+//const ByteValue kTebiByte = kGibiByte * kKibiByte;
+//const ByteValue kPebiByte = kTebiByte * kKibiByte;
+//const ByteValue kExbiByte = kPebiByte * kKibiByte;
 
 }  // namespace partman
 
