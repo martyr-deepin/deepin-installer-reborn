@@ -221,20 +221,6 @@ add_executable(deepin-installer-oem-tool
                )
 target_link_libraries(deepin-installer-oem-tool ${LINK_LIBS})
 
-# Check settings ini file
-# TODO(xushaohua): Remove check_settings
-add_executable(deepin-installer-check-settings
-               misc/check_settings.cpp
-
-               ${BASE_FILES}
-               ${SERVICE_FILES}
-               ${SYSINFO_FILES}
-
-               resources/resources.qrc
-               )
-target_link_libraries(deepin-installer-check-settings ${LINK_LIBS})
-
-
 # unsquasfs_progress
 add_executable(unsquashfs-progress-reborn
                misc/unsquashfs_progress.cpp
