@@ -67,6 +67,7 @@ set(OEM_FILES
 
 set(PARTMAN_FILES
     partman/device.cpp partman/device.h
+    partman/operation.cpp partman/operation.h
     partman/partition.cpp partman/partition.h
     partman/structs.h
     )
