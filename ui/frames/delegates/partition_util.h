@@ -7,6 +7,8 @@
 
 #include <QtCore/QtGlobal>
 
+#include "partman/fs.h"
+
 namespace ui {
 
 // Get partition name based on |path|.
@@ -17,6 +19,8 @@ QString GetPartitionUsage(qint64 freespace, qint64 total);
 
 // Convert |size| in byte to gigbyte.
 int ToGigByte(qint64 size);
+
+QString GetFsTypeName(partman::FsType fs_type);
 
 }  // namespace ui
 

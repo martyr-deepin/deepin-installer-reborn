@@ -49,22 +49,22 @@ void AdvancedPartitionFrame::initUI() {
 void AdvancedPartitionFrame::onDeviceRefreshed() {
   qDebug() << "advanced partition frame: on device refreshed()";
 
-  for (const DeviceWrap& device : partition_delegate_->devices) {
+  for (const partman::Device& device : partition_delegate_->devices) {
     qDebug() << "=======================";
-    qDebug() << device.device.model;
-    QLabel* model_label = new QLabel(device.device.model);
+    qDebug() << device.model;
+    QLabel* model_label = new QLabel(device.model);
     partition_layout_->addWidget(model_label);
-    for (const PartitionWrap& partition : device.partitions) {
-      qDebug() << "partition:" << partition.partition.path;
-      if ((partition.partition.type != service::PartitionType::Normal) &&
-          (partition.partition.type != service::PartitionType::Logical) &&
-          (partition.partition.type != service::PartitionType::Freespace)) {
+    for (const partman::Partition& partition : device.partitions) {
+      qDebug() << "partition:" << partition.path;
+      if ((partition.type != partman::PartitionType::Primary) &&
+          (partition.type != partman::PartitionType::Logical) &&
+          (partition.type != partman::PartitionType::Unallocated)) {
         continue;
       }
 
       // Filters freespace partition based on size.
-      if (partition.partition.type == service::PartitionType::Freespace &&
-          partition.partition.length < kMinimumPartitionSizeToDisplay) {
+      if (partition.type == partman::PartitionType::Unallocated &&
+          partition.length < kMinimumPartitionSizeToDisplay) {
         continue;
       }
 

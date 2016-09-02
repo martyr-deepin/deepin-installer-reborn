@@ -22,6 +22,25 @@ const ByteValue kGibiByte = kMebiByte * kKibiByte;
 //const ByteValue kPebiByte = kTebiByte * kKibiByte;
 //const ByteValue kExbiByte = kPebiByte * kKibiByte;
 
+enum class OsType {
+  Empty,
+  Linux,
+  Mac,
+  Unknown,
+  Windows,
+};
+
+enum class PartitionTableType {
+  Empty,  // Raw disk has empty partition table type.
+  GPT,
+  MsDos,
+  Others,  // Not supported partition types.
+  Unknown,
+};
+
+const char kPartationTableGPT[] = "gpt";
+const char kPartationTableMsDos[] = "msdos";
+
 }  // namespace partman
 
 #endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_STRUCTS_H

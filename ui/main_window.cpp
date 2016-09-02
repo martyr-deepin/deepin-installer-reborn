@@ -16,7 +16,8 @@
 #include <QStackedLayout>
 #include <QVBoxLayout>
 
-#include "service/partition_manager.h"
+#include "partman/partition_manager.h"
+#include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
@@ -55,7 +56,7 @@ int GetVisiblePages() {
 }
 
 bool IsDiskSpaceInsufficient() {
-  const qint64 maximum_device_size = service::GetMaximumDeviceSize();
+  const qint64 maximum_device_size = partman::GetMaximumDeviceSize();
   const int required_device_size = service::GetSettingsValue(
       service::kPartitionMinimumDiskSpaceRequired).toInt();
   return required_device_size * 1024 * 1024 > maximum_device_size;
@@ -63,14 +64,14 @@ bool IsDiskSpaceInsufficient() {
 
 // Check whether partition table matches machine settings.
 bool IsPartitionTableMatch() {
-  service::PartitionTableType type = service::GetPrimaryDiskPartitionTable();
-  if (type == service::PartitionTableType::Empty) {
+  partman::PartitionTableType type = partman::GetPrimaryDiskPartitionTable();
+  if (type == partman::PartitionTableType::Empty) {
     return true;
   }
-  if (service::IsEfiEnabled()) {
-    return type == service::PartitionTableType::GPT;
+  if (partman::IsEfiEnabled()) {
+    return type == partman::PartitionTableType::GPT;
   } else {
-    return type == service::PartitionTableType::MsDos;
+    return type == partman::PartitionTableType::MsDos;
   }
 }
 

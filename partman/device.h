@@ -18,19 +18,23 @@ class Device {
 
   void reset();
 
-  QList<Partition> partitions;
-  Sector length;
+  PartitionList partitions;
+  QString model;
+  QString path;
+  Sector length;  // device length
   Sector heads;
   Sector sectors;
   Sector cylinders;
   Sector cylsize;
-  QString model;
-  QString path;
   QString disk_type;
-  int sector_size;
+  ByteValue sector_size;  // logical sector size
   int max_prims;
   bool read_only;
+
+  PartitionTableType table;
 };
+
+typedef QList<Device> DeviceList;
 
 }  // namespace partman
 

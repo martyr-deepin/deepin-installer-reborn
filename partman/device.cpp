@@ -23,6 +23,7 @@ void Device::reset() {
   sector_size = 0;
   max_prims = 0;
   read_only = false;
+  table = PartitionTableType::Unknown;
 }
 
 }  // namespace partman

@@ -9,7 +9,7 @@
 
 class QLabel;
 
-#include "service/partition_manager_structs.h"
+#include "partman/partition.h"
 
 namespace ui {
 
@@ -17,14 +17,14 @@ class SimplePartitionButton : public FlatButton {
   Q_OBJECT
 
  public:
-  SimplePartitionButton(const service::Partition& partition,
+  SimplePartitionButton(const partman::Partition& partition,
                         QWidget* parent = nullptr);
 
  private:
   void initConnections();
   void initUI();
 
-  const service::Partition& partition_;
+  const partman::Partition& partition_;
 
   QLabel* fs_label_ = nullptr;
 

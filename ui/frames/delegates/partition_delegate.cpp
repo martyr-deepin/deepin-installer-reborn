@@ -6,7 +6,7 @@
 
 #include <QThread>
 
-#include "service/partition_manager.h"
+#include "partman/partition_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "service/signal_manager.h"
@@ -16,7 +16,7 @@ namespace ui {
 PartitionDelegate::PartitionDelegate(QObject* parent)
     : QObject(parent),
       devices(),
-      partition_manager_(new service::PartitionManager()),
+      partition_manager_(new partman::PartitionManager()),
       partition_thread_(new QThread()) {
   this->setObjectName(QStringLiteral("partition_delegate"));
 
@@ -48,30 +48,17 @@ void PartitionDelegate::autoConf() {
 
 void PartitionDelegate::initConnections() {
   service::SignalManager* signal_manager = service::SignalManager::instance();
-  connect(partition_manager_, &service::PartitionManager::autoPartDone,
+  connect(partition_manager_, &partman::PartitionManager::autoPartDone,
           signal_manager, &service::SignalManager::autoPartDone);
-  connect(partition_manager_, &service::PartitionManager::manualPartDone,
+  connect(partition_manager_, &partman::PartitionManager::manualPartDone,
           signal_manager, &service::SignalManager::manualPartDone);
 
-  connect(partition_manager_, &service::PartitionManager::devicesRefreshed,
+  connect(partition_manager_, &partman::PartitionManager::devicesRefreshed,
           this, &PartitionDelegate::onDevicesRefreshed);
 }
 
-void PartitionDelegate::onDevicesRefreshed(const service::DeviceList& devices) {
-  this->devices.clear();
-  for (const service::Device& device : devices) {
-    DeviceWrap device_wrap;
-    device_wrap.device = device;
-    PartitionWrapList partitions;
-    for (const service::Partition& partition : device.partitions) {
-      PartitionWrap partition_wrap;
-      partition_wrap.partition = partition;
-      partitions.append(partition_wrap);
-    }
-    device_wrap.partitions = partitions;
-
-    this->devices.append(device_wrap);
-  }
+void PartitionDelegate::onDevicesRefreshed(const partman::DeviceList& devices) {
+  this->devices = devices;
 
   emit this->deviceRefreshed();
 }

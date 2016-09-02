@@ -2,11 +2,16 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "service/inner/partition_format.h"
+#include "partman/partition_format.h"
+
+#include <QDebug>
 
 #include "base/command.h"
+#include "partman/fs.h"
+#include "partition.h"
 
-namespace service {
+namespace partman {
+namespace {
 
 bool FormatBtrfs(const QString& path, const QString& label) {
   return base::SpawnCmd("mkfs.btrfs", {QString("-L '%1'").arg(label), path});
@@ -86,4 +91,73 @@ bool FormatXfs(const QString& path, const QString& label) {
                         {"-f", QString("-L '%1'").arg(label), path});
 }
 
-}  // namespace service
+}  // namespace
+
+
+// Make filesystem on |partition| based on its fs type.
+void Mkfs(Partition& partition) {
+  switch (partition.fs) {
+    case FsType::Btrfs: {
+      FormatBtrfs(partition.path, partition.label);
+      break;
+    }
+    case FsType::Ext2: {
+      FormatExt2(partition.path, partition.label);
+      break;
+    }
+    case FsType::Ext3: {
+      FormatExt3(partition.path, partition.label);
+      break;
+    }
+    case FsType::Ext4: {
+      FormatExt4(partition.path, partition.label);
+      break;
+    }
+    case FsType::Fat16: {
+      FormatFat16(partition.path, partition.label);
+      break;
+    }
+    case FsType::EFI:
+    case FsType::Fat32: {
+      FormatFat32(partition.path, partition.label);
+      break;
+    }
+    case FsType::Hfs: {
+      FormatHfs(partition.path, partition.label);
+      break;
+    }
+    case FsType::HfsPlus: {
+      FormatHfsPlus(partition.path, partition.label);
+      break;
+    }
+    case FsType::Jfs: {
+      FormatJfs(partition.path, partition.label);
+      break;
+    }
+    case FsType::LinuxSwap: {
+      FormatLinuxSwap(partition.path, partition.label);
+      break;
+    }
+    case FsType::NTFS: {
+      FormatNTFS(partition.path, partition.label);
+      break;
+    }
+    case FsType::Reiser4: {
+      FormatReiser4(partition.path, partition.label);
+      break;
+    }
+    case FsType::Reiserfs: {
+      FormatReiserfs(partition.path, partition.label);
+      break;
+    }
+    case FsType::Xfs: {
+      FormatXfs(partition.path, partition.label);
+      break;
+    }
+    default: {
+      qWarning() << "Unsupported filesystem to format!" << partition.path;
+    }
+  }
+}
+
+}  // namespace partman

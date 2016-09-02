@@ -12,7 +12,7 @@
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
-#include "service/partition_manager_structs.h"
+#include "partman/structs.h"
 #include "ui/frames/delegates/partition_delegate.h"
 #include "ui/widgets/simple_partition_button.h"
 
@@ -64,9 +64,9 @@ void SimplePartitionFrame::onDeviceRefreshed() {
   // Draw partitions.
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setAlignment(Qt::AlignCenter);
-  for (const DeviceWrap& device : partition_delegate_->devices) {
+  for (const partman::Device& device : partition_delegate_->devices) {
     qDebug() << "=======================";
-    qDebug() << device.device.model;
+    qDebug() << device.model;
     QGridLayout* grid_layout = new QGridLayout();
     grid_layout->setHorizontalSpacing(20);
     grid_layout->setVerticalSpacing(20);
@@ -74,22 +74,21 @@ void SimplePartitionFrame::onDeviceRefreshed() {
     int row = 0, column = 0;
 
     qDebug() << "partition size:" << device.partitions.length();
-    for (const PartitionWrap& partition : device.partitions) {
-      qDebug() << "partition:" << partition.partition.path;
-      if ((partition.partition.type != service::PartitionType::Normal) &&
-          (partition.partition.type != service::PartitionType::Logical) &&
-          (partition.partition.type != service::PartitionType::Freespace)) {
+    for (const partman::Partition& partition : device.partitions) {
+      qDebug() << "partition:" << partition.path;
+      if ((partition.type != partman::PartitionType::Primary) &&
+          (partition.type != partman::PartitionType::Logical) &&
+          (partition.type != partman::PartitionType::Unallocated)) {
         continue;
       }
 
       // Filters freespace partition based on size.
-      if (partition.partition.type == service::PartitionType::Freespace &&
-          partition.partition.length < kMinimumPartitionSizeToDisplay) {
+      if (partition.type == partman::PartitionType::Unallocated &&
+          partition.length < kMinimumPartitionSizeToDisplay) {
         continue;
       }
 
-      SimplePartitionButton* button =
-          new SimplePartitionButton(partition.partition);
+      SimplePartitionButton* button = new SimplePartitionButton(partition);
       partition_button_group_->addButton(button);
       grid_layout->addWidget(button, row, column);
       qDebug() << "add button:" << row << column;

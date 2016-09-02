@@ -2,14 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SERVICE_PARTITION_MANAGER_H
-#define DEEPIN_INSTALLER_REBORN_SERVICE_PARTITION_MANAGER_H
+#ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_MANAGER_H
+#define DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_MANAGER_H
 
 #include <QObject>
 
-#include "service/partition_manager_structs.h"
+#include "partman/device.h"
 
-namespace service {
+namespace partman {
 
 class PartitionManager : public QObject {
   Q_OBJECT
@@ -39,18 +39,6 @@ class PartitionManager : public QObject {
   void doManualPart();
 };
 
-QString GetFsTypeName(FsType fs_type);
-FsType GetFsTypeByName(const QString& name);
+}  // namespace partman
 
-// Check if EFI feature is enabled in this machine.
-bool IsEfiEnabled();
-
-// Get maximum device size, by parsing /proc/partitions.
-qint64 GetMaximumDeviceSize();
-
-// Returns partition table type of the first disk device.
-PartitionTableType GetPrimaryDiskPartitionTable();
-
-}  // namespace service
-
-#endif  // DEEPIN_INSTALLER_REBORN_SERVICE_PARTITION_MANAGER_H
+#endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_MANAGER_H

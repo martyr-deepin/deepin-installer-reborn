@@ -9,15 +9,15 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-#include "service/partition_manager.h"
-#include "ui/utils/partition_util.h"
+#include "partman/partition_manager.h"
+#include "ui/frames/delegates/partition_util.h"
 #include "ui/widgets/flat_button.h"
 #include "ui/widgets/partition_usage_bar.h"
 
 namespace ui {
 
-AdvancedPartitionItem::AdvancedPartitionItem(const PartitionWrap& partition,
-                                             QWidget* parent)
+AdvancedPartitionItem::AdvancedPartitionItem(
+    const partman::Partition& partition, QWidget* parent)
     : QFrame(parent),
       partition_(partition),
       edit_delete_button_state_(EditDeleteButtonState::Hide) {
@@ -65,26 +65,25 @@ void AdvancedPartitionItem::initUI() {
   // filesystem type
   // partition label
   partition_label_ = new QLabel();
-  if (!partition_.partition.label.isEmpty()) {
-    partition_label_->setText(partition_.partition.label);
+  if (!partition_.label.isEmpty()) {
+    partition_label_->setText(partition_.label);
   } else {
-    partition_label_->setText(GetPartitionName(partition_.partition.path));
+    partition_label_->setText(GetPartitionName(partition_.path));
   }
   partition_label_->setObjectName(QStringLiteral("partition_label"));
 
   partition_path_label_ = new QLabel();
   partition_path_label_->setText(
-      QString("(%1)").arg(GetPartitionName(partition_.partition.path)));
+      QString("(%1)").arg(GetPartitionName(partition_.path)));
   partition_path_label_->setObjectName(QStringLiteral("partition_path_label"));
 
   // partition space usage
   usage_label_ = new QLabel();
-  usage_label_->setText(
-      GetPartitionUsage(partition_.partition.freespace,
-                        partition_.partition.length));
+  usage_label_->setText(GetPartitionUsage(partition_.freespace,
+                                          partition_.length));
   usage_label_->setObjectName(QStringLiteral("usage_label"));
-  PartitionUsageBar* usage_bar = new PartitionUsageBar(
-      partition_.partition.freespace, partition_.partition.length);
+  PartitionUsageBar* usage_bar = new PartitionUsageBar(partition_.freespace,
+                                                       partition_.length);
 
   // mount point
   mount_point_label_ = new QLabel();
@@ -96,7 +95,7 @@ void AdvancedPartitionItem::initUI() {
 
   // filesystem name
   fs_type_label_ = new QLabel();
-  fs_type_label_->setText(service::GetFsTypeName(partition_.partition.fs));
+  fs_type_label_->setText(GetFsTypeName(partition_.fs));
   fs_type_label_->setObjectName(QStringLiteral("fs_type_label"));
 
   // edit/delete button

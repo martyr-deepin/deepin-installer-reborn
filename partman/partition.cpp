@@ -26,7 +26,7 @@ void Partition::reset() {
   sector_end = -1;
   sectors_used = -1;
   sectors_unused = -1;
-  sectors_unallocated = -1;
+  sectors_unallocated = 0;
   flags.clear();
   logicals.clear();
 }

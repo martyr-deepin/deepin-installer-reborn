@@ -10,28 +10,28 @@
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
-#include "ui/utils/partition_util.h"
+#include "ui/frames/delegates/partition_util.h"
 #include "ui/widgets/partition_usage_bar.h"
 
 namespace ui {
 
 namespace {
 
-QString GetImageByOsType(service::OsType os_type) {
+QString GetImageByOsType(partman::OsType os_type) {
   switch (os_type) {
-    case service::OsType::Empty: {
+    case partman::OsType::Empty: {
       return QStringLiteral(":/images/drive-harddisk-128px.png");
     }
-    case service::OsType::Linux: {
+    case partman::OsType::Linux: {
       return QStringLiteral(":/images/drive-harddisk-linux-128px.png");
     }
-    case service::OsType::Mac: {
+    case partman::OsType::Mac: {
       return QStringLiteral(":/images/drive-harddisk-mac-128px.png");
     }
-    case service::OsType::Unknown: {
+    case partman::OsType::Unknown: {
       return QStringLiteral(":/images/drive-harddisk-128px.png");
     }
-    case service::OsType::Windows: {
+    case partman::OsType::Windows: {
       return QStringLiteral(":/images/drive-harddisk-windows-128px.png");
     }
   }
@@ -41,7 +41,7 @@ QString GetImageByOsType(service::OsType os_type) {
 }  // namespace
 
 SimplePartitionButton::SimplePartitionButton(
-    const service::Partition& partition, QWidget* parent)
+    const partman::Partition& partition, QWidget* parent)
     : FlatButton(parent),
       partition_(partition) {
   this->setObjectName(QStringLiteral("simple_partition_button"));

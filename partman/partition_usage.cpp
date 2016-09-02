@@ -2,17 +2,19 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "service/inner/partition_usage.h"
+#include "partition_usage.h"
 
+#include <QDebug>
 #include <QProcess>
 #include <QRegExp>
 
 #include "base/command.h"
 #include "base/string_util.h"
-#include "service/partition_manager_structs.h"
+#include "partman/fs.h"
+#include "partman/structs.h"
 #include "sysinfo/proc_swaps.h"
 
-namespace service {
+namespace partman {
 
 namespace {
 
@@ -35,8 +37,6 @@ qint64 ParseBtrfsUnit(const QString& value) {
   }
   return 0;
 }
-
-}  // namespace
 
 bool ReadBtrfsUsage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
@@ -236,4 +236,70 @@ bool ReadXfsUsage(const QString& path, qint64& freespace, qint64& total) {
   return true;
 }
 
-}  // namespace service
+}  // namespace
+
+// Update partition usage.
+void ReadUsage(Partition& partition) {
+  bool ok = false;
+  ByteValue total = 0;
+  ByteValue freespace = 0;
+  switch (partition.fs) {
+    case FsType::Btrfs: {
+      ok = ReadBtrfsUsage(partition.path, freespace, total);
+      break;
+    }
+    case FsType::Ext2:
+    case FsType::Ext3:
+    case FsType::Ext4: {
+      ok = ReadExt2Usage(partition.path, freespace, total);
+      break;
+    }
+    case FsType::EFI:
+    case FsType::Fat16:
+    case FsType::Fat32: {
+      ok = ReadFat16Usage(partition.path, freespace, total);
+      break;
+    }
+    case FsType::Hfs:
+    case FsType::HfsPlus: {
+      break;
+    }
+    case FsType::Jfs: {
+      ok = ReadJfsUsage(partition.path, freespace, total);
+      break;
+    }
+    case FsType::LinuxSwap: {
+      ok = ReadLinuxSwapUsage(partition.path, freespace, total);
+      break;
+    }
+    case FsType::NTFS: {
+      ok = ReadNTFSUsage(partition.path, freespace, total);
+      break;
+    }
+    case FsType::Reiser4: {
+      ok = ReadReiser4Usage(partition.path, freespace, total);
+      break;
+    }
+    case FsType::Reiserfs: {
+      ok = ReadReiserfsUsage(partition.path, freespace, total);
+      break;
+    }
+    case FsType::Xfs: {
+      ok = ReadXfsUsage(partition.path, freespace, total);
+      break;
+    }
+    default: {
+      break;
+    }
+  }
+  if (ok) {
+    partition.length = total;
+    partition.freespace = freespace;
+  } else {
+    qWarning() << "Failed to read usage:" << partition.path;
+    partition.length = 0;
+    partition.freespace = 0;
+  }
+}
+
+}  // namespace partman

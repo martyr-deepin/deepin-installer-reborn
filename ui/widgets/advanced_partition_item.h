@@ -18,7 +18,7 @@ class AdvancedPartitionItem : public QFrame {
   Q_OBJECT
 
  public:
-  AdvancedPartitionItem(const PartitionWrap& partition,
+  AdvancedPartitionItem(const partman::Partition& partition,
                         QWidget* parent = nullptr);
 
   enum class EditDeleteButtonState {
@@ -44,7 +44,7 @@ class AdvancedPartitionItem : public QFrame {
   void initConnections();
   void initUI();
 
-  const PartitionWrap& partition_;
+  const partman::Partition& partition_;
 
   FlatButton* edit_delete_button_ = nullptr;
   EditDeleteButtonState edit_delete_button_state_;

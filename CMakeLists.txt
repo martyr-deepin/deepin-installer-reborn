@@ -67,23 +67,24 @@ set(OEM_FILES
 
 set(PARTMAN_FILES
     partman/device.cpp partman/device.h
+    partman/fs.cpp partman/fs.h
     partman/operation.cpp partman/operation.h
     partman/partition.cpp partman/partition.h
+    partman/partition_format.cpp partman/partition_format.h
+    partman/partition_label.cpp partman/partition_label.h
+    partman/partition_manager.cpp partman/partition_manager.h
+    partman/partition_usage.cpp partman/partition_usage.h
     partman/structs.h
+    partman/utils.cpp partman/utils.h
     )
 
 set(SERVICE_FILES
     service/hooks_manager.cpp service/hooks_manager.h
     service/log_manager.cpp service/log_manager.h
-    service/partition_manager.cpp service/partition_manager.h
     service/settings_manager.cpp service/settings_manager.h
-    service/partition_manager_structs.h
     service/signal_manager.cpp service/signal_manager.h
     service/system_language.cpp service/system_language.h
     service/settings_name.h
-    service/inner/partition_format.cpp service/inner/partition_format.h
-    service/inner/partition_label.cpp service/inner/partition_label.h
-    service/inner/partition_usage.cpp service/inner/partition_usage.h
     )
 
 set(SYSINFO_FILES
@@ -146,7 +147,7 @@ set(UI_FILES
     ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
     ui/widgets/table_item_label.cpp ui/widgets/table_item_label.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
-    ui/utils/partition_util.cpp ui/utils/partition_util.h
+    ui/frames/delegates/partition_util.cpp ui/frames/delegates/partition_util.h
     ui/utils/xutil.cpp ui/utils/xutil.h
     )
 

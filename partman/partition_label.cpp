@@ -2,14 +2,16 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "service/inner/partition_label.h"
+#include "partman/partition_label.h"
 
 #include <QProcess>
 
 #include "base/command.h"
 #include "base/string_util.h"
 
-namespace service {
+namespace partman {
+
+namespace {
 
 QString ReadBtrfsLabel(const QString& path) {
   QString output;
@@ -57,7 +59,7 @@ QString ReadJfsLabel(const QString& path) {
 QString ReadLinuxSwapLabel(const QString& path) {
   QString output;
   if (base::SpawnCmd("swaplabel", {path}, output)) {
-    if (!output.isEmpty()){
+    if (!output.isEmpty()) {
       return base::RegexpLabel("LABEL:\\s*([^\\n]*)", output);
     }
   }
@@ -99,4 +101,62 @@ QString ReadXfsLabel(const QString& path) {
   return QString();
 }
 
-}  // namespace service
+}  // namespace
+
+void ReadLabel(Partition& partition) {
+  QString label;
+  switch (partition.fs) {
+    case FsType::Btrfs: {
+      label = ReadBtrfsLabel(partition.path);
+      break;
+    }
+    case FsType::Ext2:
+    case FsType::Ext3:
+    case FsType::Ext4: {
+      label = ReadExt2Label(partition.path);
+      break;
+    }
+    case FsType::EFI:
+    case FsType::Fat16:
+    case FsType::Fat32: {
+      label = ReadFat16Label(partition.path);
+      break;
+    }
+    case FsType::Hfs:
+    case FsType::HfsPlus: {
+      label = ReadHfsLabel(partition.path);
+      break;
+    }
+    case FsType::Jfs: {
+      label = ReadJfsLabel(partition.path);
+      break;
+    }
+    case FsType::LinuxSwap: {
+      label = ReadLinuxSwapLabel(partition.path);
+      break;
+    }
+    case FsType::NTFS: {
+      label = ReadNTFSLabel(partition.path);
+      break;
+    }
+    case FsType::Reiser4: {
+      label = ReadReiser4Label(partition.path);
+      break;
+    }
+    case FsType::Reiserfs: {
+      label = ReadReiserfsLabel(partition.path);
+      break;
+    }
+    case FsType::Xfs: {
+      label = ReadXfsLabel(partition.path);
+      break;
+    }
+    default: {
+      partition.label = "";
+      break;
+    }
+  }
+  partition.label = label.trimmed();
+}
+
+}  // namespace partman

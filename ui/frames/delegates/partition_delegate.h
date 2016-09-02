@@ -8,38 +8,18 @@
 #include <QObject>
 class QThread;
 
-#include "service/partition_manager_structs.h"
-namespace service {
+#include "partman/device.h"
+#include "partman/fs.h"
+#include "partman/partition.h"
+
+namespace partman {
 class PartitionManager;
-}  // namespace service
+}  // namespace partman
 
 namespace ui {
 
 // 100M, filter partition size.
 const qint64 kMinimumPartitionSizeToDisplay = 100 * 1024 * 1024;
-
-enum class PartitionOperations {
-  Null,
-  Create,
-  Delete,
-  Format,
-};
-
-struct PartitionWrap {
-  service::Partition partition;
-  PartitionOperations ops = PartitionOperations::Null;
-  QString mount_point;
-  service::FsType new_fs_type = service::FsType::Empty;
-};
-
-typedef QList<PartitionWrap> PartitionWrapList;
-
-struct DeviceWrap {
-  service::Device device;
-  PartitionWrapList partitions;
-};
-
-typedef QList<DeviceWrap> DeviceWrapList;
 
 // PartitionManager proxy layer.
 class PartitionDelegate : public QObject {
@@ -51,7 +31,7 @@ class PartitionDelegate : public QObject {
 
   void autoConf();
 
-  DeviceWrapList devices;
+  partman::DeviceList devices;
 
  signals:
   // Emitted after scanning local disk devices.
@@ -66,11 +46,11 @@ class PartitionDelegate : public QObject {
  private:
   void initConnections();
 
-  service::PartitionManager* partition_manager_ = nullptr;
+  partman::PartitionManager* partition_manager_ = nullptr;
   QThread* partition_thread_ = nullptr;
 
  private slots:
-  void onDevicesRefreshed(const service::DeviceList& devices);
+  void onDevicesRefreshed(const partman::DeviceList& devices);
 };
 
 }  // namespace ui
