@@ -64,15 +64,19 @@ bool IsDiskSpaceInsufficient() {
 
 // Check whether partition table matches machine settings.
 bool IsPartitionTableMatch() {
+  // If EFI is not enabled, always returns true.
+  if (!partman::IsEfiEnabled()) {
+    return true;
+  }
+
   partman::PartitionTableType type = partman::GetPrimaryDiskPartitionTable();
+
+  // If partition table is empty(a raw disk device), returns true.
   if (type == partman::PartitionTableType::Empty) {
     return true;
   }
-  if (partman::IsEfiEnabled()) {
-    return type == partman::PartitionTableType::GPT;
-  } else {
-    return type == partman::PartitionTableType::MsDos;
-  }
+
+  return type == partman::PartitionTableType::GPT;
 }
 
 }  // namespace
@@ -360,7 +364,7 @@ void MainWindow::goNextPage() {
 
     case PageId::VirtualMachineId: {
       // Check whether to show PartitionTableWarningPage.
-      if (IsPartitionTableMatch()) {
+      if (!IsPartitionTableMatch()) {
         page_indicator_->setVisible(false);
         this->setCurrentPage(PageId::PartitionTableWarningId);
       } else {

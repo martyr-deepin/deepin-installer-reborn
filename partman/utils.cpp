@@ -6,6 +6,7 @@
 
 #include <parted/parted.h>
 #include <string.h>
+#include <QDebug>
 #include <QDir>
 #include <QString>
 
