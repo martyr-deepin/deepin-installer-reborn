@@ -15,9 +15,10 @@ namespace ui {
 
 PartitionDelegate::PartitionDelegate(QObject* parent)
     : QObject(parent),
-      devices(),
       partition_manager_(new partman::PartitionManager()),
-      partition_thread_(new QThread()) {
+      partition_thread_(new QThread()),
+      devices_(),
+      operations_() {
   this->setObjectName(QStringLiteral("partition_delegate"));
 
   partition_manager_->moveToThread(partition_thread_);
@@ -58,7 +59,27 @@ void PartitionDelegate::initConnections() {
 }
 
 void PartitionDelegate::onDevicesRefreshed(const partman::DeviceList& devices) {
-  this->devices = devices;
+  this->devices_ = devices;
+  for (partman::Device& device : devices_) {
+    partman::PartitionList new_partitions;
+    for (const partman::Partition& partition : device.partitions) {
+      // Filter partitions and devices.
+      if ((partition.type != partman::PartitionType::Primary) &&
+          (partition.type != partman::PartitionType::Logical) &&
+          (partition.type != partman::PartitionType::Unallocated)) {
+        continue;
+      }
+      // Filters freespace partition based on size.
+      if (partition.type == partman::PartitionType::Unallocated &&
+          partition.length < kMinimumPartitionSizeToDisplay) {
+        continue;
+      }
+      new_partitions.append(partition);
+    }
+
+    // Update partition list.
+    device.partitions = new_partitions;
+  }
 
   emit this->deviceRefreshed();
 }

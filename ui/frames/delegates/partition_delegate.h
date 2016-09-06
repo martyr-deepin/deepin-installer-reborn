@@ -9,9 +9,7 @@
 class QThread;
 
 #include "partman/device.h"
-#include "partman/fs.h"
-#include "partman/partition.h"
-
+#include "ui/frames/delegates/operation.h"
 namespace partman {
 class PartitionManager;
 }  // namespace partman
@@ -29,9 +27,10 @@ class PartitionDelegate : public QObject {
   explicit PartitionDelegate(QObject* parent = nullptr);
   ~PartitionDelegate();
 
+  // Notify PartitionManager to do auto-part
   void autoConf();
 
-  partman::DeviceList devices;
+  const partman::DeviceList& devices() const { return devices_; }
 
  signals:
   // Emitted after scanning local disk devices.
@@ -40,14 +39,14 @@ class PartitionDelegate : public QObject {
   // Emitted when a specific partition is created/edited/deleted.
   void partitionEdited();
 
-  // Emitted when system root partition is updated.
-  void rootPartitionUpdated();
-
  private:
   void initConnections();
 
   partman::PartitionManager* partition_manager_ = nullptr;
   QThread* partition_thread_ = nullptr;
+
+  partman::DeviceList devices_;
+  OperationList operations_;
 
  private slots:
   void onDevicesRefreshed(const partman::DeviceList& devices);

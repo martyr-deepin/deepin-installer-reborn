@@ -8,7 +8,6 @@
 #include <QList>
 
 #include "partman/partition.h"
-#include "partman/structs.h"
 
 namespace partman {
 

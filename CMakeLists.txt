@@ -68,7 +68,6 @@ set(OEM_FILES
 set(PARTMAN_FILES
     partman/device.cpp partman/device.h
     partman/fs.cpp partman/fs.h
-    partman/operation.cpp partman/operation.h
     partman/partition.cpp partman/partition.h
     partman/partition_format.cpp partman/partition_format.h
     partman/partition_label.cpp partman/partition_label.h
@@ -105,7 +104,9 @@ set(UI_FILES
     ui/main_window.cpp ui/main_window.h
     ui/frames/consts.h
     ui/frames/delegates/language_list_delegate.cpp ui/frames/delegates/language_list_delegate.h
+    ui/frames/delegates/operation.cpp ui/frames/delegates/operation.h
     ui/frames/delegates/partition_delegate.cpp ui/frames/delegates/partition_delegate.h
+
     ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
     ui/frames/inner/edit_partition_frame.cpp ui/frames/inner/edit_partition_frame.h
     ui/frames/inner/new_partition_frame.cpp ui/frames/inner/new_partition_frame.h
@@ -116,7 +117,9 @@ set(UI_FILES
     ui/frames/inner/system_info_avatar_frame.cpp ui/frames/inner/system_info_avatar_frame.h
     ui/frames/inner/system_info_form_frame.cpp ui/frames/inner/system_info_form_frame.h
     ui/frames/inner/system_info_timezone_frame.cpp ui/frames/inner/system_info_timezone_frame.h
+
     ui/frames/models/language_list_model.cpp ui/frames/models/language_list_model.h
+
     ui/frames/confirm_quit_frame.cpp ui/frames/confirm_quit_frame.h
     ui/frames/disk_space_insufficient_frame.cpp ui/frames/disk_space_insufficient_frame.h
     ui/frames/install_failed_frame.cpp ui/frames/install_failed_frame.h
@@ -128,6 +131,7 @@ set(UI_FILES
     ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
     ui/frames/system_info_frame.cpp ui/frames/system_info_frame.h
     ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h
+
     ui/widgets/advanced_partition_item.cpp ui/widgets/advanced_partition_item.h
     ui/widgets/avatar_button.cpp ui/widgets/avatar_button.h
     ui/widgets/comment_label.cpp ui/widgets/comment_label.h
@@ -148,8 +152,9 @@ set(UI_FILES
     ui/widgets/table_item_label.cpp ui/widgets/table_item_label.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
     ui/frames/delegates/partition_util.cpp ui/frames/delegates/partition_util.h
+
     ui/utils/xutil.cpp ui/utils/xutil.h
-    )
+    ui/frames/delegates/operation_delete.cpp ui/frames/delegates/operation_delete.h)
 
 set(UNITTEST_FILES
     sysinfo/dev_uuid_test.cpp

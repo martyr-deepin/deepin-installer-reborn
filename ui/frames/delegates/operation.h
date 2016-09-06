@@ -5,9 +5,11 @@
 #ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_OPERATION_H
 #define DEEPIN_INSTALLER_REBORN_PARTMAN_OPERATION_H
 
+#include <QList>
+
 #include "partman/device.h"
 
-namespace partman {
+namespace ui {
 
 enum class OperationType {
   Create,
@@ -20,12 +22,14 @@ class Operation {
   Operation();
   virtual ~Operation() {}
 
-  Device device;
+  QString device_path;
   OperationType type;
-  Partition partition_original;
-  Partition partition_new;
+  partman::Partition partition_original;
+  partman::Partition partition_new;
 };
 
-}  // namespace partman
+typedef QList<Operation> OperationList;
+
+}  // namespace ui
 
 #endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_OPERATION_H

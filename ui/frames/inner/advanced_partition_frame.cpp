@@ -49,25 +49,12 @@ void AdvancedPartitionFrame::initUI() {
 void AdvancedPartitionFrame::onDeviceRefreshed() {
   qDebug() << "advanced partition frame: on device refreshed()";
 
-  for (const partman::Device& device : partition_delegate_->devices) {
+  for (const partman::Device& device : partition_delegate_->devices()) {
     qDebug() << "=======================";
     qDebug() << device.model;
     QLabel* model_label = new QLabel(device.model);
     partition_layout_->addWidget(model_label);
     for (const partman::Partition& partition : device.partitions) {
-      qDebug() << "partition:" << partition.path;
-      if ((partition.type != partman::PartitionType::Primary) &&
-          (partition.type != partman::PartitionType::Logical) &&
-          (partition.type != partman::PartitionType::Unallocated)) {
-        continue;
-      }
-
-      // Filters freespace partition based on size.
-      if (partition.type == partman::PartitionType::Unallocated &&
-          partition.length < kMinimumPartitionSizeToDisplay) {
-        continue;
-      }
-
       AdvancedPartitionItem* item = new AdvancedPartitionItem(partition);
       partition_layout_->addWidget(item);
     }

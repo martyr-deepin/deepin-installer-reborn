@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "partman/operation.h"
+#include "ui/frames/delegates/operation.h"
 
-namespace partman {
+namespace ui {
 
 Operation::Operation() {
 
 }
 
-}  // namespace partman
+}  // namespace ui

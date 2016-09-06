@@ -64,7 +64,7 @@ void SimplePartitionFrame::onDeviceRefreshed() {
   // Draw partitions.
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setAlignment(Qt::AlignCenter);
-  for (const partman::Device& device : partition_delegate_->devices) {
+  for (const partman::Device& device : partition_delegate_->devices()) {
     qDebug() << "=======================";
     qDebug() << device.model;
     QGridLayout* grid_layout = new QGridLayout();
@@ -76,17 +76,7 @@ void SimplePartitionFrame::onDeviceRefreshed() {
     qDebug() << "partition size:" << device.partitions.length();
     for (const partman::Partition& partition : device.partitions) {
       qDebug() << "partition:" << partition.path;
-      if ((partition.type != partman::PartitionType::Primary) &&
-          (partition.type != partman::PartitionType::Logical) &&
-          (partition.type != partman::PartitionType::Unallocated)) {
-        continue;
-      }
 
-      // Filters freespace partition based on size.
-      if (partition.type == partman::PartitionType::Unallocated &&
-          partition.length < kMinimumPartitionSizeToDisplay) {
-        continue;
-      }
 
       SimplePartitionButton* button = new SimplePartitionButton(partition);
       partition_button_group_->addButton(button);
