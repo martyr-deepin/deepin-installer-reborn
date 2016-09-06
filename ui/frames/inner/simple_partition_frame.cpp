@@ -18,9 +18,16 @@
 
 namespace ui {
 
+namespace {
+
+// 4 partitions are displays at each row.
+const int kPartitionColumns = 4;
+
+}
+
 SimplePartitionFrame::SimplePartitionFrame(
     PartitionDelegate* partition_delegate, QWidget* parent)
-    : QFrame(parent),
+    : QScrollArea(parent),
       partition_delegate_(partition_delegate) {
   this->setObjectName(QStringLiteral("simple_partition_frame"));
 
@@ -46,53 +53,63 @@ void SimplePartitionFrame::initUI() {
   tip_label->setAlignment(Qt::AlignCenter);
 
   tip_layout->addStretch();
-  // TODO(xushaohua): Add an icon.
   tip_layout->addWidget(tip_label);
   tip_layout->addStretch();
 
   install_tip_ = new QFrame(this);
   // Same width as SimplePartitionButton.
+  // TODO(xushaohua): Add a const variable.
   install_tip_->setFixedWidth(220);
   install_tip_->setLayout(tip_layout);
   install_tip_->hide();
-  install_tip_->setStyleSheet(
-      base::ReadTextFileContent(":/styles/simple_partition_install_tip.css"));
+
+//  this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//  this->setSizeAdjustPolicy(Q)
+  this->ensureVisible(0, 0, 640, 480);
+  this->setWidgetResizable(true);
+  this->setStyleSheet(
+      base::ReadTextFileContent(":/styles/simple_partition_frame.css"));
 }
 
-void SimplePartitionFrame::onDeviceRefreshed() {
-  qDebug() << "simple-partition-frame::on device refreshed";
+void SimplePartitionFrame::drawDevices() {
   // Draw partitions.
+
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setAlignment(Qt::AlignCenter);
   for (const partman::Device& device : partition_delegate_->devices()) {
-    qDebug() << "=======================";
-    qDebug() << device.model;
+    QLabel* device_model_label = new QLabel(device.model);
+    device_model_label->setObjectName("device_model");
+
     QGridLayout* grid_layout = new QGridLayout();
     grid_layout->setHorizontalSpacing(20);
     grid_layout->setVerticalSpacing(20);
+    // Make sure that widgets in grid are left-aligned.
+    grid_layout->setColumnStretch(kPartitionColumns, 1);
+    layout->addWidget(device_model_label);
     layout->addLayout(grid_layout);
     int row = 0, column = 0;
 
-    qDebug() << "partition size:" << device.partitions.length();
     for (const partman::Partition& partition : device.partitions) {
-      qDebug() << "partition:" << partition.path;
-
-
       SimplePartitionButton* button = new SimplePartitionButton(partition);
       partition_button_group_->addButton(button);
-      grid_layout->addWidget(button, row, column);
-      qDebug() << "add button:" << row << column;
+      grid_layout->addWidget(button, row, column, Qt::AlignLeft);
 
       column ++;
       // Add rows.
-      if (column > 3) {
+      if (column >= kPartitionColumns) {
         column = 0;
         row ++;
       }
     }
   }
 
-  this->setLayout(layout);
+  QFrame* wrapper = new QFrame();
+  wrapper->setLayout(layout);
+  this->setWidget(wrapper);
+}
+
+void SimplePartitionFrame::onDeviceRefreshed() {
+  this->drawDevices();
 }
 
 void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
