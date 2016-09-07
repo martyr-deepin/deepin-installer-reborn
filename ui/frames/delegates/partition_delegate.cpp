@@ -69,13 +69,12 @@ void PartitionDelegate::onDevicesRefreshed(const partman::DeviceList& devices) {
     partman::PartitionList new_partitions;
     for (const partman::Partition& partition : device.partitions) {
       // Filter partitions and devices.
-      if ((partition.type != partman::PartitionType::Primary) &&
-          (partition.type != partman::PartitionType::Logical) &&
-          (partition.type != partman::PartitionType::Unallocated)) {
+      if (partition.type == partman::PartitionType::Extended) {
         continue;
       }
       // Filters freespace partition based on size.
-      if (partition.type == partman::PartitionType::Unallocated &&
+      if ((partition.type == partman::PartitionType::Unallocated ||
+           partition.type == partman::PartitionType::LogicalUnallocated) &&
           partition.length < kMinimumPartitionSizeToDisplay) {
         continue;
       }

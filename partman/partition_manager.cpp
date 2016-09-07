@@ -62,38 +62,30 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
     qDebug() << "============================";
 
     // Skip useless partitions.
-    if (!ped_partition_is_active(lp_partition) ||
-        (lp_partition->type & PED_PARTITION_METADATA)) {
+    if (lp_partition->type & PED_PARTITION_METADATA) {
       continue;
     }
 
     Partition partition;
-    switch (lp_partition->type) {
-      case PED_PARTITION_NORMAL: {
-        partition.type = PartitionType::Primary;
-        qDebug() << "normal";
-        break;
-      }
-      case PED_PARTITION_FREESPACE: {
-        partition.type = PartitionType::Unallocated;
-        qDebug() << "freespace";
-        break;
-      }
-      case PED_PARTITION_LOGICAL: {
-        partition.type = PartitionType::Logical;
-        qDebug() << "logical";
-        break;
-      }
-      case PED_PARTITION_EXTENDED: {
-        partition.type = PartitionType::Extended;
-        qDebug() << "extended";
-        break;
-      }
+    if (lp_partition->type == PED_PARTITION_NORMAL) {
+      partition.type = PartitionType::Primary;
+      qDebug() << "normal";
+    } else if (lp_partition->type == PED_PARTITION_EXTENDED) {
+      partition.type = PartitionType::Extended;
+      qDebug() << "extended";
+    } else if (lp_partition->type ==
+        (PED_PARTITION_FREESPACE | PED_PARTITION_LOGICAL)) {
+      qDebug() << "logical freespace";
+      partition.type = PartitionType::LogicalUnallocated;
+    } else if (lp_partition->type == PED_PARTITION_LOGICAL) {
+      partition.type = PartitionType::Logical;
+      qDebug() << "logical";
+    } else if (lp_partition->type == PED_PARTITION_FREESPACE) {
+      partition.type = PartitionType::Unallocated;
+      qDebug() << "freespace";
+    } else {
+      qDebug() << "unknown partition type" << lp_partition->type;
 
-      default: {
-        qDebug() << "unknown partition type";
-        break;
-      }
     }
 
     if (lp_partition->fs_type) {
@@ -102,8 +94,11 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
       partition.fs = FsType::Unknown;
     }
     partition.sector_start = lp_partition->geom.start;
+    qDebug() << "sector start:" << partition.sector_start;
     partition.sectors_total = lp_partition->geom.length;
+    qDebug() << "sector total:" << partition.sectors_total;
     partition.sector_end = lp_partition->geom.end;
+    qDebug() << "sector end:" << partition.sector_end;
     partition.path = ped_partition_get_path(lp_partition);
     qDebug() << "partition path:" << partition.path;
     // Avoid reading additional filesystem information if there is no path.

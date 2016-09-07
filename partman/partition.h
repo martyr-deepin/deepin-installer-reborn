@@ -18,6 +18,7 @@ enum class PartitionType {
   Logical,
   Extended,
   Unallocated,
+  LogicalUnallocated,
 };
 
 enum class PartitionStatus {
