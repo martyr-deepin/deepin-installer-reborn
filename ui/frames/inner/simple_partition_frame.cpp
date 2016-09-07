@@ -64,11 +64,11 @@ void SimplePartitionFrame::initUI() {
   install_tip_->hide();
 
 //  this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-//  this->setSizeAdjustPolicy(Q)
-  this->ensureVisible(0, 0, 640, 480);
   this->setWidgetResizable(true);
+  this->setFixedSize(980, 580);
   this->setStyleSheet(
       base::ReadTextFileContent(":/styles/simple_partition_frame.css"));
+  this->setAttribute(Qt::WA_TranslucentBackground, true);
 }
 
 void SimplePartitionFrame::drawDevices() {
@@ -105,6 +105,7 @@ void SimplePartitionFrame::drawDevices() {
 
   QFrame* wrapper = new QFrame();
   wrapper->setLayout(layout);
+//  wrapper->setAttribute(Qt::WA_TranslucentBackground, true);
   this->setWidget(wrapper);
 }
 

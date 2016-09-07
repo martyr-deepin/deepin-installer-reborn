@@ -56,14 +56,17 @@ namespace {
 
 void ReadPartitions(Device& device, PedDisk* lp_disk,
                     const sysinfo::UUIDItems& uuid_items) {
-  PedPartition* lp_partition = ped_disk_next_partition(lp_disk, NULL);
-  while (lp_partition != NULL) {
-//    if (lp_partition->type != PED_PARTITION_LOGICAL &&
-//        lp_partition->type != PED_PARTITION_FREESPACE &&
-//        lp_partition->type != PED_PARTITION_NORMAL) {
-//      continue;
-//    }
+  for (PedPartition* lp_partition = ped_disk_next_partition(lp_disk, NULL);
+      lp_partition != NULL;
+      lp_partition = ped_disk_next_partition(lp_disk, lp_partition)) {
     qDebug() << "============================";
+
+    // Skip useless partitions.
+    if (!ped_partition_is_active(lp_partition) ||
+        (lp_partition->type & PED_PARTITION_METADATA)) {
+      continue;
+    }
+
     Partition partition;
     switch (lp_partition->type) {
       case PED_PARTITION_NORMAL: {
@@ -87,7 +90,10 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
         break;
       }
 
-      default: break;
+      default: {
+        qDebug() << "unknown partition type";
+        break;
+      }
     }
 
     if (lp_partition->fs_type) {
@@ -101,7 +107,8 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
     partition.path = ped_partition_get_path(lp_partition);
     qDebug() << "partition path:" << partition.path;
     // Avoid reading additional filesystem information if there is no path.
-    if (!partition.path.isEmpty()) {
+    if (!partition.path.isEmpty() &&
+        partition.type != PartitionType::Unallocated) {
       ReadLabel(partition);
       qDebug() << "partition label:" << partition.label;
 
@@ -122,8 +129,6 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
     if (partition.sector_end > -1) {
       device.partitions.append(partition);
     }
-
-    lp_partition = ped_disk_next_partition(lp_disk, lp_partition);
   }
 }
 

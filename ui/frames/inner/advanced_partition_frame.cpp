@@ -41,8 +41,12 @@ void AdvancedPartitionFrame::initConnections() {
 void AdvancedPartitionFrame::initUI() {
   partition_layout_ = new QVBoxLayout();
 
+  QFrame* wrapper = new QFrame();
+  wrapper->setLayout(partition_layout_);
   QScrollArea* main_area = new QScrollArea();
-  main_area->setLayout(partition_layout_);
+  main_area->setWidget(wrapper);
+//  main_area->resize(640, 480);
+  partition_layout_->setSizeConstraint(QLayout::SetMinAndMaxSize);
 
   bootloader_selection_button_ = new QPushButton("Select bootloader");
   enable_editing_button_ = new QPushButton(tr("Edit"));
@@ -67,6 +71,7 @@ void AdvancedPartitionFrame::drawDevices() {
     for (const partman::Partition& partition : device.partitions) {
       AdvancedPartitionItem* item = new AdvancedPartitionItem(partition);
       partition_layout_->addWidget(item);
+      item->show();
 
       connect(enable_editing_button_, &QPushButton::toggled,
               item, &AdvancedPartitionItem::setEditable);

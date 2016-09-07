@@ -1,9 +1,5 @@
 /** Used in SimplePartitionFrame class **/
 
-QScrollArea {
-  background: transparent;
-}
-
 QLabel#tip_label {
   color: #c9663c;
 }
