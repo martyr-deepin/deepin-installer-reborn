@@ -32,6 +32,9 @@ class PartitionDelegate : public QObject {
 
   const partman::DeviceList& devices() const { return devices_; }
 
+  // Delete a partition at |partition_path|.
+  void deletePartition(const QString& partition_path);
+
  signals:
   // Emitted after scanning local disk devices.
   void deviceRefreshed();

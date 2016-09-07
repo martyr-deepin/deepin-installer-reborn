@@ -26,12 +26,15 @@ EditPartitionFrame::EditPartitionFrame(QWidget* parent) : QFrame(parent) {
   this->initConnections();
 }
 
-void EditPartitionFrame::setPartition() {
-
+void EditPartitionFrame::setPath(const QString& partition_path) {
+  Q_UNUSED(partition_path);
 }
 
 void EditPartitionFrame::initConnections() {
-
+  connect(cancel_button_, &QPushButton::clicked,
+          this, &EditPartitionFrame::finished);
+  connect(ok_button_, &QPushButton::clicked,
+          this, &EditPartitionFrame::onOkButtonClicked);
 }
 
 void EditPartitionFrame::initUI() {
@@ -90,6 +93,11 @@ void EditPartitionFrame::initUI() {
   layout->addLayout(ok_layout);
 
   this->setLayout(layout);
+}
+
+void EditPartitionFrame::onOkButtonClicked() {
+  // TODO(xushaohua): Create an OperationModify object
+  emit this->finished();
 }
 
 }  // namespace ui

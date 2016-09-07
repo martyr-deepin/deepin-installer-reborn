@@ -9,6 +9,7 @@
 class QLabel;
 
 #include "ui/frames/delegates/partition_delegate.h"
+#include "flat_button.h"
 
 namespace ui {
 
@@ -21,24 +22,21 @@ class AdvancedPartitionItem : public QFrame {
   AdvancedPartitionItem(const partman::Partition& partition,
                         QWidget* parent = nullptr);
 
-  enum class EditDeleteButtonState {
-    Hide,  // hide edit-delete-button
-    Edit,  // displays as edit-partition-button
-    Delete,  // displays as delete-partition-button
-  };
-
-  // Update edit-delete-button state.
-  void setEditDeleteButtonState(EditDeleteButtonState state);
+  void setEditable(bool editable);
 
   void setMountPoint(const QString& mount_point);
   void setFilesystemType(const QString& fs);
 
  signals:
   // Emitted when delete partition button is clicked.
-  void deletePartitionTriggered();
+  void deletePartitionTriggered(const QString& partition_path);
 
-  // Emitted when edition partition partition is clicked.
-  void editPartitionTriggered();
+  // Emitted when edit-partition button is clicked.
+  void editPartitionTriggered(const QString& partition_path);
+
+  // Emitted when edit-partition button is clicked and type of current
+  // partition is Unallocated.
+  void newPartitionTriggered(const QString& partition_path);
 
  private:
   void initConnections();
@@ -46,18 +44,20 @@ class AdvancedPartitionItem : public QFrame {
 
   const partman::Partition& partition_;
 
-  FlatButton* edit_delete_button_ = nullptr;
-  EditDeleteButtonState edit_delete_button_state_;
-
   QLabel* partition_label_ = nullptr;
   QLabel* partition_path_label_ = nullptr;
   QLabel* usage_label_ = nullptr;
   QLabel* mount_point_label_ = nullptr;
   QLabel* tip_label_ = nullptr;
   QLabel* fs_type_label_ = nullptr;
+  FlatButton* edit_button_ = nullptr;
+  FlatButton* delete_button_ = nullptr;
+
+  bool selected_;
 
  private slots:
-  void onEditDeleteButtonClicked();
+  void onDeleteButtonClicked();
+  void onEditButtonClicked();
 };
 
 }  // namespace ui

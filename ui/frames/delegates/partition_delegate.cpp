@@ -47,6 +47,11 @@ void PartitionDelegate::autoConf() {
   emit partition_manager_->autoPart();
 }
 
+void PartitionDelegate::deletePartition(const QString& partition_path) {
+  Q_UNUSED(partition_path);
+  // TODO(xushaohua): Create an OperationDelete object.
+}
+
 void PartitionDelegate::initConnections() {
   service::SignalManager* signal_manager = service::SignalManager::instance();
   connect(partition_manager_, &partman::PartitionManager::autoPartDone,

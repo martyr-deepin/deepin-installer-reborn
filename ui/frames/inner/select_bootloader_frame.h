@@ -11,6 +11,7 @@ namespace ui {
 
 class NavButton;
 
+// Displays a window to select available boot path.
 class SelectBootloaderFrame : public QFrame {
   Q_OBJECT
 
@@ -18,6 +19,7 @@ class SelectBootloaderFrame : public QFrame {
   explicit SelectBootloaderFrame(QWidget* parent = nullptr);
 
  signals:
+  // Emitted when back-button is clicked.
   void finished();
 
  private:

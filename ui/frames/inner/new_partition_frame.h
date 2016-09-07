@@ -19,14 +19,11 @@ class NewPartitionFrame : public QFrame {
  public:
   explicit NewPartitionFrame(QWidget* parent = nullptr);
 
-  void setPartition();
+  // Reset partition information at |partition_path|.
+  void setPath(const QString& partition_path);
 
  signals:
-  // Emitted when aborting creating new partition.
-  void canceled();
-
-  // Emitted when a new partition is created.
-  void created();
+  void finished();
 
  private:
   void initConnections();
@@ -40,6 +37,9 @@ class NewPartitionFrame : public QFrame {
 
   NavButton* cancel_button_ = nullptr;
   NavButton* create_button_ = nullptr;
+
+ private slots:
+  void onCreateButtonClicked();
 };
 
 }  // namespace ui

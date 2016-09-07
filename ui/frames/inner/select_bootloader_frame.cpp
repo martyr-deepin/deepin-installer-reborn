@@ -22,7 +22,8 @@ SelectBootloaderFrame::SelectBootloaderFrame(QWidget* parent) : QFrame(parent) {
 }
 
 void SelectBootloaderFrame::initConnections() {
-
+  connect(back_button_, &QPushButton::clicked,
+          this, &SelectBootloaderFrame::finished);
 }
 
 void SelectBootloaderFrame::initUI() {

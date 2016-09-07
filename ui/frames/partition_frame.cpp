@@ -5,6 +5,7 @@
 #include "ui/frames/partition_frame.h"
 
 #include <QButtonGroup>
+#include <QDebug>
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QStackedLayout>
@@ -51,10 +52,28 @@ void PartitionFrame::initConnections() {
   connect(partition_delegate_, &PartitionDelegate::deviceRefreshed,
           this, &PartitionFrame::showMainFrame);
 
+  connect(advanced_partition_frame_,
+          &AdvancedPartitionFrame::requestEditPartitionFrame,
+          this, &PartitionFrame::showEditPartitionFrame);
+  connect(advanced_partition_frame_,
+          &AdvancedPartitionFrame::requestNewPartitionFrame,
+          this, &PartitionFrame::showNewPartitionFrame);
+  connect(advanced_partition_frame_,
+          &AdvancedPartitionFrame::requestSelectBootloaderFrame,
+          this, &PartitionFrame::showSelectBootloaderFrame);
+
+  connect(edit_partition_frame_, &EditPartitionFrame::finished,
+          this, &PartitionFrame::showMainFrame);
+  connect(new_partition_frame_, &NewPartitionFrame::finished,
+          this, &PartitionFrame::showMainFrame);
+
   connect(prepare_install_frame_, &PrepareInstallFrame::aborted,
           this, &PartitionFrame::showMainFrame);
   connect(prepare_install_frame_, &PrepareInstallFrame::finished,
           this, &PartitionFrame::finished);
+
+  connect(select_bootloader_frame_, &SelectBootloaderFrame::finished,
+          this, &PartitionFrame::showMainFrame);
 }
 
 void PartitionFrame::initUI() {
@@ -150,8 +169,22 @@ void PartitionFrame::onNextButtonClicked() {
   }
 }
 
+void PartitionFrame::showEditPartitionFrame(const QString& partition_path) {
+  edit_partition_frame_->setPath(partition_path);
+  main_layout_->setCurrentWidget(edit_partition_frame_);
+}
+
 void PartitionFrame::showMainFrame() {
   main_layout_->setCurrentWidget(main_frame_);
+}
+
+void PartitionFrame::showNewPartitionFrame(const QString& partition_path) {
+  new_partition_frame_->setPath(partition_path);
+  main_layout_->setCurrentWidget(new_partition_frame_);
+}
+
+void PartitionFrame::showSelectBootloaderFrame() {
+  main_layout_->setCurrentWidget(select_bootloader_frame_);
 }
 
 }  // namespace ui

@@ -26,15 +26,15 @@ NewPartitionFrame::NewPartitionFrame(QWidget* parent) : QFrame(parent) {
   this->initConnections();
 }
 
-void NewPartitionFrame::setPartition() {
-
+void NewPartitionFrame::setPath(const QString& partition_path) {
+  Q_UNUSED(partition_path);
 }
 
 void NewPartitionFrame::initConnections() {
   connect(cancel_button_, &QPushButton::clicked,
-          this, &NewPartitionFrame::canceled);
+          this, &NewPartitionFrame::finished);
   connect(create_button_, &QPushButton::clicked,
-          this, &NewPartitionFrame::created);
+          this, &NewPartitionFrame::onCreateButtonClicked);
 }
 
 void NewPartitionFrame::initUI() {
@@ -108,6 +108,11 @@ void NewPartitionFrame::initUI() {
   layout->addLayout(create_layout);
 
   this->setLayout(layout);
+}
+
+void NewPartitionFrame::onCreateButtonClicked() {
+  // TODO(xushaohua): Create an OperationNew object
+  emit this->finished();
 }
 
 }  // namespace ui

@@ -8,6 +8,7 @@
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QPushButton>
 #include <QScrollArea>
 #include <QVBoxLayout>
 
@@ -29,6 +30,12 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(
 void AdvancedPartitionFrame::initConnections() {
   connect(partition_delegate_, &PartitionDelegate::deviceRefreshed,
           this, &AdvancedPartitionFrame::onDeviceRefreshed);
+
+  connect(bootloader_selection_button_, &QPushButton::clicked,
+          this, &AdvancedPartitionFrame::requestSelectBootloaderFrame);
+
+  connect(enable_editing_button_, &QPushButton::toggled,
+          this, &AdvancedPartitionFrame::onEditButtonToggled);
 }
 
 void AdvancedPartitionFrame::initUI() {
@@ -37,7 +44,14 @@ void AdvancedPartitionFrame::initUI() {
   QScrollArea* main_area = new QScrollArea();
   main_area->setLayout(partition_layout_);
 
+  bootloader_selection_button_ = new QPushButton("Select bootloader");
+  enable_editing_button_ = new QPushButton(tr("Edit"));
+  enable_editing_button_->setCheckable(true);
+  enable_editing_button_->setChecked(false);
   QHBoxLayout* bottom_layout = new QHBoxLayout();
+  bottom_layout->addWidget(bootloader_selection_button_);
+  bottom_layout->addStretch();
+  bottom_layout->addWidget(enable_editing_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->addWidget(main_area);
@@ -46,18 +60,37 @@ void AdvancedPartitionFrame::initUI() {
   this->setLayout(layout);
 }
 
-void AdvancedPartitionFrame::onDeviceRefreshed() {
-  qDebug() << "advanced partition frame: on device refreshed()";
-
+void AdvancedPartitionFrame::drawDevices() {
   for (const partman::Device& device : partition_delegate_->devices()) {
-    qDebug() << "=======================";
-    qDebug() << device.model;
     QLabel* model_label = new QLabel(device.model);
     partition_layout_->addWidget(model_label);
     for (const partman::Partition& partition : device.partitions) {
       AdvancedPartitionItem* item = new AdvancedPartitionItem(partition);
       partition_layout_->addWidget(item);
+
+      connect(enable_editing_button_, &QPushButton::toggled,
+              item, &AdvancedPartitionItem::setEditable);
+
+      connect(item, &AdvancedPartitionItem::editPartitionTriggered,
+              this, &AdvancedPartitionFrame::requestEditPartitionFrame);
+      connect(item, &AdvancedPartitionItem::newPartitionTriggered,
+              this, &AdvancedPartitionFrame::requestNewPartitionFrame);
+
+      connect(item, &AdvancedPartitionItem::deletePartitionTriggered,
+              partition_delegate_, &PartitionDelegate::deletePartition);
     }
+  }
+}
+
+void AdvancedPartitionFrame::onDeviceRefreshed() {
+  this->drawDevices();
+}
+
+void AdvancedPartitionFrame::onEditButtonToggled(bool toggle) {
+  if (toggle) {
+    enable_editing_button_->setText(tr("Done"));
+  } else {
+    enable_editing_button_->setText(tr("Edit"));
   }
 }
 

@@ -20,31 +20,23 @@ AdvancedPartitionItem::AdvancedPartitionItem(
     const partman::Partition& partition, QWidget* parent)
     : QFrame(parent),
       partition_(partition),
-      edit_delete_button_state_(EditDeleteButtonState::Hide) {
+      selected_(false) {
   this->setObjectName(QStringLiteral("advanced_partition_item"));
 
   this->initUI();
   this->initConnections();
 }
 
-void AdvancedPartitionItem::setEditDeleteButtonState(
-    EditDeleteButtonState state) {
-  switch (state) {
-    case EditDeleteButtonState::Delete: {
-      edit_delete_button_->setIcon(QIcon(":/images/delete_partition.png"));
-      edit_delete_button_->show();
-      break;
+void AdvancedPartitionItem::setEditable(bool editable) {
+  if (editable) {
+    edit_button_->hide();
+    delete_button_->show();
+  } else {
+    if (selected_) {
+      edit_button_->show();
     }
-    case EditDeleteButtonState::Edit: {
-      edit_delete_button_->setIcon(QIcon(":/images/edit_partition.png"));
-      edit_delete_button_->show();
-      break;
-    }
-    case EditDeleteButtonState::Hide: {
-      edit_delete_button_->hide();
-    }
+    delete_button_->hide();
   }
-  edit_delete_button_state_ = state;
 }
 
 void AdvancedPartitionItem::setMountPoint(const QString& mount_point) {
@@ -56,8 +48,10 @@ void AdvancedPartitionItem::setFilesystemType(const QString& fs) {
 }
 
 void AdvancedPartitionItem::initConnections() {
-  connect(edit_delete_button_, &QPushButton::clicked,
-          this, &AdvancedPartitionItem::onEditDeleteButtonClicked);
+  connect(delete_button_, &QPushButton::clicked,
+          this, &AdvancedPartitionItem::onDeleteButtonClicked);
+  connect(edit_button_, &QPushButton::clicked,
+          this, &AdvancedPartitionItem::onEditButtonClicked);
 }
 
 void AdvancedPartitionItem::initUI() {
@@ -98,10 +92,12 @@ void AdvancedPartitionItem::initUI() {
   fs_type_label_->setText(GetFsTypeName(partition_.fs));
   fs_type_label_->setObjectName(QStringLiteral("fs_type_label"));
 
-  // edit/delete button
-  edit_delete_button_ = new FlatButton();
-  edit_delete_button_->setFixedSize(18, 18);
-  this->setEditDeleteButtonState(EditDeleteButtonState::Delete);
+  edit_button_ = new FlatButton();
+  edit_button_->setIcon(QIcon(":/images/edit_partition.png"));
+  edit_button_->setFixedSize(18, 18);
+  delete_button_ = new FlatButton();
+  delete_button_->setIcon(QIcon(":/images/delete_partition.png"));
+  delete_button_->setFixedSize(18, 18);
 
   // TODO(xuhaohua): Use fixed layout instead.
   QHBoxLayout* layout = new QHBoxLayout();
@@ -117,26 +113,23 @@ void AdvancedPartitionItem::initUI() {
   layout->addStretch();
   layout->addWidget(fs_type_label_);
   layout->addStretch();
-  layout->addWidget(edit_delete_button_);
+  layout->addWidget(edit_button_);
+  layout->addWidget(delete_button_);
 
   this->setLayout(layout);
 
   this->setFixedSize(480, 36);
 }
 
-void AdvancedPartitionItem::onEditDeleteButtonClicked() {
-  switch (edit_delete_button_state_) {
-    case EditDeleteButtonState::Delete: {
-      emit this->deletePartitionTriggered();
-      break;
-    }
-    case EditDeleteButtonState::Edit: {
-      emit this->editPartitionTriggered();
-      break;
-    }
-    default: {
-      break;
-    }
+void AdvancedPartitionItem::onDeleteButtonClicked() {
+  emit this->deletePartitionTriggered(partition_.path);
+}
+
+void AdvancedPartitionItem::onEditButtonClicked() {
+  if (partition_.type == partman::PartitionType::Unallocated) {
+    emit this->newPartitionTriggered(partition_.path);
+  } else {
+    emit this->editPartitionTriggered(partition_.path);
   }
 }
 

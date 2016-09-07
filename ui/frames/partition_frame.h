@@ -60,7 +60,10 @@ class PartitionFrame : public QFrame {
   void onAdvancedFrameButtonToggled();
   void onNextButtonClicked();
 
+  void showEditPartitionFrame(const QString& partition_path);
   void showMainFrame();
+  void showNewPartitionFrame(const QString& partition_path);
+  void showSelectBootloaderFrame();
 };
 
 }  // namespace ui

@@ -20,11 +20,11 @@ class EditPartitionFrame : public QFrame {
  public:
   explicit EditPartitionFrame(QWidget* parent = nullptr);
 
-  void setPartition();
+  // Set partition information at |partition_path|.
+  void setPath(const QString& partition_path);
 
  signals:
-  void canceled();
-  void confirmed();
+  void finished();
 
  private:
   void initConnections();
@@ -34,6 +34,9 @@ class EditPartitionFrame : public QFrame {
   TableComboBox* mount_point_box_ = nullptr;
   NavButton* cancel_button_ = nullptr;
   NavButton* ok_button_ = nullptr;
+
+ private slots:
+  void onOkButtonClicked();
 };
 
 }  // namespace ui
