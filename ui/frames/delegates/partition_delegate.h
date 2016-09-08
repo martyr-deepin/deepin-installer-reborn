@@ -35,6 +35,12 @@ class PartitionDelegate : public QObject {
   // Delete a partition at |partition_path|.
   void deletePartition(const QString& partition_path);
 
+  // Get mount point based on fs type.
+  const QStringList& getMountPoints();
+
+  // Get all supported fs type.
+  const partman::FsTypeList& getFsTypes();
+
  signals:
   // Emitted after scanning local disk devices.
   void deviceRefreshed();
@@ -50,6 +56,10 @@ class PartitionDelegate : public QObject {
 
   partman::DeviceList devices_;
   OperationList operations_;
+
+  QStringList all_mount_points_;
+  QStringList unused_mount_points_;
+  partman::FsTypeList fs_types_;
 
  private slots:
   void onDevicesRefreshed(const partman::DeviceList& devices);

@@ -17,10 +17,14 @@ QString GetPartitionName(const QString& path);
 // Get human readable partition usage.
 QString GetPartitionUsage(qint64 freespace, qint64 total);
 
+QString GetFsTypeName(partman::FsType fs_type);
+
+// Check whether specific fs type can be mounted by user.
+// linux-swap and efi are mounted at fixed position and thus returns false.1
+bool SupportMountPoint(partman::FsType fs_type);
+
 // Convert |size| in byte to gigbyte.
 int ToGigByte(qint64 size);
-
-QString GetFsTypeName(partman::FsType fs_type);
 
 }  // namespace ui
 

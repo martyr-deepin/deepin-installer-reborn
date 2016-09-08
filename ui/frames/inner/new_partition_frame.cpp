@@ -11,6 +11,7 @@
 #include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
+#include "ui/frames/delegates/partition_delegate.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/table_combo_box.h"
@@ -19,7 +20,10 @@
 
 namespace ui {
 
-NewPartitionFrame::NewPartitionFrame(QWidget* parent) : QFrame(parent) {
+NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
+                                     QWidget* parent)
+    : QFrame(parent),
+      delegate_(delegate) {
   this->setObjectName(QStringLiteral("new_partition_frame"));
 
   this->initUI();
@@ -28,6 +32,11 @@ NewPartitionFrame::NewPartitionFrame(QWidget* parent) : QFrame(parent) {
 
 void NewPartitionFrame::setPath(const QString& partition_path) {
   Q_UNUSED(partition_path);
+  type_box_->addItems({tr("Primary"), tr("Logical")});
+  fs_box_->addItems({"Ext4", "Ext3", "LinuxSwap"});
+
+  const QStringList mount_points = delegate_->getMountPoints();
+  mount_point_box_->addItems(mount_points);
 }
 
 void NewPartitionFrame::initConnections() {
@@ -61,14 +70,10 @@ void NewPartitionFrame::initUI() {
   TableItemLabel* size_label = new TableItemLabel(tr("Size"));
 
   type_box_ = new TableComboBox();
-  type_box_->addItems({tr("Primary"), tr("Logical")});
   location_box_ = new TableComboBox();
   location_box_->addItems({tr("Start"), tr("End")});
   fs_box_ = new TableComboBox();
-  // TODO(xushaohua): Convert fs_type to string.
-  fs_box_->addItems({"Ext4", "Ext3", "LinuxSwap"});
   mount_point_box_ = new TableComboBox();
-  mount_point_box_->addItems({"/", "/boot", "/home"});
   size_box_ = new TableComboBox();
 
   QGridLayout* grid_layout = new QGridLayout();

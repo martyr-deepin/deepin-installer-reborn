@@ -18,7 +18,10 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
       partition_manager_(new partman::PartitionManager()),
       partition_thread_(new QThread()),
       devices_(),
-      operations_() {
+      operations_(),
+      all_mount_points_(),
+      unused_mount_points_(),
+      fs_types_() {
   this->setObjectName(QStringLiteral("partition_delegate"));
 
   partition_manager_->moveToThread(partition_thread_);
@@ -50,6 +53,33 @@ void PartitionDelegate::autoConf() {
 void PartitionDelegate::deletePartition(const QString& partition_path) {
   Q_UNUSED(partition_path);
   // TODO(xushaohua): Create an OperationDelete object.
+}
+
+const QStringList& PartitionDelegate::getMountPoints() {
+  if (all_mount_points_.isEmpty()) {
+    // Read available mount points.
+    const QString name =
+        service::GetSettingsString(service::kPartitionMountPoints);
+    Q_ASSERT(!name.isEmpty());
+    all_mount_points_ = name.split(':');
+    unused_mount_points_ = all_mount_points_;
+  }
+
+  return unused_mount_points_;
+}
+
+const partman::FsTypeList& PartitionDelegate::getFsTypes() {
+  if (fs_types_.isEmpty()) {
+    const QString name =
+        service::GetSettingsString(service::kPartitionSupportedFs);
+    Q_ASSERT(!name.isEmpty());
+    const QStringList fs_names = name.split(':');
+    for (const QString& fs_name : fs_names) {
+      partman::FsType type = partman::GetFsTypeByName(fs_name);
+      fs_types_.append(type);
+    }
+  }
+  return fs_types_;
 }
 
 void PartitionDelegate::initConnections() {

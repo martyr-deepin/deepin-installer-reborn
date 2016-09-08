@@ -11,6 +11,7 @@
 #include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
+#include "ui/frames/delegates/partition_delegate.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/table_combo_box.h"
@@ -19,7 +20,10 @@
 
 namespace ui {
 
-EditPartitionFrame::EditPartitionFrame(QWidget* parent) : QFrame(parent) {
+EditPartitionFrame::EditPartitionFrame(PartitionDelegate* delegate,
+                                       QWidget* parent)
+    : QFrame(parent),
+      delegate_(delegate) {
   this->setObjectName(QStringLiteral("edit_partition_frame"));
 
   this->initUI();

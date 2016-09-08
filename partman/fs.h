@@ -5,6 +5,7 @@
 #ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_FS_H
 #define DEEPIN_INSTALLER_REBORN_PARTMAN_FS_H
 
+#include <QList>
 #include <QString>
 
 namespace partman {
@@ -32,6 +33,8 @@ enum class FsType {
 };
 
 FsType GetFsTypeByName(const QString& name);
+
+typedef QList<FsType> FsTypeList;
 
 }  // namespace partman
 

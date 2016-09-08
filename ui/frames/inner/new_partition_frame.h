@@ -12,12 +12,13 @@ namespace ui {
 
 class NavButton;
 class TableComboBox;
+class PartitionDelegate;
 
 class NewPartitionFrame : public QFrame {
   Q_OBJECT
 
  public:
-  explicit NewPartitionFrame(QWidget* parent = nullptr);
+  NewPartitionFrame(PartitionDelegate* delegate_, QWidget* parent = nullptr);
 
   // Reset partition information at |partition_path|.
   void setPath(const QString& partition_path);
@@ -37,6 +38,8 @@ class NewPartitionFrame : public QFrame {
 
   NavButton* cancel_button_ = nullptr;
   NavButton* create_button_ = nullptr;
+
+  PartitionDelegate* delegate_ = nullptr;
 
  private slots:
   void onCreateButtonClicked();
