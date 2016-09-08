@@ -62,7 +62,7 @@ const char kPartitionMinimumDiskSpaceRequired[] =
 const char kPartitionRecommendedDiskSpace[] =
     "partition_recommended_disk_space";
 const char kPartitionDoAutoPart[] = "partition_do_auto_part";
-
+const char kPartitionMountPoints[] = "partition_mount_points";
 
 // Install failed page
 const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";
