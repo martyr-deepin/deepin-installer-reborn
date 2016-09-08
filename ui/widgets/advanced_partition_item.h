@@ -50,14 +50,21 @@ class AdvancedPartitionItem : public QFrame {
   QLabel* mount_point_label_ = nullptr;
   QLabel* tip_label_ = nullptr;
   QLabel* fs_type_label_ = nullptr;
-  FlatButton* edit_button_ = nullptr;
-  FlatButton* delete_button_ = nullptr;
+  // Switch status between new-partition, edit-partition and delete-partition.
+  FlatButton* control_button_ = nullptr;
+  enum class ControlStatus {
+    Delete,
+    Edit,
+    Hide,
+    New,
+  };
+  ControlStatus control_status_;
 
+  // Whether current item is selected.
   bool selected_;
 
  private slots:
-  void onDeleteButtonClicked();
-  void onEditButtonClicked();
+  void onControlButtonClicked();
 };
 
 }  // namespace ui
