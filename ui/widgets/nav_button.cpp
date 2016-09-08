@@ -9,8 +9,7 @@
 namespace ui {
 
 NavButton::NavButton(const QString& text, QWidget* parent)
-  : FlatButton(parent) {
-  this->setText(text);
+  : FlatButton(text, parent) {
   this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
   this->setStyleSheet(
       base::ReadTextFileContent(QStringLiteral(":/styles/nav_button.css")));

@@ -8,12 +8,12 @@
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QPushButton>
 #include <QScrollArea>
 #include <QVBoxLayout>
 
 #include "ui/frames/delegates/partition_delegate.h"
 #include "ui/widgets/advanced_partition_item.h"
+#include "ui/widgets/flat_button.h"
 
 namespace ui {
 
@@ -48,8 +48,8 @@ void AdvancedPartitionFrame::initUI() {
 //  main_area->resize(640, 480);
   partition_layout_->setSizeConstraint(QLayout::SetMinAndMaxSize);
 
-  bootloader_selection_button_ = new QPushButton("Select bootloader");
-  enable_editing_button_ = new QPushButton(tr("Edit"));
+  bootloader_selection_button_ = new FlatButton(tr("Select bootloader"));
+  enable_editing_button_ = new FlatButton(tr("Edit"));
   enable_editing_button_->setCheckable(true);
   enable_editing_button_->setChecked(false);
   QHBoxLayout* bottom_layout = new QHBoxLayout();

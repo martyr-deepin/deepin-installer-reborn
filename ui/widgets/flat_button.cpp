@@ -15,6 +15,11 @@ FlatButton::FlatButton(QWidget* parent) : QPushButton(parent) {
       base::ReadTextFileContent(QStringLiteral(":/styles/flat_button.css")));
 }
 
+FlatButton::FlatButton(const QString& text, QWidget* parent)
+    : FlatButton(parent) {
+  this->setText(text);
+}
+
 void FlatButton::enterEvent(QEvent* event) {
   utils::SetCursorShape(this, XC_hand1);
   QPushButton::enterEvent(event);

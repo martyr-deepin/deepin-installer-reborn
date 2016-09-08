@@ -16,6 +16,7 @@ class FlatButton : public QPushButton {
 
  public:
   explicit FlatButton(QWidget* parent = nullptr);
+  FlatButton(const QString& text, QWidget* parent = nullptr);
 
  protected:
   // Override these two event handlers to implements hover effect.

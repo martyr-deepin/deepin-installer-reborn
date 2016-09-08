@@ -9,9 +9,8 @@
 namespace ui {
 
 ExpandedNavButton::ExpandedNavButton(const QString& text, QWidget* parent)
-  : FlatButton(parent) {
+  : FlatButton(text, parent) {
   this->setObjectName(QStringLiteral("expanded_nav_button"));
-  this->setText(text);
   this->setStyleSheet(
       base::ReadTextFileContent(":/styles/expanded_nav_button.css"));
 }
