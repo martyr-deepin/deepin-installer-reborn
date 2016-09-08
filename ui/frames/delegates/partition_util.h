@@ -18,6 +18,8 @@ QString GetPartitionName(const QString& path);
 QString GetPartitionUsage(qint64 freespace, qint64 total);
 
 QString GetFsTypeName(partman::FsType fs_type);
+// Returns human readable file system name.
+QString GetLocalFsTypeName(partman::FsType fs_type);
 
 // Check whether specific fs type can be mounted by user.
 // linux-swap and efi are mounted at fixed position and thus returns false.1
