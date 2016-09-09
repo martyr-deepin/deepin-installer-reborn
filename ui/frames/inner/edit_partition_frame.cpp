@@ -12,6 +12,7 @@
 
 #include "ui/frames/consts.h"
 #include "ui/frames/delegates/partition_delegate.h"
+#include "ui/frames/delegates/partition_util.h"
 #include "ui/frames/models/fs_model.h"
 #include "ui/frames/models/mount_point_model.h"
 #include "ui/widgets/comment_label.h"
@@ -46,6 +47,9 @@ void EditPartitionFrame::setPartition(const partman::Partition& partition) {
 }
 
 void EditPartitionFrame::initConnections() {
+  connect(fs_box_,
+          static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+          this, &EditPartitionFrame::onFsChanged);
   connect(cancel_button_, &QPushButton::clicked,
           this, &EditPartitionFrame::finished);
   connect(ok_button_, &QPushButton::clicked,
@@ -64,8 +68,8 @@ void EditPartitionFrame::initUI() {
   comment_layout->addWidget(comment_label);
 
   TableItemLabel* fs_label = new TableItemLabel(tr("Filesystem"));
-  TableItemLabel* mount_point_label = new TableItemLabel(tr("Mount point"));
-  TableItemLabel* format_label = new TableItemLabel(tr("Format the partition"));
+  mount_point_label_ = new TableItemLabel(tr("Mount point"));
+  format_label_ = new TableItemLabel(tr("Format the partition"));
 
   fs_box_ = new TableComboBox();
   fs_model_ = new FsModel(delegate_, this);
@@ -75,16 +79,16 @@ void EditPartitionFrame::initUI() {
   mount_point_model_ = new MountPointModel(delegate_, this);
   mount_point_box_->setModel(mount_point_model_);
 
-  QCheckBox* format_check_box = new QCheckBox();
-  format_check_box->setFixedWidth(20);
+  format_check_box_ = new QCheckBox();
+  format_check_box_->setFixedWidth(20);
 
   QGridLayout* grid_layout = new QGridLayout();
   grid_layout->addWidget(fs_label, 0, 0);
-  grid_layout->addWidget(mount_point_label, 1, 0);
+  grid_layout->addWidget(mount_point_label_, 1, 0);
   grid_layout->addWidget(fs_box_, 0, 1);
   grid_layout->addWidget(mount_point_box_, 1, 1);
-  grid_layout->addWidget(format_check_box, 2, 0);
-  grid_layout->addWidget(format_label, 2, 1);
+  grid_layout->addWidget(format_check_box_, 2, 0);
+  grid_layout->addWidget(format_label_, 2, 1);
 
   QHBoxLayout* grid_wrapper_layout = new QHBoxLayout();
   grid_wrapper_layout->addStretch();
@@ -111,6 +115,21 @@ void EditPartitionFrame::initUI() {
   layout->addLayout(ok_layout);
 
   this->setLayout(layout);
+}
+
+void EditPartitionFrame::onFsChanged(int index) {
+  const partman::FsType fs_type = fs_model_->getFs(index);
+  const bool visible = SupportMountPoint(fs_type);
+
+  mount_point_label_->setVisible(visible);
+  mount_point_box_->setVisible(visible);
+  format_label_->setVisible(visible);
+  format_check_box_->setVisible(visible);
+
+  const bool checked = !(fs_type == partman::FsType::Empty ||
+                         fs_type == partman::FsType::Unknown ||
+                         fs_type == partition_.fs);
+  format_check_box_->setChecked(checked);
 }
 
 void EditPartitionFrame::onOkButtonClicked() {

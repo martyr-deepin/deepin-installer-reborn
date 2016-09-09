@@ -6,6 +6,9 @@
 #define DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_EDIT_PARTITION_FRAME_H
 
 #include <QFrame>
+#include <ui/widgets/table_item_label.h>
+
+class QCheckBox;
 
 #include "partman/partition.h"
 
@@ -16,6 +19,7 @@ class MountPointModel;
 class NavButton;
 class PartitionDelegate;
 class TableComboBox;
+class TableItemLabel;
 
 class EditPartitionFrame : public QFrame {
   Q_OBJECT
@@ -35,6 +39,9 @@ class EditPartitionFrame : public QFrame {
 
   TableComboBox* fs_box_ = nullptr;
   TableComboBox* mount_point_box_ = nullptr;
+  TableItemLabel* mount_point_label_ = nullptr;
+  QCheckBox* format_check_box_ = nullptr;
+  TableItemLabel* format_label_ = nullptr;
   NavButton* cancel_button_ = nullptr;
   NavButton* ok_button_ = nullptr;
 
@@ -44,6 +51,7 @@ class EditPartitionFrame : public QFrame {
   partman::Partition partition_;
 
  private slots:
+  void onFsChanged(int index);
   void onOkButtonClicked();
 };
 
