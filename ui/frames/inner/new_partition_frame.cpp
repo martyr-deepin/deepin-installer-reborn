@@ -13,6 +13,7 @@
 #include "ui/frames/consts.h"
 #include "ui/frames/delegates/partition_delegate.h"
 #include "ui/frames/models/fs_model.h"
+#include "ui/frames/models/mount_point_model.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/table_combo_box.h"
@@ -34,9 +35,6 @@ NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
 
 void NewPartitionFrame::setPartition(const partman::Partition& partition) {
   partition_ = partition;
-
-  mount_point_box_->clear();
-  mount_point_box_->addItems(delegate_->getMountPoints());
 }
 
 void NewPartitionFrame::initConnections() {
@@ -76,9 +74,11 @@ void NewPartitionFrame::initUI() {
   fs_box_ = new TableComboBox();
   fs_model_ = new FsModel(delegate_, fs_box_);
   fs_box_->setModel(fs_model_);
-  fs_model_->updateList();
 
   mount_point_box_ = new TableComboBox();
+  mount_point_model_ = new MountPointModel(delegate_, mount_point_box_);
+  mount_point_box_->setModel(mount_point_model_);
+
   size_box_ = new TableComboBox();
 
   QGridLayout* grid_layout = new QGridLayout();

@@ -4,12 +4,14 @@
 
 #include "partman/fs.h"
 
+#include "partman/structs.h"
+
 namespace partman {
 
 FsType GetFsTypeByName(const QString& name) {
   const QString lower = name.toLower();
   if (lower.isEmpty()) return FsType::Empty;
-  if (lower == "empty") return FsType::Empty;
+  if (lower == kPartitionFsUnused) return FsType::Empty;
   if (lower == "btrfs") return FsType::Btrfs;
   if (lower == "efi") return FsType::EFI;
   if (lower == "ext2") return FsType::Ext2;

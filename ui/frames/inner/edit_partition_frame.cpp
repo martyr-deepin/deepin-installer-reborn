@@ -13,6 +13,7 @@
 #include "ui/frames/consts.h"
 #include "ui/frames/delegates/partition_delegate.h"
 #include "ui/frames/models/fs_model.h"
+#include "ui/frames/models/mount_point_model.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/table_combo_box.h"
@@ -38,8 +39,7 @@ void EditPartitionFrame::setPartition(const partman::Partition& partition) {
 
   fs_box_->setCurrentIndex(fs_model_->index(partition.fs));
 
-  mount_point_box_->clear();
-  mount_point_box_->addItems(delegate_->getMountPoints());
+  // TODO(xushaohua): Add MountPointModel::index()
   if (!partition.mount_point.isEmpty()) {
     mount_point_box_->setCurrentText(partition.mount_point);
   }
@@ -70,9 +70,10 @@ void EditPartitionFrame::initUI() {
   fs_box_ = new TableComboBox();
   fs_model_ = new FsModel(delegate_, this);
   fs_box_->setModel(fs_model_);
-  fs_model_->updateList();
 
   mount_point_box_ = new TableComboBox();
+  mount_point_model_ = new MountPointModel(delegate_, this);
+  mount_point_box_->setModel(mount_point_model_);
 
   QCheckBox* format_check_box = new QCheckBox();
   format_check_box->setFixedWidth(20);

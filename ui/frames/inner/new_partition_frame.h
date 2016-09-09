@@ -12,6 +12,7 @@
 namespace ui {
 
 class FsModel;
+class MountPointModel;
 class NavButton;
 class TableComboBox;
 class PartitionDelegate;
@@ -43,6 +44,7 @@ class NewPartitionFrame : public QFrame {
 
   PartitionDelegate* delegate_ = nullptr;
   FsModel* fs_model_ = nullptr;
+  MountPointModel* mount_point_model_ = nullptr;
   partman::Partition partition_;
 
  private slots:

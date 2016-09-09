@@ -41,6 +41,10 @@ enum class PartitionTableType {
 const char kPartationTableGPT[] = "gpt";
 const char kPartationTableMsDos[] = "msdos";
 
+// Unused file system and mount point.
+const char kPartitionFsUnused[] = "unused";
+const char kPartitionMountPointUnused[] = "unused";
+
 }  // namespace partman
 
 #endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_STRUCTS_H

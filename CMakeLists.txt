@@ -121,6 +121,7 @@ set(UI_FILES
 
     ui/frames/models/fs_model.cpp ui/frames/models/fs_model.h
     ui/frames/models/language_list_model.cpp ui/frames/models/language_list_model.h
+    ui/frames/models/mount_point_model.cpp ui/frames/models/mount_point_model.h
 
     ui/frames/confirm_quit_frame.cpp ui/frames/confirm_quit_frame.h
     ui/frames/disk_space_insufficient_frame.cpp ui/frames/disk_space_insufficient_frame.h
