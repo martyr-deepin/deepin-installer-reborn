@@ -16,11 +16,20 @@
 
 namespace ui {
 
+namespace {
+
+bool IsUnallocatedPartition(const partman::Partition& partition) {
+  return (partition.type == partman::PartitionType::Unallocated ||
+          partition.type == partman::PartitionType::LogicalUnallocated);
+}
+
+}  // namespace
+
 AdvancedPartitionItem::AdvancedPartitionItem(
     const partman::Partition& partition, QWidget* parent)
-    : QFrame(parent),
+    : FlatButton(parent),
       partition_(partition),
-      selected_(false) {
+      editable_(false) {
   this->setObjectName(QStringLiteral("advanced_partition_item"));
 
   this->initUI();
@@ -28,28 +37,8 @@ AdvancedPartitionItem::AdvancedPartitionItem(
 }
 
 void AdvancedPartitionItem::setEditable(bool editable) {
-  if (editable) {
-    if (partition_.type == partman::PartitionType::Unallocated ||
-        partition_.type == partman::PartitionType::LogicalUnallocated) {
-      control_status_ = ControlStatus::New;
-      control_button_->setIcon(
-          QIcon(QStringLiteral(":/images/new_partition.png")));
-    } else {
-      control_status_ = ControlStatus::Delete;
-      control_button_->setIcon(
-          QIcon(QStringLiteral(":/images/delete_partition.png")));
-    }
-  } else {
-    if (selected_) {
-      control_status_ = ControlStatus::Edit;
-      control_button_->setIcon(
-          QIcon(QStringLiteral(":/images/edit_partition.png")));
-    } else {
-      control_status_ = ControlStatus::Hide;
-    }
-  }
-
-  control_button_->setVisible(control_status_ != ControlStatus::Hide);
+  this->editable_ = editable;
+  this->updateStatus();
 }
 
 void AdvancedPartitionItem::setMountPoint(const QString& mount_point) {
@@ -63,6 +52,8 @@ void AdvancedPartitionItem::setFilesystemType(const QString& fs) {
 void AdvancedPartitionItem::initConnections() {
   connect(control_button_, &QPushButton::clicked,
           this, &AdvancedPartitionItem::onControlButtonClicked);
+  connect(this, &QPushButton::toggled,
+          this, &AdvancedPartitionItem::onToggled);
 }
 
 void AdvancedPartitionItem::initUI() {
@@ -70,8 +61,7 @@ void AdvancedPartitionItem::initUI() {
   // filesystem type
   // partition label
   partition_label_ = new QLabel();
-  if (partition_.type == partman::PartitionType::Unallocated ||
-      partition_.type == partman::PartitionType::LogicalUnallocated) {
+  if (IsUnallocatedPartition(partition_)) {
     partition_label_->setText(tr("Freespace"));
   } else {
     if (!partition_.label.isEmpty()) {
@@ -84,8 +74,7 @@ void AdvancedPartitionItem::initUI() {
   partition_label_->setObjectName(QStringLiteral("partition_label"));
 
   partition_path_label_ = new QLabel();
-  if (partition_.type != partman::PartitionType::Unallocated &&
-      partition_.type != partman::PartitionType::LogicalUnallocated) {
+  if (!IsUnallocatedPartition(partition_)) {
     partition_path_label_->setText(
         QString("(%1)").arg(GetPartitionName(partition_.path)));
   }
@@ -109,8 +98,7 @@ void AdvancedPartitionItem::initUI() {
 
   // filesystem name
   fs_type_label_ = new QLabel();
-  if (partition_.type != partman::PartitionType::Unallocated &&
-      partition_.type != partman::PartitionType::LogicalUnallocated) {
+  if (!IsUnallocatedPartition(partition_)) {
     fs_type_label_->setText(GetFsTypeName(partition_.fs));
   }
   fs_type_label_->setObjectName(QStringLiteral("fs_type_label"));
@@ -136,8 +124,33 @@ void AdvancedPartitionItem::initUI() {
   layout->addWidget(control_button_);
 
   this->setLayout(layout);
-
   this->setFixedSize(480, 36);
+  this->setCheckable(true);
+  this->setChecked(false);
+}
+
+void AdvancedPartitionItem::updateStatus() {
+  if (editable_) {
+    if (IsUnallocatedPartition(partition_)) {
+      control_status_ = ControlStatus::New;
+      control_button_->setIcon(
+          QIcon(QStringLiteral(":/images/new_partition.png")));
+    } else {
+      control_status_ = ControlStatus::Delete;
+      control_button_->setIcon(
+          QIcon(QStringLiteral(":/images/delete_partition.png")));
+    }
+  } else {
+    if (!IsUnallocatedPartition(partition_) && this->isChecked()) {
+      control_status_ = ControlStatus::Edit;
+      control_button_->setIcon(
+          QIcon(QStringLiteral(":/images/edit_partition.png")));
+    } else {
+      control_status_ = ControlStatus::Hide;
+    }
+  }
+
+  control_button_->setVisible(control_status_ != ControlStatus::Hide);
 }
 
 void AdvancedPartitionItem::onControlButtonClicked() {
@@ -159,6 +172,10 @@ void AdvancedPartitionItem::onControlButtonClicked() {
       break;
     }
   }
+}
+
+void AdvancedPartitionItem::onToggled() {
+  this->updateStatus();
 }
 
 }  // namespace ui

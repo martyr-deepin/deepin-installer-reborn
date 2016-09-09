@@ -4,6 +4,7 @@
 
 #include "ui/frames/inner/advanced_partition_frame.h"
 
+#include <QButtonGroup>
 #include <QDebug>
 #include <QGridLayout>
 #include <QHBoxLayout>
@@ -41,6 +42,8 @@ void AdvancedPartitionFrame::initConnections() {
 void AdvancedPartitionFrame::initUI() {
   partition_layout_ = new QVBoxLayout();
 
+  partition_button_group_ = new QButtonGroup(this);
+
   QFrame* wrapper = new QFrame();
   wrapper->setLayout(partition_layout_);
   QScrollArea* main_area = new QScrollArea();
@@ -65,12 +68,18 @@ void AdvancedPartitionFrame::initUI() {
 }
 
 void AdvancedPartitionFrame::drawDevices() {
+  // Clear children in button group.
+  for (QAbstractButton* button : partition_button_group_->buttons()) {
+    partition_button_group_->removeButton(button);
+  }
+
   for (const partman::Device& device : partition_delegate_->devices()) {
     QLabel* model_label = new QLabel(device.model);
     partition_layout_->addWidget(model_label);
     for (const partman::Partition& partition : device.partitions) {
       AdvancedPartitionItem* item = new AdvancedPartitionItem(partition);
       partition_layout_->addWidget(item);
+      partition_button_group_->addButton(item);
       item->show();
 
       connect(enable_editing_button_, &QPushButton::toggled,

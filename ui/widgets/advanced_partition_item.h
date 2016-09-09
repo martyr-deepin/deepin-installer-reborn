@@ -5,17 +5,14 @@
 #ifndef DEEPIN_INSTALLER_REBORN_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H
 #define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H
 
-#include <QFrame>
+#include "ui/widgets/flat_button.h"
 class QLabel;
 
 #include "ui/frames/delegates/partition_delegate.h"
-#include "flat_button.h"
 
 namespace ui {
 
-class FlatButton;
-
-class AdvancedPartitionItem : public QFrame {
+class AdvancedPartitionItem : public FlatButton {
   Q_OBJECT
 
  public:
@@ -50,6 +47,7 @@ class AdvancedPartitionItem : public QFrame {
   QLabel* mount_point_label_ = nullptr;
   QLabel* tip_label_ = nullptr;
   QLabel* fs_type_label_ = nullptr;
+
   // Switch status between new-partition, edit-partition and delete-partition.
   FlatButton* control_button_ = nullptr;
   enum class ControlStatus {
@@ -59,12 +57,14 @@ class AdvancedPartitionItem : public QFrame {
     New,
   };
   ControlStatus control_status_;
-
-  // Whether current item is selected.
-  bool selected_;
+  bool editable_;
+  void updateStatus();
 
  private slots:
   void onControlButtonClicked();
+
+  // Handle toggled signal from self.
+  void onToggled();
 };
 
 }  // namespace ui
