@@ -12,6 +12,7 @@
 
 #include "ui/frames/consts.h"
 #include "ui/frames/delegates/partition_delegate.h"
+#include "ui/frames/models/fs_model.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/table_combo_box.h"
@@ -32,11 +33,9 @@ NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
 
 void NewPartitionFrame::setPath(const QString& partition_path) {
   Q_UNUSED(partition_path);
-  type_box_->addItems({tr("Primary"), tr("Logical")});
-  fs_box_->addItems({"Ext4", "Ext3", "LinuxSwap"});
 
-  const QStringList mount_points = delegate_->getMountPoints();
-  mount_point_box_->addItems(mount_points);
+  mount_point_box_->clear();
+  mount_point_box_->addItems(delegate_->getMountPoints());
 }
 
 void NewPartitionFrame::initConnections() {
@@ -72,7 +71,12 @@ void NewPartitionFrame::initUI() {
   type_box_ = new TableComboBox();
   location_box_ = new TableComboBox();
   location_box_->addItems({tr("Start"), tr("End")});
+
   fs_box_ = new TableComboBox();
+  fs_model_ = new FsModel(delegate_, fs_box_);
+  fs_box_->setModel(fs_model_);
+  fs_model_->updateList();
+
   mount_point_box_ = new TableComboBox();
   size_box_ = new TableComboBox();
 

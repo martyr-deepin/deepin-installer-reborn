@@ -11,6 +11,7 @@
 
 namespace ui {
 
+class FsModel;
 class NavButton;
 class PartitionDelegate;
 class TableComboBox;
@@ -37,6 +38,7 @@ class EditPartitionFrame : public QFrame {
   NavButton* ok_button_ = nullptr;
 
   PartitionDelegate* delegate_ = nullptr;
+  FsModel* fs_model_ = nullptr;
 
  private slots:
   void onOkButtonClicked();

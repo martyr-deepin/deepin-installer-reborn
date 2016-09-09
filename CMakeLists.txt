@@ -105,6 +105,7 @@ set(UI_FILES
     ui/frames/consts.h
     ui/frames/delegates/language_list_delegate.cpp ui/frames/delegates/language_list_delegate.h
     ui/frames/delegates/operation.cpp ui/frames/delegates/operation.h
+    ui/frames/delegates/operation_delete.cpp ui/frames/delegates/operation_delete.h
     ui/frames/delegates/partition_delegate.cpp ui/frames/delegates/partition_delegate.h
 
     ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
@@ -118,6 +119,7 @@ set(UI_FILES
     ui/frames/inner/system_info_form_frame.cpp ui/frames/inner/system_info_form_frame.h
     ui/frames/inner/system_info_timezone_frame.cpp ui/frames/inner/system_info_timezone_frame.h
 
+    ui/frames/models/fs_model.cpp ui/frames/models/fs_model.h
     ui/frames/models/language_list_model.cpp ui/frames/models/language_list_model.h
 
     ui/frames/confirm_quit_frame.cpp ui/frames/confirm_quit_frame.h
@@ -154,7 +156,7 @@ set(UI_FILES
     ui/frames/delegates/partition_util.cpp ui/frames/delegates/partition_util.h
 
     ui/utils/xutil.cpp ui/utils/xutil.h
-    ui/frames/delegates/operation_delete.cpp ui/frames/delegates/operation_delete.h)
+    )
 
 set(UNITTEST_FILES
     sysinfo/dev_uuid_test.cpp

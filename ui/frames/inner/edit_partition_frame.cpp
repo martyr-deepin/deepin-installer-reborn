@@ -12,6 +12,7 @@
 
 #include "ui/frames/consts.h"
 #include "ui/frames/delegates/partition_delegate.h"
+#include "ui/frames/models/fs_model.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/table_combo_box.h"
@@ -32,6 +33,12 @@ EditPartitionFrame::EditPartitionFrame(PartitionDelegate* delegate,
 
 void EditPartitionFrame::setPath(const QString& partition_path) {
   Q_UNUSED(partition_path);
+  // TODO(xushaohua): Reset status.
+
+  // TODO(xushaohua): Select current fs.
+
+  mount_point_box_->clear();
+  mount_point_box_->addItems(delegate_->getMountPoints());
 }
 
 void EditPartitionFrame::initConnections() {
@@ -57,9 +64,11 @@ void EditPartitionFrame::initUI() {
   TableItemLabel* format_label = new TableItemLabel(tr("Format the partition"));
 
   fs_box_ = new TableComboBox();
-  fs_box_->addItems({"Ext4", "Ext3"});
+  fs_model_ = new FsModel(delegate_, this);
+  fs_box_->setModel(fs_model_);
+  fs_model_->updateList();
+
   mount_point_box_ = new TableComboBox();
-  mount_point_box_->addItems({"/", "/boot"});
 
   QCheckBox* format_check_box = new QCheckBox();
   format_check_box->setFixedWidth(20);

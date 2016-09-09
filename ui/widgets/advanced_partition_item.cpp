@@ -41,14 +41,6 @@ void AdvancedPartitionItem::setEditable(bool editable) {
   this->updateStatus();
 }
 
-void AdvancedPartitionItem::setMountPoint(const QString& mount_point) {
-  mount_point_label_->setText(mount_point);
-}
-
-void AdvancedPartitionItem::setFilesystemType(const QString& fs) {
-  fs_type_label_->setText(fs);
-}
-
 void AdvancedPartitionItem::initConnections() {
   connect(control_button_, &QPushButton::clicked,
           this, &AdvancedPartitionItem::onControlButtonClicked);

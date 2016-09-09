@@ -61,7 +61,7 @@ const QStringList& PartitionDelegate::getMountPoints() {
     const QString name =
         service::GetSettingsString(service::kPartitionMountPoints);
     Q_ASSERT(!name.isEmpty());
-    all_mount_points_ = name.split(':');
+    all_mount_points_ = name.split(';');
     unused_mount_points_ = all_mount_points_;
   }
 
@@ -73,7 +73,7 @@ const partman::FsTypeList& PartitionDelegate::getFsTypes() {
     const QString name =
         service::GetSettingsString(service::kPartitionSupportedFs);
     Q_ASSERT(!name.isEmpty());
-    const QStringList fs_names = name.split(':');
+    const QStringList fs_names = name.split(';');
     for (const QString& fs_name : fs_names) {
       partman::FsType type = partman::GetFsTypeByName(fs_name);
       fs_types_.append(type);

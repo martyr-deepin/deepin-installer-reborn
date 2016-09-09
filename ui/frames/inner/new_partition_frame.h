@@ -10,6 +10,7 @@
 
 namespace ui {
 
+class FsModel;
 class NavButton;
 class TableComboBox;
 class PartitionDelegate;
@@ -40,6 +41,7 @@ class NewPartitionFrame : public QFrame {
   NavButton* create_button_ = nullptr;
 
   PartitionDelegate* delegate_ = nullptr;
+  FsModel* fs_model_ = nullptr;
 
  private slots:
   void onCreateButtonClicked();

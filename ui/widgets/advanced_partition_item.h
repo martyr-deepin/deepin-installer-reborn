@@ -21,9 +21,6 @@ class AdvancedPartitionItem : public FlatButton {
 
   void setEditable(bool editable);
 
-  void setMountPoint(const QString& mount_point);
-  void setFilesystemType(const QString& fs);
-
  signals:
   // Emitted when delete partition button is clicked.
   void deletePartitionTriggered(const QString& partition_path);
