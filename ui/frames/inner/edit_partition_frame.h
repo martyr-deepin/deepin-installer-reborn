@@ -6,8 +6,8 @@
 #define DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_EDIT_PARTITION_FRAME_H
 
 #include <QFrame>
-#include <ui/widgets/nav_button.h>
-#include <ui/widgets/table_combo_box.h>
+
+#include "partman/partition.h"
 
 namespace ui {
 
@@ -23,7 +23,7 @@ class EditPartitionFrame : public QFrame {
   EditPartitionFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
 
   // Set partition information at |partition_path|.
-  void setPath(const QString& partition_path);
+  void setPartition(const partman::Partition& partition);
 
  signals:
   void finished();
@@ -39,6 +39,7 @@ class EditPartitionFrame : public QFrame {
 
   PartitionDelegate* delegate_ = nullptr;
   FsModel* fs_model_ = nullptr;
+  partman::Partition partition_;
 
  private slots:
   void onOkButtonClicked();

@@ -24,21 +24,25 @@ namespace ui {
 EditPartitionFrame::EditPartitionFrame(PartitionDelegate* delegate,
                                        QWidget* parent)
     : QFrame(parent),
-      delegate_(delegate) {
+      delegate_(delegate),
+      partition_() {
   this->setObjectName(QStringLiteral("edit_partition_frame"));
 
   this->initUI();
   this->initConnections();
 }
 
-void EditPartitionFrame::setPath(const QString& partition_path) {
-  Q_UNUSED(partition_path);
+void EditPartitionFrame::setPartition(const partman::Partition& partition) {
   // TODO(xushaohua): Reset status.
+  partition_ = partition;
 
-  // TODO(xushaohua): Select current fs.
+  fs_box_->setCurrentIndex(fs_model_->index(partition.fs));
 
   mount_point_box_->clear();
   mount_point_box_->addItems(delegate_->getMountPoints());
+  if (!partition.mount_point.isEmpty()) {
+    mount_point_box_->setCurrentText(partition.mount_point);
+  }
 }
 
 void EditPartitionFrame::initConnections() {

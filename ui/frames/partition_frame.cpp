@@ -169,8 +169,9 @@ void PartitionFrame::onNextButtonClicked() {
   }
 }
 
-void PartitionFrame::showEditPartitionFrame(const QString& partition_path) {
-  edit_partition_frame_->setPath(partition_path);
+void PartitionFrame::showEditPartitionFrame(
+    const partman::Partition& partition) {
+  edit_partition_frame_->setPartition(partition);
   main_layout_->setCurrentWidget(edit_partition_frame_);
 }
 
@@ -178,8 +179,9 @@ void PartitionFrame::showMainFrame() {
   main_layout_->setCurrentWidget(main_frame_);
 }
 
-void PartitionFrame::showNewPartitionFrame(const QString& partition_path) {
-  new_partition_frame_->setPath(partition_path);
+void PartitionFrame::showNewPartitionFrame(
+    const partman::Partition& partition) {
+  new_partition_frame_->setPartition(partition);
   main_layout_->setCurrentWidget(new_partition_frame_);
 }
 

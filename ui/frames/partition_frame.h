@@ -9,6 +9,8 @@
 class QPushButton;
 class QStackedLayout;
 
+#include "partman/partition.h"
+
 namespace ui {
 
 class AdvancedPartitionFrame;
@@ -60,9 +62,9 @@ class PartitionFrame : public QFrame {
   void onAdvancedFrameButtonToggled();
   void onNextButtonClicked();
 
-  void showEditPartitionFrame(const QString& partition_path);
+  void showEditPartitionFrame(const partman::Partition& partition);
   void showMainFrame();
-  void showNewPartitionFrame(const QString& partition_path);
+  void showNewPartitionFrame(const partman::Partition& partition);
   void showSelectBootloaderFrame();
 };
 

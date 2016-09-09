@@ -152,11 +152,11 @@ void AdvancedPartitionItem::onControlButtonClicked() {
       break;
     }
     case ControlStatus::Edit: {
-      emit this->editPartitionTriggered(partition_.path);
+      emit this->editPartitionTriggered(partition_);
       break;
     }
     case ControlStatus::New: {
-      emit this->newPartitionTriggered(partition_.path);
+      emit this->newPartitionTriggered(partition_);
       break;
     }
     default: {

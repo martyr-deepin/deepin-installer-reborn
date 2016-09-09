@@ -26,11 +26,11 @@ class AdvancedPartitionItem : public FlatButton {
   void deletePartitionTriggered(const QString& partition_path);
 
   // Emitted when edit-partition button is clicked.
-  void editPartitionTriggered(const QString& partition_path);
+  void editPartitionTriggered(const partman::Partition& partition);
 
   // Emitted when edit-partition button is clicked and type of current
   // partition is Unallocated.
-  void newPartitionTriggered(const QString& partition_path);
+  void newPartitionTriggered(const partman::Partition& partition);
 
  private:
   void initConnections();

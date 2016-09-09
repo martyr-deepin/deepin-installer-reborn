@@ -24,15 +24,16 @@ namespace ui {
 NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
                                      QWidget* parent)
     : QFrame(parent),
-      delegate_(delegate) {
+      delegate_(delegate),
+      partition_() {
   this->setObjectName(QStringLiteral("new_partition_frame"));
 
   this->initUI();
   this->initConnections();
 }
 
-void NewPartitionFrame::setPath(const QString& partition_path) {
-  Q_UNUSED(partition_path);
+void NewPartitionFrame::setPartition(const partman::Partition& partition) {
+  partition_ = partition;
 
   mount_point_box_->clear();
   mount_point_box_->addItems(delegate_->getMountPoints());
