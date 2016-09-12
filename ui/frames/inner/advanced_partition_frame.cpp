@@ -12,7 +12,7 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 
-#include "ui/frames/delegates/partition_delegate.h"
+#include "ui/delegates/partition_delegate.h"
 #include "ui/widgets/advanced_partition_item.h"
 #include "ui/widgets/flat_button.h"
 

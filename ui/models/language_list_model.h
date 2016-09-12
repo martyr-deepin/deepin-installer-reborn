@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_FRAMES_MODELS_LANGUAGE_LIST_MODEL_H
-#define DEEPIN_INSTALLER_REBORN_UI_FRAMES_MODELS_LANGUAGE_LIST_MODEL_H
+#ifndef DEEPIN_INSTALLER_REBORN_UI_MODELS_LANGUAGE_LIST_MODEL_H
+#define DEEPIN_INSTALLER_REBORN_UI_MODELS_LANGUAGE_LIST_MODEL_H
 
 #include <QAbstractListModel>
 #include <service/system_language.h>
@@ -29,4 +29,4 @@ class LanguageListModel : public QAbstractListModel {
 
 }  // namespace ui
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_FRAMES_MODELS_LANGUAGE_LIST_MODEL_H
+#endif  // DEEPIN_INSTALLER_REBORN_UI_MODELS_LANGUAGE_LIST_MODEL_H

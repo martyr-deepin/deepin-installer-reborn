@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/frames/delegates/language_list_delegate.h"
+#include "language_list_delegate.h"
 
 namespace ui {
 

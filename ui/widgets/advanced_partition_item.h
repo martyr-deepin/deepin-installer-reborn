@@ -8,7 +8,7 @@
 #include "ui/widgets/flat_button.h"
 class QLabel;
 
-#include "ui/frames/delegates/partition_delegate.h"
+#include "ui/delegates/partition_delegate.h"
 
 namespace ui {
 

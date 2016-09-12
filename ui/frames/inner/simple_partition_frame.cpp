@@ -13,7 +13,7 @@
 
 #include "base/file_util.h"
 #include "partman/structs.h"
-#include "ui/frames/delegates/partition_delegate.h"
+#include "ui/delegates/partition_delegate.h"
 #include "ui/widgets/simple_partition_button.h"
 
 namespace ui {

@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_OPERATION_H
-#define DEEPIN_INSTALLER_REBORN_PARTMAN_OPERATION_H
+#ifndef DEEPIN_INSTALLER_REBORN_UI_DELEGATES_OPERATION_H
+#define DEEPIN_INSTALLER_REBORN_UI_DELEGATES_OPERATION_H
 
 #include <QList>
 
@@ -35,4 +35,4 @@ typedef QList<Operation> OperationList;
 
 }  // namespace ui
 
-#endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_OPERATION_H
+#endif  // DEEPIN_INSTALLER_REBORN_UI_DELEGATES_OPERATION_H

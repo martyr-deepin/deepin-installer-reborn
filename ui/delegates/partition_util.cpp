@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "partition_util.h"
+#include "ui/delegates/partition_util.h"
 
 #include <math.h>
 #include <QDebug>

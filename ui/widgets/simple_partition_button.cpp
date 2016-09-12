@@ -10,7 +10,7 @@
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
-#include "ui/frames/delegates/partition_util.h"
+#include "ui/delegates/partition_util.h"
 #include "ui/widgets/partition_usage_bar.h"
 
 namespace ui {

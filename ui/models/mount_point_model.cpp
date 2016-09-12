@@ -2,10 +2,10 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/frames/models/mount_point_model.h"
+#include "mount_point_model.h"
 
 #include "partman/structs.h"
-#include "ui/frames/delegates/partition_delegate.h"
+#include "ui/delegates/partition_delegate.h"
 
 namespace ui {
 

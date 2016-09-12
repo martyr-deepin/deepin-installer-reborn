@@ -14,7 +14,7 @@
 
 #include "base/file_util.h"
 #include "ui/frames/consts.h"
-#include "ui/frames/delegates/partition_delegate.h"
+#include "ui/delegates/partition_delegate.h"
 #include "ui/frames/inner/advanced_partition_frame.h"
 #include "ui/frames/inner/edit_partition_frame.h"
 #include "ui/frames/inner/new_partition_frame.h"

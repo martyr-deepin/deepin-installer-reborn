@@ -102,18 +102,22 @@ set(SYSINFO_FILES
 
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
+    
+    ui/delegates/language_list_delegate.cpp ui/delegates/language_list_delegate.h
+    ui/delegates/operation.cpp ui/delegates/operation.h
+    ui/delegates/operation_create.cpp ui/delegates/operation_create.h
+    ui/delegates/operation_delete.cpp ui/delegates/operation_delete.h
+    ui/delegates/operation_format.cpp ui/delegates/operation_format.h
+    ui/delegates/operation_mount_point.cpp ui/delegates/operation_mount_point.h
+    ui/delegates/operation_resize.cpp ui/delegates/operation_resize.h
+    ui/delegates/partition_delegate.cpp ui/delegates/partition_delegate.h
+    ui/delegates/partition_util.cpp ui/delegates/partition_util.h
+
+    ui/models/fs_model.cpp ui/models/fs_model.h
+    ui/models/language_list_model.cpp ui/models/language_list_model.h
+    ui/models/mount_point_model.cpp ui/models/mount_point_model.h
+
     ui/frames/consts.h
-    ui/frames/delegates/language_list_delegate.cpp ui/frames/delegates/language_list_delegate.h
-    ui/frames/delegates/operation.cpp ui/frames/delegates/operation.h
-    ui/frames/delegates/operation_create.cpp ui/frames/delegates/operation_create.h
-    ui/frames/delegates/operation_delete.cpp ui/frames/delegates/operation_delete.h
-    ui/frames/delegates/operation_format.cpp ui/frames/delegates/operation_format.h
-    ui/frames/delegates/operation_mount_point.cpp ui/frames/delegates/operation_mount_point.h
-    ui/frames/delegates/operation_resize.cpp ui/frames/delegates/operation_resize.h
-    ui/frames/delegates/partition_delegate.cpp ui/frames/delegates/partition_delegate.h
-    ui/frames/delegates/partition_util.cpp ui/frames/delegates/partition_util.h
-
-
     ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
     ui/frames/inner/edit_partition_frame.cpp ui/frames/inner/edit_partition_frame.h
     ui/frames/inner/new_partition_frame.cpp ui/frames/inner/new_partition_frame.h
@@ -124,10 +128,6 @@ set(UI_FILES
     ui/frames/inner/system_info_avatar_frame.cpp ui/frames/inner/system_info_avatar_frame.h
     ui/frames/inner/system_info_form_frame.cpp ui/frames/inner/system_info_form_frame.h
     ui/frames/inner/system_info_timezone_frame.cpp ui/frames/inner/system_info_timezone_frame.h
-
-    ui/frames/models/fs_model.cpp ui/frames/models/fs_model.h
-    ui/frames/models/language_list_model.cpp ui/frames/models/language_list_model.h
-    ui/frames/models/mount_point_model.cpp ui/frames/models/mount_point_model.h
 
     ui/frames/confirm_quit_frame.cpp ui/frames/confirm_quit_frame.h
     ui/frames/disk_space_insufficient_frame.cpp ui/frames/disk_space_insufficient_frame.h

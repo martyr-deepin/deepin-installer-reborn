@@ -2,10 +2,10 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_FRAMES_DELEGATES_OPERATION_FORMAT_H
-#define DEEPIN_INSTALLER_REBORN_UI_FRAMES_DELEGATES_OPERATION_FORMAT_H
+#ifndef DEEPIN_INSTALLER_REBORN_UI_DELEGATES_OPERATION_FORMAT_H
+#define DEEPIN_INSTALLER_REBORN_UI_DELEGATES_OPERATION_FORMAT_H
 
-#include "ui/frames/delegates/operation.h"
+#include "ui/delegates/operation.h"
 
 namespace ui {
 
@@ -19,4 +19,4 @@ class OperationFormat : public Operation {
 
 }  // namespace ui
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_FRAMES_DELEGATES_OPERATION_FORMAT_H
+#endif  // DEEPIN_INSTALLER_REBORN_UI_DELEGATES_OPERATION_FORMAT_H

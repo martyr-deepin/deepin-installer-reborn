@@ -2,10 +2,10 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/frames/models/fs_model.h"
+#include "fs_model.h"
 
-#include "ui/frames/delegates/partition_delegate.h"
-#include "ui/frames/delegates/partition_util.h"
+#include "ui/delegates/partition_delegate.h"
+#include "ui/delegates/partition_util.h"
 
 namespace ui {
 

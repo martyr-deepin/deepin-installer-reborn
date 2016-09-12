@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_FRAMES_MODELS_MOUNT_POINT_MODEL_H
-#define DEEPIN_INSTALLER_REBORN_UI_FRAMES_MODELS_MOUNT_POINT_MODEL_H
+#ifndef DEEPIN_INSTALLER_REBORN_UI_MODELS_MOUNT_POINT_MODEL_H
+#define DEEPIN_INSTALLER_REBORN_UI_MODELS_MOUNT_POINT_MODEL_H
 
 #include <QAbstractListModel>
 
@@ -28,4 +28,4 @@ class MountPointModel : public QAbstractListModel {
 
 }  // namespace ui
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_FRAMES_MODELS_MOUNT_POINT_MODEL_H
+#endif  // DEEPIN_INSTALLER_REBORN_UI_MODELS_MOUNT_POINT_MODEL_H

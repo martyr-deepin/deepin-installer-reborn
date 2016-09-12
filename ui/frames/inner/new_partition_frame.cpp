@@ -11,9 +11,9 @@
 #include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
-#include "ui/frames/delegates/partition_delegate.h"
-#include "ui/frames/models/fs_model.h"
-#include "ui/frames/models/mount_point_model.h"
+#include "ui/delegates/partition_delegate.h"
+#include "ui/models/fs_model.h"
+#include "ui/models/mount_point_model.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/table_combo_box.h"
