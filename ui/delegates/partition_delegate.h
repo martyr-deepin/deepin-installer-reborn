@@ -5,6 +5,7 @@
 #ifndef DEEPIN_INSTALLER_REBORN_UI_DELEGATES_PARTITION_DELEGATE_H
 #define DEEPIN_INSTALLER_REBORN_UI_DELEGATES_PARTITION_DELEGATE_H
 
+#include <QList>
 #include <QObject>
 class QThread;
 
@@ -66,7 +67,7 @@ class PartitionDelegate : public QObject {
   QThread* partition_thread_ = nullptr;
 
   partman::DeviceList devices_;
-  OperationList operations_;
+  QList<Operation*> operations_;
 
   QStringList all_mount_points_;
   QStringList unused_mount_points_;

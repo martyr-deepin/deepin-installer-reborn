@@ -4,6 +4,7 @@
 
 #include "ui/delegates/partition_delegate.h"
 
+#include <QDebug>
 #include <QThread>
 
 #include "partman/partition_manager.h"
@@ -103,9 +104,12 @@ void PartitionDelegate::formatPartition(const partman::Partition& partition,
 
 void PartitionDelegate::updateMountPoint(const partman::Partition& partition,
                                          const QString& mount_point) {
+  qDebug() << "PartitionDelegate::updateMountPoint()" << partition.path
+           << mount_point;
   partman::Partition partition_new(partition);
   partition_new.mount_point = mount_point;
-  OperationMountPoint operation(partition, partition_new);
+  OperationMountPoint* operation = new OperationMountPoint(partition,
+                                                           partition_new);
   operations_.append(operation);
   // TODO(xushaohua): Merge operations.
 }

@@ -5,8 +5,6 @@
 #ifndef DEEPIN_INSTALLER_REBORN_UI_DELEGATES_OPERATION_H
 #define DEEPIN_INSTALLER_REBORN_UI_DELEGATES_OPERATION_H
 
-#include <QList>
-
 #include "partman/device.h"
 
 namespace ui {
@@ -29,8 +27,6 @@ class Operation {
   partman::Partition partition_orig;
   partman::Partition partition_new;
 };
-
-typedef QList<Operation> OperationList;
 
 }  // namespace ui
 
