@@ -59,6 +59,8 @@ void EditPartitionFrame::initConnections() {
   connect(fs_box_,
           static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
           this, &EditPartitionFrame::onFsChanged);
+
+  // Does nothing when cancel-button is clicked.
   connect(cancel_button_, &QPushButton::clicked,
           this, &EditPartitionFrame::finished);
   connect(ok_button_, &QPushButton::clicked,
@@ -142,7 +144,17 @@ void EditPartitionFrame::onFsChanged(int index) {
 }
 
 void EditPartitionFrame::onOkButtonClicked() {
-  // TODO(xushaohua): Create an OperationModify object
+
+  const QString mount_point = mount_point_box_->currentText();
+  if(format_check_box_->isChecked()) {
+    // Create an OperationFormat object.
+    const partman::FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
+    delegate_->formatPartition(partition_, fs_type, mount_point);
+  } else if (mount_point != partition_.mount_point) {
+    // Only create an OperationMountPoint object.
+    delegate_->updateMountPoint(partition_, mount_point);
+  }
+
   emit this->finished();
 }
 

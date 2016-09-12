@@ -85,8 +85,8 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
       qDebug() << "freespace";
     } else {
       qDebug() << "unknown partition type" << lp_partition->type;
-
     }
+    partition.device_path = device.path;
 
     if (lp_partition->fs_type) {
       partition.fs = GetFsTypeByName(lp_partition->fs_type->name);

@@ -12,8 +12,7 @@ namespace ui {
 // To mark new partition is created
 class OperationCreate : public Operation{
  public:
-  OperationCreate(const QString& device_path,
-                  const partman::Partition& partition_orig,
+  OperationCreate(const partman::Partition& partition_orig,
                   const partman::Partition& partition_new);
 };
 

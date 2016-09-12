@@ -25,7 +25,6 @@ class Operation {
  public:
   Operation();
 
-  QString device_path;
   OperationType type;
   partman::Partition partition_orig;
   partman::Partition partition_new;

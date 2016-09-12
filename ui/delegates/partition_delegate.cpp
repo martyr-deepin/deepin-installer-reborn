@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "partition_delegate.h"
+#include "ui/delegates/partition_delegate.h"
 
 #include <QThread>
 
@@ -10,6 +10,12 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "service/signal_manager.h"
+
+#include "ui/delegates/operation_create.h"
+#include "ui/delegates/operation_delete.h"
+#include "ui/delegates/operation_format.h"
+#include "ui/delegates/operation_mount_point.h"
+#include "ui/delegates/operation_resize.h"
 
 namespace ui {
 
@@ -50,11 +56,6 @@ void PartitionDelegate::autoConf() {
   emit partition_manager_->autoPart();
 }
 
-void PartitionDelegate::deletePartition(const QString& partition_path) {
-  Q_UNUSED(partition_path);
-  // TODO(xushaohua): Create an OperationDelete object.
-}
-
 const QStringList& PartitionDelegate::getMountPoints() {
   if (all_mount_points_.isEmpty()) {
     // Read available mount points.
@@ -80,6 +81,33 @@ const partman::FsTypeList& PartitionDelegate::getFsTypes() {
     }
   }
   return fs_types_;
+}
+
+void PartitionDelegate::createPartition(
+    const partman::Partition& partition) {
+  Q_UNUSED(partition);
+}
+
+void PartitionDelegate::deletePartition(const QString& partition_path) {
+  Q_UNUSED(partition_path);
+  // TODO(xushaohua): Create an OperationDelete object.
+}
+
+void PartitionDelegate::formatPartition(const partman::Partition& partition,
+                                        partman::FsType fs_type,
+                                        const QString& mount_point) {
+  Q_UNUSED(partition);
+  Q_UNUSED(fs_type);
+  Q_UNUSED(mount_point);
+}
+
+void PartitionDelegate::updateMountPoint(const partman::Partition& partition,
+                                         const QString& mount_point) {
+  partman::Partition partition_new(partition);
+  partition_new.mount_point = mount_point;
+  OperationMountPoint operation(partition, partition_new);
+  operations_.append(operation);
+  // TODO(xushaohua): Merge operations.
 }
 
 void PartitionDelegate::initConnections() {

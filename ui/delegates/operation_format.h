@@ -12,8 +12,7 @@ namespace ui {
 // To mark an existing partition is formated.
 class OperationFormat : public Operation {
  public:
-  OperationFormat(const QString& device_path,
-                  const partman::Partition& partition_orig,
+  OperationFormat(const partman::Partition& partition_orig,
                   const partman::Partition& partition_new);
 };
 

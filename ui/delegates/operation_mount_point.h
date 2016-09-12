@@ -5,15 +5,14 @@
 #ifndef DEEPIN_INSTALLER_REBORN_UI_DELEGATES_OPERATION_MOUNT_POINT_H
 #define DEEPIN_INSTALLER_REBORN_UI_DELEGATES_OPERATION_MOUNT_POINT_H
 
-#include "operation.h"
+#include "ui/delegates/operation.h"
 
 namespace ui {
 
 // To mark mount-point changed in partition
 class OperationMountPoint : public Operation {
  public:
-  OperationMountPoint(const QString& device_path,
-                      const partman::Partition& partition_orig,
+  OperationMountPoint(const partman::Partition& partition_orig,
                       const partman::Partition& partition_new);
 };
 

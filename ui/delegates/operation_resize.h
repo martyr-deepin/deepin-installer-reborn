@@ -12,8 +12,7 @@ namespace ui {
 // To mark extended partition is resized.
 class OperationResize : public Operation {
  public:
-  OperationResize(const QString& device_path,
-                  const partman::Partition& partition_orig,
+  OperationResize(const partman::Partition& partition_orig,
                   const partman::Partition& partition_new);
 };
 

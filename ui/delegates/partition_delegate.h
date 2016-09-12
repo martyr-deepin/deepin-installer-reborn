@@ -9,7 +9,8 @@
 class QThread;
 
 #include "partman/device.h"
-#include "operation.h"
+#include "ui/delegates/operation.h"
+
 namespace partman {
 class PartitionManager;
 }  // namespace partman
@@ -32,14 +33,24 @@ class PartitionDelegate : public QObject {
 
   const partman::DeviceList& devices() const { return devices_; }
 
-  // Delete a partition at |partition_path|.
-  void deletePartition(const QString& partition_path);
-
   // Get mount point based on fs type.
   const QStringList& getMountPoints();
 
   // Get all supported fs type.
   const partman::FsTypeList& getFsTypes();
+
+  // Operation helpers.
+  // Create a new partition.
+  void createPartition(const partman::Partition& partition);
+  // Delete a partition at |partition_path|.
+  void deletePartition(const QString& partition_path);
+  // Format a partition |partition|.
+  void formatPartition(const partman::Partition& partition,
+                       partman::FsType fs_type,
+                       const QString& mount_point);
+  // Change mount point of |partition|.
+  void updateMountPoint(const partman::Partition& partition,
+                        const QString& mount_point);
 
  signals:
   // Emitted after scanning local disk devices.
