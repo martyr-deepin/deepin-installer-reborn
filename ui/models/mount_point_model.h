@@ -17,14 +17,24 @@ class MountPointModel : public QAbstractListModel {
  public:
   MountPointModel(PartitionDelegate* delegate, QObject* parent = nullptr);
 
-  virtual int rowCount(const QModelIndex& parent) const override;
+  // Get index of |mount_point|, if not found returns -1.
+  int index(const QString& mount_point) const;
 
-  virtual QVariant data(const QModelIndex& index, int role) const override;
+  // Get index of empty mount point, might returns -1 if empty mount point is
+  // disabled.
+  int indexOfEmpty() const;
+
+  int rowCount(const QModelIndex& parent) const override;
+
+  QVariant data(const QModelIndex& index, int role) const override;
 
  private:
   PartitionDelegate* delegate_ = nullptr;
   QStringList mount_points_;
 };
+
+// Check whether |mount_point| is empty mount point.
+bool IsEmptyMountPoint(const QString& mount_point);
 
 }  // namespace ui
 

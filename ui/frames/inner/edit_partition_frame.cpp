@@ -35,15 +35,24 @@ EditPartitionFrame::EditPartitionFrame(PartitionDelegate* delegate,
 }
 
 void EditPartitionFrame::setPartition(const partman::Partition& partition) {
-  // TODO(xushaohua): Reset status.
   partition_ = partition;
 
-  fs_box_->setCurrentIndex(fs_model_->index(partition.fs));
-
-  // TODO(xushaohua): Add MountPointModel::index()
-  if (!partition.mount_point.isEmpty()) {
-    mount_point_box_->setCurrentText(partition.mount_point);
+  // Reset fs index.
+  int fs_index = fs_model_->index(partition.fs);
+  if (fs_index == -1) {
+    fs_index = 0;
   }
+  fs_box_->setCurrentIndex(fs_index);
+
+  // Reset mount point box.
+  int mount_point_index = mount_point_model_->index(partition.mount_point);
+  if (mount_point_index == -1) {
+    mount_point_index = mount_point_model_->indexOfEmpty();
+  }
+  if (mount_point_index == -1) {
+    mount_point_index = 0;
+  }
+  mount_point_box_->setCurrentIndex(mount_point_index);
 }
 
 void EditPartitionFrame::initConnections() {

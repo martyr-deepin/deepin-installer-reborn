@@ -16,6 +16,14 @@ MountPointModel::MountPointModel(PartitionDelegate* delegate, QObject* parent)
   this->setObjectName(QStringLiteral("mount_point_model"));
 }
 
+int MountPointModel::index(const QString& mount_point) const {
+  return mount_points_.indexOf(mount_point);
+}
+
+int MountPointModel::indexOfEmpty() const {
+  return mount_points_.indexOf(partman::kPartitionMountPointUnused);
+}
+
 int MountPointModel::rowCount(const QModelIndex& parent) const {
   Q_UNUSED(parent);
   return mount_points_.length();
@@ -36,6 +44,10 @@ QVariant MountPointModel::data(const QModelIndex& index, int role) const {
   } else {
     return name;
   }
+}
+
+bool IsEmptyMountPoint(const QString& mount_point) {
+  return mount_point == partman::kPartitionMountPointUnused;
 }
 
 }  // namespace ui
