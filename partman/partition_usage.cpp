@@ -221,27 +221,34 @@ bool ReadReiserfsUsage(const QString& path, qint64& freespace, qint64& total) {
 bool ReadXfsUsage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
   if (!base::SpawnCmd("xfs_db",
-                      {"-c 'sb 0' ", "-c 'print dblocks' ",
-                       "-c 'print blocksize' ", "-c 'print fdblocks' ",
-                       "-r", path},
+                      {"-c sb", "-c print", "-r", path},
                       output)) {
-    qWarning() << "ReadXfsUsage failed() at " << path;
     return false;
   }
   if (output.isEmpty()) {
     return false;
   }
 
+  int block_size = 0;
+  qint64 total_blocks = 0;
+  qint64 free_blocks = 0;
   for (const QString& line : output.split('\n')) {
     if (line.contains("fdblocks")) {
-      freespace = line.split('=').last().trimmed().toLongLong();
+      free_blocks = line.split('=').last().trimmed().toLongLong();
     } else if (line.contains("dblocks")) {
-      total = line.split('=').last().trimmed().toLongLong();
+      total_blocks = line.split('=').last().trimmed().toLongLong();
+    } else if (line.contains("blocksize")) {
+      block_size = line.split('=').last().trimmed().toInt();
     }
-    // TODO(xushaohua): Also read block-size.
   }
-  // FIXME(xushaohua): xfs_db always fails to receive these arguments correctly.
-  return false;
+
+  if (free_blocks > 0 && total_blocks > 0 && block_size > 0) {
+    freespace = free_blocks * block_size;
+    total = total_blocks * block_size;
+    return true;
+  } else {
+    return false;
+  }
 }
 
 }  // namespace
