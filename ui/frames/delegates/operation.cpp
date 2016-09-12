@@ -7,7 +7,6 @@
 namespace ui {
 
 Operation::Operation() {
-
 }
 
 }  // namespace ui

@@ -10,7 +10,9 @@
 namespace ui {
 
 class OperationDelete : public Operation {
-
+ public:
+  OperationDelete(const QString& device_path,
+                  const partman::Partition& partition_orig);
 };
 
 }  // namespace ui

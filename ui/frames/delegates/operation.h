@@ -15,16 +15,19 @@ enum class OperationType {
   Create,
   Delete,
   Format,
+  MountPoint,
+  Resize,
+  Invalid,  // operation type not set
 };
 
+// Abstract class for operations.
 class Operation {
  public:
   Operation();
-  virtual ~Operation() {}
 
   QString device_path;
   OperationType type;
-  partman::Partition partition_original;
+  partman::Partition partition_orig;
   partman::Partition partition_new;
 };
 

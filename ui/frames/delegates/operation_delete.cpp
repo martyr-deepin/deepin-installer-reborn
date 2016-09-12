@@ -6,4 +6,11 @@
 
 namespace ui {
 
+OperationDelete::OperationDelete(const QString& device_path,
+                                 const partman::Partition& partition_orig) {
+  this->type = OperationType::Delete;
+  this->device_path = device_path;
+  this->partition_orig = partition_orig;
+}
+
 }  // namespace ui

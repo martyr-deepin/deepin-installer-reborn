@@ -105,8 +105,14 @@ set(UI_FILES
     ui/frames/consts.h
     ui/frames/delegates/language_list_delegate.cpp ui/frames/delegates/language_list_delegate.h
     ui/frames/delegates/operation.cpp ui/frames/delegates/operation.h
+    ui/frames/delegates/operation_create.cpp ui/frames/delegates/operation_create.h
     ui/frames/delegates/operation_delete.cpp ui/frames/delegates/operation_delete.h
+    ui/frames/delegates/operation_format.cpp ui/frames/delegates/operation_format.h
+    ui/frames/delegates/operation_mount_point.cpp ui/frames/delegates/operation_mount_point.h
+    ui/frames/delegates/operation_resize.cpp ui/frames/delegates/operation_resize.h
     ui/frames/delegates/partition_delegate.cpp ui/frames/delegates/partition_delegate.h
+    ui/frames/delegates/partition_util.cpp ui/frames/delegates/partition_util.h
+
 
     ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
     ui/frames/inner/edit_partition_frame.cpp ui/frames/inner/edit_partition_frame.h
@@ -154,7 +160,6 @@ set(UI_FILES
     ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
     ui/widgets/table_item_label.cpp ui/widgets/table_item_label.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
-    ui/frames/delegates/partition_util.cpp ui/frames/delegates/partition_util.h
 
     ui/utils/xutil.cpp ui/utils/xutil.h
     )
