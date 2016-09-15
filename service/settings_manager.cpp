@@ -352,30 +352,4 @@ void WritePartitionInfo(const QString& root, const QString& mount_points) {
   // TODO(xushaohua): Add DI_ROOT_DISK
 }
 
-void WriteSettingsToConfigFile() {
-  const QHash<QString, QString> map = {
-      {"system_info_setup_after_reboot", "DI_SKIP_USER_INFO"},
-      {"system_info_vendor_name", "DI_VENDOR_NAME"},
-      {"system_info_os_name", "DI_OS_NAME"},
-      {"system_info_os_version", "DI_OS_VERSION"},
-      {"partition_default_fs", "DI_DEFAULT_FS"},
-      {"grub_timeout", "DI_GRUB_TIMEOUT"},
-      {"grub_block_windows", "DI_GRUB_BLOCK_WINDOWS"},
-      {"package_uninstalled_packages", "DI_UNINSTALLED_PACKAGES"},
-      {"package_hold_packages", "DI_HOLD_PACKAGES"},
-      {"service_enabled_services", "DI_ENABLED_SERVICES"},
-      {"service_disabled_services", "DI_DISABLED_SERVICES"},
-      {"dock_append_apps_to_dock", "DI_APPEND_APPS_TO_DOCK"},
-  };
-
-  QHashIterator<QString, QString> iter(map);
-  while (iter.hasNext()) {
-    iter.next();
-    const QString value = GetSettingsString(iter.key());
-    if (!AppendToConfigFile(iter.value(), value)) {
-      qWarning() << "Failed to write to conf file:" << iter.value() << value;
-    }
-  }
-}
-
 }  // namespace service

@@ -28,7 +28,6 @@ int main(int argc, char* argv[]) {
   service::DeleteConfigFile();
   // NOTE(xushaohua): Scans usb devices here, might be very slow.
   // TODO(xushaohua): Add a startup option to disable scanning operation.
-  service::WriteSettingsToConfigFile();
 
   ui::MainWindow main_window;
   main_window.fullscreen();
