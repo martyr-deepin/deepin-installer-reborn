@@ -19,7 +19,7 @@ const char kSkipPartitionPage[] = "skip_partition_page";
 
 // System Language List
 const char kSelectLanguageUseDefaultLocale[] =
-    "select_language_use_default_lcoale";
+    "select_language_use_default_locale";
 const char kSelectLanguageDefaultLocale[] = "select_language_default_locale";
 
 // System Info
