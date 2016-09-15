@@ -30,6 +30,9 @@ QString g_oem_dir;
 // Absolute path to installer config file.
 const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
 
+// Absolute path to global oem config file saved in system.
+const char kInstallerOemConfigFile[] = "/etc/deepin-installer-oem.conf";
+
 // File name of auto partition script.
 const char kAutoPartFile[] = "auto-part.sh";
 
@@ -41,6 +44,9 @@ const char kIsoOemDir[] = "/lib/live/mount/medium/oem";
 const char kUsbMountDir[] = "usb_root_dir";
 const char kUsbMountPoint[] = "/usb_root_dir";
 const char kUsbMountOemPath[] = "/usb_root_dir/oem";
+
+// Filename of oem settings
+const char kOemSettingsFile[] = "settings.ini";
 
 // Name of installer oem lock file.
 const char kOemLockFile[] = "deepin-installer-reborn.lock";
@@ -208,19 +214,16 @@ QString GetSettingsString(const QString& key) {
 }
 
 QVariant GetSettingsValue(const QString& key) {
-  const QString oem_file =
-      GetOemDir().absoluteFilePath(QStringLiteral("settings.ini"));
-
-  // TODO(xushaohua): Set as static variables to speed up.
-  QSettings oem_settings(oem_file , QSettings::IniFormat);
-  QSettings default_settings(
-      QStringLiteral(":/resources/default-settings.ini"),
-      QSettings::IniFormat);
-
-  if (oem_settings.contains(key)) {
-    return oem_settings.value(key);
+  const QString oem_file = GetOemDir().absoluteFilePath(kOemSettingsFile);
+  if (QFile::exists(oem_file)) {
+    QSettings oem_settings(oem_file , QSettings::IniFormat);
+    if (oem_settings.contains(key)) {
+      return oem_settings.value(key);
+    }
   }
 
+  QSettings default_settings(QStringLiteral(":/resources/default-settings.ini"),
+                             QSettings::IniFormat);
   if (default_settings.contains(key)) {
     return default_settings.value(key);
   }
@@ -350,6 +353,35 @@ void WritePartitionInfo(const QString& root, const QString& mount_points) {
   AppendToConfigFile("DI_ROOT_PARTITION", root);
   AppendToConfigFile("DI_MOUNTPOINTS", mount_points);
   // TODO(xushaohua): Add DI_ROOT_DISK
+}
+
+void SaveOemConfig() {
+  QFile file(kInstallerOemConfigFile);
+  if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    qWarning() << "Failed to open oem file:" << kInstallerOemConfigFile;
+    return;
+  }
+  // Read default settings
+  QSettings default_settings(QStringLiteral(":/resources/default-settings.ini"),
+                             QSettings::IniFormat);
+  for (const QString& key : default_settings.allKeys()) {
+    const QVariant value = default_settings.value(key);
+    const QString line(QString("%1='%2'\n").arg(key).arg(value.toString()));
+    file.write(line.toUtf8());
+  }
+
+  // Read oem settings
+  const QString oem_file = GetOemDir().absoluteFilePath(kOemSettingsFile);
+  if (QFile::exists(oem_file)) {
+    QSettings oem_settings(oem_file , QSettings::IniFormat);
+    for (const QString& key : oem_settings.allKeys()) {
+      const QVariant value = oem_settings.value(key);
+      const QString line(QString("%1='%2'\n").arg(key).arg(value.toString()));
+      file.write(line.toUtf8());
+    }
+  }
+
+  file.close();
 }
 
 }  // namespace service

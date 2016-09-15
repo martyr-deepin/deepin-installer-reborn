@@ -62,6 +62,10 @@ void WriteTimezone(const QString& timezone);
 void WriteKeyboard(const QString& layout, const QString& variant);
 void WritePartitionInfo(const QString& root, const QString& mount_points);
 
+// Save current oem settings to /etc/deepin-installer-oem.conf
+// This file is accessed in hook scripts.
+void SaveOemConfig();
+
 }  // namespace service
 
 #endif  // DEEPIN_INSTALLER_REBORN_SETTINGS_MANAGER_H
