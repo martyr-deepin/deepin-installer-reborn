@@ -35,13 +35,13 @@
 CONF_FILE=/etc/deepin-installer.conf
 
 kGibiByte=1048576
-k4Gb=4096
-k15Gb=15360
-k30Gb=30720
-k60Gb=61440
+k4Gib=4096
+k15Gib=15360
+k30Gib=30720
+k60Gib=61440
 
 # Minimum disk capacity required, 15G.
-MINIMUM_DISK_SIZE=$k15Gb
+MINIMUM_DISK_SIZE=$k15Gib
 
 # Print error message and exit current context.
 error_exit() {
@@ -70,7 +70,7 @@ flush_message() {
 
 # Create a EFI partition on /dev/sda1 with 512M
 make_efi() {
-  parted -s $DEVICE mkpart primary fat32 1M 512M || \
+  parted -s $DEVICE mkpart primary fat32 1Mib 512Mib || \
     error_exit "Failed to create partition ${DEVICE}1"
   parted -s $DEVICE set 1 esp on || \
     error_exit "Failed to set esp flag on ${DEVICE}1"
@@ -112,10 +112,10 @@ if [ -d '/sys/firmware/efi' ]; then
   parted -s $DEVICE mktable gpt || \
     error_exit "Failed to create msdos partition on $DEVICE";
 
-  if [ $DEVICE_SIZE -le $k15Gb ]; then
+  if [ $DEVICE_SIZE -le $k15Gib ]; then
     make_efi
 
-    parted -s $DEVICE mkpart primary ext4 512M 100% || \
+    parted -s $DEVICE mkpart primary ext4 512Mib 100% || \
       error_exit "Failed to create partition ${DEVICE}2";
     flush_message
     mkfs.ext4 -F ${DEVICE}2 || \
@@ -124,13 +124,13 @@ if [ -d '/sys/firmware/efi' ]; then
     echo "DI_ROOT_PARTITION=\"${DEVICE}2\"" >> $CONF_FILE
     echo "DI_MOUNTPOINTS=\"${DEVICE}1=/boot/efi\"" >> $CONF_FILE
 
-  elif [ $DEVICE_SIZE -le $k60Gb ]; then
+  elif [ $DEVICE_SIZE -le $k60Gib ]; then
     make_efi
 
     # / on /dev/sda2
     START_SIZE=512
-    END_SIZE=$((DEVICE_SIZE - k4Gb + START_SIZE))
-    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}M ${END_SIZE}M || \
+    END_SIZE=$((DEVICE_SIZE - k4Gib + START_SIZE))
+    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}Mib ${END_SIZE}Mib || \
       error_exit "Failed to create linux-swap on ${DEVICE}2";
     flush_message
     mkfs.ext4 -F ${DEVICE}2 || \
@@ -138,7 +138,7 @@ if [ -d '/sys/firmware/efi' ]; then
 
     # linux-swap on /dev/sda3
     START_SIZE=$END_SIZE
-    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}M 100% || \
+    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}Mib 100% || \
       error_exit "Failed to create partition ${DEVICE}3";
     flush_message
     mkswap ${DEVICE}3 || \
@@ -152,25 +152,25 @@ if [ -d '/sys/firmware/efi' ]; then
 
     # / on /dev/sda2
     START_SIZE=512
-    END_SIZE=$((START_SIZE + k30Gb))
-    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}M ${END_SIZE}M || \
+    END_SIZE=$((START_SIZE + k30Gib))
+    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}Mib ${END_SIZE}Mib || \
       error_exit "Failed to create partition ${DEVICE}2";
     flush_message
     mkfs.ext4 -F ${DEVICE}2 || \
       error_exit "Failed to make ext4 filesystem on ${DEVICE}2";
 
     START_SIZE=$END_SIZE
-    END_SIZE=$((START_SIZE + k4Gb))
+    END_SIZE=$((START_SIZE + k4Gib))
     # linux-swap on /dev/sda3
-    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}M ${END_SIZE}M || \
-      error_exit "Failed to create linux-swap on ${DEVICE}3";
+    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}Mib \
+      ${END_SIZE}Mib || error_exit "Failed to create linux-swap on ${DEVICE}3";
     flush_message
     mkswap ${DEVICE}3 || \
       error_exit "Failed to call mkswap ${DEVICE}3";
 
     # /home on /dev/sda4
     START_SIZE=$END_SIZE
-    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}M 100% || \
+    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}Mib 100% || \
       error_exit "Failed to create partition ${DEVICE}4";
     flush_message
     mkfs.ext4 -F ${DEVICE}4 || \
@@ -184,9 +184,9 @@ else
   parted -s $DEVICE mktable msdos || \
     error_exit "Failed to create msdos partition on $DEVICE";
 
-  if [ $DEVICE_SIZE -le $k15Gb ]; then
+  if [ $DEVICE_SIZE -le $k15Gib ]; then
     # / on /dev/sda1
-    parted -s $DEVICE mkpart primary ext4 1M 100% || \
+    parted -s $DEVICE mkpart primary ext4 1Mib 100% || \
       error_exit "Failed to create partition ${DEVICE}1";
     flush_message
     mark_device1_bootable
@@ -196,10 +196,10 @@ else
     echo "DI_ROOT_PARTITION=\"${DEVICE}1\"" >> $CONF_FILE
     echo "DI_MOUNTPOINTS=\"\"" >> $CONF_FILE
 
-  elif [ $DEVICE_SIZE -le $k60Gb ]; then
+  elif [ $DEVICE_SIZE -le $k60Gib ]; then
     # / on /dev/sda1
-    END_SIZE=$((DEVICE_SIZE - k4Gb))
-    parted -s $DEVICE mkpart primary ext4 1M ${END_SIZE}M || \
+    END_SIZE=$((DEVICE_SIZE - k4Gib))
+    parted -s $DEVICE mkpart primary ext4 1Mib ${END_SIZE}Mib || \
       error_exit "Failed to create partition ${DEVICE}1";
     flush_message
     mark_device1_bootable
@@ -208,7 +208,7 @@ else
 
     # linux-swap on /dev/sda2
     START_SIZE=$END_SIZE
-    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}M 100% || \
+    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}Mib 100% || \
       error_exit "Failed to create linux-swap on ${DEVICE}2";
     flush_message
     mkswap ${DEVICE}2 || \
@@ -220,8 +220,8 @@ else
   else
     # / on /dev/sda1
     START_SIZE=1
-    END_SIZE=$k30Gb
-    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}M ${END_SIZE}M || \
+    END_SIZE=$k30Gib
+    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}Mib ${END_SIZE}Mib || \
       error_exit "Failed to create partition ${DEVICE}1";
     flush_message
     mark_device1_bootable
@@ -230,16 +230,16 @@ else
 
     # linux-swap on /dev/sda2
     START_SIZE=$END_SIZE
-    END_SIZE=$((START_SIZE + k4Gb))
-    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}M ${END_SIZE}M || \
-      error_exit "Failed to create linux-swap on ${DEVICE}2";
+    END_SIZE=$((START_SIZE + k4Gib))
+    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}Mib \
+      ${END_SIZE}Mib || error_exit "Failed to create linux-swap on ${DEVICE}2";
     flush_message
     mkswap ${DEVICE}2 || \
       error_exit "Failed to call mkswap ${DEVICE}2";
 
     # /home on /dev/sda3
     START_SIZE=$END_SIZE
-    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}M 100% || \
+    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}Mib 100% || \
       error_exit "Failed to create partition ${DEVICE}3";
     flush_message
     mkfs.ext4 -F ${DEVICE}3 || \
