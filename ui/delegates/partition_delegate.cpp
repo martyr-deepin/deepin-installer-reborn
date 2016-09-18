@@ -97,9 +97,12 @@ void PartitionDelegate::deletePartition(const QString& partition_path) {
 void PartitionDelegate::formatPartition(const partman::Partition& partition,
                                         partman::FsType fs_type,
                                         const QString& mount_point) {
-  Q_UNUSED(partition);
-  Q_UNUSED(fs_type);
-  Q_UNUSED(mount_point);
+  qDebug() << "formatPartition()" << partition.path << mount_point;
+  partman::Partition new_partition(partition);
+  new_partition.fs = fs_type;
+  new_partition.mount_point = mount_point;
+  OperationFormat* operation = new OperationFormat(partition, new_partition);
+  operations_.append(operation);
 }
 
 void PartitionDelegate::updateMountPoint(const partman::Partition& partition,
