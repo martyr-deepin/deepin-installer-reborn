@@ -20,13 +20,13 @@ class Device {
   PartitionList partitions;
   QString model;
   QString path;
-  Sector length;  // device length
-  Sector heads;
-  Sector sectors;
-  Sector cylinders;
-  Sector cylsize;
+  qint64 length;  // device length
+  qint64 heads;
+  qint64 sectors;
+  qint64 cylinders;
+  qint64 cylsize;
   QString disk_type;
-  ByteValue sector_size;  // logical sector size
+  qint64 sector_size;  // logical sector size
   int max_prims;
   bool read_only;
 

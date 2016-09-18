@@ -256,8 +256,8 @@ bool ReadXfsUsage(const QString& path, qint64& freespace, qint64& total) {
 // Update partition usage.
 void ReadUsage(Partition& partition) {
   bool ok = false;
-  ByteValue total = 0;
-  ByteValue freespace = 0;
+  qint64 total = 0;
+  qint64 freespace = 0;
   switch (partition.fs) {
     case FsType::Btrfs: {
       ok = ReadBtrfsUsage(partition.path, freespace, total);

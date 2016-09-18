@@ -54,18 +54,18 @@ class Partition {
 
   // sector size of the disk device needed for converting to/from sectors
   // and bytes
-  ByteValue sector_size;
+  qint64 sector_size;
 
-  ByteValue length;
-  ByteValue freespace;
+  qint64 length;
+  qint64 freespace;
 
-  Sector sector_start;
-  Sector sector_end;
-  Sector sectors_total;  // sectors_total = sectors_end - sectors_start + 1;
-  Sector sectors_used;
-  Sector sectors_unused;
-  Sector sectors_unallocated;
-  Sector free_space_before;  // Free space preceding partition value
+  qint64 sector_start;
+  qint64 sector_end;
+  qint64 sectors_total;  // sectors_total = sectors_end - sectors_start + 1;
+  qint64 sectors_used;
+  qint64 sectors_unused;
+  qint64 sectors_unallocated;
+  qint64 free_space_before;  // Free space preceding partition value
   bool inside_extended;
   bool busy;
   QStringList flags;

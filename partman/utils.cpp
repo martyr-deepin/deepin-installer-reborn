@@ -40,9 +40,9 @@ PartitionTableType GetPrimaryDiskPartitionTable() {
   }
 
   const QString disk_type_name(disk_type->name);
-  if (disk_type_name == kPartationTableMsDos) {
+  if (disk_type_name == kPartitionTableMsDos) {
     return PartitionTableType::MsDos;
-  } else if (disk_type_name == kPartationTableGPT) {
+  } else if (disk_type_name == kPartitionTableGPT) {
     return PartitionTableType::GPT;
   }
 

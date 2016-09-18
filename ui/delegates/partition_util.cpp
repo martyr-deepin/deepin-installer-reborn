@@ -8,6 +8,8 @@
 #include <QDebug>
 #include <QFileInfo>
 
+#include "partman/structs.h"
+
 namespace ui {
 
 QString GetPartitionName(const QString& path) {
@@ -95,9 +97,8 @@ bool SupportMountPoint(partman::FsType fs_type) {
 }
 
 int ToGigByte(qint64 size) {
-  const double m_size = static_cast<double>(size) / 1024.0;
-  qDebug() << size << m_size << (m_size / 1024.0) << (m_size / 1024.0 / 1024.0);
-  return  static_cast<int>(round(m_size / 1024.0 / 1024.0));
+  const double m_size = static_cast<double>(size) / kKibiByte;
+  return  static_cast<int>(round(m_size / kMebiByte));
 }
 
 

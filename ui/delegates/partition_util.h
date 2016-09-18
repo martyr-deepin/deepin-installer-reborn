@@ -25,7 +25,7 @@ QString GetLocalFsTypeName(partman::FsType fs_type);
 // linux-swap and efi are mounted at fixed position and thus returns false.1
 bool SupportMountPoint(partman::FsType fs_type);
 
-// Convert |size| in byte to gigbyte.
+// Convert |size| in byte to gibibyte.
 int ToGigByte(qint64 size);
 
 }  // namespace ui

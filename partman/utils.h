@@ -13,7 +13,7 @@ namespace partman {
 bool IsEfiEnabled();
 
 // Get maximum device size, by parsing /proc/partitions.
-Sector GetMaximumDeviceSize();
+qint64 GetMaximumDeviceSize();
 
 // Returns partition table type of the first disk device.
 PartitionTableType GetPrimaryDiskPartitionTable();

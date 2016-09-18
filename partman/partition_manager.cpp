@@ -166,10 +166,10 @@ void PartitionManager::doRefreshDevices() {
       // Raw disk found.
       // TODO(xushaohua): Check proper partition type.
       lp_disk = ped_disk_new_fresh(lp_device,
-                                   ped_disk_type_get(kPartationTableGPT));
+                                   ped_disk_type_get(kPartitionTableGPT));
       disk_type = ped_disk_probe(lp_device);
-    } else if (QString(kPartationTableGPT) == disk_type->name ||
-               QString(kPartationTableMsDos) == disk_type->name) {
+    } else if (QString(kPartitionTableGPT) == disk_type->name ||
+               QString(kPartitionTableMsDos) == disk_type->name) {
       lp_disk = ped_disk_new(lp_device);
     } else {
       // Ignores other type of device.
@@ -186,9 +186,9 @@ void PartitionManager::doRefreshDevices() {
     device.sectors = lp_device->bios_geom.sectors;
     device.cylinders = lp_device->bios_geom.cylinders;
     const QString disk_type_name(disk_type->name);
-    if (disk_type_name == kPartationTableMsDos) {
+    if (disk_type_name == kPartitionTableMsDos) {
       device.table = PartitionTableType::MsDos;
-    } else if (disk_type_name == kPartationTableGPT) {
+    } else if (disk_type_name == kPartitionTableGPT) {
       device.table = PartitionTableType::GPT;
     }
 
