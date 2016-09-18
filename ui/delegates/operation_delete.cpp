@@ -6,9 +6,11 @@
 
 namespace ui {
 
-OperationDelete::OperationDelete(const partman::Partition& partition_orig) {
+OperationDelete::OperationDelete(const partman::Partition& partition_orig,
+                                 const partman::Partition& partition_new) {
   this->type = OperationType::Delete;
   this->partition_orig = partition_orig;
+  this->partition_new = partition_new;
 }
 
 }  // namespace ui

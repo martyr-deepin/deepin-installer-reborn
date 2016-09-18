@@ -148,7 +148,7 @@ void AdvancedPartitionItem::updateStatus() {
 void AdvancedPartitionItem::onControlButtonClicked() {
   switch (control_status_) {
     case ControlStatus::Delete: {
-      emit this->deletePartitionTriggered(partition_.path);
+      emit this->deletePartitionTriggered(partition_);
       break;
     }
     case ControlStatus::Edit: {

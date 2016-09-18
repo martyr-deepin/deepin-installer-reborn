@@ -84,14 +84,16 @@ const partman::FsTypeList& PartitionDelegate::getFsTypes() {
   return fs_types_;
 }
 
-void PartitionDelegate::createPartition(
-    const partman::Partition& partition) {
+void PartitionDelegate::createPartition(const partman::Partition& partition) {
   Q_UNUSED(partition);
 }
 
-void PartitionDelegate::deletePartition(const QString& partition_path) {
-  Q_UNUSED(partition_path);
-  // TODO(xushaohua): Create an OperationDelete object.
+void PartitionDelegate::deletePartition(const partman::Partition& partition) {
+  partman::Partition new_partition(partition);
+  // TODO(xushaohua): check logical partition.
+  new_partition.type = partman::PartitionType::Unallocated;
+  OperationDelete* operation = new OperationDelete(partition, new_partition);
+  operations_.append(operation);
 }
 
 void PartitionDelegate::formatPartition(const partman::Partition& partition,

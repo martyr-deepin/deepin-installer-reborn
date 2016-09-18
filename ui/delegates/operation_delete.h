@@ -11,7 +11,8 @@ namespace ui {
 
 class OperationDelete : public Operation {
  public:
-  OperationDelete(const partman::Partition& partition_orig);
+  OperationDelete(const partman::Partition& partition_orig,
+                  const partman::Partition& partition_new);
 };
 
 }  // namespace ui

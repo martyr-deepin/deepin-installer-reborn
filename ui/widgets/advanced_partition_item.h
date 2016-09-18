@@ -23,7 +23,7 @@ class AdvancedPartitionItem : public FlatButton {
 
  signals:
   // Emitted when delete partition button is clicked.
-  void deletePartitionTriggered(const QString& partition_path);
+  void deletePartitionTriggered(const partman::Partition& partition);
 
   // Emitted when edit-partition button is clicked.
   void editPartitionTriggered(const partman::Partition& partition);
