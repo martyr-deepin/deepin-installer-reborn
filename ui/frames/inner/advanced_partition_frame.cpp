@@ -68,14 +68,23 @@ void AdvancedPartitionFrame::initUI() {
 }
 
 void AdvancedPartitionFrame::drawDevices() {
+  qDebug() << "AdvancedPartitionFrame::drawDevice()";
   // Clear children in button group.
   for (QAbstractButton* button : partition_button_group_->buttons()) {
     partition_button_group_->removeButton(button);
   }
 
+  // Remove all widgets in partition layout.
+  for (QLayoutItem* item = partition_layout_->takeAt(0); item != NULL;
+       item = partition_layout_->takeAt(0)) {
+    delete item->widget();
+    delete item;
+  }
+
   for (const partman::Device& device : partition_delegate_->devices()) {
     QLabel* model_label = new QLabel(device.model);
     partition_layout_->addWidget(model_label);
+    qDebug() << "Add model:" << device.model;
     for (const partman::Partition& partition : device.partitions) {
       AdvancedPartitionItem* item = new AdvancedPartitionItem(partition);
       partition_layout_->addWidget(item);

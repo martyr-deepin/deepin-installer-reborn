@@ -38,6 +38,7 @@ class Partition {
   Partition();
   ~Partition();
 
+  bool operator==(const Partition& other) const;
   void reset();
 
   QString device_path;
@@ -72,6 +73,7 @@ class Partition {
 
   QString mount_point;
 
+  // TODO(xushaohua): Remove logicals.
   QList<Partition> logicals;
 };
 

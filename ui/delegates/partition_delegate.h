@@ -62,11 +62,16 @@ class PartitionDelegate : public QObject {
 
  private:
   void initConnections();
+  void refreshVisual();
 
   partman::PartitionManager* partition_manager_ = nullptr;
   QThread* partition_thread_ = nullptr;
 
+  // device list which are managed by this delegate.
   partman::DeviceList devices_;
+  // Physical device list.
+  partman::DeviceList real_devices_;
+
   QList<Operation*> operations_;
 
   QStringList all_mount_points_;

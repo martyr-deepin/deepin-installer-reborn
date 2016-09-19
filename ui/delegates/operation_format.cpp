@@ -13,4 +13,8 @@ OperationFormat::OperationFormat(const partman::Partition& partition_orig,
   this->partition_new = partition_new;
 }
 
+void OperationFormat::applyToVisual(partman::PartitionList& partitions) const {
+  Q_UNUSED(partitions);
+}
+
 }  // namespace ui

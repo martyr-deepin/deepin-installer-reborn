@@ -13,4 +13,9 @@ OperationMountPoint::OperationMountPoint(const partman::Partition& partition_ori
   this->partition_new = partition_new;
 }
 
+void OperationMountPoint::applyToVisual(
+    partman::PartitionList& partitions) const {
+  substitute(partitions);
+}
+
 }  // namespace ui

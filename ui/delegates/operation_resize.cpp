@@ -13,4 +13,8 @@ OperationResize::OperationResize(const partman::Partition& partition_orig,
   this->partition_new = partition_new;
 }
 
+void OperationResize::applyToVisual(partman::PartitionList& partitions) const {
+  Q_UNUSED(partitions);
+}
+
 }  // namespace ui

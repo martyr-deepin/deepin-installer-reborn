@@ -14,6 +14,13 @@ Partition::~Partition() {
 
 }
 
+bool Partition::operator==(const Partition& other) const {
+  return (this->device_path == other.device_path &&
+          this->partition_number == other.partition_number &&
+          this->sector_start == other.sector_start &&
+          type == other.type);
+}
+
 void Partition::reset() {
   device_path = "";
   uuid = "";

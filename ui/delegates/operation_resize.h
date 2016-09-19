@@ -14,6 +14,8 @@ class OperationResize : public Operation {
  public:
   OperationResize(const partman::Partition& partition_orig,
                   const partman::Partition& partition_new);
+
+  void applyToVisual(partman::PartitionList& partitions) const override;
 };
 
 }  // namespace ui

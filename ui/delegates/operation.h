@@ -26,6 +26,16 @@ class Operation {
   OperationType type;
   partman::Partition partition_orig;
   partman::Partition partition_new;
+
+  // Apply operation by updating partition list.
+  virtual void applyToVisual(partman::PartitionList& partitions) const = 0;
+
+ protected:
+  int findIndexNew(const partman::PartitionList& partitions) const;
+  int findIndexOriginal(const partman::PartitionList& partitions) const;
+
+  // For operations which do not change partition boundaries.
+  void substitute(partman::PartitionList& partitions) const;
 };
 
 }  // namespace ui

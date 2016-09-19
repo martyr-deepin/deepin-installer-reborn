@@ -83,6 +83,9 @@ void AdvancedPartitionItem::initUI() {
   // mount point
   mount_point_label_ = new QLabel();
   mount_point_label_->setObjectName(QStringLiteral("mount_point_label"));
+  if (!partition_.mount_point.isEmpty()) {
+    mount_point_label_->setText(partition_.mount_point);
+  }
 
   // tip
   tip_label_ = new QLabel();
@@ -99,7 +102,7 @@ void AdvancedPartitionItem::initUI() {
   control_button_->setFixedSize(18, 18);
   control_button_->hide();
 
-  // TODO(xuhaohua): Use fixed layout instead.
+  // TODO(xushaohua): Use fixed layout instead.
   QHBoxLayout* layout = new QHBoxLayout();
   layout->addWidget(partition_label_);
   layout->addWidget(partition_path_label_);
