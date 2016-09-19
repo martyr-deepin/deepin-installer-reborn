@@ -34,6 +34,8 @@ class PartitionDelegate : public QObject {
 
   const partman::DeviceList& devices() const { return devices_; }
 
+  // Remove |mount_point| from result of getMountPoints().
+  void useMountPoint(const QString& mount_point);
   // Get mount point based on fs type.
   const QStringList& getMountPoints();
 

@@ -58,6 +58,12 @@ void PartitionDelegate::autoConf() {
   emit partition_manager_->autoPart();
 }
 
+void PartitionDelegate::useMountPoint(const QString& mount_point) {
+  qDebug() << "useMountPoint()" << mount_point << unused_mount_points_;
+//  Q_ASSERT(unused_mount_points_.contains(mount_point));
+  unused_mount_points_.removeOne(mount_point);
+}
+
 const QStringList& PartitionDelegate::getMountPoints() {
   if (all_mount_points_.isEmpty()) {
     // Read available mount points.

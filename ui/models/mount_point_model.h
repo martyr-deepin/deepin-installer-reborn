@@ -17,6 +17,8 @@ class MountPointModel : public QAbstractListModel {
  public:
   MountPointModel(PartitionDelegate* delegate, QObject* parent = nullptr);
 
+  void useMountPoint(const QString& mount_point);
+
   // Get index of |mount_point|, if not found returns -1.
   int index(const QString& mount_point) const;
 
@@ -30,7 +32,6 @@ class MountPointModel : public QAbstractListModel {
 
  private:
   PartitionDelegate* delegate_ = nullptr;
-  QStringList mount_points_;
 };
 
 // Check whether |mount_point| is empty mount point.

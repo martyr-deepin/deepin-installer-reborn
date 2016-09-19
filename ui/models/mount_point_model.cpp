@@ -11,22 +11,26 @@ namespace ui {
 
 MountPointModel::MountPointModel(PartitionDelegate* delegate, QObject* parent)
     : QAbstractListModel(parent),
-      delegate_(delegate),
-      mount_points_(delegate->getMountPoints()) {
+      delegate_(delegate) {
   this->setObjectName(QStringLiteral("mount_point_model"));
 }
 
+void MountPointModel::useMountPoint(const QString& mount_point) {
+  delegate_->useMountPoint(mount_point);
+}
+
 int MountPointModel::index(const QString& mount_point) const {
-  return mount_points_.indexOf(mount_point);
+  return delegate_->getMountPoints().indexOf(mount_point);
 }
 
 int MountPointModel::indexOfEmpty() const {
-  return mount_points_.indexOf(partman::kPartitionMountPointUnused);
+  return delegate_->getMountPoints().indexOf(
+      partman::kPartitionMountPointUnused);
 }
 
 int MountPointModel::rowCount(const QModelIndex& parent) const {
   Q_UNUSED(parent);
-  return mount_points_.length();
+  return delegate_->getMountPoints().length();
 }
 
 QVariant MountPointModel::data(const QModelIndex& index, int role) const {
@@ -38,8 +42,9 @@ QVariant MountPointModel::data(const QModelIndex& index, int role) const {
     return QVariant();
   }
 
-  const QString name =  mount_points_.at(index.row());
+  const QString name =  delegate_->getMountPoints().at(index.row());
   if (name == partman::kPartitionMountPointUnused) {
+    // TODO(xushaohua): Check filesystem type of partition.
     return tr("do not use");
   } else {
     return name;
