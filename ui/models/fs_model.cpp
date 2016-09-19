@@ -12,10 +12,8 @@ namespace ui {
 FsModel::FsModel(PartitionDelegate* delegate, QObject* parent)
     : QAbstractListModel(parent),
       delegate_(delegate),
-      fs_list_() {
+      fs_list_(delegate_->getFsTypes()) {
   this->setObjectName(QStringLiteral("fs_model"));
-
-  this->updateList();
 }
 
 int FsModel::index(partman::FsType fs_type) const {
@@ -51,12 +49,6 @@ QVariant FsModel::data(const QModelIndex& index, int role) const {
 
   const partman::FsType fs = fs_list_.at(index.row());
   return GetLocalFsTypeName(fs);
-}
-
-void FsModel::updateList() {
-  fs_list_.clear();
-  fs_list_.append(delegate_->getFsTypes());
-  // TODO(xushaohua): Filters EFI file system.
 }
 
 }  // namespace ui
