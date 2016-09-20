@@ -19,7 +19,14 @@ class PartitionManager;
 namespace ui {
 
 // 100M, filter partition size.
+// TODO(xushaohua): Remove this declaration.
 const qint64 kMinimumPartitionSizeToDisplay = 100 * 1024 * 1024;
+
+enum class PartitionType {
+  PrimaryOnly,
+  LogicalOnly,
+  PrimaryOrLogical,
+};
 
 // PartitionManager proxy layer.
 class PartitionDelegate : public QObject {
@@ -34,17 +41,24 @@ class PartitionDelegate : public QObject {
 
   const partman::DeviceList& devices() const { return devices_; }
 
-  // Remove |mount_point| from result of getMountPoints().
-  void useMountPoint(const QString& mount_point);
+  // Get alternative partition type.
+  PartitionType getPartitionType(const partman::Partition& partition) const;
+
   // Get mount point based on fs type.
   const QStringList& getMountPoints();
+  // Remove |mount_point| from result of getMountPoints().
+  void useMountPoint(const QString& mount_point);
 
   // Get all supported fs type.
   const partman::FsTypeList& getFsTypes();
 
   // Operation helpers.
   // Create a new partition.
-  void createPartition(const partman::Partition& partition);
+  void createPartition(const partman::Partition& partition,
+                       partman::FsType fs_type,
+                       const QString& mount_point,
+                       qint64 partition_size,
+                       bool align_start);
   // Delete a |partition|.
   void deletePartition(const partman::Partition& partition);
   // Format a partition |partition|.

@@ -58,10 +58,11 @@ void PartitionDelegate::autoConf() {
   emit partition_manager_->autoPart();
 }
 
-void PartitionDelegate::useMountPoint(const QString& mount_point) {
-  qDebug() << "useMountPoint()" << mount_point << unused_mount_points_;
-//  Q_ASSERT(unused_mount_points_.contains(mount_point));
-  unused_mount_points_.removeOne(mount_point);
+PartitionType PartitionDelegate::getPartitionType(
+    const partman::Partition& partition) const {
+  // TODO(xushaohua): Check partition layout.
+  Q_UNUSED(partition);
+  return PartitionType::PrimaryOnly;
 }
 
 const QStringList& PartitionDelegate::getMountPoints() {
@@ -75,6 +76,12 @@ const QStringList& PartitionDelegate::getMountPoints() {
   }
 
   return unused_mount_points_;
+}
+
+void PartitionDelegate::useMountPoint(const QString& mount_point) {
+  qDebug() << "useMountPoint()" << mount_point << unused_mount_points_;
+//  Q_ASSERT(unused_mount_points_.contains(mount_point));
+  unused_mount_points_.removeOne(mount_point);
 }
 
 const partman::FsTypeList& PartitionDelegate::getFsTypes() {
@@ -91,8 +98,21 @@ const partman::FsTypeList& PartitionDelegate::getFsTypes() {
   return fs_types_;
 }
 
-void PartitionDelegate::createPartition(const partman::Partition& partition) {
-  Q_UNUSED(partition);
+void PartitionDelegate::createPartition(const partman::Partition& partition,
+                                        partman::FsType fs_type,
+                                        const QString& mount_point,
+                                        qint64 partition_size,
+                                        bool align_start) {
+  partman::Partition partition_new(partition);
+  partition_new.fs = fs_type;
+  partition_new.mount_point = mount_point;
+  partition_new.freespace = partition.length;
+  // TODO(xushaohua): Calculate new partition sector size
+  Q_UNUSED(partition_size);
+  Q_UNUSED(align_start);
+  OperationCreate* operation = new OperationCreate(partition, partition_new);
+  operations_.append(operation);
+  refreshVisual();
 }
 
 void PartitionDelegate::deletePartition(const partman::Partition& partition) {

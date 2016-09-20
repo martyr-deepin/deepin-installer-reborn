@@ -8,6 +8,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPixmap>
+#include <QSlider>
 #include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
@@ -35,6 +36,13 @@ NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
 
 void NewPartitionFrame::setPartition(const partman::Partition& partition) {
   partition_ = partition;
+  // TODO(xushaohua): update type-box
+//  delegate_->getPartitionType(partition);
+
+  const int mebi_size = static_cast<int>(
+      partition.sectors_total * partition.sector_size / kMebiByte);
+  size_slider_->setMaximum(mebi_size);
+  size_slider_->setMinimum(0);
 }
 
 void NewPartitionFrame::initConnections() {
@@ -68,6 +76,7 @@ void NewPartitionFrame::initUI() {
   TableItemLabel* size_label = new TableItemLabel(tr("Size"));
 
   type_box_ = new TableComboBox();
+  type_box_->addItems({tr("Primary partition"), tr("Logical partition")});
   location_box_ = new TableComboBox();
   location_box_->addItems({tr("Start"), tr("End")});
 
@@ -79,7 +88,7 @@ void NewPartitionFrame::initUI() {
   mount_point_model_ = new MountPointModel(delegate_, mount_point_box_);
   mount_point_box_->setModel(mount_point_model_);
 
-  size_box_ = new TableComboBox();
+  size_slider_ = new QSlider(Qt::Horizontal);
 
   QGridLayout* grid_layout = new QGridLayout();
   grid_layout->addWidget(type_label, 0, 0);
@@ -91,7 +100,7 @@ void NewPartitionFrame::initUI() {
   grid_layout->addWidget(location_box_, 1, 1);
   grid_layout->addWidget(fs_box_, 2, 1);
   grid_layout->addWidget(mount_point_box_, 3, 1);
-  grid_layout->addWidget(size_box_, 4, 1);
+  grid_layout->addWidget(size_slider_, 4, 1);
   QHBoxLayout* grid_wrapper_layout = new QHBoxLayout();;
   grid_wrapper_layout->addStretch();
   grid_wrapper_layout->addLayout(grid_layout);
@@ -121,7 +130,14 @@ void NewPartitionFrame::initUI() {
 }
 
 void NewPartitionFrame::onCreateButtonClicked() {
-  // TODO(xushaohua): Create an OperationNew object
+  const qint64 partition_size = size_slider_->value() * kMebiByte;
+  const partman::FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
+  const QString mount_point = mount_point_box_->currentText();
+  // TODO(xushaohua): Check alignment option
+  const bool align_start = true;
+  delegate_->createPartition(partition_, fs_type, mount_point, partition_size,
+                             align_start);
+
   emit this->finished();
 }
 

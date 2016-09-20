@@ -6,6 +6,7 @@
 #define DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_NEW_PARTITION_FRAME_H
 
 #include <QFrame>
+class QSlider;
 
 #include "partman/partition.h"
 
@@ -37,7 +38,7 @@ class NewPartitionFrame : public QFrame {
   TableComboBox* location_box_ = nullptr;
   TableComboBox* fs_box_ = nullptr;
   TableComboBox* mount_point_box_ = nullptr;
-  TableComboBox* size_box_ = nullptr;
+  QSlider* size_slider_ = nullptr;
 
   NavButton* cancel_button_ = nullptr;
   NavButton* create_button_ = nullptr;

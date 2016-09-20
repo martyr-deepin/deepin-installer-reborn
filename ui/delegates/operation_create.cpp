@@ -14,7 +14,9 @@ OperationCreate::OperationCreate(const partman::Partition& partition_orig,
 }
 
 void OperationCreate::applyToVisual(partman::PartitionList& partitions) const {
-  Q_UNUSED(partitions);
+  // TODO(xushaohua): Calculate partition size and insert unallocated one if
+  // needed.
+  this->substitute(partitions);
 }
 
 }  // namespace ui
