@@ -99,8 +99,11 @@ void PartitionDelegate::deletePartition(const partman::Partition& partition) {
   partman::Partition new_partition(partition);
   // TODO(xushaohua): check logical partition.
   new_partition.type = partman::PartitionType::Unallocated;
+  new_partition.freespace = new_partition.length;
+  new_partition.fs = partman::FsType::Empty;
   OperationDelete* operation = new OperationDelete(partition, new_partition);
   operations_.append(operation);
+  this->refreshVisual();
 }
 
 void PartitionDelegate::formatPartition(const partman::Partition& partition,
@@ -125,8 +128,6 @@ void PartitionDelegate::updateMountPoint(const partman::Partition& partition,
   OperationMountPoint* operation = new OperationMountPoint(partition,
                                                            partition_new);
   operations_.append(operation);
-  // TODO(xushaohua): Merge operations.
-
   this->refreshVisual();
 }
 

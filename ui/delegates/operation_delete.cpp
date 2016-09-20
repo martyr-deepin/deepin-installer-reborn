@@ -14,7 +14,7 @@ OperationDelete::OperationDelete(const partman::Partition& partition_orig,
 }
 
 void OperationDelete::applyToVisual(partman::PartitionList& partitions) const {
-  Q_UNUSED(partitions);
+  substitute(partitions);
 }
 
 }  // namespace ui
