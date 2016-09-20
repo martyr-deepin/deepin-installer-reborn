@@ -87,6 +87,7 @@ void AdvancedPartitionFrame::drawDevices() {
     qDebug() << "Add model:" << device.model;
     for (const partman::Partition& partition : device.partitions) {
       AdvancedPartitionItem* item = new AdvancedPartitionItem(partition);
+      item->setEditable(enable_editing_button_->isChecked());
       partition_layout_->addWidget(item);
       partition_button_group_->addButton(item);
       item->show();
