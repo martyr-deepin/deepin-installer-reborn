@@ -16,15 +16,6 @@
 
 namespace ui {
 
-namespace {
-
-bool IsUnallocatedPartition(const partman::Partition& partition) {
-  return (partition.type == partman::PartitionType::Unallocated ||
-          partition.type == partman::PartitionType::LogicalUnallocated);
-}
-
-}  // namespace
-
 AdvancedPartitionItem::AdvancedPartitionItem(
     const partman::Partition& partition, QWidget* parent)
     : FlatButton(parent),
@@ -53,7 +44,7 @@ void AdvancedPartitionItem::initUI() {
   // filesystem type
   // partition label
   partition_label_ = new QLabel();
-  if (IsUnallocatedPartition(partition_)) {
+  if (partition_.type == partman::PartitionType::Unallocated) {
     partition_label_->setText(tr("Freespace"));
   } else {
     if (!partition_.label.isEmpty()) {
@@ -66,7 +57,7 @@ void AdvancedPartitionItem::initUI() {
   partition_label_->setObjectName(QStringLiteral("partition_label"));
 
   partition_path_label_ = new QLabel();
-  if (!IsUnallocatedPartition(partition_)) {
+  if (partition_.type != partman::PartitionType::Unallocated) {
     partition_path_label_->setText(
         QString("(%1)").arg(GetPartitionName(partition_.path)));
   }
@@ -74,8 +65,12 @@ void AdvancedPartitionItem::initUI() {
 
   // partition space usage
   usage_label_ = new QLabel();
-  usage_label_->setText(GetPartitionUsage(partition_.freespace,
-                                          partition_.length));
+  if (partition_.type == partman::PartitionType::Unallocated) {
+    usage_label_->setText(GetPartitionUsage(0, partition_.getLength()));
+  } else {
+    usage_label_->setText(GetPartitionUsage(partition_.freespace,
+                                            partition_.length));
+  }
   usage_label_->setObjectName(QStringLiteral("usage_label"));
   PartitionUsageBar* usage_bar = new PartitionUsageBar(partition_.freespace,
                                                        partition_.length);
@@ -93,7 +88,7 @@ void AdvancedPartitionItem::initUI() {
 
   // filesystem name
   fs_type_label_ = new QLabel();
-  if (!IsUnallocatedPartition(partition_)) {
+  if (partition_.type != partman::PartitionType::Unallocated) {
     fs_type_label_->setText(GetFsTypeName(partition_.fs));
   }
   fs_type_label_->setObjectName(QStringLiteral("fs_type_label"));
@@ -126,7 +121,7 @@ void AdvancedPartitionItem::initUI() {
 
 void AdvancedPartitionItem::updateStatus() {
   if (editable_) {
-    if (IsUnallocatedPartition(partition_)) {
+    if (partition_.type == partman::PartitionType::Unallocated) {
       control_status_ = ControlStatus::New;
       control_button_->setIcon(
           QIcon(QStringLiteral(":/images/new_partition.png")));
@@ -136,7 +131,8 @@ void AdvancedPartitionItem::updateStatus() {
           QIcon(QStringLiteral(":/images/delete_partition.png")));
     }
   } else {
-    if (!IsUnallocatedPartition(partition_) && this->isChecked()) {
+    if (partition_.type != partman::PartitionType::Unallocated &&
+        this->isChecked()) {
       control_status_ = ControlStatus::Edit;
       control_button_->setIcon(
           QIcon(QStringLiteral(":/images/edit_partition.png")));

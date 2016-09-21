@@ -18,9 +18,8 @@ class PartitionManager;
 
 namespace ui {
 
-// 100M, filter partition size.
-// TODO(xushaohua): Remove this declaration.
-const qint64 kMinimumPartitionSizeToDisplay = 100 * 1024 * 1024;
+// If partition size is less than this value, hide it from partition list.
+const qint64 kMinimumPartitionSizeToDisplay = 10 * kMebiByte;
 
 enum class PartitionType {
   PrimaryOnly,

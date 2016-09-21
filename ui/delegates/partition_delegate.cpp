@@ -188,21 +188,13 @@ void PartitionDelegate::onDevicesRefreshed(const partman::DeviceList& devices) {
   for (partman::Device& device : devices_) {
     partman::PartitionList new_partitions;
     for (const partman::Partition& partition : device.partitions) {
-      // Filter partitions and devices.
-      if (partition.type == partman::PartitionType::Extended) {
-        // TODO(xushaohua): Do not filter extended partition.
-        continue;
-      }
       // Filters freespace partition based on size.
-      if ((partition.type == partman::PartitionType::Unallocated ||
-           partition.type == partman::PartitionType::LogicalUnallocated) &&
-          partition.length < kMinimumPartitionSizeToDisplay) {
+      if (partition.type == partman::PartitionType::Unallocated &&
+          partition.getLength() < kMinimumPartitionSizeToDisplay) {
         continue;
       }
       new_partitions.append(partition);
     }
-
-    // Update partition list.
     device.partitions = new_partitions;
   }
 

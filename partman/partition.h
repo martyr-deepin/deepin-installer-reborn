@@ -18,7 +18,6 @@ enum class PartitionType {
   Logical,
   Extended,
   Unallocated,
-  LogicalUnallocated,
 };
 
 enum class PartitionStatus {
@@ -73,8 +72,8 @@ class Partition {
 
   QString mount_point;
 
-  // TODO(xushaohua): Remove logicals.
-  QList<Partition> logicals;
+  // |length| is set only if this partition has a filesystem.
+  qint64 getLength() const;
 };
 
 typedef QList<Partition> PartitionList;

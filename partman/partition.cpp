@@ -21,6 +21,10 @@ bool Partition::operator==(const Partition& other) const {
           type == other.type);
 }
 
+qint64 Partition::getLength() const {
+  return sector_size * sectors_total;
+}
+
 void Partition::reset() {
   device_path = "";
   uuid = "";
@@ -35,7 +39,6 @@ void Partition::reset() {
   sectors_unused = -1;
   sectors_unallocated = 0;
   flags.clear();
-  logicals.clear();
 }
 
 }  // namespace partman

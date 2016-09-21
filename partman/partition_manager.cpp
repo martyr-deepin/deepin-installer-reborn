@@ -61,11 +61,6 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
       lp_partition = ped_disk_next_partition(lp_disk, lp_partition)) {
     qDebug() << "============================";
 
-    // Skip useless partitions.
-    if (lp_partition->type & PED_PARTITION_METADATA) {
-      continue;
-    }
-
     Partition partition;
     if (lp_partition->type == PED_PARTITION_NORMAL) {
       partition.type = PartitionType::Primary;
@@ -76,7 +71,7 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
     } else if (lp_partition->type ==
         (PED_PARTITION_FREESPACE | PED_PARTITION_LOGICAL)) {
       qDebug() << "logical freespace";
-      partition.type = PartitionType::LogicalUnallocated;
+      partition.type = PartitionType::Unallocated;
     } else if (lp_partition->type == PED_PARTITION_LOGICAL) {
       partition.type = PartitionType::Logical;
       qDebug() << "logical";
@@ -85,11 +80,13 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
       qDebug() << "freespace";
     } else {
       qDebug() << "unknown partition type" << lp_partition->type;
+      continue;
     }
     partition.device_path = device.path;
 
     if (lp_partition->fs_type) {
       partition.fs = GetFsTypeByName(lp_partition->fs_type->name);
+      // TODO(xushaohua): Check EFI flag
     } else {
       partition.fs = FsType::Unknown;
     }
@@ -98,7 +95,8 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
     partition.sectors_total = lp_partition->geom.length;
     qDebug() << "sector total:" << partition.sectors_total;
     partition.sector_end = lp_partition->geom.end;
-    qDebug() << "sector end:" << partition.sector_end;
+    qDebug() << "sector end:" << lp_partition->geom.end;
+    partition.sector_size = device.sector_size;
     partition.path = ped_partition_get_path(lp_partition);
     qDebug() << "partition path:" << partition.path;
     // Avoid reading additional filesystem information if there is no path.
@@ -120,10 +118,7 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
     }
     //partition.flags = {};
 
-    // If there is and end, there is a partition.
-    if (partition.sector_end > -1) {
-      device.partitions.append(partition);
-    }
+    device.partitions.append(partition);
   }
 }
 
