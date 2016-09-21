@@ -68,6 +68,12 @@ set(OEM_FILES
 set(PARTMAN_FILES
     partman/device.cpp partman/device.h
     partman/fs.cpp partman/fs.h
+    partman/operation.cpp partman/operation.h
+    partman/operation_create.cpp partman/operation_create.h
+    partman/operation_delete.cpp partman/operation_delete.h
+    partman/operation_format.cpp partman/operation_format.h
+    partman/operation_mount_point.cpp partman/operation_mount_point.h
+    partman/operation_resize.cpp partman/operation_resize.h
     partman/partition.cpp partman/partition.h
     partman/partition_format.cpp partman/partition_format.h
     partman/partition_label.cpp partman/partition_label.h
@@ -104,13 +110,7 @@ set(UI_FILES
     ui/main_window.cpp ui/main_window.h
     
     ui/delegates/language_list_delegate.cpp ui/delegates/language_list_delegate.h
-    ui/delegates/operation.cpp ui/delegates/operation.h
-    ui/delegates/operation_create.cpp ui/delegates/operation_create.h
-    ui/delegates/operation_delete.cpp ui/delegates/operation_delete.h
-    ui/delegates/operation_format.cpp ui/delegates/operation_format.h
-    ui/delegates/operation_mount_point.cpp ui/delegates/operation_mount_point.h
-    ui/delegates/operation_resize.cpp ui/delegates/operation_resize.h
-    ui/delegates/partition_delegate.cpp ui/delegates/partition_delegate.h
+       ui/delegates/partition_delegate.cpp ui/delegates/partition_delegate.h
     ui/delegates/partition_util.cpp ui/delegates/partition_util.h
 
     ui/models/fs_model.cpp ui/models/fs_model.h

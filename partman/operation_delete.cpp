@@ -2,19 +2,19 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/delegates/operation_delete.h"
+#include "partman/operation_delete.h"
 
-namespace ui {
+namespace partman {
 
-OperationDelete::OperationDelete(const partman::Partition& partition_orig,
-                                 const partman::Partition& partition_new) {
+OperationDelete::OperationDelete(const Partition& partition_orig,
+                                 const Partition& partition_new) {
   this->type = OperationType::Delete;
   this->partition_orig = partition_orig;
   this->partition_new = partition_new;
 }
 
-void OperationDelete::applyToVisual(partman::PartitionList& partitions) const {
+void OperationDelete::applyToVisual(PartitionList& partitions) const {
   substitute(partitions);
 }
 
-}  // namespace ui
+}  // namespace partman

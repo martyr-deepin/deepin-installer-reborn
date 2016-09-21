@@ -12,11 +12,11 @@
 #include "service/settings_name.h"
 #include "service/signal_manager.h"
 
-#include "ui/delegates/operation_create.h"
-#include "ui/delegates/operation_delete.h"
-#include "ui/delegates/operation_format.h"
-#include "ui/delegates/operation_mount_point.h"
-#include "ui/delegates/operation_resize.h"
+#include "partman/operation_create.h"
+#include "partman/operation_delete.h"
+#include "partman/operation_format.h"
+#include "partman/operation_mount_point.h"
+#include "partman/operation_resize.h"
 
 namespace ui {
 
@@ -110,7 +110,8 @@ void PartitionDelegate::createPartition(const partman::Partition& partition,
   // TODO(xushaohua): Calculate new partition sector size
   Q_UNUSED(partition_size);
   Q_UNUSED(align_start);
-  OperationCreate* operation = new OperationCreate(partition, partition_new);
+  partman::OperationCreate* operation =
+      new partman::OperationCreate(partition, partition_new);
   operations_.append(operation);
   refreshVisual();
 }
@@ -121,7 +122,8 @@ void PartitionDelegate::deletePartition(const partman::Partition& partition) {
   new_partition.type = partman::PartitionType::Unallocated;
   new_partition.freespace = new_partition.length;
   new_partition.fs = partman::FsType::Empty;
-  OperationDelete* operation = new OperationDelete(partition, new_partition);
+  partman::OperationDelete* operation =
+      new partman::OperationDelete(partition, new_partition);
   operations_.append(operation);
   this->refreshVisual();
 }
@@ -134,7 +136,8 @@ void PartitionDelegate::formatPartition(const partman::Partition& partition,
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
   new_partition.status = partman::PartitionStatus::Formatted;
-  OperationFormat* operation = new OperationFormat(partition, new_partition);
+  partman::OperationFormat* operation =
+      new partman::OperationFormat(partition, new_partition);
   operations_.append(operation);
 }
 
@@ -145,8 +148,8 @@ void PartitionDelegate::updateMountPoint(const partman::Partition& partition,
   partman::Partition partition_new(partition);
   partition_new.mount_point = mount_point;
   // No need to update partition status.
-  OperationMountPoint* operation = new OperationMountPoint(partition,
-                                                           partition_new);
+  partman::OperationMountPoint* operation =
+      new partman::OperationMountPoint(partition, partition_new);
   operations_.append(operation);
   this->refreshVisual();
 }
@@ -170,7 +173,7 @@ void PartitionDelegate::initConnections() {
 void PartitionDelegate::refreshVisual() {
   this->devices_ = this->real_devices_;
   for (partman::Device& device : this->devices_) {
-    for (Operation* operation : operations_) {
+    for (partman::Operation* operation : operations_) {
       if (operation->partition_orig.device_path == device.path) {
         operation->applyToVisual(device.partitions);
       }

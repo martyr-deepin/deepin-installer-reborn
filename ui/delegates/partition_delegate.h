@@ -10,9 +10,9 @@
 class QThread;
 
 #include "partman/device.h"
-#include "ui/delegates/operation.h"
 
 namespace partman {
+class Operation;
 class PartitionManager;
 }  // namespace partman
 
@@ -91,7 +91,7 @@ class PartitionDelegate : public QObject {
   // Physical device list.
   partman::DeviceList real_devices_;
 
-  QList<Operation*> operations_;
+  QList<partman::Operation*> operations_;
 
   QStringList all_mount_points_;
   QStringList unused_mount_points_;

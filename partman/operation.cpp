@@ -2,14 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/delegates/operation.h"
+#include "partman/operation.h"
 
-namespace ui {
+namespace partman {
 
 Operation::Operation() {
 }
 
-int Operation::findIndexNew(const partman::PartitionList& partitions) const {
+int Operation::findIndexNew(const PartitionList& partitions) const {
   for (int i = 0; i < partitions.length(); ++i) {
     if (partition_new.sector_start >= partitions[i].sector_start &&
         partition_new.sector_end <= partitions[i].sector_end) {
@@ -19,8 +19,7 @@ int Operation::findIndexNew(const partman::PartitionList& partitions) const {
   return -1;
 }
 
-int Operation::findIndexOriginal(
-    const partman::PartitionList& partitions) const {
+int Operation::findIndexOriginal(const PartitionList& partitions) const {
   for (int i = 0; i < partitions.length(); ++i) {
     if (partition_orig.sector_start >= partitions[i].sector_start &&
         partition_orig.sector_end <= partitions[i].sector_end) {
@@ -30,7 +29,7 @@ int Operation::findIndexOriginal(
   return -1;
 }
 
-void Operation::substitute(partman::PartitionList& partitions) const {
+void Operation::substitute(PartitionList& partitions) const {
   int index;
   // TODO(xushaohua): Handles extended partition
   index = findIndexOriginal(partitions);
@@ -39,4 +38,4 @@ void Operation::substitute(partman::PartitionList& partitions) const {
   }
 }
 
-}  // namespace ui
+}  // namespace partman
