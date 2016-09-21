@@ -219,9 +219,11 @@ void PartitionManager::doAutoPart() {
 }
 
 void PartitionManager::doManualPart() {
-  bool ok = true;
-  // TODO(xushaohua):
-  emit this->manualPartDone(ok);
+  // TODO(xushaohua): Receive operations list.
+
+//  bool ok = true;
+
+//  emit this->manualPartDone(ok);
 }
 
 }  // namespace partman

@@ -71,6 +71,8 @@ void PartitionFrame::initConnections() {
           this, &PartitionFrame::showMainFrame);
   connect(prepare_install_frame_, &PrepareInstallFrame::finished,
           this, &PartitionFrame::finished);
+  connect(prepare_install_frame_, &PrepareInstallFrame::finished,
+          partition_delegate_, &PartitionDelegate::doManualPart);
 
   connect(select_bootloader_frame_, &SelectBootloaderFrame::finished,
           this, &PartitionFrame::showMainFrame);

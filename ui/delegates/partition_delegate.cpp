@@ -151,6 +151,11 @@ void PartitionDelegate::updateMountPoint(const partman::Partition& partition,
   this->refreshVisual();
 }
 
+void PartitionDelegate::doManualPart() {
+  // TODO(xushaohua): Pass operations list.
+  emit partition_manager_->manualPart();
+}
+
 void PartitionDelegate::initConnections() {
   service::SignalManager* signal_manager = service::SignalManager::instance();
   connect(partition_manager_, &partman::PartitionManager::autoPartDone,
