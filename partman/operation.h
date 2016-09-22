@@ -22,6 +22,7 @@ enum class OperationType {
 class Operation {
  public:
   Operation();
+  virtual ~Operation();
 
   OperationType type;
   Partition partition_orig;

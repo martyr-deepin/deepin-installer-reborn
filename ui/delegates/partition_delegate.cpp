@@ -52,6 +52,10 @@ PartitionDelegate::~PartitionDelegate() {
   partition_thread_->wait();
   delete partition_thread_;
   partition_thread_ = nullptr;
+
+  while (!operations_.isEmpty()) {
+    delete operations_.takeFirst();
+  }
 }
 
 void PartitionDelegate::autoConf() {

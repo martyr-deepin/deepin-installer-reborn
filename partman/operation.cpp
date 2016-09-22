@@ -9,6 +9,9 @@ namespace partman {
 Operation::Operation() {
 }
 
+Operation::~Operation() {
+}
+
 int Operation::findIndexNew(const PartitionList& partitions) const {
   for (int i = 0; i < partitions.length(); ++i) {
     if (partition_new.sector_start >= partitions[i].sector_start &&
