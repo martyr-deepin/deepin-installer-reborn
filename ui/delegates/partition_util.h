@@ -17,7 +17,6 @@ QString GetPartitionName(const QString& path);
 // Get human readable partition usage.
 QString GetPartitionUsage(qint64 freespace, qint64 total);
 
-QString GetFsTypeName(partman::FsType fs_type);
 // Returns human readable file system name.
 QString GetLocalFsTypeName(partman::FsType fs_type);
 

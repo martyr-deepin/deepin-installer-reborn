@@ -27,9 +27,32 @@ FsType GetFsTypeByName(const QString& name) {
   if (lower == "ntfs") return FsType::NTFS;
   if (lower == "others") return FsType::Others;
   if (lower == "reiser4") return FsType::Reiser4;
-  if (lower == "resierfs") return FsType::Reiserfs;
+  if (lower == "reiserfs") return FsType::Reiserfs;
   if (lower == "xfs") return FsType::Xfs;
   return FsType::Unknown;
+}
+
+QString GetFsTypeName(FsType fs_type) {
+  switch (fs_type) {
+    case FsType::Empty: { return ""; }
+    case FsType::Btrfs: { return "btrfs"; }
+    case FsType::EFI: { return "fat32"; }
+    case FsType::Ext2: { return "ext2"; }
+    case FsType::Ext3: { return "ext3"; }
+    case FsType::Ext4: { return "ext4"; }
+    case FsType::Fat16: { return "fat16"; }
+    case FsType::Fat32: { return "fat32"; }
+    case FsType::Hfs: { return "hfs"; }
+    case FsType::HfsPlus: { return "hfsplus"; }
+    case FsType::Jfs: { return "jfs"; }
+    case FsType::LinuxSwap: { return "linux-swap"; }
+    case FsType::LVM2PV: { return "lvm2 pv"; }
+    case FsType::NTFS: { return "ntfs"; }
+    case FsType::Reiser4: { return "reiser4"; }
+    case FsType::Reiserfs: { return "reiserfs"; }
+    case FsType::Xfs: { return "xfs"; }
+    default: { return ""; }
+  }
 }
 
 }  // namespace partman

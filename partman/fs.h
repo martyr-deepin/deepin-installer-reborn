@@ -10,6 +10,7 @@
 
 namespace partman {
 
+// TODO(xushaohua): Add extfat, f2fs, nilfs2, ufs and zfs
 enum class FsType {
   Empty,
   Btrfs,
@@ -32,7 +33,9 @@ enum class FsType {
   Unknown,
 };
 
+// Convert between FsType enum and its name.
 FsType GetFsTypeByName(const QString& name);
+QString GetFsTypeName(FsType fs_type);
 
 typedef QList<FsType> FsTypeList;
 

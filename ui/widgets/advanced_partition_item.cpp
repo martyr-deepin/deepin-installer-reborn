@@ -89,7 +89,7 @@ void AdvancedPartitionItem::initUI() {
   // filesystem name
   fs_type_label_ = new QLabel();
   if (partition_.type != partman::PartitionType::Unallocated) {
-    fs_type_label_->setText(GetFsTypeName(partition_.fs));
+    fs_type_label_->setText(partman::GetFsTypeName(partition_.fs));
   }
   fs_type_label_->setObjectName(QStringLiteral("fs_type_label"));
 
