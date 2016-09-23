@@ -12,8 +12,6 @@ namespace partman {
 namespace {
 
 TEST(OperationTest, ApplyToDisk) {
-  ped_device_probe_all();
-
   Partition partition;
   partition.sector_start = 305072128;
   partition.sector_end = 367165439;

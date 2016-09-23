@@ -17,7 +17,7 @@ bool CommitDiskChanges(PedDisk* lp_disk) {
   return success;
 }
 
-void DestroyDeviceAndDisk(PedDevice* lp_device, PedDisk* lp_disk) {
+void DestroyDeviceAndDisk(PedDevice*& lp_device, PedDisk*& lp_disk) {
   if (lp_device) {
     ped_device_destroy(lp_device);
     lp_device = NULL;
@@ -39,12 +39,12 @@ bool FlushDevice(PedDevice* lp_device) {
 }
 
 bool GetDeviceAndDisk(const QString& path,
-                      PedDevice* lp_device,
-                      PedDisk* lp_disk) {
+                      PedDevice*& lp_device,
+                      PedDisk*& lp_disk) {
   lp_device = ped_device_get(path.toLatin1().data());
   if (lp_device) {
     lp_disk = ped_disk_new(lp_device);
-    if (lp_disk) {
+    if (lp_disk != NULL) {
       return true;
     } else {
       DestroyDeviceAndDisk(lp_device, lp_disk);
@@ -58,10 +58,8 @@ bool GetDeviceAndDisk(const QString& path,
 bool SetPartitionType(const Partition& partition) {
   PedDevice* lp_device = NULL;
   PedDisk* lp_disk = NULL;
+  bool ok = true;
   if (GetDeviceAndDisk(partition.path, lp_device, lp_disk)) {
-    bool ok = true;
-    PedPartition* lp_partition =
-        ped_disk_get_partition_by_sector(lp_disk, partition.getSector());
 
     QString fs_name = GetFsTypeName(partition.fs);
     // Default fs is Linux (83).
@@ -71,11 +69,12 @@ bool SetPartitionType(const Partition& partition) {
 
     PedFileSystemType* lp_fs_type =
         ped_file_system_type_get(fs_name.toLatin1().data());
-    if (lp_fs_type) {
-      ped_partition_set_system(lp_partition, lp_fs_type);
-      ok = true;
-    } else {
-      ok = false;
+
+    PedPartition* lp_partition =
+        ped_disk_get_partition_by_sector(lp_disk, partition.getSector());
+
+    if (lp_fs_type && lp_partition) {
+      ok = bool(ped_partition_set_system(lp_partition, lp_fs_type));
     }
 
     // Set ESP flag
@@ -88,11 +87,11 @@ bool SetPartitionType(const Partition& partition) {
     }
 
     DestroyDeviceAndDisk(lp_device, lp_disk);
-
-    return ok;
   } else {
-    return false;
+    ok = false;
   }
+
+  return ok;
 }
 
 void SettleDevice(int timeout) {

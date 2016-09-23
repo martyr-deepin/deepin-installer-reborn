@@ -15,7 +15,7 @@ namespace partman {
 bool CommitDiskChanges(PedDisk* lp_disk);
 
 // Destroy libparted-device and disk object.
-void DestroyDeviceAndDisk(PedDevice* lp_device, PedDisk* lp_disk);
+void DestroyDeviceAndDisk(PedDevice*& lp_device, PedDisk*& lp_disk);
 
 // Flush linux kernel caches. Ensure coherency between the caches of the whole
 // disk device and the partition devices.
@@ -24,8 +24,8 @@ bool FlushDevice(PedDevice* lp_device);
 // Get libparted-device and disk object at |path|.
 // Call |DestroyDeviceAndDisk()| to release them.
 bool GetDeviceAndDisk(const QString& path,
-                      PedDevice* lp_device,
-                      PedDisk* lp_disk);
+                      PedDevice*& lp_device,
+                      PedDisk*& lp_disk);
 
 // Update partition type defined in |partition|.
 bool SetPartitionType(const Partition& partition);
