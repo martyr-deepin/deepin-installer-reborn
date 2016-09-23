@@ -9,10 +9,9 @@
 #include <QObject>
 
 #include "partman/device.h"
+#include "partman/operation.h"
 
 namespace partman {
-
-class Operation;
 
 class PartitionManager : public QObject {
   Q_OBJECT
@@ -20,12 +19,6 @@ class PartitionManager : public QObject {
  public:
   explicit PartitionManager(QObject* parent = nullptr);
   ~PartitionManager();
-
-  // Update operation list.
-  // This method is called in UI thread.
-  void setOperations(const QList<Operation*>& operations) {
-    operations_ = operations;
-  }
 
  signals:
   void refreshDevices();
@@ -37,18 +30,18 @@ class PartitionManager : public QObject {
   // |ok| is true if that script exited 0.
   void autoPartDone(bool ok);
 
-  void manualPart();
+  void manualPart(const OperationList& operations);
   void manualPartDone(bool ok);
 
  private:
   void initConnections();
 
-  QList<Operation*> operations_;
+  OperationList operations_;
 
  private slots:
   void doRefreshDevices();
   void doAutoPart();
-  void doManualPart();
+  void doManualPart(const OperationList& operations);
 };
 
 }  // namespace partman

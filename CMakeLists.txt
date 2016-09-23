@@ -70,11 +70,6 @@ set(PARTMAN_FILES
     partman/fs.cpp partman/fs.h
     partman/libparted_util.cpp partman/libparted_util.h
     partman/operation.cpp partman/operation.h
-    partman/operation_create.cpp partman/operation_create.h
-    partman/operation_delete.cpp partman/operation_delete.h
-    partman/operation_format.cpp partman/operation_format.h
-    partman/operation_mount_point.cpp partman/operation_mount_point.h
-    partman/operation_resize.cpp partman/operation_resize.h
     partman/partition.cpp partman/partition.h
     partman/partition_format.cpp partman/partition_format.h
     partman/partition_label.cpp partman/partition_label.h

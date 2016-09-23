@@ -97,6 +97,7 @@ PartitionManager::PartitionManager(QObject* parent)
   this->setObjectName(QStringLiteral("partition_manager"));
 
   qRegisterMetaType<DeviceList>("DeviceList");
+  qRegisterMetaType<OperationList>("OperationList");
   this->initConnections();
 }
 
@@ -184,9 +185,9 @@ void PartitionManager::doAutoPart() {
   emit this->autoPartDone(ok);
 }
 
-void PartitionManager::doManualPart() {
-  qDebug() << " do manual part";
-  qDebug() << operations_.length();
+void PartitionManager::doManualPart(const OperationList& operations) {
+  qDebug() << " do manual part:" << operations.length();
+  operations_ = operations;
 }
 
 }  // namespace partman

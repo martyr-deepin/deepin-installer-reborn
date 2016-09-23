@@ -6,10 +6,20 @@
 
 namespace partman {
 
-Operation::Operation() {
+Operation::Operation(OperationType type,
+                     const Partition& partition_orig,
+                     const Partition& partition_new)
+    : type(type),
+      partition_orig(partition_orig),
+      partition_new(partition_new) {
 }
 
 Operation::~Operation() {
+}
+
+void Operation::applyToVisual(PartitionList& partitions) {
+  // TODO(xushaohua): Check operation type.
+  this->substitute(partitions);
 }
 
 int Operation::findIndexNew(const PartitionList& partitions) const {
