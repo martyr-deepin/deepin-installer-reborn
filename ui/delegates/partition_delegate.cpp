@@ -159,7 +159,7 @@ void PartitionDelegate::updateMountPoint(const partman::Partition& partition,
 }
 
 void PartitionDelegate::doManualPart() {
-  // TODO(xushaohua): Pass operations list.
+  partition_manager_->setOperations(operations_);
   emit partition_manager_->manualPart();
 }
 

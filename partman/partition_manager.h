@@ -5,17 +5,27 @@
 #ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_MANAGER_H
 #define DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_MANAGER_H
 
+#include <QList>
 #include <QObject>
 
 #include "partman/device.h"
 
 namespace partman {
 
+class Operation;
+
 class PartitionManager : public QObject {
   Q_OBJECT
 
  public:
   explicit PartitionManager(QObject* parent = nullptr);
+  ~PartitionManager();
+
+  // Update operation list.
+  // This method is called in UI thread.
+  void setOperations(const QList<Operation*>& operations) {
+    operations_ = operations;
+  }
 
  signals:
   void refreshDevices();
@@ -32,6 +42,8 @@ class PartitionManager : public QObject {
 
  private:
   void initConnections();
+
+  QList<Operation*> operations_;
 
  private slots:
   void doRefreshDevices();

@@ -21,39 +21,6 @@ namespace partman {
 
 namespace {
 
-// Flush linux kernel caches. Ensure coherency between the caches of the whole
-// disk device and the partition devices.
-//bool FlushDevice(PedDevice* device) {
-//  bool success = false;
-//  if (ped_device_open(device)) {
-//    success = static_cast<bool>(ped_device_sync(device));
-//    ped_device_close(device);
-//  }
-//  return success;
-//}
-
-// Refers: http://stackoverflow.com/questions/14127210/
-// After the kernel boots, `udevd` is used to create device nodes for
-// all detected devices. That is a relatively time consuming task that
-// has to be completed for the boot process to continue, otherwise
-// there is a risk of services failing due to missing device nodes.
-// `udevadm settle` waits for udevd to process the device creation events
-// for all hardware devices, thus ensuring that any device nodes
-// have been created successfully before proceeding.
-//void SettleDevice(int timeout) {
-//  const QString cmd = QString("udevadm settle --timeout=%1").arg(timeout);
-//  // TODO(xushaohua):
-//  Q_UNUSED(cmd);
-//}
-
-//bool CommitDiskChanges(PedDisk* disk) {
-//  bool success = static_cast<bool>(ped_disk_commit_to_dev(disk));
-//  if (success) {
-//    success = static_cast<bool>(ped_disk_commit_to_os(disk));
-//  }
-//  return success;
-//}
-
 void ReadPartitions(Device& device, PedDisk* lp_disk,
                     const sysinfo::UUIDItems& uuid_items) {
   for (PedPartition* lp_partition = ped_disk_next_partition(lp_disk, NULL);
@@ -124,11 +91,18 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
 
 }  // namespace
 
-PartitionManager::PartitionManager(QObject* parent) : QObject(parent) {
+PartitionManager::PartitionManager(QObject* parent)
+    : QObject(parent),
+      operations_() {
   this->setObjectName(QStringLiteral("partition_manager"));
 
   qRegisterMetaType<DeviceList>("DeviceList");
   this->initConnections();
+}
+
+PartitionManager::~PartitionManager() {
+  // No need to release objects in operation list.
+  // It is released in PartitionDelegate.
 }
 
 void PartitionManager::initConnections() {
@@ -191,14 +165,11 @@ void PartitionManager::doRefreshDevices() {
     ReadPartitions(device, lp_disk, uuid_items);
 
     devices.append(device);
-    //ped_disk_print(disk);
-//    ped_device_destroy(p_device);
-//    ped_disk_destroy(disk);
+    ped_disk_destroy(lp_disk);
 
     lp_device = ped_device_get_next(lp_device);
   }
 
-  // TODO(xushaohua): Added this->devices.
   emit this->devicesRefreshed(devices);
 }
 
@@ -214,11 +185,8 @@ void PartitionManager::doAutoPart() {
 }
 
 void PartitionManager::doManualPart() {
-  // TODO(xushaohua): Receive operations list.
-
-//  bool ok = true;
-
-//  emit this->manualPartDone(ok);
+  qDebug() << " do manual part";
+  qDebug() << operations_.length();
 }
 
 }  // namespace partman

@@ -68,6 +68,7 @@ set(OEM_FILES
 set(PARTMAN_FILES
     partman/device.cpp partman/device.h
     partman/fs.cpp partman/fs.h
+    partman/libparted_util.cpp partman/libparted_util.h
     partman/operation.cpp partman/operation.h
     partman/operation_create.cpp partman/operation_create.h
     partman/operation_delete.cpp partman/operation_delete.h
