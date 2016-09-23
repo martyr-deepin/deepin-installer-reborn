@@ -160,6 +160,10 @@ set(UI_FILES
     ui/utils/xutil.cpp ui/utils/xutil.h
     )
 
+set(ROOT_UNITTEST_FILES
+    partman/operation_test.cpp
+    )
+
 set(UNITTEST_FILES
     sysinfo/dev_uuid_test.cpp
     sysinfo/proc_mounts_test.cpp
@@ -218,6 +222,22 @@ add_executable(deepin-installer-reborn-tests
                resources/resources.qrc
                )
 target_link_libraries(deepin-installer-reborn-tests
+                      ${LINK_LIBS}
+                      gtest
+                      )
+
+# Unittest with root privilege
+add_executable(deepin-installer-reborn-root-tests
+               misc/root_test_main.cpp
+
+               ${BASE_FILES}
+               ${PARTMAN_FILES}
+               ${SERVICE_FILES}
+               ${SYSINFO_FILES}
+               ${ROOT_UNITTEST_FILES}
+               resources/resources.qrc
+               )
+target_link_libraries(deepin-installer-reborn-root-tests
                       ${LINK_LIBS}
                       gtest
                       )
