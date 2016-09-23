@@ -4,6 +4,9 @@
 
 #include "partman/operation.h"
 
+#include "partman/libparted_util.h"
+#include "partman/partition_format.h"
+
 namespace partman {
 
 Operation::Operation(OperationType type,
@@ -17,7 +20,42 @@ Operation::Operation(OperationType type,
 Operation::~Operation() {
 }
 
-void Operation::applyToVisual(PartitionList& partitions) {
+bool Operation::applyToDisk() const {
+  bool ok = true;
+  switch (type) {
+    case OperationType::Create: {
+      ok = false;
+      break;
+    }
+
+    case OperationType::Delete: {
+      ok = false;
+      break;
+    }
+
+    case OperationType::Format: {
+      ok = SetPartitionType(partition_new);
+      if (ok) {
+        ok = Mkfs(partition_new);
+      }
+      break;
+    }
+
+    case OperationType::Resize: {
+      ok = false;
+      break;
+    }
+
+    default: {
+      ok = false;
+      break;
+    }
+  }
+
+  return ok;
+}
+
+void Operation::applyToVisual(PartitionList& partitions) const {
   // TODO(xushaohua): Check operation type.
   this->substitute(partitions);
 }

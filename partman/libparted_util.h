@@ -8,20 +8,27 @@
 #include <parted/parted.h>
 #include <QString>
 
+#include "partman/partition.h"
+
 namespace partman {
 
-bool CommitDiskChanges(PedDisk* disk);
+bool CommitDiskChanges(PedDisk* lp_disk);
 
 // Destroy libparted-device and disk object.
-void DestroyDeviceAndDisk(PedDevice* device, PedDisk* disk);
+void DestroyDeviceAndDisk(PedDevice* lp_device, PedDisk* lp_disk);
 
 // Flush linux kernel caches. Ensure coherency between the caches of the whole
 // disk device and the partition devices.
-bool FlushDevice(PedDevice* device);
+bool FlushDevice(PedDevice* lp_device);
 
 // Get libparted-device and disk object at |path|.
 // Call |DestroyDeviceAndDisk()| to release them.
-bool GetDeviceAndDisk(const QString& path, PedDevice* device, PedDisk* disk);
+bool GetDeviceAndDisk(const QString& path,
+                      PedDevice* lp_device,
+                      PedDisk* lp_disk);
+
+// Update partition type defined in |partition|.
+bool SetPartitionType(const Partition& partition);
 
 // Refers: http://stackoverflow.com/questions/14127210/
 // After the kernel boots, `udevd` is used to create device nodes for

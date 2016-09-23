@@ -74,6 +74,8 @@ class Partition {
 
   // |length| is set only if this partition has a filesystem.
   qint64 getLength() const;
+
+  qint64 getSector() const;
 };
 
 typedef QList<Partition> PartitionList;

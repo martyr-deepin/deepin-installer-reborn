@@ -93,69 +93,55 @@ bool FormatXfs(const QString& path, const QString& label) {
 
 }  // namespace
 
-
 // Make filesystem on |partition| based on its fs type.
-void Mkfs(Partition& partition) {
+bool Mkfs(const Partition& partition) {
   switch (partition.fs) {
     case FsType::Btrfs: {
-      FormatBtrfs(partition.path, partition.label);
-      break;
+      return FormatBtrfs(partition.path, partition.label);
     }
     case FsType::Ext2: {
-      FormatExt2(partition.path, partition.label);
-      break;
+      return FormatExt2(partition.path, partition.label);
     }
     case FsType::Ext3: {
-      FormatExt3(partition.path, partition.label);
-      break;
+      return FormatExt3(partition.path, partition.label);
     }
     case FsType::Ext4: {
-      FormatExt4(partition.path, partition.label);
-      break;
+      return FormatExt4(partition.path, partition.label);
     }
     case FsType::Fat16: {
-      FormatFat16(partition.path, partition.label);
-      break;
+      return FormatFat16(partition.path, partition.label);
     }
     case FsType::EFI:
     case FsType::Fat32: {
-      FormatFat32(partition.path, partition.label);
-      break;
+      return FormatFat32(partition.path, partition.label);
     }
     case FsType::Hfs: {
-      FormatHfs(partition.path, partition.label);
-      break;
+      return FormatHfs(partition.path, partition.label);
     }
     case FsType::HfsPlus: {
-      FormatHfsPlus(partition.path, partition.label);
-      break;
+      return FormatHfsPlus(partition.path, partition.label);
     }
     case FsType::Jfs: {
-      FormatJfs(partition.path, partition.label);
-      break;
+      return FormatJfs(partition.path, partition.label);
     }
     case FsType::LinuxSwap: {
-      FormatLinuxSwap(partition.path, partition.label);
-      break;
+      return FormatLinuxSwap(partition.path, partition.label);
     }
     case FsType::NTFS: {
-      FormatNTFS(partition.path, partition.label);
-      break;
+      return FormatNTFS(partition.path, partition.label);
     }
     case FsType::Reiser4: {
-      FormatReiser4(partition.path, partition.label);
-      break;
+      return FormatReiser4(partition.path, partition.label);
     }
     case FsType::Reiserfs: {
-      FormatReiserfs(partition.path, partition.label);
-      break;
+      return FormatReiserfs(partition.path, partition.label);
     }
     case FsType::Xfs: {
-      FormatXfs(partition.path, partition.label);
-      break;
+      return FormatXfs(partition.path, partition.label);
     }
     default: {
       qWarning() << "Unsupported filesystem to format!" << partition.path;
+      return false;
     }
   }
 }

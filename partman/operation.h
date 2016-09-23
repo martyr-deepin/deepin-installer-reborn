@@ -32,8 +32,12 @@ class Operation {
   Partition partition_orig;
   Partition partition_new;
 
+  // Apply changes to disk. Returns operation status.
+  // Note that this method shall be called in the background thread.
+  bool applyToDisk() const;
+
   // Apply operation by updating partition list.
-  void applyToVisual(PartitionList& partitions);
+  void applyToVisual(PartitionList& partitions) const ;
 
  private:
   int findIndexNew(const PartitionList& partitions) const;

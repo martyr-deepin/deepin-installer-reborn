@@ -7,9 +7,12 @@
 
 #include <QString>
 
+#include "partman/partition.h"
+
 namespace partman {
 
 // Format filesystem.
+bool Mkfs(const Partition& partition);
 
 }  // namespace partman
 

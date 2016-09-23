@@ -186,8 +186,16 @@ void PartitionManager::doAutoPart() {
 }
 
 void PartitionManager::doManualPart(const OperationList& operations) {
-  qDebug() << " do manual part:" << operations.length();
   operations_ = operations;
+
+  bool ok = true;
+  for (int i = 0; ok && i < operations_.length(); ++i) {
+    ok = operations_.at(i).applyToDisk();
+  }
+
+  // TODO(xushaohua): Set boot flag.
+
+//  emit this->manualPartDone(ok);
 }
 
 }  // namespace partman

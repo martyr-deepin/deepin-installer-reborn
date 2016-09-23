@@ -25,6 +25,10 @@ qint64 Partition::getLength() const {
   return sector_size * sectors_total;
 }
 
+qint64 Partition::getSector() const {
+  return sector_start + (sector_end - sector_start) / 2;
+}
+
 void Partition::reset() {
   device_path = "";
   uuid = "";
