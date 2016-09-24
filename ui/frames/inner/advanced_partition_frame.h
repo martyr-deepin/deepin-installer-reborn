@@ -33,7 +33,7 @@ class AdvancedPartitionFrame : public QFrame {
   void initUI();
   void drawDevices();
 
-  PartitionDelegate* partition_delegate_ = nullptr;
+  PartitionDelegate* delegate_ = nullptr;
 
   QButtonGroup* partition_button_group_ = nullptr;
   QVBoxLayout* partition_layout_ = nullptr;

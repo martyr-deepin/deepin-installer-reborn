@@ -55,7 +55,7 @@ class PartitionFrame : public QFrame {
   QPushButton* advanced_frame_button_ = nullptr;
   NavButton* next_button_ = nullptr;
 
-  PartitionDelegate* partition_delegate_ = nullptr;
+  PartitionDelegate* delegate_ = nullptr;
 
  private slots:
   void onSimpleFrameButtonToggled();

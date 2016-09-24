@@ -27,7 +27,8 @@ enum class PartitionType {
   PrimaryOrLogical,
 };
 
-// PartitionManager proxy layer.
+// PartitionManager proxy layer. It is shared among partition sub frames.
+// PartitionManager is invisible in frame pages.
 class PartitionDelegate : public QObject {
   Q_OBJECT
 

@@ -21,7 +21,7 @@ namespace ui {
 AdvancedPartitionFrame::AdvancedPartitionFrame(
     PartitionDelegate* partition_delegate, QWidget* parent)
     : QFrame(parent),
-      partition_delegate_(partition_delegate) {
+      delegate_(partition_delegate) {
   this->setObjectName(QStringLiteral("advanced_partition_frame"));
 
   this->initUI();
@@ -29,7 +29,7 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(
 }
 
 void AdvancedPartitionFrame::initConnections() {
-  connect(partition_delegate_, &PartitionDelegate::deviceRefreshed,
+  connect(delegate_, &PartitionDelegate::deviceRefreshed,
           this, &AdvancedPartitionFrame::onDeviceRefreshed);
 
   connect(bootloader_selection_button_, &QPushButton::clicked,
@@ -81,7 +81,7 @@ void AdvancedPartitionFrame::drawDevices() {
     delete item;
   }
 
-  for (const partman::Device& device : partition_delegate_->devices()) {
+  for (const partman::Device& device : delegate_->devices()) {
     QLabel* model_label = new QLabel(device.model);
     partition_layout_->addWidget(model_label);
     qDebug() << "Add model:" << device.model;
@@ -101,7 +101,7 @@ void AdvancedPartitionFrame::drawDevices() {
               this, &AdvancedPartitionFrame::requestNewPartitionFrame);
 
       connect(item, &AdvancedPartitionItem::deletePartitionTriggered,
-              partition_delegate_, &PartitionDelegate::deletePartition);
+              delegate_, &PartitionDelegate::deletePartition);
     }
   }
 }

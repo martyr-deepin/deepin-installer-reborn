@@ -27,7 +27,7 @@ class SimplePartitionFrame : public QScrollArea {
 
   QButtonGroup* partition_button_group_ = nullptr;
   QFrame* install_tip_ = nullptr;
-  PartitionDelegate* partition_delegate_ = nullptr;
+  PartitionDelegate* delegate_ = nullptr;
 
  private slots:
   void onDeviceRefreshed();

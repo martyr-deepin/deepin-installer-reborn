@@ -30,7 +30,7 @@ namespace ui {
 
 PartitionFrame::PartitionFrame(QWidget* parent)
     : QFrame(parent),
-      partition_delegate_(new PartitionDelegate(this)) {
+      delegate_(new PartitionDelegate(this)) {
   this->setObjectName(QStringLiteral("partition_frame"));
 
   this->initUI();
@@ -38,7 +38,7 @@ PartitionFrame::PartitionFrame(QWidget* parent)
 }
 
 void PartitionFrame::autoPart() {
-  partition_delegate_->autoConf();
+  delegate_->autoConf();
 }
 
 void PartitionFrame::initConnections() {
@@ -49,7 +49,7 @@ void PartitionFrame::initConnections() {
   connect(next_button_, &QPushButton::clicked,
           this, &PartitionFrame::onNextButtonClicked);
 
-  connect(partition_delegate_, &PartitionDelegate::deviceRefreshed,
+  connect(delegate_, &PartitionDelegate::deviceRefreshed,
           this, &PartitionFrame::showMainFrame);
 
   connect(advanced_partition_frame_,
@@ -72,20 +72,20 @@ void PartitionFrame::initConnections() {
   connect(prepare_install_frame_, &PrepareInstallFrame::finished,
           this, &PartitionFrame::finished);
   connect(prepare_install_frame_, &PrepareInstallFrame::finished,
-          partition_delegate_, &PartitionDelegate::doManualPart);
+          delegate_, &PartitionDelegate::doManualPart);
 
   connect(select_bootloader_frame_, &SelectBootloaderFrame::finished,
           this, &PartitionFrame::showMainFrame);
 }
 
 void PartitionFrame::initUI() {
-  advanced_partition_frame_ = new AdvancedPartitionFrame(partition_delegate_);
-  edit_partition_frame_ = new EditPartitionFrame(partition_delegate_);
-  new_partition_frame_ = new NewPartitionFrame(partition_delegate_);
-  partition_loading_frame_ = new PartitionLoadingFrame();
-  prepare_install_frame_ = new PrepareInstallFrame();
-  select_bootloader_frame_ = new SelectBootloaderFrame();
-  simple_partition_frame_ = new SimplePartitionFrame(partition_delegate_);
+  advanced_partition_frame_ = new AdvancedPartitionFrame(delegate_, this);
+  edit_partition_frame_ = new EditPartitionFrame(delegate_, this);
+  new_partition_frame_ = new NewPartitionFrame(delegate_, this);
+  partition_loading_frame_ = new PartitionLoadingFrame(this);
+  prepare_install_frame_ = new PrepareInstallFrame(this);
+  select_bootloader_frame_ = new SelectBootloaderFrame(this);
+  simple_partition_frame_ = new SimplePartitionFrame(delegate_, this);
 
   TitleLabel* title_label = new TitleLabel(tr("Select Installation Location"));
   QHBoxLayout* title_layout = new QHBoxLayout();

@@ -28,7 +28,7 @@ const int kPartitionColumns = 4;
 SimplePartitionFrame::SimplePartitionFrame(
     PartitionDelegate* partition_delegate, QWidget* parent)
     : QScrollArea(parent),
-      partition_delegate_(partition_delegate) {
+      delegate_(partition_delegate) {
   this->setObjectName(QStringLiteral("simple_partition_frame"));
 
   this->initUI();
@@ -36,7 +36,7 @@ SimplePartitionFrame::SimplePartitionFrame(
 }
 
 void SimplePartitionFrame::initConnections() {
-  connect(partition_delegate_, &PartitionDelegate::deviceRefreshed,
+  connect(delegate_, &PartitionDelegate::deviceRefreshed,
           this, &SimplePartitionFrame::onDeviceRefreshed);
   connect(partition_button_group_,
           static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>
@@ -76,7 +76,7 @@ void SimplePartitionFrame::drawDevices() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setAlignment(Qt::AlignCenter);
-  for (const partman::Device& device : partition_delegate_->devices()) {
+  for (const partman::Device& device : delegate_->devices()) {
     QLabel* device_model_label = new QLabel(device.model);
     device_model_label->setObjectName("device_model");
 
