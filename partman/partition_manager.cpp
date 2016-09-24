@@ -59,8 +59,6 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
     }
     partition.sector_start = lp_partition->geom.start;
     qDebug() << "sector start:" << partition.sector_start;
-    partition.sectors_total = lp_partition->geom.length;
-    qDebug() << "sector total:" << partition.sectors_total;
     partition.sector_end = lp_partition->geom.end;
     qDebug() << "sector end:" << lp_partition->geom.end;
     partition.sector_size = device.sector_size;

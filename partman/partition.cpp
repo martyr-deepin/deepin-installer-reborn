@@ -47,7 +47,6 @@ void Partition::reset() {
   uuid = "";
   name = "";
   partition_number = -1;
-  whole_device = false;
   type = PartitionType::Unallocated;
   status = PartitionStatus::Real;
   sector_start = -1;

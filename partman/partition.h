@@ -26,12 +26,6 @@ enum class PartitionStatus {
   Formatted,
 };
 
-enum class PartitionAlignment {
-  Cylinder,  // Align to nearest cylinder
-  MebiByte,  // Align to nearest mebibyte
-  Strict,  // Strict alignment, no rounding.
-};
-
 class Partition {
  public:
   Partition();
@@ -46,7 +40,6 @@ class Partition {
   QString name;
   QString label;
   int partition_number;
-  bool whole_device;
   PartitionType type;
   PartitionStatus status;
   FsType fs;
@@ -61,7 +54,6 @@ class Partition {
 
   qint64 sector_start;
   qint64 sector_end;
-  qint64 sectors_total;  // sectors_total = sectors_end - sectors_start + 1;
   qint64 sectors_used;
   qint64 sectors_unused;
   qint64 sectors_unallocated;

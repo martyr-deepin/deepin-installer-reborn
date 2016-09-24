@@ -39,8 +39,7 @@ void NewPartitionFrame::setPartition(const partman::Partition& partition) {
   // TODO(xushaohua): update type-box
 //  delegate_->getPartitionType(partition);
 
-  const int mebi_size = static_cast<int>(
-      partition.sectors_total * partition.sector_size / kMebiByte);
+  const int mebi_size = static_cast<int>(partition.getByteLength() / kMebiByte);
   size_slider_->setMaximum(mebi_size);
   size_slider_->setMinimum(0);
 }
