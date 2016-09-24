@@ -7,8 +7,6 @@
 #include <QDebug>
 
 #include "base/command.h"
-#include "partman/fs.h"
-#include "partition.h"
 
 namespace partman {
 namespace {

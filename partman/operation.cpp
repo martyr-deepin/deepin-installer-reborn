@@ -21,7 +21,7 @@ Operation::~Operation() {
 }
 
 bool Operation::applyToDisk() const {
-  bool ok = true;
+  bool ok = false;
   switch (type) {
     case OperationType::Create: {
       ok = false;
@@ -29,7 +29,7 @@ bool Operation::applyToDisk() const {
     }
 
     case OperationType::Delete: {
-      ok = false;
+      ok = DeletePartition(partition_orig);
       break;
     }
 

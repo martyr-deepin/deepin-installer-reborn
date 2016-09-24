@@ -14,6 +14,9 @@ namespace partman {
 
 bool CommitDiskChanges(PedDisk* lp_disk);
 
+// Delete partition defined in |partition| from device.
+bool DeletePartition(const Partition& partition);
+
 // Destroy libparted-device and disk object.
 void DestroyDeviceAndDisk(PedDevice*& lp_device, PedDisk*& lp_disk);
 

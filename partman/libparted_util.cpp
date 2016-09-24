@@ -4,8 +4,9 @@
 
 #include "partman/libparted_util.h"
 
+#include <QDebug>
+
 #include "base/command.h"
-#include "partman/fs.h"
 
 namespace partman {
 
@@ -15,6 +16,32 @@ bool CommitDiskChanges(PedDisk* lp_disk) {
     success = static_cast<bool>(ped_disk_commit_to_os(lp_disk));
   }
   return success;
+}
+
+bool DeletePartition(const Partition& partition) {
+  bool ok = false;
+  PedDevice* lp_device = NULL;
+  PedDisk* lp_disk = NULL;
+  if (GetDeviceAndDisk(partition.path, lp_device, lp_disk)) {
+    PedPartition* lp_partition = NULL;
+    if (partition.type == PartitionType::Extended) {
+      lp_partition = ped_disk_extended_partition(lp_disk);
+    } else {
+      lp_partition = ped_disk_get_partition_by_sector(lp_disk,
+                                                      partition.getSector());
+    }
+    if (lp_partition) {
+      ok = bool(ped_disk_delete_partition(lp_disk, lp_partition));
+    }
+
+    if (ok) {
+      ok = CommitDiskChanges(lp_disk);
+    }
+
+    DestroyDeviceAndDisk(lp_device, lp_disk);
+  }
+
+  return ok;
 }
 
 void DestroyDeviceAndDisk(PedDevice*& lp_device, PedDisk*& lp_disk) {
@@ -58,13 +85,14 @@ bool GetDeviceAndDisk(const QString& path,
 bool SetPartitionType(const Partition& partition) {
   PedDevice* lp_device = NULL;
   PedDisk* lp_disk = NULL;
-  bool ok = true;
+  bool ok = false;
   if (GetDeviceAndDisk(partition.path, lp_device, lp_disk)) {
 
     QString fs_name = GetFsTypeName(partition.fs);
     // Default fs is Linux (83).
     if (fs_name.isEmpty()) {
-      fs_name = "ext2";
+      qWarning() << "SetPartitionType: no fs is specified, use default!";
+      fs_name = GetFsTypeName(FsType::Ext2);
     }
 
     PedFileSystemType* lp_fs_type =
@@ -87,8 +115,6 @@ bool SetPartitionType(const Partition& partition) {
     }
 
     DestroyDeviceAndDisk(lp_device, lp_disk);
-  } else {
-    ok = false;
   }
 
   return ok;
