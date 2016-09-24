@@ -66,7 +66,7 @@ void AdvancedPartitionItem::initUI() {
   // partition space usage
   usage_label_ = new QLabel();
   if (partition_.type == partman::PartitionType::Unallocated) {
-    usage_label_->setText(GetPartitionUsage(0, partition_.getLength()));
+    usage_label_->setText(GetPartitionUsage(0, partition_.getByteLength()));
   } else {
     usage_label_->setText(GetPartitionUsage(partition_.freespace,
                                             partition_.length));

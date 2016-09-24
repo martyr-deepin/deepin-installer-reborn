@@ -24,7 +24,10 @@ bool Operation::applyToDisk() const {
   bool ok = false;
   switch (type) {
     case OperationType::Create: {
-      ok = false;
+      ok = CreatePartition(partition_new);
+      if (ok) {
+        ok = Mkfs(partition_new);
+      }
       break;
     }
 

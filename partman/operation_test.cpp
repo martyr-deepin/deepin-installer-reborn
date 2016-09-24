@@ -9,15 +9,28 @@
 namespace partman {
 namespace {
 
+TEST(OperationTest, ApplyToDiskDelete) {
+  Partition partition;
+  partition.sector_start = 2048;
+  partition.sector_end = 66267135;
+  partition.fs = FsType::Ext4;
+  partition.device_path = "/dev/sdc";
+  partition.path = "/dev/sdc1";
+  partition.type = PartitionType::Primary;
+  Operation format_operation(OperationType::Delete, partition, partition);
+  EXPECT_TRUE(format_operation.applyToDisk());
+}
+
 TEST(OperationTest, ApplyToDiskCreate) {
-//  Partition partition;
-//  partition.sector_start = 2048;
-//  partition.sector_end = 66267135;
-//  partition.fs = FsType::Ext4;
-//  partition.path = "/dev/sdc1";
-//  partition.type = PartitionType::Primary;
-//  Operation format_operation(OperationType::Create, partition, partition);
-//  EXPECT_TRUE(format_operation.applyToDisk());
+  Partition partition;
+  partition.sector_start = 2048;
+  partition.sector_end = 66267135;
+  partition.fs = FsType::Ext2;
+  partition.device_path = "/dev/sdc";
+  partition.path = "/dev/sdc1";
+  partition.type = PartitionType::Primary;
+  Operation format_operation(OperationType::Create, partition, partition);
+  EXPECT_TRUE(format_operation.applyToDisk());
 }
 
 TEST(OperationTest, ApplyToDiskFormat) {
@@ -25,20 +38,10 @@ TEST(OperationTest, ApplyToDiskFormat) {
   partition.sector_start = 2048;
   partition.sector_end = 66267135;
   partition.fs = FsType::Ext4;
+  partition.device_path = "/dev/sdc";
   partition.path = "/dev/sdc1";
   partition.type = PartitionType::Primary;
   Operation format_operation(OperationType::Format, partition, partition);
-  EXPECT_TRUE(format_operation.applyToDisk());
-}
-
-TEST(OperationTest, ApplyToDiskDelete) {
-  Partition partition;
-  partition.sector_start = 2048;
-  partition.sector_end = 66267135;
-  partition.fs = FsType::Ext4;
-  partition.path = "/dev/sdc1";
-  partition.type = PartitionType::Primary;
-  Operation format_operation(OperationType::Delete, partition, partition);
   EXPECT_TRUE(format_operation.applyToDisk());
 }
 

@@ -72,10 +72,16 @@ class Partition {
 
   QString mount_point;
 
+  // Returns actual partition size.
   // |length| is set only if this partition has a filesystem.
-  qint64 getLength() const;
+  qint64 getByteLength() const;
 
+  // Returns a sector within this partition.
+  // This method is only useful when calling ped_disk_get_partition_by_sector()
   qint64 getSector() const;
+
+  // Returns length in sector.
+  qint64 getSectorLength() const;
 };
 
 typedef QList<Partition> PartitionList;

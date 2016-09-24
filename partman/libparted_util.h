@@ -12,7 +12,11 @@
 
 namespace partman {
 
+// Commit changes to disk.
 bool CommitDiskChanges(PedDisk* lp_disk);
+
+// Create a new partition defined in |partition|.
+bool CreatePartition(const Partition& partition);
 
 // Delete partition defined in |partition| from device.
 bool DeletePartition(const Partition& partition);
@@ -26,7 +30,7 @@ bool FlushDevice(PedDevice* lp_device);
 
 // Get libparted-device and disk object at |path|.
 // Call |DestroyDeviceAndDisk()| to release them.
-bool GetDeviceAndDisk(const QString& path,
+bool GetDeviceAndDisk(const QString& device_path,
                       PedDevice*& lp_device,
                       PedDisk*& lp_disk);
 

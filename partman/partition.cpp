@@ -21,12 +21,25 @@ bool Partition::operator==(const Partition& other) const {
           type == other.type);
 }
 
-qint64 Partition::getLength() const {
-  return sector_size * sectors_total;
+qint64 Partition::getByteLength() const {
+  const qint64 sectors = getSectorLength();
+  if (sectors >= 0) {
+    return sectors * sector_size;
+  } else {
+    return -1;
+  }
 }
 
 qint64 Partition::getSector() const {
   return sector_start + (sector_end - sector_start) / 2;
+}
+
+qint64 Partition::getSectorLength() const {
+  if (sector_start >= 0 && sector_end >= 0) {
+    return sector_end - sector_start + 1;
+  } else {
+    return -1;
+  }
 }
 
 void Partition::reset() {

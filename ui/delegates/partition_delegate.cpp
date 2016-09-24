@@ -187,7 +187,7 @@ void PartitionDelegate::onDevicesRefreshed(const partman::DeviceList& devices) {
     for (const partman::Partition& partition : device.partitions) {
       // Filters freespace partition based on size.
       if (partition.type == partman::PartitionType::Unallocated &&
-          partition.getLength() < kMinimumPartitionSizeToDisplay) {
+          partition.getByteLength() < kMinimumPartitionSizeToDisplay) {
         continue;
       }
       new_partitions.append(partition);
