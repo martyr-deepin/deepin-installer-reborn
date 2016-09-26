@@ -37,7 +37,6 @@ class Partition {
   QString device_path;
   QString path;
   QString uuid;
-  QString name;
   QString label;
   int partition_number;
   PartitionType type;
@@ -54,13 +53,6 @@ class Partition {
 
   qint64 sector_start;
   qint64 sector_end;
-  qint64 sectors_used;
-  qint64 sectors_unused;
-  qint64 sectors_unallocated;
-  qint64 free_space_before;  // Free space preceding partition value
-  bool inside_extended;
-  bool busy;
-  QStringList flags;
 
   QString mount_point;
 
