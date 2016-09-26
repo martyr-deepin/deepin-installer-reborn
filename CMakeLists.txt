@@ -215,11 +215,8 @@ add_executable(deepin-installer-reborn-tests
                misc/test_main.cpp
 
                ${BASE_FILES}
-               ${SERVICE_FILES}
                ${SYSINFO_FILES}
                ${UNITTEST_FILES}
-
-               resources/resources.qrc
                )
 target_link_libraries(deepin-installer-reborn-tests
                       ${LINK_LIBS}

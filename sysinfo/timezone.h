@@ -15,7 +15,7 @@ QStringList GetZoneInfo();
 // Read current timezone in /etc/timezone file.
 QString GetCurrentTimezone();
 
-// Get preferenced timezone based on locale.
+// Get prefer timezone based on locale.
 QString GetPreferTimezone();
 
 // Returns name of timezone, excluding continent name.

@@ -12,7 +12,7 @@ namespace sysinfo {
 
 struct MountItem {
   QString path;
-  QString mount;  // mountpoint for the filesystem
+  QString mount;  // mount point for the filesystem
   QString fs;  // filesystem type
   QString options;
   // int freq;

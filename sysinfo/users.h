@@ -14,7 +14,7 @@ const int kNormalUserMinimumUid = 1000;
 // Get system username (uid < 1000).
 QStringList GetSystemUsers();
 
-// Get all usernames in /etc/passwd.
+// Get all username list in current system.
 QStringList GetUsers();
 
 // Check whether current user has root privilege.

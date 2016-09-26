@@ -4,7 +4,6 @@
 
 #include "sysinfo/proc_mounts.h"
 
-#include <QDebug>
 #include "base/file_util.h"
 
 namespace sysinfo {

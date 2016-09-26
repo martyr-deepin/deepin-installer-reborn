@@ -4,9 +4,6 @@
 
 #include "sysinfo/validate_password.h"
 
-#include "service/settings_manager.h"
-#include "service/settings_name.h"
-
 namespace sysinfo {
 
 namespace {
@@ -23,42 +20,36 @@ bool ContainsChar(const QString& str, const QString& pattern) {
 
 }  // namespace
 
-ValidatePasswordState ValidatePassword(const QString& password) {
-  const int min_len = service::GetSettingsValue(
-      service::kSystemInfoPasswordMinLength).toInt();
+ValidatePasswordState ValidatePassword(const QString& password,
+                                       int min_len,
+                                       int max_len,
+                                       bool require_number,
+                                       bool require_lower_case,
+                                       bool require_upper_case,
+                                       bool require_special_char) {
   if (password.length() < min_len) {
     return ValidatePasswordState::TooShortError;
   }
 
-  const int max_len = service::GetSettingsValue(
-      service::kSystemInfoPasswordMaxLength).toInt();
   if (password.length() > max_len) {
     return ValidatePasswordState::TooLongError;
   }
 
-  const bool need_number = service::GetSettingsBool(
-      service::kSystemInfoPasswordShallContainNumber);
-  if (need_number && (!ContainsChar(password, QStringLiteral("1234567890")))) {
+  if (require_number && (!ContainsChar(password, QStringLiteral("1234567890")))) {
     return ValidatePasswordState::NoNumberError;
   }
 
-  const bool need_lower_case = service::GetSettingsBool(
-      service::kSystemInfoPasswordShallContainLowerCase);
-  if (need_lower_case &&
+  if (require_lower_case &&
       (!ContainsChar(password, QStringLiteral("abcdefghijklmnopqrstuvwxyz")))) {
     return ValidatePasswordState::NoLowerCharError;
   }
 
-  const bool need_upper_case = service::GetSettingsBool(
-      service::kSystemInfoPasswordShallContainUpperCase);
-  if (need_upper_case &&
+  if (require_upper_case &&
       (!ContainsChar(password, QStringLiteral("ABCDEFGHIJKLMNOPQRSTUVWXYZ")))) {
     return ValidatePasswordState::NoUpperCharError;
   }
 
-  const bool need_special_char = service::GetSettingsBool(
-      service::kSystemInfoPasswordShallContainSpecialChar);
-  if (need_special_char &&
+  if (require_special_char &&
       (!ContainsChar(password, QStringLiteral("~!@#$%^&*()[]{}\\|/?,.<>")))) {
     return ValidatePasswordState::NoSpecialCharError;
   }

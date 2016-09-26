@@ -4,40 +4,29 @@
 
 #include "sysinfo/validate_password.h"
 
-#include "service/settings_manager.h"
-#include "service/settings_name.h"
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
 namespace sysinfo {
 namespace {
 
 TEST(ValidatePasswordTest, ValidatePassword) {
-  const bool need_number = service::GetSettingsBool(
-      service::kSystemInfoPasswordShallContainNumber);
-  if (need_number) {
-    EXPECT_EQ(ValidatePassword("ABC"), ValidatePasswordState::NoNumberError);
-  }
+  EXPECT_EQ(ValidatePassword("ABC", 8, 12, false, false, false, false),
+            ValidatePasswordState::TooShortError);
 
-  const bool need_lower_case = service::GetSettingsBool(
-      service::kSystemInfoPasswordShallContainLowerCase);
-  if (need_lower_case) {
-    EXPECT_EQ(ValidatePassword("ABC123"),
-              ValidatePasswordState::NoLowerCharError);
-  }
+  EXPECT_EQ(ValidatePassword("ABCDE12345", 4, 8, false, false, false, false),
+            ValidatePasswordState::TooLongError);
 
-  const bool need_upper_case = service::GetSettingsBool(
-      service::kSystemInfoPasswordShallContainUpperCase);
-  if (need_upper_case) {
-    EXPECT_EQ(ValidatePassword("abc123"),
-              ValidatePasswordState::NoUpperCharError);
-  }
+  EXPECT_EQ(ValidatePassword("ABCDEabcde", 4, 12, true, false, false, false),
+            ValidatePasswordState::NoNumberError);
 
-  const bool need_special_char = service::GetSettingsBool(
-      service::kSystemInfoPasswordShallContainSpecialChar);
-  if (need_special_char) {
-    EXPECT_EQ(ValidatePassword("Abcabc123"),
-              ValidatePasswordState::NoSpecialCharError);
-  }
+  EXPECT_EQ(ValidatePassword("ABCD1234", 4, 12, true, true, false, false),
+            ValidatePasswordState::NoLowerCharError);
+
+  EXPECT_EQ(ValidatePassword("abcd1234", 4, 12, true, true, true, false),
+            ValidatePasswordState::NoUpperCharError);
+
+  EXPECT_EQ(ValidatePassword("ABCabc1234", 4, 12, true, true, true, true),
+            ValidatePasswordState::NoSpecialCharError);
 }
 
 }  // namespace

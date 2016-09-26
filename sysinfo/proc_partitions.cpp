@@ -6,6 +6,7 @@
 
 #include <QDebug>
 #include <QRegExp>
+
 #include "base/file_util.h"
 
 namespace sysinfo {
