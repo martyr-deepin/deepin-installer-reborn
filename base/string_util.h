@@ -11,6 +11,7 @@ namespace base {
 
 // Parse a pattern |pattern| from string |str| and returns matched substring
 // or an empty string.
+// Note that a match group shall be specified in |pattern|.
 QString RegexpLabel(const QString& pattern, const QString& str);
 
 }  // namespace base
