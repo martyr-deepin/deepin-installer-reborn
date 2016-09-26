@@ -153,6 +153,22 @@ bool GetDeviceAndDisk(const QString& device_path,
   }
 }
 
+bool SetBootFlag(const Partition& partition, bool enable_boot) {
+  PedDevice* lp_device = NULL;
+  PedDisk* lp_disk = NULL;
+  bool ok = false;
+  if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
+    PedPartition* lp_partition =
+        ped_disk_get_partition_by_sector(lp_disk, partition.getSector());
+    if (lp_partition) {
+      const int flag = enable_boot ? 1 : 0;
+      ok = bool(ped_partition_set_flag(lp_partition, PED_PARTITION_BOOT, flag));
+    }
+    DestroyDeviceAndDisk(lp_device, lp_disk);
+  }
+  return ok;
+}
+
 bool SetPartitionType(const Partition& partition) {
   PedDevice* lp_device = NULL;
   PedDisk* lp_disk = NULL;
