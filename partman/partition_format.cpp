@@ -52,6 +52,15 @@ bool FormatExt4(const QString& path, const QString& label) {
   }
 }
 
+bool FormatF2fs(const QString& path, const QString& label) {
+  if (label.isEmpty()) {
+    return base::SpawnCmd("mkfs.f2fs", {path});
+  } else {
+    const QString real_label = label.left(19);
+    return base::SpawnCmd("mkfs.f2fs", {QString("-l%1").arg(real_label), path});
+  }
+}
+
 bool FormatFat16(const QString& path, const QString& label) {
   if (label.isEmpty()) {
     return base::SpawnCmd("mkfs.msdos", {"-F16", "-v", "-I", path});
@@ -172,6 +181,9 @@ bool Mkfs(const Partition& partition) {
     }
     case FsType::Ext4: {
       return FormatExt4(partition.path, partition.label);
+    }
+    case FsType::F2fs: {
+      return FormatF2fs(partition.path, partition.label);
     }
     case FsType::Fat16: {
       return FormatFat16(partition.path, partition.label);

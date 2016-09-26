@@ -10,7 +10,6 @@
 
 namespace partman {
 
-// TODO(xushaohua): Add extfat, f2fs, nilfs2, ufs and zfs
 enum class FsType {
   Empty,
   Btrfs,
@@ -18,6 +17,7 @@ enum class FsType {
   Ext2,
   Ext3,
   Ext4,
+  F2fs,
   Fat16,
   Fat32,
   Hfs,

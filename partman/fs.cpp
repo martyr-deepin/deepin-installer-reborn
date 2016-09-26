@@ -17,6 +17,7 @@ FsType GetFsTypeByName(const QString& name) {
   if (lower == "ext2") return FsType::Ext2;
   if (lower == "ext3") return FsType::Ext3;
   if (lower == "ext4") return FsType::Ext4;
+  if (lower == "f2fs") return FsType::F2fs;
   if (lower == "fat16") return FsType::Fat16;
   if (lower == "fat32") return FsType::Fat32;
   if (lower == "hfs") return FsType::Hfs;
@@ -40,6 +41,7 @@ QString GetFsTypeName(FsType fs_type) {
     case FsType::Ext2: { return "ext2"; }
     case FsType::Ext3: { return "ext3"; }
     case FsType::Ext4: { return "ext4"; }
+    case FsType::F2fs: { return "f2fs"; }
     case FsType::Fat16: { return "fat16"; }
     case FsType::Fat32: { return "fat32"; }
     case FsType::Hfs: { return "hfs"; }
