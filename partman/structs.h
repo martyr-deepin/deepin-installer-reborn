@@ -12,9 +12,9 @@
 const qint64 kKibiByte = 1024;
 const qint64 kMebiByte = kKibiByte * kKibiByte;
 const qint64 kGibiByte = kMebiByte * kKibiByte;
-//const qint64 kTebiByte = kGibiByte * kKibiByte;
-//const qint64 kPebiByte = kTebiByte * kKibiByte;
-//const qint64 kExbiByte = kPebiByte * kKibiByte;
+const qint64 kTebiByte = kGibiByte * kKibiByte;
+const qint64 kPebiByte = kTebiByte * kKibiByte;
+const qint64 kExbiByte = kPebiByte * kKibiByte;
 
 namespace partman {
 
