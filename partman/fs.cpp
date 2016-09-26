@@ -25,6 +25,7 @@ FsType GetFsTypeByName(const QString& name) {
   if (lower == "jfs") return FsType::Jfs;
   if (lower.startsWith("linux-swap")) return FsType::LinuxSwap;
   if (lower == "lvm2pv") return FsType::LVM2PV;
+  if (lower == "nilfs2") return FsType::Nilfs2;
   if (lower == "ntfs") return FsType::NTFS;
   if (lower == "others") return FsType::Others;
   if (lower == "reiser4") return FsType::Reiser4;
@@ -48,8 +49,9 @@ QString GetFsTypeName(FsType fs_type) {
     case FsType::HfsPlus: { return "hfsplus"; }
     case FsType::Jfs: { return "jfs"; }
     case FsType::LinuxSwap: { return "linux-swap"; }
-    case FsType::LVM2PV: { return "lvm2 pv"; }
     case FsType::NTFS: { return "ntfs"; }
+    case FsType::Nilfs2: { return "nilfs2"; }
+    case FsType::LVM2PV: { return "lvm2 pv"; }
     case FsType::Reiser4: { return "reiser4"; }
     case FsType::Reiserfs: { return "reiserfs"; }
     case FsType::Xfs: { return "xfs"; }

@@ -25,6 +25,7 @@ enum class FsType {
   Jfs,
   LinuxSwap,
   LVM2PV,
+  Nilfs2,
   NTFS,
   Others,
   Reiser4,

@@ -122,6 +122,16 @@ bool FormatLinuxSwap(const QString& path, const QString& label) {
   }
 }
 
+bool FormatNilfs2(const QString& path, const QString& label) {
+  if (label.isEmpty()) {
+    return base::SpawnCmd("mkfs.nilfs2", {path});
+  } else {
+    const QString real_label = label.left(1);
+    return base::SpawnCmd("mkfs.nilfs2",
+                          {QString("-L%1").arg(real_label), path});
+  }
+}
+
 bool FormatNTFS(const QString& path, const QString& label) {
   if (label.isEmpty()) {
     return base::SpawnCmd("mkntfs", {"-Q", "-v", "-F", path});
@@ -203,6 +213,9 @@ bool Mkfs(const Partition& partition) {
     }
     case FsType::LinuxSwap: {
       return FormatLinuxSwap(partition.path, partition.label);
+    }
+    case FsType::Nilfs2: {
+      return FormatNilfs2(partition.path, partition.label);
     }
     case FsType::NTFS: {
       return FormatNTFS(partition.path, partition.label);

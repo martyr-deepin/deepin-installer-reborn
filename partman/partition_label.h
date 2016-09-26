@@ -5,12 +5,14 @@
 #ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_LABEL_H
 #define DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_LABEL_H
 
-#include "partman/partition.h"
+#include <QString>
+
+#include "partman/fs.h"
 
 namespace partman {
 
-// Read partition label.
-void ReadLabel(Partition& partition);
+// Read partition label at |partition_path| with |fs_type|.
+QString ReadLabel(const QString& partition_path, FsType fs_type);
 
 }  // namespace partman
 
