@@ -10,7 +10,7 @@
 
 namespace partman {
 
-bool CommitDiskChanges(PedDisk* lp_disk) {
+bool Commit(PedDisk* lp_disk) {
   bool success = static_cast<bool>(ped_disk_commit_to_dev(lp_disk));
   if (success) {
     success = static_cast<bool>(ped_disk_commit_to_os(lp_disk));
@@ -75,7 +75,7 @@ bool CreatePartition(const Partition& partition) {
         // TODO(xushaohua): Change constraint.min_size.
         ok = bool(ped_disk_add_partition(lp_disk, lp_partition, constraint));
         if (ok) {
-          ok = CommitDiskChanges(lp_disk);
+          ok = Commit(lp_disk);
         }
         // TODO(xushaohua): Update partition property.
 
@@ -106,7 +106,7 @@ bool DeletePartition(const Partition& partition) {
     }
 
     if (ok) {
-      ok = CommitDiskChanges(lp_disk);
+      ok = Commit(lp_disk);
     }
 
     DestroyDeviceAndDisk(lp_device, lp_disk);
@@ -182,7 +182,7 @@ bool SetPartitionType(const Partition& partition) {
     }
 
     if (ok) {
-      ok = CommitDiskChanges(lp_disk);
+      ok = Commit(lp_disk);
     }
 
     DestroyDeviceAndDisk(lp_device, lp_disk);

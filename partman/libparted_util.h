@@ -13,7 +13,7 @@
 namespace partman {
 
 // Commit changes to disk.
-bool CommitDiskChanges(PedDisk* lp_disk);
+bool Commit(PedDisk* lp_disk);
 
 // Create a new partition defined in |partition|.
 bool CreatePartition(const Partition& partition);
