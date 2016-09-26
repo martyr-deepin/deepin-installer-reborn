@@ -15,6 +15,8 @@ bool CommitDiskChanges(PedDisk* lp_disk) {
   if (success) {
     success = static_cast<bool>(ped_disk_commit_to_os(lp_disk));
   }
+
+  SettleDevice(3);
   return success;
 }
 
