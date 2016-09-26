@@ -24,8 +24,8 @@ class PartitionManager : public QObject {
   void refreshDevices();
   void devicesRefreshed(const DeviceList& devices);
 
-  // Run oem/auto-part.sh script.
-  void autoPart();
+  // Run auto part script at |script_path|.
+  void autoPart(const QString& script_path);
   // Emitted after oem/auto-part.sh script is executed and exited.
   // |ok| is true if that script exited 0.
   void autoPartDone(bool ok);
@@ -40,7 +40,7 @@ class PartitionManager : public QObject {
 
  private slots:
   void doRefreshDevices();
-  void doAutoPart();
+  void doAutoPart(const QString& script_path);
   void doManualPart(const OperationList& operations);
 };
 

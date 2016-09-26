@@ -14,7 +14,6 @@
 #include "partman/partition.h"
 #include "partman/partition_label.h"
 #include "partman/partition_usage.h"
-#include "service/settings_manager.h"
 #include "sysinfo/dev_uuid.h"
 
 namespace partman {
@@ -172,14 +171,13 @@ void PartitionManager::doRefreshDevices() {
   emit this->devicesRefreshed(devices);
 }
 
-void PartitionManager::doAutoPart() {
-  const QString filepath = service::GetAutoPartFile();
-  if (!QFile::exists(filepath)) {
-    qCritical() << "partition script file not found!";
+void PartitionManager::doAutoPart(const QString& script_path) {
+  if (!QFile::exists(script_path)) {
+    qCritical() << "partition script file not found!" << script_path;
     emit this->autoPartDone(false);
     return;
   }
-  const bool ok = base::RunScriptFile(filepath);
+  const bool ok = base::RunScriptFile(script_path);
   emit this->autoPartDone(ok);
 }
 

@@ -49,7 +49,8 @@ PartitionDelegate::~PartitionDelegate() {
 }
 
 void PartitionDelegate::autoConf() {
-  emit partition_manager_->autoPart();
+  const QString script_path = service::GetAutoPartFile();
+  emit partition_manager_->autoPart(script_path);
 }
 
 PartitionType PartitionDelegate::getPartitionType(

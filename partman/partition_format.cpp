@@ -74,6 +74,26 @@ bool FormatFat32(const QString& path, const QString& label) {
   }
 }
 
+bool FormatHfs(const QString& path, const QString& label) {
+  if (label.isEmpty()) {
+    return base::SpawnCmd("hformat", {path});
+  } else {
+    const QString real_label = label.left(27);
+    return base::SpawnCmd("hformat",
+                          {QString("-l%1").arg(real_label), path});
+  }
+}
+
+bool FormatHfsPlus(const QString& path, const QString& label) {
+  if (label.isEmpty()) {
+    return base::SpawnCmd("mkfs.hfsplus", {path});
+  } else {
+    const QString real_label = label.left(63);
+    return base::SpawnCmd("mkfs.hfsplus",
+                          {QString("-v%1").arg(real_label), path});
+  }
+}
+
 bool FormatJfs(const QString& path, const QString& label) {
   if (label.isEmpty()) {
     return base::SpawnCmd("mkfs.jfs", {"-q", path});
@@ -105,17 +125,25 @@ bool FormatNTFS(const QString& path, const QString& label) {
 }
 
 bool FormatReiser4(const QString& path, const QString& label) {
-  const QString real_label = label.left(16);
-  return base::SpawnCmd("mkfs.reiser4",
-                        {"--force", "--yes",
-                         QString("--label%1").arg(real_label), path});
+  if (label.isEmpty()) {
+    return base::SpawnCmd("mkfs.reiser4", {"--force", "--yes", path});
+  } else {
+    const QString real_label = label.left(16);
+    return base::SpawnCmd("mkfs.reiser4",
+                          {"--force", "--yes",
+                           QString("--label%1").arg(real_label), path});
+  }
 }
 
 bool FormatReiserfs(const QString& path, const QString& label) {
-  const QString real_label = label.left(16);
-  return base::SpawnCmd("mkreiserfs",
-                        {"-f", "-f", QString("--label%1").arg(real_label),
-                         path});
+  if (label.isEmpty()) {
+    return base::SpawnCmd("mkreiserfs", {"-f", "-f", path});
+  } else {
+    const QString real_label = label.left(16);
+    return base::SpawnCmd("mkreiserfs",
+                          {"-f", "-f", QString("--label%1").arg(real_label),
+                           path});
+  }
 }
 
 bool FormatXfs(const QString& path, const QString& label) {
@@ -152,6 +180,12 @@ bool Mkfs(const Partition& partition) {
     case FsType::Fat32: {
       return FormatFat32(partition.path, partition.label);
     }
+    case FsType::Hfs: {
+      return FormatHfs(partition.path, partition.label);
+    }
+    case FsType::HfsPlus: {
+      return FormatHfsPlus(partition.path, partition.label);
+    }
     case FsType::Jfs: {
       return FormatJfs(partition.path, partition.label);
     }
@@ -160,6 +194,12 @@ bool Mkfs(const Partition& partition) {
     }
     case FsType::NTFS: {
       return FormatNTFS(partition.path, partition.label);
+    }
+    case FsType::Reiser4: {
+      return FormatReiser4(partition.path, partition.label);
+    }
+    case FsType::Reiserfs: {
+      return FormatReiserfs(partition.path, partition.label);
     }
     case FsType::Xfs: {
       return FormatXfs(partition.path, partition.label);

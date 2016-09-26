@@ -229,10 +229,8 @@ add_executable(deepin-installer-reborn-root-tests
 
                ${BASE_FILES}
                ${PARTMAN_FILES}
-               ${SERVICE_FILES}
                ${SYSINFO_FILES}
                ${ROOT_UNITTEST_FILES}
-               resources/resources.qrc
                )
 target_link_libraries(deepin-installer-reborn-root-tests
                       ${LINK_LIBS}
