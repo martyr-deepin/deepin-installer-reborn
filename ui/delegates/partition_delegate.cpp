@@ -114,10 +114,13 @@ void PartitionDelegate::createPartition(const partman::Partition& partition,
 
 void PartitionDelegate::deletePartition(const partman::Partition& partition) {
   partman::Partition new_partition(partition);
-  // TODO(xushaohua): check logical partition.
   new_partition.type = partman::PartitionType::Unallocated;
   new_partition.freespace = new_partition.length;
   new_partition.fs = partman::FsType::Empty;
+  if (partition.status == partman::PartitionStatus::New) {
+    // Merge operations here.
+  }
+
   partman::Operation operation(partman::OperationType::Delete,
                                partition,
                                new_partition);

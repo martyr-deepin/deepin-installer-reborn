@@ -21,7 +21,7 @@ Operation::~Operation() {
 }
 
 bool Operation::applyToDisk() const {
-  bool ok = false;
+  bool ok;
   switch (type) {
     case OperationType::Create: {
       ok = CreatePartition(partition_new);
@@ -59,8 +59,47 @@ bool Operation::applyToDisk() const {
 }
 
 void Operation::applyToVisual(PartitionList& partitions) const {
-  // TODO(xushaohua): Check operation type.
   this->substitute(partitions);
+  switch (type) {
+    case OperationType::Create: {
+      this->substitute(partitions);
+      break;
+    }
+    case OperationType::Delete: {
+      int index = findIndexOriginal(partitions);
+      Partition empty_partition = partition_new;
+
+      if (index > 0 &&
+          (partitions.at(index - 1).type == PartitionType::Unallocated)) {
+        // Not the first partition, try to merge with previous one.
+        empty_partition.sector_start = partitions.at(index - 1).sector_start;
+        partitions.removeAt(index - 1);
+        index -= 1;
+      }
+
+      if (index < partitions.length() - 1 &&
+          (partitions.at(index + 1).type == PartitionType::Unallocated)) {
+        // Not the last partition, try to merge with next partition.
+        empty_partition.sector_end = partitions.at(index + 1).sector_end;
+        partitions[index] = empty_partition;
+        partitions.removeAt(index + 1);
+      }
+      partitions[index] = empty_partition;
+
+      break;
+    }
+    case OperationType::Format: {
+      this->substitute(partitions);
+      break;
+    }
+    case OperationType::MountPoint: {
+      this->substitute(partitions);
+      break;
+    }
+    default: {
+      break;
+    }
+  }
 }
 
 int Operation::findIndexNew(const PartitionList& partitions) const {
@@ -84,9 +123,7 @@ int Operation::findIndexOriginal(const PartitionList& partitions) const {
 }
 
 void Operation::substitute(PartitionList& partitions) const {
-  int index;
-  // TODO(xushaohua): Handles extended partition
-  index = findIndexOriginal(partitions);
+  const int index = findIndexOriginal(partitions);
   if (index > -1) {
     partitions[index] = partition_new;
   }
