@@ -20,19 +20,20 @@ namespace {
 
 Partition GetBootPartition(const OperationList& operations) {
   for (const Operation& operation : operations) {
+    // Or check mount_point == kMountPointEFI.
     if (operation.partition_new.fs == FsType::EFI) {
       return operation.partition_new;
     }
   }
 
   for (const Operation& operation : operations) {
-    if (operation.partition_new.mount_point == "/boot") {
+    if (operation.partition_new.mount_point == kMountPointBoot) {
       return operation.partition_new;
     }
   }
 
   for (const Operation& operation : operations) {
-    if (operation.partition_new.mount_point == "/") {
+    if (operation.partition_new.mount_point == kMountPointRoot) {
       return operation.partition_new;
     }
   }

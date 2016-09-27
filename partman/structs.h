@@ -16,6 +16,14 @@ const qint64 kTebiByte = kGibiByte * kKibiByte;
 const qint64 kPebiByte = kTebiByte * kKibiByte;
 const qint64 kExbiByte = kPebiByte * kKibiByte;
 
+const char kMountPointRoot[] = "/";
+const char kMountPointBoot[] = "/boot";
+const char kMountPointEFI[] = "/boot/efi";
+
+// Unused file system and mount point.
+const char kFsUnused[] = "unused";
+const char kMountPointUnused[] = "unused";
+
 namespace partman {
 
 // This header file defines commonly used types and struct type in partman
@@ -39,10 +47,6 @@ enum class PartitionTableType {
 
 const char kPartitionTableGPT[] = "gpt";
 const char kPartitionTableMsDos[] = "msdos";
-
-// Unused file system and mount point.
-const char kPartitionFsUnused[] = "unused";
-const char kPartitionMountPointUnused[] = "unused";
 
 }  // namespace partman
 

@@ -24,8 +24,7 @@ int MountPointModel::index(const QString& mount_point) const {
 }
 
 int MountPointModel::indexOfEmpty() const {
-  return delegate_->getMountPoints().indexOf(
-      partman::kPartitionMountPointUnused);
+  return delegate_->getMountPoints().indexOf(kMountPointUnused);
 }
 
 int MountPointModel::rowCount(const QModelIndex& parent) const {
@@ -43,7 +42,7 @@ QVariant MountPointModel::data(const QModelIndex& index, int role) const {
   }
 
   const QString name =  delegate_->getMountPoints().at(index.row());
-  if (name == partman::kPartitionMountPointUnused) {
+  if (name == kMountPointUnused) {
     // TODO(xushaohua): Check filesystem type of partition.
     return tr("do not use");
   } else {
@@ -52,7 +51,7 @@ QVariant MountPointModel::data(const QModelIndex& index, int role) const {
 }
 
 bool IsEmptyMountPoint(const QString& mount_point) {
-  return mount_point == partman::kPartitionMountPointUnused;
+  return mount_point == kMountPointUnused;
 }
 
 }  // namespace ui

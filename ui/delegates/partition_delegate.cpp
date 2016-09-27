@@ -209,7 +209,7 @@ void PartitionDelegate::onManualPartDone(
     QString root_path;
     QString mount_points;
     for (const QPair<QString, QString>& item : mount_point_pair) {
-      if (item.second == "/") {
+      if (item.second == kMountPointRoot) {
         root_path = item.first;
       }
       mount_points += QString("%1=%2;").arg(item.first, item.second);
