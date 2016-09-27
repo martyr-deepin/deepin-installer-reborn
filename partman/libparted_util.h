@@ -34,8 +34,8 @@ bool GetDeviceAndDisk(const QString& device_path,
                       PedDevice*& lp_device,
                       PedDisk*& lp_disk);
 
-// Set/unset boot flag of a partition at |partition_path|.
-bool SetBootFlag(const QString& partition_path, bool enable_boot);
+// Set/unset boot flag of a partition.
+bool SetBootFlag(const Partition& partition, bool enable_boot);
 
 // Update partition type defined in |partition|.
 bool SetPartitionType(const Partition& partition);

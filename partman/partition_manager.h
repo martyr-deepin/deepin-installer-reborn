@@ -36,8 +36,6 @@ class PartitionManager : public QObject {
  private:
   void initConnections();
 
-  OperationList operations_;
-
  private slots:
   void doRefreshDevices();
   void doAutoPart(const QString& script_path);

@@ -10,13 +10,34 @@
 #include <QFile>
 
 #include "base/command.h"
-#include "partman/partition.h"
+#include "partman/libparted_util.h"
 #include "partman/partition_usage.h"
 #include "sysinfo/dev_disk.h"
 
 namespace partman {
 
 namespace {
+
+Partition GetBootPartition(const OperationList& operations) {
+  for (const Operation& operation : operations) {
+    if (operation.partition_new.fs == FsType::EFI) {
+      return operation.partition_new;
+    }
+  }
+
+  for (const Operation& operation : operations) {
+    if (operation.partition_new.mount_point == "/boot") {
+      return operation.partition_new;
+    }
+  }
+
+  for (const Operation& operation : operations) {
+    if (operation.partition_new.mount_point == "/") {
+      return operation.partition_new;
+    }
+  }
+  return Partition();
+}
 
 void ReadPartitions(Device& device, PedDisk* lp_disk,
                     const sysinfo::LabelItems& label_items,
@@ -96,9 +117,7 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
 
 }  // namespace
 
-PartitionManager::PartitionManager(QObject* parent)
-    : QObject(parent),
-      operations_() {
+PartitionManager::PartitionManager(QObject* parent) : QObject(parent) {
   this->setObjectName(QStringLiteral("partition_manager"));
 
   qRegisterMetaType<DeviceList>("DeviceList");
@@ -142,6 +161,7 @@ void PartitionManager::doRefreshDevices() {
     if (disk_type == NULL) {
       // Raw disk found.
       // TODO(xushaohua): Check proper partition type.
+      // TODO(xushaohua): Move to libparted_util
       lp_disk = ped_disk_new_fresh(lp_device,
                                    ped_disk_type_get(kPartitionTableGPT));
       disk_type = ped_disk_probe(lp_device);
@@ -192,16 +212,23 @@ void PartitionManager::doAutoPart(const QString& script_path) {
 }
 
 void PartitionManager::doManualPart(const OperationList& operations) {
-  operations_ = operations;
-
   bool ok = true;
-  for (int i = 0; ok && i < operations_.length(); ++i) {
-    ok = operations_.at(i).applyToDisk();
+  for (int i = 0; ok && i < operations.length(); ++i) {
+    ok = operations.at(i).applyToDisk();
   }
 
-  // TODO(xushaohua): Set boot flag.
+  if (ok) {
+    // Set boot flag on boot partition.
+    const Partition boot_partition = GetBootPartition(operations);
+    if (boot_partition.path.isEmpty()) {
+      ok = SetBootFlag(boot_partition, true);
+    } else {
+      qWarning() << "Failed to find boot partition!";
+      ok = false;
+    }
+  }
 
-//  emit this->manualPartDone(ok);
+  emit this->manualPartDone(ok);
 }
 
 }  // namespace partman
