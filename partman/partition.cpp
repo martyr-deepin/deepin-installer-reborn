@@ -6,8 +6,23 @@
 
 namespace partman {
 
-Partition::Partition() {
-  this->reset();
+Partition::Partition()
+    : device_path(),
+      path(),
+      uuid(),
+      label(),
+      part_label(),
+      partition_number(-1),
+      type(PartitionType::Unallocated),
+      status(PartitionStatus::Real),
+      fs(FsType::Empty),
+      os(OsType::Empty),
+      sector_size(-1),
+      length(-1),
+      freespace(-1),
+      sector_start(-1),
+      sector_end(-1),
+      mount_point() {
 }
 
 Partition::~Partition() {
@@ -40,16 +55,6 @@ qint64 Partition::getSectorLength() const {
   } else {
     return -1;
   }
-}
-
-void Partition::reset() {
-  device_path = "";
-  uuid = "";
-  partition_number = -1;
-  type = PartitionType::Unallocated;
-  status = PartitionStatus::Real;
-  sector_start = -1;
-  sector_end = -1;
 }
 
 }  // namespace partman

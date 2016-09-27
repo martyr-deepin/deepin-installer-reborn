@@ -10,17 +10,17 @@
 #include <QFile>
 
 #include "base/command.h"
-#include "partman/fs.h"
 #include "partman/partition.h"
-#include "partman/partition_label.h"
 #include "partman/partition_usage.h"
-#include "sysinfo/dev_uuid.h"
+#include "sysinfo/dev_disk.h"
 
 namespace partman {
 
 namespace {
 
 void ReadPartitions(Device& device, PedDisk* lp_disk,
+                    const sysinfo::LabelItems& label_items,
+                    const sysinfo::PartLabelItems& part_label_items,
                     const sysinfo::UUIDItems& uuid_items) {
   for (PedPartition* lp_partition = ped_disk_next_partition(lp_disk, NULL);
       lp_partition != NULL;
@@ -66,11 +66,13 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
     // Avoid reading additional filesystem information if there is no path.
     if (!partition.path.isEmpty() &&
         partition.type != PartitionType::Unallocated) {
-      partition.label = ReadLabel(partition.path);
-      qDebug() << "partition label:" << partition.label;
 
-      // Read uuid from /dev/disk/by-uuid/
-      partition.uuid = uuid_items.value(partition.path);
+      const QString empty_str;
+      partition.label = label_items.value(partition.path, empty_str);
+      partition.part_label = part_label_items.value(partition.path, empty_str);
+      partition.uuid = uuid_items.value(partition.path, empty_str);
+      qDebug() << "partition label:" << partition.label;
+      qDebug() << "partition part-label:" << partition.part_label;
       qDebug() << "UUID:" << partition.uuid;
 
       // Read label based on filesystem type
@@ -122,6 +124,8 @@ void PartitionManager::doRefreshDevices() {
   ped_device_probe_all();
 
   DeviceList devices;
+  const sysinfo::LabelItems label_items = sysinfo::ParseLabelDir();
+  const sysinfo::PartLabelItems part_label_items = sysinfo::ParsePartLabelDir();
   const sysinfo::UUIDItems uuid_items = sysinfo::ParseUUIDDir();
 
   PedDevice* lp_device = ped_device_get_next(NULL);
@@ -160,7 +164,7 @@ void PartitionManager::doRefreshDevices() {
     }
 
     device.partitions.clear();
-    ReadPartitions(device, lp_disk, uuid_items);
+    ReadPartitions(device, lp_disk, label_items, part_label_items, uuid_items);
 
     devices.append(device);
     ped_disk_destroy(lp_disk);

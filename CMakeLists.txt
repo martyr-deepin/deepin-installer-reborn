@@ -72,7 +72,6 @@ set(PARTMAN_FILES
     partman/operation.cpp partman/operation.h
     partman/partition.cpp partman/partition.h
     partman/partition_format.cpp partman/partition_format.h
-    partman/partition_label.cpp partman/partition_label.h
     partman/partition_manager.cpp partman/partition_manager.h
     partman/partition_usage.cpp partman/partition_usage.h
     partman/structs.h
@@ -89,7 +88,7 @@ set(SERVICE_FILES
     )
 
 set(SYSINFO_FILES
-    sysinfo/dev_uuid.cpp sysinfo/dev_uuid.h
+    sysinfo/dev_disk.cpp sysinfo/dev_disk.h
     sysinfo/machine.cpp sysinfo/machine.h
     sysinfo/proc_mounts.cpp sysinfo/proc_mounts.h
     sysinfo/proc_partitions.cpp sysinfo/proc_partitions.h
@@ -162,11 +161,10 @@ set(UI_FILES
 
 set(ROOT_UNITTEST_FILES
     partman/operation_test.cpp
-#    partman/partition_label_test.cpp
     )
 
 set(UNITTEST_FILES
-    sysinfo/dev_uuid_test.cpp
+    sysinfo/dev_disk_test.cpp
     sysinfo/proc_mounts_test.cpp
     sysinfo/proc_partitions_test.cpp
     sysinfo/proc_swaps_test.cpp

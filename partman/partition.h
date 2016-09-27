@@ -32,12 +32,12 @@ class Partition {
   ~Partition();
 
   bool operator==(const Partition& other) const;
-  void reset();
 
   QString device_path;
   QString path;
   QString uuid;
   QString label;
+  QString part_label;  // Only some partition tables support part-label.
   int partition_number;
   PartitionType type;
   PartitionStatus status;
