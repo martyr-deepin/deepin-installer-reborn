@@ -8,6 +8,13 @@
 
 namespace partman {
 
+namespace {
+
+// Unused file system.
+const char kFsUnused[] = "unused";
+
+}  // namespace
+
 FsType GetFsTypeByName(const QString& name) {
   const QString lower = name.toLower();
   if (lower.isEmpty()) return FsType::Empty;

@@ -22,9 +22,8 @@ class MountPointModel : public QAbstractListModel {
 
   // Get index of |mount_point|, if not found returns -1.
   int index(const QString& mount_point) const;
-  // Get index of empty mount point, might returns -1 if empty mount point is
-  // disabled.
-  int indexOfEmpty() const;
+  // Get mount_point at |index|.
+  QString getMountPoint(int index) const;
 
   // Take |mount_point| out of unused-mount-point list.
   void useMountPoint(const QString& mount_point);

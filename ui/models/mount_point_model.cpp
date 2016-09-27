@@ -15,23 +15,6 @@ MountPointModel::MountPointModel(PartitionDelegate* delegate, QObject* parent)
   this->setObjectName(QStringLiteral("mount_point_model"));
 }
 
-void MountPointModel::useMountPoint(const QString& mount_point) {
-  delegate_->useMountPoint(mount_point);
-}
-
-int MountPointModel::index(const QString& mount_point) const {
-  return delegate_->getMountPoints().indexOf(mount_point);
-}
-
-int MountPointModel::indexOfEmpty() const {
-  return delegate_->getMountPoints().indexOf(kMountPointUnused);
-}
-
-int MountPointModel::rowCount(const QModelIndex& parent) const {
-  Q_UNUSED(parent);
-  return delegate_->getMountPoints().length();
-}
-
 QVariant MountPointModel::data(const QModelIndex& index, int role) const {
   if (role != Qt::DisplayRole) {
     return QVariant();
@@ -41,17 +24,44 @@ QVariant MountPointModel::data(const QModelIndex& index, int role) const {
     return QVariant();
   }
 
-  const QString name =  delegate_->getMountPoints().at(index.row());
-  if (name == kMountPointUnused) {
+  const QStringList& mount_points(delegate_->getMountPoints());
+
+  if (index.row() < mount_points.length()) {
+    const QString name = mount_points.at(index.row());
     // TODO(xushaohua): Check filesystem type of partition.
-    return tr("do not use");
-  } else {
+    if (name.isEmpty()) {
+      return tr("do not use");
+    }
     return name;
+  } else {
+    return QVariant();
   }
 }
 
-bool IsEmptyMountPoint(const QString& mount_point) {
-  return mount_point == kMountPointUnused;
+int MountPointModel::rowCount(const QModelIndex& parent) const {
+  Q_UNUSED(parent);
+  return delegate_->getMountPoints().length();
+}
+
+int MountPointModel::index(const QString& mount_point) const {
+  return delegate_->getMountPoints().indexOf(mount_point);
+}
+
+QString MountPointModel::getMountPoint(int index) const {
+  const QStringList& mount_points(delegate_->getMountPoints());
+  Q_ASSERT(index < mount_points.length());
+  if (index < mount_points.length()) {
+    return mount_points.at(index);
+  } else {
+    return QString();
+  }
+}
+
+void MountPointModel::useMountPoint(const QString& mount_point) {
+  // Ignores empty mount point.
+  if (!mount_point.isEmpty()) {
+    delegate_->useMountPoint(mount_point);
+  }
 }
 
 }  // namespace ui

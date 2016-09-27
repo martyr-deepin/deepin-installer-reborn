@@ -21,8 +21,8 @@ int FsModel::index(partman::FsType fs_type) const {
 }
 
 partman::FsType FsModel::getFs(int index) const {
-  Q_ASSERT(index <= fs_list_.length());
-  if (index <= fs_list_.length()) {
+  Q_ASSERT(index < fs_list_.length());
+  if (index < fs_list_.length()) {
     return fs_list_.at(index);
   } else {
     return partman::FsType::Unknown;

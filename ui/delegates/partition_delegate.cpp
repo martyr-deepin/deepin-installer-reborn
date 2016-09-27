@@ -14,6 +14,12 @@
 
 namespace ui {
 
+namespace {
+
+const char kMountPointUnused[] = "unused";
+
+}  // namespace
+
 PartitionDelegate::PartitionDelegate(QObject* parent)
     : QObject(parent),
       partition_manager_(new partman::PartitionManager()),
@@ -63,9 +69,11 @@ PartitionType PartitionDelegate::getPartitionType(
 const QStringList& PartitionDelegate::getMountPoints() {
   if (all_mount_points_.isEmpty()) {
     // Read available mount points.
-    const QString name =
-        service::GetSettingsString(service::kPartitionMountPoints);
+    QString name = service::GetSettingsString(service::kPartitionMountPoints);
     Q_ASSERT(!name.isEmpty());
+    if (name == kMountPointUnused) {
+      name = "";
+    }
     all_mount_points_ = name.split(';');
     unused_mount_points_ = all_mount_points_;
   }

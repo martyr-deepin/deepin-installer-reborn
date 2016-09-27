@@ -18,11 +18,6 @@ const qint64 kExbiByte = kPebiByte * kKibiByte;
 
 const char kMountPointRoot[] = "/";
 const char kMountPointBoot[] = "/boot";
-const char kMountPointEFI[] = "/boot/efi";
-
-// Unused file system and mount point.
-const char kFsUnused[] = "unused";
-const char kMountPointUnused[] = "unused";
 
 namespace partman {
 
