@@ -165,7 +165,7 @@ void PartitionDelegate::initConnections() {
   connect(partition_manager_, &partman::PartitionManager::autoPartDone,
           signal_manager, &service::SignalManager::autoPartDone);
   connect(partition_manager_, &partman::PartitionManager::manualPartDone,
-          signal_manager, &service::SignalManager::manualPartDone);
+          this, &PartitionDelegate::onManualPartDone);
 
   connect(partition_manager_, &partman::PartitionManager::devicesRefreshed,
           this, &PartitionDelegate::onDevicesRefreshed);
@@ -200,6 +200,25 @@ void PartitionDelegate::onDevicesRefreshed(const partman::DeviceList& devices) {
   }
 
   emit this->deviceRefreshed();
+}
+
+void PartitionDelegate::onManualPartDone(
+    bool ok, const QList<QPair<QString, QString>>& mount_point_pair) {
+  if (ok) {
+    // Write mount-point pair to conf.
+    QString root_path;
+    QString mount_points;
+    for (const QPair<QString, QString>& item : mount_point_pair) {
+      if (item.second == "/") {
+        root_path = item.first;
+      }
+      mount_points += QString("%1=%2;").arg(item.first, item.second);
+    }
+    // TODO(xushaohua): Remove the last semicolon.
+    service::WritePartitionInfo(root_path, mount_points);
+  }
+
+  emit service::SignalManager::instance()->manualPartDone(ok);
 }
 
 }  // namespace ui

@@ -31,7 +31,9 @@ class PartitionManager : public QObject {
   void autoPartDone(bool ok);
 
   void manualPart(const OperationList& operations);
-  void manualPartDone(bool ok);
+  // |mount_points| is a list of partition_path -> mount_point pair.
+  void manualPartDone(bool ok,
+                      const QList<QPair<QString, QString>>& mount_point_pair);
 
  private:
   void initConnections();

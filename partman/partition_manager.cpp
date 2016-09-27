@@ -228,7 +228,18 @@ void PartitionManager::doManualPart(const OperationList& operations) {
     }
   }
 
-  emit this->manualPartDone(ok);
+  QList<QPair<QString, QString>> mount_point_pair;
+  if (ok) {
+    for (const Operation& operation : operations) {
+      const Partition& partition_new = operation.partition_new;
+      if (!partition_new.mount_point.isEmpty()) {
+        mount_point_pair.append({partition_new.path,
+                                 partition_new.mount_point});
+      }
+    }
+  }
+
+  emit this->manualPartDone(ok, mount_point_pair);
 }
 
 }  // namespace partman

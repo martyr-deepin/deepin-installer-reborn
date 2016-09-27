@@ -99,6 +99,8 @@ class PartitionDelegate : public QObject {
 
  private slots:
   void onDevicesRefreshed(const partman::DeviceList& devices);
+  void onManualPartDone(bool ok,
+                        const QList<QPair<QString, QString>>& mount_point_pair);
 };
 
 }  // namespace ui
