@@ -19,23 +19,23 @@ namespace partman {
 namespace {
 
 qint64 ParseBtrfsUnit(const QString& value) {
-  const float pref = QString(value).remove(QRegExp("K|M|G|T|P|Bib")).toFloat();
-  if (value.contains("K")) {
-    return static_cast<qint64>(pref * 1024);
+  const float pref = base::RegexpLabel("^(\\d+\\.?\\d+)", value).toFloat();
+  if (value.contains("KiB")) {
+    return static_cast<qint64>(pref * kKibiByte);
   }
-  if (value.contains("M")) {
-    return static_cast<qint64>(pref * (1 << 20));
+  if (value.contains("MiB")) {
+    return static_cast<qint64>(pref * kMebiByte);
   }
-  if (value.contains("G")) {
-    return static_cast<qint64>(pref * (qint64(1) << 30));
+  if (value.contains("GiB")) {
+    return static_cast<qint64>(pref * kGibiByte);
   }
-  if (value.contains("T")) {
-    return static_cast<qint64>(pref * (qint64(1) << 40));
+  if (value.contains("TiB")) {
+    return static_cast<qint64>(pref * kTebiByte);
   }
-  if (value.contains("P")) {
-    return static_cast<qint64>(pref * (qint64(1) << 50));
+  if (value.contains("PiB")) {
+    return static_cast<qint64>(pref * kPebiByte);
   }
-  return 0;
+  return -1;
 }
 
 bool ReadBtrfsUsage(const QString& path, qint64& freespace, qint64& total) {
@@ -46,14 +46,15 @@ bool ReadBtrfsUsage(const QString& path, qint64& freespace, qint64& total) {
   QString total_str, used_str;
   for (const QString& line : output.split('\n')) {
     if (line.contains(path)) {
-      total_str = line.split(' ').at(3);
+      total_str = base::RegexpLabel("size\\s*([^\\s]*)\\s", line);
     } else if (line.contains("Total devices")) {
-      used_str = line.split(' ').at(6);
+      used_str = base::RegexpLabel("used\\s*([^\\s]*)", line);
     }
   }
+
   total = ParseBtrfsUnit(total_str);
   freespace = total - ParseBtrfsUnit(used_str);
-  return true;
+  return (total > -1 && freespace > -1);
 }
 
 bool ReadExt2Usage(const QString& path, qint64& freespace, qint64& total) {
@@ -119,23 +120,38 @@ bool ReadFat16Usage(const QString& path, qint64& freespace, qint64& total) {
 
 bool ReadJfsUsage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
-  if (!base::SpawnCmd("jfs_fsck", {"-n", path}, output)) {
+  const QString param(QString("echo dm | jfs_debugfs %1").arg(path));
+  if (!base::SpawnCmd("sh", {"-c", param}, output)) {
     return false;
   }
-  qint64 used = 0;
+
+  int block_size = 0;
+  qint64 total_blocks = 0;
+  qint64 free_blocks = 0;
   for (const QString& line : output.split('\n')) {
-    if (line.contains("kilobytes total disk space")) {
-      total = line.split(' ').at(0).trimmed().toLongLong();
-    } else if (line.contains("kilobytes are available for use")) {
-      used = line.split(' ').at(0).trimmed().toLongLong();
+    if (line.startsWith("Aggregate Block Size:")) {
+      block_size = line.split(':').at(1).trimmed().toInt();
+    } else if (line.contains("dn_mapsize:")) {
+      const QString item = base::RegexpLabel("dn_mapsize:\\s*([^\\s]+)", line);
+      total_blocks = item.toLongLong(nullptr, 16);
+    } else if (line.contains("dn_nfree:")) {
+      const QString item = base::RegexpLabel("dn_nfree:\\s*([^\\s]+)", line);
+      free_blocks = item.toLongLong(nullptr, 16);
     }
   }
-  freespace = total - used;
-  return true;
+
+  if (free_blocks > 0 && total_blocks > 0 && block_size > 0) {
+    freespace = free_blocks * block_size;
+    total = total_blocks * block_size;
+    return true;
+  } else {
+    return false;
+  }
 }
 
 bool ReadLinuxSwapUsage(const QString& path, qint64& freespace, qint64& total) {
   const sysinfo::SwapItemList swap_items = sysinfo::ParseSwaps();
+  // If this swap partition is used, read from /proc/swaps.
   for (const sysinfo::SwapItem& item : swap_items) {
     if (item.filename == path) {
       total = item.size;
@@ -143,7 +159,37 @@ bool ReadLinuxSwapUsage(const QString& path, qint64& freespace, qint64& total) {
       return true;
     }
   }
-  return false;
+
+  // If it is not used, it is totally free.
+  freespace = 0;
+  total = 0;
+  return true;
+}
+
+bool ReadNilfs2Usage(const QString& path, qint64& freespace, qint64& total) {
+  QString output;
+  if (!base::SpawnCmd("nilfs-tune", {"-l", path}, output)) {
+    return false;
+  }
+
+  int block_size = 0;
+  qint64 free_blocks = 0;
+  for (const QString& line : output.split('\n')) {
+    if (line.startsWith("Block size:")) {
+      block_size = line.split(':').last().trimmed().toInt();
+    } else if (line.startsWith("Device size:")) {
+      total = line.split(':').last().trimmed().toLongLong();
+    } else if (line.startsWith("Free blocks count:")) {
+      free_blocks = line.split(':').last().trimmed().toLongLong();
+    }
+  }
+
+  if (free_blocks > 0 && block_size > 0) {
+    freespace = free_blocks * block_size;
+    return true;
+  } else {
+    return false;
+  }
 }
 
 bool ReadNTFSUsage(const QString& path, qint64& freespace, qint64& total) {
@@ -173,16 +219,19 @@ bool ReadNTFSUsage(const QString& path, qint64& freespace, qint64& total) {
       }
     }
   }
-  freespace = cluster_size * free_clusters;
-  total = cluster_size * total_clusters;
-  return true;
+
+  if (free_clusters > 0 && total_clusters > 0 && cluster_size > 0) {
+    freespace = cluster_size * free_clusters;
+    total = cluster_size * total_clusters;
+    return true;
+  } else {
+    return false;
+  }
 }
 
 bool ReadReiser4Usage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
-  if (!base::SpawnCmd("debugfs.reiser4",
-                      {"--force", "--yes", QString("--label '%1'").arg(path)},
-                      output)) {
+  if (!base::SpawnCmd("debugfs.reiser4", {"--force", "--yes", path}, output)) {
     return false;
   }
 
@@ -190,17 +239,22 @@ bool ReadReiser4Usage(const QString& path, qint64& freespace, qint64& total) {
   qint64 free_blocks = 0;
   qint64 total_blocks = 0;
   for (const QString& line : output.split('\n')) {
-    if (line.contains("blksize:")) {
+    if (line.startsWith("blksize:")) {
       block_size = line.split(':').at(1).trimmed().toInt();
-    } else if (line.contains("blocks:")) {
+    } else if (line.startsWith("blocks:")) {
       total_blocks = line.split(':').at(1).trimmed().toLongLong();
-    } else if (line.contains("free blocks:")) {
+    } else if (line.startsWith("free blocks:")) {
       free_blocks = line.split(':').at(1).trimmed().toLongLong();
     }
   }
-  total = total_blocks * block_size;
-  freespace = free_blocks * block_size;
-  return true;
+
+  if (free_blocks > 0 && total_blocks > 0 && block_size > 0) {
+    total = total_blocks * block_size;
+    freespace = free_blocks * block_size;
+    return true;
+  } else {
+    return false;
+  }
 }
 
 bool ReadReiserfsUsage(const QString& path, qint64& freespace, qint64& total) {
@@ -208,14 +262,27 @@ bool ReadReiserfsUsage(const QString& path, qint64& freespace, qint64& total) {
   if (!base::SpawnCmd("debugreiserfs", {"-d", path}, output)) {
     return false;
   }
+
+  qint64 total_blocks = 0;
+  qint64 free_blocks = 0;
+  int block_size = 0;
   for (const QString& line : output.split('\n')) {
-    if (line.contains("Count of blocks on the device")) {
-      total = line.split(' ').last().trimmed().toLongLong();
-    } else if (line.contains("Free blocks (count of blocks")) {
-      freespace = line.split(' ').last().trimmed().toLongLong();
+    if (line.startsWith("Count of blocks on the device:")) {
+      total_blocks = line.split(':').last().trimmed().toLongLong();
+    } else if (line.startsWith("Blocksize:")) {
+      block_size = line.split(':').last().trimmed().toInt();
+    } else if (line.startsWith("Free blocks (count of blocks")) {
+      free_blocks = line.split(':').last().trimmed().toLongLong();
     }
   }
-  return true;
+
+  if (free_blocks > 0 && total_blocks > 0 && block_size > 0) {
+    freespace = free_blocks * block_size;
+    total = total_blocks * block_size;
+    return true;
+  } else {
+    return false;
+  }
 }
 
 bool ReadXfsUsage(const QString& path, qint64& freespace, qint64& total) {
@@ -253,26 +320,26 @@ bool ReadXfsUsage(const QString& path, qint64& freespace, qint64& total) {
 
 }  // namespace
 
-// Update partition usage.
-void ReadUsage(Partition& partition) {
+bool ReadUsage(const QString& partition_path,
+               FsType fs_type,
+               qint64& freespace,
+               qint64& total) {
   bool ok = false;
-  qint64 total = 0;
-  qint64 freespace = 0;
-  switch (partition.fs) {
+  switch (fs_type) {
     case FsType::Btrfs: {
-      ok = ReadBtrfsUsage(partition.path, freespace, total);
+      ok = ReadBtrfsUsage(partition_path, freespace, total);
       break;
     }
     case FsType::Ext2:
     case FsType::Ext3:
     case FsType::Ext4: {
-      ok = ReadExt2Usage(partition.path, freespace, total);
+      ok = ReadExt2Usage(partition_path, freespace, total);
       break;
     }
     case FsType::EFI:
     case FsType::Fat16:
     case FsType::Fat32: {
-      ok = ReadFat16Usage(partition.path, freespace, total);
+      ok = ReadFat16Usage(partition_path, freespace, total);
       break;
     }
     case FsType::Hfs:
@@ -280,41 +347,45 @@ void ReadUsage(Partition& partition) {
       break;
     }
     case FsType::Jfs: {
-      ok = ReadJfsUsage(partition.path, freespace, total);
+      ok = ReadJfsUsage(partition_path, freespace, total);
       break;
     }
     case FsType::LinuxSwap: {
-      ok = ReadLinuxSwapUsage(partition.path, freespace, total);
+      ok = ReadLinuxSwapUsage(partition_path, freespace, total);
+      break;
+    }
+    case FsType::Nilfs2: {
+      ok = ReadNilfs2Usage(partition_path, freespace, total);
       break;
     }
     case FsType::NTFS: {
-      ok = ReadNTFSUsage(partition.path, freespace, total);
+      ok = ReadNTFSUsage(partition_path, freespace, total);
       break;
     }
     case FsType::Reiser4: {
-      ok = ReadReiser4Usage(partition.path, freespace, total);
+      ok = ReadReiser4Usage(partition_path, freespace, total);
       break;
     }
     case FsType::Reiserfs: {
-      ok = ReadReiserfsUsage(partition.path, freespace, total);
+      ok = ReadReiserfsUsage(partition_path, freespace, total);
       break;
     }
     case FsType::Xfs: {
-      ok = ReadXfsUsage(partition.path, freespace, total);
+      ok = ReadXfsUsage(partition_path, freespace, total);
       break;
     }
     default: {
+      ok = false;
       break;
     }
   }
-  if (ok) {
-    partition.length = total;
-    partition.freespace = freespace;
-  } else {
-    qWarning() << "Failed to read usage:" << partition.path;
-    partition.length = 0;
-    partition.freespace = 0;
+
+  if (!ok) {
+    freespace = -1;
+    total = -1;
+    qWarning() << "Failed to read usage:" << partition_path;
   }
+  return ok;
 }
 
 }  // namespace partman

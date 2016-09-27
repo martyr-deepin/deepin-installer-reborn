@@ -76,7 +76,13 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
       qDebug() << "UUID:" << partition.uuid;
 
       // Read label based on filesystem type
-      ReadUsage(partition);
+      ReadUsage(partition.path, partition.fs, partition.freespace,
+                partition.length);
+      // If LinuxSwap partition is not mount, it is totally free.
+      if (partition.fs == FsType::LinuxSwap && partition.length <= 0) {
+        partition.length = partition.getByteLength();
+        partition.freespace = partition.length;
+      }
       qDebug() << "length:" << partition.length
                << ",freespace:" << partition.freespace;
 

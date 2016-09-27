@@ -161,6 +161,7 @@ set(UI_FILES
 
 set(ROOT_UNITTEST_FILES
     partman/operation_test.cpp
+#    partman/partition_usage_test.cpp
     )
 
 set(UNITTEST_FILES
