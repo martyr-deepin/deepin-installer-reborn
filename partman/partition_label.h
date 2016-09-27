@@ -11,8 +11,8 @@
 
 namespace partman {
 
-// Read partition label at |partition_path| with |fs_type|.
-QString ReadLabel(const QString& partition_path, FsType fs_type);
+// Read partition label at |partition_path|
+QString ReadLabel(const QString& partition_path);
 
 }  // namespace partman
 

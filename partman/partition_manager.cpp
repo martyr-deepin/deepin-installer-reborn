@@ -66,7 +66,7 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
     // Avoid reading additional filesystem information if there is no path.
     if (!partition.path.isEmpty() &&
         partition.type != PartitionType::Unallocated) {
-      partition.label = ReadLabel(partition.path, partition.fs);
+      partition.label = ReadLabel(partition.path);
       qDebug() << "partition label:" << partition.label;
 
       // Read uuid from /dev/disk/by-uuid/
