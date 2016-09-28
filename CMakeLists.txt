@@ -70,6 +70,7 @@ set(PARTMAN_FILES
     partman/fs.cpp partman/fs.h
     partman/libparted_util.cpp partman/libparted_util.h
     partman/operation.cpp partman/operation.h
+    partman/os_prober.cpp partman/os_prober.h
     partman/partition.cpp partman/partition.h
     partman/partition_format.cpp partman/partition_format.h
     partman/partition_manager.cpp partman/partition_manager.h
@@ -160,8 +161,9 @@ set(UI_FILES
     )
 
 set(ROOT_UNITTEST_FILES
-    partman/operation_test.cpp
+#    partman/operation_test.cpp
 #    partman/partition_usage_test.cpp
+    partman/os_prober_test.cpp
     )
 
 set(UNITTEST_FILES

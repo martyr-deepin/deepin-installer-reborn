@@ -5,12 +5,12 @@
 #include "partition_manager.h"
 
 #include <parted/parted.h>
-#include <string.h>
 #include <QDebug>
 #include <QFile>
 
 #include "base/command.h"
 #include "partman/libparted_util.h"
+#include "partman/os_prober.h"
 #include "partman/partition_usage.h"
 #include "sysinfo/dev_disk.h"
 
@@ -43,7 +43,8 @@ Partition GetBootPartition(const OperationList& operations) {
 void ReadPartitions(Device& device, PedDisk* lp_disk,
                     const sysinfo::LabelItems& label_items,
                     const sysinfo::PartLabelItems& part_label_items,
-                    const sysinfo::UUIDItems& uuid_items) {
+                    const sysinfo::UUIDItems& uuid_items,
+                    const OsTypeItems& os_type_items) {
   for (PedPartition* lp_partition = ped_disk_next_partition(lp_disk, NULL);
       lp_partition != NULL;
       lp_partition = ped_disk_next_partition(lp_disk, lp_partition)) {
@@ -93,6 +94,7 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
       partition.label = label_items.value(partition.path, empty_str);
       partition.part_label = part_label_items.value(partition.path, empty_str);
       partition.uuid = uuid_items.value(partition.path, empty_str);
+      partition.os = os_type_items.value(partition.path, OsType::Empty);
       qDebug() << "partition label:" << partition.label;
       qDebug() << "partition part-label:" << partition.part_label;
       qDebug() << "UUID:" << partition.uuid;
@@ -107,10 +109,7 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
       }
       qDebug() << "length:" << partition.length
                << ",freespace:" << partition.freespace;
-
-      // Read possible Operating System version by calling `os-prober`.
     }
-    //partition.flags = {};
 
     device.partitions.append(partition);
   }
@@ -153,6 +152,7 @@ void PartitionManager::doRefreshDevices() {
   const sysinfo::LabelItems label_items = sysinfo::ParseLabelDir();
   const sysinfo::PartLabelItems part_label_items = sysinfo::ParsePartLabelDir();
   const sysinfo::UUIDItems uuid_items = sysinfo::ParseUUIDDir();
+  const OsTypeItems os_type_items = GetOsTypeItems();
 
   PedDevice* lp_device = ped_device_get_next(NULL);
   while (lp_device != NULL) {
@@ -191,7 +191,8 @@ void PartitionManager::doRefreshDevices() {
     }
 
     device.partitions.clear();
-    ReadPartitions(device, lp_disk, label_items, part_label_items, uuid_items);
+    ReadPartitions(device, lp_disk, label_items, part_label_items, uuid_items,
+                   os_type_items);
 
     devices.append(device);
     ped_disk_destroy(lp_disk);
