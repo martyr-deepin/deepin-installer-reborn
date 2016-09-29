@@ -79,8 +79,15 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
     qDebug() << "sector start:" << partition.sector_start;
     partition.sector_end = lp_partition->geom.end;
     qDebug() << "sector end:" << lp_partition->geom.end;
-    partition.path = ped_partition_get_path(lp_partition);
-    qDebug() << "partition path:" << partition.path;
+
+    // Result of ped_partition_get_path() need to be freed by hand.
+    char* lp_path = ped_partition_get_path(lp_partition);
+    if (lp_path != NULL) {
+      partition.path = lp_path;
+      qDebug() << "partition path:" << partition.path;
+      free(lp_path);
+    }
+
     // Avoid reading additional filesystem information if there is no path.
     if (!partition.path.isEmpty() &&
         partition.type != PartitionType::Unallocated) {
