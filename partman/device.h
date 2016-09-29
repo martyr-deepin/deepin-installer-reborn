@@ -15,8 +15,6 @@ class Device {
  public:
   Device();
 
-  void reset();
-
   PartitionList partitions;
   QString model;
   QString path;

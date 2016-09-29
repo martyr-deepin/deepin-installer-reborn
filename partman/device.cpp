@@ -6,24 +6,20 @@
 
 namespace partman {
 
-Device::Device() {
-  this->reset();
-}
-
-void Device::reset() {
-  partitions.clear();
-  length = 0;
-  heads = 0;
-  sectors = 0;
-  cylinders = 0;
-  cylsize = 0;
-  model = "";
-  path = "";
-  disk_type = "";
-  sector_size = 0;
-  max_prims = 0;
-  read_only = false;
-  table = PartitionTableType::Unknown;
+Device::Device()
+    : partitions(),
+      model(),
+      path(),
+      length(-1),
+      heads(-1),
+      sectors(-1),
+      cylinders(-1),
+      cylsize(-1),
+      disk_type(),
+      sector_size(-1),
+      max_prims(-1),
+      read_only(true),
+      table(PartitionTableType::Unknown) {
 }
 
 }  // namespace partman
