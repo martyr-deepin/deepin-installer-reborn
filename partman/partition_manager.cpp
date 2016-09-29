@@ -40,11 +40,8 @@ Partition GetBootPartition(const OperationList& operations) {
   return Partition();
 }
 
-void ReadPartitions(Device& device, PedDisk* lp_disk,
-                    const sysinfo::LabelItems& label_items,
-                    const sysinfo::PartLabelItems& part_label_items,
-                    const sysinfo::UUIDItems& uuid_items,
-                    const OsTypeItems& os_type_items) {
+PartitionList ReadPartitions(PedDisk* lp_disk) {
+  PartitionList partitions;
   for (PedPartition* lp_partition = ped_disk_next_partition(lp_disk, NULL);
       lp_partition != NULL;
       lp_partition = ped_disk_next_partition(lp_disk, lp_partition)) {
@@ -71,7 +68,6 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
       qDebug() << "unknown partition type" << lp_partition->type;
       continue;
     }
-    partition.device_path = device.path;
 
     if (lp_partition->fs_type) {
       partition.fs = GetFsTypeByName(lp_partition->fs_type->name);
@@ -83,21 +79,11 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
     qDebug() << "sector start:" << partition.sector_start;
     partition.sector_end = lp_partition->geom.end;
     qDebug() << "sector end:" << lp_partition->geom.end;
-    partition.sector_size = device.sector_size;
     partition.path = ped_partition_get_path(lp_partition);
     qDebug() << "partition path:" << partition.path;
     // Avoid reading additional filesystem information if there is no path.
     if (!partition.path.isEmpty() &&
         partition.type != PartitionType::Unallocated) {
-
-      const QString empty_str;
-      partition.label = label_items.value(partition.path, empty_str);
-      partition.part_label = part_label_items.value(partition.path, empty_str);
-      partition.uuid = uuid_items.value(partition.path, empty_str);
-      partition.os = os_type_items.value(partition.path, OsType::Empty);
-      qDebug() << "partition label:" << partition.label;
-      qDebug() << "partition part-label:" << partition.part_label;
-      qDebug() << "UUID:" << partition.uuid;
 
       // Read label based on filesystem type
       ReadUsage(partition.path, partition.fs, partition.freespace,
@@ -110,9 +96,8 @@ void ReadPartitions(Device& device, PedDisk* lp_disk,
       qDebug() << "length:" << partition.length
                << ",freespace:" << partition.freespace;
     }
-
-    device.partitions.append(partition);
   }
+  return partitions;
 }
 
 }  // namespace
@@ -209,9 +194,11 @@ DeviceList ScanDevices() {
       // Raw disk found.
       // TODO(xushaohua): Check proper partition type.
       // TODO(xushaohua): Move to libparted_util
-      lp_disk = ped_disk_new_fresh(lp_device,
-                                   ped_disk_type_get(kPartitionTableGPT));
-      disk_type = ped_disk_probe(lp_device);
+      disk_type = ped_disk_type_get(kPartitionTableGPT);
+      Q_ASSERT(disk_type != NULL);
+      if (disk_type) {
+        lp_disk = ped_disk_new_fresh(lp_device, disk_type);
+      }
     } else if (QString(kPartitionTableGPT) == disk_type->name ||
                QString(kPartitionTableMsDos) == disk_type->name) {
       lp_disk = ped_disk_new(lp_device);
@@ -236,9 +223,21 @@ DeviceList ScanDevices() {
       device.table = PartitionTableType::GPT;
     }
 
-    device.partitions.clear();
-    ReadPartitions(device, lp_disk, label_items, part_label_items, uuid_items,
-                   os_type_items);
+    device.partitions = ReadPartitions(lp_disk);
+    // Add additional info to partitions.
+    for (Partition& partition : device.partitions) {
+      partition.device_path = device.path;
+      partition.sector_size = device.sector_size;
+      if (!partition.path.isEmpty() &&
+          partition.type != PartitionType::Unallocated) {
+        const QString empty_str;
+        partition.label = label_items.value(partition.path, empty_str);
+        partition.part_label = part_label_items.value(partition.path,
+                                                      empty_str);
+        partition.uuid = uuid_items.value(partition.path, empty_str);
+        partition.os = os_type_items.value(partition.path, OsType::Empty);
+      }
+    }
 
     devices.append(device);
     ped_disk_destroy(lp_disk);
