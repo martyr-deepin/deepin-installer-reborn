@@ -29,8 +29,8 @@ void PartitionUsageBar::paintEvent(QPaintEvent* event) {
 
   const QColor fill_color(44, 167, 248, 255);
   if (total_ > 0 && freespace_ > 0) {
-    const int usage =
-        static_cast<int>(freespace_ * 1.0 / total_ * this->width());
+    const int usage = static_cast<int>(
+        freespace_ * 1.0 / total_ * this->width());
     painter.fillRect(0, 0, usage, this->height(), fill_color);
   }
 }

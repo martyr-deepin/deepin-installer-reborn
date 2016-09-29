@@ -65,15 +65,19 @@ void AdvancedPartitionItem::initUI() {
 
   // partition space usage
   usage_label_ = new QLabel();
-  if (partition_.type == partman::PartitionType::Unallocated) {
-    usage_label_->setText(GetPartitionUsage(0, partition_.getByteLength()));
+  qint64 freespace;
+  qint64 total;
+  if (partition_.type == partman::PartitionType::Unallocated ||
+      partition_.length <= 0) {
+    freespace = 0;
+    total = partition_.getByteLength();
   } else {
-    usage_label_->setText(GetPartitionUsage(partition_.freespace,
-                                            partition_.length));
+    freespace = partition_.freespace;
+    total = partition_.length;
   }
+  usage_label_->setText(GetPartitionUsage(freespace, total));
   usage_label_->setObjectName(QStringLiteral("usage_label"));
-  PartitionUsageBar* usage_bar = new PartitionUsageBar(partition_.freespace,
-                                                       partition_.length);
+  PartitionUsageBar* usage_bar = new PartitionUsageBar(freespace, total);
 
   // mount point
   mount_point_label_ = new QLabel();
