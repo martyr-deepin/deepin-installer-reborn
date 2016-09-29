@@ -44,6 +44,10 @@ class PartitionManager : public QObject {
   void doManualPart(const OperationList& operations);
 };
 
+// Scan all disk devices on this machine.
+// Do not call this function directly, use PartitionManager instead.
+DeviceList ScanDevices();
+
 }  // namespace partman
 
 #endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_MANAGER_H

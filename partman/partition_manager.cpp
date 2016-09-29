@@ -140,6 +140,52 @@ void PartitionManager::initConnections() {
 }
 
 void PartitionManager::doRefreshDevices() {
+  const DeviceList devices = ScanDevices();
+  emit this->devicesRefreshed(devices);
+}
+
+void PartitionManager::doAutoPart(const QString& script_path) {
+  if (!QFile::exists(script_path)) {
+    qCritical() << "partition script file not found!" << script_path;
+    emit this->autoPartDone(false);
+    return;
+  }
+  const bool ok = base::RunScriptFile(script_path);
+  emit this->autoPartDone(ok);
+}
+
+void PartitionManager::doManualPart(const OperationList& operations) {
+  bool ok = true;
+  for (int i = 0; ok && i < operations.length(); ++i) {
+    ok = operations.at(i).applyToDisk();
+  }
+
+  if (ok) {
+    // Set boot flag on boot partition.
+    const Partition boot_partition = GetBootPartition(operations);
+    if (boot_partition.path.isEmpty()) {
+      ok = SetBootFlag(boot_partition, true);
+    } else {
+      qWarning() << "Failed to find boot partition!";
+      ok = false;
+    }
+  }
+
+  QList<QPair<QString, QString>> mount_point_pair;
+  if (ok) {
+    for (const Operation& operation : operations) {
+      const Partition& partition_new = operation.partition_new;
+      if (!partition_new.mount_point.isEmpty()) {
+        mount_point_pair.append({partition_new.path,
+                                 partition_new.mount_point});
+      }
+    }
+  }
+
+  emit this->manualPartDone(ok, mount_point_pair);
+}
+
+DeviceList ScanDevices() {
   // 1. List Devices
   // 1.1. Retrieve metadata of each device.
   // 2. List partitions of each device.
@@ -200,48 +246,7 @@ void PartitionManager::doRefreshDevices() {
     lp_device = ped_device_get_next(lp_device);
   }
 
-  emit this->devicesRefreshed(devices);
-}
-
-void PartitionManager::doAutoPart(const QString& script_path) {
-  if (!QFile::exists(script_path)) {
-    qCritical() << "partition script file not found!" << script_path;
-    emit this->autoPartDone(false);
-    return;
-  }
-  const bool ok = base::RunScriptFile(script_path);
-  emit this->autoPartDone(ok);
-}
-
-void PartitionManager::doManualPart(const OperationList& operations) {
-  bool ok = true;
-  for (int i = 0; ok && i < operations.length(); ++i) {
-    ok = operations.at(i).applyToDisk();
-  }
-
-  if (ok) {
-    // Set boot flag on boot partition.
-    const Partition boot_partition = GetBootPartition(operations);
-    if (boot_partition.path.isEmpty()) {
-      ok = SetBootFlag(boot_partition, true);
-    } else {
-      qWarning() << "Failed to find boot partition!";
-      ok = false;
-    }
-  }
-
-  QList<QPair<QString, QString>> mount_point_pair;
-  if (ok) {
-    for (const Operation& operation : operations) {
-      const Partition& partition_new = operation.partition_new;
-      if (!partition_new.mount_point.isEmpty()) {
-        mount_point_pair.append({partition_new.path,
-                                 partition_new.mount_point});
-      }
-    }
-  }
-
-  emit this->manualPartDone(ok, mount_point_pair);
+  return devices;
 }
 
 }  // namespace partman
