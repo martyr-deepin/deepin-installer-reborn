@@ -104,6 +104,7 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
       qDebug() << "length:" << partition.length
                << ",freespace:" << partition.freespace;
     }
+    partitions.append(partition);
   }
   return partitions;
 }
