@@ -12,6 +12,7 @@
 #include "partman/libparted_util.h"
 #include "partman/os_prober.h"
 #include "partman/partition_usage.h"
+#include "partman/utils.h"
 #include "sysinfo/dev_disk.h"
 
 namespace partman {
@@ -199,11 +200,14 @@ DeviceList ScanDevices() {
     // TODO(xushaohua): Filters USB device.
     if (disk_type == NULL) {
       // Raw disk found.
-      // TODO(xushaohua): Check proper partition type.
-      // TODO(xushaohua): Move to libparted_util
-      disk_type = ped_disk_type_get(kPartitionTableGPT);
+      if (IsEfiEnabled()) {
+        disk_type = ped_disk_type_get(kPartitionTableGPT);
+      } else {
+        disk_type = ped_disk_type_get(kPartitionTableMsDos);
+      }
       Q_ASSERT(disk_type != NULL);
       if (disk_type) {
+        // Create a new device table but not commit changes to device.
         lp_disk = ped_disk_new_fresh(lp_device, disk_type);
       }
     } else if (QString(kPartitionTableGPT) == disk_type->name ||
