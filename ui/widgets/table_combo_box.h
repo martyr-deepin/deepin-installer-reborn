@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_WIDGETS_TABLE_COMBO_BOX_H
-#define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_TABLE_COMBO_BOX_H
+#ifndef INSTALLER_UI_WIDGETS_TABLE_COMBO_BOX_H
+#define INSTALLER_UI_WIDGETS_TABLE_COMBO_BOX_H
 
 #include <QComboBox>
 
-namespace ui {
+namespace installer {
 
 // Combo box used in grid layout.
 class TableComboBox : public QComboBox {
@@ -17,6 +17,6 @@ class TableComboBox : public QComboBox {
   explicit TableComboBox(QWidget* parent = nullptr);
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_WIDGETS_TABLE_COMBO_BOX_H
+#endif  // INSTALLER_UI_WIDGETS_TABLE_COMBO_BOX_H

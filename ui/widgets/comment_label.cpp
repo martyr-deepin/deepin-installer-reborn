@@ -6,15 +6,14 @@
 
 #include "base/file_util.h"
 
-namespace ui {
+namespace installer {
 
 CommentLabel::CommentLabel(const QString& text, QWidget* parent)
   : QLabel(text, parent) {
   this->setWordWrap(true);
   this->setAlignment(Qt::AlignHCenter);
   this->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
-  this->setStyleSheet(
-      base::ReadTextFileContent(QStringLiteral(":/styles/comment_label.css")));
+  this->setStyleSheet(ReadTextFileContent(":/styles/comment_label.css"));
 }
 
-}  // namespace ui
+}  // namespace installer

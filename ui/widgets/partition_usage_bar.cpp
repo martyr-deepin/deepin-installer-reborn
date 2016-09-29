@@ -4,11 +4,10 @@
 
 #include "ui/widgets/partition_usage_bar.h"
 
-#include <QDebug>
 #include <QPainter>
 #include <QPaintEvent>
 
-namespace ui {
+namespace installer {
 
 PartitionUsageBar::PartitionUsageBar(qint64 freespace,
                                      qint64 total,
@@ -35,4 +34,4 @@ void PartitionUsageBar::paintEvent(QPaintEvent* event) {
   }
 }
 
-}  // namespace ui
+}  // namespace installer

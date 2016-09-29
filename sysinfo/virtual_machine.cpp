@@ -6,14 +6,13 @@
 
 #include "base/file_util.h"
 
-namespace sysinfo {
+namespace installer {
 
 // TODO(xushaohua): Call dmidecode or virt-what.
 bool IsVirtualMachine() {
   // Check "hypervisor" flag is added in /proc/cpuinfo.
-  const QString content =
-      base::ReadTextFileContent(QStringLiteral("/proc/cpuinfo"));
-  return content.contains(QStringLiteral("hypervisor"));
+  const QString content = ReadTextFileContent("/proc/cpuinfo");
+  return content.contains("hypervisor");
 }
 
-}  // namespace sysinfo
+}  // namespace installer

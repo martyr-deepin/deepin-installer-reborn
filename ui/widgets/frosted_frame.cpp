@@ -6,11 +6,11 @@
 
 #include "base/file_util.h"
 
-namespace ui {
+namespace installer {
 
 FrostedFrame::FrostedFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("frosted_frame"));
-  this->setStyleSheet(base::ReadTextFileContent(":/styles/frosted_frame.css"));
+  this->setStyleSheet(ReadTextFileContent(":/styles/frosted_frame.css"));
 }
 
-}  // namespace ui
+}  // namespace installer

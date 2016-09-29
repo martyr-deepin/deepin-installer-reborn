@@ -10,7 +10,7 @@
 
 #include "partman/structs.h"
 
-namespace ui {
+namespace installer {
 
 QString GetPartitionName(const QString& path) {
   return QFileInfo(path).fileName();
@@ -21,36 +21,36 @@ QString GetPartitionUsage(qint64 freespace, qint64 total) {
   return QString("%1/%2G").arg(ToGigByte(used)).arg(ToGigByte(total));
 }
 
-QString GetLocalFsTypeName(partman::FsType fs_type) {
+QString GetLocalFsTypeName(FsType fs_type) {
   switch (fs_type) {
-    case partman::FsType::Btrfs: return "btrfs journaling file system";
-    case partman::FsType::EFI: {
+    case FsType::Btrfs: return "btrfs journaling file system";
+    case FsType::EFI: {
       return QObject::tr("EFI");
     }
-    case partman::FsType::Empty: {
+    case FsType::Empty: {
       return QObject::tr("do not use this partition");
     }
-    case partman::FsType::Ext2: return "Ext2 journaling file system";
-    case partman::FsType::Ext3: return "Ext3 journaling file system";
-    case partman::FsType::Ext4: return "Ext4 journaling file system";
-    case partman::FsType::Fat16: return "FAT16 file system";
-    case partman::FsType::Fat32: return "FAT32 file system";
-    case partman::FsType::Jfs: return "JFS journaling file system";
-    case partman::FsType::LinuxSwap: {
+    case FsType::Ext2: return "Ext2 journaling file system";
+    case FsType::Ext3: return "Ext3 journaling file system";
+    case FsType::Ext4: return "Ext4 journaling file system";
+    case FsType::Fat16: return "FAT16 file system";
+    case FsType::Fat32: return "FAT32 file system";
+    case FsType::Jfs: return "JFS journaling file system";
+    case FsType::LinuxSwap: {
       return QObject::tr("swap area");
     }
-    case partman::FsType::Xfs: return "XFS journaling file system";
+    case FsType::Xfs: return "XFS journaling file system";
     default: {
       return QObject::tr("Unknown");
     }
   }
 }
 
-bool SupportMountPoint(partman::FsType fs_type) {
-  return (fs_type != partman::FsType::EFI &&
-          fs_type != partman::FsType::LinuxSwap &&
-          fs_type != partman::FsType::Empty &&
-          fs_type != partman::FsType::Unknown);
+bool SupportMountPoint(FsType fs_type) {
+  return (fs_type != FsType::EFI &&
+          fs_type != FsType::LinuxSwap &&
+          fs_type != FsType::Empty &&
+          fs_type != FsType::Unknown);
 }
 
 int ToGigByte(qint64 size) {
@@ -59,4 +59,4 @@ int ToGigByte(qint64 size) {
 }
 
 
-}  // namespace ui
+}  // namespace installer

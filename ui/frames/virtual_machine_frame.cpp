@@ -6,14 +6,13 @@
 
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 VirtualMachineFrame::VirtualMachineFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("virtual_machine_frame"));
@@ -53,4 +52,4 @@ void VirtualMachineFrame::initUI() {
           this, &VirtualMachineFrame::finished);
 }
 
-}  // namespace ui
+}  // namespace installer

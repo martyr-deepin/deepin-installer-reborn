@@ -7,21 +7,18 @@
 #include <QButtonGroup>
 #include <QDebug>
 #include <QGridLayout>
-#include <QHBoxLayout>
 #include <QLabel>
 #include <QScrollArea>
-#include <QVBoxLayout>
 
 #include "ui/delegates/partition_delegate.h"
 #include "ui/widgets/advanced_partition_item.h"
-#include "ui/widgets/flat_button.h"
 
-namespace ui {
+namespace installer {
 
 AdvancedPartitionFrame::AdvancedPartitionFrame(
-    PartitionDelegate* partition_delegate, QWidget* parent)
+    PartitionDelegate* delegate_, QWidget* parent)
     : QFrame(parent),
-      delegate_(partition_delegate) {
+      delegate_(delegate_) {
   this->setObjectName(QStringLiteral("advanced_partition_frame"));
 
   this->initUI();
@@ -81,11 +78,11 @@ void AdvancedPartitionFrame::drawDevices() {
     delete item;
   }
 
-  for (const partman::Device& device : delegate_->devices()) {
+  for (const Device& device : delegate_->devices()) {
     QLabel* model_label = new QLabel(device.model);
     partition_layout_->addWidget(model_label);
     qDebug() << "Add model:" << device.model;
-    for (const partman::Partition& partition : device.partitions) {
+    for (const Partition& partition : device.partitions) {
       AdvancedPartitionItem* item = new AdvancedPartitionItem(partition);
       item->setEditable(enable_editing_button_->isChecked());
       partition_layout_->addWidget(item);
@@ -118,4 +115,4 @@ void AdvancedPartitionFrame::onEditButtonToggled(bool toggle) {
   }
 }
 
-}  // namespace ui
+}  // namespace installer

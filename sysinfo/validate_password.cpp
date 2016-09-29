@@ -4,7 +4,7 @@
 
 #include "sysinfo/validate_password.h"
 
-namespace sysinfo {
+namespace installer {
 
 namespace {
 
@@ -57,4 +57,4 @@ ValidatePasswordState ValidatePassword(const QString& password,
   return ValidatePasswordState::Ok;
 }
 
-}  // namespace sysinfo
+}  // namespace installer

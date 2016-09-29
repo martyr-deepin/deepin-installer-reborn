@@ -2,14 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_UTILS_PARTITION_UTIL_H
-#define DEEPIN_INSTALLER_REBORN_UI_UTILS_PARTITION_UTIL_H
+#ifndef INSTALLER_UI_UTILS_PARTITION_UTIL_H
+#define INSTALLER_UI_UTILS_PARTITION_UTIL_H
 
 #include <QtCore/QtGlobal>
 
 #include "partman/fs.h"
 
-namespace ui {
+namespace installer {
 
 // Get partition name based on |path|.
 QString GetPartitionName(const QString& path);
@@ -18,15 +18,15 @@ QString GetPartitionName(const QString& path);
 QString GetPartitionUsage(qint64 freespace, qint64 total);
 
 // Returns human readable file system name.
-QString GetLocalFsTypeName(partman::FsType fs_type);
+QString GetLocalFsTypeName(FsType fs_type);
 
 // Check whether specific fs type can be mounted by user.
 // linux-swap and efi are mounted at fixed position and thus returns false.1
-bool SupportMountPoint(partman::FsType fs_type);
+bool SupportMountPoint(FsType fs_type);
 
 // Convert |size| in byte to gibibyte.
 int ToGigByte(qint64 size);
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_UTILS_PARTITION_UTIL_H
+#endif  // INSTALLER_UI_UTILS_PARTITION_UTIL_H

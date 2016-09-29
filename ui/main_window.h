@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_UI_MAIN_WINDOW_H
-#define DEEPIN_INSTALLER_UI_MAIN_WINDOW_H
+#ifndef INSTALLER_UI_MAIN_WINDOW_H
+#define INSTALLER_UI_MAIN_WINDOW_H
 
 #include <QWidget>
 #include <QHash>
@@ -12,7 +12,7 @@ class QResizeEvent;
 class QShortcut;
 class QStackedLayout;
 
-namespace ui {
+namespace installer {
 
 class IconButton;
 class PageIndicator;
@@ -110,6 +110,6 @@ class MainWindow : public QWidget {
   void shutdownSystem();
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_UI_MAIN_WINDOW_H
+#endif  // INSTALLER_UI_MAIN_WINDOW_H

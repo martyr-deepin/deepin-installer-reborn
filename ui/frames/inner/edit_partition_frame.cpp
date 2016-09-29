@@ -21,7 +21,7 @@
 #include "ui/widgets/table_item_label.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 EditPartitionFrame::EditPartitionFrame(PartitionDelegate* delegate,
                                        QWidget* parent)
@@ -34,7 +34,7 @@ EditPartitionFrame::EditPartitionFrame(PartitionDelegate* delegate,
   this->initConnections();
 }
 
-void EditPartitionFrame::setPartition(const partman::Partition& partition) {
+void EditPartitionFrame::setPartition(const Partition& partition) {
   partition_ = partition;
 
   // Reset fs index.
@@ -130,7 +130,7 @@ void EditPartitionFrame::initUI() {
 }
 
 void EditPartitionFrame::onFsChanged(int index) {
-  const partman::FsType fs_type = fs_model_->getFs(index);
+  const FsType fs_type = fs_model_->getFs(index);
   const bool visible = SupportMountPoint(fs_type);
 
   mount_point_label_->setVisible(visible);
@@ -138,8 +138,8 @@ void EditPartitionFrame::onFsChanged(int index) {
   format_label_->setVisible(visible);
   format_check_box_->setVisible(visible);
 
-  const bool checked = !(fs_type == partman::FsType::Empty ||
-                         fs_type == partman::FsType::Unknown ||
+  const bool checked = !(fs_type == FsType::Empty ||
+                         fs_type == FsType::Unknown ||
                          fs_type == partition_.fs);
   format_check_box_->setChecked(checked);
 }
@@ -150,7 +150,7 @@ void EditPartitionFrame::onOkButtonClicked() {
       mount_point_model_->getMountPoint(mount_point_box_->currentIndex());
   if(format_check_box_->isChecked()) {
     // Create an OperationFormat object.
-    const partman::FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
+    const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
     delegate_->formatPartition(partition_, fs_type, mount_point);
   } else if (mount_point != partition_.mount_point) {
     // Only create an OperationMountPoint object.
@@ -162,4 +162,4 @@ void EditPartitionFrame::onOkButtonClicked() {
   emit this->finished();
 }
 
-}  // namespace ui
+}  // namespace installer

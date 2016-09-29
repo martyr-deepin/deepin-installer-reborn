@@ -2,10 +2,10 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SERVICE_SETTINGS_NAME_H
-#define DEEPIN_INSTALLER_REBORN_SERVICE_SETTINGS_NAME_H
+#ifndef INSTALLER_SERVICE_SETTINGS_NAME_H
+#define INSTALLER_SERVICE_SETTINGS_NAME_H
 
-namespace service {
+namespace installer {
 
 // Keys used in settings ini file.
 
@@ -68,6 +68,6 @@ const char kPartitionMountPoints[] = "partition_mount_points";
 // Install failed page
 const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";
 
-}  // namespace service
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_SERVICE_SETTINGS_NAME_H
+#endif  // INSTALLER_SERVICE_SETTINGS_NAME_H

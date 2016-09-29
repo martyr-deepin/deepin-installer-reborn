@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_H
-#define DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_H
+#ifndef INSTALLER_PARTMAN_PARTITION_H
+#define INSTALLER_PARTMAN_PARTITION_H
 
 #include <QList>
 #include <QStringList>
@@ -11,7 +11,7 @@
 #include "partman/fs.h"
 #include "partman/structs.h"
 
-namespace partman {
+namespace installer {
 
 enum class PartitionType {
   Primary,
@@ -76,6 +76,6 @@ class Partition {
 
 typedef QList<Partition> PartitionList;
 
-}  // namespace partman
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_H
+#endif  // INSTALLER_PARTMAN_PARTITION_H

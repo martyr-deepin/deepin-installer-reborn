@@ -7,7 +7,7 @@
 #include <sys/utsname.h>
 #include <QString>
 
-namespace sysinfo {
+namespace installer {
 
 MachineArch GetMachineArch() {
   struct utsname uts;
@@ -41,4 +41,4 @@ MachineArch GetMachineArch() {
   return MachineArch::Unknown;
 }
 
-}  // namespace sysinfo
+}  // namespace installer

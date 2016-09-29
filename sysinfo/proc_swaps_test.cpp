@@ -6,7 +6,7 @@
 
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
-namespace sysinfo {
+namespace installer {
 namespace {
 
 TEST(ProcSwapsTest, ParseSwaps) {
@@ -17,4 +17,4 @@ TEST(ProcSwapsTest, ParseSwaps) {
 }
 
 }  // namespace
-}  // namespace sysinfo
+}  // namespace installer

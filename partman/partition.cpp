@@ -4,7 +4,7 @@
 
 #include "partman/partition.h"
 
-namespace partman {
+namespace installer {
 
 Partition::Partition()
     : device_path(),
@@ -59,4 +59,4 @@ qint64 Partition::getSectorLength() const {
   }
 }
 
-}  // namespace partman
+}  // namespace installer

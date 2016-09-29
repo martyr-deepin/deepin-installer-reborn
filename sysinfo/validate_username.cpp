@@ -8,7 +8,7 @@
 
 #include "sysinfo/users.h"
 
-namespace sysinfo {
+namespace installer {
 
 ValidateUsernameState ValidateUsername(const QString& username) {
   if (username.isEmpty()) {
@@ -36,4 +36,4 @@ ValidateUsernameState ValidateUsername(const QString& username) {
   return ValidateUsernameState::Ok;
 }
 
-}  // namespace sysinfo
+}  // namespace installer

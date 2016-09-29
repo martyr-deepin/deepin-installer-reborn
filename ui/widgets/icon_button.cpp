@@ -6,7 +6,7 @@
 
 #include <QMouseEvent>
 
-namespace ui {
+namespace installer {
 
 IconButton::IconButton(const QString& normal_icon,
                        const QString& hover_icon,
@@ -46,4 +46,4 @@ void IconButton::mouseReleaseEvent(QMouseEvent* event) {
   FlatButton::mouseReleaseEvent(event);
 }
 
-}  // namespace ui
+}  // namespace installer

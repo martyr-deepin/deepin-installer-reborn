@@ -16,7 +16,7 @@
 #include "ui/delegates/partition_delegate.h"
 #include "ui/widgets/simple_partition_button.h"
 
-namespace ui {
+namespace installer {
 
 namespace {
 
@@ -67,7 +67,7 @@ void SimplePartitionFrame::initUI() {
   this->setWidgetResizable(true);
   this->setFixedSize(980, 580);
   this->setStyleSheet(
-      base::ReadTextFileContent(":/styles/simple_partition_frame.css"));
+      ReadTextFileContent(":/styles/simple_partition_frame.css"));
   this->setAttribute(Qt::WA_TranslucentBackground, true);
 }
 
@@ -76,7 +76,7 @@ void SimplePartitionFrame::drawDevices() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setAlignment(Qt::AlignCenter);
-  for (const partman::Device& device : delegate_->devices()) {
+  for (const Device& device : delegate_->devices()) {
     QLabel* device_model_label = new QLabel(device.model);
     device_model_label->setObjectName("device_model");
 
@@ -89,7 +89,7 @@ void SimplePartitionFrame::drawDevices() {
     layout->addLayout(grid_layout);
     int row = 0, column = 0;
 
-    for (const partman::Partition& partition : device.partitions) {
+    for (const Partition& partition : device.partitions) {
       SimplePartitionButton* button = new SimplePartitionButton(partition);
       partition_button_group_->addButton(button);
       grid_layout->addWidget(button, row, column, Qt::AlignLeft);
@@ -124,4 +124,4 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
   }
 }
 
-}  // namespace ui
+}  // namespace installer

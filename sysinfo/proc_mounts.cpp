@@ -6,12 +6,11 @@
 
 #include "base/file_util.h"
 
-namespace sysinfo {
+namespace installer {
 
 QList<MountItem> ParseMountItems() {
   MountItemList result;
-  const QString content =
-      base::ReadTextFileContent(QStringLiteral("/proc/mounts"));
+  const QString content = ReadTextFileContent("/proc/mounts");
   const QStringList lines = content.split("\n");
   for (const QString& line : lines) {
     const QStringList parts = line.split(" ", QString::SkipEmptyParts);
@@ -24,4 +23,4 @@ QList<MountItem> ParseMountItems() {
   return result;
 }
 
-}  // namespace sysinfo
+}  // namespace installer

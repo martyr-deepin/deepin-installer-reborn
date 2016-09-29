@@ -9,7 +9,7 @@
 #include <QPainter>
 #include <qrencode.h>
 
-namespace ui {
+namespace installer {
 
 // Refers: http://stackoverflow.com/questions/21400254
 QRWidget::QRWidget(QWidget* parent)
@@ -62,4 +62,4 @@ void QRWidget::paintEvent(QPaintEvent* event) {
   }
 }
 
-}  // namespace ui
+}  // namespace installer

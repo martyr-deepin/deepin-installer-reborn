@@ -5,11 +5,9 @@
 #include "base/file_util.h"
 
 #include <QDebug>
-#include <QFile>
 #include <QTextCodec>
-#include <QTextStream>
 
-namespace base {
+namespace installer {
 
 QDir ConcateDir(const QDir& parent_dir, const QString& folder_name) {
   if (! parent_dir.exists(folder_name)) {
@@ -63,7 +61,7 @@ QString ReadTextFileContent(const QString& path) {
   QFile file(path);
   if (file.exists()) {
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-      qWarning() << "[base]::ReadTextFileContent() failed to open" << path;
+      qWarning() << "ReadTextFileContent() failed to open" << path;
       return "";
     }
     QTextStream text_stream(&file);
@@ -71,7 +69,7 @@ QString ReadTextFileContent(const QString& path) {
     file.close();
     return str;
   } else {
-    qWarning() << "[base]::ReadFileContent() file not found: " << path;
+    qWarning() << "ReadFileContent() file not found: " << path;
     return "";
   }
 }
@@ -104,7 +102,7 @@ bool ReadTextFile(const QString& path, QString& content) {
     file.close();
     return true;
   } else {
-    qWarning() << "[base]::ReadTextFile() failed!" << ", path: " << path;
+    qWarning() << "ReadTextFile() failed!" << ", path: " << path;
     return false;
   }
 }
@@ -118,9 +116,9 @@ bool WriteTextFile(const QString& path, const QString& content) {
     file.close();
     return true;
   }else {
-    qCritical() << "[base]::WriteTestFile() failed!" << ", path:" << path;
+    qCritical() << "WriteTestFile() failed!" << ", path:" << path;
     return false;
   }
 }
 
-}  // namespace base
+}  // namespace installer

@@ -12,28 +12,28 @@
 #include "ui/main_window.h"
 
 int main(int argc, char* argv[]) {
-  service::RedirectLogFile();
-  service::InitLogService();
+  installer::RedirectLogFile();
+  installer::InitLogService();
 
   QApplication app(argc, argv);
   // TODO(xushaohua): Set i18n
-  app.setApplicationDisplayName(base::kAppDisplayName);
-  app.setApplicationName(base::kAppName);
-  app.setOrganizationDomain(base::kDomainName);
+  app.setApplicationDisplayName(installer::kAppDisplayName);
+  app.setApplicationName(installer::kAppName);
+  app.setOrganizationDomain(installer::kDomainName);
 
   // Delete last installer config file as soon as possible.
-  if (!sysinfo::HasRootPrivilege()) {
+  if (!installer::HasRootPrivilege()) {
     qCritical() << "Root privilege is required!";
   }
-  service::DeleteConfigFile();
+  installer::DeleteConfigFile();
   // NOTE(xushaohua): Scans usb devices here, might be very slow.
   // TODO(xushaohua): Add a startup option to disable scanning operation.
-  service::SaveOemConfig();
+  installer::SaveOemConfig();
 
-  ui::MainWindow main_window;
+  installer::MainWindow main_window;
   main_window.fullscreen();
 
   const int result = app.exec();
-  service::ShutdownLogService();
+  installer::ShutdownLogService();
   return result;
 }

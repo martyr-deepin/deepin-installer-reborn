@@ -14,7 +14,7 @@
 #include "ui/frames/consts.h"
 #include "ui/widgets/icon_button.h"
 
-namespace ui {
+namespace installer {
 
 SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("system_info_frame"));
@@ -28,15 +28,12 @@ SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
 }
 
 void SystemInfoFrame::autoConf() {
-  const QString username =
-      service::GetSettingsString(service::kSystemInfoDefaultUsername);
-  service::WriteUsername(username);
-  const QString hostname =
-      service::GetSettingsString(service::kSystemInfoDefaultHostname);
-  service::WriteHostname(hostname);
-  const QString password =
-      service::GetSettingsString(service::kSystemInfoDefaultPassword);
-  service::WritePassword(password);
+  const QString username = GetSettingsString(kSystemInfoDefaultUsername);
+  WriteUsername(username);
+  const QString hostname = GetSettingsString(kSystemInfoDefaultHostname);
+  WriteHostname(hostname);
+  const QString password = GetSettingsString(kSystemInfoDefaultPassword);
+  WritePassword(password);
 
   timezone_frame_->autoConf();
   avatar_frame_->autoConf();
@@ -77,7 +74,7 @@ void SystemInfoFrame::initUI() {
 }
 
 void SystemInfoFrame::showAvatarPage() {
-  if (service::GetSettingsBool(service::kSystemInfoDisableAvatorPage)) {
+  if (GetSettingsBool(kSystemInfoDisableAvatorPage)) {
     return;
   }
   stacked_layout_->setCurrentWidget(avatar_frame_);
@@ -88,10 +85,10 @@ void SystemInfoFrame::showFormPage() {
 }
 
 void SystemInfoFrame::showTimezonePage() {
-  if (service::GetSettingsBool(service::kSystemInfoDisableTimezonePage)) {
+  if (GetSettingsBool(kSystemInfoDisableTimezonePage)) {
     return;
   }
   stacked_layout_->setCurrentWidget(timezone_frame_);
 }
 
-}  // namespace ui
+}  // namespace installer

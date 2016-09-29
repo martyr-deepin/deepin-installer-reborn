@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_UTILS_H
-#define DEEPIN_INSTALLER_REBORN_PARTMAN_UTILS_H
+#ifndef INSTALLER_PARTMAN_UTILS_H
+#define INSTALLER_PARTMAN_UTILS_H
 
 #include "partman/structs.h"
 
-namespace partman {
+namespace installer {
 
 // Check if EFI feature is enabled in this machine.
 bool IsEfiEnabled();
@@ -18,6 +18,6 @@ qint64 GetMaximumDeviceSize();
 // Returns partition table type of the first disk device.
 PartitionTableType GetPrimaryDiskPartitionTable();
 
-}  // namespace partman
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_UTILS_H
+#endif  // INSTALLER_PARTMAN_UTILS_H

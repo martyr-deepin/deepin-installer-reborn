@@ -2,14 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_DEVICE_H
-#define DEEPIN_INSTALLER_REBORN_PARTMAN_DEVICE_H
+#ifndef INSTALLER_PARTMAN_DEVICE_H
+#define INSTALLER_PARTMAN_DEVICE_H
 
 #include <QList>
 
 #include "partman/partition.h"
 
-namespace partman {
+namespace installer {
 
 class Device {
  public:
@@ -33,6 +33,6 @@ class Device {
 
 typedef QList<Device> DeviceList;
 
-}  // namespace partman
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_DEVICE_H
+#endif  // INSTALLER_PARTMAN_DEVICE_H

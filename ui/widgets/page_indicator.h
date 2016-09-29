@@ -2,14 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_WIDGETS_PAGE_INDICATOR_H
-#define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_PAGE_INDICATOR_H
+#ifndef INSTALLER_UI_WIDGETS_PAGE_INDICATOR_H
+#define INSTALLER_UI_WIDGETS_PAGE_INDICATOR_H
 
 #include <QFrame>
 #include <QPixmap>
 class QHBoxLayout;
 
-namespace ui {
+namespace installer {
 
 // PageIndicator is used to display page state.
 class PageIndicator : public QFrame {
@@ -36,6 +36,6 @@ class PageIndicator : public QFrame {
   QPixmap indicator_inactive_;
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_WIDGETS_PAGE_INDICATOR_H
+#endif  // INSTALLER_UI_WIDGETS_PAGE_INDICATOR_H

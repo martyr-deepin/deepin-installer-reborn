@@ -6,7 +6,7 @@
 
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
-namespace sysinfo {
+namespace installer {
 namespace {
 
 TEST(TimezoneTest, GetZoneInfo) {
@@ -22,4 +22,4 @@ TEST(TimezoneTest, GetCurrentTimezone) {
 }
 
 }  // namespace
-}  // namespace sysinfo
+}  // namespace installer

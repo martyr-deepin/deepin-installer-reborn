@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
   QString output_file;
   if (argc == 2) {
     output_file = argv[1];
-    base::CreateParentDirs(output_file);
+    installer::CreateParentDirs(output_file);
   } else {
     qWarning() << "Output file not set, use stdout instead!";
   }
@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
               write(STDOUT_FILENO, progress.toUtf8().constData(),
                     static_cast<size_t>(progress.length()));
             } else {
-              base::WriteTextFile(output_file, progress);
+              installer::WriteTextFile(output_file, progress);
             }
           }
         }

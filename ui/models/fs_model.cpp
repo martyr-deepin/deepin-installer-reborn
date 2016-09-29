@@ -7,7 +7,7 @@
 #include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 
-namespace ui {
+namespace installer {
 
 FsModel::FsModel(PartitionDelegate* delegate, QObject* parent)
     : QAbstractListModel(parent),
@@ -16,16 +16,16 @@ FsModel::FsModel(PartitionDelegate* delegate, QObject* parent)
   this->setObjectName(QStringLiteral("fs_model"));
 }
 
-int FsModel::index(partman::FsType fs_type) const {
+int FsModel::index(FsType fs_type) const {
   return fs_list_.indexOf(fs_type);
 }
 
-partman::FsType FsModel::getFs(int index) const {
+FsType FsModel::getFs(int index) const {
   Q_ASSERT(index < fs_list_.length());
   if (index < fs_list_.length()) {
     return fs_list_.at(index);
   } else {
-    return partman::FsType::Unknown;
+    return FsType::Unknown;
   }
 }
 
@@ -47,8 +47,8 @@ QVariant FsModel::data(const QModelIndex& index, int role) const {
     return QVariant();
   }
 
-  const partman::FsType fs = fs_list_.at(index.row());
+  const FsType fs = fs_list_.at(index.row());
   return GetLocalFsTypeName(fs);
 }
 
-}  // namespace ui
+}  // namespace installer

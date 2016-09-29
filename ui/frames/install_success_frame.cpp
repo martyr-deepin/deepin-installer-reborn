@@ -6,14 +6,13 @@
 
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QVBoxLayout>
 
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 #include "ui/frames/consts.h"
 
-namespace ui {
+namespace installer {
 
 InstallSuccessFrame::InstallSuccessFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("install_success_frame"));
@@ -59,4 +58,4 @@ void InstallSuccessFrame::initUI() {
   this->setLayout(layout);
 }
 
-}  // namespace ui
+}  // namespace installer

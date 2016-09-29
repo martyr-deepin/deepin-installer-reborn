@@ -4,7 +4,7 @@
 
 #include "language_list_delegate.h"
 
-namespace ui {
+namespace installer {
 
 LanguageListDelegate::LanguageListDelegate(QObject* parent)
     : QItemDelegate(parent) {
@@ -18,4 +18,4 @@ QSize LanguageListDelegate::sizeHint(const QStyleOptionViewItem& option,
   return QSize(280, 38);
 }
 
-}  // namespace ui
+}  // namespace installer

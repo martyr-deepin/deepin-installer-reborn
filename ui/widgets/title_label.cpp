@@ -6,14 +6,13 @@
 
 #include "base/file_util.h"
 
-namespace ui {
+namespace installer {
 
 TitleLabel::TitleLabel(const QString& text, QWidget* parent)
   : QLabel(text, parent) {
   this->setAlignment(Qt::AlignHCenter);
   this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-  this->setStyleSheet(
-      base::ReadTextFileContent(QStringLiteral(":/styles/title_label.css")));
+  this->setStyleSheet(ReadTextFileContent(":/styles/title_label.css"));
 }
 
-}  // namespace ui
+}  // namespace installer

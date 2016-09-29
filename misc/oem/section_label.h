@@ -2,10 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_MISC_OEM_SECTION_LABEL_H
-#define DEEPIN_INSTALLER_REBORN_MISC_OEM_SECTION_LABEL_H
+#ifndef INSTALLER_MISC_OEM_SECTION_LABEL_H
+#define INSTALLER_MISC_OEM_SECTION_LABEL_H
 
 #include <QLabel>
+
+namespace installer {
 
 class SectionLabel : public QLabel {
   Q_OBJECT
@@ -14,5 +16,6 @@ class SectionLabel : public QLabel {
   SectionLabel(const QString& text, QWidget* parent = nullptr);
 };
 
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_MISC_OEM_SECTION_LABEL_H
+#endif  // INSTALLER_MISC_OEM_SECTION_LABEL_H

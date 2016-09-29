@@ -9,12 +9,10 @@
 #include <QHash>
 #include <QHBoxLayout>
 #include <QIcon>
-#include <QKeySequence>
 #include <QLabel>
 #include <QResizeEvent>
 #include <QShortcut>
 #include <QStackedLayout>
-#include <QVBoxLayout>
 
 #include "partman/partition_manager.h"
 #include "partman/utils.h"
@@ -35,19 +33,19 @@
 #include "ui/widgets/icon_button.h"
 #include "ui/widgets/page_indicator.h"
 
-namespace ui {
+namespace installer {
 
 namespace {
 
 int GetVisiblePages() {
   int pages = 0;
-  if (!service::GetSettingsBool(service::kSkipSelectLanguagePage)) {
+  if (!GetSettingsBool(kSkipSelectLanguagePage)) {
     pages += 1;
   }
-  if (!service::GetSettingsBool(service::kSkipSystemInfoPage)) {
+  if (!GetSettingsBool(kSkipSystemInfoPage)) {
     pages += 1;
   }
-  if (!service::GetSettingsBool(service::kSkipPartitionPage)) {
+  if (!GetSettingsBool(kSkipPartitionPage)) {
     pages += 1;
   }
   // For install-progress page.
@@ -55,28 +53,29 @@ int GetVisiblePages() {
   return pages;
 }
 
+// Check size of /dev/sda larger than 15Gib.
 bool IsDiskSpaceInsufficient() {
-  const qint64 maximum_device_size = partman::GetMaximumDeviceSize();
-  const int required_device_size = service::GetSettingsValue(
-      service::kPartitionMinimumDiskSpaceRequired).toInt();
-  return required_device_size * 1024 * 1024 > maximum_device_size;
+  const qint64 maximum_device_size = GetMaximumDeviceSize();
+  const int required_device_size = GetSettingsValue(
+      kPartitionMinimumDiskSpaceRequired).toInt();
+  return required_device_size * kMebiByte > maximum_device_size;
 }
 
 // Check whether partition table matches machine settings.
 bool IsPartitionTableMatch() {
   // If EFI is not enabled, always returns true.
-  if (!partman::IsEfiEnabled()) {
+  if (!IsEfiEnabled()) {
     return true;
   }
 
-  partman::PartitionTableType type = partman::GetPrimaryDiskPartitionTable();
+  PartitionTableType type = GetPrimaryDiskPartitionTable();
 
   // If partition table is empty(a raw disk device), returns true.
-  if (type == partman::PartitionTableType::Empty) {
+  if (type == PartitionTableType::Empty) {
     return true;
   }
 
-  return type == partman::PartitionTableType::GPT;
+  return type == PartitionTableType::GPT;
 }
 
 }  // namespace
@@ -253,7 +252,7 @@ void MainWindow::updateBackground() {
     qWarning() << "background_label is not initialized!";
     return;
   }
-  const QString image_path = service::GetWindowBackground();
+  const QString image_path = GetWindowBackground();
   // TODO(xushaohua): Only scale background image in x86 architecture.
   // Other platforms may have performance issue.
   const QPixmap pixmap = QPixmap(image_path).scaled(
@@ -286,7 +285,7 @@ void MainWindow::goNextPage() {
 
     case PageId::DiskSpaceInsufficientId: {
       // Check whether to show VirtualMachinePage.
-      if (sysinfo::IsVirtualMachine()) {
+      if (IsVirtualMachine()) {
         page_indicator_->setVisible(false);
         this->setCurrentPage(PageId::VirtualMachineId);
       } else {
@@ -318,7 +317,7 @@ void MainWindow::goNextPage() {
 
     case PageId::PartitionTableWarningId: {
       // Check whether to show SelectLanguagePage.
-      if (!service::GetSettingsBool(service::kSkipSelectLanguagePage)) {
+      if (!GetSettingsBool(kSkipSelectLanguagePage)) {
         page_indicator_->setVisible(true);
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::SelectLanguageId);
@@ -333,7 +332,7 @@ void MainWindow::goNextPage() {
 
     case PageId::SelectLanguageId: {
       // Check whether to show SystemInfoPage.
-      if (!service::GetSettingsBool(service::kSkipSystemInfoPage)) {
+      if (!GetSettingsBool(kSkipSystemInfoPage)) {
         page_indicator_->setVisible(true);
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::SystemInfoId);
@@ -348,12 +347,12 @@ void MainWindow::goNextPage() {
 
     case PageId::SystemInfoId: {
       // Check whether to show PartitionPage.
-      if (!service::GetSettingsBool(service::kSkipPartitionPage)) {
+      if (!GetSettingsBool(kSkipPartitionPage)) {
         page_indicator_->setVisible(true);
         page_indicator_->goNextPage();
         this->setCurrentPage(PageId::PartitionId);
       } else {
-        if (service::GetSettingsBool(service::kPartitionDoAutoPart)) {
+        if (GetSettingsBool(kPartitionDoAutoPart)) {
           partition_frame_->autoPart();
         }
         prev_page_ = current_page_;
@@ -407,4 +406,4 @@ void MainWindow::shutdownSystem() {
   this->close();
 }
 
-}  // namespace ui
+}  // namespace installer

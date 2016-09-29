@@ -2,15 +2,15 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_WIDGETS_ICON_BUTTON_H
-#define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_ICON_BUTTON_H
+#ifndef INSTALLER_UI_WIDGETS_ICON_BUTTON_H
+#define INSTALLER_UI_WIDGETS_ICON_BUTTON_H
 
 #include "ui/widgets/flat_button.h"
 
 #include <QIcon>
 class QMouseEvent;
 
-namespace ui {
+namespace installer {
 
 // IconButton displays different icons in a flat button at different states.
 class IconButton : public FlatButton {
@@ -37,6 +37,6 @@ class IconButton : public FlatButton {
   QIcon active_icon_;
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_WIDGETS_ICON_BUTTON_H
+#endif  // INSTALLER_UI_WIDGETS_ICON_BUTTON_H

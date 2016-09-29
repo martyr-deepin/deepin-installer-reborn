@@ -4,7 +4,7 @@
 
 #include "service/signal_manager.h"
 
-namespace service {
+namespace installer {
 
 SignalManager* g_signal_manager = nullptr;
 
@@ -20,4 +20,4 @@ SignalManager* SignalManager::instance() {
   return g_signal_manager;
 }
 
-}  // namespace service
+}  // namespace installer

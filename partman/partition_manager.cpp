@@ -15,7 +15,7 @@
 #include "partman/utils.h"
 #include "sysinfo/dev_disk.h"
 
-namespace partman {
+namespace installer {
 
 namespace {
 
@@ -144,7 +144,7 @@ void PartitionManager::doAutoPart(const QString& script_path) {
     emit this->autoPartDone(false);
     return;
   }
-  const bool ok = base::RunScriptFile(script_path);
+  const bool ok = RunScriptFile(script_path);
   emit this->autoPartDone(ok);
 }
 
@@ -189,9 +189,9 @@ DeviceList ScanDevices() {
   ped_device_probe_all();
 
   DeviceList devices;
-  const sysinfo::LabelItems label_items = sysinfo::ParseLabelDir();
-  const sysinfo::PartLabelItems part_label_items = sysinfo::ParsePartLabelDir();
-  const sysinfo::UUIDItems uuid_items = sysinfo::ParseUUIDDir();
+  const LabelItems label_items = ParseLabelDir();
+  const PartLabelItems part_label_items = ParsePartLabelDir();
+  const UUIDItems uuid_items = ParseUUIDDir();
   const OsTypeItems os_type_items = GetOsTypeItems();
 
   PedDevice* lp_device = ped_device_get_next(NULL);
@@ -260,4 +260,4 @@ DeviceList ScanDevices() {
   return devices;
 }
 
-}  // namespace partman
+}  // namespace installer

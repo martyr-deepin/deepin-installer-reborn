@@ -8,7 +8,7 @@
 
 #include "base/command.h"
 
-namespace partman {
+namespace installer {
 
 bool Commit(PedDisk* lp_disk) {
   bool success = static_cast<bool>(ped_disk_commit_to_dev(lp_disk));
@@ -208,7 +208,7 @@ bool SetPartitionType(const Partition& partition) {
 }
 
 void SettleDevice(int timeout) {
-  base::SpawnCmd("udevadm", {"settle", QString("--timeout=%1").arg(timeout)});
+  SpawnCmd("udevadm", {"settle", QString("--timeout=%1").arg(timeout)});
 }
 
-}  // namespace partman
+}  // namespace installer

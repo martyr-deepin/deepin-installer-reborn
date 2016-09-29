@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_FRAMES_PARTITION_FRAME_H
-#define DEEPIN_INSTALLER_REBORN_UI_FRAMES_PARTITION_FRAME_H
+#ifndef INSTALLER_UI_FRAMES_PARTITION_FRAME_H
+#define INSTALLER_UI_FRAMES_PARTITION_FRAME_H
 
 #include <QFrame>
 class QPushButton;
@@ -11,7 +11,7 @@ class QStackedLayout;
 
 #include "partman/partition.h"
 
-namespace ui {
+namespace installer {
 
 class AdvancedPartitionFrame;
 class EditPartitionFrame;
@@ -62,12 +62,12 @@ class PartitionFrame : public QFrame {
   void onAdvancedFrameButtonToggled();
   void onNextButtonClicked();
 
-  void showEditPartitionFrame(const partman::Partition& partition);
+  void showEditPartitionFrame(const Partition& partition);
   void showMainFrame();
-  void showNewPartitionFrame(const partman::Partition& partition);
+  void showNewPartitionFrame(const Partition& partition);
   void showSelectBootloaderFrame();
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_FRAMES_PARTITION_FRAME_H
+#endif  // INSTALLER_UI_FRAMES_PARTITION_FRAME_H

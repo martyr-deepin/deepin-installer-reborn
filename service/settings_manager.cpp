@@ -20,7 +20,7 @@
 
 #include "service/settings_name.h"
 
-namespace service {
+namespace installer {
 
 namespace {
 
@@ -384,4 +384,4 @@ void SaveOemConfig() {
   file.close();
 }
 
-}  // namespace service
+}  // namespace installer

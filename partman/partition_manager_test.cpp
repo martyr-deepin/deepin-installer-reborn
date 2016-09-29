@@ -6,7 +6,7 @@
 
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
-namespace partman {
+namespace installer {
 namespace {
 
 TEST(PartitionManagerTest, ScanDevices) {
@@ -15,4 +15,4 @@ TEST(PartitionManagerTest, ScanDevices) {
 }
 
 }  // namespace
-}  // namespace partman
+}  // namespace installer

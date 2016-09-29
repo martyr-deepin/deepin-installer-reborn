@@ -16,7 +16,7 @@
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
     : QFrame(parent),
@@ -29,22 +29,22 @@ SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
 
 void SystemInfoTimezoneFrame::autoConf() {
   QString timezone;
-  if (service::GetSettingsBool(service::kSystemInfoUseDefaultTimezone)) {
-    timezone = service::GetSettingsString(service::kSystemInfoDefaultTimezone);
+  if (GetSettingsBool(kSystemInfoUseDefaultTimezone)) {
+    timezone = GetSettingsString(kSystemInfoDefaultTimezone);
   }
 
-  if (!sysinfo::IsValidTimezone(timezone)) {
-    timezone = sysinfo::GetCurrentTimezone();
+  if (!IsValidTimezone(timezone)) {
+    timezone = GetCurrentTimezone();
   }
 
-  if (!sysinfo::IsValidTimezone(timezone)) {
+  if (!IsValidTimezone(timezone)) {
     qWarning() << "autoConf() got invalid timezone:" << timezone;
     return;
   }
 
   timezone_ = timezone;
-  emit this->timezoneUpdated(sysinfo::GetTimezoneName(timezone));
-  service::WriteTimezone(timezone);
+  emit this->timezoneUpdated(GetTimezoneName(timezone));
+  WriteTimezone(timezone);
 }
 
 void SystemInfoTimezoneFrame::initConnections() {
@@ -77,4 +77,4 @@ void SystemInfoTimezoneFrame::initUI() {
   this->setLayout(layout);
 }
 
-}  // namespace ui
+}  // namespace installer

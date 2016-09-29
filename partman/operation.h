@@ -2,14 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_OPERATION_H
-#define DEEPIN_INSTALLER_REBORN_PARTMAN_OPERATION_H
+#ifndef INSTALLER_PARTMAN_OPERATION_H
+#define INSTALLER_PARTMAN_OPERATION_H
 
 #include <QList>
 
 #include "partman/device.h"
 
-namespace partman {
+namespace installer {
 
 enum class OperationType {
   Create,
@@ -49,6 +49,6 @@ class Operation {
 
 typedef QList<Operation> OperationList;
 
-}  // namespace partman
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_OPERATION_H
+#endif  // INSTALLER_PARTMAN_OPERATION_H

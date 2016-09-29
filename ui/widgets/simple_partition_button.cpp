@@ -13,25 +13,25 @@
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/partition_usage_bar.h"
 
-namespace ui {
+namespace installer {
 
 namespace {
 
-QString GetImageByOsType(partman::OsType os_type) {
+QString GetImageByOsType(OsType os_type) {
   switch (os_type) {
-    case partman::OsType::Empty: {
+    case OsType::Empty: {
       return QStringLiteral(":/images/drive-harddisk-128px.png");
     }
-    case partman::OsType::Linux: {
+    case OsType::Linux: {
       return QStringLiteral(":/images/drive-harddisk-linux-128px.png");
     }
-    case partman::OsType::Mac: {
+    case OsType::Mac: {
       return QStringLiteral(":/images/drive-harddisk-mac-128px.png");
     }
-    case partman::OsType::Unknown: {
+    case OsType::Unknown: {
       return QStringLiteral(":/images/drive-harddisk-128px.png");
     }
-    case partman::OsType::Windows: {
+    case OsType::Windows: {
       return QStringLiteral(":/images/drive-harddisk-windows-128px.png");
     }
   }
@@ -40,8 +40,8 @@ QString GetImageByOsType(partman::OsType os_type) {
 
 }  // namespace
 
-SimplePartitionButton::SimplePartitionButton(
-    const partman::Partition& partition, QWidget* parent)
+SimplePartitionButton::SimplePartitionButton(const Partition& partition,
+                                             QWidget* parent)
     : FlatButton(parent),
       partition_(partition) {
   this->setObjectName(QStringLiteral("simple_partition_button"));
@@ -97,8 +97,8 @@ void SimplePartitionButton::initUI() {
 
   this->setFixedSize(220, 220);
   this->setCheckable(true);
-  this->setStyleSheet(base::ReadTextFileContent(
-      QStringLiteral(":/styles/simple_partition_button.css")));
+  this->setStyleSheet(
+      ReadTextFileContent(":/styles/simple_partition_button.css"));
 }
 
 void SimplePartitionButton::onButtonToggled() {
@@ -111,4 +111,4 @@ void SimplePartitionButton::onButtonToggled() {
   }
 }
 
-}  // namespace ui
+}  // namespace installer

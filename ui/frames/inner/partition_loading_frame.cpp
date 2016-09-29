@@ -5,13 +5,12 @@
 #include "ui/frames/inner/partition_loading_frame.h"
 
 #include <QHBoxLayout>
-#include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 PartitionLoadingFrame::PartitionLoadingFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("partition_loading_frame"));
@@ -44,4 +43,4 @@ void PartitionLoadingFrame::initUI() {
   this->setLayout(layout);
 }
 
-}  // namespace ui
+}  // namespace installer

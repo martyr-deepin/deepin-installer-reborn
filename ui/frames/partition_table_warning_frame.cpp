@@ -16,7 +16,7 @@
 #include "ui/widgets/list_title_label.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 PartitionTableWarningFrame::PartitionTableWarningFrame(QWidget* parent)
     : QFrame(parent) {
@@ -122,4 +122,4 @@ void PartitionTableWarningFrame::initUI() {
   this->setLayout(layout);
 }
 
-}  // namespace ui
+}  // namespace installer

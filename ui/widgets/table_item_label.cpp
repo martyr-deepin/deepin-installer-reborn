@@ -6,15 +6,14 @@
 
 #include "base/file_util.h"
 
-namespace ui {
+namespace installer {
 
 TableItemLabel::TableItemLabel(const QString& text, QWidget* parent)
     : QLabel(text, parent) {
   this->setObjectName(QStringLiteral("table_item_label"));
 
   this->setAlignment(Qt::AlignRight);
-  this->setStyleSheet(
-      base::ReadTextFileContent(":/styles/table_item_label.css"));
+  this->setStyleSheet(ReadTextFileContent(":/styles/table_item_label.css"));
 }
 
-}  // namespace ui
+}  // namespace installer

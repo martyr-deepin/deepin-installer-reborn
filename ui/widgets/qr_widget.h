@@ -2,13 +2,13 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_WIDGETS_QR_WIDGET_H
-#define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_QR_WIDGET_H
+#ifndef INSTALLER_UI_WIDGETS_QR_WIDGET_H
+#define INSTALLER_UI_WIDGETS_QR_WIDGET_H
 
 #include <QWidget>
 class QPaintEvent;
 
-namespace ui {
+namespace installer {
 
 // A widget to render string content into QR image
 class QRWidget : public QWidget {
@@ -27,6 +27,6 @@ class QRWidget : public QWidget {
   QString content_;
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_WIDGETS_QR_WIDGET_H
+#endif  // INSTALLER_UI_WIDGETS_QR_WIDGET_H

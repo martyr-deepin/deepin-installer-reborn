@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_MANAGER_H
-#define DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_MANAGER_H
+#ifndef INSTALLER_PARTMAN_PARTITION_MANAGER_H
+#define INSTALLER_PARTMAN_PARTITION_MANAGER_H
 
 #include <QList>
 #include <QObject>
@@ -11,7 +11,7 @@
 #include "partman/device.h"
 #include "partman/operation.h"
 
-namespace partman {
+namespace installer {
 
 class PartitionManager : public QObject {
   Q_OBJECT
@@ -48,6 +48,6 @@ class PartitionManager : public QObject {
 // Do not call this function directly, use PartitionManager instead.
 DeviceList ScanDevices();
 
-}  // namespace partman
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_PARTITION_MANAGER_H
+#endif  // INSTALLER_PARTMAN_PARTITION_MANAGER_H

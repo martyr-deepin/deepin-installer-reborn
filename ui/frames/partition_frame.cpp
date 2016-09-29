@@ -26,7 +26,7 @@
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 PartitionFrame::PartitionFrame(QWidget* parent)
     : QFrame(parent),
@@ -143,7 +143,7 @@ void PartitionFrame::initUI() {
   main_frame_ = new QFrame();
   main_frame_->setLayout(layout);
   main_frame_->setStyleSheet(
-      base::ReadTextFileContent(":/styles/partition_frame_main_frame.css"));
+      ReadTextFileContent(":/styles/partition_frame_main_frame.css"));
 
   main_layout_ = new QStackedLayout();
   main_layout_->addWidget(partition_loading_frame_);
@@ -165,14 +165,14 @@ void PartitionFrame::onAdvancedFrameButtonToggled() {
 }
 
 void PartitionFrame::onNextButtonClicked() {
-  // Show prepare-install-frame page if target partition is selected.
+  // TODO(xushaohua):Show prepare-install-frame page if target partition is selected.
   if (true) {
     main_layout_->setCurrentWidget(prepare_install_frame_);
   }
 }
 
 void PartitionFrame::showEditPartitionFrame(
-    const partman::Partition& partition) {
+    const Partition& partition) {
   edit_partition_frame_->setPartition(partition);
   main_layout_->setCurrentWidget(edit_partition_frame_);
 }
@@ -182,7 +182,7 @@ void PartitionFrame::showMainFrame() {
 }
 
 void PartitionFrame::showNewPartitionFrame(
-    const partman::Partition& partition) {
+    const Partition& partition) {
   new_partition_frame_->setPartition(partition);
   main_layout_->setCurrentWidget(new_partition_frame_);
 }
@@ -191,4 +191,4 @@ void PartitionFrame::showSelectBootloaderFrame() {
   main_layout_->setCurrentWidget(select_bootloader_frame_);
 }
 
-}  // namespace ui
+}  // namespace installer

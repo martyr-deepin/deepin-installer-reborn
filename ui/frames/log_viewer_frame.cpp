@@ -10,19 +10,18 @@
 #include "base/file_util.h"
 #include "service/log_manager.h"
 
-namespace ui {
-
+namespace installer {
 namespace {
 
 // Read log file each 1000ms.
 const int kReadLogInterval = 1000;
 
-}
+}  // namespace
 
 LogViewerFrame::LogViewerFrame(QWidget* parent)
     : QFrame(parent),
       timer_(this),
-      log_file_path_(service::GetLogFilepath()),
+      log_file_path_(GetLogFilepath()),
       log_content_() {
   this->setObjectName(QStringLiteral("log_viewer_frame"));
 
@@ -67,8 +66,7 @@ void LogViewerFrame::initUI() {
   layout->addWidget(text_edit_);
   this->setLayout(layout);
 
-  this->setStyleSheet(
-      base::ReadTextFileContent(":/styles/log_viewer_frame.css"));
+  this->setStyleSheet(ReadTextFileContent(":/styles/log_viewer_frame.css"));
   this->setWindowFlags(Qt::FramelessWindowHint);
   this->setWindowModality(Qt::WindowModal);
   this->setAttribute(Qt::WA_TranslucentBackground, true);
@@ -76,7 +74,7 @@ void LogViewerFrame::initUI() {
 }
 
 void LogViewerFrame::onTimerTimeout() {
-  const QString content = base::ReadTextFileContent(log_file_path_);
+  const QString content = ReadTextFileContent(log_file_path_);
   if (content == log_content_) {
     return;
   }
@@ -84,4 +82,4 @@ void LogViewerFrame::onTimerTimeout() {
   text_edit_->setPlainText(log_content_);
 }
 
-}  // namespace ui
+}  // namespace installer

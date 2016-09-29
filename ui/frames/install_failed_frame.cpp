@@ -20,7 +20,7 @@
 #include "ui/widgets/qr_widget.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 namespace {
 
@@ -44,14 +44,13 @@ InstallFailedFrame::InstallFailedFrame(QWidget* parent) : QFrame(parent) {
 
 void InstallFailedFrame::updateErrorMessage() {
   // Read from log file.
-  const QString content = base::ReadTextFileContent(service::GetLogFilepath());
+  const QString content = ReadTextFileContent(GetLogFilepath());
   content_label_->setText(content.right(kLabelContentStripped));
 
   // Encode with base64.
   const QString base64_content =
       content.right(kQRContentStripped).toUtf8().toBase64();
-  const QString prefix =
-      service::GetSettingsString(service::kInstallFailedFeedbackServer);
+  const QString prefix = GetSettingsString(kInstallFailedFeedbackServer);
   qr_widget_->setText(prefix.arg(base64_content));
 }
 
@@ -89,7 +88,7 @@ void InstallFailedFrame::initUI() {
   content_label_->setWordWrap(true);
   content_label_->setAlignment(Qt::AlignLeft | Qt::AlignTop);
   content_label_->setStyleSheet(
-      base::ReadTextFileContent(":/styles/install_failed_label.css"));
+      ReadTextFileContent(":/styles/install_failed_label.css"));
   qr_widget_ = new QRWidget(content_frame);
   qr_widget_->setFixedSize(kQRWindowSize, kQRWindowSize);
   qr_widget_->move((kContentWindowWidth - kQRWindowSize) / 2,
@@ -129,4 +128,4 @@ void InstallFailedFrame::onControlButtonClicked() {
   }
 }
 
-}  // namespace ui
+}  // namespace installer

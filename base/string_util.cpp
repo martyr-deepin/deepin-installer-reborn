@@ -6,7 +6,7 @@
 
 #include <QRegularExpression>
 
-namespace base {
+namespace installer {
 
 QString RegexpLabel(const QString& pattern, const QString& str) {
   QRegularExpression reg(pattern, QRegularExpression::MultilineOption);
@@ -18,4 +18,4 @@ QString RegexpLabel(const QString& pattern, const QString& str) {
   }
 }
 
-}  // namespace base
+}  // namespace installer

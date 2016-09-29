@@ -6,7 +6,7 @@
 
 #include <QDebug>
 
-namespace ui {
+namespace installer {
 
 LanguageListModel::LanguageListModel(QObject* parent)
     : QAbstractListModel(parent),
@@ -14,7 +14,7 @@ LanguageListModel::LanguageListModel(QObject* parent)
   this->setObjectName(QStringLiteral("language_list_model"));
 
   // TODO(xushaohua): Move to init() function.
-  lang_list_ = service::GetLanguageList();
+  lang_list_ = GetLanguageList();
 }
 
 int LanguageListModel::rowCount(const QModelIndex& parent) const {
@@ -41,4 +41,4 @@ QString LanguageListModel::locale(const QModelIndex& index) const {
   return QString();
 }
 
-}  // namespace ui
+}  // namespace installer

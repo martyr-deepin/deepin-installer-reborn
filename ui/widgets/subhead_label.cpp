@@ -6,7 +6,7 @@
 
 #include "base/file_util.h"
 
-namespace ui {
+namespace installer {
 
 SubheadLabel::SubheadLabel(const QString& text, QWidget* parent)
     : QLabel(text, parent) {
@@ -14,8 +14,7 @@ SubheadLabel::SubheadLabel(const QString& text, QWidget* parent)
 
   this->setAlignment(Qt::AlignCenter);
   this->setWordWrap(true);
-  this->setStyleSheet(
-      base::ReadTextFileContent(QStringLiteral(":/styles/subhead_label.css")));
+  this->setStyleSheet(ReadTextFileContent(":/styles/subhead_label.css"));
 }
 
-}  // namespace ui
+}  // namespace installer

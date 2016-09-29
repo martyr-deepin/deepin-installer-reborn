@@ -2,14 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_WIDGETS_LINE_EDIT_H
-#define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_LINE_EDIT_H
+#ifndef INSTALLER_UI_WIDGETS_LINE_EDIT_H
+#define INSTALLER_UI_WIDGETS_LINE_EDIT_H
 
 #include <QLineEdit>
 class QLabel;
 class QResizeEvent;
 
-namespace ui {
+namespace installer {
 
 // Customized line edit used in form page.
 class LineEdit : public QLineEdit {
@@ -26,6 +26,6 @@ class LineEdit : public QLineEdit {
   QLabel* image_label_ = nullptr;
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_WIDGETS_LINE_EDIT_H
+#endif  // INSTALLER_UI_WIDGETS_LINE_EDIT_H

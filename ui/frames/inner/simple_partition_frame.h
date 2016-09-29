@@ -2,14 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_SIMPLE_PARTITION_FRAME_H
-#define DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_SIMPLE_PARTITION_FRAME_H
+#ifndef INSTALLER_UI_FRAMES_INNER_SIMPLE_PARTITION_FRAME_H
+#define INSTALLER_UI_FRAMES_INNER_SIMPLE_PARTITION_FRAME_H
 
 #include <QScrollArea>
 class QAbstractButton;
 class QButtonGroup;
 
-namespace ui {
+namespace installer {
 
 class PartitionDelegate;
 
@@ -34,6 +34,6 @@ class SimplePartitionFrame : public QScrollArea {
   void onPartitionButtonToggled(QAbstractButton* button, bool checked);
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_SIMPLE_PARTITION_FRAME_H
+#endif  // INSTALLER_UI_FRAMES_INNER_SIMPLE_PARTITION_FRAME_H

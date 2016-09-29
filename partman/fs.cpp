@@ -6,7 +6,7 @@
 
 #include "partman/structs.h"
 
-namespace partman {
+namespace installer {
 
 namespace {
 
@@ -66,4 +66,4 @@ QString GetFsTypeName(FsType fs_type) {
   }
 }
 
-}  // namespace partman
+}  // namespace installer

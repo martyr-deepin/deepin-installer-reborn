@@ -2,13 +2,13 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_FS_H
-#define DEEPIN_INSTALLER_REBORN_PARTMAN_FS_H
+#ifndef INSTALLER_PARTMAN_FS_H
+#define INSTALLER_PARTMAN_FS_H
 
 #include <QList>
 #include <QString>
 
-namespace partman {
+namespace installer {
 
 enum class FsType {
   Empty,
@@ -40,6 +40,6 @@ QString GetFsTypeName(FsType fs_type);
 
 typedef QList<FsType> FsTypeList;
 
-}  // namespace partman
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_FS_H
+#endif  // INSTALLER_PARTMAN_FS_H

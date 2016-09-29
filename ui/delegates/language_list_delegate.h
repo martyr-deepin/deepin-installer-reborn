@@ -2,13 +2,13 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_DELEGATES_LANGUAGE_LIST_DELEGATE_H
-#define DEEPIN_INSTALLER_REBORN_UI_DELEGATES_LANGUAGE_LIST_DELEGATE_H
+#ifndef INSTALLER_UI_DELEGATES_LANGUAGE_LIST_DELEGATE_H
+#define INSTALLER_UI_DELEGATES_LANGUAGE_LIST_DELEGATE_H
 
 #include <QStyledItemDelegate>
 #include <QItemDelegate>
 
-namespace ui {
+namespace installer {
 
 class LanguageListDelegate : public QItemDelegate {
   Q_OBJECT
@@ -21,6 +21,6 @@ class LanguageListDelegate : public QItemDelegate {
                  const QModelIndex& index) const override;
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_DELEGATES_LANGUAGE_LIST_DELEGATE_H
+#endif  // INSTALLER_UI_DELEGATES_LANGUAGE_LIST_DELEGATE_H

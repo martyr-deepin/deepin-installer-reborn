@@ -2,13 +2,13 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SYSINFO_DEV_DISK_H
-#define DEEPIN_INSTALLER_REBORN_SYSINFO_DEV_DISK_H
+#ifndef INSTALLER_SYSINFO_DEV_DISK_H
+#define INSTALLER_SYSINFO_DEV_DISK_H
 
 #include <QHash>
 #include <QString>
 
-namespace sysinfo {
+namespace installer {
 
 typedef QHash<QString, QString> LabelItems;
 typedef QHash<QString, QString> PartLabelItems;
@@ -23,6 +23,6 @@ PartLabelItems ParsePartLabelDir();
 // Parse /dev/disk/by-uuid folder.
 UUIDItems ParseUUIDDir();
 
-}  // namespace sysinfo
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_SYSINFO_DEV_DISK_H
+#endif  // INSTALLER_SYSINFO_DEV_DISK_H

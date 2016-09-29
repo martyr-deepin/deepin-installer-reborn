@@ -2,13 +2,13 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SYSINFO_PROC_PARTITIONS_H
-#define DEEPIN_INSTALLER_REBORN_SYSINFO_PROC_PARTITIONS_H
+#ifndef INSTALLER_SYSINFO_PROC_PARTITIONS_H
+#define INSTALLER_SYSINFO_PROC_PARTITIONS_H
 
 #include <QList>
 #include <QString>
 
-namespace sysinfo {
+namespace installer {
 
 // Parse /proc/partitions file.
 struct PartitionItem {
@@ -22,6 +22,6 @@ typedef QList<PartitionItem> PartitionItemList;
 
 PartitionItemList ParsePartitionItems();
 
-}  // namespace sysinfo
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_SYSINFO_PROC_PARTITIONS_H
+#endif  // INSTALLER_SYSINFO_PROC_PARTITIONS_H

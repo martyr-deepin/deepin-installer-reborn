@@ -23,7 +23,7 @@
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/subhead_label.h"
 
-namespace ui {
+namespace installer {
 
 SelectLanguageFrame::SelectLanguageFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("select_language_frame"));
@@ -34,9 +34,8 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent) : QFrame(parent) {
 }
 
 void SelectLanguageFrame::autoConf() {
-  const QString locale =
-      service::GetSettingsString(service::kSelectLanguageDefaultLocale);
-  service::WriteLocale(locale);
+  const QString locale = GetSettingsString(kSelectLanguageDefaultLocale);
+  WriteLocale(locale);
 }
 
 void SelectLanguageFrame::initConnections() {
@@ -48,7 +47,7 @@ void SelectLanguageFrame::initConnections() {
 
 void SelectLanguageFrame::initUI() {
   QLabel* logo_label = new QLabel();
-  logo_label->setPixmap(QPixmap(service::GetVendorLogo()));
+  logo_label->setPixmap(QPixmap(GetVendorLogo()));
   QHBoxLayout* logo_layout = new QHBoxLayout();
   logo_layout->setAlignment(Qt::AlignCenter);
   logo_layout->addWidget(logo_label);
@@ -71,8 +70,7 @@ void SelectLanguageFrame::initUI() {
   list_view_->setFixedWidth(400);
 //  LanguageListDelegate* list_delegate = new LanguageListDelegate(this);
 //  list_view_->setItemDelegate(list_delegate);
-  list_view_->setStyleSheet(
-      base::ReadTextFileContent(":/styles/language_list.css"));
+  list_view_->setStyleSheet(ReadTextFileContent(":/styles/language_list.css"));
 
   QHBoxLayout* list_layout = new QHBoxLayout();
   list_layout->setSpacing(0);
@@ -106,7 +104,7 @@ void SelectLanguageFrame::onNextButtonClicked() {
         list_view_->selectionModel()->selectedIndexes();
     if (selected_items.length() == 1) {
       const QString locale = list_model_->locale(selected_items.at(0));
-      service::WriteLocale(locale);
+      WriteLocale(locale);
 
       emit this->finished();
     } else {
@@ -115,4 +113,4 @@ void SelectLanguageFrame::onNextButtonClicked() {
   }
 }
 
-}  // namespace ui
+}  // namespace installer

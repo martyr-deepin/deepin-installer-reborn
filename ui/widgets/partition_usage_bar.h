@@ -2,13 +2,13 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_WIDGETS_PARTITION_USAGE_BAR_H
-#define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_PARTITION_USAGE_BAR_H
+#ifndef INSTALLER_UI_WIDGETS_PARTITION_USAGE_BAR_H
+#define INSTALLER_UI_WIDGETS_PARTITION_USAGE_BAR_H
 
 #include <QFrame>
 class QPaintEvent;
 
-namespace ui {
+namespace installer {
 
 // Displays partition capacity and used size.
 // Used in SimplePartitionButton.
@@ -26,6 +26,6 @@ class PartitionUsageBar : public QFrame {
   qint64 total_;
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_WIDGETS_PARTITION_USAGE_BAR_H
+#endif  // INSTALLER_UI_WIDGETS_PARTITION_USAGE_BAR_H

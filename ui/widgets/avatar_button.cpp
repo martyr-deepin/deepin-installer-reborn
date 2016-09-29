@@ -4,13 +4,12 @@
 
 #include "ui/widgets/avatar_button.h"
 
-#include <QImage>
 #include <QPainter>
 #include <QPaintEvent>
 
 #include "base/file_util.h"
 
-namespace ui {
+namespace installer {
 
 namespace {
 
@@ -26,7 +25,7 @@ AvatarButton::AvatarButton(const QString& icon, QWidget* parent)
   this->setObjectName(QStringLiteral("avatar_button"));
 
   this->setFixedSize(kIconSize, kIconSize);
-  this->setStyleSheet(base::ReadTextFileContent(":/styles/avatar_button.css"));
+  this->setStyleSheet(ReadTextFileContent(":/styles/avatar_button.css"));
 }
 
 void AvatarButton::updateIcon(const QString& icon) {
@@ -36,7 +35,6 @@ void AvatarButton::updateIcon(const QString& icon) {
 
 void AvatarButton::paintEvent(QPaintEvent* event) {
   Q_UNUSED(event);
-
   QPainter painter(this);
 
   QRect ellipse_rect((width() - kIconSize) / 2, (height() - kIconSize) / 2,
@@ -54,4 +52,4 @@ void AvatarButton::paintEvent(QPaintEvent* event) {
   painter.end();
 }
 
-}  // namespace ui
+}  // namespace installer

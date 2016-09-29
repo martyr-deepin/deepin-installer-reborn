@@ -9,7 +9,7 @@
 
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
-namespace sysinfo {
+namespace installer {
 namespace {
 
 TEST(DevDiskTest, ParseLabelDir) {
@@ -34,4 +34,4 @@ TEST(DevDiskTest, ParseUUIDDir) {
 }
 
 }  // namespace
-}  // namespace sysinfo
+}  // namespace installer

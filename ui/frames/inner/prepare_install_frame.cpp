@@ -5,7 +5,6 @@
 #include "ui/frames/inner/prepare_install_frame.h"
 
 #include <QHBoxLayout>
-#include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
@@ -13,7 +12,7 @@
 #include "ui/widgets/subhead_label.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 PrepareInstallFrame::PrepareInstallFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("prepare_install_frame"));
@@ -68,4 +67,4 @@ void PrepareInstallFrame::initUI() {
   this->setLayout(layout);
 }
 
-}  // namespace ui
+}  // namespace installer

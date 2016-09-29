@@ -2,13 +2,13 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SYSINFO_PROC_MOUNTS_H
-#define DEEPIN_INSTALLER_REBORN_SYSINFO_PROC_MOUNTS_H
+#ifndef INSTALLER_SYSINFO_PROC_MOUNTS_H
+#define INSTALLER_SYSINFO_PROC_MOUNTS_H
 
 #include <QList>
 #include <QString>
 
-namespace sysinfo {
+namespace installer {
 
 struct MountItem {
   QString path;
@@ -24,6 +24,6 @@ typedef QList<MountItem> MountItemList;
 // Parse /proc/mounts file.
 MountItemList ParseMountItems();
 
-}  // namespace sysinfo
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_SYSINFO_PROC_MOUNTS_H
+#endif  // INSTALLER_SYSINFO_PROC_MOUNTS_H

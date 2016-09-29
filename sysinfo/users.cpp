@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-namespace sysinfo {
+namespace installer {
 
 QStringList GetSystemUsers() {
   QStringList users;
@@ -38,4 +38,4 @@ bool HasRootPrivilege() {
   return geteuid() == 0;
 }
 
-}  // namespace sysinfo
+}  // namespace installer

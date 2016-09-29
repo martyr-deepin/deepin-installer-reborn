@@ -2,10 +2,10 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_CONSTS_H
-#define DEEPIN_INSTALLER_REBORN_CONSTS_H
+#ifndef INSTALLER_CONSTS_H
+#define INSTALLER_CONSTS_H
 
-namespace base {
+namespace installer {
 
 // Name of application. This name can be used as folder name.
 const char kAppName[] = "deepin-installer-reborn";
@@ -17,4 +17,4 @@ const char kDomainName[] = "deepin.org";
 
 }
 
-#endif  // DEEPIN_INSTALLER_REBORN_CONSTS_H
+#endif  // INSTALLER_CONSTS_H

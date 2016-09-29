@@ -2,10 +2,10 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SYSINFO_MACHINE_H
-#define DEEPIN_INSTALLER_REBORN_SYSINFO_MACHINE_H
+#ifndef INSTALLER_SYSINFO_MACHINE_H
+#define INSTALLER_SYSINFO_MACHINE_H
 
-namespace sysinfo {
+namespace installer {
 
 enum class MachineArch {
   Alpha,
@@ -23,6 +23,6 @@ enum class MachineArch {
 // Returns current machine architecture.
 MachineArch GetMachineArch();
 
-}  // namespace sysinfo
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_SYSINFO_MACHINE_H
+#endif  // INSTALLER_SYSINFO_MACHINE_H

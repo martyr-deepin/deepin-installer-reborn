@@ -19,7 +19,7 @@
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
     : QFrame(parent),
@@ -130,51 +130,49 @@ void SystemInfoFormFrame::initUI() {
 }
 
 void SystemInfoFormFrame::validateUsername(bool empty_ok) {
-  const sysinfo::ValidateUsernameState state =
-      sysinfo::ValidateUsername(username_edit_->text());
+  const ValidateUsernameState state = ValidateUsername(username_edit_->text());
   switch (state) {
-    case sysinfo::ValidateUsernameState::AlreadyUsedError: {
+    case ValidateUsernameState::AlreadyUsedError: {
       username_edit_->setToolTip(tr("Username is already in use"));
       break;
     }
 
-    case sysinfo::ValidateUsernameState::EmptyError: {
+    case ValidateUsernameState::EmptyError: {
       if (!empty_ok) {
         username_edit_->setToolTip(tr("Username is empty!"));
       }
       break;
     }
 
-    case sysinfo::ValidateUsernameState::FirstCharError: {
+    case ValidateUsernameState::FirstCharError: {
       username_edit_->setToolTip("First character is invalid");
       break;
     }
 
-    case sysinfo::ValidateUsernameState::InvalidCharError: {
+    case ValidateUsernameState::InvalidCharError: {
       username_edit_->setToolTip(tr("Invalid character!"));
       break;
     }
 
-    case sysinfo::ValidateUsernameState::Ok: {
+    case ValidateUsernameState::Ok: {
       username_edit_->setToolTip("");
       break;
     }
 
-    case sysinfo::ValidateUsernameState::TooLongError: {
+    case ValidateUsernameState::TooLongError: {
       username_edit_->setToolTip(tr("User name has too many characters"));
       break;
     }
   }
 
-  is_username_validated_ = (state == sysinfo::ValidateUsernameState::Ok);
+  is_username_validated_ = (state == ValidateUsernameState::Ok);
 }
 
 void SystemInfoFormFrame::validateHostname(bool empty_ok) {
   if (empty_ok) {
-    is_hostname_validated_ =
-        sysinfo::ValidateHostnameTemp(hostname_edit_->text());
+    is_hostname_validated_ = ValidateHostnameTemp(hostname_edit_->text());
   } else {
-    is_hostname_validated_ = sysinfo::ValidateHostname(hostname_edit_->text());
+    is_hostname_validated_ = ValidateHostname(hostname_edit_->text());
   }
   if (!is_hostname_validated_) {
     hostname_edit_->setToolTip(tr("Invalid hostname!"));
@@ -194,9 +192,9 @@ void SystemInfoFormFrame::validatePassword2(bool empty_ok) {
 void SystemInfoFormFrame::onNextButtonClicked() {
   if (is_username_validated_ && is_hostname_validated_ &&
       is_password_validated_ && is_password2_validated_) {
-    service::WriteUsername(username_edit_->text());
-    service::WriteHostname(hostname_edit_->text());
-    service::WritePassword(password_edit_->text());
+    WriteUsername(username_edit_->text());
+    WriteHostname(hostname_edit_->text());
+    WritePassword(password_edit_->text());
 
     emit this->finished();
   } else {
@@ -230,4 +228,4 @@ void SystemInfoFormFrame::onPassword2Changed() {
   validatePassword2(true);
 }
 
-}  // namespace ui
+}  // namespace installer

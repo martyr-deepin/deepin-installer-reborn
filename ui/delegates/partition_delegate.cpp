@@ -12,7 +12,7 @@
 #include "service/settings_name.h"
 #include "service/signal_manager.h"
 
-namespace ui {
+namespace installer {
 
 namespace {
 
@@ -22,7 +22,7 @@ const char kMountPointUnused[] = "unused";
 
 PartitionDelegate::PartitionDelegate(QObject* parent)
     : QObject(parent),
-      partition_manager_(new partman::PartitionManager()),
+      partition_manager_(new PartitionManager()),
       partition_thread_(new QThread()),
       devices_(),
       real_devices_(),
@@ -38,7 +38,7 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
   this->initConnections();
 
   // If auto-part is not set, scan devices right now.
-  if (!service::GetSettingsBool(service::kPartitionDoAutoPart)) {
+  if (!GetSettingsBool(kPartitionDoAutoPart)) {
     emit partition_manager_->refreshDevices();
   }
 }
@@ -55,21 +55,21 @@ PartitionDelegate::~PartitionDelegate() {
 }
 
 void PartitionDelegate::autoConf() {
-  const QString script_path = service::GetAutoPartFile();
+  const QString script_path = GetAutoPartFile();
   emit partition_manager_->autoPart(script_path);
 }
 
-PartitionType PartitionDelegate::getPartitionType(
-    const partman::Partition& partition) const {
+SupportedPartitionType PartitionDelegate::getPartitionType(
+    const Partition& partition) const {
   // TODO(xushaohua): Check partition layout.
   Q_UNUSED(partition);
-  return PartitionType::PrimaryOnly;
+  return SupportedPartitionType::PrimaryOnly;
 }
 
 const QStringList& PartitionDelegate::getMountPoints() {
   if (all_mount_points_.isEmpty()) {
     // Read available mount points.
-    QString name = service::GetSettingsString(service::kPartitionMountPoints);
+    QString name = GetSettingsString(kPartitionMountPoints);
     Q_ASSERT(!name.isEmpty());
     if (name == kMountPointUnused) {
       name = "";
@@ -87,31 +87,30 @@ void PartitionDelegate::useMountPoint(const QString& mount_point) {
   unused_mount_points_.removeOne(mount_point);
 }
 
-const partman::FsTypeList& PartitionDelegate::getFsTypes() {
+const FsTypeList& PartitionDelegate::getFsTypes() {
   if (fs_types_.isEmpty()) {
-    const QString name =
-        service::GetSettingsString(service::kPartitionSupportedFs);
+    const QString name = GetSettingsString(kPartitionSupportedFs);
     Q_ASSERT(!name.isEmpty());
     const QStringList fs_names = name.split(';');
     for (const QString& fs_name : fs_names) {
-      partman::FsType type = partman::GetFsTypeByName(fs_name);
+      FsType type = GetFsTypeByName(fs_name);
       fs_types_.append(type);
     }
   }
   return fs_types_;
 }
 
-void PartitionDelegate::createPartition(const partman::Partition& partition,
+void PartitionDelegate::createPartition(const Partition& partition,
                                         bool is_primary,
                                         bool align_start,
-                                        partman::FsType fs_type,
+                                        FsType fs_type,
                                         const QString& mount_point,
                                         qint64 total_sectors) {
-  partman::Partition new_partition;
+  Partition new_partition;
   new_partition.device_path = partition.device_path;
   new_partition.path = partition.path;
   new_partition.sector_size = partition.sector_size;
-  new_partition.status = partman::PartitionStatus::New;
+  new_partition.status = PartitionStatus::New;
 
   // TODO(xushaohua): Calculate 1Mib MBR space.
   if (align_start) {
@@ -127,53 +126,50 @@ void PartitionDelegate::createPartition(const partman::Partition& partition,
         partition.sector_start;
   }
 
-  new_partition.type = is_primary ? partman::PartitionType::Primary :
-                                    partman::PartitionType::Logical;
+  new_partition.type = is_primary ? PartitionType::Primary :
+                                    PartitionType::Logical;
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
-  partman::Operation operation(partman::OperationType::Create, partition,
-                               new_partition);
+  Operation operation(OperationType::Create, partition, new_partition);
   operations_.append(operation);
   refreshVisual();
 }
 
-void PartitionDelegate::deletePartition(const partman::Partition& partition) {
-  partman::Partition new_partition(partition);
-  new_partition.type = partman::PartitionType::Unallocated;
+void PartitionDelegate::deletePartition(const Partition& partition) {
+  Partition new_partition(partition);
+  new_partition.type = PartitionType::Unallocated;
   new_partition.freespace = new_partition.length;
-  new_partition.fs = partman::FsType::Empty;
-  if (partition.status == partman::PartitionStatus::New) {
+  new_partition.fs = FsType::Empty;
+  if (partition.status == PartitionStatus::New) {
     // Merge operations here.
   }
 
-  partman::Operation operation(partman::OperationType::Delete, partition,
+  Operation operation(OperationType::Delete, partition,
                                new_partition);
   operations_.append(operation);
   this->refreshVisual();
 }
 
-void PartitionDelegate::formatPartition(const partman::Partition& partition,
-                                        partman::FsType fs_type,
+void PartitionDelegate::formatPartition(const Partition& partition,
+                                        FsType fs_type,
                                         const QString& mount_point) {
   qDebug() << "formatPartition()" << partition.path << mount_point;
-  partman::Partition new_partition(partition);
+  Partition new_partition(partition);
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
-  new_partition.status = partman::PartitionStatus::Formatted;
-  partman::Operation operation(partman::OperationType::Format, partition,
-                               new_partition);
+  new_partition.status = PartitionStatus::Formatted;
+  Operation operation(OperationType::Format, partition, new_partition);
   operations_.append(operation);
 }
 
-void PartitionDelegate::updateMountPoint(const partman::Partition& partition,
+void PartitionDelegate::updateMountPoint(const Partition& partition,
                                          const QString& mount_point) {
   qDebug() << "PartitionDelegate::updateMountPoint()" << partition.path
            << mount_point;
-  partman::Partition partition_new(partition);
+  Partition partition_new(partition);
   partition_new.mount_point = mount_point;
   // No need to update partition status.
-  partman::Operation operation(partman::OperationType::MountPoint, partition,
-                               partition_new);
+  Operation operation(OperationType::MountPoint, partition, partition_new);
   operations_.append(operation);
   this->refreshVisual();
 }
@@ -183,20 +179,20 @@ void PartitionDelegate::doManualPart() {
 }
 
 void PartitionDelegate::initConnections() {
-  service::SignalManager* signal_manager = service::SignalManager::instance();
-  connect(partition_manager_, &partman::PartitionManager::autoPartDone,
-          signal_manager, &service::SignalManager::autoPartDone);
-  connect(partition_manager_, &partman::PartitionManager::manualPartDone,
+  SignalManager* signal_manager = SignalManager::instance();
+  connect(partition_manager_, &PartitionManager::autoPartDone,
+          signal_manager, &SignalManager::autoPartDone);
+  connect(partition_manager_, &PartitionManager::manualPartDone,
           this, &PartitionDelegate::onManualPartDone);
 
-  connect(partition_manager_, &partman::PartitionManager::devicesRefreshed,
+  connect(partition_manager_, &PartitionManager::devicesRefreshed,
           this, &PartitionDelegate::onDevicesRefreshed);
 }
 
 void PartitionDelegate::refreshVisual() {
   this->devices_ = this->real_devices_;
-  for (partman::Device& device : this->devices_) {
-    for (partman::Operation& operation : operations_) {
+  for (Device& device : this->devices_) {
+    for (Operation& operation : operations_) {
       if (operation.partition_orig.device_path == device.path) {
         operation.applyToVisual(device.partitions);
       }
@@ -205,14 +201,14 @@ void PartitionDelegate::refreshVisual() {
   emit this->deviceRefreshed();
 }
 
-void PartitionDelegate::onDevicesRefreshed(const partman::DeviceList& devices) {
+void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   this->real_devices_ = devices;
   this->devices_ = devices;
-  for (partman::Device& device : devices_) {
-    partman::PartitionList new_partitions;
-    for (const partman::Partition& partition : device.partitions) {
+  for (Device& device : devices_) {
+    PartitionList new_partitions;
+    for (const Partition& partition : device.partitions) {
       // Filters freespace partition based on size.
-      if (partition.type == partman::PartitionType::Unallocated &&
+      if (partition.type == PartitionType::Unallocated &&
           partition.getByteLength() < kMinimumPartitionSizeToDisplay) {
         continue;
       }
@@ -237,10 +233,10 @@ void PartitionDelegate::onManualPartDone(
       mount_points += QString("%1=%2;").arg(item.first, item.second);
     }
     // TODO(xushaohua): Remove the last semicolon.
-    service::WritePartitionInfo(root_path, mount_points);
+    WritePartitionInfo(root_path, mount_points);
   }
 
-  emit service::SignalManager::instance()->manualPartDone(ok);
+  emit SignalManager::instance()->manualPartDone(ok);
 }
 
-}  // namespace ui
+}  // namespace installer

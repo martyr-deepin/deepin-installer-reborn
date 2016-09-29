@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SYSINFO_TIMEZONE_H
-#define DEEPIN_INSTALLER_REBORN_SYSINFO_TIMEZONE_H
+#ifndef INSTALLER_SYSINFO_TIMEZONE_H
+#define INSTALLER_SYSINFO_TIMEZONE_H
 
 #include <QStringList>
 
-namespace sysinfo {
+namespace installer {
 
 // Read available timezone info in zone.tab file.
 QStringList GetZoneInfo();
@@ -24,6 +24,6 @@ QString GetTimezoneName(const QString& timezone);
 // Validate |timezone|.
 bool IsValidTimezone(const QString& timezone);
 
-}  // namespace sysinfo
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_SYSINFO_TIMEZONE_H
+#endif  // INSTALLER_SYSINFO_TIMEZONE_H

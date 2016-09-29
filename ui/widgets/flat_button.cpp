@@ -7,12 +7,11 @@
 #include "base/file_util.h"
 #include "ui/utils/xutil.h"
 
-namespace ui {
+namespace installer {
 
 FlatButton::FlatButton(QWidget* parent) : QPushButton(parent) {
   this->setFlat(true);
-  this->setStyleSheet(
-      base::ReadTextFileContent(QStringLiteral(":/styles/flat_button.css")));
+  this->setStyleSheet(ReadTextFileContent(":/styles/flat_button.css"));
 }
 
 FlatButton::FlatButton(const QString& text, QWidget* parent)
@@ -30,4 +29,4 @@ void FlatButton::leaveEvent(QEvent* event) {
   QPushButton::leaveEvent(event);
 }
 
-}  // namespace ui
+}  // namespace installer

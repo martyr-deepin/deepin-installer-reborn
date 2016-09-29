@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_STRUCTS_H
-#define DEEPIN_INSTALLER_REBORN_PARTMAN_STRUCTS_H
+#ifndef INSTALLER_PARTMAN_STRUCTS_H
+#define INSTALLER_PARTMAN_STRUCTS_H
 
 #include <QtGlobal>
 
@@ -19,7 +19,7 @@ const qint64 kExbiByte = kPebiByte * kKibiByte;
 const char kMountPointRoot[] = "/";
 const char kMountPointBoot[] = "/boot";
 
-namespace partman {
+namespace installer {
 
 // This header file defines commonly used types and struct type in partman
 // module.
@@ -43,6 +43,6 @@ enum class PartitionTableType {
 const char kPartitionTableGPT[] = "gpt";
 const char kPartitionTableMsDos[] = "msdos";
 
-}  // namespace partman
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_STRUCTS_H
+#endif  // INSTALLER_PARTMAN_STRUCTS_H

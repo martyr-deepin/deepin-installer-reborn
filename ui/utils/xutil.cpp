@@ -32,8 +32,7 @@
 #define _NET_WM_STATE_ADD           1    /* add/set property */
 #define _NET_WM_STATE_TOGGLE        2    /* toggle property  */
 
-namespace ui {
-
+namespace installer {
 namespace {
 
 const char kAtomNameHidden[] = "_NET_WM_STATE_HIDDEN";
@@ -520,4 +519,4 @@ void SimulateMotionEvent(int x, int y) {
 }
 
 }  // namespace utils
-}  // namespace ui
+}  // namespace installer

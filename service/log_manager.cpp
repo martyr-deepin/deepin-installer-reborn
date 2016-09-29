@@ -18,7 +18,7 @@
 #include "third_party/CuteLogger/CuteLogger/FileAppender.h"
 #include "third_party/CuteLogger/CuteLogger/Logger.h"
 
-namespace service {
+namespace installer {
 
 namespace {
 
@@ -83,7 +83,7 @@ void MessageOutput(QtMsgType type, const QMessageLogContext& context,
 }  // namespace
 
 QString GetLogFilepath() {
-  if (sysinfo::HasRootPrivilege()) {
+  if (HasRootPrivilege()) {
     return QString("/var/log/%1").arg(kLogFileName);
   }
 
@@ -139,4 +139,4 @@ void ShutdownLogService() {
   }
 }
 
-}  // namespace service
+}  // namespace installer

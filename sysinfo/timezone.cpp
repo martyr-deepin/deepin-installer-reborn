@@ -9,13 +9,13 @@
 
 #include "base/file_util.h"
 
-namespace sysinfo {
+namespace installer {
 
 QStringList GetZoneInfo() {
   QStringList result;
   QFile file(QStringLiteral("/usr/share/zoneinfo/zone.tab"));
   if (!file.exists() || !file.open(QIODevice::ReadOnly)) {
-    qWarning() << "[base]::GetZoneInfo() Failed to open zone.tab!";
+    qWarning() << "GetZoneInfo() Failed to open zone.tab!";
     return result;
   }
 
@@ -36,8 +36,7 @@ QStringList GetZoneInfo() {
 }
 
 QString GetCurrentTimezone() {
-  const QString content =
-      base::ReadTextFileContent(QStringLiteral("/etc/timezone"));
+  const QString content = ReadTextFileContent("/etc/timezone");
   return content.trimmed();
 }
 
@@ -60,4 +59,4 @@ bool IsValidTimezone(const QString& timezone) {
   return timezones.contains(timezone);
 }
 
-}  // namespace sysinfo
+}  // namespace installer

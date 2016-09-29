@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_SYSTEM_INFO_FORM_FRAME_H
-#define DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_SYSTEM_INFO_FORM_FRAME_H
+#ifndef INSTALLER_UI_FRAMES_INNER_SYSTEM_INFO_FORM_FRAME_H
+#define INSTALLER_UI_FRAMES_INNER_SYSTEM_INFO_FORM_FRAME_H
 
 #include <QFrame>
 
-namespace ui {
+namespace installer {
 
 class AvatarButton;
 class IconButton;
@@ -69,6 +69,6 @@ class SystemInfoFormFrame : public QFrame {
   void onPassword2Changed();
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_FRAMES_INNER_SYSTEM_INFO_FORM_FRAME_H
+#endif  // INSTALLER_UI_FRAMES_INNER_SYSTEM_INFO_FORM_FRAME_H

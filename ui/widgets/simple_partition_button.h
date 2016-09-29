@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_WIDGETS_SIMPLE_PARTITION_BUTTON_H
-#define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_SIMPLE_PARTITION_BUTTON_H
+#ifndef INSTALLER_UI_WIDGETS_SIMPLE_PARTITION_BUTTON_H
+#define INSTALLER_UI_WIDGETS_SIMPLE_PARTITION_BUTTON_H
 
 #include "ui/widgets/flat_button.h"
 
@@ -11,20 +11,19 @@ class QLabel;
 
 #include "partman/partition.h"
 
-namespace ui {
+namespace installer {
 
 class SimplePartitionButton : public FlatButton {
   Q_OBJECT
 
  public:
-  SimplePartitionButton(const partman::Partition& partition,
-                        QWidget* parent = nullptr);
+  SimplePartitionButton(const Partition& partition, QWidget* parent = nullptr);
 
  private:
   void initConnections();
   void initUI();
 
-  const partman::Partition& partition_;
+  const Partition& partition_;
 
   QLabel* fs_label_ = nullptr;
 
@@ -32,6 +31,6 @@ class SimplePartitionButton : public FlatButton {
   void onButtonToggled();
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_WIDGETS_SIMPLE_PARTITION_BUTTON_H
+#endif  // INSTALLER_UI_WIDGETS_SIMPLE_PARTITION_BUTTON_H

@@ -2,14 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SETTINGS_MANAGER_H
-#define DEEPIN_INSTALLER_REBORN_SETTINGS_MANAGER_H
+#ifndef INSTALLER_SETTINGS_MANAGER_H
+#define INSTALLER_SETTINGS_MANAGER_H
 
 #include <QString>
 #include <QStringList>
 #include <QVariant>
 
-namespace service {
+namespace installer {
 
 // Read settings value from ini file.
 
@@ -66,6 +66,6 @@ void WritePartitionInfo(const QString& root, const QString& mount_points);
 // This file is accessed in hook scripts.
 void SaveOemConfig();
 
-}  // namespace service
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_SETTINGS_MANAGER_H
+#endif  // INSTALLER_SETTINGS_MANAGER_H

@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_DELEGATES_PARTITION_DELEGATE_H
-#define DEEPIN_INSTALLER_REBORN_UI_DELEGATES_PARTITION_DELEGATE_H
+#ifndef INSTALLER_UI_DELEGATES_PARTITION_DELEGATE_H
+#define INSTALLER_UI_DELEGATES_PARTITION_DELEGATE_H
 
 #include <QList>
 #include <QObject>
@@ -12,16 +12,14 @@ class QThread;
 #include "partman/device.h"
 #include "partman/operation.h"
 
-namespace partman {
-class PartitionManager;
-}  // namespace partman
+namespace installer {
 
-namespace ui {
+class PartitionManager;
 
 // If partition size is less than this value, hide it from partition list.
 const qint64 kMinimumPartitionSizeToDisplay = 10 * kMebiByte;
 
-enum class PartitionType {
+enum class SupportedPartitionType {
   PrimaryOnly,
   LogicalOnly,
   PrimaryOrLogical,
@@ -39,10 +37,10 @@ class PartitionDelegate : public QObject {
   // Notify PartitionManager to do auto-part
   void autoConf();
 
-  const partman::DeviceList& devices() const { return devices_; }
+  const DeviceList& devices() const { return devices_; }
 
   // Get alternative partition type.
-  PartitionType getPartitionType(const partman::Partition& partition) const;
+  SupportedPartitionType getPartitionType(const Partition& partition) const;
 
   // Get mount point based on fs type.
   const QStringList& getMountPoints();
@@ -50,25 +48,24 @@ class PartitionDelegate : public QObject {
   void useMountPoint(const QString& mount_point);
 
   // Get all supported fs type.
-  const partman::FsTypeList& getFsTypes();
+  const FsTypeList& getFsTypes();
 
   // Operation helpers.
   // Create a new partition.
-  void createPartition(const partman::Partition& partition,
+  void createPartition(const Partition& partition,
                        bool is_primary,
                        bool align_start,
-                       partman::FsType fs_type,
+                       FsType fs_type,
                        const QString& mount_point,
                        qint64 total_sectors);
   // Delete a |partition|.
-  void deletePartition(const partman::Partition& partition);
+  void deletePartition(const Partition& partition);
   // Format a partition |partition|.
-  void formatPartition(const partman::Partition& partition,
-                       partman::FsType fs_type,
+  void formatPartition(const Partition& partition,
+                       FsType fs_type,
                        const QString& mount_point);
   // Change mount point of |partition|.
-  void updateMountPoint(const partman::Partition& partition,
-                        const QString& mount_point);
+  void updateMountPoint(const Partition& partition, const QString& mount_point);
 
  signals:
   // Emitted after scanning local disk devices.
@@ -84,26 +81,26 @@ class PartitionDelegate : public QObject {
   void initConnections();
   void refreshVisual();
 
-  partman::PartitionManager* partition_manager_ = nullptr;
+  PartitionManager* partition_manager_ = nullptr;
   QThread* partition_thread_ = nullptr;
 
   // device list which are managed by this delegate.
-  partman::DeviceList devices_;
+  DeviceList devices_;
   // Physical device list.
-  partman::DeviceList real_devices_;
+  DeviceList real_devices_;
 
-  partman::OperationList operations_;
+  OperationList operations_;
 
   QStringList all_mount_points_;
   QStringList unused_mount_points_;
-  partman::FsTypeList fs_types_;
+  FsTypeList fs_types_;
 
  private slots:
-  void onDevicesRefreshed(const partman::DeviceList& devices);
+  void onDevicesRefreshed(const DeviceList& devices);
   void onManualPartDone(bool ok,
                         const QList<QPair<QString, QString>>& mount_point_pair);
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_DELEGATES_PARTITION_DELEGATE_H
+#endif  // INSTALLER_UI_DELEGATES_PARTITION_DELEGATE_H

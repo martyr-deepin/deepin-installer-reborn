@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_FRAMES_VIRTUAL_MACHINE_FRAME_H
-#define DEEPIN_INSTALLER_REBORN_UI_FRAMES_VIRTUAL_MACHINE_FRAME_H
+#ifndef INSTALLER_UI_FRAMES_VIRTUAL_MACHINE_FRAME_H
+#define INSTALLER_UI_FRAMES_VIRTUAL_MACHINE_FRAME_H
 
 #include <QFrame>
 
-namespace ui {
+namespace installer {
 
 // This page is displayed when system is running in a virtual machine.
 class VirtualMachineFrame : public QFrame {
@@ -24,6 +24,6 @@ class VirtualMachineFrame : public QFrame {
   void initUI();
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_FRAMES_VIRTUAL_MACHINE_FRAME_H
+#endif  // INSTALLER_UI_FRAMES_VIRTUAL_MACHINE_FRAME_H

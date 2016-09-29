@@ -5,14 +5,13 @@
 #include "ui/frames/confirm_quit_frame.h"
 
 #include <QHBoxLayout>
-#include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 ConfirmQuitFrame::ConfirmQuitFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("confirm_quit_frame"));
@@ -56,4 +55,4 @@ void ConfirmQuitFrame::initUI() {
           this, &ConfirmQuitFrame::quitConfirmed);
 }
 
-}  // namespace ui
+}  // namespace installer

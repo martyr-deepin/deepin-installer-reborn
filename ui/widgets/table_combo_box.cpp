@@ -6,13 +6,12 @@
 
 #include "base/file_util.h"
 
-namespace ui {
+namespace installer {
 
 TableComboBox::TableComboBox(QWidget* parent) : QComboBox(parent) {
   this->setObjectName(QStringLiteral("table_combo_box"));
 
-  this->setStyleSheet(
-      base::ReadTextFileContent(":/styles/table_combo_box.css"));
+  this->setStyleSheet(ReadTextFileContent(":/styles/table_combo_box.css"));
 }
 
-}  // namespace ui
+}  // namespace installer

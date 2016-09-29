@@ -8,170 +8,160 @@
 
 #include "base/command.h"
 
-namespace partman {
+namespace installer {
 namespace {
 
 bool FormatBtrfs(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.btrfs", {"-f", path});
+    return SpawnCmd("mkfs.btrfs", {"-f", path});
   } else {
     // Truncate label size.
     const QString real_label = label.left(255);
-    return base::SpawnCmd("mkfs.btrfs",
-                          {"-f", QString("-L%1").arg(real_label), path});
+    return SpawnCmd("mkfs.btrfs",
+                    {"-f", QString("-L%1").arg(real_label), path});
   }
 }
 
 bool FormatExt2(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.ext2", {"-F", path});
+    return SpawnCmd("mkfs.ext2", {"-F", path});
   } else {
     const QString real_label = label.left(16);
-    return base::SpawnCmd("mkfs.ext2",
-                          {"-F", QString("-L%1").arg(real_label), path});
+    return SpawnCmd("mkfs.ext2", {"-F", QString("-L%1").arg(real_label), path});
   }
 }
 
 bool FormatExt3(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.ext3", {"-F", path});
+    return SpawnCmd("mkfs.ext3", {"-F", path});
   } else {
     const QString real_label = label.left(16);
-    return base::SpawnCmd("mkfs.ext3",
-                          {"-F", QString("-L%1").arg(real_label), path});
+    return SpawnCmd("mkfs.ext3", {"-F", QString("-L%1").arg(real_label), path});
   }
 }
 
 bool FormatExt4(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.ext4", {"-F", path});
+    return SpawnCmd("mkfs.ext4", {"-F", path});
   } else {
     const QString real_label = label.left(16);
-    return base::SpawnCmd("mkfs.ext4",
-                          {"-F", QString("-L%1").arg(real_label), path});
+    return SpawnCmd("mkfs.ext4", {"-F", QString("-L%1").arg(real_label), path});
   }
 }
 
 bool FormatF2fs(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.f2fs", {path});
+    return SpawnCmd("mkfs.f2fs", {path});
   } else {
     const QString real_label = label.left(19);
-    return base::SpawnCmd("mkfs.f2fs", {QString("-l%1").arg(real_label), path});
+    return SpawnCmd("mkfs.f2fs", {QString("-l%1").arg(real_label), path});
   }
 }
 
 bool FormatFat16(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.msdos", {"-F16", "-v", "-I", path});
+    return SpawnCmd("mkfs.msdos", {"-F16", "-v", "-I", path});
   } else {
     const QString real_label = label.left(11);
-    return base::SpawnCmd("mkfs.msdos",
-                          {"-F16", "-v", "-I",
-                           QString("-n%1").arg(real_label), path});
+    return SpawnCmd("mkfs.msdos",
+                    {"-F16", "-v", "-I",
+                     QString("-n%1").arg(real_label), path});
   }
 }
 
 bool FormatFat32(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.msdos", {"-F32", "-v", "-I", path});
+    return SpawnCmd("mkfs.msdos", {"-F32", "-v", "-I", path});
   } else {
     const QString real_label = label.left(11);
-    return base::SpawnCmd("mkfs.msdos",
-                          {"-F32", "-v", "-I",
-                           QString("-n%1").arg(real_label), path});
+    return SpawnCmd("mkfs.msdos",
+                    {"-F32", "-v", "-I",
+                     QString("-n%1").arg(real_label), path});
   }
 }
 
 bool FormatHfs(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("hformat", {path});
+    return SpawnCmd("hformat", {path});
   } else {
     const QString real_label = label.left(27);
-    return base::SpawnCmd("hformat",
-                          {QString("-l%1").arg(real_label), path});
+    return SpawnCmd("hformat", {QString("-l%1").arg(real_label), path});
   }
 }
 
 bool FormatHfsPlus(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.hfsplus", {path});
+    return SpawnCmd("mkfs.hfsplus", {path});
   } else {
     const QString real_label = label.left(63);
-    return base::SpawnCmd("mkfs.hfsplus",
-                          {QString("-v%1").arg(real_label), path});
+    return SpawnCmd("mkfs.hfsplus", {QString("-v%1").arg(real_label), path});
   }
 }
 
 bool FormatJfs(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.jfs", {"-q", path});
+    return SpawnCmd("mkfs.jfs", {"-q", path});
   } else {
     const QString real_label = label.left(11);
-    return base::SpawnCmd("mkfs.jfs",
-                          {"-q", QString("-L%1").arg(real_label), path});
+    return SpawnCmd("mkfs.jfs", {"-q", QString("-L%1").arg(real_label), path});
   }
 }
 
 bool FormatLinuxSwap(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkswap", {path});
+    return SpawnCmd("mkswap", {path});
   } else {
     const QString real_label = label.left(15);
-    return base::SpawnCmd("mkswap", {QString("-L%1").arg(real_label), path});
+    return SpawnCmd("mkswap", {QString("-L%1").arg(real_label), path});
   }
 }
 
 bool FormatNilfs2(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.nilfs2", {path});
+    return SpawnCmd("mkfs.nilfs2", {path});
   } else {
     const QString real_label = label.left(1);
-    return base::SpawnCmd("mkfs.nilfs2",
-                          {QString("-L%1").arg(real_label), path});
+    return SpawnCmd("mkfs.nilfs2", {QString("-L%1").arg(real_label), path});
   }
 }
 
 bool FormatNTFS(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkntfs", {"-Q", "-v", "-F", path});
+    return SpawnCmd("mkntfs", {"-Q", "-v", "-F", path});
   } else {
     const QString real_label = label.left(128);
-    return base::SpawnCmd("mkntfs",
-                          {"-Q", "-v", "-F",
-                           QString("-L%1").arg(real_label), path});
+    return SpawnCmd("mkntfs",
+                    {"-Q", "-v", "-F", QString("-L%1").arg(real_label), path});
   }
 }
 
 bool FormatReiser4(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.reiser4", {"--force", "--yes", path});
+    return SpawnCmd("mkfs.reiser4", {"--force", "--yes", path});
   } else {
     const QString real_label = label.left(16);
-    return base::SpawnCmd("mkfs.reiser4",
-                          {"--force", "--yes",
-                           QString("--label%1").arg(real_label), path});
+    return SpawnCmd("mkfs.reiser4",
+                    {"--force", "--yes",
+                     QString("--label%1").arg(real_label), path});
   }
 }
 
 bool FormatReiserfs(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkreiserfs", {"-f", "-f", path});
+    return SpawnCmd("mkreiserfs", {"-f", "-f", path});
   } else {
     const QString real_label = label.left(16);
-    return base::SpawnCmd("mkreiserfs",
-                          {"-f", "-f", QString("--label%1").arg(real_label),
-                           path});
+    return SpawnCmd("mkreiserfs",
+                    {"-f", "-f", QString("--label%1").arg(real_label), path});
   }
 }
 
 bool FormatXfs(const QString& path, const QString& label) {
   if (label.isEmpty()) {
-    return base::SpawnCmd("mkfs.xfs", {"-f", path});
+    return SpawnCmd("mkfs.xfs", {"-f", path});
   } else {
     const QString real_label = label.left(12);
-    return base::SpawnCmd("mkfs.xfs",
-                          {"-f", QString("-L%1").arg(real_label), path});
+    return SpawnCmd("mkfs.xfs", {"-f", QString("-L%1").arg(real_label), path});
   }
 }
 
@@ -236,4 +226,4 @@ bool Mkfs(const Partition& partition) {
   }
 }
 
-}  // namespace partman
+}  // namespace installer

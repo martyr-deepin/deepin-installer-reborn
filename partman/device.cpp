@@ -4,7 +4,7 @@
 
 #include "partman/device.h"
 
-namespace partman {
+namespace installer {
 
 Device::Device()
     : partitions(),
@@ -22,4 +22,4 @@ Device::Device()
       table(PartitionTableType::Unknown) {
 }
 
-}  // namespace partman
+}  // namespace installer

@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_MISC_OEM_MAIN_WINDOW_H
-#define DEEPIN_INSTALLER_REBORN_MISC_OEM_MAIN_WINDOW_H
+#ifndef INSTALLER_MISC_OEM_MAIN_WINDOW_H
+#define INSTALLER_MISC_OEM_MAIN_WINDOW_H
 
 #include <QFrame>
 #include <QtWidgets/QLineEdit>
@@ -16,6 +16,8 @@ class QLabel;
 class QLineEdit;
 class QPushButton;
 class QSlider;
+
+namespace installer {
 
 class OemWindow : public QFrame {
   Q_OBJECT
@@ -75,5 +77,6 @@ class OemWindow : public QFrame {
   void onGrubDisableWindowsButtonToggled(bool toggle);
 };
 
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_MISC_OEM_MAIN_WINDOW_H
+#endif  // INSTALLER_MISC_OEM_MAIN_WINDOW_H

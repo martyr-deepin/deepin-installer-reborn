@@ -2,18 +2,16 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_FRAMES_INSTALL_PROGRESS_FRAME_H
-#define DEEPIN_INSTALLER_REBORN_UI_FRAMES_INSTALL_PROGRESS_FRAME_H
+#ifndef INSTALLER_UI_FRAMES_INSTALL_PROGRESS_FRAME_H
+#define INSTALLER_UI_FRAMES_INSTALL_PROGRESS_FRAME_H
 
 #include <QFrame>
 class QLabel;
 class QThread;
 
-namespace service {
-class HooksManager;
-}  // namespace service
+namespace installer {
 
-namespace ui {
+class HooksManager;
 
 // Displays when system is being installed to disk.
 // A progress bar is shown at bottom of page.
@@ -44,7 +42,7 @@ class InstallProgressFrame : public QFrame {
 
   bool failed_;
 
-  service::HooksManager* hooks_manager_ = nullptr;
+  HooksManager* hooks_manager_ = nullptr;
   QThread* hooks_manager_thread_ = nullptr;
 
   QLabel* progress_label_ = nullptr;
@@ -56,6 +54,6 @@ class InstallProgressFrame : public QFrame {
   void onPartitionDone(bool ok);
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_FRAMES_INSTALL_PROGRESS_FRAME_H
+#endif  // INSTALLER_UI_FRAMES_INSTALL_PROGRESS_FRAME_H

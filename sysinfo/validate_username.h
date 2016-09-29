@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SYSINFO_VALIDATE_USERNAME_H
-#define DEEPIN_INSTALLER_REBORN_SYSINFO_VALIDATE_USERNAME_H
+#ifndef INSTALLER_SYSINFO_VALIDATE_USERNAME_H
+#define INSTALLER_SYSINFO_VALIDATE_USERNAME_H
 
 #include <QString>
 
-namespace sysinfo {
+namespace installer {
 
 enum class ValidateUsernameState {
   Ok,
@@ -29,6 +29,6 @@ const int kUsernameMaximumLen = 32;
 //   * |username| cannot be used by others or by system.
 ValidateUsernameState ValidateUsername(const QString& username);
 
-}  // namespace sysinfo
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_SYSINFO_VALIDATE_USERNAME_H
+#endif  // INSTALLER_SYSINFO_VALIDATE_USERNAME_H

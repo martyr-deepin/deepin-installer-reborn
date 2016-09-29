@@ -16,6 +16,7 @@
 
 #include "service/system_language.h"
 
+namespace installer {
 namespace {
 
 const int kGrubTimeoutMinimum = 0;
@@ -55,8 +56,8 @@ void OemWindow::initUI() {
   use_default_locale_button_ = new QCheckBox("Use default locale");
   QLabel* default_locale_label = new QLabel("Default locale:");
   default_locale_combo_ = new QComboBox();
-  const service::LanguageList language_list = service::GetLanguageList();
-  for (const service::LanguageItem& language_item : language_list) {
+  const LanguageList language_list = GetLanguageList();
+  for (const LanguageItem& language_item : language_list) {
     default_locale_combo_->addItem(language_item.locale);
   }
   QHBoxLayout* default_locale_layout = new QHBoxLayout();
@@ -180,3 +181,5 @@ void OemWindow::onGrubTimeoutSliderValueChanged(int value) {
 void OemWindow::onGrubDisableWindowsButtonToggled(bool toggle) {
   Q_UNUSED(toggle);
 }
+
+}  // namespace installer

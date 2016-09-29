@@ -9,11 +9,11 @@
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
-  app.setApplicationDisplayName(base::kAppDisplayName);
-  app.setApplicationName(base::kAppName);
-  app.setOrganizationDomain(base::kDomainName);
+  app.setApplicationDisplayName(installer::kAppDisplayName);
+  app.setApplicationName(installer::kAppName);
+  app.setOrganizationDomain(installer::kDomainName);
 
-  OemWindow oem_window;
+  installer::OemWindow oem_window;
   oem_window.show();
 
   return app.exec();

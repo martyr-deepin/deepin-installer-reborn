@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_FRAMES_DISK_SPACE_INSUFFICIENT_FRAME_H
-#define DEEPIN_INSTALLER_REBORN_UI_FRAMES_DISK_SPACE_INSUFFICIENT_FRAME_H
+#ifndef INSTALLER_UI_FRAMES_DISK_SPACE_INSUFFICIENT_FRAME_H
+#define INSTALLER_UI_FRAMES_DISK_SPACE_INSUFFICIENT_FRAME_H
 
 #include <QFrame>
 
-namespace ui {
+namespace installer {
 
 // This frame is displayed when no enough disk space is detected.
 class DiskSpaceInsufficientFrame : public QFrame {
@@ -24,6 +24,6 @@ class DiskSpaceInsufficientFrame : public QFrame {
   void initUI();
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_FRAMES_DISK_SPACE_INSUFFICIENT_FRAME_H
+#endif  // INSTALLER_UI_FRAMES_DISK_SPACE_INSUFFICIENT_FRAME_H

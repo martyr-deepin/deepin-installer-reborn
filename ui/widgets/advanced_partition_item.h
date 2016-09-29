@@ -2,41 +2,41 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H
-#define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H
+#ifndef INSTALLER_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H
+#define INSTALLER_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H
 
 #include "ui/widgets/flat_button.h"
 class QLabel;
 
-#include "ui/delegates/partition_delegate.h"
+#include "partman/partition.h"
 
-namespace ui {
+namespace installer {
 
 class AdvancedPartitionItem : public FlatButton {
   Q_OBJECT
 
  public:
-  AdvancedPartitionItem(const partman::Partition& partition,
+  AdvancedPartitionItem(const Partition& partition,
                         QWidget* parent = nullptr);
 
   void setEditable(bool editable);
 
  signals:
   // Emitted when delete partition button is clicked.
-  void deletePartitionTriggered(const partman::Partition& partition);
+  void deletePartitionTriggered(const Partition& partition);
 
   // Emitted when edit-partition button is clicked.
-  void editPartitionTriggered(const partman::Partition& partition);
+  void editPartitionTriggered(const Partition& partition);
 
   // Emitted when edit-partition button is clicked and type of current
   // partition is Unallocated.
-  void newPartitionTriggered(const partman::Partition& partition);
+  void newPartitionTriggered(const Partition& partition);
 
  private:
   void initConnections();
   void initUI();
 
-  const partman::Partition& partition_;
+  const Partition& partition_;
 
   QLabel* partition_label_ = nullptr;
   QLabel* partition_path_label_ = nullptr;
@@ -64,6 +64,6 @@ class AdvancedPartitionItem : public FlatButton {
   void onToggled();
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H
+#endif  // INSTALLER_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H

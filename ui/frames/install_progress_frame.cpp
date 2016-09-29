@@ -8,7 +8,6 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QThread>
-#include <QVBoxLayout>
 
 #include "service/hooks_manager.h"
 #include "service/signal_manager.h"
@@ -16,12 +15,12 @@
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 InstallProgressFrame::InstallProgressFrame(QWidget* parent)
     : QFrame(parent),
       failed_(false),
-      hooks_manager_(new service::HooksManager()),
+      hooks_manager_(new HooksManager()),
       hooks_manager_thread_(new QThread()) {
   this->setObjectName(QStringLiteral("install_progress_frame"));
 
@@ -46,17 +45,17 @@ InstallProgressFrame::~InstallProgressFrame() {
 }
 
 void InstallProgressFrame::initConnections() {
-  connect(hooks_manager_, &service::HooksManager::errorOccurred,
+  connect(hooks_manager_, &HooksManager::errorOccurred,
           this, &InstallProgressFrame::onErrorOccurred);
-  connect(hooks_manager_, &service::HooksManager::processUpdate,
+  connect(hooks_manager_, &HooksManager::processUpdate,
           this, &InstallProgressFrame::onInstallProgressUpdated);
-  connect(hooks_manager_, &service::HooksManager::finished,
+  connect(hooks_manager_, &HooksManager::finished,
           this, &InstallProgressFrame::finished);
 
-  service::SignalManager* signal_manager = service::SignalManager::instance();
-  connect(signal_manager, &service::SignalManager::autoPartDone,
+  SignalManager* signal_manager = SignalManager::instance();
+  connect(signal_manager, &SignalManager::autoPartDone,
           this, &InstallProgressFrame::onPartitionDone);
-  connect(signal_manager, &service::SignalManager::manualPartDone,
+  connect(signal_manager, &SignalManager::manualPartDone,
           this, &InstallProgressFrame::onPartitionDone);
 }
 
@@ -104,7 +103,7 @@ void InstallProgressFrame::onPartitionDone(bool ok) {
 
   if (ok) {
     // Partition operations take 5% progress.
-    onInstallProgressUpdated(service::kBeforeChrootStartVal);
+    onInstallProgressUpdated(kBeforeChrootStartVal);
 
     qDebug() << "emit runHooks() signal";
     // Run hooks/ in background thread.
@@ -114,4 +113,4 @@ void InstallProgressFrame::onPartitionDone(bool ok) {
   }
 }
 
-}  // namespace ui
+}  // namespace installer

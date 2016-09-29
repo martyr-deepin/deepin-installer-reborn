@@ -13,16 +13,16 @@
 #include "partman/structs.h"
 #include "sysinfo/proc_partitions.h"
 
-namespace partman {
+namespace installer {
 
 bool IsEfiEnabled() {
   return QDir(QStringLiteral("/sys/firmware/efi")).exists();
 }
 
 qint64 GetMaximumDeviceSize() {
-  const sysinfo::PartitionItemList list = sysinfo::ParsePartitionItems();
+  const PartitionItemList list = ParsePartitionItems();
   qint64 result = 0;
-  for (const sysinfo::PartitionItem item : list) {
+  for (const PartitionItem item : list) {
     result = qMax(result, item.blocks);
   }
   return result;
@@ -49,4 +49,4 @@ PartitionTableType GetPrimaryDiskPartitionTable() {
   return PartitionTableType::Others;
 }
 
-}  // namespace partman
+}  // namespace installer

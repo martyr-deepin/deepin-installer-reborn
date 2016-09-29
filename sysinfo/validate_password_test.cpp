@@ -6,7 +6,7 @@
 
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
-namespace sysinfo {
+namespace installer {
 namespace {
 
 TEST(ValidatePasswordTest, ValidatePassword) {
@@ -30,4 +30,4 @@ TEST(ValidatePasswordTest, ValidatePassword) {
 }
 
 }  // namespace
-}  // namespace sysinfo
+}  // namespace installer

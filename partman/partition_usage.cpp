@@ -6,7 +6,6 @@
 
 #include <QDebug>
 #include <QProcess>
-#include <QRegExp>
 
 #include "base/command.h"
 #include "base/string_util.h"
@@ -14,12 +13,12 @@
 #include "partman/structs.h"
 #include "sysinfo/proc_swaps.h"
 
-namespace partman {
+namespace installer {
 
 namespace {
 
 qint64 ParseBtrfsUnit(const QString& value) {
-  const float pref = base::RegexpLabel("^(\\d+\\.?\\d+)", value).toFloat();
+  const float pref = RegexpLabel("^(\\d+\\.?\\d+)", value).toFloat();
   if (value.contains("KiB")) {
     return static_cast<qint64>(pref * kKibiByte);
   }
@@ -40,15 +39,15 @@ qint64 ParseBtrfsUnit(const QString& value) {
 
 bool ReadBtrfsUsage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
-  if (!base::SpawnCmd("btrfs", {"filesystem", "show", path}, output)) {
+  if (!SpawnCmd("btrfs", {"filesystem", "show", path}, output)) {
     return false;
   }
   QString total_str, used_str;
   for (const QString& line : output.split('\n')) {
     if (line.contains(path)) {
-      total_str = base::RegexpLabel("size\\s*([^\\s]*)\\s", line);
+      total_str = RegexpLabel("size\\s*([^\\s]*)\\s", line);
     } else if (line.contains("Total devices")) {
-      used_str = base::RegexpLabel("used\\s*([^\\s]*)", line);
+      used_str = RegexpLabel("used\\s*([^\\s]*)", line);
     }
   }
 
@@ -59,7 +58,7 @@ bool ReadBtrfsUsage(const QString& path, qint64& freespace, qint64& total) {
 
 bool ReadExt2Usage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
-  if (!base::SpawnCmd("dumpe2fs", {"-h", path}, output)) {
+  if (!SpawnCmd("dumpe2fs", {"-h", path}, output)) {
     return false;
   }
 
@@ -68,17 +67,17 @@ bool ReadExt2Usage(const QString& path, qint64& freespace, qint64& total) {
   qint64 free_blocks = 0;
   for (const QString& line : output.split('\n')) {
     if (line.contains("Block count:")) {
-      const QString m = base::RegexpLabel("Block count:\\s+(\\d+)", line);
+      const QString m = RegexpLabel("Block count:\\s+(\\d+)", line);
       if (!m.isEmpty()) {
         total_blocks = m.toLongLong();
       }
     } else if (line.contains("Free blocks:")) {
-      const QString m = base::RegexpLabel("Free blocks:\\s+(\\d+)", line);
+      const QString m = RegexpLabel("Free blocks:\\s+(\\d+)", line);
       if (!m.isEmpty()) {
         free_blocks = m.toLongLong();
       }
     } else if (line.contains("Block size:")) {
-      const QString m = base::RegexpLabel("Block size:\\s+(\\d+)", line);
+      const QString m = RegexpLabel("Block size:\\s+(\\d+)", line);
       if (!m.isEmpty()) {
         block_size = m.toInt();
       }
@@ -92,7 +91,7 @@ bool ReadExt2Usage(const QString& path, qint64& freespace, qint64& total) {
 
 bool ReadFat16Usage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
-  if (!base::SpawnCmd("dosfsck", {"-n", "-v", path}, output)) {
+  if (!SpawnCmd("dosfsck", {"-n", "-v", path}, output)) {
     return false;
   }
 
@@ -121,7 +120,7 @@ bool ReadFat16Usage(const QString& path, qint64& freespace, qint64& total) {
 bool ReadJfsUsage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
   const QString param(QString("echo dm | jfs_debugfs %1").arg(path));
-  if (!base::SpawnCmd("sh", {"-c", param}, output)) {
+  if (!SpawnCmd("sh", {"-c", param}, output)) {
     return false;
   }
 
@@ -132,10 +131,10 @@ bool ReadJfsUsage(const QString& path, qint64& freespace, qint64& total) {
     if (line.startsWith("Aggregate Block Size:")) {
       block_size = line.split(':').at(1).trimmed().toInt();
     } else if (line.contains("dn_mapsize:")) {
-      const QString item = base::RegexpLabel("dn_mapsize:\\s*([^\\s]+)", line);
+      const QString item = RegexpLabel("dn_mapsize:\\s*([^\\s]+)", line);
       total_blocks = item.toLongLong(nullptr, 16);
     } else if (line.contains("dn_nfree:")) {
-      const QString item = base::RegexpLabel("dn_nfree:\\s*([^\\s]+)", line);
+      const QString item = RegexpLabel("dn_nfree:\\s*([^\\s]+)", line);
       free_blocks = item.toLongLong(nullptr, 16);
     }
   }
@@ -150,9 +149,9 @@ bool ReadJfsUsage(const QString& path, qint64& freespace, qint64& total) {
 }
 
 bool ReadLinuxSwapUsage(const QString& path, qint64& freespace, qint64& total) {
-  const sysinfo::SwapItemList swap_items = sysinfo::ParseSwaps();
+  const SwapItemList swap_items = ParseSwaps();
   // If this swap partition is used, read from /proc/swaps.
-  for (const sysinfo::SwapItem& item : swap_items) {
+  for (const SwapItem& item : swap_items) {
     if (item.filename == path) {
       total = item.size;
       freespace = item.size - item.used;
@@ -168,7 +167,7 @@ bool ReadLinuxSwapUsage(const QString& path, qint64& freespace, qint64& total) {
 
 bool ReadNilfs2Usage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
-  if (!base::SpawnCmd("nilfs-tune", {"-l", path}, output)) {
+  if (!SpawnCmd("nilfs-tune", {"-l", path}, output)) {
     return false;
   }
 
@@ -194,7 +193,7 @@ bool ReadNilfs2Usage(const QString& path, qint64& freespace, qint64& total) {
 
 bool ReadNTFSUsage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
-  if (!base::SpawnCmd("ntfsinfo", {"-mf", path}, output)) {
+  if (!SpawnCmd("ntfsinfo", {"-mf", path}, output)) {
     return false;
   }
   int cluster_size = 0;
@@ -202,18 +201,18 @@ bool ReadNTFSUsage(const QString& path, qint64& freespace, qint64& total) {
   qint64 total_clusters = 0;
   for (const QString& line : output.split('\n')) {
     if (line.contains("Cluster Size:")) {
-      const QString m = base::RegexpLabel("Cluster Size:\\s+(\\d+)", line);
+      const QString m = RegexpLabel("Cluster Size:\\s+(\\d+)", line);
       if (!m.isEmpty()) {
         cluster_size = m.toInt();
       }
     } else if (line.contains("Volume Size in Clusters:")) {
-      const QString m = base::RegexpLabel("Volume Size in Clusters:\\s+(\\d+)",
+      const QString m = RegexpLabel("Volume Size in Clusters:\\s+(\\d+)",
                                           line);
       if (!m.isEmpty()) {
         total_clusters = m.toLongLong();
       }
     } else if (line.contains("Free Clusters:")) {
-      const QString m = base::RegexpLabel("Free Clusters:\\s+(\\d+)", line);
+      const QString m = RegexpLabel("Free Clusters:\\s+(\\d+)", line);
       if (!m.isEmpty()) {
         free_clusters = m.toLongLong();
       }
@@ -231,7 +230,7 @@ bool ReadNTFSUsage(const QString& path, qint64& freespace, qint64& total) {
 
 bool ReadReiser4Usage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
-  if (!base::SpawnCmd("debugfs.reiser4", {"--force", "--yes", path}, output)) {
+  if (!SpawnCmd("debugfs.reiser4", {"--force", "--yes", path}, output)) {
     return false;
   }
 
@@ -259,7 +258,7 @@ bool ReadReiser4Usage(const QString& path, qint64& freespace, qint64& total) {
 
 bool ReadReiserfsUsage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
-  if (!base::SpawnCmd("debugreiserfs", {"-d", path}, output)) {
+  if (!SpawnCmd("debugreiserfs", {"-d", path}, output)) {
     return false;
   }
 
@@ -287,9 +286,7 @@ bool ReadReiserfsUsage(const QString& path, qint64& freespace, qint64& total) {
 
 bool ReadXfsUsage(const QString& path, qint64& freespace, qint64& total) {
   QString output;
-  if (!base::SpawnCmd("xfs_db",
-                      {"-c sb", "-c print", "-r", path},
-                      output)) {
+  if (!SpawnCmd("xfs_db", {"-c sb", "-c print", "-r", path}, output)) {
     return false;
   }
   if (output.isEmpty()) {
@@ -388,4 +385,4 @@ bool ReadUsage(const QString& partition_path,
   return ok;
 }
 
-}  // namespace partman
+}  // namespace installer

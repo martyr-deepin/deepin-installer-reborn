@@ -11,13 +11,12 @@
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 
-namespace service {
+namespace installer {
 
 LanguageList GetLanguageList() {
   LanguageList result;
 
-  const QString content =
-      base::ReadTextFileContent(QStringLiteral(":/resources/languages.json"));
+  const QString content = ReadTextFileContent(":/resources/languages.json");
   const QJsonArray lang_list =
       QJsonDocument::fromJson(content.toUtf8()).array();
   for(const QJsonValue& lang_value : lang_list) {
@@ -33,4 +32,4 @@ LanguageList GetLanguageList() {
   return result;
 }
 
-}  // namespace service
+}  // namespace installer

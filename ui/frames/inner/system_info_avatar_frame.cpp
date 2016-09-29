@@ -19,7 +19,7 @@
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 namespace {
 
@@ -44,14 +44,14 @@ SystemInfoAvatarFrame::SystemInfoAvatarFrame(QWidget* parent)
 }
 
 void SystemInfoAvatarFrame::autoConf() {
-  const QString avatar = service::GetDefaultAvatar();
+  const QString avatar = GetDefaultAvatar();
   if (!IsValidAvatar(avatar)) {
     qWarning() << "autoConf() got invalid avatar: " << avatar;
     return;
   }
 
   emit this->avatarUpdated(avatar);
-  service::WriteAvatar(avatar);
+  WriteAvatar(avatar);
 }
 
 void SystemInfoAvatarFrame::updateTimezone(const QString& timezone) {
@@ -83,7 +83,7 @@ void SystemInfoAvatarFrame::initUI() {
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->addWidget(comment_label);
 
-  chosen_avatar_button_ = new AvatarButton(service::GetDefaultAvatar());
+  chosen_avatar_button_ = new AvatarButton(GetDefaultAvatar());
   QHBoxLayout* chosen_avatar_layout = new QHBoxLayout();
   chosen_avatar_layout->setAlignment(Qt::AlignCenter);
   chosen_avatar_layout->addWidget(chosen_avatar_button_);
@@ -96,7 +96,7 @@ void SystemInfoAvatarFrame::initUI() {
   avatar_wrapper_layout->setAlignment(Qt::AlignCenter);
   avatar_wrapper_layout->addLayout(avatars_layout);
 
-  const QStringList avatars = service::GetAvatars();
+  const QStringList avatars = GetAvatars();
   int row = 0;
   int col = 0;
   for (const QString& avatar : avatars) {
@@ -132,10 +132,10 @@ void SystemInfoAvatarFrame::onAvatarButtonClicked() {
 
   const QString avatar = button->avatar();
   chosen_avatar_button_->updateIcon(avatar);
-  service::WriteAvatar(avatar);
+  WriteAvatar(avatar);
 
   emit this->avatarUpdated(avatar);
   emit this->finished();
 }
 
-}  // namespace ui
+}  // namespace installer

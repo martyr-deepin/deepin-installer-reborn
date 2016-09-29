@@ -6,7 +6,7 @@
 
 #include <QDir>
 
-namespace sysinfo {
+namespace installer {
 
 namespace {
 
@@ -14,8 +14,8 @@ QHash<QString, QString> ParseDevDir(const QString& dir_name) {
   QHash<QString, QString> result;
 
   QDir dir(dir_name);
-  const QFileInfoList items =
-      dir.entryInfoList(QDir::NoDotAndDotDot | QDir::Files);
+  const QFileInfoList items = dir.entryInfoList(QDir::NoDotAndDotDot |
+                                                QDir::Files);
   for (const QFileInfo& info : items) {
     result.insert(info.canonicalFilePath(), info.fileName());
   }
@@ -37,4 +37,4 @@ QHash<QString, QString> ParseUUIDDir() {
   return ParseDevDir("/dev/disk/by-uuid");
 }
 
-}  // namespace sysinfo
+}  // namespace installer

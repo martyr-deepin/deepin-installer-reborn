@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_BASE_COMMAND_H
-#define DEEPIN_INSTALLER_REBORN_BASE_COMMAND_H
+#ifndef INSTALLER_BASE_COMMAND_H
+#define INSTALLER_BASE_COMMAND_H
 
 #include <QStringList>
 
-namespace base {
+namespace installer {
 
 // Run a script file at |filepath|.
 // If |change_working_dir| is true, current working directory is changed to
@@ -18,9 +18,9 @@ bool RunScriptFile(const QString& filepath, bool change_working_dir = true);
 // Run |cmd| with |args| in background and returns its result.
 bool SpawnCmd(const QString& cmd, const QStringList& args);
 bool SpawnCmd(const QString& cmd, const QStringList& args, QString& output);
-bool SpawnCmd(const QString& cmd, const QStringList& args,
-              QString& output, QString& err);
+bool SpawnCmd(const QString& cmd, const QStringList& args, QString& output,
+              QString& err);
 
-}  // namespace base
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_BASE_COMMAND_H
+#endif  // INSTALLER_BASE_COMMAND_H

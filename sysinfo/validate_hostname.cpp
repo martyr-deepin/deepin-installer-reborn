@@ -6,7 +6,7 @@
 
 #include <QRegExp>
 
-namespace sysinfo {
+namespace installer {
 
 bool ValidateHostname(const QString& hostname) {
   if (hostname.isEmpty()) {
@@ -23,4 +23,4 @@ bool ValidateHostnameTemp(const QString& hostname) {
   return reg.exactMatch(hostname);
 }
 
-}  // namespace sysinfo
+}  // namespace installer

@@ -5,14 +5,13 @@
 #include "ui/frames/inner/select_bootloader_frame.h"
 
 #include <QHBoxLayout>
-#include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 SelectBootloaderFrame::SelectBootloaderFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("select_bootloader_frame"));
@@ -53,4 +52,4 @@ void SelectBootloaderFrame::initUI() {
   this->setLayout(layout);
 }
 
-}  // namespace ui
+}  // namespace installer

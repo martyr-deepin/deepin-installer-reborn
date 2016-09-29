@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SYSINFO_PROC_SWAPS_H
-#define DEEPIN_INSTALLER_REBORN_SYSINFO_PROC_SWAPS_H
+#ifndef INSTALLER_SYSINFO_PROC_SWAPS_H
+#define INSTALLER_SYSINFO_PROC_SWAPS_H
 
 #include <QList>
 
-namespace sysinfo {
+namespace installer {
 
 enum class SwapType {
   Partition,
@@ -27,6 +27,6 @@ typedef QList<SwapItem> SwapItemList;
 // Parse /proc/swaps file.
 SwapItemList ParseSwaps();
 
-}  // namespace sysinfo
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_SYSINFO_PROC_SWAPS_H
+#endif  // INSTALLER_SYSINFO_PROC_SWAPS_H

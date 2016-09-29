@@ -2,13 +2,13 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_BASE_FILE_UTIL_H
-#define DEEPIN_INSTALLER_REBORN_BASE_FILE_UTIL_H
+#ifndef INSTALLER_BASE_FILE_UTIL_H
+#define INSTALLER_BASE_FILE_UTIL_H
 
 #include <QDir>
 #include <QString>
 
-namespace base {
+namespace installer {
 
 // Create a folder with |folder_name| in |parent_dir| directory and
 // returns a QDir object refering to its absolute path.
@@ -40,6 +40,6 @@ bool ReadTextFile(const QString& path, QString& content);
 // Write content to file, returns true if succeeded, or false otherwise.
 bool WriteTextFile(const QString& path, const QString& content);
 
-}  // namespace base
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_BASE_FILE_UTIL_H
+#endif  // INSTALLER_BASE_FILE_UTIL_H

@@ -2,15 +2,15 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_PARTMAN_LIBPARTED_UTIL_H
-#define DEEPIN_INSTALLER_REBORN_PARTMAN_LIBPARTED_UTIL_H
+#ifndef INSTALLER_PARTMAN_LIBPARTED_UTIL_H
+#define INSTALLER_PARTMAN_LIBPARTED_UTIL_H
 
 #include <parted/parted.h>
 #include <QString>
 
 #include "partman/partition.h"
 
-namespace partman {
+namespace installer {
 
 // Commit changes to disk.
 bool Commit(PedDisk* lp_disk);
@@ -50,6 +50,6 @@ bool SetPartitionType(const Partition& partition);
 // have been created successfully before proceeding.
 void SettleDevice(int timeout);
 
-}  // namespace partman
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_PARTMAN_LIBPARTED_UTIL_H
+#endif  // INSTALLER_PARTMAN_LIBPARTED_UTIL_H

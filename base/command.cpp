@@ -6,10 +6,9 @@
 
 #include <QDebug>
 #include <QDir>
-#include <QFileInfo>
 #include <QProcess>
 
-namespace base {
+namespace installer {
 
 bool RunScriptFile(const QString& filepath, bool change_working_dir) {
 // Change working directory.
@@ -48,4 +47,4 @@ bool SpawnCmd(const QString& cmd, const QStringList& args,
           process.exitCode() == 0);
 }
 
-}  // namespace base
+}  // namespace installer

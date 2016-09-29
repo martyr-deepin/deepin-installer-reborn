@@ -6,7 +6,7 @@
 
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
-namespace sysinfo {
+namespace installer {
 namespace {
 
 TEST(ParsePartitionItemsTest, ParsePartitionItems) {
@@ -15,4 +15,4 @@ TEST(ParsePartitionItemsTest, ParsePartitionItems) {
 }
 
 }  // namespace
-}  // namespace sysinfo
+}  // namespace installer

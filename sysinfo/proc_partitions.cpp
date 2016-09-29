@@ -5,17 +5,15 @@
 #include "sysinfo/proc_partitions.h"
 
 #include <QDebug>
-#include <QRegExp>
 
 #include "base/file_util.h"
 
-namespace sysinfo {
+namespace installer {
 
 QList<PartitionItem> ParsePartitionItems() {
   PartitionItemList result;
 
-  const QString content =
-      base::ReadTextFileContent(QStringLiteral("/proc/partitions"));
+  const QString content = ReadTextFileContent("/proc/partitions");
   const QStringList lines = content.split("\n", QString::SkipEmptyParts);
   const QRegExp space_exp("\\s+");
   for (const QString& line : lines) {
@@ -28,12 +26,12 @@ QList<PartitionItem> ParsePartitionItems() {
       qWarning() << "Invalid partition item:" << parts;
       continue;
     }
-    const PartitionItem item = { parts[0].toInt(), parts[1].toInt(),
-                                 parts[2].toLongLong(), parts[3] };
+    const PartitionItem item = {parts[0].toInt(), parts[1].toInt(),
+                                parts[2].toLongLong(), parts[3]};
     result.append(item);
   }
 
   return result;
 }
 
-}  // namespace sysinfo
+}  // namespace installer

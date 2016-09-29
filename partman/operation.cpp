@@ -7,7 +7,7 @@
 #include "partman/libparted_util.h"
 #include "partman/partition_format.h"
 
-namespace partman {
+namespace installer {
 
 Operation::Operation(OperationType type,
                      const Partition& partition_orig,
@@ -167,4 +167,4 @@ void Operation::substitute(PartitionList& partitions) const {
   }
 }
 
-}  // namespace partman
+}  // namespace installer

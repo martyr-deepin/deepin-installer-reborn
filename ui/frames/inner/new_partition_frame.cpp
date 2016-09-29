@@ -21,7 +21,7 @@
 #include "ui/widgets/table_item_label.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
                                      QWidget* parent)
@@ -34,7 +34,7 @@ NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
   this->initConnections();
 }
 
-void NewPartitionFrame::setPartition(const partman::Partition& partition) {
+void NewPartitionFrame::setPartition(const Partition& partition) {
   partition_ = partition;
   // TODO(xushaohua): Check whether primary or logical partition is available or not.
 
@@ -133,7 +133,7 @@ void NewPartitionFrame::initUI() {
 void NewPartitionFrame::onCreateButtonClicked() {
   const bool is_primary = (type_box_->currentIndex() != 1);
   const bool align_start = (alignment_box_->currentIndex() != 1);
-  const partman::FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
+  const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
   const QString mount_point = mount_point_model_->getMountPoint(
       mount_point_box_->currentIndex());
   // TODO(xushaohua): Calculate exact sectors
@@ -145,4 +145,4 @@ void NewPartitionFrame::onCreateButtonClicked() {
   emit this->finished();
 }
 
-}  // namespace ui
+}  // namespace installer

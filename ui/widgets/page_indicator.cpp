@@ -7,7 +7,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
-namespace ui {
+namespace installer {
 
 PageIndicator::PageIndicator(int pages, QWidget* parent)
   : QFrame(parent),
@@ -56,4 +56,4 @@ void PageIndicator::updateIndicators() {
 }
 
 
-}  // namespace ui
+}  // namespace installer

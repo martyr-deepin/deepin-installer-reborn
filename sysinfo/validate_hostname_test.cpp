@@ -6,7 +6,7 @@
 
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
-namespace sysinfo {
+namespace installer {
 namespace {
 
 TEST(ValidateHostnameTest, ValidateHostname) {
@@ -28,4 +28,4 @@ TEST(ValidateHostnameTest, ValidateHostnameTemp) {
 }
 
 }  // namespace
-}  // namespace sysinfo
+}  // namespace installer

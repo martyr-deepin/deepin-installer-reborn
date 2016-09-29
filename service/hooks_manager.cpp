@@ -21,7 +21,7 @@
 #include "service/settings_manager.h"
 #include "sysinfo/machine.h"
 
-namespace service {
+namespace installer {
 
 namespace {
 
@@ -47,35 +47,30 @@ const char kUnsquashfsLangProgressFile[] = "/dev/shm/unsquashfs_lang_progress";
 const int kReadUnsquashfsInterval = 1000;
 
 bool MatchArchitecture(const QString& name) {
-  sysinfo::MachineArch arch = sysinfo::GetMachineArch();
+  MachineArch arch = GetMachineArch();
   const QString lower_name = name.toLower();
-  if (arch == sysinfo::MachineArch::Unknown) {
+  if (arch == MachineArch::Unknown) {
     qWarning() << "MatchArchitecture() unknown architecture";
     return false;
   }
 
-  if (lower_name.lastIndexOf("alpha.job") > 0 &&
-      arch != sysinfo::MachineArch::Alpha) {
+  if (lower_name.lastIndexOf("alpha.job") > 0 && arch != MachineArch::Alpha) {
     return false;
   }
   if (lower_name.lastIndexOf("alpha64.job") > 0 &&
-    arch != sysinfo::MachineArch::Alpha64) {
+    arch != MachineArch::Alpha64) {
     return false;
   }
-  if (lower_name.lastIndexOf("arm.job") > 0 &&
-      arch != sysinfo::MachineArch::ARM) {
+  if (lower_name.lastIndexOf("arm.job") > 0 && arch != MachineArch::ARM) {
     return false;
   }
-  if (lower_name.lastIndexOf("arm64.job") > 0 &&
-      arch != sysinfo::MachineArch::ARM64) {
+  if (lower_name.lastIndexOf("arm64.job") > 0 && arch != MachineArch::ARM64) {
     return false;
   }
-  if (lower_name.lastIndexOf("mips.job") > 0 &&
-      arch != sysinfo::MachineArch::MIPS) {
+  if (lower_name.lastIndexOf("mips.job") > 0 && arch != MachineArch::MIPS) {
     return false;
   }
-  if (lower_name.lastIndexOf("x86.job") > 0 &&
-      arch != sysinfo::MachineArch::X86_64) {
+  if (lower_name.lastIndexOf("x86.job") > 0 && arch != MachineArch::X86_64) {
     return false;
   }
 
@@ -90,7 +85,7 @@ bool IsOverlayModuleExists() {
 }
 
 int ReadProgressValue(const QString& file) {
-  const QString val = base::ReadTextFileContent(file);
+  const QString val = ReadTextFileContent(file);
   if (val.isEmpty()) {
     return -1;
   }
@@ -100,7 +95,7 @@ int ReadProgressValue(const QString& file) {
 // Runs a specific hook at |hook|.
 bool RunHook(const QString& hook) {
   qDebug() << "RunHook():" << hook;
-  return base::RunScriptFile(hook);
+  return RunScriptFile(hook);
 }
 
 }  // namespace
@@ -425,4 +420,4 @@ void HooksManager::handleReadUnsquashfsTimeout() {
   }
 }
 
-}  // namespace service
+}  // namespace installer

@@ -2,14 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_WIDGETS_AVATAR_BUTTON_H
-#define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_AVATAR_BUTTON_H
+#ifndef INSTALLER_UI_WIDGETS_AVATAR_BUTTON_H
+#define INSTALLER_UI_WIDGETS_AVATAR_BUTTON_H
 
 #include "ui/widgets/flat_button.h"
 
 class QPaintEvent;
 
-namespace ui {
+namespace installer {
 
 // Displays user avatar icon.
 class AvatarButton : public FlatButton {
@@ -29,6 +29,6 @@ class AvatarButton : public FlatButton {
   QString icon_;
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_WIDGETS_AVATAR_BUTTON_H
+#endif  // INSTALLER_UI_WIDGETS_AVATAR_BUTTON_H

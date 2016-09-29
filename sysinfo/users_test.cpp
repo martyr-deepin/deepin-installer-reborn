@@ -8,7 +8,7 @@
 
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
-namespace sysinfo {
+namespace installer {
 namespace {
 
 TEST(UsersTest, GetSystemUsers) {
@@ -20,4 +20,4 @@ TEST(UserTest, GetUsers) {
 }
 
 }  // namespace
-}  // namespace sysinfo
+}  // namespace installer

@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_SERVICE_SIGNAL_MANAGER_H
-#define DEEPIN_INSTALLER_SERVICE_SIGNAL_MANAGER_H
+#ifndef INSTALLER_SERVICE_SIGNAL_MANAGER_H
+#define INSTALLER_SERVICE_SIGNAL_MANAGER_H
 
 #include <QObject>
 
-namespace service {
+namespace installer {
 
 // This class is used to send signals cross objects.
 // It keeps a global instance.
@@ -26,6 +26,6 @@ class SignalManager : public QObject {
   SignalManager();
 };
 
-}  // namespace service
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_SERVICE_SIGNAL_MANAGER_H
+#endif  // INSTALLER_SERVICE_SIGNAL_MANAGER_H

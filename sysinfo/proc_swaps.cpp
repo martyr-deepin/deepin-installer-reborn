@@ -9,12 +9,11 @@
 
 #include "base/file_util.h"
 
-namespace sysinfo {
+namespace installer {
 
 SwapItemList ParseSwaps() {
   SwapItemList result;
-  const QString content =
-      base::ReadTextFileContent(QStringLiteral("/proc/swaps"));
+  const QString content = ReadTextFileContent(QStringLiteral("/proc/swaps"));
 
   for (const QString& line : content.split('\n')) {
     if ((!line.isEmpty()) && (!line.startsWith("Filename"))) {
@@ -35,4 +34,4 @@ SwapItemList ParseSwaps() {
   return result;
 }
 
-}  // namespace sysinfo
+}  // namespace installer

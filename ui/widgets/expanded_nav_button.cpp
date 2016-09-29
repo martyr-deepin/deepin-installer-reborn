@@ -6,13 +6,12 @@
 
 #include "base/file_util.h"
 
-namespace ui {
+namespace installer {
 
 ExpandedNavButton::ExpandedNavButton(const QString& text, QWidget* parent)
   : FlatButton(text, parent) {
   this->setObjectName(QStringLiteral("expanded_nav_button"));
-  this->setStyleSheet(
-      base::ReadTextFileContent(":/styles/expanded_nav_button.css"));
+  this->setStyleSheet(ReadTextFileContent(":/styles/expanded_nav_button.css"));
 }
 
-}  // namespace ui
+}  // namespace installer

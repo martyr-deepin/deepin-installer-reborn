@@ -6,13 +6,13 @@
 
 #include "base/command.h"
 
-namespace partman {
+namespace installer {
 
 OsTypeItems GetOsTypeItems() {
   OsTypeItems result;
 
   QString output;
-  if (base::SpawnCmd("os-prober", {}, output)) {
+  if (SpawnCmd("os-prober", {}, output)) {
     for (const QString& line : output.split('\n')) {
       if (line.isEmpty()) {
         continue;
@@ -42,4 +42,4 @@ OsTypeItems GetOsTypeItems() {
   return result;
 }
 
-}  // namespace partman
+}  // namespace installer

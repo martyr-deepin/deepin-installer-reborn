@@ -12,7 +12,7 @@
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
-namespace ui {
+namespace installer {
 
 DiskSpaceInsufficientFrame::DiskSpaceInsufficientFrame(QWidget* parent)
     : QFrame(parent) {
@@ -51,4 +51,4 @@ void DiskSpaceInsufficientFrame::initUI() {
           this, &DiskSpaceInsufficientFrame::finished);
 }
 
-}  // namespace ui
+}  // namespace installer

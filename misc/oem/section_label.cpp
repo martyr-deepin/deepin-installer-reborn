@@ -6,10 +6,13 @@
 
 #include "base/file_util.h"
 
+namespace installer {
+
 SectionLabel::SectionLabel(const QString& text, QWidget* parent)
     : QLabel(text, parent) {
   this->setObjectName(QStringLiteral("section_label"));
 
-  this->setStyleSheet(
-      base::ReadTextFileContent(":/oem_styles/section_label.css"));
+  this->setStyleSheet(ReadTextFileContent(":/oem_styles/section_label.css"));
 }
+
+}  // namespace installer

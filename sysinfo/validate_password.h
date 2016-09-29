@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SYSINFO_VALIDATE_PASSWORD_H
-#define DEEPIN_INSTALLER_REBORN_SYSINFO_VALIDATE_PASSWORD_H
+#ifndef INSTALLER_SYSINFO_VALIDATE_PASSWORD_H
+#define INSTALLER_SYSINFO_VALIDATE_PASSWORD_H
 
 #include <QString>
 
-namespace sysinfo {
+namespace installer {
 
 enum class ValidatePasswordState {
   Ok,
@@ -34,6 +34,6 @@ ValidatePasswordState ValidatePassword(const QString& password,
                                        bool require_upper_case,
                                        bool require_special_char);
 
-}  // namespace sysinfo
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_SYSINFO_VALIDATE_PASSWORD_H
+#endif  // INSTALLER_SYSINFO_VALIDATE_PASSWORD_H

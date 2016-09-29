@@ -2,14 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_UTILS_XUTIL_H
-#define DEEPIN_INSTALLER_REBORN_UI_UTILS_XUTIL_H
+#ifndef INSTALLER_UI_UTILS_XUTIL_H
+#define INSTALLER_UI_UTILS_XUTIL_H
 
 #include <X11/cursorfont.h>
 #include <QString>
 class QWidget;
 
-namespace ui {
+namespace installer {
 namespace utils {
 
 // Get pointer mask (modifier type).
@@ -102,6 +102,6 @@ void SimulateButtonEvent(Qt::MouseButton button, bool is_press);
 void SimulateMotionEvent(int x, int y);
 
 }  // namespace utils
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_UTILS_XUTIL_H
+#endif  // INSTALLER_UI_UTILS_XUTIL_H

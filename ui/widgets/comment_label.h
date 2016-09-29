@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_UI_WIDGETS_COMMENT_LABEL_H
-#define DEEPIN_INSTALLER_REBORN_UI_WIDGETS_COMMENT_LABEL_H
+#ifndef INSTALLER_UI_WIDGETS_COMMENT_LABEL_H
+#define INSTALLER_UI_WIDGETS_COMMENT_LABEL_H
 
 #include <QLabel>
 
-namespace ui {
+namespace installer {
 
 // CommentLabel displays description text below TitleLabel.
 class CommentLabel : public QLabel {
@@ -17,6 +17,6 @@ class CommentLabel : public QLabel {
   CommentLabel(const QString& text, QWidget* parent = nullptr);
 };
 
-}  // namespace ui
+}  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_REBORN_UI_WIDGETS_COMMENT_LABEL_H
+#endif  // INSTALLER_UI_WIDGETS_COMMENT_LABEL_H

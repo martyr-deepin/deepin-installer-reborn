@@ -2,12 +2,12 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef DEEPIN_INSTALLER_REBORN_SERVICE_LOG_MANAGER_H
-#define DEEPIN_INSTALLER_REBORN_SERVICE_LOG_MANAGER_H
+#ifndef INSTALLER_SERVICE_LOG_MANAGER_H
+#define INSTALLER_SERVICE_LOG_MANAGER_H
 
 #include <QString>
 
-namespace service {
+namespace installer {
 
 // If current user has no write permission in /var/log, keep log file in /tmp.
 QString GetLogFilepath();
@@ -22,7 +22,7 @@ void RedirectLogFile();
 // Close log file handler.
 void ShutdownLogService();
 
-}  // namespace service
+}  // namespace installer
 
 
-#endif  // DEEPIN_INSTALLER_REBORN_SERVICE_LOG_MANAGER_H
+#endif  // INSTALLER_SERVICE_LOG_MANAGER_H

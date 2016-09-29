@@ -4,10 +4,9 @@
 
 #include "mount_point_model.h"
 
-#include "partman/structs.h"
 #include "ui/delegates/partition_delegate.h"
 
-namespace ui {
+namespace installer {
 
 MountPointModel::MountPointModel(PartitionDelegate* delegate, QObject* parent)
     : QAbstractListModel(parent),
@@ -64,4 +63,4 @@ void MountPointModel::useMountPoint(const QString& mount_point) {
   }
 }
 
-}  // namespace ui
+}  // namespace installer
