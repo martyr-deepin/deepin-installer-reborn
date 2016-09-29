@@ -36,7 +36,9 @@ NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
 
 void NewPartitionFrame::setPartition(const partman::Partition& partition) {
   partition_ = partition;
-  // TODO(xushaohua): update type-box
+  // TODO(xushaohua): Check whether primary or logical partition is available or not.
+
+  // TODO(xushaohua): Reset all status.
 //  delegate_->getPartitionType(partition);
 
   const int mebi_size = static_cast<int>(partition.getByteLength() / kMebiByte);
@@ -76,8 +78,8 @@ void NewPartitionFrame::initUI() {
 
   type_box_ = new TableComboBox();
   type_box_->addItems({tr("Primary partition"), tr("Logical partition")});
-  location_box_ = new TableComboBox();
-  location_box_->addItems({tr("Start"), tr("End")});
+  alignment_box_ = new TableComboBox();
+  alignment_box_->addItems({tr("Start"), tr("End")});
 
   fs_box_ = new TableComboBox();
   fs_model_ = new FsModel(delegate_, fs_box_);
@@ -96,7 +98,7 @@ void NewPartitionFrame::initUI() {
   grid_layout->addWidget(mount_point_label, 3, 0);
   grid_layout->addWidget(size_label, 4, 0);
   grid_layout->addWidget(type_box_, 0, 1);
-  grid_layout->addWidget(location_box_, 1, 1);
+  grid_layout->addWidget(alignment_box_, 1, 1);
   grid_layout->addWidget(fs_box_, 2, 1);
   grid_layout->addWidget(mount_point_box_, 3, 1);
   grid_layout->addWidget(size_slider_, 4, 1);
@@ -129,13 +131,16 @@ void NewPartitionFrame::initUI() {
 }
 
 void NewPartitionFrame::onCreateButtonClicked() {
-  const qint64 partition_size = size_slider_->value() * kMebiByte;
+  const bool is_primary = (type_box_->currentIndex() != 1);
+  const bool align_start = (alignment_box_->currentIndex() != 1);
   const partman::FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
-  const QString mount_point = mount_point_box_->currentText();
-  // TODO(xushaohua): Check alignment option
-  const bool align_start = true;
-  delegate_->createPartition(partition_, fs_type, mount_point, partition_size,
-                             align_start);
+  const QString mount_point = mount_point_model_->getMountPoint(
+      mount_point_box_->currentIndex());
+  // TODO(xushaohua): Calculate exact sectors
+  const qint64 total_sectors = size_slider_->value() * kMebiByte /
+      partition_.sector_size;
+  delegate_->createPartition(partition_, is_primary, align_start, fs_type,
+                             mount_point, total_sectors);
 
   emit this->finished();
 }

@@ -35,7 +35,7 @@ class NewPartitionFrame : public QFrame {
   void initUI();
 
   TableComboBox* type_box_ = nullptr;
-  TableComboBox* location_box_ = nullptr;
+  TableComboBox* alignment_box_ = nullptr;
   TableComboBox* fs_box_ = nullptr;
   TableComboBox* mount_point_box_ = nullptr;
   QSlider* size_slider_ = nullptr;

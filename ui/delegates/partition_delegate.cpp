@@ -102,19 +102,28 @@ const partman::FsTypeList& PartitionDelegate::getFsTypes() {
 }
 
 void PartitionDelegate::createPartition(const partman::Partition& partition,
+                                        bool is_primary,
+                                        bool align_start,
                                         partman::FsType fs_type,
                                         const QString& mount_point,
-                                        qint64 partition_size,
-                                        bool align_start) {
-  partman::Partition new_partition(partition);
+                                        qint64 total_sectors) {
+  partman::Partition new_partition;
+  new_partition.device_path = partition.device_path;
+  new_partition.path = partition.path;
+  new_partition.sector_size = partition.sector_size;
+  if (align_start) {
+    new_partition.sector_start = partition.sector_start;
+    new_partition.sector_end = total_sectors + partition.sector_start;
+  } else {
+    new_partition.sector_end = partition.sector_end;
+    new_partition.sector_start = partition.sector_end - total_sectors;
+  }
+
+  new_partition.type = is_primary ? partman::PartitionType::Primary :
+                                    partman::PartitionType::Logical;
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
-  new_partition.freespace = partition.length;
-  // TODO(xushaohua): Calculate new partition sector size
-  Q_UNUSED(partition_size);
-  Q_UNUSED(align_start);
-  partman::Operation operation(partman::OperationType::Create,
-                               partition,
+  partman::Operation operation(partman::OperationType::Create, partition,
                                new_partition);
   operations_.append(operation);
   refreshVisual();
@@ -129,8 +138,7 @@ void PartitionDelegate::deletePartition(const partman::Partition& partition) {
     // Merge operations here.
   }
 
-  partman::Operation operation(partman::OperationType::Delete,
-                               partition,
+  partman::Operation operation(partman::OperationType::Delete, partition,
                                new_partition);
   operations_.append(operation);
   this->refreshVisual();
@@ -144,8 +152,7 @@ void PartitionDelegate::formatPartition(const partman::Partition& partition,
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
   new_partition.status = partman::PartitionStatus::Formatted;
-  partman::Operation operation(partman::OperationType::Format,
-                               partition,
+  partman::Operation operation(partman::OperationType::Format, partition,
                                new_partition);
   operations_.append(operation);
 }
@@ -157,8 +164,7 @@ void PartitionDelegate::updateMountPoint(const partman::Partition& partition,
   partman::Partition partition_new(partition);
   partition_new.mount_point = mount_point;
   // No need to update partition status.
-  partman::Operation operation(partman::OperationType::MountPoint,
-                               partition,
+  partman::Operation operation(partman::OperationType::MountPoint, partition,
                                partition_new);
   operations_.append(operation);
   this->refreshVisual();

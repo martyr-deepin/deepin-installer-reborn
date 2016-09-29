@@ -55,10 +55,11 @@ class PartitionDelegate : public QObject {
   // Operation helpers.
   // Create a new partition.
   void createPartition(const partman::Partition& partition,
+                       bool is_primary,
+                       bool align_start,
                        partman::FsType fs_type,
                        const QString& mount_point,
-                       qint64 partition_size,
-                       bool align_start);
+                       qint64 total_sectors);
   // Delete a |partition|.
   void deletePartition(const partman::Partition& partition);
   // Format a partition |partition|.
