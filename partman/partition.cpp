@@ -22,6 +22,8 @@ Partition::Partition()
       freespace(-1),
       sector_start(-1),
       sector_end(-1),
+      sectors_unallocated_preceding(0),
+      sectors_unallocated_succeeding(0),
       mount_point() {
 }
 

@@ -59,10 +59,45 @@ bool Operation::applyToDisk() const {
 }
 
 void Operation::applyToVisual(PartitionList& partitions) const {
-  this->substitute(partitions);
   switch (type) {
     case OperationType::Create: {
-      this->substitute(partitions);
+      const int index = findIndexOriginal(partitions);
+      // FIXME(xushaohua): handles index == -1.
+//      Q_ASSERT(index > -1);
+      if (index < 0) {
+        break;
+      }
+
+      if (partition_new.sectors_unallocated_succeeding > 0) {
+        // Create an unallocated partition after this one.
+        Partition succeeding_partition;
+        succeeding_partition.device_path = partition_new.device_path;
+        succeeding_partition.sector_end = partition_orig.sector_end;
+        succeeding_partition.sector_start = succeeding_partition.sector_end -
+            partition_new.sectors_unallocated_succeeding;
+        if (index+1 == partitions.length()) {
+          partitions.append(succeeding_partition);
+        } else {
+          partitions.insert(index+1, succeeding_partition);
+        }
+      }
+
+      partitions[index] = partition_new;
+
+      if (partition_new.sectors_unallocated_preceding > 0) {
+        // Create an unallocated partition before this one.
+        Partition preceding_partition;
+        preceding_partition.device_path = partition_new.device_path;
+        preceding_partition.sector_start = partition_orig.sector_start;
+        preceding_partition.sector_end = preceding_partition.sector_start +
+            partition_new.sectors_unallocated_preceding;
+        if (index == 0) {
+          partitions.prepend(preceding_partition);
+        } else {
+          partitions.insert(index, preceding_partition);
+        }
+      }
+
       break;
     }
     case OperationType::Delete: {
@@ -124,6 +159,9 @@ int Operation::findIndexOriginal(const PartitionList& partitions) const {
 
 void Operation::substitute(PartitionList& partitions) const {
   const int index = findIndexOriginal(partitions);
+  // FIXME(xushaohua): handles index == -1.
+//  Q_ASSERT(index > -1);
+
   if (index > -1) {
     partitions[index] = partition_new;
   }

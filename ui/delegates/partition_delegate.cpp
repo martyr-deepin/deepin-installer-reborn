@@ -111,12 +111,20 @@ void PartitionDelegate::createPartition(const partman::Partition& partition,
   new_partition.device_path = partition.device_path;
   new_partition.path = partition.path;
   new_partition.sector_size = partition.sector_size;
+  new_partition.status = partman::PartitionStatus::New;
+
+  // TODO(xushaohua): Calculate 1Mib MBR space.
   if (align_start) {
+    // Align from start of |partition|.
     new_partition.sector_start = partition.sector_start;
     new_partition.sector_end = total_sectors + partition.sector_start;
+    new_partition.sectors_unallocated_succeeding = partition.sector_end -
+        new_partition.sector_end;
   } else {
     new_partition.sector_end = partition.sector_end;
     new_partition.sector_start = partition.sector_end - total_sectors;
+    new_partition.sectors_unallocated_preceding = new_partition.sector_start -
+        partition.sector_start;
   }
 
   new_partition.type = is_primary ? partman::PartitionType::Primary :

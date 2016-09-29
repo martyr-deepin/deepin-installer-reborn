@@ -54,6 +54,12 @@ class Partition {
   qint64 sector_start;
   qint64 sector_end;
 
+  // No. of sectors not unallocated before/after this partition.
+  // These two properties are only used while creating a new partition.
+  // If it is a valid value, create an unallocated-partition later.
+  qint64 sectors_unallocated_preceding;
+  qint64 sectors_unallocated_succeeding;
+
   QString mount_point;
 
   // Returns actual partition size.
