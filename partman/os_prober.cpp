@@ -13,23 +13,29 @@ OsTypeItems GetOsTypeItems() {
 
   QString output;
   if (base::SpawnCmd("os-prober", {}, output)) {
-    for (const QString& line : output.trimmed().split('\n')) {
+    for (const QString& line : output.split('\n')) {
+      if (line.isEmpty()) {
+        continue;
+      }
+
       const QStringList items = line.split(':');
       Q_ASSERT(items.length() == 4);
-      if (items.length() == 4) {
-        OsType type;
-        if (line.contains("linux", Qt::CaseInsensitive)) {
-          type = OsType::Linux;
-        } else if (line.contains("windows", Qt::CaseInsensitive)) {
-          type = OsType::Windows;
-        } else if (line.contains("mac", Qt::CaseInsensitive)) {
-          // FIXME(xushaohua): Check macOS efi entry.
-          type = OsType::Mac;
-        } else {
-          type = OsType::Unknown;
-        }
-        result.insert(items[0], type);
+      if (items.length() != 4) {
+        continue;
       }
+
+      OsType type;
+      if (line.contains("linux", Qt::CaseInsensitive)) {
+        type = OsType::Linux;
+      } else if (line.contains("windows", Qt::CaseInsensitive)) {
+        type = OsType::Windows;
+      } else if (line.contains("mac", Qt::CaseInsensitive)) {
+        // FIXME(xushaohua): Check macOS efi entry.
+        type = OsType::Mac;
+      } else {
+        type = OsType::Unknown;
+      }
+      result.insert(items[0], type);
     }
   }
 
