@@ -39,6 +39,9 @@ class PartitionDelegate : public QObject {
 
   const DeviceList& devices() const { return devices_; }
 
+  // Notifies partition manager to scan devices.
+  void scanDevices() const;
+
   // Get alternative partition type.
   SupportedPartitionType getPartitionType(const Partition& partition) const;
 

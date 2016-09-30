@@ -33,6 +33,9 @@ class PartitionFrame : public QFrame {
 
   void autoPart();
 
+  // Calls delegate->scanDevices().
+  void scanDevices() const;
+
  signals:
   void finished();
 

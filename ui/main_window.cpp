@@ -93,6 +93,7 @@ MainWindow::MainWindow()
   this->initConnections();
 //  this->goNextPage();
   this->setCurrentPage(PageId::PartitionId);
+  partition_frame_->scanDevices();
 }
 
 void MainWindow::fullscreen() {

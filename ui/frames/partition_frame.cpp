@@ -41,6 +41,10 @@ void PartitionFrame::autoPart() {
   delegate_->autoConf();
 }
 
+void PartitionFrame::scanDevices() const {
+  delegate_->scanDevices();
+}
+
 void PartitionFrame::initConnections() {
   connect(simple_frame_button_, &QPushButton::toggled,
           this, &PartitionFrame::onSimpleFrameButtonToggled);

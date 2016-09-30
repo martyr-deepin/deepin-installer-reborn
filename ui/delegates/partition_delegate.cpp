@@ -36,11 +36,6 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
   partition_thread_->start();
 
   this->initConnections();
-
-  // If auto-part is not set, scan devices right now.
-  if (!GetSettingsBool(kPartitionDoAutoPart)) {
-    emit partition_manager_->refreshDevices();
-  }
 }
 
 PartitionDelegate::~PartitionDelegate() {
@@ -57,6 +52,13 @@ PartitionDelegate::~PartitionDelegate() {
 void PartitionDelegate::autoConf() {
   const QString script_path = GetAutoPartFile();
   emit partition_manager_->autoPart(script_path);
+}
+
+void PartitionDelegate::scanDevices() const {
+  // If auto-part is not set, scan devices right now.
+  if (!GetSettingsBool(kPartitionDoAutoPart)) {
+    emit partition_manager_->refreshDevices();
+  }
 }
 
 SupportedPartitionType PartitionDelegate::getPartitionType(
