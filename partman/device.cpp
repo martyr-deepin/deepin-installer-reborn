@@ -22,4 +22,13 @@ Device::Device()
       table(PartitionTableType::Unknown) {
 }
 
+int DeviceIndex(const DeviceList& devices, const QString& device_path) {
+  for (int i = 0; i < devices.length(); ++i) {
+    if (devices.at(i).path == device_path) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 }  // namespace installer

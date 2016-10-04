@@ -33,6 +33,9 @@ class Device {
 
 typedef QList<Device> DeviceList;
 
+// Get index of device object with |device_path|. Returns -1 if not found.
+int DeviceIndex(const DeviceList& devices, const QString& device_path);
+
 }  // namespace installer
 
 #endif  // INSTALLER_PARTMAN_DEVICE_H

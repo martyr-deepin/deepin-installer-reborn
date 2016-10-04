@@ -24,13 +24,13 @@ enum class OperationType {
 class Operation {
  public:
   Operation(OperationType type,
-            const Partition& partition_orig,
-            const Partition& partition_new);
+            const Partition& orig_partition,
+            const Partition& new_partition);
   ~Operation();
 
   OperationType type;
-  Partition partition_orig;
-  Partition partition_new;
+  Partition orig_partition;
+  Partition new_partition;
 
   // Apply changes to disk. Returns operation status.
   // Note that this method shall be called in the background thread.
@@ -40,9 +40,6 @@ class Operation {
   void applyToVisual(PartitionList& partitions) const ;
 
  private:
-  int findIndexNew(const PartitionList& partitions) const;
-  int findIndexOriginal(const PartitionList& partitions) const;
-
   // For operations which do not change partition boundaries.
   void substitute(PartitionList& partitions) const;
 };

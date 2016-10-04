@@ -76,6 +76,15 @@ class Partition {
 
 typedef QList<Partition> PartitionList;
 
+// Get index of extended partition in |partitions|. Returns -1 if not found.
+int ExtendedPartitionIndex(const PartitionList& partitions);
+
+// Get index of |partition| in |partitions|. Returns -1 if not found.
+int PartitionIndex(const PartitionList& partitions, const Partition& partition);
+
+// Get number of primary partitions, together with extended partition(if found).
+int SumOfPrimarys(const PartitionList& partitions);
+
 }  // namespace installer
 
 #endif  // INSTALLER_PARTMAN_PARTITION_H

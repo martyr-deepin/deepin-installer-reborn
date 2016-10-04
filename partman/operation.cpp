@@ -10,11 +10,11 @@
 namespace installer {
 
 Operation::Operation(OperationType type,
-                     const Partition& partition_orig,
-                     const Partition& partition_new)
+                     const Partition& orig_partition,
+                     const Partition& new_partition)
     : type(type),
-      partition_orig(partition_orig),
-      partition_new(partition_new) {
+      orig_partition(orig_partition),
+      new_partition(new_partition) {
 }
 
 Operation::~Operation() {
@@ -24,22 +24,22 @@ bool Operation::applyToDisk() const {
   bool ok;
   switch (type) {
     case OperationType::Create: {
-      ok = CreatePartition(partition_new);
+      ok = CreatePartition(new_partition);
       if (ok) {
-        ok = Mkfs(partition_new);
+        ok = Mkfs(new_partition);
       }
       break;
     }
 
     case OperationType::Delete: {
-      ok = DeletePartition(partition_orig);
+      ok = DeletePartition(orig_partition);
       break;
     }
 
     case OperationType::Format: {
-      ok = SetPartitionType(partition_new);
+      ok = SetPartitionType(new_partition);
       if (ok) {
-        ok = Mkfs(partition_new);
+        ok = Mkfs(new_partition);
       }
       break;
     }
@@ -61,20 +61,20 @@ bool Operation::applyToDisk() const {
 void Operation::applyToVisual(PartitionList& partitions) const {
   switch (type) {
     case OperationType::Create: {
-      const int index = findIndexOriginal(partitions);
+      const int index = PartitionIndex(partitions, orig_partition);
       // FIXME(xushaohua): handles index == -1.
 //      Q_ASSERT(index > -1);
       if (index < 0) {
         break;
       }
 
-      if (partition_new.sectors_unallocated_succeeding > 0) {
+      if (new_partition.sectors_unallocated_succeeding > 0) {
         // Create an unallocated partition after this one.
         Partition succeeding_partition;
-        succeeding_partition.device_path = partition_new.device_path;
-        succeeding_partition.sector_end = partition_orig.sector_end;
+        succeeding_partition.device_path = new_partition.device_path;
+        succeeding_partition.sector_end = orig_partition.sector_end;
         succeeding_partition.sector_start = succeeding_partition.sector_end -
-            partition_new.sectors_unallocated_succeeding;
+            new_partition.sectors_unallocated_succeeding;
         if (index+1 == partitions.length()) {
           partitions.append(succeeding_partition);
         } else {
@@ -82,15 +82,15 @@ void Operation::applyToVisual(PartitionList& partitions) const {
         }
       }
 
-      partitions[index] = partition_new;
+      partitions[index] = new_partition;
 
-      if (partition_new.sectors_unallocated_preceding > 0) {
+      if (new_partition.sectors_unallocated_preceding > 0) {
         // Create an unallocated partition before this one.
         Partition preceding_partition;
-        preceding_partition.device_path = partition_new.device_path;
-        preceding_partition.sector_start = partition_orig.sector_start;
+        preceding_partition.device_path = new_partition.device_path;
+        preceding_partition.sector_start = orig_partition.sector_start;
         preceding_partition.sector_end = preceding_partition.sector_start +
-            partition_new.sectors_unallocated_preceding;
+            new_partition.sectors_unallocated_preceding;
         if (index == 0) {
           partitions.prepend(preceding_partition);
         } else {
@@ -101,8 +101,8 @@ void Operation::applyToVisual(PartitionList& partitions) const {
       break;
     }
     case OperationType::Delete: {
-      int index = findIndexOriginal(partitions);
-      Partition empty_partition = partition_new;
+      int index = PartitionIndex(partitions, orig_partition);
+      Partition empty_partition = new_partition;
 
       if (index > 0 &&
           (partitions.at(index - 1).type == PartitionType::Unallocated)) {
@@ -137,33 +137,13 @@ void Operation::applyToVisual(PartitionList& partitions) const {
   }
 }
 
-int Operation::findIndexNew(const PartitionList& partitions) const {
-  for (int i = 0; i < partitions.length(); ++i) {
-    if (partition_new.sector_start >= partitions[i].sector_start &&
-        partition_new.sector_end <= partitions[i].sector_end) {
-      return i;
-    }
-  }
-  return -1;
-}
-
-int Operation::findIndexOriginal(const PartitionList& partitions) const {
-  for (int i = 0; i < partitions.length(); ++i) {
-    if (partition_orig.sector_start >= partitions[i].sector_start &&
-        partition_orig.sector_end <= partitions[i].sector_end) {
-      return i;
-    }
-  }
-  return -1;
-}
-
 void Operation::substitute(PartitionList& partitions) const {
-  const int index = findIndexOriginal(partitions);
+  const int index = PartitionIndex(partitions, orig_partition);
   // FIXME(xushaohua): handles index == -1.
 //  Q_ASSERT(index > -1);
 
   if (index > -1) {
-    partitions[index] = partition_new;
+    partitions[index] = new_partition;
   }
 }
 

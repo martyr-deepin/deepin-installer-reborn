@@ -63,9 +63,20 @@ void PartitionDelegate::scanDevices() const {
 
 SupportedPartitionType PartitionDelegate::getPartitionType(
     const Partition& partition) const {
-  // TODO(xushaohua): Check partition layout.
-  Q_UNUSED(partition);
-  return SupportedPartitionType::PrimaryOnly;
+  const int index = DeviceIndex(devices_, partition.device_path);
+  Q_ASSERT(index > -1);
+  const Device& device = devices_.at(index);
+  if (device.table == PartitionTableType::MsDos) {
+    // TODO(xushaohua): Check max_prims and logical partition
+    return SupportedPartitionType::PrimaryOnly;
+  } else if (device.table == PartitionTableType::GPT) {
+    // GPT only support primary partitions.
+    return SupportedPartitionType::PrimaryOnly;
+  } else {
+    qCritical() << "getPartitionType() unknown partition table at:"
+                << partition.device_path;
+    return SupportedPartitionType::Invalid;
+  }
 }
 
 const QStringList& PartitionDelegate::getMountPoints() {
@@ -168,10 +179,10 @@ void PartitionDelegate::updateMountPoint(const Partition& partition,
                                          const QString& mount_point) {
   qDebug() << "PartitionDelegate::updateMountPoint()" << partition.path
            << mount_point;
-  Partition partition_new(partition);
-  partition_new.mount_point = mount_point;
+  Partition new_partition(partition);
+  new_partition.mount_point = mount_point;
   // No need to update partition status.
-  Operation operation(OperationType::MountPoint, partition, partition_new);
+  Operation operation(OperationType::MountPoint, partition, new_partition);
   operations_.append(operation);
   this->refreshVisual();
 }
@@ -195,7 +206,7 @@ void PartitionDelegate::refreshVisual() {
   this->devices_ = this->real_devices_;
   for (Device& device : this->devices_) {
     for (Operation& operation : operations_) {
-      if (operation.partition_orig.device_path == device.path) {
+      if (operation.orig_partition.device_path == device.path) {
         operation.applyToVisual(device.partitions);
       }
     }

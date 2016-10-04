@@ -59,4 +59,35 @@ qint64 Partition::getSectorLength() const {
   }
 }
 
+int ExtendedPartitionIndex(const PartitionList& partitions) {
+  for (int i = 0; i < partitions.length(); ++i) {
+    if (partitions.at(i).type == PartitionType::Extended) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+int PartitionIndex(const PartitionList& partitions,
+                   const Partition& partition) {
+  for (int i = 0; i < partitions.length(); ++i) {
+    if (partition.sector_start >= partitions[i].sector_start &&
+        partition.sector_end <= partitions[i].sector_end) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+int SumOfPrimarys(const PartitionList& partitions) {
+  int count = 0;
+  for (const Partition& partition : partitions) {
+    if (partition.type == PartitionType::Primary ||
+        partition.type == PartitionType::Extended) {
+      ++count;
+    }
+  }
+  return count;
+}
+
 }  // namespace installer

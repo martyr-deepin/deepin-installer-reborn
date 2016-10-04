@@ -22,20 +22,20 @@ namespace {
 Partition GetBootPartition(const OperationList& operations) {
   for (const Operation& operation : operations) {
     // Or check mount_point == kMountPointEFI.
-    if (operation.partition_new.fs == FsType::EFI) {
-      return operation.partition_new;
+    if (operation.new_partition.fs == FsType::EFI) {
+      return operation.new_partition;
     }
   }
 
   for (const Operation& operation : operations) {
-    if (operation.partition_new.mount_point == kMountPointBoot) {
-      return operation.partition_new;
+    if (operation.new_partition.mount_point == kMountPointBoot) {
+      return operation.new_partition;
     }
   }
 
   for (const Operation& operation : operations) {
-    if (operation.partition_new.mount_point == kMountPointRoot) {
-      return operation.partition_new;
+    if (operation.new_partition.mount_point == kMountPointRoot) {
+      return operation.new_partition;
     }
   }
   return Partition();
@@ -168,10 +168,10 @@ void PartitionManager::doManualPart(const OperationList& operations) {
   QList<QPair<QString, QString>> mount_point_pair;
   if (ok) {
     for (const Operation& operation : operations) {
-      const Partition& partition_new = operation.partition_new;
-      if (!partition_new.mount_point.isEmpty()) {
-        mount_point_pair.append({partition_new.path,
-                                 partition_new.mount_point});
+      const Partition& new_partition = operation.new_partition;
+      if (!new_partition.mount_point.isEmpty()) {
+        mount_point_pair.append({new_partition.path,
+                                 new_partition.mount_point});
       }
     }
   }
