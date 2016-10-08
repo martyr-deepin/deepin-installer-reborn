@@ -118,7 +118,7 @@ const FsTypeList& PartitionDelegate::getFsTypes() {
 }
 
 void PartitionDelegate::createPartition(const Partition& partition,
-                                        bool is_primary,
+                                        PartitionType partition_type,
                                         bool align_start,
                                         FsType fs_type,
                                         const QString& mount_point,
@@ -129,22 +129,29 @@ void PartitionDelegate::createPartition(const Partition& partition,
   new_partition.sector_size = partition.sector_size;
   new_partition.status = PartitionStatus::New;
 
-  // TODO(xushaohua): Calculate 1Mib MBR space.
+  // Take into consideration if preceding space.
+  const qint64 preceding_sectors = getPartitionPreceding(partition) /
+                                   partition.sector_size;
+  const qint64 actual_start_sector = partition.sector_start + preceding_sectors;
+
   if (align_start) {
     // Align from start of |partition|.
-    new_partition.sector_start = partition.sector_start;
+    new_partition.sector_start = actual_start_sector;
     new_partition.sector_end = total_sectors + partition.sector_start;
     new_partition.sectors_unallocated_succeeding = partition.sector_end -
-        new_partition.sector_end;
+                                                   new_partition.sector_end;
   } else {
     new_partition.sector_end = partition.sector_end;
-    new_partition.sector_start = partition.sector_end - total_sectors;
-    new_partition.sectors_unallocated_preceding = new_partition.sector_start -
-        partition.sector_start;
+    new_partition.sector_start = qMax(partition.sector_end - total_sectors,
+                                      actual_start_sector);
+    const qint64 start_sector_delta = new_partition.sector_start -
+                                      partition.sector_start;
+    if (start_sector_delta > preceding_sectors) {
+      new_partition.sectors_unallocated_preceding = start_sector_delta;
+    }
   }
 
-  new_partition.type = is_primary ? PartitionType::Primary :
-                                    PartitionType::Logical;
+  new_partition.type = partition_type;
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
   Operation operation(OperationType::Create, partition, new_partition);
@@ -193,6 +200,22 @@ void PartitionDelegate::updateMountPoint(const Partition& partition,
 
 void PartitionDelegate::doManualPart() {
   emit partition_manager_->manualPart(operations_);
+}
+
+qint64 PartitionDelegate::getPartitionPreceding(const Partition& partition) {
+  const int device_index = DeviceIndex(devices_, partition.device_path);
+  Q_ASSERT(device_index > -1);
+  const Device& device = devices_.at(device_index);
+
+  // If it is the first primary partition, add 1Mib.
+  const int index = PartitionIndex(device.partitions, partition);
+  Q_ASSERT(index > -1);
+  if (index == 0) {
+    return 1 * kMebiByte;
+  } else {
+    return 0;
+  }
+  // TODO(xushaohua): Handles extended partition
 }
 
 void PartitionDelegate::initConnections() {

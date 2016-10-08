@@ -41,9 +41,6 @@ NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
 
 void NewPartitionFrame::setPartition(const Partition& partition) {
   partition_ = partition;
-  // TODO(xushaohua): Check whether primary or logical partition is available or not.
-
-  // TODO(xushaohua): Reset all status.
 
   const SupportedPartitionType type = delegate_->getPartitionType(partition);
   type_box_->clear();
@@ -72,6 +69,10 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
       break;
     }
   }
+
+  alignment_box_->setCurrentIndex(0);
+  // TODO(xushaohua): Reset all status.
+
 
   const int mebi_size = static_cast<int>(partition.getByteLength() / kMebiByte);
   size_slider_->setMaximum(mebi_size);
@@ -163,15 +164,17 @@ void NewPartitionFrame::initUI() {
 }
 
 void NewPartitionFrame::onCreateButtonClicked() {
-  const bool is_primary = (type_box_->currentIndex() != 1);
-  const bool align_start = (alignment_box_->currentIndex() != 1);
+  const bool is_primary = (type_box_->currentIndex() == 0);
+  const PartitionType partition_type = is_primary ? PartitionType::Primary :
+                                                    PartitionType::Logical;
+  const bool align_start = (alignment_box_->currentIndex() == 0);
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
   const QString mount_point = mount_point_model_->getMountPoint(
       mount_point_box_->currentIndex());
   // TODO(xushaohua): Calculate exact sectors
   const qint64 total_sectors = size_slider_->value() * kMebiByte /
-      partition_.sector_size;
-  delegate_->createPartition(partition_, is_primary, align_start, fs_type,
+                               partition_.sector_size;
+  delegate_->createPartition(partition_, partition_type, align_start, fs_type,
                              mount_point, total_sectors);
 
   emit this->finished();

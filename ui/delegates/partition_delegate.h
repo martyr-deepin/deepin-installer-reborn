@@ -59,7 +59,7 @@ class PartitionDelegate : public QObject {
   // Operation helpers.
   // Create a new partition.
   void createPartition(const Partition& partition,
-                       bool is_primary,
+                       PartitionType partition_type,
                        bool align_start,
                        FsType fs_type,
                        const QString& mount_point,
@@ -84,6 +84,9 @@ class PartitionDelegate : public QObject {
   void doManualPart();
 
  private:
+  // Get preceding sectors while creating a new |partition|.
+  qint64 getPartitionPreceding(const Partition& partition);
+
   void initConnections();
   void refreshVisual();
 
