@@ -234,6 +234,7 @@ DeviceList ScanDevices() {
     } else if (disk_type_name == kPartitionTableGPT) {
       device.table = PartitionTableType::GPT;
     }
+    device.max_prims = ped_disk_get_max_primary_partition_count(lp_disk);
 
     device.partitions = ReadPartitions(lp_disk);
     // Add additional info to partitions.

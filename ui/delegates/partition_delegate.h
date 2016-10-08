@@ -23,6 +23,7 @@ enum class SupportedPartitionType {
   PrimaryOnly,
   LogicalOnly,
   PrimaryOrLogical,
+  NoMorePartitionError,
   Invalid,
 };
 
@@ -43,7 +44,8 @@ class PartitionDelegate : public QObject {
   // Notifies partition manager to scan devices.
   void scanDevices() const;
 
-  // Get alternative partition type.
+  // Get alternative partition type. Used while creating a new partition.
+  // |partition| is an unallocated partition.
   SupportedPartitionType getPartitionType(const Partition& partition) const;
 
   // Get mount point based on fs type.

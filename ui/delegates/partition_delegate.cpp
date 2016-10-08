@@ -71,7 +71,11 @@ SupportedPartitionType PartitionDelegate::getPartitionType(
     return SupportedPartitionType::PrimaryOnly;
   } else if (device.table == PartitionTableType::GPT) {
     // GPT only support primary partitions.
-    return SupportedPartitionType::PrimaryOnly;
+    if (device.partitions.length() >= device.max_prims) {
+      return SupportedPartitionType::NoMorePartitionError;
+    } else {
+      return SupportedPartitionType::PrimaryOnly;
+    }
   } else {
     qCritical() << "getPartitionType() unknown partition table at:"
                 << partition.device_path;
