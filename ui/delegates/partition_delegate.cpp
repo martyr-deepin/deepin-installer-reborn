@@ -79,7 +79,7 @@ SupportedPartitionType PartitionDelegate::getPartitionType(
   } else {
     qCritical() << "getPartitionType() unknown partition table at:"
                 << partition.device_path;
-    return SupportedPartitionType::Invalid;
+    return SupportedPartitionType::InvalidPartitionTable;
   }
 }
 

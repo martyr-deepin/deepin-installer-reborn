@@ -4,12 +4,10 @@
 
 #include "ui/frames/inner/new_partition_frame.h"
 
+#include <QDebug>
 #include <QGridLayout>
-#include <QHBoxLayout>
 #include <QLabel>
-#include <QPixmap>
 #include <QSlider>
-#include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
 #include "ui/delegates/partition_delegate.h"
@@ -22,6 +20,13 @@
 #include "ui/widgets/title_label.h"
 
 namespace installer {
+
+namespace {
+
+const char kTypePrimary[] = "Primary partition";
+const char kTypeLogical[] = "Logical partition";
+
+}  // namespace
 
 NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
                                      QWidget* parent)
@@ -39,7 +44,34 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
   // TODO(xushaohua): Check whether primary or logical partition is available or not.
 
   // TODO(xushaohua): Reset all status.
-//  delegate_->getPartitionType(partition);
+
+  const SupportedPartitionType type = delegate_->getPartitionType(partition);
+  type_box_->clear();
+  switch (type) {
+    case SupportedPartitionType::PrimaryOnly: {
+      type_box_->addItem(tr(kTypePrimary));
+      break;
+    }
+    case SupportedPartitionType::LogicalOnly: {
+      type_box_->addItem(tr(kTypeLogical));
+      break;
+    }
+    case SupportedPartitionType::PrimaryOrLogical: {
+      type_box_->addItems({tr(kTypePrimary), tr(kTypeLogical)});
+      break;
+    }
+    case SupportedPartitionType::NoMorePartitionError: {
+      // TODO(xushaohua): Display error msg in page
+      // TODO(xushaohua): Disable or hide create-button
+      qCritical() << "No more primary partition available at: "
+                  << partition.device_path;
+      break;
+    }
+    case SupportedPartitionType::InvalidPartitionTable: {
+      qCritical() << "Invalid partition table found:" << partition.device_path;
+      break;
+    }
+  }
 
   const int mebi_size = static_cast<int>(partition.getByteLength() / kMebiByte);
   size_slider_->setMaximum(mebi_size);
@@ -77,7 +109,7 @@ void NewPartitionFrame::initUI() {
   TableItemLabel* size_label = new TableItemLabel(tr("Size"));
 
   type_box_ = new TableComboBox();
-  type_box_->addItems({tr("Primary partition"), tr("Logical partition")});
+  type_box_->addItems({tr(kTypePrimary), tr(kTypeLogical)});
   alignment_box_ = new TableComboBox();
   alignment_box_->addItems({tr("Start"), tr("End")});
 

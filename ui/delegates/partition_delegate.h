@@ -24,7 +24,7 @@ enum class SupportedPartitionType {
   LogicalOnly,
   PrimaryOrLogical,
   NoMorePartitionError,
-  Invalid,
+  InvalidPartitionTable,
 };
 
 // PartitionManager proxy layer. It is shared among partition sub frames.
