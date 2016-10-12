@@ -75,10 +75,10 @@ bool PartitionDelegate::canAddPrimary(const Partition& partition) const {
     bool has_logical_before = false;
     bool has_logical_after = false;
     for (const Partition& logical_partition : logical_partitions) {
-      if (logical_partition.sector_start < partition.sector_start) {
+      if (logical_partition.start_sector < partition.start_sector) {
         has_logical_before = true;
       }
-      if (logical_partition.sector_end > partition.sector_end) {
+      if (logical_partition.end_sector > partition.end_sector) {
         has_logical_after = true;
       }
     }
@@ -118,17 +118,17 @@ bool PartitionDelegate::canAddLogical(const Partition& partition) const {
     const Partition ext_partition = device.partitions.at(ext_index);
     const PartitionList prim_partitions = GetPrimaryPartitions(
         device.partitions);
-    if (partition.sector_end < ext_partition.sector_start) {
+    if (partition.end_sector < ext_partition.start_sector) {
       for (const Partition& prim_partition : prim_partitions) {
-        if (prim_partition.sector_end > partition.sector_start &&
-            prim_partition.sector_start < ext_partition.sector_start) {
+        if (prim_partition.end_sector > partition.start_sector &&
+            prim_partition.start_sector < ext_partition.start_sector) {
           logical_ok = false;
         }
       }
-    } else if (partition.sector_start > ext_partition.sector_end) {
+    } else if (partition.start_sector > ext_partition.end_sector) {
       for (const Partition& prim_partition : prim_partitions) {
-        if (prim_partition.sector_end < partition.sector_start &&
-            prim_partition.sector_start > ext_partition.sector_end) {
+        if (prim_partition.end_sector < partition.start_sector &&
+            prim_partition.start_sector > ext_partition.end_sector) {
           logical_ok =false;
         }
       }
@@ -193,20 +193,20 @@ void PartitionDelegate::createPartition(const Partition& partition,
   // Take into consideration if preceding space.
   const qint64 preceding_sectors = getPartitionPreceding(partition) /
                                    partition.sector_size;
-  const qint64 actual_start_sector = partition.sector_start + preceding_sectors;
+  const qint64 actual_start_sector = partition.start_sector + preceding_sectors;
 
   if (align_start) {
     // Align from start of |partition|.
-    new_partition.sector_start = actual_start_sector;
-    new_partition.sector_end = total_sectors + partition.sector_start;
-    new_partition.sectors_unallocated_succeeding = partition.sector_end -
-                                                   new_partition.sector_end;
+    new_partition.start_sector = actual_start_sector;
+    new_partition.end_sector = total_sectors + partition.start_sector;
+    new_partition.sectors_unallocated_succeeding = partition.end_sector -
+                                                   new_partition.end_sector;
   } else {
-    new_partition.sector_end = partition.sector_end;
-    new_partition.sector_start = qMax(partition.sector_end - total_sectors,
+    new_partition.end_sector = partition.end_sector;
+    new_partition.start_sector = qMax(partition.end_sector - total_sectors,
                                       actual_start_sector);
-    const qint64 start_sector_delta = new_partition.sector_start -
-                                      partition.sector_start;
+    const qint64 start_sector_delta = new_partition.start_sector -
+                                      partition.start_sector;
     if (start_sector_delta > preceding_sectors) {
       new_partition.sectors_unallocated_preceding = start_sector_delta;
     }

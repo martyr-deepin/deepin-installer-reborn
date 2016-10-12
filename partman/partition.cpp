@@ -20,8 +20,8 @@ Partition::Partition()
       sector_size(-1),
       length(-1),
       freespace(-1),
-      sector_start(-1),
-      sector_end(-1),
+      start_sector(-1),
+      end_sector(-1),
       sectors_unallocated_preceding(0),
       sectors_unallocated_succeeding(0),
       mount_point() {
@@ -34,7 +34,7 @@ Partition::~Partition() {
 bool Partition::operator==(const Partition& other) const {
   return (this->device_path == other.device_path &&
           this->partition_number == other.partition_number &&
-          this->sector_start == other.sector_start &&
+          this->start_sector == other.start_sector &&
           type == other.type);
 }
 
@@ -48,12 +48,12 @@ qint64 Partition::getByteLength() const {
 }
 
 qint64 Partition::getSector() const {
-  return sector_start + (sector_end - sector_start) / 2;
+  return start_sector + (end_sector - start_sector) / 2;
 }
 
 qint64 Partition::getSectorLength() const {
-  if (sector_start >= 0 && sector_end >= 0) {
-    return sector_end - sector_start + 1;
+  if (start_sector >= 0 && end_sector >= 0) {
+    return end_sector - start_sector + 1;
   } else {
     return -1;
   }
@@ -71,7 +71,7 @@ int ExtendedPartitionIndex(const PartitionList& partitions) {
 PartitionList GetPrimaryPartitions(const PartitionList& partitions) {
   PartitionList result;
   for (const Partition& partition : partitions) {
-    if (partition.type == PartitionType::Primary ||
+    if (partition.type == PartitionType::Normal ||
         partition.type == PartitionType::Extended) {
       result.append(partition);
     }
@@ -92,8 +92,8 @@ PartitionList GetLogicalPartitions(const PartitionList& partitions) {
 int PartitionIndex(const PartitionList& partitions,
                    const Partition& partition) {
   for (int i = 0; i < partitions.length(); ++i) {
-    if (partition.sector_start >= partitions[i].sector_start &&
-        partition.sector_end <= partitions[i].sector_end) {
+    if (partition.start_sector >= partitions[i].start_sector &&
+        partition.end_sector <= partitions[i].end_sector) {
       return i;
     }
   }

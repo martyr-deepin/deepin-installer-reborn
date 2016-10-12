@@ -150,7 +150,7 @@ void NewPartitionFrame::initUI() {
 
 void NewPartitionFrame::onCreateButtonClicked() {
   const bool is_primary = (type_box_->currentIndex() == 0);
-  const PartitionType partition_type = is_primary ? PartitionType::Primary :
+  const PartitionType partition_type = is_primary ? PartitionType::Normal :
                                                     PartitionType::Logical;
   const bool align_start = (alignment_box_->currentIndex() == 0);
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());

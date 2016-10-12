@@ -50,7 +50,7 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
 
     Partition partition;
     if (lp_partition->type == PED_PARTITION_NORMAL) {
-      partition.type = PartitionType::Primary;
+      partition.type = PartitionType::Normal;
       qDebug() << "normal";
     } else if (lp_partition->type == PED_PARTITION_EXTENDED) {
       partition.type = PartitionType::Extended;
@@ -77,9 +77,9 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
     } else {
       partition.fs = FsType::Unknown;
     }
-    partition.sector_start = lp_partition->geom.start;
-    qDebug() << "sector start:" << partition.sector_start;
-    partition.sector_end = lp_partition->geom.end;
+    partition.start_sector = lp_partition->geom.start;
+    qDebug() << "sector start:" << partition.start_sector;
+    partition.end_sector = lp_partition->geom.end;
     qDebug() << "sector end:" << lp_partition->geom.end;
 
     // Result of ped_partition_get_path() need to be freed by hand.

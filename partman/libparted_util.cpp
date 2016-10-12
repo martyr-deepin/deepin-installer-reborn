@@ -28,7 +28,7 @@ bool CreatePartition(const Partition& partition) {
     PedPartitionType type;
 
     switch (partition.type) {
-      case PartitionType::Primary: {
+      case PartitionType::Normal: {
         type = PED_PARTITION_NORMAL;
         break;
       }
@@ -61,12 +61,12 @@ bool CreatePartition(const Partition& partition) {
     PedPartition* lp_partition = ped_partition_new(lp_disk,
                                                    type,
                                                    fs_type,
-                                                   partition.sector_start,
-                                                   partition.sector_end);
+                                                   partition.start_sector,
+                                                   partition.end_sector);
     if (lp_partition) {
       PedConstraint* constraint = NULL;
       PedGeometry* geom = ped_geometry_new(lp_device,
-                                           partition.sector_start,
+                                           partition.start_sector,
                                            partition.getSectorLength());
       if (geom) {
         constraint = ped_constraint_exact(geom);

@@ -14,7 +14,7 @@
 namespace installer {
 
 enum class PartitionType {
-  Primary,
+  Normal,
   Logical,
   Extended,
   Unallocated,
@@ -51,8 +51,8 @@ class Partition {
   qint64 length;
   qint64 freespace;
 
-  qint64 sector_start;
-  qint64 sector_end;
+  qint64 start_sector;
+  qint64 end_sector;
 
   // No. of sectors not unallocated before/after this partition.
   // These two properties are only used while creating a new partition.

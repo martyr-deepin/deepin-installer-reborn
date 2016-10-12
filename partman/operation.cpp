@@ -94,8 +94,8 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
     // Create an unallocated partition after this one.
     Partition succeeding_partition;
     succeeding_partition.device_path = new_partition.device_path;
-    succeeding_partition.sector_end = orig_partition.sector_end;
-    succeeding_partition.sector_start = succeeding_partition.sector_end -
+    succeeding_partition.end_sector = orig_partition.end_sector;
+    succeeding_partition.start_sector = succeeding_partition.end_sector -
                                         new_partition.sectors_unallocated_succeeding;
     if (index+1 == partitions.length()) {
       partitions.append(succeeding_partition);
@@ -110,8 +110,8 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
     // Create an unallocated partition before this one.
     Partition preceding_partition;
     preceding_partition.device_path = new_partition.device_path;
-    preceding_partition.sector_start = orig_partition.sector_start;
-    preceding_partition.sector_end = preceding_partition.sector_start +
+    preceding_partition.start_sector = orig_partition.start_sector;
+    preceding_partition.end_sector = preceding_partition.start_sector +
                                      new_partition.sectors_unallocated_preceding;
     if (index == 0) {
       partitions.prepend(preceding_partition);
@@ -128,7 +128,7 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
   if (index > 0 &&
       (partitions.at(index - 1).type == PartitionType::Unallocated)) {
     // Not the first partition, try to merge with previous one.
-    empty_partition.sector_start = partitions.at(index - 1).sector_start;
+    empty_partition.start_sector = partitions.at(index - 1).start_sector;
     partitions.removeAt(index - 1);
     index -= 1;
   }
@@ -136,7 +136,7 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
   if (index < partitions.length() - 1 &&
       (partitions.at(index + 1).type == PartitionType::Unallocated)) {
     // Not the last partition, try to merge with next partition.
-    empty_partition.sector_end = partitions.at(index + 1).sector_end;
+    empty_partition.end_sector = partitions.at(index + 1).end_sector;
     partitions[index] = empty_partition;
     partitions.removeAt(index + 1);
   }
