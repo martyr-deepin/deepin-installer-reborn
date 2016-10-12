@@ -54,32 +54,93 @@ void PartitionDelegate::autoConf() {
   emit partition_manager_->autoPart(script_path);
 }
 
+bool PartitionDelegate::canAddPrimary(const Partition& partition) const {
+  const int index = DeviceIndex(devices_, partition.device_path);
+  if (index == -1) {
+    qCritical() << "getSupportedPartitionType() no device found at:"
+                << partition.device_path;
+    return false;
+  }
+  const Device& device = devices_.at(index);
+  const PartitionList prim_partitions = GetPrimaryPartitions(device.partitions);
+  const PartitionList logical_partitions = GetLogicalPartitions(
+      device.partitions);
+
+  // Check primary type
+  bool primary_ok = true;
+  if (prim_partitions.length() >= device.max_prims) {
+    primary_ok = false;
+  } else {
+    // Check whether |partition| is between two logical partitions.
+    bool has_logical_before = false;
+    bool has_logical_after = false;
+    for (const Partition& logical_partition : logical_partitions) {
+      if (logical_partition.sector_start < partition.sector_start) {
+        has_logical_before = true;
+      }
+      if (logical_partition.sector_end > partition.sector_end) {
+        has_logical_after = true;
+      }
+    }
+    if (has_logical_after && has_logical_before) {
+      primary_ok = false;
+    }
+  }
+
+  return primary_ok;
+}
+
+bool PartitionDelegate::canAddLogical(const Partition& partition) const {
+  const int index = DeviceIndex(devices_, partition.device_path);
+  if (index == -1) {
+    qCritical() << "getSupportedPartitionType() no device found at:"
+                << partition.device_path;
+    return false;
+  }
+  const Device& device = devices_.at(index);
+
+  // Ignores gpt table.
+  if (device.table != PartitionTableType::MsDos) {
+    return false;
+  }
+
+  bool logical_ok = true;
+  const int ext_index = ExtendedPartitionIndex(device.partitions);
+  if (ext_index == -1) {
+    // No extended partition found, so check one more primary partition is
+    // available or not.
+    if (GetPrimaryPartitions(device.partitions).length() >= device.max_prims) {
+      logical_ok = false;
+    }
+  } else {
+    // Check whether there is primary partition between |partition| and
+    // extended partition.
+    const Partition ext_partition = device.partitions.at(ext_index);
+    const PartitionList prim_partitions = GetPrimaryPartitions(
+        device.partitions);
+    if (partition.sector_end < ext_partition.sector_start) {
+      for (const Partition& prim_partition : prim_partitions) {
+        if (prim_partition.sector_end > partition.sector_start &&
+            prim_partition.sector_start < ext_partition.sector_start) {
+          logical_ok = false;
+        }
+      }
+    } else if (partition.sector_start > ext_partition.sector_end) {
+      for (const Partition& prim_partition : prim_partitions) {
+        if (prim_partition.sector_end < partition.sector_start &&
+            prim_partition.sector_start > ext_partition.sector_end) {
+          logical_ok =false;
+        }
+      }
+    }
+  }
+  return logical_ok;
+}
+
 void PartitionDelegate::scanDevices() const {
   // If auto-part is not set, scan devices right now.
   if (!GetSettingsBool(kPartitionDoAutoPart)) {
     emit partition_manager_->refreshDevices();
-  }
-}
-
-SupportedPartitionType PartitionDelegate::getPartitionType(
-    const Partition& partition) const {
-  const int index = DeviceIndex(devices_, partition.device_path);
-  Q_ASSERT(index > -1);
-  const Device& device = devices_.at(index);
-  if (device.table == PartitionTableType::MsDos) {
-    // TODO(xushaohua): Check max_prims and logical partition
-    return SupportedPartitionType::PrimaryOnly;
-  } else if (device.table == PartitionTableType::GPT) {
-    // GPT only support primary partitions.
-    if (device.partitions.length() >= device.max_prims) {
-      return SupportedPartitionType::NoMorePartitionError;
-    } else {
-      return SupportedPartitionType::PrimaryOnly;
-    }
-  } else {
-    qCritical() << "getPartitionType() unknown partition table at:"
-                << partition.device_path;
-    return SupportedPartitionType::InvalidPartitionTable;
   }
 }
 
@@ -156,6 +217,32 @@ void PartitionDelegate::createPartition(const Partition& partition,
   new_partition.mount_point = mount_point;
   Operation operation(OperationType::Create, partition, new_partition);
   operations_.append(operation);
+
+  // TODO(xushaohua): Resize extended partition if needed
+
+  const int device_index = DeviceIndex(devices_, partition.device_path);
+  if (device_index == -1) {
+    // TODO(xushaohua): Raise error msg
+    qCritical() << "createPartition() device index out of range:"
+                << partition.device_path;
+    return;
+  }
+  const Device& device = devices_.at(device_index);
+
+  const int ext_index = ExtendedPartitionIndex(device.partitions);
+  if (ext_index == -1 && partition_type == PartitionType::Logical) {
+    // No extended partition found, create one if needed.
+    // TODO(xushaohua): Create extended partition.
+  }
+
+//  const Partition& ext_partition = device.partitions.at(ext_index);
+
+  // If new primary partition is contained in or intersected with
+  // extended partition, shrink extended partition or delete it if no other
+  // logical partitions.
+  // If new logical partition is not contained in or is intersected with
+  // extended partition, enlarge extended partition.
+
   refreshVisual();
 }
 

@@ -19,14 +19,6 @@ class PartitionManager;
 // If partition size is less than this value, hide it from partition list.
 const qint64 kMinimumPartitionSizeToDisplay = 10 * kMebiByte;
 
-enum class SupportedPartitionType {
-  PrimaryOnly,
-  LogicalOnly,
-  PrimaryOrLogical,
-  NoMorePartitionError,
-  InvalidPartitionTable,
-};
-
 // PartitionManager proxy layer. It is shared among partition sub frames.
 // PartitionManager is invisible in frame pages.
 class PartitionDelegate : public QObject {
@@ -39,14 +31,15 @@ class PartitionDelegate : public QObject {
   // Notify PartitionManager to do auto-part
   void autoConf();
 
+  // Get alternative partition type. Used while creating a new partition.
+  // |partition| is an unallocated partition.
+  bool canAddPrimary(const Partition& partition) const;
+  bool canAddLogical(const Partition& partition) const;
+
   const DeviceList& devices() const { return devices_; }
 
   // Notifies partition manager to scan devices.
   void scanDevices() const;
-
-  // Get alternative partition type. Used while creating a new partition.
-  // |partition| is an unallocated partition.
-  SupportedPartitionType getPartitionType(const Partition& partition) const;
 
   // Get mount point based on fs type.
   const QStringList& getMountPoints();

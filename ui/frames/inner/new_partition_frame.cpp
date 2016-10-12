@@ -42,37 +42,22 @@ NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
 void NewPartitionFrame::setPartition(const Partition& partition) {
   partition_ = partition;
 
-  const SupportedPartitionType type = delegate_->getPartitionType(partition);
+  const bool primary_ok = delegate_->canAddPrimary(partition);
+  const bool logical_ok = delegate_->canAddLogical(partition);
   type_box_->clear();
-  switch (type) {
-    case SupportedPartitionType::PrimaryOnly: {
-      type_box_->addItem(tr(kTypePrimary));
-      break;
-    }
-    case SupportedPartitionType::LogicalOnly: {
-      type_box_->addItem(tr(kTypeLogical));
-      break;
-    }
-    case SupportedPartitionType::PrimaryOrLogical: {
-      type_box_->addItems({tr(kTypePrimary), tr(kTypeLogical)});
-      break;
-    }
-    case SupportedPartitionType::NoMorePartitionError: {
-      // TODO(xushaohua): Display error msg in page
-      // TODO(xushaohua): Disable or hide create-button
-      qCritical() << "No more primary partition available at: "
-                  << partition.device_path;
-      break;
-    }
-    case SupportedPartitionType::InvalidPartitionTable: {
-      qCritical() << "Invalid partition table found:" << partition.device_path;
-      break;
-    }
+  if (primary_ok) {
+    type_box_->addItem(tr(kTypePrimary));
+  }
+  if (logical_ok) {
+    type_box_->addItem(tr(kTypeLogical));
+  }
+
+  if (!primary_ok && !logical_ok) {
+    qCritical() << "No more partition available!";
   }
 
   alignment_box_->setCurrentIndex(0);
   // TODO(xushaohua): Reset all status.
-
 
   const int mebi_size = static_cast<int>(partition.getByteLength() / kMebiByte);
   size_slider_->setMaximum(mebi_size);

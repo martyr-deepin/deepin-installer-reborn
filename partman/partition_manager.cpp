@@ -73,6 +73,7 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
     if (lp_partition->fs_type) {
       partition.fs = GetFsTypeByName(lp_partition->fs_type->name);
       // TODO(xushaohua): Check EFI flag
+      // TODO(xushaohua): Read flags
     } else {
       partition.fs = FsType::Unknown;
     }
@@ -206,10 +207,11 @@ DeviceList ScanDevices() {
       } else {
         disk_type = ped_disk_type_get(kPartitionTableMsDos);
       }
-      Q_ASSERT(disk_type != NULL);
       if (disk_type) {
         // Create a new device table but not commit changes to device.
         lp_disk = ped_disk_new_fresh(lp_device, disk_type);
+      } else {
+        qCritical() << "ScanDevices() disk_type is NULL";
       }
     } else if (QString(kPartitionTableGPT) == disk_type->name ||
                QString(kPartitionTableMsDos) == disk_type->name) {
