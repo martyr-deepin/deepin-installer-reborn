@@ -68,6 +68,27 @@ int ExtendedPartitionIndex(const PartitionList& partitions) {
   return -1;
 }
 
+PartitionList GetPrimaryPartitions(const PartitionList& partitions) {
+  PartitionList result;
+  for (const Partition& partition : partitions) {
+    if (partition.type == PartitionType::Primary ||
+        partition.type == PartitionType::Extended) {
+      result.append(partition);
+    }
+  }
+  return result;
+}
+
+PartitionList GetLogicalPartitions(const PartitionList& partitions) {
+  PartitionList result;
+  for (const Partition& partition : partitions) {
+    if (partition.type == PartitionType::Logical) {
+      result.append(partition);
+    }
+  }
+  return result;
+}
+
 int PartitionIndex(const PartitionList& partitions,
                    const Partition& partition) {
   for (int i = 0; i < partitions.length(); ++i) {
@@ -77,17 +98,6 @@ int PartitionIndex(const PartitionList& partitions,
     }
   }
   return -1;
-}
-
-int SumOfPrimarys(const PartitionList& partitions) {
-  int count = 0;
-  for (const Partition& partition : partitions) {
-    if (partition.type == PartitionType::Primary ||
-        partition.type == PartitionType::Extended) {
-      ++count;
-    }
-  }
-  return count;
 }
 
 }  // namespace installer
