@@ -33,6 +33,16 @@ const char kReleaseLogFormat[] = "[%{type:-7}] %{message}\n";
 
 const char kLogFileName[] = "deepin-installer-reborn.log";
 
+void BackupLogFile() {
+  const QString log_file = GetLogFilepath();
+  QFile file(log_file);
+  if (file.exists()) {
+    const qint64 timestamp = QDateTime::currentMSecsSinceEpoch();
+    const QString old_log_file = QString("%1.%2").arg(log_file).arg(timestamp);
+    file.rename(old_log_file);
+  }
+}
+
 // Define customized QDebug handler.
 void MessageOutput(QtMsgType type, const QMessageLogContext& context,
                    const QString& msg) {
@@ -116,6 +126,8 @@ void InitLogService() {
 
 void RedirectLogFile() {
   qInstallMessageHandler(MessageOutput);
+
+  BackupLogFile();
 
   if (g_log_fd == 0) {
     const QString log_file = GetLogFilepath();
