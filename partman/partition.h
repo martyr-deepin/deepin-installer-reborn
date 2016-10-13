@@ -38,7 +38,6 @@ class Partition {
 
   QString device_path;
   QString path;
-  QString uuid;
   QString label;
   QString part_label;  // Only some partition tables support part-label.
   int partition_number;

@@ -53,7 +53,6 @@ QDebug& operator<<(QDebug& debug, const PartitionStatus& partition_status) {
 Partition::Partition()
     : device_path(),
       path(),
-      uuid(),
       label(),
       part_label(),
       partition_number(-1),

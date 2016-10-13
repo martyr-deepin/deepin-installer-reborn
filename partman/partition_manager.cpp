@@ -182,7 +182,6 @@ DeviceList ScanDevices() {
   DeviceList devices;
   const LabelItems label_items = ParseLabelDir();
   const PartLabelItems part_label_items = ParsePartLabelDir();
-  const UUIDItems uuid_items = ParseUUIDDir();
   const OsTypeItems os_type_items = GetOsTypeItems();
   const MountItemList mount_items = ParseMountItems();
 
@@ -240,7 +239,6 @@ DeviceList ScanDevices() {
         partition.label = label_items.value(partition.path, empty_str);
         partition.part_label = part_label_items.value(partition.path,
                                                       empty_str);
-        partition.uuid = uuid_items.value(partition.path, empty_str);
         partition.os = os_type_items.value(partition.path, OsType::Empty);
 
         // Mark busy flag of this partition when it is mounted in system.
