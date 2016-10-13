@@ -5,6 +5,7 @@
 #ifndef INSTALLER_PARTMAN_OPERATION_H
 #define INSTALLER_PARTMAN_OPERATION_H
 
+#include <QDebug>
 #include <QList>
 
 #include "partman/device.h"
@@ -19,6 +20,7 @@ enum class OperationType {
   Resize,
   Invalid,  // operation type not set
 };
+QDebug& operator<<(QDebug& debug, const OperationType& op_type);
 
 // Abstract class for operations.
 class Operation {

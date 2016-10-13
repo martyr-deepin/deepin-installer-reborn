@@ -6,7 +6,6 @@
 #define INSTALLER_UI_FRAMES_INNER_NEW_PARTITION_FRAME_H
 
 #include <QFrame>
-class QSlider;
 
 #include "partman/partition.h"
 
@@ -17,6 +16,7 @@ class MountPointModel;
 class NavButton;
 class TableComboBox;
 class PartitionDelegate;
+class PartitionSizeSlider;
 
 class NewPartitionFrame : public QFrame {
   Q_OBJECT
@@ -38,7 +38,7 @@ class NewPartitionFrame : public QFrame {
   TableComboBox* alignment_box_ = nullptr;
   TableComboBox* fs_box_ = nullptr;
   TableComboBox* mount_point_box_ = nullptr;
-  QSlider* size_slider_ = nullptr;
+  PartitionSizeSlider* size_slider_ = nullptr;
 
   NavButton* cancel_button_ = nullptr;
   NavButton* create_button_ = nullptr;

@@ -7,7 +7,6 @@
 #include <QDebug>
 #include <QGridLayout>
 #include <QLabel>
-#include <QSlider>
 
 #include "ui/frames/consts.h"
 #include "ui/delegates/partition_delegate.h"
@@ -15,6 +14,7 @@
 #include "ui/models/mount_point_model.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
+#include "ui/widgets/partition_size_slider.h"
 #include "ui/widgets/table_combo_box.h"
 #include "ui/widgets/table_item_label.h"
 #include "ui/widgets/title_label.h"
@@ -59,9 +59,7 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
   alignment_box_->setCurrentIndex(0);
   // TODO(xushaohua): Reset all status.
 
-  const int mebi_size = static_cast<int>(partition.getByteLength() / kMebiByte);
-  size_slider_->setMaximum(mebi_size);
-  size_slider_->setMinimum(0);
+  size_slider_->setMaximum(partition.getByteLength());
 }
 
 void NewPartitionFrame::initConnections() {
@@ -107,7 +105,7 @@ void NewPartitionFrame::initUI() {
   mount_point_model_ = new MountPointModel(delegate_, mount_point_box_);
   mount_point_box_->setModel(mount_point_model_);
 
-  size_slider_ = new QSlider(Qt::Horizontal);
+  size_slider_ = new PartitionSizeSlider();
 
   QGridLayout* grid_layout = new QGridLayout();
   grid_layout->addWidget(type_label, 0, 0);
@@ -149,16 +147,16 @@ void NewPartitionFrame::initUI() {
 }
 
 void NewPartitionFrame::onCreateButtonClicked() {
+  // FIXME(xushaohua): Check type box flag
   const bool is_primary = (type_box_->currentIndex() == 0);
   const PartitionType partition_type = is_primary ? PartitionType::Normal :
                                                     PartitionType::Logical;
   const bool align_start = (alignment_box_->currentIndex() == 0);
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
-  const QString mount_point = mount_point_model_->getMountPoint(
-      mount_point_box_->currentIndex());
+  const int mp_index = mount_point_box_->currentIndex();
+  const QString mount_point = mount_point_model_->getMountPoint(mp_index);
   // TODO(xushaohua): Calculate exact sectors
-  const qint64 total_sectors = size_slider_->value() * kMebiByte /
-                               partition_.sector_size;
+  const qint64 total_sectors = size_slider_->value() / partition_.sector_size;
   delegate_->createPartition(partition_, partition_type, align_start, fs_type,
                              mount_point, total_sectors);
 

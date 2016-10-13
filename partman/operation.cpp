@@ -11,41 +11,46 @@
 
 namespace installer {
 
+QDebug& operator<<(QDebug& debug, const OperationType& op_type) {
+  QString type;
+  switch (op_type) {
+    case OperationType::Create: {
+      type = "Create";
+      break;
+    }
+    case OperationType::Delete: {
+      type = "Delete";
+      break;
+    }
+    case OperationType::Format: {
+      type = "Format";
+      break;
+    }
+    case OperationType::Resize: {
+      type = "Resize";
+      break;
+    }
+    case OperationType::MountPoint: {
+      type = "MountPoint";
+      break;
+    }
+    case OperationType::Invalid: {
+      type = "Invalid";
+      break;
+    }
+  }
+  debug << type;
+  return debug;
+}
+
 Operation::Operation(OperationType type,
                      const Partition& orig_partition,
                      const Partition& new_partition)
     : type(type),
       orig_partition(orig_partition),
       new_partition(new_partition) {
-#ifndef NDEBUG
-  qDebug() << "Operation::constructor()" << orig_partition.path;
-  switch (type) {
-    case OperationType::Create: {
-      qDebug() << "Create!";
-      break;
-    }
-    case OperationType::Delete: {
-      qDebug() << "Delete!";
-      break;
-    }
-    case OperationType::Format: {
-      qDebug() << "Format!";
-      break;
-    }
-    case OperationType::Resize: {
-      qDebug() << "Resize";
-      break;
-    }
-    case OperationType::MountPoint: {
-      qDebug() << "MountPoint!";
-      break;
-    }
-    case OperationType::Invalid: {
-      qDebug() << "Invalid!";
-      break;
-    }
-  }
-#endif
+  qDebug() << "Operation::constructor()" << type << orig_partition
+           << new_partition;
 }
 
 Operation::~Operation() {

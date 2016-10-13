@@ -13,6 +13,7 @@
     <file>log_viewer_frame.css</file>
     <file>nav_button.css</file>
     <file>partition_frame_main_frame.css</file>
+    <file>partition_size_slider.css</file>
     <file>simple_partition_button.css</file>
     <file>simple_partition_frame.css</file>
     <file>subhead_label.css</file>
