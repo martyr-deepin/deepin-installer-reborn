@@ -367,13 +367,36 @@ void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   this->devices_ = devices;
   for (Device& device : devices_) {
     PartitionList new_partitions;
-    for (const Partition& partition : device.partitions) {
-      // Filters freespace partition based on size.
-      if (partition.type == PartitionType::Unallocated &&
-          partition.getByteLength() < kMinimumPartitionSizeToDisplay) {
-        continue;
+    const PartitionList& old_partitions = device.partitions;
+    Partition unallocated_partition;
+    for (int index = 0; index < old_partitions.length(); ) {
+      if (old_partitions.at(index).type == PartitionType::Unallocated) {
+        unallocated_partition = old_partitions.at(index);
+        index ++;
+
+        while (index < old_partitions.length()) {
+          if (old_partitions.at(index).type == PartitionType::Unallocated) {
+            // Merge unallocated partitions.
+            qDebug() << "merge partition:" << old_partitions.at(index);
+            unallocated_partition.end_sector = old_partitions.at(index).end_sector;
+            index ++;
+          } else if (old_partitions.at(index).type == PartitionType::Extended) {
+            // Ignores extended partition.
+            index ++;
+          } else {
+            break;
+          }
+        }
+
+        // Ignore unallocated partition if it is too small.
+        if (unallocated_partition.getByteLength() > kMinimumPartitionSizeToDisplay) {
+          new_partitions.append(unallocated_partition);
+        }
+
+      } else {
+        new_partitions.append(old_partitions.at(index));
+        index ++;
       }
-      new_partitions.append(partition);
     }
     device.partitions = new_partitions;
   }

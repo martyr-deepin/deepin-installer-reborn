@@ -47,7 +47,7 @@ void PartitionSizeSlider::initUI() {
   int_validator_ = new QIntValidator(editor_);
   editor_->setValidator(int_validator_);
 
-  QLabel* size_label = new QLabel("M");
+  QLabel* size_label = new QLabel("Mib");
   size_label->setObjectName(QStringLiteral("size_label"));
 
   QHBoxLayout* layout = new QHBoxLayout();
