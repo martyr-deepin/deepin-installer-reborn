@@ -90,6 +90,10 @@ void SimplePartitionFrame::drawDevices() {
     int row = 0, column = 0;
 
     for (const Partition& partition : device.partitions) {
+      if (partition.type == PartitionType::Extended) {
+        // Ignores extended partition.
+        continue;
+      }
       SimplePartitionButton* button = new SimplePartitionButton(partition);
       partition_button_group_->addButton(button);
       grid_layout->addWidget(button, row, column, Qt::AlignLeft);

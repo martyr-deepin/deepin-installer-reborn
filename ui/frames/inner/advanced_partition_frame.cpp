@@ -83,6 +83,10 @@ void AdvancedPartitionFrame::drawDevices() {
     partition_layout_->addWidget(model_label);
     qDebug() << "Add model:" << device.model;
     for (const Partition& partition : device.partitions) {
+      if (partition.type == PartitionType::Extended) {
+        // Ignores extended partition.
+        continue;
+      }
       AdvancedPartitionItem* item = new AdvancedPartitionItem(partition);
       item->setEditable(enable_editing_button_->isChecked());
       partition_layout_->addWidget(item);
