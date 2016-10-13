@@ -247,7 +247,11 @@ void PartitionDelegate::createPartition(const Partition& partition,
 }
 
 void PartitionDelegate::deletePartition(const Partition& partition) {
-  Partition new_partition(partition);
+  Partition new_partition;
+  new_partition.sector_size = partition.sector_size;
+  new_partition.start_sector = partition.start_sector;
+  new_partition.end_sector = partition.end_sector;
+  new_partition.device_path = partition.device_path;
   new_partition.type = PartitionType::Unallocated;
   new_partition.freespace = new_partition.length;
   new_partition.fs = FsType::Empty;
@@ -290,7 +294,12 @@ void PartitionDelegate::formatPartition(const Partition& partition,
                                         FsType fs_type,
                                         const QString& mount_point) {
   qDebug() << "formatPartition()" << partition.path << mount_point;
-  Partition new_partition(partition);
+  Partition new_partition;
+  new_partition.sector_size = partition.sector_size;
+  new_partition.start_sector = partition.start_sector;
+  new_partition.end_sector = partition.end_sector;
+  new_partition.path = partition.path;
+  new_partition.device_path = partition.device_path;
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
   new_partition.status = PartitionStatus::Formatted;

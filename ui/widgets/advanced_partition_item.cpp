@@ -4,6 +4,7 @@
 
 #include "ui/widgets/advanced_partition_item.h"
 
+#include <QDebug>
 #include <QHBoxLayout>
 #include <QLabel>
 
@@ -18,6 +19,8 @@ AdvancedPartitionItem::AdvancedPartitionItem(
       partition_(partition),
       editable_(false) {
   this->setObjectName(QStringLiteral("advanced_partition_item"));
+
+  qDebug() << "AdvancedPartitionItem:" << partition_;
 
   this->initUI();
   this->initConnections();

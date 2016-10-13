@@ -115,8 +115,10 @@ QDebug& operator<<(QDebug& debug, const Partition& partition) {
         << "mount point:" << partition.mount_point
         << "start:" << partition.start_sector
         << "end:" << partition.end_sector
+        << "sector size:" << partition.sector_size
         << "length:" << partition.length
         << "freespace:" << partition.freespace
+        << "byte length:" << partition.getByteLength()
         << "}";
   return debug;
 }

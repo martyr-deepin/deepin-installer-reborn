@@ -130,6 +130,7 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
     // Create an unallocated partition after this one.
     Partition succeeding_partition;
     succeeding_partition.device_path = new_partition.device_path;
+    succeeding_partition.sector_size = orig_partition.sector_size;
     succeeding_partition.end_sector = orig_partition.end_sector;
     succeeding_partition.start_sector = succeeding_partition.end_sector -
                                         new_partition.sectors_unallocated_succeeding;
