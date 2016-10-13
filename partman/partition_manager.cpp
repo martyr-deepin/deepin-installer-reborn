@@ -84,7 +84,8 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
 
     // Avoid reading additional filesystem information if there is no path.
     if (!partition.path.isEmpty() &&
-        partition.type != PartitionType::Unallocated) {
+        partition.type != PartitionType::Unallocated &&
+        partition.type != PartitionType::Extended) {
 
       // Read label based on filesystem type
       ReadUsage(partition.path, partition.fs, partition.freespace,
@@ -251,7 +252,6 @@ DeviceList ScanDevices() {
       }
     }
 
-    qDebug() << "device:" << device;
     devices.append(device);
     ped_disk_destroy(lp_disk);
 
