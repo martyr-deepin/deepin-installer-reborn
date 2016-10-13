@@ -67,8 +67,8 @@ void AdvancedPartitionItem::initUI() {
   qint64 freespace;
   qint64 total;
   if (partition_.type == PartitionType::Unallocated || partition_.length <= 0) {
-    freespace = 0;
     total = partition_.getByteLength();
+    freespace = total;
   } else {
     freespace = partition_.freespace;
     total = partition_.length;
