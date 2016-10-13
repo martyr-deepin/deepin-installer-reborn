@@ -243,7 +243,7 @@ void PartitionDelegate::createPartition(const Partition& partition,
   // If new logical partition is not contained in or is intersected with
   // extended partition, enlarge extended partition.
 
-  refreshVisual();
+  this->refreshVisual();
 }
 
 void PartitionDelegate::deletePartition(const Partition& partition) {
@@ -305,6 +305,8 @@ void PartitionDelegate::formatPartition(const Partition& partition,
   new_partition.status = PartitionStatus::Formatted;
   Operation operation(OperationType::Format, partition, new_partition);
   operations_.append(operation);
+
+  this->refreshVisual();
 }
 
 void PartitionDelegate::updateMountPoint(const Partition& partition,
@@ -316,6 +318,7 @@ void PartitionDelegate::updateMountPoint(const Partition& partition,
   // No need to update partition status.
   Operation operation(OperationType::MountPoint, partition, new_partition);
   operations_.append(operation);
+
   this->refreshVisual();
 }
 
@@ -351,7 +354,49 @@ void PartitionDelegate::initConnections() {
 }
 
 void PartitionDelegate::refreshVisual() {
+  // Filters partition list based on the following policy:
+  // * Remove extended partition if no logical partition exists;
+  // * Merge unallocated partition with next unallocated one;
+  // * Ignore partitions with size less than 100Mib;
+
   this->devices_ = this->real_devices_;
+
+//  for (Device& device : devices_) {
+//    PartitionList new_partitions;
+//    const PartitionList& old_partitions = device.partitions;
+//    Partition unallocated_partition;
+//    for (int index = 0; index < old_partitions.length(); ) {
+//      if (old_partitions.at(index).type == PartitionType::Unallocated) {
+//        unallocated_partition = old_partitions.at(index);
+//        index ++;
+//
+//        while (index < old_partitions.length()) {
+//          if (old_partitions.at(index).type == PartitionType::Unallocated) {
+//            // Merge unallocated partitions.
+//            qDebug() << "merge partition:" << old_partitions.at(index);
+//            unallocated_partition.end_sector = old_partitions.at(index).end_sector;
+//            index ++;
+//          } else if (old_partitions.at(index).type == PartitionType::Extended) {
+//            // Ignores extended partition.
+//            index ++;
+//          } else {
+//            break;
+//          }
+//        }
+//
+//        // Ignore unallocated partition if it is too small.
+//        if (unallocated_partition.getByteLength() > kMinimumPartitionSizeToDisplay) {
+//          new_partitions.append(unallocated_partition);
+//        }
+//
+//      } else {
+//        new_partitions.append(old_partitions.at(index));
+//        index ++;
+//      }
+//    }
+//    device.partitions = new_partitions;
+//  }
+
   for (Device& device : this->devices_) {
     for (Operation& operation : operations_) {
       if (operation.orig_partition.device_path == device.path) {
@@ -359,49 +404,27 @@ void PartitionDelegate::refreshVisual() {
       }
     }
   }
+
   emit this->deviceRefreshed();
+}
+
+void PartitionDelegate::removeEmptyExtendedPartition(
+    const PartitionList& partitions) {
+  const int ext_index = ExtendedPartitionIndex(partitions);
+  if (ext_index > -1) {
+    const PartitionList logical_parts = GetLogicalPartitions(partitions);
+    if (logical_parts.length() == 0) {
+      Partition ext_partition = partitions.at(ext_index);
+      Partition new_partition;
+      Operation operation(OperationType::Delete, ext_partition, new_partition);
+      operations_.append(operation);
+    }
+  }
 }
 
 void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   this->real_devices_ = devices;
-  this->devices_ = devices;
-  for (Device& device : devices_) {
-    PartitionList new_partitions;
-    const PartitionList& old_partitions = device.partitions;
-    Partition unallocated_partition;
-    for (int index = 0; index < old_partitions.length(); ) {
-      if (old_partitions.at(index).type == PartitionType::Unallocated) {
-        unallocated_partition = old_partitions.at(index);
-        index ++;
-
-        while (index < old_partitions.length()) {
-          if (old_partitions.at(index).type == PartitionType::Unallocated) {
-            // Merge unallocated partitions.
-            qDebug() << "merge partition:" << old_partitions.at(index);
-            unallocated_partition.end_sector = old_partitions.at(index).end_sector;
-            index ++;
-          } else if (old_partitions.at(index).type == PartitionType::Extended) {
-            // Ignores extended partition.
-            index ++;
-          } else {
-            break;
-          }
-        }
-
-        // Ignore unallocated partition if it is too small.
-        if (unallocated_partition.getByteLength() > kMinimumPartitionSizeToDisplay) {
-          new_partitions.append(unallocated_partition);
-        }
-
-      } else {
-        new_partitions.append(old_partitions.at(index));
-        index ++;
-      }
-    }
-    device.partitions = new_partitions;
-  }
-
-  emit this->deviceRefreshed();
+  this->refreshVisual();
 }
 
 void PartitionDelegate::onManualPartDone(bool ok,

@@ -83,6 +83,8 @@ class PartitionDelegate : public QObject {
   void initConnections();
   void refreshVisual();
 
+  void removeEmptyExtendedPartition(const PartitionList& partitions);
+
   PartitionManager* partition_manager_ = nullptr;
   QThread* partition_thread_ = nullptr;
 
