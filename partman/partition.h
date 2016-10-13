@@ -5,6 +5,7 @@
 #ifndef INSTALLER_PARTMAN_PARTITION_H
 #define INSTALLER_PARTMAN_PARTITION_H
 
+#include <QDebug>
 #include <QList>
 #include <QStringList>
 
@@ -19,12 +20,14 @@ enum class PartitionType {
   Extended,
   Unallocated,
 };
+QDebug& operator<<(QDebug& debug, const PartitionType& partition_type);
 
 enum class PartitionStatus {
   Real,
   New,
   Formatted,
 };
+QDebug& operator<<(QDebug& debug, const PartitionStatus& partition_status);
 
 class Partition {
  public:
@@ -73,6 +76,8 @@ class Partition {
   // Returns length in sector.
   qint64 getSectorLength() const;
 };
+
+QDebug& operator<<(QDebug& debug, const Partition& partition);
 
 typedef QList<Partition> PartitionList;
 

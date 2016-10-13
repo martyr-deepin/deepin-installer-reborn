@@ -6,6 +6,50 @@
 
 namespace installer {
 
+QDebug& operator<<(QDebug& debug, const PartitionType& partition_type) {
+  QString type;
+  switch (partition_type) {
+    case PartitionType::Normal: {
+      type = "Normal";
+      break;
+    }
+    case PartitionType::Logical: {
+      type = "Logical";
+      break;
+    }
+    case PartitionType::Extended: {
+      type = "Extended";
+      break;
+    }
+    case PartitionType::Unallocated: {
+      type = "Unallocated";
+      break;
+    }
+  }
+  debug << type;
+  return debug;
+}
+
+QDebug& operator<<(QDebug& debug, const PartitionStatus& partition_status) {
+  QString status;
+  switch (partition_status) {
+    case PartitionStatus::Formatted: {
+      status = "Format";
+      break;
+    }
+    case PartitionStatus::New: {
+      status = "New";
+      break;
+    }
+    case PartitionStatus::Real: {
+      status = "Real";
+      break;
+    }
+  }
+  debug << status;
+  return debug;
+}
+
 Partition::Partition()
     : device_path(),
       path(),
@@ -57,6 +101,24 @@ qint64 Partition::getSectorLength() const {
   } else {
     return -1;
   }
+}
+
+QDebug& operator<<(QDebug& debug, const Partition& partition) {
+  debug << "Partition: {"
+        << "path:" << partition.path
+        << "device path:" << partition.device_path
+        << "number:" << partition.partition_number
+        << "fs:" << partition.fs
+        << "type:" << partition.type
+        << "os:" << partition.os
+        << "label:" << partition.label
+        << "mount point:" << partition.mount_point
+        << "start:" << partition.start_sector
+        << "end:" << partition.end_sector
+        << "length:" << partition.length
+        << "freespace:" << partition.freespace
+        << "}";
+  return debug;
 }
 
 int ExtendedPartitionIndex(const PartitionList& partitions) {

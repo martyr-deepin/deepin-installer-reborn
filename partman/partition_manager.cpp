@@ -46,27 +46,21 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
   for (PedPartition* lp_partition = ped_disk_next_partition(lp_disk, NULL);
       lp_partition != NULL;
       lp_partition = ped_disk_next_partition(lp_disk, lp_partition)) {
-    qDebug() << "============================";
 
     Partition partition;
     if (lp_partition->type == PED_PARTITION_NORMAL) {
       partition.type = PartitionType::Normal;
-      qDebug() << "normal";
     } else if (lp_partition->type == PED_PARTITION_EXTENDED) {
       partition.type = PartitionType::Extended;
-      qDebug() << "extended";
     } else if (lp_partition->type ==
         (PED_PARTITION_FREESPACE | PED_PARTITION_LOGICAL)) {
-      qDebug() << "logical freespace";
       partition.type = PartitionType::Unallocated;
     } else if (lp_partition->type == PED_PARTITION_LOGICAL) {
       partition.type = PartitionType::Logical;
-      qDebug() << "logical";
     } else if (lp_partition->type == PED_PARTITION_FREESPACE) {
       partition.type = PartitionType::Unallocated;
-      qDebug() << "freespace";
     } else {
-      qDebug() << "unknown partition type" << lp_partition->type;
+      // Ignore other types
       continue;
     }
 
@@ -78,15 +72,12 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
       partition.fs = FsType::Unknown;
     }
     partition.start_sector = lp_partition->geom.start;
-    qDebug() << "sector start:" << partition.start_sector;
     partition.end_sector = lp_partition->geom.end;
-    qDebug() << "sector end:" << lp_partition->geom.end;
 
     // Result of ped_partition_get_path() need to be freed by hand.
     char* lp_path = ped_partition_get_path(lp_partition);
     if (lp_path != NULL) {
       partition.path = lp_path;
-      qDebug() << "partition path:" << partition.path;
       free(lp_path);
     }
 
@@ -102,8 +93,6 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
         partition.length = partition.getByteLength();
         partition.freespace = partition.length;
       }
-      qDebug() << "length:" << partition.length
-               << ",freespace:" << partition.freespace;
     }
     partitions.append(partition);
   }
@@ -254,6 +243,7 @@ DeviceList ScanDevices() {
       }
     }
 
+    qDebug() << "device:" << device;
     devices.append(device);
     ped_disk_destroy(lp_disk);
 

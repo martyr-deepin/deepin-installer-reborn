@@ -15,11 +15,24 @@ Device::Device()
       sectors(0),
       cylinders(0),
       cylsize(0),
-      disk_type(),
       sector_size(0),
       max_prims(0),
       read_only(true),
       table(PartitionTableType::Unknown) {
+}
+
+QDebug& operator<<(QDebug& debug, const Device& device) {
+  debug << "Device: {"
+        << "path:" << device.path
+        << "model:" << device.model
+        << "partition table:" << device.table
+        << "max prims:" << device.max_prims
+        << "length:" << device.length
+        << "sectors:" << device.sectors
+        << "sector size:" << device.sector_size
+        << "partition list:" << device.partitions
+        << "}";
+  return debug;
 }
 
 int DeviceIndex(const DeviceList& devices, const QString& device_path) {

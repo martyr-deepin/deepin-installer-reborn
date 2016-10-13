@@ -5,6 +5,7 @@
 #ifndef INSTALLER_PARTMAN_STRUCTS_H
 #define INSTALLER_PARTMAN_STRUCTS_H
 
+#include <QDebug>
 #include <QtGlobal>
 
 // Size units defined in bytes
@@ -31,6 +32,7 @@ enum class OsType {
   Unknown,
   Windows,
 };
+QDebug& operator<<(QDebug& debug, const OsType& os_type);
 
 enum class PartitionTableType {
   Empty,  // Raw disk has empty partition table type.
@@ -39,6 +41,7 @@ enum class PartitionTableType {
   Others,  // Not supported partition types.
   Unknown,
 };
+QDebug& operator<<(QDebug& debug, const PartitionTableType& table_type);
 
 const char kPartitionTableGPT[] = "gpt";
 const char kPartitionTableMsDos[] = "msdos";

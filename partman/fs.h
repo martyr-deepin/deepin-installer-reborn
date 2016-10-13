@@ -5,6 +5,7 @@
 #ifndef INSTALLER_PARTMAN_FS_H
 #define INSTALLER_PARTMAN_FS_H
 
+#include <QDebug>
 #include <QList>
 #include <QString>
 
@@ -33,6 +34,7 @@ enum class FsType {
   Xfs,
   Unknown,
 };
+QDebug& operator<<(QDebug& debug, const FsType& fs_type);
 
 // Convert between FsType enum and its name.
 FsType GetFsTypeByName(const QString& name);

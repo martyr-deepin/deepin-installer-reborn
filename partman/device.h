@@ -5,6 +5,7 @@
 #ifndef INSTALLER_PARTMAN_DEVICE_H
 #define INSTALLER_PARTMAN_DEVICE_H
 
+#include <QDebug>
 #include <QList>
 
 #include "partman/partition.h"
@@ -23,13 +24,13 @@ class Device {
   qint64 sectors;
   qint64 cylinders;
   qint64 cylsize;
-  QString disk_type;
   qint64 sector_size;  // logical sector size
   int max_prims;
   bool read_only;
 
   PartitionTableType table;
 };
+QDebug& operator<<(QDebug& debug, const Device& device);
 
 typedef QList<Device> DeviceList;
 

@@ -15,6 +15,11 @@ const char kFsUnused[] = "unused";
 
 }  // namespace
 
+QDebug& operator<<(QDebug& debug, const FsType& fs_type) {
+  debug << GetFsTypeName(fs_type);
+  return debug;
+}
+
 FsType GetFsTypeByName(const QString& name) {
   const QString lower = name.toLower();
   if (lower.isEmpty()) return FsType::Empty;

@@ -75,7 +75,7 @@ set(PARTMAN_FILES
     partman/partition_format.cpp partman/partition_format.h
     partman/partition_manager.cpp partman/partition_manager.h
     partman/partition_usage.cpp partman/partition_usage.h
-    partman/structs.h
+    partman/structs.cpp partman/structs.h
     partman/utils.cpp partman/utils.h
     )
 
