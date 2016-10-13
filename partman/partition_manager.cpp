@@ -14,6 +14,7 @@
 #include "partman/partition_usage.h"
 #include "partman/utils.h"
 #include "sysinfo/dev_disk.h"
+#include "sysinfo/proc_mounts.h"
 
 namespace installer {
 
@@ -183,6 +184,7 @@ DeviceList ScanDevices() {
   const PartLabelItems part_label_items = ParsePartLabelDir();
   const UUIDItems uuid_items = ParseUUIDDir();
   const OsTypeItems os_type_items = GetOsTypeItems();
+  const MountItemList mount_items = ParseMountItems();
 
   PedDevice* lp_device = ped_device_get_next(NULL);
   while (lp_device != NULL) {
@@ -240,6 +242,14 @@ DeviceList ScanDevices() {
                                                       empty_str);
         partition.uuid = uuid_items.value(partition.path, empty_str);
         partition.os = os_type_items.value(partition.path, OsType::Empty);
+
+        // Mark busy flag of this partition when it is mounted in system.
+        for (const MountItem& mount_item : mount_items) {
+          if (mount_item.path == partition.path) {
+            partition.busy = true;
+            break;
+          }
+        }
       }
     }
 

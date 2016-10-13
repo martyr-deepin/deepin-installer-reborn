@@ -61,6 +61,7 @@ Partition::Partition()
       status(PartitionStatus::Real),
       fs(FsType::Empty),
       os(OsType::Empty),
+      busy(false),
       sector_size(-1),
       length(-1),
       freespace(-1),

@@ -46,6 +46,7 @@ class Partition {
   PartitionStatus status;
   FsType fs;
   OsType os;
+  bool busy;  // Set to true when this partition is being used.
 
   // sector size of the disk device needed for converting to/from sectors
   // and bytes
@@ -63,6 +64,8 @@ class Partition {
   qint64 sectors_unallocated_preceding;
   qint64 sectors_unallocated_succeeding;
 
+  // |mount_point| is not system mount point, it is set by user
+  // in partition page.
   QString mount_point;
 
   // Returns actual partition size.
