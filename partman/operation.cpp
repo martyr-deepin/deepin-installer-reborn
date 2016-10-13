@@ -4,6 +4,8 @@
 
 #include "partman/operation.h"
 
+#include <QDebug>
+
 #include "partman/libparted_util.h"
 #include "partman/partition_format.h"
 
@@ -15,6 +17,35 @@ Operation::Operation(OperationType type,
     : type(type),
       orig_partition(orig_partition),
       new_partition(new_partition) {
+#ifndef NDEBUG
+  qDebug() << "Operation::constructor()" << orig_partition.path;
+  switch (type) {
+    case OperationType::Create: {
+      qDebug() << "Create!";
+      break;
+    }
+    case OperationType::Delete: {
+      qDebug() << "Delete!";
+      break;
+    }
+    case OperationType::Format: {
+      qDebug() << "Format!";
+      break;
+    }
+    case OperationType::Resize: {
+      qDebug() << "Resize";
+      break;
+    }
+    case OperationType::MountPoint: {
+      qDebug() << "MountPoint!";
+      break;
+    }
+    case OperationType::Invalid: {
+      qDebug() << "Invalid!";
+      break;
+    }
+  }
+#endif
 }
 
 Operation::~Operation() {
@@ -84,9 +115,9 @@ void Operation::applyToVisual(PartitionList& partitions) const {
 
 void Operation::applyCreateVisual(PartitionList& partitions) const {
   const int index = PartitionIndex(partitions, orig_partition);
-  // FIXME(xushaohua): handles index == -1.
-//      Q_ASSERT(index > -1);
-  if (index < 0) {
+  if (index == -1) {
+    qCritical() << "applyCreateVisual() Failed to find partition:"
+                << orig_partition.path;
     return;
   }
 
@@ -123,11 +154,18 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
 
 void Operation::applyDeleteVisual(PartitionList& partitions) const {
   int index = PartitionIndex(partitions, orig_partition);
+
+//  if (orig_partition.type == PartitionType::Extended) {
+//    // Remove extended partition.
+//    partitions.removeAt(index);
+//    return;
+//  }
+
   Partition empty_partition = new_partition;
 
   if (index > 0 &&
       (partitions.at(index - 1).type == PartitionType::Unallocated)) {
-    // Not the first partition, try to merge with previous one.
+    // Not the first partition, try to merge with previous freespace partition.
     empty_partition.start_sector = partitions.at(index - 1).start_sector;
     partitions.removeAt(index - 1);
     index -= 1;
@@ -135,7 +173,7 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
 
   if (index < partitions.length() - 1 &&
       (partitions.at(index + 1).type == PartitionType::Unallocated)) {
-    // Not the last partition, try to merge with next partition.
+    // Not the last partition, try to merge with next freespace partition.
     empty_partition.end_sector = partitions.at(index + 1).end_sector;
     partitions[index] = empty_partition;
     partitions.removeAt(index + 1);
@@ -145,10 +183,10 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
 
 void Operation::substitute(PartitionList& partitions) const {
   const int index = PartitionIndex(partitions, orig_partition);
-  // FIXME(xushaohua): handles index == -1.
-//  Q_ASSERT(index > -1);
-
-  if (index > -1) {
+  if (index == -1) {
+    qCritical() << "substitute() Failed to find partition:"
+                << orig_partition.path;
+  } else {
     partitions[index] = new_partition;
   }
 }

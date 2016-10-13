@@ -341,6 +341,11 @@ void HooksManager::monitorProgressFiles() {
 
 void HooksManager::handleRunHooks() {
   qDebug() << "handleRunHooks()";
+
+  // TODO(xushaohua): For debug only.
+  emit this->processUpdate(100);
+  return;
+
   if (!bindHooks(HookType::BeforeChroot)) {
     qCritical() << "handleRunHooks() failed to call bindHooks()";
     emit this->errorOccurred();

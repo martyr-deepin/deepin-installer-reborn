@@ -166,13 +166,13 @@ void PartitionManager::doManualPart(const OperationList& operations) {
     }
   }
 
-  QList<QPair<QString, QString>> mount_point_pair;
+  QStringList mount_point_pair;
   if (ok) {
     for (const Operation& operation : operations) {
       const Partition& new_partition = operation.new_partition;
       if (!new_partition.mount_point.isEmpty()) {
-        mount_point_pair.append({new_partition.path,
-                                 new_partition.mount_point});
+        mount_point_pair.append(new_partition.path);
+        mount_point_pair.append(new_partition.mount_point);
       }
     }
   }

@@ -81,7 +81,6 @@ void AdvancedPartitionFrame::drawDevices() {
   for (const Device& device : delegate_->devices()) {
     QLabel* model_label = new QLabel(device.model);
     partition_layout_->addWidget(model_label);
-    qDebug() << "Add model:" << device.model;
     for (const Partition& partition : device.partitions) {
       if (partition.type == PartitionType::Extended) {
         // Ignores extended partition.

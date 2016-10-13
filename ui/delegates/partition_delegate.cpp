@@ -255,9 +255,34 @@ void PartitionDelegate::deletePartition(const Partition& partition) {
     // Merge operations here.
   }
 
-  Operation operation(OperationType::Delete, partition,
-                               new_partition);
+  Operation operation(OperationType::Delete, partition, new_partition);
   operations_.append(operation);
+
+  if (partition.type == PartitionType::Logical) {
+    // Delete extended partition if needed.
+    const int device_index = DeviceIndex(devices_, partition.device_path);
+    if (device_index == -1) {
+      qCritical() << "deletePartition() Failed to get device:"
+                  << partition.device_path;
+    } else {
+      const Device& device = devices_.at(device_index);
+      const PartitionList logical_partitions =
+          GetLogicalPartitions(device.partitions);
+      if (logical_partitions.length() == 0) {
+        qDebug() << "deletePartition() delete ext partition!";
+        const int ext_index = ExtendedPartitionIndex(device.partitions);
+        Q_ASSERT(ext_index > -1);
+        Partition ext_partition = device.partitions.at(ext_index);
+        qDebug() << "ext partition:" << ext_partition.path;
+        Partition empty_partition = ext_partition;
+        empty_partition.type = PartitionType::Unallocated;
+        Operation delete_operation(OperationType::Delete, ext_partition,
+                                   empty_partition);
+        operations_.append(delete_operation);
+      }
+    }
+  }
+
   this->refreshVisual();
 }
 
@@ -347,18 +372,20 @@ void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   emit this->deviceRefreshed();
 }
 
-void PartitionDelegate::onManualPartDone(
-    bool ok, const QList<QPair<QString, QString>>& mount_point_pair) {
+void PartitionDelegate::onManualPartDone(bool ok,
+                                         const QStringList& mount_point_pair) {
   if (ok) {
     // Write mount-point pair to conf.
     QString root_path;
     QString mount_points;
-    for (const QPair<QString, QString>& item : mount_point_pair) {
-      if (item.second == kMountPointRoot) {
-        root_path = item.first;
+    for (int i = 0; i < mount_point_pair.length(); i += 2) {
+      if (mount_point_pair.at(i) == kMountPointRoot) {
+        root_path = mount_point_pair.at(i);
       }
-      mount_points += QString("%1=%2;").arg(item.first, item.second);
+      mount_points += QString("%1=%2;").arg(mount_point_pair.at(i),
+                                            mount_point_pair.at(i+1));
     }
+
     // TODO(xushaohua): Remove the last semicolon.
     WritePartitionInfo(root_path, mount_points);
   }
