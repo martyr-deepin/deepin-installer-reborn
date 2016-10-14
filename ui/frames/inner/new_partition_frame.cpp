@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QGridLayout>
 #include <QLabel>
+#include <QStandardItemModel>
 
 #include "ui/frames/consts.h"
 #include "ui/delegates/partition_delegate.h"
@@ -44,13 +45,11 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
 
   const bool primary_ok = delegate_->canAddPrimary(partition);
   const bool logical_ok = delegate_->canAddLogical(partition);
-  type_box_->clear();
-  if (primary_ok) {
-    type_box_->addItem(tr(kTypePrimary));
-  }
-  if (logical_ok) {
-    type_box_->addItem(tr(kTypeLogical));
-  }
+  QStandardItemModel* type_model =
+      static_cast<QStandardItemModel*>(type_box_->model());
+  Q_ASSERT(type_model != nullptr);
+  type_model->item(0)->setEnabled(primary_ok);
+  type_model->item(1)->setEnabled(logical_ok);
 
   if (!primary_ok && !logical_ok) {
     qCritical() << "No more partition available!";
