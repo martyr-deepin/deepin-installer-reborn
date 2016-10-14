@@ -15,7 +15,9 @@
 
 namespace installer {
 
-PartitionSizeSlider::PartitionSizeSlider(QWidget* parent) : QFrame(parent) {
+PartitionSizeSlider::PartitionSizeSlider(QWidget* parent)
+    : QFrame(parent),
+      maximum_value_(0) {
   this->setObjectName(QStringLiteral("partition_size_slider"));
 
   this->initUI();
@@ -23,10 +25,16 @@ PartitionSizeSlider::PartitionSizeSlider(QWidget* parent) : QFrame(parent) {
 }
 
 qint64 PartitionSizeSlider::value() {
-  return slider_->value() * kMebiByte;
+  // Keep maximum value unchanged.
+  if (slider_->value() == slider_->maximum()) {
+    return maximum_value_;
+  } else {
+    return slider_->value() * kMebiByte;
+  }
 }
 
 void PartitionSizeSlider::setMaximum(qint64 size) {
+  maximum_value_ = size;
   const int mebi_size = static_cast<int>(size / kMebiByte);
   slider_->setMaximum(mebi_size);
   slider_->setValue(mebi_size);

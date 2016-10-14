@@ -32,6 +32,8 @@ class PartitionSizeSlider : public QFrame {
   QLineEdit* editor_ = nullptr;
   QIntValidator* int_validator_ = nullptr;
 
+  qint64 maximum_value_;
+
  private:
   void onEditorTextChanged(const QString& text);
   void onSliderValueChanged(int value);
