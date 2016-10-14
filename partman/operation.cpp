@@ -123,6 +123,47 @@ void Operation::applyToVisual(PartitionList& partitions) const {
   }
 }
 
+QString Operation::description() const {
+  QString desc;
+  switch (type) {
+    case OperationType::Create: {
+      if (new_partition.mount_point.isEmpty()) {
+        desc = QObject::tr("Create partition %1 with %2")
+            .arg(new_partition.path)
+            .arg(GetFsTypeName(new_partition.fs));
+      } else {
+        desc = QObject::tr("Create partition %1 for %2 with %3")
+            .arg(new_partition.path)
+            .arg(new_partition.mount_point)
+            .arg(GetFsTypeName(new_partition.fs));
+      }
+      break;
+    }
+    case OperationType::Delete: {
+      desc = QObject::tr("Delete partition %1").arg(orig_partition.path);
+      break;
+    }
+    case OperationType::Format: {
+      if (new_partition.mount_point.isEmpty()) {
+        desc = QObject::tr("Format %1 with %2")
+            .arg(new_partition.path)
+            .arg(GetFsTypeName(new_partition.fs));
+      } else {
+        desc = QObject::tr("Format %1 for %2 with %3")
+            .arg(new_partition.path)
+            .arg(new_partition.mount_point)
+            .arg( GetFsTypeName(new_partition.fs));
+      }
+      break;
+    }
+    default: {
+      // pass
+      break;
+    }
+  }
+  return desc;
+}
+
 void Operation::applyCreateVisual(PartitionList& partitions) const {
   const int index = PartitionIndex(partitions, orig_partition);
   if (index == -1) {

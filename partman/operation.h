@@ -39,7 +39,10 @@ class Operation {
   bool applyToDisk() const;
 
   // Apply operation by updating partition list.
-  void applyToVisual(PartitionList& partitions) const ;
+  void applyToVisual(PartitionList& partitions) const;
+
+  // Get description of this operation.
+  QString description() const;
 
  private:
   void applyCreateVisual(PartitionList& partitions) const;

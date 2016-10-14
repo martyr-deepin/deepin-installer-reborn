@@ -137,6 +137,14 @@ bool PartitionDelegate::canAddLogical(const Partition& partition) const {
   return logical_ok;
 }
 
+QStringList PartitionDelegate::getOperationDescriptions() const {
+  QStringList result;
+  for (const Operation& operation : operations_) {
+    result.append(operation.description());
+  }
+  return result;
+}
+
 void PartitionDelegate::scanDevices() const {
   // If auto-part is not set, scan devices right now.
   if (!GetSettingsBool(kPartitionDoAutoPart)) {

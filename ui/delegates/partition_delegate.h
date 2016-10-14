@@ -38,6 +38,9 @@ class PartitionDelegate : public QObject {
 
   const DeviceList& devices() const { return devices_; }
 
+  // Get human readable operation descriptions.
+  QStringList getOperationDescriptions() const;
+
   // Notifies partition manager to scan devices.
   void scanDevices() const;
 

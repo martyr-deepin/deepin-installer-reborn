@@ -6,6 +6,7 @@
 
 #include <QHBoxLayout>
 
+#include "ui/delegates/partition_delegate.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
@@ -14,11 +15,20 @@
 
 namespace installer {
 
-PrepareInstallFrame::PrepareInstallFrame(QWidget* parent) : QFrame(parent) {
+PrepareInstallFrame::PrepareInstallFrame(PartitionDelegate* delegate,
+                                         QWidget* parent)
+    : QFrame(parent), delegate_(delegate) {
   this->setObjectName(QStringLiteral("prepare_install_frame"));
 
   this->initUI();
   this->initConnections();
+}
+
+void PrepareInstallFrame::updateDescription() {
+  const QStringList desc_list = delegate_->getOperationDescriptions();
+  const QString description = desc_list.join(QChar('\n'));
+  qDebug() << "operation descriptions:" << description;
+  desc_label_->setText(description);
 }
 
 void PrepareInstallFrame::initConnections() {
@@ -44,6 +54,8 @@ void PrepareInstallFrame::initUI() {
   QHBoxLayout* subhead_layout = new QHBoxLayout();
   subhead_layout->addWidget(subhead_label);
 
+  desc_label_ = new QLabel();
+
   abort_button_ = new NavButton(tr("Back"));
   QHBoxLayout* abort_button_layout = new QHBoxLayout();
   abort_button_layout->addWidget(abort_button_);
@@ -60,6 +72,7 @@ void PrepareInstallFrame::initUI() {
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addLayout(subhead_layout);
+  layout->addWidget(desc_label_);
   layout->addStretch();
   layout->addLayout(abort_button_layout);
   layout->addLayout(continue_button_layout);

@@ -87,7 +87,7 @@ void PartitionFrame::initUI() {
   edit_partition_frame_ = new EditPartitionFrame(delegate_, this);
   new_partition_frame_ = new NewPartitionFrame(delegate_, this);
   partition_loading_frame_ = new PartitionLoadingFrame(this);
-  prepare_install_frame_ = new PrepareInstallFrame(this);
+  prepare_install_frame_ = new PrepareInstallFrame(delegate_, this);
   select_bootloader_frame_ = new SelectBootloaderFrame(this);
   simple_partition_frame_ = new SimplePartitionFrame(delegate_, this);
 
@@ -171,6 +171,7 @@ void PartitionFrame::onAdvancedFrameButtonToggled() {
 void PartitionFrame::onNextButtonClicked() {
   // TODO(xushaohua):Show prepare-install-frame page if target partition is selected.
   if (true) {
+    prepare_install_frame_->updateDescription();
     main_layout_->setCurrentWidget(prepare_install_frame_);
   }
 }

@@ -6,16 +6,21 @@
 #define INSTALLER_UI_FRAMES_INNER_PREPARE_INSTALL_FRAME_H
 
 #include <QFrame>
+class QLabel;
 
 namespace installer {
 
 class NavButton;
+class PartitionDelegate;
 
 class PrepareInstallFrame : public QFrame {
   Q_OBJECT
 
  public:
-  explicit PrepareInstallFrame(QWidget* parent = nullptr);
+  PrepareInstallFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
+
+  // Update descriptions of operations.
+  void updateDescription();
 
  signals:
   // Emitted when abort-button is clicked, returning to previous page.
@@ -30,6 +35,9 @@ class PrepareInstallFrame : public QFrame {
 
   NavButton* abort_button_ = nullptr;
   NavButton* continue_button_ = nullptr;
+  QLabel* desc_label_ = nullptr;
+
+  PartitionDelegate* delegate_ = nullptr;
 };
 
 }  // namespace installer
