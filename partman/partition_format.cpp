@@ -41,12 +41,19 @@ bool FormatExt3(const QString& path, const QString& label) {
 }
 
 bool FormatExt4(const QString& path, const QString& label) {
+  QString output;
+  QString err;
+  bool ok;
   if (label.isEmpty()) {
-    return SpawnCmd("mkfs.ext4", {"-F", path});
+    ok = SpawnCmd("mkfs.ext4", {"-F", path}, output, err);
   } else {
     const QString real_label = label.left(16);
-    return SpawnCmd("mkfs.ext4", {"-F", QString("-L%1").arg(real_label), path});
+    ok = SpawnCmd("mkfs.ext4", {"-F", QString("-L%1").arg(real_label), path},
+                  output, err);
   }
+  qDebug() << "output:" << output;
+  qDebug() << "err:" << err;
+  return ok;
 }
 
 bool FormatF2fs(const QString& path, const QString& label) {

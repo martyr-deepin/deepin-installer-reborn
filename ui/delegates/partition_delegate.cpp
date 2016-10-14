@@ -193,12 +193,19 @@ void PartitionDelegate::createPartition(const Partition& partition,
   // Take into consideration if preceding space.
   const qint64 preceding_sectors = getPartitionPreceding(partition) /
                                    partition.sector_size;
-  const qint64 actual_start_sector = partition.start_sector + preceding_sectors;
+  qDebug() << "preceding sectors:" << preceding_sectors;
+  qint64 actual_start_sector;
+  if (preceding_sectors > 0) {
+    actual_start_sector = preceding_sectors;
+  } else {
+    actual_start_sector = partition.start_sector;
+  }
+  qDebug() << "actual start sector:" << actual_start_sector;
 
   if (align_start) {
     // Align from start of |partition|.
     new_partition.start_sector = actual_start_sector;
-    new_partition.end_sector = total_sectors + partition.start_sector;
+    new_partition.end_sector = total_sectors + partition.start_sector - 1;
     new_partition.sectors_unallocated_succeeding = partition.end_sector -
                                                    new_partition.end_sector;
   } else {
@@ -360,7 +367,7 @@ void PartitionDelegate::refreshVisual() {
   // * Ignore partitions with size less than 100Mib;
 
   this->devices_ = this->real_devices_;
-
+//
 //  for (Device& device : devices_) {
 //    PartitionList new_partitions;
 //    const PartitionList& old_partitions = device.partitions;
@@ -424,6 +431,7 @@ void PartitionDelegate::removeEmptyExtendedPartition(
 
 void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   this->real_devices_ = devices;
+  qDebug() << "onDeviceRefreshed():" << devices;
   this->refreshVisual();
 }
 

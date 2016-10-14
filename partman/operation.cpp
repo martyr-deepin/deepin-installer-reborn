@@ -61,21 +61,26 @@ bool Operation::applyToDisk() const {
   switch (type) {
     case OperationType::Create: {
       ok = CreatePartition(new_partition);
+      qDebug() << "applyToDisk() create partition:" << ok;
       if (ok) {
         ok = Mkfs(new_partition);
+        qDebug() << "applyToDisk() mkfs:" << ok;
       }
       break;
     }
 
     case OperationType::Delete: {
       ok = DeletePartition(orig_partition);
+      qDebug() << "applyToDisk() delete partition" << ok;
       break;
     }
 
     case OperationType::Format: {
       ok = SetPartitionType(new_partition);
+      qDebug() << "applyToDisk() format set partition type:" << ok;
       if (ok) {
         ok = Mkfs(new_partition);
+        qDebug() << "applyToDisk() format mkfs():" << ok;
       }
       break;
     }
