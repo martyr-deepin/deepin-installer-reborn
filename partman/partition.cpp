@@ -61,7 +61,7 @@ Partition::Partition()
       fs(FsType::Empty),
       os(OsType::Empty),
       busy(false),
-      sector_size(-1),
+      sector_size(0),
       length(-1),
       freespace(-1),
       start_sector(-1),
