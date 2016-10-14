@@ -144,6 +144,7 @@ void PartitionManager::doManualPart(const OperationList& operations) {
   bool ok = true;
   for (int i = 0; ok && i < operations.length(); ++i) {
     ok = operations.at(i).applyToDisk();
+    qDebug() << "operation result:" << ok;
   }
 
   if (ok) {

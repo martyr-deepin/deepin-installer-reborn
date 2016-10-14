@@ -13,7 +13,6 @@
 
 int main(int argc, char* argv[]) {
   installer::RedirectLogFile();
-  installer::InitLogService();
 
   QApplication app(argc, argv);
   // TODO(xushaohua): Set i18n
