@@ -75,12 +75,7 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
     partition.start_sector = lp_partition->geom.start;
     partition.end_sector = lp_partition->geom.end;
 
-    // Result of ped_partition_get_path() need to be freed by hand.
-    char* lp_path = ped_partition_get_path(lp_partition);
-    if (lp_path != NULL) {
-      partition.path = lp_path;
-      free(lp_path);
-    }
+    partition.path = GetPartitionPath(lp_partition);
 
     // Avoid reading additional filesystem information if there is no path.
     if (!partition.path.isEmpty() &&

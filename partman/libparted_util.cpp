@@ -151,6 +151,17 @@ bool GetDeviceAndDisk(const QString& device_path,
   }
 }
 
+QString GetPartitionPath(PedPartition* lp_partition) {
+  // Result of ped_partition_get_path() need to be freed by hand.
+  char* lp_path = ped_partition_get_path(lp_partition);
+  QString path;
+  if (lp_path != NULL) {
+    path = lp_path;
+    free(lp_path);
+  }
+  return path;
+}
+
 bool SetBootFlag(const Partition& partition, bool enable_boot) {
   PedDevice* lp_device = NULL;
   PedDisk* lp_disk = NULL;

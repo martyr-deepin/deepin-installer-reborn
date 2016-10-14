@@ -34,6 +34,9 @@ bool GetDeviceAndDisk(const QString& device_path,
                       PedDevice*& lp_device,
                       PedDisk*& lp_disk);
 
+// Get |partition| path, might be empty.
+QString GetPartitionPath(PedPartition* lp_partition);
+
 // Set/unset boot flag of a partition.
 bool SetBootFlag(const Partition& partition, bool enable_boot);
 
