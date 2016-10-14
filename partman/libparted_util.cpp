@@ -77,8 +77,6 @@ bool CreatePartition(const Partition& partition) {
         if (ok) {
           ok = Commit(lp_disk);
         }
-        // TODO(xushaohua): Update partition property.
-
         ped_geometry_destroy(geom);
         ped_constraint_destroy(constraint);
       }
