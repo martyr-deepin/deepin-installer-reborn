@@ -161,7 +161,8 @@ PartitionList GetLogicalPartitions(const PartitionList& partitions) {
 int PartitionIndex(const PartitionList& partitions,
                    const Partition& partition) {
   for (int i = 0; i < partitions.length(); ++i) {
-    if (partition.start_sector >= partitions[i].start_sector &&
+    if (partition.type == partitions[i].type &&
+        partition.start_sector >= partitions[i].start_sector &&
         partition.end_sector <= partitions[i].end_sector) {
       return i;
     }
