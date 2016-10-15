@@ -224,11 +224,11 @@ void PartitionDelegate::createPartition(const Partition& partition,
                                         qint64 total_sectors) {
 
   if (partition_type == PartitionType::Normal) {
-    this->createNormalPartition(partition, align_start, fs_type, mount_point,
-                                total_sectors);
+    createNormalPartition(partition, align_start, fs_type, mount_point,
+                          total_sectors);
   } else if (partition_type == PartitionType::Logical) {
-    this->createLogicalPartition(partition, align_start, fs_type, mount_point,
-                                 total_sectors);
+    createLogicalPartition(partition, align_start, fs_type, mount_point,
+                           total_sectors);
   } else {
     qCritical() << "createPartition() not supported type:" << partition_type;
   }
@@ -387,6 +387,11 @@ void PartitionDelegate::createNormalPartition(const Partition& partition,
                                               FsType fs_type,
                                               const QString& mount_point,
                                               qint64 total_sectors) {
+  // Policy:
+  // * If new primary partition is contained in or intersected with
+  //   extended partition, shrink extended partition or delete it if no other
+  //   logical partitions.
+
   const int device_index = DeviceIndex(devices_, partition.device_path);
   if (device_index == -1) {
     // TODO(xushaohua): Raise error msg
@@ -395,6 +400,8 @@ void PartitionDelegate::createNormalPartition(const Partition& partition,
     return;
   }
   const Device& device = devices_.at(device_index);
+
+  // TODO(xushaohua): Handles extended partition here.
 
   Partition new_partition;
   new_partition.device_path = partition.device_path;
@@ -440,27 +447,13 @@ void PartitionDelegate::createNormalPartition(const Partition& partition,
     }
   }
 
+  Q_ASSERT(partition.start_sector <= new_partition.start_sector);
   Q_ASSERT(new_partition.start_sector < new_partition.end_sector);
+  Q_ASSERT(new_partition.end_sector <= partition.end_sector);
 
-    Operation operation(OperationType::Create, partition, new_partition);
+  Operation operation(OperationType::Create, partition, new_partition);
   operations_.append(operation);
   qDebug() << "operation:" << operation;
-
-  // TODO(xushaohua): Resize extended partition if needed
-
-//  const int ext_index = ExtendedPartitionIndex(device.partitions);
-//  if (ext_index == -1 && partition_type == PartitionType::Logical) {
-//    // No extended partition found, create one if needed.
-//    // TODO(xushaohua): Create extended partition.
-//  }
-
-//  const Partition& ext_partition = device.partitions.at(ext_index);
-
-  // If new primary partition is contained in or intersected with
-  // extended partition, shrink extended partition or delete it if no other
-  // logical partitions.
-  // If new logical partition is not contained in or is intersected with
-  // extended partition, enlarge extended partition.
 }
 
 void PartitionDelegate::createExtendedPartition(const Partition& partition,
@@ -474,11 +467,19 @@ void PartitionDelegate::createLogicalPartition(const Partition& partition,
                                                FsType fs_type,
                                                const QString& mount_point,
                                                qint64 total_sectors) {
-  Q_UNUSED(partition);
-  Q_UNUSED(align_start);
-  Q_UNUSED(fs_type);
-  Q_UNUSED(mount_point);
-  Q_UNUSED(total_sectors);
+  // Policy:
+  // * Create extended partition if not found;
+  // * If new logical partition is not contained in or is intersected with
+  //   extended partition, enlarge extended partition.
+
+//  const int ext_index = ExtendedPartitionIndex(device.partitions);
+//  if (ext_index == -1 && partition_type == PartitionType::Logical) {
+//    // No extended partition found, create one if needed.
+//    // TODO(xushaohua): Create extended partition.
+//  }
+
+//  const Partition& ext_partition = device.partitions.at(ext_index);
+
   const int device_index = DeviceIndex(devices_, partition.device_path);
   if (device_index == -1) {
     // TODO(xushaohua): Raise error msg
@@ -488,7 +489,48 @@ void PartitionDelegate::createLogicalPartition(const Partition& partition,
   }
   const Device& device = devices_.at(device_index);
 
-  AllocLogicalPartitionNumber(device);
+  Partition new_partition;
+  new_partition.device_path = partition.device_path;
+  new_partition.path = partition.path;
+  new_partition.sector_size = partition.sector_size;
+  new_partition.status = PartitionStatus::New;
+  new_partition.type = PartitionType::Logical;
+  new_partition.fs = fs_type;
+  new_partition.mount_point = mount_point;
+  const int partition_number = AllocLogicalPartitionNumber(device);
+  Q_ASSERT(partition_number > -1);
+  new_partition.changeNumber(partition_number);
+
+  // space is required for the Extended Boot Record.
+  // Generally an additional track or MebiByte is required so for
+  // our purposes reserve a MebiByte in front of the partition.
+  const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
+  if (align_start) {
+    // Align from start of |partition|.
+    new_partition.start_sector = partition.start_sector + oneMebiByteSector;
+    new_partition.end_sector = qMin(partition.end_sector,
+        total_sectors + new_partition.start_sector - 1);
+    new_partition.succeeding_sectors = partition.end_sector -
+                                       new_partition.end_sector;
+  } else {
+    new_partition.end_sector = partition.end_sector;
+    new_partition.start_sector = qMax(
+        partition.start_sector + oneMebiByteSector,
+        partition.end_sector - total_sectors + 1);
+    const qint64 preceding_sectors = new_partition.start_sector -
+        partition.start_sector;
+    if (preceding_sectors > oneMebiByteSector) {
+      new_partition.preceding_sectors = preceding_sectors;
+    }
+  }
+
+  Q_ASSERT(partition.start_sector <= new_partition.start_sector);
+  Q_ASSERT(new_partition.start_sector < new_partition.end_sector);
+  Q_ASSERT(new_partition.end_sector <= partition.end_sector);
+
+  Operation operation(OperationType::Create, partition, new_partition);
+  operations_.append(operation);
+  qDebug() << "operation:" << operation;
 }
 
 void PartitionDelegate::removeEmptyExtendedPartition(
