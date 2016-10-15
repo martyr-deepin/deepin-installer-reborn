@@ -181,7 +181,7 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
     succeeding_partition.sector_size = orig_partition.sector_size;
     succeeding_partition.end_sector = orig_partition.end_sector;
     succeeding_partition.start_sector = succeeding_partition.end_sector -
-                                        new_partition.succeeding_sectors;
+                                        new_partition.succeeding_sectors + 1;
     if (index+1 == partitions.length()) {
       partitions.append(succeeding_partition);
     } else {
@@ -197,7 +197,7 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
     preceding_partition.device_path = new_partition.device_path;
     preceding_partition.start_sector = orig_partition.start_sector;
     preceding_partition.end_sector = preceding_partition.start_sector +
-                                     new_partition.preceding_sectors;
+                                     new_partition.preceding_sectors - 1;
     if (index == 0) {
       partitions.prepend(preceding_partition);
     } else {
