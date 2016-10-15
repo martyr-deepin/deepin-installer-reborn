@@ -67,6 +67,9 @@ class Partition {
   // in partition page.
   QString mount_point;
 
+  // Change partition number and partition path.
+  void changeNumber(int partition_number);
+
   // Returns actual partition size.
   // |length| is set only if this partition has a filesystem.
   qint64 getByteLength() const;

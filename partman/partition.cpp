@@ -82,6 +82,11 @@ bool Partition::operator==(const Partition& other) const {
           type == other.type);
 }
 
+void Partition::changeNumber(int partition_number) {
+  this->partition_number = partition_number;
+  this->path = QString("%1%2").arg(this->device_path).arg(partition_number);
+}
+
 qint64 Partition::getByteLength() const {
   const qint64 sectors = getSectorLength();
   if (sectors >= 0) {
