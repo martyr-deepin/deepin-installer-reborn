@@ -49,8 +49,6 @@ Operation::Operation(OperationType type,
     : type(type),
       orig_partition(orig_partition),
       new_partition(new_partition) {
-  qDebug() << "Operation::constructor()" << type << orig_partition
-           << new_partition;
 }
 
 Operation::~Operation() {
@@ -165,6 +163,10 @@ QString Operation::description() const {
 }
 
 void Operation::applyCreateVisual(PartitionList& partitions) const {
+  // Policy:
+  // * Create unallocated partition if orig_partition is larger than
+  //   new_partition
+
   const int index = PartitionIndex(partitions, orig_partition);
   if (index == -1) {
     qCritical() << "applyCreateVisual() Failed to find partition:"
@@ -205,6 +207,11 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
 }
 
 void Operation::applyDeleteVisual(PartitionList& partitions) const {
+  // Policy:
+  // * Update partition number;
+  // * Remove extended partition if no logical partition exists;
+  // * Merge unallocated partitions;
+
   int index = PartitionIndex(partitions, orig_partition);
 
 //  if (orig_partition.type == PartitionType::Extended) {
@@ -241,6 +248,15 @@ void Operation::substitute(PartitionList& partitions) const {
   } else {
     partitions[index] = new_partition;
   }
+}
+
+QDebug& operator<<(QDebug& debug, const Operation& operation) {
+  debug << "Operator: {"
+        << "type:" << operation.type
+        << "orig_partition:" << operation.orig_partition
+        << "new_partition:" << operation.new_partition
+        << "}";
+  return debug;
 }
 
 }  // namespace installer

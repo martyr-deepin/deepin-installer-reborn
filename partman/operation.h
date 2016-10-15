@@ -51,6 +51,7 @@ class Operation {
   // For operations which do not change partition boundaries.
   void substitute(PartitionList& partitions) const;
 };
+QDebug& operator<<(QDebug& debug, const Operation& operation);
 
 typedef QList<Operation> OperationList;
 
