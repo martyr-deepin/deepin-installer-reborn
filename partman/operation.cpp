@@ -86,7 +86,8 @@ bool Operation::applyToDisk() const {
     }
 
     case OperationType::Resize: {
-      ok = false;
+      ok = ResizeMovePartition(new_partition);
+      qDebug() << "applyToDisk() resize partition:" << ok;
       break;
     }
 
@@ -115,6 +116,10 @@ void Operation::applyToVisual(PartitionList& partitions) const {
     }
     case OperationType::MountPoint: {
       this->substitute(partitions);
+      break;
+    }
+    case OperationType::Resize: {
+      this->applyResizeVisual(partitions);
       break;
     }
     default: {
@@ -158,6 +163,10 @@ QString Operation::description() const {
             .arg(new_partition.mount_point)
             .arg( GetFsTypeName(new_partition.fs));
       }
+      break;
+    }
+    case OperationType::Resize: {
+      desc = QObject::tr("Resize partition %1").arg(new_partition.path);
       break;
     }
     default: {
@@ -258,6 +267,12 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
     partitions.removeAt(index + 1);
   }
   partitions[index] = empty_partition;
+}
+
+void Operation::applyResizeVisual(PartitionList& partitions) const {
+  // Currently only extended partition is allowed to resize
+  Q_ASSERT(new_partition.type == PartitionType::Extended);
+  this->substitute(partitions);
 }
 
 void Operation::substitute(PartitionList& partitions) const {

@@ -162,6 +162,41 @@ QString GetPartitionPath(PedPartition* lp_partition) {
   return path;
 }
 
+bool ResizeMovePartition(const Partition& partition) {
+  bool ok = false;
+  PedDevice* lp_device = NULL;
+  PedDisk* lp_disk = NULL;
+  if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
+    PedPartition* lp_partition = NULL;
+    if (partition.type == PartitionType::Extended) {
+      lp_partition = ped_disk_extended_partition(lp_disk);
+    } else {
+      lp_partition = ped_disk_get_partition_by_sector(lp_disk,
+                                                      partition.getSector());
+    }
+    if (lp_partition) {
+      PedGeometry* geom = ped_geometry_new(lp_device, partition.start_sector,
+                                           partition.getSectorLength());
+      PedConstraint* constraint = NULL;
+      if (geom) {
+        constraint = ped_constraint_exact(geom);
+      }
+      if (constraint) {
+        ok = bool(ped_disk_set_partition_geom(lp_disk, lp_partition, constraint,
+                                              partition.start_sector,
+                                              partition.end_sector));
+        if (ok) {
+          ok = Commit(lp_disk);
+        }
+        ped_geometry_destroy(geom);
+        ped_constraint_destroy(constraint);
+      }
+    }
+    DestroyDeviceAndDisk(lp_device, lp_disk);
+  }
+  return ok;
+}
+
 bool SetBootFlag(const Partition& partition, bool enable_boot) {
   PedDevice* lp_device = NULL;
   PedDisk* lp_disk = NULL;

@@ -37,6 +37,9 @@ bool GetDeviceAndDisk(const QString& device_path,
 // Get |partition| path, might be empty.
 QString GetPartitionPath(PedPartition* lp_partition);
 
+// Resize/Move partition specified with |partition|.
+bool ResizeMovePartition(const Partition& partition);
+
 // Set/unset boot flag of a partition.
 bool SetBootFlag(const Partition& partition, bool enable_boot);
 

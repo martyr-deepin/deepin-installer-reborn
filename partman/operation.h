@@ -47,6 +47,7 @@ class Operation {
  private:
   void applyCreateVisual(PartitionList& partitions) const;
   void applyDeleteVisual(PartitionList& partitions) const;
+  void applyResizeVisual(PartitionList& partitions) const;
 
   // For operations which do not change partition boundaries.
   void substitute(PartitionList& partitions) const;
