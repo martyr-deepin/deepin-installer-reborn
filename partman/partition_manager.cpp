@@ -75,6 +75,7 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
     partition.start_sector = lp_partition->geom.start;
     partition.end_sector = lp_partition->geom.end;
 
+    partition.partition_number = lp_partition->num;
     partition.path = GetPartitionPath(lp_partition);
 
     // Avoid reading additional filesystem information if there is no path.
