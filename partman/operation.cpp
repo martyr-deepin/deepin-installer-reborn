@@ -174,14 +174,14 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
     return;
   }
 
-  if (new_partition.sectors_unallocated_succeeding > 0) {
+  if (new_partition.succeeding_sectors > 0) {
     // Create an unallocated partition after this one.
     Partition succeeding_partition;
     succeeding_partition.device_path = new_partition.device_path;
     succeeding_partition.sector_size = orig_partition.sector_size;
     succeeding_partition.end_sector = orig_partition.end_sector;
     succeeding_partition.start_sector = succeeding_partition.end_sector -
-                                        new_partition.sectors_unallocated_succeeding;
+                                        new_partition.succeeding_sectors;
     if (index+1 == partitions.length()) {
       partitions.append(succeeding_partition);
     } else {
@@ -191,13 +191,13 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
 
   partitions[index] = new_partition;
 
-  if (new_partition.sectors_unallocated_preceding > 0) {
+  if (new_partition.preceding_sectors > 0) {
     // Create an unallocated partition before this one.
     Partition preceding_partition;
     preceding_partition.device_path = new_partition.device_path;
     preceding_partition.start_sector = orig_partition.start_sector;
     preceding_partition.end_sector = preceding_partition.start_sector +
-                                     new_partition.sectors_unallocated_preceding;
+                                     new_partition.preceding_sectors;
     if (index == 0) {
       partitions.prepend(preceding_partition);
     } else {

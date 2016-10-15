@@ -60,8 +60,8 @@ class Partition {
   // No. of sectors not unallocated before/after this partition.
   // These two properties are only used while creating a new partition.
   // If it is a valid value, create an unallocated-partition later.
-  qint64 sectors_unallocated_preceding;
-  qint64 sectors_unallocated_succeeding;
+  qint64 preceding_sectors;
+  qint64 succeeding_sectors;
 
   // |mount_point| is not system mount point, it is set by user
   // in partition page.
@@ -81,7 +81,6 @@ class Partition {
   // Returns length in sector.
   qint64 getSectorLength() const;
 };
-
 QDebug& operator<<(QDebug& debug, const Partition& partition);
 
 typedef QList<Partition> PartitionList;

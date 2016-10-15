@@ -66,8 +66,8 @@ Partition::Partition()
       freespace(-1),
       start_sector(-1),
       end_sector(-1),
-      sectors_unallocated_preceding(0),
-      sectors_unallocated_succeeding(0),
+      preceding_sectors(0),
+      succeeding_sectors(0),
       mount_point() {
 }
 
@@ -124,6 +124,8 @@ QDebug& operator<<(QDebug& debug, const Partition& partition) {
         << "length:" << partition.length
         << "freespace:" << partition.freespace
         << "byte length:" << partition.getByteLength()
+        << "preceding sectors:" << partition.preceding_sectors
+        << "succeeding sectors:" << partition.succeeding_sectors
         << "}";
   return debug;
 }

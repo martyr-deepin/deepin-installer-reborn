@@ -80,12 +80,21 @@ class PartitionDelegate : public QObject {
   void doManualPart();
 
  private:
-  // Get preceding sectors while creating a new |partition|.
-  qint64 getPartitionPreceding(const Partition& partition);
-
   void initConnections();
   void refreshVisual();
 
+  void createNormalPartition(const Partition& partition,
+                             bool align_start,
+                             FsType fs_type,
+                             const QString& mount_point,
+                             qint64 total_sectors);
+  void createExtendedPartition(const Partition& partition,
+                               qint64 total_sectors);
+  void createLogicalPartition(const Partition& partition,
+                              bool align_start,
+                              FsType fs_type,
+                              const QString& mount_point,
+                              qint64 total_sectors);
   void removeEmptyExtendedPartition(const PartitionList& partitions);
 
   PartitionManager* partition_manager_ = nullptr;
