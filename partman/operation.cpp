@@ -60,7 +60,9 @@ bool Operation::applyToDisk() const {
     case OperationType::Create: {
       ok = CreatePartition(new_partition);
       qDebug() << "applyToDisk() create partition:" << ok;
-      if (ok) {
+      // Ignores extended partition.
+      // TODO(xushaohua): Check new_partition.fs
+      if (ok && new_partition.type != PartitionType::Extended) {
         ok = Mkfs(new_partition);
         qDebug() << "applyToDisk() mkfs:" << ok;
       }
@@ -125,7 +127,11 @@ QString Operation::description() const {
   QString desc;
   switch (type) {
     case OperationType::Create: {
-      if (new_partition.mount_point.isEmpty()) {
+      if (new_partition.type == PartitionType::Extended) {
+        desc = QObject::tr("Create extended partition %1")
+            .arg(new_partition.path);
+      }
+      else if (new_partition.mount_point.isEmpty()) {
         desc = QObject::tr("Create partition %1 with %2")
             .arg(new_partition.path)
             .arg(GetFsTypeName(new_partition.fs));
@@ -189,7 +195,12 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
     }
   }
 
-  partitions[index] = new_partition;
+  // Do not remove orig partition when creating extended partition.
+  if (new_partition.type == PartitionType::Extended) {
+    partitions.insert(index, new_partition);
+  } else {
+    partitions[index] = new_partition;
+  }
 
   if (new_partition.preceding_sectors > 0) {
     // Create an unallocated partition before this one.
@@ -260,7 +271,7 @@ void Operation::substitute(PartitionList& partitions) const {
 }
 
 QDebug& operator<<(QDebug& debug, const Operation& operation) {
-  debug << "Operator: {"
+  debug << "Operation: {"
         << "type:" << operation.type
         << "orig_partition:" << operation.orig_partition
         << "new_partition:" << operation.new_partition

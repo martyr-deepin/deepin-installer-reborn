@@ -83,13 +83,11 @@ class PartitionDelegate : public QObject {
   void initConnections();
   void refreshVisual();
 
-  void createNormalPartition(const Partition& partition,
-                             bool align_start,
-                             FsType fs_type,
-                             const QString& mount_point,
-                             qint64 total_sectors);
-  void createExtendedPartition(const Partition& partition,
-                               qint64 total_sectors);
+  void createPrimaryPartition(const Partition& partition,
+                              bool align_start,
+                              FsType fs_type,
+                              const QString& mount_point,
+                              qint64 total_sectors);
   void createLogicalPartition(const Partition& partition,
                               bool align_start,
                               FsType fs_type,
