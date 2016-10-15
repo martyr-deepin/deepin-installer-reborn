@@ -208,8 +208,7 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
 
 void Operation::applyDeleteVisual(PartitionList& partitions) const {
   // Policy:
-  // * Update partition number;
-  // * Remove extended partition if no logical partition exists;
+  // * Update partition number if logical partition is deleted;
   // * Merge unallocated partitions;
 
   int index = PartitionIndex(partitions, orig_partition);
@@ -219,6 +218,16 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
 //    partitions.removeAt(index);
 //    return;
 //  }
+
+  if (orig_partition.type == PartitionType::Logical) {
+    // Update partition number of logical partitions.
+    for (Partition& partition : partitions) {
+      if (partition.type == PartitionType::Logical &&
+          partition.partition_number > orig_partition.partition_number) {
+        partition.changeNumber(partition.partition_number - 1);
+      }
+    }
+  }
 
   Partition empty_partition = new_partition;
 
