@@ -9,7 +9,7 @@
 
 namespace installer {
 
-// This class is used to send signals cross objects.
+// This class is used to send signals across unrelated objects.
 // It keeps a global instance.
 class SignalManager : public QObject {
   Q_OBJECT
