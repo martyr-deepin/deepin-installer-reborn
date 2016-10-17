@@ -16,6 +16,7 @@
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "service/signal_manager.h"
 #include "ui/frames/consts.h"
 #include "ui/delegates/language_list_delegate.h"
 #include "ui/models/language_list_model.h"
@@ -25,7 +26,9 @@
 
 namespace installer {
 
-SelectLanguageFrame::SelectLanguageFrame(QWidget* parent) : QFrame(parent) {
+SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
+    : QFrame(parent),
+      locale_() {
   this->setObjectName(QStringLiteral("select_language_frame"));
 
   this->initUI();
@@ -34,8 +37,8 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent) : QFrame(parent) {
 }
 
 void SelectLanguageFrame::autoConf() {
-  const QString locale = GetSettingsString(kSelectLanguageDefaultLocale);
-  WriteLocale(locale);
+  locale_ = GetSettingsString(kSelectLanguageDefaultLocale);
+  WriteLocale(locale_);
 }
 
 void SelectLanguageFrame::initConnections() {
@@ -96,20 +99,20 @@ void SelectLanguageFrame::initUI() {
 
 void SelectLanguageFrame::onLanguageListSelected() {
   language_is_selected_ = true;
+  const QModelIndexList selected_items =
+      list_view_->selectionModel()->selectedIndexes();
+  if (selected_items.length() == 1) {
+    locale_ = list_model_->locale(selected_items.at(0));
+    emit SignalManager::instance()->languageSelected(locale_);
+  }
 }
 
 void SelectLanguageFrame::onNextButtonClicked() {
   if (language_is_selected_) {
-    const QModelIndexList selected_items =
-        list_view_->selectionModel()->selectedIndexes();
-    if (selected_items.length() == 1) {
-      const QString locale = list_model_->locale(selected_items.at(0));
-      WriteLocale(locale);
-
-      emit this->finished();
-    } else {
-      qWarning() << "No locale is selected!";
-    }
+    WriteLocale(locale_);
+    emit this->finished();
+  } else {
+    qWarning() << "No locale is selected!";
   }
 }
 

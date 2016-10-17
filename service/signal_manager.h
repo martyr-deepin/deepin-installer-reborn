@@ -22,6 +22,9 @@ class SignalManager : public QObject {
   void autoPartDone(bool ok);
   void manualPartDone(bool ok);
 
+  // Emitted when |locale| is selected in select-language-frame
+  void languageSelected(const QString& locale);
+
  private:
   SignalManager();
 };

@@ -31,6 +31,7 @@ class SelectLanguageFrame : public QFrame {
   void initUI();
 
   bool language_is_selected_ = false;
+  QString locale_;
 
   QListView* list_view_ = nullptr;
   LanguageListModel* list_model_ = nullptr;
