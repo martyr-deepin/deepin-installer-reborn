@@ -84,6 +84,7 @@ void SelectLanguageFrame::initUI() {
   list_layout->addStretch();
 
   next_button_ = new NavButton(tr("Next"));
+  next_button_->setEnabled(false);
   QHBoxLayout* next_layout = new QHBoxLayout();
   next_layout->addWidget(next_button_);
 
@@ -98,7 +99,7 @@ void SelectLanguageFrame::initUI() {
 }
 
 void SelectLanguageFrame::onLanguageListSelected() {
-  language_is_selected_ = true;
+  next_button_->setEnabled(true);
   const QModelIndexList selected_items =
       list_view_->selectionModel()->selectedIndexes();
   if (selected_items.length() == 1) {
@@ -108,12 +109,8 @@ void SelectLanguageFrame::onLanguageListSelected() {
 }
 
 void SelectLanguageFrame::onNextButtonClicked() {
-  if (language_is_selected_) {
-    WriteLocale(locale_);
-    emit this->finished();
-  } else {
-    qWarning() << "No locale is selected!";
-  }
+  WriteLocale(locale_);
+  emit this->finished();
 }
 
 }  // namespace installer
