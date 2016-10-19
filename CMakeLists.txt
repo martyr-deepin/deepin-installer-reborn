@@ -27,7 +27,11 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-add_definitions("-DBUILTIN_HOOKS_DIR=\"${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn/hooks\"")
+set(INSTALLER_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn)
+
+# Defines path to resource directories
+add_definitions("-DSLIDE_DIR=\"${INSTALLER_SHARE_DIR}/slide\"")
+add_definitions("-DBUILTIN_HOOKS_DIR=\"${INSTALLER_SHARE_DIR}/hooks\"")
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
@@ -276,7 +280,12 @@ install(FILES resources/deepin-installer-reborn.svg
         DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps")
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hooks
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn
+    DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
     PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+)
+install(
+    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/resources/slide
+    DESTINATION ${INSTALLER_SHARE_DIR}
+    FILES_MATCHING PATTERN "*"
 )
