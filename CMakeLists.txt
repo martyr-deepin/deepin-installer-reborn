@@ -47,6 +47,8 @@ include_directories(AFTER ${X11_INCLUDE_DIRS})
 include_directories(AFTER ${X11EXT_INCLUDE_DIRS})
 include_directories(AFTER ${X11TST_INCLUDE_DIRS})
 
+add_subdirectory(third_party/CuteLogger)
+include_directories(third_party/CuteLogger)
 add_subdirectory(third_party/googletest)
 include_directories(third_party/googletest)
 
@@ -191,6 +193,8 @@ set(LINK_LIBS
     ${X11_LIBRARIES}
     ${X11EXT_LIBRARIES}
     ${X11TST_LIBRARIES}
+
+    CuteLogger
     )
 
 # Main executable
