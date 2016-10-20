@@ -12,6 +12,7 @@ class QThread;
 namespace installer {
 
 class HooksManager;
+class InstallProgressSlideFrame;
 
 // Displays when system is being installed to disk.
 // A progress bar is shown at bottom of page.
@@ -21,6 +22,9 @@ class InstallProgressFrame : public QFrame {
  public:
   explicit InstallProgressFrame(QWidget* parent = nullptr);
   ~InstallProgressFrame();
+
+  // Show slide now
+  void startSlide();
 
   enum class State {
     Failed,
@@ -46,6 +50,7 @@ class InstallProgressFrame : public QFrame {
   QThread* hooks_manager_thread_ = nullptr;
 
   QLabel* progress_label_ = nullptr;
+  InstallProgressSlideFrame* slide_frame_ = nullptr;
 
  private slots:
   void onErrorOccurred();

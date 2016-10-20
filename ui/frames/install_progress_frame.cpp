@@ -12,6 +12,7 @@
 #include "service/hooks_manager.h"
 #include "service/signal_manager.h"
 #include "ui/frames/consts.h"
+#include "ui/frames/inner/install_progress_slide_frame.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/title_label.h"
 
@@ -44,6 +45,10 @@ InstallProgressFrame::~InstallProgressFrame() {
   hooks_manager_thread_ = nullptr;
 }
 
+void InstallProgressFrame::startSlide() {
+  slide_frame_->startSlide();
+}
+
 void InstallProgressFrame::initConnections() {
   connect(hooks_manager_, &HooksManager::errorOccurred,
           this, &InstallProgressFrame::onErrorOccurred);
@@ -70,9 +75,11 @@ void InstallProgressFrame::initUI() {
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->addWidget(comment_label);
 
+  slide_frame_ = new InstallProgressSlideFrame();
+
   progress_label_ = new QLabel();
   progress_label_->setAlignment(Qt::AlignCenter);
-  progress_label_->setStyleSheet("font-size: 64px; color:#eaeaea;");
+  progress_label_->setStyleSheet("font-size: 24px; color:#eaeaea;");
   QHBoxLayout* progress_layout = new QHBoxLayout();
   progress_layout->addWidget(progress_label_);
 
@@ -82,6 +89,7 @@ void InstallProgressFrame::initUI() {
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
   layout->addStretch();
+  layout->addWidget(slide_frame_);
   layout->addLayout(progress_layout);
   layout->addStretch();
 
@@ -90,6 +98,7 @@ void InstallProgressFrame::initUI() {
 
 void InstallProgressFrame::onErrorOccurred() {
   failed_ = true;
+  slide_frame_->stopSlide();
   emit this->finished();
 }
 

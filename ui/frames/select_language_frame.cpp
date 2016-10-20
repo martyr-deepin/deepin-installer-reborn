@@ -38,6 +38,7 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
 
 void SelectLanguageFrame::autoConf() {
   locale_ = GetSettingsString(kSelectLanguageDefaultLocale);
+  emit SignalManager::instance()->languageSelected(locale_);
   WriteLocale(locale_);
 }
 

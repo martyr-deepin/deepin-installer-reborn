@@ -311,6 +311,7 @@ void MainWindow::goNextPage() {
       // Show InstallProgressPage.
       page_indicator_->setVisible(true);
       page_indicator_->goNextPage();
+      install_progress_frame_->startSlide();
       this->setCurrentPage(PageId::InstallProgressId);
       break;
     }
