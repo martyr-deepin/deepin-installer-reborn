@@ -62,6 +62,8 @@ void InstallProgressFrame::initConnections() {
           this, &InstallProgressFrame::onPartitionDone);
   connect(signal_manager, &SignalManager::manualPartDone,
           this, &InstallProgressFrame::onPartitionDone);
+  connect(signal_manager, &SignalManager::languageSelected,
+          slide_frame_, &InstallProgressSlideFrame::setLocale);
 }
 
 void InstallProgressFrame::initUI() {
@@ -76,6 +78,8 @@ void InstallProgressFrame::initUI() {
   comment_layout->addWidget(comment_label);
 
   slide_frame_ = new InstallProgressSlideFrame();
+  QHBoxLayout* slide_layout = new QHBoxLayout();
+  slide_layout->addWidget(slide_frame_);
 
   progress_label_ = new QLabel();
   progress_label_->setAlignment(Qt::AlignCenter);
@@ -89,8 +93,8 @@ void InstallProgressFrame::initUI() {
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
   layout->addStretch();
-  layout->addWidget(slide_frame_);
-  layout->addLayout(progress_layout);
+  layout->addLayout(slide_layout);
+//  layout->addLayout(progress_layout);
   layout->addStretch();
 
   this->setLayout(layout);

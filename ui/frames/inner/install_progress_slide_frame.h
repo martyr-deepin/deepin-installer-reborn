@@ -6,6 +6,12 @@
 #define INSTALLER_INSTALL_PROGRESS_SLIDE_FRAME_H
 
 #include <QFrame>
+#include <QStringList>
+
+class QLabel;
+class QGraphicsOpacityEffect;
+class QPropertyAnimation;
+class QParallelAnimationGroup;
 
 namespace installer {
 
@@ -20,14 +26,28 @@ class InstallProgressSlideFrame : public QFrame {
   void startSlide();
   void stopSlide();
 
+ public slots:
+  void setLocale(const QString& locale);
+
  private:
   void initConnections();
   void initUI();
+  // Update slide image by index.
+  void updateSlideImage();
+
+  QLabel* container_label_ = nullptr;
+  QPropertyAnimation* pos_animation_ = nullptr;
+  QGraphicsOpacityEffect* opacity_effect_ = nullptr;
+  QPropertyAnimation* opacity_animation_ = nullptr;
+  QParallelAnimationGroup* animation_group_ = nullptr;
 
   QString locale_;
+  int slide_index_;
+  QStringList slide_files_;
 
  private slots:
-  void onLanguageUpdated(const QString& locale);
+  // Update slide image while switching to next animation loop
+  void onAnimationCurrentLoopChanged();
 };
 
 }  // namespace installer

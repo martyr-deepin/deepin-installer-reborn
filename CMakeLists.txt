@@ -30,7 +30,12 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(INSTALLER_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn)
 
 # Defines path to resource directories
-add_definitions("-DSLIDE_DIR=\"${INSTALLER_SHARE_DIR}/slide\"")
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+  add_definitions("-DSLIDE_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/resources/slide\"")
+else()
+  add_definitions("-DSLIDE_DIR=\"${INSTALLER_SHARE_DIR}/slide\"")
+endif()
+
 add_definitions("-DBUILTIN_HOOKS_DIR=\"${INSTALLER_SHARE_DIR}/hooks\"")
 
 find_package(Qt5Core REQUIRED)

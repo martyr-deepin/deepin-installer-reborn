@@ -4,9 +4,12 @@
 
 #include "ui/frames/inner/install_progress_slide_frame.h"
 
+#include <QDebug>
 #include <QDir>
-
-#include "service/signal_manager.h"
+#include <QGraphicsOpacityEffect>
+#include <QLabel>
+#include <QPropertyAnimation>
+#include <QParallelAnimationGroup>
 
 namespace installer {
 
@@ -14,10 +17,14 @@ namespace {
 
 const char kDefaultSlide[] = "default";
 
+// Duration of each slide.
+const int kSlideDuration = 5000;
+
 // Get absolute path to slide folder, based on |locale|.
 // |locale| might be empty or like "zh_CN" or "en_US".
 QString GetSlideDir(const QString& locale) {
   QDir dir(SLIDE_DIR);
+  Q_ASSERT(dir.exists());
   for (const QFileInfo& fileinfo :
        dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
     if (fileinfo.fileName() == locale) {
@@ -30,9 +37,11 @@ QString GetSlideDir(const QString& locale) {
 
 }  // namespace
 
-InstallProgressSlideFrame::InstallProgressSlideFrame(QWidget* parent) :
-    QFrame(parent),
-    locale_() {
+InstallProgressSlideFrame::InstallProgressSlideFrame(QWidget* parent)
+    : QFrame(parent),
+      locale_(),
+      slide_index_(0),
+      slide_files_() {
   this->setObjectName(QStringLiteral("install_progress_frame"));
 
   this->initUI();
@@ -40,25 +49,68 @@ InstallProgressSlideFrame::InstallProgressSlideFrame(QWidget* parent) :
 }
 
 void InstallProgressSlideFrame::startSlide() {
-  const QString slide_dir = GetSlideDir(locale_);
-  QDir dir(slide_dir);
-  Q_ASSERT(dir.exists());
+  QDir slide_dir(GetSlideDir(locale_));
+  Q_ASSERT(slide_dir.exists());
+  for (const QString& filename : slide_dir.entryList(QDir::Files)) {
+    slide_files_.append(slide_dir.absoluteFilePath(filename));
+  }
+  slide_index_ = 0;
+  this->updateSlideImage();
+
+  animation_group_->start();
 }
 
 void InstallProgressSlideFrame::stopSlide() {
+  animation_group_->stop();
+}
+
+void InstallProgressSlideFrame::setLocale(const QString& locale) {
+  locale_ = locale;
 }
 
 void InstallProgressSlideFrame::initConnections() {
-  connect(SignalManager::instance(), &SignalManager::languageSelected,
-          this, &InstallProgressSlideFrame::onLanguageUpdated);
+  connect(animation_group_, &QParallelAnimationGroup::currentLoopChanged,
+          this, &InstallProgressSlideFrame::onAnimationCurrentLoopChanged);
 }
 
 void InstallProgressSlideFrame::initUI() {
+  container_label_ = new QLabel(this);
 
+  pos_animation_ = new QPropertyAnimation(container_label_, "pos", this);
+  pos_animation_->setKeyValueAt(0.0, QPoint(-50, 0));
+  pos_animation_->setKeyValueAt(0.1, QPoint(0, 0));
+  pos_animation_->setKeyValueAt(0.9, QPoint(0, 0));
+  pos_animation_->setKeyValueAt(1.0, QPoint(50, 0));
+  pos_animation_->setDuration(kSlideDuration);
+
+  opacity_effect_ = new QGraphicsOpacityEffect(container_label_);
+  this->setGraphicsEffect(opacity_effect_);
+  opacity_animation_ = new QPropertyAnimation(opacity_effect_, "opacity", this);
+  opacity_animation_->setKeyValueAt(0.0, 0.0);
+  opacity_animation_->setKeyValueAt(0.1, 1.0);
+  opacity_animation_->setKeyValueAt(0.9, 1.0);
+  opacity_animation_->setKeyValueAt(1.0, 0.0);
+  opacity_animation_->setDuration(kSlideDuration);
+
+  animation_group_ = new QParallelAnimationGroup(this);
+  animation_group_->addAnimation(pos_animation_);
+  animation_group_->addAnimation(opacity_animation_);
+  animation_group_->setLoopCount(-1);
+
+  // TODO(xushaohua): Check proper size of this widget
+  this->setFixedSize(960, 640);
 }
 
-void InstallProgressSlideFrame::onLanguageUpdated(const QString& locale) {
-  locale_ = locale;
+void InstallProgressSlideFrame::updateSlideImage() {
+  Q_ASSERT(slide_index_ < slide_files_.length());
+  const QPixmap pixmap(slide_files_.at(slide_index_));
+  container_label_->setPixmap(pixmap);
+  container_label_->show();
+  slide_index_ = (slide_index_ + 1) % slide_files_.length();
+}
+
+void InstallProgressSlideFrame::onAnimationCurrentLoopChanged() {
+  this->updateSlideImage();
 }
 
 }  // namespace installer
