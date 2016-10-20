@@ -40,13 +40,11 @@ find_package(Qt5Gui REQUIRED)
 find_package(PkgConfig REQUIRED)
 
 pkg_search_module(Parted REQUIRED libparted)
-pkg_search_module(QREncode REQUIRED libqrencode)
 pkg_search_module(X11 REQUIRED x11)
 pkg_search_module(X11EXT REQUIRED xext)
 pkg_search_module(X11TST REQUIRED xtst)
 
 include_directories(AFTER ${Parted_INCLUDE_DIRS})
-include_directories(AFTER ${QREncode_INCLUDE_DIRS})
 include_directories(AFTER ${X11_INCLUDE_DIRS})
 include_directories(AFTER ${X11EXT_INCLUDE_DIRS})
 include_directories(AFTER ${X11TST_INCLUDE_DIRS})
@@ -55,6 +53,8 @@ add_subdirectory(third_party/CuteLogger)
 include_directories(third_party/CuteLogger)
 add_subdirectory(third_party/googletest)
 include_directories(third_party/googletest)
+add_subdirectory(third_party/qrencode)
+include_directories(third_party/qrencode)
 
 set(BASE_FILES
     base/command.cpp base/command.h
@@ -199,6 +199,7 @@ set(LINK_LIBS
     ${X11TST_LIBRARIES}
 
     CuteLogger
+    qrencode
     )
 
 # Main executable
