@@ -12,6 +12,7 @@ class QThread;
 namespace installer {
 
 class HooksManager;
+class InstallProgressBar;
 class InstallProgressSlideFrame;
 
 // Displays when system is being installed to disk.
@@ -49,13 +50,14 @@ class InstallProgressFrame : public QFrame {
   HooksManager* hooks_manager_ = nullptr;
   QThread* hooks_manager_thread_ = nullptr;
 
-  QLabel* progress_label_ = nullptr;
+  InstallProgressBar* progress_bar_ = nullptr;
   InstallProgressSlideFrame* slide_frame_ = nullptr;
 
  private slots:
+  // Handles error state
   void onErrorOccurred();
-  void onInstallProgressUpdated(int progress);
 
+  // Run hooks when partition job is done
   void onPartitionDone(bool ok);
 };
 

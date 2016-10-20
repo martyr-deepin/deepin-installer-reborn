@@ -6,12 +6,12 @@
 
 #include <QDebug>
 #include <QHBoxLayout>
-#include <QLabel>
 #include <QThread>
 
 #include "service/hooks_manager.h"
 #include "service/signal_manager.h"
 #include "ui/frames/consts.h"
+#include "ui/frames/inner/install_progress_bar.h"
 #include "ui/frames/inner/install_progress_slide_frame.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/title_label.h"
@@ -30,9 +30,6 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
 
   this->initUI();
   this->initConnections();
-
-  // Initialize progress value.
-  this->onInstallProgressUpdated(0);
 }
 
 InstallProgressFrame::~InstallProgressFrame() {
@@ -53,7 +50,7 @@ void InstallProgressFrame::initConnections() {
   connect(hooks_manager_, &HooksManager::errorOccurred,
           this, &InstallProgressFrame::onErrorOccurred);
   connect(hooks_manager_, &HooksManager::processUpdate,
-          this, &InstallProgressFrame::onInstallProgressUpdated);
+          progress_bar_, &InstallProgressBar::setProgress);
   connect(hooks_manager_, &HooksManager::finished,
           this, &InstallProgressFrame::finished);
 
@@ -81,11 +78,9 @@ void InstallProgressFrame::initUI() {
   QHBoxLayout* slide_layout = new QHBoxLayout();
   slide_layout->addWidget(slide_frame_);
 
-  progress_label_ = new QLabel();
-  progress_label_->setAlignment(Qt::AlignCenter);
-  progress_label_->setStyleSheet("font-size: 24px; color:#eaeaea;");
+  progress_bar_ = new InstallProgressBar();
   QHBoxLayout* progress_layout = new QHBoxLayout();
-  progress_layout->addWidget(progress_label_);
+  progress_layout->addWidget(progress_bar_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
@@ -94,7 +89,7 @@ void InstallProgressFrame::initUI() {
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addLayout(slide_layout);
-//  layout->addLayout(progress_layout);
+  layout->addLayout(progress_layout);
   layout->addStretch();
 
   this->setLayout(layout);
@@ -106,17 +101,12 @@ void InstallProgressFrame::onErrorOccurred() {
   emit this->finished();
 }
 
-void InstallProgressFrame::onInstallProgressUpdated(int progress) {
-  const QString text = QString("%1%").arg(progress);
-  progress_label_->setText(text);
-}
-
 void InstallProgressFrame::onPartitionDone(bool ok) {
   qDebug() << "onPartitionDone()" << ok;
 
   if (ok) {
     // Partition operations take 5% progress.
-    onInstallProgressUpdated(kBeforeChrootStartVal);
+    progress_bar_->setProgress(kBeforeChrootStartVal);
 
     qDebug() << "emit runHooks() signal";
     // Run hooks/ in background thread.

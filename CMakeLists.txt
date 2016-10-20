@@ -125,6 +125,7 @@ set(UI_FILES
     ui/frames/consts.h
     ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
     ui/frames/inner/edit_partition_frame.cpp ui/frames/inner/edit_partition_frame.h
+    ui/frames/inner/install_progress_bar.cpp ui/frames/inner/install_progress_bar.h
     ui/frames/inner/install_progress_slide_frame.cpp ui/frames/inner/install_progress_slide_frame.h
     ui/frames/inner/new_partition_frame.cpp ui/frames/inner/new_partition_frame.h
     ui/frames/inner/partition_loading_frame.cpp ui/frames/inner/partition_loading_frame.h
