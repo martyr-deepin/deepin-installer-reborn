@@ -113,11 +113,12 @@ bool CopySymLink(const char* src_file, const char* dest_file) {
 
 // Update xattr (access control lists and file capabilities)
 bool CopyXAttr(const char* src_file, const char* dest_file) {
+  qDebug() << "CopyXAttr():" << src_file << dest_file;
   bool ok = true;
   // size of extended attribute list, 64k.
   char list[XATTR_LIST_MAX];
   char value[XATTR_NAME_MAX];
-  ssize_t xlist_len = listxattr(src_file, list, XATTR_LIST_MAX);
+  ssize_t xlist_len = llistxattr(src_file, list, XATTR_LIST_MAX);
   if (xlist_len < 0) {
     qCritical() << "CopyXAttr() listxattr() failed:" << src_file;
     perror("listxattr()");
@@ -125,11 +126,11 @@ bool CopyXAttr(const char* src_file, const char* dest_file) {
   } else {
     ssize_t value_len;
     for (int ns = 0; ok && (ns < xlist_len); ns += strlen(&list[ns] + 1)) {
-      value_len = getxattr(src_file, &list[ns], value, XATTR_NAME_MAX);
+      value_len = lgetxattr(src_file, &list[ns], value, XATTR_NAME_MAX);
       if (value_len == -1) {
         qWarning() << "CopyXAttr() could not get value:";
       } else {
-        if (setxattr(dest_file, &list[ns], value, size_t(value_len), 0) != 0) {
+        if (lsetxattr(dest_file, &list[ns], value, size_t(value_len), 0) != 0) {
           qCritical() << "CopyXAttr() setxattr() failed:" << dest_file
                       << &list[ns] << value;
           perror("setxattr()");
@@ -171,7 +172,7 @@ int CopyItem(const char* fpath, const struct stat* sb,
   const size_t dest_len = size_t(dest_filepath.length());
   char dest_file[dest_len + 1];
   strncpy(dest_file, dest_filepath.toUtf8().data(), dest_len);
-  dest_file[dest_len+1] = '\0';
+  dest_file[dest_len] = '\0';
 
   bool ok = true;
 
@@ -204,19 +205,19 @@ int CopyItem(const char* fpath, const struct stat* sb,
   }
 
   // TODO(xushaohua): Keep file descriptor.
-  // Update permissions
-  if (lchown(dest_file, st.st_uid, st.st_gid) != 0) {
-    qCritical() << "CopyItem() lchown() failed:" << dest_filepath
-                << st.st_uid << st.st_gid;
-    perror("lchown()");
-    ok = false;
-  }
   if (!S_ISLNK(st.st_mode)) {
     if (chmod(dest_file, mode) != 0) {
-      qCritical() << "CopyItem() chmod failed:" << dest_filepath << mode;
+      qCritical() << "CopyItem() chmod failed:" << dest_file << mode;
       perror("chmod()");
       ok = false;
     }
+  }
+  // Update permissions
+  if (lchown(dest_file, st.st_uid, st.st_gid) != 0) {
+    qCritical() << "CopyItem() lchown() failed:" << dest_file
+                << st.st_uid << st.st_gid;
+    perror("lchown()");
+    ok = false;
   }
 
   if (!CopyXAttr(fpath, dest_file)) {
