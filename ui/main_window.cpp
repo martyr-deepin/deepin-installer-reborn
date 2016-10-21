@@ -91,9 +91,8 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
-  current_page_ = PageId::PartitionId;
   this->goNextPage();
-//  partition_frame_->scanDevices();
+  partition_frame_->scanDevices();
 }
 
 void MainWindow::fullscreen() {
