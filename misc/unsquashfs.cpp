@@ -42,7 +42,8 @@ const int kExitOk = 0;
 const int kExitErr = 1;
 
 // Maximum number of opended file descriptors.
-const int kMaxOpenFd = 36;
+// See /proc/self/limits for more information.
+const int kMaxOpenFd = 256;
 
 // Global references to progress_file, src_dir and dest_dir.
 QString g_progress_file;
@@ -125,16 +126,20 @@ bool CopyXAttr(const char* src_file, const char* dest_file) {
     ok = false;
   } else {
     ssize_t value_len;
-    for (int ns = 0; ok && (ns < xlist_len); ns += strlen(&list[ns] + 1)) {
+    for (int ns = 0; ns < xlist_len; ns += strlen(&list[ns] + 1)) {
       value_len = lgetxattr(src_file, &list[ns], value, XATTR_NAME_MAX);
       if (value_len == -1) {
-        qWarning() << "CopyXAttr() could not get value:";
+        // FIXME(xushaohua):
+        qWarning() << "CopyXAttr() could not get value:" << src_file;
+        qDebug() << ns << xlist_len;
+        break;
       } else {
         if (lsetxattr(dest_file, &list[ns], value, size_t(value_len), 0) != 0) {
           qCritical() << "CopyXAttr() setxattr() failed:" << dest_file
                       << &list[ns] << value;
           perror("setxattr()");
           ok = false;
+          break;
         }
       }
     }
@@ -244,42 +249,41 @@ bool CopyFiles(const QString& src_dir, const QString& dest_dir,
   g_src_dir = src_dir;
   g_dest_dir = dest_dir;
 
-  const int flag = FTW_DEPTH;
   const bool ok = (nftw(src_dir.toUtf8().data(), CopyItem,
-                        kMaxOpenFd, flag) == 0);
+                        kMaxOpenFd, FTW_PHYS) == 0);
 
   // Reset umask.
   umask(old_mask);
 
   return ok;
 }
-//
-//// Mount filesystem at |src| to |mount_point|
-//bool MountFs(const QString& src, const QString& mount_point) {
-//  if (!installer::CreateDirs(mount_point)) {
-//    qCritical() << "MountFs() Failed to create folder:" << mount_point;
-//    return false;
-//  }
-//  QString output, err;
-//  const bool ok = installer::SpawnCmd("mount", {src, mount_point}, output, err);
-//  if (!ok) {
-//    qCritical() << "MountFs() err:" << err;
-//  }
-//
-//  // TODO(xushaohua): Check |mount_point| dir is not empty.
-//
-//  return ok;
-//}
-//
-//// Umount filesystem from |mount_point|.
-//bool UnMountFs(const QString& mount_point) {
-//  QString out, err;
-//  const bool ok = installer::SpawnCmd("umount", {mount_point}, out, err);
-//  if (!ok) {
-//    qCritical() << "Umount err:" << err;
-//  }
-//  return ok;
-//}
+
+// Mount filesystem at |src| to |mount_point|
+bool MountFs(const QString& src, const QString& mount_point) {
+  if (!installer::CreateDirs(mount_point)) {
+    qCritical() << "MountFs() Failed to create folder:" << mount_point;
+    return false;
+  }
+  QString output, err;
+  const bool ok = installer::SpawnCmd("mount", {src, mount_point}, output, err);
+  if (!ok) {
+    qCritical() << "MountFs() err:" << err;
+  }
+
+  // TODO(xushaohua): Check |mount_point| dir is not empty.
+
+  return ok;
+}
+
+// Umount filesystem from |mount_point|.
+bool UnMountFs(const QString& mount_point) {
+  QString out, err;
+  const bool ok = installer::SpawnCmd("umount", {mount_point}, out, err);
+  if (!ok) {
+    qCritical() << "Umount err:" << err;
+  }
+  return ok;
+}
 
 }  // namespace
 
@@ -337,20 +341,20 @@ int main(int argc, char* argv[]) {
   const QString dest_dir = parser.value(dest_option);
   const QString progress_file = parser.value(progress_option);
 
-//  if (!MountFs(src, mount_point)) {
-//    qCritical() << "Mount" << src << "to" << mount_point << "failed!";
-//    exit(kExitErr);
-//  }
+  if (!MountFs(src, mount_point)) {
+    qCritical() << "Mount" << src << "to" << mount_point << "failed!";
+    exit(kExitErr);
+  }
 
   const bool ok = CopyFiles(mount_point, dest_dir, progress_file);
   if (!ok) {
     qCritical() << "Copy files failed!";
   }
-//
-//  if (!UnMountFs(mount_point)) {
-//    qCritical() << "UnMount failed:" << mount_point;
-//    exit(kExitErr);
-//  }
+
+  if (!UnMountFs(mount_point)) {
+    qCritical() << "UnMount failed:" << mount_point;
+    exit(kExitErr);
+  }
 
   exit(ok ? kExitOk : kExitErr);
 }
