@@ -23,36 +23,19 @@ extract_overlay_filesystem() {
             ;;
     esac
 
-    # FIXME(xushaohua): Do not send overlay progress
     if [ -f ${MODULE} ];then
         for file in $(cat ${MODULE});do
-            script -c "unsquashfs -f -d /target ${CDROM}/overlay/${file}" \
-              /dev/null | unsquashfs-progress-reborn $LANG_PROGRESS_FILE || exit 2
+            deepin-installer-unsquashfs --dest /target
+              --progress "$LANG_PROGRESS_FILE" "${CDROM}/overlay/${file}" || exit 2
         done
     fi
 }
 
-declare -i MEM
-MEM=$(awk '/^MemFree:/ {mem_free=$2} /^Buffers:/ {meme_free+=$2} /^Cacheed:/ {mem_free+=$2} END{print mem_free}' /proc/meminfo)
+# First, extract base filesystem
+deepin-installer-unsquashfs --dest /target --progress $BASE_PROGRESS_FILE \
+  ${LIVE_FILESYSTEM}/filesystem.squashfs || exit 2
 
-# Do DI_EXTRACT_METHOD first
-if [ x"${DI_EXTRACT_METHOD}" = x"unsquashfs" ];then
-    MEM=9999999
-fi
+# Then extract overlay_filesystem 
+extract_overlay_filesystem
 
-if [ x"${DI_EXTRACT_METHOD}" = x"fallback" ];then
-    MEM=0
-fi
-
-# Check if freemem less than 3G
-if [ $MEM -le 3000000 ] ;then
-    echo "[Info] Detect free memory less than 3G"
-    ./extract_base_filesystem --lang ${L} --live ${LIVE} || exit 1
-else
-    echo "[Info] Detect free memory more than 3G"
-    script -c "unsquashfs -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs"\
-      /dev/null | unsquashfs-progress-reborn $BASE_PROGRESS_FILE || exit 2
-fi
-
-# Finally extract_overlay_filesystem 
-extract_overlay_filesystem || true
+exit 0

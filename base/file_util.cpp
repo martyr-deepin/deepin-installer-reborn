@@ -17,7 +17,11 @@ QDir ConcateDir(const QDir& parent_dir, const QString& folder_name) {
   return QDir(parent_dir.filePath(folder_name));
 }
 
-bool CreateParentDirs(const QString& filepath) {
+bool CreateDirs(const QString& dirpath) {
+  return QDir(dirpath).mkpath(".");
+}
+
+bool CreateParentDires(const QString& filepath) {
   return QFileInfo(filepath).absoluteDir().mkpath(".");
 }
 

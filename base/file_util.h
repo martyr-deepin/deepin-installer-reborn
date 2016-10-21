@@ -14,8 +14,11 @@ namespace installer {
 // returns a QDir object refering to its absolute path.
 QDir ConcateDir(const QDir& parent_dir, const QString& folder_name);
 
-// Create parent folders if not exist.
-bool CreateParentDirs(const QString& filepath);
+// Create parent folders and itself.
+bool CreateDirs(const QString& dirpath);
+
+// Create parent folders.
+bool CreateParentDires(const QString& filepath);
 
 // Returns final component of |filepath|.
 QString GetFileBasename(const QString& filepath);
