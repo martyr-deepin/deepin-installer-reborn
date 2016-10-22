@@ -56,6 +56,8 @@ include_directories(AFTER ${X11TST_INCLUDE_DIRS})
 
 add_subdirectory(third_party/CuteLogger)
 include_directories(third_party/CuteLogger)
+add_subdirectory(third_party/global_shortcut)
+include_directories(third_party/global_shortcut)
 add_subdirectory(third_party/googletest)
 include_directories(third_party/googletest)
 add_subdirectory(third_party/qrencode)
@@ -206,6 +208,7 @@ set(LINK_LIBS
     ${X11TST_LIBRARIES}
 
     CuteLogger
+    global_shortcut
     qrencode
     )
 
