@@ -269,13 +269,21 @@ add_executable(deepin-installer-oem-tool
                )
 target_link_libraries(deepin-installer-oem-tool ${LINK_LIBS})
 
-# unsquasfs_progress
+# unsquasfs
 add_executable(deepin-installer-unsquashfs
                misc/unsquashfs.cpp
                
                ${BASE_FILES}
                )
 target_link_libraries(deepin-installer-unsquashfs ${Qt_LIBS})
+
+# xrandr-switchy
+add_executable(deepin-installer-xrandr-switchy
+               misc/xrandr_switchy.cpp
+
+               ${BASE_FILES}
+               )
+target_link_libraries(deepin-installer-xrandr-switchy ${Qt_LIBS})
 
 
 ## Installation
@@ -284,6 +292,8 @@ install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem-tool"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs"
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-xrandr-switchy"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 install(FILES resources/deepin-installer-reborn.desktop
         DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications")
