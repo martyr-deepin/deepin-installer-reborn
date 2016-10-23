@@ -9,6 +9,15 @@
 #include "base/command.h"
 #include "base/string_util.h"
 
+// XRandR Switchy
+// Switch between display modes.
+// If only one output is found, use preferred mode;
+// Else
+//   If last connected output is primary, use mirror mode;
+//   Else set next connected output as primary
+//   End if.
+// End if.
+
 namespace {
 
 const char kXRandRApp[] = "xrandr";
@@ -103,7 +112,7 @@ QDebug& operator<<(QDebug& debug, const XRandR& xrandr) {
   return debug;
 }
 
-// Parse Screen 0: minimum 320 x 200, current 1920 x 1080, maximum 8192 x 8192
+// Parse "Screen 0: minimum 320 x 200, current 1920 x 1080, maximum 8192 x 8192"
 bool ParseScreen(const QString& text, Screen& screen) {
   QRegularExpression reg("Screen (\\d+): minimum (\\d+) x (\\d+), "
                          "current (\\d+) x (\\d+), maximum (\\d+) x (\\d+)");
@@ -123,7 +132,7 @@ bool ParseScreen(const QString& text, Screen& screen) {
   }
 }
 
-// Parses    1920x1080     60.00 +  59.93*   40.00
+// Parses "1920x1080     60.00 +  59.93*   40.00"
 bool ParseMode(const QString& text, Mode& mode) {
   if (text.contains("+")) {
     mode.is_preferred = true;
@@ -145,8 +154,7 @@ bool ParseMode(const QString& text, Mode& mode) {
   return false;
 }
 
-// Parse eDP-1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 282mm x 165mm
-
+// Parses "eDP-1 connected primary 1920x1080+0+0"
 bool ParseOutput(const QString& text, Output& output) {
   bool ok = false;
   const QStringList& items = text.split(' ');
@@ -211,8 +219,106 @@ bool ParseXRandR(const QString& text, XRandR& xrandr) {
 }
 
 // Switch to next mode
-void SwitchMode(const XRandR& xrandr) {
-  Q_UNUSED(xrandr);
+bool SwitchMode(const XRandR& xrandr) {
+  QList<Output> connected_outputs;
+  for (const Output& output : xrandr.outputs) {
+    if (output.is_connected && (!output.modes.isEmpty())) {
+      connected_outputs.append(output);
+    }
+  }
+
+  if (connected_outputs.length() == 0) {
+    qCritical() << "No connected output found!";
+    return false;
+  }
+
+  QStringList args;
+  if (connected_outputs.length() == 1) {
+    // Only one monitor is connected, using `prefer` mode
+    const Output& output = connected_outputs.first();
+    args.append({"--output", output.name, "--preferred", "--scale", "1x1"});
+  } else {
+    // Check mirror mode
+    int starts_from_o_point = 0;
+    for (const Output& output : connected_outputs) {
+      if (output.x == 0 && output.y == 0) {
+        starts_from_o_point ++;
+      }
+    }
+
+    // if (starts_from_o_point == connected_outputs.length()) {
+    if (starts_from_o_point > 1) {
+      // If it was mirror mode, set the first output as primary
+      for (int i = 0; i < connected_outputs.length(); i++) {
+        const Output& output = connected_outputs.at(i);
+        args.append({"--output", output.name,"--preferred", "--scale", "1x1"});
+        if (i == 0) {
+          args.append("--primary");
+        } else {
+          // Expand horizontally
+          args.append({"--right-of", connected_outputs.at(i-1).name});
+        }
+      }
+    } else {
+      int primary_index = 0;
+      for (int i = 0; i < connected_outputs.length(); i++) {
+        if (connected_outputs.at(i).is_primary) {
+          primary_index = i;
+          break;
+        }
+      }
+      if (primary_index < connected_outputs.length() - 1) {
+        // Switch primary output
+        for (int i = 0; i < connected_outputs.length(); i++) {
+          const Output& output = connected_outputs.at(i);
+          if (i == 0) {
+            args.append({"--output", output.name, "--scale", "1x1",
+                         "--preferred"});
+          } else {
+            args.append({"--output", output.name, "--scale", "1x1",
+                         "--preferred",
+                         "--left-of", connected_outputs.at(i-1).name});
+          }
+          if (i == primary_index + 1) {
+            // Set next output as primary
+            args.append("--primary");
+          }
+        }
+      } else {
+        // If last connected output is primary, use mirror mode.
+        // Get minimum mode.
+        Mode mini_mode = connected_outputs.at(0).modes.at(0);
+        for (const Output& output : connected_outputs) {
+          Mode pref_mode = output.modes.at(0);
+          for (const Mode& mode : output.modes) {
+            if (mode.is_preferred) {
+              pref_mode = mode;
+            }
+          }
+
+          if (mini_mode.width > pref_mode.width &&
+              mini_mode.height > pref_mode.height) {
+            mini_mode = pref_mode;
+          }
+        }
+        qDebug() << "pref mode:" << mini_mode;
+
+        for (const Output& output : connected_outputs) {
+          args.append({"--output", output.name, "--scale", "1x1",
+                       "--mode", mini_mode.name, "--pos", "0x0"});
+        }
+      }
+    }
+  }
+
+  QString out, err;
+  qDebug() << "args:" << args;
+  if (installer::SpawnCmd(kXRandRApp, args, out, err)) {
+    return true;
+  } else {
+    qCritical() << "Run xrandr failed:" << err << ", args:" << args;
+    return false;
+  }
 }
 
 }  // namespace
@@ -236,7 +342,10 @@ int main(void) {
   }
   qDebug() << "xrandr:" << xrandr;
 
-  SwitchMode(xrandr);
+  if (!SwitchMode(xrandr)) {
+    qCritical() << "Switch xrandr mode failed!";
+    return 1;
+  }
 
   return 0;
 }
