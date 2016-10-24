@@ -277,7 +277,7 @@ bool SwitchMode(const XRandR& xrandr) {
           } else {
             args.append({"--output", output.name, "--scale", "1x1",
                          "--preferred",
-                         "--left-of", connected_outputs.at(i-1).name});
+                         "--right-of", connected_outputs.at(i-1).name});
           }
           if (i == primary_index + 1) {
             // Set next output as primary
