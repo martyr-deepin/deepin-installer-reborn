@@ -7,7 +7,6 @@
 
 #include <QObject>
 #include <QList>
-class QDesktopWidget;
 
 namespace installer {
 
@@ -32,14 +31,7 @@ class MultiHeadManager : public QObject {
   void primaryScreenChanged(const QRect& geometry);
 
  private:
-  void initConnections();
-
   QList<WallpaperItem*> wallpaper_items_;
-  QDesktopWidget* desktop_widget_ = nullptr;
-
- private slots:
-  void onPrimaryScreenChanged();
-  void onScreenCountChanged();
 };
 
 }  // namespace installer

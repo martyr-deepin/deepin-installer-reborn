@@ -89,7 +89,6 @@ MainWindow::MainWindow()
   this->setObjectName(QStringLiteral("main_window"));
 
   wallpaper_manager_ = new MultiHeadManager(this);
-  wallpaper_manager_->updateWallpaper();
 
   this->initUI();
   this->initPages();
@@ -97,6 +96,11 @@ MainWindow::MainWindow()
   this->initConnections();
   this->goNextPage();
   partition_frame_->scanDevices();
+}
+
+void MainWindow::fullscreen() {
+  wallpaper_manager_->updateWallpaper();
+  this->showFullScreen();
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {

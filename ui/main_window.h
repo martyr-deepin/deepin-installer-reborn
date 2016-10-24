@@ -42,6 +42,8 @@ class MainWindow : public QWidget {
  public:
   MainWindow();
 
+  void fullscreen();
+
  protected:
   // Move close button to appropriate position when window is resized.
   void resizeEvent(QResizeEvent* event) override;
