@@ -78,6 +78,9 @@ bool ParseXRandR(const QString& text, XRandR& xrandr);
 // End if.
 bool SwitchMode(const XRandR& xrandr);
 
+// Parse xrandr output and switch mode
+bool SwitchModeWrapper();
+
 }  // namespace installer
 
 #endif  // INSTALLER_XRANDR_WRAPPER_H

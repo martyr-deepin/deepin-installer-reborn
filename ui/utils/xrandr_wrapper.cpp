@@ -279,4 +279,30 @@ bool SwitchMode(const XRandR& xrandr) {
   }
 }
 
+bool SwitchModeWrapper() {
+  QString out;
+  if (!installer::RunXRandR(out)) {
+    qCritical() << "Run xrandr failed";
+    return false;
+  }
+  if (out.isEmpty()) {
+    qCritical() << "xrandr returns an empty string!";
+    return false;
+  }
+
+  installer::XRandR xrandr;
+  if (!installer::ParseXRandR(out, xrandr)) {
+    qCritical() << "Parse XRandR failed!";
+    return false;
+  }
+  qDebug() << "xrandr:" << xrandr;
+
+  if (!installer::SwitchMode(xrandr)) {
+    qCritical() << "Switch xrandr mode failed!";
+    return false;
+  }
+
+  return true;
+}
+
 }  // namespace installer
