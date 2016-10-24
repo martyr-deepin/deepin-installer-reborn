@@ -259,7 +259,6 @@ bool SwitchMode(const XRandR& xrandr) {
             mini_mode = pref_mode;
           }
         }
-        qDebug() << "pref mode:" << mini_mode;
 
         for (const Output& output : connected_outputs) {
           args.append({"--output", output.name, "--scale", "1x1",
@@ -295,7 +294,6 @@ bool SwitchModeWrapper() {
     qCritical() << "Parse XRandR failed!";
     return false;
   }
-  qDebug() << "xrandr:" << xrandr;
 
   if (!installer::SwitchMode(xrandr)) {
     qCritical() << "Switch xrandr mode failed!";

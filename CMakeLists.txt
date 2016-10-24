@@ -119,7 +119,7 @@ set(UI_FILES
     ui/delegates/language_list_delegate.cpp ui/delegates/language_list_delegate.h
     ui/delegates/partition_delegate.cpp ui/delegates/partition_delegate.h
     ui/delegates/partition_util.cpp ui/delegates/partition_util.h
-    ui/delegates/wallpaper_manager.cpp ui/delegates/wallpaper_manager.h
+    ui/delegates/multi_head_manager.cpp ui/delegates/multi_head_manager.h
 
     ui/models/fs_model.cpp ui/models/fs_model.h
     ui/models/language_list_model.cpp ui/models/language_list_model.h

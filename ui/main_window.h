@@ -27,7 +27,7 @@ class PartitionTableWarningFrame;
 class SelectLanguageFrame;
 class SystemInfoFrame;
 class VirtualMachineFrame;
-class WallpaperManager;
+class MultiHeadManager;
 
 // MainWindow is a fullscreen window.
 // All of ui frames are placed in MainWindow.
@@ -41,10 +41,6 @@ class MainWindow : public QWidget {
 
  public:
   MainWindow();
-
-  // Show fullscreen. Do not call showFullscreen(), which does not work well
-  // with deepin-wm.
-  void fullscreen();
 
  protected:
   // Move close button to appropriate position when window is resized.
@@ -95,7 +91,7 @@ class MainWindow : public QWidget {
   SelectLanguageFrame* select_language_frame_ = nullptr;
   SystemInfoFrame* system_info_frame_ = nullptr;
   VirtualMachineFrame* virtual_machine_frame_ = nullptr;
-  WallpaperManager* wallpaper_manager_ = nullptr;
+  MultiHeadManager* wallpaper_manager_ = nullptr;
 
   // To store frame pages, page_name => page_id.
   QHash<PageId, int> pages_;
@@ -113,6 +109,9 @@ class MainWindow : public QWidget {
  private slots:
   // Show ConfirmQuitFrame when close_button_ is clicked.
   void onCloseButtonClicked();
+
+  // Move main window to primary screen when it is changed to |geometry|.
+  void onPrimaryScreenChanged(const QRect& geometry);
 
   void goNextPage();
   void rebootSystem();

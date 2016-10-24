@@ -14,15 +14,22 @@ namespace installer {
 class WallpaperItem;
 
 // Manage wallpapers of multi-head system.
-class WallpaperManager : public QObject {
+class MultiHeadManager : public QObject {
   Q_OBJECT
 
  public:
-  explicit WallpaperManager(QObject* parent = nullptr);
+  explicit MultiHeadManager(QObject* parent = nullptr);
 
  public slots:
   // Update wallpaper items background current screens information.
   void updateWallpaper();
+
+  // Switch display mode.
+  void switchXRandRMode();
+
+ signals:
+  // Emitted when primary screen changed to |geometry|.
+  void primaryScreenChanged(const QRect& geometry);
 
  private:
   void initConnections();

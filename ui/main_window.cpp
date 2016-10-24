@@ -4,8 +4,8 @@
 
 #include "ui/main_window.h"
 
+#include <QApplication>
 #include <QDebug>
-#include <QDesktopWidget>
 #include <QHash>
 #include <QHBoxLayout>
 #include <QIcon>
@@ -19,7 +19,7 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
-#include "ui/delegates/wallpaper_manager.h"
+#include "ui/delegates/multi_head_manager.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/disk_space_insufficient_frame.h"
 #include "ui/frames/install_failed_frame.h"
@@ -88,24 +88,15 @@ MainWindow::MainWindow()
       current_page_(PageId::NullId) {
   this->setObjectName(QStringLiteral("main_window"));
 
-  wallpaper_manager_ = new WallpaperManager(this);
+  wallpaper_manager_ = new MultiHeadManager(this);
   wallpaper_manager_->updateWallpaper();
 
-//  this->initUI();
-//  this->initPages();
-//  this->registerShortcut();
-//  this->initConnections();
-//  this->goNextPage();
-//  partition_frame_->scanDevices();
-}
-
-void MainWindow::fullscreen() {
-  // TODO(xushaohua): Support changing display mode.
-  this->showFullScreen();
-  const QRect geometry = QDesktopWidget().screenGeometry();
-  this->setFixedSize(geometry.size());
-  this->move(geometry.topLeft());
-  this->show();
+  this->initUI();
+  this->initPages();
+  this->registerShortcut();
+  this->initConnections();
+  this->goNextPage();
+  partition_frame_->scanDevices();
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
@@ -145,10 +136,10 @@ void MainWindow::initConnections() {
 
   connect(log_viewer_shortcut_, &QShortcut::activated,
           log_viewer_frame_, &LogViewerFrame::toggleVisible);
-//  connect(monitor_mode_shortcut_, &QShortcut::activated,
-//          [&]() {
-//            qDebug() << "Windows + P";
-//          });
+  connect(monitor_mode_shortcut_, &QShortcut::activated,
+          wallpaper_manager_, &MultiHeadManager::switchXRandRMode);
+  connect(wallpaper_manager_, &MultiHeadManager::primaryScreenChanged,
+          this, &MainWindow::onPrimaryScreenChanged);
 }
 
 void MainWindow::initPages() {
@@ -274,6 +265,12 @@ void MainWindow::updateBackground() {
 
 void MainWindow::onCloseButtonClicked() {
   this->setCurrentPage(PageId::ConfirmQuitId);
+}
+
+void MainWindow::onPrimaryScreenChanged(const QRect& geometry) {
+  qDebug() << "MainWindow::onPrimaryScreenChanged()" << geometry;
+  this->move(geometry.topLeft());
+  this->setFixedSize(geometry.size());
 }
 
 void MainWindow::goNextPage() {
@@ -410,7 +407,7 @@ void MainWindow::goNextPage() {
 
 void MainWindow::rebootSystem() {
   // TODO(xushaohua): reboot system
-  this->close();
+  qApp->quit();
 }
 
 void MainWindow::shutdownSystem() {
