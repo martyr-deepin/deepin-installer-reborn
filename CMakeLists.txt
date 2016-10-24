@@ -48,11 +48,13 @@ pkg_search_module(Parted REQUIRED libparted)
 pkg_search_module(X11 REQUIRED x11)
 pkg_search_module(X11EXT REQUIRED xext)
 pkg_search_module(X11TST REQUIRED xtst)
+pkg_search_module(X11RandR REQUIRED xrandr)
 
 include_directories(AFTER ${Parted_INCLUDE_DIRS})
 include_directories(AFTER ${X11_INCLUDE_DIRS})
 include_directories(AFTER ${X11EXT_INCLUDE_DIRS})
 include_directories(AFTER ${X11TST_INCLUDE_DIRS})
+include_directories(AFTER ${X11RandR_INCLUDE_DIRS})
 
 add_subdirectory(third_party/CuteLogger)
 include_directories(third_party/CuteLogger)
@@ -119,7 +121,6 @@ set(UI_FILES
     ui/delegates/language_list_delegate.cpp ui/delegates/language_list_delegate.h
     ui/delegates/partition_delegate.cpp ui/delegates/partition_delegate.h
     ui/delegates/partition_util.cpp ui/delegates/partition_util.h
-    ui/delegates/multi_head_manager.cpp ui/delegates/multi_head_manager.h
 
     ui/models/fs_model.cpp ui/models/fs_model.h
     ui/models/language_list_model.cpp ui/models/language_list_model.h
@@ -172,7 +173,9 @@ set(UI_FILES
     ui/widgets/table_item_label.cpp ui/widgets/table_item_label.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
     ui/widgets/wallpaper_item.cpp ui/widgets/wallpaper_item.h
-    
+
+    ui/utils/multi_head_manager.cpp ui/utils/multi_head_manager.h
+    ui/utils/multi_head_worker.cpp ui/utils/multi_head_worker.h
     ui/utils/xrandr_wrapper.cpp ui/utils/xrandr_wrapper.h
     ui/utils/xutil.cpp ui/utils/xutil.h
     )
@@ -209,6 +212,7 @@ set(LINK_LIBS
     ${X11_LIBRARIES}
     ${X11EXT_LIBRARIES}
     ${X11TST_LIBRARIES}
+    ${X11RandR_LIBRARIES}
 
     CuteLogger
     global_shortcut

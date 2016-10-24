@@ -2,19 +2,42 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/delegates/multi_head_manager.h"
+#include "ui/utils/multi_head_manager.h"
 
 #include <QDebug>
+#include <QThread>
 
 #include "ui/widgets/wallpaper_item.h"
+#include "ui/utils/multi_head_worker.h"
 #include "ui/utils/xrandr_wrapper.h"
 
 namespace installer {
 
 MultiHeadManager::MultiHeadManager(QObject* parent)
     : QObject(parent),
-      wallpaper_items_() {
+      wallpaper_items_(),
+      worker_thread_(new QThread()) {
   this->setObjectName(QStringLiteral("wallpaper_manager"));
+
+  multi_head_worker_ = new MultiHeadWorker();
+  multi_head_worker_->moveToThread(worker_thread_);
+  worker_thread_->start();
+  emit multi_head_worker_->start();
+
+  this->initConnections();
+}
+
+MultiHeadManager::~MultiHeadManager() {
+  emit multi_head_worker_->stop();
+
+  worker_thread_->quit();
+  worker_thread_->wait();
+  delete worker_thread_;
+  worker_thread_ = nullptr;
+}
+
+void MultiHeadManager::switchXRandRMode() {
+  SwitchModeWrapper();
 }
 
 void MultiHeadManager::updateWallpaper() {
@@ -36,23 +59,26 @@ void MultiHeadManager::updateWallpaper() {
         WallpaperItem* item = new WallpaperItem(geometry);
         wallpaper_items_.append(item);
         item->show();
+
+        // Notify main window to change geometry
+        if (output.is_primary) {
+          emit this->primaryScreenChanged(geometry);
+        }
       }
     }
   } else {
     qCritical() << "updateWallpaper() parse xrandr failed!";
   }
 
-  for (const Output& output : xrandr.outputs) {
-    if (output.is_connected && output.is_primary) {
-      const QRect geometry(output.x, output.y, output.width, output.height);
-      emit this->primaryScreenChanged(geometry);
-      break;
-    }
-  }
 }
 
-void MultiHeadManager::switchXRandRMode() {
-  SwitchModeWrapper();
+void MultiHeadManager::initConnections() {
+  connect(multi_head_worker_, &MultiHeadWorker::screenCountChanged,
+          this, &MultiHeadManager::onScreenCountChanged);
+}
+
+void MultiHeadManager::onScreenCountChanged() {
+  qDebug() << "MultiHeadManager::onScreenCountChanged";
   this->updateWallpaper();
 }
 

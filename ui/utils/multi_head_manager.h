@@ -7,9 +7,11 @@
 
 #include <QObject>
 #include <QList>
+class QThread;
 
 namespace installer {
 
+class MultiHeadWorker;
 class WallpaperItem;
 
 // Manage wallpapers of multi-head system.
@@ -18,20 +20,29 @@ class MultiHeadManager : public QObject {
 
  public:
   explicit MultiHeadManager(QObject* parent = nullptr);
+  ~MultiHeadManager();
 
  public slots:
-  // Update wallpaper items background current screens information.
-  void updateWallpaper();
-
   // Switch display mode.
   void switchXRandRMode();
+
+  // Update wallpaper items background current screens information.
+  void updateWallpaper();
 
  signals:
   // Emitted when primary screen changed to |geometry|.
   void primaryScreenChanged(const QRect& geometry);
 
  private:
+  void initConnections();
+
   QList<WallpaperItem*> wallpaper_items_;
+  QThread* worker_thread_ = nullptr;
+  MultiHeadWorker* multi_head_worker_ = nullptr;
+
+ private slots:
+  // Repaint background when output added, changed or removed.
+  void onScreenCountChanged();
 };
 
 }  // namespace installer

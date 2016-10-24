@@ -19,7 +19,7 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
-#include "ui/delegates/multi_head_manager.h"
+#include "ui/utils/multi_head_manager.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/disk_space_insufficient_frame.h"
 #include "ui/frames/install_failed_frame.h"
