@@ -28,10 +28,10 @@ MultiHeadManager::MultiHeadManager(QObject* parent)
 }
 
 MultiHeadManager::~MultiHeadManager() {
-  emit multi_head_worker_->stop();
+  multi_head_worker_->stop();
 
   worker_thread_->quit();
-  worker_thread_->wait();
+  worker_thread_->wait(5);
   delete worker_thread_;
   worker_thread_ = nullptr;
 }
@@ -69,7 +69,6 @@ void MultiHeadManager::updateWallpaper() {
   } else {
     qCritical() << "updateWallpaper() parse xrandr failed!";
   }
-
 }
 
 void MultiHeadManager::initConnections() {
@@ -78,7 +77,6 @@ void MultiHeadManager::initConnections() {
 }
 
 void MultiHeadManager::onScreenCountChanged() {
-  qDebug() << "MultiHeadManager::onScreenCountChanged";
   this->updateWallpaper();
 }
 

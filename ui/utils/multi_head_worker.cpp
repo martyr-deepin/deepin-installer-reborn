@@ -33,15 +33,16 @@ MultiHeadWorker::~MultiHeadWorker() {
   }
 }
 
+void MultiHeadWorker::stop() {
+  is_running_ = false;
+}
+
 void MultiHeadWorker::initConnections() {
   connect(this, &MultiHeadWorker::start,
           this, &MultiHeadWorker::doStart);
-  connect(this, &MultiHeadWorker::stop,
-          this, &MultiHeadWorker::doStop);
 }
 
 void MultiHeadWorker::doStart() {
-  qDebug() << "MultiHeadWorker:: do start()";
   if (is_running_) {
     return;
   }
@@ -63,7 +64,8 @@ void MultiHeadWorker::doStart() {
   }
 
   Window root = RootWindow(dpy, screen);
-  XRRSelectInput(dpy, root, RROutputChangeNotifyMask | RRScreenChangeNotifyMask);
+  XRRSelectInput(dpy, root, RROutputChangeNotifyMask |
+                            RRScreenChangeNotifyMask);
 
   int event_base, error_base;
   int major, minor;
@@ -72,28 +74,15 @@ void MultiHeadWorker::doStart() {
     qCritical() << "RandR extension missing!";
     return;
   }
-  qDebug() << "RandR version:" << major << minor;
 
   XEvent event;
 
   while (is_running_) {
     XNextEvent(dpy, &event);
-
-    qDebug() << "Event received, type=" << event.type;
     XRRUpdateConfiguration(&event);
-    if (event.type == ConfigureNotify) {
-      qDebug() << "Received configureNotify event!";
-    }
 
     switch (event.type - event_base) {
       case RRScreenChangeNotify: {
-        qDebug() << "RRScreenChangeNotify!";
-
-        XRRScreenChangeNotifyEvent* sce = NULL;
-        sce = (XRRScreenChangeNotifyEvent*) &event;
-        qDebug() << "window:" << int(sce->window)
-                 << "width:" << sce->width
-                 << "height:" << sce->height;
         emit this->screenCountChanged();
         break;
       }
@@ -104,10 +93,7 @@ void MultiHeadWorker::doStart() {
     }
   }
 
-}
-
-void MultiHeadWorker::doStop() {
-  is_running_ = false;
+  XCloseDisplay(dpy);
 }
 
 }  // namespace installer

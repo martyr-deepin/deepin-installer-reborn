@@ -17,11 +17,15 @@ class MultiHeadWorker : public QObject {
   explicit MultiHeadWorker(QObject* parent = nullptr);
   ~MultiHeadWorker();
 
+ public slots:
+  // Stop monitoring process.
+  // This method can be called in another thread.
+  void stop();
+
  signals:
   void screenCountChanged();
 
   void start();
-  void stop();
 
  private:
   void initConnections();
@@ -29,7 +33,6 @@ class MultiHeadWorker : public QObject {
 
  private slots:
   void doStart();
-  void doStop();
 };
 
 }  // namespace installer
