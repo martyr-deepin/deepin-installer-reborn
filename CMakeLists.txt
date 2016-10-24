@@ -172,6 +172,8 @@ set(UI_FILES
     ui/widgets/table_item_label.cpp ui/widgets/table_item_label.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
     ui/widgets/wallpaper_item.cpp ui/widgets/wallpaper_item.h
+    
+    ui/utils/xrandr_wrapper.cpp ui/utils/xrandr_wrapper.h
     ui/utils/xutil.cpp ui/utils/xutil.h
     )
 
@@ -283,6 +285,7 @@ add_executable(deepin-installer-xrandr-switchy
                misc/xrandr_switchy.cpp
 
                ${BASE_FILES}
+               ui/utils/xrandr_wrapper.cpp ui/utils/xrandr_wrapper.h
                )
 target_link_libraries(deepin-installer-xrandr-switchy ${Qt_LIBS})
 
