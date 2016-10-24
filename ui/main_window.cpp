@@ -19,6 +19,7 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
+#include "ui/delegates/wallpaper_manager.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/disk_space_insufficient_frame.h"
 #include "ui/frames/install_failed_frame.h"
@@ -87,12 +88,15 @@ MainWindow::MainWindow()
       current_page_(PageId::NullId) {
   this->setObjectName(QStringLiteral("main_window"));
 
-  this->initUI();
-  this->initPages();
-  this->registerShortcut();
-  this->initConnections();
-  this->goNextPage();
-  partition_frame_->scanDevices();
+  wallpaper_manager_ = new WallpaperManager(this);
+  wallpaper_manager_->updateWallpaper();
+
+//  this->initUI();
+//  this->initPages();
+//  this->registerShortcut();
+//  this->initConnections();
+//  this->goNextPage();
+//  partition_frame_->scanDevices();
 }
 
 void MainWindow::fullscreen() {
@@ -141,6 +145,10 @@ void MainWindow::initConnections() {
 
   connect(log_viewer_shortcut_, &QShortcut::activated,
           log_viewer_frame_, &LogViewerFrame::toggleVisible);
+//  connect(monitor_mode_shortcut_, &QShortcut::activated,
+//          [&]() {
+//            qDebug() << "Windows + P";
+//          });
 }
 
 void MainWindow::initPages() {
@@ -229,6 +237,9 @@ void MainWindow::initUI() {
 void MainWindow::registerShortcut() {
   log_viewer_shortcut_ = new QShortcut(QKeySequence("Ctrl+L"), this);
   log_viewer_shortcut_->setContext(Qt::ApplicationShortcut);
+
+  monitor_mode_shortcut_ = new QShortcut(QKeySequence("Ctrl+P"), this);
+  monitor_mode_shortcut_->setContext(Qt::ApplicationShortcut);
 }
 
 void MainWindow::setCurrentPage(PageId page_id) {

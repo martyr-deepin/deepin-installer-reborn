@@ -27,6 +27,7 @@ class PartitionTableWarningFrame;
 class SelectLanguageFrame;
 class SystemInfoFrame;
 class VirtualMachineFrame;
+class WallpaperManager;
 
 // MainWindow is a fullscreen window.
 // All of ui frames are placed in MainWindow.
@@ -68,9 +69,12 @@ class MainWindow : public QWidget {
   void initConnections();
   void initPages();
   void initUI();
+
   void registerShortcut();
+
   // Switch frame page based on name.
   void setCurrentPage(PageId page_id);
+
   void updateBackground();
 
   QLabel* background_label_ = nullptr;
@@ -91,6 +95,7 @@ class MainWindow : public QWidget {
   SelectLanguageFrame* select_language_frame_ = nullptr;
   SystemInfoFrame* system_info_frame_ = nullptr;
   VirtualMachineFrame* virtual_machine_frame_ = nullptr;
+  WallpaperManager* wallpaper_manager_ = nullptr;
 
   // To store frame pages, page_name => page_id.
   QHash<PageId, int> pages_;
@@ -99,7 +104,11 @@ class MainWindow : public QWidget {
   PageId prev_page_;
   PageId current_page_;
 
+  // Shortcut used to toggle visibility of log-viewer.
   QShortcut* log_viewer_shortcut_ = nullptr;
+
+  // Shortcut used to switch mirror modes.
+  QShortcut* monitor_mode_shortcut_ = nullptr;
 
  private slots:
   // Show ConfirmQuitFrame when close_button_ is clicked.

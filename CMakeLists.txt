@@ -119,6 +119,7 @@ set(UI_FILES
     ui/delegates/language_list_delegate.cpp ui/delegates/language_list_delegate.h
     ui/delegates/partition_delegate.cpp ui/delegates/partition_delegate.h
     ui/delegates/partition_util.cpp ui/delegates/partition_util.h
+    ui/delegates/wallpaper_manager.cpp ui/delegates/wallpaper_manager.h
 
     ui/models/fs_model.cpp ui/models/fs_model.h
     ui/models/language_list_model.cpp ui/models/language_list_model.h
@@ -170,7 +171,7 @@ set(UI_FILES
     ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
     ui/widgets/table_item_label.cpp ui/widgets/table_item_label.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
-
+    ui/widgets/wallpaper_item.cpp ui/widgets/wallpaper_item.h
     ui/utils/xutil.cpp ui/utils/xutil.h
     )
 
