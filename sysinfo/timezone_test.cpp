@@ -9,16 +9,17 @@
 namespace installer {
 namespace {
 
-TEST(TimezoneTest, GetZoneInfo) {
-  const QStringList timezone_list = GetZoneInfo();
-  EXPECT_TRUE(timezone_list.length() > 0);
-  EXPECT_TRUE(timezone_list.contains("Asia/Shanghai"));
+TEST(TimezoneTest, GetZoneInfoList) {
+  const ZoneInfoList list = GetZoneInfoList();
+  EXPECT_FALSE(list.isEmpty());
+  const ZoneInfo cn("CN", "Asia/Shanghai");
+  EXPECT_TRUE(list.contains(cn));
 }
 
 TEST(TimezoneTest, GetCurrentTimezone) {
   const QString current_timezone = GetCurrentTimezone();
   EXPECT_FALSE(current_timezone.isEmpty());
-  EXPECT_TRUE(GetZoneInfo().contains(current_timezone));
+  EXPECT_TRUE(IsValidTimezone(current_timezone));
 }
 
 }  // namespace

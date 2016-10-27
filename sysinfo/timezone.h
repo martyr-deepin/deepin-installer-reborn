@@ -5,9 +5,23 @@
 #ifndef INSTALLER_SYSINFO_TIMEZONE_H
 #define INSTALLER_SYSINFO_TIMEZONE_H
 
-#include <QStringList>
+#include <QList>
 
 namespace installer {
+
+struct ZoneInfo {
+ public:
+  ZoneInfo(const QString& country_code, const QString& timezone);
+
+  bool operator==(const ZoneInfo& other);
+
+  QString country_code;
+  QString timezone;
+};
+typedef QList<ZoneInfo> ZoneInfoList;
+
+// Read available timezone info in zone.tab file.
+ZoneInfoList GetZoneInfoList();
 
 // Read available timezone info in zone.tab file.
 QStringList GetZoneInfo();

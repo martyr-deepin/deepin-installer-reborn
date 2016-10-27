@@ -5,34 +5,40 @@
 #include "sysinfo/timezone.h"
 
 #include <QDebug>
-#include <QTextStream>
 
 #include "base/file_util.h"
 
 namespace installer {
 
-QStringList GetZoneInfo() {
-  QStringList result;
-  QFile file(QStringLiteral("/usr/share/zoneinfo/zone.tab"));
-  if (!file.exists() || !file.open(QIODevice::ReadOnly)) {
-    qWarning() << "GetZoneInfo() Failed to open zone.tab!";
-    return result;
-  }
+namespace {
 
-  QTextStream stream(&file);
-  while (!stream.atEnd()) {
-    QString line = stream.readLine();
-    if (line.startsWith('#')) {
-      continue;
-    }
-    const QStringList line_parts = line.split(QChar('\t'));
-    if (line_parts.length() > 3) {
-      result.append(line_parts[2]);
+const char kZoneTabFile[] = "/usr/share/zoneinfo/zone.tab";
+
+}  // namespace
+
+ZoneInfo::ZoneInfo(const QString& country_code, const QString& timezone)
+    : country_code(country_code),
+      timezone(timezone) {
+}
+
+bool ZoneInfo::operator==(const ZoneInfo& other) {
+  return (this->country_code == other.country_code &&
+          this->timezone == other.timezone);
+}
+
+ZoneInfoList GetZoneInfoList() {
+  ZoneInfoList list;
+  const QString content = ReadTextFileContent(kZoneTabFile);
+  for (const QString& line : content.split('\n')) {
+    if (!line.startsWith('#')) {
+      const QStringList parts = line.split('\t');
+      if (parts.length() >= 3) {
+        ZoneInfo zone_info(parts[0], parts[2]);
+        list.append(zone_info);
+      }
     }
   }
-
-  file.close();
-  return result;
+  return list;
 }
 
 QString GetCurrentTimezone() {
@@ -55,8 +61,14 @@ bool IsValidTimezone(const QString& timezone) {
   if (timezone.isEmpty()) {
     return false;
   }
-  const QStringList timezones = GetZoneInfo();
-  return timezones.contains(timezone);
+
+  const ZoneInfoList list = GetZoneInfoList();
+  for (const ZoneInfo& zone_info : list) {
+    if (zone_info.timezone == timezone) {
+      return true;
+    }
+  }
+  return false;
 }
 
 }  // namespace installer
