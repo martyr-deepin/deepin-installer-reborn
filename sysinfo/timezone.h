@@ -36,6 +36,7 @@ QString GetPreferTimezone();
 QString GetTimezoneName(const QString& timezone);
 
 // Validate |timezone|.
+// TODO(xushaohua): Optimize
 bool IsValidTimezone(const QString& timezone);
 
 }  // namespace installer

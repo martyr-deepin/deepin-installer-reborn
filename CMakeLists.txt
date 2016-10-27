@@ -268,7 +268,7 @@ add_executable(locale-manager-test
                service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
                service/backend/geoip_request_worker.cpp service/backend/geoip_request_worker.h
                service/timezone_manager.cpp service/timezone_manager.h
-               sysinfo/users.cpp sysinfo/users.h
+               ${SYSINFO_FILES}
                )
 target_link_libraries(locale-manager-test ${Qt_LIBS})
 
