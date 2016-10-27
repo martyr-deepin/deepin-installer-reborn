@@ -6,20 +6,30 @@
 #define INSTALLER_LOCALE_MANAGER_H
 
 #include <QObject>
+class QThread;
 
 namespace installer {
+
+class WiFiInspectWorker;
 
 class LocaleManager : public QObject {
   Q_OBJECT
 
  public:
   explicit LocaleManager(QObject* parent = nullptr);
+  ~LocaleManager();
 
   void update();
 
  signals:
-  void localeUpdated(const QString& locale);
   void timezoneUpdated(const QString& timezone);
+
+ private:
+  WiFiInspectWorker* inspect_worker_ = nullptr;
+
+ private slots:
+  // Convert regdomain to locale.
+  void onRegdomainUpdated(const QString& regdomain);
 };
 
 } // namespace installer

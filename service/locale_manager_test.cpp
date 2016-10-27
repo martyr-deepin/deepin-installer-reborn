@@ -11,10 +11,6 @@ int main(int argc, char* argv[]) {
   QCoreApplication app(argc, argv);
 
   installer::LocaleManager manager;
-  QObject::connect(&manager, &installer::LocaleManager::localeUpdated,
-    [&](const QString& locale) {
-    qDebug() << "locale updated:" << locale;
-  });
   QObject::connect(&manager, &installer::LocaleManager::timezoneUpdated,
     [&](const QString& timezone) {
       qDebug() << "timezone updated:" << timezone;

@@ -32,8 +32,10 @@ set(INSTALLER_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn)
 # Defines path to resource directories
 if (CMAKE_BUILD_TYPE MATCHES Debug)
   add_definitions("-DSLIDE_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/resources/slide\"")
+  add_definitions("-DSCAN_REGDOMAIN_FILE=\"${CMAKE_CURRENT_SOURCE_DIR}/misc/scan_regdomain.sh\"")
 else()
   add_definitions("-DSLIDE_DIR=\"${INSTALLER_SHARE_DIR}/slide\"")
+  add_definitions("-DSCAN_REGDOMAIN_FILE=\"${INSTALLER_SHARE_DIR}/scan_regdomain.sh\"")
 endif()
 
 add_definitions("-DBUILTIN_HOOKS_DIR=\"${INSTALLER_SHARE_DIR}/hooks\"")
@@ -94,6 +96,8 @@ set(PARTMAN_FILES
 
 set(SERVICE_FILES
     service/backend/locale_request_worker.cpp service/backend/locale_request_worker.h
+    service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
+
     service/hooks_manager.cpp service/hooks_manager.h
     service/locale_manager.cpp service/locale_manager.h
     service/log_manager.cpp service/log_manager.h
@@ -189,6 +193,7 @@ set(ROOT_UNITTEST_FILES
     partman/partition_manager_test.cpp
     )
 
+
 set(UNITTEST_FILES
     sysinfo/dev_disk_test.cpp
     sysinfo/proc_mounts_test.cpp
@@ -259,6 +264,7 @@ add_executable(locale-manager-test
                service/locale_manager.cpp service/locale_manager.h
                service/backend/locale_request_worker.cpp service/backend/locale_request_worker.h
                service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
+               sysinfo/users.cpp sysinfo/users.h
                )
 target_link_libraries(locale-manager-test ${Qt_LIBS})
 
@@ -329,6 +335,11 @@ install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hooks
     DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
+    PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
+)
+install (
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/misc/scan_regdomain.sh
+    DESTINATION ${INSTALLER_SHARE_DIR}
     PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 )
 install(
