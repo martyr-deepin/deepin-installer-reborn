@@ -25,7 +25,9 @@ class LocaleManager : public QObject {
   void timezoneUpdated(const QString& timezone);
 
  private:
-  WiFiInspectWorker* inspect_worker_ = nullptr;
+  WiFiInspectWorker* wifi_inspect_worker_ = nullptr;
+  QThread* wifi_inspect_thread_ = nullptr;
+  QThread* locale_request_thread_ = nullptr;
 
  private slots:
   // Convert regdomain to locale.

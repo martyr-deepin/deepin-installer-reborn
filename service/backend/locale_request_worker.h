@@ -9,11 +9,23 @@
 
 namespace installer {
 
+// Send http request to web server to retrieve locale information about
+// current IP.
 class LocaleRequestWorker : public QObject {
   Q_OBJECT
 
  public:
   explicit LocaleRequestWorker(QObject* parent = nullptr);
+
+ signals:
+  // Notify LocaleRequestWorker to send http request.
+  void request();
+
+  // Emitted when received response from server.
+  void localeUpdated(const QString& locale);
+
+ private slots:
+  void doRequest();
 };
 
 }  // namespace installer

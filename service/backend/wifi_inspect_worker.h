@@ -6,7 +6,6 @@
 #define INSTALLER_WIFI_INSPECT_WORKER_H
 
 #include <QObject>
-#include <QStringList>
 
 namespace installer {
 

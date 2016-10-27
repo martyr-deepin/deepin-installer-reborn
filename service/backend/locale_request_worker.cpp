@@ -10,4 +10,8 @@ LocaleRequestWorker::LocaleRequestWorker(QObject* parent) : QObject(parent) {
   this->setObjectName(QStringLiteral("locale_request_worker"));
 }
 
+void LocaleRequestWorker::doRequest() {
+
+}
+
 }  // namespace installer
