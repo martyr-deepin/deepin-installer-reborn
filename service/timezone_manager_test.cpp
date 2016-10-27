@@ -5,17 +5,17 @@
 #include <QCoreApplication>
 #include <QDebug>
 
-#include "service/locale_manager.h"
+#include "service/timezone_manager.h"
 
 int main(int argc, char* argv[]) {
   QCoreApplication app(argc, argv);
 
-  installer::LocaleManager manager;
-  QObject::connect(&manager, &installer::LocaleManager::timezoneUpdated,
+  installer::TimezoneManager manager;
+  QObject::connect(&manager, &installer::TimezoneManager::timezoneUpdated,
     [&](const QString& timezone) {
       qDebug() << "timezone updated:" << timezone;
     });
-  manager.update();
+  manager.update(false, true);
 
   return app.exec();
 }

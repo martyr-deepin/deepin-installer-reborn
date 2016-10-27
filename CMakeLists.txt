@@ -41,9 +41,11 @@ endif()
 add_definitions("-DBUILTIN_HOOKS_DIR=\"${INSTALLER_SHARE_DIR}/hooks\"")
 
 find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
+find_package(Qt5Network REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5X11Extras REQUIRED)
-find_package(Qt5Gui REQUIRED)
+find_package(Qt5Xml REQUIRED)
 find_package(PkgConfig REQUIRED)
 
 pkg_search_module(Parted REQUIRED libparted)
@@ -95,16 +97,16 @@ set(PARTMAN_FILES
     )
 
 set(SERVICE_FILES
-    service/backend/locale_request_worker.cpp service/backend/locale_request_worker.h
     service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
+    service/backend/geoip_request_worker.cpp service/backend/geoip_request_worker.h
 
     service/hooks_manager.cpp service/hooks_manager.h
-    service/locale_manager.cpp service/locale_manager.h
     service/log_manager.cpp service/log_manager.h
     service/settings_manager.cpp service/settings_manager.h
     service/signal_manager.cpp service/signal_manager.h
     service/system_language.cpp service/system_language.h
     service/settings_name.h
+    service/timezone_manager.cpp service/timezone_manager.h
     )
 
 set(SYSINFO_FILES
@@ -207,9 +209,11 @@ set(UNITTEST_FILES
     )
 
 set(Qt_LIBS
+    Qt5::Gui
+    Qt5::Network
     Qt5::Widgets
     Qt5::X11Extras
-    Qt5::Gui
+    Qt5::Xml
     )
 
 set(LINK_LIBS
@@ -258,12 +262,12 @@ target_link_libraries(deepin-installer-reborn-tests
 
 # locale manager test
 add_executable(locale-manager-test
-               service/locale_manager_test.cpp
+               service/timezone_manager_test.cpp
                
                ${BASE_FILES}
-               service/locale_manager.cpp service/locale_manager.h
-               service/backend/locale_request_worker.cpp service/backend/locale_request_worker.h
                service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
+               service/backend/geoip_request_worker.cpp service/backend/geoip_request_worker.h
+               service/timezone_manager.cpp service/timezone_manager.h
                sysinfo/users.cpp sysinfo/users.h
                )
 target_link_libraries(locale-manager-test ${Qt_LIBS})
