@@ -93,7 +93,9 @@ set(PARTMAN_FILES
     )
 
 set(SERVICE_FILES
+    service/backend/locale_request_worker.cpp service/backend/locale_request_worker.h
     service/hooks_manager.cpp service/hooks_manager.h
+    service/locale_manager.cpp service/locale_manager.h
     service/log_manager.cpp service/log_manager.h
     service/settings_manager.cpp service/settings_manager.h
     service/signal_manager.cpp service/signal_manager.h
@@ -248,6 +250,17 @@ target_link_libraries(deepin-installer-reborn-tests
                       ${LINK_LIBS}
                       gtest
                       )
+
+# locale manager test
+add_executable(locale-manager-test
+               service/locale_manager_test.cpp
+               
+               ${BASE_FILES}
+               service/locale_manager.cpp service/locale_manager.h
+               service/backend/locale_request_worker.cpp service/backend/locale_request_worker.h
+               service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
+               )
+target_link_libraries(locale-manager-test ${Qt_LIBS})
 
 # Unittest with root privilege
 add_executable(deepin-installer-reborn-root-tests
