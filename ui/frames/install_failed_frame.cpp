@@ -64,25 +64,13 @@ void InstallFailedFrame::initConnections() {
 void InstallFailedFrame::initUI() {
   QLabel* status_label = new QLabel();
   status_label->setPixmap(QPixmap(":/images/failed.png"));
-  QHBoxLayout* status_layout = new QHBoxLayout();
-  status_layout->setAlignment(Qt::AlignCenter);
-  status_layout->addWidget(status_label);
-
   TitleLabel* title_label = new TitleLabel(tr("Installation Failed"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
   CommentLabel* comment_label = new CommentLabel(
       tr("Sorry for the inconvenience, you can photo or scan the 2D code "
          "to send us the error log, so we can better solve the issue."));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
 
   FrostedFrame* content_frame = new FrostedFrame();
   content_frame->setFixedSize(kContentWindowWidth, kContentWindowHeight);
-  QHBoxLayout* content_layout = new QHBoxLayout();
-  content_layout->setAlignment(Qt::AlignCenter);
-  content_layout->addWidget(content_frame);
   content_label_ = new QLabel(content_frame);
   content_label_->setFixedSize(kContentWindowWidth, kContentWindowHeight);
   content_label_->setWordWrap(true);
@@ -101,19 +89,17 @@ void InstallFailedFrame::initUI() {
   control_button_->move(kContentWindowWidth - kControlButtonSize, 0);
 
   reboot_button_ = new NavButton(tr("Exit installation"));
-  QHBoxLayout* reboot_layout = new QHBoxLayout();
-  reboot_layout->addWidget(reboot_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addLayout(status_layout);
-  layout->addLayout(title_layout);
-  layout->addLayout(comment_layout);
+  layout->addWidget(status_label, 0, Qt::AlignCenter);
+  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(comment_label, 0, Qt::AlignCenter);
   layout->addStretch();
-  layout->addLayout(content_layout);
+  layout->addWidget(content_frame, 0, Qt::AlignCenter);
   layout->addStretch();
-  layout->addLayout(reboot_layout);
+  layout->addWidget(reboot_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
 }

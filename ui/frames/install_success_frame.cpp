@@ -29,31 +29,19 @@ void InstallSuccessFrame::initConnections() {
 void InstallSuccessFrame::initUI() {
   QLabel* status_label = new QLabel();
   status_label->setPixmap(QPixmap(":/images/succeed.png"));
-  QHBoxLayout* status_layout = new QHBoxLayout();
-  status_layout->setAlignment(Qt::AlignCenter);
-  status_layout->addWidget(status_label);
-
   TitleLabel* title_label = new TitleLabel(tr("Successfully Installed"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
   CommentLabel* comment_label = new CommentLabel(
       tr("Reboot to enjoy the new experience with deepin, hope you like it!"));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
-
   reboot_button_ = new NavButton(tr("Experience now"));
-  QHBoxLayout* reboot_layout = new QHBoxLayout();
-  reboot_layout->addWidget(reboot_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addLayout(status_layout);
-  layout->addLayout(title_layout);
-  layout->addLayout(comment_layout);
+  layout->addWidget(status_label, 0, Qt::AlignCenter);
+  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(comment_label, 0, Qt::AlignCenter);
   layout->addStretch();
-  layout->addLayout(reboot_layout);
+  layout->addWidget(reboot_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
 }

@@ -35,15 +35,10 @@ void PartitionTableWarningFrame::initConnections() {
 
 void PartitionTableWarningFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("Warning"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
   CommentLabel* comment_label = new CommentLabel(
       tr("It is detected that your motherboard boot loader is EFI and "
          "the disk format is MBR, thus the system can not be installed "
          "directly; to continue, please select one of the solutions below."));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
 
   ListTitleLabel* left_label = new ListTitleLabel(
       QString("A.") + tr("Disable UEFI"));
@@ -113,8 +108,8 @@ void PartitionTableWarningFrame::initUI() {
   layout->setSpacing(kMainLayoutSpacing);
   layout->addSpacing(50);
   layout->setAlignment(Qt::AlignCenter);
-  layout->addLayout(title_layout);
-  layout->addLayout(comment_layout);
+  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(comment_label, 0, Qt::AlignCenter);
   layout->addStretch();
   layout->addWidget(content_wrapper);
   layout->addStretch();

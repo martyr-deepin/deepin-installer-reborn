@@ -9,6 +9,8 @@
 
 namespace installer {
 
+class CommentLabel;
+
 // This frame is displayed when no enough disk space is detected.
 class DiskSpaceInsufficientFrame : public QFrame {
   Q_OBJECT
@@ -16,12 +18,17 @@ class DiskSpaceInsufficientFrame : public QFrame {
  public:
   explicit DiskSpaceInsufficientFrame(QWidget* parent = nullptr);
 
+  // Set device size limitation.
+  void setSizes(int required_device_size, int recommended_device_size);
+
  signals:
   // Emitted when abort-button is clicked.
   void finished();
 
  private:
   void initUI();
+
+  CommentLabel* comment_label_ = nullptr;
 };
 
 }  // namespace installer

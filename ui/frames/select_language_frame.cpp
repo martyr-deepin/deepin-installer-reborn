@@ -51,16 +51,12 @@ void SelectLanguageFrame::initConnections() {
 void SelectLanguageFrame::initUI() {
   QLabel* logo_label = new QLabel();
   logo_label->setPixmap(QPixmap(GetVendorLogo()));
-  QHBoxLayout* logo_layout = new QHBoxLayout();
-  logo_layout->setAlignment(Qt::AlignCenter);
-  logo_layout->addWidget(logo_label);
 
   SubheadLabel* subhead_label = new SubheadLabel(
       "Please select the language you want to use\n请选择您的语言");
-  QHBoxLayout* subhead_layout = new QHBoxLayout();
-  subhead_layout->addWidget(subhead_label);
 
   list_view_ = new QListView();
+  list_view_->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
   list_view_->setEditTriggers(QAbstractItemView::NoEditTriggers);
   QPalette list_palette = list_view_->palette();
   list_palette.setBrush(QPalette::Base, Qt::transparent);
@@ -75,25 +71,15 @@ void SelectLanguageFrame::initUI() {
 //  list_view_->setItemDelegate(list_delegate);
   list_view_->setStyleSheet(ReadTextFileContent(":/styles/language_list.css"));
 
-  QHBoxLayout* list_layout = new QHBoxLayout();
-  list_layout->setSpacing(0);
-  list_layout->setMargin(0);
-  list_layout->setAlignment(Qt::AlignCenter);
-  list_layout->addStretch();
-  list_layout->addWidget(list_view_);
-  list_layout->addStretch();
-
   next_button_ = new NavButton(tr("Next"));
   next_button_->setEnabled(false);
-  QHBoxLayout* next_layout = new QHBoxLayout();
-  next_layout->addWidget(next_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addLayout(logo_layout);
-  layout->addLayout(subhead_layout);
-  layout->addLayout(list_layout);
-  layout->addLayout(next_layout);
+  layout->addWidget(logo_label, 0, Qt::AlignCenter);
+  layout->addWidget(subhead_label, 0, Qt::AlignCenter);
+  layout->addWidget(list_view_, 0, Qt::AlignCenter);
+  layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
 }

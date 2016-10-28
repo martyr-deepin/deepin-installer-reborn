@@ -55,10 +55,8 @@ int GetVisiblePages() {
 }
 
 // Check size of /dev/sda larger than 15Gib.
-bool IsDiskSpaceInsufficient() {
+bool IsDiskSpaceInsufficient(int required_device_size) {
   const qint64 maximum_device_size = GetMaximumDeviceSize();
-  const int required_device_size = GetSettingsValue(
-      kPartitionMinimumDiskSpaceRequired).toInt();
   return required_device_size * kMebiByte > maximum_device_size;
 }
 
@@ -94,7 +92,8 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
-  this->goNextPage();
+//  this->goNextPage();
+  this->setCurrentPage(PageId::DiskSpaceInsufficientId);
 }
 
 void MainWindow::fullscreen() {
@@ -403,8 +402,14 @@ void MainWindow::goNextPage() {
     case PageId::NullId: {
       // Displays the first page.
       // Check whether to show DiskSpaceInsufficientPage.
-      if (IsDiskSpaceInsufficient()) {
+      const int required_device_size = GetSettingsValue(
+          kPartitionMinimumDiskSpaceRequired).toInt();
+      if (IsDiskSpaceInsufficient(required_device_size)) {
         page_indicator_->setVisible(false);
+        const int recommended_device_size = GetSettingsValue(
+            kPartitionRecommendedDiskSpace).toInt();
+        disk_space_insufficient_frame_->setSizes(required_device_size,
+                                                 recommended_device_size);
         this->setCurrentPage(PageId::DiskSpaceInsufficientId);
       } else {
         prev_page_ = current_page_;
