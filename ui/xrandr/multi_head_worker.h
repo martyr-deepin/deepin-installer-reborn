@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_MULTI_HEAD_WORKER_H
-#define INSTALLER_MULTI_HEAD_WORKER_H
+#ifndef INSTALLER_UI_XRANDR_MULTI_HEAD_WORKER_H
+#define INSTALLER_UI_XRANDR_MULTI_HEAD_WORKER_H
 
 #include <QObject>
 
@@ -37,4 +37,4 @@ class MultiHeadWorker : public QObject {
 
 }  // namespace installer
 
-#endif  // INSTALLER_MULTI_HEAD_WORKER_H
+#endif  // INSTALLER_UI_XRANDR_MULTI_HEAD_WORKER_H

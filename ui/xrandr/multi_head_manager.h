@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_WALLPAPER_MANAGER_H
-#define INSTALLER_WALLPAPER_MANAGER_H
+#ifndef INSTALLER_UI_XRANDR_WALLPAPER_MANAGER_H
+#define INSTALLER_UI_XRANDR_WALLPAPER_MANAGER_H
 
 #include <QObject>
 #include <QList>
@@ -47,4 +47,4 @@ class MultiHeadManager : public QObject {
 
 }  // namespace installer
 
-#endif  // INSTALLER_WALLPAPER_MANAGER_H
+#endif  // INSTALLER_UI_XRANDR_WALLPAPER_MANAGER_H

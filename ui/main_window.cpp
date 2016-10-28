@@ -19,7 +19,6 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
-#include "ui/utils/multi_head_manager.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/disk_space_insufficient_frame.h"
 #include "ui/frames/install_failed_frame.h"
@@ -33,6 +32,7 @@
 #include "ui/frames/virtual_machine_frame.h"
 #include "ui/widgets/icon_button.h"
 #include "ui/widgets/page_indicator.h"
+#include "ui/xrandr/multi_head_manager.h"
 
 namespace installer {
 

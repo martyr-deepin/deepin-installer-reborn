@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_XRANDR_WRAPPER_H
-#define INSTALLER_XRANDR_WRAPPER_H
+#ifndef INSTALLER_UI_XRANDR_XRANDR_WRAPPER_H
+#define INSTALLER_UI_XRANDR_XRANDR_WRAPPER_H
 
 #include <QDebug>
 #include <QList>
@@ -83,4 +83,4 @@ bool SwitchModeWrapper();
 
 }  // namespace installer
 
-#endif  // INSTALLER_XRANDR_WRAPPER_H
+#endif  // INSTALLER_UI_XRANDR_XRANDR_WRAPPER_H

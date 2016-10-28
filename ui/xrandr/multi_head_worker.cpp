@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/utils/multi_head_worker.h"
+#include "ui/xrandr/multi_head_worker.h"
 
 #include <QDebug>
 

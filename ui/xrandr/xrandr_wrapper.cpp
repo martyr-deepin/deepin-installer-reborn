@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/utils/xrandr_wrapper.h"
+#include "ui/xrandr/xrandr_wrapper.h"
 
 #include <QRegularExpression>
 
