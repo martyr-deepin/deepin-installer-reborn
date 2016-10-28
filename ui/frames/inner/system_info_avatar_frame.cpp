@@ -70,31 +70,15 @@ void SystemInfoAvatarFrame::initUI() {
                                     QStringLiteral(":/images/timezone.png"),
                                     QStringLiteral(":/images/timezone.png"),
                                     128, 32, nullptr);
-  QHBoxLayout* timezone_layout = new QHBoxLayout();
-  timezone_layout->setAlignment(Qt::AlignLeft);
-  timezone_layout->addWidget(timezone_button_);
-
   TitleLabel* title_label = new TitleLabel(tr("User Avatar"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
   CommentLabel* comment_label = new CommentLabel(
       tr("Select an avatar for your account"));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
-
   chosen_avatar_button_ = new AvatarButton(GetDefaultAvatar());
-  QHBoxLayout* chosen_avatar_layout = new QHBoxLayout();
-  chosen_avatar_layout->setAlignment(Qt::AlignCenter);
-  chosen_avatar_layout->addWidget(chosen_avatar_button_);
 
   QGridLayout* avatars_layout = new QGridLayout();
   // TODO(xushaohua): Add spaces and scroll area.
   avatars_layout->setHorizontalSpacing(20);
   avatars_layout->setVerticalSpacing(40);
-  QHBoxLayout* avatar_wrapper_layout = new QHBoxLayout();
-  avatar_wrapper_layout->setAlignment(Qt::AlignCenter);
-  avatar_wrapper_layout->addLayout(avatars_layout);
 
   const QStringList avatars = GetAvatars();
   int row = 0;
@@ -115,12 +99,12 @@ void SystemInfoAvatarFrame::initUI() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addLayout(timezone_layout);
+  layout->addWidget(timezone_button_, 0, Qt::AlignLeft);
   layout->addStretch();
-  layout->addLayout(title_layout);
-  layout->addLayout(comment_layout);
-  layout->addLayout(chosen_avatar_layout);
-  layout->addLayout(avatar_wrapper_layout);
+  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(comment_label, 0, Qt::AlignCenter);
+  layout->addWidget(chosen_avatar_button_, 0, Qt::AlignCenter);
+  layout->addLayout(avatars_layout);
   layout->addStretch();
 
   this->setLayout(layout);

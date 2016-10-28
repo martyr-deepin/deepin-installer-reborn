@@ -64,22 +64,10 @@ void SystemInfoFormFrame::initUI() {
                                     QStringLiteral(":/images/timezone.png"),
                                     QStringLiteral(":/images/timezone.png"),
                                     128, 32, nullptr);
-  QHBoxLayout* timezone_layout = new QHBoxLayout();
-  timezone_layout->setAlignment(Qt::AlignLeft);
-  timezone_layout->addWidget(timezone_button_);
-
   TitleLabel* title_label = new TitleLabel(tr("Create User Account"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
   CommentLabel* comment_label =
    new CommentLabel(tr("Input username and password"));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
-
   avatar_button_ = new AvatarButton();
-  QHBoxLayout* avatar_layout = new QHBoxLayout();
-  avatar_layout->addWidget(avatar_button_);
 
   username_edit_ = new LineEdit(QStringLiteral(":/images/username.png"));
   username_edit_->setPlaceholderText(tr("Username"));
@@ -102,29 +90,21 @@ void SystemInfoFormFrame::initUI() {
   QFrame* form_wrapper = new QFrame();
   form_wrapper->setFixedWidth(400);
   form_wrapper->setLayout(form_layout);
-  QHBoxLayout* form_wrapper_layout = new QHBoxLayout();
-  form_wrapper_layout->setContentsMargins(0, 0, 0, 0);
-  form_wrapper_layout->setSpacing(0);
-  form_wrapper_layout->addStretch();
-  form_wrapper_layout->addWidget(form_wrapper);
-  form_wrapper_layout->addStretch();
 
   next_button_ = new NavButton(tr("Next"));
-  QHBoxLayout* next_layout = new QHBoxLayout();
-  next_layout->addWidget(next_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addLayout(timezone_layout);
+  layout->addWidget(timezone_button_, 0, Qt::AlignLeft);
   layout->addStretch(1);
-  layout->addLayout(title_layout);
-  layout->addLayout(comment_layout);
+  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(comment_label, 0, Qt::AlignCenter);
   layout->addStretch(1);
-  layout->addLayout(avatar_layout);
+  layout->addWidget(avatar_button_, 0, Qt::AlignCenter);
   layout->addStretch(1);
-  layout->addLayout(form_wrapper_layout);
+  layout->addWidget(form_wrapper, 0, Qt::AlignCenter);
   layout->addStretch(3);
-  layout->addLayout(next_layout);
+  layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
 }

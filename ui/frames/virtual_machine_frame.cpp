@@ -22,29 +22,20 @@ VirtualMachineFrame::VirtualMachineFrame(QWidget* parent) : QFrame(parent) {
 
 void VirtualMachineFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("Friendly Reminder"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
   CommentLabel* comment_label = new CommentLabel(
       tr("System has detected that you are using a virtual machine, "
          "which will affect the system performance and operation experience, "
          "for a smooth experience, it is recommended to install deepin in "
          "real-machine environment"));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
-
   NavButton* nav_button = new NavButton(tr("Continue"));
-  QHBoxLayout* nav_layout = new QHBoxLayout();
-  nav_layout->addWidget(nav_button);
 
   QVBoxLayout* layout = new QVBoxLayout(this);
   layout->setSpacing(kMainLayoutSpacing);
-  layout->setAlignment(Qt::AlignCenter);
   layout->addStretch();
-  layout->addLayout(title_layout);
-  layout->addLayout(comment_layout);
+  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(comment_label, 0, Qt::AlignCenter);
   layout->addStretch();
-  layout->addLayout(nav_layout);
+  layout->addWidget(nav_button, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
 

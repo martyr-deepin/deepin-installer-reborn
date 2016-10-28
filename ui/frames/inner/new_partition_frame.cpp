@@ -70,20 +70,13 @@ void NewPartitionFrame::initConnections() {
 
 void NewPartitionFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("New Partition"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
   CommentLabel* comment_label = new CommentLabel(
       tr("Create a new partition and define the type and size"));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
 
   QLabel* fs_img_label = new QLabel();
   QPixmap fs_img(":/images/drive-harddisk-128px.png");
   fs_img_label->setPixmap(fs_img);
   fs_img_label->setFixedSize(fs_img.size());
-  QHBoxLayout* fs_img_layout = new QHBoxLayout();
-  fs_img_layout->addWidget(fs_img_label);
 
   TableItemLabel* type_label = new TableItemLabel(tr("Type"));
   TableItemLabel* location_label = new TableItemLabel(tr("Location"));
@@ -117,30 +110,22 @@ void NewPartitionFrame::initUI() {
   grid_layout->addWidget(fs_box_, 2, 1);
   grid_layout->addWidget(mount_point_box_, 3, 1);
   grid_layout->addWidget(size_slider_, 4, 1);
-  QHBoxLayout* grid_wrapper_layout = new QHBoxLayout();;
-  grid_wrapper_layout->addStretch();
-  grid_wrapper_layout->addLayout(grid_layout);
-  grid_wrapper_layout->addStretch();
 
   cancel_button_ = new NavButton(tr("Cancel"));
-  QHBoxLayout* cancel_layout = new QHBoxLayout();
-  cancel_layout->addWidget(cancel_button_);
 
   create_button_ = new NavButton(tr("OK"));
-  QHBoxLayout* create_layout = new QHBoxLayout();
-  create_layout->addWidget(create_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addLayout(title_layout);
-  layout->addLayout(comment_layout);
-  layout->addLayout(fs_img_layout);
+  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(comment_label, 0, Qt::AlignCenter);
+  layout->addWidget(fs_img_label, 0, Qt::AlignCenter);
   layout->addStretch();
-  layout->addLayout(grid_wrapper_layout);
+  layout->addLayout(grid_layout);
   layout->addStretch();
-  layout->addLayout(cancel_layout);
-  layout->addLayout(create_layout);
+  layout->addWidget(cancel_button_, 0, Qt::AlignCenter);
+  layout->addWidget(create_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
 }

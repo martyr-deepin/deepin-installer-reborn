@@ -58,7 +58,7 @@ void AdvancedPartitionFrame::initUI() {
   bottom_layout->addWidget(enable_editing_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
-  layout->addWidget(main_area);
+  layout->addWidget(main_area, 0, Qt::AlignCenter);
   layout->addLayout(bottom_layout);
 
   this->setLayout(layout);

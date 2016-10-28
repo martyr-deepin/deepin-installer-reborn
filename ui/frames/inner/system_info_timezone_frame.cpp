@@ -54,25 +54,17 @@ void SystemInfoTimezoneFrame::initConnections() {
 
 void SystemInfoTimezoneFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("Select Time Zone"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
   CommentLabel* comment_label =
       new CommentLabel(tr("Mark your zone in the map"));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
-
   back_button_ = new NavButton(tr("Back"));
-  QHBoxLayout* back_layout = new QHBoxLayout();
-  back_layout->addWidget(back_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addLayout(title_layout);
-  layout->addLayout(comment_layout);
+  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(comment_label, 0, Qt::AlignCenter);
   layout->addStretch();
-  layout->addLayout(back_layout);
+  layout->addWidget(back_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
 }

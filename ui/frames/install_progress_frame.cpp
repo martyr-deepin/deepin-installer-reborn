@@ -42,6 +42,7 @@ InstallProgressFrame::~InstallProgressFrame() {
 }
 
 void InstallProgressFrame::startSlide() {
+  qDebug() << "startSlide()";
   slide_frame_->startSlide();
 }
 
@@ -61,6 +62,7 @@ void InstallProgressFrame::runHooks(bool ok) {
 }
 
 void InstallProgressFrame::updateLanguage(const QString& locale) {
+  qDebug() << "updateLanguage()" << locale;
   slide_frame_->setLocale(locale);
 }
 
@@ -75,31 +77,20 @@ void InstallProgressFrame::initConnections() {
 
 void InstallProgressFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("Installing"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
   CommentLabel* comment_label = new CommentLabel(
       tr("You will be experiencing the incredible pleasant of deepin after "
          "the time for just a cup of coffee"));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
-
   slide_frame_ = new InstallProgressSlideFrame();
-  QHBoxLayout* slide_layout = new QHBoxLayout();
-  slide_layout->addWidget(slide_frame_);
-
   progress_bar_ = new InstallProgressBar();
-  QHBoxLayout* progress_layout = new QHBoxLayout();
-  progress_layout->addWidget(progress_bar_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addLayout(title_layout);
-  layout->addLayout(comment_layout);
+  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(comment_label, 0, Qt::AlignCenter);
   layout->addStretch();
-  layout->addLayout(slide_layout);
-  layout->addLayout(progress_layout);
+  layout->addWidget(slide_frame_, 0, Qt::AlignCenter);
+  layout->addWidget(progress_bar_, 0, Qt::AlignCenter);
   layout->addStretch();
 
   this->setLayout(layout);

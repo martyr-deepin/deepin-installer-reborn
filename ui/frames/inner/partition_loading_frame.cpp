@@ -25,19 +25,14 @@ void PartitionLoadingFrame::initConnections() {
 
 void PartitionLoadingFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("Scanning disks.."));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
   CommentLabel* comment_label = new CommentLabel(
       tr("It may take a few seconds to scan disk devices..."));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addLayout(title_layout);
-  layout->addLayout(comment_layout);
+  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(comment_label, 0, Qt::AlignCenter);
   layout->addStretch();
 
   this->setLayout(layout);

@@ -92,8 +92,8 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
-//  this->goNextPage();
-  this->setCurrentPage(PageId::DiskSpaceInsufficientId);
+  current_page_ = PageId::PartitionId;
+  this->goNextPage();
 }
 
 void MainWindow::fullscreen() {
