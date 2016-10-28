@@ -1,21 +1,30 @@
 /** Used by NavButton class **/
 
 QPushButton {
+  /*min-width: 220px;*/
+  width: 310px;
+  height: 36px;
+  color: #ffffff;
   text-align: center;
-  min-width: 220px;
-  color: white;
-  font-size: 12pt;
+  font-size: 14px;
+  font-weight: 500;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   outline: none;
-  background-color: rgba(221, 221, 221, 0.3);
-  padding: 3px;
+
+  background-color: qlineargradient(x1:0 y1:0, x2:0 y2:1,
+                                    stop:0 rgba(255, 255, 255, 0.3),
+                                    stop:1 rgba(253, 253, 253, 0.3));
 }
 
 QPushButton::hover {
-  background-color: rgba(221, 221, 221, 0.5);
+  background-color: qlineargradient(x1:0 y1:0, x2:0 y2:1,
+                                    stop:0 rgba(255, 255, 255, 0.4),
+                                    stop:1 rgba(253, 253, 253, 0.4));
 }
 
-QPushButton::activate {
-  background-color: rgba(221, 221, 221, 0.6);
+QPushButton::pressed {
+  background-color: qlineargradient(x1:0 y1:0, x2:0 y2:1,
+                                    stop:0 rgba(255, 255, 255, 0.5),
+                                    stop:1 rgba(253, 253, 253, 0.5));
 }

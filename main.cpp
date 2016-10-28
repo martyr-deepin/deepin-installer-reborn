@@ -31,6 +31,7 @@ int main(int argc, char* argv[]) {
   installer::SaveOemConfig();
 
   installer::MainWindow main_window;
+  main_window.scanDevices();
   main_window.fullscreen();
 
   const int result = app.exec();

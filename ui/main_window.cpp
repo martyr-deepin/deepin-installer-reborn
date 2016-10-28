@@ -95,12 +95,15 @@ MainWindow::MainWindow()
   this->registerShortcut();
   this->initConnections();
   this->goNextPage();
-  partition_frame_->scanDevices();
 }
 
 void MainWindow::fullscreen() {
   wallpaper_manager_->updateWallpaper();
   this->showFullScreen();
+}
+
+void MainWindow::scanDevices() {
+  partition_frame_->scanDevices();
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {

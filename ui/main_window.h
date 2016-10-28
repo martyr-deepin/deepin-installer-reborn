@@ -42,7 +42,11 @@ class MainWindow : public QWidget {
  public:
   MainWindow();
 
+  // Show fullscreen.
   void fullscreen();
+
+  // Notify background thread to scan disk devices if needed.
+  void scanDevices();
 
  protected:
   // Move close button to appropriate position when window is resized.

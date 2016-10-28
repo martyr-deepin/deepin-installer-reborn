@@ -1,7 +1,18 @@
 /** Used by CommentLabel class **/
 
 QLabel {
-  color: #eaeaea;
-  font-size: 14pt;
-  max-width: 840px;
+  /*color: #eaeaea;*/
+  /*font-size: 14pt;*/
+  /*max-width: 840px;*/
+
+  width: 414px;
+  height: 20px;
+  font-family: "SourceHanSansSC-Normal", Arial, SansSerif;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  text-align: center;
+  color: #ffffff;
 }
