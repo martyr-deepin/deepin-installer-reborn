@@ -55,6 +55,9 @@ const char kSystemInfoDefaultTimezone[] = "system_info_default_timezone";
 const char kSystemInfoDisableAvatorPage[] = "system_info_disable_avatar_page";
 const char kSystemInfoDisableTimezonePage[] =
     "system_info_disable_timezone_page";
+const char kSystemInfoTimezoneUseGeoIp[] = "system_info_timezone_use_geoip";
+const char kSystemInfoTimezoneUseRegdomain[] =
+    "system_info_timezone_use_regdomain";
 
 // Partition
 const char kPartitionMinimumDiskSpaceRequired[] =

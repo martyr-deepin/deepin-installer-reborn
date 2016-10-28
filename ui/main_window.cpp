@@ -144,6 +144,15 @@ void MainWindow::initConnections() {
           wallpaper_manager_, &MultiHeadManager::switchXRandRMode);
   connect(wallpaper_manager_, &MultiHeadManager::primaryScreenChanged,
           this, &MainWindow::onPrimaryScreenChanged);
+
+  // Notify InstallProgressFrame that partition job has finished.
+  connect(partition_frame_, &PartitionFrame::autoPartDone,
+          install_progress_frame_, &InstallProgressFrame::runHooks);
+  connect(partition_frame_, &PartitionFrame::manualPartDone,
+          install_progress_frame_, &InstallProgressFrame::runHooks);
+
+  connect(select_language_frame_, &SelectLanguageFrame::languageSelected,
+          install_progress_frame_, &InstallProgressFrame::updateLanguage);
 }
 
 void MainWindow::initPages() {

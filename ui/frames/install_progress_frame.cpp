@@ -9,7 +9,6 @@
 #include <QThread>
 
 #include "service/hooks_manager.h"
-#include "service/signal_manager.h"
 #include "ui/frames/consts.h"
 #include "ui/frames/inner/install_progress_bar.h"
 #include "ui/frames/inner/install_progress_slide_frame.h"
@@ -46,6 +45,25 @@ void InstallProgressFrame::startSlide() {
   slide_frame_->startSlide();
 }
 
+void InstallProgressFrame::runHooks(bool ok) {
+  qDebug() << "runHooks()" << ok;
+
+  if (ok) {
+    // Partition operations take 5% progress.
+    progress_bar_->setProgress(kBeforeChrootStartVal);
+
+    qDebug() << "emit runHooks() signal";
+    // Run hooks/ in background thread.
+    emit hooks_manager_->runHooks();
+  } else {
+    this->onErrorOccurred();
+  }
+}
+
+void InstallProgressFrame::updateLanguage(const QString& locale) {
+  slide_frame_->setLocale(locale);
+}
+
 void InstallProgressFrame::initConnections() {
   connect(hooks_manager_, &HooksManager::errorOccurred,
           this, &InstallProgressFrame::onErrorOccurred);
@@ -53,14 +71,6 @@ void InstallProgressFrame::initConnections() {
           progress_bar_, &InstallProgressBar::setProgress);
   connect(hooks_manager_, &HooksManager::finished,
           this, &InstallProgressFrame::finished);
-
-  SignalManager* signal_manager = SignalManager::instance();
-  connect(signal_manager, &SignalManager::autoPartDone,
-          this, &InstallProgressFrame::onPartitionDone);
-  connect(signal_manager, &SignalManager::manualPartDone,
-          this, &InstallProgressFrame::onPartitionDone);
-  connect(signal_manager, &SignalManager::languageSelected,
-          slide_frame_, &InstallProgressSlideFrame::setLocale);
 }
 
 void InstallProgressFrame::initUI() {
@@ -99,21 +109,6 @@ void InstallProgressFrame::onErrorOccurred() {
   failed_ = true;
   slide_frame_->stopSlide();
   emit this->finished();
-}
-
-void InstallProgressFrame::onPartitionDone(bool ok) {
-  qDebug() << "onPartitionDone()" << ok;
-
-  if (ok) {
-    // Partition operations take 5% progress.
-    progress_bar_->setProgress(kBeforeChrootStartVal);
-
-    qDebug() << "emit runHooks() signal";
-    // Run hooks/ in background thread.
-    emit hooks_manager_->runHooks();
-  } else {
-    this->onErrorOccurred();
-  }
 }
 
 }  // namespace installer

@@ -55,6 +55,10 @@ void PartitionFrame::initConnections() {
 
   connect(delegate_, &PartitionDelegate::deviceRefreshed,
           this, &PartitionFrame::showMainFrame);
+  connect(delegate_, &PartitionDelegate::autoPartDone,
+          this, &PartitionFrame::autoPartDone);
+  connect(delegate_, &PartitionDelegate::manualPartDone,
+          this, &PartitionFrame::manualPartDone);
 
   connect(advanced_partition_frame_,
           &AdvancedPartitionFrame::requestEditPartitionFrame,

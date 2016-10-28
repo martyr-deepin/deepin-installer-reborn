@@ -36,6 +36,13 @@ class InstallProgressFrame : public QFrame {
   // Returns true is installation process failed.
   bool failed() const { return failed_; }
 
+ public slots:
+  // Run hooks when partition job is done
+  void runHooks(bool ok);
+
+  // Choose slide package based on |locale|.
+  void updateLanguage(const QString& locale);
+
  signals:
   // Emitted when installation finished or failed.
   // Call state() to check its status.
@@ -56,9 +63,6 @@ class InstallProgressFrame : public QFrame {
  private slots:
   // Handles error state
   void onErrorOccurred();
-
-  // Run hooks when partition job is done
-  void onPartitionDone(bool ok);
 };
 
 }  // namespace installer

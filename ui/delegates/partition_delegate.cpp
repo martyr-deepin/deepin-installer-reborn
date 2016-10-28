@@ -10,7 +10,6 @@
 #include "partman/partition_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
-#include "service/signal_manager.h"
 
 namespace installer {
 
@@ -317,12 +316,10 @@ void PartitionDelegate::doManualPart() {
 }
 
 void PartitionDelegate::initConnections() {
-  SignalManager* signal_manager = SignalManager::instance();
   connect(partition_manager_, &PartitionManager::autoPartDone,
-          signal_manager, &SignalManager::autoPartDone);
+          this, &PartitionDelegate::autoPartDone);
   connect(partition_manager_, &PartitionManager::manualPartDone,
           this, &PartitionDelegate::onManualPartDone);
-
   connect(partition_manager_, &PartitionManager::devicesRefreshed,
           this, &PartitionDelegate::onDevicesRefreshed);
 }
@@ -590,7 +587,7 @@ void PartitionDelegate::onManualPartDone(bool ok,
     WritePartitionInfo(root_path, mount_points);
   }
 
-  emit SignalManager::instance()->manualPartDone(ok);
+  emit this->manualPartDone(ok);
 }
 
 }  // namespace installer

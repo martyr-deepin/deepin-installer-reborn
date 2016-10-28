@@ -39,6 +39,10 @@ class PartitionFrame : public QFrame {
  signals:
   void finished();
 
+  // Emitted when partition job is done.
+  void autoPartDone(bool ok);
+  void manualPartDone(bool ok);
+
  private:
   void initConnections();
   void initUI();

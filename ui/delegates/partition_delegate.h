@@ -76,6 +76,10 @@ class PartitionDelegate : public QObject {
   // Emitted when a specific partition is created/edited/deleted.
   void partitionEdited();
 
+  // Emitted when partition job is done.
+  void autoPartDone(bool ok);
+  void manualPartDone(bool ok);
+
  public slots:
   void doManualPart();
 

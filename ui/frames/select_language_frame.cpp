@@ -16,7 +16,6 @@
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
-#include "service/signal_manager.h"
 #include "ui/frames/consts.h"
 #include "ui/delegates/language_list_delegate.h"
 #include "ui/models/language_list_model.h"
@@ -38,7 +37,7 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
 
 void SelectLanguageFrame::autoConf() {
   locale_ = GetSettingsString(kSelectLanguageDefaultLocale);
-  emit SignalManager::instance()->languageSelected(locale_);
+  emit this->languageSelected(locale_);
   WriteLocale(locale_);
 }
 
@@ -105,7 +104,7 @@ void SelectLanguageFrame::onLanguageListSelected() {
       list_view_->selectionModel()->selectedIndexes();
   if (selected_items.length() == 1) {
     locale_ = list_model_->locale(selected_items.at(0));
-    emit SignalManager::instance()->languageSelected(locale_);
+    emit this->languageSelected(locale_);
   }
 }
 

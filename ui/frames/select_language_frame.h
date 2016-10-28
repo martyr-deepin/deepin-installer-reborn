@@ -26,6 +26,9 @@ class SelectLanguageFrame : public QFrame {
   // Emitted when system language is selected.
   void finished();
 
+  // Emitted when |locale| is selected in select-language-frame
+  void languageSelected(const QString& locale);
+
  private:
   void initConnections();
   void initUI();
