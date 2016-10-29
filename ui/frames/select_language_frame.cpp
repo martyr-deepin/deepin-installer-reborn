@@ -56,7 +56,10 @@ void SelectLanguageFrame::initUI() {
       "Please select the language you want to use\n请选择您的语言");
 
   list_view_ = new QListView();
-  list_view_->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+  QSizePolicy list_policy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+  list_policy.setHorizontalStretch(1);
+  list_policy.setVerticalStretch(1);
+  list_view_->setSizePolicy(list_policy);
   list_view_->setEditTriggers(QAbstractItemView::NoEditTriggers);
   QPalette list_palette = list_view_->palette();
   list_palette.setBrush(QPalette::Base, Qt::transparent);
@@ -66,7 +69,9 @@ void SelectLanguageFrame::initUI() {
   list_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   list_model_ = new LanguageListModel(this);
   list_view_->setModel(list_model_);
-  list_view_->setFixedWidth(400);
+  list_view_->setFixedWidth(468);
+  list_view_->setSelectionRectVisible(false);
+  list_view_->setUniformItemSizes(true);
 //  LanguageListDelegate* list_delegate = new LanguageListDelegate(this);
 //  list_view_->setItemDelegate(list_delegate);
   list_view_->setStyleSheet(ReadTextFileContent(":/styles/language_list.css"));
@@ -76,9 +81,12 @@ void SelectLanguageFrame::initUI() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
+  layout->addStretch();
   layout->addWidget(logo_label, 0, Qt::AlignCenter);
   layout->addWidget(subhead_label, 0, Qt::AlignCenter);
-  layout->addWidget(list_view_, 0, Qt::AlignCenter);
+  layout->addSpacing(20);
+  layout->addWidget(list_view_, 0, Qt::AlignHCenter);
+  layout->addSpacing(20);
   layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);

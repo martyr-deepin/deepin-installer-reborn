@@ -1,6 +1,5 @@
 /** Used in SelectLanguageFrame class **/
 
-QListView,
 QHeaderView,
 QHeaderView::section,
 QListCornerButton::section {
@@ -14,20 +13,35 @@ QListView {
   selection-background-color: rgba(255, 255, 255, 1);
   */
   font-size: 12pt;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.2);
+  color: #eaeaea;
+  border: none;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+
+  /* make the selection span the entire width of the view */
+  show-decoration-selected: 1;
 }
 
-QListView,
-QListView::item {
-  border: none;
+/* does not work */
+QListView::item:first {
+  border-top-left-radius: 4px;
+  border-top-right-rradius: 4px;
+}
+
+QListView::item:last {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 QListView::item {
   background: transparent;
-  color: #eaeaea;
-  height: 30px;
-  padding: 3px 7px;
+  height: 40px;
+  padding: 0px 7px;
+  outline: none;
+  border-bottom: 1px solid rgba(53, 78, 248, 0.5);
+
+  /*selection-color: black;*/
+  /*selection-background-color: transparent;*/
 }
 
 QListView::item:hover {
@@ -35,30 +49,42 @@ QListView::item:hover {
 }
 
 QListView::item:focus {
+  /*background: rgba(255, 255, 255, 0.3);*/
+}
+
+QListView::item:selected {
   background: rgba(255, 255, 255, 0.3);
-  /*background: url(:/ui/images/arrow.png) no-repeat;*/
-}
-
-QScrollArea {
-  background-color: transparent;
+  outline: none;
   border: none;
+  margin: 0px;
+  padding: 0px 7px;
+  border-image: url(":/images/list_view_selected.png");
 }
 
-QScrollBar::add-page,
-QScrollBar::sub-page,
-QScrollBar::add-line,
-QScrollBar::sub-line,
-QScrollBar::up-arrow,
-QScrollBar::down-arrow {
-  background: none;
-}
+/*QListView::item:selected:!active {*/
+  /*background-color: blue;*/
+/*}*/
 
-QScrollBar {
-  margin: 0;
-  width: 0;
-  background-color: transparent;
-}
+/*QScrollArea {*/
+  /*background-color: transparent;*/
+  /*border: none;*/
+/*}*/
 
-QScrollBar::handle {
-  border-width: 0;
-}
+/*QScrollBar::add-page,*/
+/*QScrollBar::sub-page,*/
+/*QScrollBar::add-line,*/
+/*QScrollBar::sub-line,*/
+/*QScrollBar::up-arrow,*/
+/*QScrollBar::down-arrow {*/
+  /*background: none;*/
+/*}*/
+
+/*QScrollBar {*/
+  /*margin: 0;*/
+  /*width: 0;*/
+  /*background-color: transparent;*/
+/*}*/
+
+/*QScrollBar::handle {*/
+  /*border-width: 0;*/
+/*}*/

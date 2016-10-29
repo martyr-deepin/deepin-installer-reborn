@@ -4,6 +4,7 @@
 
 #include "ui/widgets/line_edit.h"
 
+#include <QDebug>
 #include <QLabel>
 #include <QResizeEvent>
 
@@ -11,29 +12,23 @@
 
 namespace installer {
 
-namespace {
-
-const int kImageLabelSize = 32;
-const int kFixedHeight = 48;
-const int kImageLabelOffsetY = 8;
-
-}  // namespace
-
 LineEdit::LineEdit(const QString& icon, QWidget* parent)
     : QLineEdit(parent) {
   this->setObjectName(QStringLiteral("line_edit"));
 
   this->setStyleSheet(ReadTextFileContent(":/styles/line_edit.css"));
-  this->setFixedHeight(kFixedHeight);
+  this->setFixedSize(340, 36);
 
   image_label_ = new QLabel(this);
+  const QPixmap pixmap(icon);
+  qDebug() << pixmap.size();
   image_label_->setPixmap(QPixmap(icon));
-  image_label_->setFixedSize(kImageLabelSize, kImageLabelSize);
-  image_label_->move(0, kImageLabelOffsetY);
+  image_label_->setFixedSize(12, 12);
+  image_label_->move(12, 12);
 }
 
 void LineEdit::resizeEvent(QResizeEvent* event) {
-  image_label_->move(0, kImageLabelOffsetY);
+  image_label_->move(12, 12);
   QLineEdit::resizeEvent(event);
 }
 
