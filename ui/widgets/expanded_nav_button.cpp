@@ -9,9 +9,11 @@
 namespace installer {
 
 ExpandedNavButton::ExpandedNavButton(const QString& text, QWidget* parent)
-  : FlatButton(text, parent) {
+  : NavButton(text, parent) {
   this->setObjectName(QStringLiteral("expanded_nav_button"));
-  this->setStyleSheet(ReadTextFileContent(":/styles/expanded_nav_button.css"));
+  // Remove width constraints in NavButton.
+  this->setFixedWidth(QWIDGETSIZE_MAX);
+  this->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
 }
 
 }  // namespace installer

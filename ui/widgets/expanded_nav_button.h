@@ -5,12 +5,12 @@
 #ifndef INSTALLER_UI_WIDGETS_EXPANDED_NAV_BUTTON_H
 #define INSTALLER_UI_WIDGETS_EXPANDED_NAV_BUTTON_H
 
-#include "ui/widgets/flat_button.h"
+#include "ui/widgets/nav_button.h"
 
 namespace installer {
 
 // Resizable NavButton.
-class ExpandedNavButton : public FlatButton {
+class ExpandedNavButton : public NavButton {
   Q_OBJECT
 
  public:

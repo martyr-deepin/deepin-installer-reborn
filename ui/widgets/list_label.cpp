@@ -11,7 +11,6 @@ namespace installer {
 ListLabel::ListLabel(const QString& text, QWidget* parent)
     : QLabel(text, parent) {
   this->setObjectName(QStringLiteral("list_label"));
-  this->setAlignment(Qt::AlignLeft);
   this->setWordWrap(true);
   this->setStyleSheet(ReadTextFileContent(":/styles/list_label.css"));
 }

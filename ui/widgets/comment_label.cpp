@@ -10,8 +10,9 @@ namespace installer {
 
 CommentLabel::CommentLabel(const QString& text, QWidget* parent)
   : QLabel(text, parent) {
+  this->setObjectName(QStringLiteral("comment_label"));
   this->setWordWrap(true);
-//  this->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+  this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 //  QSizePolicy size_policy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 //  size_policy.setVerticalStretch(1);
 //  this->setSizePolicy(size_policy);

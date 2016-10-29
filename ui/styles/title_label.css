@@ -1,7 +1,6 @@
 /** Used by TitleLabel class **/
 
 QLabel {
-  /*height: 59px;*/
   font-size: 40px;
   text-align: center;
   color: #ffffff;

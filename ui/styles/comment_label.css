@@ -1,9 +1,9 @@
 /** Used by CommentLabel class **/
 
 QLabel {
-  font-family: "SourceHanSansSC-Normal", Arial, SansSerif;
   /*max-width: 800px;*/
   width: 1200px;
+  height: 80px;
   font-size: 12px;
   line-height: 1.67;
   text-align: center;

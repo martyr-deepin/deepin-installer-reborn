@@ -1,9 +1,6 @@
 /** Used by NavButton class **/
 
 QPushButton {
-  /*min-width: 220px;*/
-  width: 310px;
-  height: 36px;
   color: #ffffff;
   text-align: center;
   font-size: 14px;
