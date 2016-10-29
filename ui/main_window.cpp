@@ -92,7 +92,8 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
-  this->goNextPage();
+//  this->goNextPage();
+  this->setCurrentPage(PageId::InstallSuccessId);
 }
 
 void MainWindow::fullscreen() {
@@ -266,6 +267,7 @@ void MainWindow::setCurrentPage(PageId page_id) {
       page_id == PageId::VirtualMachineId ||
       page_id == PageId::InstallFailedId ||
       page_id == PageId::InstallSuccessId) {
+    // Hide page indicator in these pages.
     page_indicator_->hide();
   } else {
     page_indicator_->show();

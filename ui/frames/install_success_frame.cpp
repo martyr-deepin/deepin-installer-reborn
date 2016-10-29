@@ -7,7 +7,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
-#include "ui/widgets/comment_label.h"
+#include "ui/widgets/comment_label_layout.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 #include "ui/frames/consts.h"
@@ -30,7 +30,7 @@ void InstallSuccessFrame::initUI() {
   QLabel* status_label = new QLabel();
   status_label->setPixmap(QPixmap(":/images/succeed.png"));
   TitleLabel* title_label = new TitleLabel(tr("Successfully Installed"));
-  CommentLabel* comment_label = new CommentLabel(
+  CommentLabelLayout* comment_layout = new CommentLabelLayout(
       tr("Reboot to enjoy the new experience with deepin, hope you like it!"));
   reboot_button_ = new NavButton(tr("Experience now"));
 
@@ -39,7 +39,7 @@ void InstallSuccessFrame::initUI() {
   layout->addStretch();
   layout->addWidget(status_label, 0, Qt::AlignCenter);
   layout->addWidget(title_label, 0, Qt::AlignCenter);
-  layout->addWidget(comment_label, 0, Qt::AlignCenter);
+  layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(reboot_button_, 0, Qt::AlignCenter);
 
