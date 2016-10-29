@@ -166,6 +166,7 @@ set(UI_FILES
     ui/widgets/advanced_partition_item.cpp ui/widgets/advanced_partition_item.h
     ui/widgets/avatar_button.cpp ui/widgets/avatar_button.h
     ui/widgets/comment_label.cpp ui/widgets/comment_label.h
+    ui/widgets/comment_label_layout.cpp ui/widgets/comment_label_layout.h
     ui/widgets/expanded_nav_button.cpp ui/widgets/expanded_nav_button.h
     ui/widgets/flat_button.cpp ui/widgets/flat_button.h
     ui/widgets/frosted_frame.cpp ui/widgets/frosted_frame.h

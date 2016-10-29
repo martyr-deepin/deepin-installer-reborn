@@ -1,12 +1,8 @@
 /** Used by CommentLabel class **/
 
 QLabel {
-  /*max-width: 800px;*/
-  width: 1200px;
-  height: 80px;
   font-size: 12px;
   line-height: 1.67;
-  text-align: center;
+  text-align: center;  /* Does not work */
   color: #ffffff;
-  background-color: red;
 }

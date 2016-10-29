@@ -9,7 +9,7 @@
 #include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
-#include "ui/widgets/comment_label.h"
+#include "ui/widgets/comment_label_layout.h"
 #include "ui/widgets/expanded_nav_button.h"
 #include "ui/widgets/frosted_frame.h"
 #include "ui/widgets/list_label.h"
@@ -35,7 +35,7 @@ void PartitionTableWarningFrame::initConnections() {
 
 void PartitionTableWarningFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("Warning"));
-  CommentLabel* comment_label = new CommentLabel(
+  CommentLabelLayout* comment_layout = new CommentLabelLayout(
       tr("It is detected that your motherboard boot loader is EFI and "
          "the disk format is MBR, thus the system can not be installed "
          "directly; to continue, please select one of the solutions below."));
@@ -50,15 +50,18 @@ void PartitionTableWarningFrame::initUI() {
   ListLabel* list_label2 = new ListLabel(
       tr("1.Please make backup for all your data to avoid data loss") + "\n" +
       tr("2.Please double check if you have made backup for all the data, "
-         "and reboot to enter this interface"));
+         "and reboot to enter this interface, Please double check if you have"));
   QVBoxLayout* left_frame_layout = new QVBoxLayout();
   left_frame_layout->setContentsMargins(20, 20, 20, 20);
+  left_frame_layout->setSpacing(0);
   left_frame_layout->addWidget(left_label1);
   left_frame_layout->addWidget(list_label1);
+  left_frame_layout->addStretch();
   left_frame_layout->addWidget(left_label2);
   left_frame_layout->addWidget(list_label2);
   left_frame_layout->addStretch();
   FrostedFrame* left_frame = new FrostedFrame();
+  left_frame->setFixedWidth(480);
   left_frame->setLayout(left_frame_layout);
 
   ListTitleLabel* right_label = new ListTitleLabel(tr("Continue"));
@@ -68,10 +71,12 @@ void PartitionTableWarningFrame::initUI() {
       tr("2.Continue installation will format your disk"));
   QVBoxLayout* right_frame_layout = new QVBoxLayout();
   right_frame_layout->setContentsMargins(20, 20, 20, 20);
+  right_frame_layout->setSpacing(0);
   right_frame_layout->addWidget(right_label);
   right_frame_layout->addWidget(list_label3);
   right_frame_layout->addStretch();
   FrostedFrame* right_frame = new FrostedFrame();
+  right_frame->setFixedWidth(480);
   right_frame->setLayout(right_frame_layout);
 
   reject_button_ = new ExpandedNavButton(tr("Reboot"));
@@ -92,7 +97,7 @@ void PartitionTableWarningFrame::initUI() {
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label, 0, Qt::AlignCenter);
-  layout->addWidget(comment_label, 0, Qt::AlignCenter);
+  layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addLayout(content_layout);
   layout->addStretch();
