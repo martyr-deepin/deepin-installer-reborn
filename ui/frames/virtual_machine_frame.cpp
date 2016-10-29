@@ -4,11 +4,11 @@
 
 #include "ui/frames/virtual_machine_frame.h"
 
-#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QLabel>
 
 #include "ui/frames/consts.h"
-#include "ui/widgets/comment_label.h"
+#include "ui/widgets/comment_label_layout.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
@@ -22,7 +22,7 @@ VirtualMachineFrame::VirtualMachineFrame(QWidget* parent) : QFrame(parent) {
 
 void VirtualMachineFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("Friendly Reminder"));
-  CommentLabel* comment_label = new CommentLabel(
+  CommentLabelLayout* comment_layout = new CommentLabelLayout(
       tr("System has detected that you are using a virtual machine, "
          "which will affect the system performance and operation experience, "
          "for a smooth experience, it is recommended to install deepin in "
@@ -33,7 +33,7 @@ void VirtualMachineFrame::initUI() {
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label, 0, Qt::AlignCenter);
-  layout->addWidget(comment_label, 0, Qt::AlignCenter);
+  layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(nav_button, 0, Qt::AlignCenter);
 
