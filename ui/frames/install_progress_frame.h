@@ -27,12 +27,6 @@ class InstallProgressFrame : public QFrame {
   // Show slide now
   void startSlide();
 
-  enum class State {
-    Failed,
-    Finished,
-    InProcess,
-  };
-
   // Returns true is installation process failed.
   bool failed() const { return failed_; }
 
@@ -63,6 +57,9 @@ class InstallProgressFrame : public QFrame {
  private slots:
   // Handles error state
   void onErrorOccurred();
+
+  // Handles successful installation.
+  void onSucceeded();
 };
 
 }  // namespace installer

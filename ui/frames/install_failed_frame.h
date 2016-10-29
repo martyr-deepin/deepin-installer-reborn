@@ -21,8 +21,10 @@ class InstallFailedFrame : public QFrame {
  public:
   explicit InstallFailedFrame(QWidget* parent = nullptr);
 
-  // Reload error message from log file.
-  void updateErrorMessage();
+  // Reload error message.
+  // |msg| is plain text. And |encoded_msg| is based64 encoded |msg|, with
+  // prefix of feedback server domain.
+  void updateErrorMessage(const QString& msg, const QString& encoded_msg);
 
  signals:
   // Emitted when reboot button is clocked.

@@ -19,7 +19,7 @@ namespace installer {
 
 InstallProgressFrame::InstallProgressFrame(QWidget* parent)
     : QFrame(parent),
-      failed_(false),
+      failed_(true),
       hooks_manager_(new HooksManager()),
       hooks_manager_thread_(new QThread()) {
   this->setObjectName(QStringLiteral("install_progress_frame"));
@@ -70,7 +70,7 @@ void InstallProgressFrame::initConnections() {
   connect(hooks_manager_, &HooksManager::processUpdate,
           progress_bar_, &InstallProgressBar::setProgress);
   connect(hooks_manager_, &HooksManager::finished,
-          this, &InstallProgressFrame::finished);
+          this, &InstallProgressFrame::onSucceeded);
 }
 
 void InstallProgressFrame::initUI() {
@@ -96,6 +96,12 @@ void InstallProgressFrame::initUI() {
 
 void InstallProgressFrame::onErrorOccurred() {
   failed_ = true;
+  slide_frame_->stopSlide();
+  emit this->finished();
+}
+
+void InstallProgressFrame::onSucceeded() {
+  failed_ = false;
   slide_frame_->stopSlide();
   emit this->finished();
 }

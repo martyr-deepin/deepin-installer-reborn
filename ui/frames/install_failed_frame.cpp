@@ -4,16 +4,12 @@
 
 #include "ui/frames/install_failed_frame.h"
 
-#include <QHBoxLayout>
 #include <QLabel>
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
-#include "service/log_manager.h"
-#include "service/settings_manager.h"
-#include "service/settings_name.h"
 #include "ui/frames/consts.h"
-#include "ui/widgets/comment_label.h"
+#include "ui/widgets/comment_label_layout.h"
 #include "ui/widgets/frosted_frame.h"
 #include "ui/widgets/icon_button.h"
 #include "ui/widgets/nav_button.h"
@@ -29,29 +25,21 @@ const int kContentWindowHeight = 480;
 const int kQRWindowSize = 320;
 const int kControlButtonSize = 32;
 
-const int kLabelContentStripped = 320;
-const int kQRContentStripped = 80;
-
-}
+}  // namespace
 
 InstallFailedFrame::InstallFailedFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("install_failed_frame"));
 
   this->initUI();
+  // Show QR widget only if control button is clicked.
   qr_widget_->setVisible(false);
   this->initConnections();
 }
 
-void InstallFailedFrame::updateErrorMessage() {
-  // Read from log file.
-  const QString content = ReadTextFileContent(GetLogFilepath());
-  content_label_->setText(content.right(kLabelContentStripped));
-
-  // Encode with base64.
-  const QString base64_content =
-      content.right(kQRContentStripped).toUtf8().toBase64();
-  const QString prefix = GetSettingsString(kInstallFailedFeedbackServer);
-  qr_widget_->setText(prefix.arg(base64_content));
+void InstallFailedFrame::updateErrorMessage(const QString& msg,
+                                            const QString& encoded_msg) {
+  content_label_->setText(msg);
+  qr_widget_->setText(encoded_msg);
 }
 
 void InstallFailedFrame::initConnections() {
@@ -65,7 +53,7 @@ void InstallFailedFrame::initUI() {
   QLabel* status_label = new QLabel();
   status_label->setPixmap(QPixmap(":/images/failed.png"));
   TitleLabel* title_label = new TitleLabel(tr("Installation Failed"));
-  CommentLabel* comment_label = new CommentLabel(
+  CommentLabelLayout* comment_layout = new CommentLabelLayout(
       tr("Sorry for the inconvenience, you can photo or scan the 2D code "
          "to send us the error log, so we can better solve the issue."));
 
@@ -95,7 +83,7 @@ void InstallFailedFrame::initUI() {
   layout->addStretch();
   layout->addWidget(status_label, 0, Qt::AlignCenter);
   layout->addWidget(title_label, 0, Qt::AlignCenter);
-  layout->addWidget(comment_label, 0, Qt::AlignCenter);
+  layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(content_frame, 0, Qt::AlignCenter);
   layout->addStretch();

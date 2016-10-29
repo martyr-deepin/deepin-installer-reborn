@@ -14,8 +14,10 @@
 #include <QShortcut>
 #include <QStackedLayout>
 
+#include "base/file_util.h"
 #include "partman/partition_manager.h"
 #include "partman/utils.h"
+#include "service/log_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
@@ -37,6 +39,10 @@
 namespace installer {
 
 namespace {
+
+// TODO(xushaohua): Move to settings file
+// Strippled length of error message.
+const int kQRContentStripped = 80;
 
 int GetVisiblePages() {
   int pages = 0;
@@ -77,6 +83,22 @@ bool IsPartitionTableMatch() {
   return type == PartitionTableType::GPT;
 }
 
+// Read log file content, stripped to tail, and encode with domain name of
+// feedback server.
+// Returns false if failed.
+bool ReadErrorMsg(QString& msg, QString& encoded_msg) {
+  msg = ReadTextFileContent(GetLogFilepath());
+  if (msg.isEmpty()) {
+    return false;
+  }
+
+  const QString base64_content =
+      msg.right(kQRContentStripped).toUtf8().toBase64();
+  const QString prefix = GetSettingsString(kInstallFailedFeedbackServer);
+  encoded_msg = prefix.arg(base64_content);
+  return true;
+}
+
 }  // namespace
 
 MainWindow::MainWindow()
@@ -92,8 +114,7 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
-//  this->goNextPage();
-  this->setCurrentPage(PageId::InstallSuccessId);
+  this->goNextPage();
 }
 
 void MainWindow::fullscreen() {
@@ -359,17 +380,6 @@ void MainWindow::goNextPage() {
       break;
     }
 
-    case PageId::InstallProgressId: {
-      page_indicator_->setVisible(false);
-      if (install_progress_frame_->failed()) {
-        install_failed_frame_->updateErrorMessage();
-        this->setCurrentPage(PageId::InstallFailedId);
-      } else {
-        this->setCurrentPage(PageId::InstallSuccessId);
-      }
-      break;
-    }
-
     case PageId::PartitionTableWarningId: {
       // Check whether to show SelectLanguagePage.
       if (!GetSettingsBool(kSkipSelectLanguagePage)) {
@@ -419,6 +429,22 @@ void MainWindow::goNextPage() {
       page_indicator_->goNextPage();
       install_progress_frame_->startSlide();
       this->setCurrentPage(PageId::InstallProgressId);
+      break;
+    }
+
+    case PageId::InstallProgressId: {
+      if (install_progress_frame_->failed()) {
+        QString msg, encoded_msg;
+        if (ReadErrorMsg(msg, encoded_msg)) {
+          install_failed_frame_->updateErrorMessage(msg, encoded_msg);
+        } else {
+          msg = "Error: failed to read log file!";
+          install_failed_frame_->updateErrorMessage(msg, encoded_msg);
+        }
+        this->setCurrentPage(PageId::InstallFailedId);
+      } else {
+        this->setCurrentPage(PageId::InstallSuccessId);
+      }
       break;
     }
 
