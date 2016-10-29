@@ -5,14 +5,15 @@
 #include "ui/frames/install_progress_frame.h"
 
 #include <QDebug>
-#include <QHBoxLayout>
+#include <QProgressBar>
+#include <QVBoxLayout>
 #include <QThread>
 
+#include "base/file_util.h"
 #include "service/hooks_manager.h"
 #include "ui/frames/consts.h"
-#include "ui/frames/inner/install_progress_bar.h"
 #include "ui/frames/inner/install_progress_slide_frame.h"
-#include "ui/widgets/comment_label.h"
+#include "ui/widgets/comment_label_layout.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
@@ -50,7 +51,7 @@ void InstallProgressFrame::runHooks(bool ok) {
 
   if (ok) {
     // Partition operations take 5% progress.
-    progress_bar_->setProgress(kBeforeChrootStartVal);
+    progress_bar_->setValue(kBeforeChrootStartVal);
 
     qDebug() << "emit runHooks() signal";
     // Run hooks/ in background thread.
@@ -68,30 +69,36 @@ void InstallProgressFrame::initConnections() {
   connect(hooks_manager_, &HooksManager::errorOccurred,
           this, &InstallProgressFrame::onErrorOccurred);
   connect(hooks_manager_, &HooksManager::processUpdate,
-          progress_bar_, &InstallProgressBar::setProgress);
+          progress_bar_, &QProgressBar::setValue);
   connect(hooks_manager_, &HooksManager::finished,
           this, &InstallProgressFrame::onSucceeded);
 }
 
 void InstallProgressFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("Installing"));
-  CommentLabel* comment_label = new CommentLabel(
+  CommentLabelLayout* comment_layout = new CommentLabelLayout(
       tr("You will be experiencing the incredible pleasant of deepin after "
          "the time for just a cup of coffee"));
   slide_frame_ = new InstallProgressSlideFrame();
-  progress_bar_ = new InstallProgressBar();
+  progress_bar_ = new QProgressBar();
+  progress_bar_->setFixedSize(640, 8);
+  progress_bar_->setTextVisible(false);
+  progress_bar_->setRange(0, 100);
+  progress_bar_->setOrientation(Qt::Horizontal);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label, 0, Qt::AlignCenter);
-  layout->addWidget(comment_label, 0, Qt::AlignCenter);
+  layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(slide_frame_, 0, Qt::AlignCenter);
   layout->addWidget(progress_bar_, 0, Qt::AlignCenter);
   layout->addStretch();
 
   this->setLayout(layout);
+  this->setStyleSheet(
+      ReadTextFileContent(":/styles/install_progress_frame.css"));
 }
 
 void InstallProgressFrame::onErrorOccurred() {

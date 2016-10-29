@@ -7,6 +7,7 @@
 
 #include <QFrame>
 class QLabel;
+class QProgressBar;
 class QThread;
 
 namespace installer {
@@ -51,8 +52,8 @@ class InstallProgressFrame : public QFrame {
   HooksManager* hooks_manager_ = nullptr;
   QThread* hooks_manager_thread_ = nullptr;
 
-  InstallProgressBar* progress_bar_ = nullptr;
   InstallProgressSlideFrame* slide_frame_ = nullptr;
+  QProgressBar* progress_bar_ = nullptr;
 
  private slots:
   // Handles error state
