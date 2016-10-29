@@ -261,6 +261,15 @@ void MainWindow::setCurrentPage(PageId page_id) {
   } else {
     close_button_->show();
   }
+
+  if (page_id == PageId::DiskSpaceInsufficientId ||
+      page_id == PageId::VirtualMachineId ||
+      page_id == PageId::InstallFailedId ||
+      page_id == PageId::InstallSuccessId) {
+    page_indicator_->hide();
+  } else {
+    page_indicator_->show();
+  }
 }
 
 void MainWindow::updateBackground() {
@@ -311,8 +320,6 @@ void MainWindow::goNextPage() {
       const int required_device_size = GetSettingsValue(
           kPartitionMinimumDiskSpaceRequired).toInt();
       if (IsDiskSpaceInsufficient(required_device_size)) {
-        // Hide page indicator in DiskSpaceInsufficientFrame
-        page_indicator_->setVisible(false);
         const int recommended_device_size = GetSettingsValue(
             kPartitionRecommendedDiskSpace).toInt();
         disk_space_insufficient_frame_->setSizes(required_device_size,
@@ -329,79 +336,10 @@ void MainWindow::goNextPage() {
     case PageId::DiskSpaceInsufficientId: {
       // Check whether to show VirtualMachinePage.
       if (IsVirtualMachine()) {
-        // Hide page indicator.
-        page_indicator_->setVisible(false);
         this->setCurrentPage(PageId::VirtualMachineId);
       } else {
         prev_page_ = current_page_;
         current_page_ = PageId::VirtualMachineId;
-        this->goNextPage();
-      }
-      break;
-    }
-
-    case PageId::InstallProgressId: {
-      page_indicator_->setVisible(false);
-      if (install_progress_frame_->failed()) {
-        install_failed_frame_->updateErrorMessage();
-        this->setCurrentPage(PageId::InstallFailedId);
-      } else {
-        this->setCurrentPage(PageId::InstallSuccessId);
-      }
-      break;
-    }
-
-    case PageId::PartitionId: {
-      // Show InstallProgressPage.
-      page_indicator_->setVisible(true);
-      page_indicator_->goNextPage();
-      install_progress_frame_->startSlide();
-      this->setCurrentPage(PageId::InstallProgressId);
-      break;
-    }
-
-    case PageId::PartitionTableWarningId: {
-      // Check whether to show SelectLanguagePage.
-      if (!GetSettingsBool(kSkipSelectLanguagePage)) {
-        page_indicator_->setVisible(true);
-        page_indicator_->goNextPage();
-        this->setCurrentPage(PageId::SelectLanguageId);
-      } else {
-        select_language_frame_->autoConf();
-        prev_page_ = current_page_;
-        current_page_ = PageId::SelectLanguageId;
-        this->goNextPage();
-      }
-      break;
-    }
-
-    case PageId::SelectLanguageId: {
-      // Check whether to show SystemInfoPage.
-      if (!GetSettingsBool(kSkipSystemInfoPage)) {
-        page_indicator_->setVisible(true);
-        page_indicator_->goNextPage();
-        this->setCurrentPage(PageId::SystemInfoId);
-      } else {
-        system_info_frame_->autoConf();
-        prev_page_ = current_page_;
-        current_page_ = PageId::SystemInfoId;
-        this->goNextPage();
-      }
-      break;
-    }
-
-    case PageId::SystemInfoId: {
-      // Check whether to show PartitionPage.
-      if (!GetSettingsBool(kSkipPartitionPage)) {
-        page_indicator_->setVisible(true);
-        page_indicator_->goNextPage();
-        this->setCurrentPage(PageId::PartitionId);
-      } else {
-        if (GetSettingsBool(kPartitionDoAutoPart)) {
-          partition_frame_->autoPart();
-        }
-        prev_page_ = current_page_;
-        current_page_ = PageId::PartitionId;
         this->goNextPage();
       }
       break;
@@ -419,6 +357,68 @@ void MainWindow::goNextPage() {
       break;
     }
 
+    case PageId::InstallProgressId: {
+      page_indicator_->setVisible(false);
+      if (install_progress_frame_->failed()) {
+        install_failed_frame_->updateErrorMessage();
+        this->setCurrentPage(PageId::InstallFailedId);
+      } else {
+        this->setCurrentPage(PageId::InstallSuccessId);
+      }
+      break;
+    }
+
+    case PageId::PartitionTableWarningId: {
+      // Check whether to show SelectLanguagePage.
+      if (!GetSettingsBool(kSkipSelectLanguagePage)) {
+        page_indicator_->goNextPage();
+        this->setCurrentPage(PageId::SelectLanguageId);
+      } else {
+        select_language_frame_->autoConf();
+        prev_page_ = current_page_;
+        current_page_ = PageId::SelectLanguageId;
+        this->goNextPage();
+      }
+      break;
+    }
+
+    case PageId::SelectLanguageId: {
+      // Check whether to show SystemInfoPage.
+      if (!GetSettingsBool(kSkipSystemInfoPage)) {
+        page_indicator_->goNextPage();
+        this->setCurrentPage(PageId::SystemInfoId);
+      } else {
+        system_info_frame_->autoConf();
+        prev_page_ = current_page_;
+        current_page_ = PageId::SystemInfoId;
+        this->goNextPage();
+      }
+      break;
+    }
+
+    case PageId::SystemInfoId: {
+      // Check whether to show PartitionPage.
+      if (!GetSettingsBool(kSkipPartitionPage)) {
+        page_indicator_->goNextPage();
+        this->setCurrentPage(PageId::PartitionId);
+      } else {
+        if (GetSettingsBool(kPartitionDoAutoPart)) {
+          partition_frame_->autoPart();
+        }
+        prev_page_ = current_page_;
+        current_page_ = PageId::PartitionId;
+        this->goNextPage();
+      }
+      break;
+    }
+
+    case PageId::PartitionId: {
+      // Show InstallProgressPage.
+      page_indicator_->goNextPage();
+      install_progress_frame_->startSlide();
+      this->setCurrentPage(PageId::InstallProgressId);
+      break;
+    }
 
     default: {
       qWarning() << "[MainWindow]::goNextPage() We shall never reach here";
