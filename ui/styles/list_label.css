@@ -1,6 +1,8 @@
 /** Used by ListLabel class **/
 
 QLabel {
-  color: #e1e1e1;
-  font-size: 14pt;
+  opacity: 0.7;
+  font-size: 14px;
+  line-height: 2.14;
+  color: #ffffff;
 }

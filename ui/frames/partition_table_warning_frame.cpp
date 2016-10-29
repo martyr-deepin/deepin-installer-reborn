@@ -40,49 +40,36 @@ void PartitionTableWarningFrame::initUI() {
          "the disk format is MBR, thus the system can not be installed "
          "directly; to continue, please select one of the solutions below."));
 
-  ListTitleLabel* left_label = new ListTitleLabel(
+  ListTitleLabel* left_label1 = new ListTitleLabel(
       QString("A.") + tr("Disable UEFI"));
   ListLabel* list_label1 = new ListLabel(
-      QString("1.") + tr("Reboot, enter BIOS, and disable UEFI"));
-  ListLabel* list_label2 = new ListLabel(
-      QString("2.") +
-      tr("Exit BIOS, and enter deepin installation"));
+      tr("1.Reboot, enter BIOS, and disable UEFI") + "\n" +
+      tr("2.Exit BIOS, and enter deepin installation"));
   ListTitleLabel* left_label2 = new ListTitleLabel(
       QString("B.") + tr("Format the disk"));
-  ListLabel* list_label3 = new ListLabel(
-      QString("1.") +
-      tr("Please make backup for all your data to avoid data loss"));
-  ListLabel* list_label4 = new ListLabel(
-      QString("2.") +
-      tr("Please double check if you have made backup for all the data, "
+  ListLabel* list_label2 = new ListLabel(
+      tr("1.Please make backup for all your data to avoid data loss") + "\n" +
+      tr("2.Please double check if you have made backup for all the data, "
          "and reboot to enter this interface"));
   QVBoxLayout* left_frame_layout = new QVBoxLayout();
   left_frame_layout->setContentsMargins(20, 20, 20, 20);
-  left_frame_layout->setSpacing(kMainLayoutSpacing);
-  left_frame_layout->addWidget(left_label);
+  left_frame_layout->addWidget(left_label1);
   left_frame_layout->addWidget(list_label1);
-  left_frame_layout->addWidget(list_label2);
-  left_frame_layout->addSpacing(10);
   left_frame_layout->addWidget(left_label2);
-  left_frame_layout->addWidget(list_label3);
-  left_frame_layout->addWidget(list_label4);
+  left_frame_layout->addWidget(list_label2);
   left_frame_layout->addStretch();
   FrostedFrame* left_frame = new FrostedFrame();
   left_frame->setLayout(left_frame_layout);
 
   ListTitleLabel* right_label = new ListTitleLabel(tr("Continue"));
-  ListLabel* list_label5 = new ListLabel(
-      QString("1.") +
-      tr("Please make sure you have made backup for all the data, "
-         "then continue"));
-  ListLabel* list_label6 = new ListLabel(
-      QString("2.") + tr("Continue installation will format your disk"));
+  ListLabel* list_label3 = new ListLabel(
+      tr("1.Please make sure you have made backup for all the data, "
+         "then continue") + "\n" +
+      tr("2.Continue installation will format your disk"));
   QVBoxLayout* right_frame_layout = new QVBoxLayout();
-  right_frame_layout->setSpacing(kMainLayoutSpacing);
   right_frame_layout->setContentsMargins(20, 20, 20, 20);
   right_frame_layout->addWidget(right_label);
-  right_frame_layout->addWidget(list_label5);
-  right_frame_layout->addWidget(list_label6);
+  right_frame_layout->addWidget(list_label3);
   right_frame_layout->addStretch();
   FrostedFrame* right_frame = new FrostedFrame();
   right_frame->setLayout(right_frame_layout);
@@ -101,17 +88,13 @@ void PartitionTableWarningFrame::initUI() {
   content_layout->addWidget(reject_button_, 1, 0);
   content_layout->addWidget(accept_button_, 1, 1);
 
-  QFrame* content_wrapper = new QFrame();
-  content_wrapper->setLayout(content_layout);
-
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addSpacing(50);
-  layout->setAlignment(Qt::AlignCenter);
+  layout->addStretch();
   layout->addWidget(title_label, 0, Qt::AlignCenter);
   layout->addWidget(comment_label, 0, Qt::AlignCenter);
   layout->addStretch();
-  layout->addWidget(content_wrapper);
+  layout->addLayout(content_layout);
   layout->addStretch();
 
   this->setLayout(layout);

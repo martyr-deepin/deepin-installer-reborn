@@ -1,12 +1,8 @@
 /** Used by TitleLabel class **/
 
 QLabel {
-  height: 59px;
-  font-family: "SourceHanSansSC-Normal", Arial, SansSerif;
+  /*height: 59px;*/
   font-size: 40px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
   text-align: center;
   color: #ffffff;
 }

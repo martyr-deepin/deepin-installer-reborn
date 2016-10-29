@@ -1,7 +1,9 @@
 /** Used by ListTitleLabel class **/
 
 QLabel {
-  color: #f1f1f1;
-  font-size: 14pt;
+  font-size: 15px;
   font-weight: bold;
+  line-height: 0.93;
+  color: #ffffff;
+  text-align: left;
 }

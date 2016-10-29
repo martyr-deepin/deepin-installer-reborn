@@ -11,9 +11,8 @@ namespace installer {
 ListTitleLabel::ListTitleLabel(const QString& text, QWidget* parent)
   : QLabel(text, parent){
   this->setObjectName(QStringLiteral("list_title_label"));
-  this->setStyleSheet(ReadTextFileContent(":/styles/list_title_label.css"));
-  this->setAlignment(Qt::AlignLeft);
   this->setWordWrap(true);
+  this->setStyleSheet(ReadTextFileContent(":/styles/list_title_label.css"));
 }
 
 }  // namespace installer
