@@ -33,13 +33,17 @@ void DiskSpaceInsufficientFrame::setSizes(int required_device_size,
 void DiskSpaceInsufficientFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("Insufficient Disk Space"));
   comment_label_ = new CommentLabel("");
+  QHBoxLayout* comment_layout = new QHBoxLayout();
+  comment_layout->addSpacing(0);
+  comment_layout->setContentsMargins(0, 0, 0, 0);
+  comment_layout->addWidget(comment_label_);
   NavButton* abort_button = new NavButton(tr("Abort"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label, 0, Qt::AlignCenter);
-  layout->addWidget(comment_label_, 0, Qt::AlignCenter);
+  layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(abort_button, 0, Qt::AlignCenter);
 

@@ -305,6 +305,27 @@ void MainWindow::goNextPage() {
       break;
     }
 
+    case PageId::NullId: {
+      // Displays the first page.
+      // Check whether to show DiskSpaceInsufficientPage.
+      const int required_device_size = GetSettingsValue(
+          kPartitionMinimumDiskSpaceRequired).toInt();
+      if (IsDiskSpaceInsufficient(required_device_size)) {
+        // Hide page indicator in DiskSpaceInsufficientFrame
+        page_indicator_->setVisible(false);
+        const int recommended_device_size = GetSettingsValue(
+            kPartitionRecommendedDiskSpace).toInt();
+        disk_space_insufficient_frame_->setSizes(required_device_size,
+                                                 recommended_device_size);
+        this->setCurrentPage(PageId::DiskSpaceInsufficientId);
+      } else {
+        prev_page_ = current_page_;
+        current_page_ = PageId::DiskSpaceInsufficientId;
+        this->goNextPage();
+      }
+      break;
+    }
+
     case PageId::DiskSpaceInsufficientId: {
       // Check whether to show VirtualMachinePage.
       if (IsVirtualMachine()) {
@@ -388,7 +409,6 @@ void MainWindow::goNextPage() {
     case PageId::VirtualMachineId: {
       // Check whether to show PartitionTableWarningPage.
       if (!IsPartitionTableMatch()) {
-        page_indicator_->setVisible(false);
         this->setCurrentPage(PageId::PartitionTableWarningId);
       } else {
         prev_page_ = current_page_;
@@ -398,25 +418,6 @@ void MainWindow::goNextPage() {
       break;
     }
 
-    case PageId::NullId: {
-      // Displays the first page.
-      // Check whether to show DiskSpaceInsufficientPage.
-      const int required_device_size = GetSettingsValue(
-          kPartitionMinimumDiskSpaceRequired).toInt();
-      if (IsDiskSpaceInsufficient(required_device_size)) {
-        page_indicator_->setVisible(false);
-        const int recommended_device_size = GetSettingsValue(
-            kPartitionRecommendedDiskSpace).toInt();
-        disk_space_insufficient_frame_->setSizes(required_device_size,
-                                                 recommended_device_size);
-        this->setCurrentPage(PageId::DiskSpaceInsufficientId);
-      } else {
-        prev_page_ = current_page_;
-        current_page_ = PageId::DiskSpaceInsufficientId;
-        this->goNextPage();
-      }
-      break;
-    }
 
     default: {
       qWarning() << "[MainWindow]::goNextPage() We shall never reach here";
