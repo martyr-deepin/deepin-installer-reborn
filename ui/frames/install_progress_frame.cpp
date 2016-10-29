@@ -42,7 +42,6 @@ InstallProgressFrame::~InstallProgressFrame() {
 }
 
 void InstallProgressFrame::startSlide() {
-  qDebug() << "startSlide()";
   slide_frame_->startSlide();
 }
 
@@ -62,7 +61,6 @@ void InstallProgressFrame::runHooks(bool ok) {
 }
 
 void InstallProgressFrame::updateLanguage(const QString& locale) {
-  qDebug() << "updateLanguage()" << locale;
   slide_frame_->setLocale(locale);
 }
 

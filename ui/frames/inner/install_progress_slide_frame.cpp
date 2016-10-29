@@ -54,6 +54,10 @@ void InstallProgressSlideFrame::startSlide() {
   for (const QString& filename : slide_dir.entryList(QDir::Files)) {
     slide_files_.append(slide_dir.absoluteFilePath(filename));
   }
+  if (slide_files_.isEmpty()) {
+    qCritical() << "startSlide() no slide files found!" << slide_dir;
+    return;
+  }
   slide_index_ = 0;
   this->updateSlideImage();
 
@@ -84,7 +88,7 @@ void InstallProgressSlideFrame::initUI() {
   pos_animation_->setDuration(kSlideDuration);
 
   opacity_effect_ = new QGraphicsOpacityEffect(container_label_);
-  this->setGraphicsEffect(opacity_effect_);
+  container_label_->setGraphicsEffect(opacity_effect_);
   opacity_animation_ = new QPropertyAnimation(opacity_effect_, "opacity", this);
   opacity_animation_->setKeyValueAt(0.0, 0.0);
   opacity_animation_->setKeyValueAt(0.1, 1.0);
