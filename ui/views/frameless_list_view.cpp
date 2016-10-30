@@ -13,8 +13,8 @@ FramelessListView::FramelessListView(QWidget* parent)
     : QListView(parent) {
   this->setObjectName(QStringLiteral("frameless_list_view"));
 
-//  FramelessItemDelegate* delegate = new FramelessItemDelegate(this);
-//  this->setItemDelegate(delegate);
+  FramelessItemDelegate* delegate = new FramelessItemDelegate(this);
+  this->setItemDelegate(delegate);
 
   this->setStyleSheet(ReadTextFileContent(":/styles/frameless_list_view.css"));
   QSizePolicy list_policy(QSizePolicy::Fixed, QSizePolicy::Expanding);
@@ -31,6 +31,7 @@ FramelessListView::FramelessListView(QWidget* parent)
   this->setFixedWidth(468);
   this->setSelectionRectVisible(false);
   this->setUniformItemSizes(true);
+
 }
 
 }  // namespace installer

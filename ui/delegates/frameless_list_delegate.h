@@ -5,19 +5,18 @@
 #ifndef INSTALLER_UI_DELEGATES_LANGUAGE_LIST_DELEGATE_H
 #define INSTALLER_UI_DELEGATES_LANGUAGE_LIST_DELEGATE_H
 
-#include <QItemDelegate>
 #include <QStyledItemDelegate>
 
 namespace installer {
 
 // ItemDelegate for FramelessListView.
-class FramelessItemDelegate : public QItemDelegate {
+class FramelessItemDelegate : public QStyledItemDelegate {
   Q_OBJECT
 
  public:
   explicit FramelessItemDelegate(QObject* parent = nullptr);
 
-  // Modifies item language list item size.
+//  // Modifies item language list item size.
 //  QSize sizeHint(const QStyleOptionViewItem& option,
 //                 const QModelIndex& index) const override;
 };

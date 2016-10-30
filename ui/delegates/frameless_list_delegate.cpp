@@ -7,7 +7,7 @@
 namespace installer {
 
 FramelessItemDelegate::FramelessItemDelegate(QObject* parent)
-    : QItemDelegate(parent) {
+    : QStyledItemDelegate(parent) {
   this->setObjectName(QStringLiteral("frameless_item_delegate"));
 }
 
@@ -15,7 +15,7 @@ FramelessItemDelegate::FramelessItemDelegate(QObject* parent)
 //                                     const QModelIndex& index) const {
 //  Q_UNUSED(option);
 //  Q_UNUSED(index);
-//  return QSize(280, 38);
+//  return QSize(468, 40);
 //}
 
 }  // namespace installer

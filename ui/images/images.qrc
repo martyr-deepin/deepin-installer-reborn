@@ -95,7 +95,6 @@
     <file>failed.png</file>
     <file>default_layout.png</file>
     <file>arrow_left_hover.png</file>
-    <file>list_view_selecedt.png</file>
     <file>arrow.png</file>
     <file>deepin.png</file>
     <file>close_normal.png</file>
@@ -107,6 +106,7 @@
     <file>drive-harddisk-linux-128px.png</file>
     <file>add_part_active.png</file>
     <file>hostname_12.png</file>
+    <file>list_view_selected.png</file>
     <file>QR_normal.png</file>
     <file>checkbox_unchecked.png</file>
   </qresource>
