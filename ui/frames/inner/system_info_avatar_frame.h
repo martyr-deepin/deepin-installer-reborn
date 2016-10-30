@@ -23,6 +23,7 @@ class SystemInfoAvatarFrame : public QFrame {
  signals:
   // Emitted when an avatar is selected.
   void avatarUpdated(const QString& avatar);
+
   void finished();
 
   // Emitted when timezone button is clicked.

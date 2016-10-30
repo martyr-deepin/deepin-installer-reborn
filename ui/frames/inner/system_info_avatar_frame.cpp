@@ -8,6 +8,7 @@
 #include <QFile>
 #include <QGridLayout>
 #include <QHBoxLayout>
+#include <QScrollArea>
 #include <QVBoxLayout>
 
 #include "service/settings_manager.h"
@@ -75,8 +76,6 @@ void SystemInfoAvatarFrame::initUI() {
       tr("Select an avatar for your account"));
   chosen_avatar_button_ = new AvatarButton(GetDefaultAvatar());
 
-  // TODO(xushaohua): Replace GridLayout with ListWidget
-  // TODO(xushaohua): Add spaces and scroll area.
   QGridLayout* avatars_layout = new QGridLayout();
   avatars_layout->setHorizontalSpacing(20);
   avatars_layout->setVerticalSpacing(40);
@@ -91,38 +90,50 @@ void SystemInfoAvatarFrame::initUI() {
     avatars_layout->addWidget(button, row, col);
     col += 1;
 
-    // To next row.
-    if (col > kAvatarButtonsPerRow) {
+    // Go to next row.
+    if (col >= kAvatarButtonsPerRow) {
       col = 0;
       row += 1;
     }
   }
 
+  QFrame* avatars_wrapper = new QFrame();
+  avatars_wrapper->setLayout(avatars_layout);
+  QScrollArea* avatars_scroll_area = new QScrollArea();
+  avatars_scroll_area->setWidget(avatars_wrapper);
+  avatars_scroll_area->setFixedWidth(760);
+  avatars_scroll_area->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
+  avatars_scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  avatars_scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  avatars_scroll_area->setStyleSheet("background: transparent;");
+
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addWidget(timezone_button_, 0, Qt::AlignLeft);
-  layout->addSpacing(40);
+  layout->addStretch(2);
   layout->addWidget(title_label, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
-  layout->addSpacing(40);
+  layout->addStretch(1);
   layout->addWidget(chosen_avatar_button_, 0, Qt::AlignCenter);
-  layout->addSpacing(40);
-  layout->addLayout(avatars_layout);
-  layout->addStretch();
+  layout->addStretch(1);
+  layout->addWidget(avatars_scroll_area, 0, Qt::AlignHCenter);
+  layout->addStretch(3);
 
   this->setLayout(layout);
 }
 
 void SystemInfoAvatarFrame::onAvatarButtonClicked() {
-  AvatarButton* button = static_cast<AvatarButton*>(this->sender());
+  AvatarButton* button = qobject_cast<AvatarButton*>(this->sender());
   Q_ASSERT(button);
 
-  const QString avatar = button->avatar();
-  chosen_avatar_button_->updateIcon(avatar);
-  WriteAvatar(avatar);
+  if (button) {
+    const QString avatar = button->avatar();
+    chosen_avatar_button_->updateIcon(avatar);
+    WriteAvatar(avatar);
 
-  emit this->avatarUpdated(avatar);
-  emit this->finished();
+    emit this->avatarUpdated(avatar);
+    emit this->finished();
+  }
 }
 
 }  // namespace installer

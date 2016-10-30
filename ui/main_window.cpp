@@ -114,7 +114,7 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
-  current_page_ = PageId::PartitionTableWarningId;
+  current_page_ = PageId::SelectLanguageId;
   this->goNextPage();
 }
 
