@@ -13,7 +13,6 @@ CommentLabel::CommentLabel(const QString& text, QWidget* parent)
   this->setObjectName(QStringLiteral("comment_label"));
   this->setStyleSheet(ReadTextFileContent(":/styles/comment_label.css"));
   this->setFixedWidth(540);
-  this->setAlignment(Qt::AlignHCenter);
   this->setWordWrap(true);
 }
 

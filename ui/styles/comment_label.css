@@ -3,6 +3,6 @@
 QLabel {
   font-size: 12px;
   line-height: 1.67;
-  text-align: center;  /* Does not work */
+  qproperty-alignment: AlignCenter;
   color: #ffffff;
 }
