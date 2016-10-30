@@ -6,19 +6,23 @@
 #define INSTALLER_UI_DELEGATES_LANGUAGE_LIST_DELEGATE_H
 
 #include <QStyledItemDelegate>
+class QPainter;
 
 namespace installer {
 
 // ItemDelegate for FramelessListView.
+// This class overrides default styles in QStyledItemDelegate.
+// And stylesheets defined in :/styles/frameless_list_view.css are useless
+// for list items.
 class FramelessItemDelegate : public QStyledItemDelegate {
   Q_OBJECT
 
  public:
   explicit FramelessItemDelegate(QObject* parent = nullptr);
 
-//  // Modifies item language list item size.
-//  QSize sizeHint(const QStyleOptionViewItem& option,
-//                 const QModelIndex& index) const override;
+  void paint(QPainter* painter,
+             const QStyleOptionViewItem& option,
+             const QModelIndex& index) const override;
 };
 
 }  // namespace installer

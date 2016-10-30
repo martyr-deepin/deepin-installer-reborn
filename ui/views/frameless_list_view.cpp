@@ -31,7 +31,6 @@ FramelessListView::FramelessListView(QWidget* parent)
   this->setFixedWidth(468);
   this->setSelectionRectVisible(false);
   this->setUniformItemSizes(true);
-
 }
 
 }  // namespace installer
