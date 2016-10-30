@@ -17,8 +17,7 @@ class SimplePartitionFrame : public QScrollArea {
   Q_OBJECT
 
  public:
-  SimplePartitionFrame(PartitionDelegate* partition_delegate,
-                       QWidget* parent = nullptr);
+  SimplePartitionFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
 
  private:
   void initConnections();

@@ -23,12 +23,12 @@ namespace {
 // 4 partitions are displays at each row.
 const int kPartitionColumns = 4;
 
-}
+}  // namespace
 
-SimplePartitionFrame::SimplePartitionFrame(
-    PartitionDelegate* partition_delegate, QWidget* parent)
+SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
+                                           QWidget* parent)
     : QScrollArea(parent),
-      delegate_(partition_delegate) {
+      delegate_(delegate) {
   this->setObjectName(QStringLiteral("simple_partition_frame"));
 
   this->initUI();
@@ -58,22 +58,21 @@ void SimplePartitionFrame::initUI() {
 
   install_tip_ = new QFrame(this);
   // Same width as SimplePartitionButton.
-  // TODO(xushaohua): Add a const variable.
   install_tip_->setFixedWidth(220);
   install_tip_->setLayout(tip_layout);
   install_tip_->hide();
 
-//  this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  this->setWidgetResizable(true);
+  this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//  this->setWidgetResizable(true);
   this->setFixedSize(980, 580);
+  this->setAttribute(Qt::WA_TranslucentBackground, true);
   this->setStyleSheet(
       ReadTextFileContent(":/styles/simple_partition_frame.css"));
-  this->setAttribute(Qt::WA_TranslucentBackground, true);
 }
 
 void SimplePartitionFrame::drawDevices() {
   // Draw partitions.
-
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setAlignment(Qt::AlignCenter);
   for (const Device& device : delegate_->devices()) {
@@ -109,7 +108,7 @@ void SimplePartitionFrame::drawDevices() {
 
   QFrame* wrapper = new QFrame();
   wrapper->setLayout(layout);
-//  wrapper->setAttribute(Qt::WA_TranslucentBackground, true);
+  wrapper->setAttribute(Qt::WA_TranslucentBackground, true);
   this->setWidget(wrapper);
 }
 

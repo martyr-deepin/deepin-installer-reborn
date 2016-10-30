@@ -8,3 +8,7 @@ QLabel#device_model {
   color: #e1e1e1;
   font-size: 14px;
 }
+
+QScrollArea {
+  background: transparent;
+}

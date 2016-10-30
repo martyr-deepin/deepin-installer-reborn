@@ -184,6 +184,8 @@ void PartitionFrame::showEditPartitionFrame(const Partition& partition) {
 }
 
 void PartitionFrame::showMainFrame() {
+  // Hide loading page first.
+  partition_loading_frame_->hide();
   main_layout_->setCurrentWidget(main_frame_);
 }
 
