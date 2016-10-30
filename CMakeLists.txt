@@ -133,10 +133,6 @@ set(UI_FILES
     ui/delegates/partition_delegate.cpp ui/delegates/partition_delegate.h
     ui/delegates/partition_util.cpp ui/delegates/partition_util.h
 
-    ui/models/fs_model.cpp ui/models/fs_model.h
-    ui/models/language_list_model.cpp ui/models/language_list_model.h
-    ui/models/mount_point_model.cpp ui/models/mount_point_model.h
-
     ui/frames/consts.h
     ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
     ui/frames/inner/edit_partition_frame.cpp ui/frames/inner/edit_partition_frame.h
@@ -161,6 +157,11 @@ set(UI_FILES
     ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
     ui/frames/system_info_frame.cpp ui/frames/system_info_frame.h
     ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h
+
+    ui/models/fs_model.cpp ui/models/fs_model.h
+    ui/models/language_list_model.cpp ui/models/language_list_model.h
+    ui/models/mount_point_model.cpp ui/models/mount_point_model.h
+    ui/models/partition_list_model.cpp ui/models/partition_list_model.h
 
     ui/views/frameless_list_view.cpp ui/views/frameless_list_view.h
 
@@ -190,6 +191,7 @@ set(UI_FILES
     ui/xrandr/multi_head_manager.cpp ui/xrandr/multi_head_manager.h
     ui/xrandr/multi_head_worker.cpp ui/xrandr/multi_head_worker.h
     ui/xrandr/xrandr_wrapper.cpp ui/xrandr/xrandr_wrapper.h
+    
     ui/utils/xutil.cpp ui/utils/xutil.h
     )
 

@@ -17,11 +17,6 @@ LanguageListModel::LanguageListModel(QObject* parent)
   lang_list_ = GetLanguageList();
 }
 
-int LanguageListModel::rowCount(const QModelIndex& parent) const {
-  Q_UNUSED(parent);
-  return lang_list_.length();
-}
-
 QVariant LanguageListModel::data(const QModelIndex& index, int role) const {
   if (role != Qt::DisplayRole) {
     return QVariant();
@@ -32,6 +27,11 @@ QVariant LanguageListModel::data(const QModelIndex& index, int role) const {
   }
 
   return lang_list_.at(index.row()).local_name;
+}
+
+int LanguageListModel::rowCount(const QModelIndex& parent) const {
+  Q_UNUSED(parent);
+  return lang_list_.length();
 }
 
 QString LanguageListModel::locale(const QModelIndex& index) const {

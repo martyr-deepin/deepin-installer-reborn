@@ -11,15 +11,15 @@
 
 namespace installer {
 
+// Reimplemented model used in SelectLanguageFrame
 class LanguageListModel : public QAbstractListModel {
   Q_OBJECT
 
  public:
   explicit LanguageListModel(QObject* parent = nullptr);
 
-  virtual int rowCount(const QModelIndex& parent) const override;
-
   virtual QVariant data(const QModelIndex& index, int role) const override;
+  virtual int rowCount(const QModelIndex& parent) const override;
 
   // Get locale name at |index|.
   QString locale(const QModelIndex& index) const;

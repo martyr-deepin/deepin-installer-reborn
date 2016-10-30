@@ -22,7 +22,7 @@
 #include "ui/frames/inner/prepare_install_frame.h"
 #include "ui/frames/inner/select_bootloader_frame.h"
 #include "ui/frames/inner/simple_partition_frame.h"
-#include "ui/widgets/comment_label.h"
+#include "ui/widgets/comment_label_layout.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
@@ -92,18 +92,16 @@ void PartitionFrame::initUI() {
   new_partition_frame_ = new NewPartitionFrame(delegate_, this);
   partition_loading_frame_ = new PartitionLoadingFrame(this);
   prepare_install_frame_ = new PrepareInstallFrame(delegate_, this);
-  select_bootloader_frame_ = new SelectBootloaderFrame(this);
+  select_bootloader_frame_ = new SelectBootloaderFrame(delegate_, this);
   simple_partition_frame_ = new SimplePartitionFrame(delegate_, this);
 
   TitleLabel* title_label = new TitleLabel(tr("Select Installation Location"));
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->addWidget(title_label);
 
-  CommentLabel* comment_label = new CommentLabel(
+  CommentLabelLayout* comment_layout = new CommentLabelLayout(
       tr("Please make sure you have backed up important data, then select "
          "the disk to install"));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
 
   QButtonGroup* button_group = new QButtonGroup(this);
   simple_frame_button_ = new QPushButton(tr("Simple"));
@@ -180,8 +178,7 @@ void PartitionFrame::onNextButtonClicked() {
   }
 }
 
-void PartitionFrame::showEditPartitionFrame(
-    const Partition& partition) {
+void PartitionFrame::showEditPartitionFrame(const Partition& partition) {
   edit_partition_frame_->setPartition(partition);
   main_layout_->setCurrentWidget(edit_partition_frame_);
 }
@@ -197,6 +194,8 @@ void PartitionFrame::showNewPartitionFrame(
 }
 
 void PartitionFrame::showSelectBootloaderFrame() {
+  // Notify SelectBootloaderFrame to repaint.
+  select_bootloader_frame_->updatePartitionList();
   main_layout_->setCurrentWidget(select_bootloader_frame_);
 }
 
