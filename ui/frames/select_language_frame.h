@@ -6,10 +6,10 @@
 #define INSTALLER_UI_FRAMES_SELECT_LANGUAGE_FRAME_H
 
 #include <QFrame>
-class QListView;
 
 namespace installer {
 
+class FramelessListView;
 class LanguageListModel;
 class NavButton;
 
@@ -33,10 +33,11 @@ class SelectLanguageFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  // Current selected locale.
   QString locale_;
 
-  QListView* list_view_ = nullptr;
-  LanguageListModel* list_model_ = nullptr;
+  FramelessListView* language_view_ = nullptr;
+  LanguageListModel* language_model_ = nullptr;
 
   NavButton* next_button_ = nullptr;
 

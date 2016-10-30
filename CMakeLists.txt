@@ -129,7 +129,7 @@ set(SYSINFO_FILES
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
 
-    ui/delegates/language_list_delegate.cpp ui/delegates/language_list_delegate.h
+    ui/delegates/frameless_list_delegate.cpp ui/delegates/frameless_list_delegate.h
     ui/delegates/partition_delegate.cpp ui/delegates/partition_delegate.h
     ui/delegates/partition_util.cpp ui/delegates/partition_util.h
 
@@ -161,6 +161,8 @@ set(UI_FILES
     ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
     ui/frames/system_info_frame.cpp ui/frames/system_info_frame.h
     ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h
+
+    ui/views/frameless_list_view.cpp ui/views/frameless_list_view.h
 
     ui/widgets/advanced_partition_item.cpp ui/widgets/advanced_partition_item.h
     ui/widgets/avatar_button.cpp ui/widgets/avatar_button.h
@@ -197,7 +199,6 @@ set(ROOT_UNITTEST_FILES
     #    partman/os_prober_test.cpp
     partman/partition_manager_test.cpp
     )
-
 
 set(UNITTEST_FILES
     sysinfo/dev_disk_test.cpp

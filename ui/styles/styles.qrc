@@ -6,7 +6,7 @@
     <file>frosted_frame.css</file>
     <file>install_failed_label.css</file>
     <file>install_progress_frame.css</file>
-    <file>language_list.css</file>
+    <file>frameless_list_view.css</file>
     <file>line_edit.css</file>
     <file>list_label.css</file>
     <file>list_title_label.css</file>

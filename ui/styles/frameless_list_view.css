@@ -23,15 +23,15 @@ QListView {
 }
 
 /* does not work */
-QListView::item:first {
-  border-top-left-radius: 4px;
-  border-top-right-rradius: 4px;
-}
+/*QListView::item:first {*/
+  /*border-top-left-radius: 4px;*/
+  /*border-top-right-rradius: 4px;*/
+/*}*/
 
-QListView::item:last {
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
+/*QListView::item:last {*/
+  /*border-bottom-left-radius: 4px;*/
+  /*border-bottom-right-radius: 4px;*/
+/*}*/
 
 QListView::item {
   background: transparent;
@@ -58,5 +58,5 @@ QListView::item:selected {
   border: none;
   margin: 0px;
   padding: 0px 7px;
-  border-image: url(":/images/list_view_selected.png");
+  /*border-image: url(":/images/list_view_selected.png");*/
 }
