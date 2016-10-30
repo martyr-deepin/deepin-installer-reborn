@@ -14,7 +14,7 @@
 #include "service/settings_name.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/avatar_button.h"
-#include "ui/widgets/comment_label.h"
+#include "ui/widgets/comment_label_layout.h"
 #include "ui/widgets/icon_button.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
@@ -71,12 +71,13 @@ void SystemInfoAvatarFrame::initUI() {
                                     QStringLiteral(":/images/timezone.png"),
                                     128, 32, nullptr);
   TitleLabel* title_label = new TitleLabel(tr("User Avatar"));
-  CommentLabel* comment_label = new CommentLabel(
+  CommentLabelLayout* comment_layout = new CommentLabelLayout(
       tr("Select an avatar for your account"));
   chosen_avatar_button_ = new AvatarButton(GetDefaultAvatar());
 
-  QGridLayout* avatars_layout = new QGridLayout();
+  // TODO(xushaohua): Replace GridLayout with ListWidget
   // TODO(xushaohua): Add spaces and scroll area.
+  QGridLayout* avatars_layout = new QGridLayout();
   avatars_layout->setHorizontalSpacing(20);
   avatars_layout->setVerticalSpacing(40);
 
@@ -100,10 +101,12 @@ void SystemInfoAvatarFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addWidget(timezone_button_, 0, Qt::AlignLeft);
-  layout->addStretch();
+  layout->addSpacing(40);
   layout->addWidget(title_label, 0, Qt::AlignCenter);
-  layout->addWidget(comment_label, 0, Qt::AlignCenter);
+  layout->addLayout(comment_layout);
+  layout->addSpacing(40);
   layout->addWidget(chosen_avatar_button_, 0, Qt::AlignCenter);
+  layout->addSpacing(40);
   layout->addLayout(avatars_layout);
   layout->addStretch();
 
