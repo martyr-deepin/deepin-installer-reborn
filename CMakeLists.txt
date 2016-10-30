@@ -129,6 +129,7 @@ set(SYSINFO_FILES
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
 
+    ui/delegates/avatar_list_delegate.cpp ui/delegates/avatar_list_delegate.h
     ui/delegates/frameless_list_delegate.cpp ui/delegates/frameless_list_delegate.h
     ui/delegates/partition_delegate.cpp ui/delegates/partition_delegate.h
     ui/delegates/partition_util.cpp ui/delegates/partition_util.h
@@ -191,7 +192,7 @@ set(UI_FILES
     ui/xrandr/multi_head_manager.cpp ui/xrandr/multi_head_manager.h
     ui/xrandr/multi_head_worker.cpp ui/xrandr/multi_head_worker.h
     ui/xrandr/xrandr_wrapper.cpp ui/xrandr/xrandr_wrapper.h
-    
+
     ui/utils/xutil.cpp ui/utils/xutil.h
     )
 

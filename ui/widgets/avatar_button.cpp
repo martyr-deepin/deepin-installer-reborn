@@ -37,8 +37,8 @@ void AvatarButton::paintEvent(QPaintEvent* event) {
   Q_UNUSED(event);
   QPainter painter(this);
 
-  QRect ellipse_rect((width() - kIconSize) / 2, (height() - kIconSize) / 2,
-                     kIconSize, kIconSize);
+  const QRect ellipse_rect((width() - kIconSize) / 2, (height() - kIconSize) /2,
+                           kIconSize, kIconSize);
   QPainterPath path;
   path.addEllipse(ellipse_rect);
   painter.setRenderHint(QPainter::Antialiasing);
@@ -46,7 +46,7 @@ void AvatarButton::paintEvent(QPaintEvent* event) {
   painter.setRenderHint(QPainter::SmoothPixmapTransform);
   painter.setClipPath(path);
 
-  QImage image(icon_);
+  const QImage image(icon_);
   painter.drawImage(ellipse_rect, image);
 
   painter.end();

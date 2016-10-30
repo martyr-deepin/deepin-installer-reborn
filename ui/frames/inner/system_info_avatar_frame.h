@@ -6,6 +6,7 @@
 #define INSTALLER_UI_FRAMES_INNER_SYSTEM_INFO_AVATAR_FORM_H
 
 #include <QFrame>
+class QListView;
 
 namespace installer {
 
@@ -39,9 +40,10 @@ class SystemInfoAvatarFrame : public QFrame {
 
   AvatarButton* chosen_avatar_button_ = nullptr;
   IconButton* timezone_button_ = nullptr;
+  QListView* list_view_ = nullptr;
 
  private slots:
-  void onAvatarButtonClicked();
+  void onListViewPressed(const QModelIndex &index);
 };
 
 }  // namespace installer

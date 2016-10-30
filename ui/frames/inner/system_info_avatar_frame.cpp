@@ -6,13 +6,15 @@
 
 #include <QDebug>
 #include <QFile>
-#include <QGridLayout>
 #include <QHBoxLayout>
-#include <QScrollArea>
+#include <QListView>
+#include <QStringListModel>
 #include <QVBoxLayout>
 
+#include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "ui/delegates/avatar_list_delegate.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/avatar_button.h"
 #include "ui/widgets/comment_label_layout.h"
@@ -23,8 +25,6 @@
 namespace installer {
 
 namespace {
-
-const int kAvatarButtonsPerRow = 7;
 
 // Check whether |avatar| is valid.
 bool IsValidAvatar(const QString& avatar) {
@@ -62,8 +62,12 @@ void SystemInfoAvatarFrame::updateTimezone(const QString& timezone) {
 void SystemInfoAvatarFrame::initConnections() {
   connect(timezone_button_, &QPushButton::clicked,
           this, &SystemInfoAvatarFrame::timezoneClicked);
+
+  // Return to previous page when chosen_avatar_button is clicked.
   connect(chosen_avatar_button_, &QPushButton::clicked,
-          this, &SystemInfoAvatarFrame::onAvatarButtonClicked);
+          this, &SystemInfoAvatarFrame::finished);
+  connect(list_view_, &QListView::pressed,
+          this, &SystemInfoAvatarFrame::onListViewPressed);
 }
 
 void SystemInfoAvatarFrame::initUI() {
@@ -76,36 +80,28 @@ void SystemInfoAvatarFrame::initUI() {
       tr("Select an avatar for your account"));
   chosen_avatar_button_ = new AvatarButton(GetDefaultAvatar());
 
-  QGridLayout* avatars_layout = new QGridLayout();
-  avatars_layout->setHorizontalSpacing(20);
-  avatars_layout->setVerticalSpacing(40);
-
   const QStringList avatars = GetAvatars();
-  int row = 0;
-  int col = 0;
-  for (const QString& avatar : avatars) {
-    AvatarButton* button = new AvatarButton(avatar);
-    connect(button, &QPushButton::clicked,
-            this, &SystemInfoAvatarFrame::onAvatarButtonClicked);
-    avatars_layout->addWidget(button, row, col);
-    col += 1;
-
-    // Go to next row.
-    if (col >= kAvatarButtonsPerRow) {
-      col = 0;
-      row += 1;
-    }
-  }
-
-  QFrame* avatars_wrapper = new QFrame();
-  avatars_wrapper->setLayout(avatars_layout);
-  QScrollArea* avatars_scroll_area = new QScrollArea();
-  avatars_scroll_area->setWidget(avatars_wrapper);
-  avatars_scroll_area->setFixedWidth(760);
-  avatars_scroll_area->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
-  avatars_scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  avatars_scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  avatars_scroll_area->setStyleSheet("background: transparent;");
+  list_view_ = new QListView();
+  QStringListModel* list_model = new QStringListModel(avatars);
+  list_view_->setModel(list_model);
+  AvatarListDelegate* list_delegate = new AvatarListDelegate();
+  list_view_->setItemDelegate(list_delegate);
+  QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  policy.setHorizontalStretch(10);
+  policy.setVerticalStretch(10);
+  list_view_->setSizePolicy(policy);
+  list_view_->setContentsMargins(10, 10, 10, 10);
+  list_view_->setSpacing(30);
+  list_view_->setAcceptDrops(false);
+  list_view_->setWrapping(true);
+  list_view_->setUniformItemSizes(true);
+  list_view_->setFlow(QListView::LeftToRight);
+  list_view_->setViewMode(QListView::IconMode);
+  list_view_->setFixedWidth(960);
+  list_view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  list_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  list_view_->setStyleSheet(
+      ReadTextFileContent(":/styles/avatar_list_view.css"));;
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
@@ -116,24 +112,18 @@ void SystemInfoAvatarFrame::initUI() {
   layout->addStretch(1);
   layout->addWidget(chosen_avatar_button_, 0, Qt::AlignCenter);
   layout->addStretch(1);
-  layout->addWidget(avatars_scroll_area, 0, Qt::AlignHCenter);
+  layout->addWidget(list_view_, 0, Qt::AlignHCenter);
   layout->addStretch(3);
 
   this->setLayout(layout);
 }
 
-void SystemInfoAvatarFrame::onAvatarButtonClicked() {
-  AvatarButton* button = qobject_cast<AvatarButton*>(this->sender());
-  Q_ASSERT(button);
-
-  if (button) {
-    const QString avatar = button->avatar();
-    chosen_avatar_button_->updateIcon(avatar);
-    WriteAvatar(avatar);
-
-    emit this->avatarUpdated(avatar);
-    emit this->finished();
-  }
+void SystemInfoAvatarFrame::onListViewPressed(const QModelIndex& index) {
+  const QString avatar = index.model()->data(index).toString();
+  chosen_avatar_button_->updateIcon(avatar);
+  WriteAvatar(avatar);
+  emit this->avatarUpdated(avatar);
+  emit this->finished();
 }
 
 }  // namespace installer
