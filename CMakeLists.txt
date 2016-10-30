@@ -165,6 +165,7 @@ set(UI_FILES
     ui/models/partition_list_model.cpp ui/models/partition_list_model.h
 
     ui/views/frameless_list_view.cpp ui/views/frameless_list_view.h
+    ui/views/pointer_list_view.cpp ui/views/pointer_list_view.h
 
     ui/widgets/advanced_partition_item.cpp ui/widgets/advanced_partition_item.h
     ui/widgets/avatar_button.cpp ui/widgets/avatar_button.h

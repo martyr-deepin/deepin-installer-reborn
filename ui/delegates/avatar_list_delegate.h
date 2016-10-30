@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_AVATAR_LIST_DELEGATE_H
-#define INSTALLER_AVATAR_LIST_DELEGATE_H
+#ifndef INSTALLER_UI_DELEGATES_AVATAR_LIST_DELEGATE_H
+#define INSTALLER_UI_DELEGATES_AVATAR_LIST_DELEGATE_H
 
 #include <QStyledItemDelegate>
 
@@ -23,4 +23,4 @@ class AvatarListDelegate : public QStyledItemDelegate {
 
 }  // namespace installer
 
-#endif  // INSTALLER_AVATAR_LIST_DELEGATE_H
+#endif  // INSTALLER_UI_DELEGATES_AVATAR_LIST_DELEGATE_H

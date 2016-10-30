@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_UI_UTILS_PARTITION_UTIL_H
-#define INSTALLER_UI_UTILS_PARTITION_UTIL_H
+#ifndef INSTALLER_UI_DELEGATES_PARTITION_UTIL_H
+#define INSTALLER_UI_DELEGATES_PARTITION_UTIL_H
 
 #include <QtCore/QtGlobal>
 
@@ -29,4 +29,4 @@ int ToGigByte(qint64 size);
 
 }  // namespace installer
 
-#endif  // INSTALLER_UI_UTILS_PARTITION_UTIL_H
+#endif  // INSTALLER_UI_DELEGATES_PARTITION_UTIL_H

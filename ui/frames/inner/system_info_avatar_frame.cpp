@@ -7,7 +7,6 @@
 #include <QDebug>
 #include <QFile>
 #include <QHBoxLayout>
-#include <QListView>
 #include <QStringListModel>
 #include <QVBoxLayout>
 
@@ -16,6 +15,7 @@
 #include "service/settings_name.h"
 #include "ui/delegates/avatar_list_delegate.h"
 #include "ui/frames/consts.h"
+#include "ui/views/pointer_list_view.h"
 #include "ui/widgets/avatar_button.h"
 #include "ui/widgets/comment_label_layout.h"
 #include "ui/widgets/icon_button.h"
@@ -81,7 +81,7 @@ void SystemInfoAvatarFrame::initUI() {
   chosen_avatar_button_ = new AvatarButton(GetDefaultAvatar());
 
   const QStringList avatars = GetAvatars();
-  list_view_ = new QListView();
+  list_view_ = new PointerListView();
   QStringListModel* list_model = new QStringListModel(avatars);
   list_view_->setModel(list_model);
   AvatarListDelegate* list_delegate = new AvatarListDelegate();

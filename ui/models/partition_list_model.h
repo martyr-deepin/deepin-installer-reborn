@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_PARTITION_LIST_MODEL_H
-#define INSTALLER_PARTITION_LIST_MODEL_H
+#ifndef INSTALLER_UI_MODELS_PARTITION_LIST_MODEL_H
+#define INSTALLER_UI_MODELS_PARTITION_LIST_MODEL_H
 
 #include <QAbstractListModel>
 #include <QStringList>
@@ -33,4 +33,4 @@ class PartitionListModel : public QAbstractListModel {
 
 }  // namespace installer
 
-#endif  // INSTALLER_PARTITION_LIST_MODEL_H
+#endif  // INSTALLER_UI_MODELS_PARTITION_LIST_MODEL_H
