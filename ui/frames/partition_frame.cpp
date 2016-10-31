@@ -167,6 +167,7 @@ void PartitionFrame::initUI() {
 
 void PartitionFrame::onSimpleFrameButtonToggled() {
   if (partition_stacked_layout_->currentWidget() != simple_partition_frame_) {
+    simple_partition_frame_->repaintDevices();
     partition_stacked_layout_->setCurrentWidget(simple_partition_frame_);
   }
 }

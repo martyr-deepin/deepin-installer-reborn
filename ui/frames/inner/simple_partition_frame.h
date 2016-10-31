@@ -19,10 +19,11 @@ class SimplePartitionFrame : public QScrollArea {
  public:
   SimplePartitionFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
 
+  void repaintDevices();
+
  private:
   void initConnections();
   void initUI();
-  void drawDevices();
 
   QButtonGroup* partition_button_group_ = nullptr;
   QFrame* install_tip_ = nullptr;

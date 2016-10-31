@@ -23,6 +23,8 @@ class AdvancedPartitionFrame : public QFrame {
   AdvancedPartitionFrame(PartitionDelegate* delegate_,
                          QWidget* parent = nullptr);
 
+  void repaintDevices();
+
  signals:
   void requestEditPartitionFrame(const Partition& partition);
   void requestNewPartitionFrame(const Partition& partition);
@@ -31,7 +33,6 @@ class AdvancedPartitionFrame : public QFrame {
  private:
   void initConnections();
   void initUI();
-  void drawDevices();
 
   PartitionDelegate* delegate_ = nullptr;
 
