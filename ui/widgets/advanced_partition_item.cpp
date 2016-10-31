@@ -8,7 +8,6 @@
 #include <QLabel>
 
 #include "ui/delegates/partition_util.h"
-#include "ui/widgets/partition_usage_bar.h"
 
 namespace installer {
 
@@ -72,7 +71,6 @@ void AdvancedPartitionItem::initUI() {
   }
   usage_label_->setText(GetPartitionUsage(freespace, total));
   usage_label_->setObjectName(QStringLiteral("usage_label"));
-  PartitionUsageBar* usage_bar = new PartitionUsageBar(freespace, total);
 
   // mount point
   mount_point_label_ = new QLabel();
@@ -102,7 +100,6 @@ void AdvancedPartitionItem::initUI() {
   layout->addWidget(partition_path_label_);
   layout->addStretch();
   layout->addWidget(usage_label_);
-  layout->addWidget(usage_bar);
   layout->addStretch();
   layout->addWidget(mount_point_label_);
   layout->addStretch();

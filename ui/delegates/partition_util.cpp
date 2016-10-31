@@ -33,9 +33,15 @@ QString GetPartitionUsage(qint64 freespace, qint64 total) {
 
 QString GetPartitionUsage(const Partition& partition) {
   const qint64 length = (partition.length > 0) ? partition.length :
-                                                 partition.getByteLength();
+                        partition.getByteLength();
   const qint64 freespace = partition.freespace;
   return GetPartitionUsage(freespace, length);
+}
+
+double GetPartitionUsageValue(const Partition& partition) {
+  const qint64 length = (partition.length > 0) ? partition.length :
+                        partition.getByteLength();
+  return (length - partition.freespace) / length;
 }
 
 QString GetLocalFsTypeName(FsType fs_type) {

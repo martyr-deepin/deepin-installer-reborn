@@ -21,6 +21,9 @@ QString GetPartitionLabelAndPath(const Partition& partition);
 QString GetPartitionUsage(qint64 freespace, qint64 total);
 QString GetPartitionUsage(const Partition& partition);
 
+// Get partition usage percentage.
+double GetPartitionUsageValue(const Partition& partition);
+
 // Returns human readable file system name.
 QString GetLocalFsTypeName(FsType fs_type);
 

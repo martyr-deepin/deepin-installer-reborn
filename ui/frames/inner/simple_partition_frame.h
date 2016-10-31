@@ -13,6 +13,7 @@ namespace installer {
 
 class PartitionDelegate;
 
+// List device partitions in simple mode.
 class SimplePartitionFrame : public QScrollArea {
   Q_OBJECT
 
@@ -25,7 +26,7 @@ class SimplePartitionFrame : public QScrollArea {
 
   void repaintDevices();
 
-  QButtonGroup* partition_button_group_ = nullptr;
+  QButtonGroup* button_group_ = nullptr;
   QFrame* install_tip_ = nullptr;
   PartitionDelegate* delegate_ = nullptr;
 

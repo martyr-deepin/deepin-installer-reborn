@@ -6,11 +6,11 @@
 
 #include <QLabel>
 #include <QPixmap>
+#include <QProgressBar>
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_util.h"
-#include "ui/widgets/partition_usage_bar.h"
 
 namespace installer {
 
@@ -70,6 +70,7 @@ void SimplePartitionButton::initUI() {
   os_label_->setPixmap(os_icon);
 
   QLabel* path_label = new QLabel();
+  path_label->setFixedHeight(20);
   if (partition_.label.isEmpty()) {
     path_label->setText(partition_.path);
   } else {
@@ -81,13 +82,18 @@ void SimplePartitionButton::initUI() {
   path_label->setAlignment(Qt::AlignCenter);
 
   QLabel* usage_label = new QLabel();
+  usage_label->setFixedHeight(16);
   usage_label->setText(
       GetPartitionUsage(partition_.freespace, partition_.length));
   usage_label->setObjectName(QStringLiteral("usage_label"));
   usage_label->setAlignment(Qt::AlignCenter);
 
-  PartitionUsageBar* usage_bar =
-      new PartitionUsageBar(partition_.freespace, partition_.length);
+  QProgressBar* usage_bar = new QProgressBar();
+  usage_bar->setObjectName("usage_bar");
+  usage_bar->setFixedSize(80, 6);
+  usage_bar->setTextVisible(false);
+//  usage_bar->setValue(int(GetPartitionUsageValue(partition_) * 100));
+  usage_bar->setValue(37);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);

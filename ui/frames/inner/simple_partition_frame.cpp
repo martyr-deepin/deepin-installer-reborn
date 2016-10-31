@@ -38,14 +38,14 @@ SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
 void SimplePartitionFrame::initConnections() {
   connect(delegate_, &PartitionDelegate::deviceRefreshed,
           this, &SimplePartitionFrame::onDeviceRefreshed);
-//  connect(partition_button_group_,
-//          static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>
-//          (&QButtonGroup::buttonToggled),
-//          this, &SimplePartitionFrame::onPartitionButtonToggled);
+  connect(button_group_,
+          static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>
+          (&QButtonGroup::buttonToggled),
+          this, &SimplePartitionFrame::onPartitionButtonToggled);
 }
 
 void SimplePartitionFrame::initUI() {
-//  partition_button_group_ = new QButtonGroup(this);
+  button_group_ = new QButtonGroup(this);
 
 //  QHBoxLayout* tip_layout = new QHBoxLayout();
 //  QLabel* tip_label = new QLabel(tr("Install here"));
@@ -62,7 +62,6 @@ void SimplePartitionFrame::initUI() {
 //  install_tip_->setLayout(tip_layout);
 //  install_tip_->hide();
 
-
   this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   this->setWidgetResizable(true);
@@ -70,7 +69,6 @@ void SimplePartitionFrame::initUI() {
   this->setStyleSheet(
       ReadTextFileContent(":/styles/simple_partition_frame.css"));
 }
-
 
 void SimplePartitionFrame::repaintDevices() {
   // Draw partitions.
@@ -96,6 +94,7 @@ void SimplePartitionFrame::repaintDevices() {
         continue;
       }
       SimplePartitionButton* button = new SimplePartitionButton(partition);
+      button_group_->addButton(button);
       grid_layout->addWidget(button, row, column, Qt::AlignHCenter);
 
       column ++;
