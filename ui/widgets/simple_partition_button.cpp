@@ -4,10 +4,9 @@
 
 #include "ui/widgets/simple_partition_button.h"
 
-#include <QFontMetrics>
-#include <QPainter>
-#include <QPen>
+#include <QLabel>
 #include <QPixmap>
+#include <QVBoxLayout>
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_util.h"
@@ -19,13 +18,8 @@ namespace {
 
 const int kButtonWidth = 220;
 const int kButtonHeight = 220;
-const int kBorderRadius = 15;
-const int kBorderDiameter = kBorderRadius * 2;
-const int kVerticalSpacing = 15;
 const int kOsIconWidth = 120;
 const int kOsIconHeight = 120;
-const char kPathColor[] = "#e8e8e8";
-const char kUsageColor[] = "#c8c8c8";
 
 QString GetImageByOsType(OsType os_type) {
   switch (os_type) {
@@ -54,100 +48,73 @@ QString GetImageByOsType(OsType os_type) {
 
 SimplePartitionButton::SimplePartitionButton(const Partition& partition,
                                              QWidget* parent)
-    : QPushButton(parent),
-      partition_(partition),
-      mouse_hovered_(false) {
+    : PointerButton(parent),
+      partition_(partition) {
   this->setObjectName(QStringLiteral("simple_partition_button"));
   this->setFixedSize(kButtonWidth, kButtonHeight);
   this->setCheckable(true);
+  this->initUI();
+  this->initConnections();
 }
 
-void SimplePartitionButton::enterEvent(QEvent* event) {
-  QPushButton::enterEvent(event);
-  this->setCursor(Qt::PointingHandCursor);
-  mouse_hovered_ = true;
-  this->update();
+void SimplePartitionButton::initConnections() {
+  connect(this, &QPushButton::toggled,
+          this, &SimplePartitionButton::onButtonToggled);
 }
 
-void SimplePartitionButton::leaveEvent(QEvent* event) {
-  QPushButton::leaveEvent(event);
-  this->unsetCursor();
-  mouse_hovered_ = false;
-  this->update();
-}
+void SimplePartitionButton::initUI() {
+  os_label_ = new QLabel();
+  os_label_->setObjectName(QStringLiteral("fs_label"));
+  os_label_->setFixedSize(kOsIconWidth, kOsIconHeight);
+  const QPixmap os_icon(GetImageByOsType(partition_.os));
+  os_label_->setPixmap(os_icon);
 
-void SimplePartitionButton::paintEvent(QPaintEvent* event) {
-  Q_UNUSED(event);
-  QPainter painter(this);
-
-  const QRect rect(this->rect());
-
-  // First draw semi-transparent background with round corner.
-  // Draw background when button is checked or mouse moves over.
-  if (this->isChecked() || mouse_hovered_) {
-    const QColor background_color = this->isChecked() ?
-                                    QColor::fromRgb(255, 255, 255, 40) :
-                                    QColor::fromRgb(255, 255, 255, 10);
-    QPainterPath background_path;
-    background_path.moveTo(kButtonWidth, kBorderRadius);
-    background_path.arcTo(kButtonWidth - kBorderDiameter, 0,
-                          kBorderDiameter, kBorderDiameter,
-                          0.0, 90.0);
-    background_path.lineTo(kBorderRadius, 0);
-    background_path.arcTo(0, 0, kBorderDiameter, kBorderDiameter, 90.0, 90.0);
-    background_path.lineTo(0, kButtonHeight - kBorderRadius);
-    background_path.arcTo(0, kButtonHeight - kBorderDiameter,
-                          kBorderDiameter, kBorderDiameter,
-                          180.0, 90.0);
-    background_path.lineTo(kButtonWidth - kBorderRadius, kButtonHeight);
-    background_path.arcTo(kButtonWidth - kBorderDiameter,
-                          kButtonHeight - kBorderDiameter,
-                          kBorderDiameter, kBorderDiameter,
-                          270.0, 90.0);
-    background_path.closeSubpath();
-    painter.fillPath(background_path, QBrush(background_color));
+  QLabel* path_label = new QLabel();
+  if (partition_.label.isEmpty()) {
+    path_label->setText(partition_.path);
+  } else {
+    // TODO(xushaohua): trim text.
+    path_label->setText(
+        QString("%1(%2)").arg(partition_.label).arg(partition_.path));
   }
+  path_label->setObjectName(QStringLiteral("path_label"));
+  path_label->setAlignment(Qt::AlignCenter);
 
-  // Then draw os image
-  const QRect os_rect((rect.width() - kOsIconWidth) / 2, 0,
-                      kOsIconWidth, kOsIconHeight);
-  QPixmap os_pixmap(GetImageByOsType(partition_.os));
-  if (os_pixmap.width() != kOsIconWidth) {
-    // Scale image.
-    // TODO(xushaohua): Cache os icon
-    // TODO(xushaohua): read checked property
-    os_pixmap = os_pixmap.scaled(kOsIconWidth, kOsIconHeight);
+  QLabel* usage_label = new QLabel();
+  usage_label->setText(
+      GetPartitionUsage(partition_.freespace, partition_.length));
+  usage_label->setObjectName(QStringLiteral("usage_label"));
+  usage_label->setAlignment(Qt::AlignCenter);
+
+  PartitionUsageBar* usage_bar =
+      new PartitionUsageBar(partition_.freespace, partition_.length);
+
+  QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
+  layout->setSpacing(0);
+  layout->addStretch();
+  layout->addWidget(os_label_, 0, Qt::AlignHCenter);
+  layout->addWidget(path_label, 0, Qt::AlignHCenter);
+  layout->addWidget(usage_label, 0, Qt::AlignHCenter);
+  layout->addWidget(usage_bar, 0, Qt::AlignHCenter);
+  layout->addStretch();
+
+  this->setLayout(layout);
+
+  this->setStyleSheet(
+      ReadTextFileContent(":/styles/simple_partition_button.css"));
+  this->setCheckable(true);
+  this->setFixedSize(kButtonWidth, kButtonHeight);
+}
+
+void SimplePartitionButton::onButtonToggled() {
+  if (this->isChecked()) {
+    const QPixmap pixmap(":/images/driver_install_128.png");
+    os_label_->setPixmap(pixmap);
+  } else {
+    QPixmap pixmap(GetImageByOsType(partition_.os));
+    os_label_->setPixmap(pixmap);
   }
-  painter.drawPixmap(os_rect, os_pixmap);
-
-  // Draw partition label/path
-  const QString label_text = GetPartitionLabelAndPath(partition_);
-  const QColor label_color(QColor::fromRgb(255, 255, 255, 255));
-  QFont label_font;
-  label_font.setPixelSize(14);
-  const QFontMetrics label_font_metrics(label_font);
-  const int label_length = label_font_metrics.width(label_text);
-  painter.setPen(QPen(label_color));
-  painter.setFont(label_font);
-  // Set text alignment to center
-  painter.drawText((kButtonWidth - label_length) / 2,
-                   kOsIconHeight + kVerticalSpacing,
-                   label_text);
-
-  // Draw partition usage text
-  const QString usage_text = GetPartitionUsage(partition_);
-  const QColor usage_color(QColor::fromRgb(255, 255, 255, 120));
-  QFont usage_font;
-  usage_font.setPixelSize(10);
-  const QFontMetrics usage_font_metrics(usage_font);
-  const int usage_length = usage_font_metrics.width(usage_text);
-  painter.setFont(usage_font);
-  painter.setPen(QPen(usage_color));
-  painter.drawText((kButtonWidth - usage_length) / 2,
-                   kOsIconHeight + kVerticalSpacing * 2,
-                   usage_text);
-
-  // Draw partition usage progress bar
 }
 
 }  // namespace installer

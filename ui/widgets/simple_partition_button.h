@@ -5,29 +5,27 @@
 #ifndef INSTALLER_UI_WIDGETS_SIMPLE_PARTITION_BUTTON_H
 #define INSTALLER_UI_WIDGETS_SIMPLE_PARTITION_BUTTON_H
 
-#include <QPushButton>
+#include "ui/widgets/pointer_button.h"
 class QLabel;
-class QPaintEvent;
 
 #include "partman/partition.h"
 
 namespace installer {
 
-class SimplePartitionButton : public QPushButton {
+class SimplePartitionButton : public PointerButton {
   Q_OBJECT
 
  public:
   SimplePartitionButton(const Partition& partition, QWidget* parent = nullptr);
 
- protected:
-  // Override these two event handlers to implements hover effect.
-  void enterEvent(QEvent* event) override;
-  void leaveEvent(QEvent* event) override;
-  void paintEvent(QPaintEvent* event) override;
-
  private:
+  void initConnections();
+  void initUI();
   const Partition& partition_;
-  bool mouse_hovered_;
+  QLabel* os_label_ = nullptr;
+
+ private slots:
+  void onButtonToggled();
 };
 
 }  // namespace installer
