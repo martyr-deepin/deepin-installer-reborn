@@ -94,7 +94,7 @@ void SimplePartitionButton::paintEvent(QPaintEvent* event) {
   if (os_pixmap.width() != kOsIconWidth) {
     // Scale image.
     // TODO(xushaohua): Cache os icon
-    // TODO(xushaohua): read chcked property
+    // TODO(xushaohua): read checked property
     os_pixmap = os_pixmap.scaled(kOsIconWidth, kOsIconHeight);
   }
   painter.drawPixmap(os_rect, os_pixmap);
@@ -114,8 +114,6 @@ void SimplePartitionButton::paintEvent(QPaintEvent* event) {
                    label_text);
 
   // Draw partition usage text
-  qDebug() << partition_.length << partition_.freespace
-           << partition_.getByteLength() << partition_.getSectorLength();
   const QString usage_text = GetPartitionUsage(partition_);
   const QColor usage_color(QColor::fromRgb(255, 255, 255, 120));
   QFont usage_font;
