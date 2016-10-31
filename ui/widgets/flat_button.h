@@ -5,23 +5,18 @@
 #ifndef INSTALLER_UI_WIDGETS_FLAT_BUTTON_H
 #define INSTALLER_UI_WIDGETS_FLAT_BUTTON_H
 
-#include <QPushButton>
+#include "ui/widgets/pointer_button.h"
 
 namespace installer {
 
 // FlatButton only displays an icon, without any frame lines.
 // It also changes cursor shape.
-class FlatButton : public QPushButton {
+class FlatButton : public PointerButton {
   Q_OBJECT
 
  public:
   explicit FlatButton(QWidget* parent = nullptr);
   FlatButton(const QString& text, QWidget* parent = nullptr);
-
- protected:
-  // Override these two event handlers to implements hover effect.
-  void enterEvent(QEvent* event) override;
-  void leaveEvent(QEvent* event) override;
 };
 
 }  // namespace installer

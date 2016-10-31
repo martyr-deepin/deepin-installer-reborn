@@ -7,7 +7,6 @@
 #include <QButtonGroup>
 #include <QDebug>
 #include <QHBoxLayout>
-#include <QPushButton>
 #include <QStackedLayout>
 #include <QThread>
 #include <QVBoxLayout>
@@ -24,6 +23,7 @@
 #include "ui/frames/inner/simple_partition_frame.h"
 #include "ui/widgets/comment_label_layout.h"
 #include "ui/widgets/nav_button.h"
+#include "ui/widgets/pointer_button.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
@@ -104,15 +104,17 @@ void PartitionFrame::initUI() {
          "the disk to install"));
 
   QButtonGroup* button_group = new QButtonGroup(this);
-  simple_frame_button_ = new QPushButton(tr("Simple"));
-  simple_frame_button_->setObjectName(QStringLiteral("simple_frame_button"));
+  simple_frame_button_ = new PointerButton(tr("Simple"));
+  simple_frame_button_->setObjectName("simple_frame_button");
   simple_frame_button_->setCheckable(true);
   simple_frame_button_->setChecked(true);
   simple_frame_button_->setFlat(true);
-  advanced_frame_button_ = new QPushButton(tr("Advanced"));
-  advanced_frame_button_->setObjectName(
-      QStringLiteral("advanced_frame_button"));
+  // NOTE(xushaohua): Set size policy
+  simple_frame_button_->setMinimumWidth(86);
+  advanced_frame_button_ = new PointerButton(tr("Advanced"));
+  advanced_frame_button_->setObjectName("advanced_frame_button");
   advanced_frame_button_->setCheckable(true);
+  advanced_frame_button_->setMinimumWidth(86);
   advanced_frame_button_->setFlat(true);
   button_group->addButton(simple_frame_button_);
   button_group->addButton(advanced_frame_button_);
@@ -120,8 +122,8 @@ void PartitionFrame::initUI() {
   button_layout->setSpacing(0);
   button_layout->setContentsMargins(0, 0, 0, 0);
   button_layout->addStretch();
-  button_layout->addWidget(simple_frame_button_);
-  button_layout->addWidget(advanced_frame_button_);
+  button_layout->addWidget(simple_frame_button_, 0, Qt::AlignRight);
+  button_layout->addWidget(advanced_frame_button_, 0, Qt::AlignLeft);
   button_layout->addStretch();
 
   partition_stacked_layout_ = new QStackedLayout();
@@ -142,6 +144,7 @@ void PartitionFrame::initUI() {
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
   layout->addLayout(button_layout);
+  layout->addStretch();
   layout->addLayout(partition_stacked_wrapper_layout);
   layout->addStretch();
   layout->addLayout(next_layout);
@@ -163,11 +166,15 @@ void PartitionFrame::initUI() {
 }
 
 void PartitionFrame::onSimpleFrameButtonToggled() {
-  partition_stacked_layout_->setCurrentWidget(simple_partition_frame_);
+  if (partition_stacked_layout_->currentWidget() != simple_partition_frame_) {
+    partition_stacked_layout_->setCurrentWidget(simple_partition_frame_);
+  }
 }
 
 void PartitionFrame::onAdvancedFrameButtonToggled() {
-  partition_stacked_layout_->setCurrentWidget(advanced_partition_frame_);
+  if (partition_stacked_layout_->currentWidget() != advanced_partition_frame_) {
+    partition_stacked_layout_->setCurrentWidget(advanced_partition_frame_);
+  }
 }
 
 void PartitionFrame::onNextButtonClicked() {

@@ -9,7 +9,7 @@
 
 namespace installer {
 
-FlatButton::FlatButton(QWidget* parent) : QPushButton(parent) {
+FlatButton::FlatButton(QWidget* parent) : PointerButton(parent) {
   this->setFlat(true);
   this->setStyleSheet(ReadTextFileContent(":/styles/flat_button.css"));
 }
@@ -17,16 +17,6 @@ FlatButton::FlatButton(QWidget* parent) : QPushButton(parent) {
 FlatButton::FlatButton(const QString& text, QWidget* parent)
     : FlatButton(parent) {
   this->setText(text);
-}
-
-void FlatButton::enterEvent(QEvent* event) {
-  utils::SetCursorShape(this, XC_hand1);
-  QPushButton::enterEvent(event);
-}
-
-void FlatButton::leaveEvent(QEvent* event) {
-  utils::ResetCursorShape(this);
-  QPushButton::leaveEvent(event);
 }
 
 }  // namespace installer

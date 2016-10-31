@@ -6,7 +6,6 @@
 #define INSTALLER_UI_FRAMES_PARTITION_FRAME_H
 
 #include <QFrame>
-class QPushButton;
 class QStackedLayout;
 
 #include "partman/partition.h"
@@ -18,6 +17,7 @@ class EditPartitionFrame;
 class NavButton;
 class NewPartitionFrame;
 class PartitionLoadingFrame;
+class PointerButton;
 class PrepareInstallFrame;
 class SelectBootloaderFrame;
 class SimplePartitionFrame;
@@ -58,8 +58,8 @@ class PartitionFrame : public QFrame {
   QFrame* main_frame_ = nullptr;
   QStackedLayout* partition_stacked_layout_ = nullptr;
   QStackedLayout* main_layout_ = nullptr;
-  QPushButton* simple_frame_button_ = nullptr;
-  QPushButton* advanced_frame_button_ = nullptr;
+  PointerButton* simple_frame_button_ = nullptr;
+  PointerButton* advanced_frame_button_ = nullptr;
   NavButton* next_button_ = nullptr;
 
   PartitionDelegate* delegate_ = nullptr;
