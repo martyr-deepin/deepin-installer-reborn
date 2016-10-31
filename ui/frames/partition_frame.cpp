@@ -166,16 +166,11 @@ void PartitionFrame::initUI() {
 }
 
 void PartitionFrame::onSimpleFrameButtonToggled() {
-  if (partition_stacked_layout_->currentWidget() != simple_partition_frame_) {
-    simple_partition_frame_->repaintDevices();
-    partition_stacked_layout_->setCurrentWidget(simple_partition_frame_);
-  }
+  partition_stacked_layout_->setCurrentWidget(simple_partition_frame_);
 }
 
 void PartitionFrame::onAdvancedFrameButtonToggled() {
-  if (partition_stacked_layout_->currentWidget() != advanced_partition_frame_) {
-    partition_stacked_layout_->setCurrentWidget(advanced_partition_frame_);
-  }
+  partition_stacked_layout_->setCurrentWidget(advanced_partition_frame_);
 }
 
 void PartitionFrame::onNextButtonClicked() {

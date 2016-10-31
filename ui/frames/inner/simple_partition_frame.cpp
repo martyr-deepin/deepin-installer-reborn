@@ -35,22 +35,60 @@ SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
   this->initConnections();
 }
 
+void SimplePartitionFrame::initConnections() {
+  connect(delegate_, &PartitionDelegate::deviceRefreshed,
+          this, &SimplePartitionFrame::onDeviceRefreshed);
+//  connect(partition_button_group_,
+//          static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>
+//          (&QButtonGroup::buttonToggled),
+//          this, &SimplePartitionFrame::onPartitionButtonToggled);
+}
+
+void SimplePartitionFrame::initUI() {
+//  partition_button_group_ = new QButtonGroup(this);
+
+//  QHBoxLayout* tip_layout = new QHBoxLayout();
+//  QLabel* tip_label = new QLabel(tr("Install here"));
+//  tip_label->setObjectName("tip_label");
+//  tip_label->setAlignment(Qt::AlignCenter);
+//
+//  tip_layout->addStretch();
+//  tip_layout->addWidget(tip_label);
+//  tip_layout->addStretch();
+
+//  install_tip_ = new QFrame(this);
+//  // Same width as SimplePartitionButton.
+//  install_tip_->setFixedWidth(220);
+//  install_tip_->setLayout(tip_layout);
+//  install_tip_->hide();
+
+
+  this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  this->setWidgetResizable(true);
+  this->setFixedSize(980, 580);
+  this->setStyleSheet(
+      ReadTextFileContent(":/styles/simple_partition_frame.css"));
+}
+
+
 void SimplePartitionFrame::repaintDevices() {
   // Draw partitions.
-  QVBoxLayout* layout = new QVBoxLayout();
-  layout->setAlignment(Qt::AlignCenter);
+  QGridLayout* grid_layout = new QGridLayout();
+  grid_layout->setSpacing(0);
+  grid_layout->setContentsMargins(0, 0, 0, 0);
+  grid_layout->setHorizontalSpacing(20);
+  grid_layout->setVerticalSpacing(20);
+  grid_layout->setColumnStretch(kPartitionColumns, 1);
+
+  int row = 0, column = 0;
   for (const Device& device : delegate_->devices()) {
     QLabel* device_model_label = new QLabel(device.model);
     device_model_label->setObjectName("device_model");
 
-    QGridLayout* grid_layout = new QGridLayout();
-    grid_layout->setHorizontalSpacing(20);
-    grid_layout->setVerticalSpacing(20);
     // Make sure that widgets in grid are left-aligned.
-    grid_layout->setColumnStretch(kPartitionColumns, 1);
-    layout->addWidget(device_model_label);
-    layout->addLayout(grid_layout);
-    int row = 0, column = 0;
+    grid_layout->addWidget(device_model_label, row, 0, Qt::AlignLeft);
+    row ++;
 
     for (const Partition& partition : device.partitions) {
       if (partition.type == PartitionType::Extended) {
@@ -58,8 +96,7 @@ void SimplePartitionFrame::repaintDevices() {
         continue;
       }
       SimplePartitionButton* button = new SimplePartitionButton(partition);
-      partition_button_group_->addButton(button);
-      grid_layout->addWidget(button, row, column, Qt::AlignLeft);
+      grid_layout->addWidget(button, row, column, Qt::AlignHCenter);
 
       column ++;
       // Add rows.
@@ -68,48 +105,14 @@ void SimplePartitionFrame::repaintDevices() {
         row ++;
       }
     }
+    // Go to next row.
+    column = 0;
+    row ++;
   }
-
-  QFrame* wrapper = new QFrame();
-  wrapper->setLayout(layout);
-  wrapper->setAttribute(Qt::WA_TranslucentBackground, true);
+  QFrame* wrapper = new QFrame(this);
+  wrapper->setObjectName("content_wrapper");
+  wrapper->setLayout(grid_layout);
   this->setWidget(wrapper);
-}
-
-void SimplePartitionFrame::initConnections() {
-  connect(delegate_, &PartitionDelegate::deviceRefreshed,
-          this, &SimplePartitionFrame::onDeviceRefreshed);
-  connect(partition_button_group_,
-          static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>
-          (&QButtonGroup::buttonToggled),
-          this, &SimplePartitionFrame::onPartitionButtonToggled);
-}
-
-void SimplePartitionFrame::initUI() {
-  partition_button_group_ = new QButtonGroup(this);
-
-  QHBoxLayout* tip_layout = new QHBoxLayout();
-  QLabel* tip_label = new QLabel(tr("Install here"));
-  tip_label->setObjectName("tip_label");
-  tip_label->setAlignment(Qt::AlignCenter);
-
-  tip_layout->addStretch();
-  tip_layout->addWidget(tip_label);
-  tip_layout->addStretch();
-
-  install_tip_ = new QFrame(this);
-  // Same width as SimplePartitionButton.
-  install_tip_->setFixedWidth(220);
-  install_tip_->setLayout(tip_layout);
-  install_tip_->hide();
-
-  this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-//  this->setWidgetResizable(true);
-  this->setFixedSize(980, 580);
-  this->setAttribute(Qt::WA_TranslucentBackground, true);
-  this->setStyleSheet(
-      ReadTextFileContent(":/styles/simple_partition_frame.css"));
 }
 
 void SimplePartitionFrame::onDeviceRefreshed() {
@@ -120,10 +123,10 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
                                                     bool checked) {
   if (checked) {
     qDebug() << "pos:" << button->pos() << ",size:" << button->size();
-    const QPoint pos = button->pos();
-    const QSize size = button->size();
-    install_tip_->move(pos.x(), pos.y() + size.height());
-    install_tip_->show();
+//    const QPoint pos = button->pos();
+//    const QSize size = button->size();
+//    install_tip_->move(pos.x(), pos.y() + size.height());
+//    install_tip_->show();
   }
 }
 

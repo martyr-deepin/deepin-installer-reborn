@@ -80,26 +80,35 @@ void AdvancedPartitionFrame::initConnections() {
 
 void AdvancedPartitionFrame::initUI() {
   partition_layout_ = new QVBoxLayout();
-
+  partition_layout_->setSizeConstraint(QLayout::SetMinAndMaxSize);
   partition_button_group_ = new QButtonGroup(this);
 
   QFrame* wrapper = new QFrame();
   wrapper->setLayout(partition_layout_);
   QScrollArea* main_area = new QScrollArea();
+  QSizePolicy size_policy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
+  size_policy.setHorizontalStretch(10);
+  size_policy.setVerticalStretch(10);
+  main_area->setSizePolicy(size_policy);
   main_area->setWidget(wrapper);
-//  main_area->resize(640, 480);
-  partition_layout_->setSizeConstraint(QLayout::SetMinAndMaxSize);
+  main_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  main_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  main_area->setFixedWidth(960);
 
   bootloader_selection_button_ = new FlatButton(tr("Select bootloader"));
   enable_editing_button_ = new FlatButton(tr("Edit"));
   enable_editing_button_->setCheckable(true);
   enable_editing_button_->setChecked(false);
   QHBoxLayout* bottom_layout = new QHBoxLayout();
+  bottom_layout->setSpacing(0);
+  bottom_layout->setContentsMargins(0, 0, 0, 0);
   bottom_layout->addWidget(bootloader_selection_button_);
   bottom_layout->addStretch();
   bottom_layout->addWidget(enable_editing_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
+  layout->setSpacing(0);
   layout->addWidget(main_area, 0, Qt::AlignCenter);
   layout->addLayout(bottom_layout);
 

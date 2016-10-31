@@ -3,7 +3,7 @@
 #simple_frame_button, #advanced_frame_button {
   font-size: 12px;
   color: #ffffff;
-  qproperty-alignment: AlignCenter;
+  text-align: center;
   background: transparent;
   outline: none;
   margin: 0px;

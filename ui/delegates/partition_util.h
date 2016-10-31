@@ -8,14 +8,18 @@
 #include <QtCore/QtGlobal>
 
 #include "partman/fs.h"
+#include "partman/partition.h"
 
 namespace installer {
 
 // Get partition name based on |path|.
 QString GetPartitionName(const QString& path);
 
+QString GetPartitionLabelAndPath(const Partition& partition);
+
 // Get human readable partition usage.
 QString GetPartitionUsage(qint64 freespace, qint64 total);
+QString GetPartitionUsage(const Partition& partition);
 
 // Returns human readable file system name.
 QString GetLocalFsTypeName(FsType fs_type);

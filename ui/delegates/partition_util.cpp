@@ -16,9 +16,26 @@ QString GetPartitionName(const QString& path) {
   return QFileInfo(path).fileName();
 }
 
+QString GetPartitionLabelAndPath(const Partition& partition) {
+  // TODO(xushaohua): Trim text to appropriate length.
+  const QString name = GetPartitionName(partition.path);
+  if (partition.label.isEmpty()) {
+    return name;
+  } else {
+    return QString("%1(%2)").arg(partition.label).arg(name);
+  }
+}
+
 QString GetPartitionUsage(qint64 freespace, qint64 total) {
   const qint64 used = total - freespace;
   return QString("%1/%2G").arg(ToGigByte(used)).arg(ToGigByte(total));
+}
+
+QString GetPartitionUsage(const Partition& partition) {
+  const qint64 length = (partition.length > 0) ? partition.length :
+                                                 partition.getByteLength();
+  const qint64 freespace = partition.freespace;
+  return GetPartitionUsage(freespace, length);
 }
 
 QString GetLocalFsTypeName(FsType fs_type) {

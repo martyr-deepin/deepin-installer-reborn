@@ -8,27 +8,23 @@
 #include "ui/widgets/flat_button.h"
 
 class QLabel;
+class QPaintEvent;
 
 #include "partman/partition.h"
 
 namespace installer {
 
-class SimplePartitionButton : public FlatButton {
+class SimplePartitionButton : public QPushButton {
   Q_OBJECT
 
  public:
   SimplePartitionButton(const Partition& partition, QWidget* parent = nullptr);
 
+ protected:
+  void paintEvent(QPaintEvent* event) override;
+
  private:
-  void initConnections();
-  void initUI();
-
   const Partition& partition_;
-
-  QLabel* fs_label_ = nullptr;
-
- private slots:
-  void onButtonToggled();
 };
 
 }  // namespace installer
