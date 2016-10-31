@@ -55,9 +55,25 @@ QString GetImageByOsType(OsType os_type) {
 SimplePartitionButton::SimplePartitionButton(const Partition& partition,
                                              QWidget* parent)
     : QPushButton(parent),
-      partition_(partition) {
+      partition_(partition),
+      mouse_hovered_(false) {
   this->setObjectName(QStringLiteral("simple_partition_button"));
   this->setFixedSize(kButtonWidth, kButtonHeight);
+  this->setCheckable(true);
+}
+
+void SimplePartitionButton::enterEvent(QEvent* event) {
+  QPushButton::enterEvent(event);
+  this->setCursor(Qt::PointingHandCursor);
+  mouse_hovered_ = true;
+  this->update();
+}
+
+void SimplePartitionButton::leaveEvent(QEvent* event) {
+  QPushButton::leaveEvent(event);
+  this->unsetCursor();
+  mouse_hovered_ = false;
+  this->update();
 }
 
 void SimplePartitionButton::paintEvent(QPaintEvent* event) {
@@ -67,25 +83,30 @@ void SimplePartitionButton::paintEvent(QPaintEvent* event) {
   const QRect rect(this->rect());
 
   // First draw semi-transparent background with round corner.
-  const QColor background_color(QColor::fromRgb(255, 255, 255, 10));
-  QPainterPath background_path;
-  background_path.moveTo(kButtonWidth, kBorderRadius);
-  background_path.arcTo(kButtonWidth - kBorderDiameter, 0,
-                        kBorderDiameter, kBorderDiameter,
-                        0.0, 90.0);
-  background_path.lineTo(kBorderRadius, 0);
-  background_path.arcTo(0, 0, kBorderDiameter, kBorderDiameter, 90.0, 90.0);
-  background_path.lineTo(0, kButtonHeight - kBorderRadius);
-  background_path.arcTo(0, kButtonHeight - kBorderDiameter,
-                        kBorderDiameter, kBorderDiameter,
-                        180.0, 90.0);
-  background_path.lineTo(kButtonWidth - kBorderRadius, kButtonHeight);
-  background_path.arcTo(kButtonWidth - kBorderDiameter,
-                        kButtonHeight - kBorderDiameter,
-                        kBorderDiameter, kBorderDiameter,
-                        270.0, 90.0);
-  background_path.closeSubpath();
-  painter.fillPath(background_path, QBrush(background_color));
+  // Draw background when button is checked or mouse moves over.
+  if (this->isChecked() || mouse_hovered_) {
+    const QColor background_color = this->isChecked() ?
+                                    QColor::fromRgb(255, 255, 255, 40) :
+                                    QColor::fromRgb(255, 255, 255, 10);
+    QPainterPath background_path;
+    background_path.moveTo(kButtonWidth, kBorderRadius);
+    background_path.arcTo(kButtonWidth - kBorderDiameter, 0,
+                          kBorderDiameter, kBorderDiameter,
+                          0.0, 90.0);
+    background_path.lineTo(kBorderRadius, 0);
+    background_path.arcTo(0, 0, kBorderDiameter, kBorderDiameter, 90.0, 90.0);
+    background_path.lineTo(0, kButtonHeight - kBorderRadius);
+    background_path.arcTo(0, kButtonHeight - kBorderDiameter,
+                          kBorderDiameter, kBorderDiameter,
+                          180.0, 90.0);
+    background_path.lineTo(kButtonWidth - kBorderRadius, kButtonHeight);
+    background_path.arcTo(kButtonWidth - kBorderDiameter,
+                          kButtonHeight - kBorderDiameter,
+                          kBorderDiameter, kBorderDiameter,
+                          270.0, 90.0);
+    background_path.closeSubpath();
+    painter.fillPath(background_path, QBrush(background_color));
+  }
 
   // Then draw os image
   const QRect os_rect((rect.width() - kOsIconWidth) / 2, 0,
