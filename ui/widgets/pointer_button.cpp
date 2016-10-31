@@ -4,8 +4,6 @@
 
 #include "ui/widgets/pointer_button.h"
 
-#include "ui/utils/xutil.h"
-
 namespace installer {
 
 PointerButton::PointerButton(QWidget* parent) : QPushButton(parent) {
@@ -18,12 +16,12 @@ PointerButton::PointerButton(const QString& text, QWidget* parent)
 }
 
 void PointerButton::enterEvent(QEvent* event) {
-  utils::SetCursorShape(this, XC_hand1);
+  this->setCursor(Qt::PointingHandCursor);
   QPushButton::enterEvent(event);
 }
 
 void PointerButton::leaveEvent(QEvent* event) {
-  utils::ResetCursorShape(this);
+  this->unsetCursor();
   QPushButton::leaveEvent(event);
 }
 
