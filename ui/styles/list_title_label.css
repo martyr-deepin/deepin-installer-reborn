@@ -1,9 +1,0 @@
-/** Used by ListTitleLabel class **/
-
-QLabel {
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 0.93;
-  color: #ffffff;
-  text-align: left;
-}

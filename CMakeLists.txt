@@ -176,8 +176,6 @@ set(UI_FILES
     ui/widgets/frosted_frame.cpp ui/widgets/frosted_frame.h
     ui/widgets/icon_button.cpp ui/widgets/icon_button.h
     ui/widgets/line_edit.cpp ui/widgets/line_edit.h
-    ui/widgets/list_label.cpp ui/widgets/list_label.h
-    ui/widgets/list_title_label.cpp ui/widgets/list_title_label.h
     ui/widgets/nav_button.cpp ui/widgets/nav_button.h
     ui/widgets/page_indicator.cpp ui/widgets/page_indicator.h
     ui/widgets/partition_size_slider.cpp ui/widgets/partition_size_slider.h

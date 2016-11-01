@@ -1,0 +1,17 @@
+/** Used in PartitionTableWarningFrame class */
+
+QLabel#list_title1, QLabel#list_title2, QLabel#list_title3 {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 0.93;
+  color: #ffffff;
+  text-align: left;
+}
+
+QLabel#list_item1, QLabel#list_item2, QLabel#list_item3 {
+  opacity: 0.7;
+  font-size: 14px;
+  line-height: 2.14;
+  color: #ffffff;
+}
+

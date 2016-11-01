@@ -69,24 +69,15 @@ void SimplePartitionButton::initUI() {
   const QPixmap os_icon(GetImageByOsType(partition_.os));
   os_label_->setPixmap(os_icon);
 
-  QLabel* path_label = new QLabel();
-  path_label->setFixedHeight(20);
-  if (partition_.label.isEmpty()) {
-    path_label->setText(partition_.path);
-  } else {
-    // TODO(xushaohua): trim text.
-    path_label->setText(
-        QString("%1(%2)").arg(partition_.label).arg(partition_.path));
-  }
+  QLabel* path_label = new QLabel(GetPartitionLabelAndPath(partition_));
   path_label->setObjectName(QStringLiteral("path_label"));
-  path_label->setAlignment(Qt::AlignCenter);
+  path_label->setFixedHeight(20);
 
   QLabel* usage_label = new QLabel();
   usage_label->setFixedHeight(16);
   usage_label->setText(
       GetPartitionUsage(partition_.freespace, partition_.length));
   usage_label->setObjectName(QStringLiteral("usage_label"));
-  usage_label->setAlignment(Qt::AlignCenter);
 
   QProgressBar* usage_bar = new QProgressBar();
   usage_bar->setObjectName("usage_bar");
