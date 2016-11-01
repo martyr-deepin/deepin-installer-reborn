@@ -6,7 +6,6 @@
 #define INSTALLER_UI_FRAMES_INNER_EDIT_PARTITION_FRAME_H
 
 #include <QFrame>
-
 class QCheckBox;
 
 #include "partman/partition.h"

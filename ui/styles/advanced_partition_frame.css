@@ -44,5 +44,11 @@
 }
 
 #editing_button:checked {
+}
 
+#msg_label {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
 }

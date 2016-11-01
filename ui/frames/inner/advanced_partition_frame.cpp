@@ -113,11 +113,13 @@ void AdvancedPartitionFrame::initUI() {
 
   msg_label_ = new QLabel();
   msg_label_->setObjectName("msg_label");
+  msg_label_->setText("An EFI partition is required!");
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
   layout->addWidget(main_frame, 0, Qt::AlignHCenter);
+  layout->addSpacing(20);
   layout->addWidget(msg_label_, 0, Qt::AlignHCenter);
 
   this->setLayout(layout);
