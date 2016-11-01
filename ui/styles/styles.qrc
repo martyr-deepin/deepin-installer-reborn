@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/styles">
+    <file>advanced_partition_button.css</file>
+    <file>advanced_partition_frame.css</file>
     <file>avatar_button.css</file>
     <file>avatar_list_view.css</file>
     <file>comment_label.css</file>

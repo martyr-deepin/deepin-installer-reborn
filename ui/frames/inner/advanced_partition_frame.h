@@ -7,23 +7,23 @@
 
 #include <QFrame>
 class QButtonGroup;
+class QLabel;
+class QPushButton;
 class QVBoxLayout;
 
 #include "partman/partition.h"
 
 namespace installer {
 
-class FlatButton;
 class PartitionDelegate;
 
+// Advanced partition mode
 class AdvancedPartitionFrame : public QFrame {
   Q_OBJECT
 
  public:
   AdvancedPartitionFrame(PartitionDelegate* delegate_,
                          QWidget* parent = nullptr);
-
-  void repaintDevices();
 
  signals:
   void requestEditPartitionFrame(const Partition& partition);
@@ -33,13 +33,16 @@ class AdvancedPartitionFrame : public QFrame {
  private:
   void initConnections();
   void initUI();
+  void repaintDevices();
 
   PartitionDelegate* delegate_ = nullptr;
 
   QButtonGroup* partition_button_group_ = nullptr;
   QVBoxLayout* partition_layout_ = nullptr;
-  FlatButton* bootloader_selection_button_ = nullptr;
-  FlatButton* enable_editing_button_ = nullptr;
+  QPushButton* bootloader_button_ = nullptr;
+  QPushButton* editing_button_ = nullptr;
+  // Display message at bottom of page
+  QLabel* msg_label_ = nullptr;
 
  private slots:
   void onDeviceRefreshed();

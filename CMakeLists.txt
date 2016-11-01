@@ -167,7 +167,7 @@ set(UI_FILES
     ui/views/frameless_list_view.cpp ui/views/frameless_list_view.h
     ui/views/pointer_list_view.cpp ui/views/pointer_list_view.h
 
-    ui/widgets/advanced_partition_item.cpp ui/widgets/advanced_partition_item.h
+    ui/widgets/advanced_partition_button.cpp ui/widgets/advanced_partition_button.h
     ui/widgets/avatar_button.cpp ui/widgets/avatar_button.h
     ui/widgets/comment_label.cpp ui/widgets/comment_label.h
     ui/widgets/comment_label_layout.cpp ui/widgets/comment_label_layout.h

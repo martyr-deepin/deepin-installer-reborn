@@ -102,6 +102,13 @@ void SimplePartitionFrame::repaintDevices() {
     layout_item = nullptr;
   }
 
+  // Clear button group.
+  for (QAbstractButton* button : button_group_->buttons()) {
+    button_group_->removeButton(button);
+    delete button;
+    button = nullptr;
+  }
+
   // Draw partitions.
   int row = 0, column = 0;
   for (const Device& device : delegate_->devices()) {

@@ -5,19 +5,20 @@
 #ifndef INSTALLER_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H
 #define INSTALLER_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H
 
-#include "ui/widgets/flat_button.h"
+#include "ui/widgets/pointer_button.h"
 class QLabel;
 
 #include "partman/partition.h"
 
 namespace installer {
 
-class AdvancedPartitionItem : public FlatButton {
+// Display partition information in AdvancedPartitionFrame.
+class AdvancedPartitionButton : public PointerButton {
   Q_OBJECT
 
  public:
-  AdvancedPartitionItem(const Partition& partition,
-                        QWidget* parent = nullptr);
+  AdvancedPartitionButton(const Partition& partition,
+                          QWidget* parent = nullptr);
 
   void setEditable(bool editable);
 
@@ -46,7 +47,7 @@ class AdvancedPartitionItem : public FlatButton {
   QLabel* fs_type_label_ = nullptr;
 
   // Switch status between new-partition, edit-partition and delete-partition.
-  FlatButton* control_button_ = nullptr;
+  PointerButton* control_button_ = nullptr;
   enum class ControlStatus {
     Delete,
     Edit,

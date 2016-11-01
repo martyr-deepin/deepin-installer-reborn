@@ -2,43 +2,45 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/widgets/advanced_partition_item.h"
+#include "ui/widgets/advanced_partition_button.h"
 
 #include <QHBoxLayout>
 #include <QLabel>
 
+#include "base/file_util.h"
 #include "ui/delegates/partition_util.h"
 
 namespace installer {
 
-AdvancedPartitionItem::AdvancedPartitionItem(
-    const Partition& partition, QWidget* parent)
-    : FlatButton(parent),
+AdvancedPartitionButton::AdvancedPartitionButton(const Partition& partition,
+                                                 QWidget* parent)
+    : PointerButton(parent),
       partition_(partition),
       editable_(false) {
-  this->setObjectName(QStringLiteral("advanced_partition_item"));
+  this->setObjectName(QStringLiteral("advanced_partition_button"));
 
   this->initUI();
   this->initConnections();
 }
 
-void AdvancedPartitionItem::setEditable(bool editable) {
+void AdvancedPartitionButton::setEditable(bool editable) {
   this->editable_ = editable;
   this->updateStatus();
 }
 
-void AdvancedPartitionItem::initConnections() {
+void AdvancedPartitionButton::initConnections() {
   connect(control_button_, &QPushButton::clicked,
-          this, &AdvancedPartitionItem::onControlButtonClicked);
+          this, &AdvancedPartitionButton::onControlButtonClicked);
   connect(this, &QPushButton::toggled,
-          this, &AdvancedPartitionItem::onToggled);
+          this, &AdvancedPartitionButton::onToggled);
 }
 
-void AdvancedPartitionItem::initUI() {
+void AdvancedPartitionButton::initUI() {
   // os-prober logo
   // filesystem type
   // partition label
   partition_label_ = new QLabel();
+  partition_label_->setObjectName(QStringLiteral("partition_label"));
   if (partition_.type == PartitionType::Unallocated) {
     partition_label_->setText(tr("Freespace"));
   } else {
@@ -49,28 +51,18 @@ void AdvancedPartitionItem::initUI() {
     }
   }
 
-  partition_label_->setObjectName(QStringLiteral("partition_label"));
-
   partition_path_label_ = new QLabel();
+  partition_path_label_->setObjectName(QStringLiteral("partition_path_label"));
+  // TODO(xushaohua): Move to partition_util.h
   if (partition_.type != PartitionType::Unallocated) {
     partition_path_label_->setText(
         QString("(%1)").arg(GetPartitionName(partition_.path)));
   }
-  partition_path_label_->setObjectName(QStringLiteral("partition_path_label"));
 
   // partition space usage
   usage_label_ = new QLabel();
-  qint64 freespace;
-  qint64 total;
-  if (partition_.type == PartitionType::Unallocated || partition_.length <= 0) {
-    total = partition_.getByteLength();
-    freespace = total;
-  } else {
-    freespace = partition_.freespace;
-    total = partition_.length;
-  }
-  usage_label_->setText(GetPartitionUsage(freespace, total));
   usage_label_->setObjectName(QStringLiteral("usage_label"));
+  usage_label_->setText(GetPartitionUsage(partition_));
 
   // mount point
   mount_point_label_ = new QLabel();
@@ -85,17 +77,19 @@ void AdvancedPartitionItem::initUI() {
 
   // filesystem name
   fs_type_label_ = new QLabel();
+  fs_type_label_->setObjectName(QStringLiteral("fs_type_label"));
   if (partition_.type != PartitionType::Unallocated) {
     fs_type_label_->setText(GetFsTypeName(partition_.fs));
   }
-  fs_type_label_->setObjectName(QStringLiteral("fs_type_label"));
 
-  control_button_ = new FlatButton();
+  control_button_ = new PointerButton();
+  control_button_->setObjectName(QStringLiteral("control_button"));
   control_button_->setFixedSize(18, 18);
   control_button_->hide();
 
   // TODO(xushaohua): Use fixed layout instead.
   QHBoxLayout* layout = new QHBoxLayout();
+  layout->addSpacing(20);
   layout->addWidget(partition_label_);
   layout->addWidget(partition_path_label_);
   layout->addStretch();
@@ -110,12 +104,15 @@ void AdvancedPartitionItem::initUI() {
   layout->addWidget(control_button_);
 
   this->setLayout(layout);
-  this->setFixedSize(480, 36);
+  this->setFixedHeight(45);
   this->setCheckable(true);
   this->setChecked(false);
+  this->setFlat(true);
+  this->setStyleSheet(
+      ReadTextFileContent(":/styles/advanced_partition_button.css"));
 }
 
-void AdvancedPartitionItem::updateStatus() {
+void AdvancedPartitionButton::updateStatus() {
   if (editable_) {
     if (partition_.type == PartitionType::Unallocated) {
       control_status_ = ControlStatus::New;
@@ -140,7 +137,7 @@ void AdvancedPartitionItem::updateStatus() {
   control_button_->setVisible(control_status_ != ControlStatus::Hide);
 }
 
-void AdvancedPartitionItem::onControlButtonClicked() {
+void AdvancedPartitionButton::onControlButtonClicked() {
   switch (control_status_) {
     case ControlStatus::Delete: {
       emit this->deletePartitionTriggered(partition_);
@@ -161,7 +158,7 @@ void AdvancedPartitionItem::onControlButtonClicked() {
   }
 }
 
-void AdvancedPartitionItem::onToggled() {
+void AdvancedPartitionButton::onToggled() {
   this->updateStatus();
 }
 

@@ -1,0 +1,14 @@
+/** Used in AdvancedPartitionButton class */
+
+#advanced_partition_button {
+  border: none;
+  outline: none;
+}
+
+#advanced_partition_button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#advanced_partition_button:checked {
+  background: rgba(255, 255, 255, 0.3);
+}

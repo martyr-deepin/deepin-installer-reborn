@@ -10,10 +10,18 @@
 #include <QLabel>
 #include <QScrollArea>
 
+#include "base/file_util.h"
 #include "ui/delegates/partition_delegate.h"
-#include "ui/widgets/advanced_partition_item.h"
+#include "ui/widgets/advanced_partition_button.h"
+#include "ui/widgets/pointer_button.h"
 
 namespace installer {
+
+namespace {
+
+const int kWindowWidth = 960;
+
+}  // namespace
 
 AdvancedPartitionFrame::AdvancedPartitionFrame(
     PartitionDelegate* delegate_, QWidget* parent)
@@ -23,6 +31,102 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(
 
   this->initUI();
   this->initConnections();
+}
+
+void AdvancedPartitionFrame::initConnections() {
+  connect(delegate_, &PartitionDelegate::deviceRefreshed,
+          this, &AdvancedPartitionFrame::onDeviceRefreshed);
+
+  connect(bootloader_button_, &QPushButton::clicked,
+          this, &AdvancedPartitionFrame::requestSelectBootloaderFrame);
+
+  connect(editing_button_, &QPushButton::toggled,
+          this, &AdvancedPartitionFrame::onEditButtonToggled);
+}
+
+void AdvancedPartitionFrame::initUI() {
+  partition_button_group_ = new QButtonGroup(this);
+
+  partition_layout_ = new QVBoxLayout();
+  partition_layout_->setContentsMargins(0, 0, 0, 0);
+  partition_layout_->setSpacing(0);
+  partition_layout_->setSizeConstraint(QLayout::SetMinAndMaxSize);
+
+  QFrame* partition_list_frame = new QFrame();
+  partition_list_frame->setObjectName("partition_list_frame");
+  partition_list_frame->setContentsMargins(0, 0, 0, 0);
+  partition_list_frame->setLayout(partition_layout_);
+  partition_list_frame->setFixedWidth(kWindowWidth);
+
+  QScrollArea* scroll_area = new QScrollArea();
+  QSizePolicy scroll_area_size_policy(QSizePolicy::Preferred,
+                                      QSizePolicy::MinimumExpanding);
+  scroll_area->setContentsMargins(0, 0, 0, 0);
+  scroll_area_size_policy.setHorizontalStretch(10);
+  scroll_area_size_policy.setVerticalStretch(10);
+  scroll_area->setSizePolicy(scroll_area_size_policy);
+  scroll_area->setWidget(partition_list_frame);
+  scroll_area->setWidgetResizable(true);
+  scroll_area->setFixedWidth(kWindowWidth);
+  scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+  QLabel* bootloader_label = new QLabel(tr("Select bootloader"));
+  bootloader_label->setObjectName("bootloader_label");
+  bootloader_button_ = new PointerButton();
+  bootloader_button_->setFlat(true);
+  bootloader_button_->setObjectName("bootloader_button");
+  // TODO(xushaohua): Set current used bootloader partition
+  bootloader_button_->setText("/dev/sda");
+
+  editing_button_ = new PointerButton(tr("Edit"));
+  editing_button_->setFlat(true);
+  editing_button_->setObjectName("editing_button");
+  editing_button_->setCheckable(true);
+  editing_button_->setChecked(false);
+
+  QHBoxLayout* bottom_layout = new QHBoxLayout();
+  bottom_layout->setContentsMargins(15, 10, 15, 10);
+  bottom_layout->setSpacing(10);
+  bottom_layout->addWidget(bootloader_label);
+  bottom_layout->addWidget(bootloader_button_);
+  bottom_layout->addStretch();
+  bottom_layout->addWidget(editing_button_);
+
+  QFrame* bottom_frame = new QFrame();
+  bottom_frame->setObjectName("bottom_frame");
+  bottom_frame->setContentsMargins(0, 0, 0, 0);
+  bottom_frame->setLayout(bottom_layout);
+  bottom_frame->setFixedWidth(kWindowWidth);
+
+  QVBoxLayout* main_layout = new QVBoxLayout();
+  main_layout->setContentsMargins(0, 0, 0, 0);
+  main_layout->setSpacing(0);
+  main_layout->addWidget(scroll_area, 1, Qt::AlignHCenter);
+  main_layout->addSpacing(1);
+  main_layout->addWidget(bottom_frame, 0, Qt::AlignHCenter);
+
+  QFrame* main_frame = new QFrame();
+  main_frame->setObjectName("main_frame");
+  main_frame->setContentsMargins(0, 0, 0, 0);
+  main_frame->setLayout(main_layout);
+
+  msg_label_ = new QLabel();
+  msg_label_->setObjectName("msg_label");
+
+  QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
+  layout->setSpacing(0);
+  layout->addWidget(main_frame, 0, Qt::AlignHCenter);
+  layout->addWidget(msg_label_, 0, Qt::AlignHCenter);
+
+  this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
+  QSizePolicy container_policy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+  container_policy.setVerticalStretch(100);
+  this->setSizePolicy(container_policy);
+  this->setStyleSheet(
+      ReadTextFileContent(":/styles/advanced_partition_frame.css"));
 }
 
 void AdvancedPartitionFrame::repaintDevices() {
@@ -41,78 +145,30 @@ void AdvancedPartitionFrame::repaintDevices() {
 
   for (const Device& device : delegate_->devices()) {
     QLabel* model_label = new QLabel(device.model);
+    model_label->setObjectName("model_label");
+    model_label->setContentsMargins(15, 10, 0, 5);
     partition_layout_->addWidget(model_label);
     for (const Partition& partition : device.partitions) {
       if (partition.type == PartitionType::Extended) {
         // Ignores extended partition.
         continue;
       }
-      AdvancedPartitionItem* item = new AdvancedPartitionItem(partition);
-      item->setEditable(enable_editing_button_->isChecked());
-      partition_layout_->addWidget(item);
-      partition_button_group_->addButton(item);
-      item->show();
+      AdvancedPartitionButton* button = new AdvancedPartitionButton(partition);
+      button->setEditable(editing_button_->isChecked());
+      partition_layout_->addWidget(button);
+      partition_button_group_->addButton(button);
+      button->show();
 
-      connect(enable_editing_button_, &QPushButton::toggled,
-              item, &AdvancedPartitionItem::setEditable);
-
-      connect(item, &AdvancedPartitionItem::editPartitionTriggered,
+      connect(editing_button_, &QPushButton::toggled,
+              button, &AdvancedPartitionButton::setEditable);
+      connect(button, &AdvancedPartitionButton::editPartitionTriggered,
               this, &AdvancedPartitionFrame::requestEditPartitionFrame);
-      connect(item, &AdvancedPartitionItem::newPartitionTriggered,
+      connect(button, &AdvancedPartitionButton::newPartitionTriggered,
               this, &AdvancedPartitionFrame::requestNewPartitionFrame);
-
-      connect(item, &AdvancedPartitionItem::deletePartitionTriggered,
+      connect(button, &AdvancedPartitionButton::deletePartitionTriggered,
               delegate_, &PartitionDelegate::deletePartition);
     }
   }
-}
-
-void AdvancedPartitionFrame::initConnections() {
-  connect(delegate_, &PartitionDelegate::deviceRefreshed,
-          this, &AdvancedPartitionFrame::onDeviceRefreshed);
-
-  connect(bootloader_selection_button_, &QPushButton::clicked,
-          this, &AdvancedPartitionFrame::requestSelectBootloaderFrame);
-
-  connect(enable_editing_button_, &QPushButton::toggled,
-          this, &AdvancedPartitionFrame::onEditButtonToggled);
-}
-
-void AdvancedPartitionFrame::initUI() {
-  partition_layout_ = new QVBoxLayout();
-  partition_layout_->setSizeConstraint(QLayout::SetMinAndMaxSize);
-  partition_button_group_ = new QButtonGroup(this);
-
-  QFrame* wrapper = new QFrame();
-  wrapper->setLayout(partition_layout_);
-  QScrollArea* main_area = new QScrollArea();
-  QSizePolicy size_policy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-  size_policy.setHorizontalStretch(10);
-  size_policy.setVerticalStretch(10);
-  main_area->setSizePolicy(size_policy);
-  main_area->setWidget(wrapper);
-  main_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  main_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  main_area->setFixedWidth(960);
-
-  bootloader_selection_button_ = new FlatButton(tr("Select bootloader"));
-  enable_editing_button_ = new FlatButton(tr("Edit"));
-  enable_editing_button_->setCheckable(true);
-  enable_editing_button_->setChecked(false);
-  QHBoxLayout* bottom_layout = new QHBoxLayout();
-  bottom_layout->setSpacing(0);
-  bottom_layout->setContentsMargins(0, 0, 0, 0);
-  bottom_layout->addWidget(bootloader_selection_button_);
-  bottom_layout->addStretch();
-  bottom_layout->addWidget(enable_editing_button_);
-
-  QVBoxLayout* layout = new QVBoxLayout();
-  layout->setContentsMargins(0, 0, 0, 0);
-  layout->setSpacing(0);
-  layout->addWidget(main_area, 0, Qt::AlignCenter);
-  layout->addLayout(bottom_layout);
-
-  this->setLayout(layout);
 }
 
 void AdvancedPartitionFrame::onDeviceRefreshed() {
@@ -121,9 +177,9 @@ void AdvancedPartitionFrame::onDeviceRefreshed() {
 
 void AdvancedPartitionFrame::onEditButtonToggled(bool toggle) {
   if (toggle) {
-    enable_editing_button_->setText(tr("Done"));
+    editing_button_->setText(tr("Done"));
   } else {
-    enable_editing_button_->setText(tr("Edit"));
+    editing_button_->setText(tr("Edit"));
   }
 }
 
