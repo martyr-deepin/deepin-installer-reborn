@@ -50,20 +50,25 @@ void SimplePartitionFrame::initConnections() {
 void SimplePartitionFrame::initUI() {
   button_group_ = new QButtonGroup(this);
 
-//  QHBoxLayout* tip_layout = new QHBoxLayout();
-//  QLabel* tip_label = new QLabel(tr("Install here"));
-//  tip_label->setObjectName("tip_label");
-//  tip_label->setAlignment(Qt::AlignCenter);
-//
-//  tip_layout->addStretch();
-//  tip_layout->addWidget(tip_label);
-//  tip_layout->addStretch();
+  QLabel* tip_icon = new QLabel();
+  tip_icon->setPixmap(QPixmap(":/images/install_icon.png"));
 
-//  install_tip_ = new QFrame(this);
-//  // Same width as SimplePartitionButton.
-//  install_tip_->setFixedWidth(220);
-//  install_tip_->setLayout(tip_layout);
-//  install_tip_->hide();
+  QLabel* tip_label = new QLabel(tr("Install here"));
+  tip_label->setObjectName("tip_label");
+  tip_label->setFixedHeight(18);
+
+  QHBoxLayout* tip_layout = new QHBoxLayout();
+  tip_layout->addStretch();
+  tip_layout->addWidget(tip_icon, 0, Qt::AlignVCenter);
+  tip_layout->addWidget(tip_label, 0, Qt::AlignVCenter);
+  tip_layout->addStretch();
+
+  install_tip_ = new QFrame();
+  install_tip_->setContentsMargins(0, 0, 0, 0);
+  // Same width as SimplePartitionButton.
+  install_tip_->setFixedWidth(220);
+  install_tip_->setLayout(tip_layout);
+  install_tip_->hide();
 
   grid_layout_ = new QGridLayout();
   grid_layout_->setSpacing(0);
@@ -75,14 +80,14 @@ void SimplePartitionFrame::initUI() {
   QFrame* grid_wrapper = new QFrame();
   grid_wrapper->setObjectName("grid_wrapper");
   grid_wrapper->setLayout(grid_layout_);
+  install_tip_->setParent(grid_wrapper);
   this->setWidget(grid_wrapper);
 
   this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   this->setWidgetResizable(true);
   this->setFixedWidth(kWindowWidth);
-  this->setFixedHeight(640);
-  QSizePolicy policy(QSizePolicy::Fixed, QSizePolicy::MinimumExpanding);
+  QSizePolicy policy(QSizePolicy::Fixed, QSizePolicy::Expanding);
   policy.setVerticalStretch(100);
   this->setSizePolicy(policy);
   this->setStyleSheet(
@@ -107,7 +112,7 @@ void SimplePartitionFrame::repaintDevices() {
     // Make sure that widgets in grid are left-aligned.
     grid_layout_->addWidget(device_model_label, row, 0,
                             1, kPartitionColumns, Qt::AlignLeft);
-    row ++;
+    row += 1;
 
     for (const Partition& partition : device.partitions) {
       if (partition.type == PartitionType::Extended) {
@@ -117,18 +122,26 @@ void SimplePartitionFrame::repaintDevices() {
       SimplePartitionButton* button = new SimplePartitionButton(partition);
       button_group_->addButton(button);
       grid_layout_->addWidget(button, row, column, Qt::AlignHCenter);
+      // TODO(xushaohua): Select root partition
 
-      column ++;
+      column += 1;
       // Add rows.
       if (column >= kPartitionColumns) {
         column = 0;
-        row ++;
+        row += 1 ;
       }
     }
     // Go to next row.
     column = 0;
-    row ++;
+    row += 1;
   }
+
+  // Add place holder. It is used for install_tip
+  row += 1;
+  QLabel* place_holder_label = new QLabel();
+  place_holder_label->setFixedSize(kWindowWidth, 30);
+  grid_layout_->addWidget(place_holder_label, row, 0,
+                          1, kPartitionColumns, Qt::AlignHCenter);
 }
 
 void SimplePartitionFrame::onDeviceRefreshed() {
@@ -138,12 +151,12 @@ void SimplePartitionFrame::onDeviceRefreshed() {
 void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
                                                     bool checked) {
   if (checked) {
-    qDebug() << "pos:" << button->pos() << ",size:" << button->size();
-//    const QPoint pos = button->pos();
-//    const QSize size = button->size();
-//    install_tip_->move(pos.x(), pos.y() + size.height());
-//    install_tip_->show();
+    // Move install_tip to bottom of button
+    const QPoint pos = button->pos();
+    install_tip_->move(pos.x(), pos.y() - 10);
+    install_tip_->show();
   }
+  // TODO(xushaohua): Update delegate_
 }
 
 }  // namespace installer

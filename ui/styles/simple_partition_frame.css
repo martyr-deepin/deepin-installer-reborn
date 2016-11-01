@@ -1,7 +1,8 @@
 /** Used in SimplePartitionFrame class **/
 
 QLabel#tip_label {
-  color: #c9663c;
+  color: #ff8000;
+  font-size: 12px;
 }
 
 QLabel#device_model {
