@@ -38,10 +38,56 @@ QString GetPartitionUsage(const Partition& partition) {
   return GetPartitionUsage(freespace, length);
 }
 
-double GetPartitionUsageValue(const Partition& partition) {
+int GetPartitionUsageValue(const Partition& partition) {
   const qint64 length = (partition.length > 0) ? partition.length :
                         partition.getByteLength();
-  return (length - partition.freespace) / length;
+  return int(100 * (length - partition.freespace) / length);
+}
+
+QString GetOsTypeIcon(OsType os_type) {
+  switch (os_type) {
+    case OsType::Empty: {
+      return QStringLiteral(":/images/driver_128.png");
+    }
+    case OsType::Linux: {
+      return QStringLiteral(":/images/driver_linux_32.png");
+    }
+    case OsType::Mac: {
+      return QStringLiteral(":/images/driver_mac_32.png");
+    }
+    case OsType::Unknown: {
+      return QStringLiteral(":/images/driver_32.png");
+    }
+    case OsType::Windows: {
+      return QStringLiteral(":/images/driver_windows_32.png");
+    }
+    default: {
+      return QString();
+    }
+  }
+}
+
+QString GetOsTypeLargeIcon(OsType os_type) {
+  switch (os_type) {
+    case OsType::Empty: {
+      return QStringLiteral(":/images/driver_128.png");
+    }
+    case OsType::Linux: {
+      return QStringLiteral(":/images/driver_linux_128.png");
+    }
+    case OsType::Mac: {
+      return QStringLiteral(":/images/driver_mac_128.png");
+    }
+    case OsType::Unknown: {
+      return QStringLiteral(":/images/driver_128.png");
+    }
+    case OsType::Windows: {
+      return QStringLiteral(":/images/driver_windows_128.png");
+    }
+    default: {
+      return QString();
+    }
+  }
 }
 
 QString GetLocalFsTypeName(FsType fs_type) {

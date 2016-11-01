@@ -7,6 +7,8 @@
 
 #include <QFrame>
 class QCheckBox;
+class QLabel;
+class QProgressBar;
 
 #include "partman/partition.h"
 
@@ -17,7 +19,6 @@ class MountPointModel;
 class NavButton;
 class PartitionDelegate;
 class TableComboBox;
-class TableItemLabel;
 
 class EditPartitionFrame : public QFrame {
   Q_OBJECT
@@ -35,11 +36,15 @@ class EditPartitionFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  QLabel* os_label_ = nullptr;
+  QLabel* name_label_ = nullptr;
+  QLabel* usage_label_ = nullptr;
+  QProgressBar* usage_bar_ = nullptr;
   TableComboBox* fs_box_ = nullptr;
   TableComboBox* mount_point_box_ = nullptr;
-  TableItemLabel* mount_point_label_ = nullptr;
+  QLabel* mount_point_label_ = nullptr;
   QCheckBox* format_check_box_ = nullptr;
-  TableItemLabel* format_label_ = nullptr;
+  QLabel* format_label_ = nullptr;
   NavButton* cancel_button_ = nullptr;
   NavButton* ok_button_ = nullptr;
 

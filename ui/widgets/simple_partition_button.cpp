@@ -21,29 +21,6 @@ const int kButtonHeight = 220;
 const int kOsIconWidth = 120;
 const int kOsIconHeight = 120;
 
-QString GetImageByOsType(OsType os_type) {
-  switch (os_type) {
-    case OsType::Empty: {
-      return QStringLiteral(":/images/driver_128.png");
-    }
-    case OsType::Linux: {
-      return QStringLiteral(":/images/driver_linux_128.png");
-    }
-    case OsType::Mac: {
-      return QStringLiteral(":/images/driver_mac_128.png");
-    }
-    case OsType::Unknown: {
-      return QStringLiteral(":/images/driver_128.png");
-    }
-    case OsType::Windows: {
-      return QStringLiteral(":/images/driver_windows_128.png");
-    }
-    default: {
-      return QString();
-    }
-  }
-}
-
 }  // namespace
 
 SimplePartitionButton::SimplePartitionButton(const Partition& partition,
@@ -66,8 +43,7 @@ void SimplePartitionButton::initUI() {
   os_label_ = new QLabel();
   os_label_->setObjectName(QStringLiteral("fs_label"));
   os_label_->setFixedSize(kOsIconWidth, kOsIconHeight);
-  const QPixmap os_icon(GetImageByOsType(partition_.os));
-  os_label_->setPixmap(os_icon);
+  os_label_->setPixmap(QPixmap(GetOsTypeLargeIcon(partition_.os)));
 
   QLabel* path_label = new QLabel(GetPartitionLabelAndPath(partition_));
   path_label->setObjectName(QStringLiteral("path_label"));
@@ -75,8 +51,7 @@ void SimplePartitionButton::initUI() {
 
   QLabel* usage_label = new QLabel();
   usage_label->setFixedHeight(16);
-  usage_label->setText(
-      GetPartitionUsage(partition_.freespace, partition_.length));
+  usage_label->setText(GetPartitionUsage(partition_));
   usage_label->setObjectName(QStringLiteral("usage_label"));
 
   QProgressBar* usage_bar = new QProgressBar();
@@ -109,7 +84,7 @@ void SimplePartitionButton::onButtonToggled() {
     const QPixmap pixmap(":/images/driver_install_128.png");
     os_label_->setPixmap(pixmap);
   } else {
-    QPixmap pixmap(GetImageByOsType(partition_.os));
+    QPixmap pixmap(GetOsTypeLargeIcon(partition_.os));
     os_label_->setPixmap(pixmap);
   }
 }

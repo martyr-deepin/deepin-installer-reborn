@@ -8,20 +8,29 @@
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QProgressBar>
 #include <QVBoxLayout>
 
+#include "base/file_util.h"
 #include "ui/frames/consts.h"
 #include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/models/fs_model.h"
 #include "ui/models/mount_point_model.h"
-#include "ui/widgets/comment_label.h"
+#include "ui/widgets/comment_label_layout.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/table_combo_box.h"
-#include "ui/widgets/table_item_label.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
+
+namespace {
+
+const int kWindowWidth = 640;
+const int kProgressBarWidth = 280;
+const int kComboBoxWidth = 280;
+
+}  // namespace
 
 EditPartitionFrame::EditPartitionFrame(PartitionDelegate* delegate,
                                        QWidget* parent)
@@ -36,6 +45,12 @@ EditPartitionFrame::EditPartitionFrame(PartitionDelegate* delegate,
 
 void EditPartitionFrame::setPartition(const Partition& partition) {
   partition_ = partition;
+
+  // TODO(xushaohua): Check original fs type
+  os_label_->setPixmap(QPixmap(GetOsTypeLargeIcon(partition.os)));
+  name_label_->setText(GetPartitionLabelAndPath(partition));
+  usage_label_->setText(GetPartitionUsage(partition));
+  usage_bar_->setValue(GetPartitionUsageValue(partition));
 
   // Reset fs index.
   int fs_index = fs_model_->index(partition.fs);
@@ -70,63 +85,99 @@ void EditPartitionFrame::initConnections() {
 
 void EditPartitionFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("Edit Disk"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
-  CommentLabel* comment_label = new CommentLabel(
+  CommentLabelLayout* comment_layout = new CommentLabelLayout(
       tr("Please make sure you have backed up important data, then "
          "select the disk  to install"));
-  QHBoxLayout* comment_layout = new QHBoxLayout();
-  comment_layout->addWidget(comment_label);
 
-  TableItemLabel* fs_label = new TableItemLabel(tr("Filesystem"));
-  mount_point_label_ = new TableItemLabel(tr("Mount point"));
-  format_label_ = new TableItemLabel(tr("Format the partition"));
+  os_label_ = new QLabel();
+  os_label_->setObjectName("os_label");
+  name_label_ = new QLabel();
+  name_label_->setObjectName("name_label");
+  usage_label_ = new QLabel();
+  usage_label_->setObjectName("usage_label");
+
+  QHBoxLayout* name_layout = new QHBoxLayout();
+  name_layout->setContentsMargins(0, 0, 0, 0);
+  name_layout->setSpacing(0);
+  name_layout->addWidget(name_label_);
+  name_layout->addStretch();
+  name_layout->addWidget(usage_label_);
+  QFrame* name_frame = new QFrame();
+  name_frame->setObjectName("name_frame");
+  name_frame->setContentsMargins(0, 0, 0, 0);
+  name_frame->setLayout(name_layout);
+  name_frame->setFixedWidth(kProgressBarWidth);
+
+  usage_bar_ = new QProgressBar();
+  usage_bar_->setObjectName("usage_bar");
+  usage_bar_->setTextVisible(false);
+  usage_bar_->setFixedSize(kProgressBarWidth, 8);
+
+  QLabel* separator_label = new QLabel();
+  separator_label->setObjectName("separator_label");
+
+  QLabel* fs_label = new QLabel(tr("Filesystem"));
+  fs_label->setObjectName("fs_label");
+  mount_point_label_ = new QLabel(tr("Mount point"));
+  mount_point_label_->setObjectName("mount_point_label");
+  format_label_ = new QLabel(tr("Format the partition"));
+  format_label_->setObjectName("format_label");
 
   fs_box_ = new TableComboBox();
+  fs_box_->setObjectName("fs_box");
   fs_model_ = new FsModel(delegate_, this);
   fs_box_->setModel(fs_model_);
+  fs_box_->setFixedWidth(kComboBoxWidth);
 
   mount_point_box_ = new TableComboBox();
+  mount_point_box_->setObjectName("mount_point_box");
   mount_point_model_ = new MountPointModel(delegate_, this);
   mount_point_box_->setModel(mount_point_model_);
+  mount_point_box_->setFixedWidth(kComboBoxWidth);
 
   format_check_box_ = new QCheckBox();
+  format_check_box_->setObjectName("format_check_box");
   format_check_box_->setFixedWidth(20);
 
   QGridLayout* grid_layout = new QGridLayout();
-  grid_layout->addWidget(fs_label, 0, 0);
-  grid_layout->addWidget(mount_point_label_, 1, 0);
+  grid_layout->setHorizontalSpacing(20);
+  grid_layout->setVerticalSpacing(20);
+  grid_layout->setContentsMargins(0, 0, 0, 0);
+  grid_layout->addWidget(fs_label, 0, 0, Qt::AlignRight);
+  grid_layout->addWidget(mount_point_label_, 1, 0, Qt::AlignRight);
   grid_layout->addWidget(fs_box_, 0, 1);
   grid_layout->addWidget(mount_point_box_, 1, 1);
-  grid_layout->addWidget(format_check_box_, 2, 0);
+  grid_layout->addWidget(format_check_box_, 2, 0, Qt::AlignRight);
   grid_layout->addWidget(format_label_, 2, 1);
 
-  QHBoxLayout* grid_wrapper_layout = new QHBoxLayout();
-  grid_wrapper_layout->addStretch();
-  grid_wrapper_layout->addLayout(grid_layout);
-  grid_wrapper_layout->addStretch();
+  QFrame* fs_frame = new QFrame();
+  fs_frame->setObjectName("fs_frame");
+  fs_frame->setContentsMargins(0, 0, 0, 0);
+  fs_frame->setLayout(grid_layout);
+  fs_frame->setFixedWidth(360);
 
   cancel_button_ = new NavButton(tr("Cancel"));
-  QHBoxLayout* cancel_layout = new QHBoxLayout();
-  cancel_layout->addWidget(cancel_button_);
-
   ok_button_ = new NavButton(tr("OK"));
-  QHBoxLayout* ok_layout = new QHBoxLayout();
-  ok_layout->addWidget(ok_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addLayout(title_layout);
+  layout->addWidget(title_label, 0, Qt::AlignHCenter);
   layout->addLayout(comment_layout);
   layout->addStretch();
-  layout->addLayout(grid_wrapper_layout);
+  layout->addWidget(os_label_, 0, Qt::AlignHCenter);
+  layout->addWidget(name_frame, 0, Qt::AlignHCenter);
+  layout->addWidget(usage_bar_, 0, Qt::AlignHCenter);
+  layout->addWidget(separator_label, 0, Qt::AlignHCenter);
+  layout->addWidget(fs_frame, 0, Qt::AlignHCenter);
   layout->addStretch();
-  layout->addLayout(cancel_layout);
-  layout->addLayout(ok_layout);
+  layout->addWidget(cancel_button_, 0, Qt::AlignHCenter);
+  layout->addWidget(ok_button_, 0, Qt::AlignHCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
+  this->setStyleSheet(ReadTextFileContent(":/styles/edit_partition_frame.css"));
 }
 
 void EditPartitionFrame::onFsChanged(int index) {

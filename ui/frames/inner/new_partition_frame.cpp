@@ -17,7 +17,6 @@
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/partition_size_slider.h"
 #include "ui/widgets/table_combo_box.h"
-#include "ui/widgets/table_item_label.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
@@ -78,11 +77,11 @@ void NewPartitionFrame::initUI() {
   fs_img_label->setPixmap(fs_img);
   fs_img_label->setFixedSize(fs_img.size());
 
-  TableItemLabel* type_label = new TableItemLabel(tr("Type"));
-  TableItemLabel* location_label = new TableItemLabel(tr("Location"));
-  TableItemLabel* fs_label = new TableItemLabel(tr("Filesystem"));
-  TableItemLabel* mount_point_label = new TableItemLabel(tr("Mount point"));
-  TableItemLabel* size_label = new TableItemLabel(tr("Size"));
+  QLabel* type_label = new QLabel(tr("Type"));
+  QLabel* location_label = new QLabel(tr("Location"));
+  QLabel* fs_label = new QLabel(tr("Filesystem"));
+  QLabel* mount_point_label = new QLabel(tr("Mount point"));
+  QLabel* size_label = new QLabel(tr("Size"));
 
   type_box_ = new TableComboBox();
   type_box_->addItems({tr(kTypePrimary), tr(kTypeLogical)});

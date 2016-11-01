@@ -5,6 +5,7 @@
     <file>avatar_button.css</file>
     <file>avatar_list_view.css</file>
     <file>comment_label.css</file>
+    <file>edit_partition_frame.css</file>
     <file>flat_button.css</file>
     <file>frosted_frame.css</file>
     <file>install_failed_label.css</file>
@@ -20,7 +21,6 @@
     <file>simple_partition_button.css</file>
     <file>simple_partition_frame.css</file>
     <file>table_combo_box.css</file>
-    <file>table_item_label.css</file>
     <file>title_label.css</file>
   </qresource>
 </RCC>

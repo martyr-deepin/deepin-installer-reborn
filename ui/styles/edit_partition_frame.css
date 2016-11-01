@@ -1,0 +1,26 @@
+/** Used in EditPartitionFrame class */
+
+#edit_partition_frame {
+  background: transparent;
+}
+
+
+#name_label, #usage_label, #fs_label, #mount_point_label, #format_label {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+QProgressBar#usage_bar {
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+}
+
+QProgressBar#usage_bar::chunk {
+  background-color: #2ca7f8;
+  border-radius: 3px;
+}
+
+#fs_label, #mount_point_label {
+  text-align: right;
+}

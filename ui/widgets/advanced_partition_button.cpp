@@ -13,33 +13,6 @@
 
 namespace installer {
 
-namespace {
-
-QString GetImageByOsType(OsType os_type) {
-  switch (os_type) {
-    case OsType::Empty: {
-      return QStringLiteral(":/images/driver_128.png");
-    }
-    case OsType::Linux: {
-      return QStringLiteral(":/images/driver_linux_32.png");
-    }
-    case OsType::Mac: {
-      return QStringLiteral(":/images/driver_mac_32.png");
-    }
-    case OsType::Unknown: {
-      return QStringLiteral(":/images/driver_32.png");
-    }
-    case OsType::Windows: {
-      return QStringLiteral(":/images/driver_windows_32.png");
-    }
-    default: {
-      return QString();
-    }
-  }
-}
-
-}  // namespace
-
 AdvancedPartitionButton::AdvancedPartitionButton(const Partition& partition,
                                                  QWidget* parent)
     : PointerButton(parent),
@@ -64,13 +37,9 @@ void AdvancedPartitionButton::initConnections() {
 }
 
 void AdvancedPartitionButton::initUI() {
-  // os-prober logo
-  // filesystem type
-  // partition label
-
   QLabel* os_label = new QLabel();
   os_label->setObjectName(QStringLiteral("os_label"));
-  os_label->setPixmap(GetImageByOsType(partition_.os));
+  os_label->setPixmap(GetOsTypeIcon(partition_.os));
   os_label->setFixedWidth(32);
 
   // partition label name
@@ -107,7 +76,7 @@ void AdvancedPartitionButton::initUI() {
   QProgressBar* usage_bar = new QProgressBar();
   usage_bar->setObjectName(QStringLiteral("usage_bar"));
   usage_bar->setTextVisible(false);
-  usage_bar->setValue(int(GetPartitionUsageValue(partition_) * 100));
+  usage_bar->setValue(GetPartitionUsageValue(partition_));
   usage_bar->setFixedSize(100, 6);
 
   // mount point

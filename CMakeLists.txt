@@ -184,7 +184,6 @@ set(UI_FILES
     ui/widgets/qr_widget.cpp ui/widgets/qr_widget.h
     ui/widgets/simple_partition_button.cpp ui/widgets/simple_partition_button.h
     ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
-    ui/widgets/table_item_label.cpp ui/widgets/table_item_label.h
     ui/widgets/title_label.cpp ui/widgets/title_label.h
     ui/widgets/wallpaper_item.cpp ui/widgets/wallpaper_item.h
 
