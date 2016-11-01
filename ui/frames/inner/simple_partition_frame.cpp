@@ -14,6 +14,7 @@
 #include "base/file_util.h"
 #include "partman/structs.h"
 #include "ui/delegates/partition_delegate.h"
+#include "ui/widgets/device_model_label.h"
 #include "ui/widgets/simple_partition_button.h"
 
 namespace installer {
@@ -22,6 +23,8 @@ namespace {
 
 // 4 partitions are displays at each row.
 const int kPartitionColumns = 4;
+
+const int kWindowWidth = 960;
 
 }  // namespace
 
@@ -77,7 +80,11 @@ void SimplePartitionFrame::initUI() {
   this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   this->setWidgetResizable(true);
-  this->setFixedSize(980, 580);
+  this->setFixedWidth(kWindowWidth);
+  this->setFixedHeight(640);
+  QSizePolicy policy(QSizePolicy::Fixed, QSizePolicy::MinimumExpanding);
+  policy.setVerticalStretch(100);
+  this->setSizePolicy(policy);
   this->setStyleSheet(
       ReadTextFileContent(":/styles/simple_partition_frame.css"));
 }
@@ -93,11 +100,13 @@ void SimplePartitionFrame::repaintDevices() {
   // Draw partitions.
   int row = 0, column = 0;
   for (const Device& device : delegate_->devices()) {
-    QLabel* device_model_label = new QLabel(device.model);
+    QLabel* device_model_label = new DeviceModelLabel(device.model);
+    device_model_label->setFixedSize(kWindowWidth, 20);
     device_model_label->setObjectName("device_model");
 
     // Make sure that widgets in grid are left-aligned.
-    grid_layout_->addWidget(device_model_label, row, 0, Qt::AlignLeft);
+    grid_layout_->addWidget(device_model_label, row, 0,
+                            1, kPartitionColumns, Qt::AlignLeft);
     row ++;
 
     for (const Partition& partition : device.partitions) {

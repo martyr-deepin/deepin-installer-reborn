@@ -19,14 +19,14 @@ QPushButton::checked {
 QLabel#path_label {
   color: #ffffff;
   font-size: 14px;
-  align: center;
+  text-align: center;
 }
 
 QLabel#usage_label {
   color: #c8c8c8;
   font-size: 10px;
   line-height: 1.6;
-  align: center;
+  text-align: center;
   opacity: 0.6;
 }
 
