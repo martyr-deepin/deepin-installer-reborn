@@ -7,13 +7,13 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
+#include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "ui/frames/consts.h"
 #include "ui/models/language_list_model.h"
 #include "ui/views/frameless_list_view.h"
 #include "ui/widgets/nav_button.h"
-#include "ui/widgets/subhead_label.h"
 
 namespace installer {
 
@@ -45,8 +45,11 @@ void SelectLanguageFrame::initUI() {
   QLabel* logo_label = new QLabel();
   logo_label->setPixmap(QPixmap(GetVendorLogo()));
 
-  SubheadLabel* subhead_label = new SubheadLabel(
+  QLabel* subtitle_label = new QLabel(
       "Please select the language you want to use\n请选择您的语言");
+  subtitle_label->setObjectName("subtitle_label");
+  subtitle_label->setWordWrap(true);
+  subtitle_label->setAlignment(Qt::AlignHCenter);
 
   language_view_ = new FramelessListView();
   language_model_ = new LanguageListModel(language_view_);
@@ -59,13 +62,15 @@ void SelectLanguageFrame::initUI() {
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(logo_label, 0, Qt::AlignCenter);
-  layout->addWidget(subhead_label, 0, Qt::AlignCenter);
+  layout->addWidget(subtitle_label, 0, Qt::AlignCenter);
   layout->addSpacing(20);
   layout->addWidget(language_view_, 0, Qt::AlignHCenter);
   layout->addSpacing(20);
   layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+  this->setStyleSheet(
+      ReadTextFileContent(":/styles/select_language_frame.css"));
 }
 
 void SelectLanguageFrame::onLanguageListSelected() {

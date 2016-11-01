@@ -1,0 +1,6 @@
+/** Used in SelectLanguageFrame class **/
+
+QLabel#subtitle_label {
+  color: #ffffff;
+  font-size: 14pt;
+}
