@@ -12,3 +12,57 @@
 #advanced_partition_button:checked {
   background: rgba(255, 255, 255, 0.3);
 }
+
+#name_label {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+#path_label {
+  color: #ffffff;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+#usage_label {
+  color: #ffffff;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+QProgressBar#usage_bar {
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+}
+
+QProgressBar#usage_bar::chunk {
+  background-color: #2ca7f8;
+  border-radius: 3px;
+}
+
+#mount_point_label {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+#tip_label {
+  color: #ff8000;
+  font-size: 12px;
+}
+
+#fs_label {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+#control_button_wrapper {
+  background: transparent;
+}
+
+#control_button,
+#control_button:active {
+  border: none;
+  outline: none;
+  background: transparent;
+}

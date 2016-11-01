@@ -6,7 +6,6 @@
 #define INSTALLER_UI_WIDGETS_ADVANCED_PARTITION_ITEM_H
 
 #include "ui/widgets/pointer_button.h"
-class QLabel;
 
 #include "partman/partition.h"
 
@@ -38,13 +37,6 @@ class AdvancedPartitionButton : public PointerButton {
   void initUI();
 
   const Partition& partition_;
-
-  QLabel* partition_label_ = nullptr;
-  QLabel* partition_path_label_ = nullptr;
-  QLabel* usage_label_ = nullptr;
-  QLabel* mount_point_label_ = nullptr;
-  QLabel* tip_label_ = nullptr;
-  QLabel* fs_type_label_ = nullptr;
 
   // Switch status between new-partition, edit-partition and delete-partition.
   PointerButton* control_button_ = nullptr;
