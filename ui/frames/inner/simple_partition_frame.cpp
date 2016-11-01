@@ -62,6 +62,18 @@ void SimplePartitionFrame::initUI() {
 //  install_tip_->setLayout(tip_layout);
 //  install_tip_->hide();
 
+  grid_layout_ = new QGridLayout();
+  grid_layout_->setSpacing(0);
+  grid_layout_->setContentsMargins(0, 0, 0, 0);
+  grid_layout_->setHorizontalSpacing(20);
+  grid_layout_->setVerticalSpacing(20);
+  grid_layout_->setColumnStretch(kPartitionColumns, 1);
+
+  QFrame* grid_wrapper = new QFrame();
+  grid_wrapper->setObjectName("grid_wrapper");
+  grid_wrapper->setLayout(grid_layout_);
+  this->setWidget(grid_wrapper);
+
   this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   this->setWidgetResizable(true);
@@ -71,21 +83,21 @@ void SimplePartitionFrame::initUI() {
 }
 
 void SimplePartitionFrame::repaintDevices() {
-  // Draw partitions.
-  QGridLayout* grid_layout = new QGridLayout();
-  grid_layout->setSpacing(0);
-  grid_layout->setContentsMargins(0, 0, 0, 0);
-  grid_layout->setHorizontalSpacing(20);
-  grid_layout->setVerticalSpacing(20);
-  grid_layout->setColumnStretch(kPartitionColumns, 1);
+  // Clear grid layout.
+  QLayoutItem* layout_item;
+  while ((layout_item = grid_layout_->takeAt(0)) != nullptr) {
+    delete layout_item;
+    layout_item = nullptr;
+  }
 
+  // Draw partitions.
   int row = 0, column = 0;
   for (const Device& device : delegate_->devices()) {
     QLabel* device_model_label = new QLabel(device.model);
     device_model_label->setObjectName("device_model");
 
     // Make sure that widgets in grid are left-aligned.
-    grid_layout->addWidget(device_model_label, row, 0, Qt::AlignLeft);
+    grid_layout_->addWidget(device_model_label, row, 0, Qt::AlignLeft);
     row ++;
 
     for (const Partition& partition : device.partitions) {
@@ -95,7 +107,7 @@ void SimplePartitionFrame::repaintDevices() {
       }
       SimplePartitionButton* button = new SimplePartitionButton(partition);
       button_group_->addButton(button);
-      grid_layout->addWidget(button, row, column, Qt::AlignHCenter);
+      grid_layout_->addWidget(button, row, column, Qt::AlignHCenter);
 
       column ++;
       // Add rows.
@@ -108,10 +120,6 @@ void SimplePartitionFrame::repaintDevices() {
     column = 0;
     row ++;
   }
-  QFrame* wrapper = new QFrame(this);
-  wrapper->setObjectName("content_wrapper");
-  wrapper->setLayout(grid_layout);
-  this->setWidget(wrapper);
 }
 
 void SimplePartitionFrame::onDeviceRefreshed() {

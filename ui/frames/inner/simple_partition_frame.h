@@ -8,6 +8,7 @@
 #include <QScrollArea>
 class QAbstractButton;
 class QButtonGroup;
+class QGridLayout;
 
 namespace installer {
 
@@ -28,6 +29,7 @@ class SimplePartitionFrame : public QScrollArea {
 
   QButtonGroup* button_group_ = nullptr;
   QFrame* install_tip_ = nullptr;
+  QGridLayout* grid_layout_ = nullptr;
   PartitionDelegate* delegate_ = nullptr;
 
  private slots:

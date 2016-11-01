@@ -9,6 +9,6 @@ QLabel#device_model {
   font-size: 14px;
 }
 
-QScrollArea, #content_wrapper {
+QScrollArea, QFrame#grid_wrapper {
   background: transparent;
 }
