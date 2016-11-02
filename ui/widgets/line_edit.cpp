@@ -4,6 +4,7 @@
 
 #include "ui/widgets/line_edit.h"
 
+#include <QFocusEvent>
 #include <QLabel>
 #include <QResizeEvent>
 
@@ -11,8 +12,7 @@
 
 namespace installer {
 
-LineEdit::LineEdit(const QString& icon, QWidget* parent)
-    : QLineEdit(parent) {
+LineEdit::LineEdit(const QString& icon, QWidget* parent) : QLineEdit(parent) {
   this->setObjectName(QStringLiteral("line_edit"));
 
   this->setStyleSheet(ReadTextFileContent(":/styles/line_edit.css"));
@@ -22,6 +22,11 @@ LineEdit::LineEdit(const QString& icon, QWidget* parent)
   image_label_->setPixmap(QPixmap(icon));
   image_label_->setFixedSize(12, 12);
   image_label_->move(12, 12);
+}
+
+void LineEdit::focusInEvent(QFocusEvent* event) {
+  QLineEdit::focusInEvent(event);
+  emit this->gotFocus();
 }
 
 void LineEdit::resizeEvent(QResizeEvent* event) {

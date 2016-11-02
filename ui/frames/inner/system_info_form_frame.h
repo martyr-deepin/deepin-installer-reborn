@@ -42,10 +42,11 @@ class SystemInfoFormFrame : public QFrame {
   void initConnections();
   void initUI();
 
-  void validateUsername(bool empty_ok);
-  void validateHostname(bool empty_ok);
-  void validatePassword(bool empty_ok);
-  void validatePassword2(bool empty_ok);
+  // Validate line-edit. If failed, write tooltip to |msg| and returns false.
+  bool validateUsername(QString& msg);
+  bool validateHostname(QString& msg);
+  bool validatePassword(QString& msg);
+  bool validatePassword2(QString& msg);
 
   IconButton* timezone_button_ = nullptr;
   AvatarButton* avatar_button_ = nullptr;
@@ -57,19 +58,16 @@ class SystemInfoFormFrame : public QFrame {
   SystemInfoTip* tooltip_ = nullptr;
   NavButton* next_button_ = nullptr;
 
-  bool is_username_validated_;
-  bool is_hostname_validated_;
-  bool is_password_validated_;
-  bool is_password2_validated_;
-
  private slots:
   // Validate form content.
   void onNextButtonClicked();
 
-  void onUsernameChanged();
-  void onHostnameChanged();
-  void onPasswordChanged();
-  void onPassword2Changed();
+  // Hide tooltip frame when line-edit is being edited.
+  void onEditingLineEdit();
+  void onUserNameEditingFinished();
+  void onHostnameEditingFinished();
+  void onPasswordEditingFinished();
+  void onPassword2EditingFinished();
 };
 
 }  // namespace installer

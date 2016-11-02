@@ -22,12 +22,7 @@
 
 namespace installer {
 
-SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
-    : QFrame(parent),
-      is_username_validated_(false),
-      is_hostname_validated_(false),
-      is_password_validated_(false),
-      is_password2_validated_(false) {
+SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName(QStringLiteral("system_info_form_frame"));
 
   this->initUI();
@@ -50,14 +45,32 @@ void SystemInfoFormFrame::initConnections() {
   connect(timezone_button_, &QPushButton::clicked,
           this, &SystemInfoFormFrame::timezoneClicked);
 
-  connect(username_edit_, &QLineEdit::textChanged,
-          this, &SystemInfoFormFrame::onUsernameChanged);
-  connect(hostname_edit_, &QLineEdit::textChanged,
-          this, &SystemInfoFormFrame::onHostnameChanged);
-  connect(password_edit_, &QLineEdit::textChanged,
-          this, &SystemInfoFormFrame::onPasswordChanged);
-  connect(password2_edit_, &QLineEdit::textChanged,
-          this, &SystemInfoFormFrame::onPassword2Changed);
+  connect(username_edit_, &LineEdit::editingFinished,
+          this, &SystemInfoFormFrame::onUserNameEditingFinished);
+  connect(hostname_edit_, &LineEdit::editingFinished,
+          this, &SystemInfoFormFrame::onHostnameEditingFinished);
+  connect(password_edit_, &LineEdit::editingFinished,
+          this, &SystemInfoFormFrame::onPasswordEditingFinished);
+  connect(password2_edit_, &LineEdit::editingFinished,
+          this, &SystemInfoFormFrame::onPassword2EditingFinished);
+
+//  connect(username_edit_, &LineEdit::gotFocus,
+//          tooltip_, &SystemInfoTip::hide);
+//  connect(hostname_edit_, &LineEdit::gotFocus,
+//          tooltip_, &SystemInfoTip::hide);
+//  connect(password_edit_, &LineEdit::gotFocus,
+//          tooltip_, &SystemInfoTip::hide);
+//  connect(password2_edit_, &LineEdit::gotFocus,
+//          tooltip_, &SystemInfoTip::hide);
+
+  connect(username_edit_, &LineEdit::textEdited,
+          this, &SystemInfoFormFrame::onEditingLineEdit);
+  connect(hostname_edit_, &LineEdit::textEdited,
+          this, &SystemInfoFormFrame::onEditingLineEdit);
+  connect(password_edit_, &LineEdit::textEdited,
+          this, &SystemInfoFormFrame::onEditingLineEdit);
+  connect(password2_edit_, &LineEdit::textEdited,
+          this, &SystemInfoFormFrame::onEditingLineEdit);
 }
 
 void SystemInfoFormFrame::initUI() {
@@ -106,103 +119,116 @@ void SystemInfoFormFrame::initUI() {
   this->setLayout(layout);
 }
 
-void SystemInfoFormFrame::validateUsername(bool empty_ok) {
+bool SystemInfoFormFrame::validateUsername(QString& msg) {
   const ValidateUsernameState state = ValidateUsername(username_edit_->text());
   switch (state) {
     case ValidateUsernameState::AlreadyUsedError: {
-      username_edit_->setToolTip(tr("Username is already in use"));
-      break;
+      msg = tr("Username is already in use");
+      return false;
     }
     case ValidateUsernameState::EmptyError: {
-      if (!empty_ok) {
-        username_edit_->setToolTip(tr("Username is empty!"));
-      }
-      break;
+      msg = tr("Username is empty!");
+      return false;
     }
     case ValidateUsernameState::FirstCharError: {
-      username_edit_->setToolTip("First character is invalid");
-      break;
+      msg = tr("First character is invalid");
+      return false;
     }
     case ValidateUsernameState::InvalidCharError: {
-      username_edit_->setToolTip(tr("Invalid character!"));
-      break;
-    }
-    case ValidateUsernameState::Ok: {
-      username_edit_->setToolTip("");
-      break;
+      msg = tr("Invalid character!");
+      return false;
     }
     case ValidateUsernameState::TooLongError: {
-      username_edit_->setToolTip(tr("User name has too many characters"));
-      break;
+      msg = tr("User name has too many characters");
+      return false;
+    }
+    default: {
+      return true;
     }
   }
-  is_username_validated_ = (state == ValidateUsernameState::Ok);
 }
 
-void SystemInfoFormFrame::validateHostname(bool empty_ok) {
-  if (empty_ok) {
-    is_hostname_validated_ = ValidateHostnameTemp(hostname_edit_->text());
+bool SystemInfoFormFrame::validateHostname(QString& msg) {
+  if (!ValidateHostname(hostname_edit_->text())) {
+    msg = tr("Invalid hostname!");
+    return false;
   } else {
-    is_hostname_validated_ = ValidateHostname(hostname_edit_->text());
-  }
-  if (!is_hostname_validated_) {
-    hostname_edit_->setToolTip(tr("Invalid hostname!"));
+    return true;
   }
 }
 
-void SystemInfoFormFrame::validatePassword(bool empty_ok) {
-  Q_UNUSED(empty_ok);
-  is_password_validated_ = true;
+bool SystemInfoFormFrame::validatePassword(QString& msg) {
+  Q_UNUSED(msg);
+  return true;
 }
 
-void SystemInfoFormFrame::validatePassword2(bool empty_ok) {
-  Q_UNUSED(empty_ok);
-  is_password2_validated_ = true;
+bool SystemInfoFormFrame::validatePassword2(QString& msg) {
+  Q_UNUSED(msg);
+  return true;
 }
 
 void SystemInfoFormFrame::onNextButtonClicked() {
-  if (is_username_validated_ && is_hostname_validated_ &&
-      is_password_validated_ && is_password2_validated_) {
+  QString msg;
+  if (!validateUsername(msg)) {
+    tooltip_->setText(msg);
+    tooltip_->showBottom(username_edit_);
+  } else if (!validateHostname(msg)) {
+    tooltip_->setText(msg);
+    tooltip_->showBottom(hostname_edit_);
+  } else if (!validatePassword(msg)) {
+    tooltip_->setText(msg);
+    tooltip_->showBottom(password_edit_);
+  } else if (!validatePassword2(msg)) {
+    tooltip_->setText(msg);
+    tooltip_->showBottom(password2_edit_);
+  } else {
+    tooltip_->hide();
     WriteUsername(username_edit_->text());
     WriteHostname(hostname_edit_->text());
     WritePassword(password_edit_->text());
 
     emit this->finished();
-  } else {
-    if (!is_username_validated_) {
-      validateUsername(false);
-    }
-
-    if (!is_hostname_validated_) {
-      validateHostname(false);
-    }
-
-    if (!is_password_validated_) {
-      validatePassword(false);
-    }
   }
 }
 
-void SystemInfoFormFrame::onUsernameChanged() {
-  validateUsername(true);
-  if (!is_username_validated_ && (!username_edit_->toolTip().isEmpty())) {
-    tooltip_->setText(username_edit_->toolTip());
-    tooltip_->showBottom(username_edit_);
-  } else {
+void SystemInfoFormFrame::onEditingLineEdit() {
+  if (tooltip_->isVisible()) {
     tooltip_->hide();
   }
 }
 
-void SystemInfoFormFrame::onHostnameChanged() {
-  validateHostname(true);
+void SystemInfoFormFrame::onUserNameEditingFinished() {
+  // When line-edit loses focus, validate it, and check its results.
+  // If error occurs, popup tooltip frame.
+  QString msg;
+  if (!validateUsername(msg)) {
+    tooltip_->setText(msg);
+    tooltip_->showBottom(username_edit_);
+  }
 }
 
-void SystemInfoFormFrame::onPasswordChanged() {
-  validatePassword(true);
+void SystemInfoFormFrame::onHostnameEditingFinished() {
+  QString msg;
+  if (!validateHostname(msg)) {
+    tooltip_->setText(msg);
+    tooltip_->showBottom(hostname_edit_);
+  }
 }
 
-void SystemInfoFormFrame::onPassword2Changed() {
-  validatePassword2(true);
+void SystemInfoFormFrame::onPasswordEditingFinished() {
+  QString msg;
+  if (!validatePassword(msg)) {
+    tooltip_->setText(msg);
+    tooltip_->showBottom(password_edit_);
+  }
+}
+
+void SystemInfoFormFrame::onPassword2EditingFinished() {
+  QString msg;
+  if (!validatePassword2(msg)) {
+    tooltip_->setText(msg);
+    tooltip_->showBottom(password2_edit_);
+  }
 }
 
 }  // namespace installer

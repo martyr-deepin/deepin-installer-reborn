@@ -6,6 +6,7 @@
 #define INSTALLER_UI_WIDGETS_LINE_EDIT_H
 
 #include <QLineEdit>
+class QFocusEvent;
 class QLabel;
 class QResizeEvent;
 
@@ -18,7 +19,13 @@ class LineEdit : public QLineEdit {
  public:
   LineEdit(const QString& icon, QWidget* parent = nullptr);
 
+ signals:
+  void gotFocus();
+
  protected:
+  // Emit gotFocus() signal when line-edit get focus
+  void focusInEvent(QFocusEvent* event) override;
+
   // Reset image label position.
   void resizeEvent(QResizeEvent* event) override;
 
