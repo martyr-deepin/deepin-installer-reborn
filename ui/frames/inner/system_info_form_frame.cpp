@@ -17,6 +17,7 @@
 #include "ui/widgets/icon_button.h"
 #include "ui/widgets/line_edit.h"
 #include "ui/widgets/nav_button.h"
+#include "ui/widgets/system_info_tip.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
@@ -78,6 +79,12 @@ void SystemInfoFormFrame::initUI() {
   password2_edit_ = new LineEdit(QStringLiteral(":/images/password_12.png"));
   password2_edit_->setPlaceholderText(tr("Reenter password"));
 
+  tooltip_ = new SystemInfoTip(this);
+  // Same width as line edit.
+  tooltip_->setMaximumWidth(550);
+  tooltip_->setMinimumHeight(36);
+  tooltip_->hide();
+
   next_button_ = new NavButton(tr("Next"));
 
   QVBoxLayout* layout = new QVBoxLayout();
@@ -106,35 +113,29 @@ void SystemInfoFormFrame::validateUsername(bool empty_ok) {
       username_edit_->setToolTip(tr("Username is already in use"));
       break;
     }
-
     case ValidateUsernameState::EmptyError: {
       if (!empty_ok) {
         username_edit_->setToolTip(tr("Username is empty!"));
       }
       break;
     }
-
     case ValidateUsernameState::FirstCharError: {
       username_edit_->setToolTip("First character is invalid");
       break;
     }
-
     case ValidateUsernameState::InvalidCharError: {
       username_edit_->setToolTip(tr("Invalid character!"));
       break;
     }
-
     case ValidateUsernameState::Ok: {
       username_edit_->setToolTip("");
       break;
     }
-
     case ValidateUsernameState::TooLongError: {
       username_edit_->setToolTip(tr("User name has too many characters"));
       break;
     }
   }
-
   is_username_validated_ = (state == ValidateUsernameState::Ok);
 }
 
@@ -184,6 +185,12 @@ void SystemInfoFormFrame::onNextButtonClicked() {
 
 void SystemInfoFormFrame::onUsernameChanged() {
   validateUsername(true);
+  if (!is_username_validated_ && (!username_edit_->toolTip().isEmpty())) {
+    tooltip_->setText(username_edit_->toolTip());
+    tooltip_->showBottom(username_edit_);
+  } else {
+    tooltip_->hide();
+  }
 }
 
 void SystemInfoFormFrame::onHostnameChanged() {

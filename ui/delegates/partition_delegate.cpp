@@ -595,7 +595,7 @@ void PartitionDelegate::removeEmptyExtendedPartition(
 
 void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   this->real_devices_ = devices;
-  qDebug() << "onDeviceRefreshed():" << devices;
+//  qDebug() << "onDeviceRefreshed():" << devices;
   this->refreshVisual();
 }
 

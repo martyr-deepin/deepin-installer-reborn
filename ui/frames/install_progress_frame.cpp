@@ -40,7 +40,7 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
 
   this->initUI();
   this->initConnections();
-  this->onProgressUpdate(100);
+  this->onProgressUpdate(47);
 }
 
 InstallProgressFrame::~InstallProgressFrame() {

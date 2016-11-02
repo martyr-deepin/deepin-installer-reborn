@@ -51,7 +51,7 @@ void InstallProgressTip::paintEvent(QPaintEvent* event) {
                         180.0, 90.0);
   background_path.lineTo(kHalfWidth - kTriangleHeight,
                          kHeight - kTriangleHeight);
-  // Draw isosceles right-angled triangle
+  // Draw isosceles right-angled triangle in bottom center of label.
   background_path.lineTo(kHalfWidth, kHeight);
   background_path.lineTo(kHalfWidth + kTriangleHeight,
                          kHeight - kTriangleHeight);

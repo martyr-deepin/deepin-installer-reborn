@@ -13,6 +13,7 @@ class AvatarButton;
 class IconButton;
 class LineEdit;
 class NavButton;
+class SystemInfoTip;
 
 class SystemInfoFormFrame : public QFrame {
   Q_OBJECT
@@ -52,6 +53,8 @@ class SystemInfoFormFrame : public QFrame {
   LineEdit* hostname_edit_ = nullptr;
   LineEdit* password_edit_ = nullptr;
   LineEdit* password2_edit_ = nullptr;
+  // Display tooltip error message.
+  SystemInfoTip* tooltip_ = nullptr;
   NavButton* next_button_ = nullptr;
 
   bool is_username_validated_;
