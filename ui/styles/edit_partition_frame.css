@@ -24,3 +24,27 @@ QProgressBar#usage_bar::chunk {
 #fs_label, #mount_point_label {
   text-align: right;
 }
+
+#format_check_box::indicator {
+  width: 16px;
+  height: 16px;
+}
+
+#format_check_box::indicator:unchecked {
+  image: url(":/images/check-01.png");
+}
+#format_check_box::indicator:unchecked:hover {
+  image: url(":/images/check-05.png");
+}
+#format_check_box::indicator:unchecked:pressed {
+  image: url(":/images/check-03.png");
+}
+#format_check_box::indicator:checked {
+  image: url(":/images/check-02.png");
+}
+#format_check_box::indicator:checked:hover {
+  image: url(":/images/check-06.png");
+}
+#format_check_box::indicator:checked:pressed {
+  image: url(":/images/check-04.png");
+}

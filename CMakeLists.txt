@@ -252,6 +252,17 @@ add_executable(deepin-installer-reborn
 
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 
+add_executable(combobox-test
+               ui/tests/combobox_test.cpp
+               
+               ${BASE_FILES}
+               ui/delegates/frameless_list_delegate.cpp ui/delegates/frameless_list_delegate.h
+               ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
+               ui/images/images.qrc
+               ui/styles/styles.qrc
+               )
+target_link_libraries(combobox-test ${Qt_LIBS})
+
 # Unittest
 add_executable(deepin-installer-reborn-tests
                misc/test_main.cpp

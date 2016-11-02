@@ -28,7 +28,6 @@ namespace {
 
 const int kWindowWidth = 640;
 const int kProgressBarWidth = 280;
-const int kComboBoxWidth = 280;
 
 }  // namespace
 
@@ -127,13 +126,11 @@ void EditPartitionFrame::initUI() {
   fs_box_->setObjectName("fs_box");
   fs_model_ = new FsModel(delegate_, this);
   fs_box_->setModel(fs_model_);
-  fs_box_->setFixedWidth(kComboBoxWidth);
 
   mount_point_box_ = new TableComboBox();
   mount_point_box_->setObjectName("mount_point_box");
   mount_point_model_ = new MountPointModel(delegate_, this);
   mount_point_box_->setModel(mount_point_model_);
-  mount_point_box_->setFixedWidth(kComboBoxWidth);
 
   format_check_box_ = new QCheckBox();
   format_check_box_->setObjectName("format_check_box");

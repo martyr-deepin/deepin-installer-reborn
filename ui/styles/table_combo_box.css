@@ -1,2 +1,41 @@
 /** Used in TableComboBox class **/
 
+QComboBox {
+  border: none;
+  padding: 0 0 0 8px;
+  margin: 0;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+QComboBox::drop-down {
+  /** TODO(xushaohua): new icon arrow.png is 5x5 */
+  width: 12px;
+  background: transparent;
+  right: 10px;
+}
+
+QComboBox::down-arrow {
+  image: url(":/images/arrow.png");
+}
+
+QComboBox QAbstractItemView {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;  /* Not work */
+  /*selection-background-color: blue;*/
+  /*background: rgba(255, 255, 255, 0.3);*/
+  background: rgba(0, 0, 0, 0.5);
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+QComboBox QAbstractItemView::item {
+  height: 36px;
+  color: #ffffff;
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.3);
+}
