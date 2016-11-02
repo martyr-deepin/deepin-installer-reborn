@@ -114,6 +114,7 @@ void EditPartitionFrame::initUI() {
 
   QLabel* separator_label = new QLabel();
   separator_label->setObjectName("separator_label");
+  separator_label->setFixedSize(560, 2);
 
   QLabel* fs_label = new QLabel(tr("Filesystem"));
   fs_label->setObjectName("fs_label");
@@ -166,7 +167,9 @@ void EditPartitionFrame::initUI() {
   layout->addWidget(os_label_, 0, Qt::AlignHCenter);
   layout->addWidget(name_frame, 0, Qt::AlignHCenter);
   layout->addWidget(usage_bar_, 0, Qt::AlignHCenter);
+  layout->addSpacing(10);
   layout->addWidget(separator_label, 0, Qt::AlignHCenter);
+  layout->addSpacing(10);
   layout->addWidget(fs_frame, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addWidget(cancel_button_, 0, Qt::AlignHCenter);

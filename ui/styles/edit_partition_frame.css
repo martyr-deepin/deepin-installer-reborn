@@ -21,6 +21,10 @@ QProgressBar#usage_bar::chunk {
   border-radius: 3px;
 }
 
+#separator_label {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 #fs_label, #mount_point_label {
   text-align: right;
 }

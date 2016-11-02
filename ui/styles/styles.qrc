@@ -7,13 +7,14 @@
     <file>comment_label.css</file>
     <file>edit_partition_frame.css</file>
     <file>flat_button.css</file>
+    <file>frameless_list_view.css</file>
     <file>frosted_frame.css</file>
     <file>install_failed_label.css</file>
     <file>install_progress_frame.css</file>
-    <file>frameless_list_view.css</file>
     <file>line_edit.css</file>
     <file>log_viewer_frame.css</file>
     <file>nav_button.css</file>
+    <file>new_partition_frame.css</file>
     <file>partition_frame_main_frame.css</file>
     <file>partition_size_slider.css</file>
     <file>partition_table_warning_frame.css</file>

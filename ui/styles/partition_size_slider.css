@@ -1,5 +1,30 @@
 /** Used in PartitionSizeSlider class **/
 
+#partition_size_slider {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  border: none;
+  outline: none;
+}
+
+#slider {
+
+}
+
+#editor {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  selection-color: #ffffff;
+  selection-background-color: rgba(255, 255, 255, 0.2);
+}
+
 #size_label {
-  color: white;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
 }
