@@ -8,7 +8,37 @@
 }
 
 #slider {
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  height: 24px;
+  background: transparent;
+}
 
+#slider::groove {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  height: 4px;
+}
+
+#slider::handle {
+  height: 16px;
+  width: 16px;
+  margin: -6px 0;  /* Draw a circle */
+  /*border: 1px solid rgba(0, 0, 0, 0.1);*/
+  border: none;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+#slider::add-page {
+  background: transparent;
+}
+
+#slider::sub-page {
+  border-radius: 3px;
+  background: #2ca7f8;
 }
 
 #editor {
