@@ -8,7 +8,6 @@ QComboBox {
   background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
   font-size: 14px;
-  overflow: hidden;
 }
 
 QComboBox::drop-down {

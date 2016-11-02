@@ -14,9 +14,19 @@
 #include "ui/frames/consts.h"
 #include "ui/frames/inner/install_progress_slide_frame.h"
 #include "ui/widgets/comment_label_layout.h"
+#include "ui/widgets/install_progress_tip.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
+
+namespace {
+
+const int kProgressBarWidth = 640;
+const int kTooltipWidth = 60;
+const int kTooltipHeight = 31;
+const int kTooltipFrameWidth = kProgressBarWidth + kTooltipWidth;
+
+}  // namespace
 
 InstallProgressFrame::InstallProgressFrame(QWidget* parent)
     : QFrame(parent),
@@ -30,6 +40,7 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
 
   this->initUI();
   this->initConnections();
+  this->onProgressUpdate(100);
 }
 
 InstallProgressFrame::~InstallProgressFrame() {
@@ -51,7 +62,7 @@ void InstallProgressFrame::runHooks(bool ok) {
 
   if (ok) {
     // Partition operations take 5% progress.
-    progress_bar_->setValue(kBeforeChrootStartVal);
+    this->onProgressUpdate(kBeforeChrootStartVal);
 
     qDebug() << "emit runHooks() signal";
     // Run hooks/ in background thread.
@@ -69,7 +80,7 @@ void InstallProgressFrame::initConnections() {
   connect(hooks_manager_, &HooksManager::errorOccurred,
           this, &InstallProgressFrame::onErrorOccurred);
   connect(hooks_manager_, &HooksManager::processUpdate,
-          progress_bar_, &QProgressBar::setValue);
+          this, &InstallProgressFrame::onProgressUpdate);
   connect(hooks_manager_, &HooksManager::finished,
           this, &InstallProgressFrame::onSucceeded);
 }
@@ -80,19 +91,32 @@ void InstallProgressFrame::initUI() {
       tr("You will be experiencing the incredible pleasant of deepin after "
          "the time for just a cup of coffee"));
   slide_frame_ = new InstallProgressSlideFrame();
+
+  QFrame* tooltip_frame = new QFrame();
+  tooltip_frame->setObjectName("tooltip_frame");
+  tooltip_frame->setContentsMargins(0, 0, 0, 0);
+  tooltip_frame->setFixedSize(kTooltipFrameWidth, kTooltipHeight);
+  tooltip_label_ = new InstallProgressTip(tooltip_frame);
+  tooltip_label_->setFixedSize(kTooltipWidth, kTooltipHeight);
+  tooltip_label_->setAlignment(Qt::AlignHCenter);
+
   progress_bar_ = new QProgressBar();
-  progress_bar_->setFixedSize(640, 8);
+  progress_bar_->setFixedSize(kProgressBarWidth, 8);
   progress_bar_->setTextVisible(false);
   progress_bar_->setRange(0, 100);
   progress_bar_->setOrientation(Qt::Horizontal);
 
   QVBoxLayout* layout = new QVBoxLayout();
-  layout->setSpacing(kMainLayoutSpacing);
+  layout->setSpacing(0);
   layout->addStretch();
   layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addSpacing(kMainLayoutSpacing);
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(slide_frame_, 0, Qt::AlignCenter);
+  layout->addSpacing(kMainLayoutSpacing);
+  layout->addWidget(tooltip_frame, 0, Qt::AlignHCenter);
+  layout->addSpacing(5);
   layout->addWidget(progress_bar_, 0, Qt::AlignCenter);
   layout->addStretch();
 
@@ -105,6 +129,16 @@ void InstallProgressFrame::onErrorOccurred() {
   failed_ = true;
   slide_frame_->stopSlide();
   emit this->finished();
+}
+
+void InstallProgressFrame::onProgressUpdate(int progress) {
+  progress_bar_->setValue(progress);
+  tooltip_label_->setText(QString("%1%").arg(progress));
+  const int x = kProgressBarWidth * progress / 100;
+  const int y = tooltip_label_->y();
+  tooltip_label_->move(x, y);
+  // Force QProgressBar to repaint.
+  progress_bar_->update();
 }
 
 void InstallProgressFrame::onSucceeded() {

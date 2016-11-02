@@ -176,6 +176,7 @@ set(UI_FILES
     ui/widgets/flat_button.cpp ui/widgets/flat_button.h
     ui/widgets/frosted_frame.cpp ui/widgets/frosted_frame.h
     ui/widgets/icon_button.cpp ui/widgets/icon_button.h
+    ui/widgets/install_progress_tip.cpp ui/widgets/install_progress_tip.h
     ui/widgets/line_edit.cpp ui/widgets/line_edit.h
     ui/widgets/nav_button.cpp ui/widgets/nav_button.h
     ui/widgets/page_indicator.cpp ui/widgets/page_indicator.h

@@ -53,11 +53,14 @@ class InstallProgressFrame : public QFrame {
   QThread* hooks_manager_thread_ = nullptr;
 
   InstallProgressSlideFrame* slide_frame_ = nullptr;
+  QLabel* tooltip_label_ = nullptr;
   QProgressBar* progress_bar_ = nullptr;
 
  private slots:
   // Handles error state
   void onErrorOccurred();
+
+  void onProgressUpdate(int progress);
 
   // Handles successful installation.
   void onSucceeded();

@@ -48,3 +48,15 @@ QProgressBar::chunk {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
+
+#tooltip_frame {
+  background: transparent;
+}
+#tooltip_label {
+  color: #000000;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
