@@ -5,11 +5,13 @@
 #include "ui/frames/inner/system_info_form_frame.h"
 
 #include <QHBoxLayout>
+#include <QStringList>
 #include <QVBoxLayout>
 
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/validate_hostname.h"
+#include "sysinfo/validate_password.h"
 #include "sysinfo/validate_username.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/avatar_button.h"
@@ -149,17 +151,77 @@ bool SystemInfoFormFrame::validateUsername(QString& msg) {
 }
 
 bool SystemInfoFormFrame::validateHostname(QString& msg) {
-  if (!ValidateHostname(hostname_edit_->text())) {
-    msg = tr("Invalid hostname!");
-    return false;
-  } else {
-    return true;
+  const ValidateHostnameState state =
+      ValidateHostname(hostname_edit_->text(),
+                       GetSettingsInt(kSystemInfoHostnameMinLen),
+                       GetSettingsInt(kSystemInfoHostnameMaxLen),
+                       GetSettingsStringList(kSystemInfoHostnameReserved));
+  switch (state) {
+    case ValidateHostnameState::EmptyError: {
+      msg = tr("Hostname is empty");
+      return false;
+    }
+    case ValidateHostnameState::ReservedError: {
+      msg = tr("Hostname is reserved");
+      return false;
+    }
+    case ValidateHostnameState::TooLongError: {
+      msg = tr("Hostname is too long");
+      return false;
+    }
+    case ValidateHostnameState::TooShortError: {
+      msg = tr("Hostname is too short");
+      return false;
+    }
+    default: {
+      return true;
+    }
   }
 }
 
 bool SystemInfoFormFrame::validatePassword(QString& msg) {
-  Q_UNUSED(msg);
-  return true;
+  const ValidatePasswordState state =
+      ValidatePassword(password_edit_->text(),
+                       GetSettingsInt(kSystemInfoPasswordMinLen),
+                       GetSettingsInt(kSystemInfoPasswordMaxLen),
+                       GetSettingsBool(kSystemInfoPasswordRequireNumber),
+                       GetSettingsBool(kSystemInfoPasswordRequireLowerCase),
+                       GetSettingsBool(kSystemInfoPasswordRequireUpperCase),
+                       GetSettingsBool(kSystemInfoPasswordRequireSpecialChar));
+
+  switch (state) {
+    case ValidatePasswordState::EmptyError: {
+      msg = tr("Password is empty");
+      return false;
+    }
+    case ValidatePasswordState::NoLowerCharError: {
+      msg = tr("Password does not contain lower case character");
+      return false;
+    }
+    case ValidatePasswordState::NoUpperCharError: {
+      msg = tr("Password does not contain upper case character");
+      return false;
+    }
+    case ValidatePasswordState::NoNumberError: {
+      msg = tr("Password does not contain number");
+      return false;
+    }
+    case ValidatePasswordState::NoSpecialCharError: {
+      msg = tr("Password does not contain special characters");
+      return false;
+    }
+    case ValidatePasswordState::TooShortError: {
+      msg = tr("Password too short");
+      return false;
+    }
+    case ValidatePasswordState::TooLongError: {
+      msg = tr("Password too long");
+      return false;
+    }
+    default: {
+      return true;
+    }
+  }
 }
 
 bool SystemInfoFormFrame::validatePassword2(QString& msg) {

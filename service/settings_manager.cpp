@@ -203,6 +203,16 @@ bool GetSettingsBool(const QString& key) {
   return false;
 }
 
+int GetSettingsInt(const QString& key) {
+  const QVariant value = GetSettingsValue(key);
+  if (value.isValid()) {
+    return value.toInt();
+  }
+
+  qCritical() << "GetSettingsInt() failed with key:" << key;
+  return 0;
+}
+
 QString GetSettingsString(const QString& key) {
   const QVariant value = GetSettingsValue(key);
   if (value.isValid()) {
@@ -211,6 +221,16 @@ QString GetSettingsString(const QString& key) {
 
   qCritical() << "GetSettingsString() failed with key:" << key;
   return QStringLiteral("");
+}
+
+QStringList GetSettingsStringList(const QString& key) {
+  const QVariant value = GetSettingsValue(key);
+  if (!value.isValid()) {
+    qCritical() << "GetSettingsStringList() failed with key:" << key;
+    return QStringList();
+  }
+
+  return value.toString().split(';');
 }
 
 QVariant GetSettingsValue(const QString& key) {

@@ -17,9 +17,18 @@ namespace installer {
 // If |key| does not exist, returns false.
 bool GetSettingsBool(const QString& key);
 
+// Get integer option value from settings file.
+// If |key| does not exist, return 0.
+int GetSettingsInt(const QString& key);
+
 // Get string option value from settings file.
 // If |key| does not exist, returns an empty string.
 QString GetSettingsString(const QString& key);
+
+// Get string list option value form settings file.
+// Items in value are separated by ;
+// If |key| does not exist, returns an empty string list.
+QStringList GetSettingsStringList(const QString& key);
 
 // Get variant option value from settings file.
 QVariant GetSettingsValue(const QString& key);

@@ -10,12 +10,17 @@ namespace installer {
 namespace {
 
 TEST(ValidateHostnameTest, ValidateHostname) {
-  EXPECT_FALSE(ValidateHostname(""));
-  EXPECT_TRUE(ValidateHostname("domain"));
-  EXPECT_TRUE(ValidateHostname("sub.domain"));
-  EXPECT_FALSE(ValidateHostname(".sub.domain"));
-  EXPECT_FALSE(ValidateHostname("sub-domain."));
-  EXPECT_FALSE(ValidateHostname("&:2domain"));
+  EXPECT_EQ(ValidateHostname("", 2, 10, {}), ValidateHostnameState::EmptyError);
+  EXPECT_EQ(ValidateHostname("domain", 8, 10, {}),
+            ValidateHostnameState::TooShortError);
+  EXPECT_EQ(ValidateHostname("sub.domain", 2, 6, {}),
+            ValidateHostnameState::TooLongError);
+  EXPECT_EQ(ValidateHostname("localhost", 2, 10, {"localhost", "loop"}),
+            ValidateHostnameState::ReservedError);
+  EXPECT_EQ(ValidateHostname("sub-domain", 2, 10, {}),
+            ValidateHostnameState::Ok);
+  EXPECT_EQ(ValidateHostname("&:2domain", 2, 10, {}),
+            ValidateHostnameState::InvalidChar);
 }
 
 TEST(ValidateHostnameTest, ValidateHostnameTemp) {

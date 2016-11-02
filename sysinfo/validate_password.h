@@ -11,6 +11,7 @@ namespace installer {
 
 enum class ValidatePasswordState {
   Ok,
+  EmptyError,  // Password is empty.
   TooShortError,  // Too few characters in password.
   TooLongError,  // Too many characters in password.
   NoNumberError,  // No number in password.

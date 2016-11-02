@@ -76,8 +76,8 @@ oem 目录应该位于U盘(fat32格式)或系统光盘的根目录, 里面需要
 * `system_info_default_password` 默认密码.
 * `system_info_setup_after_reboot` 用于跳过帐户设置, 在下次重启系统再设定.
 * `skip_system_info_page` 跳过帐户设置页面, 但可以读取默认值.
-* `system_info_password_min_length`, `system_info_password_max_length`,
- `system_info_password_shall_contain_number`,
- `system_info_password_shall_contain_lower_case`,
- `system_info_password_shall_contain_upper_case` 以及
- `system_info_password_shall_contain_special_char` 用于设定密码策略.
+* `system_info_password_min_len`, `system_info_password_max_len`,
+ `system_info_password_require_number`,
+ `system_info_password_require_lower_case`,
+ `system_info_password_require_upper_case` 以及
+ `system_info_password_require_special_char` 用于设定密码策略.

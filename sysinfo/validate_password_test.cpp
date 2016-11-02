@@ -10,6 +10,8 @@ namespace installer {
 namespace {
 
 TEST(ValidatePasswordTest, ValidatePassword) {
+  EXPECT_EQ(ValidatePassword("", 5, 10, false, false, false, false),
+            ValidatePasswordState::EmptyError);
   EXPECT_EQ(ValidatePassword("ABC", 8, 12, false, false, false, false),
             ValidatePasswordState::TooShortError);
 

@@ -29,22 +29,25 @@ const char kSystemInfoSetupAfterReboot[] = "system_info_setup_after_reboot";
 const char kSystemInfoUseDefaultUsername[] =
     "system_info_use_default_username";
 const char kSystemInfoDefaultUsername[] = "system_info_default_username";
-const char kSystemInfoUseDefaultPasswordName[] =
-    "system_info_use_default_password";
-const char kSystemInfoDefaultPassword[] = "system_info_default_password";
-const char kSystemInfoPasswordMinLength[] = "system_info_password_min_length";
-const char kSystemInfoPasswordMaxLength[] = "system_info_password_max_length";
-const char kSystemInfoPasswordShallContainNumber[] =
-    "system_info_password_shall_contain_number";
-const char kSystemInfoPasswordShallContainLowerCase[] =
-    "system_info_password_shall_contain_lower_case";
-const char kSystemInfoPasswordShallContainUpperCase[] =
-    "system_info_password_shall_contain_upper_case";
-const char kSystemInfoPasswordShallContainSpecialChar[] =
-    "system_info_password_shall_contain_special_char";
 const char kSystemInfoUseDefaultHostname[] =
     "system_info_use_default_hostname";
 const char kSystemInfoDefaultHostname[] = "system_info_default_hostname";
+const char kSystemInfoHostnameMinLen[] = "system_info_hostname_min_len";
+const char kSystemInfoHostnameMaxLen[] = "system_info_hostname_max_len";
+const char kSystemInfoHostnameReserved[] = "system_info_hostname_reserved";
+const char kSystemInfoUseDefaultPasswordName[] =
+    "system_info_use_default_password";
+const char kSystemInfoDefaultPassword[] = "system_info_default_password";
+const char kSystemInfoPasswordMinLen[] = "system_info_password_min_len";
+const char kSystemInfoPasswordMaxLen[] = "system_info_password_max_len";
+const char kSystemInfoPasswordRequireNumber[] =
+    "system_info_password_require_number";
+const char kSystemInfoPasswordRequireLowerCase[] =
+    "system_info_password_require_lower_case";
+const char kSystemInfoPasswordRequireUpperCase[] =
+    "system_info_password_require_upper_case";
+const char kSystemInfoPasswordRequireSpecialChar[] =
+    "system_info_password_require_special_char";
 const char kSystemInfoUseRandomAvator[] = "system_info_use_random_avator";
 const char kSystemInfoUseDefaultAvator[] = "system_info_use_default_avatar";
 const char kSystemInfoDefaultAvator[] = "system_info_default_avatar";

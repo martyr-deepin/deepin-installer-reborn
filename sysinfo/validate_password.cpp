@@ -27,10 +27,15 @@ ValidatePasswordState ValidatePassword(const QString& password,
                                        bool require_lower_case,
                                        bool require_upper_case,
                                        bool require_special_char) {
+  Q_ASSERT(min_len >= 0);
+  Q_ASSERT(max_len > min_len);
+
+  if (password.isEmpty() && min_len > 0) {
+    return ValidatePasswordState::EmptyError;
+  }
   if (password.length() < min_len) {
     return ValidatePasswordState::TooShortError;
   }
-
   if (password.length() > max_len) {
     return ValidatePasswordState::TooLongError;
   }
