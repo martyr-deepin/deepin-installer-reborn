@@ -16,6 +16,26 @@ QString GetPartitionName(const QString& path) {
   return QFileInfo(path).fileName();
 }
 
+QString GetPartitionLabel(const Partition& partition) {
+  switch (partition.type) {
+    case PartitionType::Unallocated: {
+      return QObject::tr("Freespace");
+    }
+    case PartitionType::Normal:  // pass through
+    case PartitionType::Logical: {
+      if (partition.label.isEmpty()) {
+        return GetPartitionName(partition.path);
+      } else {
+        // TODO(xushaohua): trim text
+        return partition.label;
+      }
+    }
+    default: {
+      return QString();
+    }
+  }
+}
+
 QString GetPartitionLabelAndPath(const Partition& partition) {
   switch (partition.type) {
     case PartitionType::Unallocated: {
@@ -64,46 +84,34 @@ int GetPartitionUsageValue(const Partition& partition) {
 
 QString GetOsTypeIcon(OsType os_type) {
   switch (os_type) {
-    case OsType::Empty: {
-      return QStringLiteral(":/images/driver_128.png");
-    }
     case OsType::Linux: {
       return QStringLiteral(":/images/driver_linux_32.png");
     }
     case OsType::Mac: {
       return QStringLiteral(":/images/driver_mac_32.png");
     }
-    case OsType::Unknown: {
-      return QStringLiteral(":/images/driver_32.png");
-    }
     case OsType::Windows: {
       return QStringLiteral(":/images/driver_windows_32.png");
     }
     default: {
-      return QString();
+      return QStringLiteral(":/images/driver_32.png");
     }
   }
 }
 
 QString GetOsTypeLargeIcon(OsType os_type) {
   switch (os_type) {
-    case OsType::Empty: {
-      return QStringLiteral(":/images/driver_128.png");
-    }
     case OsType::Linux: {
       return QStringLiteral(":/images/driver_linux_128.png");
     }
     case OsType::Mac: {
       return QStringLiteral(":/images/driver_mac_128.png");
     }
-    case OsType::Unknown: {
-      return QStringLiteral(":/images/driver_128.png");
-    }
     case OsType::Windows: {
       return QStringLiteral(":/images/driver_windows_128.png");
     }
     default: {
-      return QString();
+      return QStringLiteral(":/images/driver_128.png");
     }
   }
 }

@@ -14,7 +14,7 @@ namespace installer {
 
 // Get partition name based on |path|.
 QString GetPartitionName(const QString& path);
-
+QString GetPartitionLabel(const Partition& partition);
 QString GetPartitionLabelAndPath(const Partition& partition);
 
 // Get human readable partition usage.

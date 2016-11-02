@@ -40,32 +40,32 @@ void AdvancedPartitionButton::initUI() {
   QLabel* os_label = new QLabel();
   os_label->setObjectName(QStringLiteral("os_label"));
   os_label->setPixmap(GetOsTypeIcon(partition_.os));
-  os_label->setFixedWidth(32);
 
   // partition label name
   QLabel* name_label = new QLabel();
   name_label->setObjectName(QStringLiteral("name_label"));
-  // TODO(xushaohua): trim text
-  if (partition_.type == PartitionType::Unallocated) {
-    name_label->setText(tr("Freespace"));
-  } else {
-    if (!partition_.label.isEmpty()) {
-      name_label->setText(partition_.label);
-    } else {
-      name_label->setText(GetPartitionName(partition_.path));
-    }
-  }
-  name_label->setFixedWidth(64);
+  name_label->setText(GetPartitionLabel(partition_));
 
   // partition path
   QLabel* path_label = new QLabel();
   path_label->setObjectName(QStringLiteral("path_label"));
-  // TODO(xushaohua): Move to partition_util.h
   if (partition_.type != PartitionType::Unallocated) {
-    path_label->setText(
-        QString("(%1)").arg(GetPartitionName(partition_.path)));
+    const QString name = GetPartitionName(partition_.path);
+    path_label->setText(QString("(%1)").arg(name));
   }
-  path_label->setFixedWidth(64);
+
+  QHBoxLayout* path_layout = new QHBoxLayout();
+  path_layout->setContentsMargins(0, 0, 0, 0);
+  path_layout->setSpacing(10);
+  path_layout->addWidget(os_label);
+  path_layout->addWidget(name_label);
+  path_layout->addWidget(path_label);
+  path_layout->addStretch();
+  QFrame* path_frame = new QFrame();
+  path_frame->setObjectName("path_frame");
+  path_frame->setContentsMargins(0, 0, 0, 0);
+  path_frame->setLayout(path_layout);
+  path_frame->setFixedWidth(220);
 
   // partition space usage
   QLabel* usage_label = new QLabel();
@@ -118,9 +118,7 @@ void AdvancedPartitionButton::initUI() {
   // TODO(xushaohua): Use fixed layout instead.
   QHBoxLayout* layout = new QHBoxLayout();
   layout->addSpacing(20);
-  layout->addWidget(os_label);
-  layout->addWidget(name_label);
-  layout->addWidget(path_label);
+  layout->addWidget(path_frame);
   layout->addStretch();
   layout->addWidget(usage_label);
   layout->addWidget(usage_bar);
