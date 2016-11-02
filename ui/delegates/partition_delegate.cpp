@@ -187,15 +187,23 @@ void PartitionDelegate::scanDevices() const {
     for (int j = 0; j < i+4; j++) {
       Partition partition;
       partition.label = "Debian";
-      partition.type = PartitionType::Normal;
-      partition.fs = FsType::Ext4;
-      partition.os = OsType::Linux;
-      partition.path = "/dev/sda1";
-      partition.sector_size = 512;
-      partition.start_sector = 1024;
-      partition.end_sector = 1289800441;
-      partition.length = 13456554441;
-      partition.freespace = 6456554441;
+      if (j % 2 == 0) {
+        partition.type = PartitionType::Normal;
+        partition.fs = FsType::Ext4;
+        partition.os = OsType::Linux;
+        partition.path = "/dev/sda1";
+        partition.sector_size = 512;
+        partition.start_sector = 1024;
+        partition.end_sector = 1289800441;
+        partition.length = 13456554441;
+        partition.freespace = 6456554441;
+      } else {
+        partition.type = PartitionType::Unallocated;
+        partition.start_sector = 1024;
+        partition.end_sector = 182390123;
+        partition.sector_size = 512;
+      }
+
       device.partitions.append(partition);
     }
     devices.append(device);

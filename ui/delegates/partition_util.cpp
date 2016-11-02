@@ -32,16 +32,26 @@ QString GetPartitionUsage(qint64 freespace, qint64 total) {
 }
 
 QString GetPartitionUsage(const Partition& partition) {
-  const qint64 length = (partition.length > 0) ? partition.length :
-                        partition.getByteLength();
-  const qint64 freespace = partition.freespace;
-  return GetPartitionUsage(freespace, length);
+  if (partition.type == PartitionType::Normal ||
+      partition.type == PartitionType::Logical) {
+    const qint64 length = (partition.length > 0) ? partition.length :
+                          partition.getByteLength();
+    return GetPartitionUsage(partition.freespace, length);
+  } else {
+    const qint64 length = partition.getByteLength();
+    return GetPartitionUsage(length, length);
+  }
 }
 
 int GetPartitionUsageValue(const Partition& partition) {
-  const qint64 length = (partition.length > 0) ? partition.length :
-                        partition.getByteLength();
-  return int(100 * (length - partition.freespace) / length);
+  if (partition.type == PartitionType::Normal ||
+      partition.type == PartitionType::Logical) {
+    const qint64 length = (partition.length > 0) ? partition.length :
+                          partition.getByteLength();
+    return int(100 * (length - partition.freespace) / length);
+  } else {
+    return 0;
+  }
 }
 
 QString GetOsTypeIcon(OsType os_type) {

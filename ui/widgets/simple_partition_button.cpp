@@ -58,8 +58,7 @@ void SimplePartitionButton::initUI() {
   usage_bar->setObjectName("usage_bar");
   usage_bar->setFixedSize(80, 6);
   usage_bar->setTextVisible(false);
-//  usage_bar->setValue(int(GetPartitionUsageValue(partition_) * 100));
-  usage_bar->setValue(37);
+  usage_bar->setValue(GetPartitionUsageValue(partition_));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
