@@ -17,30 +17,38 @@ QString GetPartitionName(const QString& path) {
 }
 
 QString GetPartitionLabelAndPath(const Partition& partition) {
-  // TODO(xushaohua): Trim text to appropriate length.
-  const QString name = GetPartitionName(partition.path);
-  if (partition.label.isEmpty()) {
-    return name;
-  } else {
-    return QString("%1(%2)").arg(partition.label).arg(name);
+  switch (partition.type) {
+    case PartitionType::Unallocated: {
+      return QObject::tr("Freespace");
+    }
+    case PartitionType::Normal:  // pass through
+    case PartitionType::Logical: {
+      // TODO(xushaohua): Trim text to appropriate length.
+      const QString name = GetPartitionName(partition.path);
+      if (partition.label.isEmpty()) {
+        return name;
+      } else {
+        return QString("%1(%2)").arg(partition.label).arg(name);
+      }
+    }
+    default: {
+      return QString();
+    }
   }
-}
-
-QString GetPartitionUsage(qint64 freespace, qint64 total) {
-  const qint64 used = total - freespace;
-  return QString("%1/%2G").arg(ToGigByte(used)).arg(ToGigByte(total));
 }
 
 QString GetPartitionUsage(const Partition& partition) {
+  qint64 total, used;
   if (partition.type == PartitionType::Normal ||
       partition.type == PartitionType::Logical) {
-    const qint64 length = (partition.length > 0) ? partition.length :
-                          partition.getByteLength();
-    return GetPartitionUsage(partition.freespace, length);
+    total = (partition.length > 0) ? partition.length :
+             partition.getByteLength();
+    used = total - partition.freespace;
   } else {
-    const qint64 length = partition.getByteLength();
-    return GetPartitionUsage(length, length);
+    total = partition.getByteLength();
+    used = 0;
   }
+  return QString("%1/%2G").arg(ToGigByte(used)).arg(ToGigByte(total));
 }
 
 int GetPartitionUsageValue(const Partition& partition) {
