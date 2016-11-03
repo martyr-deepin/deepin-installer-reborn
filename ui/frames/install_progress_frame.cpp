@@ -6,8 +6,9 @@
 
 #include <QDebug>
 #include <QProgressBar>
-#include <QVBoxLayout>
+#include <QStyle>
 #include <QThread>
+#include <QVBoxLayout>
 
 #include "base/file_util.h"
 #include "service/hooks_manager.h"
@@ -40,7 +41,6 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
 
   this->initUI();
   this->initConnections();
-  this->onProgressUpdate(47);
 }
 
 InstallProgressFrame::~InstallProgressFrame() {
@@ -101,6 +101,7 @@ void InstallProgressFrame::initUI() {
   tooltip_label_->setAlignment(Qt::AlignHCenter);
 
   progress_bar_ = new QProgressBar();
+  progress_bar_->setObjectName("progress_bar");
   progress_bar_->setFixedSize(kProgressBarWidth, 8);
   progress_bar_->setTextVisible(false);
   progress_bar_->setRange(0, 100);
@@ -137,8 +138,11 @@ void InstallProgressFrame::onProgressUpdate(int progress) {
   const int x = kProgressBarWidth * progress / 100;
   const int y = tooltip_label_->y();
   tooltip_label_->move(x, y);
+
   // Force QProgressBar to repaint.
-  progress_bar_->update();
+  this->style()->unpolish(progress_bar_);
+  this->style()->polish(progress_bar_);
+  progress_bar_->repaint();
 }
 
 void InstallProgressFrame::onSucceeded() {

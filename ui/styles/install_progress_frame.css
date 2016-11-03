@@ -1,41 +1,16 @@
 /** Used in InstallProgressFrame class */
 
-/*QSlider {*/
-  /*border-radius: 5px;*/
-  /*background-color: rgba(255, 255, 255, 0.1);*/
-/*}*/
-
-/*QSlider::groove:horizontal {*/
-  /*border: none;*/
-  /*background: rgba(255, 255, 255, 0.1);*/
-  /*height: 10px;*/
-  /*margin: 0px;*/
-  /*border-radius: 5px;*/
-/*}*/
-
-/*QSlider::handle:horizontal {*/
-  /*width: 0px;*/
-  /*border: 0px;*/
-  /*margin: 0px;*/
-  /*border-radius: 0px;*/
-  /*background-color: transparent;*/
-/*}*/
-
-/*QSlider::add-page:qlineargradient {*/
-  /*background: rgba(255, 255, 255, 0.1);*/
-  /*border-top-right-radius: 5px;*/
-  /*border-bottom-right-radius: 5px;*/
-  /*border-top-left-radius: 0px;*/
-  /*border-bottom-left-radius: 0px;*/
-/*}*/
-
-/*QSlider::sub-page:qlineargradient {*/
-  /*background: #2ca7f8;*/
-  /*border-top-right-radius: 0px;*/
-  /*border-bottom-right-radius: 0px;*/
-  /*border-top-left-radius: 5px;*/
-  /*border-bottom-left-radius: 5px;*/
-/*}*/
+#tooltip_frame {
+  background: transparent;
+}
+#tooltip_label {
+  color: #000000;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+}
 
 QProgressBar {
   border-radius: 4px;
@@ -49,14 +24,7 @@ QProgressBar::chunk {
   border-bottom-left-radius: 4px;
 }
 
-#tooltip_frame {
-  background: transparent;
-}
-#tooltip_label {
-  color: #000000;
-  padding: 0;
-  margin: 0;
-  font-size: 12px;
-  text-align: center;
-  vertical-align: middle;
+/* Add round corner at right side when progress value reaches 100% */
+QProgressBar::chunk[value="100"] {
+  border-radius: 4px;
 }
