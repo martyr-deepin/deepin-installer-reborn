@@ -1,0 +1,21 @@
+/** Used in PrepareInstallFrame class */
+
+#subtitle_label {
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1;
+  text-align: center;
+}
+
+#desc_area {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+#desc_label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 4.29;
+  background: transparent;
+}
