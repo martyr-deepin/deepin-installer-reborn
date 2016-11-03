@@ -16,7 +16,7 @@ TableComboBox::TableComboBox(QWidget* parent) : QComboBox(parent) {
   QAbstractItemDelegate* delegate = new FramelessItemDelegate(this);
   this->setItemDelegate(delegate);
   this->setFrame(false);
-  this->setStyleSheet(ReadTextFileContent(":/styles/table_combo_box.css"));
+  this->setStyleSheet(ReadFile(":/styles/table_combo_box.css"));
 }
 
 }  // namespace installer

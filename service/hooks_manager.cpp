@@ -85,7 +85,7 @@ bool IsOverlayModuleExists() {
 }
 
 int ReadProgressValue(const QString& file) {
-  const QString val = ReadTextFileContent(file);
+  const QString val(ReadFile(file));
   if (val.isEmpty()) {
     return -1;
   }

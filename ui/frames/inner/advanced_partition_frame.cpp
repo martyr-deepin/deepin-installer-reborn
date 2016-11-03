@@ -127,8 +127,7 @@ void AdvancedPartitionFrame::initUI() {
   QSizePolicy container_policy(QSizePolicy::Preferred, QSizePolicy::Expanding);
   container_policy.setVerticalStretch(100);
   this->setSizePolicy(container_policy);
-  this->setStyleSheet(
-      ReadTextFileContent(":/styles/advanced_partition_frame.css"));
+  this->setStyleSheet(ReadFile(":/styles/advanced_partition_frame.css"));
 }
 
 void AdvancedPartitionFrame::repaintDevices() {

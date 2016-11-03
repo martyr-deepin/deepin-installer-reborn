@@ -151,8 +151,7 @@ void PartitionFrame::initUI() {
   main_frame_ = new QFrame();
   main_frame_->setContentsMargins(0, 0, 0, 0);
   main_frame_->setLayout(layout);
-  main_frame_->setStyleSheet(
-      ReadTextFileContent(":/styles/partition_frame_main_frame.css"));
+  main_frame_->setStyleSheet(ReadFile(":/styles/partition_main_frame.css"));
 
   main_layout_ = new QStackedLayout();
   main_layout_->addWidget(partition_loading_frame_);

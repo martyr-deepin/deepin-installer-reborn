@@ -114,8 +114,7 @@ void PartitionTableWarningFrame::initUI() {
   layout->addStretch();
 
   this->setLayout(layout);
-  this->setStyleSheet(
-      ReadTextFileContent(":/styles/partition_table_warning_frame.css"));
+  this->setStyleSheet(ReadFile(":/styles/partition_table_warning_frame.css"));
 }
 
 }  // namespace installer

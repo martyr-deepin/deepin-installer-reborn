@@ -15,7 +15,7 @@
     <file>log_viewer_frame.css</file>
     <file>nav_button.css</file>
     <file>new_partition_frame.css</file>
-    <file>partition_frame_main_frame.css</file>
+    <file>partition_main_frame.css</file>
     <file>partition_size_slider.css</file>
     <file>partition_table_warning_frame.css</file>
     <file>select_language_frame.css</file>

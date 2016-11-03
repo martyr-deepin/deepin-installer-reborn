@@ -177,7 +177,7 @@ void EditPartitionFrame::initUI() {
 
   this->setLayout(layout);
   this->setContentsMargins(0, 0, 0, 0);
-  this->setStyleSheet(ReadTextFileContent(":/styles/edit_partition_frame.css"));
+  this->setStyleSheet(ReadFile(":/styles/edit_partition_frame.css"));
 }
 
 void EditPartitionFrame::onFsChanged(int index) {

@@ -72,8 +72,7 @@ void SimplePartitionButton::initUI() {
 
   this->setLayout(layout);
 
-  this->setStyleSheet(
-      ReadTextFileContent(":/styles/simple_partition_button.css"));
+  this->setStyleSheet(ReadFile(":/styles/simple_partition_button.css"));
   this->setCheckable(true);
   this->setFixedSize(kButtonWidth, kButtonHeight);
 }

@@ -90,8 +90,7 @@ void SimplePartitionFrame::initUI() {
   QSizePolicy policy(QSizePolicy::Fixed, QSizePolicy::Expanding);
   policy.setVerticalStretch(100);
   this->setSizePolicy(policy);
-  this->setStyleSheet(
-      ReadTextFileContent(":/styles/simple_partition_frame.css"));
+  this->setStyleSheet(ReadFile(":/styles/simple_partition_frame.css"));
 }
 
 void SimplePartitionFrame::repaintDevices() {

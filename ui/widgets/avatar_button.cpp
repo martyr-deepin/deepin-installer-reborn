@@ -25,7 +25,7 @@ AvatarButton::AvatarButton(const QString& icon, QWidget* parent)
   this->setObjectName(QStringLiteral("avatar_button"));
 
   this->setFixedSize(kIconSize, kIconSize);
-  this->setStyleSheet(ReadTextFileContent(":/styles/avatar_button.css"));
+  this->setStyleSheet(ReadFile(":/styles/avatar_button.css"));
 }
 
 void AvatarButton::updateIcon(const QString& icon) {

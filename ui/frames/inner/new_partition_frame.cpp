@@ -152,7 +152,7 @@ void NewPartitionFrame::initUI() {
   layout->addWidget(create_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
-  this->setStyleSheet(ReadTextFileContent(":/styles/new_partition_frame.css"));
+  this->setStyleSheet(ReadFile(":/styles/new_partition_frame.css"));
 }
 
 void NewPartitionFrame::onCreateButtonClicked() {

@@ -63,8 +63,7 @@ void InstallFailedFrame::initUI() {
   content_label_->setFixedSize(kContentWindowWidth, kContentWindowHeight);
   content_label_->setWordWrap(true);
   content_label_->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-  content_label_->setStyleSheet(
-      ReadTextFileContent(":/styles/install_failed_label.css"));
+  content_label_->setStyleSheet(ReadFile(":/styles/install_failed_label.css"));
   qr_widget_ = new QRWidget(content_frame);
   qr_widget_->setFixedSize(kQRWindowSize, kQRWindowSize);
   qr_widget_->move((kContentWindowWidth - kQRWindowSize) / 2,

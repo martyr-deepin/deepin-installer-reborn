@@ -137,8 +137,7 @@ void AdvancedPartitionButton::initUI() {
   this->setCheckable(true);
   this->setChecked(false);
   this->setFlat(true);
-  this->setStyleSheet(
-      ReadTextFileContent(":/styles/advanced_partition_button.css"));
+  this->setStyleSheet(ReadFile(":/styles/advanced_partition_button.css"));
 }
 
 void AdvancedPartitionButton::updateStatus() {

@@ -10,7 +10,7 @@ namespace installer {
 
 QList<MountItem> ParseMountItems() {
   MountItemList result;
-  const QString content = ReadTextFileContent("/proc/mounts");
+  const QString content(ReadFile("/proc/mounts"));
   const QStringList lines = content.split("\n");
   for (const QString& line : lines) {
     const QStringList parts = line.split(" ", QString::SkipEmptyParts);

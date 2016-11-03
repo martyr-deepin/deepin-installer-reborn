@@ -12,7 +12,7 @@ SectionLabel::SectionLabel(const QString& text, QWidget* parent)
     : QLabel(text, parent) {
   this->setObjectName(QStringLiteral("section_label"));
 
-  this->setStyleSheet(ReadTextFileContent(":/oem_styles/section_label.css"));
+  this->setStyleSheet(ReadFile(":/oem_styles/section_label.css"));
 }
 
 }  // namespace installer

@@ -87,7 +87,7 @@ bool IsPartitionTableMatch() {
 // feedback server.
 // Returns false if failed.
 bool ReadErrorMsg(QString& msg, QString& encoded_msg) {
-  msg = ReadTextFileContent(GetLogFilepath());
+  msg = ReadFile(GetLogFilepath());
   if (msg.isEmpty()) {
     return false;
   }

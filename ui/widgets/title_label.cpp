@@ -12,7 +12,7 @@ TitleLabel::TitleLabel(const QString& text, QWidget* parent)
   : QLabel(text, parent) {
   this->setAlignment(Qt::AlignHCenter);
   this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-  this->setStyleSheet(ReadTextFileContent(":/styles/title_label.css"));
+  this->setStyleSheet(ReadFile(":/styles/title_label.css"));
 }
 
 }  // namespace installer

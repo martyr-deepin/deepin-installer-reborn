@@ -69,8 +69,7 @@ void SelectLanguageFrame::initUI() {
   layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
-  this->setStyleSheet(
-      ReadTextFileContent(":/styles/select_language_frame.css"));
+  this->setStyleSheet(ReadFile(":/styles/select_language_frame.css"));
 }
 
 void SelectLanguageFrame::onLanguageListSelected() {

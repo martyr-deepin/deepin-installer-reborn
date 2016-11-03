@@ -31,10 +31,10 @@ qint64 GetFileSize(const QString& filepath);
 
 // Read contents of file, returns an empty string if failed.
 // DEPRECATED: call ReadTextFile() instead.
-QString ReadTextFileContent(const QString& path);
+QString ReadFile(const QString& path);
 
 // Read text file encoded in GB18030.
-QString ReadGBKTextFileContent(const QString& path);
+QString ReadGBKFile(const QString& path);
 
 // Read contents of file, returns true if succeeded, or false otherwise.
 // |content| holds the content of that file.

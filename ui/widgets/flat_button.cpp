@@ -11,7 +11,7 @@ namespace installer {
 
 FlatButton::FlatButton(QWidget* parent) : PointerButton(parent) {
   this->setFlat(true);
-  this->setStyleSheet(ReadTextFileContent(":/styles/flat_button.css"));
+  this->setStyleSheet(ReadFile(":/styles/flat_button.css"));
 }
 
 FlatButton::FlatButton(const QString& text, QWidget* parent)

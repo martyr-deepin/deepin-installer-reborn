@@ -28,7 +28,7 @@ bool ZoneInfo::operator==(const ZoneInfo& other) {
 
 ZoneInfoList GetZoneInfoList() {
   ZoneInfoList list;
-  const QString content = ReadTextFileContent(kZoneTabFile);
+  const QString content(ReadFile(kZoneTabFile));
   for (const QString& line : content.split('\n')) {
     if (!line.startsWith('#')) {
       const QStringList parts = line.split('\t');
@@ -42,7 +42,7 @@ ZoneInfoList GetZoneInfoList() {
 }
 
 QString GetCurrentTimezone() {
-  const QString content = ReadTextFileContent("/etc/timezone");
+  const QString content(ReadFile("/etc/timezone"));
   return content.trimmed();
 }
 

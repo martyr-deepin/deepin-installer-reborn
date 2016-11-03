@@ -16,7 +16,7 @@ FramelessListView::FramelessListView(QWidget* parent)
   FramelessItemDelegate* delegate = new FramelessItemDelegate(this);
   this->setItemDelegate(delegate);
 
-  this->setStyleSheet(ReadTextFileContent(":/styles/frameless_list_view.css"));
+  this->setStyleSheet(ReadFile(":/styles/frameless_list_view.css"));
   QSizePolicy list_policy(QSizePolicy::Fixed, QSizePolicy::Expanding);
   list_policy.setHorizontalStretch(1);
   list_policy.setVerticalStretch(1);

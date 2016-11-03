@@ -11,7 +11,7 @@ namespace installer {
 // TODO(xushaohua): Call dmidecode or virt-what.
 bool IsVirtualMachine() {
   // Check "hypervisor" flag is added in /proc/cpuinfo.
-  const QString content = ReadTextFileContent("/proc/cpuinfo");
+  const QString content(ReadFile("/proc/cpuinfo"));
   return content.contains("hypervisor");
 }
 

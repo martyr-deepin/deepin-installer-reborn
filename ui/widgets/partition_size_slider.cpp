@@ -73,8 +73,7 @@ void PartitionSizeSlider::initUI() {
   this->setContentsMargins(10, 0, 10, 0);
   // Same as TableComboBox
   this->setFixedSize(240, 36);
-  this->setStyleSheet(
-      ReadTextFileContent(":/styles/partition_size_slider.css"));
+  this->setStyleSheet(ReadFile(":/styles/partition_size_slider.css"));
 }
 
 void PartitionSizeSlider::onEditorTextChanged(const QString& text) {

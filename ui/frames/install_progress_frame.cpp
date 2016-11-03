@@ -122,8 +122,7 @@ void InstallProgressFrame::initUI() {
   layout->addStretch();
 
   this->setLayout(layout);
-  this->setStyleSheet(
-      ReadTextFileContent(":/styles/install_progress_frame.css"));
+  this->setStyleSheet(ReadFile(":/styles/install_progress_frame.css"));
 }
 
 void InstallProgressFrame::onErrorOccurred() {

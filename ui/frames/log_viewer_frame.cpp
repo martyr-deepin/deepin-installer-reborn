@@ -66,7 +66,7 @@ void LogViewerFrame::initUI() {
   layout->addWidget(text_edit_);
   this->setLayout(layout);
 
-  this->setStyleSheet(ReadTextFileContent(":/styles/log_viewer_frame.css"));
+  this->setStyleSheet(ReadFile(":/styles/log_viewer_frame.css"));
   this->setWindowFlags(Qt::FramelessWindowHint);
   this->setWindowModality(Qt::WindowModal);
   this->setAttribute(Qt::WA_TranslucentBackground, true);
@@ -74,7 +74,7 @@ void LogViewerFrame::initUI() {
 }
 
 void LogViewerFrame::onTimerTimeout() {
-  const QString content = ReadTextFileContent(log_file_path_);
+  const QString content(ReadFile(log_file_path_));
   if (content == log_content_) {
     return;
   }

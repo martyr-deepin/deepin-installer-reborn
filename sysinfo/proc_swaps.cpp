@@ -13,11 +13,11 @@ namespace installer {
 
 SwapItemList ParseSwaps() {
   SwapItemList result;
-  const QString content = ReadTextFileContent(QStringLiteral("/proc/swaps"));
+  const QString content(ReadFile(QStringLiteral("/proc/swaps")));
 
   for (const QString& line : content.split('\n')) {
     if ((!line.isEmpty()) && (!line.startsWith("Filename"))) {
-      const QStringList parts = line.split(QRegExp("\\s+"));
+      const QStringList parts(line.split(QRegExp("\\s+")));
       if (parts.length() == 5) {
         SwapItem item = {
             parts.at(0),

@@ -61,11 +61,11 @@ qint64 GetFileSize(const QString& filepath) {
   }
 }
 
-QString ReadTextFileContent(const QString& path) {
+QString ReadFile(const QString& path) {
   QFile file(path);
   if (file.exists()) {
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-      qWarning() << "ReadTextFileContent() failed to open" << path;
+      qWarning() << "ReadFile() failed to open" << path;
       return "";
     }
     QTextStream text_stream(&file);
@@ -78,11 +78,11 @@ QString ReadTextFileContent(const QString& path) {
   }
 }
 
-QString ReadGBKTextFileContent(const QString& path) {
+QString ReadGBKFile(const QString& path) {
   QFile file(path);
   if (file.exists()) {
     if (!file.open(QIODevice::ReadOnly)) {
-      qWarning() << "[file_util].ReadGBKTextFileContent() failed to open"
+      qWarning() << "[file_util].ReadGBKFile() failed to open"
                  << path;
       return "";
     }
@@ -91,7 +91,7 @@ QString ReadGBKTextFileContent(const QString& path) {
     file.close();
     return codec->toUnicode(file_data);
   } else {
-    qWarning() << "[file_util].ReadGBKTextFileContent() file not found:"
+    qWarning() << "[file_util].ReadGBKFile() file not found:"
     << path;
     return "";
   }
@@ -120,7 +120,7 @@ bool WriteTextFile(const QString& path, const QString& content) {
     file.close();
     return true;
   }else {
-    qCritical() << "WriteTestFile() failed!" << ", path:" << path;
+    qCritical() << "WriteTextFile() failed!" << ", path:" << path;
     return false;
   }
 }

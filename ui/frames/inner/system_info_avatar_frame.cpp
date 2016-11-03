@@ -100,8 +100,7 @@ void SystemInfoAvatarFrame::initUI() {
   list_view_->setFixedWidth(960);
   list_view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   list_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  list_view_->setStyleSheet(
-      ReadTextFileContent(":/styles/avatar_list_view.css"));;
+  list_view_->setStyleSheet(ReadFile(":/styles/avatar_list_view.css"));;
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
