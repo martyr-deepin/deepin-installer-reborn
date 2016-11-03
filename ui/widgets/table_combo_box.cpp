@@ -6,6 +6,7 @@
 
 #include "base/file_util.h"
 #include "ui/delegates/frameless_list_delegate.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -17,6 +18,8 @@ TableComboBox::TableComboBox(QWidget* parent) : QComboBox(parent) {
   this->setItemDelegate(delegate);
   this->setFrame(false);
   this->setStyleSheet(ReadFile(":/styles/table_combo_box.css"));
+
+  SetQComboBoxTransparent(this);
 }
 
 }  // namespace installer

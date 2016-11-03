@@ -4,8 +4,10 @@
 
 #include <QApplication>
 #include <QFrame>
+#include <QMenu>
 
 #include "ui/widgets/table_combo_box.h"
+#include "ui/utils/widget_util.h"
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
@@ -20,6 +22,15 @@ int main(int argc, char* argv[]) {
   frame.setAttribute(Qt::WA_NoBackground, true);
   frame.setStyleSheet("background: transparent;");
   frame.show();
+
+  QMenu menu;
+  menu.addAction("Help");
+  menu.addAction("About");
+  menu.addAction("Quit");
+  menu.popup(QPoint(100, 100));
+  menu.setStyleSheet("background: transparent;");
+  menu.setAttribute(Qt::WA_TranslucentBackground, true);
+  installer::SetQMenuTransparent(&menu);
 
   return app.exec();
 }

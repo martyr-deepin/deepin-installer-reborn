@@ -129,7 +129,6 @@ void MainWindow::scanDevices() {
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
   this->updateBackground();
-
   QWidget::resizeEvent(event);
 }
 

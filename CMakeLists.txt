@@ -164,6 +164,9 @@ set(UI_FILES
     ui/models/mount_point_model.cpp ui/models/mount_point_model.h
     ui/models/partition_list_model.cpp ui/models/partition_list_model.h
 
+    ui/utils/widget_util.cpp ui/utils/widget_util.h
+    ui/utils/xutil.cpp ui/utils/xutil.h
+
     ui/views/frameless_list_view.cpp ui/views/frameless_list_view.h
     ui/views/pointer_list_view.cpp ui/views/pointer_list_view.h
 
@@ -192,8 +195,6 @@ set(UI_FILES
     ui/xrandr/multi_head_manager.cpp ui/xrandr/multi_head_manager.h
     ui/xrandr/multi_head_worker.cpp ui/xrandr/multi_head_worker.h
     ui/xrandr/xrandr_wrapper.cpp ui/xrandr/xrandr_wrapper.h
-
-    ui/utils/xutil.cpp ui/utils/xutil.h
     )
 
 set(ROOT_UNITTEST_FILES
@@ -259,6 +260,7 @@ add_executable(combobox-test
                
                ${BASE_FILES}
                ui/delegates/frameless_list_delegate.cpp ui/delegates/frameless_list_delegate.h
+               ui/utils/widget_util.cpp ui/utils/widget_util.h
                ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
                ui/images/images.qrc
                ui/styles/styles.qrc
