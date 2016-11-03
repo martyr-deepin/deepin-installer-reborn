@@ -225,8 +225,12 @@ bool SystemInfoFormFrame::validatePassword(QString& msg) {
 }
 
 bool SystemInfoFormFrame::validatePassword2(QString& msg) {
-  Q_UNUSED(msg);
-  return true;
+  if (password_edit_->text() != password2_edit_->text()) {
+    msg = tr("Password not match");
+    return false;
+  } else {
+    return true;
+  }
 }
 
 void SystemInfoFormFrame::onNextButtonClicked() {
@@ -245,6 +249,7 @@ void SystemInfoFormFrame::onNextButtonClicked() {
     tooltip_->showBottom(password2_edit_);
   } else {
     tooltip_->hide();
+    // Write settings to config file when all form inputs are ok.
     WriteUsername(username_edit_->text());
     WriteHostname(hostname_edit_->text());
     WritePassword(password_edit_->text());
@@ -287,7 +292,10 @@ void SystemInfoFormFrame::onPasswordEditingFinished() {
 
 void SystemInfoFormFrame::onPassword2EditingFinished() {
   QString msg;
-  if (!validatePassword2(msg)) {
+  if (!validatePassword(msg)) {
+    tooltip_->setText(msg);
+    tooltip_->showBottom(password_edit_);
+  } else if (!validatePassword2(msg)) {
     tooltip_->setText(msg);
     tooltip_->showBottom(password2_edit_);
   }
