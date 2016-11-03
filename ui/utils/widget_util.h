@@ -17,6 +17,7 @@ bool SetChildTransparent(QWidget* root, const QString& child_name);
 
 // Set popup window background to transparent.
 void SetQComboBoxTransparent(QComboBox* box);
+// DEPRECATED. Not work.
 void SetQMenuTransparent(QMenu* menu);
 
 // Print type info about |root| and its children.

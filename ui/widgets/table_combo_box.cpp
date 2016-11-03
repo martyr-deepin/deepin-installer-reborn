@@ -5,7 +5,7 @@
 #include "ui/widgets/table_combo_box.h"
 
 #include "base/file_util.h"
-#include "ui/delegates/frameless_list_delegate.h"
+#include "ui/delegates/table_combo_box_delegate.h"
 #include "ui/utils/widget_util.h"
 
 namespace installer {
@@ -14,12 +14,12 @@ TableComboBox::TableComboBox(QWidget* parent) : QComboBox(parent) {
   this->setObjectName(QStringLiteral("table_combo_box"));
 
   this->setFixedSize(240, 36);
-  QAbstractItemDelegate* delegate = new FramelessItemDelegate(this);
+  QAbstractItemDelegate* delegate = new TableComboBoxDelegate(this);
   this->setItemDelegate(delegate);
-  this->setFrame(false);
   this->setStyleSheet(ReadFile(":/styles/table_combo_box.css"));
 
   SetQComboBoxTransparent(this);
+  WidgetTreeWalk(this);
 }
 
 }  // namespace installer

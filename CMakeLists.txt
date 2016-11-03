@@ -133,6 +133,7 @@ set(UI_FILES
     ui/delegates/frameless_list_delegate.cpp ui/delegates/frameless_list_delegate.h
     ui/delegates/partition_delegate.cpp ui/delegates/partition_delegate.h
     ui/delegates/partition_util.cpp ui/delegates/partition_util.h
+    ui/delegates/table_combo_box_delegate.cpp ui/delegates/table_combo_box_delegate.h
 
     ui/frames/consts.h
     ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
@@ -259,7 +260,7 @@ add_executable(combobox-test
                ui/tests/combobox_test.cpp
                
                ${BASE_FILES}
-               ui/delegates/frameless_list_delegate.cpp ui/delegates/frameless_list_delegate.h
+               ui/delegates/table_combo_box_delegate.cpp ui/delegates/table_combo_box_delegate.h
                ui/utils/widget_util.cpp ui/utils/widget_util.h
                ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
                ui/images/images.qrc
