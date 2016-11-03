@@ -335,11 +335,6 @@ add_executable(deepin-installer-xrandr-switchy
 target_link_libraries(deepin-installer-xrandr-switchy ${Qt_LIBS})
 
 
-# screen-info
-add_executable(screen-info misc/screen_info.cpp)
-target_link_libraries(screen-info ${Qt_LIBS})
-
-
 ## Installation
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")

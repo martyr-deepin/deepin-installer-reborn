@@ -53,11 +53,11 @@ QString g_dest_dir;
 // Copy regular file with sendfile() system call, from |src_file| to
 // |dest_file|. Size of |src_file| is |file_size|.
 bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
-  qDebug() << "SendFile():" << src_file << dest_file;
+  printf("SendFile(): %s, %s\n", src_file, dest_file);
   int src_fd, dest_fd;
   src_fd = open(src_file, O_RDONLY);
   if (src_fd == -1) {
-    qCritical() << "SendFile() Failed to open src file:" << src_file;
+    fprintf(stderr, "SendFile() Failed to open src file: %s\n", src_file);
     perror("Open src file failed!");
     return 1;
   }
@@ -65,7 +65,7 @@ bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
   // TODO(xushaohua): handles umask
   dest_fd = open(dest_file, O_CREAT | O_RDWR, S_IREAD | S_IWRITE);
   if (dest_fd == -1) {
-    qCritical() << "SendFile() Failed to open dest file:" << dest_file;
+    fprintf(stderr, "SendFile() Failed to open dest file: %s\n", dest_file);
     perror("Open dest file failed!");
     return 1;
   }
@@ -75,7 +75,7 @@ bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
   while (num_to_read > 0) {
     const ssize_t num_sent = sendfile(dest_fd, src_fd, NULL, num_to_read);
     if (num_sent <= 0) {
-      perror("sendfile() err:");
+      perror("sendfile() error");
       ok = false;
       break;
     }
@@ -89,23 +89,24 @@ bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
 }
 
 bool CopySymLink(const char* src_file, const char* dest_file) {
-  qDebug() << "CopySymLink():" << src_file << dest_file;
+  printf("CopySymLink: %s, %s\n", src_file, dest_file);
 
   char buf[PATH_MAX];
   ssize_t link_len = readlink(src_file, buf, PATH_MAX);
   if (link_len <= 0) {
-    qCritical() << "CopySymLink() readlink() failed:" << src_file;
-    perror("readlink()");
+    fprintf(stderr, "CopySymLink() readlink() failed: %s\n", src_file);
+    perror("readlink() error");
     return false;
   }
 
-  char linkpath[link_len + 1];
-  strncpy(linkpath, buf, size_t(link_len));
-  linkpath[link_len] = '\0';
-  qDebug() << "link path:" << linkpath;
-  if (symlink(linkpath, dest_file) != 0) {
-    qCritical() << "CopySymLink() symlink() failed:" << linkpath << dest_file;
-    perror("symlink()");
+  char target[link_len + 1];
+  strncpy(target, buf, link_len);
+  target[link_len] = '\0';
+  printf("link path: %s\n", target);
+  if (symlink(target, dest_file) != 0) {
+    fprintf(stderr, "CopySymLink() symlink() failed: %s -> %s\n",
+            dest_file, target);
+    perror("symlink() error");
     return false;
   } else {
     return true;
@@ -114,15 +115,16 @@ bool CopySymLink(const char* src_file, const char* dest_file) {
 
 // Update xattr (access control lists and file capabilities)
 bool CopyXAttr(const char* src_file, const char* dest_file) {
-  qDebug() << "CopyXAttr():" << src_file << dest_file;
+  printf("CopyXAttr(): %s, %s\n", src_file, dest_file);
+
   bool ok = true;
   // size of extended attribute list, 64k.
   char list[XATTR_LIST_MAX];
   char value[XATTR_NAME_MAX];
   ssize_t xlist_len = llistxattr(src_file, list, XATTR_LIST_MAX);
   if (xlist_len < 0) {
-    qCritical() << "CopyXAttr() listxattr() failed:" << src_file;
-    perror("listxattr()");
+    fprintf(stderr, "CopyXAttr() listxattr() failed: %s\n", src_file);
+    perror("listxattr() error");
     ok = false;
   } else {
     ssize_t value_len;
@@ -130,14 +132,13 @@ bool CopyXAttr(const char* src_file, const char* dest_file) {
       value_len = lgetxattr(src_file, &list[ns], value, XATTR_NAME_MAX);
       if (value_len == -1) {
         // FIXME(xushaohua):
-        qWarning() << "CopyXAttr() could not get value:" << src_file;
-        qDebug() << ns << xlist_len;
+        fprintf(stderr, "CopyXAttr() could not get value: %s\n", src_file);
         break;
       } else {
         if (lsetxattr(dest_file, &list[ns], value, size_t(value_len), 0) != 0) {
-          qCritical() << "CopyXAttr() setxattr() failed:" << dest_file
-                      << &list[ns] << value;
-          perror("setxattr()");
+          fprintf(stderr, "CopyXAttr() setxattr() failed: %s, %s, %s\n",
+                  dest_file, &list[ns], value);
+          perror("setxattr() error");
           ok = false;
           break;
         }
@@ -155,11 +156,11 @@ int CopyItem(const char* fpath, const struct stat* sb,
   Q_UNUSED(typeflag);
   Q_UNUSED(ftwbuf);
 
-  qDebug() << "CopyItem()" << fpath;
+  printf("CopyItem() %s\n", fpath);
 
   struct stat st;
   if (lstat(fpath, &st) != 0) {
-    qCritical() << "CopyItem() call lstat() failed:" << fpath;
+    fprintf(stderr, "CopyItem() call lstat() failed: %s\n", fpath);
     perror("lstat()");
     return 1;
   }
@@ -171,18 +172,15 @@ int CopyItem(const char* fpath, const struct stat* sb,
   const QString dest_filepath =
       QDir(g_dest_dir).absoluteFilePath(relative_path);
 
-  // Create paretn dirs.
+  // Create parent dirs.
   installer::CreateParentDires(dest_filepath);
 
-  const size_t dest_len = size_t(dest_filepath.length());
-  char dest_file[dest_len + 1];
-  strncpy(dest_file, dest_filepath.toUtf8().data(), dest_len);
-  dest_file[dest_len] = '\0';
-
-  bool ok = true;
+  const std::string std_dest_filepath(dest_filepath.toStdString());
+  const char* dest_file = std_dest_filepath.c_str();
 
   // Get file mode.
   const mode_t mode = st.st_mode & S_IMODE;
+  bool ok = true;
 
   if (S_ISLNK(st.st_mode)) {
     // Symbolic link
@@ -206,21 +204,26 @@ int CopyItem(const char* fpath, const struct stat* sb,
     // Socket
     ok = (mknod(dest_file, mode | S_IFSOCK, st.st_dev) == 0);
   } else {
-    qCritical() << "CopyItem() Unknown file mode:" << st.st_mode;
+    fprintf(stderr, "CopyItem() Unknown file mode: %d\n", st.st_mode);
+  }
+
+  if (!ok) {
+    // Returns if error occured
+    return 1;
   }
 
   // TODO(xushaohua): Keep file descriptor.
   if (!S_ISLNK(st.st_mode)) {
     if (chmod(dest_file, mode) != 0) {
-      qCritical() << "CopyItem() chmod failed:" << dest_file << mode;
+      fprintf(stderr, "CopyItem() chmod failed: %s, %ul\n", dest_file, mode);
       perror("chmod()");
       ok = false;
     }
   }
   // Update permissions
   if (lchown(dest_file, st.st_uid, st.st_gid) != 0) {
-    qCritical() << "CopyItem() lchown() failed:" << dest_file
-                << st.st_uid << st.st_gid;
+    fprintf(stderr, "CopyItem() lchown() failed: %s, %d, %d\n",
+            dest_file, st.st_uid, st.st_gid);
     perror("lchown()");
     ok = false;
   }
