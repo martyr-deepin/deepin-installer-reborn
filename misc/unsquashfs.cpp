@@ -20,6 +20,7 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
+#include <QtMath>
 
 #include "base/command.h"
 #include "base/file_util.h"
@@ -235,7 +236,7 @@ int CopyItem(const char* fpath, const struct stat* sb,
 
   // TODO(xushaohua): Update progress bar
   g_current_files ++;
-  const int progress = g_current_files * 100 / g_total_files;
+  const int progress = qFloor(g_current_files * 100.0 / g_total_files);
   WriteProgress(progress);
 
   return ok ? 0 : 1;
@@ -277,6 +278,10 @@ bool CopyFiles(const QString& src_dir, const QString& dest_dir,
 
   // Reset umask.
   umask(old_mask);
+
+  if (ok) {
+    WriteProgress(100);
+  }
 
   return ok;
 }
