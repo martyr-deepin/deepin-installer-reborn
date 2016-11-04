@@ -99,6 +99,7 @@ void InstallProgressFrame::initUI() {
   tooltip_label_ = new InstallProgressTip(tooltip_frame);
   tooltip_label_->setFixedSize(kTooltipWidth, kTooltipHeight);
   tooltip_label_->setAlignment(Qt::AlignHCenter);
+  tooltip_label_->setText("0%");
 
   progress_bar_ = new QProgressBar();
   progress_bar_->setObjectName("progress_bar");
@@ -106,6 +107,7 @@ void InstallProgressFrame::initUI() {
   progress_bar_->setTextVisible(false);
   progress_bar_->setRange(0, 100);
   progress_bar_->setOrientation(Qt::Horizontal);
+  progress_bar_->setValue(0);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(0);

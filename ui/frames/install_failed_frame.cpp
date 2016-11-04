@@ -39,7 +39,11 @@ InstallFailedFrame::InstallFailedFrame(QWidget* parent) : QFrame(parent) {
 void InstallFailedFrame::updateErrorMessage(const QString& msg,
                                             const QString& encoded_msg) {
   content_label_->setText(msg);
-  qr_widget_->setText(encoded_msg);
+  if (!encoded_msg.isEmpty()) {
+    // If encoded_msg if empty, qr_widget will generate a rectangle filled with
+    // red color, which is not what we expect.
+    qr_widget_->setText(encoded_msg);
+  }
 }
 
 void InstallFailedFrame::initConnections() {

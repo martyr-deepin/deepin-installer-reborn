@@ -77,7 +77,6 @@ void AdvancedPartitionFrame::initUI() {
   bootloader_button_->setFlat(true);
   bootloader_button_->setObjectName("bootloader_button");
   // TODO(xushaohua): Set current used bootloader partition
-  bootloader_button_->setText("/dev/sda");
 
   editing_button_ = new PointerButton(tr("Edit"));
   editing_button_->setFlat(true);
@@ -113,7 +112,7 @@ void AdvancedPartitionFrame::initUI() {
 
   msg_label_ = new QLabel();
   msg_label_->setObjectName("msg_label");
-  msg_label_->setText("An EFI partition is required!");
+  msg_label_->setFixedHeight(20);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
