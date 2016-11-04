@@ -148,7 +148,7 @@ void AdvancedPartitionFrame::repaintDevices() {
     QLabel* model_label = new QLabel(device.model);
     model_label->setObjectName("model_label");
     model_label->setContentsMargins(15, 10, 0, 5);
-    partition_layout_->addWidget(model_label);
+    partition_layout_->addWidget(model_label, 0, Qt::AlignLeft);
     for (const Partition& partition : device.partitions) {
       if (partition.type == PartitionType::Extended) {
         // Ignores extended partition.
@@ -170,6 +170,9 @@ void AdvancedPartitionFrame::repaintDevices() {
               delegate_, &PartitionDelegate::deletePartition);
     }
   }
+
+  // Add stretch to expand vertically
+  partition_layout_->addStretch();
 }
 
 void AdvancedPartitionFrame::onDeviceRefreshed() {
