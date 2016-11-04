@@ -19,7 +19,6 @@ TableComboBox::TableComboBox(QWidget* parent) : QComboBox(parent) {
   this->setStyleSheet(ReadFile(":/styles/table_combo_box.css"));
 
   SetQComboBoxTransparent(this);
-  WidgetTreeWalk(this);
 }
 
 }  // namespace installer

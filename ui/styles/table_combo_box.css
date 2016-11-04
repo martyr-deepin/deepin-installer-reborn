@@ -24,17 +24,14 @@ QComboBox::down-arrow {
 QComboBox QAbstractItemView {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  /*selection-background-color: blue;*/
-  /*background: rgba(255, 255, 255, 0.3);*/
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   outline: none;
-  padding: 0;
-  margin: 0;
+  padding: 0px;
+  margin: 0px;
 }
 
 QComboBox QAbstractItemView::item {
   height: 36px;
   color: #ffffff;
   font-size: 10px;
-  /*background: rgba(255, 255, 255, 0.3);*/
 }

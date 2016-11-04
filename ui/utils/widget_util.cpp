@@ -31,8 +31,7 @@ void WidgetTreeWalk(QWidget* root, int indent) {
 
 bool SetChildTransparent(QWidget* root, const QString& child_name) {
   for (QObject* child : root->children()) {
-    qDebug() << child;
-    if (child_name == child->metaObject()->className() || true) {
+    if (child_name == child->metaObject()->className()) {
       QWidget* container = qobject_cast<QWidget*>(child);
       if (container) {
         container->setAttribute(Qt::WA_TranslucentBackground, true);

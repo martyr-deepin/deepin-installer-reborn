@@ -39,7 +39,8 @@ void TableComboBoxDelegate::paint(QPainter* painter,
   const int row_count = index.model()->rowCount(index);
   const bool is_first_row = (index.row() == 0);
   const bool is_last_row = (index.row() + 1 == row_count);
-  if (option.state & QStyle::State_Selected && false) {
+
+  if (option.state & QStyle::State_Selected) {
     // Draw background image of selected item.
     const QPixmap pixmap(":/images/list_view_selected.png");
     const int x = rect.x() + rect.width() - pixmap.width() -
@@ -49,20 +50,25 @@ void TableComboBoxDelegate::paint(QPainter* painter,
     painter->drawPixmap(pixmap_rect, pixmap);
 
     // Draw background color of selected item, no matter it is active or not.
-    const QColor selected_color(255, 255, 255, 100);
+    const QColor selected_color(44, 167, 248);
     const QBrush background_brush(selected_color);
     painter->fillRect(background_rect, background_brush);
   }  else if (option.state & QStyle::State_MouseOver) {
     // Draw background color when mouse is hover
-    const QColor selected_color(255, 255, 255, 40);
+    // Background color: #2CA7F8
+    const QColor selected_color(44, 167, 248);
     const QBrush background_brush(selected_color);
+    // TODO(xushaohua): Draw round corner for first row and last row.
+    Q_UNUSED(is_first_row);
+    Q_UNUSED(is_last_row);
     painter->fillRect(background_rect, background_brush);
   }
-  Q_UNUSED(is_first_row);
-  Q_UNUSED(is_last_row);
 
   // Draw text
-  const QColor text_color(255, 255, 255, 255);
+  QColor text_color(0, 0, 0, 255);
+  if (option.state & QStyle::State_MouseOver) {
+    text_color = Qt::white;
+  }
   painter->setPen(QPen(text_color));
   const QString text = index.model()->data(index, Qt::DisplayRole).toString();
   const QRect text_rect(rect.x() + kTextLeftMargin, rect.y(),
