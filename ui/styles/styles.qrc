@@ -5,6 +5,7 @@
     <file>avatar_button.css</file>
     <file>avatar_list_view.css</file>
     <file>comment_label.css</file>
+    <file>control_panel_frame.css</file>
     <file>edit_partition_frame.css</file>
     <file>flat_button.css</file>
     <file>frameless_list_view.css</file>
@@ -12,7 +13,6 @@
     <file>install_failed_label.css</file>
     <file>install_progress_frame.css</file>
     <file>line_edit.css</file>
-    <file>log_viewer_frame.css</file>
     <file>nav_button.css</file>
     <file>new_partition_frame.css</file>
     <file>partition_main_frame.css</file>

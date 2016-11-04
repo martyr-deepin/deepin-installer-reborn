@@ -1,0 +1,9 @@
+/** Used by ControlPanelFrame class **/
+
+QTextEdit {
+  color: #fafafa;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 14px;
+  selection-color: #4eff44;
+  selection-background-color: black;
+}

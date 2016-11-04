@@ -22,11 +22,11 @@
 #include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
 #include "ui/frames/confirm_quit_frame.h"
+#include "ui/frames/control_panel_frame.h"
 #include "ui/frames/disk_space_insufficient_frame.h"
 #include "ui/frames/install_failed_frame.h"
 #include "ui/frames/install_progress_frame.h"
 #include "ui/frames/install_success_frame.h"
-#include "ui/frames/log_viewer_frame.h"
 #include "ui/frames/partition_frame.h"
 #include "ui/frames/partition_table_warning_frame.h"
 #include "ui/frames/select_language_frame.h"
@@ -41,7 +41,7 @@ namespace installer {
 namespace {
 
 // TODO(xushaohua): Move to settings file
-// Strippled length of error message.
+// Trim length of error message.
 const int kQRContentStripped = 80;
 
 int GetVisiblePages() {
@@ -106,9 +106,7 @@ MainWindow::MainWindow()
       pages_(),
       prev_page_(PageId::NullId),
       current_page_(PageId::NullId) {
-  this->setObjectName(QStringLiteral("main_window"));
-
-  wallpaper_manager_ = new MultiHeadManager(this);
+  this->setObjectName("main_window");
 
   this->initUI();
   this->initPages();
@@ -118,7 +116,7 @@ MainWindow::MainWindow()
 }
 
 void MainWindow::fullscreen() {
-  wallpaper_manager_->updateWallpaper();
+  multi_head_manager_->updateWallpaper();
   this->showFullScreen();
 }
 
@@ -160,11 +158,11 @@ void MainWindow::initConnections() {
   connect(virtual_machine_frame_, &VirtualMachineFrame::finished,
           this, &MainWindow::goNextPage);
 
-  connect(log_viewer_shortcut_, &QShortcut::activated,
-          log_viewer_frame_, &LogViewerFrame::toggleVisible);
+  connect(control_panel_shortcut_, &QShortcut::activated,
+          control_panel_frame_, &ControlPanelFrame::toggleVisible);
   connect(monitor_mode_shortcut_, &QShortcut::activated,
-          wallpaper_manager_, &MultiHeadManager::switchXRandRMode);
-  connect(wallpaper_manager_, &MultiHeadManager::primaryScreenChanged,
+          multi_head_manager_, &MultiHeadManager::switchXRandRMode);
+  connect(multi_head_manager_, &MultiHeadManager::primaryScreenChanged,
           this, &MainWindow::onPrimaryScreenChanged);
 
   // Notify InstallProgressFrame that partition job has finished.
@@ -218,9 +216,10 @@ void MainWindow::initPages() {
   pages_.insert(PageId::VirtualMachineId,
                 stacked_layout_->addWidget(virtual_machine_frame_));
 
-  log_viewer_frame_ = new LogViewerFrame();
-  // TODO(xushaohua): Move to center of parent window.
-  log_viewer_frame_->hide();
+  control_panel_frame_ = new ControlPanelFrame(this);
+  control_panel_frame_->hide();
+
+  multi_head_manager_ = new MultiHeadManager(this);
 }
 
 void MainWindow::initUI() {
@@ -261,8 +260,8 @@ void MainWindow::initUI() {
 }
 
 void MainWindow::registerShortcut() {
-  log_viewer_shortcut_ = new QShortcut(QKeySequence("Ctrl+L"), this);
-  log_viewer_shortcut_->setContext(Qt::ApplicationShortcut);
+  control_panel_shortcut_ = new QShortcut(QKeySequence("Ctrl+L"), this);
+  control_panel_shortcut_->setContext(Qt::ApplicationShortcut);
 
   monitor_mode_shortcut_ = new QShortcut(QKeySequence("Ctrl+P"), this);
   monitor_mode_shortcut_->setContext(Qt::ApplicationShortcut);

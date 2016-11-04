@@ -14,20 +14,20 @@ class QStackedLayout;
 
 namespace installer {
 
-class IconButton;
-class PageIndicator;
 class ConfirmQuitFrame;
+class ControlPanelFrame;
 class DiskSpaceInsufficientFrame;
+class IconButton;
 class InstallFailedFrame;
 class InstallProgressFrame;
 class InstallSuccessFrame;
-class LogViewerFrame;
+class MultiHeadManager;
+class PageIndicator;
 class PartitionFrame;
 class PartitionTableWarningFrame;
 class SelectLanguageFrame;
 class SystemInfoFrame;
 class VirtualMachineFrame;
-class MultiHeadManager;
 
 // MainWindow is a fullscreen window.
 // All of ui frames are placed in MainWindow.
@@ -87,17 +87,17 @@ class MainWindow : public QWidget {
   QStackedLayout* stacked_layout_ = nullptr;
 
   ConfirmQuitFrame* confirm_quit_frame_ = nullptr;
+  ControlPanelFrame* control_panel_frame_ = nullptr;
   DiskSpaceInsufficientFrame* disk_space_insufficient_frame_ = nullptr;
   InstallFailedFrame* install_failed_frame_ = nullptr;
   InstallProgressFrame* install_progress_frame_ = nullptr;
   InstallSuccessFrame* install_success_frame_ = nullptr;
-  LogViewerFrame* log_viewer_frame_ = nullptr;
   PartitionFrame* partition_frame_ = nullptr;
   PartitionTableWarningFrame* partition_table_warning_frame_ = nullptr;
   SelectLanguageFrame* select_language_frame_ = nullptr;
   SystemInfoFrame* system_info_frame_ = nullptr;
   VirtualMachineFrame* virtual_machine_frame_ = nullptr;
-  MultiHeadManager* wallpaper_manager_ = nullptr;
+  MultiHeadManager* multi_head_manager_ = nullptr;
 
   // To store frame pages, page_name => page_id.
   QHash<PageId, int> pages_;
@@ -107,7 +107,7 @@ class MainWindow : public QWidget {
   PageId current_page_;
 
   // Shortcut used to toggle visibility of log-viewer.
-  QShortcut* log_viewer_shortcut_ = nullptr;
+  QShortcut* control_panel_shortcut_ = nullptr;
 
   // Shortcut used to switch mirror modes.
   QShortcut* monitor_mode_shortcut_ = nullptr;
