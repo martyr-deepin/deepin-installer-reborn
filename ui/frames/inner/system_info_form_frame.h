@@ -21,6 +21,8 @@ class SystemInfoFormFrame : public QFrame {
  public:
   explicit SystemInfoFormFrame(QWidget* parent = nullptr);
 
+  void autoConf();
+
  signals:
   // Emitted when the avatar button is clicked.
   void avatarClicked();

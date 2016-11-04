@@ -28,15 +28,9 @@ SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
 }
 
 void SystemInfoFrame::autoConf() {
-  const QString username = GetSettingsString(kSystemInfoDefaultUsername);
-  WriteUsername(username);
-  const QString hostname = GetSettingsString(kSystemInfoDefaultHostname);
-  WriteHostname(hostname);
-  const QString password = GetSettingsString(kSystemInfoDefaultPassword);
-  WritePassword(password);
-
-  timezone_frame_->autoConf();
   avatar_frame_->autoConf();
+  form_frame_->autoConf();
+  timezone_frame_->autoConf();
 }
 
 void SystemInfoFrame::initConnections() {
@@ -75,9 +69,8 @@ void SystemInfoFrame::initUI() {
 
 void SystemInfoFrame::showAvatarPage() {
   if (GetSettingsBool(kSystemInfoDisableAvatorPage)) {
-    return;
+    stacked_layout_->setCurrentWidget(avatar_frame_);
   }
-  stacked_layout_->setCurrentWidget(avatar_frame_);
 }
 
 void SystemInfoFrame::showFormPage() {
@@ -85,10 +78,9 @@ void SystemInfoFrame::showFormPage() {
 }
 
 void SystemInfoFrame::showTimezonePage() {
-  if (GetSettingsBool(kSystemInfoDisableTimezonePage)) {
-    return;
+  if (!GetSettingsBool(kSystemInfoDisableTimezonePage)) {
+    stacked_layout_->setCurrentWidget(timezone_frame_);
   }
-  stacked_layout_->setCurrentWidget(timezone_frame_);
 }
 
 }  // namespace installer

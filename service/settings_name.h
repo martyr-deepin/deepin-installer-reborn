@@ -26,18 +26,16 @@ const char kSelectLanguageDefaultLocale[] = "select_language_default_locale";
 const char kSystemInfoDdeDefaultWallpaper[] =
     "system_info_dde_default_wallpaper";
 const char kSystemInfoSetupAfterReboot[] = "system_info_setup_after_reboot";
-const char kSystemInfoUseDefaultUsername[] =
-    "system_info_use_default_username";
 const char kSystemInfoDefaultUsername[] = "system_info_default_username";
-const char kSystemInfoUseDefaultHostname[] =
-    "system_info_use_default_hostname";
+const char kSystemInfoLockUsername[] = "system_info_lock_username";
 const char kSystemInfoDefaultHostname[] = "system_info_default_hostname";
+const char kSystemInfoLockHostname[] = "system_info_lock_hostname";
+const char kSystemInfoHostnameAutoSuffix[] = "system_info_hostname_auto_suffix";
 const char kSystemInfoHostnameMinLen[] = "system_info_hostname_min_len";
 const char kSystemInfoHostnameMaxLen[] = "system_info_hostname_max_len";
 const char kSystemInfoHostnameReserved[] = "system_info_hostname_reserved";
-const char kSystemInfoUseDefaultPasswordName[] =
-    "system_info_use_default_password";
 const char kSystemInfoDefaultPassword[] = "system_info_default_password";
+const char kSystemInfoLockPassword[] = "system_info_lock_password";
 const char kSystemInfoPasswordMinLen[] = "system_info_password_min_len";
 const char kSystemInfoPasswordMaxLen[] = "system_info_password_max_len";
 const char kSystemInfoPasswordRequireNumber[] =

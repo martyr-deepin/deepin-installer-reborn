@@ -33,6 +33,12 @@ SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
   this->initConnections();
 }
 
+void SystemInfoFormFrame::autoConf() {
+  WriteUsername(GetSettingsString(kSystemInfoDefaultUsername));
+  WriteHostname(GetSettingsString(kSystemInfoDefaultHostname));
+  WritePassword(GetSettingsString(kSystemInfoDefaultPassword));
+}
+
 void SystemInfoFormFrame::updateAvatar(const QString& avatar) {
   avatar_button_->updateIcon(avatar);
 }
@@ -93,14 +99,25 @@ void SystemInfoFormFrame::initUI() {
 
   username_edit_ = new LineEdit(":/images/username_12.png");
   username_edit_->setPlaceholderText(tr("Username"));
+  username_edit_->setText(GetSettingsString(kSystemInfoDefaultUsername));
+  username_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockUsername));
+
   hostname_edit_ = new LineEdit(":/images/hostname_12.png");
   hostname_edit_->setPlaceholderText(tr("Computer name"));
+  hostname_edit_->setText(GetSettingsString(kSystemInfoDefaultHostname));
+  hostname_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockHostname));
+
   password_edit_ = new LineEdit(":/images/password_12.png");
   password_edit_->setPlaceholderText(tr("Password"));
   password_edit_->setEchoMode(QLineEdit::Password);
+  password_edit_->setText(GetSettingsString(kSystemInfoDefaultPassword));
+  password_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockPassword));
+
   password2_edit_ = new LineEdit(":/images/password_12.png");
   password2_edit_->setPlaceholderText(tr("Reenter password"));
   password2_edit_->setEchoMode(QLineEdit::Password);
+  password2_edit_->setText(password_edit_->text());
+  password2_edit_->setReadOnly(password_edit_->isReadOnly());
 
   tooltip_ = new SystemInfoTip(this);
   // Same width as line edit.
@@ -273,14 +290,14 @@ void SystemInfoFormFrame::onEditingLineEdit() {
 }
 
 void SystemInfoFormFrame::onUsernameEdited() {
-  if (!is_hostname_edited_) {
-    // Add suffix to username
-    // TODO(xushaohua): Add a settings item
+  if (!is_hostname_edited_ && !GetSettingsBool(kSystemInfoLockHostname)) {
     const QString username = username_edit_->text();
     if (username.isEmpty()) {
       hostname_edit_->setText("");
     } else {
-      hostname_edit_->setText(username_edit_->text() + "-PC");
+      // Add suffix to username
+      hostname_edit_->setText(
+          username + GetSettingsString(kSystemInfoHostnameAutoSuffix));
     }
   }
 }
