@@ -52,6 +52,8 @@ class SystemInfoFormFrame : public QFrame {
   AvatarButton* avatar_button_ = nullptr;
   LineEdit* username_edit_ = nullptr;
   LineEdit* hostname_edit_ = nullptr;
+  // To mark whether content of hostname-edit is edited by user.
+  bool is_hostname_edited_;
   LineEdit* password_edit_ = nullptr;
   LineEdit* password2_edit_ = nullptr;
   // Display tooltip error message.
@@ -64,7 +66,11 @@ class SystemInfoFormFrame : public QFrame {
 
   // Hide tooltip frame when line-edit is being edited.
   void onEditingLineEdit();
-  void onUserNameEditingFinished();
+
+  // Automatically change hostname when username is changed by user.
+  void onUsernameEdited();
+  void onUsernameEditingFinished();
+  void onHostnameEdited();
   void onHostnameEditingFinished();
   void onPasswordEditingFinished();
   void onPassword2EditingFinished();

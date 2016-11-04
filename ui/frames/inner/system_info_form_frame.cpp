@@ -24,7 +24,9 @@
 
 namespace installer {
 
-SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent) : QFrame(parent) {
+SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
+    : QFrame(parent),
+      is_hostname_edited_(false) {
   this->setObjectName("system_info_form_frame");
 
   this->initUI();
@@ -48,7 +50,7 @@ void SystemInfoFormFrame::initConnections() {
           this, &SystemInfoFormFrame::timezoneClicked);
 
   connect(username_edit_, &LineEdit::editingFinished,
-          this, &SystemInfoFormFrame::onUserNameEditingFinished);
+          this, &SystemInfoFormFrame::onUsernameEditingFinished);
   connect(hostname_edit_, &LineEdit::editingFinished,
           this, &SystemInfoFormFrame::onHostnameEditingFinished);
   connect(password_edit_, &LineEdit::editingFinished,
@@ -67,8 +69,12 @@ void SystemInfoFormFrame::initConnections() {
 
   connect(username_edit_, &LineEdit::textEdited,
           this, &SystemInfoFormFrame::onEditingLineEdit);
+  connect(username_edit_, &LineEdit::textEdited,
+          this, &SystemInfoFormFrame::onUsernameEdited);
   connect(hostname_edit_, &LineEdit::textEdited,
           this, &SystemInfoFormFrame::onEditingLineEdit);
+  connect(hostname_edit_, &LineEdit::textEdited,
+          this, &SystemInfoFormFrame::onHostnameEdited);
   connect(password_edit_, &LineEdit::textEdited,
           this, &SystemInfoFormFrame::onEditingLineEdit);
   connect(password2_edit_, &LineEdit::textEdited,
@@ -266,7 +272,20 @@ void SystemInfoFormFrame::onEditingLineEdit() {
   }
 }
 
-void SystemInfoFormFrame::onUserNameEditingFinished() {
+void SystemInfoFormFrame::onUsernameEdited() {
+  if (!is_hostname_edited_) {
+    // Add suffix to username
+    // TODO(xushaohua): Add a settings item
+    const QString username = username_edit_->text();
+    if (username.isEmpty()) {
+      hostname_edit_->setText("");
+    } else {
+      hostname_edit_->setText(username_edit_->text() + "-PC");
+    }
+  }
+}
+
+void SystemInfoFormFrame::onUsernameEditingFinished() {
   // When line-edit loses focus, validate it, and check its results.
   // If error occurs, popup tooltip frame.
   QString msg;
@@ -274,6 +293,10 @@ void SystemInfoFormFrame::onUserNameEditingFinished() {
     tooltip_->setText(msg);
     tooltip_->showBottom(username_edit_);
   }
+}
+
+void SystemInfoFormFrame::onHostnameEdited() {
+  is_hostname_edited_ = true;
 }
 
 void SystemInfoFormFrame::onHostnameEditingFinished() {
