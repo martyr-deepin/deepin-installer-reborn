@@ -22,10 +22,10 @@
     <file>new_partition.png</file>
     <file>logo.png</file>
     <file>QR_press.png</file>
-    <file>check-06.png</file>
     <file>arrow_left_press.png</file>
     <file>checkbox_checked.png</file>
     <file>driver_mac_32.png</file>
+    <file>checkbox_unchecked_pressed.png</file>
     <file>code_press.png</file>
     <file>progress_failed.png</file>
     <file>zonemap.png</file>
@@ -41,13 +41,13 @@
     <file>check_unchecked.png</file>
     <file>driver_deepin_128.png</file>
     <file>close_press.png</file>
+    <file>checkbox_checked_hover.png</file>
     <file>position.png</file>
     <file>progress_account.png</file>
     <file>indicator-inactive.png</file>
     <file>decrease_hover.png</file>
     <file>driver_mac_128.svg</file>
     <file>password_12.png</file>
-    <file>check-03.png</file>
     <file>username_36.png</file>
     <file>driver_linux_32.png</file>
     <file>driver_deepin_32.png</file>
@@ -60,21 +60,21 @@
     <file>driver_deepin_32.svg</file>
     <file>generate-qrc.py</file>
     <file>QR_hover.png</file>
-    <file>check-05.png</file>
     <file>next_hover.png</file>
     <file>ubuntu.png</file>
     <file>next_normal.png</file>
     <file>arrow_right_normal.png</file>
     <file>driver_mac_128.png</file>
-    <file>check-02.png</file>
     <file>driver_linux_128.svg</file>
     <file>indicator-active.png</file>
     <file>timezone_press.png</file>
     <file>delete_partition.png</file>
     <file>delete_part.png</file>
+    <file>checkbox_unchecked_hover.png</file>
     <file>driver_mac_32.svg</file>
     <file>increase_hover.png</file>
     <file>arrow_right_press.png</file>
+    <file>checkbox_checked_pressed.png</file>
     <file>timezone.png</file>
     <file>driver_linux_32.svg</file>
     <file>complete.png</file>
@@ -84,7 +84,6 @@
     <file>driver_32.png</file>
     <file>windows.png</file>
     <file>driver_install_32.png</file>
-    <file>check-04.png</file>
     <file>username_12.png</file>
     <file>linux.png</file>
     <file>decrease_press.png</file>
@@ -99,7 +98,6 @@
     <file>arrow.png</file>
     <file>deepin.png</file>
     <file>close_normal.png</file>
-    <file>check-01.png</file>
     <file>progress_extract.png</file>
     <file>images.qrc</file>
     <file>driver_linux_128.png</file>
