@@ -50,10 +50,18 @@ QString g_progress_file;
 QString g_src_dir;
 QString g_dest_dir;
 
+// Total number of files in squashfs filesystem.
+int g_total_files = 0;
+// Number of files has been copied.
+int g_current_files = 0;
+
+void WriteProgress(int progress) {
+  installer::WriteTextFile(g_progress_file, QString::number(progress));
+}
+
 // Copy regular file with sendfile() system call, from |src_file| to
 // |dest_file|. Size of |src_file| is |file_size|.
 bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
-  printf("SendFile(): %s, %s\n", src_file, dest_file);
   int src_fd, dest_fd;
   src_fd = open(src_file, O_RDONLY);
   if (src_fd == -1) {
@@ -89,8 +97,6 @@ bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
 }
 
 bool CopySymLink(const char* src_file, const char* dest_file) {
-  printf("CopySymLink: %s, %s\n", src_file, dest_file);
-
   char buf[PATH_MAX];
   ssize_t link_len = readlink(src_file, buf, PATH_MAX);
   if (link_len <= 0) {
@@ -102,7 +108,6 @@ bool CopySymLink(const char* src_file, const char* dest_file) {
   char target[link_len + 1];
   strncpy(target, buf, link_len);
   target[link_len] = '\0';
-  printf("link path: %s\n", target);
   if (symlink(target, dest_file) != 0) {
     fprintf(stderr, "CopySymLink() symlink() failed: %s -> %s\n",
             dest_file, target);
@@ -115,8 +120,6 @@ bool CopySymLink(const char* src_file, const char* dest_file) {
 
 // Update xattr (access control lists and file capabilities)
 bool CopyXAttr(const char* src_file, const char* dest_file) {
-  printf("CopyXAttr(): %s, %s\n", src_file, dest_file);
-
   bool ok = true;
   // size of extended attribute list, 64k.
   char list[XATTR_LIST_MAX];
@@ -155,8 +158,6 @@ int CopyItem(const char* fpath, const struct stat* sb,
   Q_UNUSED(sb);
   Q_UNUSED(typeflag);
   Q_UNUSED(ftwbuf);
-
-  printf("CopyItem() %s\n", fpath);
 
   struct stat st;
   if (lstat(fpath, &st) != 0) {
@@ -208,7 +209,7 @@ int CopyItem(const char* fpath, const struct stat* sb,
   }
 
   if (!ok) {
-    // Returns if error occured
+    // Return if error occurs
     return 1;
   }
 
@@ -233,27 +234,46 @@ int CopyItem(const char* fpath, const struct stat* sb,
   }
 
   // TODO(xushaohua): Update progress bar
+  g_current_files ++;
+  const int progress = g_current_files * 100 / g_total_files;
+  WriteProgress(progress);
 
   return ok ? 0 : 1;
+}
+
+int CountItem(const char* fpath, const struct stat* sb,
+              int typeflag, struct FTW* ftwbuf) {
+  Q_UNUSED(fpath);
+  Q_UNUSED(sb);
+  Q_UNUSED(typeflag);
+  Q_UNUSED(ftwbuf);
+  g_total_files ++;
+  return 0;
 }
 
 // Copy files from |mount_point| to |dest_dir|, keeping xattrs.
 bool CopyFiles(const QString& src_dir, const QString& dest_dir,
                const QString& progress_file) {
-  qDebug() << "CopyFiles():" << src_dir << dest_dir << progress_file;
   if (!installer::CreateDirs(dest_dir)) {
     qCritical() << "CopyFiles() create dest dir failed:" << dest_dir;
     return false;
   }
 
+  // Save current umask.
   const mode_t old_mask = umask(0);
 
   g_progress_file = progress_file;
   g_src_dir = src_dir;
   g_dest_dir = dest_dir;
 
-  const bool ok = (nftw(src_dir.toUtf8().data(), CopyItem,
-                        kMaxOpenFd, FTW_PHYS) == 0);
+  // Count file numbers.
+  bool ok = (nftw(src_dir.toUtf8().data(),
+                  CountItem, kMaxOpenFd, FTW_PHYS) == 0);
+  if (!ok || (g_progress_file == 0)) {
+    qWarning() << "CopyFiles() Failed to count file number!";
+  } else {
+    ok = (nftw(src_dir.toUtf8().data(), CopyItem, kMaxOpenFd, FTW_PHYS) == 0);
+  }
 
   // Reset umask.
   umask(old_mask);
