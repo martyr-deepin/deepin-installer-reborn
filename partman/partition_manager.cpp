@@ -137,6 +137,7 @@ void PartitionManager::doAutoPart(const QString& script_path) {
 }
 
 void PartitionManager::doManualPart(const OperationList& operations) {
+  qDebug() << "operations:" << operations;
   bool ok = true;
   for (int i = 0; ok && i < operations.length(); ++i) {
     ok = operations.at(i).applyToDisk();
@@ -145,12 +146,12 @@ void PartitionManager::doManualPart(const OperationList& operations) {
 
   if (ok) {
     // Set boot flag on boot partition.
-    const Partition boot_partition = GetBootPartition(operations);
+    const Partition boot_partition(GetBootPartition(operations));
     if (boot_partition.path.isEmpty()) {
-      ok = SetBootFlag(boot_partition, true);
-    } else {
       qWarning() << "Failed to find boot partition!";
       ok = false;
+    } else {
+      ok = SetBootFlag(boot_partition, true);
     }
   }
 
@@ -165,6 +166,7 @@ void PartitionManager::doManualPart(const OperationList& operations) {
     }
   }
 
+  qDebug() << "mount_point_pair:" << mount_point_pair;
   emit this->manualPartDone(ok, mount_point_pair);
 }
 

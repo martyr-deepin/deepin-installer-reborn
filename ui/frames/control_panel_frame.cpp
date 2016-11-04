@@ -93,8 +93,8 @@ void ControlPanelFrame::initUI() {
   log_viewer_->setAcceptRichText(false);
   // Disable context menu.
   log_viewer_->setContextMenuPolicy(Qt::NoContextMenu);
-//  log_viewer_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-//  log_viewer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  log_viewer_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  log_viewer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);

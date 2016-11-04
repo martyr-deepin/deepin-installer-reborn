@@ -565,7 +565,7 @@ void PartitionDelegate::removeEmptyExtendedPartition(
 
 void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   this->real_devices_ = devices;
-//  qDebug() << "onDeviceRefreshed():" << devices;
+  qDebug() << "onDeviceRefreshed():" << devices;
   this->refreshVisual();
 }
 
@@ -574,17 +574,17 @@ void PartitionDelegate::onManualPartDone(bool ok,
   if (ok) {
     // Write mount-point pair to conf.
     QString root_path;
-    QString mount_points;
+    QStringList mount_points;
     for (int i = 0; i < mount_point_pair.length(); i += 2) {
-      if (mount_point_pair.at(i) == kMountPointRoot) {
+      if (mount_point_pair.at(i + 1) == kMountPointRoot) {
         root_path = mount_point_pair.at(i);
+      } else {
+        mount_points.append(QString("%1=%2").arg(mount_point_pair.at(i))
+                                            .arg(mount_point_pair.at(i + 1)));
       }
-      mount_points += QString("%1=%2;").arg(mount_point_pair.at(i),
-                                            mount_point_pair.at(i+1));
     }
 
-    // TODO(xushaohua): Remove the last semicolon.
-    WritePartitionInfo(root_path, mount_points);
+    WritePartitionInfo(root_path, mount_points.join(';'));
   }
 
   emit this->manualPartDone(ok);
