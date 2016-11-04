@@ -91,8 +91,10 @@ void SystemInfoFormFrame::initUI() {
   hostname_edit_->setPlaceholderText(tr("Computer name"));
   password_edit_ = new LineEdit(":/images/password_12.png");
   password_edit_->setPlaceholderText(tr("Password"));
+  password_edit_->setEchoMode(QLineEdit::Password);
   password2_edit_ = new LineEdit(":/images/password_12.png");
   password2_edit_->setPlaceholderText(tr("Reenter password"));
+  password2_edit_->setEchoMode(QLineEdit::Password);
 
   tooltip_ = new SystemInfoTip(this);
   // Same width as line edit.
