@@ -12,7 +12,7 @@ namespace installer {
 namespace {
 
 TEST(UsersTest, GetSystemUsers) {
-  EXPECT_TRUE(GetSystemUsers().contains(QStringLiteral("root")));
+  EXPECT_TRUE(GetSystemUsers().contains("root"));
 }
 
 TEST(UserTest, GetUsers) {

@@ -85,16 +85,16 @@ int GetPartitionUsageValue(const Partition& partition) {
 QString GetOsTypeIcon(OsType os_type) {
   switch (os_type) {
     case OsType::Linux: {
-      return QStringLiteral(":/images/driver_linux_32.png");
+      return ":/images/driver_linux_32.png";
     }
     case OsType::Mac: {
-      return QStringLiteral(":/images/driver_mac_32.png");
+      return ":/images/driver_mac_32.png";
     }
     case OsType::Windows: {
-      return QStringLiteral(":/images/driver_windows_32.png");
+      return ":/images/driver_windows_32.png";
     }
     default: {
-      return QStringLiteral(":/images/driver_32.png");
+      return ":/images/driver_32.png";
     }
   }
 }
@@ -102,16 +102,16 @@ QString GetOsTypeIcon(OsType os_type) {
 QString GetOsTypeLargeIcon(OsType os_type) {
   switch (os_type) {
     case OsType::Linux: {
-      return QStringLiteral(":/images/driver_linux_128.png");
+      return ":/images/driver_linux_128.png";
     }
     case OsType::Mac: {
-      return QStringLiteral(":/images/driver_mac_128.png");
+      return ":/images/driver_mac_128.png";
     }
     case OsType::Windows: {
-      return QStringLiteral(":/images/driver_windows_128.png");
+      return ":/images/driver_windows_128.png";
     }
     default: {
-      return QStringLiteral(":/images/driver_128.png");
+      return ":/images/driver_128.png";
     }
   }
 }

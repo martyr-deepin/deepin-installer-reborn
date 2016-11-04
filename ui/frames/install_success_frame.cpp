@@ -15,7 +15,7 @@
 namespace installer {
 
 InstallSuccessFrame::InstallSuccessFrame(QWidget* parent) : QFrame(parent) {
-  this->setObjectName(QStringLiteral("install_success_frame"));
+  this->setObjectName("install_success_frame");
 
   this->initUI();
   this->initConnections();

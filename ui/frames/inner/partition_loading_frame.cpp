@@ -13,7 +13,7 @@
 namespace installer {
 
 PartitionLoadingFrame::PartitionLoadingFrame(QWidget* parent) : QFrame(parent) {
-  this->setObjectName(QStringLiteral("partition_loading_frame"));
+  this->setObjectName("partition_loading_frame");
 
   this->initUI();
   this->initConnections();

@@ -35,7 +35,7 @@ NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
     : QFrame(parent),
       delegate_(delegate),
       partition_() {
-  this->setObjectName(QStringLiteral("new_partition_frame"));
+  this->setObjectName("new_partition_frame");
 
   this->initUI();
   this->initConnections();

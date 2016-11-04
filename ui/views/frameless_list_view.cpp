@@ -11,7 +11,7 @@ namespace installer {
 
 FramelessListView::FramelessListView(QWidget* parent)
     : QListView(parent) {
-  this->setObjectName(QStringLiteral("frameless_list_view"));
+  this->setObjectName("frameless_list_view");
 
   FramelessItemDelegate* delegate = new FramelessItemDelegate(this);
   this->setItemDelegate(delegate);

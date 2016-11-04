@@ -14,7 +14,7 @@ PartitionListModel::PartitionListModel(PartitionDelegate* delegate,
     : QAbstractListModel(parent),
       delegate_(delegate),
       partition_list_() {
-  this->setObjectName(QStringLiteral("partition_list_model"));
+  this->setObjectName("partition_list_model");
 }
 
 QVariant PartitionListModel::data(const QModelIndex& index, int role) const {

@@ -28,8 +28,8 @@ ValidateHostnameState ValidateHostname(const QString& hostname,
     return ValidateHostnameState::ReservedError;
   }
 
-  const QRegExp reg(QStringLiteral("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*"
-      "[a-zA-Z0-9]).)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9])$"));
+  const QRegExp reg("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]).)*"
+                    "([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9])$");
   if (!reg.exactMatch(hostname)) {
     return ValidateHostnameState::InvalidChar;
   }
@@ -38,8 +38,8 @@ ValidateHostnameState ValidateHostname(const QString& hostname,
 }
 
 bool ValidateHostnameTemp(const QString& hostname) {
-  const QRegExp reg(QStringLiteral("^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*"
-                                   "[a-zA-Z0-9-.])*$"));
+  const QRegExp reg("^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*"
+                    "[a-zA-Z0-9-.])*$");
   return reg.exactMatch(hostname);
 }
 

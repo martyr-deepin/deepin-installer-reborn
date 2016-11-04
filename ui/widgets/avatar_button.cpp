@@ -22,7 +22,7 @@ AvatarButton::AvatarButton(QWidget* parent) : AvatarButton("", parent) { }
 AvatarButton::AvatarButton(const QString& icon, QWidget* parent)
     : FlatButton(parent),
       icon_(icon) {
-  this->setObjectName(QStringLiteral("avatar_button"));
+  this->setObjectName("avatar_button");
 
   this->setFixedSize(kIconSize, kIconSize);
   this->setStyleSheet(ReadFile(":/styles/avatar_button.css"));

@@ -27,7 +27,7 @@ SimplePartitionButton::SimplePartitionButton(const Partition& partition,
                                              QWidget* parent)
     : PointerButton(parent),
       partition_(partition) {
-  this->setObjectName(QStringLiteral("simple_partition_button"));
+  this->setObjectName("simple_partition_button");
   this->setFixedSize(kButtonWidth, kButtonHeight);
   this->setCheckable(true);
   this->initUI();
@@ -41,18 +41,18 @@ void SimplePartitionButton::initConnections() {
 
 void SimplePartitionButton::initUI() {
   os_label_ = new QLabel();
-  os_label_->setObjectName(QStringLiteral("fs_label"));
+  os_label_->setObjectName("fs_label");
   os_label_->setFixedSize(kOsIconWidth, kOsIconHeight);
   os_label_->setPixmap(QPixmap(GetOsTypeLargeIcon(partition_.os)));
 
   QLabel* path_label = new QLabel(GetPartitionLabelAndPath(partition_));
-  path_label->setObjectName(QStringLiteral("path_label"));
+  path_label->setObjectName("path_label");
   path_label->setFixedHeight(20);
 
   QLabel* usage_label = new QLabel();
   usage_label->setFixedHeight(16);
   usage_label->setText(GetPartitionUsage(partition_));
-  usage_label->setObjectName(QStringLiteral("usage_label"));
+  usage_label->setObjectName("usage_label");
 
   QProgressBar* usage_bar = new QProgressBar();
   usage_bar->setObjectName("usage_bar");

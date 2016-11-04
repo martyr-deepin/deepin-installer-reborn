@@ -28,7 +28,7 @@ const int kSectionSpace = 20;
 }  // namespace
 
 OemWindow::OemWindow(QWidget* parent) : QFrame(parent) {
-  this->setObjectName(QStringLiteral("oem_window"));
+  this->setObjectName("oem_window");
 
   this->initUI();
   this->initConnections();

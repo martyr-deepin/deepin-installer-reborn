@@ -15,7 +15,7 @@
 namespace installer {
 
 VirtualMachineFrame::VirtualMachineFrame(QWidget* parent) : QFrame(parent) {
-  this->setObjectName(QStringLiteral("virtual_machine_frame"));
+  this->setObjectName("virtual_machine_frame");
 
   this->initUI();
 }

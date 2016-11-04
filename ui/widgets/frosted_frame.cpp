@@ -9,7 +9,7 @@
 namespace installer {
 
 FrostedFrame::FrostedFrame(QWidget* parent) : QFrame(parent) {
-  this->setObjectName(QStringLiteral("frosted_frame"));
+  this->setObjectName("frosted_frame");
   this->setStyleSheet(ReadFile(":/styles/frosted_frame.css"));
 }
 

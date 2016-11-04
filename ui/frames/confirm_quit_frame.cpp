@@ -14,7 +14,7 @@
 namespace installer {
 
 ConfirmQuitFrame::ConfirmQuitFrame(QWidget* parent) : QFrame(parent) {
-  this->setObjectName(QStringLiteral("confirm_quit_frame"));
+  this->setObjectName("confirm_quit_frame");
 
   this->initUI();
 }

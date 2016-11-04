@@ -11,7 +11,7 @@ namespace installer {
 MountPointModel::MountPointModel(PartitionDelegate* delegate, QObject* parent)
     : QAbstractListModel(parent),
       delegate_(delegate) {
-  this->setObjectName(QStringLiteral("mount_point_model"));
+  this->setObjectName("mount_point_model");
 }
 
 QVariant MountPointModel::data(const QModelIndex& index, int role) const {

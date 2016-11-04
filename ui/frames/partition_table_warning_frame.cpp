@@ -21,7 +21,7 @@ namespace installer {
 
 PartitionTableWarningFrame::PartitionTableWarningFrame(QWidget* parent)
     : QFrame(parent) {
-  this->setObjectName(QStringLiteral("partition_table_warning_frame"));
+  this->setObjectName("partition_table_warning_frame");
 
   this->initUI();
   this->initConnections();

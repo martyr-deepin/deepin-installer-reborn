@@ -20,7 +20,7 @@ const int kIconSize = 80;
 
 AvatarListDelegate::AvatarListDelegate(QWidget* parent)
     : QStyledItemDelegate(parent) {
-  this->setObjectName(QStringLiteral("avatar_list_delegate"));
+  this->setObjectName("avatar_list_delegate");
 }
 
 void

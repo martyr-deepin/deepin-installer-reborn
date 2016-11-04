@@ -17,7 +17,7 @@ MultiHeadManager::MultiHeadManager(QObject* parent)
     : QObject(parent),
       wallpaper_items_(),
       worker_thread_(new QThread()) {
-  this->setObjectName(QStringLiteral("wallpaper_manager"));
+  this->setObjectName("wallpaper_manager");
 
   multi_head_worker_ = new MultiHeadWorker();
   multi_head_worker_->moveToThread(worker_thread_);

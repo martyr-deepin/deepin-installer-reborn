@@ -11,7 +11,7 @@ namespace installer {
 LanguageListModel::LanguageListModel(QObject* parent)
     : QAbstractListModel(parent),
       lang_list_() {
-  this->setObjectName(QStringLiteral("language_list_model"));
+  this->setObjectName("language_list_model");
 
   // TODO(xushaohua): Move to init() function.
   lang_list_ = GetLanguageList();

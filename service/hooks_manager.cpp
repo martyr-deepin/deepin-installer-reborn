@@ -106,7 +106,7 @@ HooksManager::HooksManager(QObject* parent)
       unsquashfs_timer_(new QTimer(this)),
       unsquashfs_stage_(UnsquashfsStage::UnInitialized),
       overlay_filesystem_exists_(false) {
-  this->setObjectName(QStringLiteral("hooks_manager"));
+  this->setObjectName("hooks_manager");
 
   unsquashfs_timer_->setInterval(kReadUnsquashfsInterval);
   this->initConnections();

@@ -25,7 +25,7 @@
 namespace installer {
 
 SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent) : QFrame(parent) {
-  this->setObjectName(QStringLiteral("system_info_form_frame"));
+  this->setObjectName("system_info_form_frame");
 
   this->initUI();
   this->initConnections();
@@ -76,22 +76,22 @@ void SystemInfoFormFrame::initConnections() {
 }
 
 void SystemInfoFormFrame::initUI() {
-  timezone_button_ = new IconButton(QStringLiteral(":/images/timezone.png"),
-                                    QStringLiteral(":/images/timezone.png"),
-                                    QStringLiteral(":/images/timezone.png"),
+  timezone_button_ = new IconButton(":/images/timezone.png",
+                                    ":/images/timezone.png",
+                                    ":/images/timezone.png",
                                     128, 32, nullptr);
   TitleLabel* title_label = new TitleLabel(tr("Create User Account"));
   CommentLabelLayout* comment_layout = new CommentLabelLayout(
       tr("Input username and password"));
   avatar_button_ = new AvatarButton();
 
-  username_edit_ = new LineEdit(QStringLiteral(":/images/username_12.png"));
+  username_edit_ = new LineEdit(":/images/username_12.png");
   username_edit_->setPlaceholderText(tr("Username"));
-  hostname_edit_ = new LineEdit(QStringLiteral(":/images/hostname_12.png"));
+  hostname_edit_ = new LineEdit(":/images/hostname_12.png");
   hostname_edit_->setPlaceholderText(tr("Computer name"));
-  password_edit_ = new LineEdit(QStringLiteral(":/images/password_12.png"));
+  password_edit_ = new LineEdit(":/images/password_12.png");
   password_edit_->setPlaceholderText(tr("Password"));
-  password2_edit_ = new LineEdit(QStringLiteral(":/images/password_12.png"));
+  password2_edit_ = new LineEdit(":/images/password_12.png");
   password2_edit_->setPlaceholderText(tr("Reenter password"));
 
   tooltip_ = new SystemInfoTip(this);

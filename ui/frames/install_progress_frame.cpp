@@ -34,7 +34,7 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
       failed_(true),
       hooks_manager_(new HooksManager()),
       hooks_manager_thread_(new QThread()) {
-  this->setObjectName(QStringLiteral("install_progress_frame"));
+  this->setObjectName("install_progress_frame");
 
   hooks_manager_->moveToThread(hooks_manager_thread_);
   hooks_manager_thread_->start();

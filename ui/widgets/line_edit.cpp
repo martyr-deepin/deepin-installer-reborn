@@ -13,7 +13,7 @@
 namespace installer {
 
 LineEdit::LineEdit(const QString& icon, QWidget* parent) : QLineEdit(parent) {
-  this->setObjectName(QStringLiteral("line_edit"));
+  this->setObjectName("line_edit");
 
   this->setStyleSheet(ReadFile(":/styles/line_edit.css"));
   this->setFixedSize(340, 36);

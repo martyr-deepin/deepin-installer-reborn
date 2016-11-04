@@ -19,7 +19,7 @@ PrepareInstallFrame::PrepareInstallFrame(PartitionDelegate* delegate,
                                          QWidget* parent)
     : QFrame(parent),
       delegate_(delegate) {
-  this->setObjectName(QStringLiteral("prepare_install_frame"));
+  this->setObjectName("prepare_install_frame");
 
   this->initUI();
   this->initConnections();

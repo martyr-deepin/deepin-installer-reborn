@@ -22,9 +22,9 @@ LanguageList GetLanguageList() {
   for(const QJsonValue& lang_value : lang_list) {
     const QJsonObject obj = lang_value.toObject();
     LanguageItem item;
-    item.locale = obj.value(QStringLiteral("locale")).toString();
-    item.name = obj.value(QStringLiteral("name")).toString();
-    item.local_name = obj.value(QStringLiteral("local_name")).toString();
+    item.locale = obj.value("locale").toString();
+    item.name = obj.value("name").toString();
+    item.local_name = obj.value("local_name").toString();
     result.append(item);
   }
 

@@ -11,7 +11,7 @@
 namespace installer {
 
 TableComboBox::TableComboBox(QWidget* parent) : QComboBox(parent) {
-  this->setObjectName(QStringLiteral("table_combo_box"));
+  this->setObjectName("table_combo_box");
 
   this->setFixedSize(240, 36);
   QAbstractItemDelegate* delegate = new TableComboBoxDelegate(this);

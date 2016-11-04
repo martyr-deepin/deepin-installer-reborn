@@ -100,7 +100,7 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
 }  // namespace
 
 PartitionManager::PartitionManager(QObject* parent) : QObject(parent) {
-  this->setObjectName(QStringLiteral("partition_manager"));
+  this->setObjectName("partition_manager");
 
   qRegisterMetaType<DeviceList>("DeviceList");
   qRegisterMetaType<OperationList>("OperationList");

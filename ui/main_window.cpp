@@ -227,9 +227,9 @@ void MainWindow::initUI() {
 
   QFrame* close_button_wrapper = new QFrame();
   close_button_wrapper->setFixedHeight(36);
-  close_button_ = new IconButton(QStringLiteral(":/images/close_normal.png"),
-                                 QStringLiteral(":/images/close_hover.png"),
-                                 QStringLiteral(":/images/close_press.png"),
+  close_button_ = new IconButton(":/images/close_normal.png",
+                                 ":/images/close_hover.png",
+                                 ":/images/close_press.png",
                                  32, 32, close_button_wrapper);
   QHBoxLayout* close_layout = new QHBoxLayout();
   close_layout->setAlignment(Qt::AlignRight);

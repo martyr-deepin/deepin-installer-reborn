@@ -11,7 +11,7 @@
 namespace installer {
 
 PointerListView::PointerListView(QWidget* parent) : QListView(parent) {
-  this->setObjectName(QStringLiteral("pointer_list_view"));
+  this->setObjectName("pointer_list_view");
   this->setMouseTracking(true);
 }
 

@@ -20,7 +20,7 @@ SelectBootloaderFrame::SelectBootloaderFrame(PartitionDelegate* delegate,
                                              QWidget* parent)
     : QFrame(parent),
       delegate_(delegate) {
-  this->setObjectName(QStringLiteral("select_bootloader_frame"));
+  this->setObjectName("select_bootloader_frame");
 
   this->initUI();
   this->initConnections();

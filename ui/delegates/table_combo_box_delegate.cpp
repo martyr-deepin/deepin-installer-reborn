@@ -25,7 +25,7 @@ const int kBorderBottom = 1;
 
 TableComboBoxDelegate::TableComboBoxDelegate(QWidget* parent)
     : QStyledItemDelegate(parent) {
-  this->setObjectName(QStringLiteral("table_combo_box_delegate"));
+  this->setObjectName("table_combo_box_delegate");
 }
 
 void TableComboBoxDelegate::paint(QPainter* painter,

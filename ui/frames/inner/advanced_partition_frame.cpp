@@ -27,7 +27,7 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(
     PartitionDelegate* delegate_, QWidget* parent)
     : QFrame(parent),
       delegate_(delegate_) {
-  this->setObjectName(QStringLiteral("advanced_partition_frame"));
+  this->setObjectName("advanced_partition_frame");
 
   this->initUI();
   this->initConnections();

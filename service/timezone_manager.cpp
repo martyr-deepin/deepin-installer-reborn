@@ -37,7 +37,7 @@ TimezoneManager::TimezoneManager(QObject* parent)
       wifi_inspect_thread_(new QThread(this)),
       geoip_request_thread_(new QThread(this)),
       geoip_request_is_replied_(false) {
-  this->setObjectName(QStringLiteral("locale_manager"));
+  this->setObjectName("locale_manager");
 
   wifi_inspect_thread_->start();
   wifi_inspect_worker_ = new WiFiInspectWorker();

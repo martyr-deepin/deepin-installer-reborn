@@ -15,7 +15,7 @@ WallpaperItem::WallpaperItem(const QRect& background_geometry,
                              QWidget* parent) :
     QLabel(parent),
     background_geometry_(background_geometry) {
-  this->setObjectName(QStringLiteral("wallpaper_item"));
+  this->setObjectName("wallpaper_item");
 
   this->initUI();
 }

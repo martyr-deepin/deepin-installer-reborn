@@ -93,8 +93,8 @@ QStringList GetUsbStorage() {
   QStringList result;
   for (const QFileInfo& file : file_list) {
     const QString filename = file.fileName();
-    if (filename.contains(QStringLiteral("usb")) &&
-        filename.contains(QStringLiteral("part"))) {
+    if (filename.contains("usb") &&
+        filename.contains("part")) {
       result.append(QFileInfo(file).canonicalFilePath());
     }
   }
@@ -220,7 +220,7 @@ QString GetSettingsString(const QString& key) {
   }
 
   qCritical() << "GetSettingsString() failed with key:" << key;
-  return QStringLiteral("");
+  return QString();
 }
 
 QStringList GetSettingsStringList(const QString& key) {
@@ -236,14 +236,14 @@ QStringList GetSettingsStringList(const QString& key) {
 QVariant GetSettingsValue(const QString& key) {
   const QString oem_file = GetOemDir().absoluteFilePath(kOemSettingsFile);
   if (QFile::exists(oem_file)) {
-    QSettings oem_settings(oem_file , QSettings::IniFormat);
+    const QSettings oem_settings(oem_file , QSettings::IniFormat);
     if (oem_settings.contains(key)) {
       return oem_settings.value(key);
     }
   }
 
-  QSettings default_settings(QStringLiteral(":/resources/default-settings.ini"),
-                             QSettings::IniFormat);
+  const QSettings default_settings(":/resources/default-settings.ini",
+                                   QSettings::IniFormat);
   if (default_settings.contains(key)) {
     return default_settings.value(key);
   }
@@ -297,11 +297,11 @@ QString GetDefaultAvatar() {
 }
 
 QString GetOemHooksDir() {
-  return GetOemDir().absoluteFilePath(QStringLiteral("hooks"));
+  return GetOemDir().absoluteFilePath("hooks");
 }
 
 QString GetOverlayFilesystemDir() {
-  return GetOemDir().absoluteFilePath(QStringLiteral("overlay"));
+  return GetOemDir().absoluteFilePath("overlay");
 }
 
 QString GetVendorLogo() {
@@ -311,7 +311,7 @@ QString GetVendorLogo() {
   }
 
   // Returns builtin logo.
-  return QStringLiteral(":/images/logo.png");
+  return ":/images/logo.png";
 }
 
 QString GetWindowBackground() {
@@ -325,7 +325,7 @@ QString GetWindowBackground() {
     return in_system;
   }
 
-  return QStringLiteral(":/resources/fallback-wallpaper.jpg");
+  return ":/resources/fallback-wallpaper.jpg";
 }
 
 bool DeleteConfigFile() {
@@ -382,7 +382,7 @@ void SaveOemConfig() {
     return;
   }
   // Read default settings
-  QSettings default_settings(QStringLiteral(":/resources/default-settings.ini"),
+  QSettings default_settings(":/resources/default-settings.ini",
                              QSettings::IniFormat);
   for (const QString& key : default_settings.allKeys()) {
     const QVariant value = default_settings.value(key);

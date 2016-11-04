@@ -13,10 +13,10 @@ PageIndicator::PageIndicator(int pages, QWidget* parent)
   : QFrame(parent),
     pages_(pages),
     current_page_(-1),
-    indicator_active_(QStringLiteral(":/images/indicator-active.png")),
-    indicator_inactive_(QStringLiteral(":/images/indicator-inactive.png")) {
+    indicator_active_(":/images/indicator-active.png"),
+    indicator_inactive_(":/images/indicator-inactive.png") {
   Q_ASSERT(pages > 0);
-  this->setObjectName(QStringLiteral("page_indicator"));
+  this->setObjectName("page_indicator");
 
   this->initUI();
   this->updateIndicators();

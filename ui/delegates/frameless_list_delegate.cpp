@@ -25,7 +25,7 @@ const int kBorderBottom = 1;
 
 FramelessItemDelegate::FramelessItemDelegate(QObject* parent)
     : QStyledItemDelegate(parent) {
-  this->setObjectName(QStringLiteral("frameless_item_delegate"));
+  this->setObjectName("frameless_item_delegate");
 }
 
 void FramelessItemDelegate::paint(QPainter* painter,

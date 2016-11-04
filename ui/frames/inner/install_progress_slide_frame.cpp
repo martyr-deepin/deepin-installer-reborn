@@ -42,7 +42,7 @@ InstallProgressSlideFrame::InstallProgressSlideFrame(QWidget* parent)
       locale_(),
       slide_index_(0),
       slide_files_() {
-  this->setObjectName(QStringLiteral("install_progress_frame"));
+  this->setObjectName("install_progress_frame");
 
   this->initUI();
   this->initConnections();

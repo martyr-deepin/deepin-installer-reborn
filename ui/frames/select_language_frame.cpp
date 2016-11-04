@@ -20,7 +20,7 @@ namespace installer {
 SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
     : QFrame(parent),
       locale_() {
-  this->setObjectName(QStringLiteral("select_language_frame"));
+  this->setObjectName("select_language_frame");
 
   this->initUI();
   this->initConnections();

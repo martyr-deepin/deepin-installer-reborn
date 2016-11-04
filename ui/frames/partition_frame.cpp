@@ -31,7 +31,7 @@ namespace installer {
 PartitionFrame::PartitionFrame(QWidget* parent)
     : QFrame(parent),
       delegate_(new PartitionDelegate(this)) {
-  this->setObjectName(QStringLiteral("partition_frame"));
+  this->setObjectName("partition_frame");
 
   this->initUI();
   this->initConnections();

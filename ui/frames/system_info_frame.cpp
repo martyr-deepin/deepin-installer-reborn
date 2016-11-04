@@ -17,7 +17,7 @@
 namespace installer {
 
 SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
-  this->setObjectName(QStringLiteral("system_info_frame"));
+  this->setObjectName("system_info_frame");
 
   this->initUI();
   this->initConnections();

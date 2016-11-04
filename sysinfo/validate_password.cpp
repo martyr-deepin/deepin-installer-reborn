@@ -40,22 +40,22 @@ ValidatePasswordState ValidatePassword(const QString& password,
     return ValidatePasswordState::TooLongError;
   }
 
-  if (require_number && (!ContainsChar(password, QStringLiteral("1234567890")))) {
+  if (require_number && (!ContainsChar(password, "1234567890"))) {
     return ValidatePasswordState::NoNumberError;
   }
 
   if (require_lower_case &&
-      (!ContainsChar(password, QStringLiteral("abcdefghijklmnopqrstuvwxyz")))) {
+      (!ContainsChar(password, "abcdefghijklmnopqrstuvwxyz"))) {
     return ValidatePasswordState::NoLowerCharError;
   }
 
   if (require_upper_case &&
-      (!ContainsChar(password, QStringLiteral("ABCDEFGHIJKLMNOPQRSTUVWXYZ")))) {
+      (!ContainsChar(password, "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))) {
     return ValidatePasswordState::NoUpperCharError;
   }
 
   if (require_special_char &&
-      (!ContainsChar(password, QStringLiteral("~!@#$%^&*()[]{}\\|/?,.<>")))) {
+      (!ContainsChar(password, "~!@#$%^&*()[]{}\\|/?,.<>"))) {
     return ValidatePasswordState::NoSpecialCharError;
   }
 

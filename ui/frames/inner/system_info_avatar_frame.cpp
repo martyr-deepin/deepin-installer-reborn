@@ -38,7 +38,7 @@ bool IsValidAvatar(const QString& avatar) {
 
 SystemInfoAvatarFrame::SystemInfoAvatarFrame(QWidget* parent)
   : QFrame(parent) {
-  this->setObjectName(QStringLiteral("system_info_avatar_frame"));
+  this->setObjectName("system_info_avatar_frame");
 
   this->initUI();
   this->initConnections();
@@ -71,9 +71,9 @@ void SystemInfoAvatarFrame::initConnections() {
 }
 
 void SystemInfoAvatarFrame::initUI() {
-  timezone_button_ = new IconButton(QStringLiteral(":/images/timezone.png"),
-                                    QStringLiteral(":/images/timezone.png"),
-                                    QStringLiteral(":/images/timezone.png"),
+  timezone_button_ = new IconButton(":/images/timezone.png",
+                                    ":/images/timezone.png",
+                                    ":/images/timezone.png",
                                     128, 32, nullptr);
   TitleLabel* title_label = new TitleLabel(tr("User Avatar"));
   CommentLabelLayout* comment_layout = new CommentLabelLayout(

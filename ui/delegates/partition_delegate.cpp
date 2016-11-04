@@ -59,7 +59,7 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
       all_mount_points_(),
       unused_mount_points_(),
       fs_types_() {
-  this->setObjectName(QStringLiteral("partition_delegate"));
+  this->setObjectName("partition_delegate");
 
   partition_manager_->moveToThread(partition_thread_);
   partition_thread_->start();

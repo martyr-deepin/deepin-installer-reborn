@@ -24,7 +24,7 @@ ValidateUsernameState ValidateUsername(const QString& username) {
     return ValidateUsernameState::FirstCharError;
   }
 
-  const QRegExp reg(QStringLiteral("[a-z][a-z0-9_-]*"));
+  const QRegExp reg("[a-z][a-z0-9_-]*");
   if (!reg.exactMatch(username)) {
     return ValidateUsernameState::InvalidCharError;
   }

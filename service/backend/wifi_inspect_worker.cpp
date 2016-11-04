@@ -67,7 +67,7 @@ QString LargestCounted(const QStringList& list) {
 }  // namespace
 
 WiFiInspectWorker::WiFiInspectWorker(QObject* parent) : QObject(parent) {
-  this->setObjectName(QStringLiteral("wifi_inspect_worker"));
+  this->setObjectName("wifi_inspect_worker");
 
   connect(this, &WiFiInspectWorker::scan,
           this, &WiFiInspectWorker::doScanning);

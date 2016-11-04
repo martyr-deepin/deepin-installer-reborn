@@ -10,7 +10,8 @@ namespace installer {
 
 ExpandedNavButton::ExpandedNavButton(const QString& text, QWidget* parent)
   : NavButton(text, parent) {
-  this->setObjectName(QStringLiteral("expanded_nav_button"));
+  this->setObjectName("expanded_nav_button");
+
   // Remove width constraints in NavButton.
   this->setFixedWidth(QWIDGETSIZE_MAX);
   this->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);

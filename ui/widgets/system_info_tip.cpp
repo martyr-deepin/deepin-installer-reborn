@@ -31,7 +31,7 @@ const int kTriangleLeftMargin = 10;
 }  // namespace
 
 SystemInfoTip::SystemInfoTip(QWidget* parent) : QFrame(parent) {
-  this->setObjectName(QStringLiteral("system_info_tip"));
+  this->setObjectName("system_info_tip");
 
   label_ = new QLabel();
   label_->setStyleSheet("background: transparent;"

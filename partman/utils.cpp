@@ -16,7 +16,7 @@
 namespace installer {
 
 bool IsEfiEnabled() {
-  return QDir(QStringLiteral("/sys/firmware/efi")).exists();
+  return QDir("/sys/firmware/efi").exists();
 }
 
 qint64 GetMaximumDeviceSize() {

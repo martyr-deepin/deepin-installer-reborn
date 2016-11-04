@@ -32,7 +32,7 @@ SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
                                            QWidget* parent)
     : QScrollArea(parent),
       delegate_(delegate) {
-  this->setObjectName(QStringLiteral("simple_partition_frame"));
+  this->setObjectName("simple_partition_frame");
 
   this->initUI();
   this->initConnections();

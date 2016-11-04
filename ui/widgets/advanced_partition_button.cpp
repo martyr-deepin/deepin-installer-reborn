@@ -18,7 +18,7 @@ AdvancedPartitionButton::AdvancedPartitionButton(const Partition& partition,
     : PointerButton(parent),
       partition_(partition),
       editable_(false) {
-  this->setObjectName(QStringLiteral("advanced_partition_button"));
+  this->setObjectName("advanced_partition_button");
 
   this->initUI();
   this->initConnections();
@@ -38,17 +38,17 @@ void AdvancedPartitionButton::initConnections() {
 
 void AdvancedPartitionButton::initUI() {
   QLabel* os_label = new QLabel();
-  os_label->setObjectName(QStringLiteral("os_label"));
+  os_label->setObjectName("os_label");
   os_label->setPixmap(GetOsTypeIcon(partition_.os));
 
   // partition label name
   QLabel* name_label = new QLabel();
-  name_label->setObjectName(QStringLiteral("name_label"));
+  name_label->setObjectName("name_label");
   name_label->setText(GetPartitionLabel(partition_));
 
   // partition path
   QLabel* path_label = new QLabel();
-  path_label->setObjectName(QStringLiteral("path_label"));
+  path_label->setObjectName("path_label");
   if (partition_.type != PartitionType::Unallocated) {
     const QString name = GetPartitionName(partition_.path);
     path_label->setText(QString("(%1)").arg(name));
@@ -69,35 +69,33 @@ void AdvancedPartitionButton::initUI() {
 
   // partition space usage
   QLabel* usage_label = new QLabel();
-  usage_label->setObjectName(QStringLiteral("usage_label"));
+  usage_label->setObjectName("usage_label");
   usage_label->setText(GetPartitionUsage(partition_));
   usage_label->setFixedWidth(48);
 
   QProgressBar* usage_bar = new QProgressBar();
-  usage_bar->setObjectName(QStringLiteral("usage_bar"));
+  usage_bar->setObjectName("usage_bar");
   usage_bar->setTextVisible(false);
   usage_bar->setValue(GetPartitionUsageValue(partition_));
   usage_bar->setFixedSize(100, 6);
 
   // mount point
   QLabel* mount_point_label = new QLabel();
-  mount_point_label->setObjectName(QStringLiteral("mount_point_label"));
+  mount_point_label->setObjectName("mount_point_label");
   if (!partition_.mount_point.isEmpty()) {
     mount_point_label->setText(partition_.mount_point);
   }
   mount_point_label->setFixedWidth(64);
-  mount_point_label->setText("/root");
 
   // tip
   QLabel* tip_label = new QLabel();
-  tip_label->setObjectName(QStringLiteral("tip_label"));
+  tip_label->setObjectName("tip_label");
   // TODO(xushaohua): Read root partition.
   tip_label->setFixedWidth(64);
-  tip_label->setText("Install here");
 
   // filesystem name
   QLabel* fs_label = new QLabel();
-  fs_label->setObjectName(QStringLiteral("fs_label"));
+  fs_label->setObjectName("fs_label");
   if (partition_.type != PartitionType::Unallocated) {
     fs_label->setText(GetFsTypeName(partition_.fs));
   }
@@ -110,7 +108,7 @@ void AdvancedPartitionButton::initUI() {
   control_button_wrapper->setFixedSize(18, 18);
 
   control_button_ = new PointerButton(control_button_wrapper);
-  control_button_->setObjectName(QStringLiteral("control_button"));
+  control_button_->setObjectName("control_button");
   control_button_->setFlat(true);
   control_button_->setFixedSize(18, 18);
   control_button_->hide();
@@ -144,19 +142,16 @@ void AdvancedPartitionButton::updateStatus() {
   if (editable_) {
     if (partition_.type == PartitionType::Unallocated) {
       control_status_ = ControlStatus::New;
-      control_button_->setIcon(
-          QIcon(QStringLiteral(":/images/new_partition.png")));
+      control_button_->setIcon(QIcon(":/images/new_partition.png"));
     } else {
       control_status_ = ControlStatus::Delete;
-      control_button_->setIcon(
-          QIcon(QStringLiteral(":/images/delete_partition.png")));
+      control_button_->setIcon(QIcon(":/images/delete_partition.png"));
     }
   } else {
     if (partition_.type != PartitionType::Unallocated &&
         this->isChecked()) {
       control_status_ = ControlStatus::Edit;
-      control_button_->setIcon(
-          QIcon(QStringLiteral(":/images/edit_partition.png")));
+      control_button_->setIcon(QIcon(":/images/edit_partition.png"));
     } else {
       control_status_ = ControlStatus::Hide;
     }

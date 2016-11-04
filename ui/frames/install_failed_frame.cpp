@@ -28,7 +28,7 @@ const int kControlButtonSize = 32;
 }  // namespace
 
 InstallFailedFrame::InstallFailedFrame(QWidget* parent) : QFrame(parent) {
-  this->setObjectName(QStringLiteral("install_failed_frame"));
+  this->setObjectName("install_failed_frame");
 
   this->initUI();
   // Show QR widget only if control button is clicked.
@@ -68,9 +68,9 @@ void InstallFailedFrame::initUI() {
   qr_widget_->setFixedSize(kQRWindowSize, kQRWindowSize);
   qr_widget_->move((kContentWindowWidth - kQRWindowSize) / 2,
                    (kContentWindowHeight - kQRWindowSize) / 2);
-  control_button_ = new IconButton(QStringLiteral(":/images/QR_normal.png"),
-                                   QStringLiteral(":/images/QR_hover.png"),
-                                   QStringLiteral(":/images/QR_press.png"),
+  control_button_ = new IconButton(":/images/QR_normal.png",
+                                   ":/images/QR_hover.png",
+                                   ":/images/QR_press.png",
                                    kControlButtonSize, kControlButtonSize,
                                    content_frame);
   control_button_->move(kContentWindowWidth - kControlButtonSize, 0);

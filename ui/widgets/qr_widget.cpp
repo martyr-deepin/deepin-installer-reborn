@@ -12,10 +12,8 @@
 namespace installer {
 
 // Refers: http://stackoverflow.com/questions/21400254
-QRWidget::QRWidget(QWidget* parent)
-    : QWidget(parent),
-      content_() {
-  this->setObjectName(QStringLiteral("qr_widget"));
+QRWidget::QRWidget(QWidget* parent) : QWidget(parent), content_() {
+  this->setObjectName("qr_widget");
 }
 
 void QRWidget::setText(const QString& content) {

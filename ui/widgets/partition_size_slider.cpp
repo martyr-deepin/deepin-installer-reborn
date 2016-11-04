@@ -18,7 +18,7 @@ namespace installer {
 PartitionSizeSlider::PartitionSizeSlider(QWidget* parent)
     : QFrame(parent),
       maximum_value_(0) {
-  this->setObjectName(QStringLiteral("partition_size_slider"));
+  this->setObjectName("partition_size_slider");
 
   this->initUI();
   this->initConnection();
@@ -50,17 +50,17 @@ void PartitionSizeSlider::initConnection() {
 
 void PartitionSizeSlider::initUI() {
   slider_ = new QSlider(Qt::Horizontal);
-  slider_->setObjectName(QStringLiteral("slider"));
+  slider_->setObjectName("slider");
   slider_->setMinimum(0);
 
   editor_ = new QLineEdit();
-  editor_->setObjectName(QStringLiteral("editor"));
+  editor_->setObjectName("editor");
   int_validator_ = new QIntValidator(editor_);
   editor_->setValidator(int_validator_);
   editor_->setFixedWidth(50);
 
   QLabel* size_label = new QLabel("Mib");
-  size_label->setObjectName(QStringLiteral("size_label"));
+  size_label->setObjectName("size_label");
 
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);

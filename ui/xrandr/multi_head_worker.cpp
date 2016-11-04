@@ -21,7 +21,7 @@ namespace installer {
 MultiHeadWorker::MultiHeadWorker(QObject* parent)
     : QObject(parent),
       is_running_(false) {
-  this->setObjectName(QStringLiteral("multi_head_worker"));
+  this->setObjectName("multi_head_worker");
 
   this->initConnections();
 }

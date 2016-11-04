@@ -36,7 +36,7 @@ EditPartitionFrame::EditPartitionFrame(PartitionDelegate* delegate,
     : QFrame(parent),
       delegate_(delegate),
       partition_() {
-  this->setObjectName(QStringLiteral("edit_partition_frame"));
+  this->setObjectName("edit_partition_frame");
 
   this->initUI();
   this->initConnections();

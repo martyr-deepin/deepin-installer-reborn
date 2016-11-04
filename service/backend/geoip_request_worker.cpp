@@ -26,7 +26,7 @@ bool ReadTimezone(QNetworkReply* reply, QString& timezone) {
 
 GeoIpRequestWorker::GeoIpRequestWorker(QObject* parent)
     : QObject(parent) {
-  this->setObjectName(QStringLiteral("geo_ip_request_worker"));
+  this->setObjectName("geo_ip_request_worker");
 
   network_manager_ = new QNetworkAccessManager(this);
   connect(this, &GeoIpRequestWorker::request,

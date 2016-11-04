@@ -19,7 +19,7 @@ const int kLineLeftMargin = 30;
 }  // namespace
 
 DeviceModelLabel::DeviceModelLabel(QWidget* parent) : QLabel(parent) {
-  this->setObjectName(QStringLiteral("device_model_label"));
+  this->setObjectName("device_model_label");
 }
 
 DeviceModelLabel::DeviceModelLabel(const QString& text, QWidget* parent)

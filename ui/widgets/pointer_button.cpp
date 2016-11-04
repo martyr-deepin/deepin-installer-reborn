@@ -7,7 +7,7 @@
 namespace installer {
 
 PointerButton::PointerButton(QWidget* parent) : QPushButton(parent) {
-  this->setObjectName(QStringLiteral("pointer_button"));
+  this->setObjectName("pointer_button");
 }
 
 PointerButton::PointerButton(const QString& text, QWidget* parent)

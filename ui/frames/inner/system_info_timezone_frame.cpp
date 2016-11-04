@@ -21,7 +21,7 @@ namespace installer {
 SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
     : QFrame(parent),
       timezone_() {
-  this->setObjectName(QStringLiteral("system_info_timezone_frame"));
+  this->setObjectName("system_info_timezone_frame");
 
   this->initUI();
   this->initConnections();

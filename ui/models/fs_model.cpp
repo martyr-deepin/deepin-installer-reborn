@@ -13,7 +13,7 @@ FsModel::FsModel(PartitionDelegate* delegate, QObject* parent)
     : QAbstractListModel(parent),
       delegate_(delegate),
       fs_list_(delegate_->getFsTypes()) {
-  this->setObjectName(QStringLiteral("fs_model"));
+  this->setObjectName("fs_model");
 }
 
 int FsModel::index(FsType fs_type) const {

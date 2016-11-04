@@ -16,7 +16,7 @@ namespace installer {
 
 DiskSpaceInsufficientFrame::DiskSpaceInsufficientFrame(QWidget* parent)
     : QFrame(parent) {
-  this->setObjectName(QStringLiteral("disk_space_insufficient_frame"));
+  this->setObjectName("disk_space_insufficient_frame");
 
   this->initUI();
 }
