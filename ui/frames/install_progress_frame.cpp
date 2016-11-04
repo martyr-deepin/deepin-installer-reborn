@@ -53,8 +53,9 @@ InstallProgressFrame::~InstallProgressFrame() {
   hooks_manager_thread_ = nullptr;
 }
 
-void InstallProgressFrame::startSlide() {
-  slide_frame_->startSlide();
+void InstallProgressFrame::startSlide(bool position_animation,
+                                      bool opacity_animation) {
+  slide_frame_->startSlide(position_animation, opacity_animation);
 }
 
 void InstallProgressFrame::runHooks(bool ok) {

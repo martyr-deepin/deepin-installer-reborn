@@ -23,7 +23,7 @@ class InstallProgressSlideFrame : public QFrame {
   explicit InstallProgressSlideFrame(QWidget* parent = nullptr);
 
   // Start/stop slide show.
-  void startSlide();
+  void startSlide(bool position_animation, bool opacity_animation);
   void stopSlide();
 
  public slots:

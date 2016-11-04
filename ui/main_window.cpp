@@ -44,6 +44,13 @@ namespace {
 // Trim length of error message.
 const int kQRContentStripped = 80;
 
+void GetInstallProgressFrameAnimationLevel(bool& position_animation,
+                                           bool& opacity_animation) {
+  const int level = GetSettingsInt(kInstallProgressPageAnimationLevel);
+  position_animation = bool(level & 1);
+  opacity_animation = bool(level & 2);
+}
+
 int GetVisiblePages() {
   int pages = 0;
   if (!GetSettingsBool(kSkipSelectLanguagePage)) {
@@ -112,6 +119,7 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
+  current_page_ = PageId::PartitionId;
   this->goNextPage();
 }
 
@@ -425,7 +433,11 @@ void MainWindow::goNextPage() {
     case PageId::PartitionId: {
       // Show InstallProgressPage.
       page_indicator_->goNextPage();
-      install_progress_frame_->startSlide();
+      bool position_animation, opacity_animation;
+      GetInstallProgressFrameAnimationLevel(position_animation,
+                                            opacity_animation);
+      install_progress_frame_->startSlide(position_animation,
+                                          opacity_animation);
       this->setCurrentPage(PageId::InstallProgressId);
       break;
     }

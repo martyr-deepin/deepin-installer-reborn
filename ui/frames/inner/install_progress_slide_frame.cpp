@@ -48,7 +48,8 @@ InstallProgressSlideFrame::InstallProgressSlideFrame(QWidget* parent)
   this->initConnections();
 }
 
-void InstallProgressSlideFrame::startSlide() {
+void InstallProgressSlideFrame::startSlide(bool position_animation,
+                                           bool opacity_animation) {
   QDir slide_dir(GetSlideDir(locale_));
   Q_ASSERT(slide_dir.exists());
   for (const QString& filename : slide_dir.entryList(QDir::Files)) {
@@ -61,6 +62,13 @@ void InstallProgressSlideFrame::startSlide() {
   slide_index_ = 0;
   this->updateSlideImage();
 
+  animation_group_->clear();
+  if (position_animation) {
+    animation_group_->addAnimation(pos_animation_);
+  }
+  if (opacity_animation) {
+    animation_group_->addAnimation(opacity_animation_);
+  }
   animation_group_->start();
 }
 
@@ -97,8 +105,6 @@ void InstallProgressSlideFrame::initUI() {
   opacity_animation_->setDuration(kSlideDuration);
 
   animation_group_ = new QParallelAnimationGroup(this);
-  animation_group_->addAnimation(pos_animation_);
-  animation_group_->addAnimation(opacity_animation_);
   animation_group_->setLoopCount(-1);
 
   // TODO(xushaohua): Check proper size of this widget

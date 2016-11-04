@@ -70,8 +70,8 @@ const char kPartitionDoAutoPart[] = "partition_do_auto_part";
 const char kPartitionMountPoints[] = "partition_mount_points";
 
 // Install progress page
-const char kInstallProgressPageEnableSlider[] =
-    "install_progress_page_enable_slide";
+const char kInstallProgressPageAnimationLevel[] =
+    "install_progress_page_animation_level";
 
 // Install failed page
 const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";

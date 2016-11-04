@@ -25,8 +25,8 @@ class InstallProgressFrame : public QFrame {
   explicit InstallProgressFrame(QWidget* parent = nullptr);
   ~InstallProgressFrame();
 
-  // Show slide now
-  void startSlide();
+  // Show slide now.
+  void startSlide(bool position_animation, bool opacity_animation);
 
   // Returns true is installation process failed.
   bool failed() const { return failed_; }
