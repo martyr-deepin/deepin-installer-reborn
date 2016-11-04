@@ -176,39 +176,9 @@ QStringList PartitionDelegate::getOperationDescriptions() const {
 
 void PartitionDelegate::scanDevices() const {
   // If auto-part is not set, scan devices right now.
-//  if (!GetSettingsBool(kPartitionDoAutoPart)) {
-//    emit partition_manager_->refreshDevices();
-//  }
-  DeviceList devices;
-  for (int i = 0; i < 5; i++) {
-    Device device;
-    device.model = "West Data";
-    device.path = "/dev/sda";
-    for (int j = 0; j < i+4; j++) {
-      Partition partition;
-      partition.label = "Debian";
-      if (j % 2 == 0) {
-        partition.type = PartitionType::Normal;
-        partition.fs = FsType::Ext4;
-        partition.os = OsType::Linux;
-        partition.path = "/dev/sda1";
-        partition.sector_size = 512;
-        partition.start_sector = 1024;
-        partition.end_sector = 1289800441;
-        partition.length = 13456554441;
-        partition.freespace = 6456554441;
-      } else {
-        partition.type = PartitionType::Unallocated;
-        partition.start_sector = 1024;
-        partition.end_sector = 182390123;
-        partition.sector_size = 512;
-      }
-
-      device.partitions.append(partition);
-    }
-    devices.append(device);
+  if (!GetSettingsBool(kPartitionDoAutoPart)) {
+    emit partition_manager_->refreshDevices();
   }
-  emit partition_manager_->devicesRefreshed(devices);
 }
 
 const QStringList& PartitionDelegate::getMountPoints() {
