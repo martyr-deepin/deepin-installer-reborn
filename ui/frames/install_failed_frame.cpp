@@ -20,9 +20,9 @@ namespace installer {
 
 namespace {
 
-const int kContentWindowWidth = 640;
-const int kContentWindowHeight = 480;
-const int kQRWindowSize = 320;
+const int kContentWindowWidth = 480;
+const int kContentWindowHeight = 360;
+const int kQRWindowSize = 280;
 const int kControlButtonSize = 32;
 
 }  // namespace
@@ -60,10 +60,10 @@ void InstallFailedFrame::initUI() {
   FrostedFrame* content_frame = new FrostedFrame();
   content_frame->setFixedSize(kContentWindowWidth, kContentWindowHeight);
   content_label_ = new QLabel(content_frame);
+  content_label_->setObjectName("content_label");
   content_label_->setFixedSize(kContentWindowWidth, kContentWindowHeight);
   content_label_->setWordWrap(true);
   content_label_->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-  content_label_->setStyleSheet(ReadFile(":/styles/install_failed_label.css"));
   qr_widget_ = new QRWidget(content_frame);
   qr_widget_->setFixedSize(kQRWindowSize, kQRWindowSize);
   qr_widget_->move((kContentWindowWidth - kQRWindowSize) / 2,
@@ -71,7 +71,8 @@ void InstallFailedFrame::initUI() {
   control_button_ = new IconButton(":/images/QR_normal.png",
                                    ":/images/QR_hover.png",
                                    ":/images/QR_press.png",
-                                   kControlButtonSize, kControlButtonSize,
+                                   kControlButtonSize,
+                                   kControlButtonSize,
                                    content_frame);
   control_button_->move(kContentWindowWidth - kControlButtonSize, 0);
 
@@ -89,6 +90,7 @@ void InstallFailedFrame::initUI() {
   layout->addWidget(reboot_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+  this->setStyleSheet(ReadFile(":/styles/install_failed_frame.css"));
 }
 
 void InstallFailedFrame::onControlButtonClicked() {
