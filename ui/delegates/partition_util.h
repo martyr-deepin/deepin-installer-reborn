@@ -7,10 +7,14 @@
 
 #include <QtCore/QtGlobal>
 
+#include "partman/device.h"
 #include "partman/fs.h"
 #include "partman/partition.h"
 
 namespace installer {
+
+// Get device model name and capacity.
+QString GetDeviceModelAndCap(const Device& device);
 
 // Get partition name based on |path|.
 QString GetPartitionName(const QString& path);

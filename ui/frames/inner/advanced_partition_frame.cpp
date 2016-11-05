@@ -12,6 +12,7 @@
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_delegate.h"
+#include "ui/delegates/partition_util.h"
 #include "ui/widgets/advanced_partition_button.h"
 #include "ui/widgets/pointer_button.h"
 
@@ -144,8 +145,9 @@ void AdvancedPartitionFrame::repaintDevices() {
   }
 
   for (const Device& device : delegate_->devices()) {
-    QLabel* model_label = new QLabel(device.model);
+    QLabel* model_label = new QLabel();
     model_label->setObjectName("model_label");
+    model_label->setText(GetDeviceModelAndCap(device));
     model_label->setContentsMargins(15, 10, 0, 5);
     partition_layout_->addWidget(model_label, 0, Qt::AlignLeft);
     for (const Partition& partition : device.partitions) {

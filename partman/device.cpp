@@ -21,6 +21,14 @@ Device::Device()
       table(PartitionTableType::Unknown) {
 }
 
+qint64 Device::getByteLength() const {
+  if (length > 0) {
+    return length * sector_size;
+  } else {
+    return -1;
+  }
+}
+
 QDebug& operator<<(QDebug& debug, const Device& device) {
   debug << "Device: {"
         << "path:" << device.path

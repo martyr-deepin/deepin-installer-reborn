@@ -12,6 +12,11 @@
 
 namespace installer {
 
+QString GetDeviceModelAndCap(const Device& device) {
+  const int gibi_size = ToGigByte(device.getByteLength());
+  return QString("%1 (%2G)").arg(device.model).arg(gibi_size);
+}
+
 QString GetPartitionName(const QString& path) {
   return QFileInfo(path).fileName();
 }

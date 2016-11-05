@@ -31,6 +31,7 @@ void DeviceModelLabel::paintEvent(QPaintEvent* event) {
   Q_UNUSED(event);
   QPainter painter(this);
 
+  // Draw text.
   QFont font;
   font.setPixelSize(kFontSize);
   const QFontMetrics font_metrics(font);
@@ -42,6 +43,7 @@ void DeviceModelLabel::paintEvent(QPaintEvent* event) {
   const QRect text_rect(kTextLeftMargin, 0, text_width, text_height);
   painter.drawText(text_rect, Qt::AlignLeft, this->text());
 
+  // Draw horizontal line.
   const QColor line_color(QColor::fromRgb(255, 255, 255, 25));
   painter.setPen(QPen(QBrush(line_color), 2));
   // Add left-margin

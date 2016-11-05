@@ -19,7 +19,7 @@ class Device {
   PartitionList partitions;
   QString model;
   QString path;
-  qint64 length;  // device length
+  qint64 length;  // device length, in sector
   qint64 heads;
   qint64 sectors;
   qint64 cylinders;
@@ -29,6 +29,9 @@ class Device {
   bool read_only;
 
   PartitionTableType table;
+
+  // Returns size of device. Returns -1 if failed.
+  qint64 getByteLength() const;
 };
 QDebug& operator<<(QDebug& debug, const Device& device);
 

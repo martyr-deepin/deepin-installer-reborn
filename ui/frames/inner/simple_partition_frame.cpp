@@ -14,6 +14,7 @@
 #include "base/file_util.h"
 #include "partman/structs.h"
 #include "ui/delegates/partition_delegate.h"
+#include "ui/delegates/partition_util.h"
 #include "ui/widgets/device_model_label.h"
 #include "ui/widgets/simple_partition_button.h"
 
@@ -111,9 +112,9 @@ void SimplePartitionFrame::repaintDevices() {
   // Draw partitions.
   int row = 0, column = 0;
   for (const Device& device : delegate_->devices()) {
-    QLabel* device_model_label = new DeviceModelLabel(device.model);
+    QLabel* device_model_label = new DeviceModelLabel();
+    device_model_label->setText(GetDeviceModelAndCap(device));
     device_model_label->setFixedSize(kWindowWidth, 20);
-    device_model_label->setObjectName("device_model");
 
     // Make sure that widgets in grid are left-aligned.
     grid_layout_->addWidget(device_model_label, row, 0,
