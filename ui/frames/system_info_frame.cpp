@@ -68,7 +68,7 @@ void SystemInfoFrame::initUI() {
 }
 
 void SystemInfoFrame::showAvatarPage() {
-  if (GetSettingsBool(kSystemInfoDisableAvatorPage)) {
+  if (!GetSettingsBool(kSystemInfoDisableAvatorPage)) {
     stacked_layout_->setCurrentWidget(avatar_frame_);
   }
 }

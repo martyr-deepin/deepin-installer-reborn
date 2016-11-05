@@ -6,6 +6,7 @@
 #define INSTALLER_UI_FRAMES_SELECT_LANGUAGE_FRAME_H
 
 #include <QFrame>
+class QTranslator;
 
 namespace installer {
 
@@ -13,7 +14,7 @@ class FramelessListView;
 class LanguageListModel;
 class NavButton;
 
-// Select system language.
+// Select system language and update ui language on-the-fly.
 class SelectLanguageFrame : public QFrame {
   Q_OBJECT
 
@@ -23,18 +24,21 @@ class SelectLanguageFrame : public QFrame {
   void autoConf();
 
  signals:
-  // Emitted when system language is selected.
-  void finished();
+  // Emitted when system language |language| is selected.
+  void finished(const QString& language);
 
-  // Emitted when |locale| is selected in select-language-frame
-  void languageSelected(const QString& locale);
+ protected:
+  // Update text of next_button_
+  void changeEvent(QEvent* event) override;
 
  private:
   void initConnections();
   void initUI();
+  void updateTranslator(const QString& locale);
 
   // Current selected locale.
   QString locale_;
+  QTranslator* current_translator_ = nullptr;
 
   FramelessListView* language_view_ = nullptr;
   LanguageListModel* language_model_ = nullptr;

@@ -45,9 +45,6 @@ class MainWindow : public QWidget {
   // Show fullscreen.
   void fullscreen();
 
-  // Notify background thread to scan disk devices if needed.
-  void scanDevices();
-
  protected:
   // Move close button to appropriate position when window is resized.
   void resizeEvent(QResizeEvent* event) override;
@@ -63,14 +60,16 @@ class MainWindow : public QWidget {
     InstallSuccessId,
     PartitionId,
     PartitionTableWarningId,
-    SelectLanguageId,
     SystemInfoId,
     VirtualMachineId,
   };
 
-  void initConnections();
+  void initPageConnections();
   void initPages();
   void initUI();
+
+  // Displays SelectLanguageFrame first.
+  void initSelectLanguageFrame();
 
   void registerShortcut();
 
@@ -118,6 +117,9 @@ class MainWindow : public QWidget {
 
   // Move main window to primary screen when it is changed to |geometry|.
   void onPrimaryScreenChanged(const QRect& geometry);
+
+  // Hide SelectLanguageFrame, init other pages
+  void onSelectLanguageFrameFinished(const QString& language);
 
   void goNextPage();
   void rebootSystem();

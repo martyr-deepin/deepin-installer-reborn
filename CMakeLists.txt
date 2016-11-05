@@ -249,6 +249,7 @@ add_executable(deepin-installer-reborn
                ${SYSINFO_FILES}
                ${UI_FILES}
 
+               i18n/i18n.qrc
                resources/resources.qrc
                ui/images/images.qrc
                ui/styles/styles.qrc

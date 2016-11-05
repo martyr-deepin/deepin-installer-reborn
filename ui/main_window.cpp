@@ -116,10 +116,8 @@ MainWindow::MainWindow()
   this->setObjectName("main_window");
 
   this->initUI();
-  this->initPages();
+  this->initSelectLanguageFrame();
   this->registerShortcut();
-  this->initConnections();
-  this->goNextPage();
 }
 
 void MainWindow::fullscreen() {
@@ -127,19 +125,12 @@ void MainWindow::fullscreen() {
   this->showFullScreen();
 }
 
-void MainWindow::scanDevices() {
-  partition_frame_->scanDevices();
-}
-
 void MainWindow::resizeEvent(QResizeEvent* event) {
   this->updateBackground();
   QWidget::resizeEvent(event);
 }
 
-void MainWindow::initConnections() {
-  connect(close_button_, &QPushButton::clicked,
-          this, &MainWindow::onCloseButtonClicked);
-
+void MainWindow::initPageConnections() {
   connect(confirm_quit_frame_, &ConfirmQuitFrame::quitCancelled,
           this, &MainWindow::goNextPage);
   connect(confirm_quit_frame_, &ConfirmQuitFrame::quitConfirmed,
@@ -158,28 +149,16 @@ void MainWindow::initConnections() {
           this, &MainWindow::rebootSystem);
   connect(partition_table_warning_frame_, &PartitionTableWarningFrame::accepted,
           this, &MainWindow::goNextPage);
-  connect(select_language_frame_, &SelectLanguageFrame::finished,
-          this, &MainWindow::goNextPage);
   connect(system_info_frame_, &SystemInfoFrame::finished,
           this, &MainWindow::goNextPage);
   connect(virtual_machine_frame_, &VirtualMachineFrame::finished,
           this, &MainWindow::goNextPage);
-
-  connect(control_panel_shortcut_, &QShortcut::activated,
-          control_panel_frame_, &ControlPanelFrame::toggleVisible);
-  connect(monitor_mode_shortcut_, &QShortcut::activated,
-          multi_head_manager_, &MultiHeadManager::switchXRandRMode);
-  connect(multi_head_manager_, &MultiHeadManager::primaryScreenChanged,
-          this, &MainWindow::onPrimaryScreenChanged);
 
   // Notify InstallProgressFrame that partition job has finished.
   connect(partition_frame_, &PartitionFrame::autoPartDone,
           install_progress_frame_, &InstallProgressFrame::runHooks);
   connect(partition_frame_, &PartitionFrame::manualPartDone,
           install_progress_frame_, &InstallProgressFrame::runHooks);
-
-  connect(select_language_frame_, &SelectLanguageFrame::languageSelected,
-          install_progress_frame_, &InstallProgressFrame::updateLanguage);
 }
 
 void MainWindow::initPages() {
@@ -211,10 +190,6 @@ void MainWindow::initPages() {
   pages_.insert(PageId::PartitionTableWarningId,
                 stacked_layout_->addWidget(partition_table_warning_frame_));
 
-  select_language_frame_ = new SelectLanguageFrame(this);
-  pages_.insert(PageId::SelectLanguageId,
-                stacked_layout_->addWidget(select_language_frame_));
-
   system_info_frame_ = new SystemInfoFrame(this);
   pages_.insert(PageId::SystemInfoId,
                 stacked_layout_->addWidget(system_info_frame_));
@@ -222,11 +197,6 @@ void MainWindow::initPages() {
   virtual_machine_frame_ = new VirtualMachineFrame(this);
   pages_.insert(PageId::VirtualMachineId,
                 stacked_layout_->addWidget(virtual_machine_frame_));
-
-  control_panel_frame_ = new ControlPanelFrame(this);
-  control_panel_frame_->hide();
-
-  multi_head_manager_ = new MultiHeadManager(this);
 }
 
 void MainWindow::initUI() {
@@ -267,14 +237,34 @@ void MainWindow::initUI() {
 
   this->setLayout(vbox_layout);
   this->setWindowFlags(Qt::FramelessWindowHint);
+
+  control_panel_frame_ = new ControlPanelFrame(this);
+  control_panel_frame_->hide();
+
+  multi_head_manager_ = new MultiHeadManager(this);
+
+  connect(close_button_, &QPushButton::clicked,
+          this, &MainWindow::onCloseButtonClicked);
+  connect(multi_head_manager_, &MultiHeadManager::primaryScreenChanged,
+          this, &MainWindow::onPrimaryScreenChanged);
+}
+
+void MainWindow::initSelectLanguageFrame() {
+  select_language_frame_ = new SelectLanguageFrame(this);
+  stacked_layout_->addWidget(select_language_frame_);
+  connect(select_language_frame_, &SelectLanguageFrame::finished,
+          this, &MainWindow::onSelectLanguageFrameFinished);
 }
 
 void MainWindow::registerShortcut() {
   control_panel_shortcut_ = new QShortcut(QKeySequence("Ctrl+L"), this);
   control_panel_shortcut_->setContext(Qt::ApplicationShortcut);
-
   monitor_mode_shortcut_ = new QShortcut(QKeySequence("Ctrl+P"), this);
   monitor_mode_shortcut_->setContext(Qt::ApplicationShortcut);
+  connect(control_panel_shortcut_, &QShortcut::activated,
+          control_panel_frame_, &ControlPanelFrame::toggleVisible);
+  connect(monitor_mode_shortcut_, &QShortcut::activated,
+          multi_head_manager_, &MultiHeadManager::switchXRandRMode);
 }
 
 void MainWindow::setCurrentPage(PageId page_id) {
@@ -327,12 +317,24 @@ void MainWindow::onPrimaryScreenChanged(const QRect& geometry) {
   this->setFixedSize(geometry.size());
 }
 
+void MainWindow::onSelectLanguageFrameFinished(const QString& language) {
+  // Remove SelectLanguageFrame
+  stacked_layout_->removeWidget(select_language_frame_);
+  this->initPages();
+  install_progress_frame_->updateLanguage(language);
+
+  // Notify background thread to scan disk devices if needed.
+  partition_frame_->scanDevices();
+
+  this->initPageConnections();
+  this->goNextPage();
+}
+
 void MainWindow::goNextPage() {
   // Page order:
   //   * disk space insufficient page;
   //   * virtual machine page;
   //   * partition table warning page;
-  //   * select language page;
   //   * system info page;
   //   * partition page;
   //   * install progress page;
@@ -389,20 +391,6 @@ void MainWindow::goNextPage() {
     }
 
     case PageId::PartitionTableWarningId: {
-      // Check whether to show SelectLanguagePage.
-      if (!GetSettingsBool(kSkipSelectLanguagePage)) {
-        page_indicator_->goNextPage();
-        this->setCurrentPage(PageId::SelectLanguageId);
-      } else {
-        select_language_frame_->autoConf();
-        prev_page_ = current_page_;
-        current_page_ = PageId::SelectLanguageId;
-        this->goNextPage();
-      }
-      break;
-    }
-
-    case PageId::SelectLanguageId: {
       // Check whether to show SystemInfoPage.
       if (!GetSettingsBool(kSkipSystemInfoPage)) {
         page_indicator_->goNextPage();
@@ -450,7 +438,7 @@ void MainWindow::goNextPage() {
         if (ReadErrorMsg(msg, encoded_msg)) {
           install_failed_frame_->updateErrorMessage(msg, encoded_msg);
         } else {
-          msg = "Error: failed to read log file!";
+          msg = tr("Error: failed to read log file!");
           install_failed_frame_->updateErrorMessage(msg, encoded_msg);
         }
         this->setCurrentPage(PageId::InstallFailedId);
