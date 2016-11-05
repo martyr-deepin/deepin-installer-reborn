@@ -10,6 +10,7 @@
 namespace installer {
 
 class CommentLabel;
+class NavButton;
 
 // This frame is displayed when no enough disk space is detected.
 class DiskSpaceInsufficientFrame : public QFrame {
@@ -26,9 +27,11 @@ class DiskSpaceInsufficientFrame : public QFrame {
   void finished();
 
  private:
+  void initConnections();
   void initUI();
 
   CommentLabel* comment_label_ = nullptr;
+  NavButton* abort_button_ = nullptr;
 };
 
 }  // namespace installer

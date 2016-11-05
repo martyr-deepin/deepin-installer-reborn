@@ -18,6 +18,12 @@ VirtualMachineFrame::VirtualMachineFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName("virtual_machine_frame");
 
   this->initUI();
+  this->initConnections();
+}
+
+void VirtualMachineFrame::initConnections() {
+  connect(next_button_, &QPushButton::clicked,
+          this, &VirtualMachineFrame::finished);
 }
 
 void VirtualMachineFrame::initUI() {
@@ -27,7 +33,7 @@ void VirtualMachineFrame::initUI() {
          "which will affect the system performance and operation experience, "
          "for a smooth experience, it is recommended to install deepin in "
          "real-machine environment"));
-  NavButton* nav_button = new NavButton(tr("Continue"));
+  next_button_ = new NavButton(tr("Continue"));
 
   QVBoxLayout* layout = new QVBoxLayout(this);
   layout->setSpacing(kMainLayoutSpacing);
@@ -35,12 +41,9 @@ void VirtualMachineFrame::initUI() {
   layout->addWidget(title_label, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addStretch();
-  layout->addWidget(nav_button, 0, Qt::AlignCenter);
+  layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
-
-  connect(nav_button, &QPushButton::clicked,
-          this, &VirtualMachineFrame::finished);
 }
 
 }  // namespace installer

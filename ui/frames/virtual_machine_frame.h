@@ -9,6 +9,8 @@
 
 namespace installer {
 
+class NavButton;
+
 // This page is displayed when system is running in a virtual machine.
 class VirtualMachineFrame : public QFrame {
   Q_OBJECT
@@ -21,7 +23,10 @@ class VirtualMachineFrame : public QFrame {
   void finished();
 
  private:
+  void initConnections();
   void initUI();
+
+  NavButton* next_button_ = nullptr;
 };
 
 }  // namespace installer

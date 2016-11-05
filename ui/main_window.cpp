@@ -234,13 +234,16 @@ void MainWindow::initUI() {
 
   QFrame* close_button_wrapper = new QFrame();
   close_button_wrapper->setFixedHeight(36);
+  close_button_wrapper->setContentsMargins(0, 0, 0, 0);
   close_button_ = new IconButton(":/images/close_normal.png",
                                  ":/images/close_hover.png",
                                  ":/images/close_press.png",
                                  32, 32, close_button_wrapper);
+  close_button_->setFocusPolicy(Qt::TabFocus);
   QHBoxLayout* close_layout = new QHBoxLayout();
-  close_layout->setAlignment(Qt::AlignRight);
-  close_layout->addWidget(close_button_);
+  close_layout->setContentsMargins(0, 0, 0, 0);
+  close_layout->setSpacing(0);
+  close_layout->addWidget(close_button_, 0, Qt::AlignRight);
   close_button_wrapper->setLayout(close_layout);
 
   stacked_layout_ = new QStackedLayout();
@@ -345,11 +348,11 @@ void MainWindow::goNextPage() {
     case PageId::NullId: {
       // Displays the first page.
       // Check whether to show DiskSpaceInsufficientPage.
-      const int required_device_size = GetSettingsValue(
-          kPartitionMinimumDiskSpaceRequired).toInt();
+      const int required_device_size =
+          GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
       if (IsDiskSpaceInsufficient(required_device_size)) {
-        const int recommended_device_size = GetSettingsValue(
-            kPartitionRecommendedDiskSpace).toInt();
+        const int recommended_device_size =
+            GetSettingsInt(kPartitionRecommendedDiskSpace);
         disk_space_insufficient_frame_->setSizes(required_device_size,
                                                  recommended_device_size);
         this->setCurrentPage(PageId::DiskSpaceInsufficientId);
