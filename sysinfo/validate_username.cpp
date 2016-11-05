@@ -10,12 +10,16 @@
 
 namespace installer {
 
-ValidateUsernameState ValidateUsername(const QString& username) {
-  if (username.isEmpty()) {
+ValidateUsernameState ValidateUsername(const QString& username,
+                                       int min_len,
+                                       int max_len) {
+  if (username.isEmpty() && (min_len > 0)) {
     return ValidateUsernameState::EmptyError;
   }
-
-  if (username.length() > kUsernameMaximumLen) {
+  if (username.length() < min_len) {
+    return ValidateUsernameState::TooShortError;
+  }
+  if (username.length() > max_len) {
     return ValidateUsernameState::TooLongError;
   }
 
@@ -29,8 +33,9 @@ ValidateUsernameState ValidateUsername(const QString& username) {
     return ValidateUsernameState::InvalidCharError;
   }
 
-  if (GetUsers().contains(username)) {
-    return ValidateUsernameState::AlreadyUsedError;
+  // TODO(xushaohua): Add reserved username list to settings.ini
+  if (GetSystemUsers().contains(username)) {
+    return ValidateUsernameState::ReservedError;
   }
 
   return ValidateUsernameState::Ok;

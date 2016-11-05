@@ -147,9 +147,12 @@ void SystemInfoFormFrame::initUI() {
 }
 
 bool SystemInfoFormFrame::validateUsername(QString& msg) {
-  const ValidateUsernameState state = ValidateUsername(username_edit_->text());
+  const ValidateUsernameState state =
+      ValidateUsername(username_edit_->text(),
+                       GetSettingsInt(kSystemInfoUsernameMinLen),
+                       GetSettingsInt(kSystemInfoUsernameMaxLen));
   switch (state) {
-    case ValidateUsernameState::AlreadyUsedError: {
+    case ValidateUsernameState::ReservedError: {
       msg = tr("Username is already in use");
       return false;
     }

@@ -11,23 +11,24 @@ namespace installer {
 
 enum class ValidateUsernameState {
   Ok,
-  AlreadyUsedError,  // Username already exists.
   EmptyError,  // Username is empty.
   FirstCharError,  // First character of username is not in a-z.
   InvalidCharError,  // Contains invalid word.
-  TooLongError,  // Contains more than 32 chars.
+  ReservedError,  // Username already exists.
+  TooLongError,
+  TooShortError,
 };
-
-const int kUsernameMaximumLen = 32;
 
 // Check whether |username| is appropriate.
 // The following rules are checked by order:
-//   * Length of |username| is (0, 32];
+//   * Length of |username| is [min_len, max_len];
 //   * |username| can only contain lower letters(a-z), numbers(0-9), dash(-)
 //     and underscore(_);
 //   * First character of |username| must be a letter;
-//   * |username| cannot be used by others or by system.
-ValidateUsernameState ValidateUsername(const QString& username);
+//   * |username| cannot be used by system (uid < 1000).
+ValidateUsernameState ValidateUsername(const QString& username,
+                                       int min_len,
+                                       int max_len);
 
 }  // namespace installer
 

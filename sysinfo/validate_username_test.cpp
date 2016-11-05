@@ -10,12 +10,20 @@ namespace installer {
 namespace {
 
 TEST(ValidateUsernameTest, ValidateUsername) {
-  EXPECT_EQ(ValidateUsername("root"), ValidateUsernameState::AlreadyUsedError);
-  EXPECT_EQ(ValidateUsername(""), ValidateUsernameState::EmptyError);
-  EXPECT_EQ(ValidateUsername("AbcUser"), ValidateUsernameState::FirstCharError);
-  EXPECT_EQ(ValidateUsername("a:invalid-username"),
+  EXPECT_EQ(ValidateUsername("root", 1, 10),
+            ValidateUsernameState::ReservedError);
+  EXPECT_EQ(ValidateUsername("", 1, 10),
+            ValidateUsernameState::EmptyError);
+  EXPECT_EQ(ValidateUsername("AbcUser", 1, 10),
+            ValidateUsernameState::FirstCharError);
+  EXPECT_EQ(ValidateUsername("a:invalid", 1, 10),
             ValidateUsernameState::InvalidCharError);
-  EXPECT_EQ(ValidateUsername("not-used-username"), ValidateUsernameState::Ok);
+  EXPECT_EQ(ValidateUsername("hello_world", 1, 5),
+            ValidateUsernameState::TooLongError);
+  EXPECT_EQ(ValidateUsername("hello", 6, 10),
+            ValidateUsernameState::TooShortError);
+  EXPECT_EQ(ValidateUsername("not-used-username", 1, 24),
+            ValidateUsernameState::Ok);
 }
 
 }  // namespace

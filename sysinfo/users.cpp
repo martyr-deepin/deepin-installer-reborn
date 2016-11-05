@@ -10,11 +10,18 @@
 
 namespace installer {
 
+namespace {
+
+// Minimum uid used for normal user.
+const int kNormalUserMinUid = 1000;
+
+}  // namespace
+
 QStringList GetSystemUsers() {
   QStringList users;
   struct passwd* pwd;
   while ((pwd = getpwent()) != NULL) {
-    if (pwd->pw_uid < 1000) {
+    if (pwd->pw_uid < kNormalUserMinimumUid) {
       users.append(pwd->pw_name);
     }
   }
