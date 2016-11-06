@@ -4,12 +4,13 @@
 
 #include "ui/frames/install_failed_frame.h"
 
+#include <QEvent>
 #include <QLabel>
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
 #include "ui/frames/consts.h"
-#include "ui/widgets/comment_label_layout.h"
+#include "ui/widgets/comment_label.h"
 #include "ui/widgets/frosted_frame.h"
 #include "ui/widgets/icon_button.h"
 #include "ui/widgets/nav_button.h"
@@ -24,6 +25,12 @@ const int kContentWindowWidth = 480;
 const int kContentWindowHeight = 360;
 const int kQRWindowSize = 280;
 const int kControlButtonSize = 32;
+
+const char kTextTitle[] = "Installation Failed";
+const char kTextComment[] = "Sorry for the inconvenience, you can photo or "
+    "scan the 2D code to send us the error log, so we can better "
+    "solve the issue.";
+const char kTextReboot[] = "Exit installation";
 
 }  // namespace
 
@@ -46,6 +53,16 @@ void InstallFailedFrame::updateErrorMessage(const QString& msg,
   }
 }
 
+void InstallFailedFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr(kTextTitle));
+    comment_label_->setText(tr(kTextComment));
+    reboot_button_->setText(tr(kTextReboot));
+  } else {
+    QFrame::changeEvent(event);
+  }
+}
+
 void InstallFailedFrame::initConnections() {
   connect(control_button_, &QPushButton::clicked,
           this, &InstallFailedFrame::onControlButtonClicked);
@@ -56,10 +73,12 @@ void InstallFailedFrame::initConnections() {
 void InstallFailedFrame::initUI() {
   QLabel* status_label = new QLabel();
   status_label->setPixmap(QPixmap(":/images/failed.png"));
-  TitleLabel* title_label = new TitleLabel(tr("Installation Failed"));
-  CommentLabelLayout* comment_layout = new CommentLabelLayout(
-      tr("Sorry for the inconvenience, you can photo or scan the 2D code "
-         "to send us the error log, so we can better solve the issue."));
+  title_label_ = new TitleLabel(tr(kTextTitle));
+  comment_label_ = new CommentLabel(tr(kTextComment));
+  QHBoxLayout* comment_layout = new QHBoxLayout();
+  comment_layout->setContentsMargins(0, 0, 0, 0);
+  comment_layout->setSpacing(0);
+  comment_layout->addWidget(comment_label_);
 
   FrostedFrame* content_frame = new FrostedFrame();
   content_frame->setFixedSize(kContentWindowWidth, kContentWindowHeight);
@@ -80,13 +99,13 @@ void InstallFailedFrame::initUI() {
                                    content_frame);
   control_button_->move(kContentWindowWidth - kControlButtonSize, 0);
 
-  reboot_button_ = new NavButton(tr("Exit installation"));
+  reboot_button_ = new NavButton(tr(kTextReboot));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(status_label, 0, Qt::AlignCenter);
-  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(content_frame, 0, Qt::AlignCenter);

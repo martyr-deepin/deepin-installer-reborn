@@ -402,7 +402,7 @@
     </message>
 </context>
 <context>
-    <name>installer::installer::ConfirmQuitFrame</name>
+    <name>installer::ConfirmQuitFrame</name>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="23"/>
         <source>Abort Installation</source>

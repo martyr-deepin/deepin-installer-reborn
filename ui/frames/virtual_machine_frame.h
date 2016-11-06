@@ -9,7 +9,9 @@
 
 namespace installer {
 
+class CommentLabel;
 class NavButton;
+class TitleLabel;
 
 // This page is displayed when system is running in a virtual machine.
 class VirtualMachineFrame : public QFrame {
@@ -22,10 +24,15 @@ class VirtualMachineFrame : public QFrame {
   // This signal is emitted when continue-button is clicked.
   void finished();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
 
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
   NavButton* next_button_ = nullptr;
 };
 

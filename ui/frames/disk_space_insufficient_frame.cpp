@@ -6,6 +6,7 @@
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QtCore/QEvent>
 
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
@@ -14,12 +15,28 @@
 
 namespace installer {
 
+namespace {
+
+const char kTextTitle[] = "Insufficient Disk Space";
+const char kTextAbort[] = "Abort";
+
+}  // namespace
+
 DiskSpaceInsufficientFrame::DiskSpaceInsufficientFrame(QWidget* parent)
     : QFrame(parent) {
   this->setObjectName("disk_space_insufficient_frame");
 
   this->initUI();
   this->initConnections();
+}
+
+void DiskSpaceInsufficientFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr(kTextTitle));
+    abort_button_->setText(tr(kTextAbort));
+  } else {
+    QFrame::changeEvent(event);
+  }
 }
 
 void DiskSpaceInsufficientFrame::setSizes(int required_device_size,
@@ -37,19 +54,19 @@ void DiskSpaceInsufficientFrame::initConnections() {
 }
 
 void DiskSpaceInsufficientFrame::initUI() {
-  TitleLabel* title_label = new TitleLabel(tr("Insufficient Disk Space"));
+  title_label_ = new TitleLabel(tr(kTextTitle));
   comment_label_ = new CommentLabel("");
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->addSpacing(0);
   comment_layout->addWidget(comment_label_);
 
-  abort_button_ = new NavButton(tr("Abort"));
+  abort_button_ = new NavButton(tr(kTextAbort));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(abort_button_, 0, Qt::AlignCenter);

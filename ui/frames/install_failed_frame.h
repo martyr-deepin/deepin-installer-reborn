@@ -10,9 +10,11 @@ class QLabel;
 
 namespace installer {
 
+class CommentLabel;
 class IconButton;
 class NavButton;
 class QRWidget;
+class TitleLabel;
 
 // Displays error message and a QR image
 class InstallFailedFrame : public QFrame {
@@ -30,10 +32,15 @@ class InstallFailedFrame : public QFrame {
   // Emitted when reboot button is clocked.
   void finished();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
 
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
   NavButton* reboot_button_ = nullptr;
   QRWidget* qr_widget_ = nullptr;
   QLabel* content_label_ = nullptr;

@@ -11,8 +11,6 @@
 #include "ui/frames/inner/system_info_avatar_frame.h"
 #include "ui/frames/inner/system_info_form_frame.h"
 #include "ui/frames/inner/system_info_timezone_frame.h"
-#include "ui/frames/consts.h"
-#include "ui/widgets/icon_button.h"
 
 namespace installer {
 

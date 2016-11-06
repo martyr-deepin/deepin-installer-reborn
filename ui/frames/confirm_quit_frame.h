@@ -9,6 +9,10 @@
 
 namespace installer {
 
+class CommentLabel;
+class NavButton;
+class TitleLabel;
+
 // This frame is displayed when close-button is clicked.
 class ConfirmQuitFrame : public QFrame {
   Q_OBJECT
@@ -23,8 +27,17 @@ class ConfirmQuitFrame : public QFrame {
   // Emitted when users confirms to quit this program.
   void quitConfirmed();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
+  void initConnections();
   void initUI();
+
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
+  NavButton* continue_button_ = nullptr;
+  NavButton* abort_button_ = nullptr;
 };
 
 }  // namespace installer
