@@ -264,6 +264,10 @@ void MainWindow::initSelectLanguageFrame() {
   stacked_layout_->addWidget(select_language_frame_);
   connect(select_language_frame_, &SelectLanguageFrame::finished,
           this, &MainWindow::onSelectLanguageFrameFinished);
+
+  if (GetSettingsBool(kSkipSelectLanguagePage)) {
+    select_language_frame_->autoConf();
+  }
 }
 
 void MainWindow::registerShortcut() {
@@ -334,7 +338,9 @@ void MainWindow::onSelectLanguageFrameFinished(const QString& language) {
   install_progress_frame_->updateLanguage(language);
 
   // Notify background thread to scan disk devices if needed.
-  partition_frame_->scanDevices();
+  if (!GetSettingsBool(kSkipPartitionPage)) {
+    partition_frame_->scanDevices();
+  }
 
   this->initPageConnections();
   this->goNextPage();
@@ -402,40 +408,41 @@ void MainWindow::goNextPage() {
 
     case PageId::PartitionTableWarningId: {
       // Check whether to show SystemInfoPage.
-      if (!GetSettingsBool(kSkipSystemInfoPage)) {
-        page_indicator_->goNextPage();
-        this->setCurrentPage(PageId::SystemInfoId);
-      } else {
+      if (GetSettingsBool(kSkipSystemInfoPage)) {
         system_info_frame_->autoConf();
         prev_page_ = current_page_;
         current_page_ = PageId::SystemInfoId;
         this->goNextPage();
+      } else {
+        page_indicator_->goNextPage();
+        this->setCurrentPage(PageId::SystemInfoId);
       }
       break;
     }
 
     case PageId::SystemInfoId: {
       // Check whether to show PartitionPage.
-      if (!GetSettingsBool(kSkipPartitionPage)) {
-        page_indicator_->goNextPage();
-        this->setCurrentPage(PageId::PartitionId);
-      } else {
+      if (GetSettingsBool(kSkipPartitionPage)) {
         if (GetSettingsBool(kPartitionDoAutoPart)) {
           partition_frame_->autoPart();
         }
         prev_page_ = current_page_;
         current_page_ = PageId::PartitionId;
         this->goNextPage();
+      } else {
+        page_indicator_->goNextPage();
+        this->setCurrentPage(PageId::PartitionId);
       }
       break;
     }
 
     case PageId::PartitionId: {
-      // Show InstallProgressPage.
+      // Show InstallProgressFrame.
       page_indicator_->goNextPage();
       bool position_animation, opacity_animation;
       GetInstallProgressFrameAnimationLevel(position_animation,
                                             opacity_animation);
+      // Set animation level in InstallProgressFrame.
       install_progress_frame_->startSlide(position_animation,
                                           opacity_animation);
       this->setCurrentPage(PageId::InstallProgressId);

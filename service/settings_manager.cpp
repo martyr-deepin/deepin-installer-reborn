@@ -281,9 +281,10 @@ QStringList GetAvatars() {
 }
 
 QString GetDefaultAvatar() {
-  // Return user specified avatar.
-  if (GetSettingsBool(kSystemInfoUseDefaultAvator)) {
-    return GetSettingsString(kSystemInfoDefaultAvator);
+  const QString default_avatar(GetSettingsString(kSystemInfoDefaultAvator));
+  if (!default_avatar.isEmpty() && QFile::exists(default_avatar)) {
+    // Returns default avatar
+    return default_avatar;
   }
 
   // Pick a random avatar.

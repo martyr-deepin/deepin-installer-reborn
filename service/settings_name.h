@@ -18,8 +18,6 @@ const char kSkipSystemInfoPage[] = "skip_system_info_page";
 const char kSkipPartitionPage[] = "skip_partition_page";
 
 // System Language List
-const char kSelectLanguageUseDefaultLocale[] =
-    "select_language_use_default_locale";
 const char kSelectLanguageDefaultLocale[] = "select_language_default_locale";
 
 // System Info
@@ -48,8 +46,6 @@ const char kSystemInfoPasswordRequireUpperCase[] =
     "system_info_password_require_upper_case";
 const char kSystemInfoPasswordRequireSpecialChar[] =
     "system_info_password_require_special_char";
-const char kSystemInfoUseRandomAvator[] = "system_info_use_random_avator";
-const char kSystemInfoUseDefaultAvator[] = "system_info_use_default_avatar";
 const char kSystemInfoDefaultAvator[] = "system_info_default_avatar";
 const char kSystemInfoDdeAvatarDir[] = "system_info_dde_avatar_dir";
 const char kSystemInfoUseDefaultTimezone[] =

@@ -46,13 +46,12 @@ SystemInfoAvatarFrame::SystemInfoAvatarFrame(QWidget* parent)
 
 void SystemInfoAvatarFrame::autoConf() {
   const QString avatar = GetDefaultAvatar();
-  if (!IsValidAvatar(avatar)) {
+  if (IsValidAvatar(avatar)) {
+    WriteAvatar(avatar);
+    emit this->avatarUpdated(avatar);
+  } else {
     qWarning() << "autoConf() got invalid avatar: " << avatar;
-    return;
   }
-
-  emit this->avatarUpdated(avatar);
-  WriteAvatar(avatar);
 }
 
 void SystemInfoAvatarFrame::updateTimezone(const QString& timezone) {
@@ -64,7 +63,7 @@ void SystemInfoAvatarFrame::initConnections() {
           this, &SystemInfoAvatarFrame::timezoneClicked);
 
   // Return to previous page when chosen_avatar_button is clicked.
-  connect(chosen_avatar_button_, &QPushButton::clicked,
+  connect(current_avatar_button_, &QPushButton::clicked,
           this, &SystemInfoAvatarFrame::finished);
   connect(list_view_, &QListView::pressed,
           this, &SystemInfoAvatarFrame::onListViewPressed);
@@ -78,11 +77,13 @@ void SystemInfoAvatarFrame::initUI() {
   TitleLabel* title_label = new TitleLabel(tr("User Avatar"));
   CommentLabelLayout* comment_layout = new CommentLabelLayout(
       tr("Select an avatar for your account"));
-  chosen_avatar_button_ = new AvatarButton(GetDefaultAvatar());
+
+  // Set default avatar.
+  current_avatar_button_ = new AvatarButton(GetDefaultAvatar());
 
   const QStringList avatars = GetAvatars();
   list_view_ = new PointerListView();
-  QStringListModel* list_model = new QStringListModel(avatars);
+  QStringListModel* list_model = new QStringListModel(avatars, list_view_);
   list_view_->setModel(list_model);
   AvatarListDelegate* list_delegate = new AvatarListDelegate();
   list_view_->setItemDelegate(list_delegate);
@@ -103,13 +104,14 @@ void SystemInfoAvatarFrame::initUI() {
   list_view_->setStyleSheet(ReadFile(":/styles/avatar_list_view.css"));;
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addWidget(timezone_button_, 0, Qt::AlignLeft);
   layout->addStretch(2);
   layout->addWidget(title_label, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addStretch(1);
-  layout->addWidget(chosen_avatar_button_, 0, Qt::AlignCenter);
+  layout->addWidget(current_avatar_button_, 0, Qt::AlignCenter);
   layout->addStretch(1);
   layout->addWidget(list_view_, 0, Qt::AlignHCenter);
   layout->addStretch(3);
@@ -119,7 +121,7 @@ void SystemInfoAvatarFrame::initUI() {
 
 void SystemInfoAvatarFrame::onListViewPressed(const QModelIndex& index) {
   const QString avatar = index.model()->data(index).toString();
-  chosen_avatar_button_->updateIcon(avatar);
+  current_avatar_button_->updateIcon(avatar);
   WriteAvatar(avatar);
   emit this->avatarUpdated(avatar);
   emit this->finished();

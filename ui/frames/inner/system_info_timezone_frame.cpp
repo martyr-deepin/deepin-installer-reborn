@@ -25,26 +25,21 @@ SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
 
   this->initUI();
   this->initConnections();
+  // TODO(xushaohua): Read default timezone
 }
 
 void SystemInfoTimezoneFrame::autoConf() {
-  QString timezone;
-  if (GetSettingsBool(kSystemInfoUseDefaultTimezone)) {
-    timezone = GetSettingsString(kSystemInfoDefaultTimezone);
+  timezone_ = GetSettingsString(kSystemInfoDefaultTimezone);
+  if (!IsValidTimezone(timezone_)) {
+    timezone_ = GetCurrentTimezone();
   }
 
-  if (!IsValidTimezone(timezone)) {
-    timezone = GetCurrentTimezone();
+  if (IsValidTimezone(timezone_)) {
+    WriteTimezone(timezone_);
+    emit this->timezoneUpdated(GetTimezoneName(timezone_));
+  } else {
+    qWarning() << "autoConf() got invalid timezone:" << timezone_;
   }
-
-  if (!IsValidTimezone(timezone)) {
-    qWarning() << "autoConf() got invalid timezone:" << timezone;
-    return;
-  }
-
-  timezone_ = timezone;
-  emit this->timezoneUpdated(GetTimezoneName(timezone));
-  WriteTimezone(timezone);
 }
 
 void SystemInfoTimezoneFrame::initConnections() {
@@ -59,6 +54,7 @@ void SystemInfoTimezoneFrame::initUI() {
   back_button_ = new NavButton(tr("Back"));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label, 0, Qt::AlignCenter);

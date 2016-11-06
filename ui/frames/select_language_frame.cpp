@@ -43,6 +43,9 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
 void SelectLanguageFrame::autoConf() {
   locale_ = GetSettingsString(kSelectLanguageDefaultLocale);
   WriteLocale(locale_);
+
+  // Notify MainWindow to close this frame
+  emit this->finished(locale_);
 }
 
 void SelectLanguageFrame::changeEvent(QEvent* event) {

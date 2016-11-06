@@ -38,7 +38,7 @@ class SystemInfoAvatarFrame : public QFrame {
   void initConnections();
   void initUI();
 
-  AvatarButton* chosen_avatar_button_ = nullptr;
+  AvatarButton* current_avatar_button_ = nullptr;
   IconButton* timezone_button_ = nullptr;
   QListView* list_view_ = nullptr;
 
