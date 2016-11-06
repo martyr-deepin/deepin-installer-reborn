@@ -41,4 +41,13 @@ QString LanguageListModel::locale(const QModelIndex& index) const {
   return QString();
 }
 
+QModelIndex LanguageListModel::localeIndex(const QString& locale) const {
+  for (int index = 0; index < lang_list_.length(); index++) {
+    if (lang_list_.at(index).locale == locale) {
+      return this->index(index, 0);
+    }
+  }
+  return QModelIndex();
+}
+
 }  // namespace installer

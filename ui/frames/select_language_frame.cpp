@@ -30,18 +30,21 @@ const char kTextNext[] = "Next";
 
 SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
     : QFrame(parent),
-      locale_(),
+      locale_(GetSettingsString(kSelectLanguageDefaultLocale)),
       current_translator_(new QTranslator(this)) {
   this->setObjectName("select_language_frame");
 
   this->initUI();
   this->initConnections();
-  // TODO(xushaohua): Load default locale.
-  // TODO(xushaohua): Select the appropriate locale.
+
+  // Select default locale
+  const QModelIndex index = language_model_->localeIndex(locale_);
+  if (index.isValid()) {
+    language_view_->setCurrentIndex(index);
+  }
 }
 
 void SelectLanguageFrame::autoConf() {
-  locale_ = GetSettingsString(kSelectLanguageDefaultLocale);
   WriteLocale(locale_);
 
   // Notify MainWindow to close this frame
@@ -57,7 +60,8 @@ void SelectLanguageFrame::changeEvent(QEvent* event) {
 }
 
 void SelectLanguageFrame::initConnections() {
-  connect(language_view_, &FramelessListView::clicked,
+  connect(language_view_->selectionModel(),
+          &QItemSelectionModel::currentChanged,
           this, &SelectLanguageFrame::onLanguageListSelected);
   connect(next_button_, &QPushButton::clicked,
           this, &SelectLanguageFrame::onNextButtonClicked);
@@ -110,12 +114,12 @@ void SelectLanguageFrame::updateTranslator(const QString& locale) {
   }
 }
 
-void SelectLanguageFrame::onLanguageListSelected() {
-  next_button_->setEnabled(true);
-  const QModelIndexList selected_items =
-      language_view_->selectionModel()->selectedIndexes();
-  if (selected_items.length() == 1) {
-    locale_ = language_model_->locale(selected_items.at(0));
+void SelectLanguageFrame::onLanguageListSelected(const QModelIndex& current,
+                                                 const QModelIndex& previous) {
+  Q_UNUSED(previous);
+  if (current.isValid()) {
+    next_button_->setEnabled(true);
+    locale_ = language_model_->locale(current);
     this->updateTranslator(locale_);
   }
 }

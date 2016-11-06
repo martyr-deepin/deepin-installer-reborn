@@ -6,6 +6,7 @@
 #define INSTALLER_UI_FRAMES_SELECT_LANGUAGE_FRAME_H
 
 #include <QFrame>
+#include <QModelIndex>
 class QTranslator;
 
 namespace installer {
@@ -46,7 +47,8 @@ class SelectLanguageFrame : public QFrame {
   NavButton* next_button_ = nullptr;
 
  private slots:
-  void onLanguageListSelected();
+  void onLanguageListSelected(const QModelIndex& current,
+                              const QModelIndex& previous);
 
   // Check if a language item is selected.
   void onNextButtonClicked();

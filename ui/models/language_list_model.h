@@ -23,6 +23,8 @@ class LanguageListModel : public QAbstractListModel {
 
   // Get locale name at |index|.
   QString locale(const QModelIndex& index) const;
+  // Get index with |locale|.
+  QModelIndex localeIndex(const QString& locale) const;
 
  private:
   LanguageList lang_list_;

@@ -20,20 +20,17 @@ namespace installer {
 
 SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
     : QFrame(parent),
-      timezone_() {
+      timezone_(GetSettingsString(kSystemInfoDefaultTimezone)) {
   this->setObjectName("system_info_timezone_frame");
 
-  this->initUI();
-  this->initConnections();
-  // TODO(xushaohua): Read default timezone
-}
-
-void SystemInfoTimezoneFrame::autoConf() {
-  timezone_ = GetSettingsString(kSystemInfoDefaultTimezone);
   if (!IsValidTimezone(timezone_)) {
     timezone_ = GetCurrentTimezone();
   }
+  this->initUI();
+  this->initConnections();
+}
 
+void SystemInfoTimezoneFrame::autoConf() {
   if (IsValidTimezone(timezone_)) {
     WriteTimezone(timezone_);
     emit this->timezoneUpdated(GetTimezoneName(timezone_));
