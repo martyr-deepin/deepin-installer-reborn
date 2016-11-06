@@ -74,6 +74,7 @@ const char kPartitionMountPoints[] = "partition_mount_points";
 // Install progress page
 const char kInstallProgressPageAnimationLevel[] =
     "install_progress_page_animation_level";
+const char kDiskLogFilePath[] = "disk_log_file_path";
 
 // Install failed page
 const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";
