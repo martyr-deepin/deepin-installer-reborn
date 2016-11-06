@@ -46,9 +46,7 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
 
 void SelectLanguageFrame::autoConf() {
   WriteLocale(locale_);
-
-  // Notify MainWindow to close this frame
-  emit this->finished(locale_);
+  emit this->languageUpdated(locale_);
 }
 
 void SelectLanguageFrame::changeEvent(QEvent* event) {
@@ -121,12 +119,13 @@ void SelectLanguageFrame::onLanguageListSelected(const QModelIndex& current,
     next_button_->setEnabled(true);
     locale_ = language_model_->locale(current);
     this->updateTranslator(locale_);
+    emit this->languageUpdated(locale_);
   }
 }
 
 void SelectLanguageFrame::onNextButtonClicked() {
   WriteLocale(locale_);
-  emit this->finished(locale_);
+  emit this->finished();
 }
 
 }  // namespace installer

@@ -60,17 +60,14 @@ class MainWindow : public QWidget {
     InstallSuccessId,
     PartitionId,
     PartitionTableWarningId,
+    SelectLanguageId,
     SystemInfoId,
     VirtualMachineId,
   };
 
-  void initPageConnections();
+  void initConnections();
   void initPages();
   void initUI();
-
-  // Displays SelectLanguageFrame first.
-  void initSelectLanguageFrame();
-
   void registerShortcut();
 
   // Switch frame page based on name.
@@ -117,9 +114,6 @@ class MainWindow : public QWidget {
 
   // Move main window to primary screen when it is changed to |geometry|.
   void onPrimaryScreenChanged(const QRect& geometry);
-
-  // Hide SelectLanguageFrame, init other pages
-  void onSelectLanguageFrameFinished(const QString& language);
 
   void goNextPage();
   void rebootSystem();

@@ -126,8 +126,15 @@ MainWindow::MainWindow()
   this->setObjectName("main_window");
 
   this->initUI();
-  this->initSelectLanguageFrame();
+  this->initPages();
   this->registerShortcut();
+  this->initConnections();
+  this->goNextPage();
+
+  // Notify background thread to scan disk devices if needed.
+  if (!GetSettingsBool(kSkipPartitionPage)) {
+    partition_frame_->scanDevices();
+  }
 }
 
 void MainWindow::fullscreen() {
@@ -140,7 +147,7 @@ void MainWindow::resizeEvent(QResizeEvent* event) {
   QWidget::resizeEvent(event);
 }
 
-void MainWindow::initPageConnections() {
+void MainWindow::initConnections() {
   connect(confirm_quit_frame_, &ConfirmQuitFrame::quitCancelled,
           this, &MainWindow::goNextPage);
   connect(confirm_quit_frame_, &ConfirmQuitFrame::quitConfirmed,
@@ -159,6 +166,10 @@ void MainWindow::initPageConnections() {
           this, &MainWindow::rebootSystem);
   connect(partition_table_warning_frame_, &PartitionTableWarningFrame::accepted,
           this, &MainWindow::goNextPage);
+  connect(select_language_frame_, &SelectLanguageFrame::finished,
+          this, &MainWindow::goNextPage);
+  connect(select_language_frame_, &SelectLanguageFrame::languageUpdated,
+          install_progress_frame_, &InstallProgressFrame::updateLanguage);
   connect(system_info_frame_, &SystemInfoFrame::finished,
           this, &MainWindow::goNextPage);
   connect(virtual_machine_frame_, &VirtualMachineFrame::finished,
@@ -169,12 +180,26 @@ void MainWindow::initPageConnections() {
           install_progress_frame_, &InstallProgressFrame::runHooks);
   connect(partition_frame_, &PartitionFrame::manualPartDone,
           install_progress_frame_, &InstallProgressFrame::runHooks);
+
+  connect(close_button_, &QPushButton::clicked,
+          this, &MainWindow::onCloseButtonClicked);
+  connect(multi_head_manager_, &MultiHeadManager::primaryScreenChanged,
+          this, &MainWindow::onPrimaryScreenChanged);
+
+  connect(control_panel_shortcut_, &QShortcut::activated,
+          control_panel_frame_, &ControlPanelFrame::toggleVisible);
+  connect(monitor_mode_shortcut_, &QShortcut::activated,
+          multi_head_manager_, &MultiHeadManager::switchXRandRMode);
 }
 
 void MainWindow::initPages() {
   confirm_quit_frame_ = new ConfirmQuitFrame(this);
   pages_.insert(PageId::ConfirmQuitId,
-                stacked_layout_->addWidget(confirm_quit_frame_));
+               stacked_layout_->addWidget(confirm_quit_frame_));
+
+  select_language_frame_ = new SelectLanguageFrame(this);
+  pages_.insert(PageId::SelectLanguageId,
+                stacked_layout_->addWidget(select_language_frame_));
 
   disk_space_insufficient_frame_ = new DiskSpaceInsufficientFrame(this);
   pages_.insert(PageId::DiskSpaceInsufficientId,
@@ -252,22 +277,6 @@ void MainWindow::initUI() {
   control_panel_frame_->hide();
 
   multi_head_manager_ = new MultiHeadManager(this);
-
-  connect(close_button_, &QPushButton::clicked,
-          this, &MainWindow::onCloseButtonClicked);
-  connect(multi_head_manager_, &MultiHeadManager::primaryScreenChanged,
-          this, &MainWindow::onPrimaryScreenChanged);
-}
-
-void MainWindow::initSelectLanguageFrame() {
-  select_language_frame_ = new SelectLanguageFrame(this);
-  stacked_layout_->addWidget(select_language_frame_);
-  connect(select_language_frame_, &SelectLanguageFrame::finished,
-          this, &MainWindow::onSelectLanguageFrameFinished);
-
-  if (GetSettingsBool(kSkipSelectLanguagePage)) {
-    select_language_frame_->autoConf();
-  }
 }
 
 void MainWindow::registerShortcut() {
@@ -275,10 +284,6 @@ void MainWindow::registerShortcut() {
   control_panel_shortcut_->setContext(Qt::ApplicationShortcut);
   monitor_mode_shortcut_ = new QShortcut(QKeySequence("Ctrl+P"), this);
   monitor_mode_shortcut_->setContext(Qt::ApplicationShortcut);
-  connect(control_panel_shortcut_, &QShortcut::activated,
-          control_panel_frame_, &ControlPanelFrame::toggleVisible);
-  connect(monitor_mode_shortcut_, &QShortcut::activated,
-          multi_head_manager_, &MultiHeadManager::switchXRandRMode);
 }
 
 void MainWindow::setCurrentPage(PageId page_id) {
@@ -331,23 +336,9 @@ void MainWindow::onPrimaryScreenChanged(const QRect& geometry) {
   this->setFixedSize(geometry.size());
 }
 
-void MainWindow::onSelectLanguageFrameFinished(const QString& language) {
-  // Remove SelectLanguageFrame
-  stacked_layout_->removeWidget(select_language_frame_);
-  this->initPages();
-  install_progress_frame_->updateLanguage(language);
-
-  // Notify background thread to scan disk devices if needed.
-  if (!GetSettingsBool(kSkipPartitionPage)) {
-    partition_frame_->scanDevices();
-  }
-
-  this->initPageConnections();
-  this->goNextPage();
-}
-
 void MainWindow::goNextPage() {
   // Page order:
+  //   * select language frame;
   //   * disk space insufficient page;
   //   * virtual machine page;
   //   * partition table warning page;
@@ -364,6 +355,18 @@ void MainWindow::goNextPage() {
     }
 
     case PageId::NullId: {
+      if (GetSettingsBool(kSkipSelectLanguagePage)) {
+        select_language_frame_->autoConf();
+        prev_page_ = current_page_;
+        current_page_ = PageId::SelectLanguageId;
+        this->goNextPage();
+      } else {
+        this->setCurrentPage(PageId::SelectLanguageId);
+      }
+      break;
+    }
+
+    case PageId::SelectLanguageId: {
       // Displays the first page.
       // Check whether to show DiskSpaceInsufficientPage.
       const int required_device_size =

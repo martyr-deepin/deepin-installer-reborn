@@ -25,8 +25,10 @@ class SelectLanguageFrame : public QFrame {
   void autoConf();
 
  signals:
-  // Emitted when system language |language| is selected.
-  void finished(const QString& language);
+  void finished();
+
+  // Emited when new language is selected.
+  void languageUpdated(const QString& language);
 
  protected:
   // Update text of next_button_
