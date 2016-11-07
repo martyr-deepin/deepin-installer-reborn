@@ -370,8 +370,13 @@ void WriteKeyboard(const QString& layout, const QString& variant) {
   AppendToConfigFile("DI_KEYBOARD_LAYOUT_VARIANT", variant);
 }
 
-void WritePartitionInfo(const QString& root, const QString& mount_points) {
-  AppendToConfigFile("DI_ROOT_PARTITION", root);
+void WritePartitionInfo(const QString& root_disk,
+                        const QString& root_partition,
+                        const QString& boot_partition,
+                        const QString& mount_points) {
+  AppendToConfigFile("DI_ROOT_DISK", root_disk);
+  AppendToConfigFile("DI_ROOT_PARTITION", root_partition);
+  AppendToConfigFile("DI_BOOTLOADER", boot_partition);
   AppendToConfigFile("DI_MOUNTPOINTS", mount_points);
   // TODO(xushaohua): Add DI_ROOT_DISK
 }

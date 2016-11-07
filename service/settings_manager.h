@@ -59,7 +59,7 @@ QString GetWindowBackground();
 
 // Operations of /etc/deepin-installer.conf
 bool DeleteConfigFile();
-//void WriteBootloader(const QString& path);
+// TODO(xushaohua): setup uefi mode.
 //void WriteUEFI(bool is_efi);
 //void WriteInstallerMode(bool is_simple_mode);
 void WriteLocale(const QString& locale);
@@ -69,7 +69,16 @@ void WritePassword(const QString& password);
 void WriteAvatar(const QString& avatar);
 void WriteTimezone(const QString& timezone);
 void WriteKeyboard(const QString& layout, const QString& variant);
-void WritePartitionInfo(const QString& root, const QString& mount_points);
+// Write disk info.
+//  * |root_disk|, device path to install system into, like /dev/sda;
+//  * |root_partition|, partition path to install system into;
+//  * |boot_partition|, partition path to install grub into;
+//  * |mount_point|, a list of partition path and mount-point info,
+//    items are separated by ';'
+void WritePartitionInfo(const QString& root_disk,
+                        const QString& root_partition,
+                        const QString& boot_partition,
+                        const QString& mount_points);
 
 // Save current oem settings to /etc/deepin-installer-oem.conf
 // This file is accessed in hook scripts.

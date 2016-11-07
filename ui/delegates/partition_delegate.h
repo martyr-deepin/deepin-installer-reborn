@@ -115,7 +115,7 @@ class PartitionDelegate : public QObject {
 
  private slots:
   void onDevicesRefreshed(const DeviceList& devices);
-  void onManualPartDone(bool ok, const QStringList& mount_point_pair);
+  void onManualPartDone(bool ok);
 };
 
 }  // namespace installer

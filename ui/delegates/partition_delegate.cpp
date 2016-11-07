@@ -569,22 +569,34 @@ void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   this->refreshVisual();
 }
 
-void PartitionDelegate::onManualPartDone(bool ok,
-                                         const QStringList& mount_point_pair) {
+void PartitionDelegate::onManualPartDone(bool ok) {
   if (ok) {
-    // Write mount-point pair to conf.
+    QString root_disk;
     QString root_path;
+    QString boot_path;
     QStringList mount_points;
-    for (int i = 0; i < mount_point_pair.length(); i += 2) {
-      if (mount_point_pair.at(i + 1) == kMountPointRoot) {
-        root_path = mount_point_pair.at(i);
-      } else {
-        mount_points.append(QString("%1=%2").arg(mount_point_pair.at(i))
-                                            .arg(mount_point_pair.at(i + 1)));
+
+    QStringList mount_point_pair;
+    for (const Operation& operation : operations_) {
+      const Partition& new_partition = operation.new_partition;
+      if (!new_partition.mount_point.isEmpty()) {
+        mount_points.append(QString("%1=%2").arg(new_partition.path)
+                                            .arg(new_partition.mount_point));
+        if (new_partition.mount_point == kMountPointRoot) {
+          root_disk = new_partition.device_path;
+          root_path = new_partition.path;
+        } else if (new_partition.mount_point == kMountPointBoot) {
+          boot_path = new_partition.path;
+        }
       }
     }
 
-    WritePartitionInfo(root_path, mount_points.join(';'));
+    // If /boot is not set, use / as boot-partition.
+    if (boot_path.isEmpty()) {
+      boot_path = root_path;
+    }
+
+    WritePartitionInfo(root_disk, root_path, boot_path, mount_points.join(';'));
   }
 
   emit this->manualPartDone(ok);

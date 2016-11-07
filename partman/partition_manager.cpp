@@ -155,19 +155,7 @@ void PartitionManager::doManualPart(const OperationList& operations) {
     }
   }
 
-  QStringList mount_point_pair;
-  if (ok) {
-    for (const Operation& operation : operations) {
-      const Partition& new_partition = operation.new_partition;
-      if (!new_partition.mount_point.isEmpty()) {
-        mount_point_pair.append(new_partition.path);
-        mount_point_pair.append(new_partition.mount_point);
-      }
-    }
-  }
-
-  qDebug() << "mount_point_pair:" << mount_point_pair;
-  emit this->manualPartDone(ok, mount_point_pair);
+  emit this->manualPartDone(ok);
 }
 
 DeviceList ScanDevices() {
