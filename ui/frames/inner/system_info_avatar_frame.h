@@ -23,6 +23,9 @@ class SystemInfoAvatarFrame : public QFrame {
 
   void autoConf();
 
+  // Get current used avatar.
+  QString currentAvatar() const;
+
  signals:
   // Emitted when an avatar is selected.
   void avatarUpdated(const QString& avatar);

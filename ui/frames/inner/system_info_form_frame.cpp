@@ -91,15 +91,6 @@ void SystemInfoFormFrame::initConnections() {
   connect(password2_edit_, &LineEdit::editingFinished,
           this, &SystemInfoFormFrame::onPassword2EditingFinished);
 
-//  connect(username_edit_, &LineEdit::gotFocus,
-//          tooltip_, &SystemInfoTip::hide);
-//  connect(hostname_edit_, &LineEdit::gotFocus,
-//          tooltip_, &SystemInfoTip::hide);
-//  connect(password_edit_, &LineEdit::gotFocus,
-//          tooltip_, &SystemInfoTip::hide);
-//  connect(password2_edit_, &LineEdit::gotFocus,
-//          tooltip_, &SystemInfoTip::hide);
-
   connect(username_edit_, &LineEdit::textEdited,
           this, &SystemInfoFormFrame::onEditingLineEdit);
   connect(username_edit_, &LineEdit::textEdited,
@@ -325,6 +316,7 @@ void SystemInfoFormFrame::onEditingLineEdit() {
 
 void SystemInfoFormFrame::onUsernameEdited() {
   if (!is_hostname_edited_ && !GetSettingsBool(kSystemInfoLockHostname)) {
+    // Update hostname based on username.
     const QString username = username_edit_->text();
     if (username.isEmpty()) {
       hostname_edit_->setText("");

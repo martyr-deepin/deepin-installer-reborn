@@ -58,6 +58,10 @@ void SystemInfoAvatarFrame::autoConf() {
   }
 }
 
+QString SystemInfoAvatarFrame::currentAvatar() const {
+  return current_avatar_button_->avatar();
+}
+
 void SystemInfoAvatarFrame::updateTimezone(const QString& timezone) {
   timezone_button_->setText(timezone);
 }

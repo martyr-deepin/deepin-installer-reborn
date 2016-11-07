@@ -53,6 +53,7 @@ void SystemInfoFrame::initUI() {
   avatar_frame_ = new SystemInfoAvatarFrame();
   form_frame_ = new SystemInfoFormFrame();
   timezone_frame_ = new SystemInfoTimezoneFrame();
+  form_frame_->updateAvatar(avatar_frame_->currentAvatar());
 
   stacked_layout_ = new QStackedLayout();
   stacked_layout_->addWidget(avatar_frame_);
@@ -65,16 +66,19 @@ void SystemInfoFrame::initUI() {
 void SystemInfoFrame::showAvatarPage() {
   if (!GetSettingsBool(kSystemInfoDisableAvatorPage)) {
     stacked_layout_->setCurrentWidget(avatar_frame_);
+    avatar_frame_->raise();
   }
 }
 
 void SystemInfoFrame::showFormPage() {
   stacked_layout_->setCurrentWidget(form_frame_);
+  form_frame_->raise();
 }
 
 void SystemInfoFrame::showTimezonePage() {
   if (!GetSettingsBool(kSystemInfoDisableTimezonePage)) {
     stacked_layout_->setCurrentWidget(timezone_frame_);
+    timezone_frame_->raise();
   }
 }
 
