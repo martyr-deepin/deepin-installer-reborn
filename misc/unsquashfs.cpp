@@ -42,12 +42,14 @@ const char kMountPoint[] = "/dev/shm/installer-unsquashfs";
 const int kExitOk = 0;
 const int kExitErr = 1;
 
-// Maximum number of opended file descriptors.
+// Maximum number of opened file descriptors.
 // See /proc/self/limits for more information.
 const int kMaxOpenFd = 256;
 
-// Global references to progress_file, src_dir and dest_dir.
-QString g_progress_file;
+// File descriptor of progress file.
+FILE* g_progress_fd = NULL;
+
+// Global references to src_dir and dest_dir.
 QString g_src_dir;
 QString g_dest_dir;
 
@@ -56,8 +58,9 @@ int g_total_files = 0;
 // Number of files has been copied.
 int g_current_files = 0;
 
+// Write progress value to file.
 void WriteProgress(int progress) {
-  installer::WriteTextFile(g_progress_file, QString::number(progress));
+  fprintf(g_progress_fd, "\r%d", progress);
 }
 
 // Copy regular file with sendfile() system call, from |src_file| to
@@ -127,8 +130,8 @@ bool CopyXAttr(const char* src_file, const char* dest_file) {
   char value[XATTR_NAME_MAX];
   ssize_t xlist_len = llistxattr(src_file, list, XATTR_LIST_MAX);
   if (xlist_len < 0) {
-    fprintf(stderr, "CopyXAttr() listxattr() failed: %s\n", src_file);
-    perror("listxattr() error");
+    fprintf(stderr, "CopyXAttr() llistxattr() failed: %s\n", src_file);
+    perror("llistxattr() error");
     ok = false;
   } else {
     ssize_t value_len;
@@ -263,14 +266,24 @@ bool CopyFiles(const QString& src_dir, const QString& dest_dir,
   // Save current umask.
   const mode_t old_mask = umask(0);
 
-  g_progress_file = progress_file;
+  if (!progress_file.isEmpty()) {
+    // Set progress file descriptor.
+    g_progress_fd = fopen(progress_file.toStdString().c_str(), "w");
+    if (g_progress_fd == NULL) {
+      g_progress_fd = stdout;
+      perror("fopen() Failed to open progress file");
+    }
+  } else {
+    g_progress_fd = stdout;
+  }
+
   g_src_dir = src_dir;
   g_dest_dir = dest_dir;
 
   // Count file numbers.
   bool ok = (nftw(src_dir.toUtf8().data(),
                   CountItem, kMaxOpenFd, FTW_PHYS) == 0);
-  if (!ok || (g_progress_file == 0)) {
+  if (!ok || (g_total_files == 0)) {
     qWarning() << "CopyFiles() Failed to count file number!";
   } else {
     ok = (nftw(src_dir.toUtf8().data(), CopyItem, kMaxOpenFd, FTW_PHYS) == 0);
@@ -281,6 +294,10 @@ bool CopyFiles(const QString& src_dir, const QString& dest_dir,
 
   if (ok) {
     WriteProgress(100);
+  }
+
+  if (g_progress_fd != stdout) {
+    fclose(g_progress_fd);
   }
 
   return ok;

@@ -73,6 +73,8 @@ class HooksManager : public QObject {
   enum class UnsquashfsStage {
     UnInitialized,
     ReadBase,
+
+    // TODO(xushaohua): Do not read process of language.module.
     ReadLang,
   };
   UnsquashfsStage unsquashfs_stage_;
