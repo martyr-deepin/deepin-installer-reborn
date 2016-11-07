@@ -10,6 +10,7 @@
 #include <QLabel>
 #include <QProgressBar>
 #include <QVBoxLayout>
+#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "ui/frames/consts.h"
@@ -17,7 +18,7 @@
 #include "ui/delegates/partition_util.h"
 #include "ui/models/fs_model.h"
 #include "ui/models/mount_point_model.h"
-#include "ui/widgets/comment_label_layout.h"
+#include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/table_combo_box.h"
 #include "ui/widgets/title_label.h"
@@ -28,6 +29,15 @@ namespace {
 
 const int kWindowWidth = 640;
 const int kProgressBarWidth = 280;
+
+const char kTextTitle[] = "Edit Disk";
+const char kTextComment[] = "Please make sure you have backed up "
+    "important data, then select the disk  to install";
+const char kTextFilesystem[] = "Filesystem";
+const char kTextMountPoint[] = "Mount point";
+const char kTextFormat[] = "Format the partition";
+const char kTextCancel[] = "Cancel";
+const char kTextOk[] = "OK";
 
 }  // namespace
 
@@ -70,6 +80,20 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
   mount_point_box_->setCurrentIndex(mount_point_index);
 }
 
+void EditPartitionFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr(kTextTitle));
+    comment_label_->setText(tr(kTextComment));
+    fs_label_->setText(tr(kTextFilesystem));
+    mount_point_label_->setText(tr(kTextMountPoint));
+    format_label_->setText(tr(kTextFormat));
+    cancel_button_->setText(tr(kTextCancel));
+    ok_button_->setText(tr(kTextOk));
+  } else {
+    QFrame::changeEvent(event);
+  }
+}
+
 void EditPartitionFrame::initConnections() {
   connect(fs_box_,
           static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
@@ -83,10 +107,12 @@ void EditPartitionFrame::initConnections() {
 }
 
 void EditPartitionFrame::initUI() {
-  TitleLabel* title_label = new TitleLabel(tr("Edit Disk"));
-  CommentLabelLayout* comment_layout = new CommentLabelLayout(
-      tr("Please make sure you have backed up important data, then "
-         "select the disk  to install"));
+  title_label_ = new TitleLabel(tr(kTextTitle));
+  comment_label_ = new CommentLabel(tr(kTextComment));
+  QHBoxLayout* comment_layout = new QHBoxLayout();
+  comment_layout->setContentsMargins(0, 0, 0, 0);
+  comment_layout->setSpacing(0);
+  comment_layout->addWidget(comment_label_);
 
   os_label_ = new QLabel();
   os_label_->setObjectName("os_label");
@@ -116,11 +142,11 @@ void EditPartitionFrame::initUI() {
   separator_label->setObjectName("separator_label");
   separator_label->setFixedSize(560, 2);
 
-  QLabel* fs_label = new QLabel(tr("Filesystem"));
-  fs_label->setObjectName("fs_label");
-  mount_point_label_ = new QLabel(tr("Mount point"));
+  fs_label_ = new QLabel(tr(kTextFilesystem));
+  fs_label_->setObjectName("fs_label");
+  mount_point_label_ = new QLabel(tr(kTextMountPoint));
   mount_point_label_->setObjectName("mount_point_label");
-  format_label_ = new QLabel(tr("Format the partition"));
+  format_label_ = new QLabel(tr(kTextFormat));
   format_label_->setObjectName("format_label");
 
   fs_box_ = new TableComboBox();
@@ -141,7 +167,7 @@ void EditPartitionFrame::initUI() {
   grid_layout->setHorizontalSpacing(20);
   grid_layout->setVerticalSpacing(20);
   grid_layout->setContentsMargins(0, 0, 0, 0);
-  grid_layout->addWidget(fs_label, 0, 0, Qt::AlignRight);
+  grid_layout->addWidget(fs_label_, 0, 0, Qt::AlignRight);
   grid_layout->addWidget(mount_point_label_, 1, 0, Qt::AlignRight);
   grid_layout->addWidget(fs_box_, 0, 1);
   grid_layout->addWidget(mount_point_box_, 1, 1);
@@ -154,14 +180,14 @@ void EditPartitionFrame::initUI() {
   fs_frame->setLayout(grid_layout);
   fs_frame->setFixedWidth(360);
 
-  cancel_button_ = new NavButton(tr("Cancel"));
-  ok_button_ = new NavButton(tr("OK"));
+  cancel_button_ = new NavButton(tr(kTextCancel));
+  ok_button_ = new NavButton(tr(kTextOk));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addWidget(title_label, 0, Qt::AlignHCenter);
+  layout->addWidget(title_label_, 0, Qt::AlignHCenter);
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(os_label_, 0, Qt::AlignHCenter);

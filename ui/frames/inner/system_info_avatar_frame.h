@@ -11,7 +11,9 @@ class QListView;
 namespace installer {
 
 class AvatarButton;
+class CommentLabel;
 class IconButton;
+class TitleLabel;
 
 class SystemInfoAvatarFrame : public QFrame {
   Q_OBJECT
@@ -34,10 +36,15 @@ class SystemInfoAvatarFrame : public QFrame {
   // Update text in timezone button.
   void updateTimezone(const QString& timezone);
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
 
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
   AvatarButton* current_avatar_button_ = nullptr;
   IconButton* timezone_button_ = nullptr;
   QListView* list_view_ = nullptr;

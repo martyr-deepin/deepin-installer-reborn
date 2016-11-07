@@ -5,16 +5,26 @@
 #include "ui/frames/inner/select_bootloader_frame.h"
 
 #include <QHBoxLayout>
+#include <QtCore/QEvent>
 
 #include "ui/delegates/partition_delegate.h"
 #include "ui/frames/consts.h"
 #include "ui/models/partition_list_model.h"
 #include "ui/views/frameless_list_view.h"
-#include "ui/widgets/comment_label_layout.h"
+#include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
+
+namespace {
+
+const char kTextTitle[] = "Select location for boot loader";
+const char kTextComment[] = "If you do not understand the detailed settings, "
+                            "please select default settings";
+const char kTextBack[] = "Back";
+
+}  // namespace
 
 SelectBootloaderFrame::SelectBootloaderFrame(PartitionDelegate* delegate,
                                              QWidget* parent)
@@ -30,28 +40,39 @@ void SelectBootloaderFrame::updatePartitionList() {
   list_model_->updatePartitionList();
 }
 
+void SelectBootloaderFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr(kTextTitle));
+    comment_label_->setText(tr(kTextComment));
+    back_button_->setText(tr(kTextBack));
+  } else {
+    QFrame::changeEvent(event);
+  }
+}
+
 void SelectBootloaderFrame::initConnections() {
   connect(back_button_, &QPushButton::clicked,
           this, &SelectBootloaderFrame::finished);
 }
 
 void SelectBootloaderFrame::initUI() {
-  TitleLabel* title_label =
-      new TitleLabel(tr("Select location for boot loader"));
-  CommentLabelLayout* comment_layout = new CommentLabelLayout(
-      tr("If you do not understand the detailed settings, "
-         "please select default settings"));
+  title_label_ = new TitleLabel(tr(kTextTitle));
+  comment_label_ = new CommentLabel(tr(kTextComment));
+  QHBoxLayout* comment_layout = new QHBoxLayout();
+  comment_layout->setContentsMargins(0, 0, 0, 0);
+  comment_layout->setSpacing(0);
+  comment_layout->addWidget(comment_label_);
 
   list_view_ = new FramelessListView();
   list_model_ = new PartitionListModel(delegate_, this);
   list_view_->setModel(list_model_);
 
-  back_button_ = new NavButton(tr("Back"));
+  back_button_ = new NavButton(tr(kTextBack));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addSpacing(40);

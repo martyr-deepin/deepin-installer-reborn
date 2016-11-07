@@ -10,6 +10,7 @@
 #include <QStackedLayout>
 #include <QThread>
 #include <QVBoxLayout>
+#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "ui/frames/consts.h"
@@ -21,12 +22,23 @@
 #include "ui/frames/inner/prepare_install_frame.h"
 #include "ui/frames/inner/select_bootloader_frame.h"
 #include "ui/frames/inner/simple_partition_frame.h"
-#include "ui/widgets/comment_label_layout.h"
+#include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/pointer_button.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
+
+namespace {
+
+const char kTextTitle[] = "Select Installation Location";
+const char kTextComment[] = "Please make sure you have backed up "
+    "important data, then select the disk to install";
+const char kTextSimple[] = "Simple";
+const char kTextAdvanced[] = "Advanced";
+const char kTextNext[] = "Start installation";
+
+}  // namespace
 
 PartitionFrame::PartitionFrame(QWidget* parent)
     : QFrame(parent),
@@ -43,6 +55,18 @@ void PartitionFrame::autoPart() {
 
 void PartitionFrame::scanDevices() const {
   delegate_->scanDevices();
+}
+
+void PartitionFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr(kTextTitle));
+    comment_label_->setText(tr(kTextComment));
+    simple_frame_button_->setText(tr(kTextSimple));
+    advanced_frame_button_->setText(tr(kTextAdvanced));
+    next_button_->setText(tr(kTextNext));
+  } else {
+    QFrame::changeEvent(event);
+  }
 }
 
 void PartitionFrame::initConnections() {
@@ -95,23 +119,21 @@ void PartitionFrame::initUI() {
   select_bootloader_frame_ = new SelectBootloaderFrame(delegate_, this);
   simple_partition_frame_ = new SimplePartitionFrame(delegate_, this);
 
-  TitleLabel* title_label = new TitleLabel(tr("Select Installation Location"));
-  QHBoxLayout* title_layout = new QHBoxLayout();
-  title_layout->addWidget(title_label);
-
-  CommentLabelLayout* comment_layout = new CommentLabelLayout(
-      tr("Please make sure you have backed up important data, then select "
-         "the disk to install"));
+  title_label_ = new TitleLabel(tr(kTextTitle));
+  comment_label_ = new CommentLabel(tr(kTextComment));
+  QHBoxLayout* comment_layout = new QHBoxLayout();
+  comment_layout->setContentsMargins(0, 0, 0, 0);
+  comment_layout->setSpacing(0);
+  comment_layout->addWidget(comment_label_);
 
   QButtonGroup* button_group = new QButtonGroup(this);
-  simple_frame_button_ = new PointerButton(tr("Simple"));
+  simple_frame_button_ = new PointerButton(tr(kTextSimple));
   simple_frame_button_->setObjectName("simple_frame_button");
   simple_frame_button_->setCheckable(true);
   simple_frame_button_->setChecked(true);
   simple_frame_button_->setFlat(true);
-  // NOTE(xushaohua): Set size policy
   simple_frame_button_->setMinimumWidth(86);
-  advanced_frame_button_ = new PointerButton(tr("Advanced"));
+  advanced_frame_button_ = new PointerButton(tr(kTextAdvanced));
   advanced_frame_button_->setObjectName("advanced_frame_button");
   advanced_frame_button_->setCheckable(true);
   advanced_frame_button_->setMinimumWidth(86);
@@ -134,13 +156,13 @@ void PartitionFrame::initUI() {
   partition_stacked_wrapper_layout->addLayout(partition_stacked_layout_);
   partition_stacked_wrapper_layout->addStretch();
 
-  next_button_ = new NavButton(tr("Start installation"));
+  next_button_ = new NavButton(tr(kTextNext));
   QHBoxLayout* next_layout = new QHBoxLayout();
   next_layout->addWidget(next_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addLayout(title_layout);
+  layout->addWidget(title_label_, 0, Qt::AlignHCenter);
   layout->addLayout(comment_layout);
   layout->addLayout(button_layout);
   layout->addSpacing(20);

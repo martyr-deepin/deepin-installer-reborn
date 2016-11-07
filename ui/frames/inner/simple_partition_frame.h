@@ -9,6 +9,7 @@
 class QAbstractButton;
 class QButtonGroup;
 class QGridLayout;
+class QLabel;
 
 namespace installer {
 
@@ -21,6 +22,9 @@ class SimplePartitionFrame : public QScrollArea {
  public:
   SimplePartitionFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
@@ -29,6 +33,7 @@ class SimplePartitionFrame : public QScrollArea {
 
   QButtonGroup* button_group_ = nullptr;
   QFrame* install_tip_ = nullptr;
+  QLabel* tip_label_ = nullptr;
   QGridLayout* grid_layout_ = nullptr;
   PartitionDelegate* delegate_ = nullptr;
 

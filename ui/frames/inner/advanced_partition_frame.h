@@ -30,6 +30,9 @@ class AdvancedPartitionFrame : public QFrame {
   void requestNewPartitionFrame(const Partition& partition);
   void requestSelectBootloaderFrame();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
@@ -37,6 +40,7 @@ class AdvancedPartitionFrame : public QFrame {
 
   PartitionDelegate* delegate_ = nullptr;
 
+  QLabel* bootloader_label_ = nullptr;
   QButtonGroup* partition_button_group_ = nullptr;
   QVBoxLayout* partition_layout_ = nullptr;
   QPushButton* bootloader_button_ = nullptr;

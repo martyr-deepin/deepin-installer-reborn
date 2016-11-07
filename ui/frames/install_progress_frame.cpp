@@ -9,12 +9,13 @@
 #include <QStyle>
 #include <QThread>
 #include <QVBoxLayout>
+#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "service/hooks_manager.h"
 #include "ui/frames/consts.h"
 #include "ui/frames/inner/install_progress_slide_frame.h"
-#include "ui/widgets/comment_label_layout.h"
+#include "ui/widgets/comment_label.h"
 #include "ui/widgets/install_progress_tip.h"
 #include "ui/widgets/title_label.h"
 
@@ -26,6 +27,10 @@ const int kProgressBarWidth = 640;
 const int kTooltipWidth = 60;
 const int kTooltipHeight = 31;
 const int kTooltipFrameWidth = kProgressBarWidth + kTooltipWidth;
+
+const char kTextTitle[] = "Installing";
+const char kTextComment[] = "You will be experiencing the incredible pleasant "
+    "of deepin after the time for just a cup of coffee";
 
 }  // namespace
 
@@ -77,6 +82,15 @@ void InstallProgressFrame::updateLanguage(const QString& locale) {
   slide_frame_->setLocale(locale);
 }
 
+void InstallProgressFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr(kTextTitle));
+    comment_label_->setText(tr(kTextComment));
+  } else {
+    QFrame::changeEvent(event);
+  }
+}
+
 void InstallProgressFrame::initConnections() {
   connect(hooks_manager_, &HooksManager::errorOccurred,
           this, &InstallProgressFrame::onErrorOccurred);
@@ -87,10 +101,13 @@ void InstallProgressFrame::initConnections() {
 }
 
 void InstallProgressFrame::initUI() {
-  TitleLabel* title_label = new TitleLabel(tr("Installing"));
-  CommentLabelLayout* comment_layout = new CommentLabelLayout(
-      tr("You will be experiencing the incredible pleasant of deepin after "
-         "the time for just a cup of coffee"));
+  title_label_ = new TitleLabel(tr(kTextTitle));
+  comment_label_ = new CommentLabel(tr(kTextComment));
+  QHBoxLayout* comment_layout = new QHBoxLayout();
+  comment_layout->setContentsMargins(0, 0, 0, 0);
+  comment_layout->setSpacing(0);
+  comment_layout->addWidget(comment_label_);
+
   slide_frame_ = new InstallProgressSlideFrame();
 
   QFrame* tooltip_frame = new QFrame();
@@ -113,7 +130,7 @@ void InstallProgressFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(0);
   layout->addStretch();
-  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addSpacing(kMainLayoutSpacing);
   layout->addLayout(comment_layout);
   layout->addStretch();

@@ -9,6 +9,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QScrollArea>
+#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_delegate.h"
@@ -22,6 +23,10 @@ namespace {
 
 const int kWindowWidth = 960;
 
+const char kTextBootloader[] = "Select bootloader";
+const char kTextEdit[] = "Edit";
+const char kTextDone[] = "Done";
+
 }  // namespace
 
 AdvancedPartitionFrame::AdvancedPartitionFrame(
@@ -32,6 +37,19 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(
 
   this->initUI();
   this->initConnections();
+}
+
+void AdvancedPartitionFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    bootloader_label_->setText(tr(kTextBootloader));
+    if (editing_button_->isChecked()) {
+      editing_button_->setText(tr(kTextDone));
+    } else {
+      editing_button_->setText(tr(kTextEdit));
+    }
+  } else {
+    QFrame::changeEvent(event);
+  }
 }
 
 void AdvancedPartitionFrame::initConnections() {
@@ -72,14 +90,14 @@ void AdvancedPartitionFrame::initUI() {
   scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  QLabel* bootloader_label = new QLabel(tr("Select bootloader"));
-  bootloader_label->setObjectName("bootloader_label");
+  bootloader_label_ = new QLabel(tr(kTextBootloader));
+  bootloader_label_->setObjectName("bootloader_label");
   bootloader_button_ = new PointerButton();
-  bootloader_button_->setFlat(true);
   bootloader_button_->setObjectName("bootloader_button");
+  bootloader_button_->setFlat(true);
   // TODO(xushaohua): Set current used bootloader partition
 
-  editing_button_ = new PointerButton(tr("Edit"));
+  editing_button_ = new PointerButton(tr(kTextEdit));
   editing_button_->setFlat(true);
   editing_button_->setObjectName("editing_button");
   editing_button_->setCheckable(true);
@@ -88,7 +106,7 @@ void AdvancedPartitionFrame::initUI() {
   QHBoxLayout* bottom_layout = new QHBoxLayout();
   bottom_layout->setContentsMargins(15, 10, 15, 10);
   bottom_layout->setSpacing(10);
-  bottom_layout->addWidget(bootloader_label);
+  bottom_layout->addWidget(bootloader_label_);
   bottom_layout->addWidget(bootloader_button_);
   bottom_layout->addStretch();
   bottom_layout->addWidget(editing_button_);
@@ -182,9 +200,9 @@ void AdvancedPartitionFrame::onDeviceRefreshed() {
 
 void AdvancedPartitionFrame::onEditButtonToggled(bool toggle) {
   if (toggle) {
-    editing_button_->setText(tr("Done"));
+    editing_button_->setText(tr(kTextDone));
   } else {
-    editing_button_->setText(tr("Edit"));
+    editing_button_->setText(tr(kTextEdit));
   }
 }
 

@@ -9,7 +9,9 @@
 
 namespace installer {
 
+class CommentLabel;
 class NavButton;
+class TitleLabel;
 
 // Displays a world map to let user select timezone.
 class SystemInfoTimezoneFrame : public QFrame {
@@ -27,12 +29,17 @@ class SystemInfoTimezoneFrame : public QFrame {
   // Emitted when a new timezone is chosen.
   void timezoneUpdated(const QString& timezone);
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
 
   QString timezone_;
 
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
   NavButton* back_button_ = nullptr;
 };
 

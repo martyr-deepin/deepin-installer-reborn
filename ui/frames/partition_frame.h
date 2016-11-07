@@ -13,16 +13,17 @@ class QStackedLayout;
 namespace installer {
 
 class AdvancedPartitionFrame;
+class CommentLabel;
 class EditPartitionFrame;
 class NavButton;
 class NewPartitionFrame;
+class PartitionDelegate;
 class PartitionLoadingFrame;
 class PointerButton;
 class PrepareInstallFrame;
 class SelectBootloaderFrame;
 class SimplePartitionFrame;
-
-class PartitionDelegate;
+class TitleLabel;
 
 // Handles partition operations.
 class PartitionFrame : public QFrame {
@@ -43,6 +44,9 @@ class PartitionFrame : public QFrame {
   void autoPartDone(bool ok);
   void manualPartDone(bool ok);
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
@@ -55,6 +59,8 @@ class PartitionFrame : public QFrame {
   SelectBootloaderFrame* select_bootloader_frame_ = nullptr;
   SimplePartitionFrame* simple_partition_frame_ = nullptr;
 
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
   QFrame* main_frame_ = nullptr;
   QStackedLayout* partition_stacked_layout_ = nullptr;
   QStackedLayout* main_layout_ = nullptr;

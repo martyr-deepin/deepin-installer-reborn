@@ -9,6 +9,9 @@
 
 namespace installer {
 
+class CommentLabel;
+class TitleLabel;
+
 // Displays loading page when partition manager is scanning disk devices.
 class PartitionLoadingFrame : public QFrame {
   Q_OBJECT
@@ -16,9 +19,14 @@ class PartitionLoadingFrame : public QFrame {
  public:
   explicit PartitionLoadingFrame(QWidget* parent = nullptr);
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
-  void initConnections();
   void initUI();
+
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
 };
 
 }  // namespace installer

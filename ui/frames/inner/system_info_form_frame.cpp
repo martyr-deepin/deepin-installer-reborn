@@ -7,6 +7,7 @@
 #include <QHBoxLayout>
 #include <QStringList>
 #include <QVBoxLayout>
+#include <QtCore/QEvent>
 
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
@@ -15,7 +16,7 @@
 #include "sysinfo/validate_username.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/avatar_button.h"
-#include "ui/widgets/comment_label_layout.h"
+#include "ui/widgets/comment_label.h"
 #include "ui/widgets/icon_button.h"
 #include "ui/widgets/line_edit.h"
 #include "ui/widgets/nav_button.h"
@@ -23,6 +24,18 @@
 #include "ui/widgets/title_label.h"
 
 namespace installer {
+
+namespace {
+
+const char kTextTitle[] = "Create User Account";
+const char kTextComment[] = "Input username and password";
+const char kTextUsername[] = "Username";
+const char kTextHostname[] = "Computer name";
+const char kTextPassword[] = "Password";
+const char kTextPassword2[] = "Reenter password";
+const char kTextNext[] = "Next";
+
+}  // namespace
 
 SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
     : QFrame(parent),
@@ -45,6 +58,20 @@ void SystemInfoFormFrame::updateAvatar(const QString& avatar) {
 
 void SystemInfoFormFrame::updateTimezone(const QString& timezone) {
   timezone_button_->setText(timezone);
+}
+
+void SystemInfoFormFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr(kTextTitle));
+    comment_label_->setText(tr(kTextComment));
+    username_edit_->setText(tr(kTextUsername));
+    hostname_edit_->setText(tr(kTextHostname));
+    password_edit_->setText(tr(kTextPassword));
+    password2_edit_->setText(tr(kTextPassword2));
+    next_button_->setText(tr(kTextNext));
+  } else {
+    QFrame::changeEvent(event);
+  }
 }
 
 void SystemInfoFormFrame::initConnections() {
@@ -92,29 +119,33 @@ void SystemInfoFormFrame::initUI() {
                                     ":/images/timezone.png",
                                     ":/images/timezone.png",
                                     128, 32, nullptr);
-  TitleLabel* title_label = new TitleLabel(tr("Create User Account"));
-  CommentLabelLayout* comment_layout = new CommentLabelLayout(
-      tr("Input username and password"));
+  title_label_ = new TitleLabel(tr(kTextTitle));
+  comment_label_ = new CommentLabel(tr(kTextComment));
+  QHBoxLayout* comment_layout = new QHBoxLayout();
+  comment_layout->setContentsMargins(0, 0, 0, 0);
+  comment_layout->setSpacing(0);
+  comment_layout->addWidget(comment_label_);
+
   avatar_button_ = new AvatarButton();
 
   username_edit_ = new LineEdit(":/images/username_12.png");
-  username_edit_->setPlaceholderText(tr("Username"));
+  username_edit_->setPlaceholderText(tr(kTextUsername));
   username_edit_->setText(GetSettingsString(kSystemInfoDefaultUsername));
   username_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockUsername));
 
   hostname_edit_ = new LineEdit(":/images/hostname_12.png");
-  hostname_edit_->setPlaceholderText(tr("Computer name"));
+  hostname_edit_->setPlaceholderText(tr(kTextHostname));
   hostname_edit_->setText(GetSettingsString(kSystemInfoDefaultHostname));
   hostname_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockHostname));
 
   password_edit_ = new LineEdit(":/images/password_12.png");
-  password_edit_->setPlaceholderText(tr("Password"));
+  password_edit_->setPlaceholderText(tr(kTextPassword));
   password_edit_->setEchoMode(QLineEdit::Password);
   password_edit_->setText(GetSettingsString(kSystemInfoDefaultPassword));
   password_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockPassword));
 
   password2_edit_ = new LineEdit(":/images/password_12.png");
-  password2_edit_->setPlaceholderText(tr("Reenter password"));
+  password2_edit_->setPlaceholderText(tr(kTextPassword2));
   password2_edit_->setEchoMode(QLineEdit::Password);
   password2_edit_->setText(password_edit_->text());
   password2_edit_->setReadOnly(password_edit_->isReadOnly());
@@ -125,13 +156,13 @@ void SystemInfoFormFrame::initUI() {
   tooltip_->setMinimumHeight(36);
   tooltip_->hide();
 
-  next_button_ = new NavButton(tr("Next"));
+  next_button_ = new NavButton(tr(kTextNext));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addWidget(timezone_button_, 0, Qt::AlignLeft);
   layout->addStretch(1);
-  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addStretch(1);
   layout->addWidget(avatar_button_, 0, Qt::AlignCenter);

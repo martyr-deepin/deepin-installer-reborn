@@ -10,8 +10,10 @@ class QLabel;
 
 namespace installer {
 
+class CommentLabel;
 class NavButton;
 class PartitionDelegate;
+class TitleLabel;
 
 class PrepareInstallFrame : public QFrame {
   Q_OBJECT
@@ -29,10 +31,16 @@ class PrepareInstallFrame : public QFrame {
   // Emitted when continue-button is clicked. Start actual installation process.
   void finished();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
 
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
+  QLabel* subtitle_label_ = nullptr;
   NavButton* abort_button_ = nullptr;
   NavButton* continue_button_ = nullptr;
   QLabel* desc_label_ = nullptr;

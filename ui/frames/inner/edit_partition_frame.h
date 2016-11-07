@@ -14,11 +14,13 @@ class QProgressBar;
 
 namespace installer {
 
+class CommentLabel;
 class FsModel;
 class MountPointModel;
 class NavButton;
 class PartitionDelegate;
 class TableComboBox;
+class TitleLabel;
 
 class EditPartitionFrame : public QFrame {
   Q_OBJECT
@@ -32,15 +34,21 @@ class EditPartitionFrame : public QFrame {
  signals:
   void finished();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
 
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
   QLabel* os_label_ = nullptr;
   QLabel* name_label_ = nullptr;
   QLabel* usage_label_ = nullptr;
   QProgressBar* usage_bar_ = nullptr;
   TableComboBox* fs_box_ = nullptr;
+  QLabel* fs_label_ = nullptr;
   TableComboBox* mount_point_box_ = nullptr;
   QLabel* mount_point_label_ = nullptr;
   QCheckBox* format_check_box_ = nullptr;

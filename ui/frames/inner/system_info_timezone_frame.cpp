@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QtCore/QEvent>
 
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
@@ -17,6 +18,14 @@
 #include "ui/widgets/title_label.h"
 
 namespace installer {
+
+namespace {
+
+const char kTextTitle[] = "Select Time Zone";
+const char kTextComment[] = "Mark your zone in the map";
+const char kTextBack[] = "Back";
+
+}  // namespace
 
 SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
     : QFrame(parent),
@@ -39,23 +48,32 @@ void SystemInfoTimezoneFrame::autoConf() {
   }
 }
 
+void SystemInfoTimezoneFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr(kTextTitle));
+    comment_label_->setText(tr(kTextComment));
+    back_button_->setText(tr(kTextBack));
+  } else {
+    QFrame::changeEvent(event);
+  }
+}
+
 void SystemInfoTimezoneFrame::initConnections() {
   connect(back_button_, &QPushButton::clicked,
           this, &SystemInfoTimezoneFrame::finished);
 }
 
 void SystemInfoTimezoneFrame::initUI() {
-  TitleLabel* title_label = new TitleLabel(tr("Select Time Zone"));
-  CommentLabel* comment_label =
-      new CommentLabel(tr("Mark your zone in the map"));
-  back_button_ = new NavButton(tr("Back"));
+  title_label_ = new TitleLabel(tr(kTextTitle));
+  comment_label_ = new CommentLabel(tr(kTextComment));
+  back_button_ = new NavButton(tr(kTextBack));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addWidget(title_label, 0, Qt::AlignCenter);
-  layout->addWidget(comment_label, 0, Qt::AlignCenter);
+  layout->addWidget(title_label_, 0, Qt::AlignCenter);
+  layout->addWidget(comment_label_, 0, Qt::AlignCenter);
   layout->addStretch();
   layout->addWidget(back_button_, 0, Qt::AlignCenter);
 

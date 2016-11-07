@@ -6,19 +6,39 @@
 
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QtCore/QEvent>
 
-#include "ui/widgets/comment_label_layout.h"
+#include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 #include "ui/frames/consts.h"
 
 namespace installer {
 
+namespace {
+
+const char kTextTitle[] = "Successfully Installed";
+const char kTextComment[] =
+    "Reboot to enjoy the new experience with deepin, hope you like it!";
+const char kTextReboot[] = "Experience now";
+
+}  // namespace
+
 InstallSuccessFrame::InstallSuccessFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName("install_success_frame");
 
   this->initUI();
   this->initConnections();
+}
+
+void InstallSuccessFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr(kTextTitle));
+    comment_label_->setText(tr(kTextComment));
+    reboot_button_->setText(tr(kTextReboot));
+  } else {
+    QFrame::changeEvent(event);
+  }
 }
 
 void InstallSuccessFrame::initConnections() {
@@ -29,16 +49,20 @@ void InstallSuccessFrame::initConnections() {
 void InstallSuccessFrame::initUI() {
   QLabel* status_label = new QLabel();
   status_label->setPixmap(QPixmap(":/images/succeed.png"));
-  TitleLabel* title_label = new TitleLabel(tr("Successfully Installed"));
-  CommentLabelLayout* comment_layout = new CommentLabelLayout(
-      tr("Reboot to enjoy the new experience with deepin, hope you like it!"));
-  reboot_button_ = new NavButton(tr("Experience now"));
+  title_label_ = new TitleLabel(tr(kTextTitle));
+  comment_label_ = new CommentLabel(tr(kTextComment));
+  QHBoxLayout* comment_layout = new QHBoxLayout();
+  comment_layout->setContentsMargins(0, 0, 0, 0);
+  comment_layout->setSpacing(0);
+  comment_layout->addWidget(comment_label_);
+
+  reboot_button_ = new NavButton(tr(kTextReboot));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(status_label, 0, Qt::AlignCenter);
-  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(reboot_button_, 0, Qt::AlignCenter);

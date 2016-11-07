@@ -12,9 +12,11 @@ class QThread;
 
 namespace installer {
 
+class CommentLabel;
 class HooksManager;
 class InstallProgressBar;
 class InstallProgressSlideFrame;
+class TitleLabel;
 
 // Displays when system is being installed to disk.
 // A progress bar is shown at bottom of page.
@@ -43,6 +45,9 @@ class InstallProgressFrame : public QFrame {
   // Call state() to check its status.
   void finished();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
@@ -52,6 +57,8 @@ class InstallProgressFrame : public QFrame {
   HooksManager* hooks_manager_ = nullptr;
   QThread* hooks_manager_thread_ = nullptr;
 
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
   InstallProgressSlideFrame* slide_frame_ = nullptr;
   QLabel* tooltip_label_ = nullptr;
   QProgressBar* progress_bar_ = nullptr;

@@ -9,10 +9,12 @@
 
 namespace installer {
 
+class CommentLabel;
 class FramelessListView;
 class NavButton;
 class PartitionDelegate;
 class PartitionListModel;
+class TitleLabel;
 
 // Displays a window to select available boot path.
 class SelectBootloaderFrame : public QFrame {
@@ -27,11 +29,16 @@ class SelectBootloaderFrame : public QFrame {
   // Emitted when back-button is clicked.
   void finished();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
 
   PartitionDelegate* delegate_ = nullptr;
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
   FramelessListView* list_view_ = nullptr;
   PartitionListModel* list_model_ = nullptr;
   NavButton* back_button_ = nullptr;

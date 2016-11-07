@@ -10,10 +10,12 @@
 namespace installer {
 
 class AvatarButton;
+class CommentLabel;
 class IconButton;
 class LineEdit;
 class NavButton;
 class SystemInfoTip;
+class TitleLabel;
 
 class SystemInfoFormFrame : public QFrame {
   Q_OBJECT
@@ -40,6 +42,9 @@ class SystemInfoFormFrame : public QFrame {
   // Update text in timezone button.
   void updateTimezone(const QString& timezone);
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
@@ -51,6 +56,8 @@ class SystemInfoFormFrame : public QFrame {
   bool validatePassword2(QString& msg);
 
   IconButton* timezone_button_ = nullptr;
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
   AvatarButton* avatar_button_ = nullptr;
   LineEdit* username_edit_ = nullptr;
   LineEdit* hostname_edit_ = nullptr;

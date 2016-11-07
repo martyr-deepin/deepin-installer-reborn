@@ -9,6 +9,7 @@
 #include <QHBoxLayout>
 #include <QStringListModel>
 #include <QVBoxLayout>
+#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "service/settings_manager.h"
@@ -17,7 +18,7 @@
 #include "ui/frames/consts.h"
 #include "ui/views/pointer_list_view.h"
 #include "ui/widgets/avatar_button.h"
-#include "ui/widgets/comment_label_layout.h"
+#include "ui/widgets/comment_label.h"
 #include "ui/widgets/icon_button.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
@@ -25,6 +26,9 @@
 namespace installer {
 
 namespace {
+
+const char kTextTitle[] = "User Avatar";
+const char kTextComment[] = "Select an avatar for your account";
 
 // Check whether |avatar| is valid.
 bool IsValidAvatar(const QString& avatar) {
@@ -58,6 +62,15 @@ void SystemInfoAvatarFrame::updateTimezone(const QString& timezone) {
   timezone_button_->setText(timezone);
 }
 
+void SystemInfoAvatarFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr(kTextTitle));
+    comment_label_->setText(tr(kTextComment));
+  } else {
+    QFrame::changeEvent(event);
+  }
+}
+
 void SystemInfoAvatarFrame::initConnections() {
   connect(timezone_button_, &QPushButton::clicked,
           this, &SystemInfoAvatarFrame::timezoneClicked);
@@ -74,9 +87,12 @@ void SystemInfoAvatarFrame::initUI() {
                                     ":/images/timezone.png",
                                     ":/images/timezone.png",
                                     128, 32, nullptr);
-  TitleLabel* title_label = new TitleLabel(tr("User Avatar"));
-  CommentLabelLayout* comment_layout = new CommentLabelLayout(
-      tr("Select an avatar for your account"));
+  title_label_ = new TitleLabel(tr(kTextTitle));
+  comment_label_ = new CommentLabel(tr(kTextComment));
+  QHBoxLayout* comment_layout = new QHBoxLayout();
+  comment_layout->setContentsMargins(0, 0, 0, 0);
+  comment_layout->setSpacing(0);
+  comment_layout->addWidget(comment_label_);
 
   // Set default avatar.
   current_avatar_button_ = new AvatarButton(GetDefaultAvatar());
@@ -108,7 +124,7 @@ void SystemInfoAvatarFrame::initUI() {
   layout->setSpacing(kMainLayoutSpacing);
   layout->addWidget(timezone_button_, 0, Qt::AlignLeft);
   layout->addStretch(2);
-  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addStretch(1);
   layout->addWidget(current_avatar_button_, 0, Qt::AlignCenter);

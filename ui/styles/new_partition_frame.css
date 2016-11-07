@@ -8,7 +8,7 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-#type_label, #location_label, #mount_point_label, #fs_label, #size_label {
+#type_label, #alignment_label, #mount_point_label, #fs_label, #size_label {
   color: #ffffff;
   font-size: 14px;
   line-height: 1;

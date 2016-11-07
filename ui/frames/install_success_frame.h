@@ -9,7 +9,9 @@
 
 namespace installer {
 
+class CommentLabel;
 class NavButton;
+class TitleLabel;
 
 class InstallSuccessFrame : public QFrame {
   Q_OBJECT
@@ -21,11 +23,16 @@ class InstallSuccessFrame : public QFrame {
   // Emitted when reboot button is clicked.
   void finished();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
 
+  CommentLabel* comment_label_ = nullptr;
   NavButton* reboot_button_ = nullptr;
+  TitleLabel* title_label_ = nullptr;
 };
 
 }  // namespace installer

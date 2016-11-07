@@ -5,15 +5,29 @@
 #include "ui/frames/inner/prepare_install_frame.h"
 
 #include <QLabel>
+#include <QtCore/QEvent>
+#include <QtWidgets/QHBoxLayout>
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_delegate.h"
 #include "ui/frames/consts.h"
-#include "ui/widgets/comment_label_layout.h"
+#include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
+
+namespace {
+
+const char kTextTitle[] = "Prepare for Installation";
+const char kTextComment[] =
+    "Please backup important data and confirm the following operations";
+const char kTextSubtitle[] = "The following operations will be executed, "
+                             "please confirm and continue to avoid data loss";
+const char kTextBack[] = "Back";
+const char kTextContinue[] = "Continue";
+
+}  // namespace
 
 PrepareInstallFrame::PrepareInstallFrame(PartitionDelegate* delegate,
                                          QWidget* parent)
@@ -38,6 +52,18 @@ void PrepareInstallFrame::updateDescription() {
   desc_label_->setText(description);
 }
 
+void PrepareInstallFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    title_label_->setText(tr(kTextTitle));
+    comment_label_->setText(tr(kTextComment));
+    subtitle_label_->setText(tr(kTextSubtitle));
+    abort_button_->setText(tr(kTextBack));
+    continue_button_->setText(tr(kTextContinue));
+  } else {
+    QFrame::changeEvent(event);
+  }
+}
+
 void PrepareInstallFrame::initConnections() {
   connect(abort_button_, &QPushButton::clicked,
           this, &PrepareInstallFrame::aborted);
@@ -46,29 +72,31 @@ void PrepareInstallFrame::initConnections() {
 }
 
 void PrepareInstallFrame::initUI() {
-  TitleLabel* title_label = new TitleLabel(tr("Prepare for Installation"));
-  CommentLabelLayout* comment_layout = new CommentLabelLayout(
-      tr("Please backup important data and confirm the following operations"));
-  QLabel* subtitle_label = new QLabel(
-      tr("The following operations will be executed, please confirm and "
-         "continue to avoid data loss"));
-  subtitle_label->setObjectName("subtitle_label");
+  title_label_ = new TitleLabel(tr(kTextTitle));
+  comment_label_ = new CommentLabel(tr(kTextComment));
+  QHBoxLayout* comment_layout = new QHBoxLayout();
+  comment_layout->setContentsMargins(0, 0, 0, 0);
+  comment_layout->setSpacing(0);
+  comment_layout->addWidget(comment_label_);
+
+  subtitle_label_ = new QLabel(tr(kTextSubtitle));
+  subtitle_label_->setObjectName("subtitle_label");
 
   desc_label_ = new QLabel();
   desc_label_->setObjectName("desc_label");
   desc_label_->setWordWrap(true);
   // TODO(xushaohua): Add a ScrollArea.
 
-  abort_button_ = new NavButton(tr("Back"));
-  continue_button_ = new NavButton(tr("Continue"));
+  abort_button_ = new NavButton(tr(kTextBack));
+  continue_button_ = new NavButton(tr(kTextContinue));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addWidget(title_label, 0, Qt::AlignCenter);
+  layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addStretch();
-  layout->addWidget(subtitle_label, 0, Qt::AlignCenter);
+  layout->addWidget(subtitle_label_, 0, Qt::AlignCenter);
   layout->addWidget(desc_label_, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addWidget(abort_button_, 0, Qt::AlignCenter);

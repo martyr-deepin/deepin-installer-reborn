@@ -10,6 +10,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "partman/structs.h"
@@ -27,6 +28,8 @@ const int kPartitionColumns = 4;
 
 const int kWindowWidth = 960;
 
+const char kTextTip[] = "Install here";
+
 }  // namespace
 
 SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
@@ -37,6 +40,14 @@ SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
 
   this->initUI();
   this->initConnections();
+}
+
+void SimplePartitionFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    tip_label_->setText(tr(kTextTip));
+  } else {
+    QFrame::changeEvent(event);
+  }
 }
 
 void SimplePartitionFrame::initConnections() {
@@ -54,14 +65,14 @@ void SimplePartitionFrame::initUI() {
   QLabel* tip_icon = new QLabel();
   tip_icon->setPixmap(QPixmap(":/images/install_icon.png"));
 
-  QLabel* tip_label = new QLabel(tr("Install here"));
-  tip_label->setObjectName("tip_label");
-  tip_label->setFixedHeight(18);
+  tip_label_ = new QLabel(tr(kTextTip));
+  tip_label_->setObjectName("tip_label");
+  tip_label_->setFixedHeight(18);
 
   QHBoxLayout* tip_layout = new QHBoxLayout();
   tip_layout->addStretch();
   tip_layout->addWidget(tip_icon, 0, Qt::AlignVCenter);
-  tip_layout->addWidget(tip_label, 0, Qt::AlignVCenter);
+  tip_layout->addWidget(tip_label_, 0, Qt::AlignVCenter);
   tip_layout->addStretch();
 
   install_tip_ = new QFrame();

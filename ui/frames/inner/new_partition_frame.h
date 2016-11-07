@@ -6,17 +6,20 @@
 #define INSTALLER_UI_FRAMES_INNER_NEW_PARTITION_FRAME_H
 
 #include <QFrame>
+class QLabel;
 
 #include "partman/partition.h"
 
 namespace installer {
 
+class CommentLabel;
 class FsModel;
 class MountPointModel;
 class NavButton;
-class TableComboBox;
 class PartitionDelegate;
 class PartitionSizeSlider;
+class TableComboBox;
+class TitleLabel;
 
 class NewPartitionFrame : public QFrame {
   Q_OBJECT
@@ -30,14 +33,24 @@ class NewPartitionFrame : public QFrame {
  signals:
   void finished();
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
 
+  TitleLabel* title_label_ = nullptr;
+  CommentLabel* comment_label_ = nullptr;
+  QLabel* type_label_ = nullptr;
   TableComboBox* type_box_ = nullptr;
+  QLabel* alignment_label_ = nullptr;
   TableComboBox* alignment_box_ = nullptr;
+  QLabel* fs_label_ = nullptr;
   TableComboBox* fs_box_ = nullptr;
+  QLabel* mount_point_label_ = nullptr;
   TableComboBox* mount_point_box_ = nullptr;
+  QLabel* size_label_ = nullptr;
   PartitionSizeSlider* size_slider_ = nullptr;
 
   NavButton* cancel_button_ = nullptr;
