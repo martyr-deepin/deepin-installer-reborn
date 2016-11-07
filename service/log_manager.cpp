@@ -29,7 +29,7 @@ int g_log_fd = 0;
 const char kDebugLogFormat[] =
     "[%{type:-7}] [%{file:-25} %{line}] %{message}\n";
 
-const char kReleaseLogFormat[] = "[%{type:-7}] %{message}\n";
+const char kReleaseLogFormat[] = "%{message}\n";
 
 const char kLogFileName[] = "deepin-installer-reborn.log";
 

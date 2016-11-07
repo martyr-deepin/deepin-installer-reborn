@@ -40,9 +40,9 @@ namespace installer {
 
 namespace {
 
-// TODO(xushaohua): Move to settings file
 // Trim length of error message.
-const int kQRContentStripped = 80;
+const int kQRContentStripped = 110;
+const int kErrorMsgStripped = 360;
 
 void GetInstallProgressFrameAnimationLevel(bool& position_animation,
                                            bool& opacity_animation) {
@@ -94,13 +94,15 @@ bool IsPartitionTableMatch() {
 // feedback server.
 // Returns false if failed.
 bool ReadErrorMsg(QString& msg, QString& encoded_msg) {
-  msg = ReadFile(GetLogFilepath());
-  if (msg.isEmpty()) {
+  const QString raw_msg = ReadFile(GetLogFilepath());
+  if (raw_msg.isEmpty()) {
     return false;
   }
 
+  msg = raw_msg.right(kErrorMsgStripped);
+
   const QString base64_content =
-      msg.right(kQRContentStripped).toUtf8().toBase64();
+      raw_msg.right(kQRContentStripped).toUtf8().toBase64();
   const QString prefix = GetSettingsString(kInstallFailedFeedbackServer);
   encoded_msg = prefix.arg(base64_content);
   return true;
