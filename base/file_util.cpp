@@ -21,7 +21,7 @@ bool CreateDirs(const QString& dirpath) {
   return QDir(dirpath).mkpath(".");
 }
 
-bool CreateParentDires(const QString& filepath) {
+bool CreateParentDirs(const QString& filepath) {
   return QFileInfo(filepath).absoluteDir().mkpath(".");
 }
 

@@ -18,7 +18,7 @@ QDir ConcateDir(const QDir& parent_dir, const QString& folder_name);
 bool CreateDirs(const QString& dirpath);
 
 // Create parent folders.
-bool CreateParentDires(const QString& filepath);
+bool CreateParentDirs(const QString& filepath);
 
 // Returns final component of |filepath|.
 QString GetFileBasename(const QString& filepath);

@@ -178,7 +178,7 @@ int CopyItem(const char* fpath, const struct stat* sb,
       QDir(g_dest_dir).absoluteFilePath(relative_path);
 
   // Create parent dirs.
-  installer::CreateParentDires(dest_filepath);
+  installer::CreateParentDirs(dest_filepath);
 
   const std::string std_dest_filepath(dest_filepath.toStdString());
   const char* dest_file = std_dest_filepath.c_str();
