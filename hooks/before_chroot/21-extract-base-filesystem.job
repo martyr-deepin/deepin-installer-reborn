@@ -41,7 +41,7 @@ extract_overlay_filesystem() {
 script -c "unsquashfs -p ${PROCESSORS} -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs"\
   /dev/null | deepin-installer-unsquashfs-progress $BASE_PROGRESS_FILE || exit 2
 
-# Then extract overlay_filesystem 
+# Then extract overlay_filesystem
 extract_overlay_filesystem
 
 exit 0

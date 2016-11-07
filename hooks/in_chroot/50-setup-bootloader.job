@@ -29,7 +29,7 @@ fi
 
 if [ x${BOOT} = xuefi ];then
     value=$(od -An -t u1 /sys/firmware/efi/vars/SecureBoot-8be4df61-93ca-11d2-aa0d-00e098032b8c/data 2>/dev/null | sed s/[[:space:]]//g)
-    [ x${value} = x1 ] && BOOT="uefi-secureboot"
+    [ x${value} = x1 ] && echo "uefi-secureboot detected"
 fi
 
 case ${BOOT} in
@@ -40,7 +40,7 @@ case ${BOOT} in
             BOOTLOADER_ID="Deepin ${_type} ${_version}"
          fi
 	 ;;
-    "uefi*")
+     "uefi")
         BOOTLOADER_ID="$(config_item GRUB_DISTRIBUTOR | tr A-Z a-z | cut -d' ' -f1)"
 	;;
 esac
@@ -50,7 +50,7 @@ BOOTLOADER_ID="${BOOTLOADER_ID:-deepin}"
 case ${BOOT} in
     "legacy")
         echo "INFO: Detected legacy machine, installing grub to ${DI_BOOTLOADER}"
-        apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" --force-yes --no-install-recommends --allow-unauthenticated install grub-pc
+        apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" --no-install-recommends --allow-unauthenticated install grub-pc
 	if [ x${DI_LUPIN} = xtrue ];then
         echo "Fix grub install failed in lupin"
         [ -d /boot/grub ] || mkdir /boot/grub
@@ -61,19 +61,25 @@ case ${BOOT} in
 	fi
         grub-install --no-floppy ${DI_BOOTLOADER} --target=i386-pc --force|| exit 101
         ;;
-    "uefi|uefi-secureboot")
-	# clover efi loader cannot grub.efi currectly, so we may patch grub or use grub.efi.signed.
-        apt-get install --no-install-recommends -y --force-yes --allow-unauthenticated shim-signed grub-efi-amd64-signed efibootmgr
-	# uefi-secure-boot options is enabled by default
-        grub-install --target=x86_64-efi --uefi-secure-boot --efi-directory=/boot/efi --bootloader-id="${BOOTLOADER_ID}" --recheck || exit 101
-	[ -d /boot/efi/EFI/ubuntu ] || mkdir -p /boot/efi/EFI/ubuntu
-	[ -f /boot/efi/EFI/${BOOTLOADER_ID}/grub.cfg ] && cp /boot/efi/EFI/${BOOTLOADER_ID}/grub.cfg /boot/efi/EFI/ubuntu/grub.cfg
+    "uefi")
+	# try to get efi architecture
+	if [ x$(cat /sys/firmware/efi/fw_platform_size 2>/dev/null) = 'x32' ];then 
+            apt-get install --no-install-recommends -y --allow-unauthenticated grub-efi-ia32
+            grub-install --target=i386-efi --efi-directory=/boot/efi --bootloader-id="${BOOTLOADER_ID}" --recheck || exit 101
+	else
+	    # clover efi loader cannot grub.efi currectly, so we may patch grub or use grub.efi.signed.
+            apt-get install --no-install-recommends -y --allow-unauthenticated shim-signed grub-efi-amd64-signed efibootmgr
+	    # uefi-secure-boot options is enabled by default
+            grub-install --target=x86_64-efi --uefi-secure-boot --efi-directory=/boot/efi --bootloader-id="${BOOTLOADER_ID}" --recheck || exit 101
+	    [ -d /boot/efi/EFI/ubuntu ] || mkdir -p /boot/efi/EFI/ubuntu
+	    [ -f /boot/efi/EFI/${BOOTLOADER_ID}/grub.cfg ] && cp /boot/efi/EFI/${BOOTLOADER_ID}/grub.cfg /boot/efi/EFI/ubuntu/grub.cfg
+        fi
         ;;
 esac
 
 # Try to avoid kernel update error when create symbol link
 case ${BOOT} in
-    "uefi*")
+    "uefi")
         echo "# avoid kernel update fails with /boot on FAT32
 do_symlinks = no" | tee /etc/kernel-img.conf
     ;;

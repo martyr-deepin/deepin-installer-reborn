@@ -37,14 +37,52 @@ fix_productname_x550vc() {
     fi
 }
 
+# add N551ZU wireless fix
+fix_productname_n551zu() {
+    if is_productname_exists "N551ZU"; then
+        echo "fix N551ZU --------------------------------"
+
+        # add wapf = 1
+        echo "options asus_nb_wmi wapf=1" | tee -a /etc/modprobe.d/asus_nb_wmi.conf
+    fi
+}
+
+# add fix for wireless of xiaomi notebook 13.3
+fix_xiaomi_notebook_133() {
+     if is_productname_exists "TM1613"; then
+         if is_pci_exists "8086:24f3"; then
+             echo "fix Xiaomi notebook 13.3 ------------------"
+             echo "blacklist acer_wmi" | tee -a /etc/modprobe.d/xiaomi_disable_acer_wmi.conf
+         fi
+     fi
+}
+
+# fix wireless issue of lenovo y700
+fix_lenovo_y700() {
+    if is_productname_exists "80NV"; then
+        if is_pci_exists "8086:3166"; then
+            echo "fix lenovo y700 -----------------------"
+            echo "blacklist ideapad_laptop" | tee -a /etc/modprobe.d/ideapad.conf
+        fi
+    fi
+}
+
+#fix wireless of X450JB
+fix_asus_x450jb() {
+     if is_productname_exists "X450JB"; then
+         echo "fix asus x450jb --------------------------"
+         echo "blacklist acer_wmi" | tee -a /etc/modprobe.d/blacklist_acerwmi.conf
+     fi
+}
+
 # bcm4313 [14e4:4727] wireless driver
 fix_pci_bcm4313() {
     if is_pci_exists "14e4:4727"; then
         echo "fix bcm4313 --------------------------------"
 
         # uninstall bcmwl-kernel-source
-        apt-get purge --force-yes -f bcmwl-kernel-source
-        apt-get install --allow-unauthenticated -y --force-yes firmware-brcm80211
+        apt-get purge -y -f bcmwl-kernel-source
+        apt-get install --allow-unauthenticated -y firmware-brcm80211
 
         # blacklist b43 and wl driver
         echo "blacklist b43" | tee -a /etc/modprobe.d/bcm.conf
@@ -55,6 +93,28 @@ fix_pci_bcm4313() {
     fi
 }
 
+# bcm4350 [14e4:43a3] wl is not usable
+fix_pci_bcm4350() {
+     if is_pci_exists "14e4:43a3"; then
+         echo "fix bcm4350 ------------------------------"
+
+         # uninstall bcmwl-kernel-source
+         apt-get purge -y -f bcmwl-kernel-source
+         apt-get install --allow-unauthenticated -y  firmware-brcm80211
+
+         # blacklist wl driver
+         echo "blacklist wl" | tee -a /etc/modprobe.d/bcm.conf
+     fi
+}
+
+# bcm4322 [14e4:432b] wl is not usable
+fix_pci_bcm4322() {
+    if is_pci_exists "14e4:432b"; then
+        echo "fix bcm4322--------------------------------"
+        apt-get purge -y -f bcmwl-kernel-source
+        echo "blacklist wl" | tee -a /etc/modprobe.d/bcm.conf
+    fi
+}
 # ar9485 [168C:0032] wireless driver
 fix_pci_ar9485_nohwcrypt() {
     # fix ar9485 issue that could not connect to wifi with password protect
@@ -79,7 +139,7 @@ fix_pci_rtl8723be_fwlps() {
 fix_usb_rtl8723au() {
     if  is_usb_exists "0bda:1724"; then
         echo "fix rtl8723au --------------------------------"
-        apt-get install --allow-unauthenticated --force-yes -y rtl8723au-dkms
+        apt-get install --allow-unauthenticated -y rtl8723au-dkms
     fi
 }
 
@@ -101,7 +161,13 @@ fix_pci_rtl8723ae_fwlps() {
 
 
 fix_pci_bcm4313 || true
+fix_pci_bcm4350 || true
+fix_pci_bcm4322 || true
 fix_pci_rtl8723be_fwlps || true
 #fix_usb_rtl8723au || true
 fix_pci_rtl8723ae_fwlps || true
 fix_productname_x550vc || true
+fix_productname_n551zu || true
+fix_xiaomi_notebook_133 || true
+fix_lenovo_y700 || true
+fix_asus_x450jb || true
