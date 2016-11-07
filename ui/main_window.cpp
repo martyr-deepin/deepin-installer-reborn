@@ -361,6 +361,7 @@ void MainWindow::goNextPage() {
         current_page_ = PageId::SelectLanguageId;
         this->goNextPage();
       } else {
+        page_indicator_->goNextPage();
         this->setCurrentPage(PageId::SelectLanguageId);
       }
       break;
