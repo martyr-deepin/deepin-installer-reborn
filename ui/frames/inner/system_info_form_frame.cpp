@@ -64,10 +64,10 @@ void SystemInfoFormFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr(kTextTitle));
     comment_label_->setText(tr(kTextComment));
-    username_edit_->setText(tr(kTextUsername));
-    hostname_edit_->setText(tr(kTextHostname));
-    password_edit_->setText(tr(kTextPassword));
-    password2_edit_->setText(tr(kTextPassword2));
+    username_edit_->setPlaceholderText(tr(kTextUsername));
+    hostname_edit_->setPlaceholderText(tr(kTextHostname));
+    password_edit_->setPlaceholderText(tr(kTextPassword));
+    password2_edit_->setPlaceholderText(tr(kTextPassword2));
     next_button_->setText(tr(kTextNext));
   } else {
     QFrame::changeEvent(event);
