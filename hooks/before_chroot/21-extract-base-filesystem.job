@@ -8,7 +8,14 @@ L=${DI_LOCALE%.*}
 
 # Files to keep progress value.
 BASE_PROGRESS_FILE=/dev/shm/unsquashfs_base_progress
-LANG_PROGRESS_FILE=/dev/shm/unsquashfs_lang_progress
+
+# Get number of processors available for current process, minus 1.
+PROCESSORS=$(getconf _NPROCESSORS_ONLN)
+if [ $PROCESSORS -ge 1 ]; then
+  PROCESSORS=$((PROCESSORS - 1))
+else
+  PROCESSORS=1
+fi
 
 extract_overlay_filesystem() {
     case ${L} in
@@ -25,15 +32,14 @@ extract_overlay_filesystem() {
 
     if [ -f ${MODULE} ];then
         for file in $(cat ${MODULE});do
-            deepin-installer-unsquashfs --dest /target
-              --progress "$LANG_PROGRESS_FILE" "${CDROM}/overlay/${file}" || exit 2
+          unsquashfs -p "${PROCESSORS}" -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs || exit 2
         done
     fi
 }
 
 # First, extract base filesystem
-deepin-installer-unsquashfs --dest /target --progress $BASE_PROGRESS_FILE \
-  ${LIVE_FILESYSTEM}/filesystem.squashfs || exit 2
+script -c "unsquashfs -p ${PROCESSORS} -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs"\
+  /dev/null | unsquashfs-progress-reborn $BASE_PROGRESS_FILE || exit 2
 
 # Then extract overlay_filesystem 
 extract_overlay_filesystem
