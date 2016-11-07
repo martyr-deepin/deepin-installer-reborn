@@ -12,7 +12,6 @@
 #include "ui/main_window.h"
 
 int main(int argc, char* argv[]) {
-  installer::RedirectLogFile();
   installer::InitLogService();
 
   QApplication app(argc, argv);
@@ -34,6 +33,5 @@ int main(int argc, char* argv[]) {
   main_window.fullscreen();
 
   const int result = app.exec();
-  installer::ShutdownLogService();
   return result;
 }

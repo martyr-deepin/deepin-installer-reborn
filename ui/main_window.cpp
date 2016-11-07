@@ -42,7 +42,7 @@ namespace {
 
 // Trim length of error message.
 const int kQRContentStripped = 110;
-const int kErrorMsgStripped = 360;
+const int kErrorMsgStripped = 860;
 
 void GetInstallProgressFrameAnimationLevel(bool& position_animation,
                                            bool& opacity_animation) {

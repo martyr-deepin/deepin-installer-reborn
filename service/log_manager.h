@@ -15,13 +15,6 @@ QString GetLogFilepath();
 // Initialize console log and file log.
 void InitLogService();
 
-// Redirect console output to log file.
-// Call this before QCoreApplication instance is initialized.
-void RedirectLogFile();
-
-// Close log file handler.
-void ShutdownLogService();
-
 }  // namespace installer
 
 
