@@ -1,0 +1,6 @@
+Name: squashfs-tools
+Author: Phillip Lougher <phillip@lougher.demon.co.uk>
+License: GPLv2
+Home: http://squashfs.sourceforge.net/
+Description: A squashed read-only filesystem for Linux
+

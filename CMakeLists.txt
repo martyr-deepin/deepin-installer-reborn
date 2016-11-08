@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.0)
-project(deepin-installer-reborn)
+cmake_minimum_required(VERSION 3.2)
+project(deepin-installer-reborn C CXX)
 
 # Only generate Debug and Release configuration types.
 set(CMAKE_CONFIGURATION_TYPES Debug Release)
@@ -23,7 +23,7 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
 else()
   # -Wl, -O2 Enable linker optimizations
   #-Wl, --gc-sections Remove unused code resulting from -fdsta-sections and -ffunction-sections
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O2  -Wl,-O1 -Wl,--gc-sections")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -O2 -Wl,-O1 -Wl,--gc-sections")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2 -Wl,-O1 -Wl,--gc-sections -Wno-unused-result")
 endif()
 
@@ -73,6 +73,7 @@ add_subdirectory(third_party/googletest)
 include_directories(third_party/googletest)
 add_subdirectory(third_party/qrencode)
 include_directories(third_party/qrencode)
+add_subdirectory(third_party/squashfs-tools)
 
 set(BASE_FILES
     base/command.cpp base/command.h
@@ -324,14 +325,7 @@ add_executable(deepin-installer-oem-tool
                )
 target_link_libraries(deepin-installer-oem-tool ${LINK_LIBS})
 
-# unsquasfs
-add_executable(deepin-installer-unsquashfs
-               misc/unsquashfs.cpp
-               
-               ${BASE_FILES}
-               )
-target_link_libraries(deepin-installer-unsquashfs ${Qt_LIBS})
-
+# unsquasfs progress
 add_executable(deepin-installer-unsquashfs-progress
                misc/unsquashfs_progress.cpp
                
@@ -353,8 +347,6 @@ target_link_libraries(deepin-installer-xrandr-switchy ${Qt_LIBS})
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem-tool"
-        DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
-install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs-progress"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
