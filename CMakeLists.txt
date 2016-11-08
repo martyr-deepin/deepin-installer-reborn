@@ -37,12 +37,13 @@ set(INSTALLER_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn)
 if (CMAKE_BUILD_TYPE MATCHES Debug)
   add_definitions("-DSLIDE_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/resources/slide\"")
   add_definitions("-DSCAN_REGDOMAIN_FILE=\"${CMAKE_CURRENT_SOURCE_DIR}/misc/scan_regdomain.sh\"")
+  add_definitions("-DBUILTIN_HOOKS_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/hooks\"")
 else()
   add_definitions("-DSLIDE_DIR=\"${INSTALLER_SHARE_DIR}/slide\"")
   add_definitions("-DSCAN_REGDOMAIN_FILE=\"${INSTALLER_SHARE_DIR}/scan_regdomain.sh\"")
+  add_definitions("-DBUILTIN_HOOKS_DIR=\"${INSTALLER_SHARE_DIR}/hooks\"")
 endif()
 
-add_definitions("-DBUILTIN_HOOKS_DIR=\"${INSTALLER_SHARE_DIR}/hooks\"")
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
@@ -101,8 +102,9 @@ set(PARTMAN_FILES
     )
 
 set(SERVICE_FILES
-    service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
+    service/backend/chroot.cpp service/backend/chroot.h
     service/backend/geoip_request_worker.cpp service/backend/geoip_request_worker.h
+    service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
 
     service/hooks_manager.cpp service/hooks_manager.h
     service/log_manager.cpp service/log_manager.h
