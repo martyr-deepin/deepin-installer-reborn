@@ -104,6 +104,8 @@ set(PARTMAN_FILES
 set(SERVICE_FILES
     service/backend/chroot.cpp service/backend/chroot.h
     service/backend/geoip_request_worker.cpp service/backend/geoip_request_worker.h
+    service/backend/hooks_pack.cpp service/backend/hooks_pack.h
+    service/backend/hook_worker.cpp service/backend/hook_worker.h
     service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
 
     service/hooks_manager.cpp service/hooks_manager.h

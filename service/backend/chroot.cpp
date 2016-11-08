@@ -76,4 +76,8 @@ bool Chroot::leaveChroot() {
   return true;
 }
 
+bool Chroot::inChrootEnv() const {
+  return chroot_fd_ != kInvalidFd;
+}
+
 }  // namespace

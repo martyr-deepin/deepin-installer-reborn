@@ -17,6 +17,9 @@ class Chroot {
   bool enterChroot(const char* chroot_dir);
   bool leaveChroot();
 
+  // Whether current process is in chroot environment.
+  bool inChrootEnv() const;
+
  private:
   // A file descriptor object used to escape chroot environment.
   int chroot_fd_;

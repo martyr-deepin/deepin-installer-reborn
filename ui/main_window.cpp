@@ -137,12 +137,11 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
-  current_page_ = PageId::PartitionId;
   this->goNextPage();
 
   // Notify background thread to scan disk devices if needed.
   if (!GetSettingsBool(kSkipPartitionPage)) {
-//    partition_frame_->scanDevices();
+    partition_frame_->scanDevices();
   }
 }
 

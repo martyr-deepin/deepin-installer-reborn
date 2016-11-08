@@ -6,13 +6,18 @@
 #define INSTALLER_SERVICE_HOOKS_MANAGER_H
 
 #include <QObject>
-#include <QStringList>
+class QThread;
 class QTimer;
+
+#include "service/backend/chroot.h"
 
 namespace installer {
 
 // Expose this value explicitly.
 const int kBeforeChrootStartVal = 5;
+
+class HooksPack;
+class HookWorker;
 
 // HookManager is used to do:
 //   * run hook jobs one by one;
@@ -26,6 +31,7 @@ class HooksManager : public QObject {
 
  public:
   explicit HooksManager(QObject* parent = nullptr);
+  ~HooksManager();
 
  signals:
   // Emitted when critical error has occurred.
@@ -46,43 +52,31 @@ class HooksManager : public QObject {
  private:
   void initConnections();
 
-  enum class HookType {
-    BeforeChroot,
-    InChroot,
-    AfterChroot,
-  };
+  void runHook();
 
-  // Mount hooks folder to /dev/shm
-  bool bindHooks(HookType hook_type);
-  // Umount hooks folder.
-  bool unbindHooks();
-  // Returns a list of sorted hook scripts with |hook_type|.
-  QStringList listHooks(HookType hook_type);
   // Run hook scripts with |hook_type|.
-  bool runHooksPack(HookType hook_type, int progress_begin, int progress_end);
+  void runHooksPack();
 
-  bool enterChroot();
-  bool leaveChroot();
-  // A file descriptor object used to escape chroot environment.
-  int chroot_fd_;
+  HooksPack* hooks_pack_ = nullptr;
+  HookWorker* hook_worker_ = nullptr;
+  QThread* hook_worker_thread_ = nullptr;
+  Chroot chroot_;
 
   // Monitors unsquashfs progress file changing.
   void monitorProgressFiles();
+
   // This timer is used to read progress file each second.
   QTimer* unsquashfs_timer_ = nullptr;
-  enum class UnsquashfsStage {
-    UnInitialized,
-    ReadBase,
-
-    // TODO(xushaohua): Do not read process of language.module.
-    ReadLang,
-  };
-  UnsquashfsStage unsquashfs_stage_;
-  bool overlay_filesystem_exists_;
 
  private slots:
   void handleRunHooks();
   void handleReadUnsquashfsTimeout();
+
+  // Handles any errors.
+  void onHooksManagerFinished();
+
+  // Run next hook when current hook has finished.
+  void onHookFinished(bool ok);
 };
 
 }  // namespace installer
