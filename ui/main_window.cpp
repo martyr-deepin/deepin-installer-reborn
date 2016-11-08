@@ -90,6 +90,14 @@ bool IsPartitionTableMatch() {
   return type == PartitionTableType::GPT;
 }
 
+QString EncodeErrorMsg(const QString& msg) {
+  QString encoded_msg;
+  const QString base64_content = msg.toUtf8().toBase64();
+  const QString prefix = GetSettingsString(kInstallFailedFeedbackServer);
+  encoded_msg = prefix.arg(base64_content);
+  return encoded_msg;
+}
+
 // Read log file content, stripped to tail, and encode with domain name of
 // feedback server.
 // Returns false if failed.
@@ -100,11 +108,7 @@ bool ReadErrorMsg(QString& msg, QString& encoded_msg) {
   }
 
   msg = raw_msg.right(kErrorMsgStripped);
-
-  const QString base64_content =
-      raw_msg.right(kQRContentStripped).toUtf8().toBase64();
-  const QString prefix = GetSettingsString(kInstallFailedFeedbackServer);
-  encoded_msg = prefix.arg(base64_content);
+  encoded_msg = EncodeErrorMsg(raw_msg.right(kQRContentStripped));
   return true;
 }
 
@@ -131,17 +135,19 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
+  current_page_ = PageId::PartitionId;
   this->goNextPage();
 
   // Notify background thread to scan disk devices if needed.
   if (!GetSettingsBool(kSkipPartitionPage)) {
-    partition_frame_->scanDevices();
+//    partition_frame_->scanDevices();
   }
 }
 
 void MainWindow::fullscreen() {
   multi_head_manager_->updateWallpaper();
   this->showFullScreen();
+  install_progress_frame_->runHooks(true);
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
@@ -466,7 +472,8 @@ void MainWindow::goNextPage() {
         if (ReadErrorMsg(msg, encoded_msg)) {
           install_failed_frame_->updateErrorMessage(msg, encoded_msg);
         } else {
-          msg = tr("Error: failed to read log file!");
+          msg = "Error: failed to read log file!";
+          encoded_msg = EncodeErrorMsg(msg);
           install_failed_frame_->updateErrorMessage(msg, encoded_msg);
         }
         this->setCurrentPage(PageId::InstallFailedId);
