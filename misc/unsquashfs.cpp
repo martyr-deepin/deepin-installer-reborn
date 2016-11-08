@@ -60,7 +60,8 @@ int g_current_files = 0;
 
 // Write progress value to file.
 void WriteProgress(int progress) {
-  fprintf(g_progress_fd, "\r%d", progress);
+  fseek(g_progress_fd, 0, SEEK_SET);
+  fprintf(g_progress_fd, "%d", progress);
 }
 
 // Copy regular file with sendfile() system call, from |src_file| to
