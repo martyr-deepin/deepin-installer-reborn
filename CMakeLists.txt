@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.1)
 project(deepin-installer-reborn C CXX)
 
 # Only generate Debug and Release configuration types.
