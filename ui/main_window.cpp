@@ -90,6 +90,7 @@ bool IsPartitionTableMatch() {
   return type == PartitionTableType::GPT;
 }
 
+// Encode |msg| with base64()
 QString EncodeErrorMsg(const QString& msg) {
   QString encoded_msg;
   const QString base64_content = msg.toUtf8().toBase64();
@@ -104,6 +105,7 @@ QString EncodeErrorMsg(const QString& msg) {
 bool ReadErrorMsg(QString& msg, QString& encoded_msg) {
   const QString raw_msg = ReadFile(GetLogFilepath());
   if (raw_msg.isEmpty()) {
+    qCritical() << "log file is empty!" << GetLogFilepath();
     return false;
   }
 
@@ -302,7 +304,9 @@ void MainWindow::setCurrentPage(PageId page_id) {
   current_page_ = page_id;
   stacked_layout_->setCurrentIndex(pages_.value(page_id));
   if (page_id == PageId::ConfirmQuitId ||
-      page_id == PageId::InstallProgressId) {
+      page_id == PageId::InstallProgressId ||
+      page_id == PageId::InstallSuccessId ||
+      page_id == PageId::InstallFailedId) {
     // Hide close button in ConfirmQuit page and InstallProgress page
     close_button_->hide();
   } else {
