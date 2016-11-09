@@ -134,7 +134,7 @@
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="49"/>
         <source>Prepare for Installation</source>
-        <translation type="unfinished">安装失败</translation>
+        <translation type="unfinished">准备安装</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="51"/>
