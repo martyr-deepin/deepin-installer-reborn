@@ -17,6 +17,11 @@ bool RunScriptFile(const QString& filepath, bool change_working_dir) {
 
 bool RunScriptFile(const QString& filepath, QString& output, QString& err,
                    bool change_working_dir) {
+  return RunScriptFile(filepath, {}, output, err, change_working_dir);
+}
+
+bool RunScriptFile(const QString& filepath, const QStringList& args,
+                   QString& output, QString& err, bool change_working_dir) {
   if (change_working_dir) {
     // Change working directory.
     const QString current_dir(QFileInfo(filepath).absolutePath());
@@ -25,7 +30,6 @@ bool RunScriptFile(const QString& filepath, QString& output, QString& err,
       return false;
     }
   }
-  const QStringList args = {filepath};
 
   QProcess process;
   process.setProgram(filepath);

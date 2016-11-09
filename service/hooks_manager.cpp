@@ -27,17 +27,14 @@ const char kUnsquashfsBaseProgressFile[] = "/dev/shm/unsquashfs_base_progress";
 // Interval to read unsquashfs progress file, 500ms.
 const int kReadUnsquashfsInterval = 500;
 
-const char kTargetDir[] = "/target";
-
 int ReadProgressValue(const QString& file) {
   if (QFile::exists(file)) {
     const QString val(ReadFile(file));
-    qDebug() << "progress value:" << val;
     if (!val.isEmpty()) {
       return val.toInt();
     }
   }
-  return -1;
+  return 0;
 }
 
 }  // namespace
@@ -46,7 +43,6 @@ HooksManager::HooksManager(QObject* parent)
     : QObject(parent),
       hook_worker_(new HookWorker()),
       hook_worker_thread_(new QThread(this)),
-      chroot_(),
       unsquashfs_timer_(new QTimer(this)) {
   this->setObjectName("hooks_manager");
 
@@ -79,12 +75,6 @@ void HooksManager::runNextHook() {
     // Clear environment of current hooks pack.
     if (hooks_pack_->type == HookType::BeforeChroot) {
       unsquashfs_timer_->stop();
-    } else if (hooks_pack_->type == HookType::InChroot) {
-      if (!chroot_.leaveChroot()) {
-        qCritical() << "Leave chroot env failed!";
-        emit this->errorOccurred();
-        return;
-      }
     }
 
     HooksPack* next_hooks_pack = hooks_pack_->next;
@@ -125,12 +115,6 @@ void HooksManager::runHooksPack() {
       emit this->errorOccurred();
       return;
     }
-
-    if (!chroot_.enterChroot(kTargetDir)) {
-      qCritical() << "Enter chroot env failed!";
-      emit this->errorOccurred();
-      return;
-    }
   }
 
   // Run hooks one by one.
@@ -167,11 +151,10 @@ void HooksManager::handleRunHooks() {
                      kAfterChrootEndVal, false, nullptr);
 
   hooks_pack_ = before_chroot;
-//  this->runHooksPack();
+  this->runHooksPack();
 }
 
 void HooksManager::handleReadUnsquashfsTimeout() {
-  qDebug() << "handleReadUnsquashfsTimeout()";
   // Read progress value and notify UI thread.
   const int val = ReadProgressValue(kUnsquashfsBaseProgressFile);
   const int progress = kBeforeChrootStartVal +
@@ -194,13 +177,6 @@ void HooksManager::onHooksManagerFinished() {
   // Stop unquashfs progress file monitor
   if (unsquashfs_timer_->isActive()) {
     unsquashfs_timer_->stop();
-  }
-
-  // Leave chroot env.
-  if (chroot_.inChrootEnv()) {
-    if (!chroot_.leaveChroot()) {
-      qWarning() << "Failed to leave chroot env!";
-    }
   }
 }
 

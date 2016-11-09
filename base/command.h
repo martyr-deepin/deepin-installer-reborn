@@ -16,6 +16,9 @@ namespace installer {
 bool RunScriptFile(const QString& filepath, bool change_working_dir = true);
 bool RunScriptFile(const QString& filepath, QString& output, QString& err,
                    bool change_working_dir = true);
+bool RunScriptFile(const QString& filepath, const QStringList& args,
+                   QString& output, QString& err,
+                   bool change_working_dir = true);
 
 // Run |cmd| with |args| in background and returns its result.
 bool SpawnCmd(const QString& cmd, const QStringList& args);

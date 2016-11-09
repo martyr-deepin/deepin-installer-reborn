@@ -9,8 +9,6 @@
 class QThread;
 class QTimer;
 
-#include "service/backend/chroot.h"
-
 namespace installer {
 
 // Expose this value explicitly.
@@ -60,7 +58,6 @@ class HooksManager : public QObject {
   HooksPack* hooks_pack_ = nullptr;
   HookWorker* hook_worker_ = nullptr;
   QThread* hook_worker_thread_ = nullptr;
-  Chroot chroot_;
 
   // Monitors unsquashfs progress file changing.
   void monitorProgressFiles();

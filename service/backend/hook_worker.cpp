@@ -12,11 +12,15 @@ namespace installer {
 
 namespace {
 
+const char kInstallerHooksDir[] = "/dev/shm/installer-hooks";
+const char kHookManagerFile[] = "/dev/shm/installer-hooks/hook-manager.sh";
+
 // Runs a specific hook at |hook|.
 bool RunHook(const QString& hook) {
   qDebug() << "RunHook():" << hook;
   QString output, err;
-  const bool ok = RunScriptFile(hook, output, err, true);
+  const QStringList args = {hook};
+  const bool ok = RunScriptFile(kHookManagerFile, args, output, err, true);
   qDebug() << "hook output:" << ok << output << "\nerror:" << err;
   if (!output.isEmpty()) {
     qWarning() << "Output from " << hook << "\n" << output;
