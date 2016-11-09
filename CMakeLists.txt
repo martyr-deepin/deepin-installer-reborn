@@ -73,7 +73,6 @@ add_subdirectory(third_party/googletest)
 include_directories(third_party/googletest)
 add_subdirectory(third_party/qrencode)
 include_directories(third_party/qrencode)
-add_subdirectory(third_party/squashfs-tools)
 
 set(BASE_FILES
     base/command.cpp base/command.h
@@ -338,6 +337,13 @@ add_executable(deepin-installer-xrandr-switchy
                )
 target_link_libraries(deepin-installer-xrandr-switchy ${Qt_LIBS})
 
+add_executable(deepin-installer-unsquashfs-progress
+
+               misc/unsquashfs_progress.cpp
+               ${BASE_FILES}
+               )
+target_link_libraries(deepin-installer-unsquashfs-progress ${Qt_LIBS})
+
 
 ## Installation
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
@@ -345,6 +351,8 @@ install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem-tool"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-xrandr-switchy"
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs-progress"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 install(FILES resources/deepin-installer-reborn.desktop
         DESTINATION "${CMAKE_INSTALL_PREFIX}/share/applications")

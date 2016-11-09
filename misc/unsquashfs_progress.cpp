@@ -14,7 +14,6 @@
 namespace {
 
 void WriteProgress(const QString& output_file, const QString& progress) {
-  qDebug() << "WriteProgress:" << output_file << progress;
   if (output_file.isEmpty()) {
     write(STDOUT_FILENO, progress.toUtf8().constData(),
           static_cast<size_t>(progress.length()));
