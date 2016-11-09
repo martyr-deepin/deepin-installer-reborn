@@ -24,7 +24,7 @@ namespace {
 const int kWindowWidth = 960;
 
 const char kTextBootloader[] = "Select bootloader";
-const char kTextEdit[] = "Edit";
+const char kTextDelete[] = "Delete";
 const char kTextDone[] = "Done";
 
 }  // namespace
@@ -45,7 +45,7 @@ void AdvancedPartitionFrame::changeEvent(QEvent* event) {
     if (editing_button_->isChecked()) {
       editing_button_->setText(tr(kTextDone));
     } else {
-      editing_button_->setText(tr(kTextEdit));
+      editing_button_->setText(tr(kTextDelete));
     }
   } else {
     QFrame::changeEvent(event);
@@ -97,7 +97,7 @@ void AdvancedPartitionFrame::initUI() {
   bootloader_button_->setFlat(true);
   // TODO(xushaohua): Set current used bootloader partition
 
-  editing_button_ = new PointerButton(tr(kTextEdit));
+  editing_button_ = new PointerButton(tr(kTextDelete));
   editing_button_->setFlat(true);
   editing_button_->setObjectName("editing_button");
   editing_button_->setCheckable(true);
@@ -202,7 +202,7 @@ void AdvancedPartitionFrame::onEditButtonToggled(bool toggle) {
   if (toggle) {
     editing_button_->setText(tr(kTextDone));
   } else {
-    editing_button_->setText(tr(kTextEdit));
+    editing_button_->setText(tr(kTextDelete));
   }
 }
 

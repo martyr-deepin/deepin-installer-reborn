@@ -139,21 +139,22 @@ void AdvancedPartitionButton::initUI() {
 }
 
 void AdvancedPartitionButton::updateStatus() {
+  control_status_ = ControlStatus::Hide;
+
   if (editable_) {
-    if (partition_.type == PartitionType::Unallocated) {
-      control_status_ = ControlStatus::New;
-      control_button_->setIcon(QIcon(":/images/new_partition.png"));
-    } else {
+    if (partition_.type == PartitionType::Normal ||
+        partition_.type == PartitionType::Logical) {
       control_status_ = ControlStatus::Delete;
       control_button_->setIcon(QIcon(":/images/delete_partition.png"));
     }
-  } else {
-    if (partition_.type != PartitionType::Unallocated &&
-        this->isChecked()) {
+  } else if (this->isChecked()) {
+    if (partition_.type == PartitionType::Normal ||
+        partition_.type == PartitionType::Logical) {
       control_status_ = ControlStatus::Edit;
       control_button_->setIcon(QIcon(":/images/edit_partition.png"));
-    } else {
-      control_status_ = ControlStatus::Hide;
+    } else if (partition_.type == PartitionType::Unallocated) {
+      control_status_ = ControlStatus::New;
+      control_button_->setIcon(QIcon(":/images/new_partition.png"));
     }
   }
 
