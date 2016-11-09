@@ -74,6 +74,11 @@ void SystemInfoFormFrame::changeEvent(QEvent* event) {
   }
 }
 
+void SystemInfoFormFrame::showEvent(QShowEvent* event) {
+  QFrame::showEvent(event);
+  username_edit_->setFocus();
+}
+
 void SystemInfoFormFrame::initConnections() {
   connect(avatar_button_, &QPushButton::clicked,
           this, &SystemInfoFormFrame::avatarClicked);
@@ -90,6 +95,15 @@ void SystemInfoFormFrame::initConnections() {
           this, &SystemInfoFormFrame::onPasswordEditingFinished);
   connect(password2_edit_, &LineEdit::editingFinished,
           this, &SystemInfoFormFrame::onPassword2EditingFinished);
+
+  connect(username_edit_, SIGNAL(returnPressed()),
+          hostname_edit_, SLOT(setFocus()));
+  connect(hostname_edit_, SIGNAL(returnPressed()),
+          password_edit_, SLOT(setFocus()));
+  connect(password_edit_, SIGNAL(returnPressed()),
+          password2_edit_, SLOT(setFocus()));
+  connect(password2_edit_, &LineEdit::returnPressed,
+          next_button_, &QPushButton::click);
 
   connect(username_edit_, &LineEdit::textEdited,
           this, &SystemInfoFormFrame::onEditingLineEdit);

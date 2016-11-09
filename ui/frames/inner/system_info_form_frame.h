@@ -45,6 +45,9 @@ class SystemInfoFormFrame : public QFrame {
  protected:
   void changeEvent(QEvent* event) override;
 
+  // Set username_edit_ as the default focused widget.
+  void showEvent(QShowEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
