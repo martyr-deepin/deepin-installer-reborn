@@ -13,7 +13,9 @@ in_chroot=$(grep 'in_chroot' ${hook_file})
 
 if [ -z ${in_chroot} ]; then
   . ${hook_file}
+  exit $?
 else
   echo 'Run in chroot env'
   chroot /target ${hook_file}
+  exit $?
 fi
