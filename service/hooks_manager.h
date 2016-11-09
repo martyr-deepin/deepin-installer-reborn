@@ -52,7 +52,7 @@ class HooksManager : public QObject {
  private:
   void initConnections();
 
-  void runHook();
+  void runNextHook();
 
   // Run hook scripts with |hook_type|.
   void runHooksPack();

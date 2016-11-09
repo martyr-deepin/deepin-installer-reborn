@@ -29,11 +29,8 @@ struct HooksPack {
   HooksPack* next = nullptr;
 };
 
-// Mount hooks folder to /dev/shm
-bool BindHooks(HookType hook_type);
-
-// Umount hooks folder.
-bool UnbindHooks();
+// Copy hooks folder to /dev/shm/installer-hooks/.
+bool CopyHooks(bool in_chroot);
 
 }  // namespace installer
 

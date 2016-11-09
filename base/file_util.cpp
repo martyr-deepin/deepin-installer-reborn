@@ -49,14 +49,18 @@ bool CopyFolder(const QString src_dir, const QString& dest_dir,
                       dest_filepath.toStdString().c_str());
       }
     } else if (src_info.isFile()) {
-      QFile::remove(dest_filepath);
+      if (QFile::exists(dest_filepath)) {
+        QFile::remove(dest_filepath);
+      }
       ok = QFile::copy(iter.filePath(), dest_filepath);
       if (ok) {
         ok = CopyMode(iter.filePath().toStdString().c_str(),
                       dest_filepath.toStdString().c_str());
       }
     } else if (src_info.isSymLink()) {
-      QFile::remove(dest_filepath);
+      if (QFile::exists(dest_filepath)) {
+        QFile::remove(dest_filepath);
+      }
       ok = QFile::link(src_info.canonicalFilePath(), dest_filepath);
     }
   }
