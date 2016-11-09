@@ -210,6 +210,10 @@ set(ROOT_UNITTEST_FILES
     )
 
 set(UNITTEST_FILES
+    base/command_test.cpp
+    base/file_util_test.cpp
+    base/string_util_test.cpp
+    
     sysinfo/dev_disk_test.cpp
     sysinfo/proc_mounts_test.cpp
     sysinfo/proc_partitions_test.cpp
@@ -325,14 +329,6 @@ add_executable(deepin-installer-oem-tool
                )
 target_link_libraries(deepin-installer-oem-tool ${LINK_LIBS})
 
-# unsquasfs progress
-add_executable(deepin-installer-unsquashfs-progress
-               misc/unsquashfs_progress.cpp
-               
-               ${BASE_FILES}
-               )
-target_link_libraries(deepin-installer-unsquashfs-progress ${Qt_LIBS})
-
 # xrandr-switchy
 add_executable(deepin-installer-xrandr-switchy
                misc/xrandr_switchy.cpp
@@ -347,8 +343,6 @@ target_link_libraries(deepin-installer-xrandr-switchy ${Qt_LIBS})
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem-tool"
-        DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
-install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs-progress"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-xrandr-switchy"
         DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")

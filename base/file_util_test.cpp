@@ -2,20 +2,16 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "base/command.h"
+#include "base/file_util.h"
 
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
 namespace installer {
 namespace {
 
-TEST(CommandTest, SpawnCmd) {
-  QString output;
-  QString err;
-  const bool ok = SpawnCmd("ls", {"-h", "/"}, output, err);
-  EXPECT_TRUE(ok);
-  EXPECT_GT(output.length(), 0);
-  EXPECT_GT(output.indexOf("root"), 0);
+TEST(FileUtil, CopyFodlerTest) {
+  EXPECT_TRUE(CopyFolder("/etc/init.d", "/tmp/init.d"));
+  EXPECT_TRUE(CopyFolder("/etc/apt", "/tmp/apt", false));
 }
 
 }  // namespace

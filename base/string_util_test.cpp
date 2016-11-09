@@ -6,7 +6,7 @@
 
 #include "third_party/googletest/googletest/include/gtest/gtest.h"
 
-namespace base {
+namespace installer {
 namespace {
 
 TEST(StringUtilTest, RegexpLabel) {
@@ -19,4 +19,4 @@ TEST(StringUtilTest, RegexpLabel) {
 }
 
 }  // namespace
-}  // namespace base
+}  // namespace installer

@@ -4,7 +4,13 @@
 
 #include "base/file_util.h"
 
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 #include <QDebug>
+#include <QDir>
+#include <QDirIterator>
+#include <QFileInfo>
 #include <QTextCodec>
 
 namespace installer {
@@ -15,6 +21,56 @@ QDir ConcateDir(const QDir& parent_dir, const QString& folder_name) {
     parent_dir.mkpath(folder_name);
   }
   return QDir(parent_dir.filePath(folder_name));
+}
+
+bool CopyFolder(const QString src_dir, const QString& dest_dir,
+                bool recursive) {
+  QDirIterator::IteratorFlag iter_flag;
+  if (recursive) {
+    iter_flag = QDirIterator::Subdirectories;
+  } else {
+    iter_flag = QDirIterator::NoIteratorFlags;
+  }
+  QDirIterator iter(src_dir, QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot,
+                    iter_flag);
+  QFileInfo src_info;
+  QString dest_filepath;
+  bool ok = true;
+  if (!QDir(dest_dir).exists()) {
+    ok = CreateParentDirs(dest_dir);
+  }
+  while (ok && iter.hasNext()) {
+    src_info = iter.next();
+    dest_filepath = iter.filePath().replace(src_dir, dest_dir);
+    if (src_info.isDir()) {
+      ok = CreateDirs(dest_filepath);
+      if (ok) {
+        ok = CopyMode(iter.filePath().toStdString().c_str(),
+                      dest_filepath.toStdString().c_str());
+      }
+    } else if (src_info.isFile()) {
+      QFile::remove(dest_filepath);
+      ok = QFile::copy(iter.filePath(), dest_filepath);
+      if (ok) {
+        ok = CopyMode(iter.filePath().toStdString().c_str(),
+                      dest_filepath.toStdString().c_str());
+      }
+    } else if (src_info.isSymLink()) {
+      QFile::remove(dest_filepath);
+      ok = QFile::link(src_info.canonicalFilePath(), dest_filepath);
+    }
+  }
+  return ok;
+}
+
+bool CopyMode(const char* src_file, const char* dest_file) {
+  struct stat st;
+  if (stat(src_file, &st) == -1) {
+    return false;
+  }
+
+  const mode_t mode = st.st_mode & 0777;
+  return (chmod(dest_file, mode) == 0);
 }
 
 bool CreateDirs(const QString& dirpath) {
