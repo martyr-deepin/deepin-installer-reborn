@@ -148,7 +148,6 @@ MainWindow::MainWindow()
 void MainWindow::fullscreen() {
   multi_head_manager_->updateWallpaper();
   this->showFullScreen();
-  install_progress_frame_->runHooks(true);
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
