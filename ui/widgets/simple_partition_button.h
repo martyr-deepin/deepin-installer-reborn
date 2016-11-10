@@ -18,6 +18,8 @@ class SimplePartitionButton : public PointerButton {
  public:
   SimplePartitionButton(const Partition& partition, QWidget* parent = nullptr);
 
+  const Partition& partition() const { return partition_; }
+
  private:
   void initConnections();
   void initUI();

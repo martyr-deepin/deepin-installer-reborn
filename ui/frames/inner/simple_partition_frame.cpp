@@ -174,7 +174,19 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
     const QPoint pos = button->pos();
     install_tip_->move(pos.x(), pos.y() - 10);
     install_tip_->show();
-    // TODO(xushaohua): Update delegate_
+  }
+
+  SimplePartitionButton* part_button =
+      qobject_cast<SimplePartitionButton*>(button);
+  if (part_button) {
+    // Clear mount point, no matter button is checked or not.
+//      delegate_->updateMountPoint(part_button->partition(), "");
+    // NOTE(xushaohua): Call updateMountPoint() asynchronously,
+    // or else it crashes.
+    this->metaObject()->invokeMethod(delegate_, "updateMountPoint",
+                                     Qt::QueuedConnection,
+                                     Q_ARG(Partition, part_button->partition()),
+                                     Q_ARG(QString, ""));
   }
 }
 

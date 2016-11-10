@@ -36,6 +36,7 @@ class PartitionDelegate : public QObject {
   bool canAddPrimary(const Partition& partition) const;
   bool canAddLogical(const Partition& partition) const;
 
+  // Get a list of devices found by libparted.
   const DeviceList& devices() const { return devices_; }
 
   // Get human readable operation descriptions.
@@ -49,6 +50,23 @@ class PartitionDelegate : public QObject {
 
   // Get all supported fs type.
   const FsTypeList& getFsTypes();
+
+ signals:
+  // Emitted after scanning local disk devices or partition is edited.
+  void deviceRefreshed();
+
+  // Emitted when partition job is done.
+  void autoPartDone(bool ok);
+  void manualPartDone(bool ok);
+
+ public slots:
+  // Notify partition_manager to do manual partition operations.
+  // NOTE(xushaohua): This action can not be undo.
+  void doManualPart();
+
+  // Set bootloader path to |bootloader_path|
+  // This slot is used only in SelectBootloaderFrame.
+  void setBootloaderPath(const QString bootloader_path);
 
   // Operation helpers.
   // Create a new partition.
@@ -67,23 +85,10 @@ class PartitionDelegate : public QObject {
   // Change mount point of |partition|.
   void updateMountPoint(const Partition& partition, const QString& mount_point);
 
- signals:
-  // Emitted after scanning local disk devices or partition is edited.
-  void deviceRefreshed();
-
-  // Emitted when partition job is done.
-  void autoPartDone(bool ok);
-  void manualPartDone(bool ok);
-
- public slots:
-  void doManualPart();
-
-  // Set bootloader path to |bootloader_path|
-  // This slot is used only in SelectBootloaderFrame.
-  void setBootloaderPath(const QString bootloader_path);
-
  private:
   void initConnections();
+
+  // Update virtual partition list based on operations.
   void refreshVisual();
 
   void createPrimaryPartition(const Partition& partition,
@@ -113,7 +118,9 @@ class PartitionDelegate : public QObject {
   QString bootloader_path_;
 
  private slots:
+  // Update physical and virtual partition list.
   void onDevicesRefreshed(const DeviceList& devices);
+
   void onManualPartDone(bool ok);
 };
 
