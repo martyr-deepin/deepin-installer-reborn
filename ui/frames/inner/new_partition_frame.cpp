@@ -139,7 +139,8 @@ void NewPartitionFrame::initUI() {
   fs_box_->setModel(fs_model_);
 
   mount_point_box_ = new TableComboBox();
-  mount_point_model_ = new MountPointModel(delegate_, mount_point_box_);
+  mount_point_model_ = new MountPointModel(delegate_->allMountPoints(),
+                                           mount_point_box_);
   mount_point_box_->setModel(mount_point_model_);
 
   size_slider_ = new PartitionSizeSlider();

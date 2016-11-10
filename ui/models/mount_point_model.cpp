@@ -8,13 +8,11 @@
 
 namespace installer {
 
-MountPointModel::MountPointModel(PartitionDelegate* delegate, QObject* parent)
+MountPointModel::MountPointModel(const QStringList& mount_points,
+                                 QObject* parent)
     : QAbstractListModel(parent),
-      delegate_(delegate) {
+      mount_points_(mount_points) {
   this->setObjectName("mount_point_model");
-
-  connect(delegate_, &PartitionDelegate::deviceRefreshed,
-          this, &MountPointModel::onMountPointUpdated);
 }
 
 QVariant MountPointModel::data(const QModelIndex& index, int role) const {
@@ -26,11 +24,8 @@ QVariant MountPointModel::data(const QModelIndex& index, int role) const {
     return QVariant();
   }
 
-  const QStringList& mount_points(delegate_->getMountPoints());
-
-  if (index.row() < mount_points.length()) {
-    const QString name = mount_points.at(index.row());
-    // TODO(xushaohua): Check filesystem type of partition.
+  if (index.row() < mount_points_.length()) {
+    const QString name = mount_points_.at(index.row());
     if (name.isEmpty()) {
       return tr("do not use");
     }
@@ -42,25 +37,20 @@ QVariant MountPointModel::data(const QModelIndex& index, int role) const {
 
 int MountPointModel::rowCount(const QModelIndex& parent) const {
   Q_UNUSED(parent);
-  return delegate_->getMountPoints().length();
+  return mount_points_.length();
 }
 
 int MountPointModel::index(const QString& mount_point) const {
-  return delegate_->getMountPoints().indexOf(mount_point);
+  return mount_points_.indexOf(mount_point);
 }
 
 QString MountPointModel::getMountPoint(int index) const {
-  const QStringList& mount_points(delegate_->getMountPoints());
-  Q_ASSERT(index < mount_points.length());
-  if (index < mount_points.length()) {
-    return mount_points.at(index);
+  Q_ASSERT(index < mount_points_.length());
+  if (index < mount_points_.length()) {
+    return mount_points_.at(index);
   } else {
     return QString();
   }
-}
-
-void MountPointModel::onMountPointUpdated() {
-
 }
 
 }  // namespace installer

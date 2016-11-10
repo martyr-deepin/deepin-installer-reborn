@@ -71,11 +71,7 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
   // Reset mount point box.
   int mount_point_index = mount_point_model_->index(partition.mount_point);
   if (mount_point_index == -1) {
-    // TODO(xushaohua): Remove this statement.
     mount_point_index = mount_point_model_->index("");
-  }
-  if (mount_point_index == -1) {
-    mount_point_index = 0;
   }
   mount_point_box_->setCurrentIndex(mount_point_index);
 }
@@ -156,7 +152,7 @@ void EditPartitionFrame::initUI() {
 
   mount_point_box_ = new TableComboBox();
   mount_point_box_->setObjectName("mount_point_box");
-  mount_point_model_ = new MountPointModel(delegate_, this);
+  mount_point_model_ = new MountPointModel(delegate_->allMountPoints(), this);
   mount_point_box_->setModel(mount_point_model_);
 
   format_check_box_ = new QCheckBox();
@@ -222,7 +218,6 @@ void EditPartitionFrame::onFsChanged(int index) {
 }
 
 void EditPartitionFrame::onOkButtonClicked() {
-
   const QString mount_point =
       mount_point_model_->getMountPoint(mount_point_box_->currentIndex());
   if(format_check_box_->isChecked()) {

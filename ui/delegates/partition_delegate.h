@@ -44,8 +44,8 @@ class PartitionDelegate : public QObject {
   // Notifies partition manager to scan devices.
   void scanDevices() const;
 
-  // Get mount point based on fs type.
-  const QStringList& getMountPoints();
+  // Get all available mount points, defined in settings file.
+  const QStringList& allMountPoints();
 
   // Get all supported fs type.
   const FsTypeList& getFsTypes();
@@ -70,9 +70,6 @@ class PartitionDelegate : public QObject {
  signals:
   // Emitted after scanning local disk devices or partition is edited.
   void deviceRefreshed();
-
-  // Emitted when a specific partition is created/edited/deleted.
-  void partitionEdited();
 
   // Emitted when partition job is done.
   void autoPartDone(bool ok);
@@ -112,7 +109,6 @@ class PartitionDelegate : public QObject {
   OperationList operations_;
 
   QStringList all_mount_points_;
-  QStringList unused_mount_points_;
   FsTypeList fs_types_;
   QString bootloader_path_;
 

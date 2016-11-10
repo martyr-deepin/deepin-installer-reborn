@@ -57,7 +57,6 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
       real_devices_(),
       operations_(),
       all_mount_points_(),
-      unused_mount_points_(),
       fs_types_(),
       bootloader_path_() {
   this->setObjectName("partition_delegate");
@@ -182,19 +181,19 @@ void PartitionDelegate::scanDevices() const {
   }
 }
 
-const QStringList& PartitionDelegate::getMountPoints() {
+const QStringList& PartitionDelegate::allMountPoints() {
   if (all_mount_points_.isEmpty()) {
     // Read available mount points.
-    QString name = GetSettingsString(kPartitionMountPoints);
-    Q_ASSERT(!name.isEmpty());
-    if (name == kMountPointUnused) {
-      name = "";
-    }
-    all_mount_points_ = name.split(';');
-    unused_mount_points_ = all_mount_points_;
-  }
+    all_mount_points_ = GetSettingsStringList(kPartitionMountPoints);
 
-  return unused_mount_points_;
+    // Replace "unused" mount point with ""
+    for (QString& mount_point : all_mount_points_) {
+      if (mount_point == kMountPointUnused) {
+        mount_point = "";
+      }
+    }
+  }
+  return all_mount_points_;
 }
 
 const FsTypeList& PartitionDelegate::getFsTypes() {

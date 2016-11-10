@@ -9,13 +9,13 @@
 
 namespace installer {
 
-class PartitionDelegate;
-
+// ModelPointModel always displays all available mount-points.
+// Even if it is already in use.
 class MountPointModel : public QAbstractListModel {
   Q_OBJECT
 
  public:
-  MountPointModel(PartitionDelegate* delegate, QObject* parent = nullptr);
+  MountPointModel(const QStringList& mount_points, QObject* parent = nullptr);
 
   QVariant data(const QModelIndex& index, int role) const override;
   int rowCount(const QModelIndex& parent) const override;
@@ -26,15 +26,8 @@ class MountPointModel : public QAbstractListModel {
   QString getMountPoint(int index) const;
 
  private:
-  PartitionDelegate* delegate_ = nullptr;
-
- private slots:
-  // Update mount point list in model.
-  void onMountPointUpdated();
+  const QStringList mount_points_;
 };
-
-// Check whether |mount_point| is empty mount point.
-bool IsEmptyMountPoint(const QString& mount_point);
 
 }  // namespace installer
 
