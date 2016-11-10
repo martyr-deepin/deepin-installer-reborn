@@ -82,25 +82,23 @@ void AdvancedPartitionButton::initUI() {
   // mount point
   QLabel* mount_point_label = new QLabel();
   mount_point_label->setObjectName("mount_point_label");
-  if (!partition_.mount_point.isEmpty()) {
-    mount_point_label->setText(partition_.mount_point);
-  }
+  mount_point_label->setText(partition_.mount_point);
   mount_point_label->setFixedWidth(64);
 
   // tip
   QLabel* tip_label = new QLabel();
   tip_label->setObjectName("tip_label");
   // TODO(xushaohua): Read root partition.
-  tip_label->setFixedWidth(64);
+  tip_label->setFixedWidth(96);
 
   // filesystem name
   QLabel* fs_label = new QLabel();
   fs_label->setObjectName("fs_label");
-  if (partition_.type != PartitionType::Unallocated) {
+  if (partition_.type == PartitionType::Normal ||
+      partition_.type == PartitionType::Logical) {
     fs_label->setText(GetFsTypeName(partition_.fs));
   }
-  fs_label->setFixedWidth(30);
-
+  fs_label->setFixedWidth(80);
 
   QFrame* control_button_wrapper = new QFrame();
   control_button_wrapper->setObjectName("control_button_wrapper");
@@ -113,8 +111,9 @@ void AdvancedPartitionButton::initUI() {
   control_button_->setFixedSize(18, 18);
   control_button_->hide();
 
-  // TODO(xushaohua): Use fixed layout instead.
   QHBoxLayout* layout = new QHBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
+  layout->setSpacing(0);
   layout->addSpacing(20);
   layout->addWidget(path_frame);
   layout->addStretch();
@@ -130,6 +129,7 @@ void AdvancedPartitionButton::initUI() {
   layout->addWidget(control_button_wrapper);
   layout->addSpacing(15);
 
+  this->setContentsMargins(0, 0, 0, 0);
   this->setLayout(layout);
   this->setFixedHeight(45);
   this->setCheckable(true);
