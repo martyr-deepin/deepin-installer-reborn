@@ -68,11 +68,8 @@ class PartitionDelegate : public QObject {
   void updateMountPoint(const Partition& partition, const QString& mount_point);
 
  signals:
-  // Emitted after scanning local disk devices.
+  // Emitted after scanning local disk devices or partition is edited.
   void deviceRefreshed();
-
-  // Emitted when mount point list is updated
-  void mountPointUpdated();
 
   // Emitted when a specific partition is created/edited/deleted.
   void partitionEdited();

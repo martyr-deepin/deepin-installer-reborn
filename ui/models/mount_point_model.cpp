@@ -13,7 +13,7 @@ MountPointModel::MountPointModel(PartitionDelegate* delegate, QObject* parent)
       delegate_(delegate) {
   this->setObjectName("mount_point_model");
 
-  connect(delegate_, &PartitionDelegate::mountPointUpdated,
+  connect(delegate_, &PartitionDelegate::deviceRefreshed,
           this, &MountPointModel::onMountPointUpdated);
 }
 

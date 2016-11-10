@@ -16,7 +16,7 @@ PartitionListModel::PartitionListModel(PartitionDelegate* delegate,
       partition_list_() {
   this->setObjectName("partition_list_model");
 
-  connect(delegate_, &PartitionDelegate::mountPointUpdated,
+  connect(delegate_, &PartitionDelegate::deviceRefreshed,
           this, &PartitionListModel::onMountPointUpdated);
 }
 
