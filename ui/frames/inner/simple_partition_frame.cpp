@@ -120,6 +120,9 @@ void SimplePartitionFrame::repaintDevices() {
     button_group_->removeButton(button);
   }
 
+  // Hide tooltip frame
+  install_tip_->hide();
+
   // Draw partitions.
   int row = 0, column = 0;
   for (const Device& device : delegate_->devices()) {
