@@ -76,6 +76,7 @@ void SimplePartitionFrame::initUI() {
   tip_layout->addStretch();
 
   install_tip_ = new QFrame();
+  install_tip_->setObjectName("install_tip");
   install_tip_->setContentsMargins(0, 0, 0, 0);
   // Same width as SimplePartitionButton.
   install_tip_->setFixedWidth(220);
@@ -109,6 +110,7 @@ void SimplePartitionFrame::repaintDevices() {
   // Clear grid layout.
   QLayoutItem* layout_item;
   while ((layout_item = grid_layout_->takeAt(0)) != nullptr) {
+    delete layout_item->widget();
     delete layout_item;
     layout_item = nullptr;
   }
@@ -116,14 +118,12 @@ void SimplePartitionFrame::repaintDevices() {
   // Clear button group.
   for (QAbstractButton* button : button_group_->buttons()) {
     button_group_->removeButton(button);
-    delete button;
-    button = nullptr;
   }
 
   // Draw partitions.
   int row = 0, column = 0;
   for (const Device& device : delegate_->devices()) {
-    QLabel* device_model_label = new DeviceModelLabel();
+    DeviceModelLabel* device_model_label = new DeviceModelLabel();
     device_model_label->setText(GetDeviceModelAndCap(device));
     device_model_label->setFixedSize(kWindowWidth, 20);
 
@@ -157,6 +157,7 @@ void SimplePartitionFrame::repaintDevices() {
   // Add place holder. It is used for install_tip
   row += 1;
   QLabel* place_holder_label = new QLabel();
+  place_holder_label->setObjectName("place_holder_label");
   place_holder_label->setFixedSize(kWindowWidth, 30);
   grid_layout_->addWidget(place_holder_label, row, 0,
                           1, kPartitionColumns, Qt::AlignHCenter);
@@ -173,8 +174,8 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
     const QPoint pos = button->pos();
     install_tip_->move(pos.x(), pos.y() - 10);
     install_tip_->show();
+    // TODO(xushaohua): Update delegate_
   }
-  // TODO(xushaohua): Update delegate_
 }
 
 }  // namespace installer
