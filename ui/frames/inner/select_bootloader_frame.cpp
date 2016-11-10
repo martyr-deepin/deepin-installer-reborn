@@ -36,8 +36,12 @@ SelectBootloaderFrame::SelectBootloaderFrame(PartitionDelegate* delegate,
   this->initConnections();
 }
 
-void SelectBootloaderFrame::updatePartitionList() {
-  list_model_->updatePartitionList();
+void SelectBootloaderFrame::selectRecommendedBootloader() {
+  // First read the first device path from delegate.
+  // Then select it in list view
+  // Thus, both AdvancedPartitionFrame and PartitionDelegate will
+  // update bootloader path
+  // TODO(xushaohua): read device list
 }
 
 void SelectBootloaderFrame::changeEvent(QEvent* event) {
@@ -53,6 +57,8 @@ void SelectBootloaderFrame::changeEvent(QEvent* event) {
 void SelectBootloaderFrame::initConnections() {
   connect(back_button_, &QPushButton::clicked,
           this, &SelectBootloaderFrame::finished);
+  connect(list_view_->selectionModel(), &QItemSelectionModel::currentChanged,
+          this, &SelectBootloaderFrame::onPartitionListViewSelected);
 }
 
 void SelectBootloaderFrame::initUI() {
@@ -82,6 +88,15 @@ void SelectBootloaderFrame::initUI() {
   layout->addWidget(back_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+}
+
+void SelectBootloaderFrame::onPartitionListViewSelected(
+    const QModelIndex& current, const QModelIndex& previous) {
+  Q_UNUSED(previous);
+  if (current.isValid()) {
+    // TODO(xushaohua):
+    emit this->bootloaderUpdated("/dev/sda");
+  }
 }
 
 }  // namespace installer

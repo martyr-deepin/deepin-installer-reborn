@@ -39,6 +39,10 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(
   this->initConnections();
 }
 
+void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
+  bootloader_button_->setText(bootloader_path);
+}
+
 void AdvancedPartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     bootloader_label_->setText(tr(kTextBootloader));
@@ -55,10 +59,8 @@ void AdvancedPartitionFrame::changeEvent(QEvent* event) {
 void AdvancedPartitionFrame::initConnections() {
   connect(delegate_, &PartitionDelegate::deviceRefreshed,
           this, &AdvancedPartitionFrame::onDeviceRefreshed);
-
   connect(bootloader_button_, &QPushButton::clicked,
           this, &AdvancedPartitionFrame::requestSelectBootloaderFrame);
-
   connect(editing_button_, &QPushButton::toggled,
           this, &AdvancedPartitionFrame::onEditButtonToggled);
 }
@@ -95,7 +97,6 @@ void AdvancedPartitionFrame::initUI() {
   bootloader_button_ = new PointerButton();
   bootloader_button_->setObjectName("bootloader_button");
   bootloader_button_->setFlat(true);
-  // TODO(xushaohua): Set current used bootloader partition
 
   editing_button_ = new PointerButton(tr(kTextDelete));
   editing_button_->setFlat(true);

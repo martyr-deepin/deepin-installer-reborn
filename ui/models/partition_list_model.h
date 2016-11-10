@@ -13,6 +13,7 @@ namespace installer {
 class PartitionDelegate;
 
 // Reimplemented model used in SelectBootloaderFrame
+// Only displays device path, /root path and /boot path
 class PartitionListModel : public QAbstractListModel {
   Q_OBJECT
 
@@ -22,13 +23,15 @@ class PartitionListModel : public QAbstractListModel {
   virtual QVariant data(const QModelIndex& index, int role) const override;
   virtual int rowCount(const QModelIndex& parent) const override;
 
-  void updatePartitionList();
-
  private:
   PartitionDelegate* delegate_ = nullptr;
 
   // To store path of available partitions and devices.
   QStringList partition_list_;
+
+ private slots:
+  // Update bootloader list when mount point list is updated in delegate.
+  void onMountPointUpdated();
 };
 
 }  // namespace installer

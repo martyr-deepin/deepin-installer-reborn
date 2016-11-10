@@ -15,6 +15,9 @@ PartitionListModel::PartitionListModel(PartitionDelegate* delegate,
       delegate_(delegate),
       partition_list_() {
   this->setObjectName("partition_list_model");
+
+  connect(delegate_, &PartitionDelegate::mountPointUpdated,
+          this, &PartitionListModel::onMountPointUpdated);
 }
 
 QVariant PartitionListModel::data(const QModelIndex& index, int role) const {
@@ -34,7 +37,8 @@ int PartitionListModel::rowCount(const QModelIndex& parent) const {
   return partition_list_.length();
 }
 
-void PartitionListModel::updatePartitionList() {
+void PartitionListModel::onMountPointUpdated() {
+  // TODO(xushaohua): Filters only device path, /boot path and /root path.
   partition_list_.clear();
   for (const Device& device : delegate_->devices()) {
     partition_list_.append(device.path);

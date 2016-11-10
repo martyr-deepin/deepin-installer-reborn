@@ -58,8 +58,7 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
       operations_(),
       all_mount_points_(),
       unused_mount_points_(),
-      fs_types_(),
-      bootloader_path_() {
+      fs_types_() {
   this->setObjectName("partition_delegate");
 
   partition_manager_->moveToThread(partition_thread_);
@@ -197,6 +196,12 @@ const QStringList& PartitionDelegate::getMountPoints() {
   return unused_mount_points_;
 }
 
+void PartitionDelegate::useMountPoint(const QString& mount_point) {
+  qDebug() << "useMountPoint()" << mount_point << unused_mount_points_;
+//  Q_ASSERT(unused_mount_points_.contains(mount_point));
+  unused_mount_points_.removeOne(mount_point);
+}
+
 const FsTypeList& PartitionDelegate::getFsTypes() {
   if (fs_types_.isEmpty()) {
     const QString name = GetSettingsString(kPartitionSupportedFs);
@@ -308,10 +313,6 @@ void PartitionDelegate::updateMountPoint(const Partition& partition,
 
 void PartitionDelegate::doManualPart() {
   emit partition_manager_->manualPart(operations_);
-}
-
-void PartitionDelegate::setBootloaderPath(const QString bootloader_path) {
-  bootloader_path_ = bootloader_path;
 }
 
 void PartitionDelegate::initConnections() {
@@ -572,8 +573,10 @@ void PartitionDelegate::onManualPartDone(bool ok) {
   if (ok) {
     QString root_disk;
     QString root_path;
+    QString boot_path;
     QStringList mount_points;
 
+    QStringList mount_point_pair;
     for (const Operation& operation : operations_) {
       const Partition& new_partition = operation.new_partition;
       if (!new_partition.mount_point.isEmpty()) {
@@ -582,12 +585,18 @@ void PartitionDelegate::onManualPartDone(bool ok) {
         if (new_partition.mount_point == kMountPointRoot) {
           root_disk = new_partition.device_path;
           root_path = new_partition.path;
+        } else if (new_partition.mount_point == kMountPointBoot) {
+          boot_path = new_partition.path;
         }
       }
     }
 
-    WritePartitionInfo(root_disk, root_path, bootloader_path_,
-                       mount_points.join(';'));
+    // If /boot is not set, use / as boot-partition.
+    if (boot_path.isEmpty()) {
+      boot_path = root_path;
+    }
+
+    WritePartitionInfo(root_disk, root_path, boot_path, mount_points.join(';'));
   }
 
   emit this->manualPartDone(ok);

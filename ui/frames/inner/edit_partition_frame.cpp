@@ -233,8 +233,6 @@ void EditPartitionFrame::onOkButtonClicked() {
     // Only create an OperationMountPoint object.
     delegate_->updateMountPoint(partition_, mount_point);
   }
-  mount_point_model_->useMountPoint(mount_point);
-
 
   emit this->finished();
 }

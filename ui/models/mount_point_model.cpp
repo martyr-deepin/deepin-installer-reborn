@@ -12,6 +12,9 @@ MountPointModel::MountPointModel(PartitionDelegate* delegate, QObject* parent)
     : QAbstractListModel(parent),
       delegate_(delegate) {
   this->setObjectName("mount_point_model");
+
+  connect(delegate_, &PartitionDelegate::mountPointUpdated,
+          this, &MountPointModel::onMountPointUpdated);
 }
 
 QVariant MountPointModel::data(const QModelIndex& index, int role) const {
@@ -56,11 +59,8 @@ QString MountPointModel::getMountPoint(int index) const {
   }
 }
 
-void MountPointModel::useMountPoint(const QString& mount_point) {
-  // Ignores empty mount point.
-  if (!mount_point.isEmpty()) {
-    delegate_->useMountPoint(mount_point);
-  }
+void MountPointModel::onMountPointUpdated() {
+
 }
 
 }  // namespace installer

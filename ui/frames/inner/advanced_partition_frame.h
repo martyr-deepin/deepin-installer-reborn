@@ -30,6 +30,11 @@ class AdvancedPartitionFrame : public QFrame {
   void requestNewPartitionFrame(const Partition& partition);
   void requestSelectBootloaderFrame();
 
+ public slots:
+  // Update bootloader path in button.
+  // This slots is connected to SelectBootloaderFrame.
+  void setBootloaderPath(const QString& bootloader_path);
+
  protected:
   void changeEvent(QEvent* event) override;
 

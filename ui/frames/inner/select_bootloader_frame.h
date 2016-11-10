@@ -17,15 +17,25 @@ class PartitionListModel;
 class TitleLabel;
 
 // Displays a window to select available boot path.
+// This frame read recommended bootloader path, and notifies any changes to
+// PartitionDelegate and AdvancedPartitionFrame.
+// It refreshes available partition list for bootloader when mount-point list
+// is updated in PartitionDelegate.
 class SelectBootloaderFrame : public QFrame {
   Q_OBJECT
 
  public:
   SelectBootloaderFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
 
-  void updatePartitionList();
+  // Select the first order device path, like /dev/sda.
+  // This method does not dependent on PartitionDelegate.
+  // Instead, it reads device list directly from /dev/disk folder.
+  void selectRecommendedBootloader();
 
  signals:
+  // Emitted when currently used bootloader path is updated.
+  void bootloaderUpdated(const QString& bootloader_path);
+
   // Emitted when back-button is clicked.
   void finished();
 
@@ -42,6 +52,11 @@ class SelectBootloaderFrame : public QFrame {
   FramelessListView* list_view_ = nullptr;
   PartitionListModel* list_model_ = nullptr;
   NavButton* back_button_ = nullptr;
+
+ private slots:
+  // Emit signals when new bootloader path is selected in list-view.
+  void onPartitionListViewSelected(const QModelIndex& current,
+                                   const QModelIndex& previous);
 };
 
 }  // namespace installer

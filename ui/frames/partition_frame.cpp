@@ -55,6 +55,9 @@ void PartitionFrame::autoPart() {
 
 void PartitionFrame::scanDevices() const {
   delegate_->scanDevices();
+
+  // Selected recommended bootloader path.
+  select_bootloader_frame_->selectRecommendedBootloader();
 }
 
 void PartitionFrame::changeEvent(QEvent* event) {
@@ -106,6 +109,11 @@ void PartitionFrame::initConnections() {
   connect(prepare_install_frame_, &PrepareInstallFrame::finished,
           delegate_, &PartitionDelegate::doManualPart);
 
+  connect(select_bootloader_frame_, &SelectBootloaderFrame::bootloaderUpdated,
+          advanced_partition_frame_,
+          &AdvancedPartitionFrame::setBootloaderPath);
+  connect(select_bootloader_frame_, &SelectBootloaderFrame::bootloaderUpdated,
+          delegate_, &PartitionDelegate::setBootloaderPath);
   connect(select_bootloader_frame_, &SelectBootloaderFrame::finished,
           this, &PartitionFrame::showMainFrame);
 }
@@ -220,8 +228,6 @@ void PartitionFrame::showNewPartitionFrame(
 }
 
 void PartitionFrame::showSelectBootloaderFrame() {
-  // Notify SelectBootloaderFrame to repaint.
-  select_bootloader_frame_->updatePartitionList();
   main_layout_->setCurrentWidget(select_bootloader_frame_);
 }
 

@@ -46,8 +46,6 @@ class PartitionDelegate : public QObject {
 
   // Get mount point based on fs type.
   const QStringList& getMountPoints();
-  // Remove |mount_point| from result of getMountPoints().
-  void useMountPoint(const QString& mount_point);
 
   // Get all supported fs type.
   const FsTypeList& getFsTypes();
@@ -73,6 +71,9 @@ class PartitionDelegate : public QObject {
   // Emitted after scanning local disk devices.
   void deviceRefreshed();
 
+  // Emitted when mount point list is updated
+  void mountPointUpdated();
+
   // Emitted when a specific partition is created/edited/deleted.
   void partitionEdited();
 
@@ -82,6 +83,10 @@ class PartitionDelegate : public QObject {
 
  public slots:
   void doManualPart();
+
+  // Set bootloader path to |bootloader_path|
+  // This slot is used only in SelectBootloaderFrame.
+  void setBootloaderPath(const QString bootloader_path);
 
  private:
   void initConnections();
@@ -112,6 +117,7 @@ class PartitionDelegate : public QObject {
   QStringList all_mount_points_;
   QStringList unused_mount_points_;
   FsTypeList fs_types_;
+  QString bootloader_path_;
 
  private slots:
   void onDevicesRefreshed(const DeviceList& devices);

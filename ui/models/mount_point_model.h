@@ -25,11 +25,12 @@ class MountPointModel : public QAbstractListModel {
   // Get mount_point at |index|.
   QString getMountPoint(int index) const;
 
-  // Take |mount_point| out of unused-mount-point list.
-  void useMountPoint(const QString& mount_point);
-
  private:
   PartitionDelegate* delegate_ = nullptr;
+
+ private slots:
+  // Update mount point list in model.
+  void onMountPointUpdated();
 };
 
 // Check whether |mount_point| is empty mount point.
