@@ -71,7 +71,7 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
   // Reset mount point box.
   int mount_point_index = mount_point_model_->index(partition.mount_point);
   if (mount_point_index == -1) {
-    mount_point_index = mount_point_model_->index("");
+    mount_point_index = 0;
   }
   mount_point_box_->setCurrentIndex(mount_point_index);
 }

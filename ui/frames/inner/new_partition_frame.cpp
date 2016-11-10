@@ -70,8 +70,8 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
   }
 
   alignment_box_->setCurrentIndex(0);
-  // TODO(xushaohua): Reset all status.
-
+  fs_box_->setCurrentIndex(0);
+  mount_point_box_->setCurrentIndex(0);
   size_slider_->setMaximum(partition.getByteLength());
 }
 
@@ -84,7 +84,10 @@ void NewPartitionFrame::changeEvent(QEvent* event) {
     fs_label_->setText(tr(kTextFilesystem));
     mount_point_label_->setText(tr(kTextMountPoint));
     size_label_->setText(tr(kTextSize));
-    // TODO(xushaohua): update combo box
+    type_box_->clear();
+    type_box_->addItems({tr(kTypePrimary), tr(kTypeLogical)});
+    alignment_box_->clear();
+    alignment_box_->addItems({tr(kTextStart), tr(kTextEnd)});
     cancel_button_->setText(tr(kTextCancel));
     create_button_->setText(tr(kTextOk));
   } else {
@@ -127,11 +130,9 @@ void NewPartitionFrame::initUI() {
   size_label_->setObjectName("size_label");
 
   type_box_ = new TableComboBox();
-  // TODO(xushaohua): Add type model
   type_box_->addItems({tr(kTypePrimary), tr(kTypeLogical)});
 
   alignment_box_ = new TableComboBox();
-  // TODO(xushaohua): Add model
   alignment_box_->addItems({tr(kTextStart), tr(kTextEnd)});
 
   fs_box_ = new TableComboBox();
@@ -190,7 +191,6 @@ void NewPartitionFrame::initUI() {
 }
 
 void NewPartitionFrame::onCreateButtonClicked() {
-  // FIXME(xushaohua): Check type box flag
   const bool is_primary = (type_box_->currentIndex() == 0);
   const PartitionType partition_type = is_primary ? PartitionType::Normal :
                                                     PartitionType::Logical;
