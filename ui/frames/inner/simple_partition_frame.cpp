@@ -6,14 +6,17 @@
 
 #include <QButtonGroup>
 #include <QDebug>
+#include <QEvent>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QScrollArea>
 #include <QVBoxLayout>
-#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "partman/structs.h"
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/device_model_label.h"
@@ -34,12 +37,32 @@ const char kTextTip[] = "Install here";
 
 SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
                                            QWidget* parent)
-    : QScrollArea(parent),
+    : QFrame(parent),
       delegate_(delegate) {
   this->setObjectName("simple_partition_frame");
 
   this->initUI();
   this->initConnections();
+}
+
+bool SimplePartitionFrame::validate() {
+  SimplePartitionButton* button =
+      qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
+  if (!button) {
+    msg_label_->setText(tr("Please select one partition"));
+    return false;
+  }
+
+  const int required_space = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  const qint64 required_bytes = required_space * kGibiByte;
+  if (button->partition().getByteLength() < required_bytes) {
+    msg_label_->setText(tr("At least %1 G is required for root partition.")
+                            .arg(required_space));
+    return false;
+  }
+
+  msg_label_->clear();
+  return true;
 }
 
 void SimplePartitionFrame::changeEvent(QEvent* event) {
@@ -94,11 +117,25 @@ void SimplePartitionFrame::initUI() {
   grid_wrapper->setObjectName("grid_wrapper");
   grid_wrapper->setLayout(grid_layout_);
   install_tip_->setParent(grid_wrapper);
-  this->setWidget(grid_wrapper);
 
-  this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  this->setWidgetResizable(true);
+  QScrollArea* scroll_area = new QScrollArea();
+  scroll_area->setWidget(grid_wrapper);
+  scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  scroll_area->setWidgetResizable(true);
+
+  msg_label_ = new QLabel();
+  msg_label_->setObjectName("msg_label");
+  msg_label_->setFixedHeight(20);
+
+  QVBoxLayout* main_layout = new QVBoxLayout();
+  main_layout->setContentsMargins(0, 0, 0, 0);
+  main_layout->setSpacing(0);
+  main_layout->addWidget(scroll_area, Qt::AlignHCenter);
+  main_layout->addSpacing(5);
+  main_layout->addWidget(msg_label_, 0, Qt::AlignHCenter);
+
+  this->setLayout(main_layout);
   this->setFixedWidth(kWindowWidth);
   QSizePolicy policy(QSizePolicy::Fixed, QSizePolicy::Expanding);
   policy.setVerticalStretch(100);
@@ -177,6 +214,9 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
     const QPoint pos = button->pos();
     install_tip_->move(pos.x(), pos.y() - 10);
     install_tip_->show();
+
+    // Clear warning message.
+    msg_label_->clear();
   }
 
   SimplePartitionButton* part_button =

@@ -13,3 +13,10 @@ QLabel#device_model {
 QScrollArea, QFrame#grid_wrapper {
   background: transparent;
 }
+
+#msg_label {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+}

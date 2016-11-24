@@ -5,7 +5,7 @@
 #ifndef INSTALLER_UI_FRAMES_INNER_SIMPLE_PARTITION_FRAME_H
 #define INSTALLER_UI_FRAMES_INNER_SIMPLE_PARTITION_FRAME_H
 
-#include <QScrollArea>
+#include <QFrame>
 class QAbstractButton;
 class QButtonGroup;
 class QGridLayout;
@@ -16,11 +16,14 @@ namespace installer {
 class PartitionDelegate;
 
 // List device partitions in simple mode.
-class SimplePartitionFrame : public QScrollArea {
+class SimplePartitionFrame : public QFrame {
   Q_OBJECT
 
  public:
   SimplePartitionFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
+
+  // Validate whether a root partition is selected and large enough.
+  bool validate();
 
  protected:
   void changeEvent(QEvent* event) override;
@@ -36,6 +39,10 @@ class SimplePartitionFrame : public QScrollArea {
   QLabel* tip_label_ = nullptr;
   QGridLayout* grid_layout_ = nullptr;
   PartitionDelegate* delegate_ = nullptr;
+
+  // Displays error message in validate().
+  // It is cleared when another SimplePartitionButton is selected.
+  QLabel* msg_label_ = nullptr;
 
  private slots:
   void onDeviceRefreshed();
