@@ -13,6 +13,8 @@
 
 #include "base/file_util.h"
 #include "partman/utils.h"
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/advanced_partition_button.h"
@@ -43,11 +45,17 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(PartitionDelegate* delegate_,
 bool AdvancedPartitionFrame::validate() {
   bool efi_is_set = false;
   bool root_is_set = false;
+  bool root_large_enough = false;
   bool swap_is_set = false;
+  const int required_space = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  const qint64 required_bytes = required_space * kGibiByte;
   for (const Device& device : delegate_->devices()) {
     for (const Partition& partition : device.partitions) {
       if (partition.mount_point == kMountPointRoot) {
         root_is_set = true;
+        if (partition.getByteLength() > required_bytes) {
+          root_large_enough = true;
+        }
       } else if (partition.fs == FsType::EFI) {
         efi_is_set = true;
       } else if (partition.fs == FsType::LinuxSwap) {
@@ -57,19 +65,22 @@ bool AdvancedPartitionFrame::validate() {
   }
 
   if (!root_is_set) {
-    // Notify that root is not set.
     msg_label_->setText(tr("A root partition is required"));
     return false;
   }
 
+  if (!root_large_enough) {
+    msg_label_->setText(tr("At least %1 G is required for root partition.")
+                            .arg(required_space));
+    return false;
+  }
+
   if (!swap_is_set) {
-    // Notify that linux-swap partition is not set.
     msg_label_->setText(tr("A swap partition is required"));
     return false;
   }
 
   if (IsEfiEnabled() && !efi_is_set) {
-    // Notify that EFI partition is not set.
     msg_label_->setText(tr("An EFI partition is required"));
     return false;
   }
