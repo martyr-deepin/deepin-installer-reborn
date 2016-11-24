@@ -4,6 +4,7 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QIcon>
 
 #include "base/consts.h"
 #include "service/log_manager.h"
@@ -19,6 +20,7 @@ int main(int argc, char* argv[]) {
   app.setApplicationDisplayName(installer::kAppDisplayName);
   app.setApplicationName(installer::kAppName);
   app.setOrganizationDomain(installer::kDomainName);
+  app.setWindowIcon(QIcon(":/images/deepin_installer_reborn.svg"));
 
   // Delete last installer config file as soon as possible.
   if (!installer::HasRootPrivilege()) {
