@@ -16,7 +16,6 @@ int main(int argc, char* argv[]) {
   installer::InitLogService();
 
   QApplication app(argc, argv);
-  // TODO(xushaohua): Set i18n
   app.setApplicationDisplayName(installer::kAppDisplayName);
   app.setApplicationName(installer::kAppName);
   app.setOrganizationDomain(installer::kDomainName);

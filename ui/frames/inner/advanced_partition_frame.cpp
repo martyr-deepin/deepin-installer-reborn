@@ -12,6 +12,7 @@
 #include <QtCore/QEvent>
 
 #include "base/file_util.h"
+#include "partman/utils.h"
 #include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/advanced_partition_button.h"
@@ -29,8 +30,8 @@ const char kTextDone[] = "Done";
 
 }  // namespace
 
-AdvancedPartitionFrame::AdvancedPartitionFrame(
-    PartitionDelegate* delegate_, QWidget* parent)
+AdvancedPartitionFrame::AdvancedPartitionFrame(PartitionDelegate* delegate_,
+                                               QWidget* parent)
     : QFrame(parent),
       delegate_(delegate_) {
   this->setObjectName("advanced_partition_frame");
@@ -92,9 +93,9 @@ void AdvancedPartitionFrame::initUI() {
   scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  bootloader_label_ = new QLabel(tr(kTextBootloader));
+  bootloader_label_ = new QLabel(tr(kTextBootloader), this);
   bootloader_label_->setObjectName("bootloader_label");
-  bootloader_button_ = new PointerButton();
+  bootloader_button_ = new PointerButton(this);
   bootloader_button_->setObjectName("bootloader_button");
   bootloader_button_->setFlat(true);
 
@@ -107,8 +108,11 @@ void AdvancedPartitionFrame::initUI() {
   QHBoxLayout* bottom_layout = new QHBoxLayout();
   bottom_layout->setContentsMargins(15, 10, 15, 10);
   bottom_layout->setSpacing(10);
-  bottom_layout->addWidget(bootloader_label_);
-  bottom_layout->addWidget(bootloader_button_);
+  // Show bootloader button only if EFI mode is off.
+  if (!IsEfiEnabled()) {
+    bottom_layout->addWidget(bootloader_label_);
+    bottom_layout->addWidget(bootloader_button_);
+  }
   bottom_layout->addStretch();
   bottom_layout->addWidget(editing_button_);
 
