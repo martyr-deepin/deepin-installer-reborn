@@ -13,7 +13,6 @@ namespace installer {
 class PartitionDelegate;
 
 // Reimplemented model used in SelectBootloaderFrame
-// Only displays device path, /root path and /boot path
 class PartitionListModel : public QAbstractListModel {
   Q_OBJECT
 
@@ -23,15 +22,37 @@ class PartitionListModel : public QAbstractListModel {
   virtual QVariant data(const QModelIndex& index, int role) const override;
   virtual int rowCount(const QModelIndex& parent) const override;
 
+  // Get partition path at |row|.
+  QString getPath(const QModelIndex index) const;
+  QModelIndex getRecommendedIndex() const;
+
+ signals:
+  // Emitted when row data in list is changed.
+  // This signal is read in SelectBootloaderFrame. It is used to avoid race
+  // condition.
+  void rowChanged();
+
  private:
   PartitionDelegate* delegate_ = nullptr;
 
+  struct PartitionItem {
+    PartitionItem(const QString& path, const QString& label, bool recommended)
+        : path(path), label(label), recommended(recommended) {}
+
+    QString path;
+    QString label;
+
+    // Recommended device/partition path used for bootloader.
+    // Normally it is "/dev/sda".
+    bool recommended = false;
+  };
+
   // To store path of available partitions and devices.
-  QStringList partition_list_;
+  QList<PartitionItem> partition_list_;
 
  private slots:
-  // Update bootloader list when mount point list is updated in delegate.
-  void onMountPointUpdated();
+  // Update bootloader list when device list is updated in delegate.
+  void onDeviceRefreshed();
 };
 
 }  // namespace installer

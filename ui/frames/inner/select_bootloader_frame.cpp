@@ -36,14 +36,6 @@ SelectBootloaderFrame::SelectBootloaderFrame(PartitionDelegate* delegate,
   this->initConnections();
 }
 
-void SelectBootloaderFrame::selectRecommendedBootloader() {
-  // First read the first device path from delegate.
-  // Then select it in list view
-  // Thus, both AdvancedPartitionFrame and PartitionDelegate will
-  // update bootloader path
-  // TODO(xushaohua): read device list
-}
-
 void SelectBootloaderFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr(kTextTitle));
@@ -59,6 +51,8 @@ void SelectBootloaderFrame::initConnections() {
           this, &SelectBootloaderFrame::finished);
   connect(list_view_->selectionModel(), &QItemSelectionModel::currentChanged,
           this, &SelectBootloaderFrame::onPartitionListViewSelected);
+  connect(list_model_, &PartitionListModel::rowChanged,
+          this, &SelectBootloaderFrame::onModelChanged);
 }
 
 void SelectBootloaderFrame::initUI() {
@@ -90,12 +84,26 @@ void SelectBootloaderFrame::initUI() {
   this->setLayout(layout);
 }
 
+void SelectBootloaderFrame::onModelChanged() {
+  // Select recommended bootloader.
+  const QModelIndex index = list_model_->getRecommendedIndex();
+  if (index.isValid()) {
+    list_view_->selectionModel()->select(index, QItemSelectionModel::Select);
+    // Update selection model explicitly.
+    emit list_view_->selectionModel()->currentChanged(index, QModelIndex());
+  }
+}
+
 void SelectBootloaderFrame::onPartitionListViewSelected(
     const QModelIndex& current, const QModelIndex& previous) {
   Q_UNUSED(previous);
   if (current.isValid()) {
-    // TODO(xushaohua):
-    emit this->bootloaderUpdated("/dev/sda");
+    const QString path = list_model_->getPath(current);
+    if (!path.isEmpty()) {
+      // Both AdvancedPartitionFrame and PartitionDelegate will
+      // update bootloader path
+      emit this->bootloaderUpdated(path);
+    }
   }
 }
 

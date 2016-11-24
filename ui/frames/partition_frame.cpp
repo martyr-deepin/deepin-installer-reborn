@@ -55,9 +55,6 @@ void PartitionFrame::autoPart() {
 
 void PartitionFrame::scanDevices() const {
   delegate_->scanDevices();
-
-  // Selected recommended bootloader path.
-  select_bootloader_frame_->selectRecommendedBootloader();
 }
 
 void PartitionFrame::changeEvent(QEvent* event) {

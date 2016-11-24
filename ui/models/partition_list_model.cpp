@@ -17,7 +17,7 @@ PartitionListModel::PartitionListModel(PartitionDelegate* delegate,
   this->setObjectName("partition_list_model");
 
   connect(delegate_, &PartitionDelegate::deviceRefreshed,
-          this, &PartitionListModel::onMountPointUpdated);
+          this, &PartitionListModel::onDeviceRefreshed);
 }
 
 QVariant PartitionListModel::data(const QModelIndex& index, int role) const {
@@ -29,7 +29,12 @@ QVariant PartitionListModel::data(const QModelIndex& index, int role) const {
     return QVariant();
   }
 
-  return partition_list_.at(index.row());
+  const PartitionItem& item = partition_list_.at(index.row());
+  if (item.recommended) {
+    return tr("%1 %2 (recommended)").arg(item.path).arg(item.label);
+  } else {
+    return QString("%1 %2").arg(item.path).arg(item.label);
+  }
 }
 
 int PartitionListModel::rowCount(const QModelIndex& parent) const {
@@ -37,19 +42,44 @@ int PartitionListModel::rowCount(const QModelIndex& parent) const {
   return partition_list_.length();
 }
 
-void PartitionListModel::onMountPointUpdated() {
-  // TODO(xushaohua): Filters only device path, /boot path and /root path.
+QString PartitionListModel::getPath(const QModelIndex index) const {
+  const int row = index.row();
+  if (index.isValid() && row < partition_list_.length()) {
+    return partition_list_.at(row).path;
+  } else {
+    return QString();
+  }
+}
+
+QModelIndex PartitionListModel::getRecommendedIndex() const {
+  for (int i = 0; i < partition_list_.length(); ++i) {
+    if (partition_list_.at(i).recommended) {
+      return this->index(i);
+    }
+  }
+  return QModelIndex();
+}
+
+void PartitionListModel::onDeviceRefreshed() {
   partition_list_.clear();
+  bool recommended_flag = true;
   for (const Device& device : delegate_->devices()) {
-    partition_list_.append(device.path);
+    // Use the first available device path as recommended one.
+    // TODO(xushaohua): Filters removable device.
+    partition_list_.append({device.path, device.model, recommended_flag});
+    recommended_flag = false;
+
     for (const Partition& partition : device.partitions) {
       // Filters primary and logical partitions.
-      if (partition.type == PartitionType::Normal ||
-          partition.type == PartitionType::Logical) {
-        partition_list_.append(partition.path);
+      if ((partition.type == PartitionType::Normal ||
+          partition.type == PartitionType::Logical) &&
+          !partition.path.isEmpty()) {
+        // TODO(xushaohua): It is good to filter fs type.
+        partition_list_.append({partition.path, "", false});
       }
     }
   }
+  emit this->rowChanged();
 }
 
 }  // namespace installer

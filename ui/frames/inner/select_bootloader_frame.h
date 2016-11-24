@@ -27,11 +27,6 @@ class SelectBootloaderFrame : public QFrame {
  public:
   SelectBootloaderFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
 
-  // Select the first order device path, like /dev/sda.
-  // This method does not dependent on PartitionDelegate.
-  // Instead, it reads device list directly from /dev/disk folder.
-  void selectRecommendedBootloader();
-
  signals:
   // Emitted when currently used bootloader path is updated.
   void bootloaderUpdated(const QString& bootloader_path);
@@ -54,6 +49,9 @@ class SelectBootloaderFrame : public QFrame {
   NavButton* back_button_ = nullptr;
 
  private slots:
+  // Update partition list
+  void onModelChanged();
+
   // Emit signals when new bootloader path is selected in list-view.
   void onPartitionListViewSelected(const QModelIndex& current,
                                    const QModelIndex& previous);
