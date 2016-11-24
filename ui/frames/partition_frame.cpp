@@ -200,11 +200,17 @@ void PartitionFrame::onAdvancedFrameButtonToggled() {
 }
 
 void PartitionFrame::onNextButtonClicked() {
-  // TODO(xushaohua):Show prepare-install-frame page if target partition is selected.
-  if (true) {
-    prepare_install_frame_->updateDescription();
-    main_layout_->setCurrentWidget(prepare_install_frame_);
+  if (partition_stacked_layout_->currentWidget() == simple_partition_frame_) {
+    if (true) {
+      return;
+    }
+  } else if (!advanced_partition_frame_->validate()) {
+    // Validate advanced partition frame.
+    return;
   }
+
+  prepare_install_frame_->updateDescription();
+  main_layout_->setCurrentWidget(prepare_install_frame_);
 }
 
 void PartitionFrame::showEditPartitionFrame(const Partition& partition) {

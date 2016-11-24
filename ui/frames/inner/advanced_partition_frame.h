@@ -25,6 +25,13 @@ class AdvancedPartitionFrame : public QFrame {
   AdvancedPartitionFrame(PartitionDelegate* delegate_,
                          QWidget* parent = nullptr);
 
+  // Check whether partition operations are appropriate:
+  //  * / partition is set and large enough;
+  //  * An EFI partition is created if EFI mode is on;
+  //  * A linux-swap partition is set;
+  // This method is called when next-button is clicked in PartitionFrame
+  bool validate();
+
  signals:
   void requestEditPartitionFrame(const Partition& partition);
   void requestNewPartitionFrame(const Partition& partition);
@@ -50,7 +57,9 @@ class AdvancedPartitionFrame : public QFrame {
   QVBoxLayout* partition_layout_ = nullptr;
   QPushButton* bootloader_button_ = nullptr;
   QPushButton* editing_button_ = nullptr;
-  // Display message at bottom of page
+  // Display message at bottom of page.
+  // Its content is set in validate() and is cleared when NewPartitionFrame or
+  // EditPartitionFrame is raised.
   QLabel* msg_label_ = nullptr;
 
  private slots:

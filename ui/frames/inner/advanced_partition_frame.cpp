@@ -40,6 +40,44 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(PartitionDelegate* delegate_,
   this->initConnections();
 }
 
+bool AdvancedPartitionFrame::validate() {
+  bool efi_is_set = false;
+  bool root_is_set = false;
+  bool swap_is_set = false;
+  for (const Device& device : delegate_->devices()) {
+    for (const Partition& partition : device.partitions) {
+      if (partition.mount_point == kMountPointRoot) {
+        root_is_set = true;
+      } else if (partition.fs == FsType::EFI) {
+        efi_is_set = true;
+      } else if (partition.fs == FsType::LinuxSwap) {
+        swap_is_set = true;
+      }
+    }
+  }
+
+  if (!root_is_set) {
+    // Notify that root is not set.
+    msg_label_->setText(tr("A root partition is required"));
+    return false;
+  }
+
+  if (!swap_is_set) {
+    // Notify that linux-swap partition is not set.
+    msg_label_->setText(tr("A swap partition is required"));
+    return false;
+  }
+
+  if (IsEfiEnabled() && !efi_is_set) {
+    // Notify that EFI partition is not set.
+    msg_label_->setText(tr("An EFI partition is required"));
+    return false;
+  }
+
+  msg_label_->clear();
+  return true;
+}
+
 void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
   bootloader_button_->setText(bootloader_path);
 }
@@ -64,6 +102,13 @@ void AdvancedPartitionFrame::initConnections() {
           this, &AdvancedPartitionFrame::requestSelectBootloaderFrame);
   connect(editing_button_, &QPushButton::toggled,
           this, &AdvancedPartitionFrame::onEditButtonToggled);
+
+  // Clear content in msg_label when NewPartitionFrame or EditPartitionFrame is
+  // raised.
+  connect(this, &AdvancedPartitionFrame::requestEditPartitionFrame,
+          msg_label_, &QLabel::clear);
+  connect(this, &AdvancedPartitionFrame::requestNewPartitionFrame,
+          msg_label_, &QLabel::clear);
 }
 
 void AdvancedPartitionFrame::initUI() {
