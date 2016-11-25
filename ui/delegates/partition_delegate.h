@@ -50,10 +50,17 @@ class PartitionDelegate : public QObject {
 
   // Get all supported fs type.
   const FsTypeList& getFsTypes();
+  // Get default fs type for system.
+  FsType getDefaultFsType();
 
  signals:
   // Emitted after scanning local disk devices or partition is edited.
   void deviceRefreshed();
+
+  // Emit this signal to refresh virtual device list based on physical device
+  // list and operator list.
+  // It is used when a new operator is created.
+  void refreshVisual();
 
   // Emitted when partition job is done.
   void autoPartDone(bool ok);
@@ -88,9 +95,6 @@ class PartitionDelegate : public QObject {
  private:
   void initConnections();
 
-  // Update virtual partition list based on operations.
-  void refreshVisual();
-
   void createPrimaryPartition(const Partition& partition,
                               bool align_start,
                               FsType fs_type,
@@ -122,6 +126,9 @@ class PartitionDelegate : public QObject {
   void onDevicesRefreshed(const DeviceList& devices);
 
   void onManualPartDone(bool ok);
+
+  // Update virtual partition list based on operations.
+  void doRefreshVisual();
 };
 
 }  // namespace installer

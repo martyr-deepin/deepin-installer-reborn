@@ -224,9 +224,11 @@ void EditPartitionFrame::onOkButtonClicked() {
     // Create an OperationFormat object.
     const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
     delegate_->formatPartition(partition_, fs_type, mount_point);
+    emit delegate_->refreshVisual();
   } else if (mount_point != partition_.mount_point) {
     // Only create an OperationMountPoint object.
     delegate_->updateMountPoint(partition_, mount_point);
+    emit delegate_->refreshVisual();
   }
 
   emit this->finished();

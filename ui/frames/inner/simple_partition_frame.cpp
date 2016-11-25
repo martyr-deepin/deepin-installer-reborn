@@ -16,6 +16,7 @@
 
 #include "base/file_util.h"
 #include "partman/structs.h"
+#include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "ui/delegates/partition_delegate.h"
@@ -44,6 +45,50 @@ SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
 
   this->initUI();
   this->initConnections();
+  qRegisterMetaType<Partition>("Partition");
+}
+
+void SimplePartitionFrame::appendOperations() {
+  bool swap_is_set = false;
+  bool efi_is_set = false;
+  for (const Device& device : delegate_->devices()) {
+    for (const Partition& partition : device.partitions) {
+      if (partition.fs == FsType::LinuxSwap) {
+        swap_is_set = true;
+      } else if (partition.fs == FsType::EFI) {
+        efi_is_set = true;
+      }
+    }
+  }
+
+  SimplePartitionButton* button =
+      qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
+  Q_ASSERT(button);
+  // TODO(xushaohua): Get default fs type.
+  if (IsEfiEnabled() && !efi_is_set) {
+    // Create root partition and efi partition.
+    delegate_->createPartition(button->partition(),
+                               PartitionType::Normal,
+                               true,
+                               FsType::EFI,
+                               "",
+                               500);
+//    delegate_->createPartition(button->partition(),
+//                               PartitionType::Normal,
+//                               false,
+//                               delegate_->getDefaultFsType(),
+//                               kMountPointRoot,
+//                               500);
+  } else {
+    // Only create root partition.
+    delegate_->formatPartition(button->partition(),
+                               delegate_->getDefaultFsType(),
+                               kMountPointRoot);
+  }
+
+  if (!swap_is_set) {
+    // TODO(xushaohua): Create swap file
+  }
 }
 
 bool SimplePartitionFrame::validate() {
@@ -193,7 +238,7 @@ void SimplePartitionFrame::repaintDevices() {
       grid_layout_->addWidget(button, row, column, Qt::AlignHCenter);
       // Select root partition.
       if (partition.mount_point == kMountPointRoot) {
-        button->setChecked(true);
+        root_button_ = button;
       }
 
       column += 1;
@@ -215,6 +260,14 @@ void SimplePartitionFrame::repaintDevices() {
   place_holder_label->setFixedSize(kWindowWidth, 30);
   grid_layout_->addWidget(place_holder_label, row, 0,
                           1, kPartitionColumns, Qt::AlignHCenter);
+
+  if (root_button_) {
+    // Do not clear mount point by blocking emitting signals.
+    button_group_->blockSignals(true);
+    root_button_->setChecked(true);
+    button_group_->blockSignals(false);
+    this->showInstallTip(root_button_);
+  }
 }
 
 void SimplePartitionFrame::showInstallTip(QAbstractButton* button) {
@@ -239,15 +292,16 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
 
   SimplePartitionButton* part_button =
       qobject_cast<SimplePartitionButton*>(button);
-  if (part_button) {
+  if (part_button && !checked) {
     // Clear mount point, no matter button is checked or not.
-    // NOTE(xushaohua): Call updateMountPoint() asynchronously,
-    // or else it crashes.
-//    delegate_->updateMountPoint(part_button->partition(), "");
-    this->metaObject()->invokeMethod(delegate_, "updateMountPoint",
-                                     Qt::QueuedConnection,
-                                     Q_ARG(Partition, part_button->partition()),
-                                     Q_ARG(QString, ""));
+    delegate_->updateMountPoint(part_button->partition(), "");
+  }
+
+  if (checked) {
+    root_button_ = button;
+    this->metaObject()->invokeMethod(delegate_,
+                                     "refreshVisual",
+                                     Qt::QueuedConnection);
   }
 }
 

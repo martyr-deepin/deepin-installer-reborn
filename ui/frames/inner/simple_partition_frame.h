@@ -23,6 +23,15 @@ class SimplePartitionFrame : public QFrame {
  public:
   SimplePartitionFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
 
+  // Create and append operations into delegate:
+  //  * A root partition;
+  //  * A linux-swap file if no linux-swap partition is found;
+  //  * An EFI partition if EFI mode is on and no EFI partition is found;
+  // Call this method only if SimplePartitionFrame is represented in
+  // PartitionFrame.
+  // And call validate() first.
+  void appendOperations();
+
   // Validate whether a root partition is selected and large enough.
   bool validate();
 
@@ -50,6 +59,8 @@ class SimplePartitionFrame : public QFrame {
   // Displays error message in validate().
   // It is cleared when another SimplePartitionButton is selected.
   QLabel* msg_label_ = nullptr;
+
+  QAbstractButton* root_button_ = nullptr;
 
  private slots:
   void onDeviceRefreshed();
