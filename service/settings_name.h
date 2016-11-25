@@ -64,6 +64,7 @@ const char kPartitionMinimumDiskSpaceRequired[] =
 const char kPartitionRecommendedDiskSpace[] =
     "partition_recommended_disk_space";
 const char kPartitionSupportedFs[] = "partition_supported_fs";
+const char kPartitionDefaultFs[] = "partition_default_fs";
 const char kPartitionDoAutoPart[] = "partition_do_auto_part";
 const char kPartitionMountPoints[] = "partition_mount_points";
 

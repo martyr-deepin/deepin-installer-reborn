@@ -50,8 +50,6 @@ class PartitionDelegate : public QObject {
 
   // Get all supported fs type.
   const FsTypeList& getFsTypes();
-  // Get default fs type for system.
-  FsType getDefaultFsType();
 
  signals:
   // Emitted after scanning local disk devices or partition is edited.

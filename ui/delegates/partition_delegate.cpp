@@ -209,10 +209,6 @@ const FsTypeList& PartitionDelegate::getFsTypes() {
   return fs_types_;
 }
 
-FsType PartitionDelegate::getDefaultFsType() {
-  return FsType::Ext4;
-}
-
 void PartitionDelegate::createPartition(const Partition& partition,
                                         PartitionType partition_type,
                                         bool align_start,

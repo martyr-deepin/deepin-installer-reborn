@@ -35,6 +35,10 @@ const int kWindowWidth = 960;
 
 const char kTextTip[] = "Install here";
 
+FsType GetDefaultFs() {
+  return GetFsTypeByName(GetSettingsString(kPartitionDefaultFs));
+}
+
 }  // namespace
 
 SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
@@ -76,13 +80,13 @@ void SimplePartitionFrame::appendOperations() {
 //    delegate_->createPartition(button->partition(),
 //                               PartitionType::Normal,
 //                               false,
-//                               delegate_->getDefaultFsType(),
+//                               GetDefaultFs(),
 //                               kMountPointRoot,
 //                               500);
   } else {
     // Only create root partition.
     delegate_->formatPartition(button->partition(),
-                               delegate_->getDefaultFsType(),
+                               GetDefaultFs(),
                                kMountPointRoot);
   }
 
@@ -297,6 +301,8 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
       delegate_->updateMountPoint(part_button->partition(), "");
     }
   }
+
+  // TODO(xushaohua): Set simple operators in delegate.
 }
 
 }  // namespace installer
