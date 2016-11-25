@@ -11,6 +11,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QScrollArea>
+#include <QShowEvent>
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
@@ -70,6 +71,16 @@ void SimplePartitionFrame::changeEvent(QEvent* event) {
     tip_label_->setText(tr(kTextTip));
   } else {
     QFrame::changeEvent(event);
+  }
+}
+
+void SimplePartitionFrame::showEvent(QShowEvent* event) {
+  QFrame::showEvent(event);
+
+  QAbstractButton* button = button_group_->checkedButton();
+  if (button) {
+    // Display install_tip explicitly.
+    this->showInstallTip(button);
   }
 }
 
@@ -180,7 +191,10 @@ void SimplePartitionFrame::repaintDevices() {
       SimplePartitionButton* button = new SimplePartitionButton(partition);
       button_group_->addButton(button);
       grid_layout_->addWidget(button, row, column, Qt::AlignHCenter);
-      // TODO(xushaohua): Select root partition
+      // Select root partition.
+      if (partition.mount_point == kMountPointRoot) {
+        button->setChecked(true);
+      }
 
       column += 1;
       // Add rows.
@@ -203,6 +217,13 @@ void SimplePartitionFrame::repaintDevices() {
                           1, kPartitionColumns, Qt::AlignHCenter);
 }
 
+void SimplePartitionFrame::showInstallTip(QAbstractButton* button) {
+  // Move install_tip to bottom of button
+  const QPoint pos = button->pos();
+  install_tip_->move(pos.x(), pos.y() - 10);
+  install_tip_->show();
+}
+
 void SimplePartitionFrame::onDeviceRefreshed() {
   this->repaintDevices();
 }
@@ -210,10 +231,7 @@ void SimplePartitionFrame::onDeviceRefreshed() {
 void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
                                                     bool checked) {
   if (checked) {
-    // Move install_tip to bottom of button
-    const QPoint pos = button->pos();
-    install_tip_->move(pos.x(), pos.y() - 10);
-    install_tip_->show();
+    this->showInstallTip(button);
 
     // Clear warning message.
     msg_label_->clear();
@@ -223,9 +241,9 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
       qobject_cast<SimplePartitionButton*>(button);
   if (part_button) {
     // Clear mount point, no matter button is checked or not.
-//      delegate_->updateMountPoint(part_button->partition(), "");
     // NOTE(xushaohua): Call updateMountPoint() asynchronously,
     // or else it crashes.
+//    delegate_->updateMountPoint(part_button->partition(), "");
     this->metaObject()->invokeMethod(delegate_, "updateMountPoint",
                                      Qt::QueuedConnection,
                                      Q_ARG(Partition, part_button->partition()),

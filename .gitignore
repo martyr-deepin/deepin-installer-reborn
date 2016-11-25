@@ -1,3 +1,4 @@
 .idea/
 obj-x86-linux-gnu/
 obj-x86_64-linux-gnu/
+cmake-build-debug/

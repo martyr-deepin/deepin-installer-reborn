@@ -10,6 +10,7 @@ class QAbstractButton;
 class QButtonGroup;
 class QGridLayout;
 class QLabel;
+class QShowEvent;
 
 namespace installer {
 
@@ -28,11 +29,17 @@ class SimplePartitionFrame : public QFrame {
  protected:
   void changeEvent(QEvent* event) override;
 
+  // Show install_tip if needed.
+  void showEvent(QShowEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
 
   void repaintDevices();
+
+  // Show install_tip at bottom of |button|.
+  void showInstallTip(QAbstractButton* button);
 
   QButtonGroup* button_group_ = nullptr;
   QFrame* install_tip_ = nullptr;
