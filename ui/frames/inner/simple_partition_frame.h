@@ -60,8 +60,6 @@ class SimplePartitionFrame : public QFrame {
   // It is cleared when another SimplePartitionButton is selected.
   QLabel* msg_label_ = nullptr;
 
-  QAbstractButton* root_button_ = nullptr;
-
  private slots:
   void onDeviceRefreshed();
   void onPartitionButtonToggled(QAbstractButton* button, bool checked);

@@ -238,7 +238,11 @@ void SimplePartitionFrame::repaintDevices() {
       grid_layout_->addWidget(button, row, column, Qt::AlignHCenter);
       // Select root partition.
       if (partition.mount_point == kMountPointRoot) {
-        root_button_ = button;
+        // Do not clear mount point by blocking emitting signals.
+        button_group_->blockSignals(true);
+        button->setChecked(true);
+        button_group_->blockSignals(false);
+        this->showInstallTip(button);
       }
 
       column += 1;
@@ -260,14 +264,6 @@ void SimplePartitionFrame::repaintDevices() {
   place_holder_label->setFixedSize(kWindowWidth, 30);
   grid_layout_->addWidget(place_holder_label, row, 0,
                           1, kPartitionColumns, Qt::AlignHCenter);
-
-  if (root_button_) {
-    // Do not clear mount point by blocking emitting signals.
-    button_group_->blockSignals(true);
-    root_button_->setChecked(true);
-    button_group_->blockSignals(false);
-    this->showInstallTip(root_button_);
-  }
 }
 
 void SimplePartitionFrame::showInstallTip(QAbstractButton* button) {
@@ -292,16 +288,14 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
 
   SimplePartitionButton* part_button =
       qobject_cast<SimplePartitionButton*>(button);
-  if (part_button && !checked) {
-    // Clear mount point, no matter button is checked or not.
-    delegate_->updateMountPoint(part_button->partition(), "");
-  }
-
-  if (checked) {
-    root_button_ = button;
-    this->metaObject()->invokeMethod(delegate_,
-                                     "refreshVisual",
-                                     Qt::QueuedConnection);
+  if (part_button) {
+    if (!checked) {
+      // Clear mount point of old root partition.
+      delegate_->updateMountPoint(part_button->partition(), "");
+    } else if(part_button->partition().mount_point != kMountPointRoot) {
+      // Clear mount point of new partition if it is not root.
+      delegate_->updateMountPoint(part_button->partition(), "");
+    }
   }
 }
 

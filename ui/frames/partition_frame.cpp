@@ -196,6 +196,9 @@ void PartitionFrame::onSimpleFrameButtonToggled() {
 }
 
 void PartitionFrame::onAdvancedFrameButtonToggled() {
+  // Refresh device list before showing advanced partition frame.
+  // Because mount-point of partitions might have be updated.
+  emit delegate_->refreshVisual();
   partition_stacked_layout_->setCurrentWidget(advanced_partition_frame_);
 }
 
