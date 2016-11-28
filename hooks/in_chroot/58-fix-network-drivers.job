@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "[$0]"
-set -x
-
 is_productname_exists() {
     local productname="$(cat /sys/class/dmi/id/product_name |grep "${1}" 2>/dev/null)"
     if [ "${productname}" ]; then

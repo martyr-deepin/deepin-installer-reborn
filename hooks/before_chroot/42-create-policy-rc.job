@@ -1,7 +1,6 @@
 #!/bin/sh
 # Also create a policy-rc.d script if it doesn't already exist.
 # Chroot invoke some postinstall script will failed.
-set -x
 
 RC="/target/usr/sbin/policy-rc.d"
 

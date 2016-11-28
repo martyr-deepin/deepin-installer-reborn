@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "[$0]"
-set -x
-
 # Read kernel boostrap options from /proc/cmdline
 if grep -q boot=casper /proc/cmdline; then
     BOOT=casper

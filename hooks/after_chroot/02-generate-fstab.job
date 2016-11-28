@@ -1,9 +1,6 @@
 #!/bin/bash
 # generate fstab
 
-echo "[$0]"
-set -x
-
 . /etc/deepin-installer.conf
 
 #fstab for lupin

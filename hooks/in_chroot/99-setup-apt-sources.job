@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "[$0]"
-set -x
-
 TYPE=$(cat /etc/deepin-version  2>/dev/null | grep Type= | head -n 1 | sed 's/Type=//')
 
 case "$TYPE" in

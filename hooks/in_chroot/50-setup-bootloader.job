@@ -1,9 +1,6 @@
 #!/bin/bash
 # install grub to detect machine
 
-echo "[$0]"
-set -x
-
 config_item()
 {
     if [ -f /etc/default/grub ];then

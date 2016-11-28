@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "[$0]"
-set -x 
-
 . /etc/deepin-installer.conf
 
 target="/target"
