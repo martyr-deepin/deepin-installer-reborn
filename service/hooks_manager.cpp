@@ -23,7 +23,7 @@ const int kInChrootEndVal = 80;
 const int kAfterChrootStartVal = 80;
 const int kAfterChrootEndVal = 100;
 
-const char kUnsquashfsBaseProgressFile[] = "/dev/shm/unsquashfs_base_progress";
+const char kUnsquashfsProgressFile[] = "/dev/shm/unsquashfs_progress";
 // Interval to read unsquashfs progress file, 500ms.
 const int kReadUnsquashfsInterval = 500;
 
@@ -125,7 +125,7 @@ void HooksManager::runHooksPack() {
 void HooksManager::monitorProgressFiles() {
   qDebug() << "monitorProgressFiles()";
   // Remove old progress files first.
-  QFile::remove(kUnsquashfsBaseProgressFile);
+  QFile::remove(kUnsquashfsProgressFile);
   unsquashfs_timer_->start();
 }
 
@@ -156,7 +156,7 @@ void HooksManager::handleRunHooks() {
 
 void HooksManager::handleReadUnsquashfsTimeout() {
   // Read progress value and notify UI thread.
-  const int val = ReadProgressValue(kUnsquashfsBaseProgressFile);
+  const int val = ReadProgressValue(kUnsquashfsProgressFile);
   const int progress = kBeforeChrootStartVal +
       (kBeforeChrootEndVal - kBeforeChrootStartVal) * val / 100;
   if (hooks_pack_ && hooks_pack_->type == HookType::BeforeChroot) {
