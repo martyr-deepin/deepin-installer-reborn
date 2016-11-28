@@ -1,8 +1,7 @@
 #!/bin/sh
 # Unsquashfs file and extract its progress value
 
-#SQUASHFS_FILE=$1
-SQUASHFS_FILE=$HOME/Desktop/demo.squashfs
+SQUASHFS_FILE=$1
 
 # Files to keep progress value.
 BASE_PROGRESS_FILE=/dev/shm/unsquashfs_base_progress
@@ -14,6 +13,8 @@ if [ $PROCESSORS -ge 1 ]; then
 else
   PROCESSORS=1
 fi
+
+deepin-installer-unsquashfs -p ${PROCESSORS} -f ${SQUASHFS_FILE}
 
 #script -c "unsquashfs -p ${PROCESSORS} -f ${SQUASHFS_FILE} | deepin-installer-unsquashfs-progress ${BASE_PROGRESS_FILE}" /dev/null
 

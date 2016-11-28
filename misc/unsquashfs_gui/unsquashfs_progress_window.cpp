@@ -23,13 +23,14 @@ namespace {
 
 const char kSelectText[] = "Select squashfs file";
 
-const char kUnsquashfsBaseProgressFile[] = "/dev/shm/unsquashfs_base_progress";
+const char kUnsquashfsBaseProgressFile[] = "/dev/shm/unsquashfs_progress";
 // Interval to read unsquashfs progress file, 500ms.
 const int kReadUnsquashfsInterval = 500;
 
 int ReadProgressValue(const QString& file) {
   if (QFile::exists(file)) {
     const QString val(installer::ReadFile(file));
+    qDebug() << val;
     if (!val.isEmpty()) {
       return val.toInt();
     }
@@ -117,9 +118,5 @@ void UnsquashfsProgressWindow::onCtrlButtonClicked() {
 
 void UnsquashfsProgressWindow::onReadProgressTimeout() {
   const int progress = ReadProgressValue(kUnsquashfsBaseProgressFile);
-  qDebug() << "progress:" << progress;
-  if (progress >= 99) {
-    this->cancelWork();
-  }
   progress_bar_->setValue(progress);
 }
