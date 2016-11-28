@@ -72,6 +72,7 @@ int p_start = 0, p_end = 100;
 int quiet = FALSE;
 pthread_mutex_t	screen_mutex;
 int progress = TRUE, progress_enabled = FALSE;
+FILE* progress_bar_fd = NULL;
 unsigned int total_blocks = 0, total_files = 0, total_inodes = 0;
 unsigned int cur_blocks = 0;
 int inode_number = 1;
@@ -2161,6 +2162,11 @@ void *progress_thread(void *arg)
 	requested_time.tv_sec = 0;
 	requested_time.tv_nsec = 250000000;
 
+  progress_bar_fd = fopen(PROGRESS_FILE, "w+");
+  if (progress_bar_fd == NULL) {
+    EXIT_UNSQUASH("Failed to create unsquashfs progress file\n");
+  }
+
 	while(1) {
 		int res = nanosleep(&requested_time, &remaining);
 
@@ -2175,6 +2181,7 @@ void *progress_thread(void *arg)
 			pthread_mutex_unlock(&screen_mutex);
 		}
 	}
+  fclose(progress_bar_fd);
 }
 
 
@@ -2422,9 +2429,11 @@ void progress_bar(long long current, long long max, int columns)
 	if((current > max) || (columns - used < 0))
 		return;
 
-  printf("\r%lld",
-    p_start + (p_end - p_start) * current / max);
-	fflush(stdout);
+  fseek(progress_bar_fd, 0, SEEK_SET);
+  fprintf(progress_bar_fd,
+          "%lld",
+          p_start + (p_end - p_start) * current / max);
+	fflush(progress_bar_fd);
 }
 
 

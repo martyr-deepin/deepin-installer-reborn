@@ -13,6 +13,9 @@ add_definitions("-DLZO_SUPPORT")
 add_definitions("-DLZ4_SUPPORT")
 add_definitions("-DXZ_SUPPORT")
 
+# Absolute path to unsquashfs progress file.
+add_definitions("-DPROGRESS_FILE=\"/dev/shm/unsquashfs_progress\"")
+
 find_package(PkgConfig REQUIRED)
 
 pkg_search_module(LZMA REQUIRED liblzma)

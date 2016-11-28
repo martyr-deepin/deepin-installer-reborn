@@ -73,6 +73,7 @@ add_subdirectory(third_party/googletest)
 include_directories(third_party/googletest)
 add_subdirectory(third_party/qrencode)
 include_directories(third_party/qrencode)
+add_subdirectory(third_party/squashfs-tools)
 
 set(BASE_FILES
     base/command.cpp base/command.h
