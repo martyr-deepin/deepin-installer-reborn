@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "[$0]"
-set -x
-
 . /etc/deepin-installer.conf
 L=${DI_LOCALE%.*}
 
@@ -39,8 +36,7 @@ extract_overlay_filesystem() {
 
 # First, extract base filesystem
 stty columns 80
-unsquashfs -p ${PROCESSORS} -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs \
-  | deepin-installer-unsquashfs-progress $BASE_PROGRESS_FILE || exit 2
+deepin-installer-unsquashfs -p ${PROCESSORS} -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs || exit 2
 
 # Then extract overlay_filesystem
 extract_overlay_filesystem
