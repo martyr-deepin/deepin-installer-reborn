@@ -264,57 +264,6 @@ add_executable(deepin-installer-reborn
 
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 
-add_executable(combobox-test
-               ui/tests/combobox_test.cpp
-               
-               ${BASE_FILES}
-               ui/delegates/table_combo_box_delegate.cpp ui/delegates/table_combo_box_delegate.h
-               ui/utils/widget_util.cpp ui/utils/widget_util.h
-               ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
-               ui/images/images.qrc
-               ui/styles/styles.qrc
-               )
-target_link_libraries(combobox-test ${Qt_LIBS})
-
-# Unittest
-add_executable(deepin-installer-reborn-tests
-               misc/test_main.cpp
-
-               ${BASE_FILES}
-               ${SYSINFO_FILES}
-               ${UNITTEST_FILES}
-               )
-target_link_libraries(deepin-installer-reborn-tests
-                      ${LINK_LIBS}
-                      gtest
-                      )
-
-# locale manager test
-add_executable(locale-manager-test
-               service/timezone_manager_test.cpp
-               
-               ${BASE_FILES}
-               service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
-               service/backend/geoip_request_worker.cpp service/backend/geoip_request_worker.h
-               service/timezone_manager.cpp service/timezone_manager.h
-               ${SYSINFO_FILES}
-               )
-target_link_libraries(locale-manager-test ${Qt_LIBS})
-
-# Unittest with root privilege
-add_executable(deepin-installer-reborn-root-tests
-               misc/root_test_main.cpp
-
-               ${BASE_FILES}
-               ${PARTMAN_FILES}
-               ${SYSINFO_FILES}
-               ${ROOT_UNITTEST_FILES}
-               )
-target_link_libraries(deepin-installer-reborn-root-tests
-                      ${LINK_LIBS}
-                      gtest
-                      )
-
 
 # deepin-installer-oem-tool
 add_executable(deepin-installer-oem-tool
@@ -328,6 +277,7 @@ add_executable(deepin-installer-oem-tool
                )
 target_link_libraries(deepin-installer-oem-tool ${LINK_LIBS})
 
+
 # xrandr-switchy
 add_executable(deepin-installer-xrandr-switchy
                misc/xrandr_switchy.cpp
@@ -337,12 +287,81 @@ add_executable(deepin-installer-xrandr-switchy
                )
 target_link_libraries(deepin-installer-xrandr-switchy ${Qt_LIBS})
 
+
+# Unsquashfs progress
 add_executable(deepin-installer-unsquashfs-progress
 
                misc/unsquashfs_progress.cpp
                ${BASE_FILES}
                )
 target_link_libraries(deepin-installer-unsquashfs-progress ${Qt_LIBS})
+
+
+# Combobox test
+add_executable(combobox-test
+               ui/tests/combobox_test.cpp
+               
+               ${BASE_FILES}
+               ui/delegates/table_combo_box_delegate.cpp ui/delegates/table_combo_box_delegate.h
+               ui/utils/widget_util.cpp ui/utils/widget_util.h
+               ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
+               ui/images/images.qrc
+               ui/styles/styles.qrc
+               )
+target_link_libraries(combobox-test ${Qt_LIBS})
+
+
+# locale manager test
+add_executable(locale-manager-test
+               service/timezone_manager_test.cpp
+               
+               ${BASE_FILES}
+               service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
+               service/backend/geoip_request_worker.cpp service/backend/geoip_request_worker.h
+               service/timezone_manager.cpp service/timezone_manager.h
+               ${SYSINFO_FILES}
+               )
+target_link_libraries(locale-manager-test ${Qt_LIBS})
+
+# Unittest
+add_executable(deepin-installer-reborn-tests
+               misc/unittest_main.cpp
+
+               ${BASE_FILES}
+               ${SYSINFO_FILES}
+               ${UNITTEST_FILES}
+               )
+target_link_libraries(deepin-installer-reborn-tests
+                      ${LINK_LIBS}
+                      gtest
+                      )
+
+# Unittest with root privilege
+add_executable(deepin-installer-reborn-root-tests
+               misc/root_unittest_main.cpp
+
+               ${BASE_FILES}
+               ${PARTMAN_FILES}
+               ${SYSINFO_FILES}
+               ${ROOT_UNITTEST_FILES}
+               )
+target_link_libraries(deepin-installer-reborn-root-tests
+                      ${LINK_LIBS}
+                      gtest
+                      )
+
+
+# Unsuqashfs progress window test
+add_definitions("-DUNSQUASHFS_SH=\"${CMAKE_CURRENT_SOURCE_DIR}/misc/unsquashfs_gui/unsquashfs.sh\"")
+add_executable(unsquashfs_gui
+
+               misc/unsquashfs_gui/main.cpp
+               misc/unsquashfs_gui/unsquashfs_progress_window.cpp
+               misc/unsquashfs_gui/unsquashfs_progress_window.h
+
+               ${BASE_FILES}
+               misc/unsquashfs_gui/worker.cpp misc/unsquashfs_gui/worker.h)
+target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 
 
 ## Installation
