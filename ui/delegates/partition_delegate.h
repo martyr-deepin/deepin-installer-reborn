@@ -16,9 +16,6 @@ namespace installer {
 
 class PartitionManager;
 
-// If partition size is less than this value, hide it from partition list.
-const qint64 kMinimumPartitionSizeToDisplay = 10 * kMebiByte;
-
 // PartitionManager proxy layer. It is shared among partition sub frames.
 // PartitionManager is invisible in frame pages.
 class PartitionDelegate : public QObject {

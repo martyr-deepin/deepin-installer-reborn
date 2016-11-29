@@ -17,6 +17,9 @@ namespace {
 
 const char kMountPointUnused[] = "unused";
 
+// If partition size is less than this value, hide it from partition list.
+const qint64 kMinimumPartitionSizeToDisplay = 1 * kMebiByte;
+
 // Calculate new primary partition number.
 // Returns -1 on failed.
 int AllocPrimaryPartitionNumber(const Device& device) {
@@ -502,7 +505,6 @@ void PartitionDelegate::removeEmptyExtendedPartition(
 
 void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   this->real_devices_ = devices;
-  qDebug() << "onDeviceRefreshed():" << devices;
   this->doRefreshVisual();
 }
 
@@ -537,8 +539,25 @@ void PartitionDelegate::doRefreshVisual() {
   // * Merge unallocated partition with next unallocated one;
   // * Ignore partitions with size less than 100Mib;
 
-  this->devices_ = this->real_devices_;
-//
+  devices_ = real_devices_;
+  for (Device& device : devices_) {
+    PartitionList partitions;
+    for (const Partition& partition : device.partitions) {
+      if (partition.type == PartitionType::Normal ||
+          partition.type == PartitionType::Logical ||
+          partition.type == PartitionType::Extended) {
+        partitions.append(partition);
+      } else if (partition.type == PartitionType::Unallocated) {
+        qDebug() << "freespace:" << partition;
+        // Filters freespace.
+        if (partition.getByteLength() > kMinimumPartitionSizeToDisplay) {
+          partitions.append(partition);
+        }
+      }
+    }
+    device.partitions = partitions;
+  }
+
 //  for (Device& device : devices_) {
 //    PartitionList new_partitions;
 //    const PartitionList& old_partitions = device.partitions;
@@ -575,7 +594,7 @@ void PartitionDelegate::doRefreshVisual() {
 //    device.partitions = new_partitions;
 //  }
 
-  for (Device& device : this->devices_) {
+  for (Device& device : devices_) {
     for (Operation& operation : operations_) {
       if (operation.orig_partition.device_path == device.path) {
         operation.applyToVisual(device.partitions);
