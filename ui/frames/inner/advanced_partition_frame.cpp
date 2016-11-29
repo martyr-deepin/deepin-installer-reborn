@@ -247,12 +247,18 @@ void AdvancedPartitionFrame::repaintDevices() {
       connect(button, &AdvancedPartitionButton::newPartitionTriggered,
               this, &AdvancedPartitionFrame::requestNewPartitionFrame);
       connect(button, &AdvancedPartitionButton::deletePartitionTriggered,
-              delegate_, &PartitionDelegate::deletePartition);
+              this, &AdvancedPartitionFrame::onDeletePartitionTriggered);
     }
   }
 
   // Add stretch to expand vertically
   partition_layout_->addStretch();
+}
+
+void AdvancedPartitionFrame::onDeletePartitionTriggered(
+    const Partition& partition) {
+  emit delegate_->deletePartition(partition);
+  emit delegate_->refreshVisual();
 }
 
 void AdvancedPartitionFrame::onDeviceRefreshed() {

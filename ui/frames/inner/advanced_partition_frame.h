@@ -63,6 +63,7 @@ class AdvancedPartitionFrame : public QFrame {
   QLabel* msg_label_ = nullptr;
 
  private slots:
+  void onDeletePartitionTriggered(const Partition& partition);
   void onDeviceRefreshed();
   void onEditButtonToggled(bool toggle);
 };
