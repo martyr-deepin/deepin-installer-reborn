@@ -22,7 +22,7 @@ warn() {
 }
 
 misc_fs_umount() {
-    msg "unmount misc filesystem"
+    msg "umount misc filesystem"
     umount \
         "$1/tmp" \
         "$1/run" \

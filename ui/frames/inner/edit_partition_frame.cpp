@@ -74,6 +74,8 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
     mount_point_index = 0;
   }
   mount_point_box_->setCurrentIndex(mount_point_index);
+
+  format_check_box_->setChecked(false);
 }
 
 void EditPartitionFrame::changeEvent(QEvent* event) {
@@ -208,8 +210,6 @@ void EditPartitionFrame::onFsChanged(int index) {
 
   mount_point_label_->setVisible(visible);
   mount_point_box_->setVisible(visible);
-  format_label_->setVisible(visible);
-  format_check_box_->setVisible(visible);
 
   // Format partition forcefully if its type changed.
   const bool checked = !(fs_type == FsType::Empty ||
