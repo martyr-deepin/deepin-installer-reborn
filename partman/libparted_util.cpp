@@ -198,7 +198,9 @@ bool ResizeMovePartition(const Partition& partition) {
   return ok;
 }
 
-bool SetBootFlag(const Partition& partition, bool enable_boot) {
+bool SetPartitionFlag(const Partition& partition,
+                      PedPartitionFlag flag,
+                      bool is_set) {
   PedDevice* lp_device = NULL;
   PedDisk* lp_disk = NULL;
   bool ok = false;
@@ -206,12 +208,22 @@ bool SetBootFlag(const Partition& partition, bool enable_boot) {
     PedPartition* lp_partition =
         ped_disk_get_partition_by_sector(lp_disk, partition.getSector());
     if (lp_partition) {
-      const int flag = enable_boot ? 1 : 0;
-      ok = bool(ped_partition_set_flag(lp_partition, PED_PARTITION_BOOT, flag));
+      ok = bool(ped_partition_set_flag(lp_partition, flag, is_set ? 1 : 0));
     }
     DestroyDeviceAndDisk(lp_device, lp_disk);
   }
   return ok;
+}
+
+bool SetPartitionFlags(const Partition& partition) {
+  for (PartitionFlag flag : partition.flags) {
+    if (!SetPartitionFlag(partition,
+                          static_cast<PedPartitionFlag>(flag),
+                          true)) {
+      return false;
+    }
+  }
+  return true;
 }
 
 bool SetPartitionType(const Partition& partition) {

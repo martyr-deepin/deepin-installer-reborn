@@ -40,8 +40,12 @@ QString GetPartitionPath(PedPartition* lp_partition);
 // Resize/Move partition specified with |partition|.
 bool ResizeMovePartition(const Partition& partition);
 
-// Set/unset boot flag of a partition.
-bool SetBootFlag(const Partition& partition, bool enable_boot);
+// Set/unset |flag| of |partition|.
+bool SetPartitionFlag(const Partition& partition,
+                      PedPartitionFlag& flag,
+                      bool is_set);
+// Set/unset flags of |partition|
+bool SetPartitionFlags(const Partition& partition);
 
 // Update partition type defined in |partition|.
 bool SetPartitionType(const Partition& partition);

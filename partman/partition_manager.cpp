@@ -20,28 +20,6 @@ namespace installer {
 
 namespace {
 
-Partition GetBootPartition(const OperationList& operations) {
-  for (const Operation& operation : operations) {
-    // Or check mount_point == kMountPointEFI.
-    if (operation.new_partition.fs == FsType::EFI) {
-      return operation.new_partition;
-    }
-  }
-
-  for (const Operation& operation : operations) {
-    if (operation.new_partition.mount_point == kMountPointBoot) {
-      return operation.new_partition;
-    }
-  }
-
-  for (const Operation& operation : operations) {
-    if (operation.new_partition.mount_point == kMountPointRoot) {
-      return operation.new_partition;
-    }
-  }
-  return Partition();
-}
-
 PartitionFlags GetPartitionFlags(PedPartition* lp_partition) {
   PartitionFlags flags;
   for (PedPartitionFlag lp_flag =
@@ -168,18 +146,6 @@ void PartitionManager::doManualPart(const OperationList& operations) {
   for (int i = 0; ok && i < operations.length(); ++i) {
     ok = operations.at(i).applyToDisk();
     qDebug() << "operation result:" << ok;
-  }
-
-  if (ok) {
-    // Set boot flag on boot partition.
-    const Partition boot_partition(GetBootPartition(operations));
-    if (boot_partition.path.isEmpty()) {
-      qWarning() << "Failed to find boot partition!";
-      ok = false;
-    } else {
-      // TODO(xushaohua): Move this to PartitionDelegate.
-      ok = SetBootFlag(boot_partition, true);
-    }
   }
 
   emit this->manualPartDone(ok);

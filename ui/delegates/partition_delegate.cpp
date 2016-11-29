@@ -301,7 +301,43 @@ void PartitionDelegate::updateMountPoint(const Partition& partition,
 }
 
 void PartitionDelegate::doManualPart() {
-  emit partition_manager_->manualPart(operations_);
+  // Set boot flags of boot partitions.
+  bool is_boot_set = false;
+  // First check EFI filesystem.
+  for (Operation& operation : operations_) {
+    if (operation.new_partition.fs == FsType::EFI) {
+      operation.new_partition.flags.append(PartitionFlag::ESP);
+      is_boot_set = true;
+    }
+  }
+
+  // Then, check /boot partition.
+  if (!is_boot_set) {
+    for (Operation& operation : operations_) {
+      if (operation.new_partition.mount_point == kMountPointBoot) {
+        operation.new_partition.flags.append(PartitionFlag::Boot);
+        is_boot_set = true;
+      }
+    }
+  }
+
+  // At last, check / partition.
+  if (!is_boot_set) {
+    for (Operation& operation : operations_) {
+      if (operation.new_partition.mount_point == kMountPointRoot) {
+        operation.new_partition.flags.append(PartitionFlag::Boot);
+        is_boot_set = true;
+      }
+    }
+  }
+  if (!is_boot_set) {
+    // No boot partition found! Critical error!
+    // We shall never reach here.
+    qCritical() << "No boot partition found!";
+    emit this->onManualPartDone(false);
+  } else {
+    emit partition_manager_->manualPart(operations_);
+  }
 }
 
 void PartitionDelegate::setBootloaderPath(const QString bootloader_path) {

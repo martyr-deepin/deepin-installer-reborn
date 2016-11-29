@@ -97,6 +97,12 @@ bool Operation::applyToDisk() const {
     }
   }
 
+  // Set flags of new_partition.
+  if (ok) {
+    ok = SetPartitionFlags(new_partition);
+    qDebug() << "Set partition flags:" << new_partition.path << ok;
+  }
+
   return ok;
 }
 
