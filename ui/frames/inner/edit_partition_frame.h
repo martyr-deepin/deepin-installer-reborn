@@ -62,7 +62,9 @@ class EditPartitionFrame : public QFrame {
   Partition partition_;
 
  private slots:
+  // Hide mount_point_box_ when specific fs is selected
   void onFsChanged(int index);
+
   void onOkButtonClicked();
 };
 

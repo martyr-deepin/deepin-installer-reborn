@@ -96,6 +96,10 @@ void NewPartitionFrame::changeEvent(QEvent* event) {
 }
 
 void NewPartitionFrame::initConnections() {
+  connect(fs_box_,
+          static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+          this, &NewPartitionFrame::onFsChanged);
+
   connect(cancel_button_, &QPushButton::clicked,
           this, &NewPartitionFrame::finished);
   connect(create_button_, &QPushButton::clicked,
@@ -205,6 +209,14 @@ void NewPartitionFrame::onCreateButtonClicked() {
   emit delegate_->refreshVisual();
 
   emit this->finished();
+}
+
+void NewPartitionFrame::onFsChanged(int index) {
+  const FsType fs_type = fs_model_->getFs(index);
+  const bool visible = IsMountPointSupported(fs_type);
+
+  mount_point_label_->setVisible(visible);
+  mount_point_box_->setVisible(visible);
 }
 
 }  // namespace installer

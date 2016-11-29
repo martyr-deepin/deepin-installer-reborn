@@ -204,13 +204,14 @@ void EditPartitionFrame::initUI() {
 
 void EditPartitionFrame::onFsChanged(int index) {
   const FsType fs_type = fs_model_->getFs(index);
-  const bool visible = SupportMountPoint(fs_type);
+  const bool visible = IsMountPointSupported(fs_type);
 
   mount_point_label_->setVisible(visible);
   mount_point_box_->setVisible(visible);
   format_label_->setVisible(visible);
   format_check_box_->setVisible(visible);
 
+  // Format partition forcefully if its type changed.
   const bool checked = !(fs_type == FsType::Empty ||
                          fs_type == FsType::Unknown ||
                          fs_type == partition_.fs);

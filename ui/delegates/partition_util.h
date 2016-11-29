@@ -36,7 +36,7 @@ QString GetLocalFsTypeName(FsType fs_type);
 
 // Check whether specific fs type can be mounted by user.
 // linux-swap and efi are mounted at fixed position and thus returns false.1
-bool SupportMountPoint(FsType fs_type);
+bool IsMountPointSupported(FsType fs_type);
 
 // Convert |size| in byte to gibibyte.
 int ToGigByte(qint64 size);

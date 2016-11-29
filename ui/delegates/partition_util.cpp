@@ -151,7 +151,7 @@ QString GetLocalFsTypeName(FsType fs_type) {
   }
 }
 
-bool SupportMountPoint(FsType fs_type) {
+bool IsMountPointSupported(FsType fs_type) {
   return (fs_type != FsType::EFI &&
           fs_type != FsType::LinuxSwap &&
           fs_type != FsType::Empty &&

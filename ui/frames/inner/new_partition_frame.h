@@ -63,6 +63,9 @@ class NewPartitionFrame : public QFrame {
 
  private slots:
   void onCreateButtonClicked();
+
+  // Hide mount_point_box_ when specific fs is selected
+  void onFsChanged(int index);
 };
 
 }  // namespace installer
