@@ -90,8 +90,12 @@ bool ReadExt2Usage(const QString& path, qint64& freespace, qint64& total) {
 }
 
 bool ReadFat16Usage(const QString& path, qint64& freespace, qint64& total) {
-  QString output;
-  if (!SpawnCmd("dosfsck", {"-n", "-v", path}, output)) {
+  QString output, err;
+  SpawnCmd("dosfsck", {"-n", "-v", path}, output, err);
+  // NOTE(xushaohua): `dosfsck` returns 1 on success, so we check its error
+  // message instead.
+  if (!err.isEmpty()) {
+    qWarning() << "dosfsck failed:" << err;
     return false;
   }
 
