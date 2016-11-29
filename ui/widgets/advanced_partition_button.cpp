@@ -88,8 +88,12 @@ void AdvancedPartitionButton::initUI() {
   // tip
   QLabel* tip_label = new QLabel();
   tip_label->setObjectName("tip_label");
-  // TODO(xushaohua): Read root partition.
   tip_label->setFixedWidth(96);
+  if (partition_.mount_point == kMountPointRoot) {
+    tip_label->setText(tr("Install here"));
+  } else if (partition_.status == PartitionStatus::Formatted) {
+    tip_label->setText(tr("Format"));
+  }
 
   // filesystem name
   QLabel* fs_label = new QLabel();
