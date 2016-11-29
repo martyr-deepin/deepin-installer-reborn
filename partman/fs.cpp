@@ -50,7 +50,7 @@ QString GetFsTypeName(FsType fs_type) {
   switch (fs_type) {
     case FsType::Empty: { return ""; }
     case FsType::Btrfs: { return "btrfs"; }
-    case FsType::EFI: { return "fat32"; }
+    case FsType::EFI: { return "efi"; }
     case FsType::Ext2: { return "ext2"; }
     case FsType::Ext3: { return "ext3"; }
     case FsType::Ext4: { return "ext4"; }

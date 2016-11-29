@@ -48,6 +48,7 @@ bool CreatePartition(const Partition& partition) {
 
     PedFileSystemType* fs_type = NULL;
     if (partition.type != PartitionType::Extended) {
+      // TODO(xushaohua): Handles EFI -> fat32
       QString fs_name = GetFsTypeName(partition.fs);
       // Default fs is Linux (83).
       if (fs_name.isEmpty()) {

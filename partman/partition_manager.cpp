@@ -42,6 +42,20 @@ Partition GetBootPartition(const OperationList& operations) {
   return Partition();
 }
 
+PartitionFlags GetPartitionFlags(PedPartition* lp_partition) {
+  PartitionFlags flags;
+  for (PedPartitionFlag lp_flag =
+         ped_partition_flag_next(static_cast<PedPartitionFlag>(NULL));
+       lp_flag;
+       lp_flag = ped_partition_flag_next(lp_flag)) {
+    if (ped_partition_is_flag_available(lp_partition, lp_flag) &&
+        ped_partition_get_flag(lp_partition, lp_flag)) {
+      flags.append(static_cast<PartitionFlag>(lp_flag));
+    }
+  }
+  return flags;
+}
+
 PartitionList ReadPartitions(PedDisk* lp_disk) {
   PartitionList partitions;
   for (PedPartition* lp_partition = ped_disk_next_partition(lp_disk, NULL);
@@ -65,10 +79,22 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
       continue;
     }
 
+    // Ignores inactive partition.
+    if (!ped_partition_is_active(lp_partition)) {
+      qDebug() << "active:" << ped_partition_is_active(lp_partition);
+      continue;
+    }
+
+    partition.flags = GetPartitionFlags(lp_partition);
+
     if (lp_partition->fs_type) {
       partition.fs = GetFsTypeByName(lp_partition->fs_type->name);
-      // TODO(xushaohua): Check EFI flag
-      // TODO(xushaohua): Read flags
+      // If ESP/Boot flag is set on fat16/fat32 partition,
+      // it shall be an EFI partition.
+      if ((partition.fs == FsType::Fat32 || partition.fs == FsType::Fat16) &&
+          partition.flags.contains(PartitionFlag::ESP)) {
+        partition.fs = FsType::EFI;
+      }
     } else {
       partition.fs = FsType::Unknown;
     }
@@ -151,6 +177,7 @@ void PartitionManager::doManualPart(const OperationList& operations) {
       qWarning() << "Failed to find boot partition!";
       ok = false;
     } else {
+      // TODO(xushaohua): Move this to PartitionDelegate.
       ok = SetBootFlag(boot_partition, true);
     }
   }

@@ -29,6 +29,31 @@ enum class PartitionStatus {
 };
 QDebug& operator<<(QDebug& debug, const PartitionStatus& partition_status);
 
+// Refers PedPartitionFlag
+enum class PartitionFlag {
+  Nil,  // Used as a placeholder, with value 0.
+  Boot,
+  Root,
+  Swap,
+  Hidden,
+  RAID,
+  LVM,
+  LBA,
+  HPServer,
+  PALO,
+  PREP,
+  MSFTReserved,
+  BIOSGrub,
+  AppleTVRecovery,
+  Diag,
+  LegacyBoot,
+  MSFTData,
+  IRST,
+  ESP,
+};
+QDebug& operator<<(QDebug& debug, const PartitionFlag& flag);
+typedef QList<PartitionFlag> PartitionFlags;
+
 class Partition {
  public:
   Partition();
@@ -66,6 +91,9 @@ class Partition {
   // |mount_point| is not system mount point, it is set by user
   // in partition page.
   QString mount_point;
+
+  // Partition flags, like "boot", "esp", "raid" and "lvm".
+  PartitionFlags flags;
 
   // Change partition number and partition path.
   void changeNumber(int partition_number);

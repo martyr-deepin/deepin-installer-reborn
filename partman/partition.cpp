@@ -50,6 +50,11 @@ QDebug& operator<<(QDebug& debug, const PartitionStatus& partition_status) {
   return debug;
 }
 
+QDebug& operator<<(QDebug& debug, const PartitionFlag& flag) {
+  debug << static_cast<int>(flag);
+  return debug;
+}
+
 Partition::Partition()
     : device_path(),
       path(),
@@ -68,7 +73,8 @@ Partition::Partition()
       end_sector(-1),
       preceding_sectors(0),
       succeeding_sectors(0),
-      mount_point() {
+      mount_point(),
+      flags() {
 }
 
 Partition::~Partition() {
@@ -126,6 +132,7 @@ QDebug& operator<<(QDebug& debug, const Partition& partition) {
         << "byte length:" << partition.getByteLength()
         << "preceding sectors:" << partition.preceding_sectors
         << "succeeding sectors:" << partition.succeeding_sectors
+        << "flags:" << partition.flags
         << "}";
   return debug;
 }
