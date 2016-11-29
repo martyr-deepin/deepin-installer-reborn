@@ -71,7 +71,7 @@ void AdvancedPartitionButton::initUI() {
   QLabel* usage_label = new QLabel();
   usage_label->setObjectName("usage_label");
   usage_label->setText(GetPartitionUsage(partition_));
-  usage_label->setFixedWidth(48);
+  usage_label->setFixedWidth(64);
 
   QProgressBar* usage_bar = new QProgressBar();
   usage_bar->setObjectName("usage_bar");
