@@ -41,6 +41,9 @@ bool SupportMountPoint(FsType fs_type);
 // Convert |size| in byte to gibibyte.
 int ToGigByte(qint64 size);
 
+// Convert |size| in byte to gibibyte.
+int ToMebiByte(qint64 size);
+
 }  // namespace installer
 
 #endif  // INSTALLER_UI_DELEGATES_PARTITION_UTIL_H

@@ -73,7 +73,12 @@ QString GetPartitionUsage(const Partition& partition) {
     total = partition.getByteLength();
     used = 0;
   }
-  return QString("%1/%2G").arg(ToGigByte(used)).arg(ToGigByte(total));
+
+  if (total < 1 * kGibiByte) {
+    return QString("%1/%2M").arg(ToMebiByte(used)).arg(ToMebiByte(total));
+  } else {
+    return QString("%1/%2G").arg(ToGigByte(used)).arg(ToGigByte(total));
+  }
 }
 
 int GetPartitionUsageValue(const Partition& partition) {
@@ -154,9 +159,12 @@ bool SupportMountPoint(FsType fs_type) {
 }
 
 int ToGigByte(qint64 size) {
-  const double m_size = static_cast<double>(size) / kKibiByte;
-  return  static_cast<int>(round(m_size / kMebiByte));
+  const double m_size = double(size) / kKibiByte;
+  return int(round(m_size / kMebiByte));
 }
 
+int ToMebiByte(qint64 size) {
+  return int(round(double(size) / kMebiByte));
+}
 
 }  // namespace installer

@@ -548,7 +548,6 @@ void PartitionDelegate::doRefreshVisual() {
           partition.type == PartitionType::Extended) {
         partitions.append(partition);
       } else if (partition.type == PartitionType::Unallocated) {
-        qDebug() << "freespace:" << partition;
         // Filters freespace.
         if (partition.getByteLength() > kMinimumPartitionSizeToDisplay) {
           partitions.append(partition);
