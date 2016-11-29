@@ -29,13 +29,12 @@ extract_overlay_filesystem() {
 
     if [ -f ${MODULE} ];then
         for file in $(cat ${MODULE});do
-          unsquashfs -p "${PROCESSORS}" -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs || exit 2
+          unsquashfs -p "${PROCESSORS}" -f -d /target ${CDROW}/overlay/${file} || exit 2
         done
     fi
 }
 
 # First, extract base filesystem
-stty columns 80
 deepin-installer-unsquashfs -p ${PROCESSORS} -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs || exit 2
 
 # Then extract overlay_filesystem
