@@ -160,6 +160,8 @@ void MainWindow::initConnections() {
           this, &MainWindow::goNextPage);
   connect(confirm_quit_frame_, &ConfirmQuitFrame::quitConfirmed,
           this, &MainWindow::rebootSystem);
+  connect(control_panel_frame_, &ControlPanelFrame::currentPageChanged,
+          this, &MainWindow::onCurrentPageChanged);
   connect(disk_space_insufficient_frame_, &DiskSpaceInsufficientFrame::finished,
           this, &MainWindow::rebootSystem);
   connect(install_failed_frame_, &InstallFailedFrame::finished,
@@ -320,6 +322,11 @@ void MainWindow::setCurrentPage(PageId page_id) {
   } else {
     page_indicator_->show();
   }
+
+  // Raise control_panel_frame explicitly.
+  if (control_panel_frame_->isVisible()) {
+    control_panel_frame_->raise();
+  }
 }
 
 void MainWindow::updateBackground() {
@@ -334,6 +341,12 @@ void MainWindow::updateBackground() {
       size(), Qt::KeepAspectRatioByExpanding);
   background_label_->setPixmap(pixmap);
   background_label_->setFixedSize(size());
+}
+
+void MainWindow::onCurrentPageChanged(int index) {
+  // Ignore null id.
+  const PageId id = static_cast<PageId>(index + 1);
+  this->setCurrentPage(id);
 }
 
 void MainWindow::onCloseButtonClicked() {

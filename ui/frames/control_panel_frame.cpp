@@ -6,12 +6,15 @@
 
 #include <QDebug>
 #include <QPropertyAnimation>
+#include <QStackedWidget>
+#include <QTabBar>
 #include <QTextEdit>
 #include <QTimer>
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
 #include "service/log_manager.h"
+#include "ui/widgets/table_combo_box.h"
 
 namespace installer {
 
@@ -19,6 +22,9 @@ namespace {
 
 // Read log file each 1000ms.
 const int kReadLogInterval = 1000;
+
+const int kWindowWidth = 860;
+const int kWindowHeight = 480;
 
 }  // namespace
 
@@ -80,11 +86,22 @@ void ControlPanelFrame::toggleVisible() {
 }
 
 void ControlPanelFrame::initConnections() {
+  connect(page_combo_box_,
+          static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+          this, &ControlPanelFrame::currentPageChanged);
+  connect(tab_bar_, &QTabBar::currentChanged,
+          stacked_widget_, &QStackedWidget::setCurrentIndex);
   connect(timer_, &QTimer::timeout,
           this, &ControlPanelFrame::onTimerTimeout);
 }
 
 void ControlPanelFrame::initUI() {
+  tab_bar_ = new QTabBar();
+  tab_bar_->setShape(QTabBar::RoundedEast);
+  tab_bar_->addTab("Log");
+  tab_bar_->addTab("Pages");
+  tab_bar_->addTab("Settings");
+
   log_viewer_ = new QTextEdit();
   log_viewer_->setObjectName("log_viewer");
   // Disable user modification.
@@ -96,13 +113,35 @@ void ControlPanelFrame::initUI() {
   log_viewer_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   log_viewer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  QVBoxLayout* layout = new QVBoxLayout();
+  page_combo_box_ = new TableComboBox();
+  page_combo_box_->addItems({"ConfirmQuitFrame",
+                             "DiskSpaceInsufficientFrame",
+                             "InstallFailedFrame",
+                             "InstallProgressFrame",
+                             "InstallSuccessFrame",
+                             "PartitionFrame",
+                             "PartitionTableWarningFrame",
+                             "SelectLanguageFrame",
+                             "SystemInfoFrame",
+                             "VirtualMachineFrame",
+                            });
+
+  settings_page_ = new QFrame();
+
+  stacked_widget_ = new QStackedWidget();
+  stacked_widget_->addWidget(log_viewer_);
+  stacked_widget_->addWidget(page_combo_box_);
+  stacked_widget_->addWidget(settings_page_);
+
+  QHBoxLayout* layout = new QHBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
-  layout->addWidget(log_viewer_);
+  layout->addWidget(stacked_widget_);
+  layout->addWidget(tab_bar_);
+
   this->setLayout(layout);
   this->setStyleSheet(ReadFile(":/styles/control_panel_frame.css"));
-  this->setFixedSize(860, 480);
+  this->setFixedSize(kWindowWidth, kWindowHeight);
 }
 
 void ControlPanelFrame::onTimerTimeout() {

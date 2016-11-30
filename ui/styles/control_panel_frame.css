@@ -1,8 +1,18 @@
 /** Used by ControlPanelFrame class **/
 
+QFrame#control_panel_frame {
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 4px;
+}
+
+QTabBar {
+  color: #fafafa;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
 QTextEdit {
   color: #fafafa;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.75);
   font-size: 14px;
   selection-color: #4eff44;
   selection-background-color: black;

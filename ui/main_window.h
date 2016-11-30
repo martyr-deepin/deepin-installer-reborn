@@ -109,6 +109,9 @@ class MainWindow : public QWidget {
   QShortcut* monitor_mode_shortcut_ = nullptr;
 
  private slots:
+  // Go next page when current page index is changed in ControlPanelFrame.
+  void onCurrentPageChanged(int index);
+
   // Show ConfirmQuitFrame when close_button_ is clicked.
   void onCloseButtonClicked();
 
