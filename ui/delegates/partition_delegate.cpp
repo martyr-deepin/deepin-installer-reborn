@@ -255,6 +255,7 @@ void PartitionDelegate::deletePartition(const Partition& partition) {
   new_partition.type = PartitionType::Unallocated;
   new_partition.freespace = new_partition.length;
   new_partition.fs = FsType::Empty;
+  new_partition.status = PartitionStatus::Delete;
   if (partition.status == PartitionStatus::New) {
     // Merge operations here.
   }
