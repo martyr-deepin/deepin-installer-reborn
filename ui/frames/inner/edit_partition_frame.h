@@ -38,6 +38,12 @@ class EditPartitionFrame : public QFrame {
   void changeEvent(QEvent* event) override;
 
  private:
+  // Format partition forcefully if |force| is true.
+  void forceFormat(bool force);
+
+  // Set check state of format_box based on current mount-point and fs-type.
+  void updateFormatBoxState();
+
   void initConnections();
   void initUI();
 
@@ -64,6 +70,9 @@ class EditPartitionFrame : public QFrame {
  private slots:
   // Hide mount_point_box_ when specific fs is selected
   void onFsChanged(int index);
+
+  // Check format-box when mount-point is root.
+  void onMountPointChanged(int index);
 
   void onOkButtonClicked();
 };

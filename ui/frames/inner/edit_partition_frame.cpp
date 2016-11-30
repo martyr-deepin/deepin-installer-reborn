@@ -55,7 +55,6 @@ EditPartitionFrame::EditPartitionFrame(PartitionDelegate* delegate,
 void EditPartitionFrame::setPartition(const Partition& partition) {
   partition_ = partition;
 
-  // TODO(xushaohua): Check original fs type
   os_label_->setPixmap(QPixmap(GetOsTypeLargeIcon(partition.os)));
   name_label_->setText(GetPartitionLabelAndPath(partition));
   usage_label_->setText(GetPartitionUsage(partition));
@@ -85,13 +84,11 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
     }
     case PartitionStatus::New: {
       // Force format.
-      format_check_box_->setEnabled(false);
-      format_check_box_->setChecked(true);
+      this->forceFormat(true);
       break;
     }
     case PartitionStatus::Real: {
-      format_check_box_->setEnabled(true);
-      format_check_box_->setChecked(false);
+      this->forceFormat(false);
       break;
     }
     default: {
@@ -114,10 +111,28 @@ void EditPartitionFrame::changeEvent(QEvent* event) {
   }
 }
 
+void EditPartitionFrame::forceFormat(bool force) {
+  format_check_box_->setChecked(force);
+  format_check_box_->setEnabled(!force);
+}
+
+void EditPartitionFrame::updateFormatBoxState() {
+  // Format partition forcefully if its type is changed.
+  const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
+  const Partition real_partition(delegate_->getRealPartition(partition_));
+  const QString mount_point =
+      mount_point_model_->getMountPoint(mount_point_box_->currentIndex());
+  this->forceFormat((real_partition.fs != fs_type) ||
+                    (mount_point == kMountPointRoot));
+}
+
 void EditPartitionFrame::initConnections() {
   connect(fs_box_,
           static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
           this, &EditPartitionFrame::onFsChanged);
+  connect(mount_point_box_,
+          static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+          this, &EditPartitionFrame::onMountPointChanged);
 
   // Does nothing when cancel-button is clicked.
   connect(cancel_button_, &QPushButton::clicked,
@@ -233,15 +248,12 @@ void EditPartitionFrame::onFsChanged(int index) {
   mount_point_label_->setVisible(visible);
   mount_point_box_->setVisible(visible);
 
-  // Format partition forcefully if its type is changed.
-  const Partition real_partition(delegate_->getRealPartition(partition_));
-  if (real_partition.fs == fs_type) {
-    format_check_box_->setEnabled(true);
-    format_check_box_->setChecked(false);
-  } else {
-    format_check_box_->setEnabled(false);
-    format_check_box_->setChecked(true);
-  }
+  this->updateFormatBoxState();
+}
+
+void EditPartitionFrame::onMountPointChanged(int index) {
+  Q_UNUSED(index);
+  this->updateFormatBoxState();
 }
 
 void EditPartitionFrame::onOkButtonClicked() {
