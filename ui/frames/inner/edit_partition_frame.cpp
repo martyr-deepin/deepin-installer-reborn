@@ -252,9 +252,16 @@ void EditPartitionFrame::onOkButtonClicked() {
     const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
     delegate_->formatPartition(partition_, fs_type, mount_point);
     delegate_->refreshVisual();
-  } else if (mount_point != partition_.mount_point) {
-    // Only create an OperationMountPoint object.
-    delegate_->updateMountPoint(partition_, mount_point);
+  } else {
+    // If FormatOperation is reverted.
+    if (partition_.status == PartitionStatus::Formatted) {
+      delegate_->unFormatPartition(partition_);
+    }
+
+    // Create an OperationMountPoint object.
+    if (partition_.mount_point != mount_point) {
+      delegate_->updateMountPoint(partition_, mount_point);
+    }
     delegate_->refreshVisual();
   }
 

@@ -301,9 +301,33 @@ void PartitionDelegate::formatPartition(const Partition& partition,
   new_partition.fs = fs_type;
   new_partition.type = partition.type;
   new_partition.mount_point = mount_point;
-  new_partition.status = PartitionStatus::Formatted;
+  if (partition.status == PartitionStatus::Real) {
+    new_partition.status = PartitionStatus::Formatted;
+  } else {
+    new_partition.status = partition.status;
+  }
   Operation operation(OperationType::Format, partition, new_partition);
   operations_.append(operation);
+}
+
+bool PartitionDelegate::unFormatPartition(const Partition& partition) {
+  Q_ASSERT(partition.status == PartitionStatus::Formatted);
+  if (partition.status == PartitionStatus::Formatted) {
+    for (int index = operations_.length() - 1; index >= 0; --index) {
+      const Operation& operation = operations_.at(index);
+      // Remove the last FormatOperation if its new_partition range is the
+      // same with |partition|.
+      if (operation.new_partition == partition &&
+          operation.type == OperationType::Format) {
+        operations_.removeAt(index);
+        return true;
+      }
+    }
+    qCritical() << "No appropriate FormatPartition found:" << partition;
+  } else {
+    qCritical() << "Invalid partition status:" << partition;
+  }
+  return false;
 }
 
 void PartitionDelegate::updateMountPoint(const Partition& partition,
@@ -316,7 +340,6 @@ void PartitionDelegate::updateMountPoint(const Partition& partition,
   Operation operation(OperationType::MountPoint, partition, new_partition);
   operations_.append(operation);
 }
-
 
 void PartitionDelegate::refreshVisual() {
   // Filters partition list based on the following policy:

@@ -23,9 +23,9 @@ enum class PartitionType {
 QDebug& operator<<(QDebug& debug, const PartitionType& partition_type);
 
 enum class PartitionStatus {
-  Real,
-  New,
-  Formatted,
+  Real,  // Both partition range and fs type are not changed
+  New,  // Both partition range and fs type are changed.
+  Formatted,  // Only fs type of partition is changed.
 };
 QDebug& operator<<(QDebug& debug, const PartitionStatus& partition_status);
 

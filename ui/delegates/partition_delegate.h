@@ -82,6 +82,10 @@ class PartitionDelegate : public QObject {
   void formatPartition(const Partition& partition,
                        FsType fs_type,
                        const QString& mount_point);
+  // Revert format operation on |partition|.
+  // This method does make sense only if partition.status is Formatted.
+  // Returns true if that operation is found and removed.
+  bool unFormatPartition(const Partition& partition);
   // Change mount point of |partition|.
   void updateMountPoint(const Partition& partition, const QString& mount_point);
 
