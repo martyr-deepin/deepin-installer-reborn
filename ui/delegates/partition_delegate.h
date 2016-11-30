@@ -39,6 +39,9 @@ class PartitionDelegate : public QObject {
   // Get human readable operation descriptions.
   QStringList getOperationDescriptions() const;
 
+  // Get real partition on disk in which |virtual_partition| is located.
+  Partition getRealPartition(const Partition& virtual_partition) const;
+
   // Notifies partition manager to scan devices.
   void scanDevices() const;
 

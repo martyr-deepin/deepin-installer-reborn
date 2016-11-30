@@ -75,21 +75,18 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
   }
   mount_point_box_->setCurrentIndex(mount_point_index);
 
-  if (partition_.status == PartitionStatus::Real) {
-    format_check_box_->setChecked(false);
-  } else if (partition_.status == PartitionStatus::New) {
-    format_check_box_->setChecked(true);
-    format_check_box_->setEnabled(false);
-  } else if (partition_.status == PartitionStatus::Formatted)
   switch (partition_.status) {
     case PartitionStatus::Formatted: {
-//      format_check_box_->setEnabled(old_fs == new_fs);
+      // Compare between real filesystem type and current one.
+      const Partition real_partition(delegate_->getRealPartition(partition_));
+      format_check_box_->setEnabled(real_partition.fs == partition_.fs);
       format_check_box_->setChecked(true);
       break;
     }
     case PartitionStatus::New: {
+      // Force format.
       format_check_box_->setEnabled(false);
-      format_check_box_->setChecked(false);
+      format_check_box_->setChecked(true);
       break;
     }
     case PartitionStatus::Real: {
@@ -236,8 +233,9 @@ void EditPartitionFrame::onFsChanged(int index) {
   mount_point_label_->setVisible(visible);
   mount_point_box_->setVisible(visible);
 
-  // Format partition forcefully if its type changed.
-  if (fs_type == partition_.fs || fs_type == FsType::Empty) {
+  // Format partition forcefully if its type is changed.
+  const Partition real_partition(delegate_->getRealPartition(partition_));
+  if (real_partition.fs == fs_type) {
     format_check_box_->setEnabled(true);
     format_check_box_->setChecked(false);
   } else {

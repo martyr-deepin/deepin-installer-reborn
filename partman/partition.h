@@ -59,6 +59,8 @@ class Partition {
   Partition();
   ~Partition();
 
+  // Returns true if both this partition and the |other| one refer to
+  // the same sector range.
   bool operator==(const Partition& other) const;
 
   QString device_path;

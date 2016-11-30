@@ -83,8 +83,9 @@ Partition::~Partition() {
 
 bool Partition::operator==(const Partition& other) const {
   return (this->device_path == other.device_path &&
-          this->partition_number == other.partition_number &&
           this->start_sector == other.start_sector &&
+          this->end_sector == other.end_sector &&
+          this->sector_size == other.sector_size &&
           type == other.type);
 }
 

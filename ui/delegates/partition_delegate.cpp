@@ -177,6 +177,22 @@ QStringList PartitionDelegate::getOperationDescriptions() const {
   return result;
 }
 
+Partition PartitionDelegate::getRealPartition(
+    const Partition& virtual_partition) const {
+  const int index = DeviceIndex(real_devices_, virtual_partition.device_path);
+  if (index == -1) {
+    qWarning() << "failed to find device:" << virtual_partition.device_path;
+    return Partition();
+  } else {
+    for (const Partition& partition : real_devices_.at(index).partitions) {
+      if (partition == virtual_partition) {
+        return partition;
+      }
+    }
+  }
+  return Partition();
+}
+
 void PartitionDelegate::scanDevices() const {
   // If auto-part is not set, scan devices right now.
   if (!GetSettingsBool(kPartitionDoAutoPart)) {
