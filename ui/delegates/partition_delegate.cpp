@@ -302,7 +302,7 @@ void PartitionDelegate::formatPartition(const Partition& partition,
   new_partition.type = partition.type;
   new_partition.mount_point = mount_point;
   if (partition.status == PartitionStatus::Real) {
-    new_partition.status = PartitionStatus::Formatted;
+    new_partition.status = PartitionStatus::Format;
   } else {
     new_partition.status = partition.status;
   }
@@ -311,14 +311,14 @@ void PartitionDelegate::formatPartition(const Partition& partition,
 }
 
 bool PartitionDelegate::unFormatPartition(const Partition& partition) {
-  Q_ASSERT(partition.status == PartitionStatus::Formatted);
-  if (partition.status == PartitionStatus::Formatted) {
+  Q_ASSERT(partition.status == PartitionStatus::Format);
+  if (partition.status == PartitionStatus::Format) {
     for (int index = operations_.length() - 1; index >= 0; --index) {
       const Operation& operation = operations_.at(index);
       // Remove the last FormatOperation if its new_partition range is the
       // same with |partition|.
-      if (operation.new_partition == partition &&
-          operation.type == OperationType::Format) {
+      if (operation.type == OperationType::Format &&
+          operation.new_partition == partition) {
         operations_.removeAt(index);
         return true;
       }

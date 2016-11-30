@@ -22,10 +22,14 @@ enum class PartitionType {
 };
 QDebug& operator<<(QDebug& debug, const PartitionType& partition_type);
 
+// Real <-> New
+// Real <-> Format
+// Real <-> Delete
 enum class PartitionStatus {
   Real,  // Both partition range and fs type are not changed
   New,  // Both partition range and fs type are changed.
-  Formatted,  // Only fs type of partition is changed.
+  Format,  // Only fs type of partition is changed.
+  Delete,  // Partition is marked to delete.
 };
 QDebug& operator<<(QDebug& debug, const PartitionStatus& partition_status);
 

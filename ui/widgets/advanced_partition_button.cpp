@@ -91,7 +91,7 @@ void AdvancedPartitionButton::initUI() {
   tip_label->setFixedWidth(96);
   if (partition_.mount_point == kMountPointRoot) {
     tip_label->setText(tr("Install here"));
-  } else if (partition_.status == PartitionStatus::Formatted) {
+  } else if (partition_.status == PartitionStatus::Format) {
     tip_label->setText(tr("Format"));
   }
 

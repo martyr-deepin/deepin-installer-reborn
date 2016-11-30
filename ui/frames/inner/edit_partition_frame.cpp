@@ -75,7 +75,7 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
   mount_point_box_->setCurrentIndex(mount_point_index);
 
   switch (partition_.status) {
-    case PartitionStatus::Formatted: {
+    case PartitionStatus::Format: {
       // Compare between real filesystem type and current one.
       const Partition real_partition(delegate_->getRealPartition(partition_));
       format_check_box_->setEnabled(real_partition.fs == partition_.fs);
@@ -266,8 +266,10 @@ void EditPartitionFrame::onOkButtonClicked() {
     delegate_->refreshVisual();
   } else {
     // If FormatOperation is reverted.
-    if (partition_.status == PartitionStatus::Formatted) {
+    if (partition_.status == PartitionStatus::Format) {
       delegate_->unFormatPartition(partition_);
+      // Reset partition status.
+      partition_.status = PartitionStatus::Real;
     }
 
     // Create an OperationMountPoint object.

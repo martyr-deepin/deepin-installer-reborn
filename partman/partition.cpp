@@ -33,7 +33,7 @@ QDebug& operator<<(QDebug& debug, const PartitionType& partition_type) {
 QDebug& operator<<(QDebug& debug, const PartitionStatus& partition_status) {
   QString status;
   switch (partition_status) {
-    case PartitionStatus::Formatted: {
+    case PartitionStatus::Format: {
       status = "Format";
       break;
     }
@@ -43,6 +43,13 @@ QDebug& operator<<(QDebug& debug, const PartitionStatus& partition_status) {
     }
     case PartitionStatus::Real: {
       status = "Real";
+      break;
+    }
+    case PartitionStatus::Delete: {
+      status = "Delete";
+      break;
+    }
+    default: {
       break;
     }
   }
@@ -122,6 +129,7 @@ QDebug& operator<<(QDebug& debug, const Partition& partition) {
         << "number:" << partition.partition_number
         << "fs:" << partition.fs
         << "type:" << partition.type
+        << "status:" << partition.status
         << "os:" << partition.os
         << "label:" << partition.label
         << "mount point:" << partition.mount_point
