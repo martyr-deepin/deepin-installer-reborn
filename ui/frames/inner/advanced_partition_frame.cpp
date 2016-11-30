@@ -257,8 +257,8 @@ void AdvancedPartitionFrame::repaintDevices() {
 
 void AdvancedPartitionFrame::onDeletePartitionTriggered(
     const Partition& partition) {
-  emit delegate_->deletePartition(partition);
-  emit delegate_->refreshVisual();
+  delegate_->deletePartition(partition);
+  delegate_->refreshVisual();
 }
 
 void AdvancedPartitionFrame::onDeviceRefreshed() {

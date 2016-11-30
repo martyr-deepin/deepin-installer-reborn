@@ -75,7 +75,32 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
   }
   mount_point_box_->setCurrentIndex(mount_point_index);
 
-  format_check_box_->setChecked(false);
+  if (partition_.status == PartitionStatus::Real) {
+    format_check_box_->setChecked(false);
+  } else if (partition_.status == PartitionStatus::New) {
+    format_check_box_->setChecked(true);
+    format_check_box_->setEnabled(false);
+  } else if (partition_.status == PartitionStatus::Formatted)
+  switch (partition_.status) {
+    case PartitionStatus::Formatted: {
+//      format_check_box_->setEnabled(old_fs == new_fs);
+      format_check_box_->setChecked(true);
+      break;
+    }
+    case PartitionStatus::New: {
+      format_check_box_->setEnabled(false);
+      format_check_box_->setChecked(false);
+      break;
+    }
+    case PartitionStatus::Real: {
+      format_check_box_->setEnabled(true);
+      format_check_box_->setChecked(false);
+      break;
+    }
+    default: {
+      break;
+    }
+  }
 }
 
 void EditPartitionFrame::changeEvent(QEvent* event) {
@@ -212,10 +237,13 @@ void EditPartitionFrame::onFsChanged(int index) {
   mount_point_box_->setVisible(visible);
 
   // Format partition forcefully if its type changed.
-  const bool checked = !(fs_type == FsType::Empty ||
-                         fs_type == FsType::Unknown ||
-                         fs_type == partition_.fs);
-  format_check_box_->setChecked(checked);
+  if (fs_type == partition_.fs || fs_type == FsType::Empty) {
+    format_check_box_->setEnabled(true);
+    format_check_box_->setChecked(false);
+  } else {
+    format_check_box_->setEnabled(false);
+    format_check_box_->setChecked(true);
+  }
 }
 
 void EditPartitionFrame::onOkButtonClicked() {
@@ -225,11 +253,11 @@ void EditPartitionFrame::onOkButtonClicked() {
     // Create an OperationFormat object.
     const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
     delegate_->formatPartition(partition_, fs_type, mount_point);
-    emit delegate_->refreshVisual();
+    delegate_->refreshVisual();
   } else if (mount_point != partition_.mount_point) {
     // Only create an OperationMountPoint object.
     delegate_->updateMountPoint(partition_, mount_point);
-    emit delegate_->refreshVisual();
+    delegate_->refreshVisual();
   }
 
   emit this->finished();

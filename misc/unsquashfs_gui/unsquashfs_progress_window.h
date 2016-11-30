@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_UNSQUASHFS_PROGRESS_WINDOW_H_
-#define INSTALLER_UNSQUASHFS_PROGRESS_WINDOW_H_
+#ifndef INSTALLER_MISC_UNSQUASHFS_PROGRESS_WINDOW_H
+#define INSTALLER_MISC_UNSQUASHFS_PROGRESS_WINDOW_H
 
 #include <QFrame>
 class QLabel;
@@ -35,4 +35,4 @@ class UnsquashfsProgressWindow : public QFrame {
   void onReadProgressTimeout();
 };
 
-#endif  // INSTALLER_UNSQUASHFS_PROGRESS_WINDOW_H_
+#endif  // INSTALLER_MISC_UNSQUASHFS_PROGRESS_WINDOW_H

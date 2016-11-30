@@ -52,11 +52,6 @@ class PartitionDelegate : public QObject {
   // Emitted after scanning local disk devices or partition is edited.
   void deviceRefreshed();
 
-  // Emit this signal to refresh virtual device list based on physical device
-  // list and operator list.
-  // It is used when a new operator is created.
-  void refreshVisual();
-
   // Emitted when partition job is done.
   void autoPartDone(bool ok);
   void manualPartDone(bool ok);
@@ -86,6 +81,10 @@ class PartitionDelegate : public QObject {
                        const QString& mount_point);
   // Change mount point of |partition|.
   void updateMountPoint(const Partition& partition, const QString& mount_point);
+
+  // Refresh virtual device list based on physical device list and
+  // operator list. It is used when a new operator is created.
+  void refreshVisual();
 
  private:
   void initConnections();
@@ -121,9 +120,6 @@ class PartitionDelegate : public QObject {
   void onDevicesRefreshed(const DeviceList& devices);
 
   void onManualPartDone(bool ok);
-
-  // Update virtual partition list based on operations.
-  void doRefreshVisual();
 };
 
 }  // namespace installer

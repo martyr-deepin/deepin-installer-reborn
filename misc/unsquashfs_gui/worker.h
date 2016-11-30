@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_UNSQUASHFS_GUI_WORKER_H_
-#define INSTALLER_UNSQUASHFS_GUI_WORKER_H_
+#ifndef INSTALLER_MISC_UNSQUASHFS_GUI_WORKER_H
+#define INSTALLER_MISC_UNSQUASHFS_GUI_WORKER_H
 
 #include <QRunnable>
 #include <QString>
@@ -18,4 +18,4 @@ class Worker : public QRunnable {
   QString squashfs_file_;
 };
 
-#endif  // INSTALLER_UNSQUASHFS_GUI_WORKER_H_
+#endif  // INSTALLER_MISC_UNSQUASHFS_GUI_WORKER_H
