@@ -1,6 +1,5 @@
 <RCC>
   <qresource prefix="/resources">
-    <file>default-settings.ini</file>
     <file>deepin-installer-reborn.svg</file>
     <file>languages.json</file>
   </qresource>

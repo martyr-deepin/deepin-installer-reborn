@@ -38,11 +38,13 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
   add_definitions("-DSLIDE_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/resources/slide\"")
   add_definitions("-DSCAN_REGDOMAIN_FILE=\"${CMAKE_CURRENT_SOURCE_DIR}/misc/scan_regdomain.sh\"")
   add_definitions("-DBUILTIN_HOOKS_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/hooks\"")
+  add_definitions("-DDEFAULT_SETTINGS=\"${CMAKE_CURRENT_SOURCE_DIR}/resources/default-settings.ini\"")
   add_definitions("-DFALLBACK_WALLPAPER=\"${CMAKE_CURRENT_SOURCE_DIR}/resources/fallback-wallpaper.jpg\"")
 else()
   add_definitions("-DSLIDE_DIR=\"${INSTALLER_SHARE_DIR}/slide\"")
   add_definitions("-DSCAN_REGDOMAIN_FILE=\"${INSTALLER_SHARE_DIR}/scan_regdomain.sh\"")
   add_definitions("-DBUILTIN_HOOKS_DIR=\"${INSTALLER_SHARE_DIR}/hooks\"")
+  add_definitions("-DDEFAULT_SETTINGS=\"${INSTALLER_SHARE_DIR}/default-settings.ini\"")
   add_definitions("-DFALLBACK_WALLPAPER=\"${INSTALLER_SHARE_DIR}/fallback-wallpaper.jpg\"")
 endif()
 
@@ -380,6 +382,8 @@ install(FILES resources/deepin-installer-reborn.desktop
         DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
 install(FILES resources/deepin-installer-reborn.svg
         DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps)
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/default-settings.ini
+        DESTINATION ${INSTALLER_SHARE_DIR})
 install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/fallback-wallpaper.jpg
         DESTINATION ${INSTALLER_SHARE_DIR})
 install(

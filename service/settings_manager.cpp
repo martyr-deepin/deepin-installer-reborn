@@ -242,8 +242,7 @@ QVariant GetSettingsValue(const QString& key) {
     }
   }
 
-  const QSettings default_settings(":/resources/default-settings.ini",
-                                   QSettings::IniFormat);
+  const QSettings default_settings(DEFAULT_SETTINGS, QSettings::IniFormat);
   if (default_settings.contains(key)) {
     return default_settings.value(key);
   }
