@@ -335,7 +335,6 @@ void MainWindow::updateBackground() {
     return;
   }
   const QString image_path = GetWindowBackground();
-  // TODO(xushaohua): Only scale background image in x86 architecture.
   // Other platforms may have performance issue.
   const QPixmap pixmap = QPixmap(image_path).scaled(
       size(), Qt::KeepAspectRatioByExpanding);

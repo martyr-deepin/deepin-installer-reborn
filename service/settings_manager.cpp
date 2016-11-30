@@ -326,7 +326,7 @@ QString GetWindowBackground() {
     return in_system;
   }
 
-  return ":/resources/fallback-wallpaper.jpg";
+  return FALLBACK_WALLPAPER;
 }
 
 bool DeleteConfigFile() {
