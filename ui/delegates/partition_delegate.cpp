@@ -255,12 +255,23 @@ void PartitionDelegate::deletePartition(const Partition& partition) {
   new_partition.freespace = new_partition.length;
   new_partition.fs = FsType::Empty;
   new_partition.status = PartitionStatus::Delete;
-  if (partition.status == PartitionStatus::New) {
-    // Merge operations here.
-  }
 
-  Operation operation(OperationType::Delete, partition, new_partition);
-  operations_.append(operation);
+  if (partition.status == PartitionStatus::New) {
+    // If status of old partition is New, there shall be a CreateOperation
+    // which generates that partition. Merge that CreateOperation
+    // with DeleteOperation.
+    for (int index = operations_.length() - 1; index >= 0; --index) {
+      const Operation& operation = operations_.at(index);
+      if (operation.type == OperationType::Create &&
+          operation.new_partition == partition) {
+        operations_.removeAt(index);
+        break;
+      }
+    }
+  } else {
+    Operation operation(OperationType::Delete, partition, new_partition);
+    operations_.append(operation);
+  }
 
   if (partition.type == PartitionType::Logical) {
     // Delete extended partition if needed.
@@ -280,6 +291,7 @@ void PartitionDelegate::deletePartition(const Partition& partition) {
         qDebug() << "ext partition:" << ext_partition.path;
         Partition empty_partition = ext_partition;
         empty_partition.type = PartitionType::Unallocated;
+
         Operation delete_operation(OperationType::Delete, ext_partition,
                                    empty_partition);
         operations_.append(delete_operation);
