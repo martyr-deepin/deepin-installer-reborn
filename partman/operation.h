@@ -17,8 +17,8 @@ enum class OperationType {
   Delete,
   Format,
   MountPoint,
-  Resize,
-  Invalid,  // operation type not set
+  Resize,  // Only used for extended partition.
+  Invalid,  // Operation type not set.
 };
 QDebug& operator<<(QDebug& debug, const OperationType& op_type);
 

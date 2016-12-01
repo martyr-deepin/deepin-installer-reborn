@@ -10,6 +10,27 @@
 
 namespace installer {
 
+namespace {
+
+// Get |fs| name used in libparted.
+QString GetPedFsName(FsType fs) {
+  QString fs_name;
+  if (fs == FsType::EFI) {
+    // Handles EFI -> fat32
+    fs_name = GetFsTypeName(FsType::Fat32);
+  } else {
+    fs_name = GetFsTypeName(fs);
+  }
+  // Default fs is Linux (83).
+  if (fs_name.isEmpty()) {
+    qWarning() << "SetPartitionType: no fs is specified, use default!";
+    fs_name = GetFsTypeName(FsType::Ext2);
+  }
+  return fs_name;
+}
+
+}  // namespace
+
 bool Commit(PedDisk* lp_disk) {
   bool success = static_cast<bool>(ped_disk_commit_to_dev(lp_disk));
   if (success) {
@@ -21,6 +42,7 @@ bool Commit(PedDisk* lp_disk) {
 }
 
 bool CreatePartition(const Partition& partition) {
+  qDebug() << "CreatePartition()" << partition;
   bool ok = false;
   PedDevice* lp_device = NULL;
   PedDisk* lp_disk = NULL;
@@ -48,15 +70,8 @@ bool CreatePartition(const Partition& partition) {
 
     PedFileSystemType* fs_type = NULL;
     if (partition.type != PartitionType::Extended) {
-      // TODO(xushaohua): Handles EFI -> fat32
-      QString fs_name = GetFsTypeName(partition.fs);
-      // Default fs is Linux (83).
-      if (fs_name.isEmpty()) {
-        qWarning() << "SetPartitionType: no fs is specified, use default!";
-        fs_name = GetFsTypeName(FsType::Ext2);
-      }
-
-      fs_type = ped_file_system_type_get(fs_name.toLatin1().data());
+      const QString fs_name = GetPedFsName(partition.fs);
+      fs_type = ped_file_system_type_get(fs_name.toStdString().c_str());
     }
 
     PedPartition* lp_partition = ped_partition_new(lp_disk,
@@ -71,24 +86,37 @@ bool CreatePartition(const Partition& partition) {
                                            partition.getSectorLength());
       if (geom) {
         constraint = ped_constraint_exact(geom);
+      } else {
+        qCritical() << "CreatePartition() geom is NULL";
       }
       if (constraint) {
         // TODO(xushaohua): Change constraint.min_size.
         ok = bool(ped_disk_add_partition(lp_disk, lp_partition, constraint));
         if (ok) {
           ok = Commit(lp_disk);
+        } else {
+          qCritical() << "CreatePartition() ped_disk_add_partition() failed";
         }
         ped_geometry_destroy(geom);
         ped_constraint_destroy(constraint);
+      } else {
+        qCritical() << "CreatePartition() constraint is NULL";
       }
+    } else {
+      qCritical() << "CreatePartition() ped_partition_new() returns NULL"
+                  << partition.path;
     }
     DestroyDeviceAndDisk(lp_device, lp_disk);
+  } else {
+    qCritical() << "CreatePartition() failed to get lp disk object"
+                << partition.path;
   }
 
   return ok;
 }
 
 bool DeletePartition(const Partition& partition) {
+  qDebug() << "DeletePartition()" << partition;
   bool ok = false;
   PedDevice* lp_device = NULL;
   PedDisk* lp_disk = NULL;
@@ -102,13 +130,20 @@ bool DeletePartition(const Partition& partition) {
     }
     if (lp_partition) {
       ok = bool(ped_disk_delete_partition(lp_disk, lp_partition));
+    } else {
+      qCritical() << "DeletePartition() lp_partition is NULL";
     }
 
     if (ok) {
       ok = Commit(lp_disk);
+    } else {
+      qCritical() << "DeletePartition ped_disk_delete_partition() failed";
     }
 
     DestroyDeviceAndDisk(lp_device, lp_disk);
+  } else {
+    qCritical() << "DeletePartition() failed to get disk object"
+                << partition.path;
   }
 
   return ok;
@@ -164,6 +199,7 @@ QString GetPartitionPath(PedPartition* lp_partition) {
 }
 
 bool ResizeMovePartition(const Partition& partition) {
+  qDebug() << "ResizeMovePartition()" << partition;
   bool ok = false;
   PedDevice* lp_device = NULL;
   PedDisk* lp_disk = NULL;
@@ -201,6 +237,7 @@ bool ResizeMovePartition(const Partition& partition) {
 bool SetPartitionFlag(const Partition& partition,
                       PedPartitionFlag flag,
                       bool is_set) {
+  qDebug() << "SetPartitionFlag()" << partition << flag << is_set;
   PedDevice* lp_device = NULL;
   PedDisk* lp_disk = NULL;
   bool ok = false;
@@ -227,38 +264,36 @@ bool SetPartitionFlags(const Partition& partition) {
 }
 
 bool SetPartitionType(const Partition& partition) {
+  qDebug() << "SetPartitionType:" << partition;
   PedDevice* lp_device = NULL;
   PedDisk* lp_disk = NULL;
   bool ok = false;
   if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
-
-    QString fs_name = GetFsTypeName(partition.fs);
-    // Default fs is Linux (83).
-    if (fs_name.isEmpty()) {
-      qWarning() << "SetPartitionType: no fs is specified, use default!";
-      fs_name = GetFsTypeName(FsType::Ext2);
-    }
+    const QString fs_name = GetPedFsName(partition.fs);
 
     PedFileSystemType* fs_type =
-        ped_file_system_type_get(fs_name.toLatin1().data());
+        ped_file_system_type_get(fs_name.toStdString().c_str());
 
     PedPartition* lp_partition =
         ped_disk_get_partition_by_sector(lp_disk, partition.getSector());
 
     if (fs_type && lp_partition) {
       ok = bool(ped_partition_set_system(lp_partition, fs_type));
-    }
-
-    // Set ESP flag
-    if (ok && partition.fs == FsType::EFI) {
-      ok = bool(ped_partition_set_flag(lp_partition, PED_PARTITION_ESP, 1));
+    } else {
+      qCritical() << "SetPartitionType() ped_disk_get_partition_by_sector() "
+                  << "failed";
     }
 
     if (ok) {
       ok = Commit(lp_disk);
+    } else {
+      qCritical() << "SetPartitionType() ped_partition_set_system() failed";
     }
 
     DestroyDeviceAndDisk(lp_device, lp_disk);
+  } else {
+    qCritical() << "SetPartitionType() failed to get disk object:"
+                << partition.path;
   }
 
   return ok;
