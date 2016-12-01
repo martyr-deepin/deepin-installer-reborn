@@ -109,7 +109,6 @@ void HooksManager::runHooksPack() {
     // Setup filesystem watch of unsquashfs progress file.
     this->monitorProgressFiles();
   } else if (hooks_pack_->type == HookType::InChroot) {
-
     if (!CopyHooks(true)) {
       qCritical() << "Failed to copy hooks in chroot env!";
       emit this->errorOccurred();

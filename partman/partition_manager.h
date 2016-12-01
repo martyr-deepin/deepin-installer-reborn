@@ -21,7 +21,9 @@ class PartitionManager : public QObject {
   ~PartitionManager();
 
  signals:
-  void refreshDevices();
+  // Notify PartitionManager to scan devices.
+  // If |umount| is true, umount partitions before scanning.
+  void refreshDevices(bool umount);
   void devicesRefreshed(const DeviceList& devices);
 
   // Run auto part script at |script_path|.
@@ -37,7 +39,7 @@ class PartitionManager : public QObject {
   void initConnections();
 
  private slots:
-  void doRefreshDevices();
+  void doRefreshDevices(bool umount);
   void doAutoPart(const QString& script_path);
   void doManualPart(const OperationList& operations);
 };

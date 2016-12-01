@@ -6,6 +6,7 @@
 
 #include <parted/parted.h>
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 
 #include "base/command.h"
@@ -98,6 +99,29 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
   return partitions;
 }
 
+// Unmount devices and swap partitions.
+bool UnmountDevices() {
+  // Swap off partitions and files.
+  bool ok;
+  QString out, err;
+  ok = SpawnCmd("swapoff", {"--all"}, out, err);
+  if (!ok) {
+    qWarning() << "swapoff failed!" << out << err;
+  }
+  const char kTargetDir[] = "/target";
+  if (QDir(kTargetDir).exists()) {
+    if (!SpawnCmd("umount", {"-R", kTargetDir}, out, err)) {
+      ok = false;
+      qWarning() << "umount /target failed" << out << err;
+    }
+  }
+
+  // umount --all almost always returns false.
+  SpawnCmd("umount", {"--all"}, out, err);
+
+  return ok;
+}
+
 }  // namespace
 
 PartitionManager::PartitionManager(QObject* parent) : QObject(parent) {
@@ -122,7 +146,12 @@ void PartitionManager::initConnections() {
           this, &PartitionManager::doManualPart);
 }
 
-void PartitionManager::doRefreshDevices() {
+void PartitionManager::doRefreshDevices(bool umount) {
+  // Umount devices first.
+  if (umount) {
+    UnmountDevices();
+  }
+
   const DeviceList devices = ScanDevices();
   emit this->devicesRefreshed(devices);
 }

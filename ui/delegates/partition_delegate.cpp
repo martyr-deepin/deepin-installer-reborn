@@ -196,7 +196,7 @@ Partition PartitionDelegate::getRealPartition(
 void PartitionDelegate::scanDevices() const {
   // If auto-part is not set, scan devices right now.
   if (!GetSettingsBool(kPartitionDoAutoPart)) {
-    emit partition_manager_->refreshDevices();
+    emit partition_manager_->refreshDevices(true);
   }
 }
 
