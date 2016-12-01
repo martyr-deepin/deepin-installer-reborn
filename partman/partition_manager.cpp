@@ -57,13 +57,10 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
       continue;
     }
 
-    // Ignores inactive partition.
-    if (!ped_partition_is_active(lp_partition)) {
-      qDebug() << "active:" << ped_partition_is_active(lp_partition);
-      continue;
+    // Get partition flags when it is active.
+    if (ped_partition_is_active(lp_partition)) {
+      partition.flags = GetPartitionFlags(lp_partition);
     }
-
-    partition.flags = GetPartitionFlags(lp_partition);
 
     if (lp_partition->fs_type) {
       partition.fs = GetFsTypeByName(lp_partition->fs_type->name);
