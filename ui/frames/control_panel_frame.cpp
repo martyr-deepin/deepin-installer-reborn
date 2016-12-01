@@ -146,11 +146,17 @@ void ControlPanelFrame::initUI() {
 
 void ControlPanelFrame::onTimerTimeout() {
   const QString content(ReadFile(log_file_path_));
-  if (content == log_content_) {
+  if (content.length() == log_content_.length()) {
     return;
   }
   log_content_ = content;
+
+  QTextCursor cursor = log_viewer_->textCursor();
+  // Restore cursor position when log content is updated.
+  const int pos = cursor.position();
   log_viewer_->setPlainText(log_content_);
+  cursor.setPosition(pos);
+  log_viewer_->setTextCursor(cursor);
 }
 
 }  // namespace installer
