@@ -234,7 +234,6 @@ void PartitionDelegate::createPartition(const Partition& partition,
                                         FsType fs_type,
                                         const QString& mount_point,
                                         qint64 total_sectors) {
-
   if (partition_type == PartitionType::Normal) {
     createPrimaryPartition(partition, align_start, fs_type, mount_point,
                            total_sectors);
@@ -307,6 +306,9 @@ void PartitionDelegate::formatPartition(const Partition& partition,
   } else {
     new_partition.status = partition.status;
   }
+
+  this->resetOperationMountPoint(mount_point);
+
   Operation operation(OperationType::Format, partition, new_partition);
   operations_.append(operation);
 }
@@ -335,6 +337,9 @@ void PartitionDelegate::updateMountPoint(const Partition& partition,
                                          const QString& mount_point) {
   qDebug() << "PartitionDelegate::updateMountPoint()" << partition.path
            << mount_point;
+
+  this->resetOperationMountPoint(mount_point);
+
   Partition new_partition(partition);
   new_partition.mount_point = mount_point;
   // No need to update partition status.
@@ -537,9 +542,10 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
   Q_ASSERT(new_partition.start_sector < new_partition.end_sector);
   Q_ASSERT(new_partition.end_sector <= partition.end_sector);
 
+  this->resetOperationMountPoint(mount_point);
+
   Operation operation(OperationType::Create, partition, new_partition);
   operations_.append(operation);
-  qDebug() << "operations" << operations_;
 }
 
 void PartitionDelegate::createLogicalPartition(const Partition& partition,
@@ -633,9 +639,10 @@ void PartitionDelegate::createLogicalPartition(const Partition& partition,
     operations_.append(resize_ext_operation);
   }
 
+  this->resetOperationMountPoint(mount_point);
+
   Operation operation(OperationType::Create, partition, new_partition);
   operations_.append(operation);
-  qDebug() << "operations" << operations_;
 }
 
 void PartitionDelegate::removeEmptyExtendedPartition(
@@ -648,6 +655,15 @@ void PartitionDelegate::removeEmptyExtendedPartition(
       Partition new_partition;
       Operation operation(OperationType::Delete, ext_partition, new_partition);
       operations_.append(operation);
+    }
+  }
+}
+
+void PartitionDelegate::resetOperationMountPoint(const QString& mount_point) {
+  for (Operation& operation : operations_) {
+    // Clear mount point of old operations.
+    if (operation.new_partition.mount_point == mount_point) {
+      operation.new_partition.mount_point = "";
     }
   }
 }
