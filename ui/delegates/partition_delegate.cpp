@@ -304,6 +304,9 @@ void PartitionDelegate::formatPartition(const Partition& partition,
                                         FsType fs_type,
                                         const QString& mount_point) {
   qDebug() << "formatPartition()" << partition.path << mount_point;
+
+  this->resetOperationMountPoint(mount_point);
+
   Partition new_partition;
   new_partition.sector_size = partition.sector_size;
   new_partition.start_sector = partition.start_sector;
@@ -315,11 +318,19 @@ void PartitionDelegate::formatPartition(const Partition& partition,
   new_partition.mount_point = mount_point;
   if (partition.status == PartitionStatus::Real) {
     new_partition.status = PartitionStatus::Format;
-  } else {
+  } else if (partition.status == PartitionStatus::New ||
+             partition.status == PartitionStatus::Format) {
+    // Update partition of old operation, instead of adding a new one.
     new_partition.status = partition.status;
+    for (int index = operations_.length() - 1; index >= 0; --index) {
+      Operation& operation = operations_[index];
+      if (operation.type == OperationType::Format ||
+          operation.type == OperationType::Create) {
+        operation.new_partition = new_partition;
+        return;
+      }
+    }
   }
-
-  this->resetOperationMountPoint(mount_point);
 
   Operation operation(OperationType::Format, partition, new_partition);
   operations_.append(operation);
