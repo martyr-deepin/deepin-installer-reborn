@@ -29,7 +29,7 @@ extract_overlay_filesystem() {
 
     if [ -f ${MODULE} ];then
         for file in $(cat ${MODULE});do
-          unsquashfs -p "${PROCESSORS}" -f -d /target ${CDROW}/overlay/${file} || exit 2
+          unsquashfs -p "${PROCESSORS}" -f -d /target ${CDROM}/overlay/${file} || exit 2
         done
     fi
 }
