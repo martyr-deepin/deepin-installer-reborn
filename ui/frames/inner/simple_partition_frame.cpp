@@ -233,8 +233,8 @@ void SimplePartitionFrame::repaintDevices() {
     row += 1;
 
     for (const Partition& partition : device.partitions) {
-      if (partition.type == PartitionType::Extended) {
-        // Ignores extended partition.
+      if ((partition.type == PartitionType::Extended) || partition.busy) {
+        // Ignores extended partition or currently in-used partitions.
         continue;
       }
       SimplePartitionButton* button = new SimplePartitionButton(partition);
