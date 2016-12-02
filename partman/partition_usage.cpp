@@ -117,7 +117,7 @@ bool ReadFat16Usage(const QString& path, qint64& freespace, qint64& total) {
   }
 
   total = total_clusters * cluster_size;
-  freespace = total - start_byte + used_clusters * cluster_size;
+  freespace = total - start_byte - used_clusters * cluster_size;
   return true;
 }
 

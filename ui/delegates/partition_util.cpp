@@ -64,10 +64,8 @@ QString GetPartitionLabelAndPath(const Partition& partition) {
 
 QString GetPartitionUsage(const Partition& partition) {
   qint64 total, used;
-  if (partition.type == PartitionType::Normal ||
-      partition.type == PartitionType::Logical) {
-    total = (partition.length > 0) ? partition.length :
-             partition.getByteLength();
+  if ((partition.length > 0) && (partition.length >= partition.freespace)) {
+    total = partition.length;
     used = total - partition.freespace;
   } else {
     total = partition.getByteLength();
