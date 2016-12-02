@@ -26,7 +26,6 @@ bool MatchArchitecture(const QString& name);
 
 // Returns a list of sorted hook scripts with |hook_type|.
 QStringList ListHooks(HookType hook_type) {
-  qDebug() << "listHooks()";
   // filename => abs-filepath
   QStringList hooks;
   QString folder_name;

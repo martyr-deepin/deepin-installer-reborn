@@ -21,7 +21,6 @@ bool RunHook(const QString& hook) {
   QString output, err;
   const QStringList args = {hook};
   const bool ok = RunScriptFile(kHookManagerFile, args, output, err, true);
-  qDebug() << "hook output:" << ok << output << "\nerror:" << err;
   if (!output.isEmpty()) {
     qWarning() << "Output from " << hook << "\n" << output;
   }
