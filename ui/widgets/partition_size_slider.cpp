@@ -80,7 +80,10 @@ void PartitionSizeSlider::onEditorTextChanged(const QString& text) {
   bool ok;
   const int value = text.toInt(&ok);
   if (ok) {
+    // Block value-changed signal of slider to hold cursor position in editor.
+    slider_->blockSignals(true);
     slider_->setValue(value);
+    slider_->blockSignals(false);
   }
 }
 
