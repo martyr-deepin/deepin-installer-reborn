@@ -80,11 +80,16 @@ QString GetPartitionUsage(const Partition& partition) {
 }
 
 int GetPartitionUsageValue(const Partition& partition) {
-  if (partition.type == PartitionType::Normal ||
-      partition.type == PartitionType::Logical) {
-    const qint64 length = (partition.length > 0) ? partition.length :
-                          partition.getByteLength();
-    return int(100 * (length - partition.freespace) / length);
+  qint64 total, used;
+  if ((partition.length > 0) && (partition.length >= partition.freespace)) {
+    total = partition.length;
+    used = total - partition.freespace;
+  } else {
+    total = partition.getByteLength();
+    used = 0;
+  }
+  if (total > 0 && used >= 0 && total >= used) {
+    return int(100.0 * used / total);
   } else {
     return 0;
   }
