@@ -247,6 +247,11 @@ bool SetPartitionFlag(const Partition& partition,
     if (lp_partition) {
       ok = bool(ped_partition_set_flag(lp_partition, flag, is_set ? 1 : 0));
     }
+
+    if (ok) {
+      ok = Commit(lp_disk);
+    }
+
     DestroyDeviceAndDisk(lp_device, lp_disk);
   }
   return ok;

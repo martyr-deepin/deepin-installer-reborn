@@ -449,6 +449,7 @@ void PartitionDelegate::doManualPart() {
   // First check EFI filesystem.
   for (Operation& operation : operations_) {
     if (operation.new_partition.fs == FsType::EFI) {
+      operation.new_partition.flags.append(PartitionFlag::Boot);
       operation.new_partition.flags.append(PartitionFlag::ESP);
       is_boot_set = true;
     }

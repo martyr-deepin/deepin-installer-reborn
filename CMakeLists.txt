@@ -210,7 +210,8 @@ set(ROOT_UNITTEST_FILES
     #    partman/operation_test.cpp
     #    partman/partition_usage_test.cpp
     #    partman/os_prober_test.cpp
-    partman/partition_manager_test.cpp
+    #    partman/partition_manager_test.cpp
+    partman/libparted_util_test.cpp
     )
 
 set(UNITTEST_FILES
