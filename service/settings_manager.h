@@ -59,8 +59,8 @@ QString GetWindowBackground();
 
 // Operations of /etc/deepin-installer.conf
 bool DeleteConfigFile();
-// TODO(xushaohua): setup uefi mode.
-//void WriteUEFI(bool is_efi);
+// Setup uefi mode or not.
+void WriteUEFI(bool is_efi);
 //void WriteInstallerMode(bool is_simple_mode);
 void WriteLocale(const QString& locale);
 void WriteUsername(const QString& username);

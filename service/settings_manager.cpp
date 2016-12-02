@@ -63,8 +63,7 @@ bool AppendToConfigFile(const QString& line) {
 }
 
 bool AppendToConfigFile(const QString& key, const QString& val) {
-  const QString line = key + "=" + val + "\n";
-  return AppendToConfigFile(line);
+  return AppendToConfigFile(QString("%1=\"%2\"\n").arg(key, val));
 }
 
 QStringList ListImageFiles(const QString& dir_name) {
@@ -337,6 +336,10 @@ bool DeleteConfigFile() {
     }
   }
   return true;
+}
+
+void WriteUEFI(bool is_efi) {
+  AppendToConfigFile("DI_UEFI", is_efi ? "true" : "false");
 }
 
 void WriteLocale(const QString& locale) {

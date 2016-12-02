@@ -8,6 +8,7 @@
 #include <QThread>
 
 #include "partman/partition_manager.h"
+#include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 
@@ -716,6 +717,9 @@ void PartitionDelegate::onManualPartDone(bool ok) {
       }
     }
 
+    if (IsEfiEnabled()) {
+      WriteUEFI(true);
+    }
     WritePartitionInfo(root_disk, root_path, bootloader_path_,
                        mount_points.join(';'));
   }
