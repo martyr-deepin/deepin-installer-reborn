@@ -717,11 +717,26 @@ void PartitionDelegate::onManualPartDone(bool ok) {
       }
     }
 
+    // TODO(xushaohua): Simplifies configuration.
     if (IsEfiEnabled()) {
+      // In EFI mode.
       WriteUEFI(true);
+      QString esp_path;
+      for (const Operation& operation : operations_) {
+        if (operation.new_partition.fs == FsType::EFI) {
+          esp_path = operation.new_partition.path;
+        }
+      }
+      if (esp_path.isEmpty()) {
+        qCritical() << "esp path is empty!";
+      }
+      WritePartitionInfo(root_disk, root_path, esp_path,
+                         mount_points.join(';'));
+    } else {
+      // In legacy mode.
+      WritePartitionInfo(root_disk, root_path, bootloader_path_,
+                         mount_points.join(';'));
     }
-    WritePartitionInfo(root_disk, root_path, bootloader_path_,
-                       mount_points.join(';'));
   }
 
   emit this->manualPartDone(ok);
