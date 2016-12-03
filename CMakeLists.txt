@@ -80,130 +80,225 @@ include_directories(third_party/qrencode)
 add_subdirectory(third_party/squashfs-tools)
 
 set(BASE_FILES
-    base/command.cpp base/command.h
+    base/command.cpp
+    base/command.h
     base/consts.h
-    base/file_util.cpp base/file_util.h
-    base/string_util.cpp base/string_util.h
+    base/file_util.cpp
+    base/file_util.h
+    base/string_util.cpp
+    base/string_util.h
     )
 
 set(OEM_FILES
     misc/oem_tool.cpp
-    misc/oem/oem_window.cpp misc/oem/oem_window.h
-    misc/oem/section_label.cpp misc/oem/section_label.h
+    misc/oem/oem_window.cpp
+    misc/oem/oem_window.h
+    misc/oem/section_label.cpp
+    misc/oem/section_label.h
     )
 
 set(PARTMAN_FILES
-    partman/device.cpp partman/device.h
-    partman/fs.cpp partman/fs.h
-    partman/libparted_util.cpp partman/libparted_util.h
-    partman/operation.cpp partman/operation.h
-    partman/os_prober.cpp partman/os_prober.h
-    partman/partition.cpp partman/partition.h
-    partman/partition_format.cpp partman/partition_format.h
-    partman/partition_manager.cpp partman/partition_manager.h
-    partman/partition_usage.cpp partman/partition_usage.h
-    partman/structs.cpp partman/structs.h
-    partman/utils.cpp partman/utils.h
+    partman/device.cpp
+    partman/device.h
+    partman/fs.cpp
+    partman/fs.h
+    partman/libparted_util.cpp
+    partman/libparted_util.h
+    partman/operation.cpp
+    partman/operation.h
+    partman/os_prober.cpp
+    partman/os_prober.h
+    partman/partition.cpp
+    partman/partition.h
+    partman/partition_format.cpp
+    partman/partition_format.h
+    partman/partition_manager.cpp
+    partman/partition_manager.h
+    partman/partition_usage.cpp
+    partman/partition_usage.h
+    partman/structs.cpp
+    partman/structs.h
+    partman/utils.cpp
+    partman/utils.h
     )
 
 set(SERVICE_FILES
-    service/backend/chroot.cpp service/backend/chroot.h
-    service/backend/geoip_request_worker.cpp service/backend/geoip_request_worker.h
-    service/backend/hooks_pack.cpp service/backend/hooks_pack.h
-    service/backend/hook_worker.cpp service/backend/hook_worker.h
-    service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
+    service/backend/chroot.cpp
+    service/backend/chroot.h
+    service/backend/geoip_request_worker.cpp
+    service/backend/geoip_request_worker.h
+    service/backend/hooks_pack.cpp
+    service/backend/hooks_pack.h
+    service/backend/hook_worker.cpp
+    service/backend/hook_worker.h
+    service/backend/wifi_inspect_worker.cpp
+    service/backend/wifi_inspect_worker.h
 
-    service/hooks_manager.cpp service/hooks_manager.h
-    service/log_manager.cpp service/log_manager.h
-    service/settings_manager.cpp service/settings_manager.h
-    service/system_language.cpp service/system_language.h
+    service/hooks_manager.cpp
+    service/hooks_manager.h
+    service/log_manager.cpp
+    service/log_manager.h
+    service/settings_manager.cpp
+    service/settings_manager.h
+    service/system_language.cpp
+    service/system_language.h
     service/settings_name.h
-    service/timezone_manager.cpp service/timezone_manager.h
+    service/timezone_manager.cpp
+    service/timezone_manager.h
     )
 
 set(SYSINFO_FILES
-    sysinfo/dev_disk.cpp sysinfo/dev_disk.h
-    sysinfo/machine.cpp sysinfo/machine.h
-    sysinfo/proc_mounts.cpp sysinfo/proc_mounts.h
-    sysinfo/proc_partitions.cpp sysinfo/proc_partitions.h
-    sysinfo/proc_swaps.cpp sysinfo/proc_swaps.h
-    sysinfo/timezone.cpp sysinfo/timezone.h
-    sysinfo/users.cpp sysinfo/users.h
-    sysinfo/validate_hostname.cpp sysinfo/validate_hostname.h
-    sysinfo/validate_password.cpp sysinfo/validate_password.h
-    sysinfo/validate_username.cpp sysinfo/validate_username.h
-    sysinfo/virtual_machine.cpp sysinfo/virtual_machine.h
+    sysinfo/dev_disk.cpp
+    sysinfo/dev_disk.h
+    sysinfo/machine.cpp
+    sysinfo/machine.h
+    sysinfo/proc_mounts.cpp
+    sysinfo/proc_mounts.h
+    sysinfo/proc_partitions.cpp
+    sysinfo/proc_partitions.h
+    sysinfo/proc_swaps.cpp
+    sysinfo/proc_swaps.h
+    sysinfo/timezone.cpp
+    sysinfo/timezone.h
+    sysinfo/users.cpp
+    sysinfo/users.h
+    sysinfo/validate_hostname.cpp
+    sysinfo/validate_hostname.h
+    sysinfo/validate_password.cpp
+    sysinfo/validate_password.h
+    sysinfo/validate_username.cpp
+    sysinfo/validate_username.h
+    sysinfo/virtual_machine.cpp
+    sysinfo/virtual_machine.h
     )
 
 set(UI_FILES
     ui/main_window.cpp ui/main_window.h
 
-    ui/delegates/avatar_list_delegate.cpp ui/delegates/avatar_list_delegate.h
-    ui/delegates/frameless_list_delegate.cpp ui/delegates/frameless_list_delegate.h
-    ui/delegates/partition_delegate.cpp ui/delegates/partition_delegate.h
-    ui/delegates/partition_util.cpp ui/delegates/partition_util.h
-    ui/delegates/table_combo_box_delegate.cpp ui/delegates/table_combo_box_delegate.h
+    ui/delegates/avatar_list_delegate.cpp
+    ui/delegates/avatar_list_delegate.h
+    ui/delegates/frameless_list_delegate.cpp
+    ui/delegates/frameless_list_delegate.h
+    ui/delegates/partition_delegate.cpp
+    ui/delegates/partition_delegate.h
+    ui/delegates/partition_util.cpp
+    ui/delegates/partition_util.h
+    ui/delegates/table_combo_box_delegate.cpp
+    ui/delegates/table_combo_box_delegate.h
 
     ui/frames/consts.h
-    ui/frames/inner/advanced_partition_frame.cpp ui/frames/inner/advanced_partition_frame.h
-    ui/frames/inner/edit_partition_frame.cpp ui/frames/inner/edit_partition_frame.h
-    ui/frames/inner/install_progress_slide_frame.cpp ui/frames/inner/install_progress_slide_frame.h
-    ui/frames/inner/new_partition_frame.cpp ui/frames/inner/new_partition_frame.h
-    ui/frames/inner/partition_loading_frame.cpp ui/frames/inner/partition_loading_frame.h
-    ui/frames/inner/prepare_install_frame.cpp ui/frames/inner/prepare_install_frame.h
-    ui/frames/inner/select_bootloader_frame.cpp ui/frames/inner/select_bootloader_frame.h
-    ui/frames/inner/simple_partition_frame.cpp ui/frames/inner/simple_partition_frame.h
-    ui/frames/inner/system_info_avatar_frame.cpp ui/frames/inner/system_info_avatar_frame.h
-    ui/frames/inner/system_info_form_frame.cpp ui/frames/inner/system_info_form_frame.h
-    ui/frames/inner/system_info_timezone_frame.cpp ui/frames/inner/system_info_timezone_frame.h
+    ui/frames/inner/advanced_partition_frame.cpp
+    ui/frames/inner/advanced_partition_frame.h
+    ui/frames/inner/edit_partition_frame.cpp
+    ui/frames/inner/edit_partition_frame.h
+    ui/frames/inner/install_progress_slide_frame.cpp
+    ui/frames/inner/install_progress_slide_frame.h
+    ui/frames/inner/new_partition_frame.cpp
+    ui/frames/inner/new_partition_frame.h
+    ui/frames/inner/partition_loading_frame.cpp
+    ui/frames/inner/partition_loading_frame.h
+    ui/frames/inner/prepare_install_frame.cpp
+    ui/frames/inner/prepare_install_frame.h
+    ui/frames/inner/select_bootloader_frame.cpp
+    ui/frames/inner/select_bootloader_frame.h
+    ui/frames/inner/simple_partition_frame.cpp
+    ui/frames/inner/simple_partition_frame.h
+    ui/frames/inner/system_info_avatar_frame.cpp
+    ui/frames/inner/system_info_avatar_frame.h
+    ui/frames/inner/system_info_form_frame.cpp
+    ui/frames/inner/system_info_form_frame.h
+    ui/frames/inner/system_info_timezone_frame.cpp
+    ui/frames/inner/system_info_timezone_frame.h
 
-    ui/frames/confirm_quit_frame.cpp ui/frames/confirm_quit_frame.h
-    ui/frames/control_panel_frame.cpp ui/frames/control_panel_frame.h
-    ui/frames/disk_space_insufficient_frame.cpp ui/frames/disk_space_insufficient_frame.h
-    ui/frames/install_failed_frame.cpp ui/frames/install_failed_frame.h
-    ui/frames/install_progress_frame.cpp ui/frames/install_progress_frame.h
-    ui/frames/install_success_frame.cpp ui/frames/install_success_frame.h
-    ui/frames/partition_frame.cpp ui/frames/partition_frame.h
-    ui/frames/partition_table_warning_frame.cpp ui/frames/partition_table_warning_frame.h
-    ui/frames/select_language_frame.cpp ui/frames/select_language_frame.h
-    ui/frames/system_info_frame.cpp ui/frames/system_info_frame.h
-    ui/frames/virtual_machine_frame.cpp ui/frames/virtual_machine_frame.h
+    ui/frames/confirm_quit_frame.cpp
+    ui/frames/confirm_quit_frame.h
+    ui/frames/control_panel_frame.cpp
+    ui/frames/control_panel_frame.h
+    ui/frames/disk_space_insufficient_frame.cpp
+    ui/frames/disk_space_insufficient_frame.h
+    ui/frames/install_failed_frame.cpp
+    ui/frames/install_failed_frame.h
+    ui/frames/install_progress_frame.cpp
+    ui/frames/install_progress_frame.h
+    ui/frames/install_success_frame.cpp
+    ui/frames/install_success_frame.h
+    ui/frames/partition_frame.cpp
+    ui/frames/partition_frame.h
+    ui/frames/partition_table_warning_frame.cpp
+    ui/frames/partition_table_warning_frame.h
+    ui/frames/select_language_frame.cpp
+    ui/frames/select_language_frame.h
+    ui/frames/system_info_frame.cpp
+    ui/frames/system_info_frame.h
+    ui/frames/virtual_machine_frame.cpp
+    ui/frames/virtual_machine_frame.h
 
-    ui/models/fs_model.cpp ui/models/fs_model.h
-    ui/models/language_list_model.cpp ui/models/language_list_model.h
-    ui/models/mount_point_model.cpp ui/models/mount_point_model.h
-    ui/models/partition_list_model.cpp ui/models/partition_list_model.h
+    ui/models/fs_model.cpp
+    ui/models/fs_model.h
+    ui/models/language_list_model.cpp
+    ui/models/language_list_model.h
+    ui/models/mount_point_model.cpp
+    ui/models/mount_point_model.h
+    ui/models/partition_list_model.cpp
+    ui/models/partition_list_model.h
 
-    ui/utils/widget_util.cpp ui/utils/widget_util.h
-    ui/utils/xutil.cpp ui/utils/xutil.h
+    ui/utils/widget_util.cpp
+    ui/utils/widget_util.h
+    ui/utils/xutil.cpp
+    ui/utils/xutil.h
 
-    ui/views/frameless_list_view.cpp ui/views/frameless_list_view.h
-    ui/views/pointer_list_view.cpp ui/views/pointer_list_view.h
+    ui/views/frameless_list_view.cpp
+    ui/views/frameless_list_view.h
+    ui/views/pointer_list_view.cpp
+    ui/views/pointer_list_view.h
 
-    ui/widgets/advanced_partition_button.cpp ui/widgets/advanced_partition_button.h
-    ui/widgets/avatar_button.cpp ui/widgets/avatar_button.h
-    ui/widgets/comment_label.cpp ui/widgets/comment_label.h
-    ui/widgets/device_model_label.cpp ui/widgets/device_model_label.h
-    ui/widgets/expanded_nav_button.cpp ui/widgets/expanded_nav_button.h
-    ui/widgets/flat_button.cpp ui/widgets/flat_button.h
-    ui/widgets/frosted_frame.cpp ui/widgets/frosted_frame.h
-    ui/widgets/icon_button.cpp ui/widgets/icon_button.h
-    ui/widgets/install_progress_tip.cpp ui/widgets/install_progress_tip.h
-    ui/widgets/line_edit.cpp ui/widgets/line_edit.h
-    ui/widgets/nav_button.cpp ui/widgets/nav_button.h
-    ui/widgets/page_indicator.cpp ui/widgets/page_indicator.h
-    ui/widgets/partition_size_slider.cpp ui/widgets/partition_size_slider.h
-    ui/widgets/pointer_button.cpp ui/widgets/pointer_button.h
-    ui/widgets/qr_widget.cpp ui/widgets/qr_widget.h
-    ui/widgets/simple_partition_button.cpp ui/widgets/simple_partition_button.h
-    ui/widgets/system_info_tip.cpp ui/widgets/system_info_tip.h
-    ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
-    ui/widgets/title_label.cpp ui/widgets/title_label.h
-    ui/widgets/wallpaper_item.cpp ui/widgets/wallpaper_item.h
+    ui/widgets/advanced_partition_button.cpp
+    ui/widgets/advanced_partition_button.h
+    ui/widgets/avatar_button.cpp
+    ui/widgets/avatar_button.h
+    ui/widgets/comment_label.cpp
+    ui/widgets/comment_label.h
+    ui/widgets/device_model_label.cpp
+    ui/widgets/device_model_label.h
+    ui/widgets/expanded_nav_button.cpp
+    ui/widgets/expanded_nav_button.h
+    ui/widgets/flat_button.cpp
+    ui/widgets/flat_button.h
+    ui/widgets/frosted_frame.cpp
+    ui/widgets/frosted_frame.h
+    ui/widgets/icon_button.cpp
+    ui/widgets/icon_button.h
+    ui/widgets/install_progress_tip.cpp
+    ui/widgets/install_progress_tip.h
+    ui/widgets/line_edit.cpp
+    ui/widgets/line_edit.h
+    ui/widgets/nav_button.cpp
+    ui/widgets/nav_button.h
+    ui/widgets/page_indicator.cpp
+    ui/widgets/page_indicator.h
+    ui/widgets/partition_size_slider.cpp
+    ui/widgets/partition_size_slider.h
+    ui/widgets/pointer_button.cpp
+    ui/widgets/pointer_button.h
+    ui/widgets/qr_widget.cpp
+    ui/widgets/qr_widget.h
+    ui/widgets/simple_partition_button.cpp
+    ui/widgets/simple_partition_button.h
+    ui/widgets/system_info_tip.cpp
+    ui/widgets/system_info_tip.h
+    ui/widgets/table_combo_box.cpp
+    ui/widgets/table_combo_box.h
+    ui/widgets/title_label.cpp
+    ui/widgets/title_label.h
+    ui/widgets/wallpaper_item.cpp
+    ui/widgets/wallpaper_item.h
 
-    ui/xrandr/multi_head_manager.cpp ui/xrandr/multi_head_manager.h
-    ui/xrandr/multi_head_worker.cpp ui/xrandr/multi_head_worker.h
-    ui/xrandr/xrandr_wrapper.cpp ui/xrandr/xrandr_wrapper.h
+    ui/xrandr/multi_head_manager.cpp
+    ui/xrandr/multi_head_manager.h
+    ui/xrandr/multi_head_worker.cpp
+    ui/xrandr/multi_head_worker.h
+    ui/xrandr/xrandr_wrapper.cpp
+    ui/xrandr/xrandr_wrapper.h
     )
 
 set(ROOT_UNITTEST_FILES
@@ -289,7 +384,8 @@ add_executable(deepin-installer-xrandr-switchy
                misc/xrandr_switchy.cpp
 
                ${BASE_FILES}
-               ui/xrandr/xrandr_wrapper.cpp ui/xrandr/xrandr_wrapper.h
+               ui/xrandr/xrandr_wrapper.cpp
+               ui/xrandr/xrandr_wrapper.h
                )
 target_link_libraries(deepin-installer-xrandr-switchy ${Qt_LIBS})
 
@@ -308,9 +404,12 @@ add_executable(combobox-test
                ui/tests/combobox_test.cpp
                
                ${BASE_FILES}
-               ui/delegates/table_combo_box_delegate.cpp ui/delegates/table_combo_box_delegate.h
-               ui/utils/widget_util.cpp ui/utils/widget_util.h
-               ui/widgets/table_combo_box.cpp ui/widgets/table_combo_box.h
+               ui/delegates/table_combo_box_delegate.cpp
+               ui/delegates/table_combo_box_delegate.h
+               ui/utils/widget_util.cpp
+               ui/utils/widget_util.h
+               ui/widgets/table_combo_box.cpp
+               ui/widgets/table_combo_box.h
                ui/images/images.qrc
                ui/styles/styles.qrc
                )
@@ -322,9 +421,12 @@ add_executable(locale-manager-test
                service/timezone_manager_test.cpp
                
                ${BASE_FILES}
-               service/backend/wifi_inspect_worker.cpp service/backend/wifi_inspect_worker.h
-               service/backend/geoip_request_worker.cpp service/backend/geoip_request_worker.h
-               service/timezone_manager.cpp service/timezone_manager.h
+               service/backend/wifi_inspect_worker.cpp
+               service/backend/wifi_inspect_worker.h
+               service/backend/geoip_request_worker.cpp
+               service/backend/geoip_request_worker.h
+               service/timezone_manager.cpp
+               service/timezone_manager.h
                ${SYSINFO_FILES}
                )
 target_link_libraries(locale-manager-test ${Qt_LIBS})
@@ -366,7 +468,9 @@ add_executable(unsquashfs_gui
                misc/unsquashfs_gui/unsquashfs_progress_window.h
 
                ${BASE_FILES}
-               misc/unsquashfs_gui/worker.cpp misc/unsquashfs_gui/worker.h)
+               misc/unsquashfs_gui/worker.cpp
+               misc/unsquashfs_gui/worker.h
+               )
 target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 
 

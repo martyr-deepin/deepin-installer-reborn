@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "third_party/googletest/googletest/include/gtest/gtest.h"
+#include "third_party/googletest/include/gtest/gtest.h"
 
 int main(int argc, char* argv[]) {
   ::testing::InitGoogleTest(&argc, argv);

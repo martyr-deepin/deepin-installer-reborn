@@ -4,7 +4,7 @@
 
 #include "sysinfo/validate_username.h"
 
-#include "third_party/googletest/googletest/include/gtest/gtest.h"
+#include "third_party/googletest/include/gtest/gtest.h"
 
 namespace installer {
 namespace {
