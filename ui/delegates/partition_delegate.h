@@ -64,12 +64,17 @@ class PartitionDelegate : public QObject {
 
  public slots:
   // Notify partition_manager to do manual partition operations.
+  // Validate operations before calling this method.
   // NOTE(xushaohua): This action can not be undo.
   void doManualPart();
 
-  // Set bootloader path to |bootloader_path|
-  // This slot is used only in SelectBootloaderFrame.
-  void setBootloaderPath(const QString bootloader_path);
+  // Format a primary partition |partition|.
+  // Used in SimplePartitionFrame.
+  void formatSimplePartition(const Partition& partition,
+                             FsType fs_type,
+                             const QString& mount_point);
+  // Clear simple_operations_ list.
+  void resetSimpleOperations();
 
   // Operation helpers.
   // Create a new partition.
@@ -95,6 +100,10 @@ class PartitionDelegate : public QObject {
   // Refresh virtual device list based on physical device list and
   // operator list. It is used when a new operator is created.
   void refreshVisual();
+
+  // Set bootloader path to |bootloader_path|
+  // This slot is used only in SelectBootloaderFrame.
+  void setBootloaderPath(const QString bootloader_path);
 
  private:
   void initConnections();
@@ -122,6 +131,8 @@ class PartitionDelegate : public QObject {
   // Physical device list.
   DeviceList real_devices_;
 
+  // simple_operations_ is only used for SimplePartitionFrame
+  OperationList simple_operations_;
   OperationList operations_;
 
   QStringList all_mount_points_;

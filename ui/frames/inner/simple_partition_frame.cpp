@@ -35,7 +35,7 @@ const int kWindowWidth = 960;
 
 const char kTextTip[] = "Install here";
 
-FsType GetDefaultFs() {
+FsType GetPartitionDefaultFs() {
   return GetFsTypeByName(GetSettingsString(kPartitionDefaultFs));
 }
 
@@ -52,49 +52,6 @@ SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
   qRegisterMetaType<Partition>("Partition");
 }
 
-void SimplePartitionFrame::appendOperations() {
-  bool swap_is_set = false;
-  bool efi_is_set = false;
-  for (const Device& device : delegate_->devices()) {
-    for (const Partition& partition : device.partitions) {
-      if (partition.fs == FsType::LinuxSwap) {
-        swap_is_set = true;
-      } else if (partition.fs == FsType::EFI) {
-        efi_is_set = true;
-      }
-    }
-  }
-
-  SimplePartitionButton* button =
-      qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
-  Q_ASSERT(button);
-  // TODO(xushaohua): Get default fs type.
-  if (IsEfiEnabled() && !efi_is_set) {
-    // Create root partition and efi partition.
-    delegate_->createPartition(button->partition(),
-                               PartitionType::Normal,
-                               true,
-                               FsType::EFI,
-                               "",
-                               500);
-//    delegate_->createPartition(button->partition(),
-//                               PartitionType::Normal,
-//                               false,
-//                               GetDefaultFs(),
-//                               kMountPointRoot,
-//                               500);
-  } else {
-    // Only create root partition.
-    delegate_->formatPartition(button->partition(),
-                               GetDefaultFs(),
-                               kMountPointRoot);
-  }
-
-  if (!swap_is_set) {
-    // TODO(xushaohua): Create swap file
-  }
-}
-
 bool SimplePartitionFrame::validate() {
   SimplePartitionButton* button =
       qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
@@ -102,6 +59,10 @@ bool SimplePartitionFrame::validate() {
     msg_label_->setText(tr("Please select one partition"));
     return false;
   }
+
+  // If currently selected device reaches its maximum primary partitions and
+  // button->partition() is a Freespace, it is impossible to created a new
+  // primary partition.
 
   const int required_space = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
   const qint64 required_bytes = required_space * kGibiByte;
@@ -130,6 +91,51 @@ void SimplePartitionFrame::showEvent(QShowEvent* event) {
   if (button) {
     // Display install_tip explicitly.
     this->showInstallTip(button);
+  }
+}
+
+
+void SimplePartitionFrame::appendOperations() {
+  delegate_->resetSimpleOperations();
+
+  bool swap_is_set = false;
+  bool efi_is_set = false;
+  for (const Device& device : delegate_->devices()) {
+    for (const Partition& partition : device.partitions) {
+      if (partition.fs == FsType::LinuxSwap) {
+        swap_is_set = true;
+      } else if (partition.fs == FsType::EFI) {
+        efi_is_set = true;
+      }
+    }
+  }
+
+  SimplePartitionButton* button =
+      qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
+  Q_ASSERT(button);
+  if (IsEfiEnabled() && !efi_is_set) {
+    // Create root partition and efi partition.
+//    delegate_->createPartition(button->partition(),
+//                               PartitionType::Normal,
+//                               true,
+//                               FsType::EFI,
+//                               "",
+//                               500);
+//    delegate_->createPartition(button->partition(),
+//                               PartitionType::Normal,
+//                               false,
+//                               GetDefaultFs(),
+//                               kMountPointRoot,
+//                               500);
+  } else {
+    // Only create root partition.
+    delegate_->formatSimplePartition(button->partition(),
+                                     GetPartitionDefaultFs(),
+                                     kMountPointRoot);
+  }
+
+  if (!swap_is_set) {
+    // TODO(xushaohua): Create swap file
   }
 }
 
@@ -300,12 +306,15 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
       // Clear mount point of new partition if it is not root.
       delegate_->updateMountPoint(part_button->partition(), "");
     }
+
     // Do not refresh partition list here. Instead, call
     // delegate_->refreshVisual() in PartitionFrame before switching to
     // AdvancedPartitionFrame.
-  }
 
-  // TODO(xushaohua): Set simple operators in delegate.
+    if (checked && this->validate()) {
+      this->appendOperations();
+    }
+  }
 }
 
 }  // namespace installer

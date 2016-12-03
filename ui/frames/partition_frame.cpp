@@ -204,9 +204,7 @@ void PartitionFrame::onAdvancedFrameButtonToggled() {
 
 void PartitionFrame::onNextButtonClicked() {
   if (partition_stacked_layout_->currentWidget() == simple_partition_frame_) {
-    if (simple_partition_frame_->validate()) {
-      simple_partition_frame_->appendOperations();
-    } else {
+    if (!simple_partition_frame_->validate()) {
       return;
     }
   } else if (!advanced_partition_frame_->validate()) {

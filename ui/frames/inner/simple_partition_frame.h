@@ -12,6 +12,8 @@ class QGridLayout;
 class QLabel;
 class QShowEvent;
 
+#include "partman/partition.h"
+
 namespace installer {
 
 class PartitionDelegate;
@@ -23,15 +25,6 @@ class SimplePartitionFrame : public QFrame {
  public:
   SimplePartitionFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
 
-  // Create and append operations into delegate:
-  //  * A root partition;
-  //  * A linux-swap file if no linux-swap partition is found;
-  //  * An EFI partition if EFI mode is on and no EFI partition is found;
-  // Call this method only if SimplePartitionFrame is represented in
-  // PartitionFrame.
-  // And call validate() first.
-  void appendOperations();
-
   // Validate whether a root partition is selected and large enough.
   bool validate();
 
@@ -42,6 +35,14 @@ class SimplePartitionFrame : public QFrame {
   void showEvent(QShowEvent* event) override;
 
  private:
+  // Create and append operations into delegate:
+  //  * A root partition;
+  //  * A linux-swap file if no linux-swap partition is found;
+  //  * An EFI partition if EFI mode is on and no EFI partition is found;
+  // Call this method only if SimplePartitionFrame is represented in
+  // PartitionFrame. And call validate() first.
+  void appendOperations();
+
   void initConnections();
   void initUI();
 

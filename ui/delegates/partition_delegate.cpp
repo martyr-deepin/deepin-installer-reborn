@@ -59,6 +59,7 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
       partition_thread_(new QThread()),
       devices_(),
       real_devices_(),
+      simple_operations_(),
       operations_(),
       all_mount_points_(),
       fs_types_(),
@@ -171,11 +172,16 @@ bool PartitionDelegate::canAddLogical(const Partition& partition) const {
 }
 
 QStringList PartitionDelegate::getOperationDescriptions() const {
-  QStringList result;
+  QStringList descriptions;
   for (const Operation& operation : operations_) {
-    result.append(operation.description());
+    descriptions.append(operation.description());
   }
-  return result;
+  for (const Operation& operation : simple_operations_) {
+    descriptions.append(operation.description());
+  }
+
+  qDebug() << "operation descriptions:" << descriptions;
+  return descriptions;
 }
 
 Partition PartitionDelegate::getRealPartition(
@@ -227,6 +233,81 @@ const FsTypeList& PartitionDelegate::getFsTypes() {
     }
   }
   return fs_types_;
+}
+
+void PartitionDelegate::doManualPart() {
+  // Merge simple_operations_ and operations_.
+  operations_.append(simple_operations_);
+
+  // Set boot flags of boot partitions.
+  bool is_boot_set = false;
+  // First check EFI filesystem.
+  for (Operation& operation : operations_) {
+    if (operation.new_partition.fs == FsType::EFI) {
+      operation.new_partition.flags.append(PartitionFlag::Boot);
+      operation.new_partition.flags.append(PartitionFlag::ESP);
+      is_boot_set = true;
+    }
+  }
+
+  // Then, check /boot partition.
+  if (!is_boot_set) {
+    for (Operation& operation : operations_) {
+      if (operation.new_partition.mount_point == kMountPointBoot) {
+        operation.new_partition.flags.append(PartitionFlag::Boot);
+        is_boot_set = true;
+      }
+    }
+  }
+
+  // At last, check / partition.
+  if (!is_boot_set) {
+    for (Operation& operation : operations_) {
+      if (operation.new_partition.mount_point == kMountPointRoot) {
+        operation.new_partition.flags.append(PartitionFlag::Boot);
+        is_boot_set = true;
+      }
+    }
+  }
+  if (!is_boot_set) {
+    // No boot partition found! Critical error!
+    // We shall never reach here.
+    qCritical() << "No boot partition found!";
+    emit this->onManualPartDone(false);
+  } else {
+    emit partition_manager_->manualPart(operations_);
+  }
+}
+
+void PartitionDelegate::formatSimplePartition(const Partition& partition,
+                                              FsType fs_type,
+                                              const QString& mount_point) {
+  qDebug() << "formatSimplePartition()" << partition << fs_type << mount_point;
+
+//  this->resetOperationMountPoint(mount_point);
+
+  Partition new_partition;
+  new_partition.sector_size = partition.sector_size;
+  new_partition.start_sector = partition.start_sector;
+  new_partition.end_sector = partition.end_sector;
+  new_partition.path = partition.path;
+  new_partition.device_path = partition.device_path;
+  new_partition.fs = fs_type;
+  new_partition.type = partition.type;
+  new_partition.mount_point = mount_point;
+  if (partition.status == PartitionStatus::Real) {
+    new_partition.status = PartitionStatus::Format;
+  } else if (partition.status == PartitionStatus::New ||
+             partition.status == PartitionStatus::Format) {
+    new_partition.status = partition.status;
+  }
+
+  Operation operation(OperationType::Format,partition, new_partition);
+  simple_operations_.append(operation);
+}
+
+void PartitionDelegate::resetSimpleOperations() {
+  simple_operations_.clear();
 }
 
 void PartitionDelegate::createPartition(const Partition& partition,
@@ -446,47 +527,6 @@ void PartitionDelegate::refreshVisual() {
   emit this->deviceRefreshed();
 
   qDebug() << "operations:" << operations_;
-}
-
-void PartitionDelegate::doManualPart() {
-  // Set boot flags of boot partitions.
-  bool is_boot_set = false;
-  // First check EFI filesystem.
-  for (Operation& operation : operations_) {
-    if (operation.new_partition.fs == FsType::EFI) {
-      operation.new_partition.flags.append(PartitionFlag::Boot);
-      operation.new_partition.flags.append(PartitionFlag::ESP);
-      is_boot_set = true;
-    }
-  }
-
-  // Then, check /boot partition.
-  if (!is_boot_set) {
-    for (Operation& operation : operations_) {
-      if (operation.new_partition.mount_point == kMountPointBoot) {
-        operation.new_partition.flags.append(PartitionFlag::Boot);
-        is_boot_set = true;
-      }
-    }
-  }
-
-  // At last, check / partition.
-  if (!is_boot_set) {
-    for (Operation& operation : operations_) {
-      if (operation.new_partition.mount_point == kMountPointRoot) {
-        operation.new_partition.flags.append(PartitionFlag::Boot);
-        is_boot_set = true;
-      }
-    }
-  }
-  if (!is_boot_set) {
-    // No boot partition found! Critical error!
-    // We shall never reach here.
-    qCritical() << "No boot partition found!";
-    emit this->onManualPartDone(false);
-  } else {
-    emit partition_manager_->manualPart(operations_);
-  }
 }
 
 void PartitionDelegate::setBootloaderPath(const QString bootloader_path) {

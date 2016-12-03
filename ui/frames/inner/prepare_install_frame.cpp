@@ -49,6 +49,7 @@ void PrepareInstallFrame::updateDescription() {
   // NOTE(xushaohua): Add tow line breaks to simulate line-height property
   // in QLabel.
   const QString description = modified_desc_list.join("\n\n");
+  qDebug() << "description:" << description;
   desc_label_->setText(description);
 }
 
@@ -84,7 +85,6 @@ void PrepareInstallFrame::initUI() {
 
   desc_label_ = new QLabel();
   desc_label_->setObjectName("desc_label");
-  desc_label_->setWordWrap(true);
   // TODO(xushaohua): Add a ScrollArea.
 
   abort_button_ = new NavButton(tr(kTextBack));
