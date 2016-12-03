@@ -57,7 +57,7 @@ void PartitionSizeSlider::initUI() {
   editor_->setObjectName("editor");
   int_validator_ = new QIntValidator(editor_);
   editor_->setValidator(int_validator_);
-  editor_->setFixedWidth(50);
+  editor_->setFixedWidth(68);
 
   QLabel* size_label = new QLabel("Mib");
   size_label->setObjectName("size_label");
@@ -66,13 +66,13 @@ void PartitionSizeSlider::initUI() {
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
   layout->addWidget(slider_);
-  layout->addSpacing(12);
+  layout->addSpacing(8);
   layout->addWidget(editor_);
   layout->addWidget(size_label);
   this->setLayout(layout);
   this->setContentsMargins(10, 0, 10, 0);
   // Same as TableComboBox
-  this->setFixedSize(240, 36);
+  this->setFixedSize(280, 36);
   this->setStyleSheet(ReadFile(":/styles/partition_size_slider.css"));
 }
 

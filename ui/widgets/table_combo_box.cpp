@@ -13,7 +13,8 @@ namespace installer {
 TableComboBox::TableComboBox(QWidget* parent) : QComboBox(parent) {
   this->setObjectName("table_combo_box");
 
-  this->setFixedSize(240, 36);
+  // Same as PartitionSizeSlider.
+  this->setFixedSize(280, 36);
   QAbstractItemDelegate* delegate = new TableComboBoxDelegate(this);
   this->setItemDelegate(delegate);
   this->setStyleSheet(ReadFile(":/styles/table_combo_box.css"));

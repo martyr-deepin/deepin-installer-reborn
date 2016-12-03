@@ -209,11 +209,11 @@ void EditPartitionFrame::initUI() {
   grid_layout->addWidget(format_check_box_, 2, 0, Qt::AlignRight);
   grid_layout->addWidget(format_label_, 2, 1);
 
-  QFrame* fs_frame = new QFrame();
-  fs_frame->setObjectName("fs_frame");
-  fs_frame->setContentsMargins(0, 0, 0, 0);
-  fs_frame->setLayout(grid_layout);
-  fs_frame->setFixedWidth(360);
+  QFrame* grid_frame = new QFrame();
+  grid_frame->setObjectName("grid_frame");
+  grid_frame->setContentsMargins(0, 0, 0, 0);
+  grid_frame->setLayout(grid_layout);
+  grid_frame->setFixedWidth(400);
 
   cancel_button_ = new NavButton(tr(kTextCancel));
   ok_button_ = new NavButton(tr(kTextOk));
@@ -231,7 +231,7 @@ void EditPartitionFrame::initUI() {
   layout->addSpacing(10);
   layout->addWidget(separator_label, 0, Qt::AlignHCenter);
   layout->addSpacing(10);
-  layout->addWidget(fs_frame, 0, Qt::AlignHCenter);
+  layout->addWidget(grid_frame, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addWidget(cancel_button_, 0, Qt::AlignHCenter);
   layout->addWidget(ok_button_, 0, Qt::AlignHCenter);

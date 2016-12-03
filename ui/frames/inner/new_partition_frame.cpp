@@ -170,7 +170,7 @@ void NewPartitionFrame::initUI() {
   grid_frame->setObjectName("grid_frame");
   grid_frame->setContentsMargins(0, 0, 0, 0);
   grid_frame->setLayout(grid_layout);
-  grid_frame->setFixedWidth(360);
+  grid_frame->setFixedWidth(400);
 
   cancel_button_ = new NavButton(tr(kTextCancel));
   create_button_ = new NavButton(tr(kTextOk));
