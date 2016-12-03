@@ -8,8 +8,12 @@
 #include <QWidget>
 class QComboBox;
 class QMenu;
+class QLayout;
 
 namespace installer {
+
+// Delete layout items in |layout|.
+void ClearLayout(QLayout* layout);
 
 // Set background of child widget with name |child_name| in |root|
 // to transparent. Returns false if failed.

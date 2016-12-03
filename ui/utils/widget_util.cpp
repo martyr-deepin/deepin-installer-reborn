@@ -6,6 +6,8 @@
 
 #include <QComboBox>
 #include <QDebug>
+#include <QLayout>
+#include <QLayoutItem>
 #include <QMenu>
 
 namespace installer {
@@ -28,6 +30,16 @@ void WidgetTreeWalk(QWidget* root, int indent) {
 }
 
 }  // namespace
+
+void ClearLayout(QLayout* layout) {
+  for (QLayoutItem* item = layout->takeAt(0);
+       item != nullptr;
+       item = layout->takeAt(0)) {
+    delete item->widget();
+    delete item;
+    item = nullptr;
+  }
+}
 
 bool SetChildTransparent(QWidget* root, const QString& child_name) {
   for (QObject* child : root->children()) {

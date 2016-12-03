@@ -19,6 +19,7 @@
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/advanced_partition_button.h"
 #include "ui/widgets/pointer_button.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -220,11 +221,7 @@ void AdvancedPartitionFrame::repaintDevices() {
   }
 
   // Remove all widgets in partition layout.
-  for (QLayoutItem* item = partition_layout_->takeAt(0); item != NULL;
-       item = partition_layout_->takeAt(0)) {
-    delete item->widget();
-    delete item;
-  }
+  ClearLayout(partition_layout_);
 
   for (const Device& device : delegate_->devices()) {
     QLabel* model_label = new QLabel();

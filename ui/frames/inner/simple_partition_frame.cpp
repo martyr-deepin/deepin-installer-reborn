@@ -23,6 +23,7 @@
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/device_model_label.h"
 #include "ui/widgets/simple_partition_button.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -211,12 +212,7 @@ void SimplePartitionFrame::initUI() {
 
 void SimplePartitionFrame::repaintDevices() {
   // Clear grid layout.
-  QLayoutItem* layout_item;
-  while ((layout_item = grid_layout_->takeAt(0)) != nullptr) {
-    delete layout_item->widget();
-    delete layout_item;
-    layout_item = nullptr;
-  }
+  ClearLayout(grid_layout_);
 
   // Clear button group.
   for (QAbstractButton* button : button_group_->buttons()) {
@@ -302,17 +298,17 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
     if (!checked) {
       // Clear mount point of old root partition.
       delegate_->updateMountPoint(part_button->partition(), "");
+
+      // Do not refresh partition list here. Instead, call
+      // delegate_->refreshVisual() in PartitionFrame before switching to
+      // AdvancedPartitionFrame.
     } else if(part_button->partition().mount_point != kMountPointRoot) {
       // Clear mount point of new partition if it is not root.
       delegate_->updateMountPoint(part_button->partition(), "");
-    }
 
-    // Do not refresh partition list here. Instead, call
-    // delegate_->refreshVisual() in PartitionFrame before switching to
-    // AdvancedPartitionFrame.
-
-    if (checked && this->validate()) {
-      this->appendOperations();
+      if (this->validate()) {
+        this->appendOperations();
+      }
     }
   }
 }
