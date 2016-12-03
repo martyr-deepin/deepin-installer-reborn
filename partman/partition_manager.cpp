@@ -101,6 +101,11 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
 
 // Unmount devices and swap partitions.
 bool UnmountDevices() {
+#ifndef NDEBUG
+  // Do not umount any partition in debug mode.
+  return true;
+#endif
+
   // Swap off partitions and files.
   bool ok;
   QString out, err;
