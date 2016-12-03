@@ -9,6 +9,7 @@
 #include <QStackedWidget>
 #include <QTabBar>
 #include <QTextEdit>
+#include <QTextFormat>
 #include <QTimer>
 #include <QVBoxLayout>
 
@@ -91,6 +92,8 @@ void ControlPanelFrame::initConnections() {
           this, &ControlPanelFrame::currentPageChanged);
   connect(tab_bar_, &QTabBar::currentChanged,
           stacked_widget_, &QStackedWidget::setCurrentIndex);
+  connect(log_viewer_, &QTextEdit::cursorPositionChanged,
+          this, &ControlPanelFrame::onLogViewerCursorPositionChanged);
   connect(timer_, &QTimer::timeout,
           this, &ControlPanelFrame::onTimerTimeout);
 }
@@ -142,6 +145,15 @@ void ControlPanelFrame::initUI() {
   this->setLayout(layout);
   this->setStyleSheet(ReadFile(":/styles/control_panel_frame.css"));
   this->setFixedSize(kWindowWidth, kWindowHeight);
+}
+
+void ControlPanelFrame::onLogViewerCursorPositionChanged() {
+  QTextEdit::ExtraSelection highlight;
+  highlight.cursor = log_viewer_->textCursor();
+  highlight.cursor.clearSelection();
+  highlight.format.setProperty(QTextFormat::FullWidthSelection, true);
+  highlight.format.setBackground(QBrush(QColor(65, 65, 65)));
+  log_viewer_->setExtraSelections({highlight});
 }
 
 void ControlPanelFrame::onTimerTimeout() {

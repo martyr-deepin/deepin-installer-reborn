@@ -50,6 +50,9 @@ class ControlPanelFrame : public QFrame {
   QString log_content_;
 
  private slots:
+  // Highlight current line when position of text cursor is changed.
+  void onLogViewerCursorPositionChanged();
+
   void onTimerTimeout();
 };
 
