@@ -279,6 +279,25 @@ void PartitionDelegate::doManualPart() {
   }
 }
 
+void PartitionDelegate::createSimplePartition(const Partition& partition,
+                                              PartitionType partition_type,
+                                              bool align_start,
+                                              FsType fs_type,
+                                              const QString& mount_point,
+                                              qint64 total_sectors) {
+  Q_UNUSED(partition);
+  Q_UNUSED(partition_type);
+  Q_UNUSED(align_start);
+  Q_UNUSED(fs_type);
+  Q_UNUSED(mount_point);
+  Q_UNUSED(total_sectors);
+}
+
+Partition PartitionDelegate::deleteSimplePartition(const Partition& partition) {
+  Q_UNUSED(partition);
+  return Partition();
+}
+
 void PartitionDelegate::formatSimplePartition(const Partition& partition,
                                               FsType fs_type,
                                               const QString& mount_point) {

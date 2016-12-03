@@ -68,6 +68,16 @@ class PartitionDelegate : public QObject {
   // NOTE(xushaohua): This action can not be undo.
   void doManualPart();
 
+  void createSimplePartition(const Partition& partition,
+                             PartitionType partition_type,
+                             bool align_start,
+                             FsType fs_type,
+                             const QString& mount_point,
+                             qint64 total_sectors);
+
+  // Delete |partition| and returns newly created unallocated partition.
+  Partition deleteSimplePartition(const Partition& partition);
+
   // Format a primary partition |partition|.
   // Used in SimplePartitionFrame.
   void formatSimplePartition(const Partition& partition,

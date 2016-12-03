@@ -60,16 +60,24 @@ bool SimplePartitionFrame::validate() {
     msg_label_->setText(tr("Please select one partition"));
     return false;
   }
+  const Partition& partition = button->partition();
+
+  const int required_space = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  const qint64 required_bytes = required_space * kGibiByte;
+  if (partition.getByteLength() < required_bytes) {
+    msg_label_->setText(tr("At least %1 G is required for root partition.")
+                            .arg(required_space));
+    return false;
+  }
 
   // If currently selected device reaches its maximum primary partitions and
   // button->partition() is a Freespace, it is impossible to created a new
   // primary partition.
 
-  const int required_space = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-  const qint64 required_bytes = required_space * kGibiByte;
-  if (button->partition().getByteLength() < required_bytes) {
-    msg_label_->setText(tr("At least %1 G is required for root partition.")
-                            .arg(required_space));
+  if ((partition.type == PartitionType::Unallocated) &&
+      !delegate_->canAddPrimary(partition) &&
+      !delegate_->canAddLogical(partition)) {
+    msg_label_->setText(tr("No more partition can be created!"));
     return false;
   }
 
@@ -114,26 +122,59 @@ void SimplePartitionFrame::appendOperations() {
   SimplePartitionButton* button =
       qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
   Q_ASSERT(button);
+  Partition partition = button->partition();
   if (IsEfiEnabled() && !efi_is_set) {
-    // Create root partition and efi partition.
-//    delegate_->createPartition(button->partition(),
-//                               PartitionType::Normal,
-//                               true,
-//                               FsType::EFI,
-//                               "",
-//                               500);
-//    delegate_->createPartition(button->partition(),
-//                               PartitionType::Normal,
-//                               false,
-//                               GetDefaultFs(),
-//                               kMountPointRoot,
-//                               500);
+    if (partition.type == PartitionType::Normal) {
+      // Delete partition first.
+      partition = delegate_->deleteSimplePartition(partition);
+    }
+    // Create root partition and EFI partition.
+    const int efi_space = GetSettingsInt(kPartitionDefaultEFISpace);
+    const qint64 efi_sectors = efi_space * kMebiByte / partition.sector_size;
+    // Create EFI partition from start.
+    delegate_->createPartition(partition,
+                               PartitionType::Normal,
+                               true,
+                               FsType::EFI,
+                               "",
+                               efi_sectors);
+
+    // Create root partition from end.
+    const qint64 remaining_sectors = partition.getSectorLength() - efi_sectors;
+    delegate_->createPartition(partition,
+                               PartitionType::Normal,
+                               false,
+                               GetPartitionDefaultFs(),
+                               kMountPointRoot,
+                               remaining_sectors);
   } else {
     // Only create root partition.
-    delegate_->formatSimplePartition(button->partition(),
-                                     GetPartitionDefaultFs(),
-                                     kMountPointRoot);
+    if (partition.type == PartitionType::Unallocated) {
+      if (delegate_->canAddLogical(partition)) {
+        delegate_->createSimplePartition(partition,
+                                         PartitionType::Logical,
+                                         false,
+                                         GetPartitionDefaultFs(),
+                                         kMountPointRoot,
+                                         partition.getSectorLength());
+      } else if (delegate_->canAddPrimary(partition)) {
+        delegate_->createSimplePartition(partition,
+                                         PartitionType::Normal,
+                                         false,
+                                         GetPartitionDefaultFs(),
+                                         kMountPointRoot,
+                                         partition.getSectorLength());
+      } else {
+        // We shall never reach here.
+        qCritical() << "Reached maximum primary partitions:" << partition.path;
+      }
+    } else {
+      delegate_->formatSimplePartition(button->partition(),
+                                       GetPartitionDefaultFs(),
+                                       kMountPointRoot);
+    }
   }
+
 
   if (!swap_is_set) {
     // TODO(xushaohua): Create swap file
