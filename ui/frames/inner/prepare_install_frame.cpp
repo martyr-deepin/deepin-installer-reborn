@@ -4,9 +4,10 @@
 
 #include "ui/frames/inner/prepare_install_frame.h"
 
+#include <QEvent>
+#include <QHBoxLayout>
 #include <QLabel>
-#include <QtCore/QEvent>
-#include <QtWidgets/QHBoxLayout>
+#include <QScrollArea>
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_delegate.h"
@@ -85,7 +86,15 @@ void PrepareInstallFrame::initUI() {
 
   desc_label_ = new QLabel();
   desc_label_->setObjectName("desc_label");
-  // TODO(xushaohua): Add a ScrollArea.
+  desc_label_->setAlignment(Qt::AlignHCenter);
+  desc_label_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+
+  QScrollArea* description_scroll_area = new QScrollArea();
+  description_scroll_area->setObjectName("desc_area");
+  description_scroll_area->setWidget(desc_label_);
+  description_scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  description_scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  description_scroll_area->setWidgetResizable(true);
 
   abort_button_ = new NavButton(tr(kTextBack));
   continue_button_ = new NavButton(tr(kTextContinue));
@@ -97,7 +106,7 @@ void PrepareInstallFrame::initUI() {
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(subtitle_label_, 0, Qt::AlignCenter);
-  layout->addWidget(desc_label_, 0, Qt::AlignHCenter);
+  layout->addWidget(description_scroll_area);
   layout->addStretch();
   layout->addWidget(abort_button_, 0, Qt::AlignCenter);
   layout->addWidget(continue_button_, 0, Qt::AlignCenter);
