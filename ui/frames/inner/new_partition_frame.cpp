@@ -200,8 +200,12 @@ void NewPartitionFrame::onCreateButtonClicked() {
                                                     PartitionType::Logical;
   const bool align_start = (alignment_box_->currentIndex() == 0);
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
-  const int mp_index = mount_point_box_->currentIndex();
-  const QString mount_point = mount_point_model_->getMountPoint(mp_index);
+  QString mount_point;
+  if (mount_point_box_->isVisible()) {
+    // Set mount_point only if mount_point_box_ is visible.
+    mount_point =
+        mount_point_model_->getMountPoint(mount_point_box_->currentIndex());
+  }
   // TODO(xushaohua): Calculate exact sectors
   const qint64 total_sectors = size_slider_->value() / partition_.sector_size;
   delegate_->createPartition(partition_, partition_type, align_start, fs_type,

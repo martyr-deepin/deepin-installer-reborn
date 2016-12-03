@@ -257,8 +257,12 @@ void EditPartitionFrame::onMountPointChanged(int index) {
 }
 
 void EditPartitionFrame::onOkButtonClicked() {
-  const QString mount_point =
-      mount_point_model_->getMountPoint(mount_point_box_->currentIndex());
+  QString mount_point;
+  if (mount_point_box_->isVisible()) {
+    // Set mount_point only if mount_point_box_ is visible.
+    mount_point =
+        mount_point_model_->getMountPoint(mount_point_box_->currentIndex());
+  }
   if(format_check_box_->isChecked()) {
     // Create an OperationFormat object.
     const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
