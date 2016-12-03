@@ -18,6 +18,9 @@ class PartitionManager;
 
 // PartitionManager proxy layer. It is shared among partition sub frames.
 // PartitionManager is invisible in frame pages.
+// Operations generated in SimplePartitionFrame and AdvancedPartitionFrame
+// are stored in different lists, so that operations can be reverted or cleared
+// in SimplePartitionFrame.
 class PartitionDelegate : public QObject {
   Q_OBJECT
 

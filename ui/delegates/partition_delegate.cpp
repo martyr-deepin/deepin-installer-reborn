@@ -362,13 +362,17 @@ void PartitionDelegate::updateMountPoint(const Partition& partition,
   qDebug() << "PartitionDelegate::updateMountPoint()" << partition.path
            << mount_point;
 
+  // Reset mount-point of operation with the same mount-point.
   this->resetOperationMountPoint(mount_point);
 
-  Partition new_partition(partition);
-  new_partition.mount_point = mount_point;
-  // No need to update partition status.
-  Operation operation(OperationType::MountPoint, partition, new_partition);
-  operations_.append(operation);
+  if (!mount_point.isEmpty()) {
+    // Append MountPointOperation only if |mount_point| is not empty.
+    Partition new_partition(partition);
+    new_partition.mount_point = mount_point;
+    // No need to update partition status.
+    Operation operation(OperationType::MountPoint, partition, new_partition);
+    operations_.append(operation);
+  }
 }
 
 void PartitionDelegate::refreshVisual() {
@@ -685,10 +689,17 @@ void PartitionDelegate::removeEmptyExtendedPartition(
 }
 
 void PartitionDelegate::resetOperationMountPoint(const QString& mount_point) {
-  for (Operation& operation : operations_) {
-    // Clear mount point of old operations.
+  for (int index = operations_.length() - 1; index >= 0; --index) {
+    Operation& operation = operations_[index];
     if (operation.new_partition.mount_point == mount_point) {
+      if (operation.type == OperationType::MountPoint) {
+        // Remove MountPointOperation with same mount point.
+        operations_.removeAt(index);
+        return;
+      }
+      // Clear mount point of old operation.
       operation.new_partition.mount_point = "";
+      return;
     }
   }
 }

@@ -300,6 +300,9 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
       // Clear mount point of new partition if it is not root.
       delegate_->updateMountPoint(part_button->partition(), "");
     }
+    // Do not refresh partition list here. Instead, call
+    // delegate_->refreshVisual() in PartitionFrame before switching to
+    // AdvancedPartitionFrame.
   }
 
   // TODO(xushaohua): Set simple operators in delegate.
