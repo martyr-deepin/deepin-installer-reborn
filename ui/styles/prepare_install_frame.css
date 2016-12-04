@@ -7,15 +7,10 @@
   text-align: center;
 }
 
-#description_area {
-  background: transparent;
-  margin: 0;
-  padding: 0;
-}
-
-#description_label {
+#description_edit {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 14px;
-  line-height: 4.29;
   background: transparent;
+  selection-color: rgba(255, 255, 255, 0.7);
+  selection-background-color: transparent;
+  font-size: 14px;
 }

@@ -7,6 +7,7 @@
 
 #include <QFrame>
 class QLabel;
+class QTextEdit;
 
 namespace installer {
 
@@ -43,7 +44,7 @@ class PrepareInstallFrame : public QFrame {
   QLabel* subtitle_label_ = nullptr;
   NavButton* abort_button_ = nullptr;
   NavButton* continue_button_ = nullptr;
-  QLabel* description_label_ = nullptr;
+  QTextEdit* description_edit_ = nullptr;
 
   PartitionDelegate* delegate_ = nullptr;
 };

@@ -7,7 +7,7 @@
 #include <QEvent>
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QScrollArea>
+#include <QTextEdit>
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_delegate.h"
@@ -51,7 +51,7 @@ void PrepareInstallFrame::updateDescription() {
   // in QLabel.
   const QString description = modified_desc_list.join("\n\n");
   qDebug() << "description:" << description;
-  description_label_->setText(description);
+  description_edit_->setPlainText(description);
 }
 
 void PrepareInstallFrame::changeEvent(QEvent* event) {
@@ -84,26 +84,13 @@ void PrepareInstallFrame::initUI() {
   subtitle_label_ = new QLabel(tr(kTextSubtitle));
   subtitle_label_->setObjectName("subtitle_label");
 
-  description_label_ = new QLabel();
-  description_label_->setObjectName("description_label");
-  QScrollArea* description_scroll_area = new QScrollArea();
-  description_scroll_area->setObjectName("description_area");
-  description_scroll_area->setContentsMargins(0, 0, 0, 0);
-  description_scroll_area->setWidget(description_label_);
-  description_scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  description_scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  description_scroll_area->setWidgetResizable(true);
-  QSizePolicy description_size_policy(QSizePolicy::Maximum,
-                                      QSizePolicy::Preferred);
-  description_size_policy.setHorizontalStretch(1);
-  description_size_policy.setVerticalStretch(10);
-  description_scroll_area->setSizePolicy(description_size_policy);
-  QHBoxLayout* description_wrapper_layout = new QHBoxLayout();
-  description_wrapper_layout->setContentsMargins(0, 0, 0, 0);
-  description_wrapper_layout->setSpacing(0);
-  description_wrapper_layout->addStretch(2);
-  description_wrapper_layout->addWidget(description_scroll_area);
-  description_wrapper_layout->addStretch(2);
+  description_edit_ = new QTextEdit();
+  description_edit_->setObjectName("description_edit");
+  description_edit_->setAcceptRichText(false);
+  description_edit_->setReadOnly(true);
+  description_edit_->setContextMenuPolicy(Qt::NoContextMenu);
+  description_edit_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  description_edit_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
   abort_button_ = new NavButton(tr(kTextBack));
   continue_button_ = new NavButton(tr(kTextContinue));
@@ -115,7 +102,7 @@ void PrepareInstallFrame::initUI() {
   layout->addLayout(comment_layout);
   layout->addStretch(1);
   layout->addWidget(subtitle_label_, 0, Qt::AlignCenter);
-  layout->addLayout(description_wrapper_layout);
+  layout->addWidget(description_edit_, 0, Qt::AlignHCenter);
   layout->addStretch(1);
   layout->addWidget(abort_button_, 0, Qt::AlignCenter);
   layout->addWidget(continue_button_, 0, Qt::AlignCenter);
