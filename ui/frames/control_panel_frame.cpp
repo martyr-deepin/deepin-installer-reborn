@@ -6,6 +6,7 @@
 
 #include <QDebug>
 #include <QPropertyAnimation>
+#include <QScrollBar>
 #include <QStackedWidget>
 #include <QTabBar>
 #include <QTextEdit>
@@ -164,11 +165,10 @@ void ControlPanelFrame::onTimerTimeout() {
   log_content_ = content;
 
   QTextCursor cursor = log_viewer_->textCursor();
-  // Restore cursor position when log content is updated.
-  const int pos = cursor.position();
+  // Restore vertical position when log content is updated.
+  const int pos = log_viewer_->verticalScrollBar()->value();
   log_viewer_->setPlainText(log_content_);
-  cursor.setPosition(pos);
-  log_viewer_->setTextCursor(cursor);
+  log_viewer_->verticalScrollBar()->setValue(pos);
 }
 
 }  // namespace installer
