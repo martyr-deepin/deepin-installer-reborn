@@ -285,25 +285,50 @@ void PartitionDelegate::createSimplePartition(const Partition& partition,
                                               FsType fs_type,
                                               const QString& mount_point,
                                               qint64 total_sectors) {
-  Q_UNUSED(partition);
-  Q_UNUSED(partition_type);
-  Q_UNUSED(align_start);
-  Q_UNUSED(fs_type);
-  Q_UNUSED(mount_point);
-  Q_UNUSED(total_sectors);
+  if (partition_type == PartitionType::Normal) {
+    createPrimaryPartition(partition,
+                           align_start,
+                           fs_type,
+                           mount_point,
+                           total_sectors,
+                           true);
+  } else if (partition_type == PartitionType::Logical) {
+    createLogicalPartition(partition,
+                           align_start,
+                           fs_type,
+                           mount_point,
+                           total_sectors,
+                           true);
+  } else {
+    qCritical() << "createSimplePartition() not supported type:"
+                << partition_type;
+  }
 }
 
 Partition PartitionDelegate::deleteSimplePartition(const Partition& partition) {
-  Q_UNUSED(partition);
-  return Partition();
+  Partition new_partition;
+  new_partition.sector_size = partition.sector_size;
+  new_partition.start_sector = partition.start_sector;
+  new_partition.end_sector = partition.end_sector;
+  new_partition.device_path = partition.device_path;
+  new_partition.type = PartitionType::Unallocated;
+  new_partition.freespace = new_partition.length;
+  new_partition.fs = FsType::Empty;
+  new_partition.status = PartitionStatus::Delete;
+
+  // No need to merge operations.
+  // No need to delete extended partition.
+
+  Operation operation(OperationType::Delete, partition, new_partition);
+  operations_.append(operation);
+
+  return new_partition;
 }
 
 void PartitionDelegate::formatSimplePartition(const Partition& partition,
                                               FsType fs_type,
                                               const QString& mount_point) {
   qDebug() << "formatSimplePartition()" << partition << fs_type << mount_point;
-
-//  this->resetOperationMountPoint(mount_point);
 
   Partition new_partition;
   new_partition.sector_size = partition.sector_size;
@@ -336,11 +361,19 @@ void PartitionDelegate::createPartition(const Partition& partition,
                                         const QString& mount_point,
                                         qint64 total_sectors) {
   if (partition_type == PartitionType::Normal) {
-    createPrimaryPartition(partition, align_start, fs_type, mount_point,
-                           total_sectors);
+    createPrimaryPartition(partition,
+                           align_start,
+                           fs_type,
+                           mount_point,
+                           total_sectors,
+                           false);
   } else if (partition_type == PartitionType::Logical) {
-    createLogicalPartition(partition, align_start, fs_type, mount_point,
-                           total_sectors);
+    createLogicalPartition(partition,
+                           align_start,
+                           fs_type,
+                           mount_point,
+                           total_sectors,
+                           false);
   } else {
     qCritical() << "createPartition() not supported type:" << partition_type;
   }
@@ -565,7 +598,8 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
                                                bool align_start,
                                                FsType fs_type,
                                                const QString& mount_point,
-                                               qint64 total_sectors) {
+                                               qint64 total_sectors,
+                                               bool is_simple) {
   // Policy:
   // * If new primary partition is contained in or intersected with
   //   extended partition, shrink extended partition or delete it if no other
@@ -591,6 +625,7 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
   const int partition_number = AllocPrimaryPartitionNumber(device);
+  // FIXME(xushaohua): assertion fails sometimes.
   Q_ASSERT(partition_number > -1);
   new_partition.changeNumber(partition_number);
 
@@ -630,17 +665,23 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
   Q_ASSERT(new_partition.start_sector < new_partition.end_sector);
   Q_ASSERT(new_partition.end_sector <= partition.end_sector);
 
-  this->resetOperationMountPoint(mount_point);
-
-  Operation operation(OperationType::Create, partition, new_partition);
-  operations_.append(operation);
+  if (is_simple) {
+    Operation operation(OperationType::Create, partition, new_partition);
+    simple_operations_.append(operation);
+  } else {
+    // Reset mount-point before appending operation to advanced operation list.
+    this->resetOperationMountPoint(mount_point);
+    Operation operation(OperationType::Create, partition, new_partition);
+    operations_.append(operation);
+  }
 }
 
 void PartitionDelegate::createLogicalPartition(const Partition& partition,
                                                bool align_start,
                                                FsType fs_type,
                                                const QString& mount_point,
-                                               qint64 total_sectors) {
+                                               qint64 total_sectors,
+                                               bool is_simple) {
   // Policy:
   // * Create extended partition if not found;
   // * If new logical partition is not contained in or is intersected with
@@ -664,6 +705,7 @@ void PartitionDelegate::createLogicalPartition(const Partition& partition,
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
   const int partition_number = AllocLogicalPartitionNumber(device);
+  // FIXME(xushaohua): crashes here
   Q_ASSERT(partition_number > -1);
   new_partition.changeNumber(partition_number);
 
@@ -690,6 +732,7 @@ void PartitionDelegate::createLogicalPartition(const Partition& partition,
     }
   }
 
+  // No need to add extended partition or enlarge it.
   const int ext_index = ExtendedPartitionIndex(device.partitions);
   Partition ext_partition;
   if (ext_index == -1) {
@@ -727,10 +770,15 @@ void PartitionDelegate::createLogicalPartition(const Partition& partition,
     operations_.append(resize_ext_operation);
   }
 
-  this->resetOperationMountPoint(mount_point);
-
-  Operation operation(OperationType::Create, partition, new_partition);
-  operations_.append(operation);
+  if (is_simple) {
+    Operation operation(OperationType::Create, partition, new_partition);
+    simple_operations_.append(operation);
+  } else {
+    // Reset mount-point before append operation to advanced operation list.
+    this->resetOperationMountPoint(mount_point);
+    Operation operation(OperationType::Create, partition, new_partition);
+    operations_.append(operation);
+  }
 }
 
 void PartitionDelegate::removeEmptyExtendedPartition(

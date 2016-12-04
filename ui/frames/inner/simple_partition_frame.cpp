@@ -150,6 +150,7 @@ void SimplePartitionFrame::appendOperations() {
   } else {
     // Only create root partition.
     if (partition.type == PartitionType::Unallocated) {
+      // First try to add logical partition, then primary partition.
       if (delegate_->canAddLogical(partition)) {
         delegate_->createSimplePartition(partition,
                                          PartitionType::Logical,
