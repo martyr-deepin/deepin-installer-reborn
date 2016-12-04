@@ -46,10 +46,10 @@ SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
   this->initConnections();
 }
 
-void SystemInfoFormFrame::autoConf() {
-  WriteUsername(GetSettingsString(kSystemInfoDefaultUsername));
-  WriteHostname(GetSettingsString(kSystemInfoDefaultHostname));
-  WritePassword(GetSettingsString(kSystemInfoDefaultPassword));
+void SystemInfoFormFrame::writeConf() {
+  WriteUsername(username_edit_->text());
+  WriteHostname(hostname_edit_->text());
+  WritePassword(password_edit_->text());
 }
 
 void SystemInfoFormFrame::updateAvatar(const QString& avatar) {
@@ -313,11 +313,7 @@ void SystemInfoFormFrame::onNextButtonClicked() {
     tooltip_->showBottom(password2_edit_);
   } else {
     tooltip_->hide();
-    // Write settings to config file when all form inputs are ok.
-    WriteUsername(username_edit_->text());
-    WriteHostname(hostname_edit_->text());
-    WritePassword(password_edit_->text());
-
+    // Emit finished signal when all form inputs are ok.
     emit this->finished();
   }
 }

@@ -21,11 +21,6 @@ class SystemInfoAvatarFrame : public QFrame {
  public:
   explicit SystemInfoAvatarFrame(QWidget* parent = nullptr);
 
-  void autoConf();
-
-  // Get current used avatar.
-  QString currentAvatar() const;
-
  signals:
   // Emitted when an avatar is selected.
   void avatarUpdated(const QString& avatar);
@@ -38,6 +33,12 @@ class SystemInfoAvatarFrame : public QFrame {
  public slots:
   // Update text in timezone button.
   void updateTimezone(const QString& timezone);
+
+  // Read default avatar and emit avatarUpdated() signal.
+  void readConf();
+
+  // Validate avatar path and write to conf file.
+  void writeConf();
 
  protected:
   void changeEvent(QEvent* event) override;

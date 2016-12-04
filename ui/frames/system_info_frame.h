@@ -22,11 +22,13 @@ class SystemInfoFrame : public QFrame {
  public:
   explicit SystemInfoFrame(QWidget* parent = nullptr);
 
-  void autoConf();
-
  signals:
   // Emitted when form is validated.
   void finished();
+
+ public slots:
+  // Write conf to file.
+  void writeConf();
 
  private:
   void initConnections();

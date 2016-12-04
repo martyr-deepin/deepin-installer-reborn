@@ -19,13 +19,18 @@ SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
 
   this->initUI();
   this->initConnections();
+
+  // Read default avatar and timezone explicitly.
+  avatar_frame_->readConf();
+  timezone_frame_->readConf();
+
   this->showFormPage();
 }
 
-void SystemInfoFrame::autoConf() {
-  avatar_frame_->autoConf();
-  form_frame_->autoConf();
-  timezone_frame_->autoConf();
+void SystemInfoFrame::writeConf() {
+  avatar_frame_->writeConf();
+  form_frame_->writeConf();
+  timezone_frame_->writeConf();
 }
 
 void SystemInfoFrame::initConnections() {
@@ -37,12 +42,18 @@ void SystemInfoFrame::initConnections() {
           form_frame_, &SystemInfoFormFrame::updateAvatar);
   connect(form_frame_, &SystemInfoFormFrame::avatarClicked,
           this, &SystemInfoFrame::showAvatarPage);
-  connect(form_frame_, &SystemInfoFormFrame::finished,
-          this, &SystemInfoFrame::finished);
   connect(form_frame_, &SystemInfoFormFrame::timezoneClicked,
           this, &SystemInfoFrame::showTimezonePage);
   connect(timezone_frame_, &SystemInfoTimezoneFrame::finished,
           this, &SystemInfoFrame::showFormPage);
+
+  // Save settings when finished signal is emitted.
+  connect(form_frame_, &SystemInfoFormFrame::finished,
+          this, &SystemInfoFrame::writeConf);
+  connect(form_frame_, &SystemInfoFormFrame::finished,
+          this, &SystemInfoFrame::finished);
+
+  // Update timezone label when current timezone is updated.
   connect(timezone_frame_, &SystemInfoTimezoneFrame::timezoneUpdated,
           avatar_frame_, &SystemInfoAvatarFrame::updateTimezone);
   connect(timezone_frame_, &SystemInfoTimezoneFrame::timezoneUpdated,
@@ -53,7 +64,6 @@ void SystemInfoFrame::initUI() {
   avatar_frame_ = new SystemInfoAvatarFrame();
   form_frame_ = new SystemInfoFormFrame();
   timezone_frame_ = new SystemInfoTimezoneFrame();
-  form_frame_->updateAvatar(avatar_frame_->currentAvatar());
 
   stacked_layout_ = new QStackedLayout();
   stacked_layout_->addWidget(avatar_frame_);

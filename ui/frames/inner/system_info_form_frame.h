@@ -23,8 +23,6 @@ class SystemInfoFormFrame : public QFrame {
  public:
   explicit SystemInfoFormFrame(QWidget* parent = nullptr);
 
-  void autoConf();
-
  signals:
   // Emitted when the avatar button is clicked.
   void avatarClicked();
@@ -41,6 +39,9 @@ class SystemInfoFormFrame : public QFrame {
 
   // Update text in timezone button.
   void updateTimezone(const QString& timezone);
+
+  // Write form content to conf file.
+  void writeConf();
 
  protected:
   void changeEvent(QEvent* event) override;

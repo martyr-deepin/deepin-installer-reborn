@@ -20,14 +20,19 @@ class SystemInfoTimezoneFrame : public QFrame {
  public:
   explicit SystemInfoTimezoneFrame(QWidget* parent = nullptr);
 
-  void autoConf();
-
  signals:
   // Emitted when back button is clicked.
   void finished();
 
   // Emitted when a new timezone is chosen.
   void timezoneUpdated(const QString& timezone);
+
+ public slots:
+  // Read default timezone and emit timezoneUpdated() signal.
+  void readConf();
+
+  // Validate timezone and write to conf file.
+  void writeConf();
 
  protected:
   void changeEvent(QEvent* event) override;
@@ -41,6 +46,9 @@ class SystemInfoTimezoneFrame : public QFrame {
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
   NavButton* back_button_ = nullptr;
+
+ private slots:
+  void onBackButtonClicked();
 };
 
 }  // namespace installer

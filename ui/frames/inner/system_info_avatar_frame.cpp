@@ -48,18 +48,18 @@ SystemInfoAvatarFrame::SystemInfoAvatarFrame(QWidget* parent)
   this->initConnections();
 }
 
-void SystemInfoAvatarFrame::autoConf() {
-  const QString avatar = GetDefaultAvatar();
-  if (IsValidAvatar(avatar)) {
-    WriteAvatar(avatar);
-    emit this->avatarUpdated(avatar);
-  } else {
-    qWarning() << "autoConf() got invalid avatar: " << avatar;
-  }
+void SystemInfoAvatarFrame::readConf() {
+  const QString avatar = current_avatar_button_->avatar();
+  emit this->avatarUpdated(avatar);
 }
 
-QString SystemInfoAvatarFrame::currentAvatar() const {
-  return current_avatar_button_->avatar();
+void SystemInfoAvatarFrame::writeConf() {
+  const QString avatar = current_avatar_button_->avatar();
+  if (IsValidAvatar(avatar)) {
+    WriteAvatar(avatar);
+  } else {
+    qWarning() << "Invalid avatar: " << avatar;
+  }
 }
 
 void SystemInfoAvatarFrame::updateTimezone(const QString& timezone) {
@@ -141,9 +141,12 @@ void SystemInfoAvatarFrame::initUI() {
 
 void SystemInfoAvatarFrame::onListViewPressed(const QModelIndex& index) {
   const QString avatar = index.model()->data(index).toString();
-  current_avatar_button_->updateIcon(avatar);
-  WriteAvatar(avatar);
-  emit this->avatarUpdated(avatar);
+  if (IsValidAvatar(avatar)) {
+    current_avatar_button_->updateIcon(avatar);
+    emit this->avatarUpdated(avatar);
+  } else {
+    qWarning() << "Invalid avatar:" << avatar;
+  }
   emit this->finished();
 }
 

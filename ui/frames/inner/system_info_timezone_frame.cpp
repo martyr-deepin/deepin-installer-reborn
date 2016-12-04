@@ -29,22 +29,26 @@ const char kTextBack[] = "Back";
 
 SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
     : QFrame(parent),
-      timezone_(GetSettingsString(kSystemInfoDefaultTimezone)) {
+      timezone_() {
   this->setObjectName("system_info_timezone_frame");
 
-  if (!IsValidTimezone(timezone_)) {
-    timezone_ = GetCurrentTimezone();
-  }
   this->initUI();
   this->initConnections();
 }
 
-void SystemInfoTimezoneFrame::autoConf() {
+void SystemInfoTimezoneFrame::readConf() {
+  timezone_ = GetSettingsString(kSystemInfoDefaultTimezone);
+  if (!IsValidTimezone(timezone_)) {
+    timezone_ = GetCurrentTimezone();
+  }
+  emit this->timezoneUpdated(GetTimezoneName(timezone_));
+}
+
+void SystemInfoTimezoneFrame::writeConf() {
   if (IsValidTimezone(timezone_)) {
     WriteTimezone(timezone_);
-    emit this->timezoneUpdated(GetTimezoneName(timezone_));
   } else {
-    qWarning() << "autoConf() got invalid timezone:" << timezone_;
+    qWarning() << "Invalid timezone:" << timezone_;
   }
 }
 
@@ -60,7 +64,7 @@ void SystemInfoTimezoneFrame::changeEvent(QEvent* event) {
 
 void SystemInfoTimezoneFrame::initConnections() {
   connect(back_button_, &QPushButton::clicked,
-          this, &SystemInfoTimezoneFrame::finished);
+          this, &SystemInfoTimezoneFrame::onBackButtonClicked);
 }
 
 void SystemInfoTimezoneFrame::initUI() {
@@ -78,6 +82,15 @@ void SystemInfoTimezoneFrame::initUI() {
   layout->addWidget(back_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+}
+
+void SystemInfoTimezoneFrame::onBackButtonClicked() {
+  if (IsValidTimezone(timezone_)) {
+    emit this->timezoneUpdated(GetTimezoneName(timezone_));
+  } else {
+    qWarning() << "Invalid timezone:" << timezone_;
+  }
+  emit this->finished();
 }
 
 }  // namespace installer

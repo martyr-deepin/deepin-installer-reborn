@@ -435,7 +435,7 @@ void MainWindow::goNextPage() {
     case PageId::PartitionTableWarningId: {
       // Check whether to show SystemInfoPage.
       if (GetSettingsBool(kSkipSystemInfoPage)) {
-        system_info_frame_->autoConf();
+        system_info_frame_->writeConf();
         prev_page_ = current_page_;
         current_page_ = PageId::SystemInfoId;
         this->goNextPage();
