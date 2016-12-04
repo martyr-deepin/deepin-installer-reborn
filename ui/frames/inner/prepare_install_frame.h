@@ -43,7 +43,7 @@ class PrepareInstallFrame : public QFrame {
   QLabel* subtitle_label_ = nullptr;
   NavButton* abort_button_ = nullptr;
   NavButton* continue_button_ = nullptr;
-  QLabel* desc_label_ = nullptr;
+  QLabel* description_label_ = nullptr;
 
   PartitionDelegate* delegate_ = nullptr;
 };

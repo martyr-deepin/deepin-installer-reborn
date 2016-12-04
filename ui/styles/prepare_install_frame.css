@@ -7,13 +7,13 @@
   text-align: center;
 }
 
-#desc_area {
+#description_area {
   background: transparent;
   margin: 0;
   padding: 0;
 }
 
-#desc_label {
+#description_label {
   color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
   line-height: 4.29;
