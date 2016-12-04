@@ -207,9 +207,13 @@ void PartitionFrame::onNextButtonClicked() {
     if (!simple_partition_frame_->validate()) {
       return;
     }
-  } else if (!advanced_partition_frame_->validate()) {
+  } else {
     // Validate advanced partition frame.
-    return;
+    if (!advanced_partition_frame_->validate()) {
+      return;
+    }
+    // Clear simple_operations_ in delegate.
+    delegate_->resetSimpleOperations();
   }
 
   prepare_install_frame_->updateDescription();
