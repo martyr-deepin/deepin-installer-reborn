@@ -171,6 +171,12 @@ QString Operation::description() const {
       }
       break;
     }
+    case OperationType::MountPoint: {
+      desc = QObject::tr("Use %1 for %2")
+          .arg(new_partition.path)
+          .arg(new_partition.mount_point);
+      break;
+    }
     case OperationType::Resize: {
       desc = QObject::tr("Resize partition %1").arg(new_partition.path);
       break;
