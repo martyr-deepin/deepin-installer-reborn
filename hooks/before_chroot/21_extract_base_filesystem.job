@@ -3,9 +3,6 @@
 . /etc/deepin-installer.conf
 L=${DI_LOCALE%.*}
 
-# Files to keep progress value.
-BASE_PROGRESS_FILE=/dev/shm/unsquashfs_base_progress
-
 # Get number of processors available for current process, minus 1.
 PROCESSORS=$(getconf _NPROCESSORS_ONLN)
 if [ $PROCESSORS -ge 1 ]; then
@@ -38,6 +35,4 @@ extract_overlay_filesystem() {
 deepin-installer-unsquashfs -p ${PROCESSORS} -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs || exit 2
 
 # Then extract overlay_filesystem
-extract_overlay_filesystem
-
-exit 0
+extract_overlay_filesystem || true
