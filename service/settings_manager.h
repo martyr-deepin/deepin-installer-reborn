@@ -45,9 +45,6 @@ QString GetDefaultAvatar();
 // Get absolute path to oem hooks folder.
 QString GetOemHooksDir();
 
-// Get folder of overlay module.
-QString GetOverlayFilesystemDir();
-
 // Get vendor logo.
 QString GetVendorLogo();
 

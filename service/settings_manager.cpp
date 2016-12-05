@@ -24,14 +24,14 @@ namespace installer {
 
 namespace {
 
-// Absolute path to oem_tool dir.
+// Absolute path to oem dir.
 QString g_oem_dir;
 
 // Absolute path to installer config file.
 const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
 
-// Absolute path to global oem_tool config file saved in system.
-const char kInstallerOemConfigFile[] = "/etc/deepin-installer-oem_tool.conf";
+// Absolute path to global oem config file saved in system.
+const char kInstallerOemConfigFile[] = "/etc/deepin-installer-oem.conf";
 
 // Absolute path to default installer settings
 const char kDefaultSettingsFile[] = RESOURCES_DIR"/default_settings.ini";
@@ -40,19 +40,19 @@ const char kDefaultWallpaperFile[] = RESOURCES_DIR"/default_wallpaper.jpg";
 // File name of auto partition script.
 const char kAutoPartFile[] = "auto_part.sh";
 
-// Absolute path to oem_tool dir in system ISO.
+// Absolute path to oem dir in system ISO.
 // Note that iso image is mounted at "/lib/live/mount/medium/".
-const char kIsoOemDir[] = "/lib/live/mount/medium/oem_tool";
+const char kIsoOemDir[] = "/lib/live/mount/medium/oem";
 
 // Folder name of mount point of usb storage.
 const char kUsbMountDir[] = "usb_root_dir";
 const char kUsbMountPoint[] = "/usb_root_dir";
-const char kUsbMountOemPath[] = "/usb_root_dir/oem_tool";
+const char kUsbMountOemPath[] = "/usb_root_dir/oem";
 
-// Filename of oem_tool settings
+// Filename of oem settings
 const char kOemSettingsFile[] = "settings.ini";
 
-// Name of installer oem_tool lock file.
+// Name of installer oem lock file.
 const char kOemLockFile[] = "deepin-installer-reborn.lock";
 
 bool AppendToConfigFile(const QString& line) {
@@ -271,7 +271,7 @@ QString GetAutoPartFile() {
 }
 
 QStringList GetAvatars() {
-  // First, check oem_tool/ dir.
+  // First, check oem/ dir.
   const QString oem_avatar(GetOemDir().absoluteFilePath("avatar"));
   QStringList avatars = ListImageFiles(oem_avatar);
   if (!avatars.isEmpty()) {
@@ -301,10 +301,6 @@ QString GetDefaultAvatar() {
 
 QString GetOemHooksDir() {
   return GetOemDir().absoluteFilePath("hooks");
-}
-
-QString GetOverlayFilesystemDir() {
-  return GetOemDir().absoluteFilePath("overlay");
 }
 
 QString GetVendorLogo() {
@@ -390,7 +386,7 @@ void WritePartitionInfo(const QString& root_disk,
 void SaveOemConfig() {
   QFile file(kInstallerOemConfigFile);
   if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-    qWarning() << "Failed to open oem_tool file:" << kInstallerOemConfigFile;
+    qWarning() << "Failed to open oem file:" << kInstallerOemConfigFile;
     return;
   }
   // Read default settings
@@ -402,7 +398,7 @@ void SaveOemConfig() {
     file.write(line.toUtf8());
   }
 
-  // Read oem_tool settings
+  // Read oem settings
   const QString oem_file = GetOemDir().absoluteFilePath(kOemSettingsFile);
   if (QFile::exists(oem_file)) {
     QSettings oem_settings(oem_file , QSettings::IniFormat);
