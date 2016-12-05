@@ -123,7 +123,7 @@ bool CopyHooks(bool in_chroot) {
     return false;
   }
 
-  // Copy oem hooks to /tmp/installer-hooks/
+  // Copy oem_tool hooks to /tmp/installer-hooks/
   // Job file with same name will be overwritten here.
   const QString oem_dir(GetOemHooksDir());
   if (QDir(oem_dir).exists()) {

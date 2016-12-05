@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "misc/oem/section_label.h"
+#include "section_label.h"
 
 #include "base/file_util.h"
 

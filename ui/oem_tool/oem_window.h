@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_MISC_OEM_MAIN_WINDOW_H
-#define INSTALLER_MISC_OEM_MAIN_WINDOW_H
+#ifndef INSTALLER_UI_OEM_TOOL_OEM_WINDOW_H
+#define INSTALLER_UI_OEM_TOOL_OEM_WINDOW_H
 
 #include <QFrame>
 #include <QtWidgets/QLineEdit>
@@ -79,4 +79,4 @@ class OemWindow : public QFrame {
 
 }  // namespace installer
 
-#endif  // INSTALLER_MISC_OEM_MAIN_WINDOW_H
+#endif  // INSTALLER_UI_OEM_TOOL_OEM_WINDOW_H

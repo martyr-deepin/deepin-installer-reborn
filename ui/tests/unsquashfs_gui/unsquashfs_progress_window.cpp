@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "misc/unsquashfs_gui/unsquashfs_progress_window.h"
+#include "unsquashfs_progress_window.h"
 
 #include <QDebug>
 #include <QDir>
@@ -17,7 +17,7 @@
 
 #include "base/command.h"
 #include "base/file_util.h"
-#include "misc/unsquashfs_gui/worker.h"
+#include "worker.h"
 
 namespace {
 

@@ -35,17 +35,13 @@ set(INSTALLER_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn)
 
 # Defines path to resource directories
 if (CMAKE_BUILD_TYPE MATCHES Debug)
-  add_definitions("-DSLIDE_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/resources/slide\"")
-  add_definitions("-DSCAN_REGDOMAIN_FILE=\"${CMAKE_CURRENT_SOURCE_DIR}/misc/scan_regdomain.sh\"")
+  add_definitions("-DTOOLS_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/tools\"")
   add_definitions("-DBUILTIN_HOOKS_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/hooks\"")
-  add_definitions("-DDEFAULT_SETTINGS=\"${CMAKE_CURRENT_SOURCE_DIR}/resources/default_settings.ini\"")
-  add_definitions("-DFALLBACK_WALLPAPER=\"${CMAKE_CURRENT_SOURCE_DIR}/resources/fallback_wallpaper.jpg\"")
+  add_definitions("-DRESOURCES_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/resources\"")
 else()
-  add_definitions("-DSLIDE_DIR=\"${INSTALLER_SHARE_DIR}/slide\"")
-  add_definitions("-DSCAN_REGDOMAIN_FILE=\"${INSTALLER_SHARE_DIR}/scan_regdomain.sh\"")
+  add_definitions("-DTOOLS_DIR=\"${INSTALLER_SHARE_DIR}/tools\"")
   add_definitions("-DBUILTIN_HOOKS_DIR=\"${INSTALLER_SHARE_DIR}/hooks\"")
-  add_definitions("-DDEFAULT_SETTINGS=\"${INSTALLER_SHARE_DIR}/default_settings.ini\"")
-  add_definitions("-DFALLBACK_WALLPAPER=\"${INSTALLER_SHARE_DIR}/fallback_wallpaper.jpg\"")
+  add_definitions("-DRESOURCES_DIR=\"${INSTALLER_SHARE_DIR}/resources\"")
 endif()
 
 
@@ -90,11 +86,11 @@ set(BASE_FILES
     )
 
 set(OEM_FILES
-    misc/oem_tool.cpp
-    misc/oem/oem_window.cpp
-    misc/oem/oem_window.h
-    misc/oem/section_label.cpp
-    misc/oem/section_label.h
+    app/oem_tool.cpp
+    ui/oem_tool/oem_window.cpp
+    ui/oem_tool/oem_window.h
+    ui/oem_tool/section_label.cpp
+    ui/oem_tool/section_label.h
     )
 
 set(PARTMAN_FILES
@@ -349,7 +345,7 @@ set(LINK_LIBS
 
 # Main executable
 add_executable(deepin-installer-reborn
-               main.cpp
+               app/deepin_installer_reborn.cpp
 
                ${BASE_FILES}
                ${PARTMAN_FILES}
@@ -358,7 +354,6 @@ add_executable(deepin-installer-reborn
                ${UI_FILES}
 
                i18n/i18n.qrc
-               resources/resources.qrc
                ui/images/images.qrc
                ui/styles/styles.qrc
                )
@@ -366,22 +361,21 @@ add_executable(deepin-installer-reborn
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 
 
-# deepin-installer-oem-tool
+# deepin-installer-oem_tool-tool
 add_executable(deepin-installer-oem-tool
                ${OEM_FILES}
                ${BASE_FILES}
                ${SERVICE_FILES}
                ${SYSINFO_FILES}
 
-               misc/oem/styles/oem_styles.qrc
-               resources/resources.qrc
+               ui/oem_tool/styles/oem_styles.qrc
                )
 target_link_libraries(deepin-installer-oem-tool ${LINK_LIBS})
 
 
 # xrandr-switchy
 add_executable(deepin-installer-xrandr-switchy
-               misc/xrandr_switchy.cpp
+               app/xrandr_switchy.cpp
 
                ${BASE_FILES}
                ui/xrandr/xrandr_wrapper.cpp
@@ -393,7 +387,7 @@ target_link_libraries(deepin-installer-xrandr-switchy ${Qt_LIBS})
 # Unsquashfs progress
 add_executable(deepin-installer-unsquashfs-progress
 
-               misc/unsquashfs_progress.cpp
+               app/unsquashfs_progress.cpp
                ${BASE_FILES}
                )
 target_link_libraries(deepin-installer-unsquashfs-progress ${Qt_LIBS})
@@ -433,7 +427,7 @@ target_link_libraries(locale-manager-test ${Qt_LIBS})
 
 # Unittest
 add_executable(deepin-installer-reborn-tests
-               misc/unittest_main.cpp
+               app/unittest_main.cpp
 
                ${BASE_FILES}
                ${SYSINFO_FILES}
@@ -446,7 +440,7 @@ target_link_libraries(deepin-installer-reborn-tests
 
 # Unittest with root privilege
 add_executable(deepin-installer-reborn-root-tests
-               misc/root_unittest_main.cpp
+               app/root_unittest_main.cpp
 
                ${BASE_FILES}
                ${PARTMAN_FILES}
@@ -463,13 +457,13 @@ target_link_libraries(deepin-installer-reborn-root-tests
 add_definitions("-DUNSQUASHFS_SH=\"${CMAKE_CURRENT_SOURCE_DIR}/misc/unsquashfs_gui/unsquashfs.sh\"")
 add_executable(unsquashfs_gui
 
-               misc/unsquashfs_gui/main.cpp
-               misc/unsquashfs_gui/unsquashfs_progress_window.cpp
-               misc/unsquashfs_gui/unsquashfs_progress_window.h
+               ui/tests/unsquashfs_gui/main.cpp
+               ui/tests/unsquashfs_gui/unsquashfs_progress_window.cpp
+               ui/tests/unsquashfs_gui/unsquashfs_progress_window.h
 
                ${BASE_FILES}
-               misc/unsquashfs_gui/worker.cpp
-               misc/unsquashfs_gui/worker.h
+               ui/tests/unsquashfs_gui/worker.cpp
+               ui/tests/unsquashfs_gui/worker.h
                )
 target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 
@@ -487,23 +481,20 @@ install(FILES resources/deepin-installer-reborn.desktop
         DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
 install(FILES resources/deepin-installer-reborn.svg
         DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/default_settings.ini
-        DESTINATION ${INSTALLER_SHARE_DIR})
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/fallback_wallpaper.jpg
-        DESTINATION ${INSTALLER_SHARE_DIR})
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hooks
     DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
     PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 )
-install (
-    FILES ${CMAKE_CURRENT_SOURCE_DIR}/misc/scan_regdomain.sh
+install(
+    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tools
     DESTINATION ${INSTALLER_SHARE_DIR}
+    FILES_MATCHING PATTERN "*"
     PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 )
 install(
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/resources/slide
+    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/resources
     DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
 )

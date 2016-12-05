@@ -7,7 +7,7 @@
 
 #include <QApplication>
 
-#include "misc/unsquashfs_gui/unsquashfs_progress_window.h"
+#include "unsquashfs_progress_window.h"
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);

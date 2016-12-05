@@ -16,7 +16,7 @@ namespace installer {
 LanguageList GetLanguageList() {
   LanguageList result;
 
-  const QString content(ReadFile(":/resources/languages.json"));
+  const QString content(ReadFile(RESOURCES_DIR"/languages.json"));
   const QJsonArray lang_list =
       QJsonDocument::fromJson(content.toUtf8()).array();
   for(const QJsonValue& lang_value : lang_list) {
@@ -27,7 +27,6 @@ LanguageList GetLanguageList() {
     item.local_name = obj.value("local_name").toString();
     result.append(item);
   }
-
 
   return result;
 }

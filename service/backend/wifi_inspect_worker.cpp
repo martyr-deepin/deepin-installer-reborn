@@ -20,6 +20,8 @@ const char kTsharkPackets[] = "200";
 // Time in seconds before exit.
 const char kTsharkDuration[] = "20";
 
+const char kScanRegdomainFile[] = TOOLS_DIR"/scan_regdomain.sh";
+
 // Read output of scan_regdomain.sh and extract country code.
 QStringList ParseRegdomainList(const QString& text) {
   QHash<QString, QString> regdomain_pair;
@@ -78,7 +80,7 @@ void WiFiInspectWorker::doScanning() {
   // Then capture packets with tshark.
   // At last, disable monitor mode.
   QString out, err;
-  if (SpawnCmd(SCAN_REGDOMAIN_FILE, {kTsharkPackets, kTsharkDuration},
+  if (SpawnCmd(kScanRegdomainFile, {kTsharkPackets, kTsharkDuration},
                out, err)) {
     QStringList list = ParseRegdomainList(out);
     if (!list.isEmpty()) {

@@ -28,7 +28,7 @@ class PartitionManager : public QObject {
 
   // Run auto part script at |script_path|.
   void autoPart(const QString& script_path);
-  // Emitted after oem/auto_part.sh script is executed and exited.
+  // Emitted after oem_tool/auto_part.sh script is executed and exited.
   // |ok| is true if that script exited 0.
   void autoPartDone(bool ok);
 
