@@ -21,8 +21,9 @@ class LanguageListModel : public QAbstractListModel {
   virtual QVariant data(const QModelIndex& index, int role) const override;
   virtual int rowCount(const QModelIndex& parent) const override;
 
-  // Get locale name at |index|.
-  QString locale(const QModelIndex& index) const;
+  // Get language item at |index|.
+  LanguageItem languageItemAt(const QModelIndex& index) const;
+
   // Get index with |locale|.
   QModelIndex localeIndex(const QString& locale) const;
 

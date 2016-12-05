@@ -30,7 +30,7 @@ const char kTextNext[] = "Next";
 
 SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
     : QFrame(parent),
-      locale_(GetSettingsString(kSelectLanguageDefaultLocale)),
+      lang_(),
       current_translator_(new QTranslator(this)) {
   this->setObjectName("select_language_frame");
 
@@ -38,15 +38,18 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
   this->initConnections();
 
   // Select default locale
-  const QModelIndex index = language_model_->localeIndex(locale_);
+
+  const QString locale = GetSettingsString(kSelectLanguageDefaultLocale);
+  const QModelIndex index = language_model_->localeIndex(locale);
   if (index.isValid()) {
+    lang_ = language_model_->languageItemAt(index);
     language_view_->setCurrentIndex(index);
   }
 }
 
 void SelectLanguageFrame::autoConf() {
-  WriteLocale(locale_);
-  emit this->languageUpdated(locale_);
+  WriteLocale(lang_.lc_all);
+  emit this->languageUpdated(lang_.locale);
 }
 
 void SelectLanguageFrame::changeEvent(QEvent* event) {
@@ -97,7 +100,7 @@ void SelectLanguageFrame::initUI() {
 }
 
 void SelectLanguageFrame::updateTranslator(const QString& locale) {
-  if (!locale_.isEmpty()) {
+  if (!lang_.locale.isEmpty()) {
     // Remove the old translator if it is loaded.
     qApp->removeTranslator(current_translator_);
   }
@@ -117,14 +120,15 @@ void SelectLanguageFrame::onLanguageListSelected(const QModelIndex& current,
   Q_UNUSED(previous);
   if (current.isValid()) {
     next_button_->setEnabled(true);
-    locale_ = language_model_->locale(current);
-    this->updateTranslator(locale_);
-    emit this->languageUpdated(locale_);
+    const LanguageItem language_item = language_model_->languageItemAt(current);
+    this->updateTranslator(language_item.locale);
+    lang_ = language_item;
+    emit this->languageUpdated(lang_.locale);
   }
 }
 
 void SelectLanguageFrame::onNextButtonClicked() {
-  WriteLocale(locale_);
+  WriteLocale(lang_.lc_all);
   emit this->finished();
 }
 

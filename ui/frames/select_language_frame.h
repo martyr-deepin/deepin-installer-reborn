@@ -9,6 +9,8 @@
 #include <QModelIndex>
 class QTranslator;
 
+#include "service/system_language.h"
+
 namespace installer {
 
 class FramelessListView;
@@ -27,8 +29,8 @@ class SelectLanguageFrame : public QFrame {
  signals:
   void finished();
 
-  // Emited when new language is selected.
-  void languageUpdated(const QString& language);
+  // Emitted when new language is selected.
+  void languageUpdated(const QString& locale);
 
  protected:
   // Update text of next_button_
@@ -39,8 +41,9 @@ class SelectLanguageFrame : public QFrame {
   void initUI();
   void updateTranslator(const QString& locale);
 
-  // Current selected locale.
-  QString locale_;
+  // Current selected language.
+  LanguageItem lang_;
+
   QTranslator* current_translator_ = nullptr;
 
   FramelessListView* language_view_ = nullptr;

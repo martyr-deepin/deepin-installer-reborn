@@ -34,11 +34,11 @@ int LanguageListModel::rowCount(const QModelIndex& parent) const {
   return lang_list_.length();
 }
 
-QString LanguageListModel::locale(const QModelIndex& index) const {
+LanguageItem LanguageListModel::languageItemAt(const QModelIndex& index) const {
   if (index.isValid()) {
-    return lang_list_.at(index.row()).locale;
+    return lang_list_.at(index.row());
   }
-  return QString();
+  return LanguageItem();
 }
 
 QModelIndex LanguageListModel::localeIndex(const QString& locale) const {

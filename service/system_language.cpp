@@ -9,7 +9,6 @@
 #include <QJsonObject>
 
 #include "base/file_util.h"
-#include "service/settings_manager.h"
 
 namespace installer {
 
@@ -22,8 +21,9 @@ LanguageList GetLanguageList() {
   for(const QJsonValue& lang_value : lang_list) {
     const QJsonObject obj = lang_value.toObject();
     LanguageItem item;
-    item.locale = obj.value("locale").toString();
     item.name = obj.value("name").toString();
+    item.locale = obj.value("locale").toString();
+    item.lc_all = obj.value("lc_all").toString();
     item.local_name = obj.value("local_name").toString();
     result.append(item);
   }
