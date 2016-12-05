@@ -92,7 +92,7 @@ in_chroot=$(grep 'in_chroot' ${hook_file})
 # Check configuration
 CONF_FILE=/etc/deepin-installer.conf
 if [ ! -f ${CONF_FILE} ];then
-    error "Configfile /etc/deepin-installer.conf does not exists."
+  error "Configfile /etc/deepin-installer.conf does not exists."
 fi
 . ${CONF_FILE}
 

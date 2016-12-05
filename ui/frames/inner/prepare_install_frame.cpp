@@ -47,9 +47,7 @@ void PrepareInstallFrame::updateDescription() {
   for (const QString& desc_item : desc_list) {
     modified_desc_list.append(prefix + desc_item);
   }
-  // NOTE(xushaohua): Add tow line breaks to simulate line-height property
-  // in QLabel.
-  const QString description = modified_desc_list.join("\n\n");
+  const QString description = modified_desc_list.join("\n");
   qDebug() << "description:" << description;
   description_edit_->setPlainText(description);
 }
