@@ -44,8 +44,8 @@ bool Commit(PedDisk* lp_disk) {
 bool CreatePartition(const Partition& partition) {
   qDebug() << "CreatePartition()" << partition;
   bool ok = false;
-  PedDevice* lp_device = NULL;
-  PedDisk* lp_disk = NULL;
+  PedDevice* lp_device = nullptr;
+  PedDisk* lp_disk = nullptr;
   if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
     PedPartitionType type;
 
@@ -68,7 +68,7 @@ bool CreatePartition(const Partition& partition) {
       }
     }
 
-    PedFileSystemType* fs_type = NULL;
+    PedFileSystemType* fs_type = nullptr;
     if (partition.type != PartitionType::Extended) {
       const QString fs_name = GetPedFsName(partition.fs);
       fs_type = ped_file_system_type_get(fs_name.toStdString().c_str());
@@ -80,14 +80,14 @@ bool CreatePartition(const Partition& partition) {
                                                    partition.start_sector,
                                                    partition.end_sector);
     if (lp_partition) {
-      PedConstraint* constraint = NULL;
+      PedConstraint* constraint = nullptr;
       PedGeometry* geom = ped_geometry_new(lp_device,
                                            partition.start_sector,
                                            partition.getSectorLength());
       if (geom) {
         constraint = ped_constraint_exact(geom);
       } else {
-        qCritical() << "CreatePartition() geom is NULL";
+        qCritical() << "CreatePartition() geom is nullptr";
       }
       if (constraint) {
         // TODO(xushaohua): Change constraint.min_size.
@@ -100,10 +100,10 @@ bool CreatePartition(const Partition& partition) {
         ped_geometry_destroy(geom);
         ped_constraint_destroy(constraint);
       } else {
-        qCritical() << "CreatePartition() constraint is NULL";
+        qCritical() << "CreatePartition() constraint is nullptr";
       }
     } else {
-      qCritical() << "CreatePartition() ped_partition_new() returns NULL"
+      qCritical() << "CreatePartition() ped_partition_new() returns nullptr"
                   << partition.path;
     }
     DestroyDeviceAndDisk(lp_device, lp_disk);
@@ -118,10 +118,10 @@ bool CreatePartition(const Partition& partition) {
 bool DeletePartition(const Partition& partition) {
   qDebug() << "DeletePartition()" << partition;
   bool ok = false;
-  PedDevice* lp_device = NULL;
-  PedDisk* lp_disk = NULL;
+  PedDevice* lp_device = nullptr;
+  PedDisk* lp_disk = nullptr;
   if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
-    PedPartition* lp_partition = NULL;
+    PedPartition* lp_partition = nullptr;
     if (partition.type == PartitionType::Extended) {
       lp_partition = ped_disk_extended_partition(lp_disk);
     } else {
@@ -131,7 +131,7 @@ bool DeletePartition(const Partition& partition) {
     if (lp_partition) {
       ok = bool(ped_disk_delete_partition(lp_disk, lp_partition));
     } else {
-      qCritical() << "DeletePartition() lp_partition is NULL";
+      qCritical() << "DeletePartition() lp_partition is nullptr";
     }
 
     if (ok) {
@@ -152,12 +152,12 @@ bool DeletePartition(const Partition& partition) {
 void DestroyDeviceAndDisk(PedDevice*& lp_device, PedDisk*& lp_disk) {
   if (lp_device) {
     ped_device_destroy(lp_device);
-    lp_device = NULL;
+    lp_device = nullptr;
   }
 
   if (lp_disk) {
     ped_disk_destroy(lp_disk);
-    lp_disk = NULL;
+    lp_disk = nullptr;
   }
 }
 
@@ -176,7 +176,7 @@ bool GetDeviceAndDisk(const QString& device_path,
   lp_device = ped_device_get(device_path.toLatin1().data());
   if (lp_device) {
     lp_disk = ped_disk_new(lp_device);
-    if (lp_disk != NULL) {
+    if (lp_disk != nullptr) {
       return true;
     } else {
       DestroyDeviceAndDisk(lp_device, lp_disk);
@@ -191,7 +191,7 @@ QString GetPartitionPath(PedPartition* lp_partition) {
   // Result of ped_partition_get_path() need to be freed by hand.
   char* lp_path = ped_partition_get_path(lp_partition);
   QString path;
-  if (lp_path != NULL) {
+  if (lp_path != nullptr) {
     path = lp_path;
     free(lp_path);
   }
@@ -201,10 +201,10 @@ QString GetPartitionPath(PedPartition* lp_partition) {
 bool ResizeMovePartition(const Partition& partition) {
   qDebug() << "ResizeMovePartition()" << partition;
   bool ok = false;
-  PedDevice* lp_device = NULL;
-  PedDisk* lp_disk = NULL;
+  PedDevice* lp_device = nullptr;
+  PedDisk* lp_disk = nullptr;
   if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
-    PedPartition* lp_partition = NULL;
+    PedPartition* lp_partition = nullptr;
     if (partition.type == PartitionType::Extended) {
       lp_partition = ped_disk_extended_partition(lp_disk);
     } else {
@@ -214,7 +214,7 @@ bool ResizeMovePartition(const Partition& partition) {
     if (lp_partition) {
       PedGeometry* geom = ped_geometry_new(lp_device, partition.start_sector,
                                            partition.getSectorLength());
-      PedConstraint* constraint = NULL;
+      PedConstraint* constraint = nullptr;
       if (geom) {
         constraint = ped_constraint_exact(geom);
       }
@@ -238,8 +238,8 @@ bool SetPartitionFlag(const Partition& partition,
                       PedPartitionFlag flag,
                       bool is_set) {
   qDebug() << "SetPartitionFlag()" << partition << flag << is_set;
-  PedDevice* lp_device = NULL;
-  PedDisk* lp_disk = NULL;
+  PedDevice* lp_device = nullptr;
+  PedDisk* lp_disk = nullptr;
   bool ok = false;
   if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
     PedPartition* lp_partition =
@@ -270,8 +270,8 @@ bool SetPartitionFlags(const Partition& partition) {
 
 bool SetPartitionType(const Partition& partition) {
   qDebug() << "SetPartitionType:" << partition;
-  PedDevice* lp_device = NULL;
-  PedDisk* lp_disk = NULL;
+  PedDevice* lp_device = nullptr;
+  PedDisk* lp_disk = nullptr;
   bool ok = false;
   if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
     const QString fs_name = GetPedFsName(partition.fs);

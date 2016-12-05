@@ -37,8 +37,8 @@ PartitionFlags GetPartitionFlags(PedPartition* lp_partition) {
 
 PartitionList ReadPartitions(PedDisk* lp_disk) {
   PartitionList partitions;
-  for (PedPartition* lp_partition = ped_disk_next_partition(lp_disk, NULL);
-      lp_partition != NULL;
+  for (PedPartition* lp_partition = ped_disk_next_partition(lp_disk, nullptr);
+      lp_partition != nullptr;
       lp_partition = ped_disk_next_partition(lp_disk, lp_partition)) {
 
     Partition partition;
@@ -197,12 +197,13 @@ DeviceList ScanDevices() {
   const OsTypeItems os_type_items = GetOsTypeItems();
   const MountItemList mount_items = ParseMountItems();
 
-  PedDevice* lp_device = ped_device_get_next(NULL);
-  while (lp_device != NULL) {
+  for (PedDevice* lp_device = ped_device_get_next(nullptr);
+      lp_device != nullptr;
+      lp_device = ped_device_get_next(lp_device)) {
     PedDiskType* disk_type = ped_disk_probe(lp_device);
-    PedDisk* lp_disk = NULL;
+    PedDisk* lp_disk = nullptr;
     // TODO(xushaohua): Filters USB device.
-    if (disk_type == NULL) {
+    if (disk_type == nullptr) {
       // Raw disk found.
       if (IsEfiEnabled()) {
         disk_type = ped_disk_type_get(kPartitionTableGPT);
@@ -213,14 +214,15 @@ DeviceList ScanDevices() {
         // Create a new device table but not commit changes to device.
         lp_disk = ped_disk_new_fresh(lp_device, disk_type);
       } else {
-        qCritical() << "ScanDevices() disk_type is NULL";
+        qCritical() << "ScanDevices() disk_type is nullptr";
       }
     } else if (QString(kPartitionTableGPT) == disk_type->name ||
                QString(kPartitionTableMsDos) == disk_type->name) {
       lp_disk = ped_disk_new(lp_device);
     } else {
       // Ignores other type of device.
-      qWarning() << "Ignores other type of device:" << disk_type->name;
+      qWarning() << "Ignores other type of device:" << lp_device->path
+                 << disk_type->name;
       continue;
     }
 
@@ -265,8 +267,6 @@ DeviceList ScanDevices() {
 
     devices.append(device);
     ped_disk_destroy(lp_disk);
-
-    lp_device = ped_device_get_next(lp_device);
   }
 
   return devices;
