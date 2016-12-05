@@ -135,7 +135,7 @@ void InstallProgressFrame::initUI() {
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(slide_frame_, 0, Qt::AlignCenter);
-  layout->addSpacing(kMainLayoutSpacing);
+  layout->addStretch();
   layout->addWidget(tooltip_frame, 0, Qt::AlignHCenter);
   layout->addSpacing(5);
   layout->addWidget(progress_bar_, 0, Qt::AlignCenter);

@@ -106,9 +106,8 @@ void InstallProgressSlideFrame::initUI() {
 
   animation_group_ = new QParallelAnimationGroup(this);
   animation_group_->setLoopCount(-1);
-
-  // TODO(xushaohua): Check proper size of this widget
-  this->setFixedSize(960, 640);
+  // Slide window size shall be the same with slide images
+  this->setFixedSize(960, 453);
 }
 
 void InstallProgressSlideFrame::updateSlideImage() {
