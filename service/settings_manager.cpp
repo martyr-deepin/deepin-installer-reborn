@@ -390,7 +390,7 @@ void SaveOemConfig() {
     return;
   }
   // Read default settings
-  QSettings default_settings(":/resources/default-settings.ini",
+  QSettings default_settings(":/resources/default_settings.ini",
                              QSettings::IniFormat);
   for (const QString& key : default_settings.allKeys()) {
     const QVariant value = default_settings.value(key);

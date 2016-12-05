@@ -10,9 +10,9 @@ oem 目录应该位于U盘(fat32格式)或系统光盘的根目录, 里面需要
 新旧程度, 选择最新的那个, 其它的oem 目录均被忽略.
 
 ## 自定义功能
-安装器默认的配置信息集成到了程序里面, 在 `resources/default-settings.ini`,
+安装器默认的配置信息集成到了程序里面, 在 `resources/default_settings.ini`,
 自定义的话, 需要创建 `oem/settings.ini` 文件, 然后对选项重新赋值即可.
-所有可用的配置选项都在 `default-settings.ini` 里面有说明.
+所有可用的配置选项都在 `default_settings.ini` 里面有说明.
 
 ### 各类图片
 * 安装器背景. 默认情况下, 会使用系统默认壁纸, 位于`/usr/share/backgrounds/default.jpg`.
