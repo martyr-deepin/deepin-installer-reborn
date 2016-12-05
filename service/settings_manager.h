@@ -33,7 +33,7 @@ QStringList GetSettingsStringList(const QString& key);
 // Get variant option value from settings file.
 QVariant GetSettingsValue(const QString& key);
 
-// Returns absolute path to oem/auto-part.sh
+// Returns absolute path to oem/auto_part.sh
 QString GetAutoPartFile();
 
 // Get all available avatars in avatar folder.

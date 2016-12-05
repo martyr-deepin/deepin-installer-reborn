@@ -13,7 +13,7 @@ namespace installer {
 namespace {
 
 const char kInstallerHooksDir[] = "/dev/shm/installer-hooks";
-const char kHookManagerFile[] = "/dev/shm/installer-hooks/hook-manager.sh";
+const char kHookManagerFile[] = "/dev/shm/installer-hooks/hook_manager.sh";
 
 // Runs a specific hook at |hook|.
 bool RunHook(const QString& hook) {

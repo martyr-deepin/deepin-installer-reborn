@@ -86,8 +86,6 @@ if [ $# -ne 1 ]; then
 fi
 
 hook_file=$1
-in_chroot=$(grep 'in_chroot' ${hook_file})
-
 
 # Check configuration
 CONF_FILE=/etc/deepin-installer.conf
@@ -97,11 +95,14 @@ fi
 . ${CONF_FILE}
 
 # Run hook file
-if [ -z ${in_chroot} ]; then
-  . ${hook_file}
-  exit $?
-else
-  echo 'Run in chroot env'
-  chroot /target ${hook_file}
-  exit $?
-fi
+case ${hook_file} in
+  */in_chroot/*)
+    echo 'Run in chroot env'
+    chroot /target ${hook_file}
+    exit $?
+    ;;
+  *)
+    . ${hook_file}
+    exit $?
+    ;;
+esac

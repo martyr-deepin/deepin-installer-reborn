@@ -37,10 +37,10 @@ oem 目录应该位于U盘(fat32格式)或系统光盘的根目录, 里面需要
 
 ### 自动分区
 需要把 `skip_partition_page` 设置为`1`, 然后把 `partition_do_auto_part`
-设置为 `1`. 安装器自带的自动分区的脚本位于 `hooks/auto-part.sh`, 也可以自定义
-自动分区脚本, 把需要分区的操作写到 `oem/auto-part.sh` 这个脚本文件里.
+设置为 `1`. 安装器自带的自动分区的脚本位于 `hooks/auto_part.sh`, 也可以自定义
+自动分区脚本, 把需要分区的操作写到 `oem/auto_part.sh` 这个脚本文件里.
 分区操作使用 `parted` 命令, 同时, 记得把分区结果写入到 `/etc/deepin-installer.conf`
-这个配置文件里. 要注意的是, `oem/auto-part.sh` 这个文件需要拥有可执行权限才行.
+这个配置文件里. 要注意的是, `oem/auto_part.sh` 这个文件需要拥有可执行权限才行.
 
 ### 安装进程的动画
 可以禁用动画, 通过设定 `install_progress_page_enable_slide`

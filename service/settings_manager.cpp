@@ -34,7 +34,7 @@ const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
 const char kInstallerOemConfigFile[] = "/etc/deepin-installer-oem.conf";
 
 // File name of auto partition script.
-const char kAutoPartFile[] = "auto-part.sh";
+const char kAutoPartFile[] = "auto_part.sh";
 
 // Absolute path to oem dir in system ISO.
 // Note that iso image is mounted at "/lib/live/mount/medium/".
