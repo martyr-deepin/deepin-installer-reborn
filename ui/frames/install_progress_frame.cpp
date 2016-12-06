@@ -5,11 +5,12 @@
 #include "ui/frames/install_progress_frame.h"
 
 #include <QDebug>
+#include <QEvent>
 #include <QProgressBar>
 #include <QStyle>
 #include <QThread>
+#include <QTimer>
 #include <QVBoxLayout>
-#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "service/hooks_manager.h"
@@ -28,6 +29,8 @@ const int kTooltipWidth = 60;
 const int kTooltipHeight = 31;
 const int kTooltipFrameWidth = kProgressBarWidth + kTooltipWidth;
 
+const int kRetainingInterval = 3000;
+
 const char kTextTitle[] = "Installing";
 const char kTextComment[] = "You will be experiencing the incredible pleasant "
     "of deepin after the time for just a cup of coffee";
@@ -38,11 +41,14 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
     : QFrame(parent),
       failed_(true),
       hooks_manager_(new HooksManager()),
-      hooks_manager_thread_(new QThread()) {
+      hooks_manager_thread_(new QThread()),
+      retaining_timer_(new QTimer(this)) {
   this->setObjectName("install_progress_frame");
 
   hooks_manager_->moveToThread(hooks_manager_thread_);
   hooks_manager_thread_->start();
+
+  retaining_timer_->setInterval(kRetainingInterval);
 
   this->initUI();
   this->initConnections();
@@ -74,7 +80,7 @@ void InstallProgressFrame::runHooks(bool ok) {
     // Run hooks/ in background thread.
     emit hooks_manager_->runHooks();
   } else {
-    this->onErrorOccurred();
+    this->onHooksErrorOccurred();
   }
 }
 
@@ -93,11 +99,14 @@ void InstallProgressFrame::changeEvent(QEvent* event) {
 
 void InstallProgressFrame::initConnections() {
   connect(hooks_manager_, &HooksManager::errorOccurred,
-          this, &InstallProgressFrame::onErrorOccurred);
+          this, &InstallProgressFrame::onHooksErrorOccurred);
+  connect(hooks_manager_, &HooksManager::finished,
+          this, &InstallProgressFrame::onHooksFinished);
   connect(hooks_manager_, &HooksManager::processUpdate,
           this, &InstallProgressFrame::onProgressUpdate);
-  connect(hooks_manager_, &HooksManager::finished,
-          this, &InstallProgressFrame::onSucceeded);
+
+  connect(retaining_timer_, &QTimer::timeout,
+          this, &InstallProgressFrame::onRetainingTimerTimeout);
 }
 
 void InstallProgressFrame::initUI() {
@@ -145,10 +154,19 @@ void InstallProgressFrame::initUI() {
   this->setStyleSheet(ReadFile(":/styles/install_progress_frame.css"));
 }
 
-void InstallProgressFrame::onErrorOccurred() {
+void InstallProgressFrame::onHooksErrorOccurred() {
   failed_ = true;
   slide_frame_->stopSlide();
   emit this->finished();
+}
+
+void InstallProgressFrame::onHooksFinished() {
+  failed_ = false;
+
+  // Set progress value to 100 explicitly.
+  this->onProgressUpdate(100);
+
+  retaining_timer_->start();
 }
 
 void InstallProgressFrame::onProgressUpdate(int progress) {
@@ -164,8 +182,7 @@ void InstallProgressFrame::onProgressUpdate(int progress) {
   progress_bar_->repaint();
 }
 
-void InstallProgressFrame::onSucceeded() {
-  failed_ = false;
+void InstallProgressFrame::onRetainingTimerTimeout() {
   slide_frame_->stopSlide();
   emit this->finished();
 }

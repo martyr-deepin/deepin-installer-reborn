@@ -9,6 +9,7 @@
 class QLabel;
 class QProgressBar;
 class QThread;
+class QTimer;
 
 namespace installer {
 
@@ -63,14 +64,19 @@ class InstallProgressFrame : public QFrame {
   QLabel* tooltip_label_ = nullptr;
   QProgressBar* progress_bar_ = nullptr;
 
+  // To hold progress value in 100% for 3s.
+  QTimer* retaining_timer_ = nullptr;
+
  private slots:
   // Handles error state
-  void onErrorOccurred();
+  void onHooksErrorOccurred();
+
+  // Handles successful installation.
+  void onHooksFinished();
 
   void onProgressUpdate(int progress);
 
-  // Handles successful installation.
-  void onSucceeded();
+  void onRetainingTimerTimeout();
 };
 
 }  // namespace installer
