@@ -12,7 +12,7 @@ import stat
 import shutil
 
 _casper_config = None
-PROGRESS_FILE = '/dev/shm/unsquashfs_base_progress'
+PROGRESS_FILE = '/dev/shm/unsquashfs_progress'
 
 class InstallError(Exception):
     def __init__ (self,message):

@@ -29,7 +29,7 @@
 
 namespace {
 
-const char kAppName[] = "deepin-installer-unsqaushfs";
+const char kAppName[] = "deepin-installer-unsquashfs";
 const char kAppDesc[] = "Tool to extract squashfs filesystem";
 const char kAppVersion[] = "0.0.1";
 
