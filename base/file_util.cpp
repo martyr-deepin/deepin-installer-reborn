@@ -16,7 +16,7 @@
 namespace installer {
 
 QDir ConcateDir(const QDir& parent_dir, const QString& folder_name) {
-  if (! parent_dir.exists(folder_name)) {
+  if (!parent_dir.exists(folder_name)) {
     // TODO(xushaohua): Handles permission error.
     parent_dir.mkpath(folder_name);
   }
@@ -37,19 +37,24 @@ bool CopyFolder(const QString src_dir, const QString& dest_dir,
   QString dest_filepath;
   bool ok = true;
   if (!QDir(dest_dir).exists()) {
-    ok = CreateParentDirs(dest_dir);
+    ok = CreateDirs(dest_dir);
   }
+
+  // Walk through source folder.
   while (ok && iter.hasNext()) {
     src_info = iter.next();
     dest_filepath = iter.filePath().replace(src_dir, dest_dir);
     if (src_info.isDir()) {
-      ok = CreateDirs(dest_filepath);
+      if (!QDir(dest_filepath).exists()) {
+        ok = CreateDirs(dest_filepath);
+      }
       if (ok) {
         ok = CopyMode(iter.filePath().toStdString().c_str(),
                       dest_filepath.toStdString().c_str());
       }
     } else if (src_info.isFile()) {
       if (QFile::exists(dest_filepath)) {
+        // Remove old file first.
         QFile::remove(dest_filepath);
       }
       ok = QFile::copy(iter.filePath(), dest_filepath);
@@ -62,8 +67,11 @@ bool CopyFolder(const QString src_dir, const QString& dest_dir,
         QFile::remove(dest_filepath);
       }
       ok = QFile::link(src_info.canonicalFilePath(), dest_filepath);
+    } else {
+      // Ignores other type of files.
     }
   }
+  qDebug() << "iter:" << iter.filePath();
   return ok;
 }
 

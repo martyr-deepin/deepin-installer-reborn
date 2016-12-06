@@ -10,7 +10,7 @@ namespace installer {
 namespace {
 
 TEST(FileUtil, CopyFodlerTest) {
-  EXPECT_TRUE(CopyFolder("/etc/init.d", "/tmp/init.d"));
+  EXPECT_TRUE(CopyFolder("/etc/init.d", "/tmp/init.d", false));
   EXPECT_TRUE(CopyFolder("/etc/apt", "/tmp/apt", false));
 }
 

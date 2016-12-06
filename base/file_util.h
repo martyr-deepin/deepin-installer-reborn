@@ -11,7 +11,7 @@
 namespace installer {
 
 // Create a folder with |folder_name| in |parent_dir| directory and
-// returns a QDir object refering to its absolute path.
+// returns a QDir object referencing to its absolute path.
 QDir ConcateDir(const QDir& parent_dir, const QString& folder_name);
 
 // Folder content in |src_dir| into |dest_dir|.
