@@ -480,10 +480,6 @@ install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-xrandr-switchy
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs-progress
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(FILES resources/deepin-installer-reborn.desktop
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications)
-install(FILES resources/deepin-installer-reborn.svg
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps)
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hooks
     DESTINATION ${INSTALLER_SHARE_DIR}
