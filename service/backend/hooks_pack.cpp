@@ -4,10 +4,10 @@
 
 #include "service/backend/hooks_pack.h"
 
+#include <algorithm>
 #include <QDebug>
 #include <QDir>
 
-#include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "sysinfo/machine.h"
 
@@ -19,14 +19,11 @@ const char kBeforeChrootDir[] = "before_chroot";
 const char kInChrootDir[] = "in_chroot";
 const char kAfterChrootDir[] = "after_chroot";
 
-const char kTargetDir[] = "/target";
-const char kInstallerHooksDir[] = "/dev/shm/installer-hooks";
-
 bool MatchArchitecture(const QString& name);
 
 // Returns a list of sorted hook scripts with |hook_type|.
 QStringList ListHooks(HookType hook_type) {
-  // filename => abs-filepath
+  // Absolute file path to hooks.
   QStringList hooks;
   QString folder_name;
   switch (hook_type) {
@@ -46,14 +43,33 @@ QStringList ListHooks(HookType hook_type) {
     }
   }
 
+  // filename -> absolute file path
+  QHash<QString, QString> hooks_table;
+
   const QStringList name_filter = { "*.job" };
   const QDir::Filters dir_filter = QDir::Files | QDir::NoDotAndDotDot;
-  QDir dir(QDir(kInstallerHooksDir).absoluteFilePath(folder_name));
+  QDir builtin_dir(QDir(BUILTIN_HOOKS_DIR).absoluteFilePath(folder_name));
   for (const QString& file :
-      dir.entryList(name_filter, dir_filter, QDir::Name)) {
+      builtin_dir.entryList(name_filter, dir_filter, QDir::Name)) {
     if (MatchArchitecture(file)) {
-      hooks.append(dir.absoluteFilePath(file));
+      hooks_table.insert(file, builtin_dir.absoluteFilePath(file));
     }
+  }
+
+  QDir oem_dir(QDir(GetOemHooksDir()).absoluteFilePath(folder_name));
+  if (oem_dir.exists()) {
+    for (const QString& file :
+        oem_dir.entryList(name_filter, dir_filter, QDir::Name)) {
+      if (MatchArchitecture(file)) {
+        hooks_table.insert(file, builtin_dir.absoluteFilePath(file));
+      }
+    }
+  }
+
+  QStringList keys(hooks_table.keys());
+  std::sort(keys.begin(), keys.end());
+  for (const QString& key : keys) {
+    hooks.append(hooks_table.value(key));
   }
 
   qDebug() << "hooks:" << hooks;
@@ -102,35 +118,6 @@ void HooksPack::init(HookType type, int progress_begin, int progress_end,
   this->next = next;
   this->hooks = ListHooks(type);
   this->current_hook = -1;
-}
-
-bool CopyHooks(bool in_chroot) {
-  QString dest_dir;
-  if (in_chroot) {
-    dest_dir = QString("%1%2").arg(kTargetDir).arg(kInstallerHooksDir);
-  } else {
-    dest_dir = kInstallerHooksDir;
-  }
-  if (!CreateDirs(dest_dir)) {
-    qCritical() << "Failed to create parent dir:" << dest_dir;
-    return false;
-  }
-
-  // Copy builtin hooks to /tmp/installer-hooks/
-  const QString builtin_dir(BUILTIN_HOOKS_DIR);
-  if (!CopyFolder(builtin_dir, dest_dir)) {
-    qCritical() << "Failed to copy builtin hooks!";
-    return false;
-  }
-
-  // Copy oem_tool hooks to /tmp/installer-hooks/
-  // Job file with same name will be overwritten here.
-  const QString oem_dir(GetOemHooksDir());
-  if (QDir(oem_dir).exists()) {
-    return CopyFolder(oem_dir, dest_dir);
-  } else {
-    return true;
-  }
 }
 
 }  // namespace installer

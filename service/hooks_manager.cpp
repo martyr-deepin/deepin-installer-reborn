@@ -99,21 +99,15 @@ void HooksManager::runNextHook() {
     // Run next hook in current hooks pack.
     const QString hook(hooks_pack_->hooks.at(hooks_pack_->current_hook));
     qDebug() << "run hook:" << hook;
-    emit hook_worker_->runHook(hook);  }
+    emit hook_worker_->runHook(hook);
+  }
 }
 
 void HooksManager::runHooksPack() {
   Q_ASSERT(hooks_pack_);
-
   if (hooks_pack_->type == HookType::BeforeChroot) {
     // Setup filesystem watch of unsquashfs progress file.
     this->monitorProgressFiles();
-  } else if (hooks_pack_->type == HookType::InChroot) {
-    if (!CopyHooks(true)) {
-      qCritical() << "Failed to copy hooks in chroot env!";
-      emit this->errorOccurred();
-      return;
-    }
   }
 
   // Run hooks one by one.
@@ -131,12 +125,6 @@ void HooksManager::monitorProgressFiles() {
 void HooksManager::handleRunHooks() {
   qDebug() << "handleRunHooks()";
   unsquashfs_timer_->setInterval(kReadUnsquashfsInterval);
-
-  if (!CopyHooks(false)) {
-    qCritical() << "Failed to copy hooks!";
-    emit this->errorOccurred();
-    return;
-  }
 
   HooksPack* before_chroot = new HooksPack();
   HooksPack* in_chroot = new HooksPack();
@@ -173,7 +161,7 @@ void HooksManager::onHooksManagerFinished() {
     hooks_pack_ = next_hooks_pack;
   }
 
-  // Stop unquashfs progress file monitor
+  // Stop unsquashfs progress file monitor
   if (unsquashfs_timer_->isActive()) {
     unsquashfs_timer_->stop();
   }
