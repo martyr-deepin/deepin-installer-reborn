@@ -21,6 +21,9 @@ namespace installer {
 
 namespace {
 
+// Absolute path to hook_manager.sh
+const char kHookManagerFile[] = BUILTIN_HOOKS_DIR"/hook_manager.sh";
+
 PartitionFlags GetPartitionFlags(PedPartition* lp_partition) {
   PartitionFlags flags;
   for (PedPartitionFlag lp_flag =
@@ -167,7 +170,12 @@ void PartitionManager::doAutoPart(const QString& script_path) {
     emit this->autoPartDone(false);
     return;
   }
-  const bool ok = RunScriptFile(script_path);
+  QString output, err;
+  const bool ok = RunScriptFile({kHookManagerFile, script_path}, output, err);
+  if (!ok) {
+    qCritical() << "Output of auto_part:" << output
+                << "Error of auto_part:" << err;
+  }
   emit this->autoPartDone(ok);
 }
 
