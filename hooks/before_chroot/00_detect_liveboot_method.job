@@ -12,9 +12,12 @@ elif grep -q boot=live /proc/cmdline; then
     LUPIN_ROOT=/lib/live/mount/findiso
     DISTRIBUTION=debian
 else
-    echo "[Error] No boot value found!"
-    exit 101
+    error "[Error] No boot value found!"
 fi
 
 LIVE_FILESYSTEM=${CDROM}/${BOOT}
-echo -e "DISTRIBUTION=${DISTRIBUTION}\nLIVE=${BOOT}\nLIVE_FILESYSTEM=${LIVE_FILESYSTEM}\nCDROM=${CDROM}\nDI_LUPIN_ROOT=${LUPIN_ROOT}" | tee -a /etc/deepin-installer.conf
+installer_set "DISTRIBUTION" "${DISTRIBUTION}"
+installer_set "LIVE" "${BOOT}"
+installer_set "LIVE_FILESYSTEM" "${LIVE_FILESYSTEM}"
+installer_set "CDROM" "${CDROM}"
+installer_set "DI_LUPIN_ROOT" "${LUPIN_ROOT}"

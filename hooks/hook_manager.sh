@@ -8,6 +8,7 @@ export LC_ALL=C
 export DEBIAN_FRONTEND="noninteractive"
 export APT_OPTIONS="-y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" --force-yes --no-install-recommends --allow-unauthenticated"
 
+# Print error message and exit
 error() {
     local msg=$*
     echo " "
@@ -40,21 +41,40 @@ fi
 hook_file=$1
 
 # Check configuration
-CONF_FILE=/etc/deepin-installer.conf
-if [ ! -f ${CONF_FILE} ];then
-  error "Config file /etc/deepin-installer.conf does not exists."
-fi
-. ${CONF_FILE}
+CONF_FILE=""
+
+# Get value in conf file. Section name is ignored.
+installer_get() {
+  local key=$1
+  deepin-installer-conf-helper get ${CONF_FILE} ${key}
+}
+
+# Set value in conf file. Section name is ignored.
+installer_set() {
+  local key=$1
+  local value=$2
+  deepin-installer-conf-helper set ${CONF_FILE} ${key} ${value}
+}
 
 # Run hook file
 case ${hook_file} in
   */in_chroot/*)
+    CONF_FILE=/deepinhost/etc/deepin-installer.conf
+    if [ ! -f ${CONF_FILE} ];then
+      error "Config file ${CONF_FILE} does not exists."
+    fi
+
     echo 'Run in chroot env'
     # Host device is mounted at /target/deepinhost
     chroot /target /deepinhost/${hook_file}
     exit $?
     ;;
   *)
+    CONF_FILE=/etc/deepin-installer.conf
+    if [ ! -f ${CONF_FILE} ];then
+      error "Config file ${CONF_FILE} does not exists."
+    fi
+
     . ${hook_file}
     exit $?
     ;;

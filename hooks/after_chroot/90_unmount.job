@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. /etc/deepin-installer.conf
-
 target='/target'
 chown root:root ${target} 
 

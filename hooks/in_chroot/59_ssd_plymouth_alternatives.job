@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. /deepinhost/etc/deepin-installer.conf
+DI_ROOT_PARTITION=$(installer_get "DI_ROOT_PARTITION")
 
 detect_rootblk(){
     if [ ! -z ${DI_ROOT_PARTITION} ];then

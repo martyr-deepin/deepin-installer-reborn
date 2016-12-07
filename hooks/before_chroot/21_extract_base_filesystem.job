@@ -1,6 +1,9 @@
 #!/bin/bash
 
-. /etc/deepin-installer.conf
+CDROM=$(installer_get "CDROM")
+DI_LOCALE=$(installer_get "DI_LOCALE")
+LIVE_FILESYSTEM=$(installer-get "LIVE_FILESYSTEM")
+
 L=${DI_LOCALE%.*}
 
 # Get number of processors available for current process, minus 1.

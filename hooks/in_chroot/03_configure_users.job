@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ -f /deepinhost/etc/deepin-installer.conf ];then
-    . /deepinhost/etc/deepin-installer.conf
-fi
+DI_HOSTNAME=$(installer_get "DI_HOSTNAME")
+DI_PASSWORD=$(installer_get "DI_PASSWORD")
+DI_USERNAME=$(installer_get "DI_USERNAME")
 
 [ -z ${DI_USERNAME} ] && { echo >&2 "[ERROR] Variable DI_USERNAME not set. Aborting"; exit 1; }
 [ -z ${DI_PASSWORD} ] && { echo >&2 "[ERROR] Variable DI_PASSWORD not set. Aborting."; exit 1; }

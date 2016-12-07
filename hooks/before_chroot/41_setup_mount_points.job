@@ -1,6 +1,8 @@
 #!/bin/bash
 
-. /etc/deepin-installer.conf
+CDROM=$(installer_get "CDROM")
+DI_BOOTLOADER=$(installer_get "DI_BOOTLOADER")
+DI_UEFI=$(installer_get "DI_UEFI")
 
 mkdir -p /target/dev
 mount --bind -v --bind /dev/ /target/dev
