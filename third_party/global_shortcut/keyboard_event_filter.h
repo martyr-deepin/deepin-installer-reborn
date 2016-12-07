@@ -2,8 +2,8 @@
 // Use of this source is governed by Commercial License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_KEYBOARD_EVENT_FILTER_H_
-#define INSTALLER_KEYBOARD_EVENT_FILTER_H_
+#ifndef INSTALLER_THIRD_PARTY_KEYBOARD_EVENT_FILTER_H_
+#define INSTALLER_THIRD_PARTY_KEYBOARD_EVENT_FILTER_H_
 
 #include <QAbstractNativeEventFilter>
 #include <QHash>
@@ -32,4 +32,4 @@ class KeyboardEventFilter : public QAbstractNativeEventFilter {
   QHash<QPair<quint32, quint32>, GlobalShortcut*> shortcuts_;
 };
 
-#endif  // INSTALLER_KEYBOARD_EVENT_FILTER_H_
+#endif  // INSTALLER_THIRD_PARTY_KEYBOARD_EVENT_FILTER_H_

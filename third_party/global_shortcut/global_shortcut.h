@@ -2,8 +2,8 @@
 // Use of this source is governed by Commercial License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_GLOBAL_SHORTCUT_H_
-#define INSTALLER_GLOBAL_SHORTCUT_H_
+#ifndef INSTALLER_THIRD_PARTY_GLOBAL_SHORTCUT_H_
+#define INSTALLER_THIRD_PARTY_GLOBAL_SHORTCUT_H_
 
 #include <QObject>
 #include <QKeySequence>
@@ -13,7 +13,7 @@
 class GlobalShortcut : public QObject {
   Q_OBJECT
  public:
-  explicit GlobalShortcut(QKeySequence key_sequence);
+  explicit GlobalShortcut(QKeySequence key_sequence, QObject* parent = nullptr);
   ~GlobalShortcut();
 
   bool isRegistered() const { return is_registered_; }
@@ -32,4 +32,4 @@ class GlobalShortcut : public QObject {
   quint32 mod_;
 };
 
-#endif  // INSTALLER_GLOBAL_SHORTCUT_H_
+#endif  // INSTALLER_THIRD_PARTY_GLOBAL_SHORTCUT_H_

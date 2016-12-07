@@ -38,7 +38,7 @@ quint32 nativeKeyCode(Qt::Key key) {
       keyname = "XF86AudioPlay";
       break;
     default:
-      keyname = QKeySequence(key).toString().toLatin1().data();
+      keyname = QKeySequence(key).toString().toStdString().c_str();
       break;
   }
   return XKeysymToKeycode(display, XStringToKeysym(keyname));
@@ -56,6 +56,10 @@ quint32 nativeModifiers(Qt::KeyboardModifiers modifiers) {
   if (modifiers & Qt::AltModifier) {
     native |= Mod1Mask;
   }
+  if (modifiers & Qt::MetaModifier) {
+    // Super key.
+    native |= Mod4Mask;
+  }
   return native;
 }
 
@@ -64,19 +68,22 @@ void KeySequenceToKeyCode(const QKeySequence& shortcut,
                           quint32* native_key, quint32* native_mod) {
   Qt::KeyboardModifiers mods = Qt::ShiftModifier | Qt::ControlModifier |
                                Qt::AltModifier | Qt::MetaModifier;
+  qDebug() << "mods:" << mods;
   Qt::Key key = shortcut.isEmpty() ?
-                Qt::Key(0) : Qt::Key((shortcut[0] ^ mods) & shortcut[0]);
+                Qt::Key(0) :
+                Qt::Key((shortcut[0] ^ mods) & shortcut[0]);
   Qt::KeyboardModifiers mod = shortcut.isEmpty() ?
-                              Qt::KeyboardModifiers(0) : Qt::KeyboardModifiers(
-          shortcut[0] & mods);
+                              Qt::KeyboardModifiers(0) :
+                              Qt::KeyboardModifiers(shortcut[0] & mods);
+  qDebug() << "mod:" << mod;
   *native_key = nativeKeyCode(key);
   *native_mod = nativeModifiers(mod);
 }
 
 }  // namespace
 
-GlobalShortcut::GlobalShortcut(QKeySequence key_sequence)
-    : QObject(),
+GlobalShortcut::GlobalShortcut(QKeySequence key_sequence, QObject* parent)
+    : QObject(parent),
       is_registered_(false),
       key_(0),
       mod_(0) {
