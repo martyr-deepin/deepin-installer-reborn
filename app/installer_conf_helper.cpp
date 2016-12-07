@@ -10,10 +10,11 @@
 // * get ini-file section-name key
 // * get ini-file key
 
+#include <stdio.h>
+
 #include <QCoreApplication>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
-#include <QDebug>
 #include <QFile>
 #include <QSettings>
 
@@ -73,7 +74,7 @@ int main(int argc, char* argv[]) {
 
   const QString ini_file = pos_args.at(1);
   if ((command == CommandType::Get) && (!QFile::exists(ini_file))) {
-    qCritical() << "File not found!" << ini_file;
+    fprintf(stderr, "File not found! %s\n", ini_file.toStdString().c_str());
     return kExitErr;
   }
 
@@ -113,7 +114,8 @@ int main(int argc, char* argv[]) {
       settings.endGroup();
     }
     // Print value to stdout.
-    qDebug() << value;
+    fprintf(stdout, "%s", value.toStdString().c_str());
+
   } else if (command == CommandType::Set) {
     if (section.isEmpty()) {
       settings.setValue(key, value);
