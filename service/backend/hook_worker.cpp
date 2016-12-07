@@ -18,8 +18,8 @@ const char kHookManagerFile[] = BUILTIN_HOOKS_DIR"/hook_manager.sh";
 // Runs a specific hook at |hook|.
 bool RunHook(const QString& hook) {
   QString output, err;
-  const QStringList args = {hook};
-  const bool ok = RunScriptFile(kHookManagerFile, args, output, err, true);
+  const QStringList args = {kHookManagerFile, hook};
+  const bool ok = RunScriptFile(args, output, err);
   if (!output.isEmpty()) {
     qWarning() << "Output from " << hook << "\n" << output;
   }

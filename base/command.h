@@ -9,16 +9,13 @@
 
 namespace installer {
 
-// Run a script file at |filepath|.
-// If |change_working_dir| is true, current working directory is changed to
-// folder of |filepath|.
+// Run a script file at |filepath|, no matter |filepath| is executable or not.
+// Current working directory is changed to folder of |filepath|.
 // Returns true if |filepath| executed and exited with 0.
-bool RunScriptFile(const QString& filepath, bool change_working_dir = true);
-bool RunScriptFile(const QString& filepath, QString& output, QString& err,
-                   bool change_working_dir = true);
-bool RunScriptFile(const QString& filepath, const QStringList& args,
-                   QString& output, QString& err,
-                   bool change_working_dir = true);
+bool RunScriptFile(const QString& filepath);
+// First argument in |args| is the path to script file.
+// |output| and |err| are content of stdout and stderr.
+bool RunScriptFile(const QStringList& args, QString& output, QString& err);
 
 // Run |cmd| with |args| in background and returns its result.
 bool SpawnCmd(const QString& cmd, const QStringList& args);

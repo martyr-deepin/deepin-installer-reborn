@@ -457,7 +457,7 @@ target_link_libraries(deepin-installer-reborn-root-tests
 add_definitions("-DUNSQUASHFS_SH=\"${CMAKE_CURRENT_SOURCE_DIR}/misc/unsquashfs_gui/unsquashfs.sh\"")
 add_executable(unsquashfs_gui
 
-               ui/tests/unsquashfs_gui/main.cpp
+               ui/tests/unsquashfs_gui/unsquashfs_gui.cpp
                ui/tests/unsquashfs_gui/unsquashfs_progress_window.cpp
                ui/tests/unsquashfs_gui/unsquashfs_progress_window.h
 
