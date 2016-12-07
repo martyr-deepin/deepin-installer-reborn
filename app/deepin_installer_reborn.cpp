@@ -26,8 +26,6 @@ int main(int argc, char* argv[]) {
     qCritical() << "Root privilege is required!";
   }
   installer::DeleteConfigFile();
-  // NOTE(xushaohua): Scans usb devices here, might be very slow.
-  // TODO(xushaohua): Add a startup option to disable scanning operation.
   installer::SaveOemConfig();
 
   installer::MainWindow main_window;
