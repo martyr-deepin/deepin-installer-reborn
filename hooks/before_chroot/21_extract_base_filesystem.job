@@ -2,7 +2,7 @@
 
 CDROM=$(installer_get "CDROM")
 DI_LOCALE=$(installer_get "DI_LOCALE")
-LIVE_FILESYSTEM=$(installer-get "LIVE_FILESYSTEM")
+LIVE_FILESYSTEM=$(installer_get "LIVE_FILESYSTEM")
 
 L=${DI_LOCALE%.*}
 
