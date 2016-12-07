@@ -40,20 +40,13 @@ const char kDefaultWallpaperFile[] = RESOURCES_DIR"/default_wallpaper.jpg";
 // File name of auto partition script.
 const char kAutoPartFile[] = "auto_part.sh";
 
-// Absolute path to oem dir in system ISO.
-// Note that iso image is mounted at "/lib/live/mount/medium/".
-const char kIsoOemDir[] = "/lib/live/mount/medium/oem";
-
-// Folder name of mount point of usb storage.
-const char kUsbMountDir[] = "usb_root_dir";
-const char kUsbMountPoint[] = "/usb_root_dir";
-const char kUsbMountOemPath[] = "/usb_root_dir/oem";
+// Absolute path to oem folder.
+const char kDebugOemDir[] = "/tmp/oem";
+const char kUbuntuOemDir[] = "/cdrom/oem";
+const char kDeepinOemDir[] = "/lib/live/mount/medium/oem";
 
 // Filename of oem settings
 const char kOemSettingsFile[] = "settings.ini";
-
-// Name of installer oem lock file.
-const char kOemLockFile[] = "deepin-installer-reborn.lock";
 
 bool AppendToConfigFile(const QString& line) {
   QFile file(kInstallerConfigFile);
@@ -89,106 +82,15 @@ QStringList ListImageFiles(const QString& dir_name) {
   return result;
 }
 
-// Returns a list of usb storage in system.
-QStringList GetUsbStorage() {
-  const QFileInfoList file_list =
-      QDir("/dev/disk/by-path").entryInfoList(QDir::Files);
-  QStringList result;
-  for (const QFileInfo& file : file_list) {
-    const QString filename = file.fileName();
-    if (filename.contains("usb") &&
-        filename.contains("part")) {
-      result.append(QFileInfo(file).canonicalFilePath());
-    }
-  }
-  return result;
-}
-
-// TODO(xushaohua): Scan usb devices explicitly.
-bool ScanLatestOemDirInUsbStorage() {
-  QDir root_dir("/");
-  if (root_dir.exists(kUsbMountDir)) {
-    // Umount any devices, ignoring error message.
-    (void)umount(kUsbMountPoint);
-  } else if (!root_dir.mkdir(kUsbMountDir)) {
-    qCritical() << "Failed to create:" << kUsbMountDir;
-    return false;
-  }
-
-  QDateTime latest_timestamp = QDateTime::fromTime_t(0);
-  QString latest_device;
-  const QStringList usb_devices = GetUsbStorage();
-  qDebug() << "usb devices:" << usb_devices;
-  if (usb_devices.isEmpty()) {
-    // If no usb device is found, use ISO folder instead.
-    g_oem_dir = kIsoOemDir;
-    return true;
-  }
-
-  for (const QString& usb_device : usb_devices) {
-    qDebug() << "Scanning:" << usb_device;
-    // mount usb device
-    const char* device_path = usb_device.toStdString().c_str();
-
-    // Filesystem type of usb device is hard-coded!
-    if (mount(device_path, kUsbMountPoint, "vfat", MS_NOATIME, NULL) != 0) {
-      qCritical() << "Failed to mount:" << usb_device << strerror(errno);
-      return false;
-    }
-    // check folder and file exists
-    QDir oem_dir(kUsbMountOemPath);
-    if (oem_dir.exists() && oem_dir.exists(kOemLockFile)) {
-      qDebug() << "lock file found:" << usb_device;
-      // compare timestamp
-      QFileInfo info(oem_dir.absoluteFilePath(kOemLockFile));
-      const QDateTime timestamp = info.lastModified();
-      if (timestamp > latest_timestamp) {
-        latest_timestamp = timestamp;
-        latest_device = usb_device;
-      }
-    }
-
-    // umount usb device
-    if (umount(kUsbMountPoint) != 0) {
-      qCritical() << "Failed to umount:" << usb_device;
-      return false;
-    }
-  }
-
-  // compare with ISO device
-  QDir iso_oem_dir(kIsoOemDir);
-  if (iso_oem_dir.exists() && iso_oem_dir.exists(kOemLockFile)) {
-    QFileInfo info(iso_oem_dir.absoluteFilePath(kOemLockFile));
-    const QDateTime timestamp = info.lastModified();
-    if (timestamp > latest_timestamp) {
-      g_oem_dir = kIsoOemDir;
-      return true;
-    }
-  }
-
-  if (!latest_device.isEmpty()) {
-    // Mount that usb device.
-    if (mount(latest_device.toStdString().c_str(), kUsbMountPoint,
-              "vfat", MS_NOATIME, NULL) != 0) {
-      qCritical() << "Failed to mount:" << latest_device << strerror(errno);
-      return false;
-    }
-    qDebug() << "Use usb device:" << latest_device;
-    g_oem_dir = kUsbMountOemPath;
-    return true;
-  }
-
-  return false;
-}
-
+// Note that oem folder might not exist.
 QDir GetOemDir() {
   if (g_oem_dir.isEmpty()) {
-    if (!ScanLatestOemDirInUsbStorage()) {
-      qCritical() << "ScanLatestOemDirInUsbStorage() failed!";
-      // Fallback to ISO folder.
-      g_oem_dir = kIsoOemDir;
+    if (QDir(kDebugOemDir).exists()) {
+      g_oem_dir = kDebugOemDir;
+    } else if (QDir(kUbuntuOemDir).exists()) {
+      g_oem_dir = kUbuntuOemDir;
     } else {
-      qDebug() << "Oem dir:" << g_oem_dir;
+      g_oem_dir = kDeepinOemDir;
     }
   }
   return QDir(g_oem_dir);

@@ -3,11 +3,10 @@
 ## 关于
 这篇文档记录了安装器重制版支持的自定义功能.
 
-在不修改源码的情况下, 所有的自定义文件, 都应该放在 oem 目录.
-oem 目录应该位于U盘(fat32格式)或系统光盘的根目录, 里面需要包含
-`deepin-installer-reborn.lock` 文件, 它用于标记这是一个安装器的配置目录.
-如果找到了多个 oem 目录, 会根据 `deepin-installer-reborn.lock` 这个文件的
-新旧程度, 选择最新的那个, 其它的oem 目录均被忽略.
+在不修改源码的情况下, 所有的自定义文件, 都应该放在 oem 目录. 分发时， oem 目录应该放在ISO的
+根目录， ISO应该挂载于 /lib/live/mount/medium/ 或者 /cdrom . 测试时, 为了方便, 可以将
+oem 目录放在 /tmp 目录里. 它们的优先级从高到低依次是, /tmp/oem, /cdrom/oem,
+/lib/live/mount/medium/oem
 
 ## 自定义功能
 安装器默认的配置信息集成到了程序里面, 在 `resources/default_settings.ini`,
