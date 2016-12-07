@@ -39,7 +39,10 @@ oem 目录放在 /tmp 目录里. 它们的优先级从高到低依次是, /tmp/o
 设置为 `1`. 安装器自带的自动分区的脚本位于 `hooks/auto_part.sh`, 也可以自定义
 自动分区脚本, 把需要分区的操作写到 `oem/auto_part.sh` 这个脚本文件里.
 分区操作使用 `parted` 命令, 同时, 记得把分区结果写入到 `/etc/deepin-installer.conf`
-这个配置文件里. 要注意的是, `oem/auto_part.sh` 这个文件需要拥有可执行权限才行.
+这个配置文件里.
+针对特定架构的自动分区脚本, 要这样命名 `auto_part_ARCH.sh`, 其中 `ARCH` 是架构名称, 比如
+x86, mips64, 区分32位与64位.
+
 
 ### 安装进程的动画
 可以禁用动画, 通过设定 `install_progress_page_enable_slide`

@@ -5,8 +5,11 @@
 #ifndef INSTALLER_SYSINFO_MACHINE_H
 #define INSTALLER_SYSINFO_MACHINE_H
 
+#include <QString>
+
 namespace installer {
 
+// TODO(xushaohua): Support sw
 enum class MachineArch {
   Alpha,
   Alpha64,
@@ -22,6 +25,9 @@ enum class MachineArch {
 
 // Returns current machine architecture.
 MachineArch GetMachineArch();
+
+// Returns name of current machine architecture.
+QString GetMachineArchName();
 
 }  // namespace installer
 

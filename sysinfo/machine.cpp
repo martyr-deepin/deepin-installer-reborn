@@ -9,6 +9,12 @@
 
 namespace installer {
 
+namespace {
+
+const char kUnknownArch[] = "unknown";
+
+}  // namespace
+
 MachineArch GetMachineArch() {
   struct utsname uts;
 
@@ -32,13 +38,29 @@ MachineArch GetMachineArch() {
   if (machine == "alpha") {
     return MachineArch::Alpha;
   }
+  if (machine == "alpha64") {
+    return MachineArch::Alpha64;
+  }
   if (machine == "arm") {
     return MachineArch::ARM;
+  }
+  if (machine == "arm64") {
+    return MachineArch::ARM64;
   }
 
   // TODO(xushaohua): Check other architectures.
 
   return MachineArch::Unknown;
+}
+
+QString GetMachineArchName() {
+  struct utsname uts;
+
+  if (uname(&uts) != 0) {
+    return kUnknownArch;
+  }
+
+  return uts.machine;
 }
 
 }  // namespace installer

@@ -68,23 +68,31 @@ bool MatchArchitecture(const QString& name) {
     return false;
   }
 
-  if (lower_name.lastIndexOf("alpha.job") > 0 && arch != MachineArch::Alpha) {
-    return false;
-  }
   if (lower_name.lastIndexOf("alpha64.job") > 0 &&
       arch != MachineArch::Alpha64) {
     return false;
   }
-  if (lower_name.lastIndexOf("arm.job") > 0 && arch != MachineArch::ARM) {
+  if (lower_name.lastIndexOf("alpha.job") > 0 && arch != MachineArch::Alpha) {
     return false;
   }
   if (lower_name.lastIndexOf("arm64.job") > 0 && arch != MachineArch::ARM64) {
     return false;
   }
+  if (lower_name.lastIndexOf("arm.job") > 0 && arch != MachineArch::ARM) {
+    return false;
+  }
+  if (lower_name.lastIndexOf("mips64.job") > 0 &&
+      arch != MachineArch::MIPS64) {
+    return false;
+  }
   if (lower_name.lastIndexOf("mips.job") > 0 && arch != MachineArch::MIPS) {
     return false;
   }
-  if (lower_name.lastIndexOf("x86.job") > 0 && arch != MachineArch::X86_64) {
+  if (lower_name.lastIndexOf("x86_64.job") > 0 &&
+      arch != MachineArch::X86_64) {
+    return false;
+  }
+  if (lower_name.lastIndexOf("x86.job") > 0 && arch != MachineArch::X86) {
     return false;
   }
 

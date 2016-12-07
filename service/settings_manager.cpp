@@ -18,6 +18,7 @@
 #include <QHash>
 #include <QSettings>
 
+#include "sysinfo/machine.h"
 #include "service/settings_name.h"
 
 namespace installer {
@@ -39,6 +40,8 @@ const char kDefaultWallpaperFile[] = RESOURCES_DIR"/default_wallpaper.jpg";
 
 // File name of auto partition script.
 const char kAutoPartFile[] = "auto_part.sh";
+// File name of architecture specific of auto partition script.
+const char kAutoPartArchSpecFile[] = "auto_part_%1.sh";
 
 // Absolute path to oem folder.
 const char kDebugOemDir[] = "/tmp/oem";
@@ -157,15 +160,22 @@ QVariant GetSettingsValue(const QString& key) {
 }
 
 QString GetAutoPartFile() {
-  const QString oem_file = GetOemDir().absoluteFilePath(kAutoPartFile);
-  if (QFile::exists(oem_file)) {
-    return oem_file;
-  }
+  const QString arch_spec_file =
+      QString(kAutoPartArchSpecFile).arg(GetMachineArchName());
+  QDir oem_dir = GetOemDir();
+  QDir builtin_dir(BUILTIN_HOOKS_DIR);
 
-  const QString builtin_file =
-      QDir(BUILTIN_HOOKS_DIR).absoluteFilePath(kAutoPartFile);
-  if (QFile::exists(builtin_file)) {
-    return builtin_file;
+  // First check existence of architecture specific file.
+  const QStringList script_files = {
+      oem_dir.absoluteFilePath(arch_spec_file),
+      builtin_dir.absoluteFilePath(arch_spec_file),
+      oem_dir.absoluteFilePath(kAutoPartFile),
+      builtin_dir.absoluteFilePath(kAutoPartFile),
+  };
+  for (const QString filepath : script_files) {
+    if (QFile::exists(filepath)) {
+      return filepath;
+    }
   }
 
   qCritical() << "GetAutoPartFile() not partition script found!";
