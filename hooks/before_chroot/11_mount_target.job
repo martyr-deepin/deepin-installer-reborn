@@ -63,8 +63,7 @@ while [ "$n" -lt 30 ];do
 done
 
 if [ -z ${result} ];then
-    echo "[Error] ${target} can not mount!"
-    exit 101
+    error "[Error] ${target} can not mount!"
 fi
 
 [ ! -d ${target}/deepinhost ] && mkdir -p ${target}/deepinhost

@@ -56,7 +56,6 @@ QStringList ListHooks(HookType hook_type) {
     }
   }
 
-  qDebug() << "hooks:" << hooks;
   return hooks;
 }
 

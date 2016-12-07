@@ -13,7 +13,7 @@ if [ x${DI_LUPIN} = xtrue ]; then
     exit 0
 fi
 
-type ./genfstab >/dev/null 2>&1 || { echo >&2 "[ERROR] require genfstab but it's not found. Aborting."; exit 1; }
+type ./genfstab >/dev/null 2>&1 || error "[ERROR] require genfstab but it's not found. Aborting."
 umount -v /target/media/cdrom
 ./genfstab -p -U /target > /target/etc/fstab
 chroot /target /usr/sbin/update-initramfs -u
