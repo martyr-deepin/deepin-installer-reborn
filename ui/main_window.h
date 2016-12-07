@@ -7,6 +7,7 @@
 
 #include <QWidget>
 #include <QHash>
+class GlobalShortcut;
 class QLabel;
 class QResizeEvent;
 class QShortcut;
@@ -106,7 +107,7 @@ class MainWindow : public QWidget {
   QShortcut* control_panel_shortcut_ = nullptr;
 
   // Shortcut used to switch mirror modes.
-  QShortcut* monitor_mode_shortcut_ = nullptr;
+  GlobalShortcut* monitor_mode_shortcut_ = nullptr;
 
  private slots:
   // Go next page when current page index is changed in ControlPanelFrame.

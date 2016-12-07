@@ -6,7 +6,6 @@
 
 #include <QApplication>
 #include <QDebug>
-#include <QHash>
 #include <QHBoxLayout>
 #include <QIcon>
 #include <QLabel>
@@ -21,6 +20,7 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
+#include "third_party/global_shortcut/global_shortcut.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/control_panel_frame.h"
 #include "ui/frames/disk_space_insufficient_frame.h"
@@ -198,7 +198,7 @@ void MainWindow::initConnections() {
 
   connect(control_panel_shortcut_, &QShortcut::activated,
           control_panel_frame_, &ControlPanelFrame::toggleVisible);
-  connect(monitor_mode_shortcut_, &QShortcut::activated,
+  connect(monitor_mode_shortcut_, &GlobalShortcut::activated,
           multi_head_manager_, &MultiHeadManager::switchXRandRMode);
 }
 
@@ -292,8 +292,17 @@ void MainWindow::initUI() {
 void MainWindow::registerShortcut() {
   control_panel_shortcut_ = new QShortcut(QKeySequence("Ctrl+L"), this);
   control_panel_shortcut_->setContext(Qt::ApplicationShortcut);
-  monitor_mode_shortcut_ = new QShortcut(QKeySequence("Ctrl+P"), this);
-  monitor_mode_shortcut_->setContext(Qt::ApplicationShortcut);
+  // Note(xushaohua): Super key is named Meta key in Qt namespace.
+  monitor_mode_shortcut_ = new GlobalShortcut(QKeySequence("Meta+P"), this);
+  if (!monitor_mode_shortcut_->registerNow()) {
+    qWarning() << "Failed to register global shortcut of Meta+P"
+               << "Fallback to Ctrl+P";
+    delete monitor_mode_shortcut_;
+    monitor_mode_shortcut_ = new GlobalShortcut(QKeySequence("Ctrl+P"), this);
+    if (!monitor_mode_shortcut_->registerNow()) {
+      qWarning() << "Failed to register global shortcut of Ctrl+P";
+    }
+  }
 }
 
 void MainWindow::setCurrentPage(PageId page_id) {
