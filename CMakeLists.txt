@@ -319,8 +319,6 @@ set(UNITTEST_FILES
     sysinfo/validate_hostname_test.cpp
     sysinfo/validate_password_test.cpp
     sysinfo/validate_username_test.cpp
-    
-    service/backend/hooks_pack_test.cpp
     )
 
 set(Qt_LIBS
@@ -433,7 +431,6 @@ add_executable(deepin-installer-reborn-tests
 
                ${BASE_FILES}
                ${SYSINFO_FILES}
-               ${SERVICE_FILES}
                ${UNITTEST_FILES}
                )
 target_link_libraries(deepin-installer-reborn-tests

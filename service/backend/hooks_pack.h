@@ -29,6 +29,9 @@ struct HooksPack {
   HooksPack* next = nullptr;
 };
 
+// Copy hooks from system and oem folder to /dev/shm/installer-hooks
+bool CopyHooks();
+
 }  // namespace installer
 
 #endif  // INSTALLER_SERVICE_BACKEND_HOOKS_PACK_H

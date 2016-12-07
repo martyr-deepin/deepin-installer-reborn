@@ -126,6 +126,13 @@ void HooksManager::handleRunHooks() {
   qDebug() << "handleRunHooks()";
   unsquashfs_timer_->setInterval(kReadUnsquashfsInterval);
 
+  // First copy hooks from system and oem folder into the same folder.
+  if (!CopyHooks()) {
+    qCritical() << "Copy hooks failed!";
+    emit this->errorOccurred();
+    return;
+  }
+
   HooksPack* before_chroot = new HooksPack();
   HooksPack* in_chroot = new HooksPack();
   HooksPack* after_chroot = new HooksPack();

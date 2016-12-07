@@ -4,10 +4,11 @@
 
 #include "service/backend/hooks_pack.h"
 
-#include <algorithm>
 #include <QDebug>
 #include <QDir>
 
+#include "base/command.h"
+#include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "sysinfo/machine.h"
 
@@ -18,6 +19,8 @@ namespace {
 const char kBeforeChrootDir[] = "before_chroot";
 const char kInChrootDir[] = "in_chroot";
 const char kAfterChrootDir[] = "after_chroot";
+
+const char kTargetHooksDir[] = "/dev/shm/installer-hooks";
 
 bool MatchArchitecture(const QString& name);
 
@@ -43,33 +46,14 @@ QStringList ListHooks(HookType hook_type) {
     }
   }
 
-  // filename -> absolute file path
-  QHash<QString, QString> hooks_table;
-
   const QStringList name_filter = { "*.job" };
   const QDir::Filters dir_filter = QDir::Files | QDir::NoDotAndDotDot;
-  QDir builtin_dir(QDir(BUILTIN_HOOKS_DIR).absoluteFilePath(folder_name));
+  QDir builtin_dir(QDir(kTargetHooksDir).absoluteFilePath(folder_name));
   for (const QString& file :
       builtin_dir.entryList(name_filter, dir_filter, QDir::Name)) {
     if (MatchArchitecture(file)) {
-      hooks_table.insert(file, builtin_dir.absoluteFilePath(file));
+      hooks.append(builtin_dir.absoluteFilePath(file));
     }
-  }
-
-  QDir oem_dir(QDir(GetOemHooksDir()).absoluteFilePath(folder_name));
-  if (oem_dir.exists()) {
-    for (const QString& file :
-        oem_dir.entryList(name_filter, dir_filter, QDir::Name)) {
-      if (MatchArchitecture(file)) {
-        hooks_table.insert(file, builtin_dir.absoluteFilePath(file));
-      }
-    }
-  }
-
-  QStringList keys(hooks_table.keys());
-  std::sort(keys.begin(), keys.end());
-  for (const QString& key : keys) {
-    hooks.append(hooks_table.value(key));
   }
 
   qDebug() << "hooks:" << hooks;
@@ -118,6 +102,30 @@ void HooksPack::init(HookType type, int progress_begin, int progress_end,
   this->next = next;
   this->hooks = ListHooks(type);
   this->current_hook = -1;
+}
+
+bool CopyHooks() {
+  // First, remove old folder.
+  // TODO(xushaohua): Added RemoveFolder() method in base/file_util.sh
+  if (!SpawnCmd("/bin/rm", {"-r", "-f", kTargetHooksDir})) {
+    qCritical() << "Failed to remove folder hook folder:" << kTargetHooksDir;
+    return false;
+  }
+
+  if (!CopyFolder(BUILTIN_HOOKS_DIR, kTargetHooksDir)) {
+    qCritical() << "Copy builtin hooks folder failed";
+    return false;
+  }
+
+  const QString oem_dir = GetOemHooksDir();
+  if (QDir(oem_dir).exists()) {
+    if (!CopyFolder(oem_dir, kTargetHooksDir)) {
+      qCritical() << "Copy oem hooks folder failed";
+      return false;
+    }
+  }
+
+  return true;
 }
 
 }  // namespace installer
