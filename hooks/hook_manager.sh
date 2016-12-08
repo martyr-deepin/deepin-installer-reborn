@@ -10,27 +10,33 @@ export APT_OPTIONS="-y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="
 
 # Print error message and exit
 error() {
-    local msg=$*
-    echo " "
-    echo "!! Error: ${msg}" >&2
-    echo " "
-    exit 1
+  local msg=$*
+  echo " "
+  echo "!! Error: ${msg}" >&2
+  echo " "
+  exit 1
 }
 
 warn() {
-    local msg=$*
-    echo "Warn: ${msg}" >&2
+  local msg=$*
+  echo "Warn: ${msg}" >&2
+}
+
+warn_exit() {
+  local msg=$*
+  echo "Warn: ${msg}" >&2
+  exit 0
 }
 
 # standard message
 msg() {
-    local mesg=$*
-    echo ":: BACKEND : ${mesg}"
+  local mesg=$*
+  echo ":: BACKEND : ${mesg}"
 }
 
 debug() {
-    local mesg=$*
-    echo " - ${mesg}"
+  local mesg=$*
+  echo " - ${mesg}"
 }
 
 # Check arguments
