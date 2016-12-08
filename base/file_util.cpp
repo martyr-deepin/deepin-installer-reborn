@@ -71,7 +71,6 @@ bool CopyFolder(const QString src_dir, const QString& dest_dir,
       // Ignores other type of files.
     }
   }
-  qDebug() << "iter:" << iter.filePath();
   return ok;
 }
 

@@ -29,7 +29,8 @@ bool RunScriptFile(const QStringList& args, QString& output, QString& err) {
     return false;
   }
 
-  return SpawnCmd("/bin/sh", args, output, err);
+  // TODO(xushaohua): Remove bash
+  return SpawnCmd("/bin/bash", args, output, err);
 }
 
 bool SpawnCmd(const QString& cmd, const QStringList& args) {
