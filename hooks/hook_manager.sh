@@ -38,7 +38,9 @@ if [ $# -ne 1 ]; then
   error "Usage: $0 hook-file"
 fi
 
-SELF=$0
+# Absolue path of hook_manager.sh in chroot env.
+# This path is defined in service/backend/hooks_pack.cpp.
+SELF=/tmp/installer-reborn/hook_manager.sh
 HOOK_FILE=$1
 IN_CHROOT=$2
 
@@ -73,7 +75,7 @@ case ${HOOK_FILE} in
     else
       # Switch to chroot env.
       echo 'Run in chroot env'
-      chroot /target "${SELF}" "${HOOK_FILE}"
+      chroot /target "${SELF}" "${HOOK_FILE}" 'true'
       exit $?
     fi
     ;;
