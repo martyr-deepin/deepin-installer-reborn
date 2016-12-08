@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Copy desktop wallpaper to system folder
+
+OEM_WALLPAPER=/media/cdrom/oem/wallpaper.jpg
+SYS_WALLPAPER=/usr/share/backgrounds/desktop.jpg
+
+if [ -f "${OEM_WALLPAPER}" ]; then
+  cp -f "${OEM_WALLPAPER}" "${SYS_WALLPAPER}" || \
+    warn_exit "Failed to copy wallpaper to system"
+  chmod a+r "${SYS_WALLPAPER}"
+fi
