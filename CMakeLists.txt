@@ -360,10 +360,11 @@ add_executable(deepin-installer-reborn
 
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 
-add_executable(deepin-installer-conf-helper
-               app/installer_conf_helper.cpp)
+# Set/get ini files.
+add_executable(deepin-installer-settings
+               app/deepin_installer_reborn_settings.cpp)
 
-target_link_libraries(deepin-installer-conf-helper ${Qt_LIBS})
+target_link_libraries(deepin-installer-settings ${Qt_LIBS})
 
 
 # deepin-installer-oem_tool-tool
@@ -476,7 +477,7 @@ target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 ## Installation
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-conf-helper
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem-tool
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)

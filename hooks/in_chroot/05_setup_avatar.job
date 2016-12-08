@@ -7,7 +7,7 @@ USER_CONF=/var/lib/AccountService/users/${DI_USERNAME}
 AVATAR_FILE="file://${DI_AVATAR}"
 
 if [ -f "${DI_AVATAR}" ]; then
-  deepin-installer-conf-helper set "${USER_CONF}" "User" "Icon" "${AVATAR_FILE}"
+  deepin-installer-settings set "${USER_CONF}" "User" "Icon" "${AVATAR_FILE}"
 fi
 
 exit 0

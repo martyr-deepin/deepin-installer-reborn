@@ -51,14 +51,14 @@ fi
 # Get value in conf file. Section name is ignored.
 installer_get() {
   local key=$1
-  deepin-installer-conf-helper get ${CONF_FILE} ${key}
+  deepin-installer-settings get ${CONF_FILE} ${key}
 }
 
 # Set value in conf file. Section name is ignored.
 installer_set() {
   local key=$1
   local value=$2
-  deepin-installer-conf-helper set ${CONF_FILE} ${key} ${value}
+  deepin-installer-settings set ${CONF_FILE} ${key} ${value}
 }
 
 # Run hook file
