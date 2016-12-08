@@ -20,9 +20,18 @@ const char kBeforeChrootDir[] = "before_chroot";
 const char kInChrootDir[] = "in_chroot";
 const char kAfterChrootDir[] = "after_chroot";
 
-const char kTargetHooksDir[] = "/tmp/installer-hooks";
+const char kTargetHooksDir[] = "/tmp/installer-reborn";
+const char kChrootTargetHooksDir[] = "/target/tmp/installer-reborn";
 
 bool MatchArchitecture(const QString& name);
+
+bool AddExecutable(const QString& path, bool recursive) {
+  if (recursive) {
+    return SpawnCmd("/bin/chmod", {"-R", "a+x", path});
+  } else {
+    return SpawnCmd("/bin/chmod", {"a+x", path});
+  }
+}
 
 // Returns a list of sorted hook scripts with |hook_type|.
 QStringList ListHooks(HookType hook_type) {
@@ -98,6 +107,10 @@ bool MatchArchitecture(const QString& name) {
   return true;
 }
 
+bool RemoveFolderRecursively(const QString& path) {
+  return SpawnCmd("/bin/rm", {"-r", "-f", path});
+}
+
 }  // namespace
 
 void HooksPack::init(HookType type, int progress_begin, int progress_end,
@@ -112,9 +125,8 @@ void HooksPack::init(HookType type, int progress_begin, int progress_end,
 
 bool CopyHooks() {
   // First, remove old folder.
-  // TODO(xushaohua): Added RemoveFolder() method in base/file_util.sh
-  if (!SpawnCmd("/bin/rm", {"-r", "-f", kTargetHooksDir})) {
-    qCritical() << "Failed to remove folder hook folder:" << kTargetHooksDir;
+  if (!RemoveFolderRecursively(kTargetHooksDir)) {
+    qCritical() << "Failed to remove hooks folder:" << kTargetHooksDir;
     return false;
   }
 
@@ -132,8 +144,31 @@ bool CopyHooks() {
   }
 
   // Add executable permissions
-  if (!SpawnCmd("/bin/chmod", {"-R", "a+x", kTargetHooksDir})) {
+  if (!AddExecutable(kTargetHooksDir, true)) {
     qCritical() << "Failed to add executable permissions to hooks";
+    return false;
+  }
+
+  return true;
+}
+
+bool ChrootCopyHooks() {
+  // Remove old folders.
+  if (!RemoveFolderRecursively(kChrootTargetHooksDir)) {
+    qCritical() << "Failed to remove hooks folder:"
+                << kChrootTargetHooksDir;
+    return false;
+  }
+
+  if (!CopyFolder(kTargetHooksDir, kChrootTargetHooksDir)) {
+    qCritical() << "Failed to copy hooks to:" << kChrootTargetHooksDir;
+    return false;
+  }
+
+  // Add executable permissions
+  if (!AddExecutable(kChrootTargetHooksDir, true)) {
+    qCritical() << "Failed to add executable permissions to hooks:"
+                << kChrootTargetHooksDir;
     return false;
   }
 

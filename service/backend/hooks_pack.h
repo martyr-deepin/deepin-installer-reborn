@@ -28,8 +28,11 @@ struct HooksPack {
   HooksPack* next = nullptr;
 };
 
-// Copy hooks from system and oem folder to /tmp/installer-hooks
+// Copy hooks from system and oem folder to /tmp/installer-reborn
 bool CopyHooks();
+
+// Copy hooks from /tmp/installer-reborn to /target/tmp/installer-reborn
+bool ChrootCopyHooks();
 
 }  // namespace installer
 

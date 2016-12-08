@@ -65,11 +65,11 @@ case ${hook_file} in
     CONF_FILE="/deepinhost${CONF_FILE}"
     echo 'Run in chroot env'
     # Host device is mounted at /target/deepinhost
-    chroot /target "/deepinhost/${hook_file}"
+    chroot /target "${hook_file}"
     exit $?
     ;;
   *)
-    . ${hook_file}
+    . "${hook_file}"
     exit $?
     ;;
 esac
