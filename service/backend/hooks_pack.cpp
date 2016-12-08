@@ -20,7 +20,7 @@ const char kBeforeChrootDir[] = "before_chroot";
 const char kInChrootDir[] = "in_chroot";
 const char kAfterChrootDir[] = "after_chroot";
 
-const char kTargetHooksDir[] = "/dev/shm/installer-hooks";
+const char kTargetHooksDir[] = "/tmp/installer-hooks";
 
 bool MatchArchitecture(const QString& name);
 
@@ -101,11 +101,10 @@ bool MatchArchitecture(const QString& name) {
 }  // namespace
 
 void HooksPack::init(HookType type, int progress_begin, int progress_end,
-                     bool in_chroot, HooksPack* next) {
+                     HooksPack* next) {
   this->type = type;
   this->progress_begin = progress_begin;
   this->progress_end = progress_end;
-  this->in_chroot = in_chroot;
   this->next = next;
   this->hooks = ListHooks(type);
   this->current_hook = -1;
@@ -130,6 +129,12 @@ bool CopyHooks() {
       qCritical() << "Copy oem hooks folder failed";
       return false;
     }
+  }
+
+  // Add executable permissions
+  if (!SpawnCmd("/bin/chmod", {"-R", "a+x", kTargetHooksDir})) {
+    qCritical() << "Failed to add executable permissions to hooks";
+    return false;
   }
 
   return true;

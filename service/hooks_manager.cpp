@@ -138,11 +138,11 @@ void HooksManager::handleRunHooks() {
   HooksPack* after_chroot = new HooksPack();
 
   before_chroot->init(HookType::BeforeChroot, kBeforeChrootStartVal,
-                      kBeforeChrootEndVal, false, in_chroot);
+                      kBeforeChrootEndVal, in_chroot);
   in_chroot->init(HookType::InChroot, kInChrootStartVal,
-                  kInChrootEndVal, true, after_chroot);
+                  kInChrootEndVal, after_chroot);
   after_chroot->init(HookType::AfterChroot, kAfterChrootStartVal,
-                     kAfterChrootEndVal, false, nullptr);
+                     kAfterChrootEndVal, nullptr);
 
   hooks_pack_ = before_chroot;
   this->runHooksPack();
