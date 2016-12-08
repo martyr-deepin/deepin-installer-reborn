@@ -296,11 +296,12 @@ void MainWindow::registerShortcut() {
   monitor_mode_shortcut_ = new GlobalShortcut(QKeySequence("Meta+P"), this);
   if (!monitor_mode_shortcut_->registerNow()) {
     qWarning() << "Failed to register global shortcut of Meta+P"
-               << "Fallback to Ctrl+P";
+               << "Fallback to Ctrl+Alt+P";
     delete monitor_mode_shortcut_;
-    monitor_mode_shortcut_ = new GlobalShortcut(QKeySequence("Ctrl+P"), this);
+    monitor_mode_shortcut_ = new GlobalShortcut(QKeySequence("Ctrl+Alt+P"),
+                                                this);
     if (!monitor_mode_shortcut_->registerNow()) {
-      qWarning() << "Failed to register global shortcut of Ctrl+P";
+      qWarning() << "Failed to register global shortcut of Ctrl+Alt+P";
     }
   }
 }
