@@ -1,5 +1,7 @@
 #! /bin/sh
-# config lightdm greeter to deepin-lightdm-greeter
+
+# Config lightdm greeter to deepin-lightdm-greeter.
+# Update background of lightdm.
 
 if [ -f /etc/lightdm/lightdm.conf ]; then
     sed -i -r -e "s|^#.*greeter-session=.*\$|greeter-session=lightdm-deepin-greeter|" \
@@ -7,3 +9,16 @@ if [ -f /etc/lightdm/lightdm.conf ]; then
     /etc/lightdm/lightdm.conf
 fi
 
+SRC_FILE=/media/cdrom/oem/lightdm.png
+DEST_FILE=/usr/share/backgrounds/lightdm.png
+
+if [ -f "${SRC_FILE}" ]; then
+  cp -f "${SRC_FILE}" "${DEST_FILE}" || \
+    warn_exit "Failed to copy lightdm background"
+  chmod a+r "${DEST_FILE}"
+
+  # Update lightdm background path in config file.
+  USERNAME=$(installer_get "DI_USERNAME")
+  USER_CONF="/var/lib/AccountsService/users/${USERNAME}
+  deepin-installer-settings set "${USER_CONF}" Users GreeterBackground "${DEST_FILE}"
+fi
