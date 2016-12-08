@@ -321,6 +321,7 @@ set(UNITTEST_FILES
     sysinfo/validate_username_test.cpp
     )
 
+set(QtCore_LIBS Qt5::Core)
 set(Qt_LIBS
     Qt5::Gui
     Qt5::Network
@@ -364,7 +365,7 @@ target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 add_executable(deepin-installer-settings
                app/deepin_installer_reborn_settings.cpp)
 
-target_link_libraries(deepin-installer-settings ${Qt_LIBS})
+target_link_libraries(deepin-installer-settings ${QtCore_LIBS})
 
 
 # deepin-installer-oem_tool-tool
@@ -387,7 +388,7 @@ add_executable(deepin-installer-xrandr-switchy
                ui/xrandr/xrandr_wrapper.cpp
                ui/xrandr/xrandr_wrapper.h
                )
-target_link_libraries(deepin-installer-xrandr-switchy ${Qt_LIBS})
+target_link_libraries(deepin-installer-xrandr-switchy ${QtCore_LIBS})
 
 
 # Unsquashfs progress
@@ -396,7 +397,7 @@ add_executable(deepin-installer-unsquashfs-progress
                app/unsquashfs_progress.cpp
                ${BASE_FILES}
                )
-target_link_libraries(deepin-installer-unsquashfs-progress ${Qt_LIBS})
+target_link_libraries(deepin-installer-unsquashfs-progress ${QtCore_LIBS})
 
 
 # Combobox test
