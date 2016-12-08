@@ -77,9 +77,9 @@ void WritePartitionInfo(const QString& root_disk,
                         const QString& boot_partition,
                         const QString& mount_points);
 
-// Save current oem_tool settings to /etc/deepin-installer-oem_tool.conf
-// This file is accessed in hook scripts.
-void SaveOemConfig();
+// Save current settings to /etc/deepin-installer.conf
+// Other settings will be updated later.
+void AddConfigFile();
 
 }  // namespace installer
 

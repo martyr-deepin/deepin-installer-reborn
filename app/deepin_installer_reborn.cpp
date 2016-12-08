@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
     qCritical() << "Root privilege is required!";
   }
   installer::DeleteConfigFile();
-  installer::SaveOemConfig();
+  installer::AddConfigFile();
 
   installer::MainWindow main_window;
   main_window.fullscreen();

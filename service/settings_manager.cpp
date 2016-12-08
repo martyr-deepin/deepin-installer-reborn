@@ -31,9 +31,6 @@ QString g_oem_dir;
 // Absolute path to installer config file.
 const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
 
-// Absolute path to global oem config file saved in system.
-const char kInstallerOemConfigFile[] = "/etc/deepin-installer-oem.conf";
-
 // Absolute path to default installer settings
 const char kDefaultSettingsFile[] = RESOURCES_DIR"/default_settings.ini";
 const char kDefaultWallpaperFile[] = RESOURCES_DIR"/default_wallpaper.jpg";
@@ -49,21 +46,11 @@ const char kUbuntuOemDir[] = "/cdrom/oem";
 const char kDeepinOemDir[] = "/lib/live/mount/medium/oem";
 
 // Filename of oem settings
-const char kOemSettingsFile[] = "settings.ini";
+const char kOemSettingsFilename[] = "settings.ini";
 
-bool AppendToConfigFile(const QString& line) {
-  QFile file(kInstallerConfigFile);
-  if (!file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
-    qWarning() << "Failed to append to config file:" << line;
-    return false;
-  }
-  file.write(line.toUtf8());
-  file.close();
-  return true;
-}
-
-bool AppendToConfigFile(const QString& key, const QString& val) {
-  return AppendToConfigFile(QString("%1=\"%2\"\n").arg(key, val));
+void AppendToConfigFile(const QString& key, const QString& value) {
+  QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
+  settings.setValue(key, value);
 }
 
 QStringList ListImageFiles(const QString& dir_name) {
@@ -142,21 +129,12 @@ QStringList GetSettingsStringList(const QString& key) {
 }
 
 QVariant GetSettingsValue(const QString& key) {
-  const QString oem_file = GetOemDir().absoluteFilePath(kOemSettingsFile);
-  if (QFile::exists(oem_file)) {
-    const QSettings oem_settings(oem_file , QSettings::IniFormat);
-    if (oem_settings.contains(key)) {
-      return oem_settings.value(key);
-    }
+  QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
+  const QVariant value(settings.value(key));
+  if (!value.isValid()) {
+    qWarning() << "getSettingsValue() Invalid key:" << key;
   }
-
-  const QSettings default_settings(kDefaultSettingsFile, QSettings::IniFormat);
-  if (default_settings.contains(key)) {
-    return default_settings.value(key);
-  }
-
-  qWarning() << "[SettingsManager]::getSettingsValue() Invalid key:" << key;
-  return QVariant();
+  return value;
 }
 
 QString GetAutoPartFile() {
@@ -280,48 +258,42 @@ void WriteTimezone(const QString& timezone) {
 }
 
 void WriteKeyboard(const QString& layout, const QString& variant) {
-  AppendToConfigFile("DI_KEYBOARD_LAYOUT", layout);
-  AppendToConfigFile("DI_KEYBOARD_LAYOUT_VARIANT", variant);
+  QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
+  settings.setValue("DI_KEYBOARD_LAYOUT_VARIANT", variant);
+  settings.setValue("DI_KEYBOARD_LAYOUT", layout);
 }
 
 void WritePartitionInfo(const QString& root_disk,
                         const QString& root_partition,
                         const QString& boot_partition,
                         const QString& mount_points) {
-  AppendToConfigFile("DI_ROOT_DISK", root_disk);
-  AppendToConfigFile("DI_ROOT_PARTITION", root_partition);
-  AppendToConfigFile("DI_BOOTLOADER", boot_partition);
-  AppendToConfigFile("DI_MOUNTPOINTS", mount_points);
-  // TODO(xushaohua): Add DI_ROOT_DISK
+  QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
+  settings.setValue("DI_ROOT_DISK", root_disk);
+  settings.setValue("DI_ROOT_PARTITION", root_partition);
+  settings.setValue("DI_BOOTLOADER", boot_partition);
+  settings.setValue("DI_MOUNTPOINTS", mount_points);
 }
 
-void SaveOemConfig() {
-  QFile file(kInstallerOemConfigFile);
-  if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-    qWarning() << "Failed to open oem file:" << kInstallerOemConfigFile;
-    return;
-  }
+void AddConfigFile() {
+  QSettings target_settings(kInstallerConfigFile, QSettings::IniFormat);
+
   // Read default settings
-  QSettings default_settings(kDefaultSettingsFile,
-                             QSettings::IniFormat);
+  QSettings default_settings(kDefaultSettingsFile, QSettings::IniFormat);
   for (const QString& key : default_settings.allKeys()) {
-    const QVariant value = default_settings.value(key);
-    const QString line(QString("%1='%2'\n").arg(key).arg(value.toString()));
-    file.write(line.toUtf8());
+    const QVariant value(default_settings.value(key));
+    // Do not use section groups.
+    target_settings.setValue(key, value);
   }
 
   // Read oem settings
-  const QString oem_file = GetOemDir().absoluteFilePath(kOemSettingsFile);
+  const QString oem_file = GetOemDir().absoluteFilePath(kOemSettingsFilename);
   if (QFile::exists(oem_file)) {
     QSettings oem_settings(oem_file , QSettings::IniFormat);
     for (const QString& key : oem_settings.allKeys()) {
       const QVariant value = oem_settings.value(key);
-      const QString line(QString("%1='%2'\n").arg(key).arg(value.toString()));
-      file.write(line.toUtf8());
+      target_settings.setValue(key, value);
     }
   }
-
-  file.close();
 }
 
 }  // namespace installer
