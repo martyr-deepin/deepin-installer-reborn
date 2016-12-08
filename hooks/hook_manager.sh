@@ -41,7 +41,10 @@ fi
 hook_file=$1
 
 # Check configuration
-CONF_FILE=""
+CONF_FILE=/etc/deepin-installer.conf
+if [ ! -f ${CONF_FILE} ];then
+  error "Config file ${CONF_FILE} does not exists."
+fi
 
 # Get value in conf file. Section name is ignored.
 installer_get() {
@@ -59,22 +62,13 @@ installer_set() {
 # Run hook file
 case ${hook_file} in
   */in_chroot/*)
-    CONF_FILE=/deepinhost/etc/deepin-installer.conf
-    if [ ! -f ${CONF_FILE} ];then
-      error "Config file ${CONF_FILE} does not exists."
-    fi
-
+    CONF_FILE="/deepinhost${CONF_FILE}"
     echo 'Run in chroot env'
     # Host device is mounted at /target/deepinhost
-    chroot /target /deepinhost/${hook_file}
+    chroot /target "/deepinhost/${hook_file}"
     exit $?
     ;;
   *)
-    CONF_FILE=/etc/deepin-installer.conf
-    if [ ! -f ${CONF_FILE} ];then
-      error "Config file ${CONF_FILE} does not exists."
-    fi
-
     . ${hook_file}
     exit $?
     ;;
