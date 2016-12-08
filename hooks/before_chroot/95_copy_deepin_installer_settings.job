@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Copy deepin-installer-settings to /target.
+# NOTE(xushaohua): This job is only used for debug. Remove it when
+# deepin-installer-reborn package is compressed in ISO.
+
+SRC_BIN=/usr/bin/deepin-installer-settings
+DEST_BIN="/target${SRC_BIN}""
+cp -v ""$SRC_BIN" ""$DEST_BIN"  || error "Failed to copy ${SRC_BIN}"
