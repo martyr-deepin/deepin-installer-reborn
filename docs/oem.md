@@ -22,14 +22,11 @@ oem 目录放在 /tmp 目录里. 它们的优先级从高到低依次是, /tmp/o
  自定义, 可以放到 `oem/logo.png`.
 * 应用图标. `oem/icons/` 目录用于存放应用图标, 其目录结构应与
  `/usr/share/icons/hicolor` 相同.
-* 用户头像. 用户头像默认会使用 `dde-account-faces` 这个包提供的头像, 如果需要
- 自定义, 可以把头像图片放到 `oem/avatar/` 目录里. 注意, 图片分辨率应该在
- `64x64`到`256x256`之间, 支持png和jpg格式. 如果要指定用户的默认头像, 需要
- 设定 `system_info_default_avatar`.
 * GRUB引导画面背景. 可以把图片放到 `oem/grub.png`.
 * 登录界面背景. 可以放到 `oem/lightdm.png`
 * plymouth 开机动画是一系统图片组成的, 放到 `oem/plymouth-theme/deepin-logo/` 目录中.
   可以参考 `plymouth-theme-deepin-logo` 这个deb包的结构.
+* deepin 控制中心和桌面登录界面中用到的logo, 目前还不支持被定制.
 * 光盘启动动画. 待补充.
 
 ### 任务栏默认图标和顺序
@@ -63,7 +60,6 @@ x86, mips64, 区分32位与64位.
 * 需要额外安装的deb包, 都应该放到 `oem/deb/` 目录里, 并且, 它们的依赖关系应该能被
  自动满足, 否则可能无法正常安装.
 * 卸载deb包, 可以在 `package_uninstall_packages` 里面设置.
-* 禁止卸载某些deb包, 可以在 `package_hold_packages` 里面设定.
 
 ### Grub
 * 设置 `grub_timeout` 可以设定grub菜单的超时.
@@ -85,3 +81,10 @@ x86, mips64, 区分32位与64位.
  `system_info_password_require_lower_case`,
  `system_info_password_require_upper_case` 以及
  `system_info_password_require_special_char` 用于设定密码策略.
+ 
+### 桌面环境相关的
+* `dde_dock_app_list` 在dock中显示哪些应用图标.
+* `dde_launcher_app_list` 在launcher中显示的哪些应用图标.
+* `dde_launcher_hold_packages` 在launcher中禁止卸载这些应用.
+* `dde_desktop_desktop_content` 在桌面显示哪些图标或应用.
+* `dde_sound_effect_switches` 用来控制桌面音效开关.
