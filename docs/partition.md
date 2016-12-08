@@ -7,3 +7,8 @@
 并将结果(DeviceList)发送给PartitionDelegate, 这时, 用户就可以开发做分区操作了.
 用户分区完成后, PartitionDelegate 将用户的分区操作(OperationList)发送给
 PartitionManager, 后者在工作线程中执行实际的分区过程, 并将结果返回给UI线程.
+
+
+# Tips
+后台开始扫描磁盘之前, 会尽可能卸载所有可卸载的分区 (Debug 模式不会卸载交换分区). 如果卸载失败,
+在分区页面里, 会隐藏正在被使用的分区.

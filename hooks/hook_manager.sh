@@ -38,7 +38,9 @@ if [ $# -ne 1 ]; then
   error "Usage: $0 hook-file"
 fi
 
-hook_file=$1
+SELF=$0
+HOOK_FILE=$1
+IN_CHROOT=$2
 
 # Check configuration
 CONF_FILE=/etc/deepin-installer.conf
@@ -60,16 +62,24 @@ installer_set() {
 }
 
 # Run hook file
-case ${hook_file} in
+case ${HOOK_FILE} in
   */in_chroot/*)
-    CONF_FILE="/deepinhost${CONF_FILE}"
-    echo 'Run in chroot env'
-    # Host device is mounted at /target/deepinhost
-    chroot /target "${hook_file}"
-    exit $?
+    if [ "x${IN_CHROOT}" = "xtrue" ]; then
+      # Already in chroot env.
+      # Host device is mounted at /target/deepinhost
+      CONF_FILE="/deepinhost${CONF_FILE}"
+      . "${HOOK_FILE}"
+      exit $?
+    else
+      # Switch to chroot env.
+      echo 'Run in chroot env'
+      chroot /target "${SELF}" "${HOOK_FILE}"
+      exit $?
+    fi
     ;;
   *)
-    . "${hook_file}"
+    # Run normal hooks.
+    . "${HOOK_FILE}"
     exit $?
     ;;
 esac
