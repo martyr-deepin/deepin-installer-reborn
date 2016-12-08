@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Enable/disable services
+
+OLD_IFS=$IFS
+IFS=';'
+for service_name in $(installer_get "service_enabled_services"); do
+  if [ -n "${service_name}" ]; then
+    # Only print warning message instead of quiting.
+    systemctl enable "${service_name}" || \
+      warn "Failed to enable service ${service_name}"
+  fi
+done
+IFS="$OLD_IFS"
+
+IFS=';'
+for service_name in $(installer_get "service_disabled_services"); do
+  if [ -n "${service_name}" ]; then
+    systemctl disable "${service_name}" || \
+      warn "Failed to disable service ${service_name}"
+  fi
+done
+IFS="$OLD_IFS"
