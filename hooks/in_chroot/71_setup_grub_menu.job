@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# Update grub menu options like:
+#  * Set grub menu timeout;
+#  * Remove windows menu item;
+#  * Update grub background image;
+
+GRUB_CONF=/etc/default/grub
+GRUB_NEED_UPDATE=false
+
+GRUB_TIMEOUT=$(installer_get "grub_timeout")
+if [ -n "${GRUB_TIMEOUT}" ]; then
+ # Update timeout of boot menu.
+ sed -i "s/^GRUB_TIMEOUT.*/GRUB_TIMEOUT=\"${GRUB_TIMEOUT}\"" "${GRUB_CONF}"
+ GRUB_NEED_UPDATE=true
+fi
+
+GRUB_BLOCK_WINDOWS=$(installer_get "grub_block_windows")
+if [ -n "${GRUB_BLOCK_WINDOWS}" ]; then
+  # Remove windows menu item from boot menu by disable os-prober and efi scanning.
+  rm -vf /etc/grub.d/[34]*
+  GRUB_NEED_UPDATE=true
+fi
+
+NEW_GRUB_BACKGROUND=/media/cdrom/oem/grub.png
+if [ -f "${NEW_GRUB_BACKGROUND}" ]; then
+  # Update background of boot menu.
+  GRUB_BACKGROUND=$(deepin-installer-settings get "${GRUB_CONF}" "GRUB_BACKGROUND")
+  if [ -n "${GRUB_BACKGROUND}" ]; then
+    cp -v "${NEW_GRUB_BACKGROUND}" "${GRUB_BACKGROUND}"
+    chmod 644 "${GRUB_BACKGROUND}"
+    GRUB_NEED_UPDATE=true
+  fi
+fi
+
+if [ x${GRUB_NEED_UPDATE} = xtrue ]; then
+  update-grub
+fi
