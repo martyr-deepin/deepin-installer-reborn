@@ -71,9 +71,10 @@ x86, mips64, 区分32位与64位.
 
 
 ### 系统基本信息
+系统名称和版本号的定义, 放在 `oem/deepin-version` 文件里面, 它会覆盖 `/etc/deepin-version`
+这个系统文件.
+
 * `system_info_vendor_name` 用于设定组织名称.
-* `system_info_os_name` 用于设定系统名称.
-* `system_info_os_version` 设定系统版本号.
 * `system_info_default_username` 设定默认用户名.
 * `system_info_default_hostname` 默认主机名.
 * `system_info_default_password` 默认密码.

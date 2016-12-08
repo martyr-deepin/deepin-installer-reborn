@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Copy deepin-version into /etc/
+
+SRC_FILE=/media/cdrom/oem/deepin-version
+DEST_FILE=/etc/deepin-version
+
+if [ -f "${SRC_FILE}" ]; then
+  cp -f "${SRC_FILE}" "${DEST_FILE}" || warn_exit "Failed to copy version file"
+  chmod a+r "${DEST_FILE}"
+fi
