@@ -19,6 +19,6 @@ if [ -f "${SRC_FILE}" ]; then
 
   # Update lightdm background path in config file.
   USERNAME=$(installer_get "DI_USERNAME")
-  USER_CONF="/var/lib/AccountsService/users/${USERNAME}
+  USER_CONF="/var/lib/AccountsService/users/${USERNAME}"
   deepin-installer-settings set "${USER_CONF}" Users GreeterBackground "${DEST_FILE}"
 fi
