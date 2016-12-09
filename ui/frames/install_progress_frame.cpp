@@ -49,6 +49,7 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
   hooks_manager_thread_->start();
 
   retaining_timer_->setInterval(kRetainingInterval);
+  retaining_timer_->setSingleShot(true);
 
   this->initUI();
   this->initConnections();
@@ -155,7 +156,6 @@ void InstallProgressFrame::initUI() {
 }
 
 void InstallProgressFrame::onHooksErrorOccurred() {
-  qDebug() << "onHooksErrorOccurred()";
   failed_ = true;
   slide_frame_->stopSlide();
   retaining_timer_->stop();
@@ -185,9 +185,7 @@ void InstallProgressFrame::onProgressUpdate(int progress) {
 }
 
 void InstallProgressFrame::onRetainingTimerTimeout() {
-  qDebug() << "onRetainingTimerTimeout()";
   slide_frame_->stopSlide();
-  retaining_timer_->stop();
   emit this->finished();
 }
 
