@@ -97,11 +97,9 @@ void HooksManager::runNextHook() {
     // Update progress, except before-chroot.
     if (hooks_pack_->type != HookType::BeforeChroot) {
       const int progress = hooks_pack_->progress_begin +
-          (hooks_pack_->progress_end - hooks_pack_->progress_begin) /
-              hooks_pack_->hooks.length() * hooks_pack_->current_hook;
-      qDebug() << "processUpdate():" << progress
-               << hooks_pack_->hooks.length() << hooks_pack_->current_hook
-               << hooks_pack_->progress_end << hooks_pack_->progress_begin;
+          int((hooks_pack_->progress_end - hooks_pack_->progress_begin) *
+              hooks_pack_->current_hook * 1.0 / hooks_pack_->hooks.length());
+      qDebug() << "processUpdate():" << progress;
       emit this->processUpdate(progress);
     }
 
