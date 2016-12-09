@@ -155,8 +155,10 @@ void InstallProgressFrame::initUI() {
 }
 
 void InstallProgressFrame::onHooksErrorOccurred() {
+  qDebug() << "onHooksErrorOccurred()";
   failed_ = true;
   slide_frame_->stopSlide();
+  retaining_timer_->stop();
   emit this->finished();
 }
 
@@ -183,7 +185,9 @@ void InstallProgressFrame::onProgressUpdate(int progress) {
 }
 
 void InstallProgressFrame::onRetainingTimerTimeout() {
+  qDebug() << "onRetainingTimerTimeout()";
   slide_frame_->stopSlide();
+  retaining_timer_->stop();
   emit this->finished();
 }
 
