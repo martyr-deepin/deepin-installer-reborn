@@ -54,6 +54,12 @@ HooksManager::HooksManager(QObject* parent)
 
 HooksManager::~HooksManager() {
   // TODO(xushaohua): delete thread.
+
+  while (hooks_pack_ != nullptr) {
+    HooksPack* next_pack = hooks_pack_->next;
+    delete hooks_pack_;
+    hooks_pack_ = next_pack;
+  }
 }
 
 void HooksManager::initConnections() {
@@ -80,10 +86,11 @@ void HooksManager::runNextHook() {
     HooksPack* next_hooks_pack = hooks_pack_->next;
     delete hooks_pack_;
     hooks_pack_ = next_hooks_pack;
-    // Run next hooks pack if it is not nullptr
     if (hooks_pack_ == nullptr) {
+      // All hooks pack jobs are finished.
       emit this->finished();
     } else {
+      // Run next hooks pack if it is not nullptr
       this->runHooksPack();
     }
   } else {
@@ -92,12 +99,14 @@ void HooksManager::runNextHook() {
       const int progress = hooks_pack_->progress_begin +
           (hooks_pack_->progress_end - hooks_pack_->progress_begin) /
               hooks_pack_->hooks.length() * hooks_pack_->current_hook;
-      qDebug() << "processUpdate():" << progress;
+      qDebug() << "processUpdate():" << progress
+               << hooks_pack_->hooks.length() << hooks_pack_->current_hook
+               << hooks_pack_->progress_end << hooks_pack_->progress_begin;
       emit this->processUpdate(progress);
     }
 
     // Run next hook in current hooks pack.
-    const QString hook(hooks_pack_->hooks.at(hooks_pack_->current_hook));
+    const QString hook = hooks_pack_->hooks.at(hooks_pack_->current_hook);
     qDebug() << "run hook:" << hook;
     emit hook_worker_->runHook(hook);
   }

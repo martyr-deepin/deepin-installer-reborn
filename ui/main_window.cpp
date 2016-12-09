@@ -508,7 +508,8 @@ void MainWindow::goNextPage() {
     }
 
     default: {
-      qWarning() << "[MainWindow]::goNextPage() We shall never reach here";
+      qWarning() << "[MainWindow]::goNextPage() We shall never reach here"
+                 << static_cast<int>(current_page_);
       break;
     }
   }
