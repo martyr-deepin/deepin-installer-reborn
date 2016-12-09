@@ -22,12 +22,12 @@ class InstallProgressSlideFrame : public QFrame {
  public:
   explicit InstallProgressSlideFrame(QWidget* parent = nullptr);
 
+ public slots:
+  void setLocale(const QString& locale);
+
   // Start/stop slide show.
   void startSlide(bool position_animation, bool opacity_animation);
   void stopSlide();
-
- public slots:
-  void setLocale(const QString& locale);
 
  private:
   void initConnections();

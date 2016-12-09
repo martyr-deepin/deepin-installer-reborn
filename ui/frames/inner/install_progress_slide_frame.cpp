@@ -48,6 +48,11 @@ InstallProgressSlideFrame::InstallProgressSlideFrame(QWidget* parent)
   this->initConnections();
 }
 
+
+void InstallProgressSlideFrame::setLocale(const QString& locale) {
+  locale_ = locale;
+}
+
 void InstallProgressSlideFrame::startSlide(bool position_animation,
                                            bool opacity_animation) {
   QDir slide_dir(GetSlideDir(locale_));
@@ -74,10 +79,6 @@ void InstallProgressSlideFrame::startSlide(bool position_animation,
 
 void InstallProgressSlideFrame::stopSlide() {
   animation_group_->stop();
-}
-
-void InstallProgressSlideFrame::setLocale(const QString& locale) {
-  locale_ = locale;
 }
 
 void InstallProgressSlideFrame::initConnections() {

@@ -41,15 +41,11 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
     : QFrame(parent),
       failed_(true),
       hooks_manager_(new HooksManager()),
-      hooks_manager_thread_(new QThread()),
-      retaining_timer_(new QTimer(this)) {
+      hooks_manager_thread_(new QThread()) {
   this->setObjectName("install_progress_frame");
 
   hooks_manager_->moveToThread(hooks_manager_thread_);
   hooks_manager_thread_->start();
-
-  retaining_timer_->setInterval(kRetainingInterval);
-  retaining_timer_->setSingleShot(true);
 
   this->initUI();
   this->initConnections();
@@ -105,9 +101,6 @@ void InstallProgressFrame::initConnections() {
           this, &InstallProgressFrame::onHooksFinished);
   connect(hooks_manager_, &HooksManager::processUpdate,
           this, &InstallProgressFrame::onProgressUpdate);
-
-  connect(retaining_timer_, &QTimer::timeout,
-          this, &InstallProgressFrame::onRetainingTimerTimeout);
 }
 
 void InstallProgressFrame::initUI() {
@@ -158,7 +151,6 @@ void InstallProgressFrame::initUI() {
 void InstallProgressFrame::onHooksErrorOccurred() {
   failed_ = true;
   slide_frame_->stopSlide();
-  retaining_timer_->stop();
   emit this->finished();
 }
 
@@ -168,7 +160,8 @@ void InstallProgressFrame::onHooksFinished() {
   // Set progress value to 100 explicitly.
   this->onProgressUpdate(100);
 
-  retaining_timer_->start();
+  QTimer::singleShot(kRetainingInterval,
+                     this, &InstallProgressFrame::onRetainingTimerTimeout);
 }
 
 void InstallProgressFrame::onProgressUpdate(int progress) {
