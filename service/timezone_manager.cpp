@@ -21,13 +21,13 @@ namespace {
 // like Russia and US. So this function is not quite reliable.
 bool RegdomainToTimezone(const QString& regdomain, QString& timezone) {
   const ZoneInfoList list = GetZoneInfoList();
-  for (const ZoneInfo& zone_info : list) {
-    if (zone_info.country_code == regdomain) {
-      timezone = zone_info.timezone;
-      return true;
-    }
+  const int index = GetZoneInfoByCountry(list, regdomain);
+  if (index > -1) {
+    timezone = list.at(index).timezone;
+    return true;
+  } else {
+    return false;
   }
-  return false;
 }
 
 }  // namespace

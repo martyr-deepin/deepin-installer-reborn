@@ -17,14 +17,9 @@ const char kZoneTabFile[] = "/usr/share/zoneinfo/zone.tab";
 
 }  // namespace
 
-//bool ZoneInfo::operator==(const ZoneInfo& other) {
-//  return (this->country_code == other.country_code &&
-//          this->timezone == other.timezone);
-//}
-
 QDebug& operator<<(QDebug& debug, const ZoneInfo& info) {
   debug << "ZoneInfo {"
-        << "cc:" << info.country_code
+        << "cc:" << info.country
         << "tz:" << info.timezone
         << "lat:" << info.latitude
         << "lon:" << info.longitude
@@ -45,8 +40,8 @@ ZoneInfoList GetZoneInfoList() {
           longitude_index = coordinates.indexOf('-', 3);
         }
         Q_ASSERT(longitude_index > -1);
-        const int latitude = coordinates.left(longitude_index).toInt();
-        const int longitude = coordinates.mid(longitude_index).toInt();
+        const double latitude = coordinates.left(longitude_index).toDouble();
+        const double longitude = coordinates.mid(longitude_index).toDouble();
         const ZoneInfo zone_info = {parts.at(0), parts.at(2),
                                     latitude, longitude};
         list.append(zone_info);
@@ -56,19 +51,19 @@ ZoneInfoList GetZoneInfoList() {
   return list;
 }
 
-int GetZoneInfoByCountryCode(const ZoneInfoList& list,
-                             const QString& country_code) {
+int GetZoneInfoByCountry(const ZoneInfoList& list,
+                         const QString& country) {
   int index = -1;
   for (const ZoneInfo& info : list) {
     index ++;
-    if (info.country_code == country_code) {
+    if (info.country == country) {
       return index;
     }
   }
   return -1;
 }
 
-int GetZoneInfoByTimezone(const ZoneInfoList& list, const QString& timezone) {
+int GetZoneInfoByZone(const ZoneInfoList& list, const QString& timezone) {
   int index = -1;
   for (const ZoneInfo& info : list) {
     index ++;
@@ -101,7 +96,7 @@ bool IsValidTimezone(const QString& timezone) {
   }
 
   const ZoneInfoList list = GetZoneInfoList();
-  return (GetZoneInfoByTimezone(list, timezone) > -1);
+  return (GetZoneInfoByZone(list, timezone) > -1);
 }
 
 }  // namespace installer
