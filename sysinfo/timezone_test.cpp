@@ -12,8 +12,11 @@ namespace {
 TEST(TimezoneTest, GetZoneInfoList) {
   const ZoneInfoList list = GetZoneInfoList();
   EXPECT_FALSE(list.isEmpty());
-  const ZoneInfo cn("CN", "Asia/Shanghai");
-  EXPECT_TRUE(list.contains(cn));
+  const int index = GetZoneInfoByTimezone(list, "Asia/Shanghai");
+  EXPECT_TRUE(index > -1);
+  const ZoneInfo info = list.at(index);
+  EXPECT_EQ(info.latitude, 3114);
+  EXPECT_EQ(info.longitude, 12128);
 }
 
 TEST(TimezoneTest, GetCurrentTimezone) {

@@ -11,20 +11,24 @@ namespace installer {
 
 struct ZoneInfo {
  public:
-  ZoneInfo(const QString& country_code, const QString& timezone);
-
-  bool operator==(const ZoneInfo& other);
-
   QString country_code;
   QString timezone;
+  // Coordinates of zone.
+  int latitude;
+  int longitude;
 };
+QDebug& operator<<(QDebug& debug, const ZoneInfo& info);
 typedef QList<ZoneInfo> ZoneInfoList;
 
 // Read available timezone info in zone.tab file.
 ZoneInfoList GetZoneInfoList();
 
-// Read available timezone info in zone.tab file.
-QStringList GetZoneInfo();
+// Find ZoneInfo based on |country_code| or |timezone|.
+// Returns -1 if not found.
+int GetZoneInfoByCountryCode(const ZoneInfoList& list,
+                             const QString& country_code);
+int GetZoneInfoByTimezone(const ZoneInfoList& list,
+                          const QString& timezone);
 
 // Read current timezone in /etc/timezone file.
 QString GetCurrentTimezone();

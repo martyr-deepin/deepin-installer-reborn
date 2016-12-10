@@ -12,18 +12,24 @@ namespace installer {
 
 namespace {
 
+// Absolute path to zone.tab file.
 const char kZoneTabFile[] = "/usr/share/zoneinfo/zone.tab";
 
 }  // namespace
 
-ZoneInfo::ZoneInfo(const QString& country_code, const QString& timezone)
-    : country_code(country_code),
-      timezone(timezone) {
-}
+//bool ZoneInfo::operator==(const ZoneInfo& other) {
+//  return (this->country_code == other.country_code &&
+//          this->timezone == other.timezone);
+//}
 
-bool ZoneInfo::operator==(const ZoneInfo& other) {
-  return (this->country_code == other.country_code &&
-          this->timezone == other.timezone);
+QDebug& operator<<(QDebug& debug, const ZoneInfo& info) {
+  debug << "ZoneInfo {"
+        << "cc:" << info.country_code
+        << "tz:" << info.timezone
+        << "lat:" << info.latitude
+        << "lon:" << info.longitude
+        << "}";
+  return debug;
 }
 
 ZoneInfoList GetZoneInfoList() {
@@ -31,14 +37,46 @@ ZoneInfoList GetZoneInfoList() {
   const QString content(ReadFile(kZoneTabFile));
   for (const QString& line : content.split('\n')) {
     if (!line.startsWith('#')) {
-      const QStringList parts = line.split('\t');
+      const QStringList parts(line.split('\t'));
       if (parts.length() >= 3) {
-        ZoneInfo zone_info(parts[0], parts[2]);
+        const QString coordinates = parts.at(1);
+        int longitude_index = coordinates.indexOf('+', 3);
+        if (longitude_index == -1) {
+          longitude_index = coordinates.indexOf('-', 3);
+        }
+        Q_ASSERT(longitude_index > -1);
+        const int latitude = coordinates.left(longitude_index).toInt();
+        const int longitude = coordinates.mid(longitude_index).toInt();
+        const ZoneInfo zone_info = {parts.at(0), parts.at(2),
+                                    latitude, longitude};
         list.append(zone_info);
       }
     }
   }
   return list;
+}
+
+int GetZoneInfoByCountryCode(const ZoneInfoList& list,
+                             const QString& country_code) {
+  int index = -1;
+  for (const ZoneInfo& info : list) {
+    index ++;
+    if (info.country_code == country_code) {
+      return index;
+    }
+  }
+  return -1;
+}
+
+int GetZoneInfoByTimezone(const ZoneInfoList& list, const QString& timezone) {
+  int index = -1;
+  for (const ZoneInfo& info : list) {
+    index ++;
+    if (info.timezone == timezone) {
+      return index;
+    }
+  }
+  return -1;
 }
 
 QString GetCurrentTimezone() {
@@ -52,7 +90,7 @@ QString GetPreferTimezone() {
 }
 
 QString GetTimezoneName(const QString& timezone) {
-  const int index = timezone.indexOf('/');
+  const int index = timezone.lastIndexOf('/');
   return (index > -1) ? timezone.mid(index + 1) : timezone;
 }
 
@@ -63,12 +101,7 @@ bool IsValidTimezone(const QString& timezone) {
   }
 
   const ZoneInfoList list = GetZoneInfoList();
-  for (const ZoneInfo& zone_info : list) {
-    if (zone_info.timezone == timezone) {
-      return true;
-    }
-  }
-  return false;
+  return (GetZoneInfoByTimezone(list, timezone) > -1);
 }
 
 }  // namespace installer
