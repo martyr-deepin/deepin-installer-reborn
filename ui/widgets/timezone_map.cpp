@@ -14,7 +14,7 @@ namespace installer {
 
 namespace {
 
-const int kDistanceThreshold = 100;
+const double kDistanceThreshold = 100.0;
 
 }  // namespace
 

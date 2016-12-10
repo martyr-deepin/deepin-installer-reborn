@@ -323,6 +323,10 @@ set(UNITTEST_FILES
     sysinfo/validate_hostname_test.cpp
     sysinfo/validate_password_test.cpp
     sysinfo/validate_username_test.cpp
+    
+    ui/delegates/timezone_map_util.cpp
+    ui/delegates/timezone_map_util.h
+    ui/delegates/timezone_map_util_test.cpp
     )
 
 set(QtCore_LIBS Qt5::Core)
