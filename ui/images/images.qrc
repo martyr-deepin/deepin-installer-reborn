@@ -71,6 +71,7 @@
     <file>increase_hover.png</file>
     <file>arrow_right_press.png</file>
     <file>checkbox_checked_pressed.png</file>
+    <file>timezone_map.png</file>
     <file>timezone.png</file>
     <file>driver_linux_32.svg</file>
     <file>complete.png</file>
@@ -101,6 +102,7 @@
     <file>list_view_selected.png</file>
     <file>QR_normal.png</file>
     <file>driver_windows_32.png</file>
+    <file>timezone_map_big.png</file>
     <file>checkbox_unchecked.png</file>
   </qresource>
 </RCC>

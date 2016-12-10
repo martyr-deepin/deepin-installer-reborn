@@ -181,6 +181,8 @@ set(UI_FILES
     ui/delegates/partition_util.h
     ui/delegates/table_combo_box_delegate.cpp
     ui/delegates/table_combo_box_delegate.h
+    ui/delegates/timezone_map_util.cpp
+    ui/delegates/timezone_map_util.h
 
     ui/frames/consts.h
     ui/frames/inner/advanced_partition_frame.cpp
@@ -284,6 +286,8 @@ set(UI_FILES
     ui/widgets/system_info_tip.h
     ui/widgets/table_combo_box.cpp
     ui/widgets/table_combo_box.h
+    ui/widgets/timezone_map.cpp
+    ui/widgets/timezone_map.h
     ui/widgets/title_label.cpp
     ui/widgets/title_label.h
     ui/widgets/wallpaper_item.cpp
@@ -444,6 +448,8 @@ add_executable(timezone-frame-test
                sysinfo/machine.h
                sysinfo/timezone.cpp
                sysinfo/timezone.h
+               ui/delegates/timezone_map_util.cpp
+               ui/delegates/timezone_map_util.h
                ui/frames/consts.h
                ui/frames/inner/system_info_timezone_frame.cpp
                ui/frames/inner/system_info_timezone_frame.h
@@ -455,6 +461,8 @@ add_executable(timezone-frame-test
                ui/widgets/nav_button.h
                ui/widgets/pointer_button.cpp
                ui/widgets/pointer_button.h
+               ui/widgets/timezone_map.cpp
+               ui/widgets/timezone_map.h
                ui/widgets/title_label.cpp
                ui/widgets/title_label.h
 

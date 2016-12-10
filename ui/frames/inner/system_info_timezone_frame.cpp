@@ -15,6 +15,7 @@
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
+#include "ui/widgets/timezone_map.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
@@ -70,6 +71,7 @@ void SystemInfoTimezoneFrame::initConnections() {
 void SystemInfoTimezoneFrame::initUI() {
   title_label_ = new TitleLabel(tr(kTextTitle));
   comment_label_ = new CommentLabel(tr(kTextComment));
+  timezone_map_ = new TimezoneMap();
   back_button_ = new NavButton(tr(kTextBack));
 
   QVBoxLayout* layout = new QVBoxLayout();
@@ -78,6 +80,8 @@ void SystemInfoTimezoneFrame::initUI() {
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addWidget(comment_label_, 0, Qt::AlignCenter);
+  layout->addStretch();
+  layout->addWidget(timezone_map_, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addWidget(back_button_, 0, Qt::AlignCenter);
 

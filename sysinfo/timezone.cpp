@@ -29,8 +29,8 @@ double ConvertPos(const QString& pos, int digits) {
     return 0.0;
   }
 
-  const QString integer = pos.left(digits);
-  const QString fraction = pos.mid(digits);
+  const QString integer = pos.left(digits + 1);
+  const QString fraction = pos.mid(digits + 1);
   const double t1 = integer.toDouble();
   const double t2 = fraction.toDouble();
   if (t1 > 0.0) {
@@ -41,6 +41,10 @@ double ConvertPos(const QString& pos, int digits) {
 }
 
 }  // namespace
+
+bool ZoneInfoDistanceComp(const ZoneInfo& a, const ZoneInfo& b) {
+  return a.distance < b.distance;
+}
 
 QDebug& operator<<(QDebug& debug, const ZoneInfo& info) {
   debug << "ZoneInfo {"
@@ -69,12 +73,11 @@ ZoneInfoList GetZoneInfoList() {
         const double latitude = ConvertPos(coordinates.left(index), 2);
         const double longitude = ConvertPos(coordinates.mid(index), 3);
         const ZoneInfo zone_info = {parts.at(0), parts.at(2),
-                                    latitude, longitude};
+                                    latitude, longitude, 0.0};
         list.append(zone_info);
       }
     }
   }
-  qDebug() << list;
   return list;
 }
 

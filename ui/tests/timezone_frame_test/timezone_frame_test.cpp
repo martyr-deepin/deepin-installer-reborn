@@ -11,8 +11,7 @@ int main(int argc, char* argv[]) {
 
   installer::SystemInfoTimezoneFrame frame;
   frame.setAttribute(Qt::WA_TranslucentBackground, true);
-  frame.setWindowFlags(Qt::FramelessWindowHint);
-  frame.resize(960, 480);
+//  frame.setWindowFlags(Qt::FramelessWindowHint);
   frame.show();
   QObject::connect(&frame, &installer::SystemInfoTimezoneFrame::finished,
                    &app, &QApplication::quit);

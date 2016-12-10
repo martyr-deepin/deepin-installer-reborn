@@ -11,6 +11,7 @@ namespace installer {
 
 class CommentLabel;
 class NavButton;
+class TimezoneMap;
 class TitleLabel;
 
 // Displays a world map to let user select timezone.
@@ -45,6 +46,7 @@ class SystemInfoTimezoneFrame : public QFrame {
 
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
+  TimezoneMap* timezone_map_ = nullptr;
   NavButton* back_button_ = nullptr;
 
  private slots:

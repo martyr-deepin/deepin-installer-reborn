@@ -14,10 +14,15 @@ struct ZoneInfo {
  public:
   QString country;
   QString timezone;
+
   // Coordinates of zone.
   double latitude;
   double longitude;
+
+  // Distance to clicked point for comparison.
+  double distance;
 };
+bool ZoneInfoDistanceComp(const ZoneInfo& a, const ZoneInfo& b);
 QDebug& operator<<(QDebug& debug, const ZoneInfo& info);
 typedef QList<ZoneInfo> ZoneInfoList;
 
@@ -36,6 +41,7 @@ QString GetCurrentTimezone();
 QString GetPreferTimezone();
 
 // Returns name of timezone, excluding continent name.
+// TODO(xushaohua): Call time and localtime()
 QString GetTimezoneName(const QString& timezone);
 
 // A map between current name of timezone and their old names.
