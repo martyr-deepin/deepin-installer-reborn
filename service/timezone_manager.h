@@ -39,8 +39,6 @@ class TimezoneManager : public QObject {
   QThread* wifi_inspect_thread_ = nullptr;
   QThread* geoip_request_thread_ = nullptr;
 
-  bool geoip_request_is_replied_;
-
  private slots:
   void onGeoIpUpdated(const QString& timezone);
 

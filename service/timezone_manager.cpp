@@ -16,10 +16,10 @@ namespace installer {
 
 namespace {
 
-// Convert regdomain to timezone.
+// Convert country code to timezone.
 // NOTE(xushaohua): Some countries may have multiple timezones,
 // like Russia and US. So this function is not quite reliable.
-bool RegdomainToTimezone(const QString& regdomain, QString& timezone) {
+bool CountryCodeToTimezone(const QString& regdomain, QString& timezone) {
   const ZoneInfoList list = GetZoneInfoList();
   const int index = GetZoneInfoByCountry(list, regdomain);
   if (index > -1) {
@@ -35,8 +35,7 @@ bool RegdomainToTimezone(const QString& regdomain, QString& timezone) {
 TimezoneManager::TimezoneManager(QObject* parent)
     : QObject(parent),
       wifi_inspect_thread_(new QThread(this)),
-      geoip_request_thread_(new QThread(this)),
-      geoip_request_is_replied_(false) {
+      geoip_request_thread_(new QThread(this)) {
   this->setObjectName("locale_manager");
 
   wifi_inspect_thread_->start();
@@ -84,21 +83,16 @@ void TimezoneManager::update(bool use_geoip, bool use_regdomain) {
 }
 
 void TimezoneManager::onRegdomainUpdated(const QString& regdomain) {
-  if (!geoip_request_is_replied_) {
-    // Guess timezone based on regdomain.
-    QString timezone;
-    if (RegdomainToTimezone(regdomain, timezone)) {
-      emit this->timezoneUpdated(timezone);
-    } else {
-      qWarning() << "Failed to convert regdomain to timezone:" << regdomain;
-    }
+  // Guess timezone based on regdomain.
+  QString timezone;
+  if (CountryCodeToTimezone(regdomain, timezone)) {
+    emit this->timezoneUpdated(timezone);
   } else {
-    qDebug() << "GeoIP request got reply, so ignore wifi regdomain!";
+    qWarning() << "Failed to convert regdomain to timezone:" << regdomain;
   }
 }
 
 void TimezoneManager::onGeoIpUpdated(const QString& timezone) {
-  geoip_request_is_replied_ = true;
   emit this->timezoneUpdated(timezone);
 }
 
