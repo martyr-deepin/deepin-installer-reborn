@@ -432,6 +432,37 @@ add_executable(locale-manager-test
                )
 target_link_libraries(locale-manager-test ${Qt_LIBS})
 
+add_executable(timezone-frame-test
+               ui/tests/timezone_frame_test/timezone_frame_test.cpp
+
+               base/file_util.cpp
+               base/file_util.h
+               service/settings_manager.cpp
+               service/settings_manager.h
+               service/settings_name.h
+               sysinfo/machine.cpp
+               sysinfo/machine.h
+               sysinfo/timezone.cpp
+               sysinfo/timezone.h
+               ui/frames/consts.h
+               ui/frames/inner/system_info_timezone_frame.cpp
+               ui/frames/inner/system_info_timezone_frame.h
+               ui/widgets/comment_label.cpp
+               ui/widgets/comment_label.h
+               ui/widgets/flat_button.cpp
+               ui/widgets/flat_button.h
+               ui/widgets/nav_button.cpp
+               ui/widgets/nav_button.h
+               ui/widgets/pointer_button.cpp
+               ui/widgets/pointer_button.h
+               ui/widgets/title_label.cpp
+               ui/widgets/title_label.h
+
+               ui/images/images.qrc
+               ui/styles/styles.qrc
+               )
+target_link_libraries(timezone-frame-test ${Qt_LIBS})
+
 # Unittest
 add_executable(deepin-installer-reborn-tests
                app/unittest_main.cpp

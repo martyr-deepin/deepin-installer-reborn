@@ -32,7 +32,7 @@ double ConvertPos(const QString& pos, int digits) {
   const QString integer = pos.left(digits);
   const QString fraction = pos.mid(digits);
   const double t1 = integer.toDouble();
-  const double t2 = integer.toDouble();
+  const double t2 = fraction.toDouble();
   if (t1 > 0.0) {
     return t1 + t2 / pow(10.0, fraction.length());
   } else {
@@ -74,6 +74,7 @@ ZoneInfoList GetZoneInfoList() {
       }
     }
   }
+  qDebug() << list;
   return list;
 }
 

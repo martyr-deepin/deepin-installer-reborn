@@ -15,8 +15,8 @@ TEST(TimezoneTest, GetZoneInfoList) {
   const int index = GetZoneInfoByZone(list, "Asia/Shanghai");
   EXPECT_TRUE(index > -1);
   const ZoneInfo info = list.at(index);
-  EXPECT_EQ(info.latitude, 3.003);
-  EXPECT_EQ(info.longitude, 12.012);
+  EXPECT_EQ(info.latitude, 3.114);
+  EXPECT_EQ(info.longitude, 12.128);
 }
 
 TEST(TimezoneTest, GetCurrentTimezone) {
