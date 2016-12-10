@@ -4,6 +4,7 @@
 
 #include "sysinfo/timezone.h"
 
+#include <cmath>
 #include <QDebug>
 
 #include "base/file_util.h"
@@ -15,6 +16,30 @@ namespace {
 // Absolute path to zone.tab file.
 const char kZoneTabFile[] = "/usr/share/zoneinfo/zone.tab";
 
+// Absolute path to backward timezone file.
+const char kBackwardTzFile[] = RESOURCES_DIR "backward_tz";
+
+// Parse latitude and longitude of the zone's principal location.
+// See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.
+// |pos| is in ISO 6709 sign-degrees-minutes-seconds format,
+// either +-DDMM+-DDDMM or +-DDMMSS+-DDDMMSS.
+// |digits| 2 for latitude, 3 for longitude.
+double ConvertPos(const QString& pos, int digits) {
+  if (pos.length() < 4 || digits > 9) {
+    return 0.0;
+  }
+
+  const QString integer = pos.left(digits);
+  const QString fraction = pos.mid(digits);
+  const double t1 = integer.toDouble();
+  const double t2 = integer.toDouble();
+  if (t1 > 0.0) {
+    return t1 + t2 / pow(10.0, fraction.length());
+  } else {
+    return t1 - t2 / pow(10.0, fraction.length());
+  }
+}
+
 }  // namespace
 
 QDebug& operator<<(QDebug& debug, const ZoneInfo& info) {
@@ -22,7 +47,7 @@ QDebug& operator<<(QDebug& debug, const ZoneInfo& info) {
         << "cc:" << info.country
         << "tz:" << info.timezone
         << "lat:" << info.latitude
-        << "lon:" << info.longitude
+        << "lng:" << info.longitude
         << "}";
   return debug;
 }
@@ -33,15 +58,16 @@ ZoneInfoList GetZoneInfoList() {
   for (const QString& line : content.split('\n')) {
     if (!line.startsWith('#')) {
       const QStringList parts(line.split('\t'));
+      // Parse latitude and longitude.
       if (parts.length() >= 3) {
         const QString coordinates = parts.at(1);
-        int longitude_index = coordinates.indexOf('+', 3);
-        if (longitude_index == -1) {
-          longitude_index = coordinates.indexOf('-', 3);
+        int index = coordinates.indexOf('+', 3);
+        if (index == -1) {
+          index = coordinates.indexOf('-', 3);
         }
-        Q_ASSERT(longitude_index > -1);
-        const double latitude = coordinates.left(longitude_index).toDouble();
-        const double longitude = coordinates.mid(longitude_index).toDouble();
+        Q_ASSERT(index > -1);
+        const double latitude = ConvertPos(coordinates.left(index), 2);
+        const double longitude = ConvertPos(coordinates.mid(index), 3);
         const ZoneInfo zone_info = {parts.at(0), parts.at(2),
                                     latitude, longitude};
         list.append(zone_info);
@@ -87,6 +113,28 @@ QString GetPreferTimezone() {
 QString GetTimezoneName(const QString& timezone) {
   const int index = timezone.lastIndexOf('/');
   return (index > -1) ? timezone.mid(index + 1) : timezone;
+}
+
+BackwardTzMap GetBackwardTzMap() {
+  BackwardTzMap map;
+
+  const QString content = ReadFile(kBackwardTzFile);
+  for (const QString& line : content.split('\n')) {
+    // Ignores empty line and comment.
+    if (line.startsWith("Link\t")) {
+      const QStringList parts(line.split('\t'));
+      Q_ASSERT(parts.length() == 3);
+      if (parts.length() == 3) {
+        QString real = parts.at(1);
+        if ((real == "Etc/UTC") || (real == "Etc/UCT")) {
+          real = "Etc/GMT";
+        }
+        map.insert(real, parts.at(2));
+      }
+    }
+  }
+
+  return map;
 }
 
 bool IsValidTimezone(const QString& timezone) {

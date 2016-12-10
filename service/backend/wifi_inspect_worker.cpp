@@ -20,7 +20,7 @@ const char kTsharkPackets[] = "200";
 // Time in seconds before exit.
 const char kTsharkDuration[] = "20";
 
-const char kScanRegdomainFile[] = TOOLS_DIR"/scan_regdomain.sh";
+const char kScanRegdomainFile[] = TOOLS_DIR "/scan_regdomain.sh";
 
 // Read output of scan_regdomain.sh and extract country code.
 QStringList ParseRegdomainList(const QString& text) {

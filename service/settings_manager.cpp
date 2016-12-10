@@ -32,8 +32,8 @@ QString g_oem_dir;
 const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
 
 // Absolute path to default installer settings
-const char kDefaultSettingsFile[] = RESOURCES_DIR"/default_settings.ini";
-const char kDefaultWallpaperFile[] = RESOURCES_DIR"/default_wallpaper.jpg";
+const char kDefaultSettingsFile[] = RESOURCES_DIR "/default_settings.ini";
+const char kDefaultWallpaperFile[] = RESOURCES_DIR "/default_wallpaper.jpg";
 
 // File name of auto partition script.
 const char kAutoPartFile[] = "auto_part.sh";

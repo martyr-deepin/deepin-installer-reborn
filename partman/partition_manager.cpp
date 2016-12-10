@@ -22,7 +22,7 @@ namespace installer {
 namespace {
 
 // Absolute path to hook_manager.sh
-const char kHookManagerFile[] = BUILTIN_HOOKS_DIR"/hook_manager.sh";
+const char kHookManagerFile[] = BUILTIN_HOOKS_DIR "/hook_manager.sh";
 
 PartitionFlags GetPartitionFlags(PedPartition* lp_partition) {
   PartitionFlags flags;

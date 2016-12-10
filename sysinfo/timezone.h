@@ -6,6 +6,7 @@
 #define INSTALLER_SYSINFO_TIMEZONE_H
 
 #include <QList>
+#include <QHash>
 
 namespace installer {
 
@@ -36,6 +37,10 @@ QString GetPreferTimezone();
 
 // Returns name of timezone, excluding continent name.
 QString GetTimezoneName(const QString& timezone);
+
+// A map between current name of timezone and their old names.
+typedef QHash<QString, QString> BackwardTzMap;
+BackwardTzMap GetBackwardTzMap();
 
 // Validate |timezone|.
 // TODO(xushaohua): Optimize
