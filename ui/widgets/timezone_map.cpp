@@ -15,9 +15,11 @@ namespace installer {
 
 namespace {
 
+const int kDotVerticalMargin = 2;
 const int kZonePinHeight = 30;
 
 const double kDistanceThreshold = 100.0;
+const char kDotFile[] = ":/images/indicator_active.png";
 const char kTimezoneMapFile[] = ":/images/timezone_map.png";
 
 // At absolute position of |zone| on a map with size (map_width, map_height).
@@ -74,6 +76,13 @@ void TimezoneMap::initUI() {
   Q_ASSERT(!timezone_pixmap.isNull());
   background_label->setPixmap(timezone_pixmap);
 
+  dot_ = new QLabel(this);
+  QPixmap dot_pixmap(kDotFile);
+  Q_ASSERT(!dot_pixmap.isNull());
+  dot_->setPixmap(dot_pixmap);
+  dot_->setFixedSize(dot_pixmap.size());
+  dot_->hide();
+
   zone_pin_ = new TooltipPin(this);
   zone_pin_->setFixedHeight(kZonePinHeight);
   zone_pin_->hide();
@@ -83,6 +92,10 @@ void TimezoneMap::initUI() {
 }
 
 void TimezoneMap::remark() {
+  // Hide all marks first.
+  dot_->hide();
+  zone_pin_->hide();
+
   const int map_width = this->width();
   const int map_height = this->height();
   switch (bubble_mode_) {
@@ -97,7 +110,13 @@ void TimezoneMap::remark() {
         zone_pin_->adjustSize();
 
         // Show zone pin at the nearest zone.
-        zone_pin_->popup(ZoneInfoToPosition(zone, map_width, map_height));
+        const QPoint point = ZoneInfoToPosition(zone, map_width, map_height);
+        const int dy = point.y() - dot_->height() / 2 - kDotVerticalMargin;
+        zone_pin_->popup(QPoint(point.x(), dy));
+
+        dot_->move(point.x() - dot_->width() / 2,
+                   point.y() - dot_->height() / 2);
+        dot_->show();
       }
       break;
     }

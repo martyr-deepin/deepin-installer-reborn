@@ -6,6 +6,7 @@
 #define INSTALLER_UI_WIDGETS_TIMEZONE_MAP_H
 
 #include <QFrame>
+class QLabel;
 
 #include "sysinfo/timezone.h"
 
@@ -40,6 +41,9 @@ class TimezoneMap : public QFrame {
   QString timezone_;
   const ZoneInfoList total_zones_;
   ZoneInfoList nearest_zones_;
+
+  // A round dot to indicate position on the map.
+  QLabel* dot_ = nullptr;
 
   TooltipPin* zone_pin_ = nullptr;
 
