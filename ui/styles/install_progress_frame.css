@@ -3,14 +3,6 @@
 #tooltip_frame {
   background: transparent;
 }
-#tooltip_label {
-  color: #000000;
-  padding: 0;
-  margin: 0;
-  font-size: 12px;
-  text-align: center;
-  vertical-align: middle;
-}
 
 QProgressBar {
   border-radius: 4px;

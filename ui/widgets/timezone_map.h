@@ -34,6 +34,8 @@ class TimezoneMap : public QFrame {
 
  private:
   void initUI();
+  // Redraw bubble based on current mode.
+  void remark();
 
   QString timezone_;
   const ZoneInfoList total_zones_;

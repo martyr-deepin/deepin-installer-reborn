@@ -15,8 +15,18 @@ namespace installer {
 
 namespace {
 
+const int kZonePinHeight = 30;
+
 const double kDistanceThreshold = 100.0;
 const char kTimezoneMapFile[] = ":/images/timezone_map.png";
+
+// At absolute position of |zone| on a map with size (map_width, map_height).
+QPoint ZoneInfoToPosition(const ZoneInfo& zone, int map_width, int map_height) {
+  // TODO(xushaohua): Call round().
+  const int x = int(ConvertLongitudeToX(zone.longitude) * map_width);
+  const int y = int(ConvertLatitudeToY(zone.latitude) * map_height);
+  return QPoint(x, y);
+}
 
 }  // namespace
 
@@ -51,7 +61,7 @@ void TimezoneMap::mousePressEvent(QMouseEvent* event) {
     bubble_mode_ = (nearest_zones_.length() == 1) ?
                    BubbleMode::SelectSingle :
                    BubbleMode::SelectMultiple;
-    this->update();
+    this->remark();
   } else {
     QWidget::mousePressEvent(event);
   }
@@ -65,10 +75,43 @@ void TimezoneMap::initUI() {
   background_label->setPixmap(timezone_pixmap);
 
   zone_pin_ = new TooltipPin(this);
+  zone_pin_->setFixedHeight(kZonePinHeight);
   zone_pin_->hide();
 
   this->setContentsMargins(0, 0, 0, 0);
   this->setFixedSize(timezone_pixmap.size());
+}
+
+void TimezoneMap::remark() {
+  const int map_width = this->width();
+  const int map_height = this->height();
+  switch (bubble_mode_) {
+    case BubbleMode::SelectSingle: {
+      Q_ASSERT(!nearest_zones_.isEmpty());
+      if (!nearest_zones_.isEmpty()) {
+        const ZoneInfo& zone = nearest_zones_.first();
+        // TODO(xushaohua): Convert timezone to other names.
+        zone_pin_->setText(GetTimezoneName(zone.timezone));
+
+        // Adjust size of pin to fit its content.
+        zone_pin_->adjustSize();
+
+        // Show zone pin at the nearest zone.
+        zone_pin_->popup(ZoneInfoToPosition(zone, map_width, map_height));
+      }
+      break;
+    }
+    case BubbleMode::SelectMultiple: {
+      break;
+    }
+    case BubbleMode::Set: {
+      break;
+    }
+    default: {
+      // Pass through.
+      break;
+    }
+  }
 }
 
 }  // namespace installer
