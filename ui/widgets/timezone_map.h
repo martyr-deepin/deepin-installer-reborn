@@ -37,6 +37,15 @@ class TimezoneMap : public QFrame {
   const QPixmap background_pixmap_;
 
   const ZoneInfoList total_zones_;
+  ZoneInfoList nearest_zones_;
+
+  enum class BubbleMode {
+    Nil,
+    Set,  // When setTimezone() is called.
+    SelectSingle,  // When there is only one zone near cursor position.
+    SelectMultiple,  // When there are several zones near cursor position.
+  };
+  BubbleMode bubble_mode_;
 };
 
 }  // namespace installer
