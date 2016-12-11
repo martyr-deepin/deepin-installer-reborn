@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/widgets/install_progress_tip.h"
+#include "ui/widgets/tooltip_pin.h"
 
 #include <QDebug>
 #include <QPainter>
@@ -23,11 +23,16 @@ const int kTriangleHeight = 6;
 
 }  // namespace
 
-InstallProgressTip::InstallProgressTip(QWidget* parent) : QLabel(parent) {
-  this->setObjectName("install_progress_tip");
+TooltipPin::TooltipPin(QWidget* parent) : QLabel(parent) {
+  this->setObjectName("tooltip_pin");
 }
 
-void InstallProgressTip::paintEvent(QPaintEvent* event) {
+void TooltipPin::popup(const QPoint& point) {
+  this->move(point.x() - this->width() / 2, point.y() - this->height());
+  this->show();
+}
+
+void TooltipPin::paintEvent(QPaintEvent* event) {
   Q_UNUSED(event);
 
   QPainter painter(this);

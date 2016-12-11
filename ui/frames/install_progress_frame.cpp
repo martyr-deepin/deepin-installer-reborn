@@ -17,7 +17,7 @@
 #include "ui/frames/consts.h"
 #include "ui/frames/inner/install_progress_slide_frame.h"
 #include "ui/widgets/comment_label.h"
-#include "ui/widgets/install_progress_tip.h"
+#include "ui/widgets/tooltip_pin.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
@@ -117,7 +117,7 @@ void InstallProgressFrame::initUI() {
   tooltip_frame->setObjectName("tooltip_frame");
   tooltip_frame->setContentsMargins(0, 0, 0, 0);
   tooltip_frame->setFixedSize(kTooltipFrameWidth, kTooltipHeight);
-  tooltip_label_ = new InstallProgressTip(tooltip_frame);
+  tooltip_label_ = new TooltipPin(tooltip_frame);
   tooltip_label_->setFixedSize(kTooltipWidth, kTooltipHeight);
   tooltip_label_->setAlignment(Qt::AlignHCenter);
   tooltip_label_->setText("0%");

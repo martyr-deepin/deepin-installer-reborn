@@ -266,8 +266,7 @@ set(UI_FILES
     ui/widgets/frosted_frame.h
     ui/widgets/icon_button.cpp
     ui/widgets/icon_button.h
-    ui/widgets/install_progress_tip.cpp
-    ui/widgets/install_progress_tip.h
+
     ui/widgets/line_edit.cpp
     ui/widgets/line_edit.h
     ui/widgets/nav_button.cpp
@@ -290,6 +289,8 @@ set(UI_FILES
     ui/widgets/timezone_map.h
     ui/widgets/title_label.cpp
     ui/widgets/title_label.h
+    ui/widgets/tooltip_pin.cpp
+    ui/widgets/tooltip_pin.h
     ui/widgets/wallpaper_item.cpp
     ui/widgets/wallpaper_item.h
 
@@ -469,6 +470,8 @@ add_executable(timezone-frame-test
                ui/widgets/timezone_map.h
                ui/widgets/title_label.cpp
                ui/widgets/title_label.h
+               ui/widgets/tooltip_pin.cpp
+               ui/widgets/tooltip_pin.h
 
                ui/images/images.qrc
                ui/styles/styles.qrc

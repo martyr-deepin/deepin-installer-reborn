@@ -6,11 +6,12 @@
 #define INSTALLER_UI_WIDGETS_TIMEZONE_MAP_H
 
 #include <QFrame>
-#include <QPixmap>
 
 #include "sysinfo/timezone.h"
 
 namespace installer {
+
+class TooltipPin;
 
 // Draw timezone map and bubble.
 class TimezoneMap : public QFrame {
@@ -29,15 +30,16 @@ class TimezoneMap : public QFrame {
   void setTimezone(const QString& timezone);
 
  protected:
-  void mousePressEvent(QMouseEvent* event);
-  void paintEvent(QPaintEvent* event);
+  void mousePressEvent(QMouseEvent* event) override;
 
  private:
-  QString timezone_;
-  const QPixmap background_pixmap_;
+  void initUI();
 
+  QString timezone_;
   const ZoneInfoList total_zones_;
   ZoneInfoList nearest_zones_;
+
+  TooltipPin* zone_pin_ = nullptr;
 
   enum class BubbleMode {
     Nil,

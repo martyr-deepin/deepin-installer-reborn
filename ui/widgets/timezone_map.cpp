@@ -5,28 +5,30 @@
 #include "ui/widgets/timezone_map.h"
 
 #include <QDebug>
+#include <QLabel>
 #include <QMouseEvent>
-#include <QPainter>
 
 #include "ui/delegates/timezone_map_util.h"
+#include "ui/widgets/tooltip_pin.h"
 
 namespace installer {
 
 namespace {
 
 const double kDistanceThreshold = 100.0;
+const char kTimezoneMapFile[] = ":/images/timezone_map.png";
 
 }  // namespace
 
 TimezoneMap::TimezoneMap(QWidget* parent)
     : QFrame(parent),
       timezone_(),
-      background_pixmap_(":/images/timezone_map_big.png"),
       total_zones_(GetZoneInfoList()),
       nearest_zones_(),
       bubble_mode_(BubbleMode::Nil) {
   this->setObjectName("timezone_map");
-  this->setFixedSize(background_pixmap_.size());
+
+  this->initUI();
 }
 
 const QString TimezoneMap::getTimezone() const {
@@ -55,25 +57,18 @@ void TimezoneMap::mousePressEvent(QMouseEvent* event) {
   }
 }
 
-void TimezoneMap::paintEvent(QPaintEvent* event) {
-  Q_UNUSED(event);
-  QPainter painter(this);
-  const int width = this->width();
-  const int height = this->height();
-  painter.drawPixmap(0, 0, width, height, background_pixmap_);
+void TimezoneMap::initUI() {
+  QLabel* background_label = new QLabel(this);
+  background_label->setObjectName("background_label");
+  QPixmap timezone_pixmap(kTimezoneMapFile);
+  Q_ASSERT(!timezone_pixmap.isNull());
+  background_label->setPixmap(timezone_pixmap);
 
-  const QPixmap pin_pixmap(":/images/timezone_map_pin.png");
-  const int pin_width = pin_pixmap.width();
-  const int pin_height = pin_pixmap.height();
-  for (const ZoneInfo& info : nearest_zones_) {
-    qDebug() << "draw zone info" << info << pin_pixmap;
-    const int point_y = int(ConvertLatitudeToY(info.latitude) * height);
-    const int point_x = int(ConvertLongitudeToX(info.longitude) * width);
-    const int x = point_x - pin_width / 2;
-    const int y = point_y - pin_height;
-    painter.drawPixmap(x, y, pin_width, pin_height, pin_pixmap);
-  }
+  zone_pin_ = new TooltipPin(this);
+  zone_pin_->hide();
 
+  this->setContentsMargins(0, 0, 0, 0);
+  this->setFixedSize(timezone_pixmap.size());
 }
 
 }  // namespace installer
