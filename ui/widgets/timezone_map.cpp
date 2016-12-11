@@ -50,8 +50,14 @@ const QString TimezoneMap::getTimezone() const {
 void TimezoneMap::setTimezone(const QString& timezone) {
   timezone_ = timezone;
   bubble_mode_ = BubbleMode::Set;
-  this->update();
-  emit this->timezoneUpdated(timezone_);
+  nearest_zones_.clear();
+  const int index = GetZoneInfoByZone(total_zones_, timezone);
+  if (index > -1) {
+    nearest_zones_.append(total_zones_.at(index));
+    this->remark();
+  } else {
+    qWarning() << "Timezone not found:" << timezone;
+  }
 }
 
 void TimezoneMap::mousePressEvent(QMouseEvent* event) {
@@ -99,6 +105,7 @@ void TimezoneMap::remark() {
   const int map_width = this->width();
   const int map_height = this->height();
   switch (bubble_mode_) {
+    case BubbleMode::Set:  // Pass through.
     case BubbleMode::SelectSingle: {
       Q_ASSERT(!nearest_zones_.isEmpty());
       if (!nearest_zones_.isEmpty()) {
@@ -117,17 +124,17 @@ void TimezoneMap::remark() {
         dot_->move(point.x() - dot_->width() / 2,
                    point.y() - dot_->height() / 2);
         dot_->show();
+
+        timezone_ = zone.timezone;
+        emit this->timezoneUpdated(timezone_);
       }
       break;
     }
     case BubbleMode::SelectMultiple: {
       break;
     }
-    case BubbleMode::Set: {
-      break;
-    }
     default: {
-      // Pass through.
+      // Ignored.
       break;
     }
   }
