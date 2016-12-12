@@ -289,6 +289,8 @@ set(UI_FILES
     ui/widgets/timezone_map.h
     ui/widgets/title_label.cpp
     ui/widgets/title_label.h
+    ui/widgets/tooltip_container.cpp
+    ui/widgets/tooltip_container.h
     ui/widgets/tooltip_pin.cpp
     ui/widgets/tooltip_pin.h
     ui/widgets/wallpaper_item.cpp
@@ -420,6 +422,9 @@ add_executable(combobox-test
                ui/utils/widget_util.h
                ui/widgets/table_combo_box.cpp
                ui/widgets/table_combo_box.h
+               ui/widgets/tooltip_container.cpp
+               ui/widgets/tooltip_container.h
+               
                ui/images/images.qrc
                ui/styles/styles.qrc
                )
@@ -470,6 +475,8 @@ add_executable(timezone-frame-test
                ui/widgets/timezone_map.h
                ui/widgets/title_label.cpp
                ui/widgets/title_label.h
+               ui/widgets/tooltip_container.cpp
+               ui/widgets/tooltip_container.h
                ui/widgets/tooltip_pin.cpp
                ui/widgets/tooltip_pin.h
 
