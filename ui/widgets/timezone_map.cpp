@@ -13,7 +13,9 @@
 #include <QStringListModel>
 #include <QVBoxLayout>
 
+#include "base/file_util.h"
 #include "ui/delegates/timezone_map_util.h"
+#include "ui/delegates/timezone_popup_delegate.h"
 #include "ui/widgets/tooltip_container.h"
 #include "ui/widgets/tooltip_pin.h"
 
@@ -23,6 +25,9 @@ namespace {
 
 const int kDotVerticalMargin = 2;
 const int kZonePinHeight = 30;
+
+// Height of popup item is also defined in styles/timezone_map.css
+const int kPopupItemHeight = 40;
 
 const double kDistanceThreshold = 100.0;
 const char kDotFile[] = ":/images/indicator_active.png";
@@ -50,9 +55,9 @@ TimezoneMap::TimezoneMap(QWidget* parent)
 }
 
 TimezoneMap::~TimezoneMap() {
-  if (popup_zones_window_) {
-    delete popup_zones_window_;
-    popup_zones_window_ = nullptr;
+  if (popup_window_) {
+    delete popup_window_;
+    popup_window_ = nullptr;
   }
 }
 
@@ -90,21 +95,21 @@ void TimezoneMap::mousePressEvent(QMouseEvent* event) {
 }
 
 void TimezoneMap::resizeEvent(QResizeEvent* event) {
-  if (popup_zones_window_->isVisible()) {
+  if (popup_window_->isVisible()) {
     dot_->hide();
-    popup_zones_window_->hide();
+    popup_window_->hide();
   }
   QWidget::resizeEvent(event);
 }
 
 void TimezoneMap::initConnections() {
   // Hide dot when popup-zones window is hidden.
-  connect(popup_zones_window_, &TooltipContainer::onHide,
+  connect(popup_window_, &TooltipContainer::onHide,
           dot_, &QLabel::hide);
 
-  // Hide popup_zones_window_ and mark new timezone on map when it is selected
-  // in zones_list_view_.
-  connect(zones_list_view_, &QListView::pressed,
+  // Hide popup_window_ and mark new timezone on map when it is selected
+  // in popup_list_view_.
+  connect(popup_list_view_, &QListView::pressed,
           this, &TimezoneMap::onPopupZonesActivated);
 }
 
@@ -126,21 +131,26 @@ void TimezoneMap::initUI() {
   zone_pin_->setFixedHeight(kZonePinHeight);
   zone_pin_->hide();
 
-  zones_list_view_ = new QListView();
-  zones_model_ = new QStringListModel(this);
-  zones_list_view_->setModel(zones_model_);
-  zones_list_view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  zones_list_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  zones_list_view_->setUniformItemSizes(true);
-  zones_list_view_->setSelectionMode(QListView::SingleSelection);
-  zones_list_view_->setEditTriggers(QListView::NoEditTriggers);
-  zones_list_view_->setStyleSheet("background: transparent;");
-  zones_list_view_->adjustSize();
+  popup_list_view_ = new QListView();
+  popup_list_view_->setObjectName("popup_list_view");
+  popup_model_ = new QStringListModel(this);
+  popup_list_view_->setModel(popup_model_);
+  popup_list_view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  popup_list_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  popup_list_view_->setUniformItemSizes(true);
+  popup_list_view_->setSelectionMode(QListView::SingleSelection);
+  popup_list_view_->setEditTriggers(QListView::NoEditTriggers);
+  popup_list_view_->adjustSize();
+  TimezonePopupDelegate* popup_delegate = new TimezonePopupDelegate(this);
+  popup_list_view_->setItemDelegate(popup_delegate);
+  popup_list_view_->setMouseTracking(true);
+  popup_list_view_->setStyleSheet(ReadFile(":/styles/timezone_map.css"));
 
-  popup_zones_window_ = new TooltipContainer();
-  popup_zones_window_->setWidget(zones_list_view_);
+  popup_window_ = new TooltipContainer();
+  popup_window_->setAttribute(Qt::WA_TranslucentBackground, true);
+  popup_window_->setWidget(popup_list_view_);
 
-  popup_zones_window_->hide();
+  popup_window_->hide();
 
   this->setContentsMargins(0, 0, 0, 0);
   this->setFixedSize(timezone_pixmap.size());
@@ -150,28 +160,28 @@ void TimezoneMap::popupZoneWindow(const QPoint& pos) {
   // Hide all marks first.
   dot_->hide();
   zone_pin_->hide();
-  popup_zones_window_->hide();
+  popup_window_->hide();
 
   // Popup zone list window.
   QStringList zone_names;
   for (const ZoneInfo& zone : nearest_zones_) {
     zone_names.append(GetTimezoneName(zone.timezone));
   }
-  zones_model_->setStringList(zone_names);
-  zones_list_view_->setFixedHeight(zone_names.length() * 25 - 5);
+  popup_model_->setStringList(zone_names);
+  popup_list_view_->setFixedHeight(zone_names.length() * kPopupItemHeight);
   dot_->move(pos.x() - dot_->width() / 2, pos.y() - dot_->height() / 2);
   dot_->show();
 
   const int dy = pos.y() - dot_->height() - kDotVerticalMargin;
   const QPoint global_pos = this->mapToGlobal(QPoint(pos.x(), dy));
-  popup_zones_window_->popup(global_pos);
+  popup_window_->popup(global_pos);
 }
 
 void TimezoneMap::remark() {
   // Hide all marks first.
   dot_->hide();
   zone_pin_->hide();
-  popup_zones_window_->hide();
+  popup_window_->hide();
 
   const int map_width = this->width();
   const int map_height = this->height();
@@ -200,8 +210,8 @@ void TimezoneMap::remark() {
 }
 
 void TimezoneMap::onPopupZonesActivated(const QModelIndex& index) {
-// Hide popup_zones_window_.
-  popup_zones_window_->hide();
+// Hide popup_window_.
+  popup_window_->hide();
   dot_->hide();
 
   // Update current selected timezone and mark it on map.
@@ -213,6 +223,7 @@ void TimezoneMap::onPopupZonesActivated(const QModelIndex& index) {
       current_zone_ = nearest_zones_.at(row);
       this->remark();
     }
-  }}
+  }
+}
 
 }  // namespace installer

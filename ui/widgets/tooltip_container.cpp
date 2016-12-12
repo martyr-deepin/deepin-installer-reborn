@@ -71,11 +71,6 @@ void TooltipContainer::paintEvent(QPaintEvent* event) {
   const int kHalfWidth = kWidth / 2;
   const int kHeight = this->height();
 
-  // TODO(xushaohua):
-//  if (true) {
-//    return;
-//  }
-
   // First draw background with round corner.
   QPainterPath background_path;
   background_path.moveTo(kWidth, kBorderRadius);
@@ -100,7 +95,8 @@ void TooltipContainer::paintEvent(QPaintEvent* event) {
                         kBorderDiameter, kBorderDiameter,
                         270.0, 90.0);
   background_path.closeSubpath();
-  painter.fillPath(background_path, QBrush(Qt::white));
+  const QColor background_color(255, 255, 255, 150);
+  painter.fillPath(background_path, QBrush(background_color));
 }
 
 }  // namespace installer

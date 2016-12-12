@@ -183,6 +183,8 @@ set(UI_FILES
     ui/delegates/table_combo_box_delegate.h
     ui/delegates/timezone_map_util.cpp
     ui/delegates/timezone_map_util.h
+    ui/delegates/timezone_popup_delegate.cpp
+    ui/delegates/timezone_popup_delegate.h
 
     ui/frames/consts.h
     ui/frames/inner/advanced_partition_frame.cpp
@@ -460,6 +462,8 @@ add_executable(timezone-frame-test
                sysinfo/timezone.h
                ui/delegates/timezone_map_util.cpp
                ui/delegates/timezone_map_util.h
+               ui/delegates/timezone_popup_delegate.cpp
+               ui/delegates/timezone_popup_delegate.h
                ui/frames/consts.h
                ui/frames/inner/system_info_timezone_frame.cpp
                ui/frames/inner/system_info_timezone_frame.h

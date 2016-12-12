@@ -67,9 +67,9 @@ class TimezoneMap : public QFrame {
   TooltipPin* zone_pin_ = nullptr;
 
   // To display a list of zones on map.
-  QListView* zones_list_view_ = nullptr;
-  QStringListModel* zones_model_ = nullptr;
-  TooltipContainer* popup_zones_window_ = nullptr;
+  QListView* popup_list_view_ = nullptr;
+  QStringListModel* popup_model_ = nullptr;
+  TooltipContainer* popup_window_ = nullptr;
 
  private slots:
   void onPopupZonesActivated(const QModelIndex& index);

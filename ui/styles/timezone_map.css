@@ -1,0 +1,30 @@
+/** Used in class TimezoneMap **/
+
+/*QHeaderView,*/
+/*QHeaderView::section,*/
+/*QListCornerButton::section {*/
+  /*background-color: transparent;*/
+/*}*/
+
+QListView#popup_list_view {
+  font-size: 12pt;
+  color: #ffffff;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+  background: transparent;
+
+  /* make the selection span the entire width of the view */
+  show-decoration-selected: 0;
+}
+
+QListView::item {
+  background: transparent;
+  height: 40px;
+  padding: 0px;
+  margin: 0px;
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  selection-background-color: rgba(255, 255, 255, 0.3);
+}
