@@ -7,11 +7,15 @@
 
 #include <QFrame>
 class QLabel;
+class QListView;
+class QResizeEvent;
+class QStringListModel;
 
 #include "sysinfo/timezone.h"
 
 namespace installer {
 
+class TooltipContainer;
 class TooltipPin;
 
 // Draw timezone map and bubble.
@@ -20,6 +24,7 @@ class TimezoneMap : public QFrame {
 
  public:
   explicit TimezoneMap(QWidget* parent = nullptr);
+  ~TimezoneMap();
 
   // Get current selected timezone, might be empty.
   const QString getTimezone() const;
@@ -33,27 +38,41 @@ class TimezoneMap : public QFrame {
  protected:
   void mousePressEvent(QMouseEvent* event) override;
 
+  // Hide tooltips when window is resized.
+  void resizeEvent(QResizeEvent* event) override;
+
  private:
+  void initConnections();
   void initUI();
-  // Redraw bubble based on current mode.
+
+  // Popup zone window at |pos|.
+  void popupZoneWindow(const QPoint& pos);
+
+  // Mark current zone on the map.
   void remark();
 
-  QString timezone_;
+  // Currently selected/marked timezone.
+  ZoneInfo current_zone_;
+
+  // A list of zone info found in system.
   const ZoneInfoList total_zones_;
+
+  // A list of zone info which are near enough to current cursor position.
   ZoneInfoList nearest_zones_;
 
   // A round dot to indicate position on the map.
   QLabel* dot_ = nullptr;
 
+  // To mark a zone on map.
   TooltipPin* zone_pin_ = nullptr;
 
-  enum class BubbleMode {
-    Nil,
-    Set,  // When setTimezone() is called.
-    SelectSingle,  // When there is only one zone near cursor position.
-    SelectMultiple,  // When there are several zones near cursor position.
-  };
-  BubbleMode bubble_mode_;
+  // To display a list of zones on map.
+  QListView* zones_list_view_ = nullptr;
+  QStringListModel* zones_model_ = nullptr;
+  TooltipContainer* popup_zones_window_ = nullptr;
+
+ private slots:
+  void onPopupZonesActivated(const QModelIndex& index);
 };
 
 }  // namespace installer

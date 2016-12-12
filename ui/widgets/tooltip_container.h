@@ -6,6 +6,7 @@
 #define INSTALLER_UI_WIDGETS_TOOLTIP_CONTAINER_H
 
 #include <QFrame>
+class QKeyEvent;
 class QPaintEvent;
 
 namespace installer {
@@ -24,11 +25,21 @@ class TooltipContainer : public QFrame{
 
   QWidget* widget() const;
 
+ signals:
+  // Emitted when window is hidden.
+  void onHide();
+
  public slots:
-  // Show tooltip container at |pos|.
+  // Show tooltip container at |pos| and grab keyboard focus.
   void popup(const QPoint& pos);
 
  protected:
+  // Release keyboard focus when window is hidden.
+  void hideEvent(QHideEvent* event) override;
+
+  // Hide window when Escape button is pressed.
+  void keyPressEvent(QKeyEvent* event) override;
+
   void paintEvent(QPaintEvent* event) override;
 
  private:

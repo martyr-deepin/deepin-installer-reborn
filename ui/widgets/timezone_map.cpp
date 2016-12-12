@@ -5,10 +5,16 @@
 #include "ui/widgets/timezone_map.h"
 
 #include <QDebug>
+#include <QItemSelectionModel>
 #include <QLabel>
+#include <QListView>
 #include <QMouseEvent>
+#include <QResizeEvent>
+#include <QStringListModel>
+#include <QVBoxLayout>
 
 #include "ui/delegates/timezone_map_util.h"
+#include "ui/widgets/tooltip_container.h"
 #include "ui/widgets/tooltip_pin.h"
 
 namespace installer {
@@ -34,26 +40,32 @@ QPoint ZoneInfoToPosition(const ZoneInfo& zone, int map_width, int map_height) {
 
 TimezoneMap::TimezoneMap(QWidget* parent)
     : QFrame(parent),
-      timezone_(),
+      current_zone_(),
       total_zones_(GetZoneInfoList()),
-      nearest_zones_(),
-      bubble_mode_(BubbleMode::Nil) {
+      nearest_zones_() {
   this->setObjectName("timezone_map");
 
   this->initUI();
+  this->initConnections();
+}
+
+TimezoneMap::~TimezoneMap() {
+  if (popup_zones_window_) {
+    delete popup_zones_window_;
+    popup_zones_window_ = nullptr;
+  }
 }
 
 const QString TimezoneMap::getTimezone() const {
-  return timezone_;
+  return current_zone_.timezone;
 }
 
 void TimezoneMap::setTimezone(const QString& timezone) {
-  timezone_ = timezone;
-  bubble_mode_ = BubbleMode::Set;
   nearest_zones_.clear();
   const int index = GetZoneInfoByZone(total_zones_, timezone);
   if (index > -1) {
-    nearest_zones_.append(total_zones_.at(index));
+    current_zone_ = total_zones_.at(index);
+    nearest_zones_.append(current_zone_);
     this->remark();
   } else {
     qWarning() << "Timezone not found:" << timezone;
@@ -66,13 +78,34 @@ void TimezoneMap::mousePressEvent(QMouseEvent* event) {
                                      event->x(), event->y(),
                                      this->width(), this->height());
     qDebug() << nearest_zones_;
-    bubble_mode_ = (nearest_zones_.length() == 1) ?
-                   BubbleMode::SelectSingle :
-                   BubbleMode::SelectMultiple;
-    this->remark();
+    if (nearest_zones_.length() == 1) {
+      current_zone_ = nearest_zones_.first();
+      this->remark();
+    } else {
+      this->popupZoneWindow(event->pos());
+    }
   } else {
     QWidget::mousePressEvent(event);
   }
+}
+
+void TimezoneMap::resizeEvent(QResizeEvent* event) {
+  if (popup_zones_window_->isVisible()) {
+    dot_->hide();
+    popup_zones_window_->hide();
+  }
+  QWidget::resizeEvent(event);
+}
+
+void TimezoneMap::initConnections() {
+  // Hide dot when popup-zones window is hidden.
+  connect(popup_zones_window_, &TooltipContainer::onHide,
+          dot_, &QLabel::hide);
+
+  // Hide popup_zones_window_ and mark new timezone on map when it is selected
+  // in zones_list_view_.
+  connect(zones_list_view_, &QListView::pressed,
+          this, &TimezoneMap::onPopupZonesActivated);
 }
 
 void TimezoneMap::initUI() {
@@ -93,51 +126,93 @@ void TimezoneMap::initUI() {
   zone_pin_->setFixedHeight(kZonePinHeight);
   zone_pin_->hide();
 
+  zones_list_view_ = new QListView();
+  zones_model_ = new QStringListModel(this);
+  zones_list_view_->setModel(zones_model_);
+  zones_list_view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  zones_list_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  zones_list_view_->setUniformItemSizes(true);
+  zones_list_view_->setSelectionMode(QListView::SingleSelection);
+  zones_list_view_->setEditTriggers(QListView::NoEditTriggers);
+  zones_list_view_->setStyleSheet("background: transparent;");
+  zones_list_view_->adjustSize();
+
+  popup_zones_window_ = new TooltipContainer();
+  popup_zones_window_->setWidget(zones_list_view_);
+
+  popup_zones_window_->hide();
+
   this->setContentsMargins(0, 0, 0, 0);
   this->setFixedSize(timezone_pixmap.size());
+}
+
+void TimezoneMap::popupZoneWindow(const QPoint& pos) {
+  // Hide all marks first.
+  dot_->hide();
+  zone_pin_->hide();
+  popup_zones_window_->hide();
+
+  // Popup zone list window.
+  QStringList zone_names;
+  for (const ZoneInfo& zone : nearest_zones_) {
+    zone_names.append(GetTimezoneName(zone.timezone));
+  }
+  zones_model_->setStringList(zone_names);
+  zones_list_view_->setFixedHeight(zone_names.length() * 25 - 5);
+  dot_->move(pos.x() - dot_->width() / 2, pos.y() - dot_->height() / 2);
+  dot_->show();
+
+  const int dy = pos.y() - dot_->height() - kDotVerticalMargin;
+  const QPoint global_pos = this->mapToGlobal(QPoint(pos.x(), dy));
+  popup_zones_window_->popup(global_pos);
 }
 
 void TimezoneMap::remark() {
   // Hide all marks first.
   dot_->hide();
   zone_pin_->hide();
+  popup_zones_window_->hide();
 
   const int map_width = this->width();
   const int map_height = this->height();
-  switch (bubble_mode_) {
-    case BubbleMode::Set:  // Pass through.
-    case BubbleMode::SelectSingle: {
-      Q_ASSERT(!nearest_zones_.isEmpty());
-      if (!nearest_zones_.isEmpty()) {
-        const ZoneInfo& zone = nearest_zones_.first();
-        // TODO(xushaohua): Convert timezone to other names.
-        zone_pin_->setText(GetTimezoneName(zone.timezone));
 
-        // Adjust size of pin to fit its content.
-        zone_pin_->adjustSize();
+  Q_ASSERT(!nearest_zones_.isEmpty());
+  if (!nearest_zones_.isEmpty()) {
+    // TODO(xushaohua): Convert timezone to other names.
+    zone_pin_->setText(GetTimezoneName(current_zone_.timezone));
 
-        // Show zone pin at the nearest zone.
-        const QPoint point = ZoneInfoToPosition(zone, map_width, map_height);
-        const int dy = point.y() - dot_->height() / 2 - kDotVerticalMargin;
-        zone_pin_->popup(QPoint(point.x(), dy));
+    // Adjust size of pin to fit its content.
+    zone_pin_->adjustSize();
 
-        dot_->move(point.x() - dot_->width() / 2,
-                   point.y() - dot_->height() / 2);
-        dot_->show();
+    // Show zone pin at current marked zone.
+    const QPoint point = ZoneInfoToPosition(current_zone_,
+                                            map_width,
+                                            map_height);
+    const int dy = point.y() - dot_->height() / 2 - kDotVerticalMargin;
+    zone_pin_->popup(QPoint(point.x(), dy));
 
-        timezone_ = zone.timezone;
-        emit this->timezoneUpdated(timezone_);
-      }
-      break;
-    }
-    case BubbleMode::SelectMultiple: {
-      break;
-    }
-    default: {
-      // Ignored.
-      break;
-    }
+    dot_->move(point.x() - dot_->width() / 2,
+               point.y() - dot_->height() / 2);
+    dot_->show();
+
+    emit this->timezoneUpdated(current_zone_.timezone);
   }
 }
+
+void TimezoneMap::onPopupZonesActivated(const QModelIndex& index) {
+// Hide popup_zones_window_.
+  popup_zones_window_->hide();
+  dot_->hide();
+
+  // Update current selected timezone and mark it on map.
+  Q_ASSERT(index.isValid());
+  if (index.isValid()) {
+    const int row = index.row();
+    Q_ASSERT(row < nearest_zones_.length());
+    if (row < nearest_zones_.length()) {
+      current_zone_ = nearest_zones_.at(row);
+      this->remark();
+    }
+  }}
 
 }  // namespace installer

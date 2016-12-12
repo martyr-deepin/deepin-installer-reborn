@@ -5,6 +5,7 @@
 #include "ui/widgets/tooltip_container.h"
 
 #include <QDebug>
+#include <QKeyEvent>
 #include <QPaintEvent>
 #include <QPainter>
 
@@ -24,6 +25,10 @@ const int kTriangleHeight = 6;
 
 TooltipContainer::TooltipContainer(QWidget* parent) : QFrame(parent) {
   this->setObjectName("tooltip_container");
+  this->setAttribute(Qt::WA_TranslucentBackground, true);
+  this->setFocusPolicy(Qt::StrongFocus);
+  this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint |
+                       Qt::WindowStaysOnTopHint | Qt::ToolTip);
 }
 
 void TooltipContainer::setWidget(QWidget* widget) {
@@ -40,11 +45,24 @@ void TooltipContainer::popup(const QPoint& pos) {
   this->resize(size.width(), size.height() + kTriangleHeight);
   this->move(pos.x() - size.width() / 2, pos.y() - size.height());
   this->show();
+  this->grabKeyboard();
+}
+
+void TooltipContainer::hideEvent(QHideEvent* event) {
+  this->releaseKeyboard();
+  QWidget::hideEvent(event);
+  emit this->onHide();
+}
+
+void TooltipContainer::keyPressEvent(QKeyEvent* event) {
+  if (event->key() == Qt::Key_Escape) {
+    this->hide();
+  }
+  QWidget::keyPressEvent(event);
 }
 
 void TooltipContainer::paintEvent(QPaintEvent* event) {
   Q_UNUSED(event);
-  qDebug() << "draw container";
 
   QPainter painter(this);
   painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing,
