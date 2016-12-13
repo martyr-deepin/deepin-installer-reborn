@@ -96,7 +96,7 @@ void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
 
 void AdvancedPartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    bootloader_label_->setText(tr(kTextBootloader));
+    bootloader_tip_button_->setText(tr(kTextBootloader));
     if (editing_button_->isChecked()) {
       editing_button_->setText(tr(kTextDone));
     } else {
@@ -110,6 +110,8 @@ void AdvancedPartitionFrame::changeEvent(QEvent* event) {
 void AdvancedPartitionFrame::initConnections() {
   connect(delegate_, &PartitionDelegate::deviceRefreshed,
           this, &AdvancedPartitionFrame::onDeviceRefreshed);
+  connect(bootloader_tip_button_, &QPushButton::clicked,
+          this, &AdvancedPartitionFrame::requestSelectBootloaderFrame);
   connect(bootloader_button_, &QPushButton::clicked,
           this, &AdvancedPartitionFrame::requestSelectBootloaderFrame);
   connect(editing_button_, &QPushButton::toggled,
@@ -150,27 +152,28 @@ void AdvancedPartitionFrame::initUI() {
   scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  bootloader_label_ = new QLabel(tr(kTextBootloader), this);
-  bootloader_label_->setObjectName("bootloader_label");
+  bootloader_tip_button_ = new PointerButton(tr(kTextBootloader), this);
+  bootloader_tip_button_->setObjectName("bootloader_tip_button");
+  bootloader_tip_button_->setFlat(true);
   bootloader_button_ = new PointerButton(this);
   bootloader_button_->setObjectName("bootloader_button");
   bootloader_button_->setFlat(true);
 
-  editing_button_ = new PointerButton(tr(kTextDelete));
-  editing_button_->setFlat(true);
+  editing_button_ = new PointerButton(tr(kTextDelete), this);
   editing_button_->setObjectName("editing_button");
+  editing_button_->setFlat(true);
   editing_button_->setCheckable(true);
   editing_button_->setChecked(false);
 
   QHBoxLayout* bottom_layout = new QHBoxLayout();
   bottom_layout->setContentsMargins(15, 10, 15, 10);
-  bottom_layout->setSpacing(10);
+  bottom_layout->setSpacing(0);
   // Show bootloader button only if EFI mode is off.
   if (IsEfiEnabled()) {
-    bootloader_label_->hide();
+    bootloader_tip_button_->hide();
     bootloader_button_->hide();
   } else {
-    bottom_layout->addWidget(bootloader_label_);
+    bottom_layout->addWidget(bootloader_tip_button_);
     bottom_layout->addWidget(bootloader_button_);
   }
   bottom_layout->addStretch();

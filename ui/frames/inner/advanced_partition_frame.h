@@ -52,7 +52,7 @@ class AdvancedPartitionFrame : public QFrame {
 
   PartitionDelegate* delegate_ = nullptr;
 
-  QLabel* bootloader_label_ = nullptr;
+  QPushButton* bootloader_tip_button_ = nullptr;
   QButtonGroup* partition_button_group_ = nullptr;
   QVBoxLayout* partition_layout_ = nullptr;
   QPushButton* bootloader_button_ = nullptr;

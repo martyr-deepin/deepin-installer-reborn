@@ -24,16 +24,19 @@
   border-bottom-right-radius: 4px;
 }
 
-#bootloader_label {
+#bootloader_tip_button {
   color: #ffffff;
   font-size: 12px;
+  border: none;
+  outline: none;
 }
 
 #bootloader_button {
-  font-size: 11px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.7);
   border: none;
   outline: none;
+  margin-left: 8px;
 }
 
 #editing_button {
