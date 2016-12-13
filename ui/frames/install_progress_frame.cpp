@@ -66,6 +66,23 @@ void InstallProgressFrame::startSlide(bool position_animation,
   slide_frame_->startSlide(position_animation, opacity_animation);
 }
 
+void InstallProgressFrame::simulate() {
+  QTimer* timer = new QTimer(this);
+  timer->setSingleShot(false);
+  timer->setInterval(500);
+  connect(timer, &QTimer::timeout,
+          [&]() {
+            int progress = progress_bar_->value();
+            progress ++;
+            this->onProgressUpdate(progress);
+            if (progress >= progress_bar_->maximum()) {
+              timer->stop();
+//              timer->deleteLater();
+            }
+          });
+  timer->start();
+}
+
 void InstallProgressFrame::runHooks(bool ok) {
   qDebug() << "runHooks()" << ok;
 

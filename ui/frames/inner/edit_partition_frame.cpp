@@ -220,20 +220,24 @@ void EditPartitionFrame::initUI() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
-  layout->setSpacing(kMainLayoutSpacing);
+  layout->setSpacing(0);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignHCenter);
+  layout->addSpacing(kMainLayoutSpacing);
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(os_label_, 0, Qt::AlignHCenter);
+  layout->addSpacing(kMainLayoutSpacing);
   layout->addWidget(name_frame, 0, Qt::AlignHCenter);
+  layout->addSpacing(kMainLayoutSpacing);
   layout->addWidget(usage_bar_, 0, Qt::AlignHCenter);
-  layout->addSpacing(10);
+  layout->addSpacing(10 + kMainLayoutSpacing);
   layout->addWidget(separator_label, 0, Qt::AlignHCenter);
-  layout->addSpacing(10);
+  layout->addSpacing(10 + kMainLayoutSpacing);
   layout->addWidget(grid_frame, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addWidget(cancel_button_, 0, Qt::AlignHCenter);
+  layout->addSpacing(30);
   layout->addWidget(ok_button_, 0, Qt::AlignHCenter);
 
   this->setLayout(layout);

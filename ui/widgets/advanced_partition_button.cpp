@@ -136,7 +136,7 @@ void AdvancedPartitionButton::initUI() {
 
   this->setContentsMargins(0, 0, 0, 0);
   this->setLayout(layout);
-  this->setFixedHeight(45);
+  this->setFixedHeight(60);
   this->setCheckable(true);
   this->setChecked(false);
   this->setFlat(true);

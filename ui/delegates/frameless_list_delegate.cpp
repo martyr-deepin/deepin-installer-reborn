@@ -46,12 +46,12 @@ void FramelessItemDelegate::paint(QPainter* painter,
     painter->drawPixmap(pixmap_rect, pixmap);
 
     // Draw background color of selected item, no matter it is active or not.
-    const QColor selected_color(255, 255, 255, 100);
+    const QColor selected_color(255, 255, 255, 51);
     const QBrush background_brush(selected_color);
     painter->fillRect(background_rect, background_brush);
   }  else if (option.state & QStyle::State_MouseOver) {
     // Draw background color when mouse is hover
-    const QColor selected_color(255, 255, 255, 40);
+    const QColor selected_color(255, 255, 255, 25);
     const QBrush background_brush(selected_color);
     painter->fillRect(background_rect, background_brush);
   }

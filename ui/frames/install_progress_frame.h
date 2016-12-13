@@ -33,6 +33,8 @@ class InstallProgressFrame : public QFrame {
   // Returns true is installation process failed.
   bool failed() const { return failed_; }
 
+  void simulate();
+
  public slots:
   // Run hooks when partition job is done
   void runHooks(bool ok);

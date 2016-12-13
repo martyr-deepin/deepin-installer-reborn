@@ -120,7 +120,7 @@ void NewPartitionFrame::initUI() {
 
   QLabel* separator_label = new QLabel();
   separator_label->setObjectName("separator_label");
-  separator_label->setFixedSize(560, 2);
+  separator_label->setFixedSize(560, 1);
 
   type_label_ = new QLabel(tr(kTextType));
   type_label_->setObjectName("type_label");
@@ -176,18 +176,20 @@ void NewPartitionFrame::initUI() {
   create_button_ = new NavButton(tr(kTextOk));
 
   QVBoxLayout* layout = new QVBoxLayout();
-  layout->setSpacing(kMainLayoutSpacing);
+  layout->setSpacing(0);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
+  layout->addSpacing(kMainLayoutSpacing);
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(os_label, 0, Qt::AlignCenter);
-  layout->addSpacing(10);
+  layout->addSpacing(10 + kMainLayoutSpacing);
   layout->addWidget(separator_label, 0, Qt::AlignHCenter);
-  layout->addSpacing(10);
+  layout->addSpacing(10 + kMainLayoutSpacing);
   layout->addWidget(grid_frame, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addWidget(cancel_button_, 0, Qt::AlignCenter);
+  layout->addSpacing(30);
   layout->addWidget(create_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);

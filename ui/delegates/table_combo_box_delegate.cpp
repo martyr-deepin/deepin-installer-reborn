@@ -36,10 +36,6 @@ void TableComboBoxDelegate::paint(QPainter* painter,
   const QRect& rect(option.rect);
   const QRect background_rect(rect.x(), rect.y(), rect.width(),
                               rect.height() - kBorderBottom);
-  const int row_count = index.model()->rowCount(index);
-  const bool is_first_row = (index.row() == 0);
-  const bool is_last_row = (index.row() + 1 == row_count);
-
   if (option.state & QStyle::State_Selected) {
     // Draw background image of selected item.
     const QPixmap pixmap(":/images/list_view_selected.png");
@@ -58,9 +54,6 @@ void TableComboBoxDelegate::paint(QPainter* painter,
     // Background color: #2CA7F8
     const QColor selected_color(44, 167, 248);
     const QBrush background_brush(selected_color);
-    // TODO(xushaohua): Draw round corner for first row and last row.
-    Q_UNUSED(is_first_row);
-    Q_UNUSED(is_last_row);
     painter->fillRect(background_rect, background_brush);
   }
 

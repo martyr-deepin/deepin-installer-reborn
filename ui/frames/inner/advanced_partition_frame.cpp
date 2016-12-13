@@ -166,7 +166,7 @@ void AdvancedPartitionFrame::initUI() {
   bottom_layout->setContentsMargins(15, 10, 15, 10);
   bottom_layout->setSpacing(10);
   // Show bootloader button only if EFI mode is off.
-  if (IsEfiEnabled()) {
+  if (IsEfiEnabled() && false) {
     bootloader_label_->hide();
     bootloader_button_->hide();
   } else {
@@ -186,7 +186,7 @@ void AdvancedPartitionFrame::initUI() {
   main_layout->setContentsMargins(0, 0, 0, 0);
   main_layout->setSpacing(0);
   main_layout->addWidget(scroll_area, 1, Qt::AlignHCenter);
-  main_layout->addSpacing(1);
+  main_layout->addSpacing(0);
   main_layout->addWidget(bottom_frame, 0, Qt::AlignHCenter);
 
   QFrame* main_frame = new QFrame();

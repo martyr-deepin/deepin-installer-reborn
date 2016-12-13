@@ -1,14 +1,12 @@
 <RCC>
   <qresource prefix="/images">
     <file>code_hover.png</file>
-    <file>capslock.png</file>
     <file>mode.png</file>
     <file>driver_windows_32.svg</file>
     <file>succeed.png</file>
     <file>decrease.png</file>
     <file>driver_windows_128.png</file>
     <file>install_icon.png</file>
-    <file>arrow_right_hover.png</file>
     <file>mac.png</file>
     <file>driver_deepin_128.svg</file>
     <file>timezone_hover.svg</file>
@@ -20,20 +18,19 @@
     <file>new_partition.png</file>
     <file>logo.png</file>
     <file>QR_press.png</file>
-    <file>arrow_left_press.png</file>
     <file>checkbox_checked.png</file>
     <file>driver_mac_32.png</file>
     <file>checkbox_unchecked_pressed.png</file>
     <file>code_press.png</file>
     <file>down_arrow.png</file>
     <file>driver_install_128.png</file>
-    <file>arrow_left_normal.png</file>
     <file>driver_128.svg</file>
     <file>edit_partition.png</file>
     <file>driver_install_32.svg</file>
     <file>deepin_installer_reborn.svg</file>
     <file>delete_part_active.png</file>
     <file>check_unchecked.png</file>
+    <file>info.png</file>
     <file>driver_deepin_128.png</file>
     <file>close_press.png</file>
     <file>checkbox_checked_hover.png</file>
@@ -53,7 +50,6 @@
     <file>driver_deepin_32.svg</file>
     <file>QR_hover.png</file>
     <file>ubuntu.png</file>
-    <file>arrow_right_normal.png</file>
     <file>indicator_inactive.png</file>
     <file>driver_mac_128.png</file>
     <file>driver_linux_128.svg</file>
@@ -63,7 +59,6 @@
     <file>checkbox_unchecked_hover.png</file>
     <file>driver_mac_32.svg</file>
     <file>increase_hover.png</file>
-    <file>arrow_right_press.png</file>
     <file>checkbox_checked_pressed.png</file>
     <file>timezone_map.png</file>
     <file>driver_linux_32.svg</file>
@@ -85,8 +80,6 @@
     <file>driver_32.svg</file>
     <file>failed.png</file>
     <file>default_layout.png</file>
-    <file>arrow_left_hover.png</file>
-    <file>arrow.png</file>
     <file>deepin.png</file>
     <file>close_normal.png</file>
     <file>images.qrc</file>
