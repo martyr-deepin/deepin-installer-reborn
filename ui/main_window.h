@@ -46,6 +46,9 @@ class MainWindow : public QWidget {
   // Show fullscreen.
   void fullscreen();
 
+  // Notify background thread to scan disk devices if needed.
+  void scanDevices();
+
  protected:
   // Move close button to appropriate position when window is resized.
   void resizeEvent(QResizeEvent* event) override;

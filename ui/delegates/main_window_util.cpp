@@ -27,13 +27,6 @@ QString EncodeErrorMsg(const QString& msg) {
   return encoded_msg;
 }
 
-void GetInstallProgressFrameAnimationLevel(bool& position_animation,
-                                           bool& opacity_animation) {
-  const int level = GetSettingsInt(kInstallProgressPageAnimationLevel);
-  position_animation = bool(level & 1);
-  opacity_animation = bool(level & 2);
-}
-
 int GetVisiblePages() {
   int pages = 0;
   if (!GetSettingsBool(kSkipSelectLanguagePage)) {

@@ -28,11 +28,12 @@ class InstallProgressFrame : public QFrame {
   ~InstallProgressFrame();
 
   // Show slide now.
-  void startSlide(bool position_animation, bool opacity_animation);
+  void startSlide();
 
   // Returns true is installation process failed.
   bool failed() const { return failed_; }
 
+  // Update progress value with a qtimer object.
   void simulate();
 
  public slots:

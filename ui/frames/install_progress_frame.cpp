@@ -14,6 +14,8 @@
 
 #include "base/file_util.h"
 #include "service/hooks_manager.h"
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/frames/consts.h"
 #include "ui/frames/inner/install_progress_slide_frame.h"
 #include "ui/widgets/comment_label.h"
@@ -34,6 +36,13 @@ const int kRetainingInterval = 3000;
 const char kTextTitle[] = "Installing";
 const char kTextComment[] = "You will be experiencing the incredible pleasant "
     "of deepin after the time for just a cup of coffee";
+
+// Get animation options.
+void GetAnimationLevel(bool& position_animation, bool& opacity_animation) {
+  const int level = GetSettingsInt(kInstallProgressPageAnimationLevel);
+  position_animation = bool(level & 1);
+  opacity_animation = bool(level & 2);
+}
 
 }  // namespace
 
@@ -61,8 +70,9 @@ InstallProgressFrame::~InstallProgressFrame() {
   hooks_manager_thread_ = nullptr;
 }
 
-void InstallProgressFrame::startSlide(bool position_animation,
-                                      bool opacity_animation) {
+void InstallProgressFrame::startSlide() {
+  bool position_animation, opacity_animation;
+  GetAnimationLevel(position_animation, opacity_animation);
   slide_frame_->startSlide(position_animation, opacity_animation);
 }
 
@@ -77,7 +87,6 @@ void InstallProgressFrame::simulate() {
             this->onProgressUpdate(progress);
             if (progress >= progress_bar_->maximum()) {
               timer->stop();
-//              timer->deleteLater();
             }
           });
   timer->start();

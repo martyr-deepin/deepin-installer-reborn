@@ -12,10 +12,6 @@ namespace installer {
 // Encode |msg| with base64()
 QString EncodeErrorMsg(const QString& msg);
 
-// Get animation options used in install_progress_frame.
-void GetInstallProgressFrameAnimationLevel(bool& position_animation,
-                                           bool& opacity_animation);
-
 // Get number of visible pages displayed in main page.
 int GetVisiblePages();
 

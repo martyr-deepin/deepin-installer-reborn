@@ -20,9 +20,6 @@ class DiskSpaceInsufficientFrame : public QFrame {
  public:
   explicit DiskSpaceInsufficientFrame(QWidget* parent = nullptr);
 
-  // Set device size limitation.
-  void setSizes(int required_device_size, int recommended_device_size);
-
  signals:
   // Emitted when abort-button is clicked.
   void finished();

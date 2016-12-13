@@ -49,16 +49,17 @@ MainWindow::MainWindow()
   this->registerShortcut();
   this->initConnections();
   this->goNextPage();
-
-  // Notify background thread to scan disk devices if needed.
-  if (!GetSettingsBool(kSkipPartitionPage)) {
-    partition_frame_->scanDevices();
-  }
 }
 
 void MainWindow::fullscreen() {
   multi_head_manager_->updateWallpaper();
   this->showFullScreen();
+}
+
+void MainWindow::scanDevices() {
+  if (!GetSettingsBool(kSkipPartitionPage)) {
+    partition_frame_->scanDevices();
+  }
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
@@ -314,10 +315,6 @@ void MainWindow::goNextPage() {
       const int required_device_size =
           GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
       if (IsDiskSpaceInsufficient(required_device_size)) {
-        const int recommended_device_size =
-            GetSettingsInt(kPartitionRecommendedDiskSpace);
-        disk_space_insufficient_frame_->setSizes(required_device_size,
-                                                 recommended_device_size);
         this->setCurrentPage(PageId::DiskSpaceInsufficientId);
       } else {
         prev_page_ = current_page_;
@@ -384,12 +381,7 @@ void MainWindow::goNextPage() {
     case PageId::PartitionId: {
       // Show InstallProgressFrame.
       page_indicator_->goNextPage();
-      bool position_animation, opacity_animation;
-      GetInstallProgressFrameAnimationLevel(position_animation,
-                                            opacity_animation);
-      // Set animation level in InstallProgressFrame.
-      install_progress_frame_->startSlide(position_animation,
-                                          opacity_animation);
+      install_progress_frame_->startSlide();
       this->setCurrentPage(PageId::InstallProgressId);
       break;
     }

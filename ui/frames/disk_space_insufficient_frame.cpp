@@ -4,10 +4,12 @@
 
 #include "ui/frames/disk_space_insufficient_frame.h"
 
+#include <QEvent>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QtCore/QEvent>
 
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
@@ -19,6 +21,9 @@ namespace {
 
 const char kTextTitle[] = "Insufficient Disk Space";
 const char kTextAbort[] = "Abort";
+
+const char kTextComment[] = "It takes at lease %1GB disk space to install "
+    "deepin, for better performance, %2GB and more space is recommended";
 
 }  // namespace
 
@@ -33,19 +38,13 @@ DiskSpaceInsufficientFrame::DiskSpaceInsufficientFrame(QWidget* parent)
 void DiskSpaceInsufficientFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr(kTextTitle));
+    const int required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+    const int recommended = GetSettingsInt(kPartitionRecommendedDiskSpace);
+    comment_label_->setText(tr(kTextComment).arg(required).arg(recommended));
     abort_button_->setText(tr(kTextAbort));
   } else {
     QFrame::changeEvent(event);
   }
-}
-
-void DiskSpaceInsufficientFrame::setSizes(int required_device_size,
-                                          int recommended_device_size) {
-  comment_label_->setText(
-      tr("It takes at lease %1GB disk space to install deepin, "
-         "for better performance, %2GB and more space is recommended")
-          .arg(required_device_size)
-          .arg(recommended_device_size));
 }
 
 void DiskSpaceInsufficientFrame::initConnections() {
@@ -54,8 +53,11 @@ void DiskSpaceInsufficientFrame::initConnections() {
 }
 
 void DiskSpaceInsufficientFrame::initUI() {
+  const int required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  const int recommended = GetSettingsInt(kPartitionRecommendedDiskSpace);
   title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel("");
+  comment_label_ = new CommentLabel(
+      tr(kTextComment).arg(required).arg( recommended));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->addSpacing(0);
