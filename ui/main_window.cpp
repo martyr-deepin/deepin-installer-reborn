@@ -137,8 +137,6 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
-  const QString msg = ReadFile("/etc/apt/sources.list");
-  install_failed_frame_->updateErrorMessage(msg, msg.mid(msg.length() / 3));
   this->goNextPage();
 
   // Notify background thread to scan disk devices if needed.
