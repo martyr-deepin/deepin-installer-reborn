@@ -4,10 +4,10 @@
 
 #include "ui/frames/inner/system_info_form_frame.h"
 
+#include <QEvent>
 #include <QHBoxLayout>
 #include <QStringList>
 #include <QVBoxLayout>
-#include <QtCore/QEvent>
 
 #include "service/settings_manager.h"
 #include "service/settings_name.h"

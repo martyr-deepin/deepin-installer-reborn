@@ -138,9 +138,9 @@ void AdvancedPartitionFrame::initUI() {
   partition_list_frame->setFixedWidth(kWindowWidth);
 
   QScrollArea* scroll_area = new QScrollArea();
-  QSizePolicy scroll_area_size_policy(QSizePolicy::Preferred,
-                                      QSizePolicy::MinimumExpanding);
   scroll_area->setContentsMargins(0, 0, 0, 0);
+  QSizePolicy scroll_area_size_policy(QSizePolicy::Fixed,
+                                      QSizePolicy::MinimumExpanding);
   scroll_area_size_policy.setHorizontalStretch(10);
   scroll_area_size_policy.setVerticalStretch(10);
   scroll_area->setSizePolicy(scroll_area_size_policy);
@@ -166,7 +166,7 @@ void AdvancedPartitionFrame::initUI() {
   bottom_layout->setContentsMargins(15, 10, 15, 10);
   bottom_layout->setSpacing(10);
   // Show bootloader button only if EFI mode is off.
-  if (IsEfiEnabled() && false) {
+  if (IsEfiEnabled()) {
     bootloader_label_->hide();
     bootloader_button_->hide();
   } else {
@@ -180,7 +180,7 @@ void AdvancedPartitionFrame::initUI() {
   bottom_frame->setObjectName("bottom_frame");
   bottom_frame->setContentsMargins(0, 0, 0, 0);
   bottom_frame->setLayout(bottom_layout);
-  bottom_frame->setFixedWidth(kWindowWidth);
+  bottom_frame->setFixedWidth(kWindowWidth - 2);
 
   QVBoxLayout* main_layout = new QVBoxLayout();
   main_layout->setContentsMargins(0, 0, 0, 0);
@@ -207,7 +207,8 @@ void AdvancedPartitionFrame::initUI() {
 
   this->setLayout(layout);
   this->setContentsMargins(0, 0, 0, 0);
-  QSizePolicy container_policy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+  this->setFixedWidth(kWindowWidth);
+  QSizePolicy container_policy(QSizePolicy::Fixed, QSizePolicy::Expanding);
   container_policy.setVerticalStretch(100);
   this->setSizePolicy(container_policy);
   this->setStyleSheet(ReadFile(":/styles/advanced_partition_frame.css"));
