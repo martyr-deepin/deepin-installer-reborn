@@ -19,7 +19,6 @@ IconButton::IconButton(const QString& normal_icon,
       hover_icon_(QIcon(hover_icon)),
       active_icon_(QIcon(active_icon)) {
   const QSize size(button_width, button_height);
-  this->setIconSize(size);
   this->setFixedSize(size);
   this->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
 

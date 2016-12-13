@@ -12,7 +12,7 @@ QPushButton {
 }
 
 QPushButton::checked {
-  background-color: rgba(221, 221, 221, 0.3);
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
 }
 
@@ -23,11 +23,9 @@ QLabel#path_label {
 }
 
 QLabel#usage_label {
-  color: #c8c8c8;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 10px;
-  line-height: 1.6;
   text-align: center;
-  opacity: 0.6;
 }
 
 QProgressBar#usage_bar {

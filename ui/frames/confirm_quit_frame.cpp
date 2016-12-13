@@ -69,6 +69,7 @@ void ConfirmQuitFrame::initUI() {
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(continue_button_, 0, Qt::AlignCenter);
+  layout->addSpacing(15);
   layout->addWidget(abort_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);

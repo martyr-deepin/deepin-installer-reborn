@@ -65,8 +65,10 @@ void SimplePartitionButton::initUI() {
   layout->setSpacing(0);
   layout->addStretch();
   layout->addWidget(os_label_, 0, Qt::AlignHCenter);
+  layout->addSpacing(6);
   layout->addWidget(path_label, 0, Qt::AlignHCenter);
   layout->addWidget(usage_label, 0, Qt::AlignHCenter);
+  layout->addSpacing(6);
   layout->addWidget(usage_bar, 0, Qt::AlignHCenter);
   layout->addStretch();
 

@@ -15,9 +15,10 @@ namespace installer {
 
 namespace {
 
-const int kWindowTopMargin = 5;
+// Top margin of window relative to its original position.
+const int kWindowTopMargin = -3;
 
-const int kBorderRadius = 5;
+const int kBorderRadius = 4;
 const int kBorderDiameter = kBorderRadius * 2;
 
 // _____
@@ -26,7 +27,7 @@ const int kBorderDiameter = kBorderRadius * 2;
 const int kTriangleHeight = 6;
 const int kTriangleWidth = 10;
 const int kTriangleHalfWidth = kTriangleWidth / 2;
-const int kTriangleLeftMargin = 10;
+const int kTriangleLeftMargin = 36;
 
 }  // namespace
 
@@ -36,15 +37,14 @@ SystemInfoTip::SystemInfoTip(QWidget* parent) : QFrame(parent) {
   label_ = new QLabel();
   label_->setStyleSheet("background: transparent;"
                         "color: #f9704f;"
-                        "font-size: 14px;");
+                        "font-size: 12px;");
   label_->setWordWrap(true);
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
-  layout->setSpacing(0);
   layout->addWidget(label_);
 
   this->setLayout(layout);
-  this->setContentsMargins(10, 15, 10, 10);
+  this->setContentsMargins(8, 8, 8, 6);
 }
 
 void SystemInfoTip::setText(const QString& text) {

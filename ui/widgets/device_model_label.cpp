@@ -16,6 +16,8 @@ const int kFontSize = 14;
 const int kTextLeftMargin = 40;
 const int kLineLeftMargin = 30;
 
+const int kHorizontalLineHeight = 1;
+
 }  // namespace
 
 DeviceModelLabel::DeviceModelLabel(QWidget* parent) : QLabel(parent) {
@@ -45,7 +47,7 @@ void DeviceModelLabel::paintEvent(QPaintEvent* event) {
 
   // Draw horizontal line.
   const QColor line_color(QColor::fromRgb(255, 255, 255, 25));
-  painter.setPen(QPen(QBrush(line_color), 2));
+  painter.setPen(QPen(QBrush(line_color), kHorizontalLineHeight));
   // Add left-margin
   const int line_start_x = kTextLeftMargin + text_width + kLineLeftMargin;
   const int half_height = this->height() / 2;

@@ -25,9 +25,11 @@ namespace {
 
 const int kDotVerticalMargin = 2;
 const int kZonePinHeight = 30;
+const int kZonePinMinimumWidth = 60;
 
 // Height of popup item is also defined in styles/timezone_map.css
-const int kPopupItemHeight = 40;
+const int kPopupItemHeight = 24;
+const int kPopupListViewMargins = 4;
 
 const double kDistanceThreshold = 100.0;
 const char kDotFile[] = ":/images/indicator_active.png";
@@ -129,11 +131,12 @@ void TimezoneMap::initUI() {
 
   zone_pin_ = new TooltipPin(this);
   zone_pin_->setFixedHeight(kZonePinHeight);
+  zone_pin_->setMinimumWidth(kZonePinMinimumWidth);
   zone_pin_->hide();
 
   popup_list_view_ = new QListView();
   popup_list_view_->setObjectName("popup_list_view");
-  popup_model_ = new QStringListModel(this);
+  popup_model_ = new QStringListModel(popup_list_view_);
   popup_list_view_->setModel(popup_model_);
   popup_list_view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   popup_list_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -141,7 +144,8 @@ void TimezoneMap::initUI() {
   popup_list_view_->setSelectionMode(QListView::SingleSelection);
   popup_list_view_->setEditTriggers(QListView::NoEditTriggers);
   popup_list_view_->adjustSize();
-  TimezonePopupDelegate* popup_delegate = new TimezonePopupDelegate(this);
+  TimezonePopupDelegate* popup_delegate =
+      new TimezonePopupDelegate(popup_list_view_);
   popup_list_view_->setItemDelegate(popup_delegate);
   popup_list_view_->setMouseTracking(true);
   popup_list_view_->setStyleSheet(ReadFile(":/styles/timezone_map.css"));
@@ -168,7 +172,8 @@ void TimezoneMap::popupZoneWindow(const QPoint& pos) {
     zone_names.append(GetTimezoneName(zone.timezone));
   }
   popup_model_->setStringList(zone_names);
-  popup_list_view_->setFixedHeight(zone_names.length() * kPopupItemHeight);
+  popup_list_view_->setFixedHeight(zone_names.length() * kPopupItemHeight +
+                                   2 * kPopupListViewMargins);
   dot_->move(pos.x() - dot_->width() / 2, pos.y() - dot_->height() / 2);
   dot_->show();
 

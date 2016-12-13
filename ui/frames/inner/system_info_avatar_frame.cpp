@@ -87,10 +87,10 @@ void SystemInfoAvatarFrame::initConnections() {
 }
 
 void SystemInfoAvatarFrame::initUI() {
-  timezone_button_ = new IconButton(":/images/timezone.png",
-                                    ":/images/timezone.png",
-                                    ":/images/timezone.png",
-                                    128, 32, nullptr);
+  timezone_button_ = new IconButton(":/images/timezone_normal.svg",
+                                    ":/images/timezone_hover.svg",
+                                    ":/images/timezone_press.svg",
+                                    128, 20, nullptr);
   title_label_ = new TitleLabel(tr(kTextTitle));
   comment_label_ = new CommentLabel(tr(kTextComment));
   QHBoxLayout* comment_layout = new QHBoxLayout();
@@ -105,7 +105,7 @@ void SystemInfoAvatarFrame::initUI() {
   list_view_ = new PointerListView();
   QStringListModel* list_model = new QStringListModel(avatars, list_view_);
   list_view_->setModel(list_model);
-  AvatarListDelegate* list_delegate = new AvatarListDelegate();
+  AvatarListDelegate* list_delegate = new AvatarListDelegate(list_view_);
   list_view_->setItemDelegate(list_delegate);
   QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   policy.setHorizontalStretch(10);

@@ -25,6 +25,7 @@ const int kTriangleHeight = 6;
 
 TooltipContainer::TooltipContainer(QWidget* parent) : QFrame(parent) {
   this->setObjectName("tooltip_container");
+  this->setContentsMargins(0, 4, 0, 4);
   this->setAttribute(Qt::WA_TranslucentBackground, true);
   this->setFocusPolicy(Qt::StrongFocus);
   this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint |
@@ -95,7 +96,7 @@ void TooltipContainer::paintEvent(QPaintEvent* event) {
                         kBorderDiameter, kBorderDiameter,
                         270.0, 90.0);
   background_path.closeSubpath();
-  const QColor background_color(255, 255, 255, 150);
+  const QColor background_color(255, 255, 255, 230);
   painter.fillPath(background_path, QBrush(background_color));
 }
 

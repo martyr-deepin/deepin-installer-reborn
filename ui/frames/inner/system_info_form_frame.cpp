@@ -120,10 +120,10 @@ void SystemInfoFormFrame::initConnections() {
 }
 
 void SystemInfoFormFrame::initUI() {
-  timezone_button_ = new IconButton(":/images/timezone.png",
-                                    ":/images/timezone.png",
-                                    ":/images/timezone.png",
-                                    128, 32, nullptr);
+  timezone_button_ = new IconButton(":/images/timezone_normal.svg",
+                                    ":/images/timezone_hover.svg",
+                                    ":/images/timezone_press.svg",
+                                    128, 19, nullptr);
   title_label_ = new TitleLabel(tr(kTextTitle));
   comment_label_ = new CommentLabel(tr(kTextComment));
   QHBoxLayout* comment_layout = new QHBoxLayout();
@@ -158,7 +158,7 @@ void SystemInfoFormFrame::initUI() {
   tooltip_ = new SystemInfoTip(this);
   // Same width as line edit.
   tooltip_->setMaximumWidth(550);
-  tooltip_->setMinimumHeight(36);
+  tooltip_->setMinimumHeight(32);
   tooltip_->hide();
 
   next_button_ = new NavButton(tr(kTextNext));

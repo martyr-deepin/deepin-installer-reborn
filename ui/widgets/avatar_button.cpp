@@ -13,7 +13,7 @@ namespace installer {
 
 namespace {
 
-const int kIconSize = 80;
+const int kIconSize = 100;
 
 }  // namespace
 

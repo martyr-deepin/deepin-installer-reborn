@@ -86,13 +86,14 @@ void SelectLanguageFrame::initUI() {
   next_button_->setEnabled(false);
 
   QVBoxLayout* layout = new QVBoxLayout();
-  layout->setSpacing(kMainLayoutSpacing);
+  layout->setSpacing(0);
   layout->addStretch();
   layout->addWidget(logo_label, 0, Qt::AlignCenter);
+  layout->addSpacing(kMainLayoutSpacing);
   layout->addWidget(subtitle_label, 0, Qt::AlignCenter);
-  layout->addSpacing(20);
+  layout->addSpacing(kMainLayoutSpacing + 20);
   layout->addWidget(language_view_, 0, Qt::AlignHCenter);
-  layout->addSpacing(20);
+  layout->addSpacing(10);
   layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
