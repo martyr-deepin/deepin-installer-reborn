@@ -39,7 +39,13 @@ class SystemInfoFrame : public QFrame {
   SystemInfoFormFrame* form_frame_ = nullptr;
   SystemInfoTimezoneFrame* timezone_frame_ = nullptr;
 
+  // To mark current page before switching to timezone page.
+  QWidget* last_page_ = nullptr;
+
  private slots:
+  // Restore last page when timezone page is finished.
+  void restoreLastPage();
+
   void showAvatarPage();
   void showFormPage();
   void showTimezonePage();

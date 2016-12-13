@@ -45,7 +45,7 @@ void SystemInfoFrame::initConnections() {
   connect(form_frame_, &SystemInfoFormFrame::timezoneClicked,
           this, &SystemInfoFrame::showTimezonePage);
   connect(timezone_frame_, &SystemInfoTimezoneFrame::finished,
-          this, &SystemInfoFrame::showFormPage);
+          this, &SystemInfoFrame::restoreLastPage);
 
   // Save settings when finished signal is emitted.
   connect(form_frame_, &SystemInfoFormFrame::finished,
@@ -73,6 +73,14 @@ void SystemInfoFrame::initUI() {
   this->setLayout(stacked_layout_);
 }
 
+void SystemInfoFrame::restoreLastPage() {
+  if (last_page_) {
+    stacked_layout_->setCurrentWidget(last_page_);
+  } else {
+    stacked_layout_->setCurrentWidget(form_frame_);
+  }
+}
+
 void SystemInfoFrame::showAvatarPage() {
   if (!GetSettingsBool(kSystemInfoDisableAvatorPage)) {
     stacked_layout_->setCurrentWidget(avatar_frame_);
@@ -87,6 +95,7 @@ void SystemInfoFrame::showFormPage() {
 
 void SystemInfoFrame::showTimezonePage() {
   if (!GetSettingsBool(kSystemInfoDisableTimezonePage)) {
+    last_page_ = qobject_cast<QWidget*>(this->sender());
     stacked_layout_->setCurrentWidget(timezone_frame_);
     timezone_frame_->raise();
   }
