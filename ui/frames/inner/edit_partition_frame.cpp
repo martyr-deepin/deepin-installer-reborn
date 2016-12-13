@@ -209,11 +209,17 @@ void EditPartitionFrame::initUI() {
   grid_layout->addWidget(format_check_box_, 2, 0, Qt::AlignRight);
   grid_layout->addWidget(format_label_, 2, 1);
 
+  QVBoxLayout* grid_wrapper_layout = new QVBoxLayout();
+  grid_wrapper_layout->setContentsMargins(0, 0, 0, 0);
+  grid_wrapper_layout->setSpacing(0);
+  grid_wrapper_layout->addLayout(grid_layout);
+  grid_wrapper_layout->addStretch();
+
   QFrame* grid_frame = new QFrame();
   grid_frame->setObjectName("grid_frame");
-  grid_frame->setContentsMargins(0, 0, 0, 0);
-  grid_frame->setLayout(grid_layout);
-  grid_frame->setFixedWidth(400);
+  grid_frame->setContentsMargins(0, 0, 110, 0);
+  grid_frame->setFixedSize(400, 300);
+  grid_frame->setLayout(grid_wrapper_layout);
 
   cancel_button_ = new NavButton(tr(kTextCancel));
   ok_button_ = new NavButton(tr(kTextOk));
@@ -231,9 +237,9 @@ void EditPartitionFrame::initUI() {
   layout->addWidget(name_frame, 0, Qt::AlignHCenter);
   layout->addSpacing(kMainLayoutSpacing);
   layout->addWidget(usage_bar_, 0, Qt::AlignHCenter);
-  layout->addSpacing(10 + kMainLayoutSpacing);
+  layout->addSpacing(20 + kMainLayoutSpacing);
   layout->addWidget(separator_label, 0, Qt::AlignHCenter);
-  layout->addSpacing(10 + kMainLayoutSpacing);
+  layout->addSpacing(20 + kMainLayoutSpacing);
   layout->addWidget(grid_frame, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addWidget(cancel_button_, 0, Qt::AlignHCenter);
