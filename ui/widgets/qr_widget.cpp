@@ -12,13 +12,22 @@
 namespace installer {
 
 // Refers: http://stackoverflow.com/questions/21400254
-QRWidget::QRWidget(QWidget* parent) : QWidget(parent), content_() {
+QRWidget::QRWidget(QWidget* parent) : QWidget(parent), content_(), margin_(0) {
   this->setObjectName("qr_widget");
 }
 
 void QRWidget::setText(const QString& content) {
   content_ = content;
   this->update();
+}
+
+void QRWidget::setMargin(int margin) {
+  if (margin >= 0) {
+    margin_ = margin;
+  } else {
+    margin_ = 0;
+    qWarning() << "setMargin() invalid margin:" << margin;
+  }
 }
 
 void QRWidget::paintEvent(QPaintEvent* event) {
@@ -35,19 +44,20 @@ void QRWidget::paintEvent(QPaintEvent* event) {
     painter.drawRect(0, 0, width(), height());
     painter.setBrush(fg);
     const int s = qr->width > 0 ? qr->width: 1;
-    const double w = width();
-    const double h = height();
+    const double w = width() - 2 * margin_;
+    const double h = height() - 2 * margin_;
     const double aspect = w / h;
     const double scale = ((aspect > 1.0) ? h : w) / s;
     for(int y = 0; y < s; y++){
       const int yy = y*s;
-      for(int x=0; x < s; x++){
+      for(int x = 0; x < s; x++){
         const int xx = yy + x;
         const unsigned char b = qr->data[xx];
         if(b & 0x01){
-          const double rx1 = x * scale, ry1 = y * scale;
+          const double rx1 = x * scale + margin_;
+          const double ry1 = y * scale + margin_;
           QRectF r(rx1, ry1, scale, scale);
-          painter.drawRects(&r,1);
+          painter.drawRects(&r, 1);
         }
       }
     }

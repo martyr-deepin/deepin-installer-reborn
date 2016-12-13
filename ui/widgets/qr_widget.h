@@ -20,11 +20,17 @@ class QRWidget : public QWidget {
   QString text() const { return content_; }
   void setText(const QString& content);
 
+ public slots:
+  // Set margin of qr image. |margin| shall be a non-negative integer.
+  // Call update() to repaint qr image.
+  void setMargin(int margin);
+
  protected:
   void paintEvent(QPaintEvent* event) override;
 
  private:
   QString content_;
+  int margin_;
 };
 
 }  // namespace installer

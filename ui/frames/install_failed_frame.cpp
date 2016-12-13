@@ -23,7 +23,10 @@ namespace {
 
 const int kContentWindowWidth = 580;
 const int kContentWindowHeight = 360;
-const int kQRWindowSize = 280;
+
+const int kQrMargin = 8;
+const int kQrWindowSize = 300;
+
 const int kControlButtonSize = 32;
 
 const char kTextTitle[] = "Installation Failed";
@@ -38,9 +41,10 @@ InstallFailedFrame::InstallFailedFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName("install_failed_frame");
 
   this->initUI();
-  // Show QR widget only if control button is clicked.
-  qr_widget_->setVisible(false);
   this->initConnections();
+
+  // Show QR widget by default.
+  content_label_->hide();
 }
 
 void InstallFailedFrame::updateErrorMessage(const QString& msg,
@@ -87,10 +91,13 @@ void InstallFailedFrame::initUI() {
   content_label_->setFixedSize(kContentWindowWidth, kContentWindowHeight);
   content_label_->setWordWrap(true);
   content_label_->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+
   qr_widget_ = new QRWidget(content_frame);
-  qr_widget_->setFixedSize(kQRWindowSize, kQRWindowSize);
-  qr_widget_->move((kContentWindowWidth - kQRWindowSize) / 2,
-                   (kContentWindowHeight - kQRWindowSize) / 2);
+  qr_widget_->setMargin(kQrMargin);
+  qr_widget_->setFixedSize(kQrWindowSize, kQrWindowSize);
+  qr_widget_->move((kContentWindowWidth - kQrWindowSize) / 2,
+                   (kContentWindowHeight - kQrWindowSize) / 2);
+
   control_button_ = new IconButton(":/images/qr_normal.png",
                                    ":/images/qr_hover.png",
                                    ":/images/qr_press.png",
