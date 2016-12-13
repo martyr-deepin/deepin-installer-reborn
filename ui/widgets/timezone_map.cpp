@@ -5,6 +5,7 @@
 #include "ui/widgets/timezone_map.h"
 
 #include <QDebug>
+#include <QFontMetrics>
 #include <QItemSelectionModel>
 #include <QLabel>
 #include <QListView>
@@ -29,7 +30,9 @@ const int kZonePinMinimumWidth = 60;
 
 // Height of popup item is also defined in styles/timezone_map.css
 const int kPopupItemHeight = 24;
-const int kPopupListViewMargins = 4;
+const int kPopupListViewVerticalMargins = 4;
+const int kPopupListViewHorizontalMargins = 20;
+const int kPopupListViewMinimumWidth = 60;
 
 const double kDistanceThreshold = 100.0;
 const char kDotFile[] = ":/images/indicator_active.png";
@@ -168,12 +171,21 @@ void TimezoneMap::popupZoneWindow(const QPoint& pos) {
 
   // Popup zone list window.
   QStringList zone_names;
+  int item_width = kPopupListViewMinimumWidth;
+  const QFontMetrics metrics(popup_list_view_->font());
   for (const ZoneInfo& zone : nearest_zones_) {
-    zone_names.append(GetTimezoneName(zone.timezone));
+    const QString zone_name = GetTimezoneName(zone.timezone);
+    zone_names.append(zone_name);
+    const int curr_width = metrics.width(zone_name);
+    item_width = (curr_width > item_width) ? curr_width : item_width;
   }
   popup_model_->setStringList(zone_names);
-  popup_list_view_->setFixedHeight(zone_names.length() * kPopupItemHeight +
-                                   2 * kPopupListViewMargins);
+
+  // Add margin to list view.
+  const int width = item_width + kPopupListViewHorizontalMargins * 2;
+  const int height = kPopupItemHeight * zone_names.length() +
+                     kPopupListViewVerticalMargins * 2;
+  popup_list_view_->resize(width, height);
   dot_->move(pos.x() - dot_->width() / 2, pos.y() - dot_->height() / 2);
   dot_->show();
 
