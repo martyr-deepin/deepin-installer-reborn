@@ -14,6 +14,7 @@
 #include <QStackedLayout>
 
 #include "base/file_util.h"
+#include "service/power_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
@@ -426,12 +427,28 @@ void MainWindow::goNextPage() {
 }
 
 void MainWindow::rebootSystem() {
-  // TODO(xushaohua): reboot system
+  // Do not reboot system in debug mode.
+#ifdef NDEBUG
+  if (!RebootSystem()) {
+    qWarning() << "RebootSystem failed!";
+    if (!RebootSystemWithMagicKey()) {
+      qWarning() << "RebootSystemWithMagicKey() failed!";
+    }
+  }
+#endif
   qApp->quit();
 }
 
 void MainWindow::shutdownSystem() {
-  // TODO(xushaohua): Power off system.
+  // Do not shutdown system in debug mode.
+#ifdef NDEBUG
+  if (!ShutdownSystem()) {
+    qWarning() << "ShutdownSystem() failed!";
+    if (!ShutdownSystemWithMagicKey()) {
+      qWarning() << "ShutdownSystemWithMagicKey() failed!";
+    }
+  }
+#endif
   qApp->quit();
 }
 
