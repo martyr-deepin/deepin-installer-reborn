@@ -168,7 +168,7 @@ void NewPartitionFrame::initUI() {
 
   QFrame* grid_frame = new QFrame();
   grid_frame->setObjectName("grid_frame");
-  grid_frame->setContentsMargins(0, 0, 0, 0);
+  grid_frame->setContentsMargins(0, 0, 20, 0);
   grid_frame->setLayout(grid_layout);
   grid_frame->setFixedWidth(400);
 
