@@ -234,9 +234,7 @@ void MainWindow::setCurrentPage(PageId page_id) {
     close_button_->show();
   }
 
-  if (page_id == PageId::DiskSpaceInsufficientId ||
-      page_id == PageId::VirtualMachineId ||
-      page_id == PageId::InstallFailedId ||
+  if (page_id == PageId::InstallFailedId ||
       page_id == PageId::InstallSuccessId) {
     // Hide page indicator in these pages.
     page_indicator_->hide();

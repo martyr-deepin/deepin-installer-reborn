@@ -91,9 +91,9 @@ void InstallFailedFrame::initUI() {
   qr_widget_->setFixedSize(kQRWindowSize, kQRWindowSize);
   qr_widget_->move((kContentWindowWidth - kQRWindowSize) / 2,
                    (kContentWindowHeight - kQRWindowSize) / 2);
-  control_button_ = new IconButton(":/images/QR_normal.png",
-                                   ":/images/QR_hover.png",
-                                   ":/images/QR_press.png",
+  control_button_ = new IconButton(":/images/qr_normal.png",
+                                   ":/images/qr_hover.png",
+                                   ":/images/qr_press.png",
                                    kControlButtonSize,
                                    kControlButtonSize,
                                    content_frame);

@@ -13,8 +13,8 @@ PageIndicator::PageIndicator(int pages, QWidget* parent)
   : QFrame(parent),
     pages_(pages),
     current_page_(-1),
-    indicator_active_(":/images/indicator-active.png"),
-    indicator_inactive_(":/images/indicator-inactive.png") {
+    indicator_active_(":/images/indicator_active.png"),
+    indicator_inactive_(":/images/indicator_inactive.png") {
   Q_ASSERT(pages > 0);
   this->setObjectName("page_indicator");
 
@@ -47,10 +47,13 @@ void PageIndicator::initUI() {
 void PageIndicator::updateIndicators() {
   for (int i = 0; i < pages_; i++) {
     QLabel* label = static_cast<QLabel*>(layout_->itemAt(i)->widget());
-    if (i == current_page_) {
-      label->setPixmap(indicator_active_);
-    } else {
-      label->setPixmap(indicator_inactive_);
+    Q_ASSERT(label);
+    if (label) {
+      if (i == current_page_) {
+        label->setPixmap(indicator_active_);
+      } else {
+        label->setPixmap(indicator_inactive_);
+      }
     }
   }
 }
