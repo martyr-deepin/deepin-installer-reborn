@@ -123,7 +123,7 @@ void SystemInfoFormFrame::initUI() {
   timezone_button_ = new IconButton(":/images/timezone_normal.svg",
                                     ":/images/timezone_hover.svg",
                                     ":/images/timezone_press.svg",
-                                    128, 19, nullptr);
+                                    128, 20, nullptr);
   title_label_ = new TitleLabel(tr(kTextTitle));
   comment_label_ = new CommentLabel(tr(kTextComment));
   QHBoxLayout* comment_layout = new QHBoxLayout();
@@ -164,22 +164,24 @@ void SystemInfoFormFrame::initUI() {
   next_button_ = new NavButton(tr(kTextNext));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addWidget(timezone_button_, 0, Qt::AlignLeft);
-  layout->addStretch(1);
+  layout->addSpacing(10);
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
-  layout->addStretch(1);
+  layout->addSpacing(40);
   layout->addWidget(avatar_button_, 0, Qt::AlignCenter);
-  layout->addStretch(1);
+  layout->addStretch();
   layout->addWidget(username_edit_, 0, Qt::AlignCenter);
   layout->addWidget(hostname_edit_, 0, Qt::AlignCenter);
   layout->addWidget(password_edit_, 0, Qt::AlignCenter);
   layout->addWidget(password2_edit_, 0, Qt::AlignCenter);
-  layout->addStretch(3);
+  layout->addStretch();
   layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 bool SystemInfoFormFrame::validateUsername(QString& msg) {

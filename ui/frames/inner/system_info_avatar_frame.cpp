@@ -107,36 +107,42 @@ void SystemInfoAvatarFrame::initUI() {
   list_view_->setModel(list_model);
   AvatarListDelegate* list_delegate = new AvatarListDelegate(list_view_);
   list_view_->setItemDelegate(list_delegate);
-  QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  policy.setHorizontalStretch(10);
-  policy.setVerticalStretch(10);
-  list_view_->setSizePolicy(policy);
-  list_view_->setContentsMargins(10, 10, 10, 10);
-  list_view_->setSpacing(30);
+  QSizePolicy list_policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  list_policy.setVerticalStretch(100);
+  list_view_->setSizePolicy(list_policy);
+  list_view_->setContentsMargins(0, 0, 0, 0);
+  list_view_->setSpacing(40);
   list_view_->setAcceptDrops(false);
   list_view_->setWrapping(true);
   list_view_->setUniformItemSizes(true);
   list_view_->setFlow(QListView::LeftToRight);
   list_view_->setViewMode(QListView::IconMode);
-  list_view_->setFixedWidth(960);
+  list_view_->setFixedWidth(882);
   list_view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   list_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   list_view_->setStyleSheet(ReadFile(":/styles/avatar_list_view.css"));;
+
+  QHBoxLayout* list_layout = new QHBoxLayout();
+  list_layout->setContentsMargins(0, 0, 0, 0);
+  list_layout->setSpacing(0);
+  list_layout->addStretch();
+  list_layout->addWidget(list_view_);
+  list_layout->addStretch();
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addWidget(timezone_button_, 0, Qt::AlignLeft);
-  layout->addStretch(2);
+  layout->addSpacing(10);
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
-  layout->addStretch(1);
+  layout->addSpacing(40);
   layout->addWidget(current_avatar_button_, 0, Qt::AlignCenter);
-  layout->addStretch(1);
-  layout->addWidget(list_view_, 0, Qt::AlignHCenter);
-  layout->addStretch(3);
+  layout->addSpacing(40);
+  layout->addLayout(list_layout);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 void SystemInfoAvatarFrame::onListViewPressed(const QModelIndex& index) {
