@@ -65,13 +65,20 @@ class SystemInfoFormFrame : public QFrame {
   AvatarButton* avatar_button_ = nullptr;
   LineEdit* username_edit_ = nullptr;
   LineEdit* hostname_edit_ = nullptr;
-  // To mark whether content of hostname-edit is edited by user.
-  bool is_hostname_edited_;
   LineEdit* password_edit_ = nullptr;
   LineEdit* password2_edit_ = nullptr;
   // Display tooltip error message.
   SystemInfoTip* tooltip_ = nullptr;
   NavButton* next_button_ = nullptr;
+
+  // To mark whether content is edited by user.
+  bool is_username_edited_;
+  bool is_hostname_edited_;
+  // If hostname is edited by user, do not generate new hostname based on
+  // current username.
+  bool is_hostname_edited_manually_;
+  bool is_password_edited_;
+  bool is_password2_edited_;
 
  private slots:
   // Validate form content.
@@ -85,7 +92,9 @@ class SystemInfoFormFrame : public QFrame {
   void onUsernameEditingFinished();
   void onHostnameEdited();
   void onHostnameEditingFinished();
+  void onPasswordEdited();
   void onPasswordEditingFinished();
+  void onPassword2Edited();
   void onPassword2EditingFinished();
 };
 

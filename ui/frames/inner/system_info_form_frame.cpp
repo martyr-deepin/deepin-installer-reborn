@@ -39,7 +39,11 @@ const char kTextNext[] = "Next";
 
 SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
     : QFrame(parent),
-      is_hostname_edited_(false) {
+      is_username_edited_(false),
+      is_hostname_edited_(false),
+      is_hostname_edited_manually_(false),
+      is_password_edited_(false),
+      is_password2_edited_(false) {
   this->setObjectName("system_info_form_frame");
 
   this->initUI();
@@ -115,8 +119,12 @@ void SystemInfoFormFrame::initConnections() {
           this, &SystemInfoFormFrame::onHostnameEdited);
   connect(password_edit_, &LineEdit::textEdited,
           this, &SystemInfoFormFrame::onEditingLineEdit);
+  connect(password_edit_, &LineEdit::textEdited,
+          this, &SystemInfoFormFrame::onPasswordEdited);
   connect(password2_edit_, &LineEdit::textEdited,
           this, &SystemInfoFormFrame::onEditingLineEdit);
+  connect(password2_edit_, &LineEdit::textEdited,
+          this, &SystemInfoFormFrame::onPassword2Edited);
 }
 
 void SystemInfoFormFrame::initUI() {
@@ -327,7 +335,9 @@ void SystemInfoFormFrame::onEditingLineEdit() {
 }
 
 void SystemInfoFormFrame::onUsernameEdited() {
-  if (!is_hostname_edited_ && !GetSettingsBool(kSystemInfoLockHostname)) {
+  is_username_edited_ = true;
+  if (!is_hostname_edited_manually_ &&
+      !GetSettingsBool(kSystemInfoLockHostname)) {
     // Update hostname based on username.
     const QString username = username_edit_->text();
     if (username.isEmpty()) {
@@ -343,41 +353,62 @@ void SystemInfoFormFrame::onUsernameEdited() {
 void SystemInfoFormFrame::onUsernameEditingFinished() {
   // When line-edit loses focus, validate it, and check its results.
   // If error occurs, popup tooltip frame.
-  QString msg;
-  if (!validateUsername(msg)) {
-    tooltip_->setText(msg);
-    tooltip_->showBottom(username_edit_);
+  if (is_username_edited_) {
+    is_username_edited_ = false;
+    QString msg;
+    if (!validateUsername(msg)) {
+      tooltip_->setText(msg);
+      tooltip_->showBottom(username_edit_);
+    }
   }
 }
 
 void SystemInfoFormFrame::onHostnameEdited() {
   is_hostname_edited_ = true;
+  is_hostname_edited_manually_ = true;
 }
 
 void SystemInfoFormFrame::onHostnameEditingFinished() {
-  QString msg;
-  if (!validateHostname(msg)) {
-    tooltip_->setText(msg);
-    tooltip_->showBottom(hostname_edit_);
+  if (is_hostname_edited_) {
+    is_hostname_edited_ = false;
+    QString msg;
+    if (!validateHostname(msg)) {
+      tooltip_->setText(msg);
+      tooltip_->showBottom(hostname_edit_);
+    }
   }
+}
+
+void SystemInfoFormFrame::onPasswordEdited() {
+  is_password_edited_ = true;
 }
 
 void SystemInfoFormFrame::onPasswordEditingFinished() {
-  QString msg;
-  if (!validatePassword(msg)) {
-    tooltip_->setText(msg);
-    tooltip_->showBottom(password_edit_);
+  if (is_password_edited_) {
+    is_password_edited_ = false;
+    QString msg;
+    if (!validatePassword(msg)) {
+      tooltip_->setText(msg);
+      tooltip_->showBottom(password_edit_);
+    }
   }
 }
 
+void SystemInfoFormFrame::onPassword2Edited() {
+  is_password2_edited_ = true;
+}
+
 void SystemInfoFormFrame::onPassword2EditingFinished() {
-  QString msg;
-  if (!validatePassword(msg)) {
-    tooltip_->setText(msg);
-    tooltip_->showBottom(password_edit_);
-  } else if (!validatePassword2(msg)) {
-    tooltip_->setText(msg);
-    tooltip_->showBottom(password2_edit_);
+  if (is_password2_edited_) {
+    is_password2_edited_ = false;
+    QString msg;
+    if (!validatePassword(msg)) {
+      tooltip_->setText(msg);
+      tooltip_->showBottom(password_edit_);
+    } else if (!validatePassword2(msg)) {
+      tooltip_->setText(msg);
+      tooltip_->showBottom(password2_edit_);
+    }
   }
 }
 
