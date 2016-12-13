@@ -134,6 +134,8 @@ set(SERVICE_FILES
     service/hooks_manager.h
     service/log_manager.cpp
     service/log_manager.h
+    service/power_manager.cpp
+    service/power_manager.h
     service/settings_manager.cpp
     service/settings_manager.h
     service/system_language.cpp
@@ -414,6 +416,15 @@ add_executable(deepin-installer-unsquashfs-progress
                )
 target_link_libraries(deepin-installer-unsquashfs-progress ${QtCore_LIBS})
 
+
+add_executable(reboot-system
+               app/reboot_system.cpp
+               
+               ${BASE_FILES}
+               service/power_manager.cpp
+               service/power_manager.h
+               )
+target_link_libraries(reboot-system ${QtCore_LIBS})
 
 # Combobox test
 add_executable(combobox-test
