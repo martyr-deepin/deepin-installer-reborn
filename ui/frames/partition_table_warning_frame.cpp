@@ -76,7 +76,19 @@ void PartitionTableWarningFrame::initConnections() {
 }
 
 void PartitionTableWarningFrame::initUI() {
+  QLabel* warning_label = new QLabel();
+  QPixmap warning_pixmap(":/images/warning.png");
+  warning_label->setPixmap(warning_pixmap);
   title_label_ = new TitleLabel(tr(kTextTitle));
+  QHBoxLayout* title_layout = new QHBoxLayout();
+  title_layout->setContentsMargins(0, 0, 0, 0);
+  title_layout->setSpacing(0);
+  title_layout->addStretch();
+  title_layout->addWidget(warning_label);
+  title_layout->addSpacing(8);
+  title_layout->addWidget(title_label_);
+  title_layout->addStretch();
+
   comment_label_ = new CommentLabel(tr(kTextComment));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
@@ -99,6 +111,7 @@ void PartitionTableWarningFrame::initUI() {
   left_frame_layout->addWidget(list_title1_);
   left_frame_layout->addWidget(list_item1_);
   left_frame_layout->addStretch();
+  left_frame_layout->addSpacing(5);
   left_frame_layout->addWidget(list_title2_);
   left_frame_layout->addWidget(list_item2_);
   left_frame_layout->addStretch();
@@ -138,7 +151,7 @@ void PartitionTableWarningFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addWidget(title_label_, 0, Qt::AlignCenter);
+  layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addLayout(content_layout);
