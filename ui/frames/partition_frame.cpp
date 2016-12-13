@@ -166,13 +166,14 @@ void PartitionFrame::initUI() {
   next_layout->addWidget(next_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
-  layout->setSpacing(kMainLayoutSpacing);
+  layout->setSpacing(0);
   layout->addWidget(title_label_, 0, Qt::AlignHCenter);
+  layout->addSpacing(kMainLayoutSpacing);
   layout->addLayout(comment_layout);
+  layout->addSpacing(kMainLayoutSpacing);
   layout->addLayout(button_layout);
-  layout->addSpacing(20);
+  layout->addSpacing(20 + kMainLayoutSpacing);
   layout->addLayout(partition_stacked_wrapper_layout);
-  layout->addSpacing(20);
   layout->addLayout(next_layout);
 
   main_frame_ = new QFrame();

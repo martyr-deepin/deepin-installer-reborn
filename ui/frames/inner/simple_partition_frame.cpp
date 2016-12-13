@@ -243,6 +243,7 @@ void SimplePartitionFrame::initUI() {
   main_layout->addWidget(scroll_area, Qt::AlignHCenter);
   main_layout->addStretch();
   main_layout->addWidget(msg_label_, 0, Qt::AlignHCenter);
+  main_layout->addSpacing(10);
 
   this->setLayout(main_layout);
   this->setFixedWidth(kWindowWidth);

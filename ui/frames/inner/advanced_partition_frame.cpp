@@ -207,6 +207,7 @@ void AdvancedPartitionFrame::initUI() {
   layout->addWidget(main_frame, 0, Qt::AlignHCenter);
   layout->addSpacing(20);
   layout->addWidget(msg_label_, 0, Qt::AlignHCenter);
+  layout->addSpacing(10);
 
   this->setLayout(layout);
   this->setContentsMargins(0, 0, 0, 0);
