@@ -14,13 +14,11 @@
 #include <QStackedLayout>
 
 #include "base/file_util.h"
-#include "partman/partition_manager.h"
-#include "partman/utils.h"
-#include "service/log_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/virtual_machine.h"
 #include "third_party/global_shortcut/global_shortcut.h"
+#include "ui/delegates/main_window_util.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/control_panel_frame.h"
 #include "ui/frames/disk_space_insufficient_frame.h"
@@ -37,94 +35,6 @@
 #include "ui/xrandr/multi_head_manager.h"
 
 namespace installer {
-
-namespace {
-
-// Trim length of error message.
-const int kQRContentStripped = 110;
-const int kErrorMsgStripped = 860;
-
-void GetInstallProgressFrameAnimationLevel(bool& position_animation,
-                                           bool& opacity_animation) {
-  const int level = GetSettingsInt(kInstallProgressPageAnimationLevel);
-  position_animation = bool(level & 1);
-  opacity_animation = bool(level & 2);
-}
-
-int GetVisiblePages() {
-  int pages = 0;
-  if (!GetSettingsBool(kSkipSelectLanguagePage)) {
-    pages += 1;
-  }
-  if (!GetSettingsBool(kSkipSystemInfoPage)) {
-    pages += 1;
-  }
-  if (!GetSettingsBool(kSkipPartitionPage)) {
-    pages += 1;
-  }
-  // For install-progress page.
-  pages += 1;
-  return pages;
-}
-
-// Check size of /dev/sda larger than 15Gib.
-bool IsDiskSpaceInsufficient(int required_device_size) {
-  const qint64 maximum_device_size = GetMaximumDeviceSize();
-  return required_device_size * kMebiByte > maximum_device_size;
-}
-
-// Check whether partition table matches machine settings.
-bool IsPartitionTableMatch() {
-  // If EFI is not enabled, always returns true.
-  if (!IsEfiEnabled()) {
-    return true;
-  }
-
-  PartitionTableType type = GetPrimaryDiskPartitionTable();
-
-  // If partition table is empty(a raw disk device), returns true.
-  if (type == PartitionTableType::Empty) {
-    return true;
-  }
-
-  return type == PartitionTableType::GPT;
-}
-
-// Encode |msg| with base64()
-QString EncodeErrorMsg(const QString& msg) {
-  QString encoded_msg;
-  const QString base64_content = msg.toUtf8().toBase64();
-  const QString prefix = GetSettingsString(kInstallFailedFeedbackServer);
-  encoded_msg = prefix.arg(base64_content);
-  return encoded_msg;
-}
-
-// Read log file content, stripped to tail, and encode with domain name of
-// feedback server.
-// Returns false if failed.
-bool ReadErrorMsg(QString& msg, QString& encoded_msg) {
-  const QString raw_msg = ReadFile(GetLogFilepath());
-  if (raw_msg.isEmpty()) {
-    qCritical() << "log file is empty!" << GetLogFilepath();
-    return false;
-  }
-
-  msg = raw_msg.right(kErrorMsgStripped);
-  encoded_msg = EncodeErrorMsg(raw_msg.right(kQRContentStripped));
-  return true;
-}
-
-// Copy log file from memory to disk.
-bool SaveLogFileToDisk() {
-  const QString filepath(GetSettingsString(kDiskLogFilePath));
-  if (filepath.isEmpty()) {
-    return false;
-  } else {
-    return QFile::copy(GetLogFilepath(), filepath);
-  }
-}
-
-}  // namespace
 
 MainWindow::MainWindow()
     : QWidget(),
@@ -521,8 +431,8 @@ void MainWindow::rebootSystem() {
 }
 
 void MainWindow::shutdownSystem() {
-  // TODO(xushaohua): Poweroff system.
-  this->close();
+  // TODO(xushaohua): Power off system.
+  qApp->quit();
 }
 
 }  // namespace installer

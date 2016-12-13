@@ -175,6 +175,8 @@ set(UI_FILES
     ui/delegates/avatar_list_delegate.h
     ui/delegates/frameless_list_delegate.cpp
     ui/delegates/frameless_list_delegate.h
+    ui/delegates/main_window_util.cpp
+    ui/delegates/main_window_util.h
     ui/delegates/partition_delegate.cpp
     ui/delegates/partition_delegate.h
     ui/delegates/partition_util.cpp
