@@ -21,8 +21,6 @@ const char kSkipPartitionPage[] = "skip_partition_page";
 const char kSelectLanguageDefaultLocale[] = "select_language_default_locale";
 
 // System Info
-const char kSystemInfoDdeDefaultWallpaper[] =
-    "system_info_dde_default_wallpaper";
 const char kSystemInfoSetupAfterReboot[] = "system_info_setup_after_reboot";
 const char kSystemInfoDefaultUsername[] = "system_info_default_username";
 const char kSystemInfoLockUsername[] = "system_info_lock_username";

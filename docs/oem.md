@@ -14,10 +14,10 @@ oem 目录放在 /tmp 目录里. 它们的优先级从高到低依次是, /tmp/o
 所有可用的配置选项都在 `default_settings.ini` 里面有说明.
 
 ### 各类图片
-* 安装器背景. 默认情况下, 会使用系统默认壁纸, 位于`/usr/share/backgrounds/default.jpg`.
- 如果需要使用别的图片, 只需要放到 `oem/background.jpg`, 注意图片分辨率和大小. 如果
- 需要模糊效果的话, 可以用 `convert input.jpg -blur 0x32 background.jpg`
- 命令来生成模糊图片. 如果 ISO中集成的系统默认壁纸发生了变化, 也需要在这里更新安装器的背景图.
+* 安装器背景. 放到 `oem/installer-background.jpg`. 如果需要模糊效果的话, 可以用
+  `convert input.jpg -blur 0x32 installer-background.jpg`
+ 命令来生成模糊图片. 如果 ISO中 集成的系统默认壁纸发生了变化, 也需要在这里更新安装器的背景图.
+* 桌面背景. 放到 `oem/background.jpg`.
 * Logo. 在语言选择页面的正上方, 会显示系统 logo, 默认是 deepin 的官方logo, 如果需要
  自定义, 可以放到 `oem/logo.png`.
 * 应用图标. `oem/icons/` 目录用于存放应用图标, 其目录结构应与

@@ -48,10 +48,9 @@ QString GetOemHooksDir();
 // Get vendor logo.
 QString GetVendorLogo();
 
-// Get image path of window background.
-// First try to find in root of iso.
-// Then read from /usr/share/backgrounds/.
-// If not appropriate image is found, use the fallback image.
+// Get image path of installer window background.
+// First try to find installer background image in oem folder.
+// If not found, use the fallback image.
 QString GetWindowBackground();
 
 // Operations of /etc/deepin-installer.conf

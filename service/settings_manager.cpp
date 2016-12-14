@@ -34,6 +34,8 @@ const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
 // Absolute path to default installer settings
 const char kDefaultSettingsFile[] = RESOURCES_DIR "/default_settings.ini";
 const char kDefaultWallpaperFile[] = RESOURCES_DIR "/default_wallpaper.jpg";
+// File name of installer wallpaper.
+const char kOemWallpaperFilename[] = "installer-background.jpg";
 
 // File name of auto partition script.
 const char kAutoPartFile[] = "auto_part.sh";
@@ -204,14 +206,9 @@ QString GetVendorLogo() {
 }
 
 QString GetWindowBackground() {
-  const QString oem_file = GetOemDir().absoluteFilePath("background.jpg");
+  const QString oem_file = GetOemDir().absoluteFilePath(kOemWallpaperFilename);
   if (QFile::exists(oem_file)) {
     return oem_file;
-  }
-
-  const QString in_system = GetSettingsString(kSystemInfoDdeDefaultWallpaper);
-  if (QFile::exists(in_system)) {
-    return in_system;
   }
 
   return kDefaultWallpaperFile;
