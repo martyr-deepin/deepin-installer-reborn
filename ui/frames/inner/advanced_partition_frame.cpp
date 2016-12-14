@@ -5,11 +5,10 @@
 #include "ui/frames/inner/advanced_partition_frame.h"
 
 #include <QButtonGroup>
-#include <QDebug>
+#include <QEvent>
 #include <QGridLayout>
 #include <QLabel>
 #include <QScrollArea>
-#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "partman/utils.h"

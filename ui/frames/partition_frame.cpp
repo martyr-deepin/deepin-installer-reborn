@@ -5,12 +5,9 @@
 #include "ui/frames/partition_frame.h"
 
 #include <QButtonGroup>
-#include <QDebug>
+#include <QEvent>
 #include <QHBoxLayout>
 #include <QStackedLayout>
-#include <QThread>
-#include <QVBoxLayout>
-#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "ui/frames/consts.h"
@@ -24,7 +21,6 @@
 #include "ui/frames/inner/simple_partition_frame.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
-#include "ui/widgets/pointer_button.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {

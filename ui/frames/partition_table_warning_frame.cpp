@@ -5,11 +5,11 @@
 #include "ui/frames/partition_table_warning_frame.h"
 
 #include <QDebug>
+#include <QEvent>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QVBoxLayout>
-#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "ui/frames/consts.h"

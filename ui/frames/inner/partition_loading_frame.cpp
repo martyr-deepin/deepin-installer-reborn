@@ -4,8 +4,8 @@
 
 #include "ui/frames/inner/partition_loading_frame.h"
 
+#include <QEvent>
 #include <QHBoxLayout>
-#include <QtCore/QEvent>
 
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"

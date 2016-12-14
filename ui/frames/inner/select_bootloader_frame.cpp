@@ -4,8 +4,8 @@
 
 #include "ui/frames/inner/select_bootloader_frame.h"
 
+#include <QEvent>
 #include <QHBoxLayout>
-#include <QtCore/QEvent>
 
 #include "ui/delegates/partition_delegate.h"
 #include "ui/frames/consts.h"

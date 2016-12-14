@@ -5,11 +5,11 @@
 #include "ui/frames/inner/system_info_avatar_frame.h"
 
 #include <QDebug>
+#include <QEvent>
 #include <QFile>
 #include <QHBoxLayout>
 #include <QStringListModel>
 #include <QVBoxLayout>
-#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "service/settings_manager.h"

@@ -5,12 +5,12 @@
 #include "ui/frames/inner/edit_partition_frame.h"
 
 #include <QCheckBox>
+#include <QEvent>
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QProgressBar>
 #include <QVBoxLayout>
-#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "ui/frames/consts.h"

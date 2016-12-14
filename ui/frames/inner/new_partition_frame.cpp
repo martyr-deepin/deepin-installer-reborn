@@ -4,11 +4,10 @@
 
 #include "ui/frames/inner/new_partition_frame.h"
 
-#include <QDebug>
+#include <QEvent>
 #include <QGridLayout>
 #include <QLabel>
 #include <QStandardItemModel>
-#include <QtCore/QEvent>
 
 #include "base/file_util.h"
 #include "ui/frames/consts.h"
