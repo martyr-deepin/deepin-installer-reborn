@@ -12,7 +12,7 @@ GRUB_TIMEOUT=$(installer_get "grub_timeout")
 if [ -n "${GRUB_TIMEOUT}" ]; then
   # Update timeout of boot menu.
   sed -i "/^GRUB_TIMEOUT=/d" "${GRUB_CONF}"
-  echo "GRUB_TIMEOUT=\"${GRUB_TIMEOUT}\"" "${GRUB_CONF}"
+  echo "GRUB_TIMEOUT=${GRUB_TIMEOUT}" >> "${GRUB_CONF}"
   GRUB_NEED_UPDATE=true
 fi
 
@@ -23,15 +23,24 @@ if [ -n "${GRUB_BLOCK_WINDOWS}" ]; then
   GRUB_NEED_UPDATE=true
 fi
 
-NEW_GRUB_BACKGROUND="${OEM_DIR}/grub.png"
-if [ -f "${NEW_GRUB_BACKGROUND}" ]; then
+OEM_GRUB_BACKGROUND="${OEM_DIR}/grub.png"
+GRUB_BACKGROUND=/boot/grub/themes/deepin/background.png
+GRUB_BACKGROUND_THUMB=/boot/grub/themes/deepin/background_thumb.png
+if [ -f "${OEM_GRUB_BACKGROUND}" ]; then
   # Update background of boot menu.
-  GRUB_BACKGROUND=$(deepin-installer-settings get "${GRUB_CONF}" "GRUB_BACKGROUND")
-  if [ -n "${GRUB_BACKGROUND}" ]; then
-    cp -v "${NEW_GRUB_BACKGROUND}" "${GRUB_BACKGROUND}"
-    chmod 644 "${GRUB_BACKGROUND}"
-    GRUB_NEED_UPDATE=true
-  fi
+#  GRUB_BACKGROUND=$(deepin-installer-settings get "${GRUB_CONF}" "GRUB_BACKGROUND")
+#  if [ -n "${GRUB_BACKGROUND}" ]; then
+#    cp -v "${OEM_GRUB_BACKGROUND}" "${GRUB_BACKGROUND}"
+#    chmod 644 "${GRUB_BACKGROUND}"
+#    GRUB_NEED_UPDATE=true
+#  fi
+
+  cp -f "${OEM_GRUB_BACKGROUND}" "${GRUB_BACKGROUND}"
+
+  # Generate thumbnail file.
+  convert "${OEM_GRUB_BACKGROUND}" -scale 300x250 "${GRUB_BACKGROUND_THUMB}"
+
+  GRUB_NEED_UPDATE=true
 fi
 
 if [ x${GRUB_NEED_UPDATE} = xtrue ]; then
