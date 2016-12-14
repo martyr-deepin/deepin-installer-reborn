@@ -3,7 +3,7 @@
 # Install packages in oem/deb/ folder.
 # Uninstall packages defined in settings file.
 
-OEM_DEB=/media/cdrom/oem/deb
+OEM_DEB="${OEM_DIR}/deb"
 if [ -d "${OEM_DEB}" ]; then
   dpkg -i "${OEM_DEB}"/*.deb || warn "Failed to install oem deb packages"
 fi

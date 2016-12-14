@@ -2,7 +2,7 @@
 
 # Copy desktop wallpaper to system folder
 
-OEM_WALLPAPER=/media/cdrom/oem/wallpaper.jpg
+OEM_WALLPAPER="$OEM_DIR/wallpaper.jpg"
 SYS_WALLPAPER=/usr/share/backgrounds/desktop.jpg
 
 if [ -f "${OEM_WALLPAPER}" ]; then

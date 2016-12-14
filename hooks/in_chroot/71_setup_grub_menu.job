@@ -10,9 +10,10 @@ GRUB_NEED_UPDATE=false
 
 GRUB_TIMEOUT=$(installer_get "grub_timeout")
 if [ -n "${GRUB_TIMEOUT}" ]; then
- # Update timeout of boot menu.
- sed -i "s/^GRUB_TIMEOUT.*/GRUB_TIMEOUT=\"${GRUB_TIMEOUT}\"" "${GRUB_CONF}"
- GRUB_NEED_UPDATE=true
+  # Update timeout of boot menu.
+  sed -i "/^GRUB_TIMEOUT=/d" "${GRUB_CONF}"
+  echo "GRUB_TIMEOUT=\"${GRUB_TIMEOUT}\"" "${GRUB_CONF}"
+  GRUB_NEED_UPDATE=true
 fi
 
 GRUB_BLOCK_WINDOWS=$(installer_get "grub_block_windows")
@@ -22,7 +23,7 @@ if [ -n "${GRUB_BLOCK_WINDOWS}" ]; then
   GRUB_NEED_UPDATE=true
 fi
 
-NEW_GRUB_BACKGROUND=/media/cdrom/oem/grub.png
+NEW_GRUB_BACKGROUND="${OEM_DIR}/grub.png"
 if [ -f "${NEW_GRUB_BACKGROUND}" ]; then
   # Update background of boot menu.
   GRUB_BACKGROUND=$(deepin-installer-settings get "${GRUB_CONF}" "GRUB_BACKGROUND")

@@ -9,7 +9,7 @@ if [ -f /etc/lightdm/lightdm.conf ]; then
     /etc/lightdm/lightdm.conf
 fi
 
-SRC_FILE=/media/cdrom/oem/lightdm.png
+SRC_FILE="${OEM_DIR}/lightdm.png"
 DEST_FILE=/usr/share/backgrounds/lightdm.png
 
 if [ -f "${SRC_FILE}" ]; then

@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.1)
 project(deepin-installer-reborn C CXX)
 
+#set(CMAKE_C_COMPILER  /usr/bin/clang)
+#set(CMAKE_CXX_COMPILER  /usr/bin/clang++)
+
 # Only generate Debug and Release configuration types.
 set(CMAKE_CONFIGURATION_TYPES Debug Release)
 if (NOT CMAKE_BUILD_TYPE)
@@ -16,7 +19,13 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
   # -fno-rtti, Disable real-time type information
   # -fno-exceptions Disable exceptions
   # -fsanitize=address Enable memory sanitize plugin
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Werror -Wextra -fno-rtti -fno-exceptions -fsanitize=leak")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Werror -Wextra -fno-rtti -fno-exceptions")
+  # -fsanitize=address, Enable memory address sanitizer.
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+  # -fsanitize=leak, Enable memory leak sanitizer.
+  # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=leak")
+  # -fsanitize=memory, Enable detecting uninitited memory sanitizer.
+  # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=memory -fsanitize-memory-track-origins -fPIC -pie -fno-omit-frame-pointer")
   
   # Enable Qt builtin debug mode
   add_definitions("-DQT_MESSAGELOGCONTEXT")

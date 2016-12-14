@@ -2,7 +2,7 @@
 
 # Copy plymouth theme folder into system.
 
-SRC_DIR=/media/cdrom/oem/plymouth-theme/deepin-logo
+SRC_DIR="${OEM_DIR}/plymouth-theme/deepin-logo"
 DEST_DIR=/usr/share/plymouth/themes/deepin-logo
 if [ -d "${SRC_DIR}" ]; then
   rm -rf "${DEST_DIR}" || warn_exit "Failed to remove old plymouth theme"

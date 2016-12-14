@@ -44,53 +44,61 @@ if [ $# -lt 1 ]; then
   error "Usage: $0 hook-file"
 fi
 
-# Absolue path of hook_manager.sh in chroot env.
+# Absolute path of hook_manager.sh in chroot env.
 # This path is defined in service/backend/hooks_pack.cpp.
-SELF=/tmp/installer-reborn/hook_manager.sh
-HOOK_FILE=$1
-IN_CHROOT=$2
+_SELF=/tmp/installer-reborn/hook_manager.sh
+_HOOK_FILE=$1
+_IN_CHROOT=$2
 
-# Check configuration
-CONF_FILE=/etc/deepin-installer.conf
+# Absolute path to config file.
+# Do not read from/write to this file, call installer_get/installer_set instead.
+_CONF_FILE=/etc/deepin-installer.conf
+
+# Defines absolute path to oem folder.
+# /tmp/oem is reserved for debug.
+OEM_DIR=/media/cdrom/oem
+if [ -d "/tmp/oem" ]; then
+  OEM_DIR=/tmp/oem
+fi
 
 # Get value in conf file. Section name is ignored.
 installer_get() {
   local key=$1
-  deepin-installer-settings get ${CONF_FILE} ${key}
+  deepin-installer-settings get ${_CONF_FILE} ${key}
 }
 
 # Set value in conf file. Section name is ignored.
 installer_set() {
   local key=$1
   local value=$2
-  deepin-installer-settings set ${CONF_FILE} ${key} ${value}
+  deepin-installer-settings set ${_CONF_FILE} ${key} ${value}
 }
 
 # Run hook file
-case ${HOOK_FILE} in
+case ${_HOOK_FILE} in
   */in_chroot/*)
-    if [ "x${IN_CHROOT}" = "xtrue" ]; then
+    if [ "x${_IN_CHROOT}" = "xtrue" ]; then
       # Already in chroot env.
       # Host device is mounted at /target/deepinhost
-      CONF_FILE="/deepinhost${CONF_FILE}"
-      if [ ! -f ${CONF_FILE} ];then
-        error "Config file ${CONF_FILE} does not exists."
+      _CONF_FILE="/deepinhost${_CONF_FILE}"
+      if [ ! -f ${_CONF_FILE} ];then
+        error "Config file ${_CONF_FILE} does not exists."
       fi
-      . "${HOOK_FILE}"
+      . "${_HOOK_FILE}"
       exit $?
     else
       # Switch to chroot env.
       echo 'Run in chroot env'
-      chroot /target "${SELF}" "${HOOK_FILE}" 'true'
+      chroot /target "${_SELF}" "${_HOOK_FILE}" 'true'
       exit $?
     fi
     ;;
   *)
     # Run normal hooks.
-    if [ ! -f ${CONF_FILE} ];then
-      error "Config file ${CONF_FILE} does not exists."
+    if [ ! -f ${_CONF_FILE} ];then
+      error "Config file ${_CONF_FILE} does not exists."
     fi
-    . "${HOOK_FILE}"
+    . "${_HOOK_FILE}"
     exit $?
     ;;
 esac
