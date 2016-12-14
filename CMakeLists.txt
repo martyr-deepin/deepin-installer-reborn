@@ -342,8 +342,6 @@ set(UNITTEST_FILES
     sysinfo/validate_password_test.cpp
     sysinfo/validate_username_test.cpp
     
-    ui/delegates/timezone_map_util.cpp
-    ui/delegates/timezone_map_util.h
     ui/delegates/timezone_map_util_test.cpp
     )
 
@@ -460,12 +458,14 @@ add_executable(locale-manager-test
                service/timezone_manager_test.cpp
                
                ${BASE_FILES}
+               
                service/backend/wifi_inspect_worker.cpp
                service/backend/wifi_inspect_worker.h
                service/backend/geoip_request_worker.cpp
                service/backend/geoip_request_worker.h
                service/timezone_manager.cpp
                service/timezone_manager.h
+               
                ${SYSINFO_FILES}
                )
 target_link_libraries(locale-manager-test ${Qt_LIBS})
@@ -473,15 +473,25 @@ target_link_libraries(locale-manager-test ${Qt_LIBS})
 add_executable(timezone-frame-test
                ui/tests/timezone_frame_test/timezone_frame_test.cpp
 
-               base/file_util.cpp
-               base/file_util.h
+               ${BASE_FILES}
+               
                service/settings_manager.cpp
                service/settings_manager.h
                service/settings_name.h
+               service/timezone_manager.cpp
+               service/timezone_manager.h
+               service/backend/geoip_request_worker.cpp
+               service/backend/geoip_request_worker.h
+               service/backend/wifi_inspect_worker.cpp
+               service/backend/wifi_inspect_worker.h
+               
                sysinfo/machine.cpp
                sysinfo/machine.h
                sysinfo/timezone.cpp
                sysinfo/timezone.h
+               sysinfo/users.cpp
+               sysinfo/users.h
+               
                ui/delegates/timezone_map_util.cpp
                ui/delegates/timezone_map_util.h
                ui/delegates/timezone_popup_delegate.cpp
@@ -518,6 +528,9 @@ add_executable(deepin-installer-reborn-tests
                ${BASE_FILES}
                ${SYSINFO_FILES}
                ${UNITTEST_FILES}
+
+               ui/delegates/timezone_map_util.cpp
+               ui/delegates/timezone_map_util.h
                )
 target_link_libraries(deepin-installer-reborn-tests
                       ${LINK_LIBS}

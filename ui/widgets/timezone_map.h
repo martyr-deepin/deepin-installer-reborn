@@ -33,6 +33,7 @@ class TimezoneMap : public QFrame {
   void timezoneUpdated(const QString& timezone);
 
  public slots:
+  // Remark |timezone| on map.
   void setTimezone(const QString& timezone);
 
  protected:

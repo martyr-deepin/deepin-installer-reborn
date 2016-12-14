@@ -46,9 +46,8 @@ const char kSystemInfoPasswordRequireSpecialChar[] =
     "system_info_password_require_special_char";
 const char kSystemInfoDefaultAvator[] = "system_info_default_avatar";
 const char kSystemInfoDdeAvatarDir[] = "system_info_dde_avatar_dir";
-const char kSystemInfoUseDefaultTimezone[] =
-    "system_info_use_default_timezone";
 const char kSystemInfoDefaultTimezone[] = "system_info_default_timezone";
+const char kSystemInfoUseWindowsTime[] = "system_info_use_windows_time";
 const char kSystemInfoDisableAvatorPage[] = "system_info_disable_avatar_page";
 const char kSystemInfoDisableTimezonePage[] =
     "system_info_disable_timezone_page";

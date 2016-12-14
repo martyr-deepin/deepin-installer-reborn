@@ -5,12 +5,13 @@
 #include "ui/frames/inner/system_info_timezone_frame.h"
 
 #include <QDebug>
+#include <QEvent>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QtCore/QEvent>
 
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "service/timezone_manager.h"
 #include "sysinfo/timezone.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
@@ -30,7 +31,9 @@ const char kTextBack[] = "Back";
 
 SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
     : QFrame(parent),
-      timezone_() {
+      timezone_(),
+      timezone_manager_(new TimezoneManager(this)),
+      timezone_source_(TimezoneSource::NotSet) {
   this->setObjectName("system_info_timezone_frame");
 
   this->initUI();
@@ -39,10 +42,14 @@ SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
 
 void SystemInfoTimezoneFrame::readConf() {
   timezone_ = GetSettingsString(kSystemInfoDefaultTimezone);
-  if (!IsValidTimezone(timezone_)) {
-    timezone_ = GetCurrentTimezone();
+  if (IsValidTimezone(timezone_)) {
+    timezone_source_ = TimezoneSource::Conf;
+    emit this->timezoneUpdated(GetTimezoneName(timezone_));
+  } else {
+    const bool use_geoip = GetSettingsBool(kSystemInfoTimezoneUseGeoIp);
+    const bool use_regdomain = GetSettingsBool(kSystemInfoTimezoneUseRegdomain);
+    timezone_manager_->update(use_geoip, use_regdomain);
   }
-  emit this->timezoneUpdated(GetTimezoneName(timezone_));
 }
 
 void SystemInfoTimezoneFrame::writeConf() {
@@ -66,6 +73,15 @@ void SystemInfoTimezoneFrame::changeEvent(QEvent* event) {
 void SystemInfoTimezoneFrame::initConnections() {
   connect(back_button_, &QPushButton::clicked,
           this, &SystemInfoTimezoneFrame::onBackButtonClicked);
+
+  connect(timezone_manager_, &TimezoneManager::timezoneUpdated,
+          this, &SystemInfoTimezoneFrame::onTimezoneManagerUpdated);
+  connect(timezone_map_, &TimezoneMap::timezoneUpdated,
+          this, &SystemInfoTimezoneFrame::onTimezoneMapUpdated);
+
+  // Remark timezone on map when it is updated.
+  connect(this, &SystemInfoTimezoneFrame::timezoneUpdated,
+          timezone_map_, &TimezoneMap::setTimezone);
 }
 
 void SystemInfoTimezoneFrame::initUI() {
@@ -95,6 +111,25 @@ void SystemInfoTimezoneFrame::onBackButtonClicked() {
     qWarning() << "Invalid timezone:" << timezone_;
   }
   emit this->finished();
+}
+
+void SystemInfoTimezoneFrame::onTimezoneManagerUpdated(
+    const QString& timezone) {
+  if (timezone_source_ == TimezoneSource::NotSet ||
+      timezone_source_ == TimezoneSource::Scan) {
+    // Update timezone only if it is not set.
+    timezone_source_ = TimezoneSource::Scan;
+    timezone_ = timezone;
+    emit this->timezoneUpdated(timezone_);
+  } else {
+    qDebug() << "Ignore timezone value from timezone-manager:" << timezone;
+  }
+}
+
+void SystemInfoTimezoneFrame::onTimezoneMapUpdated(const QString& timezone) {
+  timezone_source_ = TimezoneSource::User;
+  timezone_ = timezone;
+  emit this->timezoneUpdated(timezone_);
 }
 
 }  // namespace installer

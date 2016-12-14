@@ -37,9 +37,6 @@ int GetZoneInfoByZone(const ZoneInfoList& list, const QString& timezone);
 // Read current timezone in /etc/timezone file.
 QString GetCurrentTimezone();
 
-// Get prefer timezone based on locale.
-QString GetPreferTimezone();
-
 // Returns name of timezone, excluding continent name.
 // TODO(xushaohua): Call time and localtime()
 QString GetTimezoneName(const QString& timezone);

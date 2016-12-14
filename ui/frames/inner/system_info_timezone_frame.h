@@ -11,6 +11,7 @@ namespace installer {
 
 class CommentLabel;
 class NavButton;
+class TimezoneManager;
 class TimezoneMap;
 class TitleLabel;
 
@@ -44,13 +45,30 @@ class SystemInfoTimezoneFrame : public QFrame {
 
   QString timezone_;
 
+  TimezoneManager* timezone_manager_ = nullptr;
+
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
   TimezoneMap* timezone_map_ = nullptr;
   NavButton* back_button_ = nullptr;
 
+  // Priority of timezone: User > Conf > Scan
+  enum class TimezoneSource {
+    NotSet,  // Timezone not set.
+    User,  // Timezone is setup by user.
+    Conf,  // Timezone is read from conf file
+    Scan  // Timezone is updated based on geoip or regdomain
+  };
+  TimezoneSource timezone_source_;
+
  private slots:
   void onBackButtonClicked();
+
+  // Update timezone after receiving signals from timezone manager.
+  void onTimezoneManagerUpdated(const QString& timezone);
+
+  // Update timezone after a new one has been chosen by user.
+  void onTimezoneMapUpdated(const QString& timezone);
 };
 
 }  // namespace installer

@@ -109,11 +109,6 @@ QString GetCurrentTimezone() {
   return content.trimmed();
 }
 
-QString GetPreferTimezone() {
-  // TODO(xushaohua): Read locale info.
-  return "UTC";
-}
-
 QString GetTimezoneName(const QString& timezone) {
   const int index = timezone.lastIndexOf('/');
   return (index > -1) ? timezone.mid(index + 1) : timezone;

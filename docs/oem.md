@@ -81,6 +81,8 @@ x86, mips64, 区分32位与64位.
  `system_info_password_require_lower_case`,
  `system_info_password_require_upper_case` 以及
  `system_info_password_require_special_char` 用于设定密码策略.
+ `system_info_use_windows_time` 当开启了这个选项时, 如果硬盘上已经有 windows 分区了, 就
+ 不在使用UTC时间, 而使用本地时间. 这个选项用于解决windows系统时间相差8小时的问题.
  
 ### 桌面环境相关的
 * `dde_dock_app_list` 在dock中显示哪些应用图标.
