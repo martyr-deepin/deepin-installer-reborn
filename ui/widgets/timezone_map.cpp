@@ -91,6 +91,7 @@ void TimezoneMap::mousePressEvent(QMouseEvent* event) {
     if (nearest_zones_.length() == 1) {
       current_zone_ = nearest_zones_.first();
       this->remark();
+      emit this->timezoneUpdated(current_zone_.timezone);
     } else {
       this->popupZoneWindow(event->pos());
     }
@@ -221,8 +222,6 @@ void TimezoneMap::remark() {
     dot_->move(point.x() - dot_->width() / 2,
                point.y() - dot_->height() / 2);
     dot_->show();
-
-    emit this->timezoneUpdated(current_zone_.timezone);
   }
 }
 
@@ -239,6 +238,7 @@ void TimezoneMap::onPopupZonesActivated(const QModelIndex& index) {
     if (row < nearest_zones_.length()) {
       current_zone_ = nearest_zones_.at(row);
       this->remark();
+      emit this->timezoneUpdated(current_zone_.timezone);
     }
   }
 }
