@@ -42,6 +42,15 @@ struct XkbConfig {
 // Read system keyboard layout.
 XkbConfig ReadXkbConfig();
 
+// Set current keyboard layout to |layout|.
+bool SetXkbLayout(const QString& layout);
+
+// Set current keyboard |layout| and |variant|.
+bool SetXkbLayout(const QString& layout, const QString& variant);
+
+// Set current keyboard |model|.
+bool SetXkbModel(const QString& model);
+
 }  // namespace installer
 
 #endif  // INSTALLER_SYSINFO_KEYBOARD_H

@@ -7,11 +7,14 @@
 #include <QDebug>
 #include <QDomDocument>
 
+#include "base/command.h"
 #include "base/file_util.h"
 
 namespace installer {
 
 namespace {
+
+const char kSetXkbMapCmd[] = "/usr/bin/setxkbmap";
 
 const char kXkbBaseRule[] = "/usr/share/X11/xkb/rules/base.xml";
 const char kXkbExtraRule[] = "/usr/share/X11/xkb/rules/base.extras.xml";
@@ -152,6 +155,18 @@ XkbConfig ReadXkbConfig() {
     return config;
   }
   return config;
+}
+
+bool SetXkbLayout(const QString& layout) {
+  return SpawnCmd(kSetXkbMapCmd, {layout});
+}
+
+bool SetXkbLayout(const QString& layout, const QString& variant) {
+  return SpawnCmd(kSetXkbMapCmd, {layout, variant});
+}
+
+bool SetXkbModel(const QString& model) {
+  return SpawnCmd(kSetXkbMapCmd, {"-model", model});
 }
 
 }  // namespace installer
