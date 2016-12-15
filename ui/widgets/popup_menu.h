@@ -14,7 +14,7 @@ class QStringListModel;
 namespace installer {
 
 // Used to display popup menu with sharp corner at middle of bottom edge.
-class PopupMenu : public QFrame{
+class PopupMenu : public QFrame {
   Q_OBJECT
 
  public:
@@ -38,6 +38,9 @@ class PopupMenu : public QFrame{
   void setStringList(const QStringList& strings);
 
  protected:
+  // Filters global mouse press event.
+  bool eventFilter(QObject* obj, QEvent* event) override;
+
   // Release keyboard focus when window is hidden.
   void hideEvent(QHideEvent* event) override;
 
@@ -45,6 +48,9 @@ class PopupMenu : public QFrame{
   void keyPressEvent(QKeyEvent* event) override;
 
   void paintEvent(QPaintEvent* event) override;
+
+  // Monitors global mouse event when menu is popup.
+  void showEvent(QShowEvent* event) override;
 
  private:
   void initConnections();

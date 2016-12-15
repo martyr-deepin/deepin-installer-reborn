@@ -4,6 +4,7 @@
 
 #include "ui/widgets/popup_menu.h"
 
+#include <QApplication>
 #include <QDebug>
 #include <QKeyEvent>
 #include <QListView>
@@ -70,7 +71,23 @@ void PopupMenu::setStringList(const QStringList& strings) {
   menu_view_->resize(width, height);
 }
 
+bool PopupMenu::eventFilter(QObject* obj, QEvent* event) {
+  if (event->type() == QEvent::MouseButtonPress) {
+    QMouseEvent* mouse_event = static_cast<QMouseEvent*>(event);
+    if (mouse_event) {
+      // If mouse press event is not happened within menu area, hide menu.
+      if (!this->geometry().contains(mouse_event->pos())) {
+        this->hide();
+      }
+    }
+  }
+  return QObject::eventFilter(obj, event);
+}
+
 void PopupMenu::hideEvent(QHideEvent* event) {
+  // No need to monitor global mouse event when menu is hidden.
+  qApp->removeEventFilter(this);
+
   this->releaseKeyboard();
   QWidget::hideEvent(event);
   emit this->onHide();
@@ -121,6 +138,11 @@ void PopupMenu::paintEvent(QPaintEvent* event) {
   painter.fillPath(background_path, QBrush(background_color));
 }
 
+void PopupMenu::showEvent(QShowEvent* event) {
+  qApp->installEventFilter(this);
+  QFrame::showEvent(event);
+}
+
 void PopupMenu::initConnections() {
   connect(menu_view_, &QListView::activated,
           this, &PopupMenu::onMenuViewActivated);
@@ -144,6 +166,7 @@ void PopupMenu::initUI() {
   this->setContentsMargins(0, 4, 0, 4);
   this->setAttribute(Qt::WA_TranslucentBackground, true);
   this->setFocusPolicy(Qt::StrongFocus);
+
   this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint |
                        Qt::WindowStaysOnTopHint | Qt::ToolTip);
 }
