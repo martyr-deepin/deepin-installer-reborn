@@ -1,12 +1,12 @@
-/** Used in class TimezoneMap **/
+/** Used in class PopupMenu **/
 
-/*QHeaderView,*/
-/*QHeaderView::section,*/
-/*QListCornerButton::section {*/
-  /*background-color: transparent;*/
-/*}*/
+QHeaderView,
+QHeaderView::section,
+QListCornerButton::section {
+  background-color: transparent;
+}
 
-QListView#popup_list_view {
+QListView {
   font-size: 12px;
   border: none;
   margin: 4px 0px;

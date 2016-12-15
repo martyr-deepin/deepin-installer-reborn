@@ -4,12 +4,10 @@
 
 #include <QApplication>
 #include <QFrame>
-#include <QGraphicsDropShadowEffect>
 #include <QMenu>
 
 #include "ui/widgets/table_combo_box.h"
 #include "ui/utils/widget_util.h"
-#include "ui/widgets/tooltip_container.h"
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
@@ -52,16 +50,9 @@ int main(int argc, char* argv[]) {
   );
   frame.setContextMenuPolicy(Qt::CustomContextMenu);
 
-  installer::TooltipContainer menu_wrapper;
-  menu_wrapper.setWidget(&menu);
-
-
   QObject::connect(&frame, &QWidget::customContextMenuRequested,
       [&]() {
-//        menu.popup(QCursor::pos());
-        menu.show();
-        menu_wrapper.resize(menu.sizeHint());
-        menu_wrapper.popup(QCursor::pos());
+        menu.popup(QCursor::pos());
       });
   installer::WidgetTreeWalk(&menu);
 

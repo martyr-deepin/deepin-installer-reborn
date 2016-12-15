@@ -194,12 +194,12 @@ set(UI_FILES
     ui/delegates/partition_delegate.h
     ui/delegates/partition_util.cpp
     ui/delegates/partition_util.h
+    ui/delegates/popup_menu_delegate.cpp
+    ui/delegates/popup_menu_delegate.h
     ui/delegates/table_combo_box_delegate.cpp
     ui/delegates/table_combo_box_delegate.h
     ui/delegates/timezone_map_util.cpp
     ui/delegates/timezone_map_util.h
-    ui/delegates/timezone_popup_delegate.cpp
-    ui/delegates/timezone_popup_delegate.h
 
     ui/frames/consts.h
     ui/frames/inner/advanced_partition_frame.cpp
@@ -294,6 +294,8 @@ set(UI_FILES
     ui/widgets/partition_size_slider.h
     ui/widgets/pointer_button.cpp
     ui/widgets/pointer_button.h
+    ui/widgets/popup_menu.cpp
+    ui/widgets/popup_menu.h
     ui/widgets/qr_widget.cpp
     ui/widgets/qr_widget.h
     ui/widgets/simple_partition_button.cpp
@@ -306,8 +308,6 @@ set(UI_FILES
     ui/widgets/timezone_map.h
     ui/widgets/title_label.cpp
     ui/widgets/title_label.h
-    ui/widgets/tooltip_container.cpp
-    ui/widgets/tooltip_container.h
     ui/widgets/tooltip_pin.cpp
     ui/widgets/tooltip_pin.h
     ui/widgets/wallpaper_item.cpp
@@ -447,9 +447,7 @@ add_executable(combobox-test
                ui/utils/widget_util.h
                ui/widgets/table_combo_box.cpp
                ui/widgets/table_combo_box.h
-               ui/widgets/tooltip_container.cpp
-               ui/widgets/tooltip_container.h
-               
+
                ui/images/images.qrc
                ui/styles/styles.qrc
                )
@@ -494,11 +492,11 @@ add_executable(timezone-frame-test
                sysinfo/timezone.h
                sysinfo/users.cpp
                sysinfo/users.h
-               
+
+               ui/delegates/popup_menu_delegate.cpp
+               ui/delegates/popup_menu_delegate.h
                ui/delegates/timezone_map_util.cpp
                ui/delegates/timezone_map_util.h
-               ui/delegates/timezone_popup_delegate.cpp
-               ui/delegates/timezone_popup_delegate.h
                ui/frames/consts.h
                ui/frames/inner/system_info_timezone_frame.cpp
                ui/frames/inner/system_info_timezone_frame.h
@@ -510,12 +508,12 @@ add_executable(timezone-frame-test
                ui/widgets/nav_button.h
                ui/widgets/pointer_button.cpp
                ui/widgets/pointer_button.h
+               ui/widgets/popup_menu.cpp
+               ui/widgets/popup_menu.h
                ui/widgets/timezone_map.cpp
                ui/widgets/timezone_map.h
                ui/widgets/title_label.cpp
                ui/widgets/title_label.h
-               ui/widgets/tooltip_container.cpp
-               ui/widgets/tooltip_container.h
                ui/widgets/tooltip_pin.cpp
                ui/widgets/tooltip_pin.h
 

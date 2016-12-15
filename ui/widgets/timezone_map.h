@@ -15,7 +15,7 @@ class QStringListModel;
 
 namespace installer {
 
-class TooltipContainer;
+class PopupMenu;
 class TooltipPin;
 
 // Draw timezone map and bubble.
@@ -68,12 +68,10 @@ class TimezoneMap : public QFrame {
   TooltipPin* zone_pin_ = nullptr;
 
   // To display a list of zones on map.
-  QListView* popup_list_view_ = nullptr;
-  QStringListModel* popup_model_ = nullptr;
-  TooltipContainer* popup_window_ = nullptr;
+  PopupMenu* popup_window_ = nullptr;
 
  private slots:
-  void onPopupZonesActivated(const QModelIndex& index);
+  void onPopupWindowActivated(int index);
 };
 
 }  // namespace installer

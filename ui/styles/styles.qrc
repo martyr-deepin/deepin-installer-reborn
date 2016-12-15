@@ -18,12 +18,12 @@
     <file>partition_main_frame.css</file>
     <file>partition_size_slider.css</file>
     <file>partition_table_warning_frame.css</file>
+    <file>popup_menu.css</file>
     <file>prepare_install_frame.css</file>
     <file>select_language_frame.css</file>
     <file>simple_partition_button.css</file>
     <file>simple_partition_frame.css</file>
     <file>table_combo_box.css</file>
-    <file>timezone_map.css</file>
     <file>title_label.css</file>
   </qresource>
 </RCC>

@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/delegates/timezone_popup_delegate.h"
+#include "ui/delegates/popup_menu_delegate.h"
 
 #include <QPainter>
 
@@ -15,14 +15,14 @@ const int kBorderDiameter = kBorderRadius * 2;
 
 }  // namespace
 
-TimezonePopupDelegate::TimezonePopupDelegate(QWidget* parent)
+PopupMenuDelegate::PopupMenuDelegate(QWidget* parent)
     : QStyledItemDelegate(parent) {
-  this->setObjectName("timezone_popup_delegate");
+  this->setObjectName("popup_menu_delegate");
 }
 
-void TimezonePopupDelegate::paint(QPainter* painter,
-                                  const QStyleOptionViewItem& option,
-                                  const QModelIndex& index) const {
+void PopupMenuDelegate::paint(QPainter* painter,
+                              const QStyleOptionViewItem& option,
+                              const QModelIndex& index) const {
   painter->save();
 
   const QRect& rect(option.rect);
@@ -37,6 +37,7 @@ void TimezonePopupDelegate::paint(QPainter* painter,
   // Draw text. Default color is #303030.
   QColor text_color = QColor::fromRgb(48, 48, 48);
   if (option.state & QStyle::State_MouseOver) {
+    // Change text color to white on mouse hover.
     text_color = Qt::white;
   }
   painter->setPen(QPen(text_color));
