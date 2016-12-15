@@ -40,6 +40,7 @@ struct XkbConfig {
 };
 
 // Read system keyboard layout.
+// TODO(xushaohua): Call gettext()
 XkbConfig ReadXkbConfig();
 
 // Set current keyboard layout to |layout|.

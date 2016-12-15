@@ -63,7 +63,8 @@ void SystemInfoAvatarFrame::writeConf() {
 }
 
 void SystemInfoAvatarFrame::updateTimezone(const QString& timezone) {
-  timezone_button_->setText(timezone);
+  // Add left margin.
+  timezone_button_->setText(QString(" %1").arg(timezone));
 }
 
 void SystemInfoAvatarFrame::changeEvent(QEvent* event) {
@@ -91,6 +92,13 @@ void SystemInfoAvatarFrame::initUI() {
                                     ":/images/timezone_hover.svg",
                                     ":/images/timezone_press.svg",
                                     128, 20, nullptr);
+  QHBoxLayout* timezone_layout = new QHBoxLayout();
+  timezone_layout->setContentsMargins(0, 0, 0, 0);
+  timezone_layout->setSpacing(0);
+  timezone_layout->addSpacing(20);
+  timezone_layout->addWidget(timezone_button_);
+  timezone_layout->addStretch();
+
   title_label_ = new TitleLabel(tr(kTextTitle));
   comment_label_ = new CommentLabel(tr(kTextComment));
   QHBoxLayout* comment_layout = new QHBoxLayout();
@@ -132,7 +140,7 @@ void SystemInfoAvatarFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addWidget(timezone_button_, 0, Qt::AlignLeft);
+  layout->addLayout(timezone_layout);
   layout->addSpacing(10);
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);

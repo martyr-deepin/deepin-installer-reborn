@@ -6,9 +6,9 @@
 
 #include <QEvent>
 #include <QHBoxLayout>
-#include <QStringList>
 #include <QVBoxLayout>
 
+#include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/validate_hostname.h"
@@ -61,7 +61,8 @@ void SystemInfoFormFrame::updateAvatar(const QString& avatar) {
 }
 
 void SystemInfoFormFrame::updateTimezone(const QString& timezone) {
-  timezone_button_->setText(timezone);
+  // Add left margin.
+  timezone_button_->setText(QString(" %1").arg(timezone));
 }
 
 void SystemInfoFormFrame::changeEvent(QEvent* event) {
@@ -132,6 +133,13 @@ void SystemInfoFormFrame::initUI() {
                                     ":/images/timezone_hover.svg",
                                     ":/images/timezone_press.svg",
                                     128, 20, nullptr);
+  QHBoxLayout* timezone_layout = new QHBoxLayout();
+  timezone_layout->setContentsMargins(0, 0, 0, 0);
+  timezone_layout->setSpacing(0);
+  timezone_layout->addSpacing(20);
+  timezone_layout->addWidget(timezone_button_);
+  timezone_layout->addStretch();
+
   title_label_ = new TitleLabel(tr(kTextTitle));
   comment_label_ = new CommentLabel(tr(kTextComment));
   QHBoxLayout* comment_layout = new QHBoxLayout();
@@ -174,7 +182,7 @@ void SystemInfoFormFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addWidget(timezone_button_, 0, Qt::AlignLeft);
+  layout->addLayout(timezone_layout);
   layout->addSpacing(10);
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
