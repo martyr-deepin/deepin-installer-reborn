@@ -157,6 +157,8 @@ set(SERVICE_FILES
 set(SYSINFO_FILES
     sysinfo/dev_disk.cpp
     sysinfo/dev_disk.h
+    sysinfo/keyboard.cpp
+    sysinfo/keyboard.h
     sysinfo/machine.cpp
     sysinfo/machine.h
     sysinfo/proc_mounts.cpp
@@ -333,6 +335,7 @@ set(UNITTEST_FILES
     base/string_util_test.cpp
 
     sysinfo/dev_disk_test.cpp
+    sysinfo/keyboard_test.cpp
     sysinfo/proc_mounts_test.cpp
     sysinfo/proc_partitions_test.cpp
     sysinfo/proc_swaps_test.cpp
@@ -341,7 +344,7 @@ set(UNITTEST_FILES
     sysinfo/validate_hostname_test.cpp
     sysinfo/validate_password_test.cpp
     sysinfo/validate_username_test.cpp
-    
+
     ui/delegates/timezone_map_util_test.cpp
     )
 
