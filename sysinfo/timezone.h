@@ -41,7 +41,7 @@ QString GetCurrentTimezone();
 // TODO(xushaohua): Call time and localtime()
 QString GetTimezoneName(const QString& timezone);
 
-// A map between current name of timezone and their old names.
+// A map between old name of timezone and current name.
 typedef QHash<QString, QString> BackwardTzMap;
 BackwardTzMap GetBackwardTzMap();
 

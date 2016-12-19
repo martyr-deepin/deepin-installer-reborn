@@ -124,11 +124,7 @@ BackwardTzMap GetBackwardTzMap() {
       const QStringList parts(line.split('\t'));
       Q_ASSERT(parts.length() == 3);
       if (parts.length() == 3) {
-        QString real = parts.at(1);
-        if ((real == "Etc/UTC") || (real == "Etc/UCT")) {
-          real = "Etc/GMT";
-        }
-        map.insert(real, parts.at(2));
+        map.insert(parts.at(2), parts.at(1));
       }
     }
   }
