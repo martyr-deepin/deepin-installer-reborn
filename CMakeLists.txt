@@ -323,6 +323,11 @@ set(UI_FILES
     ui/xrandr/xrandr_wrapper.h
     )
 
+set(REBOOT_SETUP_FILES
+    ui/setup_window.cpp
+    ui/setup_window.h
+    )
+
 set(ROOT_UNITTEST_FILES
     #    partman/operation_test.cpp
     #    partman/partition_usage_test.cpp
@@ -396,6 +401,23 @@ add_executable(deepin-installer-settings
 
 target_link_libraries(deepin-installer-settings ${QtCore_LIBS})
 
+
+# Reboot setup
+add_executable(deepin-installer-reboot-setup
+               app/deepin_installer_reboot_setup.cpp
+
+               ${BASE_FILES}
+               ${PARTMAN_FILES}
+               ${SERVICE_FILES}
+               ${SYSINFO_FILES}
+               ${UI_FILES}
+               ${REBOOT_SETUP_FILES}
+
+               i18n/i18n.qrc
+               ui/images/images.qrc
+               ui/styles/styles.qrc
+               )
+target_link_libraries(deepin-installer-reboot-setup ${LINK_LIBS})
 
 # deepin-installer-oem_tool-tool
 add_executable(deepin-installer-oem-tool
