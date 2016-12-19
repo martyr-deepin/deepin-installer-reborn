@@ -145,14 +145,14 @@ void TimezoneMap::popupZoneWindow(const QPoint& pos) {
   for (const ZoneInfo& zone : nearest_zones_) {
     zone_names.append(GetTimezoneName(zone.timezone));
   }
+
   popup_window_->setStringList(zone_names);
-
-  dot_->move(pos.x() - dot_->width() / 2, pos.y() - dot_->height() / 2);
-  dot_->show();
-
   const int dy = pos.y() - dot_->height() - kDotVerticalMargin;
   const QPoint global_pos = this->mapToGlobal(QPoint(pos.x(), dy));
   popup_window_->popup(global_pos);
+
+  dot_->move(pos.x() - dot_->width() / 2, pos.y() - dot_->height() / 2);
+  dot_->show();
 }
 
 void TimezoneMap::remark() {
@@ -186,7 +186,6 @@ void TimezoneMap::remark() {
 }
 
 void TimezoneMap::onPopupWindowActivated(int index) {
-  qDebug() << "timezone map on popup window activated:" << index;
   // Hide popup_window_.
   popup_window_->hide();
   dot_->hide();

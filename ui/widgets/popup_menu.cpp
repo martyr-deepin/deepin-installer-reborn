@@ -28,7 +28,8 @@ const int kTriangleHeight = 6;
 
 // Height of menu item is also defined in styles/popup_menu.css
 const int kMenuItemHeight = 24;
-const int kMenuViewVerticalMargins = 4;
+const int kMenuViewVerticalMargin = 4;
+const int kMenuViewBottomPadding = 5;
 const int kMenuViewHorizontalMargins = 20;
 const int kMenuViewMinimumWidth = 60;
 
@@ -57,7 +58,6 @@ void PopupMenu::popup(const QPoint& pos) {
 
 void PopupMenu::setStringList(const QStringList& strings) {
   menu_model_->setStringList(strings);
-  qDebug() << "strings:" << strings;
 
   int item_width = kMenuViewMinimumWidth;
   const QFontMetrics metrics(menu_view_->font());
@@ -67,8 +67,12 @@ void PopupMenu::setStringList(const QStringList& strings) {
   }
   // Add margin to list view.
   const int width = item_width + kMenuViewHorizontalMargins * 2;
+
+  // Add more space at bottom of list view.
   const int height = kMenuItemHeight * strings.length() +
-                     kMenuViewVerticalMargins * 2;
+                     kMenuViewVerticalMargin * 2 + kMenuViewBottomPadding;
+
+  menu_view_->adjustSize();
   menu_view_->resize(width, height);
 
   this->resize(width, height + kTriangleHeight);
@@ -155,8 +159,8 @@ void PopupMenu::initUI() {
   menu_model_ = new QStringListModel(this);
   menu_view_ = new QListView(this);
   menu_view_->setObjectName("menu_view");
-  menu_view_->setContentsMargins(0, kMenuViewVerticalMargins,
-                                 0, kMenuViewVerticalMargins);
+  menu_view_->setContentsMargins(0, kMenuViewVerticalMargin,
+                                 0, kMenuViewVerticalMargin);
   menu_view_->setModel(menu_model_);
   menu_view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   menu_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -178,7 +182,6 @@ void PopupMenu::initUI() {
 
 void PopupMenu::onMenuViewActivated(const QModelIndex& index) {
   Q_ASSERT(index.isValid());
-  qDebug() << "popup menu activated:" << index.row();
   if (index.isValid()) {
     emit this->menuActivated(index.row());
   }
