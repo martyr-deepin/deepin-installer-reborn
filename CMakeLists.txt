@@ -92,6 +92,8 @@ set(BASE_FILES
     base/file_util.h
     base/string_util.cpp
     base/string_util.h
+    base/thread_util.cpp
+    base/thread_util.h
     )
 
 set(OEM_FILES

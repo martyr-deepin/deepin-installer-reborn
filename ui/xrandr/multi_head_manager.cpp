@@ -16,24 +16,22 @@ namespace installer {
 MultiHeadManager::MultiHeadManager(QObject* parent)
     : QObject(parent),
       wallpaper_items_(),
-      worker_thread_(new QThread()) {
+      multi_head_thread_(new QThread(this)),
+      multi_head_worker_(new MultiHeadWorker()) {
   this->setObjectName("wallpaper_manager");
 
-  multi_head_worker_ = new MultiHeadWorker();
-  multi_head_worker_->moveToThread(worker_thread_);
-  worker_thread_->start();
-  emit multi_head_worker_->start();
+  multi_head_worker_->moveToThread(multi_head_thread_);
 
   this->initConnections();
+
+  multi_head_thread_->start();
+  emit multi_head_worker_->start();
 }
 
 MultiHeadManager::~MultiHeadManager() {
   multi_head_worker_->stop();
-
-  worker_thread_->quit();
-  worker_thread_->wait(5);
-  delete worker_thread_;
-  worker_thread_ = nullptr;
+  multi_head_thread_->quit();
+  multi_head_thread_->wait(3);
 }
 
 void MultiHeadManager::switchXRandRMode() {
@@ -74,6 +72,11 @@ void MultiHeadManager::updateWallpaper() {
 void MultiHeadManager::initConnections() {
   connect(multi_head_worker_, &MultiHeadWorker::screenCountChanged,
           this, &MultiHeadManager::onScreenCountChanged);
+
+  connect(multi_head_thread_, &QThread::finished,
+          multi_head_worker_, &MultiHeadWorker::stop);
+  connect(multi_head_thread_, &QThread::finished,
+          multi_head_worker_, &MultiHeadWorker::deleteLater);
 }
 
 void MultiHeadManager::onScreenCountChanged() {

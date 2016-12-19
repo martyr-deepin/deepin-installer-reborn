@@ -34,10 +34,12 @@ class TimezoneManager : public QObject {
   void timezoneUpdated(const QString& timezone);
 
  private:
-  WiFiInspectWorker* wifi_inspect_worker_ = nullptr;
+  void initConnections();
+
   GeoIpRequestWorker* geoip_worker_ = nullptr;
-  QThread* wifi_inspect_thread_ = nullptr;
+  WiFiInspectWorker* wifi_inspect_worker_ = nullptr;
   QThread* geoip_request_thread_ = nullptr;
+  QThread* wifi_inspect_thread_ = nullptr;
 
  private slots:
   void onGeoIpUpdated(const QString& timezone);

@@ -37,7 +37,7 @@ class MultiHeadManager : public QObject {
   void initConnections();
 
   QList<WallpaperItem*> wallpaper_items_;
-  QThread* worker_thread_ = nullptr;
+  QThread* multi_head_thread_ = nullptr;
   MultiHeadWorker* multi_head_worker_ = nullptr;
 
  private slots:

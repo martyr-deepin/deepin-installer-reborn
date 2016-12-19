@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QThread>
 
+#include "base/thread_util.h"
 #include "service/backend/wifi_inspect_worker.h"
 #include "service/backend/geoip_request_worker.h"
 #include "sysinfo/timezone.h"
@@ -34,37 +35,24 @@ bool CountryCodeToTimezone(const QString& regdomain, QString& timezone) {
 
 TimezoneManager::TimezoneManager(QObject* parent)
     : QObject(parent),
-      wifi_inspect_thread_(new QThread(this)),
-      geoip_request_thread_(new QThread(this)) {
+      geoip_worker_(new GeoIpRequestWorker()),
+      wifi_inspect_worker_(new WiFiInspectWorker()),
+      geoip_request_thread_(new QThread(this)),
+      wifi_inspect_thread_(new QThread(this)) {
   this->setObjectName("locale_manager");
 
-  wifi_inspect_thread_->start();
-  wifi_inspect_worker_ = new WiFiInspectWorker();
-  connect(wifi_inspect_worker_, &WiFiInspectWorker::regdomainUpdated,
-          this, &TimezoneManager::onRegdomainUpdated);
+  geoip_worker_->moveToThread(geoip_request_thread_);
   wifi_inspect_worker_->moveToThread(wifi_inspect_thread_);
 
+  this->initConnections();
+
   geoip_request_thread_->start();
-  geoip_worker_ = new GeoIpRequestWorker();
-  connect(geoip_worker_, &GeoIpRequestWorker::geoIpUpdated,
-          this, &TimezoneManager::onGeoIpUpdated);
-  geoip_worker_->moveToThread(geoip_request_thread_);
+  wifi_inspect_thread_->start();
 }
 
 TimezoneManager::~TimezoneManager() {
-  if (wifi_inspect_thread_) {
-    wifi_inspect_thread_->quit();
-    wifi_inspect_thread_->wait(3);
-    delete wifi_inspect_thread_;
-    wifi_inspect_thread_ = nullptr;
-  }
-
-  if (geoip_request_thread_) {
-    geoip_request_thread_->quit();
-    geoip_request_thread_->wait(3);
-    delete geoip_request_thread_;
-    geoip_request_thread_ = nullptr;
-  }
+  QuitThread(geoip_request_thread_);
+  QuitThread(wifi_inspect_thread_);
 }
 
 void TimezoneManager::update(bool use_geoip, bool use_regdomain) {
@@ -80,6 +68,24 @@ void TimezoneManager::update(bool use_geoip, bool use_regdomain) {
   }
 }
 
+void TimezoneManager::initConnections() {
+  connect(geoip_worker_, &GeoIpRequestWorker::geoIpUpdated,
+          this, &TimezoneManager::onGeoIpUpdated);
+  connect(wifi_inspect_worker_, &WiFiInspectWorker::regdomainUpdated,
+          this, &TimezoneManager::onRegdomainUpdated);
+
+  connect(geoip_request_thread_, &QThread::finished,
+          geoip_worker_, &GeoIpRequestWorker::deleteLater);
+  connect(wifi_inspect_thread_, &QThread::finished,
+          wifi_inspect_worker_, &WiFiInspectWorker::deleteLater);
+
+}
+
+void TimezoneManager::onGeoIpUpdated(const QString& timezone) {
+  qDebug() << "onGeoIpUpdated():" << timezone;
+  emit this->timezoneUpdated(timezone);
+}
+
 void TimezoneManager::onRegdomainUpdated(const QString& regdomain) {
   qDebug() << "onRegdomainUpdated():" << regdomain;
   // Guess timezone based on regdomain.
@@ -89,11 +95,6 @@ void TimezoneManager::onRegdomainUpdated(const QString& regdomain) {
   } else {
     qWarning() << "Failed to convert regdomain to timezone:" << regdomain;
   }
-}
-
-void TimezoneManager::onGeoIpUpdated(const QString& timezone) {
-  qDebug() << "onGeoIpUpdated():" << timezone;
-  emit this->timezoneUpdated(timezone);
 }
 
 }  // namespace installer

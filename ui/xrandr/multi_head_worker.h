@@ -20,6 +20,7 @@ class MultiHeadWorker : public QObject {
  public slots:
   // Stop monitoring process.
   // This method can be called in another thread.
+  // FIXME(xushaohua): Stop the event loop explicitly.
   void stop();
 
  signals:

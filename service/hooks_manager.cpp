@@ -10,6 +10,7 @@
 #include <QTimer>
 
 #include "base/file_util.h"
+#include "base/thread_util.h"
 #include "service/backend/hooks_pack.h"
 #include "service/backend/hook_worker.h"
 
@@ -46,14 +47,14 @@ HooksManager::HooksManager(QObject* parent)
       unsquashfs_timer_(new QTimer(this)) {
   this->setObjectName("hooks_manager");
 
-  hook_worker_thread_->start();
   hook_worker_->moveToThread(hook_worker_thread_);
-
   this->initConnections();
+
+  hook_worker_thread_->start();
 }
 
 HooksManager::~HooksManager() {
-  // TODO(xushaohua): delete thread.
+  QuitThread(hook_worker_thread_);
 
   while (hooks_pack_ != nullptr) {
     HooksPack* next_pack = hooks_pack_->next;
@@ -73,6 +74,10 @@ void HooksManager::initConnections() {
           this, &HooksManager::onHooksManagerFinished);
   connect(hook_worker_, &HookWorker::hookFinished,
           this, &HooksManager::onHookFinished);
+
+  // Delete worker object on thread finished.
+  connect(hook_worker_thread_, &QThread::finished,
+          hook_worker_, &HookWorker::deleteLater);
 }
 
 void HooksManager::runNextHook() {

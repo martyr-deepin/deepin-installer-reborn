@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QThread>
 
+#include "base/thread_util.h"
 #include "partman/partition_manager.h"
 #include "partman/utils.h"
 #include "service/settings_manager.h"
@@ -56,7 +57,7 @@ int AllocLogicalPartitionNumber(const Device& device) {
 PartitionDelegate::PartitionDelegate(QObject* parent)
     : QObject(parent),
       partition_manager_(new PartitionManager()),
-      partition_thread_(new QThread()),
+      partition_thread_(new QThread(this)),
       devices_(),
       real_devices_(),
       simple_operations_(),
@@ -67,20 +68,14 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
   this->setObjectName("partition_delegate");
 
   partition_manager_->moveToThread(partition_thread_);
-  partition_thread_->start();
-
   this->initConnections();
+
+  partition_thread_->start();
 }
 
 PartitionDelegate::~PartitionDelegate() {
-  delete partition_manager_;
-  partition_manager_ = nullptr;
-
   // Quit background thread explicitly.
-  partition_thread_->quit();
-  partition_thread_->wait();
-  delete partition_thread_;
-  partition_thread_ = nullptr;
+  QuitThread(partition_thread_);
 }
 
 void PartitionDelegate::autoConf() {
@@ -592,6 +587,9 @@ void PartitionDelegate::initConnections() {
           this, &PartitionDelegate::onManualPartDone);
   connect(partition_manager_, &PartitionManager::devicesRefreshed,
           this, &PartitionDelegate::onDevicesRefreshed);
+
+  connect(partition_thread_, &QThread::finished,
+          partition_manager_, &PartitionManager::deleteLater);
 }
 
 void PartitionDelegate::createPrimaryPartition(const Partition& partition,

@@ -13,6 +13,7 @@
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
+#include "base/thread_util.h"
 #include "service/hooks_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
@@ -50,24 +51,19 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
     : QFrame(parent),
       failed_(true),
       hooks_manager_(new HooksManager()),
-      hooks_manager_thread_(new QThread()) {
+      hooks_manager_thread_(new QThread(this)) {
   this->setObjectName("install_progress_frame");
 
   hooks_manager_->moveToThread(hooks_manager_thread_);
-  hooks_manager_thread_->start();
 
   this->initUI();
   this->initConnections();
+
+  hooks_manager_thread_->start();
 }
 
 InstallProgressFrame::~InstallProgressFrame() {
-  delete hooks_manager_;
-  hooks_manager_ = nullptr;
-
-  hooks_manager_thread_->quit();
-  hooks_manager_thread_->wait();
-  delete hooks_manager_thread_;
-  hooks_manager_thread_ = nullptr;
+  QuitThread(hooks_manager_thread_);
 }
 
 void InstallProgressFrame::startSlide() {
@@ -127,6 +123,9 @@ void InstallProgressFrame::initConnections() {
           this, &InstallProgressFrame::onHooksFinished);
   connect(hooks_manager_, &HooksManager::processUpdate,
           this, &InstallProgressFrame::onProgressUpdate);
+
+  connect(hooks_manager_thread_, &QThread::finished,
+          hooks_manager_, &HooksManager::deleteLater);
 }
 
 void InstallProgressFrame::initUI() {
