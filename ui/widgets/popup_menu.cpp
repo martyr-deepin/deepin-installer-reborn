@@ -47,7 +47,7 @@ QStringList PopupMenu::stringList() const {
 
 void PopupMenu::popup(const QPoint& pos) {
   const QSize size = menu_view_->size();
-  this->resize(size.width(), size.height() + kTriangleHeight);
+//  this->resize(size.width(), size.height() + kTriangleHeight);
   this->move(pos.x() - size.width() / 2, pos.y() - size.height());
   this->show();
 
@@ -57,6 +57,7 @@ void PopupMenu::popup(const QPoint& pos) {
 
 void PopupMenu::setStringList(const QStringList& strings) {
   menu_model_->setStringList(strings);
+  qDebug() << "strings:" << strings;
 
   int item_width = kMenuViewMinimumWidth;
   const QFontMetrics metrics(menu_view_->font());
@@ -69,6 +70,8 @@ void PopupMenu::setStringList(const QStringList& strings) {
   const int height = kMenuItemHeight * strings.length() +
                      kMenuViewVerticalMargins * 2;
   menu_view_->resize(width, height);
+
+  this->resize(width, height + kTriangleHeight);
 }
 
 bool PopupMenu::eventFilter(QObject* obj, QEvent* event) {
@@ -144,7 +147,7 @@ void PopupMenu::showEvent(QShowEvent* event) {
 }
 
 void PopupMenu::initConnections() {
-  connect(menu_view_, &QListView::activated,
+  connect(menu_view_, &QListView::pressed,
           this, &PopupMenu::onMenuViewActivated);
 }
 
@@ -152,6 +155,8 @@ void PopupMenu::initUI() {
   menu_model_ = new QStringListModel(this);
   menu_view_ = new QListView(this);
   menu_view_->setObjectName("menu_view");
+  menu_view_->setContentsMargins(0, kMenuViewVerticalMargins,
+                                 0, kMenuViewVerticalMargins);
   menu_view_->setModel(menu_model_);
   menu_view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   menu_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -163,7 +168,7 @@ void PopupMenu::initUI() {
   menu_view_->setMouseTracking(true);
   menu_view_->setStyleSheet(ReadFile(":/styles/popup_menu.css"));
 
-  this->setContentsMargins(0, 4, 0, 4);
+  this->setContentsMargins(0, 0, 0, 0);
   this->setAttribute(Qt::WA_TranslucentBackground, true);
   this->setFocusPolicy(Qt::StrongFocus);
 
