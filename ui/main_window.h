@@ -47,6 +47,7 @@ class MainWindow : public QWidget {
   void fullscreen();
 
   // Notify background thread to scan disk devices if needed.
+  // And read current timezone.
   void scanDevices();
 
  protected:

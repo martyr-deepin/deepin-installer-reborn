@@ -48,6 +48,10 @@ SystemInfoAvatarFrame::SystemInfoAvatarFrame(QWidget* parent)
   this->initConnections();
 }
 
+void SystemInfoAvatarFrame::hideTimezoneButton() {
+  timezone_button_->setVisible(false);
+}
+
 void SystemInfoAvatarFrame::readConf() {
   const QString avatar = current_avatar_button_->avatar();
   emit this->avatarUpdated(avatar);

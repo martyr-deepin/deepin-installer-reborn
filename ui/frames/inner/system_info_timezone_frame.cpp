@@ -9,6 +9,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
+#include "partman/os_prober.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "service/timezone_manager.h"
@@ -27,6 +28,14 @@ const char kTextTitle[] = "Select Time Zone";
 const char kTextComment[] = "Mark your zone in the map";
 const char kTextBack[] = "Back";
 
+const char kLocalTime[] = "local";
+
+// Check if any Windows partition is found on disk.
+bool HasWindowsPartition() {
+  const OsTypeItems os_items = GetOsTypeItems();
+  return os_items.values().contains(OsType::Windows);
+}
+
 }  // namespace
 
 SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
@@ -41,6 +50,29 @@ SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
 }
 
 void SystemInfoTimezoneFrame::readConf() {
+  // Policy:
+  //  * Call `os-prober` if `system_info_use_windows_time` is enabled.
+  //  * Hide timezone-page and timezone-button if
+  //    `system_info_windows_disable_timezone_page` if enabled.
+  //  * If no windows partition is found, then:
+  //    * Read default timezone from settings.
+  //    * Scan wifi spot.
+  //    * Send http request to get geo ip.
+  //    * Or wait for user to choose timezone on map.
+
+  if (GetSettingsBool(kSystemInfoUseWindowsTime) && HasWindowsPartition()) {
+    // Update timezone.
+    timezone_ = kLocalTime;
+    timezone_source_ = TimezoneSource::Local;
+    if (GetSettingsBool(kSystemInfoWindowsDisableTimezonePage)) {
+      // Send hide-timezone signal.
+      emit this->hideTimezone();
+      return;
+    }
+
+    emit this->timezoneUpdated(timezone_);
+  }
+
   timezone_ = GetSettingsString(kSystemInfoDefaultTimezone);
   if (IsValidTimezone(timezone_)) {
     timezone_source_ = TimezoneSource::Conf;

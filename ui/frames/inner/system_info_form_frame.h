@@ -34,6 +34,9 @@ class SystemInfoFormFrame : public QFrame {
   void timezoneClicked();
 
  public slots:
+  // Hide timezone button.
+  void hideTimezoneButton();
+
   // Update user avatar image.
   void updateAvatar(const QString& avatar);
 

@@ -14,17 +14,22 @@
 
 namespace installer {
 
-SystemInfoFrame::SystemInfoFrame(QWidget* parent) : QFrame(parent) {
+SystemInfoFrame::SystemInfoFrame(QWidget* parent)
+    : QFrame(parent),
+      disable_timezone_(GetSettingsBool(kSystemInfoDisableTimezonePage)) {
   this->setObjectName("system_info_frame");
 
   this->initUI();
   this->initConnections();
 
-  // Read default avatar and timezone explicitly.
+  // Read default avatar explicitly.
   avatar_frame_->readConf();
-  timezone_frame_->readConf();
 
   this->showFormPage();
+}
+
+void SystemInfoFrame::readTimezone() {
+  timezone_frame_->readConf();
 }
 
 void SystemInfoFrame::writeConf() {
@@ -58,6 +63,13 @@ void SystemInfoFrame::initConnections() {
           avatar_frame_, &SystemInfoAvatarFrame::updateTimezone);
   connect(timezone_frame_, &SystemInfoTimezoneFrame::timezoneUpdated,
           form_frame_, &SystemInfoFormFrame::updateTimezone);
+
+  connect(timezone_frame_, &SystemInfoTimezoneFrame::hideTimezone,
+          avatar_frame_, &SystemInfoAvatarFrame::hideTimezoneButton);
+  connect(timezone_frame_, &SystemInfoTimezoneFrame::hideTimezone,
+          form_frame_, &SystemInfoFormFrame::hideTimezoneButton);
+  connect(timezone_frame_, &SystemInfoTimezoneFrame::hideTimezone,
+          this, &SystemInfoFrame::hideTimezone);
 }
 
 void SystemInfoFrame::initUI() {
@@ -71,6 +83,10 @@ void SystemInfoFrame::initUI() {
   stacked_layout_->addWidget(timezone_frame_);
 
   this->setLayout(stacked_layout_);
+}
+
+void SystemInfoFrame::hideTimezone() {
+  disable_timezone_ = true;
 }
 
 void SystemInfoFrame::restoreLastPage() {
@@ -94,7 +110,7 @@ void SystemInfoFrame::showFormPage() {
 }
 
 void SystemInfoFrame::showTimezonePage() {
-  if (!GetSettingsBool(kSystemInfoDisableTimezonePage)) {
+  if (!disable_timezone_) {
     last_page_ = qobject_cast<QWidget*>(this->sender());
     stacked_layout_->setCurrentWidget(timezone_frame_);
     timezone_frame_->raise();

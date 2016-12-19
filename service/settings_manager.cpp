@@ -251,6 +251,7 @@ void WriteAvatar(const QString& avatar) {
 }
 
 void WriteTimezone(const QString& timezone) {
+  // |timezone| is "local" when local timezone is used.
   AppendToConfigFile("DI_TIMEZONE", timezone);
 }
 

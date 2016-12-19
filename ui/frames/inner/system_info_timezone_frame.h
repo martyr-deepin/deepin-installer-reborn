@@ -26,6 +26,9 @@ class SystemInfoTimezoneFrame : public QFrame {
   // Emitted when back button is clicked.
   void finished();
 
+  // Emit this signal to request to hide timezone page and timezone button.
+  void hideTimezone();
+
   // Emitted when a new timezone is chosen.
   void timezoneUpdated(const QString& timezone);
 
@@ -56,6 +59,7 @@ class SystemInfoTimezoneFrame : public QFrame {
   enum class TimezoneSource {
     NotSet,  // Timezone not set.
     User,  // Timezone is setup by user.
+    Local,  // Timezone is based on local time.
     Conf,  // Timezone is read from conf file
     Scan  // Timezone is updated based on geoip or regdomain
   };

@@ -60,6 +60,13 @@ void MainWindow::scanDevices() {
   if (!GetSettingsBool(kSkipPartitionPage)) {
     partition_frame_->scanDevices();
   }
+
+  // If SystemInfoFrame page is not hidden, read current timezone based on
+  // policy in settings.
+  // NOTE(xushaohua): This function might take some time.
+  if (!GetSettingsBool(kSkipSystemInfoPage)) {
+    system_info_frame_->readTimezone();
+  }
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {

@@ -46,11 +46,13 @@ const char kSystemInfoPasswordRequireSpecialChar[] =
     "system_info_password_require_special_char";
 const char kSystemInfoDefaultAvator[] = "system_info_default_avatar";
 const char kSystemInfoDdeAvatarDir[] = "system_info_dde_avatar_dir";
+const char kSystemInfoDisableAvatorPage[] = "system_info_disable_avatar_page";
 const char kSystemInfoDefaultTimezone[] = "system_info_default_timezone";
 const char kSystemInfoUseWindowsTime[] = "system_info_use_windows_time";
-const char kSystemInfoDisableAvatorPage[] = "system_info_disable_avatar_page";
 const char kSystemInfoDisableTimezonePage[] =
     "system_info_disable_timezone_page";
+const char kSystemInfoWindowsDisableTimezonePage[] =
+    "system_info_windows_disable_timezone_page";
 const char kSystemInfoTimezoneUseGeoIp[] = "system_info_timezone_use_geoip";
 const char kSystemInfoTimezoneUseRegdomain[] =
     "system_info_timezone_use_regdomain";

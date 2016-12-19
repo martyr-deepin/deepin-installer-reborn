@@ -31,11 +31,14 @@ class SystemInfoAvatarFrame : public QFrame {
   void timezoneClicked();
 
  public slots:
-  // Update text in timezone button.
-  void updateTimezone(const QString& timezone);
+  // Hide timezone button.
+  void hideTimezoneButton();
 
   // Read default avatar and emit avatarUpdated() signal.
   void readConf();
+
+  // Update text in timezone button.
+  void updateTimezone(const QString& timezone);
 
   // Validate avatar path and write to conf file.
   void writeConf();

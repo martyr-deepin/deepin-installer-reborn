@@ -50,10 +50,8 @@ SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
   this->initConnections();
 }
 
-void SystemInfoFormFrame::writeConf() {
-  WriteUsername(username_edit_->text());
-  WriteHostname(hostname_edit_->text());
-  WritePassword(password_edit_->text());
+void SystemInfoFormFrame::hideTimezoneButton() {
+  timezone_button_->setVisible(false);
 }
 
 void SystemInfoFormFrame::updateAvatar(const QString& avatar) {
@@ -63,6 +61,12 @@ void SystemInfoFormFrame::updateAvatar(const QString& avatar) {
 void SystemInfoFormFrame::updateTimezone(const QString& timezone) {
   // Add left margin.
   timezone_button_->setText(QString(" %1").arg(timezone));
+}
+
+void SystemInfoFormFrame::writeConf() {
+  WriteUsername(username_edit_->text());
+  WriteHostname(hostname_edit_->text());
+  WritePassword(password_edit_->text());
 }
 
 void SystemInfoFormFrame::changeEvent(QEvent* event) {

@@ -22,6 +22,9 @@ class SystemInfoFrame : public QFrame {
  public:
   explicit SystemInfoFrame(QWidget* parent = nullptr);
 
+  // Notify SystemInfoTimezoneFrame to read timezone based on current settings.
+  void readTimezone();
+
  signals:
   // Emitted when form is validated.
   void finished();
@@ -42,7 +45,13 @@ class SystemInfoFrame : public QFrame {
   // To mark current page before switching to timezone page.
   QWidget* last_page_ = nullptr;
 
+  // Do not show timezone frame if this flag is false.
+  bool disable_timezone_;
+
  private slots:
+  // Hide timezone frame.
+  void hideTimezone();
+
   // Restore last page when timezone page is finished.
   void restoreLastPage();
 

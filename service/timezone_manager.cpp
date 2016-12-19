@@ -52,21 +52,19 @@ TimezoneManager::TimezoneManager(QObject* parent)
 }
 
 TimezoneManager::~TimezoneManager() {
-  delete wifi_inspect_worker_;
-  wifi_inspect_worker_ = nullptr;
+  if (wifi_inspect_thread_) {
+    wifi_inspect_thread_->quit();
+    wifi_inspect_thread_->wait(3);
+    delete wifi_inspect_thread_;
+    wifi_inspect_thread_ = nullptr;
+  }
 
-  wifi_inspect_thread_->quit();
-  wifi_inspect_thread_->wait(3);
-  delete wifi_inspect_thread_;
-  wifi_inspect_thread_ = nullptr;
-
-  delete geoip_worker_;
-  geoip_worker_ = nullptr;
-
-  geoip_request_thread_->quit();
-  geoip_request_thread_->wait(3);
-  delete geoip_request_thread_;
-  geoip_request_thread_ = nullptr;
+  if (geoip_request_thread_) {
+    geoip_request_thread_->quit();
+    geoip_request_thread_->wait(3);
+    delete geoip_request_thread_;
+    geoip_request_thread_ = nullptr;
+  }
 }
 
 void TimezoneManager::update(bool use_geoip, bool use_regdomain) {
@@ -83,6 +81,7 @@ void TimezoneManager::update(bool use_geoip, bool use_regdomain) {
 }
 
 void TimezoneManager::onRegdomainUpdated(const QString& regdomain) {
+  qDebug() << "onRegdomainUpdated():" << regdomain;
   // Guess timezone based on regdomain.
   QString timezone;
   if (CountryCodeToTimezone(regdomain, timezone)) {
@@ -93,6 +92,7 @@ void TimezoneManager::onRegdomainUpdated(const QString& regdomain) {
 }
 
 void TimezoneManager::onGeoIpUpdated(const QString& timezone) {
+  qDebug() << "onGeoIpUpdated():" << timezone;
   emit this->timezoneUpdated(timezone);
 }
 

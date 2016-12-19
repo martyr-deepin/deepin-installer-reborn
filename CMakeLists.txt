@@ -486,6 +486,11 @@ add_executable(timezone-frame-test
                service/backend/wifi_inspect_worker.cpp
                service/backend/wifi_inspect_worker.h
                
+               partman/os_prober.cpp
+               partman/os_prober.h
+               partman/structs.cpp
+               partman/structs.h
+               
                sysinfo/machine.cpp
                sysinfo/machine.h
                sysinfo/timezone.cpp

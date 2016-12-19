@@ -8,6 +8,8 @@
 #include <QDebug>
 #include <QtGlobal>
 
+namespace installer {
+
 // Size units defined in bytes
 // See https://en.wikipedia.org/wiki/Kibibyte
 const qint64 kKibiByte = 1024;
@@ -19,8 +21,6 @@ const qint64 kExbiByte = kPebiByte * kKibiByte;
 
 const char kMountPointRoot[] = "/";
 const char kMountPointBoot[] = "/boot";
-
-namespace installer {
 
 // This header file defines commonly used types and struct type in partman
 // module.
