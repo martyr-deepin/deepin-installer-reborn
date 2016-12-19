@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ x$(installer_get "system_info_setup_after_reboot") = x1 ]; then
+  exit 0
+fi
+
 DI_HOSTNAME=$(installer_get "DI_HOSTNAME")
 DI_PASSWORD=$(installer_get "DI_PASSWORD")
 DI_USERNAME=$(installer_get "DI_USERNAME")

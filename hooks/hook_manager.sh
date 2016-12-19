@@ -3,6 +3,7 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+
 # Set environment
 export LC_ALL=C
 export DEBIAN_FRONTEND="noninteractive"
@@ -39,27 +40,10 @@ debug() {
   echo " - ${mesg}"
 }
 
-# Check arguments
-if [ $# -lt 1 ]; then
-  error "Usage: $0 hook-file"
-fi
-
-# Absolute path of hook_manager.sh in chroot env.
-# This path is defined in service/backend/hooks_pack.cpp.
-_SELF=/tmp/installer-reborn/hook_manager.sh
-_HOOK_FILE=$1
-_IN_CHROOT=$2
-
 # Absolute path to config file.
 # Do not read from/write to this file, call installer_get/installer_set instead.
 _CONF_FILE=/etc/deepin-installer.conf
 
-# Defines absolute path to oem folder.
-# /tmp/oem is reserved for debug.
-OEM_DIR=/media/cdrom/oem
-if [ -d "/tmp/oem" ]; then
-  OEM_DIR=/tmp/oem
-fi
 
 # Get value in conf file. Section name is ignored.
 installer_get() {
@@ -73,6 +57,25 @@ installer_set() {
   local value=$2
   deepin-installer-settings set ${_CONF_FILE} ${key} ${value}
 }
+
+
+# Check arguments
+if [ $# -lt 1 ]; then
+  error "Usage: $0 hook-file"
+fi
+
+# Absolute path of hook_manager.sh in chroot env.
+# This path is defined in service/backend/hooks_pack.cpp.
+_SELF=/tmp/installer-reborn/hook_manager.sh
+_HOOK_FILE=$1
+_IN_CHROOT=$2
+
+# Defines absolute path to oem folder.
+# /tmp/oem is reserved for debug.
+OEM_DIR=/media/cdrom/oem
+if [ -d "/tmp/oem" ]; then
+  OEM_DIR=/tmp/oem
+fi
 
 # Run hook file
 case ${_HOOK_FILE} in

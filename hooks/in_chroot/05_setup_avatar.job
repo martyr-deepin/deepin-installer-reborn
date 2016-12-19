@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ x$(installer_get "system_info_setup_after_reboot") = x1 ]; then
+  exit 0
+fi
+
 DI_AVATAR=$(installer_get "DI_AVATAR")
 DI_USERNAME=$(installer_get "DI_USERNAME")
 
