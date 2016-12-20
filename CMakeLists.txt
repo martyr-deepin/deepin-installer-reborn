@@ -383,6 +383,14 @@ add_executable(deepin-installer-reborn
 
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 
+add_executable(deepin-installer-adjtime
+               app/deepin_installer_adjtime.cpp
+
+               base/file_util.cpp
+               base/file_util.h
+               )
+target_link_libraries(deepin-installer-adjtime ${QtCore_LIBS})
+
 # Set/get ini files.
 add_executable(deepin-installer-settings
                app/deepin_installer_reborn_settings.cpp)
