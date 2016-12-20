@@ -143,6 +143,12 @@ EOF
   ln -nsf /usr/share/zoneinfo/${DI_TIMEZONE} /etc/localtime
   dpkg-reconfigure --frontend noninteractive tzdata
 
+  # Set using local time or not
+  DI_IS_LOCAL_TIME=$(installer_get "DI_IS_LOCAL_TIME")
+  if [ x"${DI_IS_LOCAL_TIME}" = x1 ]; then
+    deepin-installer-adjtime 1
+  fi
+
   # Check locale
   if ls /usr/share/i18n/locales | grep -q "\<${LOCALE}\>";then
     echo "${LOCALE} is available"

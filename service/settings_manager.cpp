@@ -50,7 +50,7 @@ const char kDeepinOemDir[] = "/lib/live/mount/medium/oem";
 // Filename of oem settings
 const char kOemSettingsFilename[] = "settings.ini";
 
-void AppendToConfigFile(const QString& key, const QString& value) {
+void AppendToConfigFile(const QString& key, const QVariant& value) {
   QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
   settings.setValue(key, value);
 }
@@ -226,7 +226,7 @@ bool DeleteConfigFile() {
 }
 
 void WriteUEFI(bool is_efi) {
-  AppendToConfigFile("DI_UEFI", is_efi ? "true" : "false");
+  AppendToConfigFile("DI_UEFI", is_efi);
 }
 
 void WriteLocale(const QString& locale) {
@@ -250,9 +250,10 @@ void WriteAvatar(const QString& avatar) {
   AppendToConfigFile("DI_AVATAR", avatar);
 }
 
-void WriteTimezone(const QString& timezone) {
-  // |timezone| is "local" when local timezone is used.
-  AppendToConfigFile("DI_TIMEZONE", timezone);
+void WriteTimezone(const QString& timezone, bool is_local_time) {
+  QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
+  settings.setValue("DI_TIMEZONE", timezone);
+  settings.setValue("DI_IS_LOCAL_TIME", is_local_time);
 }
 
 void WriteKeyboard(const QString& layout, const QString& variant) {

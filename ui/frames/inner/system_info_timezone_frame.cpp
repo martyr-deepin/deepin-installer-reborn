@@ -28,7 +28,8 @@ const char kTextTitle[] = "Select Time Zone";
 const char kTextComment[] = "Mark your zone in the map";
 const char kTextBack[] = "Back";
 
-const char kLocalTime[] = "local";
+// Set timezone to UTC when local-time is used.
+const char kLocalTime[] = "Etc/UTC";
 
 // Check if any Windows partition is found on disk.
 bool HasWindowsPartition() {
@@ -86,7 +87,8 @@ void SystemInfoTimezoneFrame::readConf() {
 
 void SystemInfoTimezoneFrame::writeConf() {
   if (IsValidTimezone(timezone_)) {
-    WriteTimezone(timezone_);
+    const bool is_local_time = (timezone_source_ == TimezoneSource::Local);
+    WriteTimezone(timezone_, is_local_time);
   } else {
     qWarning() << "Invalid timezone:" << timezone_;
   }

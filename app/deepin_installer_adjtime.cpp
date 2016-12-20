@@ -22,8 +22,8 @@
 const char kUsage[] = ""
     "Set local time or utc time\n"
     "Usage: %s 0|1\n"
-    " 0 - Set as local time\n"
-    " 1 - Set as UTC time\n";
+    " 0 - Set as UTC time\n"
+    " 1 - Set as local time\n";
 
 // Write settings to /etc/adjtime.
 // From timedated.c:context_write_data_local_rtc().
@@ -125,7 +125,7 @@ int main(int argc, char* argv[]) {
   }
 
   struct tm tm;
-  const bool is_utc = (strncmp(argv[1], "0", 1) != 0);
+  const bool is_utc = (strncmp(argv[1], "0", 1) == 0);
 
   // 1. Write new configuration file
   if (!write_local_rtc(is_utc)) {
