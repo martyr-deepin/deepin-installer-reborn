@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "section_label.h"
+#include "ui/widgets/section_label.h"
 
 #include "base/file_util.h"
 
@@ -12,7 +12,7 @@ SectionLabel::SectionLabel(const QString& text, QWidget* parent)
     : QLabel(text, parent) {
   this->setObjectName("section_label");
 
-  this->setStyleSheet(ReadFile(":/oem_styles/section_label.css"));
+  this->setStyleSheet(ReadFile(":/styles/section_label.css"));
 }
 
 }  // namespace installer

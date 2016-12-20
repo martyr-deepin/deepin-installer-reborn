@@ -96,14 +96,6 @@ set(BASE_FILES
     base/thread_util.h
     )
 
-set(OEM_FILES
-    app/oem_tool.cpp
-    ui/oem_tool/oem_window.cpp
-    ui/oem_tool/oem_window.h
-    ui/oem_tool/section_label.cpp
-    ui/oem_tool/section_label.h
-    )
-
 set(PARTMAN_FILES
     partman/device.cpp
     partman/device.h
@@ -184,7 +176,6 @@ set(SYSINFO_FILES
     )
 
 set(UI_FILES
-    ui/main_window.cpp ui/main_window.h
 
     ui/delegates/avatar_list_delegate.cpp
     ui/delegates/avatar_list_delegate.h
@@ -323,11 +314,6 @@ set(UI_FILES
     ui/xrandr/xrandr_wrapper.h
     )
 
-set(REBOOT_SETUP_FILES
-    ui/setup_window.cpp
-    ui/setup_window.h
-    )
-
 set(ROOT_UNITTEST_FILES
     #    partman/operation_test.cpp
     #    partman/partition_usage_test.cpp
@@ -381,6 +367,8 @@ set(LINK_LIBS
 # Main executable
 add_executable(deepin-installer-reborn
                app/deepin_installer_reborn.cpp
+               ui/main_window.cpp
+               ui/main_window.h
 
                ${BASE_FILES}
                ${PARTMAN_FILES}
@@ -405,13 +393,14 @@ target_link_libraries(deepin-installer-settings ${QtCore_LIBS})
 # Reboot setup
 add_executable(deepin-installer-reboot-setup
                app/deepin_installer_reboot_setup.cpp
+               ui/setup_window.cpp
+               ui/setup_window.h
 
                ${BASE_FILES}
                ${PARTMAN_FILES}
                ${SERVICE_FILES}
                ${SYSINFO_FILES}
                ${UI_FILES}
-               ${REBOOT_SETUP_FILES}
 
                i18n/i18n.qrc
                ui/images/images.qrc
@@ -419,16 +408,23 @@ add_executable(deepin-installer-reboot-setup
                )
 target_link_libraries(deepin-installer-reboot-setup ${LINK_LIBS})
 
-# deepin-installer-oem_tool-tool
-add_executable(deepin-installer-oem-tool
-               ${OEM_FILES}
-               ${BASE_FILES}
-               ${SERVICE_FILES}
-               ${SYSINFO_FILES}
+# deepin-installer-oem
+add_executable(deepin-installer-oem
+               app/deepin_installer_oem.cpp
+               ui/oem_window.cpp
+               ui/oem_window.h
+               ui/widgets/section_label.cpp
+               ui/widgets/section_label.h
 
-               ui/oem_tool/styles/oem_styles.qrc
+               ${BASE_FILES}
+               ${SYSINFO_FILES}
+               service/system_language.cpp
+               service/system_language.h
+
+               i18n/i18n.qrc
+               ui/styles/styles.qrc
                )
-target_link_libraries(deepin-installer-oem-tool ${LINK_LIBS})
+target_link_libraries(deepin-installer-oem ${Qt_LIBS})
 
 
 # xrandr-switchy
@@ -451,6 +447,7 @@ add_executable(deepin-installer-unsquashfs-progress
 target_link_libraries(deepin-installer-unsquashfs-progress ${QtCore_LIBS})
 
 
+# test reboot system
 add_executable(reboot-system
                app/reboot_system.cpp
                
@@ -602,7 +599,7 @@ install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem-tool
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-xrandr-switchy
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
