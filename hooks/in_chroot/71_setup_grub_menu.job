@@ -19,7 +19,12 @@ fi
 GRUB_BLOCK_WINDOWS=$(installer_get "grub_block_windows")
 if [ -n "${GRUB_BLOCK_WINDOWS}" ]; then
   # Remove windows menu item from boot menu by disable os-prober and efi scanning.
-  rm -vf /etc/grub.d/[34]*
+  if [ -f "/etc/grub.d/30_os-prober" ]; then
+    > /etc/grub.d/30_os-prober
+  fi
+  if [ -f "/etc/grub.d/30_uefi-firmware" ]; then
+    > /etc/grub.d/30_uefi-firmware
+  fi
   GRUB_NEED_UPDATE=true
 fi
 
