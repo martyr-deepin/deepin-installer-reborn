@@ -162,6 +162,9 @@ setup_username_password() {
   [ -z ${DI_PASSWORD} ] && error "[ERROR] Variable DI_PASSWORD not set. Aborting."
   DI_HOSTNAME="${DI_HOSTNAME:-deepin}"
 
+  # Reset password in settings file
+  installer_set "DI_PASSWORD" ""
+
   if [ -x /bin/zsh ] ;then
     useradd -U -m --skel /etc/skel --shell /bin/zsh ${DI_USERNAME}
   else
