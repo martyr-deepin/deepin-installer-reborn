@@ -3,38 +3,43 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-usage() {
-  echo "Usage $0 packets duration"
+error() {
+  echo " "
+  echo "Error: $*" >&2
   echo ""
-  echo "<packets> number of captured packets before quit, 100 is recommended"
-  echo "<duration> seconds before quit, 20 is recommended"
+  exit 1
 }
 
+kUsage="\
+Usage $0 packets duration
+
+packets -  number of captured packets before quit, 100 is recommended.
+duration - seconds before quit, 10 is recommended.
+"
+
 if [ 2 -ne "$#" ]; then
-  usage
+  echo "${kUsage}" >&2
   exit 1
 fi
 
 packets=$1
 duration=$2
 
-# Get appropriate wireless interface.
-wifi_interface=$(airmon-ng  | grep '^[^mon][^Interface]' | cut -f 1)
-
-if [ x$wifi_interface = x"" ]; then
-  # No wireless interface found.
-  exit 1
+interfaceList=$(./airmon-ng)
+if [ $? != 0 ]; then
+  error "airmon-ng failed! ${interfaceList}"
 fi
 
-# Enable monitor mode on $wifi_interface.
-mon_interface=$(airmon-ng start $wifi_interface | grep 'enabled on ' | \
-                cut -f 1 -d ')' | cut -f 5 -d ' ')
+# Get the first availabel wireless device.
+interface=$(echo "${interfaceList}" | cut -f 2 | grep '[^Interface]' | head -n1)
+echo "interface: ${interface}"
+
+if [ -z "${interface}" ]; then
+  error "No interface availabel"
+fi
 
 # Capture beacon packets and print to stdout.
 #tshark -c $packets -a duration:$duration -I -f 'wlan[0] == 0x80' -Tfields -e wlan.sa -e wlan_mgt.country_info.code 2>/dev/null
-tshark -c $packets -a duration:$duration -I -f 'wlan[0] == 0x80' -Tfields -e wlan.sa -e wlan_mgt.country_info.code
-
-# Disable monitor mode.
-airmon-ng stop $mon_interface 1>/dev/null 2>&1
+tshark -c $packets -a duration:$duration -I -f 'wlan[0] == 0x80' -Tfields -e wlan.sa -e wlan_mgt.country_info.code -i ${interface}
 
 exit 0
