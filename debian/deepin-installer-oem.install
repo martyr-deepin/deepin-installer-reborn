@@ -1,0 +1,5 @@
+usr/bin/deepin-installer-oem
+usr/share/applications/*
+usr/share/icons/*
+usr/share/deepin-installer-reborn/resources/*
+usr/share/deepin-installer-reborn/tools/*

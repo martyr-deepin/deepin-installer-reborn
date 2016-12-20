@@ -7,3 +7,7 @@ export QT_SELECT=qt5
 
 override_dh_auto_configure:
 	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release
+
+
+#override_dh_auto_build:
+#	make -j `nproc`

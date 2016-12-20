@@ -34,3 +34,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
     x11-xserver-utils,
 Description: Reborn version of deepin installer
  New version of deepin-installer, rewritten with Qt5.
+
+Package: deepin-installer-oem
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: OEM tool for deepin-installer-reborn

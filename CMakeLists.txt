@@ -606,6 +606,14 @@ install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-xrandr-switchy
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs-progress
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-oem.svg
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps
+)
+install(
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-oem.desktop
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications
+)
+install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hooks
     DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
@@ -617,8 +625,10 @@ install(
     FILES_MATCHING PATTERN "*"
     PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 )
+# Install resources/ folde, excluding desktop file and icons of oem tool.
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/resources
     DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
+    PATTERN "deepin-installer-oem" EXCLUDE
 )

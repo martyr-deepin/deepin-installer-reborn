@@ -1,0 +1,9 @@
+[desktop]
+Categories=Settings;
+Comment=OEM tool for deepin installer
+Exec=deepin-installer-oem
+Icon=deepin-installer-oem
+Name=Deepin Installer OEM
+StartupNotify=false
+Terminal=false
+Type=Application
