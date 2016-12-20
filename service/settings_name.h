@@ -47,6 +47,14 @@ const char kSystemInfoPasswordRequireSpecialChar[] =
 const char kSystemInfoDefaultAvator[] = "system_info_default_avatar";
 const char kSystemInfoDdeAvatarDir[] = "system_info_dde_avatar_dir";
 const char kSystemInfoDisableAvatorPage[] = "system_info_disable_avatar_page";
+
+const char kSystemInfoDefaultKeyboardLayout[] =
+    "system_info_default_keyboard_layout";
+const char kSystemInfoDefaultKeyboardLayoutVariant[] =
+    "system_info_default_keyboard_layout_variant";
+const char kSystemInfoDisableKeyboardPage[] =
+    "system_info_disable_keyboard_page";
+
 const char kSystemInfoDefaultTimezone[] = "system_info_default_timezone";
 const char kSystemInfoUseWindowsTime[] = "system_info_use_windows_time";
 const char kSystemInfoDisableTimezonePage[] =

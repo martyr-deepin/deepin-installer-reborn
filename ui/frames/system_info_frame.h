@@ -6,12 +6,15 @@
 #define INSTALLER_UI_FRAMES_SYSTEM_INFO_FRAME_H
 
 #include <QFrame>
+class QHBoxLayout;
 class QStackedLayout;
 
 namespace installer {
 
+class IconButton;
 class SystemInfoAvatarFrame;
 class SystemInfoFormFrame;
+class SystemInfoKeyboardFrame;
 class SystemInfoTimezoneFrame;
 
 // Provides a form to let use input username, password and hostname,
@@ -37,27 +40,41 @@ class SystemInfoFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  // Update visibility of buttons in header bar based on current page.
+  void updateHeadBar();
+
+  IconButton* timezone_button_ = nullptr;
+  IconButton* keyboard_button_ = nullptr;
+  QHBoxLayout* head_layout_ = nullptr;
   QStackedLayout* stacked_layout_ = nullptr;
   SystemInfoAvatarFrame* avatar_frame_ = nullptr;
   SystemInfoFormFrame* form_frame_ = nullptr;
+  SystemInfoKeyboardFrame* keyboard_frame_ = nullptr;
   SystemInfoTimezoneFrame* timezone_frame_ = nullptr;
 
   // To mark current page before switching to timezone page.
-  QWidget* last_page_ = nullptr;
+  int last_page_;
 
-  // Do not show timezone frame if this flag is false.
+  // Do not show keyboard frame if this flag is true.
+  bool disable_keyboard_;
+
+  // Do not show timezone frame if this flag is true.
   bool disable_timezone_;
 
  private slots:
-  // Hide timezone frame.
-  void hideTimezone();
-
   // Restore last page when timezone page is finished.
   void restoreLastPage();
 
   void showAvatarPage();
   void showFormPage();
+  void showKeyboardPage();
   void showTimezonePage();
+
+  // Hide timezone Frame.
+  void hideTimezone();
+
+  // Update text in timezone button.
+  void updateTimezone(const QString& timezone);
 };
 
 }  // namespace installer

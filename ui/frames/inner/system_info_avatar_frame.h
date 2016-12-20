@@ -12,7 +12,6 @@ namespace installer {
 
 class AvatarButton;
 class CommentLabel;
-class IconButton;
 class TitleLabel;
 
 class SystemInfoAvatarFrame : public QFrame {
@@ -27,18 +26,9 @@ class SystemInfoAvatarFrame : public QFrame {
 
   void finished();
 
-  // Emitted when timezone button is clicked.
-  void timezoneClicked();
-
  public slots:
-  // Hide timezone button.
-  void hideTimezoneButton();
-
   // Read default avatar and emit avatarUpdated() signal.
   void readConf();
-
-  // Update text in timezone button.
-  void updateTimezone(const QString& timezone);
 
   // Validate avatar path and write to conf file.
   void writeConf();
@@ -53,7 +43,6 @@ class SystemInfoAvatarFrame : public QFrame {
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
   AvatarButton* current_avatar_button_ = nullptr;
-  IconButton* timezone_button_ = nullptr;
   QListView* list_view_ = nullptr;
 
  private slots:

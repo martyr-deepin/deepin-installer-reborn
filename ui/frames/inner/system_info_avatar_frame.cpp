@@ -14,13 +14,11 @@
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
-#include "sysinfo/timezone.h"
 #include "ui/delegates/avatar_list_delegate.h"
 #include "ui/frames/consts.h"
 #include "ui/views/pointer_list_view.h"
 #include "ui/widgets/avatar_button.h"
 #include "ui/widgets/comment_label.h"
-#include "ui/widgets/icon_button.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
@@ -49,10 +47,6 @@ SystemInfoAvatarFrame::SystemInfoAvatarFrame(QWidget* parent)
   this->initConnections();
 }
 
-void SystemInfoAvatarFrame::hideTimezoneButton() {
-  timezone_button_->setVisible(false);
-}
-
 void SystemInfoAvatarFrame::readConf() {
   const QString avatar = current_avatar_button_->avatar();
   emit this->avatarUpdated(avatar);
@@ -67,11 +61,6 @@ void SystemInfoAvatarFrame::writeConf() {
   }
 }
 
-void SystemInfoAvatarFrame::updateTimezone(const QString& timezone) {
-  // Add left margin.
-  timezone_button_->setText(QString(" %1").arg(GetTimezoneName(timezone)));
-}
-
 void SystemInfoAvatarFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr(kTextTitle));
@@ -82,9 +71,6 @@ void SystemInfoAvatarFrame::changeEvent(QEvent* event) {
 }
 
 void SystemInfoAvatarFrame::initConnections() {
-  connect(timezone_button_, &QPushButton::clicked,
-          this, &SystemInfoAvatarFrame::timezoneClicked);
-
   // Return to previous page when chosen_avatar_button is clicked.
   connect(current_avatar_button_, &QPushButton::clicked,
           this, &SystemInfoAvatarFrame::finished);
@@ -93,17 +79,6 @@ void SystemInfoAvatarFrame::initConnections() {
 }
 
 void SystemInfoAvatarFrame::initUI() {
-  timezone_button_ = new IconButton(":/images/timezone_normal.svg",
-                                    ":/images/timezone_hover.svg",
-                                    ":/images/timezone_press.svg",
-                                    128, 20, nullptr);
-  QHBoxLayout* timezone_layout = new QHBoxLayout();
-  timezone_layout->setContentsMargins(0, 0, 0, 0);
-  timezone_layout->setSpacing(0);
-  timezone_layout->addSpacing(20);
-  timezone_layout->addWidget(timezone_button_);
-  timezone_layout->addStretch();
-
   title_label_ = new TitleLabel(tr(kTextTitle));
   comment_label_ = new CommentLabel(tr(kTextComment));
   QHBoxLayout* comment_layout = new QHBoxLayout();
@@ -145,8 +120,6 @@ void SystemInfoAvatarFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addLayout(timezone_layout);
-  layout->addSpacing(10);
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addSpacing(40);

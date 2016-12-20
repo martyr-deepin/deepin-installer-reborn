@@ -11,14 +11,12 @@
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
-#include "sysinfo/timezone.h"
 #include "sysinfo/validate_hostname.h"
 #include "sysinfo/validate_password.h"
 #include "sysinfo/validate_username.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/avatar_button.h"
 #include "ui/widgets/comment_label.h"
-#include "ui/widgets/icon_button.h"
 #include "ui/widgets/line_edit.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/system_info_tip.h"
@@ -51,17 +49,8 @@ SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
   this->initConnections();
 }
 
-void SystemInfoFormFrame::hideTimezoneButton() {
-  timezone_button_->setVisible(false);
-}
-
 void SystemInfoFormFrame::updateAvatar(const QString& avatar) {
   avatar_button_->updateIcon(avatar);
-}
-
-void SystemInfoFormFrame::updateTimezone(const QString& timezone) {
-  // Add left margin.
-  timezone_button_->setText(QString(" %1").arg(GetTimezoneName(timezone)));
 }
 
 void SystemInfoFormFrame::writeConf() {
@@ -94,8 +83,6 @@ void SystemInfoFormFrame::initConnections() {
           this, &SystemInfoFormFrame::avatarClicked);
   connect(next_button_, &QPushButton::clicked,
           this, &SystemInfoFormFrame::onNextButtonClicked);
-  connect(timezone_button_, &QPushButton::clicked,
-          this, &SystemInfoFormFrame::timezoneClicked);
 
   connect(username_edit_, &LineEdit::editingFinished,
           this, &SystemInfoFormFrame::onUsernameEditingFinished);
@@ -134,17 +121,6 @@ void SystemInfoFormFrame::initConnections() {
 }
 
 void SystemInfoFormFrame::initUI() {
-  timezone_button_ = new IconButton(":/images/timezone_normal.svg",
-                                    ":/images/timezone_hover.svg",
-                                    ":/images/timezone_press.svg",
-                                    128, 20, nullptr);
-  QHBoxLayout* timezone_layout = new QHBoxLayout();
-  timezone_layout->setContentsMargins(0, 0, 0, 0);
-  timezone_layout->setSpacing(0);
-  timezone_layout->addSpacing(20);
-  timezone_layout->addWidget(timezone_button_);
-  timezone_layout->addStretch();
-
   title_label_ = new TitleLabel(tr(kTextTitle));
   comment_label_ = new CommentLabel(tr(kTextComment));
   QHBoxLayout* comment_layout = new QHBoxLayout();
@@ -187,8 +163,6 @@ void SystemInfoFormFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addLayout(timezone_layout);
-  layout->addSpacing(10);
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addSpacing(40);

@@ -11,7 +11,6 @@ namespace installer {
 
 class AvatarButton;
 class CommentLabel;
-class IconButton;
 class LineEdit;
 class NavButton;
 class SystemInfoTip;
@@ -30,18 +29,9 @@ class SystemInfoFormFrame : public QFrame {
   // Emitted when form is validated.
   void finished();
 
-  // Emitted when timezone button is clicked.
-  void timezoneClicked();
-
  public slots:
-  // Hide timezone button.
-  void hideTimezoneButton();
-
   // Update user avatar image.
   void updateAvatar(const QString& avatar);
-
-  // Update text in timezone button.
-  void updateTimezone(const QString& timezone);
 
   // Write form content to conf file.
   void writeConf();
@@ -62,7 +52,6 @@ class SystemInfoFormFrame : public QFrame {
   bool validatePassword(QString& msg);
   bool validatePassword2(QString& msg);
 
-  IconButton* timezone_button_ = nullptr;
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
   AvatarButton* avatar_button_ = nullptr;

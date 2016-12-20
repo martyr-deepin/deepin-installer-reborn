@@ -215,6 +215,8 @@ set(UI_FILES
     ui/frames/inner/system_info_avatar_frame.h
     ui/frames/inner/system_info_form_frame.cpp
     ui/frames/inner/system_info_form_frame.h
+    ui/frames/inner/system_info_keyboard_frame.cpp
+    ui/frames/inner/system_info_keyboard_frame.h
     ui/frames/inner/system_info_timezone_frame.cpp
     ui/frames/inner/system_info_timezone_frame.h
 
