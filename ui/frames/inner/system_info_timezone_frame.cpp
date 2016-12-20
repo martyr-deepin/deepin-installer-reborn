@@ -29,7 +29,7 @@ const char kTextComment[] = "Mark your zone in the map";
 const char kTextBack[] = "Back";
 
 // Set timezone to UTC when local-time is used.
-const char kLocalTime[] = "Etc/UTC";
+const char kDefaultTimezone[] = "Etc/UTC";
 
 // Check if any Windows partition is found on disk.
 bool HasWindowsPartition() {
@@ -62,27 +62,30 @@ void SystemInfoTimezoneFrame::readConf() {
   //    * Or wait for user to choose timezone on map.
 
   if (GetSettingsBool(kSystemInfoUseWindowsTime) && HasWindowsPartition()) {
-    // Update timezone.
-    timezone_ = kLocalTime;
+    // If local time is used, set timezone to Etc/UTC.
+    timezone_ = kDefaultTimezone;
     timezone_source_ = TimezoneSource::Local;
     if (GetSettingsBool(kSystemInfoWindowsDisableTimezonePage)) {
       // Send hide-timezone signal.
       emit this->hideTimezone();
+      // Do not send timezoneUpdated() signal.
       return;
     }
-
-    emit this->timezoneUpdated(GetTimezoneName(timezone_));
-  }
-
-  timezone_ = GetSettingsString(kSystemInfoDefaultTimezone);
-  if (IsValidTimezone(timezone_)) {
-    timezone_source_ = TimezoneSource::Conf;
-    emit this->timezoneUpdated(GetTimezoneName(timezone_));
   } else {
-    const bool use_geoip = GetSettingsBool(kSystemInfoTimezoneUseGeoIp);
-    const bool use_regdomain = GetSettingsBool(kSystemInfoTimezoneUseRegdomain);
-    timezone_manager_->update(use_geoip, use_regdomain);
+    // Read timezone from settings.
+    timezone_ = GetSettingsString(kSystemInfoDefaultTimezone);
+    if (IsValidTimezone(timezone_)) {
+      timezone_source_ = TimezoneSource::Conf;
+    } else {
+      const bool use_geoip = GetSettingsBool(kSystemInfoTimezoneUseGeoIp);
+      const bool use_regdomain = GetSettingsBool(kSystemInfoTimezoneUseRegdomain);
+      timezone_manager_->update(use_geoip, use_regdomain);
+
+      // Use default timezone.
+      timezone_ = kDefaultTimezone;
+    }
   }
+  emit this->timezoneUpdated(GetTimezoneName(timezone_));
 }
 
 void SystemInfoTimezoneFrame::writeConf() {
