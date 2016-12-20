@@ -85,7 +85,7 @@ void SystemInfoTimezoneFrame::readConf() {
       timezone_ = kDefaultTimezone;
     }
   }
-  emit this->timezoneUpdated(GetTimezoneName(timezone_));
+  emit this->timezoneUpdated(timezone_);
 }
 
 void SystemInfoTimezoneFrame::writeConf() {
@@ -143,7 +143,7 @@ void SystemInfoTimezoneFrame::initUI() {
 
 void SystemInfoTimezoneFrame::onBackButtonClicked() {
   if (IsValidTimezone(timezone_)) {
-    emit this->timezoneUpdated(GetTimezoneName(timezone_));
+    emit this->timezoneUpdated(timezone_);
   } else {
     qWarning() << "Invalid timezone:" << timezone_;
   }
@@ -157,7 +157,7 @@ void SystemInfoTimezoneFrame::onTimezoneManagerUpdated(
     // Update timezone only if it is not set.
     timezone_source_ = TimezoneSource::Scan;
     timezone_ = timezone;
-    emit this->timezoneUpdated(GetTimezoneName(timezone_));
+    emit this->timezoneUpdated(timezone_);
   } else {
     qDebug() << "Ignore timezone value from timezone-manager:" << timezone;
   }
@@ -166,7 +166,7 @@ void SystemInfoTimezoneFrame::onTimezoneManagerUpdated(
 void SystemInfoTimezoneFrame::onTimezoneMapUpdated(const QString& timezone) {
   timezone_source_ = TimezoneSource::User;
   timezone_ = timezone;
-  emit this->timezoneUpdated(GetTimezoneName(timezone_));
+  emit this->timezoneUpdated(timezone_);
 }
 
 }  // namespace installer

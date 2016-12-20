@@ -14,6 +14,7 @@
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "sysinfo/timezone.h"
 #include "ui/delegates/avatar_list_delegate.h"
 #include "ui/frames/consts.h"
 #include "ui/views/pointer_list_view.h"
@@ -68,7 +69,7 @@ void SystemInfoAvatarFrame::writeConf() {
 
 void SystemInfoAvatarFrame::updateTimezone(const QString& timezone) {
   // Add left margin.
-  timezone_button_->setText(QString(" %1").arg(timezone));
+  timezone_button_->setText(QString(" %1").arg(GetTimezoneName(timezone)));
 }
 
 void SystemInfoAvatarFrame::changeEvent(QEvent* event) {

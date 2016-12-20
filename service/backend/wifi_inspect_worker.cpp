@@ -18,7 +18,7 @@ namespace {
 const char kTsharkPackets[] = "200";
 
 // Time in seconds before exit.
-const char kTsharkDuration[] = "20";
+const char kTsharkDuration[] = "10";
 
 const char kScanRegdomainFile[] = TOOLS_DIR "/scan_regdomain.sh";
 
@@ -80,8 +80,8 @@ void WiFiInspectWorker::doScanning() {
   // Then capture packets with tshark.
   // At last, disable monitor mode.
   QString out, err;
-  if (SpawnCmd(kScanRegdomainFile, {kTsharkPackets, kTsharkDuration},
-               out, err)) {
+  if (RunScriptFile({kScanRegdomainFile, kTsharkPackets, kTsharkDuration},
+                    out, err)) {
     QStringList list = ParseRegdomainList(out);
     if (!list.isEmpty()) {
       // Get the most used country code.

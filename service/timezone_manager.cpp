@@ -20,14 +20,13 @@ namespace {
 // Convert country code to timezone.
 // NOTE(xushaohua): Some countries may have multiple timezones,
 // like Russia and US. So this function is not quite reliable.
-bool CountryCodeToTimezone(const QString& regdomain, QString& timezone) {
+QString CountryCodeToTimezone(const QString& regdomain) {
   const ZoneInfoList list = GetZoneInfoList();
   const int index = GetZoneInfoByCountry(list, regdomain);
   if (index > -1) {
-    timezone = list.at(index).timezone;
-    return true;
+    return list.at(index).timezone;
   } else {
-    return false;
+    return QString();
   }
 }
 
@@ -89,8 +88,8 @@ void TimezoneManager::onGeoIpUpdated(const QString& timezone) {
 void TimezoneManager::onRegdomainUpdated(const QString& regdomain) {
   qDebug() << "onRegdomainUpdated():" << regdomain;
   // Guess timezone based on regdomain.
-  QString timezone;
-  if (CountryCodeToTimezone(regdomain, timezone)) {
+  const QString timezone = CountryCodeToTimezone(regdomain);
+  if (!timezone.isEmpty()) {
     emit this->timezoneUpdated(timezone);
   } else {
     qWarning() << "Failed to convert regdomain to timezone:" << regdomain;

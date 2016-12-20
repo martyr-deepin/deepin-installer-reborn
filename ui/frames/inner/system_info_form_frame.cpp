@@ -11,6 +11,7 @@
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "sysinfo/timezone.h"
 #include "sysinfo/validate_hostname.h"
 #include "sysinfo/validate_password.h"
 #include "sysinfo/validate_username.h"
@@ -60,7 +61,7 @@ void SystemInfoFormFrame::updateAvatar(const QString& avatar) {
 
 void SystemInfoFormFrame::updateTimezone(const QString& timezone) {
   // Add left margin.
-  timezone_button_->setText(QString(" %1").arg(timezone));
+  timezone_button_->setText(QString(" %1").arg(GetTimezoneName(timezone)));
 }
 
 void SystemInfoFormFrame::writeConf() {
