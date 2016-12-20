@@ -605,6 +605,8 @@ target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 ## Installation
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-adjtime
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
