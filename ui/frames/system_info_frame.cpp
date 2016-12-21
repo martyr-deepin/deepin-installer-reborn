@@ -55,6 +55,7 @@ void SystemInfoFrame::readTimezone() {
 void SystemInfoFrame::writeConf() {
   avatar_frame_->writeConf();
   form_frame_->writeConf();
+  keyboard_frame_->writeConf();
   timezone_frame_->writeConf();
 }
 

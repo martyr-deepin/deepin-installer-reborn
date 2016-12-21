@@ -34,6 +34,10 @@ class SystemInfoKeyboardFrame : public QFrame {
   // Emitted when new keyboard layout is selected.
   void layoutUpdated(const QString& layout);
 
+ public slots:
+  // Save current keyboard layout to settings file.
+  void writeConf();
+
  protected:
   void changeEvent(QEvent* event) override;
 

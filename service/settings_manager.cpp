@@ -256,10 +256,13 @@ void WriteTimezone(const QString& timezone, bool is_local_time) {
   settings.setValue("DI_IS_LOCAL_TIME", is_local_time);
 }
 
-void WriteKeyboard(const QString& layout, const QString& variant) {
+void WriteKeyboard(const QString& model,
+                   const QString& layout,
+                   const QString& variant) {
   QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
-  settings.setValue("DI_KEYBOARD_LAYOUT_VARIANT", variant);
+  settings.setValue("DI_KEYBOARD_MODEL", model);
   settings.setValue("DI_KEYBOARD_LAYOUT", layout);
+  settings.setValue("DI_KEYBOARD_LAYOUT_VARIANT", variant);
 }
 
 void WritePartitionInfo(const QString& root_disk,

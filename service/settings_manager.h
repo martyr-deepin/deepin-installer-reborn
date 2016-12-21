@@ -64,7 +64,12 @@ void WriteHostname(const QString& hostname);
 void WritePassword(const QString& password);
 void WriteAvatar(const QString& avatar);
 void WriteTimezone(const QString& timezone, bool is_local_time);
-void WriteKeyboard(const QString& layout, const QString& variant);
+
+// Write keyboard model, layout and layout variant name.
+void WriteKeyboard(const QString& model,
+                   const QString& layout,
+                   const QString& variant);
+
 // Write disk info.
 //  * |root_disk|, device path to install system into, like /dev/sda;
 //  * |root_partition|, partition path to install system into;

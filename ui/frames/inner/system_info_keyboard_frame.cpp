@@ -58,6 +58,15 @@ void SystemInfoKeyboardFrame::readConf() {
   }
 }
 
+void SystemInfoKeyboardFrame::writeConf() {
+  const QString layout =
+      layout_model_->getLayoutName(layout_view_->currentIndex());
+  const QString variant =
+      variant_model_->getVariantName(variant_view_->currentIndex());
+  // Model name of keyboard is empty. Variant name might be empty.
+  WriteKeyboard("", layout, variant);
+}
+
 void SystemInfoKeyboardFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr(kTextTitle));
