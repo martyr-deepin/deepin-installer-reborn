@@ -1,0 +1,39 @@
+/** Used in SystemInfoFrame class **/
+
+/* Remove borders */
+QPushButton[flat="true"] {
+  border: none;
+  outline: none;
+  color: #eaeaea;
+}
+
+#timezone_button, #keyboard_button {
+  border: none;
+  padding: 0 0 0 30px;
+  font-size: 12px;
+  /* NOTE(xushaohua): Do not optimize css properties */
+  background-clip: border;
+  background-origin: padding;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+
+#timezone_button {
+  background-image: url(:/images/timezone_normal.svg);
+}
+#timezone_button:hover {
+  background-image: url(:/images/timezone_hover.svg);
+}
+#timezone_button:pressed {
+  background-image: url(:/images/timezone_press.svg);
+}
+
+#keyboard_button {
+  background-image: url(:/images/keyboard_normal.png);
+}
+#keyboard_button:hover {
+  background-image: url(:/images/keyboard_hover.png);
+}
+#keyboard_button:pressed {
+  background-image: url(:/images/keyboard_press.png);
+}

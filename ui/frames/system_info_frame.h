@@ -7,11 +7,11 @@
 
 #include <QFrame>
 class QHBoxLayout;
+class QPushButton;
 class QStackedLayout;
 
 namespace installer {
 
-class IconButton;
 class SystemInfoAvatarFrame;
 class SystemInfoFormFrame;
 class SystemInfoKeyboardFrame;
@@ -43,8 +43,8 @@ class SystemInfoFrame : public QFrame {
   // Update visibility of buttons in header bar based on current page.
   void updateHeadBar();
 
-  IconButton* timezone_button_ = nullptr;
-  IconButton* keyboard_button_ = nullptr;
+  QPushButton* timezone_button_ = nullptr;
+  QPushButton* keyboard_button_ = nullptr;
   QHBoxLayout* head_layout_ = nullptr;
   QStackedLayout* stacked_layout_ = nullptr;
   SystemInfoAvatarFrame* avatar_frame_ = nullptr;

@@ -8,6 +8,7 @@
 #include <QHBoxLayout>
 #include <QStackedLayout>
 
+#include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/timezone.h"
@@ -15,7 +16,7 @@
 #include "ui/frames/inner/system_info_form_frame.h"
 #include "ui/frames/inner/system_info_keyboard_frame.h"
 #include "ui/frames/inner/system_info_timezone_frame.h"
-#include "ui/widgets/icon_button.h"
+#include "ui/widgets/pointer_button.h"
 
 namespace installer {
 
@@ -93,18 +94,21 @@ void SystemInfoFrame::initConnections() {
 }
 
 void SystemInfoFrame::initUI() {
-  timezone_button_ = new IconButton(":/images/timezone_normal.svg",
-                                    ":/images/timezone_hover.svg",
-                                    ":/images/timezone_press.svg",
-                                    128, 20, nullptr);
-  keyboard_button_ = new IconButton(":/images/keyboard_normal.png",
-                                    ":/images/keyboard_hover.png",
-                                    ":/images/keyboard_press.png",
-                                    128, 20, nullptr);
+  timezone_button_ = new PointerButton();
+  timezone_button_->setObjectName("timezone_button");
+  timezone_button_->setFlat(true);
+  timezone_button_->setFixedHeight(23);
+
+  keyboard_button_ = new PointerButton();
+  keyboard_button_->setObjectName("keyboard_button");
+  keyboard_button_->setFlat(true);
+  keyboard_button_->setFixedHeight(23);
+
   head_layout_ = new QHBoxLayout();
-  head_layout_->setContentsMargins(20, 0, 0, 0);
-  head_layout_->setSpacing(20);
+  head_layout_->setContentsMargins(30, 0, 0, 0);
+  head_layout_->setSpacing(0);
   head_layout_->addWidget(timezone_button_);
+  head_layout_->addSpacing(30);
   head_layout_->addWidget(keyboard_button_);
   head_layout_->addStretch();
 
@@ -126,6 +130,7 @@ void SystemInfoFrame::initUI() {
   layout->addLayout(stacked_layout_);
 
   this->setLayout(layout);
+  this->setStyleSheet(ReadFile(":/styles/system_info_frame.css"));
 }
 
 void SystemInfoFrame::updateHeadBar() {
@@ -185,14 +190,11 @@ void SystemInfoFrame::hideTimezone() {
 }
 
 void SystemInfoFrame::updateLayout(const QString& layout) {
-  // Add left margin.
-  // TODO(xushaohua): Replace it with css style
-  keyboard_button_->setText(QString(" %1").arg(layout));
+  keyboard_button_->setText(layout);
 }
 
 void SystemInfoFrame::updateTimezone(const QString& timezone) {
-  // Add left margin.
-  timezone_button_->setText(QString(" %1").arg(GetTimezoneName(timezone)));
+  timezone_button_->setText(GetTimezoneName(timezone));
 }
 
 }  // namespace installer
