@@ -10,10 +10,12 @@ namespace installer {
 
 KeyboardLayoutModel::KeyboardLayoutModel(QObject* parent)
     : QAbstractListModel(parent),
-      xkb_config_(GetXkbConfig()) {
+      xkb_config_(GetXkbConfig()),
+      layout_list_() {
   this->setObjectName("keyboard_layout_model");
 
   layout_list_ = xkb_config_.layout_list;
+  // Sort layout list by description.
   std::sort(layout_list_.begin(), layout_list_.end());
 }
 
@@ -37,6 +39,23 @@ QVariant KeyboardLayoutModel::data(const QModelIndex& index, int role) const {
 int KeyboardLayoutModel::rowCount(const QModelIndex& parent) const {
   Q_UNUSED(parent);
   return layout_list_.length();
+}
+
+XKbLayoutVariantList KeyboardLayoutModel::getVariantList(
+    const QModelIndex& index) const {
+  if (index.isValid()) {
+    return layout_list_.at(index.row()).variant_list;
+  } else {
+    return XKbLayoutVariantList();
+  }
+}
+
+QString KeyboardLayoutModel::getLayoutName(const QModelIndex& index) const {
+  if (index.isValid()) {
+    return layout_list_.at(index.row()).name;
+  } else {
+    return QString();
+  }
 }
 
 }  // namespace installer

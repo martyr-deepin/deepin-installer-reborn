@@ -25,6 +25,12 @@ class KeyboardLayoutModel : public QAbstractListModel {
   // Get number of rows with |parent|.
   int rowCount(const QModelIndex& parent) const override;
 
+  // Get variant list at |index|.
+  XKbLayoutVariantList getVariantList(const QModelIndex& index) const;
+
+  // Get layout name at |index|.
+  QString getLayoutName(const QModelIndex& index) const;
+
  private:
   XkbConfig xkb_config_;
 

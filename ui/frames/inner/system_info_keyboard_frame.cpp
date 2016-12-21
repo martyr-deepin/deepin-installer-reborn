@@ -4,12 +4,14 @@
 
 #include "ui/frames/inner/system_info_keyboard_frame.h"
 
+#include <QDebug>
 #include <QEvent>
 #include <QLineEdit>
 #include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
 #include "ui/models/keyboard_layout_model.h"
+#include "ui/models/keyboard_layout_variant_model.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/views/frameless_list_view.h"
 #include "ui/widgets/nav_button.h"
@@ -48,6 +50,11 @@ void SystemInfoKeyboardFrame::changeEvent(QEvent* event) {
 }
 
 void SystemInfoKeyboardFrame::initConnections() {
+  connect(layout_view_, &QListView::pressed,
+          this, &SystemInfoKeyboardFrame::onLayoutViewSelected);
+  connect(variant_view_, &QListView::pressed,
+          this, &SystemInfoKeyboardFrame::onVariantViewSelected);
+
   connect(back_button_, &QPushButton::clicked,
           this, &SystemInfoKeyboardFrame::finished);
 }
@@ -61,6 +68,8 @@ void SystemInfoKeyboardFrame::initUI() {
   layout_view_->setModel(layout_model_);
 
   variant_view_ = new FramelessListView();
+  variant_model_ = new KeyboardLayoutVariantModel(this);
+  variant_view_->setModel(variant_model_);
 
   QHBoxLayout* keyboard_layout = new QHBoxLayout();
   keyboard_layout->setContentsMargins(0, 0, 0, 0);
@@ -96,6 +105,31 @@ void SystemInfoKeyboardFrame::initUI() {
 
   this->setLayout(layout);
   this->setContentsMargins(0, 0, 0, 0);
+}
+
+void SystemInfoKeyboardFrame::onLayoutViewSelected(const QModelIndex& index) {
+  test_edit_->clear();
+
+  const QString layout = layout_model_->getLayoutName(index);
+  if (!layout.isEmpty()) {
+    if (!SetXkbLayout(layout)) {
+      qWarning() << "SetXkbLayout() failed!" << layout;
+    }
+  }
+  variant_model_->setVariantList(layout_model_->getVariantList(index));
+}
+
+void SystemInfoKeyboardFrame::onVariantViewSelected(const QModelIndex& index) {
+  test_edit_->clear();
+
+  const QString layout =
+      layout_model_->getLayoutName(layout_view_->currentIndex());
+  const QString variant = variant_model_->getVariantName(index);
+  if (!layout.isEmpty() && !variant.isEmpty()) {
+    if (!SetXkbLayout(layout, variant)) {
+      qWarning() << "SetXkbLayout() failed!" << layout << variant;
+    }
+  }
 }
 
 }  // namespace installer

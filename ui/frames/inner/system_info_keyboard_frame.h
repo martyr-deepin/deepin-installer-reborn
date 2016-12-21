@@ -13,6 +13,7 @@ namespace installer {
 class CommentLabel;
 class FramelessListView;
 class KeyboardLayoutModel;
+class KeyboardLayoutVariantModel;
 class NavButton;
 class TitleLabel;
 
@@ -39,8 +40,19 @@ class SystemInfoKeyboardFrame : public QFrame {
   FramelessListView* layout_view_ = nullptr;
   KeyboardLayoutModel* layout_model_ = nullptr;
   FramelessListView* variant_view_ = nullptr;
+  KeyboardLayoutVariantModel* variant_model_ = nullptr;
   QLineEdit* test_edit_ = nullptr;
   NavButton* back_button_ = nullptr;
+
+ private:
+  // Update variant list when new keyboard layout is selected.
+  // Update system keyboard layout.
+  // Clear content of test_edit_.
+  void onLayoutViewSelected(const QModelIndex& index);
+
+  // Update system keyboard layout when new layout variant is selected.
+  // Clear content of test_edit_.
+  void onVariantViewSelected(const QModelIndex& index);
 };
 
 }  // namespace installer
