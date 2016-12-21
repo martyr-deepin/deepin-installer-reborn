@@ -31,11 +31,11 @@ void ReadModelList(const QDomNode& root, XkbModelList& model_list) {
       for (int props_idx = 0; props_idx < props.length(); props_idx++) {
         const QDomNode prop(props.at(props_idx));
         if (prop.nodeName() == "name") {
-          xkb_model.name = prop.nodeValue();
+          xkb_model.name = prop.toElement().text();
         } else if (prop.nodeName() == "description") {
-          xkb_model.description = prop.nodeValue();
+          xkb_model.description = prop.toElement().text();
         } else if (prop.nodeName() == "vendor") {
-          xkb_model.vendor = prop.nodeValue();
+          xkb_model.vendor = prop.toElement().text();
         }
       }
     }
@@ -45,27 +45,31 @@ void ReadModelList(const QDomNode& root, XkbModelList& model_list) {
 
 // Read configItem in layoutVariant node.
 void ReadLayoutVariantList(const QDomNode& root,
-                                 XKbLayoutVariantList& variant_list) {
+                           XKbLayoutVariantList& variant_list) {
   const QDomNodeList variant_nodes(root.childNodes());
   for (int variant_idx = 0; variant_idx < variant_nodes.length();
        variant_idx++) {
     const QDomNode variant_node(variant_nodes.at(variant_idx));
     XkbLayoutVariant layout_variant;
-    const QDomNodeList props(variant_node.childNodes());
+    const QDomNode config_node(variant_node.firstChild());
+    if (config_node.isNull()) {
+      continue;
+    }
+    const QDomNodeList props(config_node.childNodes());
     for (int prop_idx = 0; prop_idx < props.length(); prop_idx++) {
       const QDomNode prop(props.at(prop_idx));
       if (prop.nodeName() == "name") {
-        layout_variant.name = prop.nodeValue();
+        layout_variant.name = prop.toElement().text();
       } else if (prop.nodeName() == "description") {
-        layout_variant.description = prop.nodeValue();
+        layout_variant.description = prop.toElement().text();
       } else if (prop.nodeName() == "shortDescription") {
-        layout_variant.short_description = prop.nodeValue();
+        layout_variant.short_description = prop.toElement().text();
       } else if (prop.nodeName() == "languageList") {
         // Read layout / configItem / languageList
         const QDomNodeList lang_nodes(prop.childNodes());
         for (int lang_idx = 0; lang_idx < lang_nodes.length(); lang_idx++) {
           const QDomNode lang_node(lang_nodes.at(lang_idx));
-          layout_variant.language_list.append(lang_node.nodeValue());
+          layout_variant.language_list.append(lang_node.toElement().text());
         }
       }
     }
@@ -79,17 +83,17 @@ void ReadLayoutConfigItem(const QDomNode& root, XkbLayout& xkb_layout) {
   for (int prop_idx = 0; prop_idx < props.length(); prop_idx++) {
     const QDomNode prop(props.at(prop_idx));
     if (prop.nodeName() == "name") {
-      xkb_layout.name = prop.nodeValue();
+      xkb_layout.name = prop.toElement().text();
     } else if (prop.nodeName() == "description") {
-      xkb_layout.description = prop.nodeValue();
+      xkb_layout.description = prop.toElement().text();
     } else if (prop.nodeName() == "shortDescription") {
-      xkb_layout.short_description = prop.nodeValue();
+      xkb_layout.short_description = prop.toElement().text();
     } else if (prop.nodeName() == "languageList") {
       // Read layout / configItem / languageList
       const QDomNodeList lang_nodes(prop.childNodes());
       for (int lang_idx = 0; lang_idx < lang_nodes.length(); lang_idx++) {
         const QDomNode lang_node(lang_nodes.at(lang_idx));
-        xkb_layout.language_list.append(lang_node.nodeValue());
+        xkb_layout.language_list.append(lang_node.toElement().text());
       }
     }
   }
