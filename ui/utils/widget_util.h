@@ -12,6 +12,9 @@ class QLayout;
 
 namespace installer {
 
+// Append stylesheet to |widget| and re paint it.
+void AppendStyleSheet(QWidget* widget, const QString& style);
+
 // Delete layout items in |layout|.
 void ClearLayout(QLayout* layout);
 

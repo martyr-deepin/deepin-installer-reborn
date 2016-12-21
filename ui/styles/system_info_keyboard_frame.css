@@ -1,0 +1,32 @@
+/** Used in SystemInfoKeyboardFrame class **/
+
+QListView#layout_view {
+  /* NOTE(xushaohua): Do not simplify this statement as
+   "border-radius: 4px 0 4px 0", which does not work in QSS. */
+  border-top-left-radius: 4px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 0px;
+}
+
+QListView#variant_view {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 4px;
+}
+
+QLineEdit#test_edit {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  padding: 0px 5px 0px 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  outline: none;
+  font-size: 12px;
+  line-height: 1.25;
+  color: #dadada;
+}
+
+QLineEdit#test_edit:focus {
+  border-color: #2ca7f8;
+}

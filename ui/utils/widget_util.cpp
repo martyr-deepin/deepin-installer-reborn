@@ -31,6 +31,11 @@ void WidgetTreeWalk(QWidget* root, int indent) {
 
 }  // namespace
 
+void AppendStyleSheet(QWidget* widget, const QString& style) {
+  widget->setStyleSheet(widget->styleSheet() + style);
+  widget->ensurePolished();
+}
+
 void ClearLayout(QLayout* layout) {
   for (QLayoutItem* item = layout->takeAt(0);
        item != nullptr;
