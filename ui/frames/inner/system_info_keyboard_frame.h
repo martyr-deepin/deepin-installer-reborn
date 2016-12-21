@@ -28,6 +28,9 @@ class SystemInfoKeyboardFrame : public QFrame {
   // Emitted when back_button_ is clicked.
   void finished();
 
+  // Emitted when new keyboard layout is selected.
+  void layoutUpdated(const QString& layout);
+
  protected:
   void changeEvent(QEvent* event) override;
 
@@ -44,9 +47,10 @@ class SystemInfoKeyboardFrame : public QFrame {
   QLineEdit* test_edit_ = nullptr;
   NavButton* back_button_ = nullptr;
 
- private:
+ private slots:
   // Update variant list when new keyboard layout is selected.
   // Update system keyboard layout.
+  // Emit layoutUpdate() signal.
   // Clear content of test_edit_.
   void onLayoutViewSelected(const QModelIndex& index);
 

@@ -71,6 +71,8 @@ void SystemInfoFrame::initConnections() {
 
   connect(keyboard_frame_, &SystemInfoKeyboardFrame::finished,
           this, &SystemInfoFrame::restoreLastPage);
+  connect(keyboard_frame_, &SystemInfoKeyboardFrame::layoutUpdated,
+          this, &SystemInfoFrame::updateLayout);
 
   connect(timezone_frame_, &SystemInfoTimezoneFrame::finished,
           this, &SystemInfoFrame::restoreLastPage);
@@ -176,6 +178,12 @@ void SystemInfoFrame::showTimezonePage() {
 void SystemInfoFrame::hideTimezone() {
   disable_timezone_ = true;
   timezone_button_->hide();
+}
+
+void SystemInfoFrame::updateLayout(const QString& layout) {
+  // Add left margin.
+  // TODO(xushaohua): Replace it with css style
+  keyboard_button_->setText(QString(" %1").arg(layout));
 }
 
 void SystemInfoFrame::updateTimezone(const QString& timezone) {

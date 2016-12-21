@@ -112,6 +112,8 @@ void SystemInfoKeyboardFrame::onLayoutViewSelected(const QModelIndex& index) {
 
   const QString layout = layout_model_->getLayoutName(index);
   if (!layout.isEmpty()) {
+    emit this->layoutUpdated(layout_model_->getLayoutDescription(index));
+
     if (!SetXkbLayout(layout)) {
       qWarning() << "SetXkbLayout() failed!" << layout;
     }

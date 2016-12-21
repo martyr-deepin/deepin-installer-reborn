@@ -73,6 +73,9 @@ class SystemInfoFrame : public QFrame {
   // Hide timezone Frame.
   void hideTimezone();
 
+  // Update text in keyboard button.
+  void updateLayout(const QString& layout);
+
   // Update text in timezone button.
   void updateTimezone(const QString& timezone);
 };

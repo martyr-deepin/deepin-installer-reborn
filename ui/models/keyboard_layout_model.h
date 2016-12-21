@@ -28,6 +28,9 @@ class KeyboardLayoutModel : public QAbstractListModel {
   // Get variant list at |index|.
   XKbLayoutVariantList getVariantList(const QModelIndex& index) const;
 
+  // Get layout description at |index|.
+  QString getLayoutDescription(const QModelIndex& index) const;
+
   // Get layout name at |index|.
   QString getLayoutName(const QModelIndex& index) const;
 

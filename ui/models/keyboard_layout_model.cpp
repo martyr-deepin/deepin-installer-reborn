@@ -50,6 +50,15 @@ XKbLayoutVariantList KeyboardLayoutModel::getVariantList(
   }
 }
 
+QString KeyboardLayoutModel::getLayoutDescription(
+    const QModelIndex& index) const {
+  if (index.isValid()) {
+    return layout_list_.at(index.row()).description;
+  } else {
+    return QString();
+  }
+}
+
 QString KeyboardLayoutModel::getLayoutName(const QModelIndex& index) const {
   if (index.isValid()) {
     return layout_list_.at(index.row()).name;
