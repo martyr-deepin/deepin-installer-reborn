@@ -120,6 +120,7 @@ void SystemInfoAvatarFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
+  layout->addSpacing(50);
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addSpacing(40);

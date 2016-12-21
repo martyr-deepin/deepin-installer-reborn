@@ -147,7 +147,15 @@ bool ReadConfig(const QString& filepath, XkbConfig& config) {
 
 }  // namespace
 
-XkbConfig ReadXkbConfig() {
+bool operator<(const XkbLayoutVariant& a, const XkbLayoutVariant& b) {
+  return a.description < b.description;
+}
+
+bool operator<(const XkbLayout& a, const XkbLayout& b) {
+  return a.description < b.description;
+}
+
+XkbConfig GetXkbConfig() {
   XkbConfig config;
   if (!ReadConfig(kXkbBaseRule, config)) {
     qWarning() << "Failed to read xkb config file" << kXkbBaseRule;

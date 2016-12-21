@@ -6,10 +6,13 @@
 #define INSTALLER_UI_FRAMES_INNNER_SYSTEM_INFO_KEYBOARD_FRAME_H
 
 #include <QFrame>
+class QLineEdit;
 
 namespace installer {
 
 class CommentLabel;
+class FramelessListView;
+class KeyboardLayoutModel;
 class NavButton;
 class TitleLabel;
 
@@ -33,6 +36,10 @@ class SystemInfoKeyboardFrame : public QFrame {
 
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
+  FramelessListView* layout_view_ = nullptr;
+  KeyboardLayoutModel* layout_model_ = nullptr;
+  FramelessListView* variant_view_ = nullptr;
+  QLineEdit* test_edit_ = nullptr;
   NavButton* back_button_ = nullptr;
 };
 

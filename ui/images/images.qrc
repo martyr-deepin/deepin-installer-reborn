@@ -22,12 +22,15 @@
     <file>driver_mac_32.png</file>
     <file>checkbox_unchecked_pressed.png</file>
     <file>code_press.png</file>
+    <file>keyboard_hover.png</file>
     <file>down_arrow.png</file>
+    <file>keyboard_normal.png</file>
     <file>driver_install_128.png</file>
     <file>driver_128.svg</file>
     <file>edit_partition.png</file>
     <file>driver_install_32.svg</file>
     <file>deepin_installer_reborn.svg</file>
+    <file>keyboard_press.png</file>
     <file>delete_part_active.png</file>
     <file>check_unchecked.png</file>
     <file>info.png</file>
@@ -76,7 +79,6 @@
     <file>increase.png</file>
     <file>driver_128.png</file>
     <file>timezone_press.svg</file>
-    <file>keyboard.png</file>
     <file>driver_32.svg</file>
     <file>failed.png</file>
     <file>default_layout.png</file>

@@ -5,10 +5,13 @@
 #include "ui/frames/inner/system_info_keyboard_frame.h"
 
 #include <QEvent>
+#include <QLineEdit>
 #include <QVBoxLayout>
 
 #include "ui/frames/consts.h"
+#include "ui/models/keyboard_layout_model.h"
 #include "ui/widgets/comment_label.h"
+#include "ui/views/frameless_list_view.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
@@ -18,7 +21,10 @@ namespace {
 
 const char kTextTitle[] = "Select keyboard layout";
 const char kTextComment[] = "Select keyboard layout";
+const char kTextTest[] = "Test area";
 const char kTextBack[] = "Back";
+
+const int kLayoutWidth = 860;
 
 }  // namespace
 
@@ -34,6 +40,7 @@ void SystemInfoKeyboardFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr(kTextTitle));
     comment_label_->setText(tr(kTextComment));
+    test_edit_->setPlaceholderText(tr(kTextTest));
     back_button_->setText(tr(kTextBack));
   } else {
     QFrame::changeEvent(event);
@@ -49,6 +56,30 @@ void SystemInfoKeyboardFrame::initUI() {
   title_label_ = new TitleLabel(tr(kTextTitle));
   comment_label_ = new CommentLabel(tr(kTextComment));
 
+  layout_view_ = new FramelessListView();
+  layout_model_ = new KeyboardLayoutModel(this);
+  layout_view_->setModel(layout_model_);
+
+  variant_view_ = new FramelessListView();
+
+  QHBoxLayout* keyboard_layout = new QHBoxLayout();
+  keyboard_layout->setContentsMargins(0, 0, 0, 0);
+  keyboard_layout->setSpacing(0);
+  keyboard_layout->addStretch();
+  keyboard_layout->addWidget(layout_view_);
+  keyboard_layout->addWidget(variant_view_);
+  keyboard_layout->addStretch();
+
+  QFrame* keyboard_wrapper = new QFrame();
+  keyboard_wrapper->setFixedWidth(kLayoutWidth);
+  keyboard_wrapper->setContentsMargins(0, 0, 0, 0);
+  keyboard_wrapper->setLayout(keyboard_layout);
+
+  test_edit_ = new QLineEdit();
+  test_edit_->setObjectName("test_edit");
+  test_edit_->setPlaceholderText(tr(kTextTest));
+  test_edit_->setFixedWidth(kLayoutWidth);
+
   back_button_ = new NavButton(tr(kTextBack));
 
   QVBoxLayout* layout = new QVBoxLayout();
@@ -57,6 +88,9 @@ void SystemInfoKeyboardFrame::initUI() {
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addWidget(comment_label_, 0, Qt::AlignCenter);
+  layout->addStretch();
+  layout->addWidget(keyboard_wrapper, 0, Qt::AlignHCenter);
+  layout->addWidget(test_edit_, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addWidget(back_button_, 0, Qt::AlignHCenter);
 

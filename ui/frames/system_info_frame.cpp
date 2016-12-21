@@ -91,9 +91,9 @@ void SystemInfoFrame::initUI() {
                                     ":/images/timezone_hover.svg",
                                     ":/images/timezone_press.svg",
                                     128, 20, nullptr);
-  keyboard_button_ = new IconButton(":/images/timezone_normal.svg",
-                                    ":/images/timezone_hover.svg",
-                                    ":/images/timezone_press.svg",
+  keyboard_button_ = new IconButton(":/images/keyboard_normal.png",
+                                    ":/images/keyboard_hover.png",
+                                    ":/images/keyboard_press.png",
                                     128, 20, nullptr);
   head_layout_ = new QHBoxLayout();
   head_layout_->setContentsMargins(20, 0, 0, 0);

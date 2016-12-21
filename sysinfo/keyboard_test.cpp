@@ -10,7 +10,7 @@ namespace installer {
 namespace {
 
 TEST(KeyboardTest, ReadXkbConfigTest) {
-  XkbConfig config = ReadXkbConfig();
+  XkbConfig config = GetXkbConfig();
   EXPECT_GT(config.model_list.length(), 10);
   EXPECT_GT(config.layout_list.length(), 100);
 }

@@ -245,6 +245,8 @@ set(UI_FILES
 
     ui/models/fs_model.cpp
     ui/models/fs_model.h
+    ui/models/keyboard_layout_model.cpp
+    ui/models/keyboard_layout_model.h
     ui/models/language_list_model.cpp
     ui/models/language_list_model.h
     ui/models/mount_point_model.cpp
