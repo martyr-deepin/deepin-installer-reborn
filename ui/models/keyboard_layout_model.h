@@ -34,6 +34,10 @@ class KeyboardLayoutModel : public QAbstractListModel {
   // Get layout name at |index|.
   QString getLayoutName(const QModelIndex& index) const;
 
+  // Get index of layout with |name|.
+  // Result might be invalid.
+  QModelIndex getLayoutByName(const QString& name) const;
+
  private:
   XkbConfig xkb_config_;
 

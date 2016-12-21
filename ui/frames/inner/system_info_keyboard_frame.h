@@ -24,6 +24,9 @@ class SystemInfoKeyboardFrame : public QFrame {
  public:
   explicit SystemInfoKeyboardFrame(QWidget* parent = nullptr);
 
+  // Set keyboard layout to default value.
+  void readConf();
+
  signals:
   // Emitted when back_button_ is clicked.
   void finished();
@@ -52,7 +55,8 @@ class SystemInfoKeyboardFrame : public QFrame {
   // Update system keyboard layout.
   // Emit layoutUpdate() signal.
   // Clear content of test_edit_.
-  void onLayoutViewSelected(const QModelIndex& index);
+  void onLayoutViewSelectionChanged(const QModelIndex& current,
+                                    const QModelIndex& previous);
 
   // Update system keyboard layout when new layout variant is selected.
   // Clear content of test_edit_.

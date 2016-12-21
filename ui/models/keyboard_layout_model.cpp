@@ -67,4 +67,13 @@ QString KeyboardLayoutModel::getLayoutName(const QModelIndex& index) const {
   }
 }
 
+QModelIndex KeyboardLayoutModel::getLayoutByName(const QString& name) const {
+  for (int row = 0; row < layout_list_.length(); ++row) {
+    if (layout_list_.at(row).name == name) {
+      return this->index(row);
+    }
+  }
+  return QModelIndex();
+}
+
 }  // namespace installer

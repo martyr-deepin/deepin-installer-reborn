@@ -9,6 +9,8 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/frames/consts.h"
 #include "ui/models/keyboard_layout_model.h"
 #include "ui/models/keyboard_layout_variant_model.h"
@@ -38,6 +40,22 @@ SystemInfoKeyboardFrame::SystemInfoKeyboardFrame(QWidget* parent)
   this->initConnections();
 }
 
+void SystemInfoKeyboardFrame::readConf() {
+  const QString layout = GetSettingsString(kSystemInfoDefaultKeyboardLayout);
+  if (layout.isEmpty()) {
+    qWarning() << "Default keyboard layout is empty!";
+    return;
+  }
+
+  const QModelIndex index = layout_model_->getLayoutByName(layout);
+  if (index.isValid()) {
+    // Select default layout.
+    layout_view_->setCurrentIndex(index);
+  } else {
+    qWarning() << "Invalid default keyboard layout:" << layout;
+  }
+}
+
 void SystemInfoKeyboardFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr(kTextTitle));
@@ -50,8 +68,8 @@ void SystemInfoKeyboardFrame::changeEvent(QEvent* event) {
 }
 
 void SystemInfoKeyboardFrame::initConnections() {
-  connect(layout_view_, &QListView::pressed,
-          this, &SystemInfoKeyboardFrame::onLayoutViewSelected);
+  connect(layout_view_->selectionModel(), &QItemSelectionModel::currentChanged,
+          this, &SystemInfoKeyboardFrame::onLayoutViewSelectionChanged);
   connect(variant_view_, &QListView::pressed,
           this, &SystemInfoKeyboardFrame::onVariantViewSelected);
 
@@ -107,18 +125,20 @@ void SystemInfoKeyboardFrame::initUI() {
   this->setContentsMargins(0, 0, 0, 0);
 }
 
-void SystemInfoKeyboardFrame::onLayoutViewSelected(const QModelIndex& index) {
+void SystemInfoKeyboardFrame::onLayoutViewSelectionChanged(
+    const QModelIndex& current, const QModelIndex& previous) {
+  Q_UNUSED(previous);
   test_edit_->clear();
 
-  const QString layout = layout_model_->getLayoutName(index);
+  const QString layout = layout_model_->getLayoutName(current);
   if (!layout.isEmpty()) {
-    emit this->layoutUpdated(layout_model_->getLayoutDescription(index));
+    emit this->layoutUpdated(layout_model_->getLayoutDescription(current));
 
     if (!SetXkbLayout(layout)) {
       qWarning() << "SetXkbLayout() failed!" << layout;
     }
   }
-  variant_model_->setVariantList(layout_model_->getVariantList(index));
+  variant_model_->setVariantList(layout_model_->getVariantList(current));
 }
 
 void SystemInfoKeyboardFrame::onVariantViewSelected(const QModelIndex& index) {
