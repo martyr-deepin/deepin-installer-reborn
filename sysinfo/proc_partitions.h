@@ -14,7 +14,7 @@ namespace installer {
 struct PartitionItem {
   int major;
   int minor;
-  qint64 blocks;
+  qint64 blocks;  // Size in kib.
   QString name;
 };
 

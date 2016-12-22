@@ -10,6 +10,7 @@
 #include "service/log_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "sysinfo/proc_meminfo.h"
 
 namespace installer {
 
@@ -44,10 +45,20 @@ int GetVisiblePages() {
 }
 
 bool IsDiskSpaceInsufficient() {
-  const int required_device_size =
-      GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  const MemInfo mem_info = GetMemInfo();
+  const qint64 mem_threshold =
+      GetSettingsInt(kPartitionMemoryThresholdForSwapArea) * kGibiByte;
+  int required_disk_space = 0;
+  // Check whether memory is too small.
+  if (mem_info.mem_total <= mem_threshold) {
+    required_disk_space =
+        GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
+  } else {
+    required_disk_space = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  }
+
   const qint64 maximum_device_size = GetMaximumDeviceSize();
-  return required_device_size * kMebiByte > maximum_device_size;
+  return required_disk_space * kGibiByte > maximum_device_size;
 }
 
 bool IsPartitionTableMatch() {
@@ -56,8 +67,7 @@ bool IsPartitionTableMatch() {
     return true;
   }
 
-  PartitionTableType type = GetPrimaryDiskPartitionTable();
-
+  const PartitionTableType type = GetPrimaryDiskPartitionTable();
   // If partition table is empty(a raw disk device), returns true.
   if (type == PartitionTableType::Empty) {
     return true;

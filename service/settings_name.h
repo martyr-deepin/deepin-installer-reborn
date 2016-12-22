@@ -68,10 +68,16 @@ const char kSystemInfoTimezoneUseRegdomain[] =
     "system_info_timezone_use_regdomain";
 
 // Partition
+const char kPartitionMemoryThresholdForSwapArea[] =
+    "partition_memory_threshold_for_swap_area";
+const char kPartitionDefaultSwapFileSize[] = "partition_default_swap_file_size";
 const char kPartitionMinimumDiskSpaceRequired[] =
     "partition_minimum_disk_space_required";
+const char kPartitionMinimumDiskSpaceRequiredInLowMemory[] =
+    "partition_minimum_disk_space_required_in_low_memory";
 const char kPartitionRecommendedDiskSpace[] =
     "partition_recommended_disk_space";
+const char kPartitionDefaultBootSpace[] = "partition_default_boot_space";
 const char kPartitionDefaultEFISpace[] = "partition_default_efi_space";
 const char kPartitionSupportedFs[] = "partition_supported_fs";
 const char kPartitionDefaultFs[] = "partition_default_fs";

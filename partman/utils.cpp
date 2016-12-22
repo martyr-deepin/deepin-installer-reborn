@@ -25,7 +25,9 @@ qint64 GetMaximumDeviceSize() {
   for (const PartitionItem item : list) {
     result = qMax(result, item.blocks);
   }
-  return result;
+
+  // Convert kib to bytes.
+  return result * kKibiByte;
 }
 
 PartitionTableType GetPrimaryDiskPartitionTable() {

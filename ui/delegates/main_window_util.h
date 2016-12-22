@@ -13,6 +13,11 @@ namespace installer {
 QString EncodeErrorMsg(const QString& msg);
 
 // Get number of visible pages displayed in main page.
+// Typically there are four pages:
+//  * SelectLanguageFrame
+//  * SystemInfoFrame
+//  * PartitionFrame
+//  * InstallProgressFrame
 int GetVisiblePages();
 
 // Check whether disk space is large enough to install new system.

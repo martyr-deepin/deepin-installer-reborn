@@ -12,7 +12,7 @@ namespace installer {
 // Check if EFI feature is enabled in this machine.
 bool IsEfiEnabled();
 
-// Get maximum device size, by parsing /proc/partitions.
+// Get maximum device size in bytes, by parsing /proc/partitions.
 qint64 GetMaximumDeviceSize();
 
 // Returns partition table type of the first disk device.
