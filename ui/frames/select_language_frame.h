@@ -24,7 +24,11 @@ class SelectLanguageFrame : public QFrame {
  public:
   explicit SelectLanguageFrame(QWidget* parent = nullptr);
 
-  void autoConf();
+  // Read default locale.
+  void readConf();
+
+  // Write locale to settings file.
+  void writeConf();
 
  signals:
   void finished();
@@ -54,9 +58,6 @@ class SelectLanguageFrame : public QFrame {
  private slots:
   void onLanguageListSelected(const QModelIndex& current,
                               const QModelIndex& previous);
-
-  // Check if a language item is selected.
-  void onNextButtonClicked();
 };
 
 }  // namespace installer

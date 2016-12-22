@@ -25,14 +25,15 @@ class SystemInfoFrame : public QFrame {
  public:
   explicit SystemInfoFrame(QWidget* parent = nullptr);
 
-  // Notify SystemInfoTimezoneFrame to read timezone based on current settings.
-  void readTimezone();
 
  signals:
   // Emitted when form is validated.
   void finished();
 
  public slots:
+  // Read default conf from settings.
+  void readConf();
+
   // Write conf to file.
   void writeConf();
 

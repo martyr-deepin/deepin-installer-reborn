@@ -36,9 +36,10 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
 
   this->initUI();
   this->initConnections();
+}
 
-  // Select default locale
-
+void SelectLanguageFrame::readConf() {
+// Select default locale
   const QString locale = GetSettingsString(kSelectLanguageDefaultLocale);
   const QModelIndex index = language_model_->localeIndex(locale);
   if (index.isValid()) {
@@ -47,7 +48,10 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
   }
 }
 
-void SelectLanguageFrame::autoConf() {
+void SelectLanguageFrame::writeConf() {
+  // Update locale environment.
+  qputenv("LC_ALL", lang_.lc_all.toStdString().c_str());
+
   WriteLocale(lang_.lc_all);
   emit this->languageUpdated(lang_.locale);
 }
@@ -65,7 +69,7 @@ void SelectLanguageFrame::initConnections() {
           &QItemSelectionModel::currentChanged,
           this, &SelectLanguageFrame::onLanguageListSelected);
   connect(next_button_, &QPushButton::clicked,
-          this, &SelectLanguageFrame::onNextButtonClicked);
+          this, &SelectLanguageFrame::finished);
 }
 
 void SelectLanguageFrame::initUI() {
@@ -122,13 +126,8 @@ void SelectLanguageFrame::onLanguageListSelected(const QModelIndex& current,
     const LanguageItem language_item = language_model_->languageItemAt(current);
     this->updateTranslator(language_item.locale);
     lang_ = language_item;
-    emit this->languageUpdated(lang_.locale);
+    this->writeConf();
   }
-}
-
-void SelectLanguageFrame::onNextButtonClicked() {
-  WriteLocale(lang_.lc_all);
-  emit this->finished();
 }
 
 }  // namespace installer

@@ -38,6 +38,9 @@ class KeyboardLayoutModel : public QAbstractListModel {
   // Result might be invalid.
   QModelIndex getLayoutByName(const QString& name) const;
 
+  // Read xkb layout list.
+  void initLayout();
+
  private:
   XkbConfig xkb_config_;
 

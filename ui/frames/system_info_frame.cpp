@@ -40,16 +40,17 @@ SystemInfoFrame::SystemInfoFrame(QWidget* parent)
   this->initUI();
   this->initConnections();
 
+  this->showFormPage();
+}
+
+void SystemInfoFrame::readConf() {
   // Read default avatar explicitly.
   avatar_frame_->readConf();
 
   // Read default keyboard layout.
   keyboard_frame_->readConf();
 
-  this->showFormPage();
-}
-
-void SystemInfoFrame::readTimezone() {
+  // Notify SystemInfoTimezoneFrame to read timezone based on current settings.
   timezone_frame_->readConf();
 }
 

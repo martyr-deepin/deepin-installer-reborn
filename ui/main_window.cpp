@@ -60,13 +60,6 @@ void MainWindow::scanDevices() {
   if (!GetSettingsBool(kSkipPartitionPage)) {
     partition_frame_->scanDevices();
   }
-
-  // If SystemInfoFrame page is not hidden, read current timezone based on
-  // policy in settings.
-  // NOTE(xushaohua): This function might take some time.
-  if (!GetSettingsBool(kSkipSystemInfoPage)) {
-    system_info_frame_->readTimezone();
-  }
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
@@ -304,8 +297,9 @@ void MainWindow::goNextPage() {
     }
 
     case PageId::NullId: {
+      select_language_frame_->readConf();
       if (GetSettingsBool(kSkipSelectLanguagePage)) {
-        select_language_frame_->autoConf();
+        select_language_frame_->writeConf();
         prev_page_ = current_page_;
         current_page_ = PageId::SelectLanguageId;
         this->goNextPage();
@@ -358,6 +352,7 @@ void MainWindow::goNextPage() {
 
     case PageId::PartitionTableWarningId: {
       // Check whether to show SystemInfoPage.
+      system_info_frame_->readConf();
       if (GetSettingsBool(kSkipSystemInfoPage)) {
         system_info_frame_->writeConf();
         prev_page_ = current_page_;

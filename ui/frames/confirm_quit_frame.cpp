@@ -34,7 +34,6 @@ ConfirmQuitFrame::ConfirmQuitFrame(QWidget* parent) : QFrame(parent) {
 
 void ConfirmQuitFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    qDebug() << "change event";
     title_label_->setText(tr(kTextTitle));
     comment_label_->setText(tr(kTextComment));
     continue_button_->setText(tr(kTextContinue));

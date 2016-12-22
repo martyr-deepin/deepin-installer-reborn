@@ -10,7 +10,7 @@ namespace installer {
 
 KeyboardLayoutModel::KeyboardLayoutModel(QObject* parent)
     : QAbstractListModel(parent),
-      xkb_config_(GetXkbConfig()),
+      xkb_config_(),
       layout_list_() {
   this->setObjectName("keyboard_layout_model");
 
@@ -74,6 +74,16 @@ QModelIndex KeyboardLayoutModel::getLayoutByName(const QString& name) const {
     }
   }
   return QModelIndex();
+}
+
+void KeyboardLayoutModel::initLayout() {
+  this->beginResetModel();
+
+  // Load xkb layout based on current locale.
+  // Locale environment is setup in SelectLanguageFrame.
+  xkb_config_ = GetXkbConfig();
+
+  this->endResetModel();
 }
 
 }  // namespace installer

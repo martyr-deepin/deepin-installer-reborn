@@ -83,6 +83,8 @@ const char kPartitionSupportedFs[] = "partition_supported_fs";
 const char kPartitionDefaultFs[] = "partition_default_fs";
 const char kPartitionDoAutoPart[] = "partition_do_auto_part";
 const char kPartitionMountPoints[] = "partition_mount_points";
+const char kPartitionFormattedMountPoints[] =
+    "partition_formatted_mount_points";
 
 // Install progress page
 const char kInstallProgressPageAnimationLevel[] =

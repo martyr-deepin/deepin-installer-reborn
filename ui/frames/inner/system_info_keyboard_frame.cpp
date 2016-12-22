@@ -43,6 +43,9 @@ SystemInfoKeyboardFrame::SystemInfoKeyboardFrame(QWidget* parent)
 }
 
 void SystemInfoKeyboardFrame::readConf() {
+  // Load xkb config first.
+  layout_model_->initLayout();
+
   const QString layout = GetSettingsString(kSystemInfoDefaultKeyboardLayout);
   if (layout.isEmpty()) {
     qWarning() << "Default keyboard layout is empty!";
