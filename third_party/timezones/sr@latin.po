@@ -1,0 +1,3313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Igor Miletic <grejigl-gnomeprevod@yahoo.ca>, 2008.
+# Miloš Komarčević <kmilos@gmail.com>, 2005.
+# Zoltan Čala <zolika@sezampro.yu>, 1999.
+msgid ""
+msgstr ""
+"Project-Id-Version: system-config-date\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-12-10 17:18+0100\n"
+"PO-Revision-Date: 2012-07-09 12:54+0000\n"
+"Last-Translator: Nils Philippsen <nils@redhat.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sr@latin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: system-config-date-timezones.h:1
+msgid "Africa/Abidjan"
+msgstr "Afrika/Abidžan"
+
+#: system-config-date-timezones.h:2
+msgid "Africa/Accra"
+msgstr "Afrika/Akra"
+
+#: system-config-date-timezones.h:3
+msgid "Africa/Addis_Ababa"
+msgstr "Afrika/Adis_Abeba"
+
+#: system-config-date-timezones.h:4
+msgid "Africa/Algiers"
+msgstr "Afrika/Alžir"
+
+#: system-config-date-timezones.h:5
+msgid "Africa/Asmara"
+msgstr "Afrika/Asmara"
+
+#: system-config-date-timezones.h:6
+msgid "Africa/Asmera"
+msgstr "Afrika/Asmera"
+
+#: system-config-date-timezones.h:7
+msgid "Africa/Bamako"
+msgstr "Afrika/Bamako"
+
+#: system-config-date-timezones.h:8
+msgid "Africa/Bangui"
+msgstr "Afrika/Banguj"
+
+#: system-config-date-timezones.h:9
+msgid "Africa/Banjul"
+msgstr "Afrika/Bandžul"
+
+#: system-config-date-timezones.h:10
+msgid "Africa/Bissau"
+msgstr "Afrika/Bisau"
+
+#: system-config-date-timezones.h:11
+msgid "Africa/Blantyre"
+msgstr "Afrika/Blentajr"
+
+#: system-config-date-timezones.h:12
+msgid "Africa/Brazzaville"
+msgstr "Afrika/Brazavil"
+
+#: system-config-date-timezones.h:13
+msgid "Africa/Bujumbura"
+msgstr "Afrika/Budžumbura"
+
+#: system-config-date-timezones.h:14
+msgid "Africa/Cairo"
+msgstr "Afrika/Kairo"
+
+#: system-config-date-timezones.h:15
+msgid "Africa/Casablanca"
+msgstr "Afrika/Kazablanka"
+
+#: system-config-date-timezones.h:16
+msgid "Africa/Ceuta"
+msgstr "Afrika/Seuta"
+
+#. comment for time zone Africa/Ceuta
+#: system-config-date-timezones.h:18
+msgid "Ceuta & Melilla"
+msgstr "Seuta i Melilja"
+
+#: system-config-date-timezones.h:19
+msgid "Africa/Conakry"
+msgstr "Afrika/Konakri"
+
+#: system-config-date-timezones.h:20
+msgid "Africa/Dakar"
+msgstr "Afrika/Dakar"
+
+#: system-config-date-timezones.h:21
+msgid "Africa/Dar_es_Salaam"
+msgstr "Afrika/Dar_es_Salam"
+
+#: system-config-date-timezones.h:22
+msgid "Africa/Djibouti"
+msgstr "Afrika/Džibuti"
+
+#: system-config-date-timezones.h:23
+msgid "Africa/Douala"
+msgstr "Afrika/Duala"
+
+#: system-config-date-timezones.h:24
+msgid "Africa/El_Aaiun"
+msgstr "Afrika/El_Ajun"
+
+#: system-config-date-timezones.h:25
+msgid "Africa/Freetown"
+msgstr "Afrika/Fritaun"
+
+#: system-config-date-timezones.h:26
+msgid "Africa/Gaborone"
+msgstr "Afrika/Gaboron"
+
+#: system-config-date-timezones.h:27
+msgid "Africa/Harare"
+msgstr "Afrika/Harare"
+
+#: system-config-date-timezones.h:28
+msgid "Africa/Johannesburg"
+msgstr "Afrika/Johanesburg"
+
+#: system-config-date-timezones.h:29
+msgid "Africa/Juba"
+msgstr ""
+
+#: system-config-date-timezones.h:30
+msgid "Africa/Kampala"
+msgstr "Afrika/Kampala"
+
+#: system-config-date-timezones.h:31
+msgid "Africa/Khartoum"
+msgstr "Afrika/Kartum"
+
+#: system-config-date-timezones.h:32
+msgid "Africa/Kigali"
+msgstr "Afrika/Kigali"
+
+#: system-config-date-timezones.h:33
+msgid "Africa/Kinshasa"
+msgstr "Afrika/Kinšasa"
+
+#. comment for time zone Africa/Kinshasa
+#: system-config-date-timezones.h:35
+msgid "west Dem. Rep. of Congo"
+msgstr "zapadna Dem. Rep. Kongo"
+
+#: system-config-date-timezones.h:36
+msgid "Africa/Lagos"
+msgstr "Afrika/Lagos"
+
+#: system-config-date-timezones.h:37
+msgid "Africa/Libreville"
+msgstr "Afrika/Libervil"
+
+#: system-config-date-timezones.h:38
+msgid "Africa/Lome"
+msgstr "Afrika/Lome"
+
+#: system-config-date-timezones.h:39
+msgid "Africa/Luanda"
+msgstr "Afrika/Luanda"
+
+#: system-config-date-timezones.h:40
+msgid "Africa/Lubumbashi"
+msgstr "Afrika/Lubumbaši"
+
+#. comment for time zone Africa/Lubumbashi
+#: system-config-date-timezones.h:42
+msgid "east Dem. Rep. of Congo"
+msgstr "istočna Dem. Rep. Kongo"
+
+#: system-config-date-timezones.h:43
+msgid "Africa/Lusaka"
+msgstr "Afrika/Lusaka"
+
+#: system-config-date-timezones.h:44
+msgid "Africa/Malabo"
+msgstr "Afrika/Malabo"
+
+#: system-config-date-timezones.h:45
+msgid "Africa/Maputo"
+msgstr "Afrika/Maputo"
+
+#: system-config-date-timezones.h:46
+msgid "Africa/Maseru"
+msgstr "Afrika/Maseru"
+
+#: system-config-date-timezones.h:47
+msgid "Africa/Mbabane"
+msgstr "Afrika/Mbabane"
+
+#: system-config-date-timezones.h:48
+msgid "Africa/Mogadishu"
+msgstr "Afrika/Mogadiš"
+
+#: system-config-date-timezones.h:49
+msgid "Africa/Monrovia"
+msgstr "Afrika/Monrovija"
+
+#: system-config-date-timezones.h:50
+msgid "Africa/Nairobi"
+msgstr "Afrika/Najrobi"
+
+#: system-config-date-timezones.h:51
+msgid "Africa/Ndjamena"
+msgstr "Afrika/Ndžamena"
+
+#: system-config-date-timezones.h:52
+msgid "Africa/Niamey"
+msgstr "Afrika/Niamej"
+
+#: system-config-date-timezones.h:53
+msgid "Africa/Nouakchott"
+msgstr "Afrika/Nuakčot"
+
+#: system-config-date-timezones.h:54
+msgid "Africa/Ouagadougou"
+msgstr "Afrika/Uagadugu"
+
+#: system-config-date-timezones.h:55
+msgid "Africa/Porto-Novo"
+msgstr "Afrika/Porto-Novo"
+
+#: system-config-date-timezones.h:56
+msgid "Africa/Sao_Tome"
+msgstr "Afrika/Sao_Tome"
+
+#: system-config-date-timezones.h:57
+msgid "Africa/Timbuktu"
+msgstr "Afrika/Timbuktu"
+
+#: system-config-date-timezones.h:58
+msgid "Africa/Tripoli"
+msgstr "Afrika/Tripoli"
+
+#: system-config-date-timezones.h:59
+msgid "Africa/Tunis"
+msgstr "Afrika/Tunis"
+
+#: system-config-date-timezones.h:60
+msgid "Africa/Windhoek"
+msgstr "Afrika/Vindhuk"
+
+#: system-config-date-timezones.h:61
+msgid "America/Adak"
+msgstr "Amerika/Adak"
+
+#. comment for time zone America/Adak
+#: system-config-date-timezones.h:63
+msgid "Aleutian Islands"
+msgstr "Aleutska ostrva"
+
+#: system-config-date-timezones.h:64
+msgid "America/Anchorage"
+msgstr "Amerika/Enkoridž"
+
+#. comment for time zone America/Anchorage
+#: system-config-date-timezones.h:66
+msgid "Alaska Time"
+msgstr "Aljaško vreme"
+
+#: system-config-date-timezones.h:67
+msgid "America/Anguilla"
+msgstr "Amerika/Angvila"
+
+#: system-config-date-timezones.h:68
+msgid "America/Antigua"
+msgstr "Amerika/Antigva"
+
+#: system-config-date-timezones.h:69
+msgid "America/Araguaina"
+msgstr "Amerika/Aragvijana"
+
+#. comment for time zone America/Araguaina
+#: system-config-date-timezones.h:71
+msgid "Tocantins"
+msgstr "Tokantins"
+
+#: system-config-date-timezones.h:72
+msgid "America/Argentina/Buenos_Aires"
+msgstr "Amerika/Argentina/Buenos_Ajres"
+
+#. comment for time zone America/Argentina/Buenos_Aires
+#: system-config-date-timezones.h:74
+msgid "Buenos Aires (BA, CF)"
+msgstr "Buenos Ajres (BA, CF)"
+
+#: system-config-date-timezones.h:75
+msgid "America/Argentina/Catamarca"
+msgstr "Amerika/Argentina/Katamarka"
+
+#. comment for time zone America/Argentina/Catamarca
+#: system-config-date-timezones.h:77
+msgid "Catamarca (CT), Chubut (CH)"
+msgstr "Katamarka (CT), Čubut (CH)"
+
+#: system-config-date-timezones.h:78
+msgid "America/Argentina/ComodRivadavia"
+msgstr "Amerika/Argentina/KomodoroRivadavia"
+
+#: system-config-date-timezones.h:79
+msgid "America/Argentina/Cordoba"
+msgstr "Amerika/Argentina/Kordoba"
+
+#. comment for time zone America/Argentina/Cordoba
+#: system-config-date-timezones.h:81
+msgid "most locations (CB, CC, CN, ER, FM, MN, SE, SF)"
+msgstr "većina mesta (CB, CC, CN, ER, FM, MN, SE, SF)"
+
+#: system-config-date-timezones.h:82
+msgid "America/Argentina/Jujuy"
+msgstr "Amerika/Argentina/Huhui"
+
+#. comment for time zone America/Argentina/Jujuy
+#: system-config-date-timezones.h:84
+msgid "Jujuy (JY)"
+msgstr "Huhui (JY)"
+
+#: system-config-date-timezones.h:85
+msgid "America/Argentina/La_Rioja"
+msgstr "Amerika/Argentina/La_Rioha"
+
+#. comment for time zone America/Argentina/La_Rioja
+#: system-config-date-timezones.h:87
+msgid "La Rioja (LR)"
+msgstr "La Rioha (LR)"
+
+#: system-config-date-timezones.h:88
+msgid "America/Argentina/Mendoza"
+msgstr "Amerika/Argentina/Mendoza"
+
+#. comment for time zone America/Argentina/Mendoza
+#: system-config-date-timezones.h:90
+msgid "Mendoza (MZ)"
+msgstr "Mendoza (MZ)"
+
+#: system-config-date-timezones.h:91
+msgid "America/Argentina/Rio_Gallegos"
+msgstr "Amerika/Argentina/Rio_Galjegos"
+
+#. comment for time zone America/Argentina/Rio_Gallegos
+#: system-config-date-timezones.h:93
+msgid "Santa Cruz (SC)"
+msgstr "Santa Kruz (SC)"
+
+#: system-config-date-timezones.h:94
+msgid "America/Argentina/Salta"
+msgstr "Amerika/Argentina/Salta"
+
+#. comment for time zone America/Argentina/Salta
+#: system-config-date-timezones.h:96
+msgid "(SA, LP, NQ, RN)"
+msgstr "(SA, LP, NQ, RN)"
+
+#: system-config-date-timezones.h:97
+msgid "America/Argentina/San_Juan"
+msgstr "Amerika/Argentina/San_Huan"
+
+#. comment for time zone America/Argentina/San_Juan
+#: system-config-date-timezones.h:99
+msgid "San Juan (SJ)"
+msgstr "San Huan (SJ)"
+
+#: system-config-date-timezones.h:100
+msgid "America/Argentina/San_Luis"
+msgstr "Amerika/Argentina/San_Luis"
+
+#. comment for time zone America/Argentina/San_Luis
+#: system-config-date-timezones.h:102
+msgid "San Luis (SL)"
+msgstr "San Luis (SL)"
+
+#: system-config-date-timezones.h:103
+msgid "America/Argentina/Tucuman"
+msgstr "Amerika/Argentina/Tukuman"
+
+#. comment for time zone America/Argentina/Tucuman
+#: system-config-date-timezones.h:105
+msgid "Tucuman (TM)"
+msgstr "Tukuman (TM)"
+
+#: system-config-date-timezones.h:106
+msgid "America/Argentina/Ushuaia"
+msgstr "Amerika/Argentina/Ušuaja"
+
+#. comment for time zone America/Argentina/Ushuaia
+#: system-config-date-timezones.h:108
+msgid "Tierra del Fuego (TF)"
+msgstr "Ognjena zemlja (TF)"
+
+#: system-config-date-timezones.h:109
+msgid "America/Aruba"
+msgstr "Amerika/Aruba"
+
+#: system-config-date-timezones.h:110
+msgid "America/Asuncion"
+msgstr "Amerika/Asunsion"
+
+#: system-config-date-timezones.h:111
+msgid "America/Atikokan"
+msgstr "Amerika/Atikokan"
+
+#. comment for time zone America/Atikokan
+#: system-config-date-timezones.h:113
+msgid "Eastern Standard Time - Atikokan, Ontario and Southampton I, Nunavut"
+msgstr "Istočno standardno vreme - Atikokan, Ontario i O. Sautempton, Nunavut"
+
+#: system-config-date-timezones.h:114
+msgid "America/Atka"
+msgstr "Amerika/Atka"
+
+#: system-config-date-timezones.h:115
+msgid "America/Bahia"
+msgstr "Amerika/Baija"
+
+#. comment for time zone America/Bahia
+#: system-config-date-timezones.h:117
+msgid "Bahia"
+msgstr "Baija"
+
+#: system-config-date-timezones.h:118
+msgid "America/Bahia_Banderas"
+msgstr ""
+
+#. comment for time zone America/Bahia_Banderas
+#: system-config-date-timezones.h:120
+msgid "Mexican Central Time - Bahia de Banderas"
+msgstr ""
+
+#: system-config-date-timezones.h:121
+msgid "America/Barbados"
+msgstr "Amerika/Barbados"
+
+#: system-config-date-timezones.h:122
+msgid "America/Belem"
+msgstr "Amerika/Belem"
+
+#. comment for time zone America/Belem
+#: system-config-date-timezones.h:124
+msgid "Amapa, E Para"
+msgstr "Amapa, I Para"
+
+#: system-config-date-timezones.h:125
+msgid "America/Belize"
+msgstr "Amerika/Belize"
+
+#: system-config-date-timezones.h:126
+msgid "America/Blanc-Sablon"
+msgstr "Amerika/Blan-Sablon"
+
+#. comment for time zone America/Blanc-Sablon
+#: system-config-date-timezones.h:128
+msgid "Atlantic Standard Time - Quebec - Lower North Shore"
+msgstr "Atlantsko standardno vreme - Kvebek - Niža severna obala"
+
+#: system-config-date-timezones.h:129
+msgid "America/Boa_Vista"
+msgstr "Amerika/Boa_Vista"
+
+#. comment for time zone America/Boa_Vista
+#: system-config-date-timezones.h:131
+msgid "Roraima"
+msgstr "Roraima"
+
+#: system-config-date-timezones.h:132
+msgid "America/Bogota"
+msgstr "Amerika/Bogota"
+
+#: system-config-date-timezones.h:133
+msgid "America/Boise"
+msgstr "Amerika/Boize"
+
+#. comment for time zone America/Boise
+#: system-config-date-timezones.h:135
+msgid "Mountain Time - south Idaho & east Oregon"
+msgstr "Planinsko vreme - južni Ajdaho i istočni Oregon"
+
+#: system-config-date-timezones.h:136
+msgid "America/Buenos_Aires"
+msgstr "Amerika/Buenos_Ajres"
+
+#: system-config-date-timezones.h:137
+msgid "America/Cambridge_Bay"
+msgstr "Amerika/Kembridž_Bej"
+
+#. comment for time zone America/Cambridge_Bay
+#: system-config-date-timezones.h:139
+msgid "Mountain Time - west Nunavut"
+msgstr "Planinsko vreme - zapadni Nunavut"
+
+#: system-config-date-timezones.h:140
+msgid "America/Campo_Grande"
+msgstr "Amerika/Kampo_Grande"
+
+#. comment for time zone America/Campo_Grande
+#: system-config-date-timezones.h:142
+msgid "Mato Grosso do Sul"
+msgstr "Mato Groso do Sul"
+
+#: system-config-date-timezones.h:143
+msgid "America/Cancun"
+msgstr "Amerika/Kankun"
+
+#. comment for time zone America/Cancun
+#: system-config-date-timezones.h:145
+msgid "Central Time - Quintana Roo"
+msgstr "Centralno vreme - Kintana Ro"
+
+#: system-config-date-timezones.h:146
+msgid "America/Caracas"
+msgstr "Amerika/Karakas"
+
+#: system-config-date-timezones.h:147
+msgid "America/Catamarca"
+msgstr "Amerika/Katamarka"
+
+#: system-config-date-timezones.h:148
+msgid "America/Cayenne"
+msgstr "Amerika/Kajen"
+
+#: system-config-date-timezones.h:149
+msgid "America/Cayman"
+msgstr "Amerika/Kajman"
+
+#: system-config-date-timezones.h:150
+msgid "America/Chicago"
+msgstr "Amerika/Čikago"
+
+#. comment for time zone America/Chicago
+#: system-config-date-timezones.h:152
+msgid "Central Time"
+msgstr "Centralno vreme"
+
+#: system-config-date-timezones.h:153
+msgid "America/Chihuahua"
+msgstr "Amerika/Čivava"
+
+#. comment for time zone America/Chihuahua
+#: system-config-date-timezones.h:155
+msgid "Mexican Mountain Time - Chihuahua away from US border"
+msgstr "Meksičko planinsko vreme - Čivava daleko od granice SAD"
+
+#: system-config-date-timezones.h:156
+msgid "America/Coral_Harbour"
+msgstr "Amerika/Koral_Harbor"
+
+#: system-config-date-timezones.h:157
+msgid "America/Cordoba"
+msgstr "Amerika/Kordoba"
+
+#: system-config-date-timezones.h:158
+msgid "America/Costa_Rica"
+msgstr "Amerika/Kostarika"
+
+#: system-config-date-timezones.h:159
+msgid "America/Creston"
+msgstr ""
+
+#. comment for time zone America/Creston
+#: system-config-date-timezones.h:161
+msgid "Mountain Standard Time - Creston, British Columbia"
+msgstr ""
+
+#: system-config-date-timezones.h:162
+msgid "America/Cuiaba"
+msgstr "Amerika/Kujaba"
+
+#. comment for time zone America/Cuiaba
+#: system-config-date-timezones.h:164
+msgid "Mato Grosso"
+msgstr "Mato Groso"
+
+#: system-config-date-timezones.h:165
+msgid "America/Curacao"
+msgstr "Amerika/Kurakao"
+
+#: system-config-date-timezones.h:166
+msgid "America/Danmarkshavn"
+msgstr "Amerika/Denmarkshaven"
+
+#. comment for time zone America/Danmarkshavn
+#: system-config-date-timezones.h:168
+msgid "east coast, north of Scoresbysund"
+msgstr "istočna obala, severno od Skorzbisunda"
+
+#: system-config-date-timezones.h:169
+msgid "America/Dawson"
+msgstr "Amerika/Doson"
+
+#. comment for time zone America/Dawson
+#: system-config-date-timezones.h:171
+msgid "Pacific Time - north Yukon"
+msgstr "Pacifičko vreme - severni Jukon"
+
+#: system-config-date-timezones.h:172
+msgid "America/Dawson_Creek"
+msgstr "Amerika/Doson_Krik"
+
+#. comment for time zone America/Dawson_Creek
+#: system-config-date-timezones.h:174
+msgid ""
+"Mountain Standard Time - Dawson Creek & Fort Saint John, British Columbia"
+msgstr ""
+"Planinsko standardno vreme - Doson Krik i Fort Sent Džon, Britanska Kolumbija"
+
+#: system-config-date-timezones.h:175
+msgid "America/Denver"
+msgstr "Amerika/Denver"
+
+#. comment for time zone America/Denver
+#: system-config-date-timezones.h:177
+msgid "Mountain Time"
+msgstr "Planinsko vreme"
+
+#: system-config-date-timezones.h:178
+msgid "America/Detroit"
+msgstr "Amerika/Detroit"
+
+#. comment for time zone America/Detroit
+#: system-config-date-timezones.h:180
+msgid "Eastern Time - Michigan - most locations"
+msgstr "Istočno vreme - Mičigen - većina mesta"
+
+#: system-config-date-timezones.h:181
+msgid "America/Dominica"
+msgstr "Amerika/Dominika"
+
+#: system-config-date-timezones.h:182
+msgid "America/Edmonton"
+msgstr "Amerika/Edmonton"
+
+#. comment for time zone America/Edmonton
+#: system-config-date-timezones.h:184
+msgid "Mountain Time - Alberta, east British Columbia & west Saskatchewan"
+msgstr ""
+"Planinsko vreme - Alberta, istočna Britanska Kolumbija i zapadni Saskačevan"
+
+#: system-config-date-timezones.h:185
+msgid "America/Eirunepe"
+msgstr "Amerika/Ejrunepe"
+
+#. comment for time zone America/Eirunepe
+#: system-config-date-timezones.h:187
+msgid "W Amazonas"
+msgstr "Z Amazonija"
+
+#: system-config-date-timezones.h:188
+msgid "America/El_Salvador"
+msgstr "Amerika/El_Salvador"
+
+#: system-config-date-timezones.h:189
+msgid "America/Ensenada"
+msgstr "Amerika/Ensenada"
+
+#: system-config-date-timezones.h:190
+msgid "America/Fortaleza"
+msgstr "Amerika/Fortaleza"
+
+#. comment for time zone America/Fortaleza
+#: system-config-date-timezones.h:192
+msgid "NE Brazil (MA, PI, CE, RN, PB)"
+msgstr "SI Brazil (MA, PI, CE, RN, PB)"
+
+#: system-config-date-timezones.h:193
+msgid "America/Fort_Wayne"
+msgstr "Amerika/Fort_Vejn"
+
+#: system-config-date-timezones.h:194
+msgid "America/Glace_Bay"
+msgstr "Amerika/Glejs_Bej"
+
+#. comment for time zone America/Glace_Bay
+#: system-config-date-timezones.h:196
+msgid "Atlantic Time - Nova Scotia - places that did not observe DST 1966-1971"
+msgstr "Atlantsko vreme - Nova Škotska - mesta koja nisu pratila DST 1966-1971"
+
+#: system-config-date-timezones.h:197
+msgid "America/Godthab"
+msgstr "Amerika/Godtab"
+
+#. comment for time zone America/Godthab
+#. comment for time zone America/Santiago
+#. comment for time zone Asia/Almaty
+#. comment for time zone Asia/Ulaanbaatar
+#. comment for time zone Europe/Kiev
+#. comment for time zone Pacific/Auckland
+#. comment for time zone Pacific/Majuro
+#: system-config-date-timezones.h:199 system-config-date-timezones.h:376
+#: system-config-date-timezones.h:468 system-config-date-timezones.h:611
+#: system-config-date-timezones.h:774 system-config-date-timezones.h:870
+#: system-config-date-timezones.h:912
+msgid "most locations"
+msgstr "većina mesta"
+
+#: system-config-date-timezones.h:200
+msgid "America/Goose_Bay"
+msgstr "Amerika/Gus_Bej"
+
+#. comment for time zone America/Goose_Bay
+#: system-config-date-timezones.h:202
+msgid "Atlantic Time - Labrador - most locations"
+msgstr "Atlantsko vreme - Labrador - većina mesta"
+
+#: system-config-date-timezones.h:203
+msgid "America/Grand_Turk"
+msgstr "Amerika/Grand_Turk"
+
+#: system-config-date-timezones.h:204
+msgid "America/Grenada"
+msgstr "Amerika/Grenada"
+
+#: system-config-date-timezones.h:205
+msgid "America/Guadeloupe"
+msgstr "Amerika/Gvadelup"
+
+#: system-config-date-timezones.h:206
+msgid "America/Guatemala"
+msgstr "Amerika/Gvatemala"
+
+#: system-config-date-timezones.h:207
+msgid "America/Guayaquil"
+msgstr "Amerika/Gvajakvil"
+
+#. comment for time zone America/Guayaquil
+#. comment for time zone Europe/Lisbon
+#. comment for time zone Europe/Madrid
+#: system-config-date-timezones.h:209 system-config-date-timezones.h:777
+#: system-config-date-timezones.h:783
+msgid "mainland"
+msgstr "matično kopno"
+
+#: system-config-date-timezones.h:210
+msgid "America/Guyana"
+msgstr "Amerika/Gijana"
+
+#: system-config-date-timezones.h:211
+msgid "America/Halifax"
+msgstr "Amerika/Halifaks"
+
+#. comment for time zone America/Halifax
+#: system-config-date-timezones.h:213
+msgid "Atlantic Time - Nova Scotia (most places), PEI"
+msgstr "Atlantsko vreme - Nova Škotska (većina mesta), OPE"
+
+#: system-config-date-timezones.h:214
+msgid "America/Havana"
+msgstr "Amerika/Havana"
+
+#: system-config-date-timezones.h:215
+msgid "America/Hermosillo"
+msgstr "Amerika/Ermosiljo"
+
+#. comment for time zone America/Hermosillo
+#: system-config-date-timezones.h:217
+msgid "Mountain Standard Time - Sonora"
+msgstr "Planinsko standardno vreme - Sonora"
+
+#: system-config-date-timezones.h:218
+msgid "America/Indiana/Indianapolis"
+msgstr "Amerika/Indijana/Indijanapolis"
+
+#. comment for time zone America/Indiana/Indianapolis
+#: system-config-date-timezones.h:220
+msgid "Eastern Time - Indiana - most locations"
+msgstr "Istočno vreme - Indijana - većina mesta"
+
+#: system-config-date-timezones.h:221
+msgid "America/Indiana/Knox"
+msgstr "Amerika/Indijana/Noks"
+
+#. comment for time zone America/Indiana/Knox
+#: system-config-date-timezones.h:223
+msgid "Central Time - Indiana - Starke County"
+msgstr "Centralno vreme - Indijana - Okrug Stark"
+
+#: system-config-date-timezones.h:224
+msgid "America/Indiana/Marengo"
+msgstr "Amerika/Indijana/Marengo"
+
+#. comment for time zone America/Indiana/Marengo
+#: system-config-date-timezones.h:226
+msgid "Eastern Time - Indiana - Crawford County"
+msgstr "Istočno vreme - Indijana - Okrug Kroford"
+
+#: system-config-date-timezones.h:227
+msgid "America/Indiana/Petersburg"
+msgstr "Amerika/Indijana/Pitersburg"
+
+#. comment for time zone America/Indiana/Petersburg
+#: system-config-date-timezones.h:229
+msgid "Eastern Time - Indiana - Pike County"
+msgstr "Istočno vreme - Indijana - Okrug Pajk"
+
+#: system-config-date-timezones.h:230
+msgid "America/Indianapolis"
+msgstr "Amerika/Indijanapolis"
+
+#: system-config-date-timezones.h:231
+msgid "America/Indiana/Tell_City"
+msgstr "Amerika/Indijana/Tel_Siti"
+
+#. comment for time zone America/Indiana/Tell_City
+#: system-config-date-timezones.h:233
+msgid "Central Time - Indiana - Perry County"
+msgstr "Centralno vreme - Indijana - Okrug Peri"
+
+#: system-config-date-timezones.h:234
+msgid "America/Indiana/Vevay"
+msgstr "Amerika/Indijana/Vevaj"
+
+#. comment for time zone America/Indiana/Vevay
+#: system-config-date-timezones.h:236
+msgid "Eastern Time - Indiana - Switzerland County"
+msgstr "Istočno vreme - Indijana - Okrug Svicerlend"
+
+#: system-config-date-timezones.h:237
+msgid "America/Indiana/Vincennes"
+msgstr "Amerika/Indijana/Vinsens"
+
+#. comment for time zone America/Indiana/Vincennes
+#: system-config-date-timezones.h:239
+msgid "Eastern Time - Indiana - Daviess, Dubois, Knox & Martin Counties"
+msgstr "Istočno vreme - Indijana - Okruzi Davis, Duboa, Noks i Martin"
+
+#: system-config-date-timezones.h:240
+msgid "America/Indiana/Winamac"
+msgstr "Amerika/Indijana/Vinamak"
+
+#. comment for time zone America/Indiana/Winamac
+#: system-config-date-timezones.h:242
+msgid "Eastern Time - Indiana - Pulaski County"
+msgstr "Istočno vreme - Indijana - Okrug Pulaski"
+
+#: system-config-date-timezones.h:243
+msgid "America/Inuvik"
+msgstr "Amerika/Inuvik"
+
+#. comment for time zone America/Inuvik
+#: system-config-date-timezones.h:245
+msgid "Mountain Time - west Northwest Territories"
+msgstr "Planinsko vreme - zapadne Severozapadne teritorije"
+
+#: system-config-date-timezones.h:246
+msgid "America/Iqaluit"
+msgstr "Amerika/Ikalujt"
+
+#. comment for time zone America/Iqaluit
+#: system-config-date-timezones.h:248
+msgid "Eastern Time - east Nunavut - most locations"
+msgstr "Istočno vreme - istočni Nunavut - većina mesta"
+
+#: system-config-date-timezones.h:249
+msgid "America/Jamaica"
+msgstr "Amerika/Jamajka"
+
+#: system-config-date-timezones.h:250
+msgid "America/Jujuy"
+msgstr "Amerika/Huhui"
+
+#: system-config-date-timezones.h:251
+msgid "America/Juneau"
+msgstr "Amerika/Žuno"
+
+#. comment for time zone America/Juneau
+#: system-config-date-timezones.h:253
+msgid "Alaska Time - Alaska panhandle"
+msgstr "Aljaško vreme - izbočina Aljaske"
+
+#: system-config-date-timezones.h:254
+msgid "America/Kentucky/Louisville"
+msgstr "Amerika/Kentaki/Luivil"
+
+#. comment for time zone America/Kentucky/Louisville
+#: system-config-date-timezones.h:256
+msgid "Eastern Time - Kentucky - Louisville area"
+msgstr "Istočno vreme - Kentaki - područje Luivila"
+
+#: system-config-date-timezones.h:257
+msgid "America/Kentucky/Monticello"
+msgstr "Amerika/Kentaki/Montičelo"
+
+#. comment for time zone America/Kentucky/Monticello
+#: system-config-date-timezones.h:259
+msgid "Eastern Time - Kentucky - Wayne County"
+msgstr "Istočno vreme - Kentaki - Okrug Vejn"
+
+#: system-config-date-timezones.h:260
+msgid "America/Knox_IN"
+msgstr "Amerika/Noks_IN"
+
+#: system-config-date-timezones.h:261
+msgid "America/Kralendijk"
+msgstr ""
+
+#: system-config-date-timezones.h:262
+msgid "America/La_Paz"
+msgstr "Amerika/La_Paz"
+
+#: system-config-date-timezones.h:263
+msgid "America/Lima"
+msgstr "Amerika/Lima"
+
+#: system-config-date-timezones.h:264
+msgid "America/Los_Angeles"
+msgstr "Amerika/Los_Anđeles"
+
+#. comment for time zone America/Los_Angeles
+#: system-config-date-timezones.h:266
+msgid "Pacific Time"
+msgstr "Pacifičko vreme"
+
+#: system-config-date-timezones.h:267
+msgid "America/Louisville"
+msgstr "Amerika/Luivil"
+
+#: system-config-date-timezones.h:268
+msgid "America/Lower_Princes"
+msgstr ""
+
+#: system-config-date-timezones.h:269
+msgid "America/Maceio"
+msgstr "Amerika/Masejo"
+
+#. comment for time zone America/Maceio
+#: system-config-date-timezones.h:271
+msgid "Alagoas, Sergipe"
+msgstr "Alagoas, Seržipe"
+
+#: system-config-date-timezones.h:272
+msgid "America/Managua"
+msgstr "Amerika/Managva"
+
+#: system-config-date-timezones.h:273
+msgid "America/Manaus"
+msgstr "Amerika/Manaus"
+
+#. comment for time zone America/Manaus
+#: system-config-date-timezones.h:275
+msgid "E Amazonas"
+msgstr "I Amazonija"
+
+#: system-config-date-timezones.h:276
+msgid "America/Marigot"
+msgstr "Amerika/Marigo"
+
+#: system-config-date-timezones.h:277
+msgid "America/Martinique"
+msgstr "Amerika/Martinik"
+
+#: system-config-date-timezones.h:278
+msgid "America/Matamoros"
+msgstr "Amerika/Matamoros"
+
+#. comment for time zone America/Matamoros
+#: system-config-date-timezones.h:280
+msgid ""
+"US Central Time - Coahuila, Durango, Nuevo Leon, Tamaulipas near US border"
+msgstr ""
+"SAD centralno vreme - Kuauila, Durango, Nuevo Leon, Tamaulipas u blizini "
+"granice SAD"
+
+#: system-config-date-timezones.h:281
+msgid "America/Mazatlan"
+msgstr "Amerika/Mazatlan"
+
+#. comment for time zone America/Mazatlan
+#: system-config-date-timezones.h:283
+msgid "Mountain Time - S Baja, Nayarit, Sinaloa"
+msgstr "Planinsko vreme - J Baha, Najarit, Sinaloa"
+
+#: system-config-date-timezones.h:284
+msgid "America/Mendoza"
+msgstr "Amerika/Mendoza"
+
+#: system-config-date-timezones.h:285
+msgid "America/Menominee"
+msgstr "Amerika/Menomini"
+
+#. comment for time zone America/Menominee
+#: system-config-date-timezones.h:287
+msgid "Central Time - Michigan - Dickinson, Gogebic, Iron & Menominee Counties"
+msgstr ""
+"Centralno vreme - Mičigen - Okruzi Dikinskon, Gogebik, Ajron i Menomini"
+
+#: system-config-date-timezones.h:288
+msgid "America/Merida"
+msgstr "Amerika/Merida"
+
+#. comment for time zone America/Merida
+#: system-config-date-timezones.h:290
+msgid "Central Time - Campeche, Yucatan"
+msgstr "Centralno vreme - Kampeće, Jukatan"
+
+#: system-config-date-timezones.h:291
+msgid "America/Metlakatla"
+msgstr ""
+
+#. comment for time zone America/Metlakatla
+#: system-config-date-timezones.h:293
+msgid "Metlakatla Time - Annette Island"
+msgstr ""
+
+#: system-config-date-timezones.h:294
+msgid "America/Mexico_City"
+msgstr "Amerika/Meksiko_Siti"
+
+#. comment for time zone America/Mexico_City
+#: system-config-date-timezones.h:296
+msgid "Central Time - most locations"
+msgstr "Centralno vreme - većina mesta"
+
+#: system-config-date-timezones.h:297
+msgid "America/Miquelon"
+msgstr "Amerika/Mikelon"
+
+#: system-config-date-timezones.h:298
+msgid "America/Moncton"
+msgstr "Amerika/Monkton"
+
+#. comment for time zone America/Moncton
+#: system-config-date-timezones.h:300
+msgid "Atlantic Time - New Brunswick"
+msgstr "Atlantsko vreme - Nju Branzvik"
+
+#: system-config-date-timezones.h:301
+msgid "America/Monterrey"
+msgstr "Amerika/Monterej"
+
+#. comment for time zone America/Monterrey
+#: system-config-date-timezones.h:303
+msgid ""
+"Mexican Central Time - Coahuila, Durango, Nuevo Leon, Tamaulipas away from "
+"US border"
+msgstr ""
+"Meksičko centralno vreme - Kuauila, Durango, Nuevo Leon, Tamaulipas daleko "
+"od granice SAD"
+
+#: system-config-date-timezones.h:304
+msgid "America/Montevideo"
+msgstr "Amerika/Montevideo"
+
+#: system-config-date-timezones.h:305
+msgid "America/Montreal"
+msgstr "Amerika/Montreal"
+
+#. comment for time zone America/Montreal
+#: system-config-date-timezones.h:307
+msgid "Eastern Time - Quebec - most locations"
+msgstr "Istočno vreme - Kvebek - većina mesta"
+
+#: system-config-date-timezones.h:308
+msgid "America/Montserrat"
+msgstr "Amerika/Montserat"
+
+#: system-config-date-timezones.h:309
+msgid "America/Nassau"
+msgstr "Amerika/Nasau"
+
+#: system-config-date-timezones.h:310
+msgid "America/New_York"
+msgstr "Amerika/Njujork"
+
+#. comment for time zone America/New_York
+#: system-config-date-timezones.h:312
+msgid "Eastern Time"
+msgstr "Istočno vreme"
+
+#: system-config-date-timezones.h:313
+msgid "America/Nipigon"
+msgstr "Amerika/Nipigon"
+
+#. comment for time zone America/Nipigon
+#: system-config-date-timezones.h:315
+msgid ""
+"Eastern Time - Ontario & Quebec - places that did not observe DST 1967-1973"
+msgstr ""
+"Istočno vreme - Ontario i Kvebek - mesta koja nisu pratila DST 1967-1973"
+
+#: system-config-date-timezones.h:316
+msgid "America/Nome"
+msgstr "Amerika/Nom"
+
+#. comment for time zone America/Nome
+#: system-config-date-timezones.h:318
+msgid "Alaska Time - west Alaska"
+msgstr "Aljaško vreme - zapadna Aljaska"
+
+#: system-config-date-timezones.h:319
+msgid "America/Noronha"
+msgstr "Amerika/Noronja"
+
+#. comment for time zone America/Noronha
+#: system-config-date-timezones.h:321
+msgid "Atlantic islands"
+msgstr "Atlantska ostrva"
+
+#: system-config-date-timezones.h:322
+msgid "America/North_Dakota/Beulah"
+msgstr ""
+
+#. comment for time zone America/North_Dakota/Beulah
+#: system-config-date-timezones.h:324
+msgid "Central Time - North Dakota - Mercer County"
+msgstr ""
+
+#: system-config-date-timezones.h:325
+msgid "America/North_Dakota/Center"
+msgstr "Amerika/Severna_Dakota/Centar"
+
+#. comment for time zone America/North_Dakota/Center
+#: system-config-date-timezones.h:327
+msgid "Central Time - North Dakota - Oliver County"
+msgstr "Centralno vreme - Severna Dakota - Okrug Oliver"
+
+#: system-config-date-timezones.h:328
+msgid "America/North_Dakota/New_Salem"
+msgstr "Amerika/Severna_Dakota/Nju_Salem"
+
+#. comment for time zone America/North_Dakota/New_Salem
+#: system-config-date-timezones.h:330
+msgid "Central Time - North Dakota - Morton County (except Mandan area)"
+msgstr ""
+"Centralno vreme - Severna Dakota - Okrug Morton (izuzev područja Mandana)"
+
+#: system-config-date-timezones.h:331
+msgid "America/Ojinaga"
+msgstr "Amerika/Ohinaga"
+
+#. comment for time zone America/Ojinaga
+#: system-config-date-timezones.h:333
+msgid "US Mountain Time - Chihuahua near US border"
+msgstr "SAD planinsko vreme - Čivava u blizini granice SAD"
+
+#: system-config-date-timezones.h:334
+msgid "America/Panama"
+msgstr "Amerika/Panama"
+
+#: system-config-date-timezones.h:335
+msgid "America/Pangnirtung"
+msgstr "Amerika/Pangnirtung"
+
+#. comment for time zone America/Pangnirtung
+#: system-config-date-timezones.h:337
+msgid "Eastern Time - Pangnirtung, Nunavut"
+msgstr "Istočno vreme - Pangnirtung, Nunavut"
+
+#: system-config-date-timezones.h:338
+msgid "America/Paramaribo"
+msgstr "Amerika/Paramaribo"
+
+#: system-config-date-timezones.h:339
+msgid "America/Phoenix"
+msgstr "Amerika/Feniks"
+
+#. comment for time zone America/Phoenix
+#: system-config-date-timezones.h:341
+msgid "Mountain Standard Time - Arizona"
+msgstr "Planinsko standardno vreme - Arizona"
+
+#: system-config-date-timezones.h:342
+msgid "America/Port-au-Prince"
+msgstr "Amerika/Port-o-Prins"
+
+#: system-config-date-timezones.h:343
+msgid "America/Porto_Acre"
+msgstr "Amerika/Porto_Akri"
+
+#: system-config-date-timezones.h:344
+msgid "America/Port_of_Spain"
+msgstr "Amerika/Port_of_Spejn"
+
+#: system-config-date-timezones.h:345
+msgid "America/Porto_Velho"
+msgstr "Amerika/Porto_Velo"
+
+#. comment for time zone America/Porto_Velho
+#: system-config-date-timezones.h:347
+msgid "Rondonia"
+msgstr "Rondonija"
+
+#: system-config-date-timezones.h:348
+msgid "America/Puerto_Rico"
+msgstr "Amerika/Portoriko"
+
+#: system-config-date-timezones.h:349
+msgid "America/Rainy_River"
+msgstr "Amerika/Rejni_River"
+
+#. comment for time zone America/Rainy_River
+#: system-config-date-timezones.h:351
+msgid "Central Time - Rainy River & Fort Frances, Ontario"
+msgstr "Centralno vreme - Rejni River i Fort Fransis, Ontario"
+
+#: system-config-date-timezones.h:352
+msgid "America/Rankin_Inlet"
+msgstr "Amerika/Rankinov_rukavac"
+
+#. comment for time zone America/Rankin_Inlet
+#: system-config-date-timezones.h:354
+msgid "Central Time - central Nunavut"
+msgstr "Centralno vreme - centralni Nunavut"
+
+#: system-config-date-timezones.h:355
+msgid "America/Recife"
+msgstr "Amerika/Resifi"
+
+#. comment for time zone America/Recife
+#: system-config-date-timezones.h:357
+msgid "Pernambuco"
+msgstr "Pernambuko"
+
+#: system-config-date-timezones.h:358
+msgid "America/Regina"
+msgstr "Amerika/Regina"
+
+#. comment for time zone America/Regina
+#: system-config-date-timezones.h:360
+msgid "Central Standard Time - Saskatchewan - most locations"
+msgstr "Centralno standardno vreme - Saskačevan - većina mesta"
+
+#: system-config-date-timezones.h:361
+msgid "America/Resolute"
+msgstr "Amerika/Rezolut"
+
+#. comment for time zone America/Resolute
+#: system-config-date-timezones.h:363
+msgid "Central Standard Time - Resolute, Nunavut"
+msgstr ""
+
+#: system-config-date-timezones.h:364
+msgid "America/Rio_Branco"
+msgstr "Amerika/Rio_Branko"
+
+#. comment for time zone America/Rio_Branco
+#: system-config-date-timezones.h:366
+msgid "Acre"
+msgstr "Akri"
+
+#: system-config-date-timezones.h:367
+msgid "America/Rosario"
+msgstr "Amerika/Rozario"
+
+#: system-config-date-timezones.h:368
+msgid "America/Santa_Isabel"
+msgstr "Amerika/Santa_Izabel"
+
+#. comment for time zone America/Santa_Isabel
+#: system-config-date-timezones.h:370
+msgid "Mexican Pacific Time - Baja California away from US border"
+msgstr "Meksičko pacifičko vreme - Donja Kalifornija daleko od granice SAD"
+
+#: system-config-date-timezones.h:371
+msgid "America/Santarem"
+msgstr "Amerika/Santarem"
+
+#. comment for time zone America/Santarem
+#: system-config-date-timezones.h:373
+msgid "W Para"
+msgstr "Z Para"
+
+#: system-config-date-timezones.h:374
+msgid "America/Santiago"
+msgstr "Amerika/Santjago"
+
+#: system-config-date-timezones.h:377
+msgid "America/Santo_Domingo"
+msgstr "Amerika/Santo_Domingo"
+
+#: system-config-date-timezones.h:378
+msgid "America/Sao_Paulo"
+msgstr "Amerika/Sao_Paolo"
+
+#. comment for time zone America/Sao_Paulo
+#: system-config-date-timezones.h:380
+msgid "S & SE Brazil (GO, DF, MG, ES, RJ, SP, PR, SC, RS)"
+msgstr "J i JI Brazil (GO, DF, MG, ES, RJ, SP, PR, SC, RS)"
+
+#: system-config-date-timezones.h:381
+msgid "America/Scoresbysund"
+msgstr "Amerika/Skorzbisund"
+
+#. comment for time zone America/Scoresbysund
+#: system-config-date-timezones.h:383
+msgid "Scoresbysund / Ittoqqortoormiit"
+msgstr "Skorzbisund / Itokortormit"
+
+#: system-config-date-timezones.h:384
+msgid "America/Shiprock"
+msgstr "Amerika/Šiprok"
+
+#. comment for time zone America/Shiprock
+#: system-config-date-timezones.h:386
+msgid "Mountain Time - Navajo"
+msgstr "Planinsko vreme - Navaho"
+
+#: system-config-date-timezones.h:387
+msgid "America/Sitka"
+msgstr ""
+
+#. comment for time zone America/Sitka
+#: system-config-date-timezones.h:389
+msgid "Alaska Time - southeast Alaska panhandle"
+msgstr ""
+
+#: system-config-date-timezones.h:390
+msgid "America/St_Barthelemy"
+msgstr "Amerika/Sv_Bartolomej"
+
+#: system-config-date-timezones.h:391
+msgid "America/St_Johns"
+msgstr "Amerika/Sent_Džon"
+
+#. comment for time zone America/St_Johns
+#: system-config-date-timezones.h:393
+msgid "Newfoundland Time, including SE Labrador"
+msgstr "Njufaundlendsko vreme, uključujući JI Labrador"
+
+#: system-config-date-timezones.h:394
+msgid "America/St_Kitts"
+msgstr "Amerika/Sv_Kits"
+
+#: system-config-date-timezones.h:395
+msgid "America/St_Lucia"
+msgstr "Amerika/Sv_Lucija"
+
+#: system-config-date-timezones.h:396
+msgid "America/St_Thomas"
+msgstr "Amerika/Sent_Tomas"
+
+#: system-config-date-timezones.h:397
+msgid "America/St_Vincent"
+msgstr "Amerika/Sv_Vinsent"
+
+#: system-config-date-timezones.h:398
+msgid "America/Swift_Current"
+msgstr "Amerika/Svift_Karent"
+
+#. comment for time zone America/Swift_Current
+#: system-config-date-timezones.h:400
+msgid "Central Standard Time - Saskatchewan - midwest"
+msgstr "Centralno standardno vreme - Saskačevan - srednji zapad"
+
+#: system-config-date-timezones.h:401
+msgid "America/Tegucigalpa"
+msgstr "Amerika/Tegusigalpa"
+
+#: system-config-date-timezones.h:402
+msgid "America/Thule"
+msgstr "Amerika/Tule"
+
+#. comment for time zone America/Thule
+#: system-config-date-timezones.h:404
+msgid "Thule / Pituffik"
+msgstr "Tule / Pitufik"
+
+#: system-config-date-timezones.h:405
+msgid "America/Thunder_Bay"
+msgstr "Amerika/Tander_Bej"
+
+#. comment for time zone America/Thunder_Bay
+#: system-config-date-timezones.h:407
+msgid "Eastern Time - Thunder Bay, Ontario"
+msgstr "Istočno vreme - Tander Bej, Ontario"
+
+#: system-config-date-timezones.h:408
+msgid "America/Tijuana"
+msgstr "Amerika/Tihuana"
+
+#. comment for time zone America/Tijuana
+#: system-config-date-timezones.h:410
+msgid "US Pacific Time - Baja California near US border"
+msgstr "SAD pacifičko vreme - Donja Kalifornija u blizini granice SAD"
+
+#: system-config-date-timezones.h:411
+msgid "America/Toronto"
+msgstr "Amerika/Toronto"
+
+#. comment for time zone America/Toronto
+#: system-config-date-timezones.h:413
+msgid "Eastern Time - Ontario - most locations"
+msgstr "Istočno vreme - Ontario - većina mesta"
+
+#: system-config-date-timezones.h:414
+msgid "America/Tortola"
+msgstr "Amerika/Tortola"
+
+#: system-config-date-timezones.h:415
+msgid "America/Vancouver"
+msgstr "Amerika/Vankuver"
+
+#. comment for time zone America/Vancouver
+#: system-config-date-timezones.h:417
+msgid "Pacific Time - west British Columbia"
+msgstr "Pacifičko vreme - zapadna Britanska Kolumbija"
+
+#: system-config-date-timezones.h:418
+msgid "America/Virgin"
+msgstr "Amerika/Virdžin"
+
+#: system-config-date-timezones.h:419
+msgid "America/Whitehorse"
+msgstr "Amerika/Vajthors"
+
+#. comment for time zone America/Whitehorse
+#: system-config-date-timezones.h:421
+msgid "Pacific Time - south Yukon"
+msgstr "Pacifičko vreme - južni Jukon"
+
+#: system-config-date-timezones.h:422
+msgid "America/Winnipeg"
+msgstr "Amerika/Vinipeg"
+
+#. comment for time zone America/Winnipeg
+#: system-config-date-timezones.h:424
+msgid "Central Time - Manitoba & west Ontario"
+msgstr "Centralno vreme - Manitoba i zapadni Ontario"
+
+#: system-config-date-timezones.h:425
+msgid "America/Yakutat"
+msgstr "Amerika/Jakutat"
+
+#. comment for time zone America/Yakutat
+#: system-config-date-timezones.h:427
+msgid "Alaska Time - Alaska panhandle neck"
+msgstr "Aljaško vreme - vrat izbočine Aljaske"
+
+#: system-config-date-timezones.h:428
+msgid "America/Yellowknife"
+msgstr "Amerika/Jelounajf"
+
+#. comment for time zone America/Yellowknife
+#: system-config-date-timezones.h:430
+msgid "Mountain Time - central Northwest Territories"
+msgstr "Planinsko vreme - centralne Severozapadne teritorije"
+
+#: system-config-date-timezones.h:431
+msgid "Antarctica/Casey"
+msgstr "Antarktik/Kejsi"
+
+#. comment for time zone Antarctica/Casey
+#: system-config-date-timezones.h:433
+msgid "Casey Station, Bailey Peninsula"
+msgstr "Stanica Kejsi, Poluostrvo Bejli"
+
+#: system-config-date-timezones.h:434
+msgid "Antarctica/Davis"
+msgstr "Antarktik/Dejvis"
+
+#. comment for time zone Antarctica/Davis
+#: system-config-date-timezones.h:436
+msgid "Davis Station, Vestfold Hills"
+msgstr "Stanica Dejvis, Vestfold Hils"
+
+#: system-config-date-timezones.h:437
+msgid "Antarctica/DumontDUrville"
+msgstr "Antarktik/DimonDIrvil"
+
+#. comment for time zone Antarctica/DumontDUrville
+#: system-config-date-timezones.h:439
+msgid "Dumont-d'Urville Station, Terre Adelie"
+msgstr "Stanica Dimon d'Irvil, Adelina zemlja"
+
+#: system-config-date-timezones.h:440
+msgid "Antarctica/Macquarie"
+msgstr "Antarktik/Makuori"
+
+#. comment for time zone Antarctica/Macquarie
+#: system-config-date-timezones.h:442
+msgid "Macquarie Island Station, Macquarie Island"
+msgstr "Stanica Ostrva Makuori, Ostrvo Makuori"
+
+#: system-config-date-timezones.h:443
+msgid "Antarctica/Mawson"
+msgstr "Antarktik/Moson"
+
+#. comment for time zone Antarctica/Mawson
+#: system-config-date-timezones.h:445
+msgid "Mawson Station, Holme Bay"
+msgstr "Stanica Moson, Zaliv Holm"
+
+#: system-config-date-timezones.h:446
+msgid "Antarctica/McMurdo"
+msgstr "Antarktik/MekMurdo"
+
+#. comment for time zone Antarctica/McMurdo
+#: system-config-date-timezones.h:448
+msgid "McMurdo Station, Ross Island"
+msgstr "Stanica MekMurdo, Ostrvo Ros"
+
+#: system-config-date-timezones.h:449
+msgid "Antarctica/Palmer"
+msgstr "Antarktik/Palmer"
+
+#. comment for time zone Antarctica/Palmer
+#: system-config-date-timezones.h:451
+msgid "Palmer Station, Anvers Island"
+msgstr "Stanica Palmer, Ostrvo Anvers"
+
+#: system-config-date-timezones.h:452
+msgid "Antarctica/Rothera"
+msgstr "Antarktik/Rotera"
+
+#. comment for time zone Antarctica/Rothera
+#: system-config-date-timezones.h:454
+msgid "Rothera Station, Adelaide Island"
+msgstr "Stanica Rotera, Ostrvo Adelejd"
+
+#: system-config-date-timezones.h:455
+msgid "Antarctica/South_Pole"
+msgstr "Antarktik/Južni_pol"
+
+#. comment for time zone Antarctica/South_Pole
+#: system-config-date-timezones.h:457
+msgid "Amundsen-Scott Station, South Pole"
+msgstr "Stanica Amundsen-Skot, južni pol"
+
+#: system-config-date-timezones.h:458
+msgid "Antarctica/Syowa"
+msgstr "Antarktik/Sjova"
+
+#. comment for time zone Antarctica/Syowa
+#: system-config-date-timezones.h:460
+msgid "Syowa Station, E Ongul I"
+msgstr "Stanica Sjova, O. i. Ongul"
+
+#: system-config-date-timezones.h:461
+msgid "Antarctica/Vostok"
+msgstr "Antarktik/Vostok"
+
+#. comment for time zone Antarctica/Vostok
+#: system-config-date-timezones.h:463
+msgid "Vostok Station, Lake Vostok"
+msgstr ""
+
+#: system-config-date-timezones.h:464
+msgid "Arctic/Longyearbyen"
+msgstr "Arktik/Longjirbjen"
+
+#: system-config-date-timezones.h:465
+msgid "Asia/Aden"
+msgstr "Azija/Aden"
+
+#: system-config-date-timezones.h:466
+msgid "Asia/Almaty"
+msgstr "Azija/Almati"
+
+#: system-config-date-timezones.h:469
+msgid "Asia/Amman"
+msgstr "Azija/Aman"
+
+#: system-config-date-timezones.h:470
+msgid "Asia/Anadyr"
+msgstr "Azija/Anadir"
+
+#. comment for time zone Asia/Anadyr
+#: system-config-date-timezones.h:472
+msgid "Moscow+08 - Bering Sea"
+msgstr "Moskva+08 - Beringovo more"
+
+#: system-config-date-timezones.h:473
+msgid "Asia/Aqtau"
+msgstr "Azija/Aktau"
+
+#. comment for time zone Asia/Aqtau
+#: system-config-date-timezones.h:475
+msgid "Atyrau (Atirau, Gur'yev), Mangghystau (Mankistau)"
+msgstr "Atirau (Gurjev), Mangistau"
+
+#: system-config-date-timezones.h:476
+msgid "Asia/Aqtobe"
+msgstr "Azija/Aktobe"
+
+#. comment for time zone Asia/Aqtobe
+#: system-config-date-timezones.h:478
+msgid "Aqtobe (Aktobe)"
+msgstr "Aktobe"
+
+#: system-config-date-timezones.h:479
+msgid "Asia/Ashgabat"
+msgstr "Azija/Ašgabat"
+
+#: system-config-date-timezones.h:480
+msgid "Asia/Ashkhabad"
+msgstr "Azija/Aškabad"
+
+#: system-config-date-timezones.h:481
+msgid "Asia/Baghdad"
+msgstr "Azija/Bagdad"
+
+#: system-config-date-timezones.h:482
+msgid "Asia/Bahrain"
+msgstr "Azija/Bahrein"
+
+#: system-config-date-timezones.h:483
+msgid "Asia/Baku"
+msgstr "Azija/Baku"
+
+#: system-config-date-timezones.h:484
+msgid "Asia/Bangkok"
+msgstr "Azija/Bankok"
+
+#: system-config-date-timezones.h:485
+msgid "Asia/Beirut"
+msgstr "Azija/Bejrut"
+
+#: system-config-date-timezones.h:486
+msgid "Asia/Bishkek"
+msgstr "Azija/Biškek"
+
+#: system-config-date-timezones.h:487
+msgid "Asia/Brunei"
+msgstr "Azija/Bruneji"
+
+#: system-config-date-timezones.h:488
+msgid "Asia/Calcutta"
+msgstr "Azija/Kalkuta"
+
+#: system-config-date-timezones.h:489
+msgid "Asia/Choibalsan"
+msgstr "Azija/Čojbalsan"
+
+#. comment for time zone Asia/Choibalsan
+#: system-config-date-timezones.h:491
+msgid "Dornod, Sukhbaatar"
+msgstr "Dornod, Suhbatar"
+
+#: system-config-date-timezones.h:492
+msgid "Asia/Chongqing"
+msgstr "Azija/Čonking"
+
+#. comment for time zone Asia/Chongqing
+#: system-config-date-timezones.h:494
+msgid "central China - Sichuan, Yunnan, Guangxi, Shaanxi, Guizhou, etc."
+msgstr "centralna Kina - Sečuan, Junan, Guangsi, Šansi, Guidžou, itd."
+
+#: system-config-date-timezones.h:495
+msgid "Asia/Chungking"
+msgstr "Azija/Čunking"
+
+#: system-config-date-timezones.h:496
+msgid "Asia/Colombo"
+msgstr "Azija/Kolombo"
+
+#: system-config-date-timezones.h:497
+msgid "Asia/Dacca"
+msgstr "Azija/Daka"
+
+#: system-config-date-timezones.h:498
+msgid "Asia/Damascus"
+msgstr "Azija/Damask"
+
+#: system-config-date-timezones.h:499
+msgid "Asia/Dhaka"
+msgstr "Azija/Daka"
+
+#: system-config-date-timezones.h:500
+msgid "Asia/Dili"
+msgstr "Azija/Dili"
+
+#: system-config-date-timezones.h:501
+msgid "Asia/Dubai"
+msgstr "Azija/Dubaji"
+
+#: system-config-date-timezones.h:502
+msgid "Asia/Dushanbe"
+msgstr "Azija/Dušanbe"
+
+#: system-config-date-timezones.h:503
+msgid "Asia/Gaza"
+msgstr "Azija/Gaza"
+
+#. comment for time zone Asia/Gaza
+#: system-config-date-timezones.h:505
+msgid "Gaza Strip"
+msgstr ""
+
+#: system-config-date-timezones.h:506
+msgid "Asia/Harbin"
+msgstr "Azija/Harbin"
+
+#. comment for time zone Asia/Harbin
+#: system-config-date-timezones.h:508
+msgid "Heilongjiang (except Mohe), Jilin"
+msgstr "Heilungđang (izuzev Mohe), Đilin"
+
+#: system-config-date-timezones.h:509
+msgid "Asia/Hebron"
+msgstr ""
+
+#. comment for time zone Asia/Hebron
+#: system-config-date-timezones.h:511
+msgid "West Bank"
+msgstr ""
+
+#: system-config-date-timezones.h:512
+msgid "Asia/Ho_Chi_Minh"
+msgstr "Azija/Ho_Ši_Min"
+
+#: system-config-date-timezones.h:513
+msgid "Asia/Hong_Kong"
+msgstr "Azija/Hong_Kong"
+
+#: system-config-date-timezones.h:514
+msgid "Asia/Hovd"
+msgstr "Azija/Hovd"
+
+#. comment for time zone Asia/Hovd
+#: system-config-date-timezones.h:516
+msgid "Bayan-Olgiy, Govi-Altai, Hovd, Uvs, Zavkhan"
+msgstr "Bajan-Ulgij, Govi-Altaj, Hovd, Uvs, Zavhaj"
+
+#: system-config-date-timezones.h:517
+msgid "Asia/Irkutsk"
+msgstr "Azija/Irkutsk"
+
+#. comment for time zone Asia/Irkutsk
+#: system-config-date-timezones.h:519
+msgid "Moscow+05 - Lake Baikal"
+msgstr "Moskva+05 - Bajkalsko jezero"
+
+#: system-config-date-timezones.h:520
+msgid "Asia/Istanbul"
+msgstr "Azija/Carigrad"
+
+#: system-config-date-timezones.h:521
+msgid "Asia/Jakarta"
+msgstr "Azija/Džakarta"
+
+#. comment for time zone Asia/Jakarta
+#: system-config-date-timezones.h:523
+msgid "Java & Sumatra"
+msgstr "Java i Sumatra"
+
+#: system-config-date-timezones.h:524
+msgid "Asia/Jayapura"
+msgstr "Azija/Džajapura"
+
+#. comment for time zone Asia/Jayapura
+#: system-config-date-timezones.h:526
+msgid "west New Guinea (Irian Jaya) & Malukus (Moluccas)"
+msgstr ""
+
+#: system-config-date-timezones.h:527
+msgid "Asia/Jerusalem"
+msgstr "Azija/Jerusalim"
+
+#: system-config-date-timezones.h:528
+msgid "Asia/Kabul"
+msgstr "Azija/Kabul"
+
+#: system-config-date-timezones.h:529
+msgid "Asia/Kamchatka"
+msgstr "Azija/Kamčatka"
+
+#. comment for time zone Asia/Kamchatka
+#: system-config-date-timezones.h:531
+msgid "Moscow+08 - Kamchatka"
+msgstr "Moskva+08 - Kamčatka"
+
+#: system-config-date-timezones.h:532
+msgid "Asia/Karachi"
+msgstr "Azija/Karači"
+
+#: system-config-date-timezones.h:533
+msgid "Asia/Kashgar"
+msgstr "Azija/Kašgar"
+
+#. comment for time zone Asia/Kashgar
+#: system-config-date-timezones.h:535
+msgid "west Tibet & Xinjiang"
+msgstr "zapadni Tibet i Sinđang"
+
+#: system-config-date-timezones.h:536
+msgid "Asia/Kathmandu"
+msgstr "Azija/Katmandu"
+
+#: system-config-date-timezones.h:537
+msgid "Asia/Katmandu"
+msgstr "Azija/Katmandu"
+
+#: system-config-date-timezones.h:538
+msgid "Asia/Kolkata"
+msgstr "Azija/Kalkuta"
+
+#: system-config-date-timezones.h:539
+msgid "Asia/Krasnoyarsk"
+msgstr "Azija/Krasnojarsk"
+
+#. comment for time zone Asia/Krasnoyarsk
+#: system-config-date-timezones.h:541
+msgid "Moscow+04 - Yenisei River"
+msgstr "Moskva+04 - Reka Jenisej"
+
+#: system-config-date-timezones.h:542
+msgid "Asia/Kuala_Lumpur"
+msgstr "Azija/Kuala_Lumpur"
+
+#. comment for time zone Asia/Kuala_Lumpur
+#: system-config-date-timezones.h:544
+msgid "peninsular Malaysia"
+msgstr "poluostrvska Malezija"
+
+#: system-config-date-timezones.h:545
+msgid "Asia/Kuching"
+msgstr "Azija/Kučing"
+
+#. comment for time zone Asia/Kuching
+#: system-config-date-timezones.h:547
+msgid "Sabah & Sarawak"
+msgstr "Sabah i Saravak"
+
+#: system-config-date-timezones.h:548
+msgid "Asia/Kuwait"
+msgstr "Azija/Kuvajt"
+
+#: system-config-date-timezones.h:549
+msgid "Asia/Macao"
+msgstr "Azija/Makao"
+
+#: system-config-date-timezones.h:550
+msgid "Asia/Macau"
+msgstr "Azija/Makao"
+
+#: system-config-date-timezones.h:551
+msgid "Asia/Magadan"
+msgstr "Azija/Magadan"
+
+#. comment for time zone Asia/Magadan
+#: system-config-date-timezones.h:553
+msgid "Moscow+08 - Magadan"
+msgstr "Moskva+08 - Magadan"
+
+#: system-config-date-timezones.h:554
+msgid "Asia/Makassar"
+msgstr "Azija/Makasar"
+
+#. comment for time zone Asia/Makassar
+#: system-config-date-timezones.h:556
+msgid ""
+"east & south Borneo, Sulawesi (Celebes), Bali, Nusa Tengarra, west Timor"
+msgstr ""
+
+#: system-config-date-timezones.h:557
+msgid "Asia/Manila"
+msgstr "Azija/Manila"
+
+#: system-config-date-timezones.h:558
+msgid "Asia/Muscat"
+msgstr "Azija/Muskat"
+
+#: system-config-date-timezones.h:559
+msgid "Asia/Nicosia"
+msgstr "Azija/Nikozija"
+
+#: system-config-date-timezones.h:560
+msgid "Asia/Novokuznetsk"
+msgstr "Azija/Novokuznjeck"
+
+#. comment for time zone Asia/Novokuznetsk
+#: system-config-date-timezones.h:562
+msgid "Moscow+03 - Novokuznetsk"
+msgstr "Moskva+03 - Novokuznjeck"
+
+#: system-config-date-timezones.h:563
+msgid "Asia/Novosibirsk"
+msgstr "Azija/Novosibirsk"
+
+#. comment for time zone Asia/Novosibirsk
+#: system-config-date-timezones.h:565
+msgid "Moscow+03 - Novosibirsk"
+msgstr "Moskva+03 - Novosibirsk"
+
+#: system-config-date-timezones.h:566
+msgid "Asia/Omsk"
+msgstr "Azija/Omsk"
+
+#. comment for time zone Asia/Omsk
+#: system-config-date-timezones.h:568
+msgid "Moscow+03 - west Siberia"
+msgstr "Moskva+03 - zapadni Sibir"
+
+#: system-config-date-timezones.h:569
+msgid "Asia/Oral"
+msgstr "Azija/Oral"
+
+#. comment for time zone Asia/Oral
+#: system-config-date-timezones.h:571
+msgid "West Kazakhstan"
+msgstr "Zapadni Kazahstan"
+
+#: system-config-date-timezones.h:572
+msgid "Asia/Phnom_Penh"
+msgstr "Azija/Pnom_Pen"
+
+#: system-config-date-timezones.h:573
+msgid "Asia/Pontianak"
+msgstr "Azija/Pontijanak"
+
+#. comment for time zone Asia/Pontianak
+#: system-config-date-timezones.h:575
+msgid "west & central Borneo"
+msgstr "zapadni i centralni Borneo"
+
+#: system-config-date-timezones.h:576
+msgid "Asia/Pyongyang"
+msgstr "Azija/Pjongjang"
+
+#: system-config-date-timezones.h:577
+msgid "Asia/Qatar"
+msgstr "Azija/Katar"
+
+#: system-config-date-timezones.h:578
+msgid "Asia/Qyzylorda"
+msgstr "Azija/Kizilorda"
+
+#. comment for time zone Asia/Qyzylorda
+#: system-config-date-timezones.h:580
+msgid "Qyzylorda (Kyzylorda, Kzyl-Orda)"
+msgstr "Kizilorda"
+
+#: system-config-date-timezones.h:581
+msgid "Asia/Rangoon"
+msgstr "Azija/Rangun"
+
+#: system-config-date-timezones.h:582
+msgid "Asia/Riyadh"
+msgstr "Azija/Rijad"
+
+#: system-config-date-timezones.h:583
+msgid "Asia/Riyadh87"
+msgstr "Azija/Rijad87"
+
+#: system-config-date-timezones.h:584
+msgid "Asia/Riyadh88"
+msgstr "Azija/Rijad88"
+
+#: system-config-date-timezones.h:585
+msgid "Asia/Riyadh89"
+msgstr "Azija/Rijad89"
+
+#: system-config-date-timezones.h:586
+msgid "Asia/Saigon"
+msgstr "Azija/Sajgon"
+
+#: system-config-date-timezones.h:587
+msgid "Asia/Sakhalin"
+msgstr "Azija/Sahalin"
+
+#. comment for time zone Asia/Sakhalin
+#: system-config-date-timezones.h:589
+msgid "Moscow+07 - Sakhalin Island"
+msgstr "Moskva+07 - Ostrvo Sahalin"
+
+#: system-config-date-timezones.h:590
+msgid "Asia/Samarkand"
+msgstr "Azija/Samarkand"
+
+#. comment for time zone Asia/Samarkand
+#: system-config-date-timezones.h:592
+msgid "west Uzbekistan"
+msgstr "zapadni Uzbekistan"
+
+#: system-config-date-timezones.h:593
+msgid "Asia/Seoul"
+msgstr "Azija/Seul"
+
+#: system-config-date-timezones.h:594
+msgid "Asia/Shanghai"
+msgstr "Azija/Šangaj"
+
+#. comment for time zone Asia/Shanghai
+#: system-config-date-timezones.h:596
+msgid "east China - Beijing, Guangdong, Shanghai, etc."
+msgstr "istočna Kina - Peking, Guangdung, Šangaj, itd."
+
+#: system-config-date-timezones.h:597
+msgid "Asia/Singapore"
+msgstr "Azija/Singapur"
+
+#: system-config-date-timezones.h:598
+msgid "Asia/Taipei"
+msgstr "Azija/Tajpej"
+
+#: system-config-date-timezones.h:599
+msgid "Asia/Tashkent"
+msgstr "Azija/Taškent"
+
+#. comment for time zone Asia/Tashkent
+#: system-config-date-timezones.h:601
+msgid "east Uzbekistan"
+msgstr "istočni Uzbekistan"
+
+#: system-config-date-timezones.h:602
+msgid "Asia/Tbilisi"
+msgstr "Azija/Tbilisi"
+
+#: system-config-date-timezones.h:603
+msgid "Asia/Tehran"
+msgstr "Azija/Teheran"
+
+#: system-config-date-timezones.h:604
+msgid "Asia/Tel_Aviv"
+msgstr "Azija/Tel_Aviv"
+
+#: system-config-date-timezones.h:605
+msgid "Asia/Thimbu"
+msgstr "Azija/Timbu"
+
+#: system-config-date-timezones.h:606
+msgid "Asia/Thimphu"
+msgstr "Azija/Timpu"
+
+#: system-config-date-timezones.h:607
+msgid "Asia/Tokyo"
+msgstr "Azija/Tokio"
+
+#: system-config-date-timezones.h:608
+msgid "Asia/Ujung_Pandang"
+msgstr "Azija/Ujang_Pandang"
+
+#: system-config-date-timezones.h:609
+msgid "Asia/Ulaanbaatar"
+msgstr "Azija/Ulanbatar"
+
+#: system-config-date-timezones.h:612
+msgid "Asia/Ulan_Bator"
+msgstr "Azija/Ulan_Bator"
+
+#: system-config-date-timezones.h:613
+msgid "Asia/Urumqi"
+msgstr "Azija/Urumči"
+
+#. comment for time zone Asia/Urumqi
+#: system-config-date-timezones.h:615
+msgid "most of Tibet & Xinjiang"
+msgstr "većina Tibeta i Sinđang"
+
+#: system-config-date-timezones.h:616
+msgid "Asia/Vientiane"
+msgstr "Azija/Vijentijan"
+
+#: system-config-date-timezones.h:617
+msgid "Asia/Vladivostok"
+msgstr "Azija/Vladivostok"
+
+#. comment for time zone Asia/Vladivostok
+#: system-config-date-timezones.h:619
+msgid "Moscow+07 - Amur River"
+msgstr "Moskva+07 - Reka Amur"
+
+#: system-config-date-timezones.h:620
+msgid "Asia/Yakutsk"
+msgstr "Azija/Jakutsk"
+
+#. comment for time zone Asia/Yakutsk
+#: system-config-date-timezones.h:622
+msgid "Moscow+06 - Lena River"
+msgstr "Moskva+06 - Reka Lena"
+
+#: system-config-date-timezones.h:623
+msgid "Asia/Yekaterinburg"
+msgstr "Azija/Jekaterinburg"
+
+#. comment for time zone Asia/Yekaterinburg
+#: system-config-date-timezones.h:625
+msgid "Moscow+02 - Urals"
+msgstr "Moskva+02 - Ural"
+
+#: system-config-date-timezones.h:626
+msgid "Asia/Yerevan"
+msgstr "Azija/Jerevan"
+
+#: system-config-date-timezones.h:627
+msgid "Atlantic/Azores"
+msgstr "Atlantik/Azori"
+
+#. comment for time zone Atlantic/Azores
+#: system-config-date-timezones.h:629
+msgid "Azores"
+msgstr "Azorska ostrva"
+
+#: system-config-date-timezones.h:630
+msgid "Atlantic/Bermuda"
+msgstr "Atlantik/Bermude"
+
+#: system-config-date-timezones.h:631
+msgid "Atlantic/Canary"
+msgstr "Atlantik/Kanarska_ostrva"
+
+#. comment for time zone Atlantic/Canary
+#: system-config-date-timezones.h:633
+msgid "Canary Islands"
+msgstr "Kanarska ostrva"
+
+#: system-config-date-timezones.h:634
+msgid "Atlantic/Cape_Verde"
+msgstr "Atlantik/Kejp_Verde"
+
+#: system-config-date-timezones.h:635
+msgid "Atlantic/Faeroe"
+msgstr "Atlantik/Farska_ostrva"
+
+#: system-config-date-timezones.h:636
+msgid "Atlantic/Faroe"
+msgstr "Atlantik/Farska_ostrva"
+
+#: system-config-date-timezones.h:637
+msgid "Atlantic/Jan_Mayen"
+msgstr "Atlantik/Jan_Majen"
+
+#: system-config-date-timezones.h:638
+msgid "Atlantic/Madeira"
+msgstr "Atlantik/Madeira"
+
+#. comment for time zone Atlantic/Madeira
+#: system-config-date-timezones.h:640
+msgid "Madeira Islands"
+msgstr "Ostrva Madeira"
+
+#: system-config-date-timezones.h:641
+msgid "Atlantic/Reykjavik"
+msgstr "Atlantik/Rejkjavik"
+
+#: system-config-date-timezones.h:642
+msgid "Atlantic/South_Georgia"
+msgstr "Atlantik/Južna_Džordžija"
+
+#: system-config-date-timezones.h:643
+msgid "Atlantic/Stanley"
+msgstr "Atlantik/Stenli"
+
+#: system-config-date-timezones.h:644
+msgid "Atlantic/St_Helena"
+msgstr "Atlantik/Sv_Helena"
+
+#: system-config-date-timezones.h:645
+msgid "Australia/ACT"
+msgstr "Australija/ACT"
+
+#: system-config-date-timezones.h:646
+msgid "Australia/Adelaide"
+msgstr "Australija/Adelejd"
+
+#. comment for time zone Australia/Adelaide
+#: system-config-date-timezones.h:648
+msgid "South Australia"
+msgstr "Južna Australija"
+
+#: system-config-date-timezones.h:649
+msgid "Australia/Brisbane"
+msgstr "Australija/Brizbejn"
+
+#. comment for time zone Australia/Brisbane
+#: system-config-date-timezones.h:651
+msgid "Queensland - most locations"
+msgstr "Kvinslend - većina mesta"
+
+#: system-config-date-timezones.h:652
+msgid "Australia/Broken_Hill"
+msgstr "Australija/Broken_Hil"
+
+#. comment for time zone Australia/Broken_Hill
+#: system-config-date-timezones.h:654
+msgid "New South Wales - Yancowinna"
+msgstr "Novi Južni Vels - Jankovina"
+
+#: system-config-date-timezones.h:655
+msgid "Australia/Canberra"
+msgstr "Australija/Kanbera"
+
+#: system-config-date-timezones.h:656
+msgid "Australia/Currie"
+msgstr "Australija/Kjuri"
+
+#. comment for time zone Australia/Currie
+#: system-config-date-timezones.h:658
+msgid "Tasmania - King Island"
+msgstr "Tasmanija - Ostrvo King"
+
+#: system-config-date-timezones.h:659
+msgid "Australia/Darwin"
+msgstr "Australija/Darvin"
+
+#. comment for time zone Australia/Darwin
+#: system-config-date-timezones.h:661
+msgid "Northern Territory"
+msgstr "Severna teritorija"
+
+#: system-config-date-timezones.h:662
+msgid "Australia/Eucla"
+msgstr "Australija/Jukla"
+
+#. comment for time zone Australia/Eucla
+#: system-config-date-timezones.h:664
+msgid "Western Australia - Eucla area"
+msgstr "Zapadna Australija - područje Jukle"
+
+#: system-config-date-timezones.h:665
+msgid "Australia/Hobart"
+msgstr "Australija/Hobart"
+
+#. comment for time zone Australia/Hobart
+#: system-config-date-timezones.h:667
+msgid "Tasmania - most locations"
+msgstr "Tasmanija - većina mesta"
+
+#: system-config-date-timezones.h:668
+msgid "Australia/LHI"
+msgstr "Australija/OLH"
+
+#: system-config-date-timezones.h:669
+msgid "Australia/Lindeman"
+msgstr "Australija/Lindeman"
+
+#. comment for time zone Australia/Lindeman
+#: system-config-date-timezones.h:671
+msgid "Queensland - Holiday Islands"
+msgstr "Kvinslend - Praznična ostrva"
+
+#: system-config-date-timezones.h:672
+msgid "Australia/Lord_Howe"
+msgstr "Australija/Lord_Hou"
+
+#. comment for time zone Australia/Lord_Howe
+#: system-config-date-timezones.h:674
+msgid "Lord Howe Island"
+msgstr "Ostrvo Lorda Houa"
+
+#: system-config-date-timezones.h:675
+msgid "Australia/Melbourne"
+msgstr "Australija/Melburn"
+
+#. comment for time zone Australia/Melbourne
+#: system-config-date-timezones.h:677
+msgid "Victoria"
+msgstr "Viktorija"
+
+#: system-config-date-timezones.h:678
+msgid "Australia/North"
+msgstr "Australija/Sever"
+
+#: system-config-date-timezones.h:679
+msgid "Australia/NSW"
+msgstr "Australija/NJV"
+
+#: system-config-date-timezones.h:680
+msgid "Australia/Perth"
+msgstr "Australija/Pert"
+
+#. comment for time zone Australia/Perth
+#: system-config-date-timezones.h:682
+msgid "Western Australia - most locations"
+msgstr "Zapadna Australija - većina mesta"
+
+#: system-config-date-timezones.h:683
+msgid "Australia/Queensland"
+msgstr "Australija/Kvinslend"
+
+#: system-config-date-timezones.h:684
+msgid "Australia/South"
+msgstr "Australija/Jug"
+
+#: system-config-date-timezones.h:685
+msgid "Australia/Sydney"
+msgstr "Australija/Sidnej"
+
+#. comment for time zone Australia/Sydney
+#: system-config-date-timezones.h:687
+msgid "New South Wales - most locations"
+msgstr "Novi Južni Vels - većina mesta"
+
+#: system-config-date-timezones.h:688
+msgid "Australia/Tasmania"
+msgstr "Australija/Tasmanija"
+
+#: system-config-date-timezones.h:689
+msgid "Australia/Victoria"
+msgstr "Australija/Viktorija"
+
+#: system-config-date-timezones.h:690
+msgid "Australia/West"
+msgstr "Australija/Zapad"
+
+#: system-config-date-timezones.h:691
+msgid "Australia/Yancowinna"
+msgstr "Australija/Jankovina"
+
+#: system-config-date-timezones.h:692
+msgid "Brazil/Acre"
+msgstr "Brazil/Akri"
+
+#: system-config-date-timezones.h:693
+msgid "Brazil/DeNoronha"
+msgstr "Brazil/DeNoronja"
+
+#: system-config-date-timezones.h:694
+msgid "Brazil/East"
+msgstr "Brazil/Istok"
+
+#: system-config-date-timezones.h:695
+msgid "Brazil/West"
+msgstr "Brazil/Zapad"
+
+#: system-config-date-timezones.h:696
+msgid "Canada/Atlantic"
+msgstr "Kanada/Atlantik"
+
+#: system-config-date-timezones.h:697
+msgid "Canada/Central"
+msgstr "Kanada/Centralna"
+
+#: system-config-date-timezones.h:698
+msgid "Canada/Eastern"
+msgstr "Kanada/Istočna"
+
+#: system-config-date-timezones.h:699
+msgid "Canada/East-Saskatchewan"
+msgstr "Kanada/Istok-Saskačevan"
+
+#: system-config-date-timezones.h:700
+msgid "Canada/Mountain"
+msgstr "Kanada/Planine"
+
+#: system-config-date-timezones.h:701
+msgid "Canada/Newfoundland"
+msgstr "Kanada/Njufaundlend"
+
+#: system-config-date-timezones.h:702
+msgid "Canada/Pacific"
+msgstr "Kanada/Pacifik"
+
+#: system-config-date-timezones.h:703
+msgid "Canada/Saskatchewan"
+msgstr "Kanada/Saskačevan"
+
+#: system-config-date-timezones.h:704
+msgid "Canada/Yukon"
+msgstr "Kanada/Jukon"
+
+#: system-config-date-timezones.h:705
+msgid "CET"
+msgstr "CET"
+
+#: system-config-date-timezones.h:706
+msgid "Chile/Continental"
+msgstr "Čile/Kontinentalni"
+
+#: system-config-date-timezones.h:707
+msgid "Chile/EasterIsland"
+msgstr "Čile/Uskršnje_ostrvo"
+
+#: system-config-date-timezones.h:708
+msgid "CST6CDT"
+msgstr "CST6CDT"
+
+#: system-config-date-timezones.h:709
+msgid "Cuba"
+msgstr "Kuba"
+
+#: system-config-date-timezones.h:710
+msgid "EET"
+msgstr "EET"
+
+#: system-config-date-timezones.h:711
+msgid "Egypt"
+msgstr "Egipat"
+
+#: system-config-date-timezones.h:712
+msgid "Eire"
+msgstr "Irska"
+
+#: system-config-date-timezones.h:713
+msgid "EST"
+msgstr "EST"
+
+#: system-config-date-timezones.h:714
+msgid "EST5EDT"
+msgstr "EST5EDT"
+
+#: system-config-date-timezones.h:715
+msgid "Etc/GMT"
+msgstr "Itd/GMT"
+
+#: system-config-date-timezones.h:716
+msgid "Etc/GMT0"
+msgstr "Itd/GMT0"
+
+#: system-config-date-timezones.h:717
+msgid "Etc/GMT-0"
+msgstr "Itd/GMT-0"
+
+#: system-config-date-timezones.h:718
+msgid "Etc/GMT+0"
+msgstr "Itd/GMT+0"
+
+#: system-config-date-timezones.h:719
+msgid "Etc/GMT-1"
+msgstr "Itd/GMT-1"
+
+#: system-config-date-timezones.h:720
+msgid "Etc/GMT+1"
+msgstr "Itd/GMT+1"
+
+#: system-config-date-timezones.h:721
+msgid "Etc/GMT-10"
+msgstr "Itd/GMT-10"
+
+#: system-config-date-timezones.h:722
+msgid "Etc/GMT+10"
+msgstr "Itd/GMT+10"
+
+#: system-config-date-timezones.h:723
+msgid "Etc/GMT-11"
+msgstr "Itd/GMT-11"
+
+#: system-config-date-timezones.h:724
+msgid "Etc/GMT+11"
+msgstr "Itd/GMT+11"
+
+#: system-config-date-timezones.h:725
+msgid "Etc/GMT-12"
+msgstr "Itd/GMT-12"
+
+#: system-config-date-timezones.h:726
+msgid "Etc/GMT+12"
+msgstr "Itd/GMT+12"
+
+#: system-config-date-timezones.h:727
+msgid "Etc/GMT-13"
+msgstr "Itd/GMT-13"
+
+#: system-config-date-timezones.h:728
+msgid "Etc/GMT-14"
+msgstr "Itd/GMT-14"
+
+#: system-config-date-timezones.h:729
+msgid "Etc/GMT-2"
+msgstr "Itd/GMT-2"
+
+#: system-config-date-timezones.h:730
+msgid "Etc/GMT+2"
+msgstr "Itd/GMT+2"
+
+#: system-config-date-timezones.h:731
+msgid "Etc/GMT-3"
+msgstr "Itd/GMT-3"
+
+#: system-config-date-timezones.h:732
+msgid "Etc/GMT+3"
+msgstr "Itd/GMT+3"
+
+#: system-config-date-timezones.h:733
+msgid "Etc/GMT-4"
+msgstr "Itd/GMT-4"
+
+#: system-config-date-timezones.h:734
+msgid "Etc/GMT+4"
+msgstr "Itd/GMT+4"
+
+#: system-config-date-timezones.h:735
+msgid "Etc/GMT-5"
+msgstr "Itd/GMT-5"
+
+#: system-config-date-timezones.h:736
+msgid "Etc/GMT+5"
+msgstr "Itd/GMT+5"
+
+#: system-config-date-timezones.h:737
+msgid "Etc/GMT-6"
+msgstr "Itd/GMT-6"
+
+#: system-config-date-timezones.h:738
+msgid "Etc/GMT+6"
+msgstr "Itd/GMT+6"
+
+#: system-config-date-timezones.h:739
+msgid "Etc/GMT-7"
+msgstr "Itd/GMT-7"
+
+#: system-config-date-timezones.h:740
+msgid "Etc/GMT+7"
+msgstr "Itd/GMT+7"
+
+#: system-config-date-timezones.h:741
+msgid "Etc/GMT-8"
+msgstr "Itd/GMT-8"
+
+#: system-config-date-timezones.h:742
+msgid "Etc/GMT+8"
+msgstr "Itd/GMT+8"
+
+#: system-config-date-timezones.h:743
+msgid "Etc/GMT-9"
+msgstr "Itd/GMT-9"
+
+#: system-config-date-timezones.h:744
+msgid "Etc/GMT+9"
+msgstr "Itd/GMT+9"
+
+#: system-config-date-timezones.h:745
+msgid "Etc/Greenwich"
+msgstr "Itd/Grinič"
+
+#: system-config-date-timezones.h:746
+msgid "Etc/UCT"
+msgstr "Itd/UCT"
+
+#: system-config-date-timezones.h:747
+msgid "Etc/Universal"
+msgstr "Itd/Univerzalno"
+
+#: system-config-date-timezones.h:748
+msgid "Etc/UTC"
+msgstr "Itd/UTC"
+
+#: system-config-date-timezones.h:749
+msgid "Etc/Zulu"
+msgstr "Itd/Zulu"
+
+#: system-config-date-timezones.h:750
+msgid "Europe/Amsterdam"
+msgstr "Evropa/Amsterdam"
+
+#: system-config-date-timezones.h:751
+msgid "Europe/Andorra"
+msgstr "Evropa/Andora"
+
+#: system-config-date-timezones.h:752
+msgid "Europe/Athens"
+msgstr "Evropa/Atina"
+
+#: system-config-date-timezones.h:753
+msgid "Europe/Belfast"
+msgstr "Evropa/Belfast"
+
+#: system-config-date-timezones.h:754
+msgid "Europe/Belgrade"
+msgstr "Evropa/Beograd"
+
+#: system-config-date-timezones.h:755
+msgid "Europe/Berlin"
+msgstr "Evropa/Berlin"
+
+#: system-config-date-timezones.h:756
+msgid "Europe/Bratislava"
+msgstr "Evropa/Bratislava"
+
+#: system-config-date-timezones.h:757
+msgid "Europe/Brussels"
+msgstr "Evropa/Brisel"
+
+#: system-config-date-timezones.h:758
+msgid "Europe/Bucharest"
+msgstr "Evropa/Bukurešt"
+
+#: system-config-date-timezones.h:759
+msgid "Europe/Budapest"
+msgstr "Evropa/Budimpešta"
+
+#: system-config-date-timezones.h:760
+msgid "Europe/Chisinau"
+msgstr "Evropa/Kišinjev"
+
+#: system-config-date-timezones.h:761
+msgid "Europe/Copenhagen"
+msgstr "Evropa/Kopenhagen"
+
+#: system-config-date-timezones.h:762
+msgid "Europe/Dublin"
+msgstr "Evropa/Dablin"
+
+#: system-config-date-timezones.h:763
+msgid "Europe/Gibraltar"
+msgstr "Evropa/Gibraltar"
+
+#: system-config-date-timezones.h:764
+msgid "Europe/Guernsey"
+msgstr "Evropa/Gernzi"
+
+#: system-config-date-timezones.h:765
+msgid "Europe/Helsinki"
+msgstr "Evropa/Helsinki"
+
+#: system-config-date-timezones.h:766
+msgid "Europe/Isle_of_Man"
+msgstr "Evropa/Ostrvo Man"
+
+#: system-config-date-timezones.h:767
+msgid "Europe/Istanbul"
+msgstr "Evropa/Carigrad"
+
+#: system-config-date-timezones.h:768
+msgid "Europe/Jersey"
+msgstr "Evropa/Džerzi"
+
+#: system-config-date-timezones.h:769
+msgid "Europe/Kaliningrad"
+msgstr "Evropa/Kalinjingrad"
+
+#. comment for time zone Europe/Kaliningrad
+#: system-config-date-timezones.h:771
+msgid "Moscow-01 - Kaliningrad"
+msgstr "Moskva-01 - Kalinjingrad"
+
+#: system-config-date-timezones.h:772
+msgid "Europe/Kiev"
+msgstr "Evropa/Kijev"
+
+#: system-config-date-timezones.h:775
+msgid "Europe/Lisbon"
+msgstr "Evropa/Lisabon"
+
+#: system-config-date-timezones.h:778
+msgid "Europe/Ljubljana"
+msgstr "Evropa/Ljubljana"
+
+#: system-config-date-timezones.h:779
+msgid "Europe/London"
+msgstr "Evropa/London"
+
+#: system-config-date-timezones.h:780
+msgid "Europe/Luxembourg"
+msgstr "Evropa/Luksemburg"
+
+#: system-config-date-timezones.h:781
+msgid "Europe/Madrid"
+msgstr "Evropa/Madrid"
+
+#: system-config-date-timezones.h:784
+msgid "Europe/Malta"
+msgstr "Evropa/Malta"
+
+#: system-config-date-timezones.h:785
+msgid "Europe/Mariehamn"
+msgstr "Evropa/Marijehamn"
+
+#: system-config-date-timezones.h:786
+msgid "Europe/Minsk"
+msgstr "Evropa/Minsk"
+
+#: system-config-date-timezones.h:787
+msgid "Europe/Monaco"
+msgstr "Evropa/Monako"
+
+#: system-config-date-timezones.h:788
+msgid "Europe/Moscow"
+msgstr "Evropa/Moskva"
+
+#. comment for time zone Europe/Moscow
+#: system-config-date-timezones.h:790
+msgid "Moscow+00 - west Russia"
+msgstr "Moskva+00 - zapadna Rusija"
+
+#: system-config-date-timezones.h:791
+msgid "Europe/Nicosia"
+msgstr "Evropa/Nikozija"
+
+#: system-config-date-timezones.h:792
+msgid "Europe/Oslo"
+msgstr "Evropa/Oslo"
+
+#: system-config-date-timezones.h:793
+msgid "Europe/Paris"
+msgstr "Evropa/Pariz"
+
+#: system-config-date-timezones.h:794
+msgid "Europe/Podgorica"
+msgstr "Evropa/Podgorica"
+
+#: system-config-date-timezones.h:795
+msgid "Europe/Prague"
+msgstr "Evropa/Prag"
+
+#: system-config-date-timezones.h:796
+msgid "Europe/Riga"
+msgstr "Evropa/Riga"
+
+#: system-config-date-timezones.h:797
+msgid "Europe/Rome"
+msgstr "Evropa/Rim"
+
+#: system-config-date-timezones.h:798
+msgid "Europe/Samara"
+msgstr "Evropa/Samara"
+
+#. comment for time zone Europe/Samara
+#: system-config-date-timezones.h:800
+msgid "Moscow+00 - Samara, Udmurtia"
+msgstr ""
+
+#: system-config-date-timezones.h:801
+msgid "Europe/San_Marino"
+msgstr "Evropa/San_Marino"
+
+#: system-config-date-timezones.h:802
+msgid "Europe/Sarajevo"
+msgstr "Evropa/Sarajevo"
+
+#: system-config-date-timezones.h:803
+msgid "Europe/Simferopol"
+msgstr "Evropa/Simferopolj"
+
+#. comment for time zone Europe/Simferopol
+#: system-config-date-timezones.h:805
+msgid "central Crimea"
+msgstr "centralni Krim"
+
+#: system-config-date-timezones.h:806
+msgid "Europe/Skopje"
+msgstr "Evropa/Skoplje"
+
+#: system-config-date-timezones.h:807
+msgid "Europe/Sofia"
+msgstr "Evropa/Sofija"
+
+#: system-config-date-timezones.h:808
+msgid "Europe/Stockholm"
+msgstr "Evropa/Stokholm"
+
+#: system-config-date-timezones.h:809
+msgid "Europe/Tallinn"
+msgstr "Evropa/Talin"
+
+#: system-config-date-timezones.h:810
+msgid "Europe/Tirane"
+msgstr "Evropa/Tirana"
+
+#: system-config-date-timezones.h:811
+msgid "Europe/Tiraspol"
+msgstr "Evropa/Tiraspolj"
+
+#: system-config-date-timezones.h:812
+msgid "Europe/Uzhgorod"
+msgstr "Evropa/Užgorod"
+
+#. comment for time zone Europe/Uzhgorod
+#: system-config-date-timezones.h:814
+msgid "Ruthenia"
+msgstr "Rutenija"
+
+#: system-config-date-timezones.h:815
+msgid "Europe/Vaduz"
+msgstr "Evropa/Vaduz"
+
+#: system-config-date-timezones.h:816
+msgid "Europe/Vatican"
+msgstr "Evropa/Vatikan"
+
+#: system-config-date-timezones.h:817
+msgid "Europe/Vienna"
+msgstr "Evropa/Beč"
+
+#: system-config-date-timezones.h:818
+msgid "Europe/Vilnius"
+msgstr "Evropa/Vilnijus"
+
+#: system-config-date-timezones.h:819
+msgid "Europe/Volgograd"
+msgstr "Evropa/Volgograd"
+
+#. comment for time zone Europe/Volgograd
+#: system-config-date-timezones.h:821
+msgid "Moscow+00 - Caspian Sea"
+msgstr "Moskva+00 - Kaspijsko more"
+
+#: system-config-date-timezones.h:822
+msgid "Europe/Warsaw"
+msgstr "Evropa/Varšava"
+
+#: system-config-date-timezones.h:823
+msgid "Europe/Zagreb"
+msgstr "Evropa/Zagreb"
+
+#: system-config-date-timezones.h:824
+msgid "Europe/Zaporozhye"
+msgstr "Evropa/Zaporožje"
+
+#. comment for time zone Europe/Zaporozhye
+#: system-config-date-timezones.h:826
+msgid "Zaporozh'ye, E Lugansk / Zaporizhia, E Luhansk"
+msgstr "Zaporožje, I Lugansk"
+
+#: system-config-date-timezones.h:827
+msgid "Europe/Zurich"
+msgstr "Evropa/Cirih"
+
+#: system-config-date-timezones.h:828
+msgid "GB"
+msgstr "VB"
+
+#: system-config-date-timezones.h:829
+msgid "GB-Eire"
+msgstr "VB-Irska"
+
+#: system-config-date-timezones.h:830
+msgid "GMT"
+msgstr "GMT"
+
+#: system-config-date-timezones.h:831
+msgid "GMT0"
+msgstr "GMT0"
+
+#: system-config-date-timezones.h:832
+msgid "GMT-0"
+msgstr "GMT-0"
+
+#: system-config-date-timezones.h:833
+msgid "GMT+0"
+msgstr "GMT+0"
+
+#: system-config-date-timezones.h:834
+msgid "Greenwich"
+msgstr "Grinič"
+
+#: system-config-date-timezones.h:835
+msgid "Hongkong"
+msgstr "Hongkong"
+
+#: system-config-date-timezones.h:836
+msgid "HST"
+msgstr "HST"
+
+#: system-config-date-timezones.h:837
+msgid "Iceland"
+msgstr "Island"
+
+#: system-config-date-timezones.h:838
+msgid "Indian/Antananarivo"
+msgstr "Indijski_okean/Antananarivo"
+
+#: system-config-date-timezones.h:839
+msgid "Indian/Chagos"
+msgstr "Indijski_okean/Čagos"
+
+#: system-config-date-timezones.h:840
+msgid "Indian/Christmas"
+msgstr "Indijski_okean/Božićna_ostrva"
+
+#: system-config-date-timezones.h:841
+msgid "Indian/Cocos"
+msgstr "Indijski_okean/Kokos"
+
+#: system-config-date-timezones.h:842
+msgid "Indian/Comoro"
+msgstr "Indijski_okean/Komoro"
+
+#: system-config-date-timezones.h:843
+msgid "Indian/Kerguelen"
+msgstr "Indijski_okean/Kergulen"
+
+#: system-config-date-timezones.h:844
+msgid "Indian/Mahe"
+msgstr "Indijski_okean/Mahe"
+
+#: system-config-date-timezones.h:845
+msgid "Indian/Maldives"
+msgstr "Indijski_okean/Maldivi"
+
+#: system-config-date-timezones.h:846
+msgid "Indian/Mauritius"
+msgstr "Indijski_okean/Mauricijus"
+
+#: system-config-date-timezones.h:847
+msgid "Indian/Mayotte"
+msgstr "Indijski_okean/Majot"
+
+#: system-config-date-timezones.h:848
+msgid "Indian/Reunion"
+msgstr "Indijski_okean/Reunion"
+
+#: system-config-date-timezones.h:849
+msgid "Iran"
+msgstr "Iran"
+
+#: system-config-date-timezones.h:850
+msgid "Israel"
+msgstr "Izrael"
+
+#: system-config-date-timezones.h:851
+msgid "Jamaica"
+msgstr "Jamajka"
+
+#: system-config-date-timezones.h:852
+msgid "Japan"
+msgstr "Japan"
+
+#. comment for time zone Pacific/Kwajalein
+#: system-config-date-timezones.h:853 system-config-date-timezones.h:909
+msgid "Kwajalein"
+msgstr "Kvadžalin"
+
+#: system-config-date-timezones.h:854
+msgid "Libya"
+msgstr "Libija"
+
+#: system-config-date-timezones.h:855
+msgid "MET"
+msgstr "MET"
+
+#: system-config-date-timezones.h:856
+msgid "Mexico/BajaNorte"
+msgstr "Meksiko/BahaNorte"
+
+#: system-config-date-timezones.h:857
+msgid "Mexico/BajaSur"
+msgstr "Meksiko/BahaSur"
+
+#: system-config-date-timezones.h:858
+msgid "Mexico/General"
+msgstr "Meksiko/Opšte"
+
+#: system-config-date-timezones.h:859
+msgid "Mideast/Riyadh87"
+msgstr "Bliski istok/Rijad87"
+
+#: system-config-date-timezones.h:860
+msgid "Mideast/Riyadh88"
+msgstr "Bliski istok/Rijad88"
+
+#: system-config-date-timezones.h:861
+msgid "Mideast/Riyadh89"
+msgstr "Bliski istok/Rijad89"
+
+#: system-config-date-timezones.h:862
+msgid "MST"
+msgstr "MST"
+
+#: system-config-date-timezones.h:863
+msgid "MST7MDT"
+msgstr "MST7MDT"
+
+#: system-config-date-timezones.h:864
+msgid "Navajo"
+msgstr "Navaho"
+
+#: system-config-date-timezones.h:865
+msgid "NZ"
+msgstr "NZ"
+
+#: system-config-date-timezones.h:866
+msgid "NZ-CHAT"
+msgstr "NZ-ČAT"
+
+#: system-config-date-timezones.h:867
+msgid "Pacific/Apia"
+msgstr "Pacifik/Apia"
+
+#: system-config-date-timezones.h:868
+msgid "Pacific/Auckland"
+msgstr "Pacifik/Oklend"
+
+#: system-config-date-timezones.h:871
+msgid "Pacific/Chatham"
+msgstr "Pacifik/Čatam"
+
+#. comment for time zone Pacific/Chatham
+#: system-config-date-timezones.h:873
+msgid "Chatham Islands"
+msgstr "Ostrva Čatam"
+
+#: system-config-date-timezones.h:874
+msgid "Pacific/Chuuk"
+msgstr ""
+
+#. comment for time zone Pacific/Chuuk
+#: system-config-date-timezones.h:876
+msgid "Chuuk (Truk) and Yap"
+msgstr ""
+
+#: system-config-date-timezones.h:877
+msgid "Pacific/Easter"
+msgstr "Pacifik/Uskršnje_ostrvo"
+
+#. comment for time zone Pacific/Easter
+#: system-config-date-timezones.h:879
+msgid "Easter Island & Sala y Gomez"
+msgstr "Uskršnje ostrvo i Sala i Gomez"
+
+#: system-config-date-timezones.h:880
+msgid "Pacific/Efate"
+msgstr "Pacifik/Efate"
+
+#: system-config-date-timezones.h:881
+msgid "Pacific/Enderbury"
+msgstr "Pacifik/Enderburi"
+
+#. comment for time zone Pacific/Enderbury
+#: system-config-date-timezones.h:883
+msgid "Phoenix Islands"
+msgstr "Ostrva Feniks"
+
+#: system-config-date-timezones.h:884
+msgid "Pacific/Fakaofo"
+msgstr "Pacifik/Fakaofo"
+
+#: system-config-date-timezones.h:885
+msgid "Pacific/Fiji"
+msgstr "Pacifik/Fidži"
+
+#: system-config-date-timezones.h:886
+msgid "Pacific/Funafuti"
+msgstr "Pacifik/Funafuti"
+
+#: system-config-date-timezones.h:887
+msgid "Pacific/Galapagos"
+msgstr "Pacifik/Galapagos"
+
+#. comment for time zone Pacific/Galapagos
+#: system-config-date-timezones.h:889
+msgid "Galapagos Islands"
+msgstr "Ostrva Galapagos"
+
+#: system-config-date-timezones.h:890
+msgid "Pacific/Gambier"
+msgstr "Pacifik/Gambije"
+
+#. comment for time zone Pacific/Gambier
+#: system-config-date-timezones.h:892
+msgid "Gambier Islands"
+msgstr "Ostrva Gambije"
+
+#: system-config-date-timezones.h:893
+msgid "Pacific/Guadalcanal"
+msgstr "Pacifik/Gvadalkanal"
+
+#: system-config-date-timezones.h:894
+msgid "Pacific/Guam"
+msgstr "Pacifik/Guam"
+
+#: system-config-date-timezones.h:895
+msgid "Pacific/Honolulu"
+msgstr "Pacifik/Honolulu"
+
+#. comment for time zone Pacific/Honolulu
+#: system-config-date-timezones.h:897
+msgid "Hawaii"
+msgstr "Havaji"
+
+#: system-config-date-timezones.h:898
+msgid "Pacific/Johnston"
+msgstr "Pacifik/Džonston"
+
+#. comment for time zone Pacific/Johnston
+#: system-config-date-timezones.h:900
+msgid "Johnston Atoll"
+msgstr "Atol Džonston"
+
+#: system-config-date-timezones.h:901
+msgid "Pacific/Kiritimati"
+msgstr "Pacifik/Kiritimati"
+
+#. comment for time zone Pacific/Kiritimati
+#: system-config-date-timezones.h:903
+msgid "Line Islands"
+msgstr "Linijska ostrva"
+
+#: system-config-date-timezones.h:904
+msgid "Pacific/Kosrae"
+msgstr "Pacifik/Kosre"
+
+#. comment for time zone Pacific/Kosrae
+#: system-config-date-timezones.h:906
+msgid "Kosrae"
+msgstr "Kosre"
+
+#: system-config-date-timezones.h:907
+msgid "Pacific/Kwajalein"
+msgstr "Pacifik/Kvadžalin"
+
+#: system-config-date-timezones.h:910
+msgid "Pacific/Majuro"
+msgstr "Pacifik/Madžuro"
+
+#: system-config-date-timezones.h:913
+msgid "Pacific/Marquesas"
+msgstr "Pacifik/Markiz"
+
+#. comment for time zone Pacific/Marquesas
+#: system-config-date-timezones.h:915
+msgid "Marquesas Islands"
+msgstr "Ostrva Markiz"
+
+#: system-config-date-timezones.h:916
+msgid "Pacific/Midway"
+msgstr "Pacifik/Midvej"
+
+#. comment for time zone Pacific/Midway
+#: system-config-date-timezones.h:918
+msgid "Midway Islands"
+msgstr "Ostrva Midvej"
+
+#: system-config-date-timezones.h:919
+msgid "Pacific/Nauru"
+msgstr "Pacifik/Nauru"
+
+#: system-config-date-timezones.h:920
+msgid "Pacific/Niue"
+msgstr "Pacifik/Niue"
+
+#: system-config-date-timezones.h:921
+msgid "Pacific/Norfolk"
+msgstr "Pacifik/Norfolk"
+
+#: system-config-date-timezones.h:922
+msgid "Pacific/Noumea"
+msgstr "Pacifik/Noumea"
+
+#: system-config-date-timezones.h:923
+msgid "Pacific/Pago_Pago"
+msgstr "Pacifik/Pago_Pago"
+
+#: system-config-date-timezones.h:924
+msgid "Pacific/Palau"
+msgstr "Pacifik/Palau"
+
+#: system-config-date-timezones.h:925
+msgid "Pacific/Pitcairn"
+msgstr "Pacifik/Pitkairn"
+
+#: system-config-date-timezones.h:926
+msgid "Pacific/Pohnpei"
+msgstr ""
+
+#. comment for time zone Pacific/Pohnpei
+#: system-config-date-timezones.h:928
+msgid "Pohnpei (Ponape)"
+msgstr ""
+
+#: system-config-date-timezones.h:929
+msgid "Pacific/Ponape"
+msgstr "Pacifik/Ponape"
+
+#: system-config-date-timezones.h:930
+msgid "Pacific/Port_Moresby"
+msgstr "Pacifik/Port_Morezbi"
+
+#: system-config-date-timezones.h:931
+msgid "Pacific/Rarotonga"
+msgstr "Pacifik/Rarotonga"
+
+#: system-config-date-timezones.h:932
+msgid "Pacific/Saipan"
+msgstr "Pacifik/Saipan"
+
+#: system-config-date-timezones.h:933
+msgid "Pacific/Samoa"
+msgstr "Pacifik/Samoa"
+
+#: system-config-date-timezones.h:934
+msgid "Pacific/Tahiti"
+msgstr "Pacifik/Tahiti"
+
+#. comment for time zone Pacific/Tahiti
+#: system-config-date-timezones.h:936
+msgid "Society Islands"
+msgstr "Društvena ostrva"
+
+#: system-config-date-timezones.h:937
+msgid "Pacific/Tarawa"
+msgstr "Pacifik/Tarava"
+
+#. comment for time zone Pacific/Tarawa
+#: system-config-date-timezones.h:939
+msgid "Gilbert Islands"
+msgstr "Ostrva Gilbert"
+
+#: system-config-date-timezones.h:940
+msgid "Pacific/Tongatapu"
+msgstr "Pacifik/Tongatapu"
+
+#: system-config-date-timezones.h:941
+msgid "Pacific/Truk"
+msgstr "Pacifik/Truk"
+
+#: system-config-date-timezones.h:942
+msgid "Pacific/Wake"
+msgstr "Pacifik/Vejk"
+
+#. comment for time zone Pacific/Wake
+#: system-config-date-timezones.h:944
+msgid "Wake Island"
+msgstr "Ostrvo Vejk"
+
+#: system-config-date-timezones.h:945
+msgid "Pacific/Wallis"
+msgstr "Pacifik/Valis"
+
+#: system-config-date-timezones.h:946
+msgid "Pacific/Yap"
+msgstr "Pacifik/Jap"
+
+#: system-config-date-timezones.h:947
+msgid "Poland"
+msgstr "Poljska"
+
+#: system-config-date-timezones.h:948
+msgid "Portugal"
+msgstr "Portugal"
+
+#: system-config-date-timezones.h:949
+msgid "PRC"
+msgstr "PRC"
+
+#: system-config-date-timezones.h:950
+msgid "PST8PDT"
+msgstr "PST8PDT"
+
+#: system-config-date-timezones.h:951
+msgid "ROC"
+msgstr "ROC"
+
+#: system-config-date-timezones.h:952
+msgid "ROK"
+msgstr "ROK"
+
+#: system-config-date-timezones.h:953
+msgid "Singapore"
+msgstr "Singapur"
+
+#: system-config-date-timezones.h:954
+msgid "Turkey"
+msgstr "Turska"
+
+#: system-config-date-timezones.h:955
+msgid "UCT"
+msgstr "UCT"
+
+#: system-config-date-timezones.h:956
+msgid "Universal"
+msgstr "Univerzalno"
+
+#: system-config-date-timezones.h:957
+msgid "US/Alaska"
+msgstr "SAD/Aljaska"
+
+#: system-config-date-timezones.h:958
+msgid "US/Aleutian"
+msgstr "SAD/Aleutska_ostrva"
+
+#: system-config-date-timezones.h:959
+msgid "US/Arizona"
+msgstr "SAD/Arizona"
+
+#: system-config-date-timezones.h:960
+msgid "US/Central"
+msgstr "SAD/Centralne"
+
+#: system-config-date-timezones.h:961
+msgid "US/Eastern"
+msgstr "SAD/Istočne"
+
+#: system-config-date-timezones.h:962
+msgid "US/East-Indiana"
+msgstr "SAD/Istok-Indijana"
+
+#: system-config-date-timezones.h:963
+msgid "US/Hawaii"
+msgstr "SAD/Havaji"
+
+#: system-config-date-timezones.h:964
+msgid "US/Indiana-Starke"
+msgstr "SAD/Indijana-Stark"
+
+#: system-config-date-timezones.h:965
+msgid "US/Michigan"
+msgstr "SAD/Mičigen"
+
+#: system-config-date-timezones.h:966
+msgid "US/Mountain"
+msgstr "SAD/Planine"
+
+#: system-config-date-timezones.h:967
+msgid "US/Pacific"
+msgstr "SAD/Pacifik"
+
+#: system-config-date-timezones.h:968
+#, fuzzy
+msgid "US/Pacific-New"
+msgstr "SAD/Pacifik"
+
+#: system-config-date-timezones.h:969
+msgid "US/Samoa"
+msgstr "SAD/Samoa"
+
+#: system-config-date-timezones.h:970
+msgid "UTC"
+msgstr "UTC"
+
+#: system-config-date-timezones.h:971
+msgid "WET"
+msgstr "WET"
+
+#: system-config-date-timezones.h:972
+msgid "W-SU"
+msgstr "W-SU"
+
+#: system-config-date-timezones.h:973
+msgid "Zulu"
+msgstr "Zulu"
+
+#~ msgid "Factory"
+#~ msgstr "Fabrika"

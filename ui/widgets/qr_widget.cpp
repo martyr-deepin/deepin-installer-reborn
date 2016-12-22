@@ -7,7 +7,8 @@
 #include <QDebug>
 #include <QPaintEvent>
 #include <QPainter>
-#include <qrencode.h>
+
+#include "third_party/qrencode/qrencode.h"
 
 namespace installer {
 

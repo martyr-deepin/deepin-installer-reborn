@@ -5,6 +5,7 @@
 #include "sysinfo/timezone.h"
 
 #include <cmath>
+#include <libintl.h>
 #include <QDebug>
 
 #include "base/file_util.h"
@@ -18,6 +19,9 @@ const char kZoneTabFile[] = "/usr/share/zoneinfo/zone.tab";
 
 // Absolute path to backward timezone file.
 const char kBackwardTzFile[] = RESOURCES_DIR "backward_tz";
+
+// Domain name for timezones.
+const char kTimezoneDomain[] = "deepin-installer-timezones";
 
 // Parse latitude and longitude of the zone's principal location.
 // See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.
@@ -110,8 +114,16 @@ QString GetCurrentTimezone() {
 }
 
 QString GetTimezoneName(const QString& timezone) {
-  const int index = timezone.lastIndexOf('/');
-  return (index > -1) ? timezone.mid(index + 1) : timezone;
+//  const int index = timezone.lastIndexOf('/');
+//  return (index > -1) ? timezone.mid(index + 1) : timezone;
+  return GetLocalTimezoneName(timezone);
+}
+
+QString GetLocalTimezoneName(const QString& timezone) {
+  setlocale(LC_ALL, "");
+  const QString local_name(dgettext(kTimezoneDomain, timezone.toStdString().c_str()));
+  const int index = local_name.lastIndexOf('/');
+  return (index > -1) ? local_name.mid(index + 1) : local_name;
 }
 
 BackwardTzMap GetBackwardTzMap() {

@@ -38,8 +38,10 @@ int GetZoneInfoByZone(const ZoneInfoList& list, const QString& timezone);
 QString GetCurrentTimezone();
 
 // Returns name of timezone, excluding continent name.
-// TODO(xushaohua): Call time and localtime()
 QString GetTimezoneName(const QString& timezone);
+
+// Returns local name of timezone, excluding continent name.
+QString GetLocalTimezoneName(const QString& timezone);
 
 // A map between old name of timezone and current name.
 typedef QHash<QString, QString> BackwardTzMap;

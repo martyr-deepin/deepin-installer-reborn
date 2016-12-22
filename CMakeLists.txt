@@ -75,14 +75,11 @@ include_directories(AFTER ${X11TST_INCLUDE_DIRS})
 include_directories(AFTER ${X11RandR_INCLUDE_DIRS})
 
 add_subdirectory(third_party/CuteLogger)
-include_directories(third_party/CuteLogger)
 add_subdirectory(third_party/global_shortcut)
-include_directories(third_party/global_shortcut)
 add_subdirectory(third_party/googletest)
-include_directories(third_party/googletest)
 add_subdirectory(third_party/qrencode)
-include_directories(third_party/qrencode)
 add_subdirectory(third_party/squashfs-tools)
+add_subdirectory(third_party/timezones)
 
 set(BASE_FILES
     base/command.cpp
