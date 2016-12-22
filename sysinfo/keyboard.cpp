@@ -4,6 +4,8 @@
 
 #include "sysinfo/keyboard.h"
 
+#include <libintl.h>
+#include <locale.h>
 #include <QDebug>
 #include <QDomDocument>
 
@@ -14,10 +16,18 @@ namespace installer {
 
 namespace {
 
+// Domain name of xkb-data.
+const char kXkbDomain[] = "xkeyboard-config";
+
 const char kSetXkbMapCmd[] = "/usr/bin/setxkbmap";
 
 const char kXkbBaseRule[] = "/usr/share/X11/xkb/rules/base.xml";
 const char kXkbExtraRule[] = "/usr/share/X11/xkb/rules/base.extras.xml";
+
+// Get localized |description|.
+QString GetLocalDesc(const QString& description) {
+  return QString(dgettext(kXkbDomain, description.toStdString().c_str()));
+}
 
 // Read modelList node.
 void ReadModelList(const QDomNode& root, XkbModelList& model_list) {
@@ -33,7 +43,7 @@ void ReadModelList(const QDomNode& root, XkbModelList& model_list) {
         if (prop.nodeName() == "name") {
           xkb_model.name = prop.toElement().text();
         } else if (prop.nodeName() == "description") {
-          xkb_model.description = prop.toElement().text();
+          xkb_model.description = GetLocalDesc(prop.toElement().text());
         } else if (prop.nodeName() == "vendor") {
           xkb_model.vendor = prop.toElement().text();
         }
@@ -61,7 +71,7 @@ void ReadLayoutVariantList(const QDomNode& root,
       if (prop.nodeName() == "name") {
         layout_variant.name = prop.toElement().text();
       } else if (prop.nodeName() == "description") {
-        layout_variant.description = prop.toElement().text();
+        layout_variant.description = GetLocalDesc(prop.toElement().text());
       } else if (prop.nodeName() == "shortDescription") {
         layout_variant.short_description = prop.toElement().text();
       } else if (prop.nodeName() == "languageList") {
@@ -85,7 +95,7 @@ void ReadLayoutConfigItem(const QDomNode& root, XkbLayout& xkb_layout) {
     if (prop.nodeName() == "name") {
       xkb_layout.name = prop.toElement().text();
     } else if (prop.nodeName() == "description") {
-      xkb_layout.description = prop.toElement().text();
+      xkb_layout.description = GetLocalDesc(prop.toElement().text());
     } else if (prop.nodeName() == "shortDescription") {
       xkb_layout.short_description = prop.toElement().text();
     } else if (prop.nodeName() == "languageList") {
@@ -147,15 +157,10 @@ bool ReadConfig(const QString& filepath, XkbConfig& config) {
 
 }  // namespace
 
-bool operator<(const XkbLayoutVariant& a, const XkbLayoutVariant& b) {
-  return a.description < b.description;
-}
-
-bool operator<(const XkbLayout& a, const XkbLayout& b) {
-  return a.description < b.description;
-}
-
 XkbConfig GetXkbConfig() {
+  // Query current locale.
+  (void) setlocale(LC_ALL, "");
+
   XkbConfig config;
   if (!ReadConfig(kXkbBaseRule, config)) {
     qWarning() << "Failed to read xkb config file" << kXkbBaseRule;
@@ -164,8 +169,8 @@ XkbConfig GetXkbConfig() {
 
   if (!ReadConfig(kXkbExtraRule, config)) {
     qWarning() << "Failed to read xkb config file" << kXkbExtraRule;
-    return config;
   }
+
   return config;
 }
 

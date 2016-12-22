@@ -5,6 +5,7 @@
 #include "ui/models/keyboard_layout_model.h"
 
 #include <algorithm>
+#include <QCollator>
 
 namespace installer {
 
@@ -13,10 +14,6 @@ KeyboardLayoutModel::KeyboardLayoutModel(QObject* parent)
       xkb_config_(),
       layout_list_() {
   this->setObjectName("keyboard_layout_model");
-
-  layout_list_ = xkb_config_.layout_list;
-  // Sort layout list by description.
-  std::sort(layout_list_.begin(), layout_list_.end());
 }
 
 QVariant KeyboardLayoutModel::data(const QModelIndex& index, int role) const {
@@ -82,6 +79,15 @@ void KeyboardLayoutModel::initLayout() {
   // Load xkb layout based on current locale.
   // Locale environment is setup in SelectLanguageFrame.
   xkb_config_ = GetXkbConfig();
+  layout_list_ = xkb_config_.layout_list;
+
+  // Sort layout list by description.
+  // Perform localized comparison.
+  const QCollator collator(QLocale(qgetenv("LC_ALL")));
+  std::sort(layout_list_.begin(), layout_list_.end(),
+            [&](const XkbLayout& a, const XkbLayout& b) -> bool {
+              return collator.compare(a.description, b.description) < 0;
+            });
 
   this->endResetModel();
 }

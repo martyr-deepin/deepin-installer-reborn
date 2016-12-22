@@ -23,8 +23,6 @@ struct XkbLayoutVariant {
   QString short_description = "";
   QStringList language_list;
 };
-// Sort keyboard variant by description.
-bool operator<(const XkbLayoutVariant& a, const XkbLayoutVariant& b);
 typedef QList<XkbLayoutVariant> XKbLayoutVariantList;
 
 struct XkbLayout {
@@ -34,8 +32,6 @@ struct XkbLayout {
   QStringList language_list;
   XKbLayoutVariantList variant_list;
 };
-// Sort XkbLayout by description.
-bool operator<(const XkbLayout& a, const XkbLayout& b);
 typedef QList<XkbLayout> XkbLayoutList;
 
 struct XkbConfig {
@@ -44,7 +40,6 @@ struct XkbConfig {
 };
 
 // Read system keyboard layout.
-// TODO(xushaohua): Call gettext()
 XkbConfig GetXkbConfig();
 
 // Set current keyboard layout to |layout|.

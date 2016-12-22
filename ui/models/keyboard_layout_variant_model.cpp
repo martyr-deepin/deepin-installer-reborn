@@ -5,6 +5,7 @@
 #include "ui/models/keyboard_layout_variant_model.h"
 
 #include <algorithm>
+#include <QCollator>
 
 namespace installer {
 
@@ -43,7 +44,11 @@ void KeyboardLayoutVariantModel::setVariantList(
   variant_list_ = variant_list;
 
   // Sort variant list by description.
-  std::sort(variant_list_.begin(), variant_list_.end());
+  const QCollator collator(QLocale(qgetenv("LC_ALL")));
+  std::sort(variant_list_.begin(), variant_list_.end(),
+            [&](const XkbLayoutVariant& a, const XkbLayoutVariant& b) -> bool {
+              return collator.compare(a.description, b.description) < 0;
+            });
 
   // Call this method resulting in emitting dataChanged() signal.
   this->endResetModel();
