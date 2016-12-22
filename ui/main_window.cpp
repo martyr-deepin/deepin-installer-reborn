@@ -319,9 +319,8 @@ void MainWindow::goNextPage() {
     case PageId::SelectLanguageId: {
       // Displays the first page.
       // Check whether to show DiskSpaceInsufficientPage.
-      const int required_device_size =
-          GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-      if (IsDiskSpaceInsufficient(required_device_size)) {
+      if (!GetSettingsBool(kSkipDiskSpaceInsufficientPage) &&
+          IsDiskSpaceInsufficient()) {
         this->setCurrentPage(PageId::DiskSpaceInsufficientId);
       } else {
         prev_page_ = current_page_;
@@ -333,7 +332,8 @@ void MainWindow::goNextPage() {
 
     case PageId::DiskSpaceInsufficientId: {
       // Check whether to show VirtualMachinePage.
-      if (IsVirtualMachine()) {
+      if (!GetSettingsBool(kSkipVirtualMachinePage) &&
+          IsVirtualMachine()) {
         this->setCurrentPage(PageId::VirtualMachineId);
       } else {
         prev_page_ = current_page_;
@@ -345,7 +345,8 @@ void MainWindow::goNextPage() {
 
     case PageId::VirtualMachineId: {
       // Check whether to show PartitionTableWarningPage.
-      if (!IsPartitionTableMatch()) {
+      if (!GetSettingsBool(kSkipPartitionTableWarningPage) &&
+          !IsPartitionTableMatch()) {
         this->setCurrentPage(PageId::PartitionTableWarningId);
       } else {
         prev_page_ = current_page_;

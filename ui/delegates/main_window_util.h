@@ -15,8 +15,8 @@ QString EncodeErrorMsg(const QString& msg);
 // Get number of visible pages displayed in main page.
 int GetVisiblePages();
 
-// Check whether disk device is large enough enough to install new system.
-bool IsDiskSpaceInsufficient(int required_device_size);
+// Check whether disk space is large enough to install new system.
+bool IsDiskSpaceInsufficient();
 
 // Check whether partition table matches machine settings.
 bool IsPartitionTableMatch();

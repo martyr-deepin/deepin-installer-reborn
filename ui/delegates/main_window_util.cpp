@@ -43,7 +43,9 @@ int GetVisiblePages() {
   return pages;
 }
 
-bool IsDiskSpaceInsufficient(int required_device_size) {
+bool IsDiskSpaceInsufficient() {
+  const int required_device_size =
+      GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
   const qint64 maximum_device_size = GetMaximumDeviceSize();
   return required_device_size * kMebiByte > maximum_device_size;
 }
