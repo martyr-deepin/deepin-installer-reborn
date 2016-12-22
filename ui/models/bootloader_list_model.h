@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_UI_MODELS_PARTITION_LIST_MODEL_H
-#define INSTALLER_UI_MODELS_PARTITION_LIST_MODEL_H
+#ifndef INSTALLER_UI_MODELS_BOOTLOADER_LIST_MODEL_H
+#define INSTALLER_UI_MODELS_BOOTLOADER_LIST_MODEL_H
 
 #include <QAbstractListModel>
 #include <QStringList>
@@ -13,11 +13,11 @@ namespace installer {
 class PartitionDelegate;
 
 // Reimplemented model used in SelectBootloaderFrame
-class PartitionListModel : public QAbstractListModel {
+class BootloaderListModel : public QAbstractListModel {
   Q_OBJECT
 
  public:
-  PartitionListModel(PartitionDelegate* delegate, QObject* parent = nullptr);
+  BootloaderListModel(PartitionDelegate* delegate, QObject* parent = nullptr);
 
   virtual QVariant data(const QModelIndex& index, int role) const override;
   virtual int rowCount(const QModelIndex& parent) const override;
@@ -48,7 +48,7 @@ class PartitionListModel : public QAbstractListModel {
   };
 
   // To store path of available partitions and devices.
-  QList<PartitionItem> partition_list_;
+  QList<PartitionItem> bootloader_list_;
 
  private slots:
   // Update bootloader list when device list is updated in delegate.
@@ -57,4 +57,4 @@ class PartitionListModel : public QAbstractListModel {
 
 }  // namespace installer
 
-#endif  // INSTALLER_UI_MODELS_PARTITION_LIST_MODEL_H
+#endif  // INSTALLER_UI_MODELS_BOOTLOADER_LIST_MODEL_H

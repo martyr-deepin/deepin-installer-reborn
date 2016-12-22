@@ -243,6 +243,8 @@ set(UI_FILES
     ui/frames/virtual_machine_frame.cpp
     ui/frames/virtual_machine_frame.h
 
+    ui/models/bootloader_list_model.cpp
+    ui/models/bootloader_list_model.h
     ui/models/fs_model.cpp
     ui/models/fs_model.h
     ui/models/keyboard_layout_model.cpp
@@ -253,8 +255,6 @@ set(UI_FILES
     ui/models/language_list_model.h
     ui/models/mount_point_model.cpp
     ui/models/mount_point_model.h
-    ui/models/partition_list_model.cpp
-    ui/models/partition_list_model.h
 
     ui/utils/widget_util.cpp
     ui/utils/widget_util.h

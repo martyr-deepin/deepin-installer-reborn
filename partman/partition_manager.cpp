@@ -24,7 +24,9 @@ namespace {
 // Absolute path to hook_manager.sh
 const char kHookManagerFile[] = BUILTIN_HOOKS_DIR "/hook_manager.sh";
 
+// Get flags of |lp_partition|.
 PartitionFlags GetPartitionFlags(PedPartition* lp_partition) {
+  Q_ASSERT(lp_partition);
   PartitionFlags flags;
   for (PedPartitionFlag lp_flag =
          ped_partition_flag_next(static_cast<PedPartitionFlag>(NULL));
@@ -38,7 +40,9 @@ PartitionFlags GetPartitionFlags(PedPartition* lp_partition) {
   return flags;
 }
 
+// Read all partitions of |lp_disk|.
 PartitionList ReadPartitions(PedDisk* lp_disk) {
+  Q_ASSERT(lp_disk);
   PartitionList partitions;
   for (PedPartition* lp_partition = ped_disk_next_partition(lp_disk, nullptr);
       lp_partition != nullptr;

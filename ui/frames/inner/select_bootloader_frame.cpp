@@ -9,7 +9,7 @@
 
 #include "ui/delegates/partition_delegate.h"
 #include "ui/frames/consts.h"
-#include "ui/models/partition_list_model.h"
+#include "ui/models/bootloader_list_model.h"
 #include "ui/views/frameless_list_view.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
@@ -51,7 +51,7 @@ void SelectBootloaderFrame::initConnections() {
           this, &SelectBootloaderFrame::finished);
   connect(list_view_->selectionModel(), &QItemSelectionModel::currentChanged,
           this, &SelectBootloaderFrame::onPartitionListViewSelected);
-  connect(list_model_, &PartitionListModel::rowChanged,
+  connect(list_model_, &BootloaderListModel::rowChanged,
           this, &SelectBootloaderFrame::onModelChanged);
 }
 
@@ -64,7 +64,8 @@ void SelectBootloaderFrame::initUI() {
   comment_layout->addWidget(comment_label_);
 
   list_view_ = new FramelessListView();
-  list_model_ = new PartitionListModel(delegate_, this);
+  list_view_->setFixedWidth(560);
+  list_model_ = new BootloaderListModel(delegate_, this);
   list_view_->setModel(list_model_);
 
   back_button_ = new NavButton(tr(kTextBack));

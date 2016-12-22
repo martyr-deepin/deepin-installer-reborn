@@ -104,12 +104,12 @@ bool CreatePartition(const Partition& partition) {
       }
     } else {
       qCritical() << "CreatePartition() ped_partition_new() returns nullptr"
-                  << partition.path;
+                  << partition;
     }
     DestroyDeviceAndDisk(lp_device, lp_disk);
   } else {
     qCritical() << "CreatePartition() failed to get lp disk object"
-                << partition.path;
+                << partition;
   }
 
   return ok;
@@ -143,7 +143,7 @@ bool DeletePartition(const Partition& partition) {
     DestroyDeviceAndDisk(lp_device, lp_disk);
   } else {
     qCritical() << "DeletePartition() failed to get disk object"
-                << partition.path;
+                << partition;
   }
 
   return ok;
@@ -173,7 +173,7 @@ bool FlushDevice(PedDevice* lp_device) {
 bool GetDeviceAndDisk(const QString& device_path,
                       PedDevice*& lp_device,
                       PedDisk*& lp_disk) {
-  lp_device = ped_device_get(device_path.toLatin1().data());
+  lp_device = ped_device_get(device_path.toStdString().c_str());
   if (lp_device) {
     lp_disk = ped_disk_new(lp_device);
     if (lp_disk != nullptr) {
@@ -298,7 +298,7 @@ bool SetPartitionType(const Partition& partition) {
     DestroyDeviceAndDisk(lp_device, lp_disk);
   } else {
     qCritical() << "SetPartitionType() failed to get disk object:"
-                << partition.path;
+                << partition;
   }
 
   return ok;
