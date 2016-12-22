@@ -3,7 +3,6 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-
 # Set environment
 export LC_ALL=C
 export DEBIAN_FRONTEND="noninteractive"
