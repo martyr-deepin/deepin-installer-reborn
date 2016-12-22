@@ -78,13 +78,13 @@ void MainWindow::initConnections() {
   connect(confirm_quit_frame_, &ConfirmQuitFrame::quitCancelled,
           this, &MainWindow::goNextPage);
   connect(confirm_quit_frame_, &ConfirmQuitFrame::quitConfirmed,
-          this, &MainWindow::rebootSystem);
+          this, &MainWindow::shutdownSystem);
   connect(control_panel_frame_, &ControlPanelFrame::currentPageChanged,
           this, &MainWindow::onCurrentPageChanged);
   connect(disk_space_insufficient_frame_, &DiskSpaceInsufficientFrame::finished,
-          this, &MainWindow::rebootSystem);
+          this, &MainWindow::shutdownSystem);
   connect(install_failed_frame_, &InstallFailedFrame::finished,
-          this, &MainWindow::rebootSystem);
+          this, &MainWindow::shutdownSystem);
   connect(install_progress_frame_, &InstallProgressFrame::finished,
           this, &MainWindow::goNextPage);
   connect(install_success_frame_, &InstallSuccessFrame::finished,
