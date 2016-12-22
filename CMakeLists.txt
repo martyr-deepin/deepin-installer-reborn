@@ -155,6 +155,8 @@ set(SYSINFO_FILES
     sysinfo/keyboard.h
     sysinfo/machine.cpp
     sysinfo/machine.h
+    sysinfo/proc_meminfo.cpp
+    sysinfo/proc_meminfo.h
     sysinfo/proc_mounts.cpp
     sysinfo/proc_mounts.h
     sysinfo/proc_partitions.cpp
@@ -335,6 +337,7 @@ set(UNITTEST_FILES
 
     sysinfo/dev_disk_test.cpp
     sysinfo/keyboard_test.cpp
+    sysinfo/proc_meminfo_test.cpp
     sysinfo/proc_mounts_test.cpp
     sysinfo/proc_partitions_test.cpp
     sysinfo/proc_swaps_test.cpp
