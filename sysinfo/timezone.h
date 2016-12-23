@@ -44,8 +44,9 @@ QString GetTimezoneName(const QString& timezone);
 QString GetLocalTimezoneName(const QString& timezone);
 
 // A map between old name of timezone and current name.
-typedef QHash<QString, QString> BackwardTzMap;
-BackwardTzMap GetBackwardTzMap();
+// e.g. Asia/Chongqing -> Asia/Shanghai
+typedef QHash<QString, QString> TimezoneAliasMap;
+TimezoneAliasMap GetTimezoneAliasMap();
 
 // Validate |timezone|.
 bool IsValidTimezone(const QString& timezone);

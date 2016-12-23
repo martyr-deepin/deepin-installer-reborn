@@ -24,6 +24,13 @@ TEST(TimezoneTest, GetCurrentTimezone) {
   EXPECT_FALSE(current_timezone.isEmpty());
 }
 
+TEST(TimezoneTest, GetTimezoneAliasMap) {
+  const TimezoneAliasMap map = GetTimezoneAliasMap();
+  EXPECT_GT(map.keys().length(), 0);
+  EXPECT_TRUE(map.contains("Asia/Chongqing"));
+  EXPECT_EQ(map.value("Asia/Chongqing"), "Asia/Shanghai");
+}
+
 TEST(TimezoneTest, IsValidTimezone) {
   EXPECT_TRUE(IsValidTimezone("Asia/Shanghai"));
   EXPECT_TRUE(IsValidTimezone("Etc/UTC"));

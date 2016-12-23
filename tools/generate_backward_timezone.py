@@ -3,27 +3,26 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+import json
 import os
 
+ZONE_INFO_DIR = "/usr/share/zoneinfo"
 
 def parse_symlink():
   dirs = ("Africa", "America", "Antarctica", "Arctic", "Asia", "Atlantic",
           "Australia", "Brazil", "Canada", "Chile", "Etc", "Europe", "Indian",
           "Mexico", "Pacific")
-  parent_dir = "/usr/share/zoneinfo"
-  parent_len = len(parent_dir)
-  result = list()
+  map = dict()
   for dir_name in dirs:
-    dir_path = os.path.join(parent_dir, dir_name)
-    for entry in os.listdir(dir_path):
-      abspath = os.path.join(dir_path, entry)
-      if os.path.isdir(abspath):
-        pass
-      elif os.path.islink(abspath):
-        tz_name = dir_name + "/" + entry
-        real_path = os.path.realpath(abspath)[parent_len+1:]
-        result.append((tz_name, real_path))
-  return result
+    for root, dirs, files in os.walk(os.path.join(ZONE_INFO_DIR, dir_name)):
+      for file_name in files:
+        abspath = os.path.join(root, file_name)
+        if os.path.islink(abspath):
+          real_path = os.path.realpath(abspath)
+          if real_path not in map:
+            map[real_path] = [real_path]
+          map[real_path].append(abspath)
+  return map
 
 def read_zone_tab():
   result = list()
@@ -32,34 +31,42 @@ def read_zone_tab():
       if line and not line.startswith("#"):
         items = line.split("\t")
         if len(items) >= 3:
-          result.append(items[2].strip())
+          result.append(os.path.join(ZONE_INFO_DIR, items[2].strip()))
+  # Add Etc/UTC
+  utc_list = ("Etc/UTC", "Etc/UCT", "Etc/GMT")
+  result.extend(os.path.join(ZONE_INFO_DIR, name) for name in utc_list)
   return result
+
+def merge_alias(alias_map, zones_map):
+  result = []
+  for alias_list in alias_map.values():
+    real_name = ""
+    for alias in alias_list:
+      if alias in zones_map:
+        real_name = alias
+        break
+    if real_name:
+      for alias in alias_list:
+        if alias != real_name:
+          result.append((alias, real_name))
+    else:
+      print("Error:", alias_list)
+  return result
+
+def split_base_name(alias_list):
+  pref = len(ZONE_INFO_DIR)
+  return tuple((key[pref+1:], value[pref+1:]) for key, value in alias_list)
+
+def print_result(alias_list):
+  for alias_name, real_name in alias_list:
+    print(alias_name, real_name, sep=':')
 
 def main():
   symlinks = parse_symlink()
   zones = set(read_zone_tab())
-  symlink_map = dict()
-  for tz_name, real_name in symlinks:
-    if real_name not in symlink_map:
-      symlink_map[real_name] = list()
-    symlink_map[real_name].append(tz_name)
-
-  result = dict()
-  for real_name in symlink_map:
-    alias_list = symlink_map[real_name]
-    real_name2 = ""
-    if real_name in zones:
-      real_name2 = real_name
-    else:
-      for alias in alias_list:
-        if alias in zones:
-          real_name2 = alias
-          break
-    for alias in alias_list:
-      if alias != real_name2:
-        result[alias] = real_name2
-  for item in result:
-    print(item, result[item])
+  alias_list = merge_alias(symlinks, zones)
+  alias_list = split_base_name(alias_list)
+  print_result(alias_list)
 
 if __name__ == "__main__":
   main()

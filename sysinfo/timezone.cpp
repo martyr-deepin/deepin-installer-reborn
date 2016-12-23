@@ -18,7 +18,7 @@ namespace {
 const char kZoneTabFile[] = "/usr/share/zoneinfo/zone.tab";
 
 // Absolute path to backward timezone file.
-const char kBackwardTzFile[] = RESOURCES_DIR "backward_tz";
+const char kTimezoneAliasFile[] = RESOURCES_DIR "/timezone_alias";
 
 // Domain name for timezones.
 const char kTimezoneDomain[] = "deepin-installer-timezones";
@@ -126,17 +126,16 @@ QString GetLocalTimezoneName(const QString& timezone) {
   return (index > -1) ? local_name.mid(index + 1) : local_name;
 }
 
-BackwardTzMap GetBackwardTzMap() {
-  BackwardTzMap map;
+TimezoneAliasMap GetTimezoneAliasMap() {
+  TimezoneAliasMap map;
 
-  const QString content = ReadFile(kBackwardTzFile);
+  const QString content = ReadFile(kTimezoneAliasFile);
   for (const QString& line : content.split('\n')) {
-    // Ignores empty line and comment.
-    if (line.startsWith("Link\t")) {
-      const QStringList parts(line.split('\t'));
-      Q_ASSERT(parts.length() == 3);
-      if (parts.length() == 3) {
-        map.insert(parts.at(2), parts.at(1));
+    if (!line.isEmpty()) {
+      const QStringList parts = line.split(':');
+      Q_ASSERT(parts.length() == 2);
+      if (parts.length() == 2) {
+        map.insert(parts.at(0), parts.at(1));
       }
     }
   }
