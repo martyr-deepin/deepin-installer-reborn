@@ -92,9 +92,11 @@ void HooksManager::runNextHook() {
     delete hooks_pack_;
     hooks_pack_ = next_hooks_pack;
     if (hooks_pack_ == nullptr) {
+      qDebug() << "hooks_pack_ is null, all jobs done!";
       // All hooks pack jobs are finished.
       emit this->finished();
     } else {
+      qDebug() << "Run next hooks pack";
       // Run next hooks pack if it is not nullptr
       this->runHooksPack();
     }
@@ -117,6 +119,12 @@ void HooksManager::runNextHook() {
 
 void HooksManager::runHooksPack() {
   Q_ASSERT(hooks_pack_);
+  if (!hooks_pack_) {
+    qCritical() << "hooks_pack_ is nullptr!";
+    emit this->errorOccurred();
+    return;
+  }
+
   if (hooks_pack_->type == HookType::BeforeChroot) {
     // Setup filesystem watch of unsquashfs progress file.
     this->monitorProgressFiles();
