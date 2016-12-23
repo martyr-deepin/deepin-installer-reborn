@@ -13,6 +13,8 @@
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/frames/consts.h"
 #include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
@@ -38,6 +40,13 @@ const char kTextMountPoint[] = "Mount point";
 const char kTextFormat[] = "Format the partition";
 const char kTextCancel[] = "Cancel";
 const char kTextOk[] = "OK";
+
+// Check whether partition with |mount_point| should be formatted
+// compulsively.
+bool IsInFormattedMountPointList(const QString& mount_point) {
+  const QStringList list(GetSettingsStringList(kPartitionFormattedMountPoints));
+  return list.contains(mount_point);
+}
 
 }  // namespace
 
@@ -83,12 +92,14 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
       break;
     }
     case PartitionStatus::New: {
-      // Force format.
+      // Force format for new partition.
       this->forceFormat(true);
       break;
     }
     case PartitionStatus::Real: {
-      this->forceFormat(false);
+      // If mount point in ins formatted-mount-point list, format this partition
+      // compulsively.
+      this->forceFormat(IsInFormattedMountPointList(partition.mount_point));
       break;
     }
     default: {
@@ -120,10 +131,12 @@ void EditPartitionFrame::updateFormatBoxState() {
   // Format partition forcefully if its type is changed.
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
   const Partition real_partition(delegate_->getRealPartition(partition_));
-  const QString mount_point =
-      mount_point_model_->getMountPoint(mount_point_box_->currentIndex());
+  const int index = mount_point_box_->currentIndex();
+  const QString mount_point = mount_point_model_->getMountPoint(index);
+  // If fs type changed, or mount-point is in formatted-mount-point list,
+  // format that partition compulsively.
   this->forceFormat((real_partition.fs != fs_type) ||
-                    (mount_point == kMountPointRoot));
+                    IsInFormattedMountPointList(mount_point));
 }
 
 void EditPartitionFrame::initConnections() {
