@@ -646,5 +646,5 @@ install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/resources
     DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
-    PATTERN "deepin-installer-oem" EXCLUDE
+    PATTERN "deepin-installer-oem*" EXCLUDE
 )
