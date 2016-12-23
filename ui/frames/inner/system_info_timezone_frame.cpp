@@ -13,7 +13,6 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "service/timezone_manager.h"
-#include "sysinfo/timezone.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
@@ -42,6 +41,7 @@ bool HasWindowsPartition() {
 SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
     : QFrame(parent),
       timezone_(),
+      alias_map_(GetTimezoneAliasMap()),
       timezone_manager_(new TimezoneManager(this)),
       timezone_source_(TimezoneSource::NotSet) {
   this->setObjectName("system_info_timezone_frame");
@@ -74,11 +74,13 @@ void SystemInfoTimezoneFrame::readConf() {
   } else {
     // Read timezone from settings.
     timezone_ = GetSettingsString(kSystemInfoDefaultTimezone);
+    timezone_ = this->parseTimezoneAlias(timezone_);
     if (IsValidTimezone(timezone_)) {
       timezone_source_ = TimezoneSource::Conf;
     } else {
       const bool use_geoip = GetSettingsBool(kSystemInfoTimezoneUseGeoIp);
-      const bool use_regdomain = GetSettingsBool(kSystemInfoTimezoneUseRegdomain);
+      const bool use_regdomain =
+          GetSettingsBool(kSystemInfoTimezoneUseRegdomain);
       timezone_manager_->update(use_geoip, use_regdomain);
 
       // Use default timezone.
@@ -89,6 +91,7 @@ void SystemInfoTimezoneFrame::readConf() {
 }
 
 void SystemInfoTimezoneFrame::writeConf() {
+  // Validate timezone before writing to settings file.
   if (IsValidTimezone(timezone_)) {
     const bool is_local_time = (timezone_source_ == TimezoneSource::Local);
     WriteTimezone(timezone_, is_local_time);
@@ -147,6 +150,11 @@ void SystemInfoTimezoneFrame::initUI() {
   this->setLayout(layout);
 }
 
+QString SystemInfoTimezoneFrame::parseTimezoneAlias(const QString& timezone) {
+  // If |timezone| not in alias map, returns itself.
+  return alias_map_.value(timezone, timezone);
+}
+
 void SystemInfoTimezoneFrame::onBackButtonClicked() {
   if (IsValidTimezone(timezone_)) {
     emit this->timezoneUpdated(timezone_);
@@ -162,7 +170,7 @@ void SystemInfoTimezoneFrame::onTimezoneManagerUpdated(
       timezone_source_ == TimezoneSource::Scan) {
     // Update timezone only if it is not set.
     timezone_source_ = TimezoneSource::Scan;
-    timezone_ = timezone;
+    timezone_ = this->parseTimezoneAlias(timezone);
     emit this->timezoneUpdated(timezone_);
   } else {
     qDebug() << "Ignore timezone value from timezone-manager:" << timezone;
@@ -171,6 +179,7 @@ void SystemInfoTimezoneFrame::onTimezoneManagerUpdated(
 
 void SystemInfoTimezoneFrame::onTimezoneMapUpdated(const QString& timezone) {
   timezone_source_ = TimezoneSource::User;
+  // No need to convert timezone alias.
   timezone_ = timezone;
   emit this->timezoneUpdated(timezone_);
 }

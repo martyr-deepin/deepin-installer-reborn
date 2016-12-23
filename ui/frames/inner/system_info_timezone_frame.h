@@ -7,6 +7,8 @@
 
 #include <QFrame>
 
+#include "sysinfo/timezone.h"
+
 namespace installer {
 
 class CommentLabel;
@@ -46,7 +48,11 @@ class SystemInfoTimezoneFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  // Convert timezone alias to its original name.
+  QString parseTimezoneAlias(const QString& timezone);
+
   QString timezone_;
+  TimezoneAliasMap alias_map_;
 
   TimezoneManager* timezone_manager_ = nullptr;
 
