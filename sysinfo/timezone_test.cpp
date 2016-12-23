@@ -22,7 +22,12 @@ TEST(TimezoneTest, GetZoneInfoList) {
 TEST(TimezoneTest, GetCurrentTimezone) {
   const QString current_timezone = GetCurrentTimezone();
   EXPECT_FALSE(current_timezone.isEmpty());
-  EXPECT_TRUE(IsValidTimezone(current_timezone));
+}
+
+TEST(TimezoneTest, IsValidTimezone) {
+  EXPECT_TRUE(IsValidTimezone("Asia/Shanghai"));
+  EXPECT_TRUE(IsValidTimezone("Etc/UTC"));
+  EXPECT_FALSE(IsValidTimezone("Asia/Beijing"));
 }
 
 }  // namespace

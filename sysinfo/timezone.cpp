@@ -150,8 +150,9 @@ bool IsValidTimezone(const QString& timezone) {
     return false;
   }
 
-  const ZoneInfoList list = GetZoneInfoList();
-  return (GetZoneInfoByZone(list, timezone) > -1);
+  // If |filepath| is a file or a symbolic link to file, it is a valid timezone.
+  const QString filepath(QString("/usr/share/zoneinfo/") + timezone);
+  return QFile::exists(filepath);
 }
 
 }  // namespace installer

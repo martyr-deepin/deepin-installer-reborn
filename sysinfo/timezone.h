@@ -48,7 +48,6 @@ typedef QHash<QString, QString> BackwardTzMap;
 BackwardTzMap GetBackwardTzMap();
 
 // Validate |timezone|.
-// TODO(xushaohua): Optimize
 bool IsValidTimezone(const QString& timezone);
 
 }  // namespace installer
