@@ -56,9 +56,15 @@ void MainWindow::fullscreen() {
   this->showFullScreen();
 }
 
-void MainWindow::scanDevices() {
+void MainWindow::scanDevicesAndTimezone() {
   if (!GetSettingsBool(kSkipPartitionPage)) {
     partition_frame_->scanDevices();
+  }
+
+  // If system_info_frame_ is not omitted, scan wireless hot spot and update
+  // timezone in background.
+  if (!GetSettingsBool(kSkipSystemInfoPage)) {
+    system_info_frame_->scanTimezone();
   }
 }
 

@@ -48,7 +48,7 @@ class MainWindow : public QWidget {
 
   // Notify background thread to scan disk devices if needed.
   // And read current timezone.
-  void scanDevices();
+  void scanDevicesAndTimezone();
 
  protected:
   // Move close button to appropriate position when window is resized.

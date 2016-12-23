@@ -49,7 +49,9 @@ void SystemInfoFrame::readConf() {
 
   // Read default keyboard layout.
   keyboard_frame_->readConf();
+}
 
+void SystemInfoFrame::scanTimezone() {
   // Notify SystemInfoTimezoneFrame to read timezone based on current settings.
   timezone_frame_->readConf();
 }

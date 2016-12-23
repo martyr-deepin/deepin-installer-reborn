@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
   installer::AddConfigFile();
 
   installer::MainWindow main_window;
-  main_window.scanDevices();
+  main_window.scanDevicesAndTimezone();
   main_window.fullscreen();
 
   const int result = app.exec();

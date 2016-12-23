@@ -102,6 +102,12 @@ void SystemInfoTimezoneFrame::changeEvent(QEvent* event) {
     title_label_->setText(tr(kTextTitle));
     comment_label_->setText(tr(kTextComment));
     back_button_->setText(tr(kTextBack));
+
+    // Also update timezone.
+    if (!timezone_.isEmpty()) {
+      timezone_map_->setTimezone(timezone_);
+      emit this->timezoneUpdated(timezone_);
+    }
   } else {
     QFrame::changeEvent(event);
   }

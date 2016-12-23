@@ -34,6 +34,9 @@ class SystemInfoFrame : public QFrame {
   // Read default conf from settings.
   void readConf();
 
+  // Notify timezone_frame_ to scan wifi hot spot.
+  void scanTimezone();
+
   // Write conf to file.
   void writeConf();
 
