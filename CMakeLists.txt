@@ -506,6 +506,11 @@ add_executable(locale-manager-test
                )
 target_link_libraries(locale-manager-test ${Qt_LIBS})
 
+# progress bar test
+add_executable(qprogressbar_test
+               ui/tests/qprogressbar_test/progressbar_test.cpp)
+target_link_libraries(qprogressbar_test ${Qt_LIBS})
+
 add_executable(timezone-frame-test
                ui/tests/timezone_frame_test/timezone_frame_test.cpp
 
