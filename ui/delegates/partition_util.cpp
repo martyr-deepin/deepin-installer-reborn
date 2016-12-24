@@ -5,10 +5,11 @@
 #include "ui/delegates/partition_util.h"
 
 #include <math.h>
-#include <QDebug>
 #include <QFileInfo>
 
-#include "partman/structs.h"
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
+#include "sysinfo/proc_meminfo.h"
 
 namespace installer {
 
@@ -159,6 +160,13 @@ bool IsMountPointSupported(FsType fs_type) {
           fs_type != FsType::LinuxSwap &&
           fs_type != FsType::Empty &&
           fs_type != FsType::Unknown);
+}
+
+bool IsSwapAreaNeeded() {
+  const MemInfo mem_info = GetMemInfo();
+  const qint64 mem_threshold =
+      GetSettingsInt(kPartitionMemoryThresholdForSwapArea) * kGibiByte;
+  return mem_info.mem_total <= mem_threshold;
 }
 
 int ToGigByte(qint64 size) {

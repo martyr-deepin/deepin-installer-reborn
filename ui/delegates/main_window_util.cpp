@@ -10,7 +10,7 @@
 #include "service/log_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
-#include "sysinfo/proc_meminfo.h"
+#include "ui/delegates/partition_util.h"
 
 namespace installer {
 
@@ -45,12 +45,9 @@ int GetVisiblePages() {
 }
 
 bool IsDiskSpaceInsufficient() {
-  const MemInfo mem_info = GetMemInfo();
-  const qint64 mem_threshold =
-      GetSettingsInt(kPartitionMemoryThresholdForSwapArea) * kGibiByte;
   int minimum = 0;
   // Check whether memory is too small.
-  if (mem_info.mem_total <= mem_threshold) {
+  if (IsSwapAreaNeeded()) {
     minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
   } else {
     minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);

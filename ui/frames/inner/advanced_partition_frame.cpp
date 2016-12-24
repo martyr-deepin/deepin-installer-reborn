@@ -17,7 +17,6 @@
 #include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/advanced_partition_button.h"
-#include "ui/widgets/pointer_button.h"
 #include "ui/utils/widget_util.h"
 
 namespace installer {
@@ -76,8 +75,13 @@ bool AdvancedPartitionFrame::validate() {
   }
 
   if (!swap_is_set) {
-    msg_label_->setText(tr("A swap partition is required"));
-    return false;
+    if (IsSwapAreaNeeded()) {
+      // In advanced-mode, notify user to create linux-swap partition, instead
+      // of creating swap-file automatically. Because swap partition is more
+      // stable and faster than swap file.
+      msg_label_->setText(tr("A linux swap partition is required"));
+      return false;
+    }
   }
 
   if (IsEfiEnabled() && !efi_is_set) {

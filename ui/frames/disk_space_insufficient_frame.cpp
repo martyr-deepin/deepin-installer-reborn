@@ -8,10 +8,9 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
-#include "partman/structs.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
-#include "sysinfo/proc_meminfo.h"
+#include "ui/delegates/partition_util.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
@@ -30,12 +29,9 @@ const char kTextComment[] = "It takes at lease %1GB disk space to install "
 // Get content of comment label.
 // Value of minimum disk space is changed based on size of physical memory.
 QString GetCommentLabel() {
-  const MemInfo mem_info = GetMemInfo();
-  const qint64 mem_threshold =
-      GetSettingsInt(kPartitionMemoryThresholdForSwapArea) * kGibiByte;
   int minimum = 0;
   // Check whether memory is too small.
-  if (mem_info.mem_total <= mem_threshold) {
+  if (IsSwapAreaNeeded()) {
     minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
   } else {
     minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
