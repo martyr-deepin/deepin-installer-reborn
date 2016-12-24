@@ -8,8 +8,10 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
+#include "partman/structs.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "sysinfo/proc_meminfo.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
@@ -25,6 +27,23 @@ const char kTextAbort[] = "Abort";
 const char kTextComment[] = "It takes at lease %1GB disk space to install "
     "deepin, for better performance, %2GB and more space is recommended";
 
+// Get content of comment label.
+// Value of minimum disk space is changed based on size of physical memory.
+QString GetCommentLabel() {
+  const MemInfo mem_info = GetMemInfo();
+  const qint64 mem_threshold =
+      GetSettingsInt(kPartitionMemoryThresholdForSwapArea) * kGibiByte;
+  int minimum = 0;
+  // Check whether memory is too small.
+  if (mem_info.mem_total <= mem_threshold) {
+    minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
+  } else {
+    minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  }
+  const int recommended = GetSettingsInt(kPartitionRecommendedDiskSpace);
+  return QObject::tr(kTextComment).arg(minimum).arg(recommended);
+}
+
 }  // namespace
 
 DiskSpaceInsufficientFrame::DiskSpaceInsufficientFrame(QWidget* parent)
@@ -38,9 +57,7 @@ DiskSpaceInsufficientFrame::DiskSpaceInsufficientFrame(QWidget* parent)
 void DiskSpaceInsufficientFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr(kTextTitle));
-    const int required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-    const int recommended = GetSettingsInt(kPartitionRecommendedDiskSpace);
-    comment_label_->setText(tr(kTextComment).arg(required).arg(recommended));
+    comment_label_->setText(GetCommentLabel());
     abort_button_->setText(tr(kTextAbort));
   } else {
     QFrame::changeEvent(event);
@@ -53,11 +70,8 @@ void DiskSpaceInsufficientFrame::initConnections() {
 }
 
 void DiskSpaceInsufficientFrame::initUI() {
-  const int required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-  const int recommended = GetSettingsInt(kPartitionRecommendedDiskSpace);
   title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(
-      tr(kTextComment).arg(required).arg( recommended));
+  comment_label_ = new CommentLabel(GetCommentLabel());
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->addSpacing(0);

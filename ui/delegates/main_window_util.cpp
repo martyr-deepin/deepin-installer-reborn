@@ -48,17 +48,16 @@ bool IsDiskSpaceInsufficient() {
   const MemInfo mem_info = GetMemInfo();
   const qint64 mem_threshold =
       GetSettingsInt(kPartitionMemoryThresholdForSwapArea) * kGibiByte;
-  int required_disk_space = 0;
+  int minimum = 0;
   // Check whether memory is too small.
   if (mem_info.mem_total <= mem_threshold) {
-    required_disk_space =
-        GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
+    minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
   } else {
-    required_disk_space = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+    minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
   }
 
   const qint64 maximum_device_size = GetMaximumDeviceSize();
-  return required_disk_space * kGibiByte > maximum_device_size;
+  return minimum * kGibiByte > maximum_device_size;
 }
 
 bool IsPartitionTableMatch() {
