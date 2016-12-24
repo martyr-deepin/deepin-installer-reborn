@@ -24,6 +24,8 @@ class FsModel : public QAbstractListModel {
 
   // Index fs type. Returns -1 if not found.
   int index(FsType fs_type) const;
+
+  // Get fs type at |index|.
   FsType getFs(int index) const;
 
  private:

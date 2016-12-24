@@ -10,6 +10,8 @@
 #include <QStandardItemModel>
 
 #include "base/file_util.h"
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/frames/consts.h"
 #include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
@@ -68,9 +70,20 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
     qCritical() << "No more partition available!";
   }
 
+  // Select align-start.
   alignment_box_->setCurrentIndex(0);
-  fs_box_->setCurrentIndex(0);
+
+  // Select default fs type.
+  const QString default_fs_name = GetSettingsString(kPartitionDefaultFs);
+  const FsType default_fs = GetFsTypeByName(default_fs_name);
+  const int fs_index = fs_model_->index(default_fs);
+  // fs_index might be -1.
+  fs_box_->setCurrentIndex(fs_index);
+
+  // Select empty mount-point.
   mount_point_box_->setCurrentIndex(0);
+
+  // Set size slider to its maximum value.
   size_slider_->setMaximum(partition.getByteLength());
 }
 
