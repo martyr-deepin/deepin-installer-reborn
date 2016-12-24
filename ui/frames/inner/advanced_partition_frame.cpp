@@ -43,20 +43,37 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(PartitionDelegate* delegate_,
 
 bool AdvancedPartitionFrame::validate() {
   bool efi_is_set = false;
+  bool efi_large_enough = false;
   bool root_is_set = false;
   bool root_large_enough = false;
   bool swap_is_set = false;
-  const int required_space = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-  const qint64 required_bytes = required_space * kGibiByte;
+  bool boot_is_set = false;
+  bool boot_large_enough = false;
+
+  const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
+  const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
+
   for (const Device& device : delegate_->devices()) {
     for (const Partition& partition : device.partitions) {
       if (partition.mount_point == kMountPointRoot) {
+        // Check / partition.
         root_is_set = true;
-        if (partition.getByteLength() > required_bytes) {
-          root_large_enough = true;
-        }
+        const qint64 minimum_bytes = root_required * kGibiByte;
+        root_large_enough =  (partition.getByteLength() > minimum_bytes);
+
+      } else if (partition.mount_point == kMountPointBoot) {
+        // Check /boot partition.
+        boot_is_set = true;
+        const qint64 recommend_bytes = boot_recommended * kMebiByte;
+        boot_large_enough = (partition.getByteLength() > recommend_bytes);
+
       } else if (partition.fs == FsType::EFI) {
+        // Check EFI partition.
         efi_is_set = true;
+
+        const qint64 recommended_bytes = efi_recommended * kMebiByte;
+        efi_large_enough = (partition.getByteLength() > recommended_bytes);
       } else if (partition.fs == FsType::LinuxSwap) {
         swap_is_set = true;
       }
@@ -69,8 +86,9 @@ bool AdvancedPartitionFrame::validate() {
   }
 
   if (!root_large_enough) {
-    msg_label_->setText(tr("At least %1 G is required for root partition.")
-                            .arg(required_space));
+    msg_label_->setText(
+        tr("At least %1 Gib is required for root partition.")
+            .arg(root_required));
     return false;
   }
 
@@ -84,9 +102,26 @@ bool AdvancedPartitionFrame::validate() {
     }
   }
 
-  if (IsEfiEnabled() && !efi_is_set) {
-    msg_label_->setText(tr("An EFI partition is required"));
-    return false;
+  if (IsEfiEnabled()) {
+    if (!efi_is_set) {
+      msg_label_->setText(tr("An EFI partition is required"));
+      return false;
+    }
+    if (!efi_large_enough) {
+      msg_label_->setText(
+          tr("At least %1 Mib is required for EFI partition.")
+              .arg(efi_recommended));
+      return false;
+    }
+  }
+
+  if (boot_is_set) {
+    if (!boot_large_enough) {
+      msg_label_->setText(
+          tr("At least %1 Mib is required for /boot partition.")
+              .arg(boot_recommended));
+      return false;
+    }
   }
 
   msg_label_->clear();
