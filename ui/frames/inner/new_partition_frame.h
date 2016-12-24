@@ -62,10 +62,14 @@ class NewPartitionFrame : public QFrame {
   Partition partition_;
 
  private slots:
+  // Append operations to |delegate| when create_button_ is clicked.
   void onCreateButtonClicked();
 
   // Hide mount_point_box_ when specific fs is selected
   void onFsChanged(int index);
+
+  // Change value of size-slider when mount point is special.
+  void onMountPointChanged(int index);
 };
 
 }  // namespace installer

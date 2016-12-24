@@ -33,12 +33,22 @@ qint64 PartitionSizeSlider::value() {
   }
 }
 
-void PartitionSizeSlider::setMaximum(qint64 size) {
-  maximum_value_ = size;
-  const int mebi_size = static_cast<int>(size / kMebiByte);
+void PartitionSizeSlider::setMaximum(qint64 maximum_size) {
+  Q_ASSERT(maximum_size >= 0);
+  maximum_value_ = maximum_size;
+  // First convert bytes to mebibytes.
+  const int mebi_size = static_cast<int>(maximum_size / kMebiByte);
   slider_->setMaximum(mebi_size);
   slider_->setValue(mebi_size);
   int_validator_->setRange(slider_->minimum(), mebi_size);
+}
+
+void PartitionSizeSlider::setValue(qint64 size) {
+  Q_ASSERT(size >= 0);
+  // Make sure that |size| is in range.
+  const qint64 min_size = qMin(size, maximum_value_);
+  const int mebi_size = static_cast<int>(min_size / kMebiByte);
+  slider_->setValue(mebi_size);
 }
 
 void PartitionSizeSlider::initConnection() {

@@ -112,6 +112,9 @@ void NewPartitionFrame::initConnections() {
   connect(fs_box_,
           static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
           this, &NewPartitionFrame::onFsChanged);
+  connect(mount_point_box_,
+          static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+          this, &NewPartitionFrame::onMountPointChanged);
 
   connect(cancel_button_, &QPushButton::clicked,
           this, &NewPartitionFrame::finished);
@@ -232,10 +235,33 @@ void NewPartitionFrame::onCreateButtonClicked() {
 
 void NewPartitionFrame::onFsChanged(int index) {
   const FsType fs_type = fs_model_->getFs(index);
-  const bool visible = IsMountPointSupported(fs_type);
 
+  // If fs_type is special, no need to display mount-point box.
+  const bool visible = IsMountPointSupported(fs_type);
   mount_point_label_->setVisible(visible);
   mount_point_box_->setVisible(visible);
+
+  if (fs_type == FsType::EFI) {
+    // Set default size of EFI partition.
+    // NOTE(xushaohua): partition size might be less than |default_size|.
+    // Its value will also be checked in AdvancedPartitionFrame.
+    const qint64 default_size = GetSettingsInt(kPartitionDefaultEFISpace) *
+                                kMebiByte;
+    size_slider_->setValue(default_size);
+  }
+}
+
+void NewPartitionFrame::onMountPointChanged(int index) {
+  const QString mount_point = mount_point_model_->getMountPoint(index);
+
+  if (mount_point == kMountPointBoot) {
+    // Set default size for /boot.
+    // NOTE(xushaohua): partition size might be less than |default_size|.
+    // Its value will also be checked in AdvancedPartitionFrame.
+    const qint64 default_size = GetSettingsInt(kPartitionDefaultBootSpace) *
+                                kMebiByte;
+    size_slider_->setValue(default_size);
+  }
 }
 
 }  // namespace installer

@@ -12,6 +12,8 @@ class QSlider;
 
 namespace installer {
 
+// A slider to display partition size. A line edit is also shown at right
+// side of slider.
 class PartitionSizeSlider : public QFrame {
   Q_OBJECT
 
@@ -21,8 +23,13 @@ class PartitionSizeSlider : public QFrame {
   // Get current partition size, in byte.
   qint64 value();
 
+ public slots:
   // Set maximum partition size, in byte.
-  void setMaximum(qint64 size);
+  void setMaximum(qint64 maximum_size);
+
+  // Set current slider value, in byte.
+  // |size| shall be in range [0, maximum_size].
+  void setValue(qint64 size);
 
  private:
   void initConnection();
