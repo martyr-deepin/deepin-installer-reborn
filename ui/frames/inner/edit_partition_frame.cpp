@@ -70,18 +70,12 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
   usage_bar_->setValue(GetPartitionUsageValue(partition));
 
   // Reset fs index.
-  int fs_index = fs_model_->index(partition.fs);
-  if (fs_index == -1) {
-    fs_index = 0;
-  }
+  const int fs_index = fs_model_->index(partition.fs);
   fs_box_->setCurrentIndex(fs_index);
 
-  // Reset mount point box.
-  int mount_point_index = mount_point_model_->index(partition.mount_point);
-  if (mount_point_index == -1) {
-    mount_point_index = 0;
-  }
-  mount_point_box_->setCurrentIndex(mount_point_index);
+  // Reset mount point box. partition.mount_point might be empty.
+  const int mp_index = mount_point_model_->index(partition.mount_point);
+  mount_point_box_->setCurrentIndex(mp_index);
 
   switch (partition_.status) {
     case PartitionStatus::Format: {

@@ -81,7 +81,8 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
   fs_box_->setCurrentIndex(fs_index);
 
   // Select empty mount-point.
-  mount_point_box_->setCurrentIndex(0);
+  const int mount_point_index = mount_point_model_->index("");
+  mount_point_box_->setCurrentIndex(mount_point_index);
 
   // Set size slider to its maximum value.
   size_slider_->setMaximum(partition.getByteLength());

@@ -22,6 +22,7 @@ class MountPointModel : public QAbstractListModel {
 
   // Get index of |mount_point|, if not found returns -1.
   int index(const QString& mount_point) const;
+
   // Get mount_point at |index|.
   QString getMountPoint(int index) const;
 
