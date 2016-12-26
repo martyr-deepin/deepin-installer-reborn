@@ -7,6 +7,7 @@
 #include <ftw.h>
 #include <limits.h>
 #include <stdlib.h>
+// TODO(xushaohua): Replace sendfile() with splice().
 #include <sys/sendfile.h>
 #include <sys/stat.h>
 #include <sys/types.h>

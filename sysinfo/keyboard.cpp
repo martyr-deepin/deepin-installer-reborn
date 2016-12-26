@@ -158,7 +158,7 @@ bool ReadConfig(const QString& filepath, XkbConfig& config) {
 }  // namespace
 
 XkbConfig GetXkbConfig() {
-  // Query current locale.
+  // Query current locale. It is essential for dgettext to work properly.
   (void) setlocale(LC_ALL, "");
 
   XkbConfig config;
@@ -167,9 +167,10 @@ XkbConfig GetXkbConfig() {
     return config;
   }
 
-  if (!ReadConfig(kXkbExtraRule, config)) {
-    qWarning() << "Failed to read xkb config file" << kXkbExtraRule;
-  }
+  // NOTE(xushaohua): Do not read extra keyboard layout list currently.
+//  if (!ReadConfig(kXkbExtraRule, config)) {
+//    qWarning() << "Failed to read xkb config file" << kXkbExtraRule;
+//  }
 
   return config;
 }
