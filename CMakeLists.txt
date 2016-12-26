@@ -254,6 +254,8 @@ set(UI_FILES
     ui/models/language_list_model.h
     ui/models/mount_point_model.cpp
     ui/models/mount_point_model.h
+    ui/models/partition_type_model.cpp
+    ui/models/partition_type_model.h
 
     ui/utils/widget_util.cpp
     ui/utils/widget_util.h
