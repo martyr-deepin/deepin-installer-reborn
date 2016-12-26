@@ -17,7 +17,8 @@ namespace installer {
 
 PartitionSizeSlider::PartitionSizeSlider(QWidget* parent)
     : QFrame(parent),
-      maximum_value_(0) {
+      maximum_size_(0),
+      minimum_size_(0) {
   this->setObjectName("partition_size_slider");
 
   this->initUI();
@@ -27,7 +28,7 @@ PartitionSizeSlider::PartitionSizeSlider(QWidget* parent)
 qint64 PartitionSizeSlider::value() {
   // Keep maximum value unchanged.
   if (slider_->value() == slider_->maximum()) {
-    return maximum_value_;
+    return maximum_size_;
   } else {
     return slider_->value() * kMebiByte;
   }
@@ -35,7 +36,7 @@ qint64 PartitionSizeSlider::value() {
 
 void PartitionSizeSlider::setMaximum(qint64 maximum_size) {
   Q_ASSERT(maximum_size >= 0);
-  maximum_value_ = maximum_size;
+  maximum_size_ = maximum_size;
   // First convert bytes to mebibytes.
   const int mebi_size = static_cast<int>(maximum_size / kMebiByte);
   slider_->setMaximum(mebi_size);
@@ -43,11 +44,24 @@ void PartitionSizeSlider::setMaximum(qint64 maximum_size) {
   int_validator_->setRange(slider_->minimum(), mebi_size);
 }
 
-void PartitionSizeSlider::setValue(qint64 size) {
-  Q_ASSERT(size >= 0);
-  // Make sure that |size| is in range.
-  const qint64 min_size = qMin(size, maximum_value_);
+void PartitionSizeSlider::setMinimum(qint64 minimum_size) {
+  Q_ASSERT(minimum_size >= 0);
+  // Make sure that |minimum_size| is in range.
+  const qint64 min_size = qMin(minimum_size, maximum_size_);
+  minimum_size_ = min_size;
+  // Convert bytes to mebibytes.
   const int mebi_size = static_cast<int>(min_size / kMebiByte);
+  slider_->setMinimum(mebi_size);
+  int_validator_->setRange(mebi_size, slider_->maximum());
+}
+
+void PartitionSizeSlider::setValue(qint64 size) {
+  Q_ASSERT(size >= minimum_size_);
+  Q_ASSERT(size <= maximum_size_);
+  qint64 real_size = qMin(size, maximum_size_);
+  real_size = qMax(size, minimum_size_);
+  // Convert to mebibytes.
+  const int mebi_size = static_cast<int>(real_size / kMebiByte);
   slider_->setValue(mebi_size);
 }
 
@@ -66,6 +80,7 @@ void PartitionSizeSlider::initUI() {
   editor_ = new QLineEdit();
   editor_->setObjectName("editor");
   int_validator_ = new QIntValidator(editor_);
+  int_validator_->setRange(0, 1);
   editor_->setValidator(int_validator_);
   editor_->setFixedWidth(68);
 

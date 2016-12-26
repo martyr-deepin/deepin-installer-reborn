@@ -84,8 +84,10 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
   const int mount_point_index = mount_point_model_->index("");
   mount_point_box_->setCurrentIndex(mount_point_index);
 
-  // Set size slider to its maximum value.
+  // Set size_slider_ to its maximum value.
   size_slider_->setMaximum(partition.getByteLength());
+  // Also reset minimum value of size_slider_.
+  size_slider_->setMinimum(0);
 }
 
 void NewPartitionFrame::changeEvent(QEvent* event) {
@@ -247,7 +249,11 @@ void NewPartitionFrame::onFsChanged(int index) {
     // Its value will also be checked in AdvancedPartitionFrame.
     const qint64 default_size = GetSettingsInt(kPartitionDefaultEFISpace) *
                                 kMebiByte;
+    size_slider_->setMinimum(default_size);
     size_slider_->setValue(default_size);
+  } else {
+    // Reset minimum value of size_slider_.
+    size_slider_->setMinimum(0);
   }
 }
 
@@ -260,7 +266,11 @@ void NewPartitionFrame::onMountPointChanged(int index) {
     // Its value will also be checked in AdvancedPartitionFrame.
     const qint64 default_size = GetSettingsInt(kPartitionDefaultBootSpace) *
                                 kMebiByte;
+    size_slider_->setMinimum(default_size);
     size_slider_->setValue(default_size);
+  } else {
+    // Reset minimum value of size_slider_.
+    size_slider_->setMinimum(0);
   }
 }
 

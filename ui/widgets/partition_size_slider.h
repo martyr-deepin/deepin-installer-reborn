@@ -24,11 +24,15 @@ class PartitionSizeSlider : public QFrame {
   qint64 value();
 
  public slots:
-  // Set maximum partition size, in byte.
+  // Set maximum partition size, in bytes.
   void setMaximum(qint64 maximum_size);
 
-  // Set current slider value, in byte.
-  // |size| shall be in range [0, maximum_size].
+  // Set minimum value of slider, in bytes.
+  // |minimum_size| shall be in range [0, maximum_size_].
+  void setMinimum(qint64 minimum_size);
+
+  // Set value of slider to |size|, in bytes.
+  // |size| shall be in range [minimum_size_, maximum_size_].
   void setValue(qint64 size);
 
  private:
@@ -39,7 +43,8 @@ class PartitionSizeSlider : public QFrame {
   QLineEdit* editor_ = nullptr;
   QIntValidator* int_validator_ = nullptr;
 
-  qint64 maximum_value_;
+  qint64 maximum_size_;
+  qint64 minimum_size_;
 
  private:
   void onEditorTextChanged(const QString& text);
