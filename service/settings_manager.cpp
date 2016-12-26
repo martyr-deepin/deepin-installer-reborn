@@ -277,7 +277,7 @@ void WritePartitionInfo(const QString& root_disk,
 }
 
 void WriteRequiringSwapFile(bool is_required) {
-  AppendToConfigFile("DI_SWAP_FILE", is_required);
+  AppendToConfigFile("DI_SWAP_FILE_REQUIRED", is_required);
 }
 
 void AddConfigFile() {

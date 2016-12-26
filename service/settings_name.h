@@ -70,7 +70,6 @@ const char kSystemInfoTimezoneUseRegdomain[] =
 // Partition
 const char kPartitionMemoryThresholdForSwapArea[] =
     "partition_memory_threshold_for_swap_area";
-const char kPartitionDefaultSwapFileSize[] = "partition_default_swap_file_size";
 const char kPartitionMinimumDiskSpaceRequired[] =
     "partition_minimum_disk_space_required";
 const char kPartitionMinimumDiskSpaceRequiredInLowMemory[] =
