@@ -100,6 +100,8 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
       break;
     }
   }
+
+  this->updateFormatBoxState();
 }
 
 void EditPartitionFrame::changeEvent(QEvent* event) {
@@ -131,6 +133,11 @@ void EditPartitionFrame::updateFormatBoxState() {
   // format that partition compulsively.
   this->forceFormat((real_partition.fs != fs_type) ||
                     IsInFormattedMountPointList(mount_point));
+
+  // If it is linux-swap, hide format_box_ option.
+  const bool is_swap = (fs_type == FsType::LinuxSwap);
+  format_label_->setVisible(!is_swap);
+  format_check_box_->setVisible(!is_swap);
 }
 
 void EditPartitionFrame::initConnections() {
