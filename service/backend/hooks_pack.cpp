@@ -10,7 +10,6 @@
 #include "base/command.h"
 #include "base/file_util.h"
 #include "service/settings_manager.h"
-#include "sysinfo/machine.h"
 
 namespace installer {
 
@@ -22,8 +21,6 @@ const char kAfterChrootDir[] = "after_chroot";
 
 const char kTargetHooksDir[] = "/tmp/installer-reborn";
 const char kChrootTargetHooksDir[] = "/target/tmp/installer-reborn";
-
-bool MatchArchitecture(const QString& name);
 
 bool AddExecutable(const QString& path, bool recursive) {
   if (recursive) {
@@ -60,51 +57,10 @@ QStringList ListHooks(HookType hook_type) {
   QDir builtin_dir(QDir(kTargetHooksDir).absoluteFilePath(folder_name));
   for (const QString& file :
       builtin_dir.entryList(name_filter, dir_filter, QDir::Name)) {
-    if (MatchArchitecture(file)) {
-      hooks.append(builtin_dir.absoluteFilePath(file));
-    }
+    hooks.append(builtin_dir.absoluteFilePath(file));
   }
 
   return hooks;
-}
-
-bool MatchArchitecture(const QString& name) {
-  MachineArch arch = GetMachineArch();
-  const QString lower_name = name.toLower();
-  if (arch == MachineArch::Unknown) {
-    qWarning() << "MatchArchitecture() unknown architecture";
-    return false;
-  }
-
-  if (lower_name.lastIndexOf("alpha64.job") > 0 &&
-      arch != MachineArch::Alpha64) {
-    return false;
-  }
-  if (lower_name.lastIndexOf("alpha.job") > 0 && arch != MachineArch::Alpha) {
-    return false;
-  }
-  if (lower_name.lastIndexOf("arm64.job") > 0 && arch != MachineArch::ARM64) {
-    return false;
-  }
-  if (lower_name.lastIndexOf("arm.job") > 0 && arch != MachineArch::ARM) {
-    return false;
-  }
-  if (lower_name.lastIndexOf("mips64.job") > 0 &&
-      arch != MachineArch::MIPS64) {
-    return false;
-  }
-  if (lower_name.lastIndexOf("mips.job") > 0 && arch != MachineArch::MIPS) {
-    return false;
-  }
-  if (lower_name.lastIndexOf("x86_64.job") > 0 &&
-      arch != MachineArch::X86_64) {
-    return false;
-  }
-  if (lower_name.lastIndexOf("x86.job") > 0 && arch != MachineArch::X86) {
-    return false;
-  }
-
-  return true;
 }
 
 bool RemoveFolderRecursively(const QString& path) {
