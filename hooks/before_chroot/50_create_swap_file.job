@@ -7,7 +7,7 @@
 
 SWAP_FILE_REQUIRED=$(installer_get "DI_SWAP_FILE_REQUIRED")
 SWAP_FILE_PATH=$(installer_get "partition_swap_file_path")
-SWAP_FILE_SIZE=$(installer_get "partition_default_swap_file_size")
+SWAP_FILE_SIZE=$(installer_get "partition_swap_file_size")
 
 if [ x"${SWAP_FILE_REQUIRED}" = x1 ]; then
   # A swap file is required.
