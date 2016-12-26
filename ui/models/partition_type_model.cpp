@@ -45,6 +45,7 @@ QVariant PartitionTypeModel::data(const QModelIndex& index, int role) const {
 }
 
 int PartitionTypeModel::rowCount(const QModelIndex& parent) const {
+  Q_UNUSED(parent);
   int rows = 0;
   if (is_primary_visible_) {
     rows ++;
@@ -55,26 +56,30 @@ int PartitionTypeModel::rowCount(const QModelIndex& parent) const {
   return rows;
 }
 
-bool PartitionTypeModel::isLogical(const QModelIndex& index) const {
+int PartitionTypeModel::getLogicalIndex() const {
+  // Check whether logical partition is visible.
+  if (is_logical_visible_) {
+    return is_primary_visible_ ? 1 : 0;
+  }
+  return -1;
+}
+
+int PartitionTypeModel::getPrimaryIndex() const {
+  // Check whether primary partition is visible.
+  return is_primary_visible_ ? 0 : -1;
+}
+
+bool PartitionTypeModel::isLogical(int index) const {
   // First make sure that logical partition is visible.
   if (is_logical_visible_) {
-    const int row = index.row();
-    if (is_primary_visible_) {
-      return row == 1;
-    } else {
-      return row == 0;
-    }
+    return is_primary_visible_ ? (index == 1) : (index == 0);
   }
   return false;
 }
 
-bool PartitionTypeModel::isPrimary(const QModelIndex& index) const {
+bool PartitionTypeModel::isPrimary(int index) const {
   // First make sure that primary partition is visible.
-  if (is_primary_visible_) {
-    const int row = index.row();
-    return row == 0;
-  }
-  return false;
+  return is_primary_visible_ ? (index == 0) : false;
 }
 
 void PartitionTypeModel::reset() {
@@ -84,7 +89,7 @@ void PartitionTypeModel::reset() {
   this->endResetModel();
 }
 
-void PartitionTypeModel::setLogicalVisibel(bool visible) {
+void PartitionTypeModel::setLogicalVisible(bool visible) {
   this->beginResetModel();
   is_logical_visible_ = visible;
   this->endResetModel();

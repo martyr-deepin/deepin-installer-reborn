@@ -17,6 +17,7 @@
 #include "ui/delegates/partition_util.h"
 #include "ui/models/fs_model.h"
 #include "ui/models/mount_point_model.h"
+#include "ui/models/partition_type_model.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/partition_size_slider.h"
@@ -60,14 +61,16 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
 
   const bool primary_ok = delegate_->canAddPrimary(partition);
   const bool logical_ok = delegate_->canAddLogical(partition);
-  QStandardItemModel* type_model =
-      static_cast<QStandardItemModel*>(type_box_->model());
-  Q_ASSERT(type_model != nullptr);
-  type_model->item(0)->setEnabled(primary_ok);
-  type_model->item(1)->setEnabled(logical_ok);
-
   if (!primary_ok && !logical_ok) {
     qCritical() << "No more partition available!";
+  }
+  type_model_->setPrimaryVisible(primary_ok);
+  type_model_->setLogicalVisible(logical_ok);
+  // Select logical partition is available.
+  if (logical_ok) {
+    type_box_->setCurrentIndex(type_model_->getLogicalIndex());
+  } else if (primary_ok) {
+    type_box_->setCurrentIndex(type_model_->getPrimaryIndex());
   }
 
   // Select align-start.
@@ -142,30 +145,30 @@ void NewPartitionFrame::initUI() {
 
   type_label_ = new QLabel(tr(kTextType));
   type_label_->setObjectName("type_label");
+  type_box_ = new TableComboBox();
+  type_model_ = new PartitionTypeModel(type_box_);
+  type_box_->setModel(type_model_);
+
   alignment_label_ = new QLabel(tr(kTextAlignment));
   alignment_label_->setObjectName("alignment_label");
-  fs_label_ = new QLabel(tr(kTextFilesystem));
-  fs_label_->setObjectName("fs_label");
-  mount_point_label_ = new QLabel(tr(kTextMountPoint));
-  mount_point_label_->setObjectName("mount_point_label");
-  size_label_ = new QLabel(tr(kTextSize));
-  size_label_->setObjectName("size_label");
-
-  type_box_ = new TableComboBox();
-  type_box_->addItems({tr(kTypePrimary), tr(kTypeLogical)});
-
   alignment_box_ = new TableComboBox();
   alignment_box_->addItems({tr(kTextStart), tr(kTextEnd)});
 
+  fs_label_ = new QLabel(tr(kTextFilesystem));
+  fs_label_->setObjectName("fs_label");
   fs_box_ = new TableComboBox();
   fs_model_ = new FsModel(delegate_, fs_box_);
   fs_box_->setModel(fs_model_);
 
+  mount_point_label_ = new QLabel(tr(kTextMountPoint));
+  mount_point_label_->setObjectName("mount_point_label");
   mount_point_box_ = new TableComboBox();
   mount_point_model_ = new MountPointModel(delegate_->allMountPoints(),
                                            mount_point_box_);
   mount_point_box_->setModel(mount_point_model_);
 
+  size_label_ = new QLabel(tr(kTextSize));
+  size_label_->setObjectName("size_label");
   size_slider_ = new PartitionSizeSlider();
   size_slider_->setFixedWidth(mount_point_box_->width());
 
@@ -215,7 +218,14 @@ void NewPartitionFrame::initUI() {
 }
 
 void NewPartitionFrame::onCreateButtonClicked() {
-  const bool is_primary = (type_box_->currentIndex() == 0);
+  const bool is_primary = type_model_->isPrimary(type_box_->currentIndex());
+  const bool is_logical = type_model_->isLogical(type_box_->currentIndex());
+  if (!is_primary && !is_logical) {
+    // We shall never reach here.
+    qCritical() << "Both primary and logical partition are not available!";
+    emit this->finished();
+    return;
+  }
   const PartitionType partition_type = is_primary ? PartitionType::Normal :
                                                     PartitionType::Logical;
   const bool align_start = (alignment_box_->currentIndex() == 0);
@@ -223,8 +233,8 @@ void NewPartitionFrame::onCreateButtonClicked() {
   QString mount_point;
   if (mount_point_box_->isVisible()) {
     // Set mount_point only if mount_point_box_ is visible.
-    mount_point =
-        mount_point_model_->getMountPoint(mount_point_box_->currentIndex());
+    const int index = mount_point_box_->currentIndex();
+    mount_point = mount_point_model_->getMountPoint(index);
   }
   // TODO(xushaohua): Calculate exact sectors
   const qint64 total_sectors = size_slider_->value() / partition_.sector_size;

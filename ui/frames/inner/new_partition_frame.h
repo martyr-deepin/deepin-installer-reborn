@@ -17,6 +17,7 @@ class FsModel;
 class MountPointModel;
 class NavButton;
 class PartitionDelegate;
+class PartitionTypeModel;
 class PartitionSizeSlider;
 class TableComboBox;
 class TitleLabel;
@@ -59,6 +60,7 @@ class NewPartitionFrame : public QFrame {
   PartitionDelegate* delegate_ = nullptr;
   FsModel* fs_model_ = nullptr;
   MountPointModel* mount_point_model_ = nullptr;
+  PartitionTypeModel* type_model_ = nullptr;
   Partition partition_;
 
  private slots:

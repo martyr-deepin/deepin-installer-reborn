@@ -19,11 +19,17 @@ class PartitionTypeModel : public QAbstractListModel {
   QVariant data(const QModelIndex& index, int role) const override;
   int rowCount(const QModelIndex& parent) const override;
 
+  // Get index of logical partition.
+  int getLogicalIndex() const;
+
+  // Get index of primary partition.
+  int getPrimaryIndex() const;
+
   // Check whether selected item at |index| is logical partition.
-  bool isLogical(const QModelIndex& index) const;
+  bool isLogical(int index) const;
 
   // Check whether selected item at |index| is primary partition.
-  bool isPrimary(const QModelIndex& index) const;
+  bool isPrimary(int index) const;
 
  public slots:
   // Reset status. Both "primary partition" and "logical partition" are
@@ -31,7 +37,7 @@ class PartitionTypeModel : public QAbstractListModel {
   void reset();
 
   // Set visibility of "logical partition" option.
-  void setLogicalVisibel(bool visible);
+  void setLogicalVisible(bool visible);
 
   // Set visibility of "primary partition" option.
   void setPrimaryVisible(bool visible);
