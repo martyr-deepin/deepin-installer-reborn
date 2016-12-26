@@ -54,32 +54,112 @@ SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
 }
 
 bool SimplePartitionFrame::validate() {
-  SimplePartitionButton* button =
-      qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
-  if (!button) {
-    msg_label_->setText(tr("Please select one partition"));
-    return false;
-  }
-  const Partition& partition = button->partition();
+  bool efi_is_set = false;
+  bool efi_large_enough = false;
+  bool root_is_set = false;
+  bool root_large_enough = false;
+  bool swap_is_set = false;
+  bool boot_is_set = false;
+  bool boot_large_enough = false;
 
-  const int required_space = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-  const qint64 required_bytes = required_space * kGibiByte;
-  if (partition.getByteLength() < required_bytes) {
-    msg_label_->setText(tr("At least %1 G is required for root partition.")
-                            .arg(required_space));
-    return false;
+  const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  const int root_with_swap_required =
+      GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
+  const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
+  const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
+
+  Partition root_partition;
+
+  // First check whether partitions are modified in advanced mode.
+  for (const Device& device : delegate_->devices()) {
+    for (const Partition& partition : device.partitions) {
+      if (partition.mount_point == kMountPointRoot) {
+        // Check / partition.
+        root_is_set = true;
+        root_partition = partition;
+
+      } else if (partition.mount_point == kMountPointBoot) {
+        // Check /boot partition.
+        boot_is_set = true;
+        const qint64 recommend_bytes = boot_recommended * kMebiByte;
+        boot_large_enough = (partition.getByteLength() > recommend_bytes);
+
+      } else if (partition.fs == FsType::EFI) {
+        // Check EFI partition.
+        efi_is_set = true;
+
+        const qint64 recommended_bytes = efi_recommended * kMebiByte;
+        efi_large_enough = (partition.getByteLength() > recommended_bytes);
+      } else if (partition.fs == FsType::LinuxSwap) {
+        swap_is_set = true;
+      }
+    }
+  }
+
+  bool is_max_prims_reached = false;
+  if (!root_is_set) {
+    SimplePartitionButton* button =
+        qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
+    if (button) {
+      root_is_set = true;
+      root_partition = button->partition();
+    } else {
+      root_is_set = false;
+    }
   }
 
   // If currently selected device reaches its maximum primary partitions and
   // button->partition() is a Freespace, it is impossible to created a new
   // primary partition.
+  if ((root_partition.type == PartitionType::Unallocated) &&
+      !delegate_->canAddPrimary(root_partition) &&
+      !delegate_->canAddLogical(root_partition)) {
+    is_max_prims_reached = true;
+  }
 
-  if ((partition.type == PartitionType::Unallocated) &&
-      !delegate_->canAddPrimary(partition) &&
-      !delegate_->canAddLogical(partition)) {
+  if (!root_is_set) {
+    msg_label_->setText(tr("Please select one partition"));
+    return false;
+  }
+
+  if (is_max_prims_reached) {
     msg_label_->setText(tr("No more partition can be created!"));
     return false;
   }
+
+  if (swap_is_set) {
+    const qint64 minimum_bytes = root_required * kGibiByte;
+    root_large_enough = (root_partition.getByteLength() > minimum_bytes);
+  } else {
+    // If no swap partition is created, more space is required for
+    // root partition.
+    const qint64 minimum_bytes = root_with_swap_required * kGibiByte;
+    root_large_enough = (root_partition.getByteLength() > minimum_bytes);
+  }
+
+  if (!root_large_enough) {
+    msg_label_->setText(
+        tr("At least %1 Gib is required for root partition.")
+            .arg(root_required));
+    return false;
+  }
+
+  if (IsEfiEnabled() && efi_is_set && !efi_large_enough) {
+    msg_label_->setText(
+        tr("At least %1 Mib is required for EFI partition.")
+            .arg(efi_recommended));
+    return false;
+  }
+
+  if (boot_is_set && !boot_large_enough) {
+    msg_label_->setText(
+        tr("At least %1 Mib is required for /boot partition.")
+            .arg(boot_recommended));
+    return false;
+  }
+
+  // Create swap file is swap partition is not found.
+  WriteRequiringSwapFile(!swap_is_set);
 
   msg_label_->clear();
   return true;
@@ -105,15 +185,13 @@ void SimplePartitionFrame::showEvent(QShowEvent* event) {
 
 
 void SimplePartitionFrame::appendOperations() {
+  // Reset simple operations first.
   delegate_->resetSimpleOperations();
 
-  bool swap_is_set = false;
   bool efi_is_set = false;
   for (const Device& device : delegate_->devices()) {
     for (const Partition& partition : device.partitions) {
-      if (partition.fs == FsType::LinuxSwap) {
-        swap_is_set = true;
-      } else if (partition.fs == FsType::EFI) {
+      if (partition.fs == FsType::EFI) {
         efi_is_set = true;
       }
     }
@@ -174,11 +252,6 @@ void SimplePartitionFrame::appendOperations() {
                                        GetPartitionDefaultFs(),
                                        kMountPointRoot);
     }
-  }
-
-
-  if (!swap_is_set) {
-    // TODO(xushaohua): Create swap file
   }
 }
 

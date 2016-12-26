@@ -51,16 +51,18 @@ bool AdvancedPartitionFrame::validate() {
   bool boot_large_enough = false;
 
   const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  const int root_with_swap_required =
+      GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
   const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
   const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
+  Partition root_partition;
 
   for (const Device& device : delegate_->devices()) {
     for (const Partition& partition : device.partitions) {
       if (partition.mount_point == kMountPointRoot) {
         // Check / partition.
         root_is_set = true;
-        const qint64 minimum_bytes = root_required * kGibiByte;
-        root_large_enough =  (partition.getByteLength() > minimum_bytes);
+        root_partition = partition;
 
       } else if (partition.mount_point == kMountPointBoot) {
         // Check /boot partition.
@@ -85,21 +87,21 @@ bool AdvancedPartitionFrame::validate() {
     return false;
   }
 
+  if (swap_is_set) {
+    const qint64 minimum_bytes = root_required * kGibiByte;
+    root_large_enough = (root_partition.getByteLength() > minimum_bytes);
+  } else {
+    // If no swap partition is created, more space is required for
+    // root partition.
+    const qint64 minimum_bytes = root_with_swap_required * kGibiByte;
+    root_large_enough = (root_partition.getByteLength() > minimum_bytes);
+  }
+
   if (!root_large_enough) {
     msg_label_->setText(
         tr("At least %1 Gib is required for root partition.")
             .arg(root_required));
     return false;
-  }
-
-  if (!swap_is_set) {
-    if (IsSwapAreaNeeded()) {
-      // In advanced-mode, notify user to create linux-swap partition, instead
-      // of creating swap-file automatically. Because swap partition is more
-      // stable and faster than swap file.
-      msg_label_->setText(tr("A linux swap partition is required"));
-      return false;
-    }
   }
 
   if (IsEfiEnabled()) {
@@ -115,14 +117,15 @@ bool AdvancedPartitionFrame::validate() {
     }
   }
 
-  if (boot_is_set) {
-    if (!boot_large_enough) {
-      msg_label_->setText(
-          tr("At least %1 Mib is required for /boot partition.")
-              .arg(boot_recommended));
-      return false;
-    }
+  if (boot_is_set && !boot_large_enough) {
+    msg_label_->setText(
+        tr("At least %1 Mib is required for /boot partition.")
+            .arg(boot_recommended));
+    return false;
   }
+
+  // Create swap file is swap partition is not found.
+  WriteRequiringSwapFile(!swap_is_set);
 
   msg_label_->clear();
   return true;

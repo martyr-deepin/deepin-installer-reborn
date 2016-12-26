@@ -276,6 +276,10 @@ void WritePartitionInfo(const QString& root_disk,
   settings.setValue("DI_MOUNTPOINTS", mount_points);
 }
 
+void WriteRequiringSwapFile(bool is_required) {
+  AppendToConfigFile("DI_SWAP_FILE", is_required);
+}
+
 void AddConfigFile() {
   QSettings target_settings(kInstallerConfigFile, QSettings::IniFormat);
 

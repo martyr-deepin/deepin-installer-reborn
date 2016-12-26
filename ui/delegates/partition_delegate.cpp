@@ -136,7 +136,7 @@ bool PartitionDelegate::canAddLogical(const Partition& partition) const {
   bool logical_ok = true;
   const int ext_index = ExtendedPartitionIndex(device.partitions);
   if (ext_index == -1) {
-    // No extended partition found, so check one more primary partition is
+    // No extended partition found, so check a new primary partition is
     // available or not.
     if (GetPrimaryPartitions(device.partitions).length() >= device.max_prims) {
       logical_ok = false;
