@@ -1,7 +1,10 @@
 #!/bin/bash
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
 
 # Automatically create disk partitions based on this policy:
-# Assumes /dev/sda is the deivce which has the largest capacity.
+# Assumes /dev/sda is the device which has the largest capacity.
 # If UEFI is enabled:
 #   * Create label of /dev/sda to GPT
 #   If /dev/sda is less than 15G:

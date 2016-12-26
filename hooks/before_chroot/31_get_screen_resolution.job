@@ -1,4 +1,7 @@
 #!/bin/bash
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
 
 # try to get primary screen resolution, for example, extract 1440x900
 # from "LVDS1 connected primary 1440x900+0+0 (normal left inverted

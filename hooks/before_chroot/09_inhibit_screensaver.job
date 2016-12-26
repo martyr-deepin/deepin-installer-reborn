@@ -1,4 +1,7 @@
 #!/bin/sh
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
 
 # FIXME(xushaohua): Does not work.
 DISPLAY=:0 gsettings set com.deepin.dde.power battery-screen-black-delay 0

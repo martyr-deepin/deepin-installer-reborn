@@ -1,4 +1,8 @@
 #!/bin/bash
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
 # copy apt-cache list
 
 [ -d /target/var/lib/apt/lists ] && rm -rf /target/var/lib/apt/lists

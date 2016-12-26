@@ -1,4 +1,7 @@
 #!/bin/bash
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
 
 # Read kernel boostrap options from /proc/cmdline
 if grep -q boot=casper /proc/cmdline; then

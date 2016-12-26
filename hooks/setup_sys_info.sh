@@ -5,7 +5,6 @@
 
 # Setup username, password, timezone and keyboard layout.
 
-
 # Set environment
 export LC_ALL=C
 export DEBIAN_FRONTEND="noninteractive"
