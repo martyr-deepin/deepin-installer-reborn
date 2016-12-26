@@ -68,6 +68,10 @@ const char kSystemInfoTimezoneUseRegdomain[] =
     "system_info_timezone_use_regdomain";
 
 // Partition
+const char kPartitionSkipSimplePartitionPage[] =
+    "partition_skip_simple_partition_page";
+const char kPartitionSkipAdvancedPartitionPage[] =
+    "partition_skip_advanced_partition_page";
 const char kPartitionMemoryThresholdForSwapArea[] =
     "partition_memory_threshold_for_swap_area";
 const char kPartitionMinimumDiskSpaceRequired[] =

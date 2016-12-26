@@ -10,6 +10,8 @@
 #include <QStackedLayout>
 
 #include "base/file_util.h"
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/frames/consts.h"
 #include "ui/delegates/partition_delegate.h"
 #include "ui/frames/inner/advanced_partition_frame.h"
@@ -150,8 +152,19 @@ void PartitionFrame::initUI() {
   button_layout->addStretch();
 
   partition_stacked_layout_ = new QStackedLayout();
-  partition_stacked_layout_->addWidget(simple_partition_frame_);
-  partition_stacked_layout_->addWidget(advanced_partition_frame_);
+  if (GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
+    // Hide simple partition frame if it is disabled.
+    simple_partition_frame_->hide();
+  } else {
+    partition_stacked_layout_->addWidget(simple_partition_frame_);
+  }
+  if (GetSettingsBool(kPartitionSkipAdvancedPartitionPage)) {
+    // Hide advanced partition frame if it is disabled.
+    advanced_partition_frame_->hide();
+  } else {
+    partition_stacked_layout_->addWidget(advanced_partition_frame_);
+  }
+
   QHBoxLayout* partition_stacked_wrapper_layout = new QHBoxLayout();
   partition_stacked_wrapper_layout->addStretch();
   partition_stacked_wrapper_layout->addLayout(partition_stacked_layout_);
@@ -167,7 +180,12 @@ void PartitionFrame::initUI() {
   layout->addSpacing(kMainLayoutSpacing);
   layout->addLayout(comment_layout);
   layout->addSpacing(kMainLayoutSpacing);
-  layout->addLayout(button_layout);
+  if (!GetSettingsBool(kPartitionSkipSimplePartitionPage) &&
+      !GetSettingsBool(kPartitionSkipAdvancedPartitionPage)) {
+    // Add control button groups only if both simple mode and advanced mode
+    // are enabled.
+    layout->addLayout(button_layout);
+  }
   layout->addSpacing(20 + kMainLayoutSpacing);
   layout->addLayout(partition_stacked_wrapper_layout);
   layout->addLayout(next_layout);
@@ -223,8 +241,6 @@ void PartitionFrame::showEditPartitionFrame(const Partition& partition) {
 }
 
 void PartitionFrame::showMainFrame() {
-  // Hide loading page first.
-  partition_loading_frame_->hide();
   main_layout_->setCurrentWidget(main_frame_);
 }
 
