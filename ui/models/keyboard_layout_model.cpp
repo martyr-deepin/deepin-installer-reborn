@@ -81,6 +81,16 @@ void KeyboardLayoutModel::initLayout() {
   xkb_config_ = GetXkbConfig();
   layout_list_ = xkb_config_.layout_list;
 
+  // Append layout to its variant list.
+  for (XkbLayout& layout : layout_list_) {
+    XkbLayoutVariant variant;
+    variant.name = layout.name;
+    variant.description = layout.description;
+    variant.short_description = layout.short_description;
+    variant.language_list = layout.language_list;
+    layout.variant_list.prepend(variant);
+  }
+
   // Sort layout list by description.
   // Perform localized comparison.
   const QCollator collator(QLocale(qgetenv("LC_ALL")));

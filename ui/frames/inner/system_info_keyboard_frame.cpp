@@ -62,12 +62,18 @@ void SystemInfoKeyboardFrame::readConf() {
 }
 
 void SystemInfoKeyboardFrame::writeConf() {
-  const QString layout =
-      layout_model_->getLayoutName(layout_view_->currentIndex());
-  const QString variant =
-      variant_model_->getVariantName(variant_view_->currentIndex());
+  const QModelIndex layout_index = layout_view_->currentIndex();
+  const QString layout = layout_model_->getLayoutName(layout_index);
+  const QModelIndex variant_index = variant_view_->currentIndex();
+  const QString variant = variant_model_->getVariantName(variant_index);
+
   // Model name of keyboard is empty. Variant name might be empty.
-  WriteKeyboard("", layout, variant);
+  // The first row in variant list is the default layout.
+  if (variant_index.row() == 0) {
+    WriteKeyboard("", layout, "");
+  } else {
+    WriteKeyboard("", layout, variant);
+  }
 }
 
 void SystemInfoKeyboardFrame::changeEvent(QEvent* event) {
@@ -84,7 +90,7 @@ void SystemInfoKeyboardFrame::changeEvent(QEvent* event) {
 void SystemInfoKeyboardFrame::initConnections() {
   connect(layout_view_->selectionModel(), &QItemSelectionModel::currentChanged,
           this, &SystemInfoKeyboardFrame::onLayoutViewSelectionChanged);
-  connect(variant_view_, &QListView::pressed,
+  connect(variant_view_->selectionModel(), &QItemSelectionModel::currentChanged,
           this, &SystemInfoKeyboardFrame::onVariantViewSelected);
 
   connect(back_button_, &QPushButton::clicked,
@@ -164,33 +170,41 @@ void SystemInfoKeyboardFrame::onLayoutViewSelectionChanged(
   Q_UNUSED(previous);
   test_edit_->clear();
 
-  const QString layout = layout_model_->getLayoutName(current);
-  if (!layout.isEmpty()) {
-    emit this->layoutUpdated(layout_model_->getLayoutDescription(current));
-
-    if (!SetXkbLayout(layout)) {
-      qWarning() << "SetXkbLayout() failed!" << layout;
-    }
-  }
-
   // Update variant list.
   variant_model_->setVariantList(layout_model_->getVariantList(current));
 
   // Scroll to top of variant view.
   variant_view_->scrollToTop();
+
+  // Select the default layout variant.
+  variant_view_->setCurrentIndex(variant_model_->index(0));
 }
 
-void SystemInfoKeyboardFrame::onVariantViewSelected(const QModelIndex& index) {
+void SystemInfoKeyboardFrame::onVariantViewSelected(
+    const QModelIndex& current, const QModelIndex& previous) {
+  Q_UNUSED(previous);
+
+  // Clear content of test_edit_ when new layout variant is selected.
   test_edit_->clear();
 
-  const QString layout =
-      layout_model_->getLayoutName(layout_view_->currentIndex());
-  const QString variant = variant_model_->getVariantName(index);
-  if (!layout.isEmpty() && !variant.isEmpty()) {
+  const QModelIndex layout_index = layout_view_->currentIndex();
+  const QString layout = layout_model_->getLayoutName(layout_index);
+  const QString variant = variant_model_->getVariantName(current);
+  QString description;
+
+  // The first row in variant list is the default layout.
+  if (current.row() == 0) {
+    description = layout_model_->getLayoutDescription(layout_index);
+    if (!SetXkbLayout(layout)) {
+      qWarning() << "SetXkbLayout() failed!" << layout;
+    }
+  } else {
+    description = variant_model_->getVariantDescription(current);
     if (!SetXkbLayout(layout, variant)) {
       qWarning() << "SetXkbLayout() failed!" << layout << variant;
     }
   }
+  emit this->layoutUpdated(description);
 }
 
 }  // namespace installer

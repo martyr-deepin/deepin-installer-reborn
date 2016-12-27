@@ -27,6 +27,9 @@ class KeyboardLayoutVariantModel : public QAbstractListModel {
   // Set variant list and emit dataChanged() signal.
   void setVariantList(const XKbLayoutVariantList& variant_list);
 
+  // Get description at |index|.
+  QString getVariantDescription(const QModelIndex& index) const;
+
   // Get layout variant name at |index|.
   QString getVariantName(const QModelIndex& index) const;
 

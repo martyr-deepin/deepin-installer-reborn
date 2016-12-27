@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <QCollator>
+#include <QDebug>
 
 namespace installer {
 
@@ -45,7 +46,15 @@ void KeyboardLayoutVariantModel::setVariantList(
 
   // Sort variant list by description.
   const QCollator collator(QLocale(qgetenv("LC_ALL")));
-  std::sort(variant_list_.begin(), variant_list_.end(),
+
+  if (variant_list_.isEmpty()) {
+    qCritical() << "VariantList is empty! We shall never reach here!";
+    this->endResetModel();
+    return;
+  }
+
+  // Sorting variant list by description, skipping the first item.
+  std::sort(variant_list_.begin() + 1, variant_list_.end(),
             [&](const XkbLayoutVariant& a, const XkbLayoutVariant& b) -> bool {
               return collator.compare(a.description, b.description) < 0;
             });
@@ -54,12 +63,22 @@ void KeyboardLayoutVariantModel::setVariantList(
   this->endResetModel();
 }
 
+QString KeyboardLayoutVariantModel::getVariantDescription(
+    const QModelIndex& index) const {
+  if (index.isValid()) {
+    return variant_list_.at(index.row()).description;
+  } else {
+    return QString();
+  }
+}
+
 QString KeyboardLayoutVariantModel::getVariantName(
     const QModelIndex& index) const {
   if (index.isValid()) {
     return variant_list_.at(index.row()).name;
   } else {
     return QString();
-  }}
+  }
+}
 
 }  // namespace installer

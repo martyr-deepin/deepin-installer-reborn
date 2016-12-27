@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_UI_FRAMES_INNNER_SYSTEM_INFO_KEYBOARD_FRAME_H
-#define INSTALLER_UI_FRAMES_INNNER_SYSTEM_INFO_KEYBOARD_FRAME_H
+#ifndef INSTALLER_UI_FRAMES_INNER_SYSTEM_INFO_KEYBOARD_FRAME_H
+#define INSTALLER_UI_FRAMES_INNER_SYSTEM_INFO_KEYBOARD_FRAME_H
 
 #include <QFrame>
 class QLineEdit;
@@ -64,9 +64,10 @@ class SystemInfoKeyboardFrame : public QFrame {
 
   // Update system keyboard layout when new layout variant is selected.
   // Clear content of test_edit_.
-  void onVariantViewSelected(const QModelIndex& index);
+  void onVariantViewSelected(const QModelIndex& current,
+                             const QModelIndex& previous);
 };
 
 }  // namespace installer
 
-#endif  // INSTALLER_UI_FRAMES_INNNER_SYSTEM_INFO_KEYBOARD_FRAME_H
+#endif  // INSTALLER_UI_FRAMES_INNER_SYSTEM_INFO_KEYBOARD_FRAME_H
