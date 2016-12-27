@@ -6,6 +6,7 @@
 #define INSTALLER_UI_FRAMES_CONTROL_PANEL_FRAME_H
 
 #include <QFrame>
+class QPushButton;
 class QStackedWidget;
 class QTabBar;
 class QTextEdit;
@@ -26,6 +27,9 @@ class ControlPanelFrame : public QFrame {
   // Emitted when page index is changed in page_combo_box_.
   void currentPageChanged(int index);
 
+  // Emitted when refresh_device_button_ is clicked.
+  void requestRefreshDevices();
+
  public slots:
   void toggleVisible();
 
@@ -44,6 +48,7 @@ class ControlPanelFrame : public QFrame {
 
   // Displays global settings.
   QFrame* settings_page_ = nullptr;
+  QPushButton* refresh_devices_button_ = nullptr;
 
   QTimer* timer_ = nullptr;
   QString log_file_path_;

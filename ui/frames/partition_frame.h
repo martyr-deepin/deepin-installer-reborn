@@ -34,15 +34,16 @@ class PartitionFrame : public QFrame {
 
   void autoPart();
 
-  // Calls delegate->scanDevices().
-  void scanDevices() const;
-
  signals:
   void finished();
 
   // Emitted when partition job is done.
   void autoPartDone(bool ok);
   void manualPartDone(bool ok);
+
+ public slots:
+  // Notify delegate to scan devices.
+  void scanDevices() const;
 
  protected:
   void changeEvent(QEvent* event) override;

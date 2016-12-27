@@ -16,6 +16,7 @@
 
 #include "base/file_util.h"
 #include "service/log_manager.h"
+#include "ui/widgets/pointer_button.h"
 #include "ui/widgets/table_combo_box.h"
 
 namespace installer {
@@ -97,6 +98,9 @@ void ControlPanelFrame::initConnections() {
           this, &ControlPanelFrame::onLogViewerCursorPositionChanged);
   connect(timer_, &QTimer::timeout,
           this, &ControlPanelFrame::onTimerTimeout);
+
+  connect(refresh_devices_button_, &QPushButton::clicked,
+          this, &ControlPanelFrame::requestRefreshDevices);
 }
 
 void ControlPanelFrame::initUI() {
@@ -131,6 +135,8 @@ void ControlPanelFrame::initUI() {
                             });
 
   settings_page_ = new QFrame();
+  refresh_devices_button_ = new PointerButton(settings_page_);
+  refresh_devices_button_->setText("Refresh Device List");
 
   stacked_widget_ = new QStackedWidget();
   stacked_widget_->addWidget(log_viewer_);

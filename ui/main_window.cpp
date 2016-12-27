@@ -78,28 +78,40 @@ void MainWindow::initConnections() {
           this, &MainWindow::goNextPage);
   connect(confirm_quit_frame_, &ConfirmQuitFrame::quitConfirmed,
           this, &MainWindow::shutdownSystem);
+
   connect(control_panel_frame_, &ControlPanelFrame::currentPageChanged,
           this, &MainWindow::onCurrentPageChanged);
+  connect(control_panel_frame_, &ControlPanelFrame::requestRefreshDevices,
+          partition_frame_, &PartitionFrame::scanDevices);
+
   connect(disk_space_insufficient_frame_, &DiskSpaceInsufficientFrame::finished,
           this, &MainWindow::shutdownSystem);
+
   connect(install_failed_frame_, &InstallFailedFrame::finished,
           this, &MainWindow::shutdownSystem);
+
   connect(install_progress_frame_, &InstallProgressFrame::finished,
           this, &MainWindow::goNextPage);
+
   connect(install_success_frame_, &InstallSuccessFrame::finished,
           this, &MainWindow::rebootSystem);
+
   connect(partition_frame_, &PartitionFrame::finished,
           this, &MainWindow::goNextPage);
+
   connect(partition_table_warning_frame_, &PartitionTableWarningFrame::declined,
           this, &MainWindow::rebootSystem);
   connect(partition_table_warning_frame_, &PartitionTableWarningFrame::accepted,
           this, &MainWindow::goNextPage);
+
   connect(select_language_frame_, &SelectLanguageFrame::finished,
           this, &MainWindow::goNextPage);
   connect(select_language_frame_, &SelectLanguageFrame::languageUpdated,
           install_progress_frame_, &InstallProgressFrame::updateLanguage);
+
   connect(system_info_frame_, &SystemInfoFrame::finished,
           this, &MainWindow::goNextPage);
+
   connect(virtual_machine_frame_, &VirtualMachineFrame::finished,
           this, &MainWindow::goNextPage);
 

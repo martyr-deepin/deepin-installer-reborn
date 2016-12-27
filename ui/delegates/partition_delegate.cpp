@@ -812,6 +812,11 @@ void PartitionDelegate::resetOperationMountPoint(const QString& mount_point) {
 void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   qDebug() << "device refreshed:" << devices;
   this->real_devices_ = devices;
+
+  // Clear operation list.
+  simple_operations_.clear();
+  operations_.clear();
+
   this->refreshVisual();
 }
 
