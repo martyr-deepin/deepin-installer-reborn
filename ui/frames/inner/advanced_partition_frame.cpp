@@ -25,10 +25,6 @@ namespace {
 
 const int kWindowWidth = 960;
 
-const char kTextBootloader[] = "Select bootloader";
-const char kTextDelete[] = "Delete";
-const char kTextDone[] = "Done";
-
 }  // namespace
 
 AdvancedPartitionFrame::AdvancedPartitionFrame(PartitionDelegate* delegate_,
@@ -99,7 +95,7 @@ bool AdvancedPartitionFrame::validate() {
 
   if (!root_large_enough) {
     msg_label_->setText(
-        tr("At least %1 Gib is required for root partition.")
+        tr("At least %1 Gib is required for root partition")
             .arg(root_required));
     return false;
   }
@@ -111,7 +107,7 @@ bool AdvancedPartitionFrame::validate() {
     }
     if (!efi_large_enough) {
       msg_label_->setText(
-          tr("At least %1 Mib is required for EFI partition.")
+          tr("At least %1 Mib is required for EFI partition")
               .arg(efi_recommended));
       return false;
     }
@@ -119,7 +115,7 @@ bool AdvancedPartitionFrame::validate() {
 
   if (boot_is_set && !boot_large_enough) {
     msg_label_->setText(
-        tr("At least %1 Mib is required for /boot partition.")
+        tr("At least %1 Mib is required for /boot partition")
             .arg(boot_recommended));
     return false;
   }
@@ -137,11 +133,11 @@ void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
 
 void AdvancedPartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    bootloader_tip_button_->setText(tr(kTextBootloader));
+    bootloader_tip_button_->setText(tr("Change boot loader"));
     if (editing_button_->isChecked()) {
-      editing_button_->setText(tr(kTextDone));
+      editing_button_->setText(tr("Done"));
     } else {
-      editing_button_->setText(tr(kTextDelete));
+      editing_button_->setText(tr("Delete"));
     }
   } else {
     QFrame::changeEvent(event);
@@ -193,14 +189,14 @@ void AdvancedPartitionFrame::initUI() {
   scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  bootloader_tip_button_ = new PointerButton(tr(kTextBootloader), this);
+  bootloader_tip_button_ = new PointerButton(tr("Change boot loader"), this);
   bootloader_tip_button_->setObjectName("bootloader_tip_button");
   bootloader_tip_button_->setFlat(true);
   bootloader_button_ = new PointerButton(this);
   bootloader_button_->setObjectName("bootloader_button");
   bootloader_button_->setFlat(true);
 
-  editing_button_ = new PointerButton(tr(kTextDelete), this);
+  editing_button_ = new PointerButton(tr("Delete"), this);
   editing_button_->setObjectName("editing_button");
   editing_button_->setFlat(true);
   editing_button_->setCheckable(true);
@@ -313,9 +309,9 @@ void AdvancedPartitionFrame::onDeviceRefreshed() {
 
 void AdvancedPartitionFrame::onEditButtonToggled(bool toggle) {
   if (toggle) {
-    editing_button_->setText(tr(kTextDone));
+    editing_button_->setText(tr("Done"));
   } else {
-    editing_button_->setText(tr(kTextDelete));
+    editing_button_->setText(tr("Delete"));
   }
 }
 

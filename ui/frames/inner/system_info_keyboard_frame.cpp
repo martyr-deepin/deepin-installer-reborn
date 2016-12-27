@@ -25,11 +25,6 @@ namespace installer {
 
 namespace {
 
-const char kTextTitle[] = "Select keyboard layout";
-const char kTextComment[] = "Select keyboard layout";
-const char kTextTest[] = "Test area";
-const char kTextBack[] = "Back";
-
 const int kLayoutWidth = 860;
 
 }  // namespace
@@ -78,10 +73,10 @@ void SystemInfoKeyboardFrame::writeConf() {
 
 void SystemInfoKeyboardFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
-    test_edit_->setPlaceholderText(tr(kTextTest));
-    back_button_->setText(tr(kTextBack));
+    title_label_->setText(tr("Select keyboard layout"));
+    comment_label_->setText(tr("Select keyboard layout"));
+    test_edit_->setPlaceholderText(tr("Test area"));
+    back_button_->setText(tr("Back"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -98,8 +93,8 @@ void SystemInfoKeyboardFrame::initConnections() {
 }
 
 void SystemInfoKeyboardFrame::initUI() {
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  title_label_ = new TitleLabel(tr("Select keyboard layout"));
+  comment_label_ = new CommentLabel(tr("Select keyboard layout"));
 
   layout_view_ = new FramelessListView();
   layout_view_->setObjectName("layout_view");
@@ -134,10 +129,10 @@ void SystemInfoKeyboardFrame::initUI() {
 
   test_edit_ = new QLineEdit();
   test_edit_->setObjectName("test_edit");
-  test_edit_->setPlaceholderText(tr(kTextTest));
+  test_edit_->setPlaceholderText(tr("Test area"));
   test_edit_->setFixedSize(kLayoutWidth, 36);
 
-  back_button_ = new NavButton(tr(kTextBack));
+  back_button_ = new NavButton(tr("Back"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);

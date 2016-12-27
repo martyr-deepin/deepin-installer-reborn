@@ -15,15 +15,6 @@
 
 namespace installer {
 
-namespace {
-
-const char kTextTitle[] = "Successfully Installed";
-const char kTextComment[] =
-    "Reboot to enjoy the new experience with deepin, hope you like it!";
-const char kTextReboot[] = "Experience now";
-
-}  // namespace
-
 InstallSuccessFrame::InstallSuccessFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName("install_success_frame");
 
@@ -33,9 +24,11 @@ InstallSuccessFrame::InstallSuccessFrame(QWidget* parent) : QFrame(parent) {
 
 void InstallSuccessFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
-    reboot_button_->setText(tr(kTextReboot));
+    title_label_->setText(tr("Successfully Installed"));
+    comment_label_->setText(
+        tr("Reboot to enjoy the new experience with deepin, "
+           "hope you like it!"));
+    reboot_button_->setText(tr("Experience now"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -49,14 +42,15 @@ void InstallSuccessFrame::initConnections() {
 void InstallSuccessFrame::initUI() {
   QLabel* status_label = new QLabel();
   status_label->setPixmap(QPixmap(":/images/succeed.png"));
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  title_label_ = new TitleLabel(tr("Successfully Installed"));
+  comment_label_ = new CommentLabel(
+      tr("Reboot to enjoy the new experience with deepin, hope you like it!"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
   comment_layout->addWidget(comment_label_);
 
-  reboot_button_ = new NavButton(tr(kTextReboot));
+  reboot_button_ = new NavButton(tr("Experience now"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);

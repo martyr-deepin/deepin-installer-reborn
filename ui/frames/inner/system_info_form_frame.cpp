@@ -24,18 +24,6 @@
 
 namespace installer {
 
-namespace {
-
-const char kTextTitle[] = "Create User Account";
-const char kTextComment[] = "Input username and password";
-const char kTextUsername[] = "Username";
-const char kTextHostname[] = "Computer name";
-const char kTextPassword[] = "Password";
-const char kTextPassword2[] = "Reenter password";
-const char kTextNext[] = "Next";
-
-}  // namespace
-
 SystemInfoFormFrame::SystemInfoFormFrame(QWidget* parent)
     : QFrame(parent),
       is_username_edited_(false),
@@ -61,13 +49,13 @@ void SystemInfoFormFrame::writeConf() {
 
 void SystemInfoFormFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
-    username_edit_->setPlaceholderText(tr(kTextUsername));
-    hostname_edit_->setPlaceholderText(tr(kTextHostname));
-    password_edit_->setPlaceholderText(tr(kTextPassword));
-    password2_edit_->setPlaceholderText(tr(kTextPassword2));
-    next_button_->setText(tr(kTextNext));
+    title_label_->setText(tr("Create User Account"));
+    comment_label_->setText(tr("Input username and password"));
+    username_edit_->setPlaceholderText(tr("Username"));
+    hostname_edit_->setPlaceholderText(tr("Computer name"));
+    password_edit_->setPlaceholderText(tr("Password"));
+    password2_edit_->setPlaceholderText(tr("Reenter password"));
+    next_button_->setText(tr("Next"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -121,8 +109,8 @@ void SystemInfoFormFrame::initConnections() {
 }
 
 void SystemInfoFormFrame::initUI() {
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  title_label_ = new TitleLabel(tr("Create User Account"));
+  comment_label_ = new CommentLabel(tr("Input username and password"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
@@ -131,23 +119,23 @@ void SystemInfoFormFrame::initUI() {
   avatar_button_ = new AvatarButton();
 
   username_edit_ = new LineEdit(":/images/username_12.png");
-  username_edit_->setPlaceholderText(tr(kTextUsername));
+  username_edit_->setPlaceholderText(tr("Username"));
   username_edit_->setText(GetSettingsString(kSystemInfoDefaultUsername));
   username_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockUsername));
 
   hostname_edit_ = new LineEdit(":/images/hostname_12.png");
-  hostname_edit_->setPlaceholderText(tr(kTextHostname));
+  hostname_edit_->setPlaceholderText(tr("Computer name"));
   hostname_edit_->setText(GetSettingsString(kSystemInfoDefaultHostname));
   hostname_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockHostname));
 
   password_edit_ = new LineEdit(":/images/password_12.png");
-  password_edit_->setPlaceholderText(tr(kTextPassword));
+  password_edit_->setPlaceholderText(tr("Password"));
   password_edit_->setEchoMode(QLineEdit::Password);
   password_edit_->setText(GetSettingsString(kSystemInfoDefaultPassword));
   password_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockPassword));
 
   password2_edit_ = new LineEdit(":/images/password_12.png");
-  password2_edit_->setPlaceholderText(tr(kTextPassword2));
+  password2_edit_->setPlaceholderText(tr("Reenter password"));
   password2_edit_->setEchoMode(QLineEdit::Password);
   password2_edit_->setText(password_edit_->text());
   password2_edit_->setReadOnly(password_edit_->isReadOnly());
@@ -158,7 +146,7 @@ void SystemInfoFormFrame::initUI() {
   tooltip_->setMinimumHeight(32);
   tooltip_->hide();
 
-  next_button_ = new NavButton(tr(kTextNext));
+  next_button_ = new NavButton(tr("Next"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
@@ -187,7 +175,7 @@ bool SystemInfoFormFrame::validateUsername(QString& msg) {
                        GetSettingsInt(kSystemInfoUsernameMaxLen));
   switch (state) {
     case ValidateUsernameState::ReservedError: {
-      msg = tr("Username is already in use");
+      msg = tr("This username already exists");
       return false;
     }
     case ValidateUsernameState::EmptyError: {
@@ -203,7 +191,7 @@ bool SystemInfoFormFrame::validateUsername(QString& msg) {
       return false;
     }
     case ValidateUsernameState::TooLongError: {
-      msg = tr("User name has too many characters");
+      msg = tr("Username length exceeds the limit");
       return false;
     }
     default: {
@@ -220,19 +208,19 @@ bool SystemInfoFormFrame::validateHostname(QString& msg) {
                        GetSettingsStringList(kSystemInfoHostnameReserved));
   switch (state) {
     case ValidateHostnameState::EmptyError: {
-      msg = tr("Hostname is empty");
+      msg = tr("Computer name is empty");
       return false;
     }
     case ValidateHostnameState::ReservedError: {
-      msg = tr("Hostname is reserved");
+      msg = tr("Computer name is reserved");
       return false;
     }
     case ValidateHostnameState::TooLongError: {
-      msg = tr("Hostname is too long");
+      msg = tr("Computer name is too long");
       return false;
     }
     case ValidateHostnameState::TooShortError: {
-      msg = tr("Hostname is too short");
+      msg = tr("Computer is too short");
       return false;
     }
     default: {

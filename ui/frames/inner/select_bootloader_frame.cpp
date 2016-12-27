@@ -17,15 +17,6 @@
 
 namespace installer {
 
-namespace {
-
-const char kTextTitle[] = "Select location for boot loader";
-const char kTextComment[] = "If you do not understand the detailed settings, "
-                            "please select default settings";
-const char kTextBack[] = "Back";
-
-}  // namespace
-
 SelectBootloaderFrame::SelectBootloaderFrame(PartitionDelegate* delegate,
                                              QWidget* parent)
     : QFrame(parent),
@@ -38,9 +29,11 @@ SelectBootloaderFrame::SelectBootloaderFrame(PartitionDelegate* delegate,
 
 void SelectBootloaderFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
-    back_button_->setText(tr(kTextBack));
+    title_label_->setText(tr("Select location for boot loader"));
+    comment_label_->setText(
+        tr("If you do not understand the detailed settings, "
+           "please select default settings"));
+    back_button_->setText(tr("Back"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -56,8 +49,10 @@ void SelectBootloaderFrame::initConnections() {
 }
 
 void SelectBootloaderFrame::initUI() {
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  title_label_ = new TitleLabel(tr("Select location for boot loader"));
+  comment_label_ = new CommentLabel(
+      tr("If you do not understand the detailed settings, "
+         "please select default settings"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
@@ -68,7 +63,7 @@ void SelectBootloaderFrame::initUI() {
   list_model_ = new BootloaderListModel(delegate_, this);
   list_view_->setModel(list_model_);
 
-  back_button_ = new NavButton(tr(kTextBack));
+  back_button_ = new NavButton(tr("Back"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);

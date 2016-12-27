@@ -20,29 +20,6 @@
 
 namespace installer {
 
-namespace {
-
-const char kTextTitle[] = "Warning";
-const char kTextComment[] = "It is detected that your motherboard boot loader "
-    "is EFI and the disk format is MBR, thus the system can not be installed "
-    "directly; to continue, please select one of the solutions below.";
-const char kTextListTitle1[] = "A. Disable UEFI";
-const char kTextListItem1[] = "1.Reboot, enter BIOS, and disable UEFI\n"
-    "2.Exit BIOS, and enter deepin installation";
-const char kTextListTitle2[] = "B.Format the disk";
-const char kTextListItem2[] =
-    "1.Please make backup for all your data to avoid data loss\n"
-    "2.Please double check if you have made backup for all the data, "
-    "and reboot to enter this interface, Please double check if you have";
-const char kTextListTitle3[] = "Continue";
-const char kTextListItem3[] =
-    "1.Please make sure you have made backup for all the data, then continue\n"
-    "2.Continue installation will format your disk";
-const char kTextReboot[] = "Reboot";
-const char kTextContinue[] = "Continue";
-
-}  // namespace
-
 PartitionTableWarningFrame::PartitionTableWarningFrame(QWidget* parent)
     : QFrame(parent) {
   this->setObjectName("partition_table_warning_frame");
@@ -53,16 +30,29 @@ PartitionTableWarningFrame::PartitionTableWarningFrame(QWidget* parent)
 
 void PartitionTableWarningFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
-    list_title1_->setText(tr(kTextListTitle1));
-    list_item1_->setText(tr(kTextListItem1));
-    list_title2_->setText(tr(kTextListTitle2));
-    list_item2_->setText(tr(kTextListItem2));
-    list_title3_->setText(tr(kTextListTitle3));
-    list_item3_->setText(tr(kTextListItem3));
-    reject_button_->setText(tr(kTextReboot));
-    accept_button_->setText(tr(kTextContinue));
+    title_label_->setText(tr("Warning"));
+    comment_label_->setText(
+        tr("It is detected that your motherboard boot loader "
+           "is EFI and the disk format is MBR, thus the system can not be "
+           "installed directly; to continue, please select one of "
+           "the solutions below."));
+    list_title1_->setText(tr("A. Disable UEFI"));
+    list_item1_->setText(
+        tr("1.Reboot, enter BIOS, and disable UEFI\n"
+           "2.Exit BIOS, and enter deepin installation"));
+    list_title2_->setText(tr("B.Format the disk"));
+    list_item2_->setText(
+        tr("1.Please make backup for all your data to avoid data loss\n"
+           "2.Please double check if you have made backup for all the data, "
+           "and reboot to enter this interface, Please double check if "
+           "you have"));
+    list_title3_->setText(tr("Continue"));
+    list_item3_->setText(
+        tr("1.Please make sure you have made backup for all the data, then "
+           "continue\n"
+           "2.Continue installation will format your disk"));
+    reject_button_->setText(tr("Reboot"));
+    accept_button_->setText(tr("Continue"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -79,7 +69,7 @@ void PartitionTableWarningFrame::initUI() {
   QLabel* warning_label = new QLabel();
   QPixmap warning_pixmap(":/images/warning.png");
   warning_label->setPixmap(warning_pixmap);
-  title_label_ = new TitleLabel(tr(kTextTitle));
+  title_label_ = new TitleLabel(tr("Warning"));
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->setContentsMargins(0, 0, 0, 0);
   title_layout->setSpacing(0);
@@ -89,20 +79,30 @@ void PartitionTableWarningFrame::initUI() {
   title_layout->addWidget(title_label_);
   title_layout->addStretch();
 
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  comment_label_ = new CommentLabel(
+      tr("It is detected that your motherboard boot loader "
+         "is EFI and the disk format is MBR, thus the system can not be "
+         "installed directly; to continue, please select one of "
+         "the solutions below."));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
   comment_layout->addWidget(comment_label_);
 
-  list_title1_ = new QLabel(tr(kTextListTitle1), this);
+  list_title1_ = new QLabel(tr("A. Disable UEFI"), this);
   list_title1_->setObjectName("list_title1");
-  list_item1_ = new QLabel(tr(kTextListItem1), this);
+  list_item1_ = new QLabel(
+      tr("1.Reboot, enter BIOS, and disable UEFI\n"
+         "2.Exit BIOS, and enter deepin installation"), this);
   list_item1_->setObjectName("list_item1");
   list_item1_->setWordWrap(true);
-  list_title2_ = new QLabel(tr(kTextListTitle2), this);
+  list_title2_ = new QLabel(tr("B.Format the disk"), this);
   list_title2_->setObjectName("list_title2");
-  list_item2_ = new QLabel(tr(kTextListItem2), this);
+  list_item2_ = new QLabel(
+      tr("1.Please make backup for all your data to avoid data loss\n"
+         "2.Please double check if you have made backup for all the data, "
+         "and reboot to enter this interface, Please double check if you have"),
+      this);
   list_item2_->setObjectName("list_item2");
   list_item2_->setWordWrap(true);
   QVBoxLayout* left_frame_layout = new QVBoxLayout();
@@ -119,9 +119,13 @@ void PartitionTableWarningFrame::initUI() {
   left_frame->setFixedWidth(480);
   left_frame->setLayout(left_frame_layout);
 
-  list_title3_ = new QLabel(tr(kTextListTitle3), this);
+  list_title3_ = new QLabel(tr("Continue"), this);
   list_title3_->setObjectName("list_title3");
-  list_item3_ = new QLabel(tr(kTextListItem3), this);
+  list_item3_ = new QLabel(
+      tr("1.Please make sure you have made backup for all the data, then "
+         "continue\n"
+         "2.Continue installation will format your disk"),
+      this);
   list_item3_->setObjectName("list_item3");
   list_item3_->setWordWrap(true);
   QVBoxLayout* right_frame_layout = new QVBoxLayout();
@@ -134,8 +138,8 @@ void PartitionTableWarningFrame::initUI() {
   right_frame->setFixedWidth(480);
   right_frame->setLayout(right_frame_layout);
 
-  reject_button_ = new ExpandedNavButton(tr(kTextReboot));
-  accept_button_ = new ExpandedNavButton(tr(kTextContinue));
+  reject_button_ = new ExpandedNavButton(tr("Reboot"));
+  accept_button_ = new ExpandedNavButton(tr("Continue"));
 
   QGridLayout* content_layout = new QGridLayout();
   content_layout->setAlignment(Qt::AlignCenter);

@@ -32,15 +32,6 @@ namespace {
 const int kWindowWidth = 640;
 const int kProgressBarWidth = 280;
 
-const char kTextTitle[] = "Edit Disk";
-const char kTextComment[] = "Please make sure you have backed up "
-    "important data, then select the disk  to install";
-const char kTextFilesystem[] = "Filesystem";
-const char kTextMountPoint[] = "Mount point";
-const char kTextFormat[] = "Format the partition";
-const char kTextCancel[] = "Cancel";
-const char kTextOk[] = "OK";
-
 // Check whether partition with |mount_point| should be formatted
 // compulsively.
 bool IsInFormattedMountPointList(const QString& mount_point) {
@@ -106,13 +97,15 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
 
 void EditPartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
-    fs_label_->setText(tr(kTextFilesystem));
-    mount_point_label_->setText(tr(kTextMountPoint));
-    format_label_->setText(tr(kTextFormat));
-    cancel_button_->setText(tr(kTextCancel));
-    ok_button_->setText(tr(kTextOk));
+    title_label_->setText(tr("Edit Disk"));
+    comment_label_->setText(
+        tr("Please make sure you have backed up "
+           "important data, then select the disk  to install"));
+    fs_label_->setText(tr("Filesystem"));
+    mount_point_label_->setText(tr("Mount point"));
+    format_label_->setText(tr("Format the partition"));
+    cancel_button_->setText(tr("Cancel"));
+    ok_button_->setText(tr("OK"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -156,8 +149,10 @@ void EditPartitionFrame::initConnections() {
 }
 
 void EditPartitionFrame::initUI() {
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  title_label_ = new TitleLabel(tr("Edit Disk"));
+  comment_label_ = new CommentLabel(
+      tr("Please make sure you have backed up "
+         "important data, then select the disk  to install"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
@@ -191,11 +186,11 @@ void EditPartitionFrame::initUI() {
   separator_label->setObjectName("separator_label");
   separator_label->setFixedSize(560, 2);
 
-  fs_label_ = new QLabel(tr(kTextFilesystem));
+  fs_label_ = new QLabel(tr("Filesystem"));
   fs_label_->setObjectName("fs_label");
-  mount_point_label_ = new QLabel(tr(kTextMountPoint));
+  mount_point_label_ = new QLabel(tr("Mount point"));
   mount_point_label_->setObjectName("mount_point_label");
-  format_label_ = new QLabel(tr(kTextFormat));
+  format_label_ = new QLabel(tr("Format the partition"));
   format_label_->setObjectName("format_label");
 
   fs_box_ = new TableComboBox();
@@ -235,8 +230,8 @@ void EditPartitionFrame::initUI() {
   grid_frame->setFixedSize(400, 300);
   grid_frame->setLayout(grid_wrapper_layout);
 
-  cancel_button_ = new NavButton(tr(kTextCancel));
-  ok_button_ = new NavButton(tr(kTextOk));
+  cancel_button_ = new NavButton(tr("Cancel"));
+  ok_button_ = new NavButton(tr("OK"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);

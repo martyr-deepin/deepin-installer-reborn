@@ -23,10 +23,6 @@ namespace installer {
 
 namespace {
 
-const char kTextTitle[] = "Select Time Zone";
-const char kTextComment[] = "Mark your zone in the map";
-const char kTextBack[] = "Back";
-
 // Set timezone to UTC when local-time is used.
 const char kDefaultTimezone[] = "Etc/UTC";
 
@@ -102,9 +98,9 @@ void SystemInfoTimezoneFrame::writeConf() {
 
 void SystemInfoTimezoneFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
-    back_button_->setText(tr(kTextBack));
+    title_label_->setText(tr("Select Time Zone"));
+    comment_label_->setText(tr("Mark your zone in the map"));
+    back_button_->setText(tr("Back"));
 
     // Also update timezone.
     if (!timezone_.isEmpty()) {
@@ -131,10 +127,10 @@ void SystemInfoTimezoneFrame::initConnections() {
 }
 
 void SystemInfoTimezoneFrame::initUI() {
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  title_label_ = new TitleLabel(tr("Select Time Zone"));
+  comment_label_ = new CommentLabel(tr("Mark your zone in the map"));
   timezone_map_ = new TimezoneMap();
-  back_button_ = new NavButton(tr(kTextBack));
+  back_button_ = new NavButton(tr("Back"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);

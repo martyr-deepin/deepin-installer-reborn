@@ -34,8 +34,6 @@ const int kPartitionColumns = 4;
 
 const int kWindowWidth = 960;
 
-const char kTextTip[] = "Install here";
-
 FsType GetPartitionDefaultFs() {
   return GetFsTypeByName(GetSettingsString(kPartitionDefaultFs));
 }
@@ -123,7 +121,7 @@ bool SimplePartitionFrame::validate() {
   }
 
   if (is_max_prims_reached) {
-    msg_label_->setText(tr("No more partition can be created!"));
+    msg_label_->setText(tr("No more partition can be created"));
     return false;
   }
 
@@ -139,21 +137,21 @@ bool SimplePartitionFrame::validate() {
 
   if (!root_large_enough) {
     msg_label_->setText(
-        tr("At least %1 Gib is required for root partition.")
+        tr("At least %1 Gib is required for root partition")
             .arg(root_required));
     return false;
   }
 
   if (IsEfiEnabled() && efi_is_set && !efi_large_enough) {
     msg_label_->setText(
-        tr("At least %1 Mib is required for EFI partition.")
+        tr("At least %1 Mib is required for EFI partition")
             .arg(efi_recommended));
     return false;
   }
 
   if (boot_is_set && !boot_large_enough) {
     msg_label_->setText(
-        tr("At least %1 Mib is required for /boot partition.")
+        tr("At least %1 Mib is required for /boot partition")
             .arg(boot_recommended));
     return false;
   }
@@ -167,7 +165,7 @@ bool SimplePartitionFrame::validate() {
 
 void SimplePartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    tip_label_->setText(tr(kTextTip));
+    tip_label_->setText(tr("Install here"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -270,7 +268,7 @@ void SimplePartitionFrame::initUI() {
   QLabel* tip_icon = new QLabel();
   tip_icon->setPixmap(QPixmap(":/images/install_icon.png"));
 
-  tip_label_ = new QLabel(tr(kTextTip));
+  tip_label_ = new QLabel(tr("Install here"));
   tip_label_->setObjectName("tip_label");
   tip_label_->setFixedHeight(18);
 

@@ -24,8 +24,6 @@ namespace {
 
 const char kDefaultLanguageFile[] = ":/i18n/en_US.qm";
 
-const char kTextNext[] = "Next";
-
 }  // namespace
 
 SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
@@ -58,7 +56,7 @@ void SelectLanguageFrame::writeConf() {
 
 void SelectLanguageFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    next_button_->setText(tr(kTextNext));
+    next_button_->setText(tr("Next"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -86,7 +84,7 @@ void SelectLanguageFrame::initUI() {
   language_model_ = new LanguageListModel(language_view_);
   language_view_->setModel(language_model_);
 
-  next_button_ = new NavButton(tr(kTextNext));
+  next_button_ = new NavButton(tr("Next"));
   next_button_->setEnabled(false);
 
   QVBoxLayout* layout = new QVBoxLayout();

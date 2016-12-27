@@ -14,7 +14,7 @@ def generate_ts():
     Scan source files in `ui` module recursively.
     And save result to i18n/installer.ts.
     """
-    return os.system("lupdate -recursive ui -ts i18n/installer.ts") == 0
+    return os.system("lupdate -recursive . -ts i18n/installer.ts") == 0
 
 def fix_lupdate_namespace():
     """Fix context error in ts file.
@@ -37,7 +37,7 @@ def fix_lupdate_namespace():
     os.rename(pathout, pathin)
 
 def main():
-    # Check PWD is root of source repo.
+    # Make sure that PWD is root of source repo.
     if not os.path.isdir("i18n"):
         print("Run script in parent folder of `i18n`")
         sys.exit(1)

@@ -15,16 +15,6 @@
 
 namespace installer {
 
-namespace {
-
-const char kTextTitle[] = "Abort Installation";
-const char kTextComment[] = "Relevant operations you made in the installation "
-    "process will not take effect, abort or continue installation?";
-const char kTextAbort[] = "Abort";
-const char kTextContinue[] = "Continue";
-
-}  // namespace
-
 ConfirmQuitFrame::ConfirmQuitFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName("confirm_quit_frame");
 
@@ -34,10 +24,12 @@ ConfirmQuitFrame::ConfirmQuitFrame(QWidget* parent) : QFrame(parent) {
 
 void ConfirmQuitFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
-    continue_button_->setText(tr(kTextContinue));
-    abort_button_->setText(tr(kTextAbort));
+    title_label_->setText(tr("Abort Installation"));
+    comment_label_->setText(
+        tr("Relevant operations you made in the installation "
+           "process will not take effect, abort or continue installation?"));
+    continue_button_->setText(tr("Continue"));
+    abort_button_->setText(tr("Abort"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -51,15 +43,17 @@ void ConfirmQuitFrame::initConnections() {
 }
 
 void ConfirmQuitFrame::initUI() {
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  title_label_ = new TitleLabel(tr("Abort Installation"));
+  comment_label_ = new CommentLabel(
+      tr("Relevant operations you made in the installation "
+         "process will not take effect, abort or continue installation?"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
   comment_layout->addWidget(comment_label_);
 
-  abort_button_ = new NavButton(tr(kTextAbort));
-  continue_button_ = new NavButton(tr(kTextContinue));
+  continue_button_ = new NavButton(tr("Continue"));
+  abort_button_ = new NavButton(tr("Abort"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);

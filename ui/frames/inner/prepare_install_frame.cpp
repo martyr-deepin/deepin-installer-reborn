@@ -18,18 +18,6 @@
 
 namespace installer {
 
-namespace {
-
-const char kTextTitle[] = "Prepare for Installation";
-const char kTextComment[] =
-    "Please backup important data and confirm the following operations";
-const char kTextSubtitle[] = "The following operations will be executed, "
-                             "please confirm and continue to avoid data loss";
-const char kTextBack[] = "Back";
-const char kTextContinue[] = "Continue";
-
-}  // namespace
-
 PrepareInstallFrame::PrepareInstallFrame(PartitionDelegate* delegate,
                                          QWidget* parent)
     : QFrame(parent),
@@ -54,11 +42,13 @@ void PrepareInstallFrame::updateDescription() {
 
 void PrepareInstallFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
-    subtitle_label_->setText(tr(kTextSubtitle));
-    abort_button_->setText(tr(kTextBack));
-    continue_button_->setText(tr(kTextContinue));
+    title_label_->setText(tr("Prepare for Installation"));
+    comment_label_->setText(tr("Please backup important data and confirm the following operations"));
+    subtitle_label_->setText(
+        tr("The following operations will be executed, "
+           "please confirm and continue to avoid data loss"));
+    abort_button_->setText(tr("Back"));
+    continue_button_->setText(tr("Continue"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -72,14 +62,17 @@ void PrepareInstallFrame::initConnections() {
 }
 
 void PrepareInstallFrame::initUI() {
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  title_label_ = new TitleLabel(tr("Prepare for Installation"));
+  comment_label_ = new CommentLabel(
+      tr( "Please backup important data and confirm the following operations"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
   comment_layout->addWidget(comment_label_);
 
-  subtitle_label_ = new QLabel(tr(kTextSubtitle));
+  subtitle_label_ = new QLabel(
+      tr("The following operations will be executed, "
+         "please confirm and continue to avoid data loss"));
   subtitle_label_->setObjectName("subtitle_label");
 
   description_edit_ = new QTextEdit();
@@ -90,8 +83,8 @@ void PrepareInstallFrame::initUI() {
   description_edit_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   description_edit_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  abort_button_ = new NavButton(tr(kTextBack));
-  continue_button_ = new NavButton(tr(kTextContinue));
+  abort_button_ = new NavButton(tr("Back"));
+  continue_button_ = new NavButton(tr("Continue"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);

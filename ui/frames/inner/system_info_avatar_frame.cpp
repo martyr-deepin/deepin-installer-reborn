@@ -26,9 +26,6 @@ namespace installer {
 
 namespace {
 
-const char kTextTitle[] = "User Avatar";
-const char kTextComment[] = "Select an avatar for your account";
-
 // Check whether |avatar| is valid.
 bool IsValidAvatar(const QString& avatar) {
   if (avatar.isEmpty()) {
@@ -63,8 +60,8 @@ void SystemInfoAvatarFrame::writeConf() {
 
 void SystemInfoAvatarFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
+    title_label_->setText(tr("User Avatar"));
+    comment_label_->setText(tr("Select an avatar for your account"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -79,8 +76,8 @@ void SystemInfoAvatarFrame::initConnections() {
 }
 
 void SystemInfoAvatarFrame::initUI() {
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  title_label_ = new TitleLabel(tr("User Avatar"));
+  comment_label_ = new CommentLabel(tr("Select an avatar for your account"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);

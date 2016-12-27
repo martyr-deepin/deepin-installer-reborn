@@ -13,14 +13,6 @@
 
 namespace installer {
 
-namespace {
-
-const char kTextTitle[] = "Scanning disks..";
-const char kTextComment[] =
-    "It may take a few seconds to scan disk devices...";
-
-}  // namespace
-
 PartitionLoadingFrame::PartitionLoadingFrame(QWidget* parent) : QFrame(parent) {
   this->setObjectName("partition_loading_frame");
 
@@ -29,16 +21,18 @@ PartitionLoadingFrame::PartitionLoadingFrame(QWidget* parent) : QFrame(parent) {
 
 void PartitionLoadingFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
+    title_label_->setText(tr("Scanning disks.."));
+    comment_label_->setText(
+        tr( "It may take a few seconds to scan disk devices..."));
   } else {
     QFrame::changeEvent(event);
   }
 }
 
 void PartitionLoadingFrame::initUI() {
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  title_label_ = new TitleLabel(tr("Scanning disks.."));
+  comment_label_ = new CommentLabel(
+      tr( "It may take a few seconds to scan disk devices..."));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);

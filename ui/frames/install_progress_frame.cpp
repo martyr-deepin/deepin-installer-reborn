@@ -34,10 +34,6 @@ const int kTooltipFrameWidth = kProgressBarWidth + kTooltipWidth;
 
 const int kRetainingInterval = 3000;
 
-const char kTextTitle[] = "Installing";
-const char kTextComment[] = "You will be experiencing the incredible pleasant "
-    "of deepin after the time for just a cup of coffee";
-
 // Get animation options.
 void GetAnimationLevel(bool& position_animation, bool& opacity_animation) {
   const int level = GetSettingsInt(kInstallProgressPageAnimationLevel);
@@ -109,8 +105,10 @@ void InstallProgressFrame::updateLanguage(const QString& locale) {
 
 void InstallProgressFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
+    title_label_->setText(tr("Installing"));
+    comment_label_->setText(
+        tr("You will be experiencing the incredible pleasant "
+           "of deepin after the time for just a cup of coffee"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -129,8 +127,10 @@ void InstallProgressFrame::initConnections() {
 }
 
 void InstallProgressFrame::initUI() {
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(tr(kTextComment));
+  title_label_ = new TitleLabel(tr("Installing"));
+  comment_label_ = new CommentLabel(
+      tr("You will be experiencing the incredible pleasant "
+         "of deepin after the time for just a cup of coffee"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);

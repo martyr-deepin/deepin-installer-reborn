@@ -26,25 +26,6 @@
 
 namespace installer {
 
-namespace {
-
-const char kTextTitle[] = "New Partition";
-const char kTextComment[] =
-    "Create a new partition and define the type and size";
-const char kTextType[] = "Type";
-const char kTextAlignment[] = "Location";
-const char kTextFilesystem[] = "Filesystem";
-const char kTextMountPoint[] = "Mount point";
-const char kTextSize[] = "Size";
-const char kTypePrimary[] = "Primary partition";
-const char kTypeLogical[] = "Logical partition";
-const char kTextStart[] = "Start";
-const char kTextEnd[] = "End";
-const char kTextCancel[] = "Cancel";
-const char kTextOk[] = "OK";
-
-}  // namespace
-
 NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
                                      QWidget* parent)
     : QFrame(parent),
@@ -95,19 +76,18 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
 
 void NewPartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr(kTextTitle));
-    comment_label_->setText(tr(kTextComment));
-    type_label_->setText(tr(kTextType));
-    alignment_label_->setText(tr(kTextAlignment));
-    fs_label_->setText(tr(kTextFilesystem));
-    mount_point_label_->setText(tr(kTextMountPoint));
-    size_label_->setText(tr(kTextSize));
-    type_box_->clear();
-    type_box_->addItems({tr(kTypePrimary), tr(kTypeLogical)});
+    title_label_->setText(tr("New Partition"));
+    comment_label_->setText(
+        tr("Create a new partition and define the type and size"));
+    type_label_->setText(tr("Type"));
+    alignment_label_->setText(tr("Location"));
+    fs_label_->setText(tr("Filesystem"));
+    mount_point_label_->setText(tr("Mount point"));
+    size_label_->setText(tr("Size"));
     alignment_box_->clear();
-    alignment_box_->addItems({tr(kTextStart), tr(kTextEnd)});
-    cancel_button_->setText(tr(kTextCancel));
-    create_button_->setText(tr(kTextOk));
+    alignment_box_->addItems({tr("Start"), tr("End")});
+    cancel_button_->setText(tr("Cancel"));
+    create_button_->setText(tr("OK"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -128,8 +108,9 @@ void NewPartitionFrame::initConnections() {
 }
 
 void NewPartitionFrame::initUI() {
-  title_label_ = new TitleLabel(tr(kTextTitle));
-  comment_label_ = new CommentLabel(kTextComment);
+  title_label_ = new TitleLabel(tr("New Partition"));
+  comment_label_ = new CommentLabel(
+      tr("Create a new partition and define the type and size"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
@@ -143,31 +124,31 @@ void NewPartitionFrame::initUI() {
   separator_label->setObjectName("separator_label");
   separator_label->setFixedSize(560, 1);
 
-  type_label_ = new QLabel(tr(kTextType));
+  type_label_ = new QLabel(tr("Type"));
   type_label_->setObjectName("type_label");
   type_box_ = new TableComboBox();
   type_model_ = new PartitionTypeModel(type_box_);
   type_box_->setModel(type_model_);
 
-  alignment_label_ = new QLabel(tr(kTextAlignment));
+  alignment_label_ = new QLabel(tr("Location"));
   alignment_label_->setObjectName("alignment_label");
   alignment_box_ = new TableComboBox();
-  alignment_box_->addItems({tr(kTextStart), tr(kTextEnd)});
+  alignment_box_->addItems({tr("Start"), tr("End")});
 
-  fs_label_ = new QLabel(tr(kTextFilesystem));
+  fs_label_ = new QLabel(tr("Filesystem"));
   fs_label_->setObjectName("fs_label");
   fs_box_ = new TableComboBox();
   fs_model_ = new FsModel(delegate_, fs_box_);
   fs_box_->setModel(fs_model_);
 
-  mount_point_label_ = new QLabel(tr(kTextMountPoint));
+  mount_point_label_ = new QLabel(tr("Mount point"));
   mount_point_label_->setObjectName("mount_point_label");
   mount_point_box_ = new TableComboBox();
   mount_point_model_ = new MountPointModel(delegate_->allMountPoints(),
                                            mount_point_box_);
   mount_point_box_->setModel(mount_point_model_);
 
-  size_label_ = new QLabel(tr(kTextSize));
+  size_label_ = new QLabel(tr("Size"));
   size_label_->setObjectName("size_label");
   size_slider_ = new PartitionSizeSlider();
   size_slider_->setFixedWidth(mount_point_box_->width());
@@ -193,8 +174,8 @@ void NewPartitionFrame::initUI() {
   grid_frame->setLayout(grid_layout);
   grid_frame->setFixedWidth(400);
 
-  cancel_button_ = new NavButton(tr(kTextCancel));
-  create_button_ = new NavButton(tr(kTextOk));
+  cancel_button_ = new NavButton(tr("Cancel"));
+  create_button_ = new NavButton(tr("OK"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(0);
