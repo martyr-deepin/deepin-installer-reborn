@@ -131,6 +131,7 @@ void SystemInfoFrame::initUI() {
   layout->setSpacing(0);
   layout->addLayout(head_layout_);
   layout->addLayout(stacked_layout_);
+  layout->addSpacing(9);
 
   this->setLayout(layout);
   this->setStyleSheet(ReadFile(":/styles/system_info_frame.css"));
