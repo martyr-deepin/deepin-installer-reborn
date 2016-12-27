@@ -6,13 +6,6 @@
 
 namespace installer {
 
-namespace {
-
-const char kTextLogical[] = "Logical Partition";
-const char kTextPrimary[] = "Primary Partition";
-
-}  // namespace
-
 PartitionTypeModel::PartitionTypeModel(QObject* parent)
     : QAbstractListModel(parent),
       is_logical_visible_(true),
@@ -32,13 +25,13 @@ QVariant PartitionTypeModel::data(const QModelIndex& index, int role) const {
   const int row = index.row();
   if (row == 1) {
     if (is_primary_visible_ && is_logical_visible_) {
-      return tr(kTextLogical);
+      return tr("Logical Partition");
     }
   } else if (row == 0) {
     if (is_primary_visible_) {
-      return tr(kTextPrimary);
+      return tr("Primary Partition");
     } else if (is_logical_visible_) {
-      return tr(kTextLogical);
+      return tr("Logical Partition");
     }
   }
   return QVariant();
