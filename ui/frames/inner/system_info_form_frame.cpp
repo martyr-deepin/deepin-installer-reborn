@@ -191,7 +191,7 @@ bool SystemInfoFormFrame::validateUsername(QString& msg) {
       return false;
     }
     case ValidateUsernameState::EmptyError: {
-      msg = tr("Username is empty!");
+      msg = tr("Username is empty");
       return false;
     }
     case ValidateUsernameState::FirstCharError: {
@@ -199,7 +199,7 @@ bool SystemInfoFormFrame::validateUsername(QString& msg) {
       return false;
     }
     case ValidateUsernameState::InvalidCharError: {
-      msg = tr("Invalid character!");
+      msg = tr("Invalid character");
       return false;
     }
     case ValidateUsernameState::TooLongError: {
