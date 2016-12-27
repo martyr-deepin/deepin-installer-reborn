@@ -438,28 +438,23 @@ void MainWindow::goNextPage() {
 }
 
 void MainWindow::rebootSystem() {
-  // Do not reboot system in debug mode.
-#ifdef NDEBUG
-  if (!RebootSystem()) {
-    qWarning() << "RebootSystem failed!";
-    if (!RebootSystemWithMagicKey()) {
-      qWarning() << "RebootSystemWithMagicKey() failed!";
-    }
-  }
-#endif
+  // NOTE(xushaohua): Remove these comments before new version is released.
+//  if (!RebootSystem()) {
+//    qWarning() << "RebootSystem failed!";
+//    if (!RebootSystemWithMagicKey()) {
+//      qWarning() << "RebootSystemWithMagicKey() failed!";
+//    }
+//  }
   qApp->quit();
 }
 
 void MainWindow::shutdownSystem() {
-  // Do not shutdown system in debug mode.
-#ifdef NDEBUG
-  if (!ShutdownSystem()) {
-    qWarning() << "ShutdownSystem() failed!";
-    if (!ShutdownSystemWithMagicKey()) {
-      qWarning() << "ShutdownSystemWithMagicKey() failed!";
-    }
-  }
-#endif
+//  if (!ShutdownSystem()) {
+//    qWarning() << "ShutdownSystem() failed!";
+//    if (!ShutdownSystemWithMagicKey()) {
+//      qWarning() << "ShutdownSystemWithMagicKey() failed!";
+//    }
+//  }
   qApp->quit();
 }
 
