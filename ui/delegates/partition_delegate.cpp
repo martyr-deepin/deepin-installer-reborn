@@ -25,7 +25,7 @@ const qint64 kMinimumPartitionSizeToDisplay = 1 * kMebiByte;
 // Calculate new primary partition number.
 // Returns -1 on failed.
 int AllocPrimaryPartitionNumber(const Device& device) {
-  for (int num = 1; num < device.max_prims; num++) {
+  for (int num = 1; num <= device.max_prims; num++) {
     bool in_use = false;
     for (const Partition& partition : device.partitions) {
       if (partition.partition_number == num) {
@@ -623,7 +623,6 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
   const int partition_number = AllocPrimaryPartitionNumber(device);
-  // FIXME(xushaohua): assertion fails sometimes.
   Q_ASSERT(partition_number > -1);
   new_partition.changeNumber(partition_number);
 
