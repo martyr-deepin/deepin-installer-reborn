@@ -74,11 +74,15 @@ void SelectLanguageFrame::initUI() {
   QLabel* logo_label = new QLabel();
   logo_label->setPixmap(QPixmap(GetVendorLogo()));
 
-  QLabel* subtitle_label = new QLabel(
-      "Please select the language you want to use\n请选择您的语言");
+  QLabel* subtitle_label =
+      new QLabel("Please select the language you want to use");
   subtitle_label->setObjectName("subtitle_label");
-  subtitle_label->setWordWrap(true);
+  subtitle_label->setWordWrap(false);
   subtitle_label->setAlignment(Qt::AlignHCenter);
+  QLabel* subtitle2_label = new QLabel("请选择您的语言");
+  subtitle2_label->setObjectName("subtitle2_label");
+  subtitle2_label->setWordWrap(false);
+  subtitle2_label->setAlignment(Qt::AlignHCenter);
 
   language_view_ = new FramelessListView();
   language_model_ = new LanguageListModel(language_view_);
@@ -92,6 +96,7 @@ void SelectLanguageFrame::initUI() {
   layout->addStretch();
   layout->addWidget(logo_label, 0, Qt::AlignCenter);
   layout->addWidget(subtitle_label, 0, Qt::AlignCenter);
+  layout->addWidget(subtitle2_label, 0, Qt::AlignCenter);
   layout->addSpacing(20);
   layout->addWidget(language_view_, 0, Qt::AlignHCenter);
   layout->addWidget(next_button_, 0, Qt::AlignCenter);
