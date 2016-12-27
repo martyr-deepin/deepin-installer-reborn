@@ -293,13 +293,13 @@ void SimplePartitionFrame::initUI() {
   grid_layout_->setVerticalSpacing(20);
   grid_layout_->setColumnStretch(kPartitionColumns, 1);
 
-  QFrame* grid_wrapper = new QFrame();
-  grid_wrapper->setObjectName("grid_wrapper");
-  grid_wrapper->setLayout(grid_layout_);
-  install_tip_->setParent(grid_wrapper);
+  grid_wrapper_ = new QFrame();
+  grid_wrapper_->setObjectName("grid_wrapper");
+  grid_wrapper_->setLayout(grid_layout_);
+  install_tip_->setParent(grid_wrapper_);
 
   QScrollArea* scroll_area = new QScrollArea();
-  scroll_area->setWidget(grid_wrapper);
+  scroll_area->setWidget(grid_wrapper_);
   scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setWidgetResizable(true);
@@ -379,11 +379,14 @@ void SimplePartitionFrame::repaintDevices() {
 
   // Add place holder. It is used for install_tip
   row += 1;
-  QLabel* place_holder_label = new QLabel();
+  QLabel* place_holder_label = new QLabel(this);
   place_holder_label->setObjectName("place_holder_label");
   place_holder_label->setFixedSize(kWindowWidth, 30);
   grid_layout_->addWidget(place_holder_label, row, 0,
                           1, kPartitionColumns, Qt::AlignHCenter);
+
+  // Resize grid_wrapper explicitly.
+  grid_wrapper_->adjustSize();
 }
 
 void SimplePartitionFrame::showInstallTip(QAbstractButton* button) {

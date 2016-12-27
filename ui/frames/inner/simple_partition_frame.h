@@ -46,6 +46,7 @@ class SimplePartitionFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  // Repaint partition list.
   void repaintDevices();
 
   // Show install_tip at bottom of |button|.
@@ -54,6 +55,7 @@ class SimplePartitionFrame : public QFrame {
   QButtonGroup* button_group_ = nullptr;
   QFrame* install_tip_ = nullptr;
   QLabel* tip_label_ = nullptr;
+  QFrame* grid_wrapper_ = nullptr;
   QGridLayout* grid_layout_ = nullptr;
   PartitionDelegate* delegate_ = nullptr;
 
