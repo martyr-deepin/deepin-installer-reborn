@@ -66,6 +66,9 @@ class AdvancedPartitionFrame : public QFrame {
   void onDeletePartitionTriggered(const Partition& partition);
   void onDeviceRefreshed();
   void onEditButtonToggled(bool toggle);
+
+  // Handles newPartitionTriggered() signal from advanced partition button.
+  void onNewPartitionTriggered(const Partition& partition);
 };
 
 }  // namespace installer

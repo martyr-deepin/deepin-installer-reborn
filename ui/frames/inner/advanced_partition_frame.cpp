@@ -288,7 +288,7 @@ void AdvancedPartitionFrame::repaintDevices() {
       connect(button, &AdvancedPartitionButton::editPartitionTriggered,
               this, &AdvancedPartitionFrame::requestEditPartitionFrame);
       connect(button, &AdvancedPartitionButton::newPartitionTriggered,
-              this, &AdvancedPartitionFrame::requestNewPartitionFrame);
+              this, &AdvancedPartitionFrame::onNewPartitionTriggered);
       connect(button, &AdvancedPartitionButton::deletePartitionTriggered,
               this, &AdvancedPartitionFrame::onDeletePartitionTriggered);
     }
@@ -313,6 +313,18 @@ void AdvancedPartitionFrame::onEditButtonToggled(bool toggle) {
     editing_button_->setText(tr("Done"));
   } else {
     editing_button_->setText(tr("Delete"));
+  }
+}
+
+void AdvancedPartitionFrame::onNewPartitionTriggered(
+    const Partition& partition) {
+  if (delegate_->canAddPrimary(partition) ||
+      delegate_->canAddLogical(partition)) {
+    // Switch to NewPartitionFrame only if a new partition can be added.
+    emit this->requestNewPartitionFrame(partition);
+  } else {
+    qWarning() << "Can not add new partition any more" << partition;
+    msg_label_->setText(tr("No more partition can be created"));
   }
 }
 
