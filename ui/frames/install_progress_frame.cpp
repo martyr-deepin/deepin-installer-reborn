@@ -92,8 +92,11 @@ void InstallProgressFrame::runHooks(bool ok) {
     this->onProgressUpdate(kBeforeChrootStartVal);
 
     qDebug() << "emit runHooks() signal";
-    // Run hooks/ in background thread.
+    // Notify HooksManager to run hooks/ in background thread.
+    // Do not run hooks in debug mode.
+#ifdef NDEBUG
     emit hooks_manager_->runHooks();
+#endif
   } else {
     this->onHooksErrorOccurred();
   }
