@@ -133,7 +133,7 @@ void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
 
 void AdvancedPartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    bootloader_tip_button_->setText(tr("Change boot loader"));
+    bootloader_tip_button_->setText(tr("Select location for boot loader"));
     if (editing_button_->isChecked()) {
       editing_button_->setText(tr("Done"));
     } else {
@@ -189,7 +189,8 @@ void AdvancedPartitionFrame::initUI() {
   scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  bootloader_tip_button_ = new PointerButton(tr("Change boot loader"), this);
+  bootloader_tip_button_ = new PointerButton(
+      tr("Select location for boot loader"), this);
   bootloader_tip_button_->setObjectName("bootloader_tip_button");
   bootloader_tip_button_->setFlat(true);
   bootloader_button_ = new PointerButton(this);
