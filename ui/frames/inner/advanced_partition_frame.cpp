@@ -64,14 +64,17 @@ bool AdvancedPartitionFrame::validate() {
         // Check /boot partition.
         boot_is_set = true;
         const qint64 recommend_bytes = boot_recommended * kMebiByte;
-        boot_large_enough = (partition.getByteLength() > recommend_bytes);
+        // Add 1Mib to partition size.
+        const qint64 real_bytes = partition.getByteLength() + kMebiByte;
+        boot_large_enough = (real_bytes >= recommend_bytes);
 
       } else if (partition.fs == FsType::EFI) {
         // Check EFI partition.
         efi_is_set = true;
 
         const qint64 recommended_bytes = efi_recommended * kMebiByte;
-        efi_large_enough = (partition.getByteLength() > recommended_bytes);
+        const qint64 real_bytes = partition.getByteLength() + kMebiByte;
+        efi_large_enough = (real_bytes >= recommended_bytes);
       } else if (partition.fs == FsType::LinuxSwap) {
         swap_is_set = true;
       }
@@ -85,12 +88,14 @@ bool AdvancedPartitionFrame::validate() {
 
   if (swap_is_set) {
     const qint64 minimum_bytes = root_required * kGibiByte;
-    root_large_enough = (root_partition.getByteLength() > minimum_bytes);
+    const qint64 real_bytes = root_partition.getByteLength() + kMebiByte;
+    root_large_enough = (real_bytes >= minimum_bytes);
   } else {
     // If no swap partition is created, more space is required for
     // root partition.
     const qint64 minimum_bytes = root_with_swap_required * kGibiByte;
-    root_large_enough = (root_partition.getByteLength() > minimum_bytes);
+    const qint64 real_bytes = root_partition.getByteLength() + kMebiByte;
+    root_large_enough = (real_bytes >= minimum_bytes);
   }
 
   if (!root_large_enough) {
