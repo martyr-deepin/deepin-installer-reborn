@@ -445,7 +445,7 @@ target_link_libraries(deepin-installer-oem ${Qt_LIBS})
 
 # xrandr-switchy
 add_executable(deepin-installer-xrandr-switchy
-               app/xrandr_switchy.cpp
+               ui/tests/xrandr_switchy.cpp
 
                ${BASE_FILES}
                ui/xrandr/xrandr_wrapper.cpp
@@ -623,8 +623,6 @@ install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-adjtime
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-xrandr-switchy
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs-progress
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
