@@ -4,6 +4,7 @@ usr/bin/deepin-installer-settings
 usr/bin/deepin-installer-unsquashfs
 usr/bin/deepin-installer-unsquashfs-progress
 usr/bin/deepin-installer-xrandr-switchy
+usr/share/deepin-installer-reborn/hooks/*
 usr/share/deepin-installer-reborn/resources/*
 usr/share/deepin-installer-reborn/tools/*
 usr/share/locale/*
