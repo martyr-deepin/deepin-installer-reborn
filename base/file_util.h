@@ -47,7 +47,11 @@ QString ReadFile(const QString& path);
 // Read text file encoded in GB18030.
 QString ReadGBKFile(const QString& path);
 
-// Read contents of file, returns true if succeeded, or false otherwise.
+// Read content of file at |path|, and save its content into |content|.
+// Returns true if succeeded, or false otherwise.
+bool ReadRawFile(const QString& path, QByteArray& content);
+
+// Read contents of text file, returns true if succeeded, or false otherwise.
 // |content| holds the content of that file.
 bool ReadTextFile(const QString& path, QString& content);
 

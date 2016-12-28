@@ -149,8 +149,7 @@ QString ReadGBKFile(const QString& path) {
   QFile file(path);
   if (file.exists()) {
     if (!file.open(QIODevice::ReadOnly)) {
-      qWarning() << "[file_util].ReadGBKFile() failed to open"
-                 << path;
+      qWarning() << "ReadGBKFile() failed to open" << path;
       return "";
     }
     const QByteArray file_data = file.readAll();
@@ -158,24 +157,35 @@ QString ReadGBKFile(const QString& path) {
     file.close();
     return codec->toUnicode(file_data);
   } else {
-    qWarning() << "[file_util].ReadGBKFile() file not found:"
-    << path;
+    qWarning() << "ReadGBKFile() file not found:" << path;
     return "";
   }
+}
+
+bool ReadRawFile(const QString& path, QByteArray& content) {
+  QFile file(path);
+  if (file.exists()) {
+    if (file.open(QIODevice::ReadOnly)) {
+      content = file.readAll();
+      return true;
+    }
+  }
+  qWarning() << "ReadRawFile() failed!" << path;
+  return false;
 }
 
 bool ReadTextFile(const QString& path, QString& content) {
   QFile file(path);
   if (file.exists()) {
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-    QTextStream text_stream(&file);
-    content = text_stream.readAll();
-    file.close();
-    return true;
-  } else {
-    qWarning() << "ReadTextFile() failed!" << ", path: " << path;
-    return false;
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+      QTextStream text_stream(&file);
+      content = text_stream.readAll();
+      file.close();
+      return true;
+    }
   }
+  qWarning() << "ReadTextFile() failed!" << path;
+  return false;
 }
 
 bool WriteTextFile(const QString& path, const QString& content) {

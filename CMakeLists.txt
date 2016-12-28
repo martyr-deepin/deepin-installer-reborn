@@ -148,6 +148,8 @@ set(SERVICE_FILES
 set(SYSINFO_FILES
     sysinfo/dev_disk.cpp
     sysinfo/dev_disk.h
+    sysinfo/iso3166.cpp
+    sysinfo/iso3166.h
     sysinfo/keyboard.cpp
     sysinfo/keyboard.h
     sysinfo/machine.cpp
@@ -335,6 +337,7 @@ set(UNITTEST_FILES
     base/string_util_test.cpp
 
     sysinfo/dev_disk_test.cpp
+    sysinfo/iso3166_test.cpp
     sysinfo/keyboard_test.cpp
     sysinfo/proc_meminfo_test.cpp
     sysinfo/proc_mounts_test.cpp
