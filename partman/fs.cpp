@@ -66,6 +66,7 @@ QString GetFsTypeName(FsType fs_type) {
     case FsType::LVM2PV: { return "lvm2 pv"; }
     case FsType::Reiser4: { return "reiser4"; }
     case FsType::Reiserfs: { return "reiserfs"; }
+    case FsType::Unknown: { return "unknown"; }
     case FsType::Xfs: { return "xfs"; }
     default: { return ""; }
   }

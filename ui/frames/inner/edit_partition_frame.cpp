@@ -61,7 +61,11 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
   usage_bar_->setValue(GetPartitionUsageValue(partition));
 
   // Reset fs index.
-  const int fs_index = fs_model_->index(partition.fs);
+  int fs_index = fs_model_->index(partition.fs);
+  if (fs_index == -1) {
+    // If partition fs type not in current fs_list, selected the first one.
+    fs_index = 0;
+  }
   fs_box_->setCurrentIndex(fs_index);
 
   // Reset mount point box. partition.mount_point might be empty.
@@ -120,12 +124,14 @@ void EditPartitionFrame::updateFormatBoxState() {
   // Format partition forcefully if its type is changed.
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
   const Partition real_partition(delegate_->getRealPartition(partition_));
-  const int index = mount_point_box_->currentIndex();
-  const QString mount_point = mount_point_model_->getMountPoint(index);
-  // If fs type changed, or mount-point is in formatted-mount-point list,
-  // format that partition compulsively.
-  this->forceFormat((real_partition.fs != fs_type) ||
-                    IsInFormattedMountPointList(mount_point));
+  const int mp_index = mount_point_box_->currentIndex();
+  const QString mount_point = mount_point_model_->getMountPoint(mp_index);
+
+  // If fs type changed and used, or mount-point is in formatted-mount-point
+  // list, format that partition compulsively.
+  bool format = (fs_type != FsType::Empty && fs_type != real_partition.fs);
+  format |= IsInFormattedMountPointList(mount_point);
+  this->forceFormat(format);
 
   // If it is linux-swap, hide format_box_ option.
   const bool is_swap = (fs_type == FsType::LinuxSwap);
