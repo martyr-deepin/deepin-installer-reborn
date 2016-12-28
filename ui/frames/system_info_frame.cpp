@@ -4,14 +4,12 @@
 
 #include "ui/frames/system_info_frame.h"
 
-#include <QDebug>
 #include <QHBoxLayout>
 #include <QStackedLayout>
 
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
-#include "sysinfo/timezone.h"
 #include "ui/frames/inner/system_info_avatar_frame.h"
 #include "ui/frames/inner/system_info_form_frame.h"
 #include "ui/frames/inner/system_info_keyboard_frame.h"
@@ -34,7 +32,9 @@ SystemInfoFrame::SystemInfoFrame(QWidget* parent)
     : QFrame(parent),
       last_page_(kInvalidPageId),
       disable_keyboard_(GetSettingsBool(kSystemInfoDisableKeyboardPage)),
-      disable_timezone_(GetSettingsBool(kSystemInfoDisableTimezonePage)) {
+      disable_timezone_(GetSettingsBool(kSystemInfoDisableTimezonePage)),
+      country_entries_(GetCountryEntries()),
+      zone_list_(GetZoneInfoList()) {
   this->setObjectName("system_info_frame");
 
   this->initUI();
@@ -198,7 +198,20 @@ void SystemInfoFrame::updateLayout(const QString& layout) {
 }
 
 void SystemInfoFrame::updateTimezone(const QString& timezone) {
-  timezone_button_->setText(GetTimezoneName(timezone));
+  const int zone_index = GetZoneInfoByZone(zone_list_, timezone);
+  const QString zone_name = GetTimezoneName(timezone);
+  if (zone_index > -1) {
+    const QString cc = zone_list_.at(zone_index).country;
+    const int entry_index = GetCountryEntryIndex(country_entries_, cc);
+    if (entry_index > -1) {
+      const QString country_name = country_entries_.at(entry_index).name;
+      // Displays "country_name, timezone_name" in timezone button.
+      const QString label = QString("%1, %2").arg(country_name).arg(zone_name);
+      timezone_button_->setText(label);
+      return;
+    }
+  }
+  timezone_button_->setText(zone_name);
 }
 
 }  // namespace installer

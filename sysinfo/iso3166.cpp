@@ -19,7 +19,7 @@ const char kIsoStandardFile[] = "/usr/share/iso-codes/json/iso_3166-1.json";
 }  // namespace installer
 
 CountryEntries GetCountryEntries() {
-  CountryEntries list;
+  CountryEntries entries;
   QByteArray content;
 
   if (ReadRawFile(kIsoStandardFile, content)) {
@@ -38,14 +38,14 @@ CountryEntries GetCountryEntries() {
             entry.name = val.value("name").toString();
             entry.official_name = val.value("official_name").toString();
             entry.numberic = val.value("numeric").toInt();
-            list.append(entry);
+            entries.append(entry);
           }
         }
       }
     }
   }
 
-  return list;
+  return entries;
 }
 
 int GetCountryEntryIndex(const CountryEntries& entries, const QString& cc) {
