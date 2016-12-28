@@ -159,11 +159,15 @@ bool ParseXRandR(const QString& text, XRandR& xrandr) {
       }
     } else if (line.startsWith(' ')) {
       Mode mode;
-      Output& output = xrandr.outputs.last();
-      if (ParseMode(line, mode)) {
-        output.modes.append(mode);
+      if (!xrandr.outputs.isEmpty()) {
+        Output& output = xrandr.outputs.last();
+        if (ParseMode(line, mode)) {
+          output.modes.append(mode);
+        } else {
+          qCritical() << "Parse mode failed:" << line;
+        }
       } else {
-        qCritical() << "Parse mode failed:" << line;
+        qWarning() << "xrandr output list is empty";
       }
     } else {
       Output output;

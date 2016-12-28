@@ -46,10 +46,13 @@ void MultiHeadManager::updateWallpaper() {
   }
   wallpaper_items_.clear();
 
-  XRandR xrandr;
   QString out;
-  RunXRandR(out);
+  if (!RunXRandR(out)) {
+    qCritical() << "RunXRandR() failed";
+    return;
+  }
 
+  XRandR xrandr;
   if (ParseXRandR(out, xrandr)) {
     for (const Output& output : xrandr.outputs) {
       if (output.is_connected) {
