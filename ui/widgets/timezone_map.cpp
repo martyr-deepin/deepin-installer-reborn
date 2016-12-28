@@ -146,6 +146,7 @@ void TimezoneMap::popupZoneWindow(const QPoint& pos) {
     zone_names.append(GetTimezoneName(zone.timezone));
   }
 
+  // Show popup window above dot
   popup_window_->setStringList(zone_names);
   const int dy = pos.y() - dot_->height() - kDotVerticalMargin;
   const QPoint global_pos = this->mapToGlobal(QPoint(pos.x(), dy));
@@ -166,7 +167,6 @@ void TimezoneMap::remark() {
 
   Q_ASSERT(!nearest_zones_.isEmpty());
   if (!nearest_zones_.isEmpty()) {
-    // TODO(xushaohua): Convert timezone to other names.
     zone_pin_->setText(GetTimezoneName(current_zone_.timezone));
 
     // Adjust size of pin to fit its content.
@@ -186,7 +186,7 @@ void TimezoneMap::remark() {
 }
 
 void TimezoneMap::onPopupWindowActivated(int index) {
-  // Hide popup_window_.
+  // Hide popup window and dot first.
   popup_window_->hide();
   dot_->hide();
 
