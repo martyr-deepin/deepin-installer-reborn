@@ -17,12 +17,13 @@ FsModel::FsModel(PartitionDelegate* delegate, QObject* parent)
 }
 
 int FsModel::index(FsType fs_type) const {
+  // Might return -1.
   return fs_list_.indexOf(fs_type);
 }
 
 FsType FsModel::getFs(int index) const {
   Q_ASSERT(index < fs_list_.length());
-  if (index < fs_list_.length()) {
+  if (index >= 0 && index < fs_list_.length()) {
     return fs_list_.at(index);
   } else {
     return FsType::Unknown;
@@ -39,16 +40,13 @@ QVariant FsModel::data(const QModelIndex& index, int role) const {
     return QVariant();
   }
 
-  if (!index.isValid()) {
+  const int row = index.row();
+  if (index.isValid() && row >= 0 && row < fs_list_.length()) {
+    const FsType fs = fs_list_.at(index.row());
+    return GetLocalFsTypeName(fs);
+  } else {
     return QVariant();
   }
-
-  if (index.row() >= fs_list_.length()) {
-    return QVariant();
-  }
-
-  const FsType fs = fs_list_.at(index.row());
-  return GetLocalFsTypeName(fs);
 }
 
 }  // namespace installer

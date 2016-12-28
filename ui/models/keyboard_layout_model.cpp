@@ -21,16 +21,11 @@ QVariant KeyboardLayoutModel::data(const QModelIndex& index, int role) const {
     return QVariant();
   }
 
-  if (!index.isValid()) {
+  if (index.isValid()) {
+    return layout_list_.at(index.row()).description;
+  } else {
     return QVariant();
   }
-
-  const int row = index.row();
-  if (row >= layout_list_.length()) {
-    return QVariant();
-  }
-
-  return layout_list_.at(row).description;
 }
 
 int KeyboardLayoutModel::rowCount(const QModelIndex& parent) const {

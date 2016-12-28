@@ -22,11 +22,11 @@ QVariant LanguageListModel::data(const QModelIndex& index, int role) const {
     return QVariant();
   }
 
-  if (!index.isValid()) {
+  if (index.isValid()) {
+    return lang_list_.at(index.row()).local_name;
+  } else {
     return QVariant();
   }
-
-  return lang_list_.at(index.row()).local_name;
 }
 
 int LanguageListModel::rowCount(const QModelIndex& parent) const {
@@ -37,14 +37,15 @@ int LanguageListModel::rowCount(const QModelIndex& parent) const {
 LanguageItem LanguageListModel::languageItemAt(const QModelIndex& index) const {
   if (index.isValid()) {
     return lang_list_.at(index.row());
+  } else {
+    return LanguageItem();
   }
-  return LanguageItem();
 }
 
 QModelIndex LanguageListModel::localeIndex(const QString& locale) const {
   for (int index = 0; index < lang_list_.length(); index++) {
     if (lang_list_.at(index).locale == locale) {
-      return this->index(index, 0);
+      return this->index(index);
     }
   }
   return QModelIndex();

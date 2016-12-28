@@ -20,19 +20,16 @@ QVariant MountPointModel::data(const QModelIndex& index, int role) const {
     return QVariant();
   }
 
-  if (!index.isValid()) {
-    return QVariant();
-  }
-
-  if (index.row() < mount_points_.length()) {
+  if (index.isValid()) {
     const QString name = mount_points_.at(index.row());
     if (name.isEmpty()) {
       return tr("do not use");
+    } else {
+      return name;
     }
-    return name;
-  } else {
-    return QVariant();
   }
+
+  return QVariant();
 }
 
 int MountPointModel::rowCount(const QModelIndex& parent) const {
@@ -46,7 +43,7 @@ int MountPointModel::index(const QString& mount_point) const {
 
 QString MountPointModel::getMountPoint(int index) const {
   Q_ASSERT(index < mount_points_.length());
-  if (index < mount_points_.length()) {
+  if (index >= 0 && index < mount_points_.length()) {
     return mount_points_.at(index);
   } else {
     return QString();

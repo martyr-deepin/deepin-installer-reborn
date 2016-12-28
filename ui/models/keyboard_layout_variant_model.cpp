@@ -22,16 +22,12 @@ QVariant KeyboardLayoutVariantModel::data(const QModelIndex& index,
     return QVariant();
   }
 
-  if (!index.isValid()) {
+  if (index.isValid()) {
+    return variant_list_.at(index.row()).description;
+  } else {
     return QVariant();
   }
-
-  const int row = index.row();
-  if (row >= variant_list_.length()) {
-    return QVariant();
-  }
-
-  return variant_list_.at(row).description;}
+}
 
 int KeyboardLayoutVariantModel::rowCount(const QModelIndex& parent) const {
   Q_UNUSED(parent);
