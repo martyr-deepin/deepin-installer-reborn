@@ -31,8 +31,8 @@ QString GetCommentLabel() {
     minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
   }
   const int recommended = GetSettingsInt(kPartitionRecommendedDiskSpace);
-  return QObject::tr("It takes at lease %1Gib disk space to install deepin, "
-      "for better performance, %2Gib and more space is recommended")
+  return QObject::tr("It takes at lease %1GB disk space to install deepin, "
+      "for better performance, %2GB and more space is recommended")
       .arg(minimum)
       .arg(recommended);
 }
