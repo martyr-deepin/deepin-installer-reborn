@@ -2,6 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
+// OEM program to modify settings file.
+
 #include <QApplication>
 
 #include "base/consts.h"

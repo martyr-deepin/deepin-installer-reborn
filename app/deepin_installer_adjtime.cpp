@@ -3,6 +3,9 @@
 // in the LICENSE file.
 
 // Re-implement `timedatectl set-local-rtc` command.
+// `timedatectl` requires system dbus, which is not available in
+// chroot environment.
+// Most parts of this program are copied directly from systemd source repo.
 
 #include <stdio.h>
 #include <string.h>

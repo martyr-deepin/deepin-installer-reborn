@@ -2,6 +2,9 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
+// Run this program to setup username, password, keyboard and timezone after
+// reboot system. Only if `system_info_setup_after_reboot` flag is enabled.
+
 #include <QApplication>
 #include <QDebug>
 #include <QIcon>

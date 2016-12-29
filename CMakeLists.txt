@@ -410,8 +410,8 @@ target_link_libraries(deepin-installer-settings ${QtCore_LIBS})
 
 
 # Reboot setup
-add_executable(deepin-installer-reboot-setup
-               app/deepin_installer_reboot_setup.cpp
+add_executable(deepin-installer-first-boot
+               app/deepin_installer_first_boot.cpp
                ui/setup_window.cpp
                ui/setup_window.h
 
@@ -425,7 +425,7 @@ add_executable(deepin-installer-reboot-setup
                ui/images/images.qrc
                ui/styles/styles.qrc
                )
-target_link_libraries(deepin-installer-reboot-setup ${LINK_LIBS})
+target_link_libraries(deepin-installer-first-boot ${LINK_LIBS})
 
 # deepin-installer-oem
 add_executable(deepin-installer-oem
@@ -623,12 +623,16 @@ install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-adjtime
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs-progress
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+
 install(
     FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-oem.svg
     DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps

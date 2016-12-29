@@ -2,6 +2,9 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
+// Standard alone program to read output of `unsquashfs`.
+// And write its progress value to file.
+
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>

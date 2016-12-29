@@ -1,5 +1,6 @@
-usr/bin/deepin-installer-adjtime
 usr/bin/deepin-installer-reborn
+usr/bin/deepin-installer-adjtime
+usr/bin/deepin-installer-first-boot
 usr/bin/deepin-installer-settings
 usr/bin/deepin-installer-unsquashfs
 usr/bin/deepin-installer-unsquashfs-progress
