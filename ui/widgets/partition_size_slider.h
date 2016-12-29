@@ -20,8 +20,14 @@ class PartitionSizeSlider : public QFrame {
  public:
   explicit PartitionSizeSlider(QWidget* parent = nullptr);
 
-  // Get current partition size, in byte.
+  // Get current partition size, in bytes.
   qint64 value();
+
+  // Get maximum size, in bytes.
+  qint64 maximum() const { return maximum_size_; }
+
+  // Get minimum size, in bytes.
+  qint64 minimum() const { return minimum_size_; }
 
  public slots:
   // Set maximum partition size, in bytes.

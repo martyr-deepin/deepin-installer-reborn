@@ -68,9 +68,8 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
   const int mount_point_index = mount_point_model_->index("");
   mount_point_box_->setCurrentIndex(mount_point_index);
 
-  // Set size_slider_ to its maximum value.
+  // Set value range of size_slider_
   size_slider_->setMaximum(partition.getByteLength());
-  // Also reset minimum value of size_slider_.
   size_slider_->setMinimum(0);
 }
 
@@ -245,6 +244,9 @@ void NewPartitionFrame::onFsChanged(int index) {
   } else {
     // Reset minimum value of size_slider_.
     size_slider_->setMinimum(0);
+
+    // And set current value to maximum value.
+    size_slider_->setValue(size_slider_->maximum());
   }
 }
 
@@ -262,6 +264,9 @@ void NewPartitionFrame::onMountPointChanged(int index) {
   } else {
     // Reset minimum value of size_slider_.
     size_slider_->setMinimum(0);
+
+    // And set current value to maximum value.
+    size_slider_->setValue(size_slider_->maximum());
   }
 }
 
