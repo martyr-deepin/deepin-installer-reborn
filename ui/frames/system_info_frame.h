@@ -10,9 +10,6 @@ class QHBoxLayout;
 class QPushButton;
 class QStackedLayout;
 
-#include "sysinfo/iso3166.h"
-#include "sysinfo/timezone.h"
-
 namespace installer {
 
 class SystemInfoAvatarFrame;
@@ -66,9 +63,6 @@ class SystemInfoFrame : public QFrame {
 
   // Do not show timezone frame if this flag is true.
   bool disable_timezone_;
-
-  CountryEntries country_entries_;
-  ZoneInfoList zone_list_;
 
  private slots:
   // Restore last page when timezone page is finished.
