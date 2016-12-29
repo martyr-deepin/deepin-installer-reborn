@@ -827,26 +827,50 @@ void PartitionDelegate::onManualPartDone(bool ok) {
 
     for (const Operation& operation : operations_) {
       const Partition& new_partition = operation.new_partition;
+
       if (!new_partition.mount_point.isEmpty()) {
+        // Add used partitions to mount_point list.
         mount_points.append(QString("%1=%2").arg(new_partition.path)
                                             .arg(new_partition.mount_point));
         if (new_partition.mount_point == kMountPointRoot) {
           root_disk = new_partition.device_path;
           root_path = new_partition.path;
         }
+      } else if (new_partition.fs == FsType::LinuxSwap) {
+        // Add swap area to mount_point list.
+        mount_points.append(QString("%1=swap").arg(new_partition.path));
       }
     }
 
-    // TODO(xushaohua): Simplifies configuration.
     if (IsEfiEnabled()) {
-      // In EFI mode.
+      // Enable EFI mode.
       WriteUEFI(true);
       QString esp_path;
       for (const Operation& operation : operations_) {
         if (operation.new_partition.fs == FsType::EFI) {
+          // NOTE(xushaohua): There shall be only one EFI partition.
           esp_path = operation.new_partition.path;
+          break;
         }
       }
+      if (esp_path.isEmpty()) {
+        // If no new EFI partition is created, search in device list.
+        bool esp_found = false;
+        for (const Device& device : devices_) {
+          for (const Partition& partition : device.partitions) {
+            if (partition.fs == FsType::EFI) {
+              esp_path = partition.path;
+              esp_found = true;
+              break;
+            }
+          }
+
+          if (esp_found) {
+            break;
+          }
+        }
+      }
+
       if (esp_path.isEmpty()) {
         qCritical() << "esp path is empty!";
       }
