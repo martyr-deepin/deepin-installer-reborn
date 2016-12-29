@@ -144,7 +144,7 @@ EOF
 
   # Set using local time or not
   DI_IS_LOCAL_TIME=$(installer_get "DI_IS_LOCAL_TIME")
-  if [ x"${DI_IS_LOCAL_TIME}" = x1 ]; then
+  if [ x"${DI_IS_LOCAL_TIME}" = xtrue ]; then
     deepin-installer-adjtime 1
   fi
 

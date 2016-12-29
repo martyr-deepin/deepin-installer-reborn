@@ -25,7 +25,7 @@ DI_UEFI=$(installer_get "DI_UEFI")
 # if no DI_BOOTLOADER, treat as not installing bootloader
 [ -z ${DI_BOOTLOADER} ] && { echo >&2 "[WARN] DI_BOOTLOADER not set. Treat as not install bootloader. Skip."; exit 0;}
 
-if [ x${DI_UEFI} = x1 ];then
+if [ x${DI_UEFI} = xtrue ];then
     BOOT="uefi"
 else
     BOOT="legacy"

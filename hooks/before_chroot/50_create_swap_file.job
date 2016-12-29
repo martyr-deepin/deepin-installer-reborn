@@ -9,7 +9,7 @@ SWAP_FILE_REQUIRED=$(installer_get "DI_SWAP_FILE_REQUIRED")
 SWAP_FILE_PATH=$(installer_get "partition_swap_file_path")
 SWAP_FILE_SIZE=$(installer_get "partition_swap_file_size")
 
-if [ x"${SWAP_FILE_REQUIRED}" = x1 ]; then
+if [ x"${SWAP_FILE_REQUIRED}" = xtrue ]; then
   # A swap file is required.
   dd if=/dev/zero off="${SWAP_FILE_PATH}" count="${SWAP_FILE_SIZE}" \
     bs=1M || error "Failed to create swap file: ${SWAP_FILE_PATH}"

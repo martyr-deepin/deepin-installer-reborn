@@ -5,7 +5,7 @@
 
 # set keyboard
 
-if [ x$(installer_get "system_info_setup_after_reboot") = x1 ]; then
+if [ x$(installer_get "system_info_setup_after_reboot") = xtrue ]; then
   exit 0
 fi
 
