@@ -112,7 +112,7 @@ bool AdvancedPartitionFrame::validate() {
     }
     if (!efi_large_enough) {
       msg_label_->setText(
-          tr("At least %1 GB is required for EFI partition")
+          tr("At least %1 MB is required for EFI partition")
               .arg(efi_recommended));
       return false;
     }
@@ -120,7 +120,7 @@ bool AdvancedPartitionFrame::validate() {
 
   if (boot_is_set && !boot_large_enough) {
     msg_label_->setText(
-        tr("At least %1 GB is required for /boot partition")
+        tr("At least %1 MB is required for /boot partition")
             .arg(boot_recommended));
     return false;
   }
