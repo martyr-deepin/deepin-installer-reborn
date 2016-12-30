@@ -237,6 +237,8 @@ set(UI_FILES
     ui/frames/partition_frame.h
     ui/frames/partition_table_warning_frame.cpp
     ui/frames/partition_table_warning_frame.h
+    ui/frames/privilege_error_frame.cpp
+    ui/frames/privilege_error_frame.h
     ui/frames/select_language_frame.cpp
     ui/frames/select_language_frame.h
     ui/frames/system_info_frame.cpp

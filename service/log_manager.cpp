@@ -55,21 +55,14 @@ void InitLogService() {
   BackupLogFile();
 
   // TODO(xushaohua): Release log appender.
-#ifndef NDEBUG
   ConsoleAppender* console_appender = new ConsoleAppender();
   console_appender->setDetailsLevel(Logger::Debug);
   logger->registerAppender(console_appender);
   console_appender->setFormat(kDebugLogFormat);
-#endif
 
   FileAppender* file_appender = new FileAppender(GetLogFilepath());
-#ifndef NDEBUG
-  file_appender->setDetailsLevel(Logger::Debug);
-  file_appender->setFormat(kDebugLogFormat);
-#else
   file_appender->setDetailsLevel(Logger::Debug);
   file_appender->setFormat(kReleaseLogFormat);
-#endif
   logger->registerAppender(file_appender);
 }
 

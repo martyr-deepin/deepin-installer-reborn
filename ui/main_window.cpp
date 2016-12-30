@@ -274,8 +274,8 @@ void MainWindow::updateBackground() {
   }
   const QString image_path = GetWindowBackground();
   // Other platforms may have performance issue.
-  const QPixmap pixmap = QPixmap(image_path).scaled(
-      size(), Qt::KeepAspectRatioByExpanding);
+  const QPixmap pixmap =
+      QPixmap(image_path).scaled(size(), Qt::KeepAspectRatioByExpanding);
   background_label_->setPixmap(pixmap);
   background_label_->setFixedSize(size());
 }

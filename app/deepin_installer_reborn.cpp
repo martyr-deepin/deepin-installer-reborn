@@ -20,8 +20,6 @@ int main(int argc, char* argv[]) {
     qputenv("LANG", "C.UTF-8");
   }
 
-  installer::InitLogService();
-
   QApplication app(argc, argv);
   app.setApplicationDisplayName(installer::kAppDisplayName);
   app.setApplicationName(installer::kAppName);
@@ -31,7 +29,14 @@ int main(int argc, char* argv[]) {
   // Delete last installer config file as soon as possible.
   if (!installer::HasRootPrivilege()) {
     qCritical() << "Root privilege is required!";
+
+#ifdef NDEBUG
+    // Returns immediately if process permission is error.
+    return 1;
+#endif
   }
+
+  installer::InitLogService();
   installer::DeleteConfigFile();
   installer::AddConfigFile();
 
@@ -39,6 +44,5 @@ int main(int argc, char* argv[]) {
   main_window.scanDevicesAndTimezone();
   main_window.fullscreen();
 
-  const int result = app.exec();
-  return result;
+  return app.exec();
 }
