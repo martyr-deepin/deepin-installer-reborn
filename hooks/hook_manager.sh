@@ -4,7 +4,7 @@
 # in the LICENSE file.
 
 # Set environment
-export LC_ALL=C
+export LANG=C LC_ALL=C
 export DEBIAN_FRONTEND="noninteractive"
 export APT_OPTIONS="-y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" --force-yes --no-install-recommends --allow-unauthenticated"
 

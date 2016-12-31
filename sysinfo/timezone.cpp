@@ -156,7 +156,11 @@ QString GetLocalTimezoneName(const QString& timezone) {
   setlocale(LC_ALL, "");
   const QString local_name(dgettext(kTimezoneDomain,
                                     timezone.toStdString().c_str()));
-  const int index = local_name.lastIndexOf('/');
+  int index = local_name.lastIndexOf('/');
+  if (index == -1) {
+    // Some translations of locale name contains non-standard char.
+    index = local_name.lastIndexOf("∕");
+  }
   return (index > -1) ? local_name.mid(index + 1) : local_name;
 }
 
