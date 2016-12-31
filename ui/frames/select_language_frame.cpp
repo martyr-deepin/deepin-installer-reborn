@@ -126,6 +126,8 @@ void SelectLanguageFrame::onLanguageListSelected(const QModelIndex& current,
   Q_UNUSED(previous);
   if (current.isValid()) {
     next_button_->setEnabled(true);
+
+    // Update locale on-the-fly.
     const LanguageItem language_item = language_model_->languageItemAt(current);
     this->updateTranslator(language_item.locale);
     lang_ = language_item;

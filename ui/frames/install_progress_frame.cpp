@@ -37,7 +37,9 @@ const int kRetainingInterval = 3000;
 // Get animation options.
 void GetAnimationLevel(bool& position_animation, bool& opacity_animation) {
   const int level = GetSettingsInt(kInstallProgressPageAnimationLevel);
+  // Option for position_animation is 0b01. See default_settings.ini for detail.
   position_animation = bool(level & 1);
+  // Option for opacity animation is 0b10.
   opacity_animation = bool(level & 2);
 }
 

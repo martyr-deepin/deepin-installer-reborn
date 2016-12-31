@@ -55,6 +55,7 @@ void SystemInfoFrame::scanTimezone() {
 }
 
 void SystemInfoFrame::writeConf() {
+  // Notify sub-pages to save settings.
   avatar_frame_->writeConf();
   form_frame_->writeConf();
   keyboard_frame_->writeConf();
@@ -153,6 +154,7 @@ void SystemInfoFrame::restoreLastPage() {
   if (last_page_ != kInvalidPageId) {
     stacked_layout_->setCurrentIndex(last_page_);
   } else {
+    // Displays default page if last_page_ is not set.
     stacked_layout_->setCurrentWidget(form_frame_);
   }
   this->updateHeadBar();
@@ -196,6 +198,7 @@ void SystemInfoFrame::updateLayout(const QString& layout) {
 }
 
 void SystemInfoFrame::updateTimezone(const QString& timezone) {
+  // Displays timezone description, like Shanghai (CST+08)
   const QString name = GetLocalTimezoneName(timezone);
   const QString offset = GetTimezoneOffset(timezone);
   const QString zone_description(QString("%1 (%2)").arg(name, offset));

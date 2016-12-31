@@ -155,6 +155,7 @@ void ControlPanelFrame::initUI() {
 }
 
 void ControlPanelFrame::onLogViewerCursorPositionChanged() {
+  // Highlight current line.
   QTextEdit::ExtraSelection highlight;
   highlight.cursor = log_viewer_->textCursor();
   highlight.cursor.clearSelection();

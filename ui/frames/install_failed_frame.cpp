@@ -104,6 +104,7 @@ void InstallFailedFrame::initUI() {
                                    kControlButtonSize,
                                    kControlButtonSize,
                                    content_frame);
+  // Move control_button_ to top-right corner of content area.
   control_button_->move(kContentWindowWidth - kControlButtonSize, 0);
 
   reboot_button_ = new NavButton(tr("Exit installation"));
@@ -124,6 +125,7 @@ void InstallFailedFrame::initUI() {
 }
 
 void InstallFailedFrame::onControlButtonClicked() {
+  // Toggle visibility of content_label and qr_widget_.
   if (content_label_->isVisible()) {
     content_label_->setVisible(false);
     qr_widget_->setVisible(true);
