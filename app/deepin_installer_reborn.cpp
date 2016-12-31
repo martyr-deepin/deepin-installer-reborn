@@ -15,9 +15,10 @@
 #include "ui/main_window.h"
 
 int main(int argc, char* argv[]) {
-  if (qgetenv("LANG").isEmpty()) {
+  if (qgetenv("LC_ALL").isEmpty() && qgetenv("LANG").isEmpty()) {
     // Reset locale to C if it is empty.
-    qputenv("LANG", "C.UTF-8");
+    qputenv("LC_ALL", "C");
+    qputenv("LANG", "C");
   }
 
   QApplication app(argc, argv);
