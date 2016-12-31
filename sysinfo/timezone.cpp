@@ -4,8 +4,13 @@
 
 #include "sysinfo/timezone.h"
 
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE  /* For tm_gmtoff and tm_zone */
+#endif
 #include <cmath>
 #include <libintl.h>
+#include <locale.h>
+#include <time.h>
 #include <QDebug>
 
 #include "base/file_util.h"
@@ -114,14 +119,43 @@ QString GetCurrentTimezone() {
 }
 
 QString GetTimezoneName(const QString& timezone) {
-//  const int index = timezone.lastIndexOf('/');
-//  return (index > -1) ? timezone.mid(index + 1) : timezone;
-  return GetLocalTimezoneName(timezone);
+  const int index = timezone.lastIndexOf('/');
+  return (index > -1) ? timezone.mid(index + 1) : timezone;
+}
+
+QString GetTimezoneOffset(const QString& timezone) {
+  const char* kTzEnv = "TZ";
+  const char* old_tz = getenv(kTzEnv);
+  setenv(kTzEnv, timezone.toStdString().c_str(), 1);
+  struct tm tm;
+  const time_t curr_time = time(NULL);
+
+  // Call tzset() before localtime_r(). Set tzset(3).
+  tzset();
+  (void) localtime_r(&curr_time, &tm);
+
+  // Reset timezone.
+  if (old_tz) {
+    setenv(kTzEnv, old_tz, 1);
+  } else {
+    unsetenv(kTzEnv);
+  }
+
+  // Hours offset.
+  const int offset = static_cast<int>(tm.tm_gmtoff / 3600);
+  // Minutes offset.
+  const int min_offset = static_cast<int>(tm.tm_gmtoff % 3600 / 60);
+  if (min_offset == 0) {
+    return QString::asprintf("%s%+03d", tm.tm_zone, offset);
+  } else {
+    return QString::asprintf("%s%+03d:%02d", tm.tm_zone, offset, min_offset);
+  }
 }
 
 QString GetLocalTimezoneName(const QString& timezone) {
   setlocale(LC_ALL, "");
-  const QString local_name(dgettext(kTimezoneDomain, timezone.toStdString().c_str()));
+  const QString local_name(dgettext(kTimezoneDomain,
+                                    timezone.toStdString().c_str()));
   const int index = local_name.lastIndexOf('/');
   return (index > -1) ? local_name.mid(index + 1) : local_name;
 }

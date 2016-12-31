@@ -196,8 +196,10 @@ void SystemInfoFrame::updateLayout(const QString& layout) {
 }
 
 void SystemInfoFrame::updateTimezone(const QString& timezone) {
-  const QString zone_name = GetTimezoneName(timezone);
-  timezone_button_->setText(zone_name);
+  const QString name = GetLocalTimezoneName(timezone);
+  const QString offset = GetTimezoneOffset(timezone);
+  const QString zone_description(QString("%1 (%2)").arg(name, offset));
+  timezone_button_->setText(zone_description);
 }
 
 }  // namespace installer

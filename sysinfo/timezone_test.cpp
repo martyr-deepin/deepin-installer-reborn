@@ -31,6 +31,12 @@ TEST(TimezoneTest, GetTimezoneAliasMap) {
   EXPECT_EQ(map.value("Asia/Chongqing"), "Asia/Shanghai");
 }
 
+TEST(Timezonetest, GetTimezoneOffset) {
+  EXPECT_TRUE(GetTimezoneOffset("Asia/Shanghai") == "CST+08");
+  EXPECT_TRUE(GetTimezoneOffset("Asia/Pyongyang") == "KST+08:30");
+  EXPECT_TRUE(GetTimezoneOffset("America/Lima") == "PET-05");
+}
+
 TEST(TimezoneTest, IsValidTimezone) {
   EXPECT_TRUE(IsValidTimezone("Asia/Shanghai"));
   EXPECT_TRUE(IsValidTimezone("Etc/UTC"));

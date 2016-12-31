@@ -40,6 +40,9 @@ QString GetCurrentTimezone();
 // Returns name of timezone, excluding continent name.
 QString GetTimezoneName(const QString& timezone);
 
+// Get |timezone| GMT offset, like CST+08
+QString GetTimezoneOffset(const QString& timezone);
+
 // Returns local name of timezone, excluding continent name.
 QString GetLocalTimezoneName(const QString& timezone);
 
