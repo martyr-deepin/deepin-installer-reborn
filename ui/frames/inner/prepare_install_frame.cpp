@@ -32,12 +32,19 @@ void PrepareInstallFrame::updateDescription() {
   const QStringList desc_list(delegate_->getOperationDescriptions());
   const QString prefix("•   ");
   QStringList modified_desc_list;
+  int max_width = 0;
+  QFontMetrics metrics(description_edit_->font());
   for (const QString& desc_item : desc_list) {
-    modified_desc_list.append(prefix + desc_item);
+    const QString content = prefix + desc_item;
+    modified_desc_list.append(content);
+    max_width = qMax(metrics.width(content), max_width);
   }
   const QString description = modified_desc_list.join("\n");
   qDebug() << "description:" << description;
   description_edit_->setPlainText(description);
+  Q_ASSERT(max_width >= 0);
+  // Add horizontal margins.
+  description_edit_->setFixedWidth(max_width + 20);
 }
 
 void PrepareInstallFrame::changeEvent(QEvent* event) {
@@ -77,6 +84,7 @@ void PrepareInstallFrame::initUI() {
 
   description_edit_ = new QTextEdit();
   description_edit_->setObjectName("description_edit");
+  description_edit_->setContentsMargins(10, 10, 10, 10);
   description_edit_->setAcceptRichText(false);
   description_edit_->setReadOnly(true);
   description_edit_->setContextMenuPolicy(Qt::NoContextMenu);
