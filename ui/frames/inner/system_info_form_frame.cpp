@@ -191,10 +191,16 @@ bool SystemInfoFormFrame::validateUsername(QString& msg) {
       msg = tr("Username length exceeds the limit");
       return false;
     }
-    default: {
-      return true;
+    case ValidateUsernameState::TooShortError: {
+      msg = tr("Username is too short");
+      return false;
+    }
+    case ValidateUsernameState::Ok: {
+      // Pass
+      break;
     }
   }
+  return true;
 }
 
 bool SystemInfoFormFrame::validateHostname(QString& msg) {
@@ -206,6 +212,10 @@ bool SystemInfoFormFrame::validateHostname(QString& msg) {
   switch (state) {
     case ValidateHostnameState::EmptyError: {
       msg = tr("Computer name is empty");
+      return false;
+    }
+    case ValidateHostnameState::InvalidChar: {
+      msg = tr("Computer name is invalid");
       return false;
     }
     case ValidateHostnameState::ReservedError: {
@@ -220,10 +230,12 @@ bool SystemInfoFormFrame::validateHostname(QString& msg) {
       msg = tr("Computer is too short");
       return false;
     }
-    default: {
-      return true;
+    case ValidateHostnameState::Ok: {
+      // Pass
+      break;
     }
   }
+  return true;
 }
 
 bool SystemInfoFormFrame::validatePassword(QString& msg) {
@@ -265,10 +277,12 @@ bool SystemInfoFormFrame::validatePassword(QString& msg) {
       msg = tr("Password too long");
       return false;
     }
-    default: {
-      return true;
+    case ValidatePasswordState::Ok: {
+      // Pass
+      break;
     }
   }
+  return true;
 }
 
 bool SystemInfoFormFrame::validatePassword2(QString& msg) {
