@@ -7,18 +7,19 @@
 
 #include <QWidget>
 #include <QHash>
-class GlobalShortcut;
 class QLabel;
+class QPushButton;
 class QResizeEvent;
 class QShortcut;
 class QStackedLayout;
+
+class GlobalShortcut;
 
 namespace installer {
 
 class ConfirmQuitFrame;
 class ControlPanelFrame;
 class DiskSpaceInsufficientFrame;
-class IconButton;
 class InstallFailedFrame;
 class InstallProgressFrame;
 class InstallSuccessFrame;
@@ -81,7 +82,7 @@ class MainWindow : public QWidget {
   void updateBackground();
 
   QLabel* background_label_ = nullptr;
-  IconButton* close_button_ = nullptr;
+  QPushButton* close_button_ = nullptr;
   PageIndicator* page_indicator_ = nullptr;
   // All of frame pages are stored in this layout.
   // And they are referenced by id in |pages_|.

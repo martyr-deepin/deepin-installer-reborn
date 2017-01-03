@@ -1,0 +1,24 @@
+/** Styles used in MainWindow class **/
+
+#close_button {
+  border: none;
+  outline: none;
+  color: #eaeaea;
+  margin: 0;
+  padding: 0;
+  /* NOTE(xushaohua): Do not optimize css properties */
+  background-clip: border;
+  background-origin: padding;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  background-image: url(:/images/close_button_normal.png);
+}
+
+#close_button:hover {
+  background-image: url(:/images/close_button_hover.png);
+}
+
+#close_button:pressed {
+  background-image: url(:/images/close_button_press.png);
+}

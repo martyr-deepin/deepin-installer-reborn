@@ -31,8 +31,8 @@
 #include "ui/frames/select_language_frame.h"
 #include "ui/frames/system_info_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
-#include "ui/widgets/icon_button.h"
 #include "ui/widgets/page_indicator.h"
+#include "ui/widgets/pointer_button.h"
 #include "ui/xrandr/multi_head_manager.h"
 
 namespace installer {
@@ -177,18 +177,20 @@ void MainWindow::initPages() {
 void MainWindow::initUI() {
   background_label_ = new QLabel(this);
 
-  QFrame* close_button_wrapper = new QFrame();
-  close_button_wrapper->setFixedHeight(36);
-  close_button_wrapper->setContentsMargins(0, 0, 0, 0);
-  close_button_ = new IconButton(":/images/close_normal.png",
-                                 ":/images/close_hover.png",
-                                 ":/images/close_press.png",
-                                 32, 32, close_button_wrapper);
+  close_button_ = new PointerButton();
+  close_button_->setObjectName("close_button");
+  close_button_->setFlat(true);
   close_button_->setFocusPolicy(Qt::TabFocus);
+  close_button_->setFixedSize(12, 12);
+  close_button_->setStyleSheet(ReadFile(":/styles/close_button.css"));
   QHBoxLayout* close_layout = new QHBoxLayout();
   close_layout->setContentsMargins(0, 0, 0, 0);
   close_layout->setSpacing(0);
-  close_layout->addWidget(close_button_, 0, Qt::AlignRight);
+  close_layout->addStretch();
+  close_layout->addWidget(close_button_);
+  QFrame* close_button_wrapper = new QFrame();
+  close_button_wrapper->setFixedHeight(16);
+  close_button_wrapper->setContentsMargins(2, 2, 2, 2);
   close_button_wrapper->setLayout(close_layout);
 
   stacked_layout_ = new QStackedLayout();
