@@ -141,9 +141,6 @@ void SystemInfoFormFrame::initUI() {
   password2_edit_->setReadOnly(password_edit_->isReadOnly());
 
   tooltip_ = new SystemInfoTip(this);
-  // Same width as line edit.
-  tooltip_->setMaximumWidth(550);
-  tooltip_->setMinimumHeight(32);
   tooltip_->hide();
 
   next_button_ = new NavButton(tr("Next"));

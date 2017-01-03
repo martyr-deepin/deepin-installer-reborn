@@ -518,6 +518,21 @@ add_executable(qprogressbar_test
                ui/tests/qprogressbar_test/progressbar_test.cpp)
 target_link_libraries(qprogressbar_test ${Qt_LIBS})
 
+
+# system info tip test
+add_executable(system_info_tip_test
+               ui/tests/system_info_tip_test.cpp
+
+               ui/widgets/system_info_tip.cpp
+               ui/widgets/system_info_tip.h
+
+               ${BASE_FILES}
+               ui/images/images.qrc
+               ui/styles/styles.qrc
+               )
+target_link_libraries(system_info_tip_test ${Qt_LIBS})
+
+# timezone frame test
 add_executable(timezone-frame-test
                ui/tests/timezone_frame_test/timezone_frame_test.cpp
 

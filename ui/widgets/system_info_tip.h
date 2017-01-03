@@ -28,6 +28,8 @@ class SystemInfoTip : public QFrame {
   void paintEvent(QPaintEvent* event) override;
 
  private:
+  void initUI();
+
   QLabel* label_ = nullptr;
 };
 
