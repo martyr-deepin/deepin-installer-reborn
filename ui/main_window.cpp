@@ -189,8 +189,8 @@ void MainWindow::initUI() {
   close_layout->addStretch();
   close_layout->addWidget(close_button_);
   QFrame* close_button_wrapper = new QFrame();
-  close_button_wrapper->setFixedHeight(16);
-  close_button_wrapper->setContentsMargins(2, 2, 2, 2);
+  close_button_wrapper->setFixedHeight(12);
+  close_button_wrapper->setContentsMargins(0, 0, 0, 0);
   close_button_wrapper->setLayout(close_layout);
 
   stacked_layout_ = new QStackedLayout();
