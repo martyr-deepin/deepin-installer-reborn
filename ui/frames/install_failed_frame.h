@@ -7,11 +7,11 @@
 
 #include <QFrame>
 class QLabel;
+class QPushButton;
 
 namespace installer {
 
 class CommentLabel;
-class IconButton;
 class NavButton;
 class QRWidget;
 class TitleLabel;
@@ -44,7 +44,7 @@ class InstallFailedFrame : public QFrame {
   NavButton* reboot_button_ = nullptr;
   QRWidget* qr_widget_ = nullptr;
   QLabel* content_label_ = nullptr;
-  IconButton* control_button_ = nullptr;
+  QPushButton* control_button_ = nullptr;
 
  private slots:
   void onControlButtonClicked();

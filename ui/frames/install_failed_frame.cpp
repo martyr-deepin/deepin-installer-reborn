@@ -12,7 +12,6 @@
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/frosted_frame.h"
-#include "ui/widgets/icon_button.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/qr_widget.h"
 #include "ui/widgets/title_label.h"
@@ -98,12 +97,10 @@ void InstallFailedFrame::initUI() {
   qr_widget_->move((kContentWindowWidth - kQrWindowSize) / 2,
                    (kContentWindowHeight - kQrWindowSize) / 2);
 
-  control_button_ = new IconButton(":/images/qr_normal.png",
-                                   ":/images/qr_hover.png",
-                                   ":/images/qr_press.png",
-                                   kControlButtonSize,
-                                   kControlButtonSize,
-                                   content_frame);
+  control_button_ = new PointerButton(content_frame);
+  control_button_->setObjectName("control_button");
+  control_button_->setFlat(true);
+  control_button_->setFixedSize(kControlButtonSize, kControlButtonSize);
   // Move control_button_ to top-right corner of content area.
   control_button_->move(kContentWindowWidth - kControlButtonSize, 0);
 
