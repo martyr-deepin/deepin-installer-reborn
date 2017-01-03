@@ -123,35 +123,6 @@ QString GetTimezoneName(const QString& timezone) {
   return (index > -1) ? timezone.mid(index + 1) : timezone;
 }
 
-QString GetTimezoneOffset(const QString& timezone) {
-  const char* kTzEnv = "TZ";
-  const char* old_tz = getenv(kTzEnv);
-  setenv(kTzEnv, timezone.toStdString().c_str(), 1);
-  struct tm tm;
-  const time_t curr_time = time(NULL);
-
-  // Call tzset() before localtime_r(). Set tzset(3).
-  tzset();
-  (void) localtime_r(&curr_time, &tm);
-
-  // Reset timezone.
-  if (old_tz) {
-    setenv(kTzEnv, old_tz, 1);
-  } else {
-    unsetenv(kTzEnv);
-  }
-
-  // Hours offset.
-  const int offset = static_cast<int>(tm.tm_gmtoff / 3600);
-  // Minutes offset.
-  const int min_offset = static_cast<int>(tm.tm_gmtoff % 3600 / 60);
-  if (min_offset == 0) {
-    return QString::asprintf("%s%+03d", tm.tm_zone, offset);
-  } else {
-    return QString::asprintf("%s%+03d:%02d", tm.tm_zone, offset, min_offset);
-  }
-}
-
 QString GetLocalTimezoneName(const QString& timezone) {
   setlocale(LC_ALL, "");
   const QString local_name(dgettext(kTimezoneDomain,
@@ -190,6 +161,28 @@ bool IsValidTimezone(const QString& timezone) {
   // If |filepath| is a file or a symbolic link to file, it is a valid timezone.
   const QString filepath(QString("/usr/share/zoneinfo/") + timezone);
   return QFile::exists(filepath);
+}
+
+TimezoneOffset GetTimezoneOffset(const QString& timezone) {
+  const char* kTzEnv = "TZ";
+  const char* old_tz = getenv(kTzEnv);
+  setenv(kTzEnv, timezone.toStdString().c_str(), 1);
+  struct tm tm;
+  const time_t curr_time = time(NULL);
+
+  // Call tzset() before localtime_r(). Set tzset(3).
+  tzset();
+  (void) localtime_r(&curr_time, &tm);
+
+  // Reset timezone.
+  if (old_tz) {
+    setenv(kTzEnv, old_tz, 1);
+  } else {
+    unsetenv(kTzEnv);
+  }
+
+  const TimezoneOffset offset = {tm.tm_zone, tm.tm_gmtoff};
+  return offset;
 }
 
 }  // namespace installer

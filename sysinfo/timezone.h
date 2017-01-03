@@ -40,9 +40,6 @@ QString GetCurrentTimezone();
 // Returns name of timezone, excluding continent name.
 QString GetTimezoneName(const QString& timezone);
 
-// Get |timezone| GMT offset, like CST+08
-QString GetTimezoneOffset(const QString& timezone);
-
 // Returns local name of timezone, excluding continent name.
 QString GetLocalTimezoneName(const QString& timezone);
 
@@ -53,6 +50,14 @@ TimezoneAliasMap GetTimezoneAliasMap();
 
 // Validate |timezone|.
 bool IsValidTimezone(const QString& timezone);
+
+struct TimezoneOffset {
+  QString name;  // Offset name, like CST.
+  long seconds;  // Offset seconds.
+};
+
+// Get |timezone| GMT offset.
+TimezoneOffset GetTimezoneOffset(const QString& timezone);
 
 }  // namespace installer
 

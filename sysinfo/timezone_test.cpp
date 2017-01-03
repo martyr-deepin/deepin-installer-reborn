@@ -32,9 +32,13 @@ TEST(TimezoneTest, GetTimezoneAliasMap) {
 }
 
 TEST(Timezonetest, GetTimezoneOffset) {
-  EXPECT_TRUE(GetTimezoneOffset("Asia/Shanghai") == "CST+08");
-  EXPECT_TRUE(GetTimezoneOffset("Asia/Pyongyang") == "KST+08:30");
-  EXPECT_TRUE(GetTimezoneOffset("America/Lima") == "PET-05");
+  const TimezoneOffset shanghai = GetTimezoneOffset("Asia/Shanghai");
+  EXPECT_TRUE(shanghai.name == "CST");
+  EXPECT_EQ(shanghai.seconds, 28800);
+
+  const TimezoneOffset lima = GetTimezoneOffset("America/Lima");
+  EXPECT_TRUE(lima.name == "PET");
+  EXPECT_EQ(lima.seconds, -18000);
 }
 
 TEST(TimezoneTest, IsValidTimezone) {

@@ -200,8 +200,17 @@ void SystemInfoFrame::updateLayout(const QString& layout) {
 void SystemInfoFrame::updateTimezone(const QString& timezone) {
   // Displays timezone description, like Shanghai (CST+08)
   const QString name = GetLocalTimezoneName(timezone);
-  const QString offset = GetTimezoneOffset(timezone);
-  const QString zone_description(QString("%1 (%2)").arg(name, offset));
+  const TimezoneOffset offset = GetTimezoneOffset(timezone);
+  // Hours offset.
+  const int hour_offset = static_cast<int>(offset.seconds / 3600);
+  // Minutes offset.
+  const int min_offset = static_cast<int>(offset.seconds % 3600 / 60);
+  // Format of offset description is like, GMT +08:00
+  const QString offset_description = QString::asprintf("GMT %+03d:%02d",
+                                                       hour_offset,
+                                                       min_offset);
+  const QString zone_description = QString("%1 (%2)").arg(name)
+                                                     .arg(offset_description);
   timezone_button_->setText(zone_description);
 }
 
