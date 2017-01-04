@@ -27,6 +27,7 @@ Homepage: http://www.deepin.org
 Package: deepin-installer-reborn
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
+    aircrack-ng,
     tshark,
     udev,
     util-linux,

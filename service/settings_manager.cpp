@@ -283,7 +283,6 @@ void WriteRequiringSwapFile(bool is_required) {
 void AddConfigFile() {
   QSettings target_settings(kInstallerConfigFile, QSettings::IniFormat);
 
-  qDebug() << "AddConfigFile()" << kInstallerConfigFile << kDefaultSettingsFile;
   // Read default settings
   QSettings default_settings(kDefaultSettingsFile, QSettings::IniFormat);
   for (const QString& key : default_settings.allKeys()) {
