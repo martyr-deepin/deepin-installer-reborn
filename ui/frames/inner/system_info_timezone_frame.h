@@ -38,6 +38,9 @@ class SystemInfoTimezoneFrame : public QFrame {
   // Read default timezone and emit timezoneUpdated() signal.
   void readConf();
 
+  // Remark current timezone when current frame is raised.
+  void remarkTimezone();
+
   // Validate timezone and write to conf file.
   void writeConf();
 

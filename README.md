@@ -21,9 +21,9 @@ Deepin Installer, reborn version.
 # Unit test
 Run `deepin-installer-reborn-tests`
 
-# Check settings ini file
-Run `deepin-installer-check-settings`
+# OEM tools
+Run `deepin-installer-oem`
 
 # Copyright
-This project is released under General Public License which can be found in
+This project is released under GNU General Public License which can be found in
 LICENSE file.

@@ -86,6 +86,10 @@ void SystemInfoTimezoneFrame::readConf() {
   emit this->timezoneUpdated(timezone_);
 }
 
+void SystemInfoTimezoneFrame::remarkTimezone() {
+  timezone_map_->setTimezone(timezone_map_->getTimezone());
+}
+
 void SystemInfoTimezoneFrame::writeConf() {
   // Validate timezone before writing to settings file.
   if (IsValidTimezone(timezone_)) {
@@ -129,7 +133,7 @@ void SystemInfoTimezoneFrame::initConnections() {
 void SystemInfoTimezoneFrame::initUI() {
   title_label_ = new TitleLabel(tr("Select Time Zone"));
   comment_label_ = new CommentLabel(tr("Mark your zone in the map"));
-  timezone_map_ = new TimezoneMap();
+  timezone_map_ = new TimezoneMap(this);
   back_button_ = new NavButton(tr("Back"));
 
   QVBoxLayout* layout = new QVBoxLayout();

@@ -26,7 +26,7 @@ const int kZonePinMinimumWidth = 60;
 
 const double kDistanceThreshold = 100.0;
 const char kDotFile[] = ":/images/indicator_active.png";
-const char kTimezoneMapFile[] = ":/images/timezone_map.png";
+const char kTimezoneMapFile[] = ":/images/timezone_map_big.png";
 
 // At absolute position of |zone| on a map with size (map_width, map_height).
 QPoint ZoneInfoToPosition(const ZoneInfo& zone, int map_width, int map_height) {
@@ -74,6 +74,7 @@ void TimezoneMap::setTimezone(const QString& timezone) {
 
 void TimezoneMap::mousePressEvent(QMouseEvent* event) {
   if (event->button() == Qt::LeftButton) {
+    // Get nearest zones around mouse.
     nearest_zones_ = GetNearestZones(total_zones_, kDistanceThreshold,
                                      event->x(), event->y(),
                                      this->width(), this->height());
@@ -115,16 +116,21 @@ void TimezoneMap::initUI() {
   Q_ASSERT(!timezone_pixmap.isNull());
   background_label->setPixmap(timezone_pixmap);
 
-  dot_ = new QLabel(this);
-  QPixmap dot_pixmap(kDotFile);
+  Q_ASSERT(this->parentWidget());
+  // Set parent widget of dot_ to SystemInfoTimezoneFrame.
+  dot_ = new QLabel(this->parentWidget());
+  const QPixmap dot_pixmap(kDotFile);
   Q_ASSERT(!dot_pixmap.isNull());
   dot_->setPixmap(dot_pixmap);
   dot_->setFixedSize(dot_pixmap.size());
   dot_->hide();
 
-  zone_pin_ = new TooltipPin(this);
+  // Set parent widget of zone_pin_ to SystemInfoTimezoneFrame.
+  zone_pin_ = new TooltipPin(this->parentWidget());
   zone_pin_->setFixedHeight(kZonePinHeight);
   zone_pin_->setMinimumWidth(kZonePinMinimumWidth);
+  // Allow mouse event to pass through.
+  zone_pin_->setAttribute(Qt::WA_TransparentForMouseEvents, true);
   zone_pin_->hide();
 
   popup_window_ = new PopupMenu();
@@ -149,10 +155,13 @@ void TimezoneMap::popupZoneWindow(const QPoint& pos) {
   // Show popup window above dot
   popup_window_->setStringList(zone_names);
   const int dy = pos.y() - dot_->height() - kDotVerticalMargin;
-  const QPoint global_pos = this->mapToGlobal(QPoint(pos.x(), dy));
-  popup_window_->popup(global_pos);
+  const QPoint popup_window_pos = this->mapToGlobal(QPoint(pos.x(), dy));
+  popup_window_->popup(popup_window_pos);
 
-  dot_->move(pos.x() - dot_->width() / 2, pos.y() - dot_->height() / 2);
+  const QPoint dot_relative_pos(pos.x() - dot_->width() / 2,
+                                pos.y() - dot_->height() / 2);
+  const QPoint dot_pos(this->mapToParent(dot_relative_pos));
+  dot_->move(dot_pos);
   dot_->show();
 }
 
@@ -173,13 +182,17 @@ void TimezoneMap::remark() {
     zone_pin_->adjustSize();
 
     // Show zone pin at current marked zone.
-    const QPoint point = ZoneInfoToPosition(current_zone_, map_width,
-                                            map_height);
-    const int dy = point.y() - dot_->height() / 2 - kDotVerticalMargin;
-    zone_pin_->popup(QPoint(point.x(), dy));
+    const QPoint zone_pos = ZoneInfoToPosition(current_zone_, map_width,
+                                               map_height);
+    const int zone_dy = zone_pos.y() - dot_->height() / 2 - kDotVerticalMargin;
+    const QPoint zone_pin_relative_pos(zone_pos.x(), zone_dy);
+    const QPoint zone_pin_pos(this->mapToParent(zone_pin_relative_pos));
+    zone_pin_->popup(zone_pin_pos);
 
-    dot_->move(point.x() - dot_->width() / 2,
-               point.y() - dot_->height() / 2);
+    const QPoint dot_relative_pos(zone_pos.x() - dot_->width() / 2,
+                                  zone_pos.y() - dot_->height() / 2);
+    const QPoint dot_pos(this->mapToParent(dot_relative_pos));
+    dot_->move(dot_pos);
     dot_->show();
   }
 }
