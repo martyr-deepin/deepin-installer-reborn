@@ -74,8 +74,7 @@ void SelectLanguageFrame::initUI() {
   QLabel* logo_label = new QLabel();
   logo_label->setPixmap(QPixmap(GetVendorLogo()));
 
-  QLabel* subtitle_label =
-      new QLabel("Please select the language you want to use");
+  QLabel* subtitle_label = new QLabel("Select system language");
   subtitle_label->setObjectName("subtitle_label");
   subtitle_label->setWordWrap(false);
   subtitle_label->setAlignment(Qt::AlignHCenter);
