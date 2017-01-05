@@ -11,6 +11,7 @@ namespace installer {
 
 // Handles read/write of settings file.
 // All settings are saved in $HOOME/oem/ folder.
+// TODO(xushaohua): Add process lock.
 class SettingsModel : public QObject {
   Q_OBJECT
 
@@ -30,7 +31,7 @@ class SettingsModel : public QObject {
   bool skipPartitionPage() const;
 
   // Language selection
-  bool useDefaultLocale() const;
+  QString defaultLocale() const;
 
  public slots:
   // Pages
@@ -42,7 +43,7 @@ class SettingsModel : public QObject {
   void setSkipPartitionPage(bool checked);
 
   // Language selection
-  void setUseDefaultLocale(bool checked);
+  void setDefaultLocale(const QString& locale);
 };
 
 }  // namespace installer

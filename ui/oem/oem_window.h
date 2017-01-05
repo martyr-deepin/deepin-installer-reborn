@@ -35,13 +35,12 @@ class OemWindow : public QFrame {
   // Pages
   QCheckBox* disk_space_box_ = nullptr;
   QCheckBox* virtual_machine_box_ = nullptr;
-  QCheckBox* language_box_ = nullptr;
+  QCheckBox* skip_language_box_ = nullptr;
   QCheckBox* table_warning_box_ = nullptr;
   QCheckBox* system_info_box_ = nullptr;
   QCheckBox* partition_box_ = nullptr;
 
   // Language selection
-  QCheckBox* default_locale_box_ = nullptr;
   QComboBox* default_locale_combo_ = nullptr;
   LanguageListModel* language_model_ = nullptr;
 
@@ -80,6 +79,10 @@ class OemWindow : public QFrame {
   QScrollArea* right_scroll_area_ = nullptr;
 
   SettingsModel* settings_model_ = nullptr;
+
+ private slots:
+  // Update tooltip of default_locale_combo_ when another language is selected.
+  void onDefaultLocaleIndexChanged(int index);
 };
 
 }  // namespace installer

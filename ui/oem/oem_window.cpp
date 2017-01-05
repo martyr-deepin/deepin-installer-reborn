@@ -49,7 +49,7 @@ void OemWindow::initConnections() {
           settings_model_, &SettingsModel::setSkipDiskSpacePage);
   connect(virtual_machine_box_, &QCheckBox::toggled,
           settings_model_, &SettingsModel::setSkipVirtualMachinePage);
-  connect(language_box_, &QCheckBox::toggled,
+  connect(skip_language_box_, &QCheckBox::toggled,
           settings_model_, &SettingsModel::setSkipLanguagePage);
   connect(table_warning_box_, &QCheckBox::toggled,
           settings_model_, &SettingsModel::setSkipTableWarningPage);
@@ -59,8 +59,9 @@ void OemWindow::initConnections() {
           settings_model_, &SettingsModel::setSkipPartitionPage);
 
   // Language selection
-  connect(default_locale_box_, &QCheckBox::toggled,
-          settings_model_, &SettingsModel::setUseDefaultLocale);
+  connect(default_locale_combo_,
+          static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+          this, &OemWindow::onDefaultLocaleIndexChanged);
 }
 
 void OemWindow::initUI() {
@@ -75,10 +76,10 @@ void OemWindow::initUI() {
   virtual_machine_box_->setText(tr("Skip virtual machine warning page"));
   virtual_machine_box_->setChecked(settings_model_->skipVirtualMachinePage());
 
-  language_box_ = new QCheckBox(this);
-  language_box_->setObjectName("language_box");
-  language_box_->setText(tr("Skip language selection page"));
-  language_box_->setChecked(settings_model_->skipLanguagePage());
+  skip_language_box_ = new QCheckBox(this);
+  skip_language_box_->setObjectName("skip_language_box");
+  skip_language_box_->setText(tr("Skip language selection page"));
+  skip_language_box_->setChecked(settings_model_->skipLanguagePage());
 
   table_warning_box_ = new QCheckBox(this);
   table_warning_box_->setObjectName("table_warning_box");
@@ -96,11 +97,6 @@ void OemWindow::initUI() {
   partition_box_->setChecked(settings_model_->skipPartitionPage());
 
   // Language selection
-  default_locale_box_ = new QCheckBox(this);
-  default_locale_box_->setObjectName("default_locale_box");
-  default_locale_box_->setText(tr("Use default locale"));
-  default_locale_box_->setChecked(settings_model_->useDefaultLocale());
-
   QLabel* default_locale_label = new QLabel(this);
   default_locale_label->setObjectName("default_locale_label");
   default_locale_label->setText(tr("Default locale:"));
@@ -109,6 +105,12 @@ void OemWindow::initUI() {
   default_locale_combo_->setObjectName("default_locale_combo");
   language_model_ = new LanguageListModel(this);
   default_locale_combo_->setModel(language_model_);
+  // Select default locale.
+  const QString default_locale = settings_model_->defaultLocale();
+  const QModelIndex locale_index = language_model_->localeIndex(default_locale);
+  if (locale_index.isValid()) {
+    default_locale_combo_->setCurrentIndex(locale_index.row());
+  }
 
   QHBoxLayout* default_locale_layout = new QHBoxLayout();
   default_locale_layout->addWidget(default_locale_label);
@@ -170,12 +172,11 @@ void OemWindow::initUI() {
   QVBoxLayout* right_layout = new QVBoxLayout();
   right_layout->addWidget(disk_space_box_);
   right_layout->addWidget(virtual_machine_box_);
-  right_layout->addWidget(language_box_);
+  right_layout->addWidget(skip_language_box_);
   right_layout->addWidget(system_info_box_);
   right_layout->addWidget(partition_box_);
 
   right_layout->addSpacing(kSectionSpace);
-  right_layout->addWidget(default_locale_box_);
   right_layout->addLayout(default_locale_layout);
 
   right_layout->addSpacing(kSectionSpace);
@@ -246,6 +247,15 @@ void OemWindow::initUI() {
 
   this->setContentsMargins(0, 0, 0, 0);
   this->setLayout(layout);
+}
+
+void OemWindow::onDefaultLocaleIndexChanged(int index) {
+  const LanguageItem lang = language_model_->languageItemAt(index);
+  // Update tooltip of default_locale_combo_.
+  default_locale_combo_->setToolTip(lang.name);
+
+  // Write to settings.
+  settings_model_->setDefaultLocale(lang.locale);
 }
 
 }  // namespace installer

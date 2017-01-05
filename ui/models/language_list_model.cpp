@@ -34,6 +34,14 @@ int LanguageListModel::rowCount(const QModelIndex& parent) const {
   return lang_list_.length();
 }
 
+LanguageItem LanguageListModel::languageItemAt(int index) const {
+  if (index >= 0 && index < lang_list_.length()) {
+    return lang_list_.at(index);
+  } else {
+    return LanguageItem();
+  }
+}
+
 LanguageItem LanguageListModel::languageItemAt(const QModelIndex& index) const {
   if (index.isValid()) {
     return lang_list_.at(index.row());

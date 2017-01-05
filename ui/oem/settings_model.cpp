@@ -45,15 +45,15 @@ bool GetSettingsBool(const QString& key) {
 //  return 0;
 //}
 
-//QString GetSettingsString(const QString& key) {
-//  const QVariant value = GetSettingsValue(key);
-//  if (value.isValid()) {
-//    return value.toString();
-//  }
-//
-//  qCritical() << "GetSettingsString() failed with key:" << key;
-//  return QString();
-//}
+QString GetSettingsString(const QString& key) {
+  const QVariant value = GetSettingsValue(key);
+  if (value.isValid()) {
+    return value.toString();
+  }
+
+  qCritical() << "GetSettingsString() failed with key:" << key;
+  return QString();
+}
 
 //QStringList GetSettingsStringList(const QString& key) {
 //  const QVariant value = GetSettingsValue(key);
@@ -138,8 +138,8 @@ bool SettingsModel::skipPartitionPage() const {
   return GetSettingsBool(kSkipPartitionPage);
 }
 
-bool SettingsModel::useDefaultLocale() const {
-  return GetSettingsBool(kSelectLanguageDefaultLocale);
+QString SettingsModel::defaultLocale() const {
+  return GetSettingsString(kSelectLanguageDefaultLocale);
 }
 
 void SettingsModel::setSkipDiskSpacePage(bool checked) {
@@ -166,8 +166,8 @@ void SettingsModel::setSkipPartitionPage(bool checked) {
   SetSettingsValue(kSkipPartitionPage, checked);
 }
 
-void SettingsModel::setUseDefaultLocale(bool checked) {
-  SetSettingsValue(kSelectLanguageDefaultLocale, checked);
+void SettingsModel::setDefaultLocale(const QString& locale) {
+  SetSettingsValue(kSelectLanguageDefaultLocale, locale);
 }
 
 }  // namespace installer
