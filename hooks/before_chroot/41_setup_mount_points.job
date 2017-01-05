@@ -3,29 +3,32 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+# Mount virtual fs and efi to /target.
+
 CDROM=$(installer_get "CDROM")
 DI_BOOTLOADER=$(installer_get "DI_BOOTLOADER")
 DI_UEFI=$(installer_get "DI_UEFI")
 
 mkdir -p /target/dev
-mount --bind -v --bind /dev/ /target/dev
+mount --bind -v --bind /dev/ /target/dev || error "Failed to bind /dev"
 
 mkdir -p /target/dev/pts
-mount -vt devpts devpts /target/dev/pts
+mount -vt devpts devpts /target/dev/pts || error "Failed to bind devpts"
 
 mkdir -p /target/proc
-mount -vt proc proc /target/proc
+mount -vt proc proc /target/proc || error "Failed to bind proc"
 
 mkdir -p /target/sys
-mount -vt sysfs sysfs /target/sys
+mount -vt sysfs sysfs /target/sys || error "Failed to bind sysfs"
 
 mkdir -p /target/media/cdrom
-mount --bind ${CDROM} /target/media/cdrom
+mount --bind ${CDROM} /target/media/cdrom || error "Failed to bind ${CDROM}"
 
 if [ x"${DI_UEFI}" = xtrue ];then
-    mkdir -p /target/boot/efi
-    mount ${DI_BOOTLOADER} /target/boot/efi || exit 1
+  mkdir -p /target/boot/efi
+  mount ${DI_BOOTLOADER} /target/boot/efi || \
+    error "Failed to mount bootloader ${DI_BOOTLOADER}"
 fi
 
 mkdir -p /target/run
-mount --bind /run /target/run
+mount --bind /run /target/run || error "Failed to bind /run"

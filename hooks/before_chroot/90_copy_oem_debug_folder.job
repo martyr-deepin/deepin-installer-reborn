@@ -3,8 +3,7 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-# Copy /tmp/oem folder to /target.
-# This folder is used for tuning oem features.
+# Copy /tmp/oem folder to /target. This folder is used for oem settings.
 
 if [ -d /tmp/oem ]; then
   cp -rf /tmp/oem /target/tmp/oem || error "Failed to copy /tmp/oem to /target"

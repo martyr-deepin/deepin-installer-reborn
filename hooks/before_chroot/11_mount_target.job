@@ -3,6 +3,8 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+# Mount root partition to /target.
+
 target="/target"
 mkdir -p ${target}
 #Try to fix wrong permission (owned by 1001)
@@ -14,75 +16,81 @@ DI_ROOT_PARTITION=$(installer_get "DI_ROOT_PARTITION")
 DI_LOOP_ROOT_FILE=$(installer_get "DI_LOOP_ROOT_FILE")
 DI_MOUNTPOINTS=$(installer_get "DI_MOUNTPOINTS")
 
-#mount for lupin
+# Mount for lupin
 if [ x${DI_LUPIN} = xtrue ];then
-    hostdev=`df ${DI_LUPIN_ROOT} | tail -1 | awk '{printf $1}'`
-    installer_set "DI_HOST_DEV" "${hostdev}"
-    mkdir -v /host
-    mount --bind ${DI_LUPIN_ROOT} /host
-    losetup ${DI_ROOT_PARTITION} /host/${DI_LOOP_ROOT_FILE}
-    mkfs.ext4 -L "Computer" -F -F ${DI_ROOT_PARTITION}
+  hostdev=`df ${DI_LUPIN_ROOT} | tail -1 | awk '{printf $1}'`
+  installer_set "DI_HOST_DEV" "${hostdev}"
+  mkdir -v /host
+  mount --bind ${DI_LUPIN_ROOT} /host
+  losetup ${DI_ROOT_PARTITION} /host/${DI_LOOP_ROOT_FILE}
+  mkfs.ext4 -L "Computer" -F -F ${DI_ROOT_PARTITION}
 fi
 
-get_fstype()
-{
-    local FS FSTYPE FSSIZE RET
-    FS="${1}"
-    eval $(fstype "${FS}" 2>/dev/null)
-    FSTYPE=$(blkid -o value -s TYPE "${FS}")
+get_fstype() {
+  local PART_PATH FSTYPE RET
+  PART_PATH="${1}"
+  if [ -n "${PART_PATH}" ]; then
+    # Make sure that ${PART_PATH} is not empty, or else `blkid` will print
+    # fs names of all partitions.
+    FSTYPE=$(blkid -o value -s TYPE "${PART_PATH}")
     RET=$?
-    echo "${FSTYPE:-unknown}"
-    return ${RET}
+  else
+    FSTYPE=""
+    RET=1
+  fi
+  echo "${FSTYPE:-unknown}"
+  return ${RET}
 }
 
-find_target(){
-    local target
-    target="${1}"
-    for p in $(cat /proc/mounts | awk '{print $2}');do
-        if [ ${p} = "${target}" ];then
-            echo "${target}"
-            return 0
-        fi
-    done
-    return 1
+find_target() {
+  local target="$1"
+  for p in $(cat /proc/mounts | awk '{print $2}'); do
+    if [ ${p} = "${target}" ];then
+      echo "${target}"
+      return 0
+    fi
+  done
+  return 1
 }
 
 # mount rootfs first
-echo "mount rootfs(${DI_ROOT_PARTITION}) to ${target}"
+msg "mount rootfs(${DI_ROOT_PARTITION}) to ${target}"
 n=0
 DI_ROOT_FSTYPE=$(get_fstype ${DI_ROOT_PARTITION})
-while [ "$n" -lt 30 ];do
-    if [ ${DI_ROOT_FSTYPE} != "unknown" ];then
-        mount -t ${DI_ROOT_FSTYPE} ${DI_ROOT_PARTITION} ${target}
-    else
-        mount ${DI_ROOT_PARTITION} ${target}
-    fi
-    result=$(find_target $target)
-    if [ "${result}" ];then
-        break
-    fi
-    sleep 1
-    n="$(($n + 1))"
+while [ "$n" -lt 30 ]; do
+  if [ ${DI_ROOT_FSTYPE} != "unknown" ]; then
+    mount -t ${DI_ROOT_FSTYPE} ${DI_ROOT_PARTITION} ${target}
+  else
+    mount ${DI_ROOT_PARTITION} ${target}
+  fi
+  result=$(find_target $target)
+  if [ -n "${result}" ]; then
+    break
+  fi
+  sleep 1
+  n="$(($n + 1))"
 done
 
 if [ -z ${result} ];then
-    error "[Error] ${target} can not mount!"
+  error "Failed to mount ${target}!"
 fi
 
 [ ! -d ${target}/deepinhost ] && mkdir -p ${target}/deepinhost
 mount --bind / ${target}/deepinhost
 
 # Mount other mountpoints
-array=`echo ${DI_MOUNTPOINTS//;/ }`
-for i in $array;do
+# Split mount-point list.
+mount_points=$(echo ${DI_MOUNTPOINTS//;/ })
+for i in "${mount_points}"; do
 	mountpoint=$(echo $i | cut -d'=' -f1)
 	mountpath=$(echo $i | cut -d'=' -f2)
-	if [ $mountpath !=  '/' ] && [ $mountpath != 'swap' ];then
-        echo "mount ${mountpoint} -> ${mountpath}"
+	if [ $mountpath != "/" ] && [ $mountpath != "swap" ]; then
+    msg "mount ${mountpoint} -> ${mountpath}"
 		mkdir -p ${target}${mountpath}
-		mount $mountpoint ${target}${mountpath}
-    elif [ $mountpath == 'swap' ];then
-        echo "Detect swap partition, try swapon it first"
-        swapon $mountpoint || true
+		mount $mountpoint ${target}${mountpath} || \
+		  error "Failed to mount ${mountpoint}"
+  elif [ $mountpath == "swap" ]; then
+    msg "Detect swap partition, try swapon it first"
+    swapon $mountpoint || true
 	fi
 done

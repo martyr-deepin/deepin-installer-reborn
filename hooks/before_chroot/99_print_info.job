@@ -1,12 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright (c) 2016 Deepin Ltd. All rights reserved.
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+# Print sys info.
+
 echo "-----------------------------Before Chroot Hooks ----------------------"
 echo "-----------------------------DEBUG INFO: df -h ----------------------"
 df -h
-echo "-----------------------------DEBUG INFO: ls -lh /target/deepinhost ----------------------"
 ls -lh /target/deepinhost
 echo "-----------------------------DEBUG INFO: mount ----------------------"
 mount
+
+exit 0

@@ -17,30 +17,32 @@ else
   PROCESSORS=1
 fi
 
+# Extract all overlay modules.
 extract_overlay_filesystem() {
-    case ${L} in
-        zh_CN)
-            MODULE="${CDROM}/overlay/filesystem.zh-hans.module"
-            ;;
-        zh_*)
-            MODULE="${CDROM}/overlay/filesystem.zh-hant.module"
-            ;;
-        *)
-            MODULE="${CDROM}/overlay/filesystem.en-us.module"
-            ;;
-    esac
+  case ${L} in
+    zh_CN)
+      MODULE="${CDROM}/overlay/filesystem.zh-hans.module"
+      ;;
+    zh_*)
+      MODULE="${CDROM}/overlay/filesystem.zh-hant.module"
+      ;;
+    *)
+      MODULE="${CDROM}/overlay/filesystem.en-us.module"
+      ;;
+  esac
 
-    if [ -f ${MODULE} ];then
-        for file in $(cat ${MODULE});do
-          unsquashfs -p "${PROCESSORS}" -f -d /target ${CDROM}/overlay/${file} || \
-            error "unsquashfs failed" ${CDROM}/overlay/${file}
-        done
-    fi
+  if [ -f ${MODULE} ]; then
+    for file in $(cat ${MODULE}); do
+      unsquashfs -p "${PROCESSORS}" -f -d /target ${CDROM}/overlay/${file} || \
+        error "unsquashfs failed" ${CDROM}/overlay/${file}
+    done
+  fi
 }
 
 # First, extract base filesystem
-deepin-installer-unsquashfs -p ${PROCESSORS} -f -d /target ${LIVE_FILESYSTEM}/filesystem.squashfs || \
-  error "installer-unsquashfs failed" ${LIVE_FILESYSTEM}/filesystem.squashfs
+readonly BASE_MODULE="${LIVE_FILESYSTEM}/filesystem.squashfs"
+deepin-installer-unsquashfs -p ${PROCESSORS} -f -d /target "${BASE_MODULE}" || \
+  error "installer-unsquashfs failed, ${BASE_MODULE}"
 
 # Then extract overlay_filesystem
 extract_overlay_filesystem || true

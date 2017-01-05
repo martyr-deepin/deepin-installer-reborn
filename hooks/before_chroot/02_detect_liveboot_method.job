@@ -3,22 +3,22 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-# Read kernel boostrap options from /proc/cmdline
+# Read kernel bootstrap options from /proc/cmdline
 if grep -q boot=casper /proc/cmdline; then
-    BOOT=casper
-    CDROM=/cdrom
-    LUPIN_ROOT=/isodevice
-    DISTRIBUTION=ubuntu
+  BOOT=casper
+  CDROM=/cdrom
+  LUPIN_ROOT=/isodevice
+  DISTRIBUTION=ubuntu
 elif grep -q boot=live /proc/cmdline; then
-    BOOT=live
-    CDROM=/lib/live/mount/medium
-    LUPIN_ROOT=/lib/live/mount/findiso
-    DISTRIBUTION=debian
+  BOOT=live
+  CDROM=/lib/live/mount/medium
+  LUPIN_ROOT=/lib/live/mount/findiso
+  DISTRIBUTION=debian
 else
-    error "[Error] No boot value found!"
+  error "[Error] No boot value found!"
 fi
 
-LIVE_FILESYSTEM=${CDROM}/${BOOT}
+LIVE_FILESYSTEM="${CDROM}/${BOOT}"
 installer_set "DISTRIBUTION" "${DISTRIBUTION}"
 installer_set "LIVE" "${BOOT}"
 installer_set "LIVE_FILESYSTEM" "${LIVE_FILESYSTEM}"

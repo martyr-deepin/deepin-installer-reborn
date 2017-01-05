@@ -1,14 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright (c) 2016 Deepin Ltd. All rights reserved.
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-# FIXME(xushaohua): Does not work.
-DISPLAY=:0 gsettings set com.deepin.dde.power battery-screen-black-delay 0
-DISPLAY=:0 gsettings set com.deepin.dde.power battery-sleep-delay 0
-DISPLAY=:0 gsettings set com.deepin.dde.power line-power-screen-black-delay 0
-DISPLAY=:0 gsettings set com.deepin.dde.power line-power-sleep-delay 0
+# Inhibit display screensaver.
 
-setterm -powersave off -blank 0 || true
+setterm -powersave off -blank 0
 
 exit 0
