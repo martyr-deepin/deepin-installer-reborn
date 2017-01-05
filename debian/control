@@ -28,6 +28,15 @@ Package: deepin-installer-reborn
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
     aircrack-ng,
+    btrfs-progs,
+    dosfstools,
+    e2fsprogs,
+    hfsprogs,
+    jfsutils,
+    mtools,
+    ntfs-3g,
+    os-prober,
+    squashfs-tools,
     tshark,
     udev,
     util-linux,
