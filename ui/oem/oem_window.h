@@ -18,6 +18,7 @@ class QStringListModel;
 
 namespace installer {
 
+class LanguageListModel;
 class SettingsModel;
 
 // Main window of deepin-installer-oem tool.
@@ -35,13 +36,14 @@ class OemWindow : public QFrame {
   QCheckBox* disk_space_box_ = nullptr;
   QCheckBox* virtual_machine_box_ = nullptr;
   QCheckBox* language_box_ = nullptr;
-  QCheckBox* skip_partition_table_warning_button_ = nullptr;
+  QCheckBox* table_warning_box_ = nullptr;
   QCheckBox* system_info_box_ = nullptr;
   QCheckBox* partition_box_ = nullptr;
 
   // Language selection
   QCheckBox* default_locale_box_ = nullptr;
   QComboBox* default_locale_combo_ = nullptr;
+  LanguageListModel* language_model_ = nullptr;
 
   // System info
   QCheckBox* use_default_username_button_ = nullptr;

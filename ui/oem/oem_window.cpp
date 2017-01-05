@@ -17,6 +17,7 @@
 #include <QStringListModel>
 #include <QVBoxLayout>
 
+#include "ui/models/language_list_model.h"
 #include "ui/oem/settings_model.h"
 
 namespace installer {
@@ -29,8 +30,17 @@ const int kSectionSpace = 20;
 OemWindow::OemWindow(QWidget* parent) : QFrame(parent) {
   this->setObjectName("oem_window");
 
-  this->initUI();
-  this->initConnections();
+  settings_model_ = new SettingsModel(this);
+
+  if (settings_model_->initOemFolder()) {
+    this->initUI();
+    this->initConnections();
+  } else {
+    // Display an error message if failed to init oem folder.
+    QLabel* error_label = new QLabel(this);
+    error_label->setObjectName("error_label");
+    error_label->setText(tr("Failed to create $HOME/oem folder!"));
+  }
 }
 
 void OemWindow::initConnections() {
@@ -41,6 +51,8 @@ void OemWindow::initConnections() {
           settings_model_, &SettingsModel::setSkipVirtualMachinePage);
   connect(language_box_, &QCheckBox::toggled,
           settings_model_, &SettingsModel::setSkipLanguagePage);
+  connect(table_warning_box_, &QCheckBox::toggled,
+          settings_model_, &SettingsModel::setSkipTableWarningPage);
   connect(system_info_box_, &QCheckBox::toggled,
           settings_model_, &SettingsModel::setSkipSystemInfoPage);
   connect(partition_box_, &QCheckBox::toggled,
@@ -52,8 +64,6 @@ void OemWindow::initConnections() {
 }
 
 void OemWindow::initUI() {
-  settings_model_ = new SettingsModel(this);
-
   // Pages
   disk_space_box_ = new QCheckBox(this);
   disk_space_box_->setObjectName("disk_space_box");
@@ -69,6 +79,11 @@ void OemWindow::initUI() {
   language_box_->setObjectName("language_box");
   language_box_->setText(tr("Skip language selection page"));
   language_box_->setChecked(settings_model_->skipLanguagePage());
+
+  table_warning_box_ = new QCheckBox(this);
+  table_warning_box_->setObjectName("table_warning_box");
+  table_warning_box_->setText(tr("Skip partition table warning page"));
+  table_warning_box_->setChecked(settings_model_->skipTableWarningPage());
 
   system_info_box_ = new QCheckBox(this);
   system_info_box_->setObjectName("system_info_box");
@@ -92,7 +107,8 @@ void OemWindow::initUI() {
 
   default_locale_combo_ = new QComboBox(this);
   default_locale_combo_->setObjectName("default_locale_combo");
-  default_locale_combo_->addItems(settings_model_->languageList());
+  language_model_ = new LanguageListModel(this);
+  default_locale_combo_->setModel(language_model_);
 
   QHBoxLayout* default_locale_layout = new QHBoxLayout();
   default_locale_layout->addWidget(default_locale_label);
@@ -204,6 +220,7 @@ void OemWindow::initUI() {
   category_view_->setModel(category_model_);
   const QStringList categories = {
       "Pages",
+      "Languages",
       "System Info",
       "Partition",
       "Installation",
@@ -213,6 +230,7 @@ void OemWindow::initUI() {
       "Services",
       "Miscellaneous",
   };
+  category_model_->setStringList(categories);
   category_model_->setStringList(categories);
 
   QSplitter* splitter = new QSplitter(this);

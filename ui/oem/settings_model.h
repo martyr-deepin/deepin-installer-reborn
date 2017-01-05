@@ -10,28 +10,34 @@
 namespace installer {
 
 // Handles read/write of settings file.
+// All settings are saved in $HOOME/oem/ folder.
 class SettingsModel : public QObject {
   Q_OBJECT
 
  public:
   explicit SettingsModel(QObject* parent = nullptr);
 
+  // Initialize oem folder. Returns false if failed.
+  // Call this method before accessing any other methods of this class.
+  bool initOemFolder();
+
   // Pages
   bool skipDiskSpacePage() const;
   bool skipVirtualMachinePage() const;
   bool skipLanguagePage() const;
+  bool skipTableWarningPage() const;
   bool skipSystemInfoPage() const;
   bool skipPartitionPage() const;
 
   // Language selection
   bool useDefaultLocale() const;
-  QStringList languageList() const;
 
  public slots:
   // Pages
   void setSkipDiskSpacePage(bool checked);
   void setSkipVirtualMachinePage(bool checked);
   void setSkipLanguagePage(bool checked);
+  void setSkipTableWarningPage(bool checked);
   void setSkipSystemInfoPage(bool checked);
   void setSkipPartitionPage(bool checked);
 
