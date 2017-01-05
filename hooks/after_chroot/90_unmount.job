@@ -3,6 +3,8 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+# Umount /target recursively.
+
 target='/target'
 chown root:root ${target} 
 
@@ -12,7 +14,6 @@ sync
 [ -d /target/deepinhost ] && umount -l /target/deepinhost 
 rm -rf /target/deepinhost
 
-for i in $(cat /proc/mounts | awk '{print $2}' | grep -e ^$target | sort -r);do
-    umount -v $i
+for i in $(cat /proc/mounts | awk '{print $2}' | grep -e ^$target | sort -r); do
+  umount -v $i
 done
-echo "[$0] finished"

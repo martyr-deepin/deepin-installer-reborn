@@ -4,3 +4,5 @@
 # in the LICENSE file.
 
 cat /etc/deepin-installer.conf
+
+exit 0

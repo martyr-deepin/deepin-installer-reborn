@@ -8,9 +8,9 @@
 RC="/target/usr/sbin/policy-rc.d"
 
 if [ -f "$RC" ]; then
-    echo "[INFO] policy-rc.d exists.Will remove it..."
-    rm "$RC"
+  msg "policy-rc.d exists.Will remove it..."
+  rm "$RC"
 else
-    echo "[INFO] policy-rc.d not exists"
+  msg "policy-rc.d not exists"
 fi
 
