@@ -6,6 +6,7 @@
 
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDebug>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -17,7 +18,7 @@
 #include <QStringListModel>
 #include <QVBoxLayout>
 
-#include "ui/models/language_list_model.h"
+#include "ui/oem/language_list_model.h"
 #include "ui/oem/settings_model.h"
 
 namespace installer {
@@ -103,13 +104,15 @@ void OemWindow::initUI() {
 
   default_locale_combo_ = new QComboBox(this);
   default_locale_combo_->setObjectName("default_locale_combo");
-  language_model_ = new LanguageListModel(this);
+  language_model_ = new LanguageListModel(true, this);
   default_locale_combo_->setModel(language_model_);
   // Select default locale.
   const QString default_locale = settings_model_->defaultLocale();
   const QModelIndex locale_index = language_model_->localeIndex(default_locale);
   if (locale_index.isValid()) {
     default_locale_combo_->setCurrentIndex(locale_index.row());
+    const LanguageItem lang = language_model_->languageItemAt(locale_index);
+    default_locale_combo_->setToolTip(lang.name);
   }
 
   QHBoxLayout* default_locale_layout = new QHBoxLayout();

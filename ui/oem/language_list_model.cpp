@@ -17,6 +17,19 @@ LanguageListModel::LanguageListModel(QObject* parent)
   lang_list_ = GetLanguageList();
 }
 
+LanguageListModel::LanguageListModel(bool append_empty, QObject* parent)
+    : LanguageListModel(parent) {
+  if (append_empty) {
+    // Append an empty language item.
+    LanguageItem empty_lang;
+    empty_lang.name = "Do not set";
+    empty_lang.local_name = tr("Do not set");
+    empty_lang.locale = "";
+    empty_lang.lc_all = "";
+    lang_list_.prepend(empty_lang);
+  }
+}
+
 QVariant LanguageListModel::data(const QModelIndex& index, int role) const {
   if (role != Qt::DisplayRole) {
     return QVariant();
@@ -32,6 +45,14 @@ QVariant LanguageListModel::data(const QModelIndex& index, int role) const {
 int LanguageListModel::rowCount(const QModelIndex& parent) const {
   Q_UNUSED(parent);
   return lang_list_.length();
+}
+
+LanguageItem LanguageListModel::languageItemAt(int index) const {
+  if (index >= 0 && index < lang_list_.length()) {
+    return lang_list_.at(index);
+  } else {
+    return LanguageItem();
+  }
 }
 
 LanguageItem LanguageListModel::languageItemAt(const QModelIndex& index) const {

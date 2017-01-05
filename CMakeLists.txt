@@ -437,9 +437,8 @@ add_executable(deepin-installer-oem
                service/system_language.cpp
                service/system_language.h
 
-               ui/models/language_list_model.cpp
-               ui/models/language_list_model.h
-
+               ui/oem/language_list_model.cpp
+               ui/oem/language_list_model.h
                ui/oem/oem_window.cpp
                ui/oem/oem_window.h
                ui/oem/settings_model.cpp
