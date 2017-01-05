@@ -3,60 +3,60 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-if [ x$(installer_get "system_info_setup_after_reboot") = xtrue ]; then
-  exit 0
-fi
+# Setup locale and timezone.
+# This function used in hook_manager.sh and first_boot_setup.sh
+setup_locale_timezone() {
+  local DI_LOCALE DI_TIMEZONE LOCALE DI_IS_LOCAL_TIME
+  DI_LOCALE=$(installer_get "DI_LOCALE")
+  DI_TIMEZONE=$(installer_get "DI_TIMEZONE")
 
-DI_LOCALE=$(installer_get "DI_LOCALE")
-DI_TIMEZONE=$(installer_get "DI_TIMEZONE")
+  DI_LOCALE=${DI_LOCALE:-en_US}
+  DI_TIMEZONE=${DI_TIMEZONE:-Etc/UTC}
+  LOCALE=${DI_LOCALE%.*}
 
-DI_LOCALE=${DI_LOCALE:-en_US}
-DI_TIMEZONE=${DI_TIMEZONE:-Etc/UTC}
-LOCALE=${DI_LOCALE%.*}
+  # Always generate en_US locale.
+  msg "Generating locale: en_US ${LOCALE}"
+  sed -i "s/# \(en_US\.UTF-8.*$\)/\1/g" /etc/locale.gen
 
-#alway generate en_US locale
-echo "Generating locale: en_US ${LOCALE}"
-sed -i "s/# \(en_US\.UTF-8.*$\)/\1/g" /etc/locale.gen
-
-if [ ! -z ${LOCALE} ];then
-    sed -i "s/# \(${LOCALE}\.UTF-8.*$\)/\1/g" /etc/locale.gen
-    cat > /etc/default/locale <<EOF
+  sed -i "s/# \(${LOCALE}\.UTF-8.*$\)/\1/g" /etc/locale.gen
+  cat > /etc/default/locale << EOF
 LANG=${LOCALE}.UTF-8
 LANGUAGE=${LOCALE}
 EOF
-else
-    cat > /etc/default/locale <<EOF
-LANG=en_US.UTF-8
-LANGUAGE=en_US
-EOF
-fi
 
-/usr/sbin/locale-gen
+  # Re-generate localisation files.
+  /usr/sbin/locale-gen
 
-echo "Check timezone ${DI_TIMEZONE}"
-if cat /usr/share/zoneinfo/zone.tab | grep -v '^#' | awk '{print $3}' | grep -q "^${DI_TIMEZONE}$";then
-    echo "${DI_TIMEZONE} is available"
-else
-    echo "Timezone is not available, Fall back to UTC"
+  echo "Check timezone ${DI_TIMEZONE}"
+  if cat /usr/share/zoneinfo/zone.tab | grep -v '^#' | awk '{print $3}' | \
+      grep -q "^${DI_TIMEZONE}$"; then
+    msg "${DI_TIMEZONE} is available"
+  else
+    msg "Timezone is not available, Fall back to UTC"
     DI_TIMEZONE="Etc/UTC"
-fi
+  fi
 
-echo "Set timezone to ${DI_TIMEZONE}"
-echo "${DI_TIMEZONE}" > /etc/timezone
-# Create /etc/localtime symbol links
-ln -nsf /usr/share/zoneinfo/${DI_TIMEZONE} /etc/localtime
-dpkg-reconfigure --frontend noninteractive tzdata
+  msg "Set timezone to ${DI_TIMEZONE}"
+  echo "${DI_TIMEZONE}" > /etc/timezone
+  # Create /etc/localtime symbol links
+  ln -nsf /usr/share/zoneinfo/${DI_TIMEZONE} /etc/localtime
+  dpkg-reconfigure --frontend noninteractive tzdata
 
-# Set using local time or not
-DI_IS_LOCAL_TIME=$(installer_get "DI_IS_LOCAL_TIME")
-if [ x"${DI_IS_LOCAL_TIME}" = xtrue ]; then
-  deepin-installer-adjtime 1
-fi
+  # Set using local time or not
+  DI_IS_LOCAL_TIME=$(installer_get "DI_IS_LOCAL_TIME")
+  if [ x"${DI_IS_LOCAL_TIME}" = xtrue ]; then
+    deepin-installer-adjtime 1
+  fi
 
-#check locale
-if ls /usr/share/i18n/locales | grep -q "\<${LOCALE}\>";then
-    echo "${LOCALE} is available"
-else
-    echo "${LOCALE} is not available, Fallback to en_US"
+  # Check locale
+  if ls /usr/share/i18n/locales | grep -q "\<${LOCALE}\>";then
+    msg "${LOCALE} is available"
+  else
+    msg "${LOCALE} is not available, Fallback to en_US"
     unset LOCALE
+  fi
+}
+
+if [ x$(installer_get "system_info_setup_after_reboot") != "xtrue" ]; then
+  setup_locale_timezone
 fi

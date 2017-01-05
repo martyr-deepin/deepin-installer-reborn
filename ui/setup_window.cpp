@@ -64,7 +64,7 @@ void SetupWindow::updateBackground() {
 }
 
 void SetupWindow::onSystemInfoFinished() {
-  // TODO(xushaohua): Call "hooks/setup_sys_info.sh".
+  // TODO(xushaohua): Call "hooks/first_boot_setup.sh".
 }
 
 }  // namespace installer

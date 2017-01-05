@@ -3,47 +3,46 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-if [ x$(installer_get "system_info_setup_after_reboot") = xtrue ]; then
-  exit 0
-fi
+# Setup username, password and hostname.
+setup_username_password() {
+  local DI_HOSTNAME DI_PASSWORD DI_USERNAME REAL_PASSWORD
+  DI_HOSTNAME=$(installer_get "DI_HOSTNAME")
+  DI_PASSWORD=$(installer_get "DI_PASSWORD")
+  DI_USERNAME=$(installer_get "DI_USERNAME")
 
-DI_HOSTNAME=$(installer_get "DI_HOSTNAME")
-DI_PASSWORD=$(installer_get "DI_PASSWORD")
-DI_USERNAME=$(installer_get "DI_USERNAME")
+  [ -z "${DI_USERNAME}" ] && error "Variable DI_USERNAME not set. Abort!"
+  [ -z "${DI_PASSWORD}" ] && error "Variable DI_PASSWORD not set. Abort!"
+  DI_HOSTNAME="${DI_HOSTNAME:-deepin}"
 
-[ -z ${DI_USERNAME} ] && error "[ERROR] Variable DI_USERNAME not set. Aborting"
-[ -z ${DI_PASSWORD} ] && error "[ERROR] Variable DI_PASSWORD not set. Aborting."
-DI_HOSTNAME="${DI_HOSTNAME:-deepin}"
+  # Reset password in settings file
+  installer_set "DI_PASSWORD" ""
 
-# Reset password in settings file
-installer_set "DI_PASSWORD" ""
+  # Update password.
+  useradd -U -m --skel /etc/skel --shell /bin/bash ${DI_USERNAME}
+  REAL_PASSWORD=$(echo "${DI_PASSWORD}" | base64 -d)
+  echo "${DI_USERNAME}:${REAL_PASSWORD}" | chpasswd
 
-if [ -x /bin/zsh ] ;then
-    useradd -U -m --skel /etc/skel --shell /bin/zsh ${DI_USERNAME} 
-else
-    useradd -U -m --skel /etc/skel --shell /bin/bash ${DI_USERNAME} 
-fi
-REAL_PASSWD=`echo ${DI_PASSWORD} | base64 -d -`
-echo ${DI_USERNAME}:"${REAL_PASSWD}" | chpasswd
-set +e
-gpasswd -a ${DI_USERNAME} sudo
-gpasswd -a ${DI_USERNAME} users
-gpasswd -a ${DI_USERNAME} wheel
-gpasswd -a ${DI_USERNAME} netdev
-gpasswd -a ${DI_USERNAME} storage
-gpasswd -a ${DI_USERNAME} lp
-gpasswd -a ${DI_USERNAME} scanner
-gpasswd -a ${DI_USERNAME} lpadmin
-gpasswd -a ${DI_USERNAME} network
-set -e 
+  # Add user to groups.
+  set +e
+  gpasswd -a ${DI_USERNAME} sudo
+  gpasswd -a ${DI_USERNAME} users
+  gpasswd -a ${DI_USERNAME} wheel
+  gpasswd -a ${DI_USERNAME} netdev
+  gpasswd -a ${DI_USERNAME} storage
+  gpasswd -a ${DI_USERNAME} lp
+  gpasswd -a ${DI_USERNAME} scanner
+  gpasswd -a ${DI_USERNAME} lpadmin
+  gpasswd -a ${DI_USERNAME} network
+  set -e
 
-echo "[INFO] Fix Home directory permission to ${DI_USERNAME}."
-chown -hR ${DI_USERNAME}:${DI_USERNAME} /home/${DI_USERNAME}
+  msg "Fix Home directory permission to ${DI_USERNAME}."
+  chown -hR "${DI_USERNAME}:${DI_USERNAME}" /home/${DI_USERNAME}
 
-echo "[INFO] Set Hostname to ${DI_HOSTNAME}"
-echo "${DI_HOSTNAME}" | tee /etc/hostname
+  # Setup hostname.
+  msg "Set Hostname to ${DI_HOSTNAME}"
+  echo "${DI_HOSTNAME}" | tee /etc/hostname
 
-cat > /etc/hosts <<EOF
+  cat > /etc/hosts << EOF
 127.0.0.1	localhost
 127.0.1.1   ${DI_HOSTNAME}
 
@@ -54,3 +53,8 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 EOF
+}
+
+if [ x$(installer_get "system_info_setup_after_reboot") != "xtrue" ]; then
+  setup_username_password
+fi

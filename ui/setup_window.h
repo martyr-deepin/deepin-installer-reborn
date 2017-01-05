@@ -14,7 +14,7 @@ namespace installer {
 
 class SystemInfoFrame;
 
-// Main window of deepin_installer_reboot_setup.
+// Main window of deepin_installer_first_boot.
 class SetupWindow : public QFrame {
   Q_OBJECT
 
@@ -38,7 +38,7 @@ class SetupWindow : public QFrame {
   QStackedLayout* stacked_layout_ = nullptr;
 
  private slots:
-  // Run "setup_sys_info.sh" after system_info_frame_ is finished.
+  // Run "first_boot_setup.sh" after system_info_frame_ is finished.
   void onSystemInfoFinished();
 };
 

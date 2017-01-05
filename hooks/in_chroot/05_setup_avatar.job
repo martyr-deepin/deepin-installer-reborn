@@ -1,21 +1,21 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright (c) 2016 Deepin Ltd. All rights reserved.
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-if [ x$(installer_get "system_info_setup_after_reboot") = xtrue ]; then
-  exit 0
+# Setup user avatar.
+setup_avatar() {
+  local DI_AVATAR DI_USERNAME USER_CONF AVATAR_FILE
+  DI_AVATAR=$(installer_get "DI_AVATAR")
+  DI_USERNAME=$(installer_get "DI_USERNAME")
+  USER_CONF="/var/lib/AccountService/users/${DI_USERNAME}"
+  AVATAR_FILE="file://${DI_AVATAR}"
+
+  if [ -f "${DI_AVATAR}" ]; then
+    deepin-installer-settings set "${USER_CONF}" "User" "Icon" "${AVATAR_FILE}"
+  fi
+}
+
+if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
+  setup_avatar
 fi
-
-DI_AVATAR=$(installer_get "DI_AVATAR")
-DI_USERNAME=$(installer_get "DI_USERNAME")
-
-USER_CONF=/var/lib/AccountService/users/${DI_USERNAME}
-AVATAR_FILE="file://${DI_AVATAR}"
-
-if [ -f "${DI_AVATAR}" ]; then
-  deepin-installer-settings set "${USER_CONF}" "User" "Icon" "${AVATAR_FILE}"
-fi
-
-exit 0
-
