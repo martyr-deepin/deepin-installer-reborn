@@ -3,14 +3,14 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-# refresh desktop cache
+# Refresh desktop cache
 
 DB_PATH=/var/cache/deepin-store/new-desktop.db
 DSTORE_BACKEND=/usr/lib/deepin-store/deepin-store-backend
-[ -e $DB_PATH ] && rm -f $DB_PATH
-[ -x $DSTORE_BACKEND ] && $DSTORE_BACKEND --init 
+[ -e "${DB_PATH}" ] && rm -f "${DB_PATH}"
+[ -x "${DSTORE_BACKEND}" ] && "${DSTORE_BACKEND}" --init
 
 if [ -x /var/lib/lastore/scripts/build_system_info ];then
-    /usr/bin/lastore-tools update -j=desktop -o /var/lib/lastore/ || true
+  /usr/bin/lastore-tools update -j=desktop -o /var/lib/lastore/ || true
 fi
-echo "[Info] refresh desktop cache done."
+msg "refresh desktop cache done."

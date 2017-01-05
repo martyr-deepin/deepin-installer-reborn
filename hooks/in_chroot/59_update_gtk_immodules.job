@@ -1,11 +1,11 @@
-#! /bin/sh
+#! /bin/bash
 # Copyright (c) 2016 Deepin Ltd. All rights reserved.
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-INFO="Refresh gtk2 and gtk3 im-modules cache"
+# Refresh gtk2 and gtk3 im-modules cache
 
-echo "[$0] ${INFO}"
+msg "Refresh gtk2 and gtk3 im-modules cache"
 if dpkg -l | grep -q ^ii\ \ libgtk2.0-0;then
 	dpkg-reconfigure libgtk2.0-0 || true
 fi

@@ -3,12 +3,5 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-# Copy deepin-version into /etc/
-
-SRC_FILE="${OEM_DIR}/deepin-version"
-DEST_FILE=/etc/deepin-version
-
-if [ -f "${SRC_FILE}" ]; then
-  cp -f "${SRC_FILE}" "${DEST_FILE}" || warn_exit "Failed to copy version file"
-  chmod a+r "${DEST_FILE}"
-fi
+# Update /etc/deepin-version.
+# TODO(xushaohua): Read version from settings file.

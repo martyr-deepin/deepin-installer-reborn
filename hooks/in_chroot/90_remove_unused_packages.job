@@ -10,35 +10,39 @@ declare -a REMOVE_PKGS
 
 DI_LUPIN=$(installer_get "DI_LUPIN")
 
-
+# Check whether btrfs filesystem is used in machine.
 detect_btrfs() {
-    for i in ` lsblk -o FSTYPE | sed '/^$/d' | uniq `;do
-        [ "${i}" = "btrfs" ] && return 0
-    done
-    return 1
+  for i in $(lsblk -o FSTYPE | sed '/^$/d' | uniq); do
+    [ "${i}" = "btrfs" ] && return 0
+  done
+  return 1
 }
 
+# Check whether current machine is virtualbox.
 detect_vbox() {
-    if dmidecode | grep -q "Product Name: VirtualBox";then
-        return 0
-    fi
-    return 1
+  if dmidecode | grep -q "Product Name: VirtualBox"; then
+    return 0
+  fi
+  return 1
 }
 
+# TODO(xushaohua): Support "setup_after_reboot"
 REMOVE_PKGS+=(deepin-installer)
-if grep -q boot=casper /proc/cmdline;then
-    REMOVE_PKGS+=("casper")
+
+if grep -q boot=casper /proc/cmdline; then
+  REMOVE_PKGS+=("casper")
 fi
-if grep -q boot=live /proc/cmdline;then
-    REMOVE_PKGS+=("live-boot*" "live-config*")
+if grep -q boot=live /proc/cmdline; then
+  REMOVE_PKGS+=("live-boot*" "live-config*")
 fi
 
 detect_btrfs || remove_pkgs+=("btrfs-tools")
-[ x${DI_LUPIN} = xtrue ] || remove_pkgs+=("lupin-support")
+[ x${DI_LUPIN} = "xtrue" ] || remove_pkgs+=("lupin-support")
 detect_vbox || remove_pkgs+=("virtualbox-guest-*")
 
-for pkg in ${remove_pkgs[@]};do
-    dpkg -l | grep -q $pkg && REMOVE_PKGS+=($pkg)
+# Remove selected packages.
+for pkg in ${remove_pkgs[@]}; do
+  dpkg -l | grep -q $pkg && REMOVE_PKGS+=($pkg)
 done
 
 apt-get -y purge ${REMOVE_PKGS[@]}

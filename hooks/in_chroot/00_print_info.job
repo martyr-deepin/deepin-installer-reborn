@@ -3,7 +3,7 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-echo "--------------------------Start In Chroot Hooks-----------------"
-
-echo "--------------------------Debug Info: mount-----------------"
+# Print system info
+blkid
 mount
+exit 0

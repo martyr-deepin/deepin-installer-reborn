@@ -23,8 +23,9 @@ if [ -n "${GRUB_TIMEOUT}" ]; then
 fi
 
 GRUB_BLOCK_WINDOWS=$(installer_get "grub_block_windows")
-if [ -n "${GRUB_BLOCK_WINDOWS}" ]; then
-  # Remove windows menu item from boot menu by disable os-prober and efi scanning.
+if [ x"${GRUB_BLOCK_WINDOWS}" = "xtrue" ]; then
+  # Remove windows menu item from boot menu by disable os-prober and
+  # uefi_firmware scanning.
   if [ -f "/etc/grub.d/30_os-prober" ]; then
     > /etc/grub.d/30_os-prober
   fi
@@ -38,14 +39,7 @@ OEM_GRUB_BACKGROUND="${OEM_DIR}/grub.png"
 GRUB_BACKGROUND=/boot/grub/themes/deepin/background.png
 GRUB_BACKGROUND_THUMB=/boot/grub/themes/deepin/background_thumb.png
 if [ -f "${OEM_GRUB_BACKGROUND}" ]; then
-  # Update background of boot menu.
-#  GRUB_BACKGROUND=$(deepin-installer-settings get "${GRUB_CONF}" "GRUB_BACKGROUND")
-#  if [ -n "${GRUB_BACKGROUND}" ]; then
-#    cp -v "${OEM_GRUB_BACKGROUND}" "${GRUB_BACKGROUND}"
-#    chmod 644 "${GRUB_BACKGROUND}"
-#    GRUB_NEED_UPDATE=true
-#  fi
-
+  # Update background of boot menu by overwriting old background image.
   cp -f "${OEM_GRUB_BACKGROUND}" "${GRUB_BACKGROUND}"
 
   # Generate thumbnail file.
@@ -54,6 +48,6 @@ if [ -f "${OEM_GRUB_BACKGROUND}" ]; then
   GRUB_NEED_UPDATE=true
 fi
 
-if [ x${GRUB_NEED_UPDATE} = xtrue ]; then
+if [ x${GRUB_NEED_UPDATE} = "xtrue" ]; then
   update-grub
 fi

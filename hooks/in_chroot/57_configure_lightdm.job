@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 # Copyright (c) 2016 Deepin Ltd. All rights reserved.
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
@@ -7,9 +7,9 @@
 # Update background of lightdm.
 
 if [ -f /etc/lightdm/lightdm.conf ]; then
-    sed -i -r -e "s|^#.*greeter-session=.*\$|greeter-session=lightdm-deepin-greeter|" \
+  sed -i -r -e "s|^#.*greeter-session=.*\$|greeter-session=lightdm-deepin-greeter|" \
     -e "s|^#.*user-session=.*\$|user-session=deepin|" \
-    /etc/lightdm/lightdm.conf
+  /etc/lightdm/lightdm.conf
 fi
 
 SRC_FILE="${OEM_DIR}/lightdm.png"
@@ -23,5 +23,6 @@ if [ -f "${SRC_FILE}" ]; then
   # Update lightdm background path in config file.
   USERNAME=$(installer_get "DI_USERNAME")
   USER_CONF="/var/lib/AccountsService/users/${USERNAME}"
-  deepin-installer-settings set "${USER_CONF}" Users GreeterBackground "${DEST_FILE}"
+  deepin-installer-settings set "${USER_CONF}" "Users" "GreeterBackground" \
+    "${DEST_FILE}"
 fi

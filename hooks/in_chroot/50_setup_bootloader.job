@@ -20,7 +20,6 @@ DI_HOST_DEV=$(installer_get "DI_HOST_DEV")
 DI_LUPIN=$(installer_get "DI_LUPIN")
 DI_UEFI=$(installer_get "DI_UEFI")
 
-
 # if no DI_BOOTLOADER, treat as not installing bootloader
 [ -z ${DI_BOOTLOADER} ] && \
   warn_exit "DI_BOOTLOADER not set. Treat as not install bootloader. Skip."
@@ -33,7 +32,8 @@ fi
 
 # Check SecureBoot option is enabled or not.
 if [ x${BOOT} = xuefi ]; then
-  value=$(od -An -t u1 /sys/firmware/efi/vars/SecureBoot-8be4df61-93ca-11d2-aa0d-00e098032b8c/data 2>/dev/null | sed s/[[:space:]]//g)
+  SB=/sys/firmware/efi/vars/SecureBoot-8be4df61-93ca-11d2-aa0d-00e098032b8c/data
+  value=$(od -An -t u1 "${SB}" 2>/dev/null | sed s/[[:space:]]//g)
   [ x${value} = x1 ] && echo "uefi-secure-boot detected"
 fi
 
@@ -44,11 +44,10 @@ case ${BOOT} in
       _type=$(grep '^Type=' /etc/deepin-version | cut -d '=' -f2)
       BOOTLOADER_ID="Deepin ${_type} ${_version}"
     fi
-  ;;
-
+    ;;
   "uefi")
     BOOTLOADER_ID="$(config_item GRUB_DISTRIBUTOR | tr A-Z a-z | cut -d' ' -f1)"
-  ;;
+    ;;
 esac
 
 BOOTLOADER_ID="${BOOTLOADER_ID:-deepin}"
@@ -71,17 +70,19 @@ case ${BOOT} in
 
     grub-install --no-floppy ${DI_BOOTLOADER} --target=i386-pc --force|| \
       error "grub-install failed! ${DI_BOOTLOADER}"
-  ;;
+    ;;
 
   "uefi")
     # try to get efi architecture
     if [ x$(cat /sys/firmware/efi/fw_platform_size 2>/dev/null) = 'x32' ]; then
-      apt-get install --no-install-recommends -y --allow-unauthenticated grub-efi-ia32
+      apt-get install --no-install-recommends -y --allow-unauthenticated \
+        grub-efi-ia32
       grub-install --target=i386-efi --efi-directory=/boot/efi \
         --bootloader-id="${BOOTLOADER_ID}" --recheck || \
         error "grub-install failed with efi! ${BOOTLOADER_ID}"
     else
-      # clover efi loader cannot grub.efi correctly, so we may patch grub or use grub.efi.signed.
+      # Clover efi loader cannot use grub.efi correctly,
+      # so we may patch grub or use grub.efi.signed.
       apt-get install --no-install-recommends -y --allow-unauthenticated \
         shim-signed grub-efi-amd64-signed efibootmgr
 
@@ -94,7 +95,7 @@ case ${BOOT} in
     # Copy signed grub efi file.
     [ -d /boot/efi/EFI/ubuntu ] || mkdir -p /boot/efi/EFI/ubuntu
     cp /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/ubuntu/
-  ;;
+    ;;
 esac
 
 # Try to avoid kernel update error when create symbol link
@@ -102,7 +103,7 @@ case ${BOOT} in
   "uefi")
     echo "# avoid kernel update fails with /boot on FAT32
 do_symlinks = no" | tee /etc/kernel-img.conf
-  ;;
+    ;;
 esac
 
 fix_boot_order(){
@@ -127,12 +128,12 @@ fix_boot_order(){
   for line in $bootinfo;do
     case $line in
       Boot[0-9A-F][0-9A-F][0-9A-F][0-9A-F]\*\ "${BOOTLOADER_ID}")
-      ;;
+        ;;
 
       Boot[0-9A-F][0-9A-F][0-9A-F][0-9A-F]\*\ ?*)
         line="${line%%\**}"
         orderids[${#orderids[@]}]="${line##Boot}"
-      ;;
+        ;;
     esac
   done
 
@@ -147,18 +148,18 @@ case ${BOOT} in
   uefi*)
     echo "Try to fix efi boot order to deepin first"
     fix_boot_order
-  ;;
-
+    ;;
   legacy)
-  ;;
-
+    ;;
   *)
-  ;;
+    ;;
 esac
 
 [ -x /usr/lib/deepin-daemon/grub2 ] && \
   /usr/lib/deepin-daemon/grub2 --setup --gfxmode="$DI_CUR_RESOLUTION"
-[ -e /etc/default/grub ] && sed -i 's|GRUB_CMDLINE_LINUX_DEFAULT=.*$|GRUB_CMDLINE_LINUX_DEFAULT="splash quiet"|g' /etc/default/grub
+[ -e /etc/default/grub ] && \
+  sed -i 's|^\(GRUB_CMDLINE_LINUX_DEFAULT\)=.*|\1="splash quiet"|g' \
+    /etc/default/grub
 
 # ignore uefi checking for windows partitions which effect by
 # /usr/lib/os-probes/mounted/20microsoft

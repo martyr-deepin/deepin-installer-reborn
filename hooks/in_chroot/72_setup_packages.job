@@ -11,9 +11,8 @@ if [ -d "${OEM_DEB}" ]; then
   dpkg -i "${OEM_DEB}"/*.deb || warn "Failed to install oem deb packages"
 fi
 
-UNINSTALLED_PACKAGES=$(installer_get "package_uninstalled_packages")
-if [ -n "${UNINSTALLED_PACKAGES}" ]; then
-  UNINSTALLED_PACKAGES=$(echo ${UNINSTALLED_PACKAGES} | sed "s/;/ /g")
-  apt-get -y purge "${UNINSTALLED_PACKAGES}" || \
-    warn_exit "Failed to install packages: ${UNINSTALLED_PACKAGES}"
+UNINSTALLED_PKGS=$(installer_get "package_uninstalled_packages" | sed "s/;/ /g")
+if [ -n "${UNINSTALLED_PKGS}" ]; then
+  apt-get -y purge "${UNINSTALLED_PKGS}" || \
+    warn_exit "Failed to install packages: ${UNINSTALLED_PKGS}"
 fi

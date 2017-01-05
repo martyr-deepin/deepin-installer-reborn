@@ -3,7 +3,10 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+# Install deepin-license-activator in Professional version
+
 if [ -f /etc/deepin-version ] && grep -qr "Professional" /etc/lsb-release; then
-	apt-get install --no-install-recommends -y --force-yes --allow-unauthenticated  deepin-license-activator
-	echo "install deepin-license-activator"
+	msg "install deepin-license-activator"
+	apt-get install --no-install-recommends -y --force-yes \
+	  --allow-unauthenticated  deepin-license-activator
 fi

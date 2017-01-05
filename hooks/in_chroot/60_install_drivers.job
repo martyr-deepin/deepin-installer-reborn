@@ -3,5 +3,6 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-# install drivers using ubuntu-drivers-common
-ubuntu-drivers autoinstall || echo "fialed to install drivers via 'ubuntu-drivers autoinstall'"
+# Install drivers with ubuntu-drivers-common
+ubuntu-drivers autoinstall || \
+  warn "Failed to install drivers via 'ubuntu-drivers autoinstall'"

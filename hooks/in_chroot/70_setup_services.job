@@ -7,8 +7,6 @@
 
 ENABLED_SERVICES=$(installer_get "service_enabled_services");
 if [ -n "${ENABLED_SERVICES}" ]; then
-  OLD_IFS=$IFS
-  IFS=';'
   for service_name in "${ENABLED_SERVICES}"; do
     if [ -n "${service_name}" ]; then
       # Only print warning message instead of quiting.
@@ -16,17 +14,15 @@ if [ -n "${ENABLED_SERVICES}" ]; then
         warn "Failed to enable service ${service_name}"
     fi
   done
-  IFS="$OLD_IFS"
 fi
 
-DISABLED_SERVICES=$(installer_get "service_disabled_services")
+DISABLED_SERVICES=$(installer_get "service_disabled_services" | sed "s/;/ /g")
 if [ -n "${DISABLED_SERVICES}" ]; then
-  IFS=';'
+  # Disable services one by one.
   for service_name in "${DISABLED_SERVICES}"; do
     if [ -n "${service_name}" ]; then
       systemctl disable "${service_name}" || \
         warn "Failed to disable service ${service_name}"
     fi
   done
-  IFS="$OLD_IFS"
 fi
