@@ -142,6 +142,34 @@ QString SettingsModel::defaultLocale() const {
   return GetSettingsString(kSelectLanguageDefaultLocale);
 }
 
+QString SettingsModel::vendorName() const {
+  return GetSettingsString(kSystemInfoVendorName);
+}
+
+bool SettingsModel::lockUsername() const {
+  return GetSettingsBool(kSystemInfoLockUsername);
+}
+
+bool SettingsModel::lockHostname() const {
+  return GetSettingsBool(kSystemInfoLockHostname);
+}
+
+bool SettingsModel::lockPassword() const {
+  return GetSettingsBool(kSystemInfoLockPassword);
+}
+
+QString SettingsModel::defaultUsername() const {
+  return GetSettingsString(kSystemInfoDefaultUsername);
+}
+
+QString SettingsModel::defaultHostname() const {
+  return GetSettingsString(kSystemInfoDefaultHostname);
+}
+
+QString SettingsModel::defaultPassword() const {
+  return GetSettingsString(kSystemInfoDefaultPassword);
+}
+
 void SettingsModel::setSkipDiskSpacePage(bool checked) {
   SetSettingsValue(kSkipDiskSpaceInsufficientPage, checked);
 }
@@ -168,6 +196,34 @@ void SettingsModel::setSkipPartitionPage(bool checked) {
 
 void SettingsModel::setDefaultLocale(const QString& locale) {
   SetSettingsValue(kSelectLanguageDefaultLocale, locale);
+}
+
+void SettingsModel::setVendorName(const QString& vendor) {
+  SetSettingsValue(kSystemInfoVendorName, vendor);
+}
+
+void SettingsModel::setLockUsername(bool checked) {
+  SetSettingsValue(kSystemInfoLockUsername, checked);
+}
+
+void SettingsModel::setLockHostname(bool checked) {
+  SetSettingsValue(kSystemInfoLockHostname, checked);
+}
+
+void SettingsModel::setLockPassword(bool checked) {
+  SetSettingsValue(kSystemInfoLockPassword, checked);
+}
+
+void SettingsModel::setDefaultUsername(const QString& username) {
+  SetSettingsValue(kSystemInfoDefaultUsername, username);
+}
+
+void SettingsModel::setDefaultHostname(const QString& hostname) {
+  SetSettingsValue(kSystemInfoDefaultHostname, hostname);
+}
+
+void SettingsModel::setDefaultPassword(const QString& password) {
+  SetSettingsValue(kSystemInfoDefaultPassword, password);
 }
 
 }  // namespace installer

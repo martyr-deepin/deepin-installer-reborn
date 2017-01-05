@@ -33,6 +33,15 @@ class SettingsModel : public QObject {
   // Language selection
   QString defaultLocale() const;
 
+  // System info
+  QString vendorName() const;
+  bool lockUsername() const;
+  bool lockHostname() const;
+  bool lockPassword() const;
+  QString defaultUsername() const;
+  QString defaultHostname() const;
+  QString defaultPassword() const;
+
  public slots:
   // Pages
   void setSkipDiskSpacePage(bool checked);
@@ -44,6 +53,15 @@ class SettingsModel : public QObject {
 
   // Language selection
   void setDefaultLocale(const QString& locale);
+
+  // System info
+  void setVendorName(const QString& vendor);
+  void setLockUsername(bool checked);
+  void setLockHostname(bool checked);
+  void setLockPassword(bool checked);
+  void setDefaultUsername(const QString& username);
+  void setDefaultHostname(const QString& hostname);
+  void setDefaultPassword(const QString& password);
 };
 
 }  // namespace installer

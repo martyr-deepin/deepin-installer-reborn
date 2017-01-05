@@ -63,6 +63,22 @@ void OemWindow::initConnections() {
   connect(default_locale_combo_,
           static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
           this, &OemWindow::onDefaultLocaleIndexChanged);
+
+  // System info
+  connect(vendor_name_edit_, &QLineEdit::textEdited,
+          settings_model_, &SettingsModel::setVendorName);
+  connect(lock_username_box_, &QCheckBox::toggled,
+          settings_model_, &SettingsModel::setLockUsername);
+  connect(lock_hostname_box_, &QCheckBox::toggled,
+          settings_model_, &SettingsModel::setLockHostname);
+  connect(lock_password_box_, &QCheckBox::toggled,
+          settings_model_, &SettingsModel::setLockPassword);
+  connect(default_username_edit_, &QLineEdit::textEdited,
+          settings_model_, &SettingsModel::setDefaultUsername);
+  connect(default_hostname_edit_, &QLineEdit::textEdited,
+          settings_model_, &SettingsModel::setDefaultHostname);
+  connect(default_password_edit_, &QLineEdit::textEdited,
+          settings_model_, &SettingsModel::setDefaultPassword);
 }
 
 void OemWindow::initUI() {
@@ -120,21 +136,36 @@ void OemWindow::initUI() {
   default_locale_layout->addWidget(default_locale_combo_);
 
   // System info
-  vendor_name_edit_ = new QLineEdit();
-  vendor_name_edit_->setPlaceholderText("vendor name");
-  os_name_edit_ = new QLineEdit();
-  os_name_edit_->setPlaceholderText("OS name");
-  os_version_edit_ = new QLineEdit();
-  os_version_edit_->setPlaceholderText("OS version");
-  use_default_username_button_ = new QCheckBox("Use default username");
-  use_default_hostname_button_ = new QCheckBox("Use default hostname");
-  use_default_password_button_ = new QCheckBox("Use default password");
-  default_username_edit_ = new QLineEdit();
-  default_username_edit_->setPlaceholderText("default username");
-  default_hostname_edit_ = new QLineEdit();
-  default_hostname_edit_->setPlaceholderText("default hostname");
-  default_password_edit_ = new QLineEdit();
-  default_password_edit_->setPlaceholderText("default password");
+  vendor_name_edit_ = new QLineEdit(this);
+  vendor_name_edit_->setPlaceholderText(tr("Vendor name"));
+  vendor_name_edit_->setText(settings_model_->vendorName());
+
+  lock_username_box_ = new QCheckBox(this);
+  lock_username_box_->setObjectName("lock_username_box");
+  lock_username_box_->setText(tr("Lock username"));
+  lock_username_box_->setChecked(settings_model_->lockUsername());
+  default_username_edit_ = new QLineEdit(this);
+  default_username_edit_->setObjectName("default_username_edit");
+  default_username_edit_->setPlaceholderText(tr("Default username"));
+  default_username_edit_->setText(settings_model_->defaultUsername());
+
+  lock_hostname_box_ = new QCheckBox(this);
+  lock_hostname_box_->setObjectName("lock_hostname_box");
+  lock_hostname_box_->setText(tr("Lock hostname"));
+  lock_hostname_box_->setChecked(settings_model_->lockHostname());
+  default_hostname_edit_ = new QLineEdit(this);
+  default_hostname_edit_->setObjectName("default_hostname_edit");
+  default_hostname_edit_->setPlaceholderText(tr("Default hostname"));
+  default_hostname_edit_->setText(settings_model_->defaultHostname());
+
+  lock_password_box_ = new QCheckBox(this);
+  lock_password_box_->setObjectName("lock_password_box");
+  lock_password_box_->setText(tr("Lock password"));
+  lock_password_box_->setChecked(settings_model_->lockPassword());
+  default_password_edit_ = new QLineEdit(this);
+  default_password_edit_->setObjectName("default_password_edit");
+  default_password_edit_->setPlaceholderText(tr("Default password"));
+  default_password_edit_->setText(settings_model_->defaultPassword());
 
   // Partition
   default_fs_combo_ = new QComboBox();
@@ -184,13 +215,11 @@ void OemWindow::initUI() {
 
   right_layout->addSpacing(kSectionSpace);
   right_layout->addWidget(vendor_name_edit_);
-  right_layout->addWidget(os_name_edit_);
-  right_layout->addWidget(os_version_edit_);
-  right_layout->addWidget(use_default_username_button_);
+  right_layout->addWidget(lock_username_box_);
   right_layout->addWidget(default_username_edit_);
-  right_layout->addWidget(use_default_hostname_button_);
+  right_layout->addWidget(lock_hostname_box_);
   right_layout->addWidget(default_hostname_edit_);
-  right_layout->addWidget(use_default_password_button_);
+  right_layout->addWidget(lock_password_box_);
   right_layout->addWidget(default_password_edit_);
 
   right_layout->addSpacing(kSectionSpace);

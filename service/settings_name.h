@@ -23,6 +23,9 @@ const char kSkipPartitionPage[] = "skip_partition_page";
 const char kSelectLanguageDefaultLocale[] = "select_language_default_locale";
 
 // System Info
+const char kSystemInfoDeepinVersion[] = "system_info_deepin_version";
+const char kSystemInfoLsbRelease[] = "system_info_lsb_release";
+const char kSystemInfoVendorName[] = "system_info_vendor_name";
 const char kSystemInfoSetupAfterReboot[] = "system_info_setup_after_reboot";
 const char kSystemInfoDefaultUsername[] = "system_info_default_username";
 const char kSystemInfoLockUsername[] = "system_info_lock_username";

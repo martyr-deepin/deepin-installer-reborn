@@ -45,15 +45,13 @@ class OemWindow : public QFrame {
   LanguageListModel* language_model_ = nullptr;
 
   // System info
-  QCheckBox* use_default_username_button_ = nullptr;
-  QCheckBox* use_default_hostname_button_ = nullptr;
-  QCheckBox* use_default_password_button_ = nullptr;
-  QLineEdit* default_username_edit_ = nullptr;
-  QLineEdit* default_hostname_edit_ = nullptr;
-  QLineEdit* default_password_edit_ = nullptr;
   QLineEdit* vendor_name_edit_ = nullptr;
-  QLineEdit* os_name_edit_ = nullptr;
-  QLineEdit* os_version_edit_ = nullptr;
+  QCheckBox* lock_username_box_ = nullptr;
+  QLineEdit* default_username_edit_ = nullptr;
+  QCheckBox* lock_hostname_box_ = nullptr;
+  QLineEdit* default_hostname_edit_ = nullptr;
+  QCheckBox* lock_password_box_ = nullptr;
+  QLineEdit* default_password_edit_ = nullptr;
 
   // Partition
   QComboBox* default_fs_combo_ = nullptr;
