@@ -10,11 +10,15 @@ class QCheckBox;
 class QComboBox;
 class QLabel;
 class QLineEdit;
+class QListView;
 class QPushButton;
 class QScrollArea;
 class QSlider;
+class QStringListModel;
 
 namespace installer {
+
+class SettingsModel;
 
 // Main window of deepin-installer-oem tool.
 class OemWindow : public QFrame {
@@ -28,14 +32,15 @@ class OemWindow : public QFrame {
   void initUI();
 
   // Pages
-  QCheckBox* skip_disk_space_insufficient_page_button_ = nullptr;
-  QCheckBox* skip_virtual_machine_page_button_ = nullptr;
-  QCheckBox* skip_select_language_page_button_ = nullptr;
-  QCheckBox* skip_system_info_page_button_ = nullptr;
-  QCheckBox* skip_partition_page_button_ = nullptr;
+  QCheckBox* disk_space_box_ = nullptr;
+  QCheckBox* virtual_machine_box_ = nullptr;
+  QCheckBox* language_box_ = nullptr;
+  QCheckBox* skip_partition_table_warning_button_ = nullptr;
+  QCheckBox* system_info_box_ = nullptr;
+  QCheckBox* partition_box_ = nullptr;
 
   // Language selection
-  QCheckBox* use_default_locale_button_ = nullptr;
+  QCheckBox* default_locale_box_ = nullptr;
   QComboBox* default_locale_combo_ = nullptr;
 
   // System info
@@ -68,11 +73,11 @@ class OemWindow : public QFrame {
   QLineEdit* enabled_services_edit_ = nullptr;
   QLineEdit* disabled_services_edit_ = nullptr;
 
+  QListView* category_view_ = nullptr;
+  QStringListModel* category_model_ = nullptr;
   QScrollArea* right_scroll_area_ = nullptr;
 
- private slots:
-  void onGrubTimeoutSliderValueChanged(int value);
-  void onGrubDisableWindowsButtonToggled(bool toggle);
+  SettingsModel* settings_model_ = nullptr;
 };
 
 }  // namespace installer

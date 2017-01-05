@@ -9,19 +9,18 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QListView>
 #include <QPushButton>
 #include <QScrollArea>
 #include <QSlider>
+#include <QSplitter>
+#include <QStringListModel>
 #include <QVBoxLayout>
 
-#include "service/system_language.h"
+#include "ui/oem/settings_model.h"
 
 namespace installer {
 namespace {
-
-const int kGrubTimeoutMinimum = 0;
-const int kGrubTimeoutMaximum = 30;
-
 // Add 20px between sections
 const int kSectionSpace = 20;
 
@@ -35,31 +34,66 @@ OemWindow::OemWindow(QWidget* parent) : QFrame(parent) {
 }
 
 void OemWindow::initConnections() {
-  connect(grub_timeout_slider_, &QSlider::valueChanged,
-          this, &OemWindow::onGrubTimeoutSliderValueChanged);
-  connect(grub_disable_windows_button_, &QCheckBox::toggled,
-          this, &OemWindow::onGrubDisableWindowsButtonToggled);
+  // Pages
+  connect(disk_space_box_, &QCheckBox::toggled,
+          settings_model_, &SettingsModel::setSkipDiskSpacePage);
+  connect(virtual_machine_box_, &QCheckBox::toggled,
+          settings_model_, &SettingsModel::setSkipVirtualMachinePage);
+  connect(language_box_, &QCheckBox::toggled,
+          settings_model_, &SettingsModel::setSkipLanguagePage);
+  connect(system_info_box_, &QCheckBox::toggled,
+          settings_model_, &SettingsModel::setSkipSystemInfoPage);
+  connect(partition_box_, &QCheckBox::toggled,
+          settings_model_, &SettingsModel::setSkipPartitionPage);
+
+  // Language selection
+  connect(default_locale_box_, &QCheckBox::toggled,
+          settings_model_, &SettingsModel::setUseDefaultLocale);
 }
 
 void OemWindow::initUI() {
+  settings_model_ = new SettingsModel(this);
+
   // Pages
-  skip_disk_space_insufficient_page_button_ =
-      new QCheckBox("Skip disk space insufficient page");
-  skip_virtual_machine_page_button_ =
-      new QCheckBox("Skip virtual machine warning page");
-  skip_select_language_page_button_ =
-      new QCheckBox("Skip language selection page");
-  skip_system_info_page_button_ = new QCheckBox("Skip system info page");
-  skip_partition_page_button_ = new QCheckBox("Skip partition page");
+  disk_space_box_ = new QCheckBox(this);
+  disk_space_box_->setObjectName("disk_space_box");
+  disk_space_box_->setText(tr("Skip disk space insufficient page"));
+  disk_space_box_->setChecked(settings_model_->skipDiskSpacePage());
+
+  virtual_machine_box_ = new QCheckBox(this);
+  virtual_machine_box_->setObjectName("virtual_machine_box");
+  virtual_machine_box_->setText(tr("Skip virtual machine warning page"));
+  virtual_machine_box_->setChecked(settings_model_->skipVirtualMachinePage());
+
+  language_box_ = new QCheckBox(this);
+  language_box_->setObjectName("language_box");
+  language_box_->setText(tr("Skip language selection page"));
+  language_box_->setChecked(settings_model_->skipLanguagePage());
+
+  system_info_box_ = new QCheckBox(this);
+  system_info_box_->setObjectName("system_info_box");
+  system_info_box_->setText(tr("Skip system info page"));
+  system_info_box_->setChecked(settings_model_->skipSystemInfoPage());
+
+  partition_box_ = new QCheckBox(this);
+  partition_box_->setObjectName("partition_box");
+  partition_box_->setText(tr("Skip partition page"));
+  partition_box_->setChecked(settings_model_->skipPartitionPage());
 
   // Language selection
-  use_default_locale_button_ = new QCheckBox("Use default locale");
-  QLabel* default_locale_label = new QLabel("Default locale:");
-  default_locale_combo_ = new QComboBox();
-  const LanguageList language_list = GetLanguageList();
-  for (const LanguageItem& language_item : language_list) {
-    default_locale_combo_->addItem(language_item.locale);
-  }
+  default_locale_box_ = new QCheckBox(this);
+  default_locale_box_->setObjectName("default_locale_box");
+  default_locale_box_->setText(tr("Use default locale"));
+  default_locale_box_->setChecked(settings_model_->useDefaultLocale());
+
+  QLabel* default_locale_label = new QLabel(this);
+  default_locale_label->setObjectName("default_locale_label");
+  default_locale_label->setText(tr("Default locale:"));
+
+  default_locale_combo_ = new QComboBox(this);
+  default_locale_combo_->setObjectName("default_locale_combo");
+  default_locale_combo_->addItems(settings_model_->languageList());
+
   QHBoxLayout* default_locale_layout = new QHBoxLayout();
   default_locale_layout->addWidget(default_locale_label);
   default_locale_layout->addWidget(default_locale_combo_);
@@ -89,8 +123,8 @@ void OemWindow::initUI() {
   QLabel* grub_timeout_label = new QLabel();
   grub_timeout_label->setText("Grub menu timeout:");
   grub_timeout_slider_ = new QSlider();
-  grub_timeout_slider_->setMinimum(kGrubTimeoutMinimum);
-  grub_timeout_slider_->setMaximum(kGrubTimeoutMaximum);
+//  grub_timeout_slider_->setMinimum(kGrubTimeoutMinimum);
+//  grub_timeout_slider_->setMaximum(kGrubTimeoutMaximum);
   grub_timeout_slider_->setOrientation(Qt::Horizontal);
   grub_timeout_value_label_ = new QLabel();
   QHBoxLayout* grub_timeout_layout = new QHBoxLayout();
@@ -118,14 +152,14 @@ void OemWindow::initUI() {
   disabled_services_edit_->setPlaceholderText("disabled services");
 
   QVBoxLayout* right_layout = new QVBoxLayout();
-  right_layout->addWidget(skip_disk_space_insufficient_page_button_);
-  right_layout->addWidget(skip_virtual_machine_page_button_);
-  right_layout->addWidget(skip_select_language_page_button_);
-  right_layout->addWidget(skip_system_info_page_button_);
-  right_layout->addWidget(skip_partition_page_button_);
+  right_layout->addWidget(disk_space_box_);
+  right_layout->addWidget(virtual_machine_box_);
+  right_layout->addWidget(language_box_);
+  right_layout->addWidget(system_info_box_);
+  right_layout->addWidget(partition_box_);
 
   right_layout->addSpacing(kSectionSpace);
-  right_layout->addWidget(use_default_locale_button_);
+  right_layout->addWidget(default_locale_box_);
   right_layout->addLayout(default_locale_layout);
 
   right_layout->addSpacing(kSectionSpace);
@@ -157,29 +191,43 @@ void OemWindow::initUI() {
   right_layout->addWidget(enabled_services_edit_);
   right_layout->addWidget(disabled_services_edit_);
 
-  QVBoxLayout* left_layout = new QVBoxLayout();
-  QFrame* left_frame = new QFrame();
-  left_frame->setLayout(left_layout);
-  QScrollArea* left_scroll_area = new QScrollArea();
-  left_scroll_area->setWidget(left_frame);
-
   QFrame* right_frame = new QFrame();
+  right_frame->setObjectName("right_frame");
+  right_frame->setContentsMargins(0, 0, 0, 0);
   right_frame->setLayout(right_layout);
+
   right_scroll_area_ = new QScrollArea();
   right_scroll_area_->setWidget(right_frame);
 
-  QHBoxLayout* layout = new QHBoxLayout();
-  layout->addWidget(left_scroll_area);
-  layout->addWidget(right_scroll_area_);
+  category_view_ = new QListView(this);
+  category_model_ = new QStringListModel(this);
+  category_view_->setModel(category_model_);
+  const QStringList categories = {
+      "Pages",
+      "System Info",
+      "Partition",
+      "Installation",
+      "Grub",
+      "Desktop",
+      "Packages",
+      "Services",
+      "Miscellaneous",
+  };
+  category_model_->setStringList(categories);
+
+  QSplitter* splitter = new QSplitter(this);
+  splitter->setContentsMargins(0, 0, 0, 0);
+  splitter->addWidget(category_view_);
+  splitter->addWidget(right_scroll_area_);
+
+  // TODO(xushaohua): Add buttons
+  QHBoxLayout* layout = new QHBoxLayout(this);
+  layout->setContentsMargins(0, 0, 0, 0);
+  layout->setSpacing(0);
+  layout->addWidget(splitter);
+
+  this->setContentsMargins(0, 0, 0, 0);
   this->setLayout(layout);
-}
-
-void OemWindow::onGrubTimeoutSliderValueChanged(int value) {
-  grub_timeout_value_label_->setText(QString("%1 s").arg(value));
-}
-
-void OemWindow::onGrubDisableWindowsButtonToggled(bool toggle) {
-  Q_UNUSED(toggle);
 }
 
 }  // namespace installer

@@ -434,6 +434,8 @@ add_executable(deepin-installer-oem
                app/deepin_installer_oem.cpp
                ui/oem/oem_window.cpp
                ui/oem/oem_window.h
+               ui/oem/settings_model.cpp
+               ui/oem/settings_model.h
                ui/widgets/section_label.cpp
                ui/widgets/section_label.h
 
