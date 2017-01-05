@@ -432,8 +432,8 @@ target_link_libraries(deepin-installer-first-boot ${LINK_LIBS})
 # deepin-installer-oem
 add_executable(deepin-installer-oem
                app/deepin_installer_oem.cpp
-               ui/oem_window.cpp
-               ui/oem_window.h
+               ui/oem/oem_window.cpp
+               ui/oem/oem_window.h
                ui/widgets/section_label.cpp
                ui/widgets/section_label.h
 

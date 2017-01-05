@@ -31,7 +31,7 @@ class SelectLanguageFrame;
 class SystemInfoFrame;
 class VirtualMachineFrame;
 
-// MainWindow is a fullscreen window.
+// MainWindow is a fullscreen window of deepin-installer-reborn.
 // All of ui frames are placed in MainWindow.
 // It does following jobs:
 //   * draw window background with a blur image;

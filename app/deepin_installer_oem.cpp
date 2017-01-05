@@ -7,7 +7,7 @@
 #include <QApplication>
 
 #include "base/consts.h"
-#include "ui/oem_window.h"
+#include "ui/oem/oem_window.h"
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
