@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/setup_window.h"
+#include "ui/first_boot_setup_window.h"
 
 #include <QDebug>
 #include <QLabel>
@@ -14,28 +14,28 @@
 
 namespace installer {
 
-SetupWindow::SetupWindow(QWidget *parent) : QFrame(parent) {
-  this->setObjectName("setup_window");
+FirstBootSetupWindow::FirstBootSetupWindow(QWidget *parent) : QFrame(parent) {
+  this->setObjectName("first_boot_setup_window");
 
   this->initUI();
   this->initConnections();
 }
 
-void SetupWindow::fullscreen() {
+void FirstBootSetupWindow::fullscreen() {
   this->showFullScreen();
 }
 
-void SetupWindow::resizeEvent(QResizeEvent *event) {
+void FirstBootSetupWindow::resizeEvent(QResizeEvent *event) {
   this->updateBackground();
   QFrame::resizeEvent(event);
 }
 
-void SetupWindow::initConnections() {
+void FirstBootSetupWindow::initConnections() {
   connect(system_info_frame_, &SystemInfoFrame::finished,
-          this, &SetupWindow::onSystemInfoFinished);
+          this, &FirstBootSetupWindow::onSystemInfoFinished);
 }
 
-void SetupWindow::initUI() {
+void FirstBootSetupWindow::initUI() {
   background_label_ = new QLabel(this);
 
   system_info_frame_ = new SystemInfoFrame(this);
@@ -50,7 +50,7 @@ void SetupWindow::initUI() {
   this->setContentsMargins(0, 36, 0, 36);
 }
 
-void SetupWindow::updateBackground() {
+void FirstBootSetupWindow::updateBackground() {
   if (!background_label_) {
     qWarning() << "background_label is not initialized!";
     return;
@@ -63,7 +63,7 @@ void SetupWindow::updateBackground() {
   background_label_->setFixedSize(size());
 }
 
-void SetupWindow::onSystemInfoFinished() {
+void FirstBootSetupWindow::onSystemInfoFinished() {
   // TODO(xushaohua): Call "hooks/first_boot_setup.sh".
 }
 

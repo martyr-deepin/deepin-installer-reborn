@@ -15,11 +15,11 @@ namespace installer {
 class SystemInfoFrame;
 
 // Main window of deepin_installer_first_boot.
-class SetupWindow : public QFrame {
+class FirstBootSetupWindow : public QFrame {
   Q_OBJECT
 
  public:
-  explicit SetupWindow(QWidget* parent = nullptr);
+  explicit FirstBootSetupWindow(QWidget* parent = nullptr);
 
   // Show fullscreen.
   void fullscreen();

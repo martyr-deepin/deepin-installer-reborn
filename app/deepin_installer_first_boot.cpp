@@ -13,7 +13,7 @@
 #include "service/log_manager.h"
 #include "service/settings_manager.h"
 #include "sysinfo/users.h"
-#include "ui/setup_window.h"
+#include "ui/first_boot_setup_window.h"
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     qCritical() << "Root privilege is required!";
   }
 
-  installer::SetupWindow window;
+  installer::FirstBootSetupWindow window;
   window.fullscreen();
 
   return app.exec();

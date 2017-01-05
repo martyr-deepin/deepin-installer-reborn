@@ -414,8 +414,8 @@ target_link_libraries(deepin-installer-settings ${QtCore_LIBS})
 # Reboot setup
 add_executable(deepin-installer-first-boot
                app/deepin_installer_first_boot.cpp
-               ui/setup_window.cpp
-               ui/setup_window.h
+               ui/first_boot_setup_window.cpp
+               ui/first_boot_setup_window.h
 
                ${BASE_FILES}
                ${PARTMAN_FILES}
