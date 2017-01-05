@@ -4,8 +4,10 @@
 
 #include "ui/oem/settings_model.h"
 
+#include <QCheckBox>
 #include <QDebug>
 #include <QDir>
+#include <QLineEdit>
 #include <QSettings>
 
 #include "service/settings_name.h"
@@ -114,116 +116,34 @@ bool SettingsModel::initOemFolder() {
   return true;
 }
 
-bool SettingsModel::skipDiskSpacePage() const {
-  return GetSettingsBool(kSkipDiskSpaceInsufficientPage);
+QCheckBox* SettingsModel::addCheckBox(const QString& property) {
+  QCheckBox* check_box = new QCheckBox();
+  check_box->setObjectName("check_box");
+  check_box->setChecked(GetSettingsBool(property));
+  connect(check_box, &QCheckBox::toggled,
+          [&](bool checked) {
+            SetSettingsValue(property, checked);
+          });
+  return check_box;
 }
 
-bool SettingsModel::skipVirtualMachinePage() const {
-  return GetSettingsBool(kSkipVirtualMachinePage);
-}
-
-bool SettingsModel::skipLanguagePage() const {
-  return GetSettingsBool(kSkipSelectLanguagePage);
-}
-
-bool SettingsModel::skipTableWarningPage() const {
-  return GetSettingsBool(kSkipPartitionTableWarningPage);
-}
-
-bool SettingsModel::skipSystemInfoPage() const {
-  return GetSettingsBool(kSkipSystemInfoPage);
-}
-
-bool SettingsModel::skipPartitionPage() const {
-  return GetSettingsBool(kSkipPartitionPage);
+QLineEdit* SettingsModel::addLineEdit(const QString& property) {
+  QLineEdit* line_edit = new QLineEdit();
+  line_edit->setObjectName("line_edit");
+  line_edit->setText(GetSettingsString(property));
+  connect(line_edit, &QLineEdit::textChanged,
+          [&](const QString& text) {
+            SetSettingsValue(property, text);
+          });
+  return line_edit;
 }
 
 QString SettingsModel::defaultLocale() const {
   return GetSettingsString(kSelectLanguageDefaultLocale);
 }
 
-QString SettingsModel::vendorName() const {
-  return GetSettingsString(kSystemInfoVendorName);
-}
-
-bool SettingsModel::lockUsername() const {
-  return GetSettingsBool(kSystemInfoLockUsername);
-}
-
-bool SettingsModel::lockHostname() const {
-  return GetSettingsBool(kSystemInfoLockHostname);
-}
-
-bool SettingsModel::lockPassword() const {
-  return GetSettingsBool(kSystemInfoLockPassword);
-}
-
-QString SettingsModel::defaultUsername() const {
-  return GetSettingsString(kSystemInfoDefaultUsername);
-}
-
-QString SettingsModel::defaultHostname() const {
-  return GetSettingsString(kSystemInfoDefaultHostname);
-}
-
-QString SettingsModel::defaultPassword() const {
-  return GetSettingsString(kSystemInfoDefaultPassword);
-}
-
-void SettingsModel::setSkipDiskSpacePage(bool checked) {
-  SetSettingsValue(kSkipDiskSpaceInsufficientPage, checked);
-}
-
-void SettingsModel::setSkipVirtualMachinePage(bool checked) {
-  SetSettingsValue(kSkipVirtualMachinePage, checked);
-}
-
-void SettingsModel::setSkipLanguagePage(bool checked) {
-  SetSettingsValue(kSkipSelectLanguagePage, checked);
-}
-
-void SettingsModel::setSkipTableWarningPage(bool checked) {
-  SetSettingsValue(kSkipPartitionTableWarningPage, checked);
-}
-
-void SettingsModel::setSkipSystemInfoPage(bool checked) {
-  SetSettingsValue(kSkipSystemInfoPage, checked);
-}
-
-void SettingsModel::setSkipPartitionPage(bool checked) {
-  SetSettingsValue(kSkipPartitionPage, checked);
-}
-
 void SettingsModel::setDefaultLocale(const QString& locale) {
   SetSettingsValue(kSelectLanguageDefaultLocale, locale);
-}
-
-void SettingsModel::setVendorName(const QString& vendor) {
-  SetSettingsValue(kSystemInfoVendorName, vendor);
-}
-
-void SettingsModel::setLockUsername(bool checked) {
-  SetSettingsValue(kSystemInfoLockUsername, checked);
-}
-
-void SettingsModel::setLockHostname(bool checked) {
-  SetSettingsValue(kSystemInfoLockHostname, checked);
-}
-
-void SettingsModel::setLockPassword(bool checked) {
-  SetSettingsValue(kSystemInfoLockPassword, checked);
-}
-
-void SettingsModel::setDefaultUsername(const QString& username) {
-  SetSettingsValue(kSystemInfoDefaultUsername, username);
-}
-
-void SettingsModel::setDefaultHostname(const QString& hostname) {
-  SetSettingsValue(kSystemInfoDefaultHostname, hostname);
-}
-
-void SettingsModel::setDefaultPassword(const QString& password) {
-  SetSettingsValue(kSystemInfoDefaultPassword, password);
 }
 
 }  // namespace installer

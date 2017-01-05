@@ -6,6 +6,8 @@
 #define INSTALLER_UI_OEM_SETTINGS_MODEL_H
 
 #include <QObject>
+class QCheckBox;
+class QLineEdit;
 
 namespace installer {
 
@@ -22,46 +24,18 @@ class SettingsModel : public QObject {
   // Call this method before accessing any other methods of this class.
   bool initOemFolder();
 
-  // Pages
-  bool skipDiskSpacePage() const;
-  bool skipVirtualMachinePage() const;
-  bool skipLanguagePage() const;
-  bool skipTableWarningPage() const;
-  bool skipSystemInfoPage() const;
-  bool skipPartitionPage() const;
+  // Create a QCheckBox widget, binding to |property|.
+  virtual QCheckBox* addCheckBox(const QString& property);
+
+  // Create a QLineEdit widget, binding to |property|.
+  virtual QLineEdit* addLineEdit(const QString& property);
 
   // Language selection
   QString defaultLocale() const;
 
-  // System info
-  QString vendorName() const;
-  bool lockUsername() const;
-  bool lockHostname() const;
-  bool lockPassword() const;
-  QString defaultUsername() const;
-  QString defaultHostname() const;
-  QString defaultPassword() const;
-
  public slots:
-  // Pages
-  void setSkipDiskSpacePage(bool checked);
-  void setSkipVirtualMachinePage(bool checked);
-  void setSkipLanguagePage(bool checked);
-  void setSkipTableWarningPage(bool checked);
-  void setSkipSystemInfoPage(bool checked);
-  void setSkipPartitionPage(bool checked);
-
-  // Language selection
+   // Language selection
   void setDefaultLocale(const QString& locale);
-
-  // System info
-  void setVendorName(const QString& vendor);
-  void setLockUsername(bool checked);
-  void setLockHostname(bool checked);
-  void setLockPassword(bool checked);
-  void setDefaultUsername(const QString& username);
-  void setDefaultHostname(const QString& hostname);
-  void setDefaultPassword(const QString& password);
 };
 
 }  // namespace installer

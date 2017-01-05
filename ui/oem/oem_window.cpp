@@ -18,6 +18,7 @@
 #include <QStringListModel>
 #include <QVBoxLayout>
 
+#include "service/settings_name.h"
 #include "ui/oem/language_list_model.h"
 #include "ui/oem/settings_model.h"
 
@@ -45,73 +46,32 @@ OemWindow::OemWindow(QWidget* parent) : QFrame(parent) {
 }
 
 void OemWindow::initConnections() {
-  // Pages
-  connect(disk_space_box_, &QCheckBox::toggled,
-          settings_model_, &SettingsModel::setSkipDiskSpacePage);
-  connect(virtual_machine_box_, &QCheckBox::toggled,
-          settings_model_, &SettingsModel::setSkipVirtualMachinePage);
-  connect(skip_language_box_, &QCheckBox::toggled,
-          settings_model_, &SettingsModel::setSkipLanguagePage);
-  connect(table_warning_box_, &QCheckBox::toggled,
-          settings_model_, &SettingsModel::setSkipTableWarningPage);
-  connect(system_info_box_, &QCheckBox::toggled,
-          settings_model_, &SettingsModel::setSkipSystemInfoPage);
-  connect(partition_box_, &QCheckBox::toggled,
-          settings_model_, &SettingsModel::setSkipPartitionPage);
-
   // Language selection
   connect(default_locale_combo_,
           static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
           this, &OemWindow::onDefaultLocaleIndexChanged);
-
-  // System info
-  connect(vendor_name_edit_, &QLineEdit::textEdited,
-          settings_model_, &SettingsModel::setVendorName);
-  connect(lock_username_box_, &QCheckBox::toggled,
-          settings_model_, &SettingsModel::setLockUsername);
-  connect(lock_hostname_box_, &QCheckBox::toggled,
-          settings_model_, &SettingsModel::setLockHostname);
-  connect(lock_password_box_, &QCheckBox::toggled,
-          settings_model_, &SettingsModel::setLockPassword);
-  connect(default_username_edit_, &QLineEdit::textEdited,
-          settings_model_, &SettingsModel::setDefaultUsername);
-  connect(default_hostname_edit_, &QLineEdit::textEdited,
-          settings_model_, &SettingsModel::setDefaultHostname);
-  connect(default_password_edit_, &QLineEdit::textEdited,
-          settings_model_, &SettingsModel::setDefaultPassword);
 }
 
 void OemWindow::initUI() {
   // Pages
-  disk_space_box_ = new QCheckBox(this);
-  disk_space_box_->setObjectName("disk_space_box");
-  disk_space_box_->setText(tr("Skip disk space insufficient page"));
-  disk_space_box_->setChecked(settings_model_->skipDiskSpacePage());
+  QCheckBox* disk_space_box = settings_model_->addCheckBox(
+      kSkipDiskSpaceInsufficientPage);
+  disk_space_box->setText(tr("Skip disk space insufficient page"));
+  QCheckBox* virtual_machine_box = settings_model_->addCheckBox(
+      kSkipVirtualMachinePage);
+  virtual_machine_box->setText(tr("Skip virtual machine warning page"));
+  QCheckBox* skip_language_box = settings_model_->addCheckBox(
+      kSkipSelectLanguagePage);
+  skip_language_box->setText(tr("Skip language selection page"));
+  QCheckBox* table_warning_box = settings_model_->addCheckBox(
+      kSkipPartitionTableWarningPage);
+  table_warning_box->setText(tr("Skip partition table warning page"));
+  QCheckBox* system_info_box = settings_model_->addCheckBox(
+      kSkipSystemInfoPage);
+  system_info_box->setText(tr("Skip system info page"));
 
-  virtual_machine_box_ = new QCheckBox(this);
-  virtual_machine_box_->setObjectName("virtual_machine_box");
-  virtual_machine_box_->setText(tr("Skip virtual machine warning page"));
-  virtual_machine_box_->setChecked(settings_model_->skipVirtualMachinePage());
-
-  skip_language_box_ = new QCheckBox(this);
-  skip_language_box_->setObjectName("skip_language_box");
-  skip_language_box_->setText(tr("Skip language selection page"));
-  skip_language_box_->setChecked(settings_model_->skipLanguagePage());
-
-  table_warning_box_ = new QCheckBox(this);
-  table_warning_box_->setObjectName("table_warning_box");
-  table_warning_box_->setText(tr("Skip partition table warning page"));
-  table_warning_box_->setChecked(settings_model_->skipTableWarningPage());
-
-  system_info_box_ = new QCheckBox(this);
-  system_info_box_->setObjectName("system_info_box");
-  system_info_box_->setText(tr("Skip system info page"));
-  system_info_box_->setChecked(settings_model_->skipSystemInfoPage());
-
-  partition_box_ = new QCheckBox(this);
-  partition_box_->setObjectName("partition_box");
-  partition_box_->setText(tr("Skip partition page"));
-  partition_box_->setChecked(settings_model_->skipPartitionPage());
+  QCheckBox* partition_box = settings_model_->addCheckBox(kSkipPartitionPage);
+  partition_box->setText(tr("Skip partition page"));
 
   // Language selection
   QLabel* default_locale_label = new QLabel(this);
@@ -136,36 +96,30 @@ void OemWindow::initUI() {
   default_locale_layout->addWidget(default_locale_combo_);
 
   // System info
-  vendor_name_edit_ = new QLineEdit(this);
+  QLineEdit* vendor_name_edit_ = settings_model_->addLineEdit(
+      kSystemInfoVendorName);
   vendor_name_edit_->setPlaceholderText(tr("Vendor name"));
-  vendor_name_edit_->setText(settings_model_->vendorName());
 
-  lock_username_box_ = new QCheckBox(this);
-  lock_username_box_->setObjectName("lock_username_box");
+  QCheckBox* lock_username_box_ = settings_model_->addCheckBox(
+      kSystemInfoLockUsername);
   lock_username_box_->setText(tr("Lock username"));
-  lock_username_box_->setChecked(settings_model_->lockUsername());
-  default_username_edit_ = new QLineEdit(this);
-  default_username_edit_->setObjectName("default_username_edit");
+  QLineEdit* default_username_edit_ = settings_model_->addLineEdit(
+      kSystemInfoDefaultUsername);
   default_username_edit_->setPlaceholderText(tr("Default username"));
-  default_username_edit_->setText(settings_model_->defaultUsername());
 
-  lock_hostname_box_ = new QCheckBox(this);
-  lock_hostname_box_->setObjectName("lock_hostname_box");
+  QCheckBox* lock_hostname_box_ = settings_model_->addCheckBox(
+      kSystemInfoLockHostname);
   lock_hostname_box_->setText(tr("Lock hostname"));
-  lock_hostname_box_->setChecked(settings_model_->lockHostname());
-  default_hostname_edit_ = new QLineEdit(this);
-  default_hostname_edit_->setObjectName("default_hostname_edit");
+  QLineEdit* default_hostname_edit_ = settings_model_->addLineEdit(
+      kSystemInfoDefaultHostname);
   default_hostname_edit_->setPlaceholderText(tr("Default hostname"));
-  default_hostname_edit_->setText(settings_model_->defaultHostname());
 
-  lock_password_box_ = new QCheckBox(this);
-  lock_password_box_->setObjectName("lock_password_box");
+  QCheckBox* lock_password_box_ = settings_model_->addCheckBox(
+      kSystemInfoLockPassword);
   lock_password_box_->setText(tr("Lock password"));
-  lock_password_box_->setChecked(settings_model_->lockPassword());
-  default_password_edit_ = new QLineEdit(this);
-  default_password_edit_->setObjectName("default_password_edit");
+  QLineEdit* default_password_edit_ = settings_model_->addLineEdit(
+      kSystemInfoDefaultPassword);
   default_password_edit_->setPlaceholderText(tr("Default password"));
-  default_password_edit_->setText(settings_model_->defaultPassword());
 
   // Partition
   default_fs_combo_ = new QComboBox();
@@ -189,26 +143,52 @@ void OemWindow::initUI() {
   // Packages
   uninstalled_packages_edit_ = new QLineEdit();
   uninstalled_packages_edit_->setPlaceholderText("packages to be uninstalled");
+  uninstalled_packages_edit_->setToolTip(
+      uninstalled_packages_edit_->placeholderText());
   hold_packages_edit_ = new QLineEdit();
   hold_packages_edit_->setPlaceholderText(
       "packages to be prevented from uninstalling");
+  hold_packages_edit_->setToolTip(hold_packages_edit_->placeholderText());
 
-  // Dock
-  append_apps_to_dock_edit_ = new QLineEdit();
-  append_apps_to_dock_edit_->setPlaceholderText("apps appending to dock");
+  // Desktop
+  QLineEdit* dde_dock_app_list = settings_model_->addLineEdit(kDdeDockAppList);
+  dde_dock_app_list->setPlaceholderText(tr("apps to be added to dock"));
+  dde_dock_app_list->setToolTip(dde_dock_app_list->placeholderText());
+  QLineEdit* dde_launcher_app_list = settings_model_->addLineEdit(
+      kDdeLauncherAppList);
+  dde_launcher_app_list->setPlaceholderText(tr("apps to be added to launcher"));
+  dde_launcher_app_list->setToolTip(dde_launcher_app_list->placeholderText());
+  QLineEdit* dde_launcher_hold_packages = settings_model_->addLineEdit(
+      kDdeLauncherHoldPackages);
+  dde_launcher_hold_packages->setPlaceholderText(
+      tr("apps to be prevented from uninstall in launcher"));
+  dde_launcher_hold_packages->setToolTip(
+      dde_launcher_hold_packages->placeholderText());
+  QLineEdit* dde_desktop_content = settings_model_->addLineEdit(
+      kDdeDesktopDesktopContent);
+  dde_desktop_content->setPlaceholderText(tr("Set desktop content"));
+  dde_desktop_content->setToolTip(dde_desktop_content->placeholderText());
+  QLineEdit* dde_sound_effects = settings_model_->addLineEdit(
+      kDdeSoundEffectSwitches);
+  dde_sound_effects->setPlaceholderText(tr("Set sound effect switches"));
+  dde_sound_effects->setToolTip(dde_sound_effects->placeholderText());
 
   // Services
-  enabled_services_edit_ = new QLineEdit();
-  enabled_services_edit_->setPlaceholderText("enabled services");
-  disabled_services_edit_ = new QLineEdit();
-  disabled_services_edit_->setPlaceholderText("disabled services");
+  QLineEdit* enabled_services = settings_model_->addLineEdit(
+      kServiceEnabledServices);
+  enabled_services->setPlaceholderText(tr("enabled services"));
+  enabled_services->setToolTip(enabled_services->placeholderText());
+  QLineEdit* disabled_services = settings_model_->addLineEdit(
+      kServiceDisabledServices);
+  disabled_services->setPlaceholderText(tr("disabled services"));
+  disabled_services->setToolTip(disabled_services->placeholderText());
 
   QVBoxLayout* right_layout = new QVBoxLayout();
-  right_layout->addWidget(disk_space_box_);
-  right_layout->addWidget(virtual_machine_box_);
-  right_layout->addWidget(skip_language_box_);
-  right_layout->addWidget(system_info_box_);
-  right_layout->addWidget(partition_box_);
+  right_layout->addWidget(disk_space_box);
+  right_layout->addWidget(virtual_machine_box);
+  right_layout->addWidget(skip_language_box);
+  right_layout->addWidget(system_info_box);
+  right_layout->addWidget(partition_box);
 
   right_layout->addSpacing(kSectionSpace);
   right_layout->addLayout(default_locale_layout);
@@ -234,11 +214,15 @@ void OemWindow::initUI() {
   right_layout->addWidget(hold_packages_edit_);
 
   right_layout->addSpacing(kSectionSpace);
-  right_layout->addWidget(append_apps_to_dock_edit_);
+  right_layout->addWidget(dde_dock_app_list);
+  right_layout->addWidget(dde_launcher_app_list);
+  right_layout->addWidget(dde_launcher_hold_packages);
+  right_layout->addWidget(dde_desktop_content);
+  right_layout->addWidget(dde_sound_effects);
 
   right_layout->addSpacing(kSectionSpace);
-  right_layout->addWidget(enabled_services_edit_);
-  right_layout->addWidget(disabled_services_edit_);
+  right_layout->addWidget(enabled_services);
+  right_layout->addWidget(disabled_services);
 
   QFrame* right_frame = new QFrame();
   right_frame->setObjectName("right_frame");

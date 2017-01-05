@@ -32,26 +32,9 @@ class OemWindow : public QFrame {
   void initConnections();
   void initUI();
 
-  // Pages
-  QCheckBox* disk_space_box_ = nullptr;
-  QCheckBox* virtual_machine_box_ = nullptr;
-  QCheckBox* skip_language_box_ = nullptr;
-  QCheckBox* table_warning_box_ = nullptr;
-  QCheckBox* system_info_box_ = nullptr;
-  QCheckBox* partition_box_ = nullptr;
-
   // Language selection
   QComboBox* default_locale_combo_ = nullptr;
   LanguageListModel* language_model_ = nullptr;
-
-  // System info
-  QLineEdit* vendor_name_edit_ = nullptr;
-  QCheckBox* lock_username_box_ = nullptr;
-  QLineEdit* default_username_edit_ = nullptr;
-  QCheckBox* lock_hostname_box_ = nullptr;
-  QLineEdit* default_hostname_edit_ = nullptr;
-  QCheckBox* lock_password_box_ = nullptr;
-  QLineEdit* default_password_edit_ = nullptr;
 
   // Partition
   QComboBox* default_fs_combo_ = nullptr;
@@ -64,13 +47,6 @@ class OemWindow : public QFrame {
   // Packages
   QLineEdit* uninstalled_packages_edit_ = nullptr;
   QLineEdit* hold_packages_edit_ = nullptr;
-
-  // Dock
-  QLineEdit* append_apps_to_dock_edit_ = nullptr;
-
-  // Service
-  QLineEdit* enabled_services_edit_ = nullptr;
-  QLineEdit* disabled_services_edit_ = nullptr;
 
   QListView* category_view_ = nullptr;
   QStringListModel* category_model_ = nullptr;

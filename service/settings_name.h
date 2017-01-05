@@ -100,6 +100,17 @@ const char kDiskLogFilePath[] = "disk_log_file_path";
 // Install failed page
 const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";
 
+// Desktop
+const char kDdeDockAppList[] = "dde_dock_app_list";
+const char kDdeLauncherAppList[] = "dde_launcher_app_list";
+const char kDdeLauncherHoldPackages[] = "dde_launcher_hold_packages";
+const char kDdeDesktopDesktopContent[] = "dde_desktop_desktop_content";
+const char kDdeSoundEffectSwitches[] = "dde_sound_effect_switches";
+
+// Service
+const char kServiceEnabledServices[] = "service_enabled_services";
+const char kServiceDisabledServices[] = "service_disabled_services";
+
 }  // namespace installer
 
 #endif  // INSTALLER_SERVICE_SETTINGS_NAME_H
