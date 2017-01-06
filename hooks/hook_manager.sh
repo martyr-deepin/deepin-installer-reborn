@@ -11,7 +11,10 @@
 # Do not read from/write to this file, call installer_get/installer_set instead.
 CONF_FILE=/etc/deepin-installer.conf
 
-. ./basic_utils.sh
+# Folder path of hooks.
+HOOKS_DIR=/tmp/installer-reborn
+
+. "${HOOKS_DIR}/basic_utils.sh"
 
 # Check arguments
 if [ $# -lt 1 ]; then
@@ -20,7 +23,7 @@ fi
 
 # Absolute path of hook_manager.sh in chroot env.
 # This path is defined in service/backend/hooks_pack.cpp.
-_SELF=/tmp/installer-reborn/hook_manager.sh
+_SELF="${HOOKS_DIR}/hook_manager.sh"
 _HOOK_FILE=$1
 _IN_CHROOT=$2
 
