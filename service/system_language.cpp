@@ -60,6 +60,12 @@ void GenerateLocale(const QString& lc_all) {
   if (!SpawnCmd("locale-gen", {}, out, err)) {
     qCritical() << "locale-gen failed:" << out << err;
   }
+
+  // Update default locale.
+  const QString default_locale = QString("LANG=%1").arg(lc_all);
+  if (!WriteTextFile("/etc/default/locale", default_locale)) {
+    qCritical() << "Failed to update default locale";
+  }
 }
 
 }  // namespace installer

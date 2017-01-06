@@ -1,0 +1,44 @@
+#!/bin/bash
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# Generate background image of installer with blur effect.
+# Enable all locales defined in language list.
+
+# NOTE(xushaohua): This script is used to speed up installer program.
+# Also it is ok to generate blur-image when installer program is startup,
+# it takes some seconds to minutes to do this job.
+# Call service/system_language.h::GenerateLocale() in SystemLanguageFrame
+# may also update system locale based on using settings, it is not so fluent
+# before switching to SystemInfoFrame.
+
+
+# Update /etc/locale.gen and generate new locale cache.
+generate_locale() {
+  local JSON="/usr/share/deepin-installer-reborn/resources/languages.json"
+  local locales
+  locales=$(grep 'locale' "${JSON}" | awk '{ print $2 }' | \
+            sed 's/"//g'  | sed 's/,//g')
+
+  echo "locales: ${locales}"
+  for locale_name in $(echo "${locales}"); do
+    echo "${locale_name}"
+    sed -i "s/# \(${locale_name}\.UTF-8.*$\)/\1/g" /etc/locale.gen
+  done
+
+  locale-gen
+}
+
+# Generate new background image.
+generate_background_image() {
+  local SRC="/usr/share/backgrounds/default_background.jpg"
+  local DST="/usr/share/deepin-installer-reborn/resources/default_wallpaper.jpg"
+  if [ -f "${SRC}" ]; then
+    echo "Generate default wallpaper.."
+    convert "${SRC}" -blur 0x32 "${DST}"
+  fi
+}
+
+generate_locale
+generate_background_image
