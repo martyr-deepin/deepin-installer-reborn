@@ -93,12 +93,16 @@ const char kPartitionFormattedMountPoints[] =
     "partition_formatted_mount_points";
 
 // Install progress page
-const char kInstallProgressPageAnimationLevel[] =
-    "install_progress_page_animation_level";
-const char kDiskLogFilePath[] = "disk_log_file_path";
+const char kInstallProgressPagePositionAnimation[] =
+    "install_progress_page_position_animation";
+const char kInstallProgressPageOpacityAnimation[] =
+    "install_progress_page_position_animation";
 
 // Install failed page
 const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";
+
+// Packages
+const char kPackageUninstalledPackages[] = "package_uninstalled_packages";
 
 // Desktop
 const char kDdeDockAppList[] = "dde_dock_app_list";
@@ -110,6 +114,9 @@ const char kDdeSoundEffectSwitches[] = "dde_sound_effect_switches";
 // Service
 const char kServiceEnabledServices[] = "service_enabled_services";
 const char kServiceDisabledServices[] = "service_disabled_services";
+
+// Misc
+const char kDiskLogFilePath[] = "disk_log_file_path";
 
 }  // namespace installer
 

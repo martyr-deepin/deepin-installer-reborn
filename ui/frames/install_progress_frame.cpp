@@ -34,15 +34,6 @@ const int kTooltipFrameWidth = kProgressBarWidth + kTooltipWidth;
 
 const int kRetainingInterval = 3000;
 
-// Get animation options.
-void GetAnimationLevel(bool& position_animation, bool& opacity_animation) {
-  const int level = GetSettingsInt(kInstallProgressPageAnimationLevel);
-  // Option for position_animation is 0b01. See default_settings.ini for detail.
-  position_animation = bool(level & 1);
-  // Option for opacity animation is 0b10.
-  opacity_animation = bool(level & 2);
-}
-
 }  // namespace
 
 InstallProgressFrame::InstallProgressFrame(QWidget* parent)
@@ -65,8 +56,10 @@ InstallProgressFrame::~InstallProgressFrame() {
 }
 
 void InstallProgressFrame::startSlide() {
-  bool position_animation, opacity_animation;
-  GetAnimationLevel(position_animation, opacity_animation);
+  const bool position_animation = GetSettingsBool(
+      kInstallProgressPagePositionAnimation);
+  const bool opacity_animation = GetSettingsBool(
+      kInstallProgressPageOpacityAnimation);
   slide_frame_->startSlide(position_animation, opacity_animation);
 }
 
