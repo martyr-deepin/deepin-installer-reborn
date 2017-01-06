@@ -21,6 +21,11 @@ typedef QList<LanguageItem> LanguageList;
 
 LanguageList GetLanguageList();
 
+// Generate locale based on |lc_all|.
+// Call `locale-gen` to update system locales, or else setlocale() will fail
+// in future.
+void GenerateLocale(const QString& lc_all);
+
 }  // namespace installer
 
 #endif  // INSTALLER_SERVICE_SYSTEM_LANGUAGE_H

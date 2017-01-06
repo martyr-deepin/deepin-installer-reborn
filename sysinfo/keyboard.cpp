@@ -158,7 +158,7 @@ bool ReadConfig(const QString& filepath, XkbConfig& config) {
 }  // namespace
 
 XkbConfig GetXkbConfig() {
-  // Query current locale. It is essential for dgettext to work properly.
+  // Set locale based on current environment.
   (void) setlocale(LC_ALL, "");
 
   XkbConfig config;

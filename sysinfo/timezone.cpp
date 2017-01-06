@@ -124,7 +124,8 @@ QString GetTimezoneName(const QString& timezone) {
 }
 
 QString GetLocalTimezoneName(const QString& timezone) {
-  setlocale(LC_ALL, "");
+  // Set locale based on current environment.
+  (void) setlocale(LC_ALL, "");
   const QString local_name(dgettext(kTimezoneDomain,
                                     timezone.toStdString().c_str()));
   int index = local_name.lastIndexOf('/');
