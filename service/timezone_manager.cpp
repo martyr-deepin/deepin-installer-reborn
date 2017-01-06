@@ -58,6 +58,9 @@ void TimezoneManager::update(bool use_geoip, bool use_regdomain) {
   if (use_geoip) {
     geoip_worker_->request();
   }
+
+#ifdef NDEBUG
+  // Scan wireless spot only in release mode.
   if (use_regdomain) {
     if (HasRootPrivilege()){
     emit wifi_inspect_worker_->scan();
@@ -65,6 +68,9 @@ void TimezoneManager::update(bool use_geoip, bool use_regdomain) {
       qWarning() << "LocalManager requires root privilege!";
     }
   }
+#else
+  Q_UNUSED(use_regdomain);
+#endif
 }
 
 void TimezoneManager::initConnections() {
