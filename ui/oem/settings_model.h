@@ -11,8 +11,11 @@ class QLineEdit;
 
 namespace installer {
 
+// Property name saved in generated widgets.
+const char kSettingsPropName[] = "settings-name";
+
 // Handles read/write of settings file.
-// All settings are saved in $HOOME/oem/ folder.
+// All settings are saved in $HOME/oem/ folder.
 // TODO(xushaohua): Add process lock.
 class SettingsModel : public QObject {
   Q_OBJECT
@@ -25,10 +28,10 @@ class SettingsModel : public QObject {
   bool initOemFolder();
 
   // Create a QCheckBox widget, binding to |property|.
-  virtual QCheckBox* addCheckBox(const QString& property);
+  QCheckBox* addCheckBox(const QString& property);
 
   // Create a QLineEdit widget, binding to |property|.
-  virtual QLineEdit* addLineEdit(const QString& property);
+  QLineEdit* addLineEdit(const QString& property);
 
   // Language selection
   QString defaultLocale() const;
@@ -36,6 +39,13 @@ class SettingsModel : public QObject {
  public slots:
    // Language selection
   void setDefaultLocale(const QString& locale);
+
+ protected slots:
+  // Save |toggled| state to settings.
+  void onCheckBoxToggled(bool toggled);
+
+  // Save |text| to settings.
+  void onLineEditChanged(const QString& text);
 };
 
 }  // namespace installer

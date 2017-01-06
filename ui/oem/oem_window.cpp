@@ -140,15 +140,20 @@ void OemWindow::initUI() {
   grub_disable_windows_button_ = new QCheckBox("Disable Windows in grub menu");
   grub_disable_windows_button_->setCheckable(true);
 
+  // Install progress frame
+  QCheckBox* position_animation = settings_model_->addCheckBox(
+      kInstallProgressPagePositionAnimation);
+  position_animation->setText(tr("Position animation"));
+  QCheckBox* opacity_animation = settings_model_->addCheckBox(
+      kInstallProgressPageOpacityAnimation);
+  opacity_animation->setText(tr("Fade animation"));
+
   // Packages
-  uninstalled_packages_edit_ = new QLineEdit();
-  uninstalled_packages_edit_->setPlaceholderText("packages to be uninstalled");
-  uninstalled_packages_edit_->setToolTip(
-      uninstalled_packages_edit_->placeholderText());
-  hold_packages_edit_ = new QLineEdit();
-  hold_packages_edit_->setPlaceholderText(
-      "packages to be prevented from uninstalling");
-  hold_packages_edit_->setToolTip(hold_packages_edit_->placeholderText());
+  QLineEdit* uninstalled_packages = settings_model_->addLineEdit(
+      kPackageUninstalledPackages);
+  uninstalled_packages->setPlaceholderText("packages to be uninstalled");
+  uninstalled_packages->setToolTip(
+      uninstalled_packages->placeholderText());
 
   // Desktop
   QLineEdit* dde_dock_app_list = settings_model_->addLineEdit(kDdeDockAppList);
@@ -210,8 +215,11 @@ void OemWindow::initUI() {
   right_layout->addWidget(grub_disable_windows_button_);
 
   right_layout->addSpacing(kSectionSpace);
-  right_layout->addWidget(uninstalled_packages_edit_);
-  right_layout->addWidget(hold_packages_edit_);
+  right_layout->addWidget(position_animation);
+  right_layout->addWidget(opacity_animation);
+
+  right_layout->addSpacing(kSectionSpace);
+  right_layout->addWidget(uninstalled_packages);
 
   right_layout->addSpacing(kSectionSpace);
   right_layout->addWidget(dde_dock_app_list);

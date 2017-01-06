@@ -119,22 +119,32 @@ bool SettingsModel::initOemFolder() {
 QCheckBox* SettingsModel::addCheckBox(const QString& property) {
   QCheckBox* check_box = new QCheckBox();
   check_box->setObjectName("check_box");
+
+  // Save property name to widget's property-list.
   check_box->setChecked(GetSettingsBool(property));
+
+  // Read current property value.
+  check_box->setProperty(kSettingsPropName, property);
+
+  // Watch for changes.
   connect(check_box, &QCheckBox::toggled,
-          [&](bool checked) {
-            SetSettingsValue(property, checked);
-          });
+          this, &SettingsModel::onCheckBoxToggled);
   return check_box;
 }
 
 QLineEdit* SettingsModel::addLineEdit(const QString& property) {
   QLineEdit* line_edit = new QLineEdit();
   line_edit->setObjectName("line_edit");
+
+  // Save property name to widget's property-list.
+  line_edit->setProperty(kSettingsPropName, property);
+
+  // Read current property value.
   line_edit->setText(GetSettingsString(property));
+
+  // Watch for changes.
   connect(line_edit, &QLineEdit::textChanged,
-          [&](const QString& text) {
-            SetSettingsValue(property, text);
-          });
+          this, &SettingsModel::onLineEditChanged);
   return line_edit;
 }
 
@@ -144,6 +154,17 @@ QString SettingsModel::defaultLocale() const {
 
 void SettingsModel::setDefaultLocale(const QString& locale) {
   SetSettingsValue(kSelectLanguageDefaultLocale, locale);
+}
+
+void SettingsModel::onCheckBoxToggled(bool toggled) {
+  // Get property name from source widget.
+  const QString prop = this->sender()->property(kSettingsPropName).toString();
+  SetSettingsValue(prop, toggled);
+}
+
+void SettingsModel::onLineEditChanged(const QString& text) {
+  const QString prop = this->sender()->property(kSettingsPropName).toString();
+  SetSettingsValue(prop, text);
 }
 
 }  // namespace installer

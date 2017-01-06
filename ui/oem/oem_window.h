@@ -44,10 +44,6 @@ class OemWindow : public QFrame {
   QSlider* grub_timeout_slider_ = nullptr;
   QCheckBox* grub_disable_windows_button_ = nullptr;
 
-  // Packages
-  QLineEdit* uninstalled_packages_edit_ = nullptr;
-  QLineEdit* hold_packages_edit_ = nullptr;
-
   QListView* category_view_ = nullptr;
   QStringListModel* category_model_ = nullptr;
   QScrollArea* right_scroll_area_ = nullptr;
