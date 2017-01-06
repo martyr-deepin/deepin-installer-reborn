@@ -2,55 +2,55 @@
   {
     "name": "English",
     "locale": "en_US",
-    "lc_all": "en_US.utf8",
+    "lc_all": "en_US.UTF-8",
     "local_name": "English"
   },
   {
     "name": "Simplified Chinese",
     "locale": "zh_CN",
-    "lc_all": "zh_CN.utf8",
+    "lc_all": "zh_CN.UTF-8",
     "local_name": "简体中文"
   },
   {
     "name": "Traditional Chinese",
     "locale": "zh_TW",
-    "lc_all": "zh_TW.utf8",
+    "lc_all": "zh_TW.UTF-8",
     "local_name": "繁體中文"
   },
   {
     "name": "French",
     "locale": "fr_FR",
-    "lc_all": "fr_FR.utf8",
+    "lc_all": "fr_FR.UTF-8",
     "local_name": "Français"
   },
   {
     "name": "German",
     "locale": "de_DE",
-    "lc_all": "de_DE.utf8",
+    "lc_all": "de_DE.UTF-8",
     "local_name": "Deutsch"
   },
   {
     "name": "Russian",
     "locale": "ru_RU",
-    "lc_all": "ru_RU.utf8",
+    "lc_all": "ru_RU.UTF-8",
     "local_name": "Русский"
   },
   {
     "name": "Spanish",
     "locale": "es_ES",
-    "lc_all": "es_ES.utf8",
+    "lc_all": "es_ES.UTF-8",
     "local_name": "Español"
   },
   {
     "name": "Indonesian",
     "locale": "id_ID",
-    "lc_all": "id_ID.utf8",
+    "lc_all": "id_ID.UTF-8",
     "local_name": "Bahasa Indonesia"
   },
   {
     "name": "Italian",
     "locale": "it_IT",
-    "lc_all": "it_IT.utf8",
+    "lc_all": "it_IT.UTF-8",
     "local_name": "Italiano"
   },
   {
@@ -62,122 +62,122 @@
   {
     "name": "Portuguese (Brazil)",
     "locale": "pt_BR",
-    "lc_all": "pt_BR.utf8",
+    "lc_all": "pt_BR.UTF-8",
     "local_name": "Português (Brasil)"
   },
   {
     "name": "Portuguese",
     "locale": "pt_PT",
-    "lc_all": "pt_PT.utf8",
+    "lc_all": "pt_PT.UTF-8",
     "local_name": "Português"
   },
   {
     "name": "Polish",
     "locale": "pl_PL",
-    "lc_all": "pl_PL.utf8",
+    "lc_all": "pl_PL.UTF-8",
     "local_name": "Polski"
   },
   {
     "name": "Romanian",
     "locale": "ro_RO",
-    "lc_all": "ro_RO.utf8",
+    "lc_all": "ro_RO.UTF-8",
     "local_name": "Română"
   },
   {
     "name": "Dutch",
     "locale": "nl_NL",
-    "lc_all": "nl_NL.utf8",
+    "lc_all": "nl_NL.UTF-8",
     "local_name": "Nederlands"
   },
   {
     "name": "Hungarian",
     "locale": "hu_HU",
-    "lc_all": "hu_HU.utf8",
+    "lc_all": "hu_HU.UTF-8",
     "local_name": "Magyar"
   },
   {
     "name": "Czech",
     "locale": "cs_CZ",
-    "lc_all": "cs_CZ.utf8",
+    "lc_all": "cs_CZ.UTF-8",
     "local_name": "Čeština"
   },
   {
     "name": "Greek",
     "locale": "el_GR",
-    "lc_all": "el_GR.utf8",
+    "lc_all": "el_GR.UTF-8",
     "local_name": "Ελληνικά"
   },
   {
     "name": "Danish",
     "locale": "da_DK",
-    "lc_all": "da_DK.utf8",
+    "lc_all": "da_DK.UTF-8",
     "local_name": "Dansk"
   },
   {
     "name": "Slovak",
     "locale": "sk_SK",
-    "lc_all": "sk_SK.utf8",
-    "lc_all": "sk_SK.utf8",
+    "lc_all": "sk_SK.UTF-8",
+    "lc_all": "sk_SK.UTF-8",
     "local_name": "Slovenčina"
   },
   {
     "name": "Malay",
     "locale": "ms_MY",
-    "lc_all": "ms_MY.utf8",
+    "lc_all": "ms_MY.UTF-8",
     "local_name": "Bahasa Melayu"
   },
   {
     "name": "Bulgarian",
     "locale": "bg_BG",
-    "lc_all": "bg_BG.utf8",
+    "lc_all": "bg_BG.UTF-8",
     "local_name": "български"
   },
   {
     "name": "Swedish",
     "locale": "sv_SE",
-    "lc_all": "sv_SE.utf8",
+    "lc_all": "sv_SE.UTF-8",
     "local_name": "Svenska"
   },
   {
     "name": "Croatian",
     "locale": "hr_HR",
-    "lc_all": "hr_HR.utf8",
+    "lc_all": "hr_HR.UTF-8",
     "local_name": "Hrvatski"
   },
   {
     "name": "Japanese",
     "locale": "ja_JP",
-    "lc_all": "ja_JP.utf8",
+    "lc_all": "ja_JP.UTF-8",
     "local_name": "日本語"
   },
   {
     "name": "Korean",
     "locale": "ko_KR",
-    "lc_all": "ko_KR.utf8",
+    "lc_all": "ko_KR.UTF-8",
     "local_name": "한국어"
   },
   {
     "name": "Finnish",
     "locale": "fi_FI",
-    "lc_all": "fi_FI.utf8",
+    "lc_all": "fi_FI.UTF-8",
     "local_name": "Suomi"
   },
   {
     "name": "Spanish (Latin America)",
     "locale": "es_AR",
-    "lc_all": "es_AR.utf8",
+    "lc_all": "es_AR.UTF-8",
     "local_name": "Español (América Latina)"
   },
   {
     "name": "Hindi(India)",
     "locale": "hi_IN",
-    "lc_all": "hi_IN.utf8",
+    "lc_all": "hi_IN.UTF-8",
     "local_name": "हिंदी"
   },
   {
     "name": "Ukrainian",
     "locale": "uk_UA",
-    "lc_all": "uk_UA.utf8",
+    "lc_all": "uk_UA.UTF-8",
     "local_name": "Українська"
   }
 ]

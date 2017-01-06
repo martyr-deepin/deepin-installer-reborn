@@ -4,16 +4,25 @@
 
 #include "service/system_language.h"
 
+#include <QDebug>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 
+#include "base/command.h"
 #include "base/file_util.h"
 
 namespace installer {
 
+namespace {
+
+// Absolute path to locale.gen
+const char kLocaleGenFile[] = "/etc/locale.gen";
+
+}  // namespace
+
 LanguageList GetLanguageList() {
-  LanguageList result;
+  LanguageList list;
 
   const QString content(ReadFile(RESOURCES_DIR "/languages.json"));
   const QJsonArray lang_list =
@@ -25,10 +34,32 @@ LanguageList GetLanguageList() {
     item.locale = obj.value("locale").toString();
     item.lc_all = obj.value("lc_all").toString();
     item.local_name = obj.value("local_name").toString();
-    result.append(item);
+    list.append(item);
   }
 
-  return result;
+  return list;
+}
+
+void GenerateLocale(const QString& lc_all) {
+  const QString content = ReadFile(kLocaleGenFile);
+  QStringList lines = content.split('\n');
+  for (QString& line : lines) {
+    // Match locale name with case-insensitive.
+    if (line.contains(lc_all, Qt::CaseInsensitive)) {
+      line = line.remove('#').trimmed();
+      break;
+    }
+  }
+  const QString result = lines.join('\n');
+  if (!WriteTextFile(kLocaleGenFile, result)) {
+    qCritical() << "Failed to update locale.gen file";
+    return;
+  }
+
+  QString out, err;
+  if (!SpawnCmd("locale-gen", {}, out, err)) {
+    qCritical() << "locale-gen failed:" << out << err;
+  }
 }
 
 }  // namespace installer

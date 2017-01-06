@@ -31,7 +31,11 @@ TEST(TimezoneTest, GetTimezoneAliasMap) {
   EXPECT_EQ(map.value("Asia/Chongqing"), "Asia/Shanghai");
 }
 
-TEST(Timezonetest, GetTimezoneOffset) {
+TEST(TimezoneTest, GetTimezoneName) {
+  EXPECT_EQ(GetTimezoneName("Asia/Shanghai"), "Shanghai");
+}
+
+TEST(TimezoneTest, GetTimezoneOffset) {
   const TimezoneOffset shanghai = GetTimezoneOffset("Asia/Shanghai");
   EXPECT_TRUE(shanghai.name == "CST");
   EXPECT_EQ(shanghai.seconds, 28800);

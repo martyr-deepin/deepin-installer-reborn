@@ -37,12 +37,18 @@ int main(int argc, char* argv[]) {
 #endif
   }
 
+  // Initialize log service.
   installer::InitLogService();
+
+  // Delete old settings file and generate a new one.
   installer::DeleteConfigFile();
   installer::AddConfigFile();
 
   installer::MainWindow main_window;
+
+  // Notify background thread to scan device info.
   main_window.scanDevicesAndTimezone();
+
   main_window.fullscreen();
 
   return app.exec();
