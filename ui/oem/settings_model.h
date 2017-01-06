@@ -8,11 +8,12 @@
 #include <QObject>
 class QCheckBox;
 class QLineEdit;
+class QSlider;
 
 namespace installer {
 
 // Property name saved in generated widgets.
-const char kSettingsPropName[] = "settings-name";
+const char kSettingsPropName[] = "settings-prop-name";
 
 // Handles read/write of settings file.
 // All settings are saved in $HOME/oem/ folder.
@@ -33,6 +34,10 @@ class SettingsModel : public QObject {
   // Create a QLineEdit widget, binding to |property|.
   QLineEdit* addLineEdit(const QString& property);
 
+  // Create a QSlider widget with range [minimum, maximum],
+  // binding to |property|.
+  QSlider* addSlider(const QString& property, int minimum, int maximum);
+
   // Language selection
   QString defaultLocale() const;
 
@@ -46,6 +51,9 @@ class SettingsModel : public QObject {
 
   // Save |text| to settings.
   void onLineEditChanged(const QString& text);
+
+  // Save |value| to settings.
+  void onSliderChanged(int value);
 };
 
 }  // namespace installer

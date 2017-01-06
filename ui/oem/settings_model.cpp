@@ -9,6 +9,7 @@
 #include <QDir>
 #include <QLineEdit>
 #include <QSettings>
+#include <QSlider>
 
 #include "service/settings_name.h"
 
@@ -37,15 +38,15 @@ bool GetSettingsBool(const QString& key) {
   return false;
 }
 
-//int GetSettingsInt(const QString& key) {
-//  const QVariant value = GetSettingsValue(key);
-//  if (value.isValid()) {
-//    return value.toInt();
-//  }
-//
-//  qCritical() << "GetSettingsInt() failed with key:" << key;
-//  return 0;
-//}
+int GetSettingsInt(const QString& key) {
+  const QVariant value = GetSettingsValue(key);
+  if (value.isValid()) {
+    return value.toInt();
+  }
+
+  qCritical() << "GetSettingsInt() failed with key:" << key;
+  return 0;
+}
 
 QString GetSettingsString(const QString& key) {
   const QVariant value = GetSettingsValue(key);
@@ -148,6 +149,26 @@ QLineEdit* SettingsModel::addLineEdit(const QString& property) {
   return line_edit;
 }
 
+QSlider* SettingsModel::addSlider(const QString& property, int minimum,
+                                  int maximum) {
+  QSlider* slider = new QSlider();
+  slider->setObjectName("slider");
+
+  // Save property name to widget's property-list.
+  slider->setProperty(kSettingsPropName, property);
+
+  // Read current property value.
+  slider->setRange(minimum, maximum);
+  slider->setOrientation(Qt::Horizontal);
+  slider->setValue(GetSettingsInt(property));
+
+  // Watch for changes.
+  connect(slider, &QSlider::valueChanged,
+          this, &SettingsModel::onSliderChanged);
+
+  return slider;
+}
+
 QString SettingsModel::defaultLocale() const {
   return GetSettingsString(kSelectLanguageDefaultLocale);
 }
@@ -165,6 +186,11 @@ void SettingsModel::onCheckBoxToggled(bool toggled) {
 void SettingsModel::onLineEditChanged(const QString& text) {
   const QString prop = this->sender()->property(kSettingsPropName).toString();
   SetSettingsValue(prop, text);
+}
+
+void SettingsModel::onSliderChanged(int value) {
+  const QString prop = this->sender()->property(kSettingsPropName).toString();
+  SetSettingsValue(prop, value);
 }
 
 }  // namespace installer

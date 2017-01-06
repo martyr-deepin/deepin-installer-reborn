@@ -122,23 +122,28 @@ void OemWindow::initUI() {
   default_password_edit_->setPlaceholderText(tr("Default password"));
 
   // Partition
+  QCheckBox* skip_simple_part = settings_model_->addCheckBox(
+      kPartitionSkipSimplePartitionPage);
+  skip_simple_part->setText(tr("Skip simple partition page"));
+  QCheckBox* skip_adv_part = settings_model_->addCheckBox(
+      kPartitionSkipAdvancedPartitionPage);
+  skip_adv_part->setText(tr("Skip advanced partition page"));
+
   default_fs_combo_ = new QComboBox();
   default_fs_combo_->addItems({"btrfs", "ext4", "ext3", "xfs"});
 
-  // Grub tab
-  QLabel* grub_timeout_label = new QLabel();
-  grub_timeout_label->setText("Grub menu timeout:");
-  grub_timeout_slider_ = new QSlider();
-//  grub_timeout_slider_->setMinimum(kGrubTimeoutMinimum);
-//  grub_timeout_slider_->setMaximum(kGrubTimeoutMaximum);
-  grub_timeout_slider_->setOrientation(Qt::Horizontal);
-  grub_timeout_value_label_ = new QLabel();
-  QHBoxLayout* grub_timeout_layout = new QHBoxLayout();
-  grub_timeout_layout->addWidget(grub_timeout_label);
-  grub_timeout_layout->addWidget(grub_timeout_slider_);
-  grub_timeout_layout->addWidget(grub_timeout_value_label_);
-  grub_disable_windows_button_ = new QCheckBox("Disable Windows in grub menu");
-  grub_disable_windows_button_->setCheckable(true);
+  QCheckBox* auto_part = settings_model_->addCheckBox(kPartitionDoAutoPart);
+  auto_part->setText("Enable auto partition");
+
+  QLineEdit* mount_points = settings_model_->addLineEdit(kPartitionMountPoints);
+  mount_points->setPlaceholderText(tr("Supported mount points"));
+  mount_points->setToolTip(mount_points->placeholderText());
+  QLineEdit* formatted_mount_points = settings_model_->addLineEdit(
+      kPartitionFormattedMountPoints);
+  formatted_mount_points->setPlaceholderText(
+      tr("Mount points to be formatted"));
+  formatted_mount_points->setToolTip(formatted_mount_points->placeholderText());
+
 
   // Install progress frame
   QCheckBox* position_animation = settings_model_->addCheckBox(
@@ -152,8 +157,19 @@ void OemWindow::initUI() {
   QLineEdit* uninstalled_packages = settings_model_->addLineEdit(
       kPackageUninstalledPackages);
   uninstalled_packages->setPlaceholderText("packages to be uninstalled");
-  uninstalled_packages->setToolTip(
-      uninstalled_packages->placeholderText());
+  uninstalled_packages->setToolTip(uninstalled_packages->placeholderText());
+
+
+  // Grub
+  QLabel* grub_timeout_label = new QLabel();
+  grub_timeout_label->setText(tr("Grub menu timeout:"));
+  QSlider* grub_timeout_slider_ = settings_model_->addSlider(kGrubTimeout,
+                                                             0, 30);
+  QHBoxLayout* grub_timeout_layout = new QHBoxLayout();
+  grub_timeout_layout->addWidget(grub_timeout_label);
+  grub_timeout_layout->addWidget(grub_timeout_slider_);
+  QCheckBox* block_windows = settings_model_->addCheckBox(kGrubBlockWindows);
+  block_windows->setText(tr("Disable Windows in grub menu"));
 
   // Desktop
   QLineEdit* dde_dock_app_list = settings_model_->addLineEdit(kDdeDockAppList);
@@ -208,11 +224,16 @@ void OemWindow::initUI() {
   right_layout->addWidget(default_password_edit_);
 
   right_layout->addSpacing(kSectionSpace);
+  right_layout->addWidget(skip_simple_part);
+  right_layout->addWidget(skip_adv_part);
   right_layout->addWidget(default_fs_combo_);
+  right_layout->addWidget(auto_part);
+  right_layout->addWidget(mount_points);
+  right_layout->addWidget(formatted_mount_points);
 
   right_layout->addSpacing(kSectionSpace);
   right_layout->addLayout(grub_timeout_layout);
-  right_layout->addWidget(grub_disable_windows_button_);
+  right_layout->addWidget(block_windows);
 
   right_layout->addSpacing(kSectionSpace);
   right_layout->addWidget(position_animation);

@@ -104,6 +104,10 @@ const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";
 // Packages
 const char kPackageUninstalledPackages[] = "package_uninstalled_packages";
 
+// Grub
+const char kGrubTimeout[] = "grub_timeout";
+const char kGrubBlockWindows[] = "grub_block_windows";
+
 // Desktop
 const char kDdeDockAppList[] = "dde_dock_app_list";
 const char kDdeLauncherAppList[] = "dde_launcher_app_list";

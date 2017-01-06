@@ -39,11 +39,6 @@ class OemWindow : public QFrame {
   // Partition
   QComboBox* default_fs_combo_ = nullptr;
 
-  // Grub
-  QLabel* grub_timeout_value_label_ = nullptr;
-  QSlider* grub_timeout_slider_ = nullptr;
-  QCheckBox* grub_disable_windows_button_ = nullptr;
-
   QListView* category_view_ = nullptr;
   QStringListModel* category_model_ = nullptr;
   QScrollArea* right_scroll_area_ = nullptr;
