@@ -45,5 +45,10 @@ for pkg in ${remove_pkgs[@]}; do
   dpkg -l | grep -q $pkg && REMOVE_PKGS+=($pkg)
 done
 
+msg "Remove packages: ${REMOVE_PKGS[@]}"
 apt-get -y purge ${REMOVE_PKGS[@]}
 apt-get -y autoremove --purge
+
+# Returns 0 explicitly, because apt-get --purge might returns error if package
+# dependency does not fit.
+exit 0
