@@ -38,6 +38,7 @@ OsTypeItems GetOsTypeItems() {
       result.insert(items[0], type);
     }
   }
+  qDebug() << "GetOsTypeItems:" << output << result;
 
   return result;
 }
