@@ -5,12 +5,11 @@
 #include "ui/widgets/simple_partition_button.h"
 
 #include <QLabel>
-#include <QPixmap>
-#include <QProgressBar>
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_util.h"
+#include "ui/widgets/rounded_progress_bar.h"
 
 namespace installer {
 
@@ -54,10 +53,8 @@ void SimplePartitionButton::initUI() {
   usage_label->setText(GetPartitionUsage(partition_));
   usage_label->setObjectName("usage_label");
 
-  QProgressBar* usage_bar = new QProgressBar();
-  usage_bar->setObjectName("usage_bar");
+  QProgressBar* usage_bar = new RoundedProgressBar();
   usage_bar->setFixedSize(80, 6);
-  usage_bar->setTextVisible(false);
   usage_bar->setValue(GetPartitionUsageValue(partition_));
 
   QVBoxLayout* layout = new QVBoxLayout();

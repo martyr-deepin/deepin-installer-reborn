@@ -27,15 +27,3 @@ QLabel#usage_label {
   font-size: 10px;
   text-align: center;
 }
-
-QProgressBar#usage_bar {
-  height: 6px;
-  border-radius: 3px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: none;
-}
-
-QProgressBar#usage_bar::chunk {
-  background-color: #2ca7f8;
-  border-radius: 3px;
-}
