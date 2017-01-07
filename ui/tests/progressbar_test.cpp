@@ -4,9 +4,10 @@
 
 #include <QApplication>
 #include <QFrame>
-#include <QProgressBar>
 #include <QSlider>
 #include <QVBoxLayout>
+
+#include "ui/widgets/rounded_progress_bar.h"
 
 namespace {
 
@@ -26,8 +27,8 @@ const char kStyle[] = ""
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
 
-  QProgressBar* bar = new QProgressBar();
-  bar->setFixedSize(480, 20);
+  QProgressBar* bar = new installer::RoundedProgressBar();
+  bar->setFixedSize(480, 10);
   bar->setStyleSheet(kStyle);
   bar->setTextVisible(false);
   bar->setRange(0, 100);

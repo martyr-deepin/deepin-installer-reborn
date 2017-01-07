@@ -302,6 +302,8 @@ set(UI_FILES
     ui/widgets/popup_menu.h
     ui/widgets/qr_widget.cpp
     ui/widgets/qr_widget.h
+    ui/widgets/rounded_progress_bar.cpp
+    ui/widgets/rounded_progress_bar.h
     ui/widgets/simple_partition_button.cpp
     ui/widgets/simple_partition_button.h
     ui/widgets/system_info_tip.cpp
@@ -524,7 +526,10 @@ target_link_libraries(locale-manager-test ${Qt_LIBS})
 
 # progress bar test
 add_executable(qprogressbar_test
-               ui/tests/qprogressbar_test/progressbar_test.cpp)
+               ui/tests/progressbar_test.cpp
+               ui/widgets/rounded_progress_bar.cpp
+               ui/widgets/rounded_progress_bar.h
+               )
 target_link_libraries(qprogressbar_test ${Qt_LIBS})
 
 
