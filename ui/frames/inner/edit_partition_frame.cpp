@@ -9,8 +9,6 @@
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QProgressBar>
-#include <QVBoxLayout>
 
 #include "base/file_util.h"
 #include "service/settings_manager.h"
@@ -22,6 +20,7 @@
 #include "ui/models/mount_point_model.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
+#include "ui/widgets/rounded_progress_bar.h"
 #include "ui/widgets/table_combo_box.h"
 #include "ui/widgets/title_label.h"
 
@@ -183,9 +182,7 @@ void EditPartitionFrame::initUI() {
   name_frame->setLayout(name_layout);
   name_frame->setFixedWidth(kProgressBarWidth);
 
-  usage_bar_ = new QProgressBar();
-  usage_bar_->setObjectName("usage_bar");
-  usage_bar_->setTextVisible(false);
+  usage_bar_ = new RoundedProgressBar();
   usage_bar_->setFixedSize(kProgressBarWidth, 8);
 
   QLabel* separator_label = new QLabel();

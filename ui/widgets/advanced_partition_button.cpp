@@ -6,10 +6,10 @@
 
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QProgressBar>
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_util.h"
+#include "ui/widgets/rounded_progress_bar.h"
 
 namespace installer {
 
@@ -73,9 +73,7 @@ void AdvancedPartitionButton::initUI() {
   usage_label->setText(GetPartitionUsage(partition_));
   usage_label->setFixedWidth(64);
 
-  QProgressBar* usage_bar = new QProgressBar();
-  usage_bar->setObjectName("usage_bar");
-  usage_bar->setTextVisible(false);
+  QProgressBar* usage_bar = new RoundedProgressBar();
   usage_bar->setValue(GetPartitionUsageValue(partition_));
   usage_bar->setFixedSize(100, 6);
 
