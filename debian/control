@@ -5,6 +5,7 @@ Maintainer: Deepin Packages Builder <packages@deepin.com>
 Build-Depends: debhelper (>=9),
     cmake (>=3.1),
     g++,
+    gettext,
     qt5-qmake,
     qt5-default,
     qtbase5-dev,

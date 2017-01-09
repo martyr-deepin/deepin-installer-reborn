@@ -8,6 +8,7 @@
 sudo apt install \
     cmake \
     g++ \
+    gettext \
     qt5-qmake \
     qt5-default \
     qtbase5-dev \
