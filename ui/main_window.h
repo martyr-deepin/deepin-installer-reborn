@@ -44,12 +44,13 @@ class MainWindow : public QWidget {
  public:
   MainWindow();
 
-  // Show fullscreen.
-  void fullscreen();
-
   // Notify background thread to scan disk devices if needed.
   // And read current timezone.
   void scanDevicesAndTimezone();
+
+ public slots:
+  // Show fullscreen.
+  void fullscreen();
 
  protected:
   // Move close button to appropriate position when window is resized.

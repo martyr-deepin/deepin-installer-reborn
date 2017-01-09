@@ -49,7 +49,5 @@ int main(int argc, char* argv[]) {
   // Notify background thread to scan device info.
   main_window.scanDevicesAndTimezone();
 
-  main_window.fullscreen();
-
   return app.exec();
 }

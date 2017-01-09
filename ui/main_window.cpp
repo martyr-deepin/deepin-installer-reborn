@@ -51,21 +51,24 @@ MainWindow::MainWindow()
   this->goNextPage();
 }
 
-void MainWindow::fullscreen() {
-  multi_head_manager_->updateWallpaper();
-  this->showFullScreen();
-}
-
 void MainWindow::scanDevicesAndTimezone() {
-  if (!GetSettingsBool(kSkipPartitionPage)) {
-    partition_frame_->scanDevices();
-  }
-
   // If system_info_frame_ is not omitted, scan wireless hot spot and update
   // timezone in background.
   if (!GetSettingsBool(kSkipSystemInfoPage)) {
     system_info_frame_->scanTimezone();
   }
+
+  if (!GetSettingsBool(kSkipPartitionPage)) {
+    // Notify background thread to scan device list.
+    // When device is refreshed in partition_frame_, call fullscreen() method
+    // to display main window.
+    partition_frame_->scanDevices();
+  }
+}
+
+void MainWindow::fullscreen() {
+  multi_head_manager_->updateWallpaper();
+  this->showFullScreen();
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
@@ -96,6 +99,8 @@ void MainWindow::initConnections() {
   connect(install_success_frame_, &InstallSuccessFrame::finished,
           this, &MainWindow::rebootSystem);
 
+  connect(partition_frame_, &PartitionFrame::deviceRefreshed,
+          this, &MainWindow::fullscreen);
   connect(partition_frame_, &PartitionFrame::finished,
           this, &MainWindow::goNextPage);
 
