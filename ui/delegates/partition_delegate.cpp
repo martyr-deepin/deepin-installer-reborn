@@ -844,6 +844,8 @@ void PartitionDelegate::onManualPartDone(bool ok) {
 
     if (IsEfiEnabled()) {
       // Enable EFI mode.
+      // First check newly created EFI partition. If not found, check existing
+      // EFI partition.
       WriteUEFI(true);
       QString esp_path;
       for (const Operation& operation : operations_) {

@@ -65,7 +65,7 @@ bool SimplePartitionFrame::validate() {
       GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
   const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
   const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
-
+  const int efi_minimum = GetSettingsInt(kPartitionEFIMinimumSpace);
   Partition root_partition;
 
   // First check whether partitions are modified in advanced mode.
@@ -87,9 +87,18 @@ bool SimplePartitionFrame::validate() {
         // Check EFI partition.
         efi_is_set = true;
 
-        const qint64 recommended_bytes = efi_recommended * kMebiByte;
-        const qint64 real_bytes = partition.getByteLength() + kMebiByte;
-        efi_large_enough = (real_bytes >= recommended_bytes);
+
+        if (partition.status == PartitionStatus::Real) {
+          // For existing EFI partition.
+          const qint64 minimum_bytes = efi_minimum * kMebiByte;
+          const qint64 real_bytes = partition.getByteLength() + kMebiByte;
+          efi_large_enough = (real_bytes >= minimum_bytes);
+        } else {
+          // For newly created EFI partition.
+          const qint64 recommended_bytes = efi_recommended * kMebiByte;
+          const qint64 real_bytes = partition.getByteLength() + kMebiByte;
+          efi_large_enough = (real_bytes >= recommended_bytes);
+        }
       } else if (partition.fs == FsType::LinuxSwap) {
         swap_is_set = true;
       }
