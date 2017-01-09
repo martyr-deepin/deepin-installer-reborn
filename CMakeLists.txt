@@ -391,7 +391,6 @@ add_executable(deepin-installer-reborn
                ${SYSINFO_FILES}
                ${UI_FILES}
 
-               i18n/i18n.qrc
                ui/images/images.qrc
                ui/styles/styles.qrc
                )
@@ -425,7 +424,6 @@ add_executable(deepin-installer-first-boot
                ${SYSINFO_FILES}
                ${UI_FILES}
 
-               i18n/i18n.qrc
                ui/images/images.qrc
                ui/styles/styles.qrc
                )
@@ -453,7 +451,6 @@ add_executable(deepin-installer-oem
                service/system_language.cpp
                service/system_language.h
 
-               i18n/i18n.qrc
                ui/styles/styles.qrc
                )
 target_link_libraries(deepin-installer-oem ${Qt_LIBS})
