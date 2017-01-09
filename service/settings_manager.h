@@ -58,6 +58,9 @@ bool DeleteConfigFile();
 // Setup uefi mode or not.
 void WriteUEFI(bool is_efi);
 //void WriteInstallerMode(bool is_simple_mode);
+
+// Get current locale if set.
+QString ReadLocale();
 void WriteLocale(const QString& locale);
 void WriteUsername(const QString& username);
 void WriteHostname(const QString& hostname);

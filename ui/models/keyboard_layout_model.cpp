@@ -68,12 +68,12 @@ QModelIndex KeyboardLayoutModel::getLayoutByName(const QString& name) const {
   return QModelIndex();
 }
 
-void KeyboardLayoutModel::initLayout() {
+void KeyboardLayoutModel::initLayout(const QString& locale) {
   this->beginResetModel();
 
   // Load xkb layout based on current locale.
   // Locale environment is setup in SelectLanguageFrame.
-  xkb_config_ = GetXkbConfig();
+  xkb_config_ = GetXkbConfig(locale);
   layout_list_ = xkb_config_.layout_list;
 
   // Append layout to its variant list.
@@ -88,7 +88,8 @@ void KeyboardLayoutModel::initLayout() {
 
   // Sort layout list by description.
   // Perform localized comparison.
-  const QCollator collator(QLocale(qgetenv("LC_ALL")));
+  const QLocale curr_locale(locale);
+  const QCollator collator(curr_locale);
   std::sort(layout_list_.begin(), layout_list_.end(),
             [&](const XkbLayout& a, const XkbLayout& b) -> bool {
               return collator.compare(a.description, b.description) < 0;

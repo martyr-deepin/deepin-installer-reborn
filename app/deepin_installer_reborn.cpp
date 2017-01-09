@@ -15,11 +15,10 @@
 #include "ui/main_window.h"
 
 int main(int argc, char* argv[]) {
-  if (qgetenv("LC_ALL").isEmpty() && qgetenv("LANG").isEmpty()) {
-    // Reset locale to C if it is empty.
-    qputenv("LC_ALL", "C");
-    qputenv("LANG", "C");
-  }
+  // Reset locale to en_US.
+  // NOTE(xushaohua): "LANG" might not set in some live environment.
+  qputenv("LC_ALL", installer::kDefaultLocale);
+  qputenv("LANG", installer::kDefaultLocale);
 
   QApplication app(argc, argv);
   app.setApplicationDisplayName(installer::kAppDisplayName);

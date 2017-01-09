@@ -39,8 +39,9 @@ struct XkbConfig {
   XkbLayoutList layout_list;
 };
 
-// Read system keyboard layout.
-XkbConfig GetXkbConfig();
+// Read system keyboard layout, with localized description.
+// |locale| is the desired locale name.
+XkbConfig GetXkbConfig(const QString& locale);
 
 // Set current keyboard layout to |layout|.
 bool SetXkbLayout(const QString& layout);

@@ -38,8 +38,8 @@ class KeyboardLayoutModel : public QAbstractListModel {
   // Result might be invalid.
   QModelIndex getLayoutByName(const QString& name) const;
 
-  // Read xkb layout list.
-  void initLayout();
+  // Read xkb layout list with |locale|.
+  void initLayout(const QString& locale);
 
  private:
   XkbConfig xkb_config_;
