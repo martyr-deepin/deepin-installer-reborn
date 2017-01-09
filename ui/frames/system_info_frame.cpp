@@ -201,7 +201,8 @@ void SystemInfoFrame::updateLayout(const QString& layout) {
 
 void SystemInfoFrame::updateTimezone(const QString& timezone) {
   // Displays timezone description, like Shanghai (CST+08)
-  const QString name = GetLocalTimezoneName(timezone);
+  const QString locale = ReadLocale();
+  const QString name = GetLocalTimezoneName(timezone, locale);
   const TimezoneOffset offset = GetTimezoneOffset(timezone);
   // Hours offset.
   const int hour_offset = static_cast<int>(offset.seconds / 3600);

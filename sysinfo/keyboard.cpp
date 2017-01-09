@@ -10,6 +10,7 @@
 #include <QDomDocument>
 
 #include "base/command.h"
+#include "base/consts.h"
 #include "base/file_util.h"
 
 namespace installer {
@@ -157,13 +158,15 @@ bool ReadConfig(const QString& filepath, XkbConfig& config) {
 
 }  // namespace
 
-XkbConfig GetXkbConfig() {
-  // Set locale based on current environment.
-  (void) setlocale(LC_ALL, "");
+XkbConfig GetXkbConfig(const QString& locale) {
+  // Set locale first.
+  (void) setlocale(LC_ALL, locale.toStdString().c_str());
 
   XkbConfig config;
   if (!ReadConfig(kXkbBaseRule, config)) {
     qWarning() << "Failed to read xkb config file" << kXkbBaseRule;
+    // Reset locale.
+    (void) setlocale(LC_ALL, kDefaultLocale);
     return config;
   }
 
@@ -171,6 +174,8 @@ XkbConfig GetXkbConfig() {
 //  if (!ReadConfig(kXkbExtraRule, config)) {
 //    qWarning() << "Failed to read xkb config file" << kXkbExtraRule;
 //  }
+
+  (void) setlocale(LC_ALL, kDefaultLocale);
 
   return config;
 }

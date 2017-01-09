@@ -13,6 +13,7 @@
 #include <time.h>
 #include <QDebug>
 
+#include "base/consts.h"
 #include "base/file_util.h"
 
 namespace installer {
@@ -123,9 +124,9 @@ QString GetTimezoneName(const QString& timezone) {
   return (index > -1) ? timezone.mid(index + 1) : timezone;
 }
 
-QString GetLocalTimezoneName(const QString& timezone) {
-  // Set locale based on current environment.
-  (void) setlocale(LC_ALL, "");
+QString GetLocalTimezoneName(const QString& timezone, const QString& locale) {
+  // Set locale first.
+  (void) setlocale(LC_ALL, locale.toStdString().c_str());
   const QString local_name(dgettext(kTimezoneDomain,
                                     timezone.toStdString().c_str()));
   int index = local_name.lastIndexOf('/');
@@ -133,6 +134,10 @@ QString GetLocalTimezoneName(const QString& timezone) {
     // Some translations of locale name contains non-standard char.
     index = local_name.lastIndexOf("∕");
   }
+
+  // Reset locale.
+  (void) setlocale(LC_ALL, kDefaultLocale);
+
   return (index > -1) ? local_name.mid(index + 1) : local_name;
 }
 

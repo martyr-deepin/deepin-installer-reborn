@@ -15,6 +15,9 @@ const char kAppDisplayName[] = "Deepin Installer Reborn";
 
 const char kDomainName[] = "deepin.org";
 
+// Default locale used in program.
+const char kDefaultLocale[] = "en_US.UTF-8";
+
 }
 
 #endif  // INSTALLER_CONSTS_H

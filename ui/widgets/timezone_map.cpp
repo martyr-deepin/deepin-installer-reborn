@@ -12,6 +12,7 @@
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
+#include "service/settings_manager.h"
 #include "ui/delegates/timezone_map_util.h"
 #include "ui/widgets/popup_menu.h"
 #include "ui/widgets/tooltip_pin.h"
@@ -148,8 +149,9 @@ void TimezoneMap::popupZoneWindow(const QPoint& pos) {
 
   // Popup zone list window.
   QStringList zone_names;
+  const QString locale = ReadLocale();
   for (const ZoneInfo& zone : nearest_zones_) {
-    zone_names.append(GetLocalTimezoneName(zone.timezone));
+    zone_names.append(GetLocalTimezoneName(zone.timezone, locale));
   }
 
   // Show popup window above dot
@@ -176,7 +178,8 @@ void TimezoneMap::remark() {
 
   Q_ASSERT(!nearest_zones_.isEmpty());
   if (!nearest_zones_.isEmpty()) {
-    zone_pin_->setText(GetLocalTimezoneName(current_zone_.timezone));
+    const QString locale = ReadLocale();
+    zone_pin_->setText(GetLocalTimezoneName(current_zone_.timezone, locale));
 
     // Adjust size of pin to fit its content.
     zone_pin_->adjustSize();

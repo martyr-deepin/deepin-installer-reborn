@@ -39,7 +39,8 @@ SystemInfoKeyboardFrame::SystemInfoKeyboardFrame(QWidget* parent)
 
 void SystemInfoKeyboardFrame::readConf() {
   // Load xkb config first.
-  layout_model_->initLayout();
+  const QString locale = ReadLocale();
+  layout_model_->initLayout(locale);
 
   const QString layout = GetSettingsString(kSystemInfoDefaultKeyboardLayout);
   if (layout.isEmpty()) {

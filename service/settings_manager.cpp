@@ -18,6 +18,7 @@
 #include <QHash>
 #include <QSettings>
 
+#include "base/consts.h"
 #include "sysinfo/machine.h"
 #include "service/settings_name.h"
 
@@ -227,6 +228,11 @@ bool DeleteConfigFile() {
 
 void WriteUEFI(bool is_efi) {
   AppendToConfigFile("DI_UEFI", is_efi);
+}
+
+QString ReadLocale() {
+  QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
+  return settings.value("DI_LOCALE", kDefaultLocale).toString();
 }
 
 void WriteLocale(const QString& locale) {

@@ -41,7 +41,8 @@ QString GetCurrentTimezone();
 QString GetTimezoneName(const QString& timezone);
 
 // Returns local name of timezone, excluding continent name.
-QString GetLocalTimezoneName(const QString& timezone);
+// |locale| is desired locale name.
+QString GetLocalTimezoneName(const QString& timezone, const QString& locale);
 
 // A map between old name of timezone and current name.
 // e.g. Asia/Chongqing -> Asia/Shanghai
