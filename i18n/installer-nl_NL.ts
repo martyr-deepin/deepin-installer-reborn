@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="id_ID">
+<TS version="2.1" language="nl_NL">
 <context>
     <name>QObject</name>
     <message>
@@ -510,8 +510,8 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../ui/frames/select_language_frame.cpp" line="61"/>
-        <location filename="../ui/frames/select_language_frame.cpp" line="92"/>
+        <location filename="../ui/frames/select_language_frame.cpp" line="59"/>
+        <location filename="../ui/frames/select_language_frame.cpp" line="90"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
@@ -708,22 +708,22 @@
 <context>
     <name>installer::SystemInfoKeyboardFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="76"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="96"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="97"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="98"/>
         <source>Select keyboard layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="132"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="79"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="133"/>
         <source>Test area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="79"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="135"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="80"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="136"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>

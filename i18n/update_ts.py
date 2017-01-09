@@ -61,7 +61,7 @@ def main():
     lang_list = get_language_list()
     if lang_list:
         for lang in lang_list:
-            ts_path = "i18n/%s.ts" % lang
+            ts_path = "i18n/installer-%s.ts" % lang
             generate_ts(ts_path, True)
         default_installer_ts = "i18n/installer.ts"
         generate_ts(default_installer_ts, True)

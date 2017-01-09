@@ -53,14 +53,14 @@ else()
   add_definitions("-DRESOURCES_DIR=\"${INSTALLER_SHARE_DIR}/resources\"")
 endif()
 
-
+find_package(PkgConfig REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5X11Extras REQUIRED)
 find_package(Qt5Xml REQUIRED)
-find_package(PkgConfig REQUIRED)
+FIND_PACKAGE(Qt5LinguistTools)
 
 pkg_search_module(Parted REQUIRED libparted)
 pkg_search_module(X11 REQUIRED x11)
@@ -80,6 +80,7 @@ add_subdirectory(third_party/googletest)
 add_subdirectory(third_party/qrencode)
 add_subdirectory(third_party/squashfs-tools)
 add_subdirectory(third_party/timezones)
+
 
 set(BASE_FILES
     base/command.cpp
@@ -356,6 +357,7 @@ set(UNITTEST_FILES
     ui/delegates/timezone_map_util_test.cpp
     )
 
+
 set(QtCore_LIBS Qt5::Core)
 set(Qt_LIBS
     Qt5::Gui
@@ -380,6 +382,24 @@ set(LINK_LIBS
     )
 
 # Main executable
+# Generate .qm files from .ts files.
+file(GLOB INSTALLER_TRANSLATION_TS
+     ${CMAKE_CURRENT_SOURCE_DIR}/i18n/installer-*.ts)
+qt5_add_translation(INSTALLER_TRANSLATION_QM
+                    ${INSTALLER_TRANSLATION_TS}
+                    )
+add_custom_target(installer-qm-update DEPENDS ${INSTALLER_TRANSLATION_QM})
+# Generate installer_i18n.qrc file from template.
+foreach(_file ${INSTALLER_TRANSLATION_QM})
+  message(INFO ${_file})
+  get_filename_component(_qresource ${_file} NAME)
+  set(i18n_qresource "${i18n_qresource}\n    <file>${_qresource}</file>")
+  set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/installer_i18n.qrc
+                              PROPERTIES OBJECT_DEPENDS ${_file})
+endforeach()
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/i18n/installer.qrc.in
+               ${CMAKE_BINARY_DIR}/installer_i18n.qrc)
+
 add_executable(deepin-installer-reborn
                app/deepin_installer_reborn.cpp
                ui/main_window.cpp
@@ -393,9 +413,12 @@ add_executable(deepin-installer-reborn
 
                ui/images/images.qrc
                ui/styles/styles.qrc
+
+               ${CMAKE_BINARY_DIR}/installer_i18n.qrc
                )
 
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
+add_dependencies(deepin-installer-reborn installer-qm-update)
 
 add_executable(deepin-installer-adjtime
                app/deepin_installer_adjtime.cpp

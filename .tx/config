@@ -4,7 +4,7 @@ minimum_perc = 80
 mode = developer
 
 [deepin-installer-reborn.deepin-installer-reborn]
-file_filter = i18n/<lang>.ts
+file_filter = i18n/installer-<lang>.ts
 source_file = i18n/installer.ts
 source_lang = en
 type = TS
