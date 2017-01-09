@@ -80,6 +80,14 @@ case ${BOOT} in
       grub-install --target=i386-efi --efi-directory=/boot/efi \
         --bootloader-id="${BOOTLOADER_ID}" --recheck || \
         error "grub-install failed with efi! ${BOOTLOADER_ID}"
+
+      # Copy signed grub efi file.
+      [ -d /boot/efi/EFI/ubuntu ] || mkdir -p /boot/efi/EFI/ubuntu
+      cp /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/ubuntu/
+      [ -d /boot/efi/EFI/boot ] || mkdir -p /boot/efi/EFI/boot
+      cp -f /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/boot/
+      cp /boot/efi/EFI/${BOOTLOADER_ID}/shim*.efi \
+        /boot/efi/EFI/boot/bootia32.efi
     else
       # Clover efi loader cannot use grub.efi correctly,
       # so we may patch grub or use grub.efi.signed.
@@ -90,11 +98,15 @@ case ${BOOT} in
       grub-install --target=x86_64-efi --uefi-secure-boot \
         --efi-directory=/boot/efi --bootloader-id="${BOOTLOADER_ID}" \
         --recheck || error "grub-install failed with efi64 ${BOOTLOADER_ID}"
+
+      # Copy signed grub efi file.
+      [ -d /boot/efi/EFI/ubuntu ] || mkdir -p /boot/efi/EFI/ubuntu
+      cp /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/ubuntu/
+      [ -d /boot/efi/EFI/boot ] || mkdir -p /boot/efi/EFI/boot
+      cp -f /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/boot/
+      cp /boot/efi/EFI/${BOOTLOADER_ID}/shim*.efi /boot/efi/EFI/boot/bootx64.efi
     fi
 
-    # Copy signed grub efi file.
-    [ -d /boot/efi/EFI/ubuntu ] || mkdir -p /boot/efi/EFI/ubuntu
-    cp /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/ubuntu/
     ;;
 esac
 
