@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/i18n">
-        <file>en_US.qm</file>
-        <file>zh_CN.qm</file>
-    </qresource>
-</RCC>
