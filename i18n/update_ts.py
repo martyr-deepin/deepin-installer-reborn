@@ -30,6 +30,7 @@ def generate_ts(ts_path, is_installer):
     """
     if is_installer:
         paths = (
+            "partman",
             "ui/delegates",
             "ui/first_boot_setup_window.cpp",
             "ui/first_boot_setup_window.h",
