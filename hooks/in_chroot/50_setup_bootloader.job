@@ -120,7 +120,8 @@ esac
 
 fix_boot_order(){
   command -v efibootmgr >/dev/null 2>&1 || \
-    warn_exit "Require efibootmgr installed but not found.Skip"
+    warn "Require efibootmgr installed but not found. Skip"
+  return
 
   local bootinfo=$(efibootmgr)
   echo "bootinfo: ${bootinfo}"
