@@ -10,21 +10,25 @@
 #include "service/log_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "third_party/zlib_wrapper/zip_util.h"
 #include "ui/delegates/partition_util.h"
 
 namespace installer {
 
-
-// Trim length of error message.
-const int kQRContentStripped = 110;
-const int kErrorMsgStripped = 860;
-
 // Encode |msg| with base64()
 QString EncodeErrorMsg(const QString& msg) {
-  QString encoded_msg;
   const QString base64_content = msg.toUtf8().toBase64();
+  const QByteArray b64 = msg.toUtf8().toBase64();
+  QByteArray zip_output;
   const QString prefix = GetSettingsString(kInstallFailedFeedbackServer);
-  encoded_msg = prefix.arg(base64_content);
+  QString encoded_msg;
+
+  // Try gzip first, if failed use base64 only.
+  if (GzipCompress(b64, zip_output, 9)) {
+    encoded_msg = prefix.arg(QString::fromUtf8(zip_output));
+  } else {
+    encoded_msg = prefix.arg(QString::fromUtf8(b64));
+  }
   return encoded_msg;
 }
 
@@ -79,8 +83,9 @@ bool ReadErrorMsg(QString& msg, QString& encoded_msg) {
     return false;
   }
 
-  msg = raw_msg.right(kErrorMsgStripped);
-  encoded_msg = EncodeErrorMsg(raw_msg.right(kQRContentStripped));
+  msg = raw_msg.right(GetSettingsInt(kInstallFailedErrMsgLen));
+  const int qr_max_len = GetSettingsInt(kInstallFailedQRErrMsgLen);
+  encoded_msg = EncodeErrorMsg(raw_msg.right(qr_max_len));
   return true;
 }
 

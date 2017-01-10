@@ -17,11 +17,6 @@ QRWidget::QRWidget(QWidget* parent) : QWidget(parent), content_(), margin_(0) {
   this->setObjectName("qr_widget");
 }
 
-void QRWidget::setText(const QString& content) {
-  content_ = content;
-  this->update();
-}
-
 void QRWidget::setMargin(int margin) {
   if (margin >= 0) {
     margin_ = margin;
@@ -29,6 +24,11 @@ void QRWidget::setMargin(int margin) {
     margin_ = 0;
     qWarning() << "setMargin() invalid margin:" << margin;
   }
+}
+
+void QRWidget::setText(const QString& content) {
+  content_ = content;
+  this->update();
 }
 
 void QRWidget::paintEvent(QPaintEvent* event) {
