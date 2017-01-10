@@ -450,23 +450,22 @@ void MainWindow::goNextPage() {
 }
 
 void MainWindow::rebootSystem() {
-  // NOTE(xushaohua): Remove these comments before new version is released.
-//  if (!RebootSystem()) {
-//    qWarning() << "RebootSystem failed!";
-//    if (!RebootSystemWithMagicKey()) {
-//      qWarning() << "RebootSystemWithMagicKey() failed!";
-//    }
-//  }
+  if (!RebootSystem()) {
+    qWarning() << "RebootSystem failed!";
+    if (!RebootSystemWithMagicKey()) {
+      qWarning() << "RebootSystemWithMagicKey() failed!";
+    }
+  }
   qApp->quit();
 }
 
 void MainWindow::shutdownSystem() {
-//  if (!ShutdownSystem()) {
-//    qWarning() << "ShutdownSystem() failed!";
-//    if (!ShutdownSystemWithMagicKey()) {
-//      qWarning() << "ShutdownSystemWithMagicKey() failed!";
-//    }
-//  }
+  if (!ShutdownSystem()) {
+    qWarning() << "ShutdownSystem() failed!";
+    if (!ShutdownSystemWithMagicKey()) {
+      qWarning() << "ShutdownSystemWithMagicKey() failed!";
+    }
+  }
   qApp->quit();
 }
 
