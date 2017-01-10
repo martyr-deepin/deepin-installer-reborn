@@ -45,10 +45,9 @@ class ControlPanelFrame : public QFrame {
 
   // Displays page index
   TableComboBox* page_combo_box_ = nullptr;
-
-  // Displays global settings.
-  QFrame* settings_page_ = nullptr;
   QPushButton* refresh_devices_button_ = nullptr;
+
+  QTextEdit* settings_viewer_ = nullptr;
 
   QTimer* timer_ = nullptr;
   QString log_file_path_;
@@ -57,6 +56,9 @@ class ControlPanelFrame : public QFrame {
  private slots:
   // Highlight current line when position of text cursor is changed.
   void onLogViewerCursorPositionChanged();
+
+  // Switch pages on tab bar changed to |index|.
+  void onTabBarChanged(int index);
 
   void onTimerTimeout();
 };
