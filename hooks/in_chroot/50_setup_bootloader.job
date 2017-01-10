@@ -86,8 +86,12 @@ case ${BOOT} in
       cp /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/ubuntu/
       [ -d /boot/efi/EFI/boot ] || mkdir -p /boot/efi/EFI/boot
       cp -f /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/boot/
-      cp /boot/efi/EFI/${BOOTLOADER_ID}/shim*.efi \
-        /boot/efi/EFI/boot/bootia32.efi
+      # Backup fallback efi first.
+      fallback_efi=/boot/efi/EFI/boot/bootia32.efi
+      fallback_efi_bak="${fallback_efi}-$(date +%s).bak"
+      [ -f "${fallback_efi}" ] && cp "${fallback_efi}" "${fallback_efi_bak}"
+      # Override fallback efi with shim.
+      cp /boot/efi/EFI/${BOOTLOADER_ID}/shim*.efi "${fallback_efi}"
     else
       # Clover efi loader cannot use grub.efi correctly,
       # so we may patch grub or use grub.efi.signed.
@@ -104,7 +108,13 @@ case ${BOOT} in
       cp /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/ubuntu/
       [ -d /boot/efi/EFI/boot ] || mkdir -p /boot/efi/EFI/boot
       cp -f /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/boot/
-      cp /boot/efi/EFI/${BOOTLOADER_ID}/shim*.efi /boot/efi/EFI/boot/bootx64.efi
+
+      # Backup fallback efi first.
+      fallback_efi=/boot/efi/EFI/boot/bootx64.efi
+      fallback_efi_bak="${fallback_efi}-$(date +%s).bak"
+      [ -f "${fallback_efi}" ] && cp "${fallback_efi}" "${fallback_efi_bak}"
+      # Override fallback efi with shim.
+      cp /boot/efi/EFI/${BOOTLOADER_ID}/shim*.efi "${fallback_efi}"
     fi
 
     ;;
