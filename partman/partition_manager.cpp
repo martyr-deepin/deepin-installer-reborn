@@ -222,9 +222,15 @@ DeviceList ScanDevices() {
       } else {
         disk_type = ped_disk_type_get(kPartitionTableMsDos);
       }
-      if (disk_type) {
+      if (disk_type != NULL) {
         // Create a new device table but not commit changes to device.
         lp_disk = ped_disk_new_fresh(lp_device, disk_type);
+        if (lp_disk) {
+          // Commit explicitly. Or else newly created partition table is only
+          // in memory.
+          // TODO(xushaohua): Add FormatDisk in operation.h
+          Commit(lp_disk);
+        }
       } else {
         qCritical() << "ScanDevices() disk_type is nullptr";
       }
