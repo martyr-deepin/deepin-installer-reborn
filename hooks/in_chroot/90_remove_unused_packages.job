@@ -27,7 +27,7 @@ detect_vbox() {
 }
 
 # TODO(xushaohua): Support "setup_after_reboot"
-REMOVE_PKGS+=(deepin-installer)
+REMOVE_PKGS+=(deepin-installer-wrapper)
 
 if grep -q boot=casper /proc/cmdline; then
   REMOVE_PKGS+=("casper")
