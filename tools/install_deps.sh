@@ -9,10 +9,6 @@ sudo apt install \
     cmake \
     g++ \
     gettext \
-    qt5-qmake \
-    qt5-default \
-    qtbase5-dev \
-    pkg-config \
     libattr1-dev \
     liblz4-dev \
     liblzma-dev \
@@ -24,6 +20,11 @@ sudo apt install \
     libxrandr-dev \
     libxss-dev \
     libxtst-dev \
+    pkg-config \
+    qt5-qmake \
+    qt5-default \
+    qtbase5-dev \
+    qttools5-dev-tools \
     zlib1g-dev \
     aircrack-ng \
     btrfs-progs \
