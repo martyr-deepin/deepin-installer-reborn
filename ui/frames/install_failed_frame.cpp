@@ -21,10 +21,10 @@ namespace installer {
 namespace {
 
 const int kContentWindowWidth = 580;
-const int kContentWindowHeight = 360;
+const int kContentWindowHeight = 460;
 
 const int kQrMargin = 8;
-const int kQrWindowSize = 300;
+const int kQrWindowSize = 400;
 
 const int kControlButtonSize = 32;
 

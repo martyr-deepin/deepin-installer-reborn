@@ -17,16 +17,21 @@ namespace installer {
 
 // Encode |msg| with base64()
 QString EncodeErrorMsg(const QString& msg) {
-  const QString base64_content = msg.toUtf8().toBase64();
-  const QByteArray b64 = msg.toUtf8().toBase64();
-  QByteArray zip_output;
   const QString prefix = GetSettingsString(kInstallFailedFeedbackServer);
   QString encoded_msg;
-
+  const QByteArray msg_bytes = msg.toUtf8();
+  QByteArray zip_output;
   // Try gzip first, if failed use base64 only.
-  if (GzipCompress(b64, zip_output, 9)) {
-    encoded_msg = prefix.arg(QString::fromUtf8(zip_output));
+  if (GzipCompress(msg_bytes, zip_output, 9)) {
+    QString fuck(zip_output.constData());
+    const QByteArray b64 = zip_output.toBase64();
+    encoded_msg = prefix.arg(b64.constData());
   } else {
+    qWarning() << "GZipCompress failed, fallback to b64";
+    // Use only part of msg if zip-compress is failed.
+    const int tail_msg_len = msg.length() * 3 / 4;
+    const QString tail_msg = msg.right(tail_msg_len);
+    const QByteArray b64 = tail_msg.toUtf8().toBase64();
     encoded_msg = prefix.arg(QString::fromUtf8(b64));
   }
   return encoded_msg;
