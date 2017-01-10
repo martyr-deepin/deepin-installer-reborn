@@ -34,6 +34,46 @@
         <source>It takes at lease %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="142"/>
+        <source>Create extended partition %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="146"/>
+        <source>Create partition %1 with %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="150"/>
+        <source>Create partition %1 for %2 with %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="158"/>
+        <source>Delete partition %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="163"/>
+        <source>Format %1 with %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="167"/>
+        <source>Format %1 for %2 with %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="175"/>
+        <source>Use %1 for %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="181"/>
+        <source>Resize partition %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>installer::AdvancedPartitionButton</name>

@@ -34,6 +34,46 @@
         <source>It takes at lease %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
         <translation>安装deepin至少需要 %1GB 磁盘空间, 为了更好的使用体验, 建议分配 %2GB 以上</translation>
     </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="142"/>
+        <source>Create extended partition %1</source>
+        <translation>创建扩展分区 %1</translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="146"/>
+        <source>Create partition %1 with %2</source>
+        <translation>创建分区 %1, 文件系统是 %2</translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="150"/>
+        <source>Create partition %1 for %2 with %3</source>
+        <translation>创建分区 %1, 挂载点是 %2, 文件系统是 %3</translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="158"/>
+        <source>Delete partition %1</source>
+        <translation>删除分区 %1</translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="163"/>
+        <source>Format %1 with %2</source>
+        <translation>格式化分区 %1 为 %2</translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="167"/>
+        <source>Format %1 for %2 with %3</source>
+        <translation>格式化分区 %1, 挂载点是 %2, 文件系统是 %3</translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="175"/>
+        <source>Use %1 for %2</source>
+        <translation>使用 %1 作为 %2</translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="181"/>
+        <source>Resize partition %1</source>
+        <translation>调整  %1 的分区大小</translation>
+    </message>
 </context>
 <context>
     <name>installer::AdvancedPartitionButton</name>
@@ -513,8 +553,8 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../ui/frames/select_language_frame.cpp" line="61"/>
-        <location filename="../ui/frames/select_language_frame.cpp" line="92"/>
+        <location filename="../ui/frames/select_language_frame.cpp" line="59"/>
+        <location filename="../ui/frames/select_language_frame.cpp" line="90"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
@@ -711,22 +751,22 @@
 <context>
     <name>installer::SystemInfoKeyboardFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="76"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="96"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="97"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="98"/>
         <source>Select keyboard layout</source>
         <translation>选项键盘布局</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="132"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="79"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="133"/>
         <source>Test area</source>
         <translation>在这里测试</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="79"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="135"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="80"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="136"/>
         <source>Back</source>
         <translation>返回</translation>
     </message>
