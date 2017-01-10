@@ -11,7 +11,7 @@ L=${DI_LOCALE%.*}
 
 # Get number of processors available for current process, minus 1.
 PROCESSORS=$(getconf _NPROCESSORS_ONLN)
-if [ $PROCESSORS -ge 1 ]; then
+if [ $PROCESSORS -ge 2 ]; then
   PROCESSORS=$((PROCESSORS - 1))
 else
   PROCESSORS=1
