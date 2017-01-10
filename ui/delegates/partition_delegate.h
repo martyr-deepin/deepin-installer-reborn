@@ -58,6 +58,9 @@ class PartitionDelegate : public QObject {
   // Emitted after scanning local disk devices or partition is edited.
   void deviceRefreshed();
 
+  // Emitted after scanning local disk devices.
+  void realDeviceRefreshed();
+
   // Emitted when partition job is done.
   void autoPartDone(bool ok);
   void manualPartDone(bool ok);

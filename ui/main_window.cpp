@@ -103,7 +103,7 @@ void MainWindow::initConnections() {
   connect(install_success_frame_, &InstallSuccessFrame::finished,
           this, &MainWindow::rebootSystem);
 
-  connect(partition_frame_, &PartitionFrame::deviceRefreshed,
+  connect(partition_frame_, &PartitionFrame::realDeviceRefreshed,
           this, &MainWindow::fullscreen);
   connect(partition_frame_, &PartitionFrame::finished,
           this, &MainWindow::goNextPage);

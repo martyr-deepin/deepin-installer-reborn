@@ -816,6 +816,8 @@ void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   simple_operations_.clear();
   operations_.clear();
 
+  emit this->realDeviceRefreshed();
+
   this->refreshVisual();
 }
 

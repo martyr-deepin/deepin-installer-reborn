@@ -67,8 +67,8 @@ void PartitionFrame::initConnections() {
           this, &PartitionFrame::onNextButtonClicked);
 
   // Pass deviceRefreshed() signal.
-  connect(delegate_, &PartitionDelegate::deviceRefreshed,
-          this, &PartitionFrame::deviceRefreshed);
+  connect(delegate_, &PartitionDelegate::realDeviceRefreshed,
+          this, &PartitionFrame::realDeviceRefreshed);
 
   // Show main frame when device is refreshed.
   connect(delegate_, &PartitionDelegate::deviceRefreshed,

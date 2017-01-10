@@ -282,8 +282,8 @@ void EditPartitionFrame::onOkButtonClicked() {
   QString mount_point;
   if (mount_point_box_->isVisible()) {
     // Set mount_point only if mount_point_box_ is visible.
-    mount_point =
-        mount_point_model_->getMountPoint(mount_point_box_->currentIndex());
+    const int index = mount_point_box_->currentIndex();
+    mount_point = mount_point_model_->getMountPoint(index);
   }
   if(format_check_box_->isChecked()) {
     // Create an OperationFormat object.

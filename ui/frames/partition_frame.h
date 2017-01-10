@@ -35,8 +35,8 @@ class PartitionFrame : public QFrame {
   void autoPart();
 
  signals:
-  // Emitted when new device list is updated from delegate_.
-  void deviceRefreshed();
+  // Emitted after scanning local disk devices.
+  void realDeviceRefreshed();
 
   // Emitted when partition edition is done.
   void finished();
