@@ -81,7 +81,7 @@ mount --bind / ${target}/deepinhost
 # Mount other mountpoints
 # Split mount-point list.
 mount_points=$(echo ${DI_MOUNTPOINTS//;/ })
-for i in "${mount_points}"; do
+for i in $(echo "${mount_points}"); do
 	mountpoint=$(echo $i | cut -d'=' -f1)
 	mountpath=$(echo $i | cut -d'=' -f2)
 	if [ $mountpath != "/" ] && [ $mountpath != "swap" ]; then
