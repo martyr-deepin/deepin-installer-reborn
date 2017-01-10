@@ -17,3 +17,13 @@ QTextEdit {
   selection-color: #4eff44;
   selection-background-color: black;
 }
+
+QPushButton#refresh_devices {
+  border: none;
+  padding: 0px 4px;
+  margin: 0px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 14px;
+}

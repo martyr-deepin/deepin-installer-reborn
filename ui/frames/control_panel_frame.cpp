@@ -29,6 +29,12 @@ const int kReadLogInterval = 1000;
 const int kWindowWidth = 860;
 const int kWindowHeight = 480;
 
+const int kSettingsPageId = 2;
+
+// Absolute path to settings file.
+// Same in service/settings_manager.cpp.
+const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
+
 }  // namespace
 
 ControlPanelFrame::ControlPanelFrame(QWidget* parent)
@@ -93,7 +99,7 @@ void ControlPanelFrame::initConnections() {
           static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
           this, &ControlPanelFrame::currentPageChanged);
   connect(tab_bar_, &QTabBar::currentChanged,
-          stacked_widget_, &QStackedWidget::setCurrentIndex);
+          this, &ControlPanelFrame::onTabBarChanged);
   connect(log_viewer_, &QTextEdit::cursorPositionChanged,
           this, &ControlPanelFrame::onLogViewerCursorPositionChanged);
   connect(timer_, &QTimer::timeout,
@@ -134,14 +140,36 @@ void ControlPanelFrame::initUI() {
                              "VirtualMachineFrame",
                             });
 
-  settings_page_ = new QFrame();
-  refresh_devices_button_ = new PointerButton(settings_page_);
+  refresh_devices_button_ = new PointerButton();
+  refresh_devices_button_->setObjectName("refresh_devices");
   refresh_devices_button_->setText("Refresh Device List");
+  refresh_devices_button_->setFixedHeight(40);
+
+  QHBoxLayout* page_layout = new QHBoxLayout();
+  page_layout->addWidget(page_combo_box_, 0, Qt::AlignLeft | Qt::AlignTop);
+  page_layout->addWidget(refresh_devices_button_, 0,
+                         Qt::AlignLeft | Qt::AlignTop);
+  page_layout->addStretch();
+
+  QFrame* page_frame = new QFrame();
+  page_frame->setContentsMargins(0, 0, 0, 0);
+  page_frame->setLayout(page_layout);
+
+  settings_viewer_ = new QTextEdit();
+  settings_viewer_->setObjectName("settings_viewer");
+  // Disable user modification.
+  settings_viewer_->setReadOnly(true);
+  // Disable rich text support.
+  settings_viewer_->setAcceptRichText(false);
+  // Disable context menu.
+  settings_viewer_->setContextMenuPolicy(Qt::NoContextMenu);
+  settings_viewer_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  settings_viewer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
   stacked_widget_ = new QStackedWidget();
   stacked_widget_->addWidget(log_viewer_);
-  stacked_widget_->addWidget(page_combo_box_);
-  stacked_widget_->addWidget(settings_page_);
+  stacked_widget_->addWidget(page_frame);
+  stacked_widget_->addWidget(settings_viewer_);
 
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
@@ -162,6 +190,14 @@ void ControlPanelFrame::onLogViewerCursorPositionChanged() {
   highlight.format.setProperty(QTextFormat::FullWidthSelection, true);
   highlight.format.setBackground(QBrush(QColor(65, 65, 65)));
   log_viewer_->setExtraSelections({highlight});
+}
+
+void ControlPanelFrame::onTabBarChanged(int index) {
+  if (index == kSettingsPageId) {
+    const QString content = ReadFile(kInstallerConfigFile);
+    settings_viewer_->setText(content);
+  }
+  stacked_widget_->setCurrentIndex(index);
 }
 
 void ControlPanelFrame::onTimerTimeout() {
