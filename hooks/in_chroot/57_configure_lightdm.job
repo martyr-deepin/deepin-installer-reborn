@@ -6,6 +6,14 @@
 # Config lightdm greeter to deepin-lightdm-greeter.
 # Update background of lightdm.
 
+#reset lightdm config,delete by deepin-installer-wrapper
+mv /lib/systemd/system/lightdm.service_back /lib/systemd/system/lightdm.service
+ln -s /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service
+
+cat > /etc/X11/default-display-manager <<EOF
+/usr/sbin/lightdm
+EOF
+
 if [ -f /etc/lightdm/lightdm.conf ]; then
   sed -i -r -e "s|^#.*greeter-session=.*\$|greeter-session=lightdm-deepin-greeter|" \
     -e "s|^#.*user-session=.*\$|user-session=deepin|" \
