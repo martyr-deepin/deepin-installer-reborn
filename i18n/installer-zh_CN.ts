@@ -114,7 +114,7 @@
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="27"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="46"/>
         <source>Abort Installation</source>
-        <translation>退出安装</translation>
+        <translation>终止安装</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="29"/>
