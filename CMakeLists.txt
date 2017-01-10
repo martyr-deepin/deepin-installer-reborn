@@ -80,6 +80,7 @@ add_subdirectory(third_party/googletest)
 add_subdirectory(third_party/qrencode)
 add_subdirectory(third_party/squashfs-tools)
 add_subdirectory(third_party/timezones)
+add_subdirectory(third_party/zlib_wrapper)
 
 
 set(BASE_FILES
@@ -370,7 +371,6 @@ set(Qt_LIBS
 set(LINK_LIBS
     ${Qt_LIBS}
     ${Parted_LIBRARIES}
-    ${QREncode_LIBRARIES}
     ${X11_LIBRARIES}
     ${X11EXT_LIBRARIES}
     ${X11TST_LIBRARIES}
@@ -379,6 +379,7 @@ set(LINK_LIBS
     CuteLogger
     global_shortcut
     qrencode
+    zlib_wrapper
     )
 
 # Main executable
@@ -543,6 +544,26 @@ add_executable(locale-manager-test
                ${SYSINFO_FILES}
                )
 target_link_libraries(locale-manager-test ${Qt_LIBS})
+
+
+# QR widget test
+add_executable(qr-widget-test
+               ui/tests/qr_widget_test.cpp
+
+               base/file_util.cpp
+               base/file_util.h
+               third_party/zlib_wrapper/zip_util.cpp
+               third_party/zlib_wrapper/zip_util.h
+               ui/widgets/qr_widget.cpp
+               ui/widgets/qr_widget.h
+               )
+target_link_libraries(qr-widget-test
+                      ${Qt_LIBS}
+                      ${ZLib_LIBRARIES}
+
+                      qrencode
+                      )
+
 
 # progress bar test
 add_executable(qprogressbar_test

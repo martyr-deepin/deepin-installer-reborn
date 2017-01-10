@@ -101,6 +101,8 @@ const char kInstallProgressPageOpacityAnimation[] =
 
 // Install failed page
 const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";
+const char kInstallFailedQRErrMsgLen[] = "install_failed_qr_err_msg_len";
+const char kInstallFailedErrMsgLen[] = "install_failed_err_msg_len";
 
 // Packages
 const char kPackageUninstalledPackages[] = "package_uninstalled_packages";

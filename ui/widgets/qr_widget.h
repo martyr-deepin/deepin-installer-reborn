@@ -17,13 +17,16 @@ class QRWidget : public QWidget {
  public:
   explicit QRWidget(QWidget* parent = nullptr);
 
+  // Get current qr content.
   QString text() const { return content_; }
-  void setText(const QString& content);
 
  public slots:
   // Set margin of qr image. |margin| shall be a non-negative integer.
   // Call update() to repaint qr image.
   void setMargin(int margin);
+
+  // Update qr |content|.
+  void setText(const QString& content);
 
  protected:
   void paintEvent(QPaintEvent* event) override;
