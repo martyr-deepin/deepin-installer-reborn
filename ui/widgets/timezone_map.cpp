@@ -69,6 +69,7 @@ void TimezoneMap::setTimezone(const QString& timezone) {
     nearest_zones_.append(current_zone_);
     this->remark();
   } else {
+    // NOTE(xushaohua): "Etc/UTC" can not be set on the map
     qWarning() << "Timezone not found:" << timezone;
   }
 }

@@ -35,10 +35,14 @@ OsTypeItems GetOsTypeItems() {
       } else {
         type = OsType::Unknown;
       }
-      result.insert(items[0], type);
+
+      // Deal with EFI path, like "/dev/sda2@/EFI/Microsoft/Boot/bootmgfw.efi.
+      const QString dev_path = items[0];
+      const int index = dev_path.indexOf('@');
+      const QString path = (index == -1) ? dev_path : dev_path.left(index);
+      result.insert(path, type);
     }
   }
-  qDebug() << "GetOsTypeItems:" << output << result;
 
   return result;
 }

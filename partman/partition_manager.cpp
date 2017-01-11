@@ -209,6 +209,8 @@ DeviceList ScanDevices() {
   const OsTypeItems os_type_items = GetOsTypeItems();
   const MountItemList mount_items = ParseMountItems();
 
+  qDebug() << "os_type_items:" << os_type_items;
+
   for (PedDevice* lp_device = ped_device_get_next(nullptr);
       lp_device != nullptr;
       lp_device = ped_device_get_next(lp_device)) {
