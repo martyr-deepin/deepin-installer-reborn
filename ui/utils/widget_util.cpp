@@ -4,8 +4,10 @@
 
 #include "ui/utils/widget_util.h"
 
+#include <QApplication>
 #include <QComboBox>
 #include <QDebug>
+#include <QDesktopWidget>
 #include <QLayout>
 #include <QLayoutItem>
 #include <QMenu>
@@ -57,6 +59,13 @@ bool SetChildTransparent(QWidget* root, const QString& child_name) {
     }
   }
   return false;
+}
+
+void ShowFullscreen(QWidget* widget) {
+  const QRect rect = qApp->desktop()->screenGeometry();
+  widget->move(rect.topLeft());
+  widget->setFixedSize(rect.size());
+  widget->showFullScreen();
 }
 
 void SetQComboBoxTransparent(QComboBox* box) {
