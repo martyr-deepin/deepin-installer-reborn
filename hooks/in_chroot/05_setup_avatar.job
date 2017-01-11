@@ -8,7 +8,7 @@ setup_avatar() {
   local DI_AVATAR DI_USERNAME USER_CONF AVATAR_FILE
   DI_AVATAR=$(installer_get "DI_AVATAR")
   DI_USERNAME=$(installer_get "DI_USERNAME")
-  USER_CONF="/var/lib/AccountService/users/${DI_USERNAME}"
+  USER_CONF="/var/lib/AccountsService/users/${DI_USERNAME}"
   AVATAR_FILE="file://${DI_AVATAR}"
 
   if [ -f "${DI_AVATAR}" ]; then
