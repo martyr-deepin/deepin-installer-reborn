@@ -112,7 +112,7 @@ void HooksManager::runNextHook() {
 
     // Run next hook in current hooks pack.
     const QString hook = hooks_pack_->hooks.at(hooks_pack_->current_hook);
-    qDebug() << "run hook:" << hook;
+    qDebug() << "run hook:" << GetFileName(hook);
     emit hook_worker_->runHook(hook);
   }
 }
@@ -202,8 +202,8 @@ void HooksManager::onHooksManagerFinished() {
 
 void HooksManager::onHookFinished(bool ok) {
   if (!ok) {
-    qCritical() << "Hook failed:"
-                << hooks_pack_->hooks.at(hooks_pack_->current_hook);
+    const QString hook = hooks_pack_->hooks.at(hooks_pack_->current_hook);
+    qCritical() << "Hook failed:" << GetFileName(hook);
     emit this->errorOccurred();
     return;
   }

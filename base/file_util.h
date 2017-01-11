@@ -31,11 +31,14 @@ bool CreateDirs(const QString& dirpath);
 // Create parent folders.
 bool CreateParentDirs(const QString& filepath);
 
-// Returns final component of |filepath|.
+// Returns basename of |filepath|.
 QString GetFileBasename(const QString& filepath);
 
 // Returns lower cased extension name of |filepath|, might be empty.
 QString GetFileExtname(const QString& filepath);
+
+// Returns filename of |filepath|.
+QString GetFileName(const QString& filepath);
 
 // Get size of file. If file not found or has no access, returns 0.
 qint64 GetFileSize(const QString& filepath);

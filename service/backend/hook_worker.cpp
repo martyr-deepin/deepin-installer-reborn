@@ -7,6 +7,7 @@
 #include <QDebug>
 
 #include "base/command.h"
+#include "base/file_util.h"
 
 namespace installer {
 
@@ -21,10 +22,10 @@ bool RunHook(const QString& hook) {
   const QStringList args = {kHookManagerFile, hook};
   const bool ok = RunScriptFile(args, output, err);
   if (!output.isEmpty()) {
-    qWarning() << "Output from " << hook << "\n" << output;
+    qDebug() << GetFileName(hook) << "\n" << output;
   }
   if (!err.isEmpty()) {
-    qCritical() << "Error from " << hook << "\n" <<err;
+    qCritical() << GetFileName(hook) << "\n" << err;
   }
   return ok;
 }

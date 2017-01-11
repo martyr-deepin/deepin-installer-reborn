@@ -93,19 +93,13 @@ bool CreateParentDirs(const QString& filepath) {
 }
 
 QString GetFileBasename(const QString& filepath) {
-  const int slash_index = filepath.lastIndexOf(QDir::separator());
-  QString tmp_filepath;
-  if (slash_index > -1) {
-    tmp_filepath = filepath.mid(slash_index + 1);
-  } else {
-    tmp_filepath = filepath;
-  }
-
-  const int dot_index = tmp_filepath.lastIndexOf(QChar('.'));
+  const QString filename = GetFileName(filepath);
+  const int dot_index = filename.lastIndexOf(QChar('.'));
   if (dot_index > 0) {
-    return tmp_filepath.left(dot_index);
+    return filename.left(dot_index);
   } else {
-    return tmp_filepath;
+    // Filename does not contain extension name.
+    return filename;
   }
 }
 
@@ -117,6 +111,16 @@ QString GetFileExtname(const QString& filepath) {
   }
 
   return "";
+}
+
+QString GetFileName(const QString& filepath) {
+  const int slash_index = filepath.lastIndexOf(QDir::separator());
+  if (slash_index > -1) {
+    return filepath.mid(slash_index + 1);
+  } else {
+    // filepath is the filename.
+    return filepath;
+  }
 }
 
 qint64 GetFileSize(const QString& filepath) {

@@ -14,5 +14,9 @@ TEST(FileUtil, CopyFodlerTest) {
   EXPECT_TRUE(CopyFolder("/etc/apt", "/tmp/apt", false));
 }
 
+TEST(FileUtil, GetFileNameTest) {
+  EXPECT_EQ(GetFileName("/etc/apt/sources.list"), "sources.list");
+}
+
 }  // namespace
 }  // namespace installer
