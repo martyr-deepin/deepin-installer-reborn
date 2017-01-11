@@ -8,7 +8,7 @@
 #include <QObject>
 class QCheckBox;
 class QLineEdit;
-class QSlider;
+class QSpinBox;
 
 namespace installer {
 
@@ -34,9 +34,9 @@ class SettingsModel : public QObject {
   // Create a QLineEdit widget, binding to |property|.
   QLineEdit* addLineEdit(const QString& property);
 
-  // Create a QSlider widget with range [minimum, maximum],
+  // Create a QSpinBox widget with range [minimum, maximum],
   // binding to |property|.
-  QSlider* addSlider(const QString& property, int minimum, int maximum);
+  QSpinBox* addSpinBox(const QString& property, int minimum, int maximum);
 
   // Language selection
   QString defaultLocale() const;
@@ -53,7 +53,7 @@ class SettingsModel : public QObject {
   void onLineEditChanged(const QString& text);
 
   // Save |value| to settings.
-  void onSliderChanged(int value);
+  void onSpinBoxChanged(int value);
 };
 
 }  // namespace installer

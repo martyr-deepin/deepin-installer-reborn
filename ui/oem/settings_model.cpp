@@ -9,7 +9,7 @@
 #include <QDir>
 #include <QLineEdit>
 #include <QSettings>
-#include <QSlider>
+#include <QSpinBox>
 
 #include "service/settings_name.h"
 
@@ -149,24 +149,23 @@ QLineEdit* SettingsModel::addLineEdit(const QString& property) {
   return line_edit;
 }
 
-QSlider* SettingsModel::addSlider(const QString& property, int minimum,
-                                  int maximum) {
-  QSlider* slider = new QSlider();
-  slider->setObjectName("slider");
+QSpinBox* SettingsModel::addSpinBox(const QString& property, int minimum,
+                                   int maximum) {
+  QSpinBox* spin_box = new QSpinBox();
+  spin_box->setObjectName("spin_box");
 
   // Save property name to widget's property-list.
-  slider->setProperty(kSettingsPropName, property);
+  spin_box->setProperty(kSettingsPropName, property);
 
   // Read current property value.
-  slider->setRange(minimum, maximum);
-  slider->setOrientation(Qt::Horizontal);
-  slider->setValue(GetSettingsInt(property));
+  spin_box->setRange(minimum, maximum);
+  spin_box->setValue(GetSettingsInt(property));
 
   // Watch for changes.
-  connect(slider, &QSlider::valueChanged,
-          this, &SettingsModel::onSliderChanged);
+  connect(spin_box, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+          this, &SettingsModel::onSpinBoxChanged);
 
-  return slider;
+  return spin_box;
 }
 
 QString SettingsModel::defaultLocale() const {
@@ -188,7 +187,7 @@ void SettingsModel::onLineEditChanged(const QString& text) {
   SetSettingsValue(prop, text);
 }
 
-void SettingsModel::onSliderChanged(int value) {
+void SettingsModel::onSpinBoxChanged(int value) {
   const QString prop = this->sender()->property(kSettingsPropName).toString();
   SetSettingsValue(prop, value);
 }

@@ -13,7 +13,7 @@
 #include <QListView>
 #include <QPushButton>
 #include <QScrollArea>
-#include <QSlider>
+#include <QSpinBox>
 #include <QSplitter>
 #include <QStringListModel>
 #include <QVBoxLayout>
@@ -23,6 +23,7 @@
 #include "ui/oem/settings_model.h"
 
 namespace installer {
+
 namespace {
 // Add 20px between sections
 const int kSectionSpace = 20;
@@ -144,7 +145,6 @@ void OemWindow::initUI() {
       tr("Mount points to be formatted"));
   formatted_mount_points->setToolTip(formatted_mount_points->placeholderText());
 
-
   // Install progress frame
   QCheckBox* position_animation = settings_model_->addCheckBox(
       kInstallProgressPagePositionAnimation);
@@ -153,18 +153,21 @@ void OemWindow::initUI() {
       kInstallProgressPageOpacityAnimation);
   opacity_animation->setText(tr("Fade animation"));
 
+  // Install failed frame
+  QSpinBox* qr_err_msg = settings_model_->addSpinBox(kInstallFailedQRErrMsgLen,
+                                                     100, 500);
+
   // Packages
   QLineEdit* uninstalled_packages = settings_model_->addLineEdit(
       kPackageUninstalledPackages);
   uninstalled_packages->setPlaceholderText("packages to be uninstalled");
   uninstalled_packages->setToolTip(uninstalled_packages->placeholderText());
 
-
   // Grub
   QLabel* grub_timeout_label = new QLabel();
   grub_timeout_label->setText(tr("Grub menu timeout:"));
-  QSlider* grub_timeout_slider_ = settings_model_->addSlider(kGrubTimeout,
-                                                             0, 30);
+  QSpinBox* grub_timeout_slider_ = settings_model_->addSpinBox(kGrubTimeout,
+                                                              0, 30);
   QHBoxLayout* grub_timeout_layout = new QHBoxLayout();
   grub_timeout_layout->addWidget(grub_timeout_label);
   grub_timeout_layout->addWidget(grub_timeout_slider_);
@@ -231,17 +234,23 @@ void OemWindow::initUI() {
   right_layout->addWidget(mount_points);
   right_layout->addWidget(formatted_mount_points);
 
-  right_layout->addSpacing(kSectionSpace);
-  right_layout->addLayout(grub_timeout_layout);
-  right_layout->addWidget(block_windows);
-
+  // Install progress frame
   right_layout->addSpacing(kSectionSpace);
   right_layout->addWidget(position_animation);
   right_layout->addWidget(opacity_animation);
 
-  right_layout->addSpacing(kSectionSpace);
+  // Install failed frame
+  right_layout->addWidget(qr_err_msg);
+
+  // Packages
   right_layout->addWidget(uninstalled_packages);
 
+  // Grub
+  right_layout->addSpacing(kSectionSpace);
+  right_layout->addLayout(grub_timeout_layout);
+  right_layout->addWidget(block_windows);
+
+  // Desktop
   right_layout->addSpacing(kSectionSpace);
   right_layout->addWidget(dde_dock_app_list);
   right_layout->addWidget(dde_launcher_app_list);
