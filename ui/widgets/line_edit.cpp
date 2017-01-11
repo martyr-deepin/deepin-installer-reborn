@@ -18,6 +18,9 @@ LineEdit::LineEdit(const QString& icon, QWidget* parent) : QLineEdit(parent) {
   this->setStyleSheet(ReadFile(":/styles/line_edit.css"));
   this->setFixedSize(340, 36);
 
+  // Disable context menu.
+  this->setContextMenuPolicy(Qt::NoContextMenu);
+
   image_label_ = new QLabel(this);
   image_label_->setPixmap(QPixmap(icon));
   image_label_->setFixedSize(12, 12);
