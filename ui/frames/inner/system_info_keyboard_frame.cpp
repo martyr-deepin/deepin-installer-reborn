@@ -132,6 +132,8 @@ void SystemInfoKeyboardFrame::initUI() {
   test_edit_->setObjectName("test_edit");
   test_edit_->setPlaceholderText(tr("Test area"));
   test_edit_->setFixedSize(kLayoutWidth, 36);
+  // Disable context menu.
+  test_edit_->setContextMenuPolicy(Qt::NoContextMenu);
 
   back_button_ = new NavButton(tr("Back"));
 

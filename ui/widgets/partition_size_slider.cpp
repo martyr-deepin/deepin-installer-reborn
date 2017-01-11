@@ -83,6 +83,8 @@ void PartitionSizeSlider::initUI() {
   int_validator_->setRange(0, 1);
   editor_->setValidator(int_validator_);
   editor_->setFixedWidth(68);
+  // Disable context menu.
+  editor_->setContextMenuPolicy(Qt::NoContextMenu);
 
   QLabel* size_label = new QLabel("MB");
   size_label->setObjectName("size_label");
