@@ -31,6 +31,7 @@
 #include "ui/frames/select_language_frame.h"
 #include "ui/frames/system_info_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
+#include "ui/utils/widget_util.h"
 #include "ui/widgets/page_indicator.h"
 #include "ui/widgets/pointer_button.h"
 #include "ui/xrandr/multi_head_manager.h"
@@ -72,7 +73,7 @@ void MainWindow::scanDevicesAndTimezone() {
 
 void MainWindow::fullscreen() {
   multi_head_manager_->updateWallpaper();
-  this->showFullScreen();
+  ShowFullscreen(this);
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
@@ -303,7 +304,8 @@ void MainWindow::onCloseButtonClicked() {
 }
 
 void MainWindow::onPrimaryScreenChanged(const QRect& geometry) {
-  qDebug() << "MainWindow::onPrimaryScreenChanged()" << geometry;
+  qDebug() << "onPrimaryScreenChanged()" << geometry;
+  ShowFullscreen(this);
   this->move(geometry.topLeft());
   this->setFixedSize(geometry.size());
 }
