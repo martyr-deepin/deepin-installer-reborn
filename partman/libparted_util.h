@@ -38,6 +38,8 @@ bool GetDeviceAndDisk(const QString& device_path,
 QString GetPartitionPath(PedPartition* lp_partition);
 
 // Resize/Move partition specified with |partition|.
+// If |partition| is NormalPartition or LogicalPartition, remember to re-format
+// it.
 bool ResizeMovePartition(const Partition& partition);
 
 // Set/unset |flag| of |partition|.
