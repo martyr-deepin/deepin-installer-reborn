@@ -17,6 +17,7 @@ enum class OperationType {
   Delete,
   Format,
   MountPoint,
+  NewPartTable,  // Create new partition table.
   Resize,  // Only used for extended partition.
   Invalid,  // Operation type not set.
 };
@@ -42,6 +43,7 @@ class Operation {
   void applyToVisual(PartitionList& partitions) const;
 
   // Get description of this operation.
+  // TODO(xushaohua): Move to PartitionDelegate.
   QString description() const;
 
  private:
@@ -55,6 +57,12 @@ class Operation {
 QDebug& operator<<(QDebug& debug, const Operation& operation);
 
 typedef QList<Operation> OperationList;
+
+// Merge |operation| in |operations|.
+void MergeOperations(OperationList& operations, const Operation& operation);
+
+// Merge unallocated partitions.
+void MergeUnallocatedPartitions(PartitionList& partitions);
 
 }  // namespace installer
 

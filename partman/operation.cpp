@@ -26,12 +26,16 @@ QDebug& operator<<(QDebug& debug, const OperationType& op_type) {
       type = "Format";
       break;
     }
-    case OperationType::Resize: {
-      type = "Resize";
-      break;
-    }
     case OperationType::MountPoint: {
       type = "MountPoint";
+      break;
+    }
+    case OperationType::NewPartTable: {
+      type = "NewPartTable";
+      break;
+    }
+    case OperationType::Resize: {
+      type = "Resize";
       break;
     }
     case OperationType::Invalid: {
@@ -58,6 +62,7 @@ bool Operation::applyToDisk() const {
   bool ok;
   switch (type) {
     case OperationType::Create: {
+      // TODO(xushaohua): Update partition number.
       ok = CreatePartition(new_partition);
       qDebug() << "applyToDisk() create partition:" << ok;
       // Ignores extended partition.
@@ -190,30 +195,11 @@ QString Operation::description() const {
 }
 
 void Operation::applyCreateVisual(PartitionList& partitions) const {
-  // Policy:
-  // * Create unallocated partition if orig_partition is larger than
-  //   new_partition
-
   const int index = PartitionIndex(partitions, orig_partition);
   if (index == -1) {
     qCritical() << "applyCreateVisual() Failed to find partition:"
                 << orig_partition.path;
     return;
-  }
-
-  if (new_partition.succeeding_sectors > 0) {
-    // Create an unallocated partition after this one.
-    Partition succeeding_partition;
-    succeeding_partition.device_path = new_partition.device_path;
-    succeeding_partition.sector_size = orig_partition.sector_size;
-    succeeding_partition.end_sector = orig_partition.end_sector;
-    succeeding_partition.start_sector = succeeding_partition.end_sector -
-                                        new_partition.succeeding_sectors + 1;
-    if (index+1 == partitions.length()) {
-      partitions.append(succeeding_partition);
-    } else {
-      partitions.insert(index+1, succeeding_partition);
-    }
   }
 
   // Do not remove orig partition when creating extended partition.
@@ -223,19 +209,7 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
     partitions[index] = new_partition;
   }
 
-  if (new_partition.preceding_sectors > 0) {
-    // Create an unallocated partition before this one.
-    Partition preceding_partition;
-    preceding_partition.device_path = new_partition.device_path;
-    preceding_partition.start_sector = orig_partition.start_sector;
-    preceding_partition.end_sector = preceding_partition.start_sector +
-                                     new_partition.preceding_sectors - 1;
-    if (index == 0) {
-      partitions.prepend(preceding_partition);
-    } else {
-      partitions.insert(index, preceding_partition);
-    }
-  }
+  // TODO(xushaohua): Merge unallocated spaces.
 }
 
 void Operation::applyDeleteVisual(PartitionList& partitions) const {
@@ -244,12 +218,7 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
   // * Merge unallocated partitions;
 
   int index = PartitionIndex(partitions, orig_partition);
-
-//  if (orig_partition.type == PartitionType::Extended) {
-//    // Remove extended partition.
-//    partitions.removeAt(index);
-//    return;
-//  }
+  Q_ASSERT(index > -1);
 
   if (orig_partition.type == PartitionType::Logical) {
     // Update partition number of logical partitions.
@@ -261,24 +230,8 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
     }
   }
 
-  Partition empty_partition = new_partition;
-
-  if (index > 0 &&
-      (partitions.at(index - 1).type == PartitionType::Unallocated)) {
-    // Not the first partition, try to merge with previous freespace partition.
-    empty_partition.start_sector = partitions.at(index - 1).start_sector;
-    partitions.removeAt(index - 1);
-    index -= 1;
-  }
-
-  if (index < partitions.length() - 1 &&
-      (partitions.at(index + 1).type == PartitionType::Unallocated)) {
-    // Not the last partition, try to merge with next freespace partition.
-    empty_partition.end_sector = partitions.at(index + 1).end_sector;
-    partitions[index] = empty_partition;
-    partitions.removeAt(index + 1);
-  }
-  partitions[index] = empty_partition;
+  partitions[index] = new_partition;
+  // TODO(xushaohua): Merge unallocated spaces.
 }
 
 void Operation::applyResizeVisual(PartitionList& partitions) const {
@@ -304,6 +257,11 @@ QDebug& operator<<(QDebug& debug, const Operation& operation) {
         << "new_partition:" << operation.new_partition
         << "}";
   return debug;
+}
+
+void MergeOperations(OperationList& operations, const Operation& operation) {
+  Q_UNUSED(operations);
+  Q_UNUSED(operation);
 }
 
 }  // namespace installer

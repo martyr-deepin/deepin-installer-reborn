@@ -640,8 +640,6 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
     }
     new_partition.end_sector = qMin(partition.end_sector,
         total_sectors + new_partition.start_sector - 1);
-    new_partition.succeeding_sectors = partition.end_sector -
-        new_partition.end_sector;
   } else {
     new_partition.end_sector = partition.end_sector;
     if (need_mbr) {
@@ -650,11 +648,6 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
     } else {
       new_partition.start_sector = qMax(partition.start_sector,
           partition.end_sector - total_sectors + 1);
-    }
-    const qint64 preceding_sectors = new_partition.start_sector -
-        partition.start_sector;
-    if (preceding_sectors > oneMebiByteSector) {
-      new_partition.preceding_sectors = preceding_sectors;
     }
   }
 
@@ -715,18 +708,11 @@ void PartitionDelegate::createLogicalPartition(const Partition& partition,
     new_partition.start_sector = partition.start_sector + oneMebiByteSector;
     new_partition.end_sector = qMin(partition.end_sector,
         total_sectors + new_partition.start_sector - 1);
-    new_partition.succeeding_sectors = partition.end_sector -
-                                       new_partition.end_sector;
   } else {
     new_partition.end_sector = partition.end_sector;
     new_partition.start_sector = qMax(
         partition.start_sector + oneMebiByteSector,
         partition.end_sector - total_sectors + 1);
-    const qint64 preceding_sectors = new_partition.start_sector -
-        partition.start_sector;
-    if (preceding_sectors > oneMebiByteSector) {
-      new_partition.preceding_sectors = preceding_sectors;
-    }
   }
 
   // No need to add extended partition or enlarge it.
