@@ -49,6 +49,7 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
+  current_page_ = PageId::SystemInfoId;
   this->goNextPage();
 }
 

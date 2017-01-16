@@ -123,7 +123,8 @@ class PartitionDelegate : public QObject {
 
   // Create primary partition. If |is_simple| is true, append operation
   // to simple_operations_ list.
-  void createPrimaryPartition(const Partition& partition,
+  bool createPrimaryPartition(const Partition& partition,
+                              PartitionType partition_type,
                               bool align_start,
                               FsType fs_type,
                               const QString& mount_point,
@@ -132,7 +133,7 @@ class PartitionDelegate : public QObject {
 
   // Create logical partition. If |is_simple| is true, append operation to
   // simple_partitions_ list.
-  void createLogicalPartition(const Partition& partition,
+  bool createLogicalPartition(const Partition& partition,
                               bool align_start,
                               FsType fs_type,
                               const QString& mount_point,
