@@ -78,8 +78,6 @@ Partition::Partition()
       freespace(-1),
       start_sector(-1),
       end_sector(-1),
-      preceding_sectors(0),
-      succeeding_sectors(0),
       mount_point(),
       flags() {
 }
@@ -139,8 +137,6 @@ QDebug& operator<<(QDebug& debug, const Partition& partition) {
         << "length:" << partition.length
         << "freespace:" << partition.freespace
         << "byte length:" << partition.getByteLength()
-        << "preceding sectors:" << partition.preceding_sectors
-        << "succeeding sectors:" << partition.succeeding_sectors
         << "flags:" << partition.flags
         << "}";
   return debug;

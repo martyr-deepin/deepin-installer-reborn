@@ -88,12 +88,6 @@ class Partition {
   qint64 start_sector;
   qint64 end_sector;
 
-  // No. of sectors not unallocated before/after this partition.
-  // These two properties are only used while creating a new partition.
-  // If it is a valid value, create an unallocated-partition later.
-  qint64 preceding_sectors;
-  qint64 succeeding_sectors;
-
   // |mount_point| is not system mount point, it is set by user
   // in partition page.
   QString mount_point;
