@@ -100,6 +100,9 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
         partition.length = partition.getByteLength();
         partition.freespace = partition.length;
       }
+
+      // Get partition name.
+      partition.name = ped_partition_get_name(lp_partition);
     }
     partitions.append(partition);
   }
@@ -205,11 +208,8 @@ DeviceList ScanDevices() {
 
   DeviceList devices;
   const LabelItems label_items = ParseLabelDir();
-  const PartLabelItems part_label_items = ParsePartLabelDir();
   const OsTypeItems os_type_items = GetOsTypeItems();
   const MountItemList mount_items = ParseMountItems();
-
-  qDebug() << "os_type_items:" << os_type_items;
 
   for (PedDevice* lp_device = ped_device_get_next(nullptr);
       lp_device != nullptr;
@@ -269,10 +269,9 @@ DeviceList ScanDevices() {
       partition.sector_size = device.sector_size;
       if (!partition.path.isEmpty() &&
           partition.type != PartitionType::Unallocated) {
+        // Read partition label and os.
         const QString empty_str;
         partition.label = label_items.value(partition.path, empty_str);
-        partition.part_label = part_label_items.value(partition.path,
-                                                      empty_str);
         partition.os = os_type_items.value(partition.path, OsType::Empty);
 
         // Mark busy flag of this partition when it is mounted in system.

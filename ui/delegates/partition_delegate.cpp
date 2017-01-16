@@ -623,7 +623,10 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
   const int partition_number = AllocPrimaryPartitionNumber(device);
-  Q_ASSERT(partition_number > -1);
+  if (partition_number < 0) {
+    qCritical() << "Failed to allocate primary partition number!";
+    return;
+  }
   new_partition.changeNumber(partition_number);
 
   // Check whether space is required for the Master Boot Record.
