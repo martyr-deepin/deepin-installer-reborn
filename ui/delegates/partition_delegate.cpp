@@ -20,9 +20,6 @@ namespace {
 
 const char kMountPointUnused[] = "unused";
 
-// If partition size is less than this value, hide it from partition list.
-const qint64 kMinimumPartitionSizeToDisplay = 1 * kMebiByte;
-
 // Align partition to nearest mebibytes.
 void AlignPartition(Partition& partition) {
   const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
@@ -557,9 +554,10 @@ void PartitionDelegate::refreshVisual() {
         operation.applyToVisual(device.partitions);
       }
     }
-  }
 
-  // TODO(xushaohua): Merge unallocated partitions.
+    // Merge unallocated partitions.
+    MergeUnallocatedPartitions(device.partitions);
+  }
 
   emit this->deviceRefreshed();
 

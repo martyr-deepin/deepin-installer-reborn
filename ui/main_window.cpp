@@ -7,7 +7,6 @@
 #include <QApplication>
 #include <QDebug>
 #include <QHBoxLayout>
-#include <QIcon>
 #include <QLabel>
 #include <QResizeEvent>
 #include <QShortcut>
@@ -49,7 +48,6 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
-  current_page_ = PageId::SystemInfoId;
   this->goNextPage();
 }
 
@@ -453,22 +451,28 @@ void MainWindow::goNextPage() {
 }
 
 void MainWindow::rebootSystem() {
+#ifdef N_DEBUG
+  // Do not reboot system in debug mode.
   if (!RebootSystem()) {
     qWarning() << "RebootSystem failed!";
     if (!RebootSystemWithMagicKey()) {
       qWarning() << "RebootSystemWithMagicKey() failed!";
     }
   }
+#endif
   qApp->quit();
 }
 
 void MainWindow::shutdownSystem() {
+#ifdef N_DEBUG
+  // Do not shutdown in debug mode.
   if (!ShutdownSystem()) {
     qWarning() << "ShutdownSystem() failed!";
     if (!ShutdownSystemWithMagicKey()) {
       qWarning() << "ShutdownSystemWithMagicKey() failed!";
     }
   }
+#endif
   qApp->quit();
 }
 

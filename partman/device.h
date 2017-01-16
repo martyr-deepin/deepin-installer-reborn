@@ -19,7 +19,7 @@ class Device {
   PartitionList partitions;
   QString model;
   QString path;
-  qint64 length;  // device length, in sector
+  qint64 length;  // device length, in sector, total sectors.
   qint64 heads;
   qint64 sectors;
   qint64 cylinders;

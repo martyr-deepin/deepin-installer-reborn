@@ -195,7 +195,8 @@ QString Operation::description() const {
 }
 
 void Operation::applyCreateVisual(PartitionList& partitions) const {
-  const int index = PartitionIndex(partitions, orig_partition);
+  // FIXME(xushaohua): index == -1
+  int index = PartitionIndex(partitions, orig_partition);
   if (index == -1) {
     qCritical() << "applyCreateVisual() Failed to find partition:"
                 << orig_partition.path;
@@ -209,35 +210,46 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
     partitions[index] = new_partition;
   }
 
-  // TODO(xushaohua): Merge unallocated spaces.
-}
+  Partition unallocated;
+  unallocated.device_path = orig_partition.device_path;
+  unallocated.sector_size = orig_partition.sector_size;
+  unallocated.type = PartitionType::Unallocated;
+  const qint64 twoMebiByteSector = 2 * kMebiByte / orig_partition.sector_size;
 
-void Operation::applyDeleteVisual(PartitionList& partitions) const {
-  // Policy:
-  // * Update partition number if logical partition is deleted;
-  // * Merge unallocated partitions;
+  // Gap between orig_partition.start <-> new_partition.start.
+  if (new_partition.start_sector - orig_partition.start_sector >
+      twoMebiByteSector) {
+    unallocated.start_sector = orig_partition.start_sector + 1;
+    unallocated.end_sector = new_partition.start_sector - 1;
+    partitions.insert(index, unallocated);
+    index += 1;
+  }
 
-  int index = PartitionIndex(partitions, orig_partition);
-  Q_ASSERT(index > -1);
-
-  if (orig_partition.type == PartitionType::Logical) {
-    // Update partition number of logical partitions.
-    for (Partition& partition : partitions) {
-      if (partition.type == PartitionType::Logical &&
-          partition.partition_number > orig_partition.partition_number) {
-        partition.changeNumber(partition.partition_number - 1);
-      }
+  // Gap between new_partition.end <-> orig_partition.end
+  if (orig_partition.end_sector - new_partition.end_sector >
+      twoMebiByteSector) {
+    unallocated.start_sector = new_partition.end_sector + 1;
+    unallocated.end_sector = orig_partition.end_sector - 1;
+    if (index + 1 == partitions.length()) {
+      partitions.append(unallocated);
+    } else {
+      partitions.insert(index + 1, unallocated);
     }
   }
 
-  partitions[index] = new_partition;
-  // TODO(xushaohua): Merge unallocated spaces.
+  MergeUnallocatedPartitions(partitions);
+}
+
+void Operation::applyDeleteVisual(PartitionList& partitions) const {
+  this->substitute(partitions);
+  MergeUnallocatedPartitions(partitions);
 }
 
 void Operation::applyResizeVisual(PartitionList& partitions) const {
   // Currently only extended partition is allowed to resize
-  Q_ASSERT(new_partition.type == PartitionType::Extended);
-  this->substitute(partitions);
+  if (new_partition.type == PartitionType::Extended) {
+    this->substitute(partitions);
+  }
 }
 
 void Operation::substitute(PartitionList& partitions) const {
@@ -262,6 +274,40 @@ QDebug& operator<<(QDebug& debug, const Operation& operation) {
 void MergeOperations(OperationList& operations, const Operation& operation) {
   Q_UNUSED(operations);
   Q_UNUSED(operation);
+}
+
+void MergeUnallocatedPartitions(PartitionList& partitions) {
+  // Do not handles empty partition list.
+  if (partitions.isEmpty()) {
+    return;
+  }
+
+  // Looks for gaps in between.
+  int global_index = 0;
+  while (global_index < partitions.length()) {
+    int index;
+    // Find unallocated partition.
+    for (index = global_index; index < partitions.length(); ++index) {
+      if (partitions.at(index).type == PartitionType::Unallocated) {
+        break;
+      }
+    }
+
+    // No more unallocated partitions.
+    if (index >= partitions.length()) {
+      break;
+    }
+
+    global_index = index;
+    // Find all connected unallocated partitions.
+    while ((index + 1 < partitions.length()) &&
+           (partitions.at(index + 1).type == PartitionType::Unallocated)) {
+      partitions[global_index].end_sector = partitions.at(index + 1).end_sector;
+      partitions.removeAt(index + 1);
+    }
+
+    ++global_index;
+  }
 }
 
 }  // namespace installer
