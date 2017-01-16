@@ -6,6 +6,7 @@
 
 #include <QDebug>
 #include <QThread>
+#include <math.h>
 
 #include "base/thread_util.h"
 #include "partman/partition_manager.h"
@@ -21,6 +22,19 @@ const char kMountPointUnused[] = "unused";
 
 // If partition size is less than this value, hide it from partition list.
 const qint64 kMinimumPartitionSizeToDisplay = 1 * kMebiByte;
+
+// Align partition to nearest mebibytes.
+void AlignPartition(Partition& partition) {
+  const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
+
+  // Align to nearest MebiBytes.
+  const int start_size = static_cast<int>(
+      ceil(partition.start_sector / oneMebiByteSector));
+  const int end_size = static_cast<int>(
+      floor((partition.end_sector + 1) / oneMebiByteSector));
+  partition.start_sector = start_size * oneMebiByteSector;
+  partition.end_sector = end_size * oneMebiByteSector - 1;
+}
 
 // Calculate new primary partition number.
 // Returns -1 on failed.
@@ -282,6 +296,7 @@ void PartitionDelegate::createSimplePartition(const Partition& partition,
                                               qint64 total_sectors) {
   if (partition_type == PartitionType::Normal) {
     createPrimaryPartition(partition,
+                           partition_type,
                            align_start,
                            fs_type,
                            mount_point,
@@ -357,6 +372,7 @@ void PartitionDelegate::createPartition(const Partition& partition,
                                         qint64 total_sectors) {
   if (partition_type == PartitionType::Normal) {
     createPrimaryPartition(partition,
+                           PartitionType::Normal,
                            align_start,
                            fs_type,
                            mount_point,
@@ -375,6 +391,11 @@ void PartitionDelegate::createPartition(const Partition& partition,
 }
 
 void PartitionDelegate::deletePartition(const Partition& partition) {
+  // Policy:
+  //  * Remove selected partition.
+  //  * Merge unallocated partitions.
+  //  * Remove extended partition if no logical partition.
+  //  * Update partition number if needed.
   Partition new_partition;
   new_partition.sector_size = partition.sector_size;
   new_partition.start_sector = partition.start_sector;
@@ -426,6 +447,8 @@ void PartitionDelegate::deletePartition(const Partition& partition) {
         operations_.append(delete_operation);
       }
     }
+
+    // TODO(xushaohua): Remove empty extended partition.
   }
 }
 
@@ -510,6 +533,7 @@ void PartitionDelegate::refreshVisual() {
   // * Ignore partitions with size less than 100Mib;
 
   devices_ = real_devices_;
+
   for (Device& device : devices_) {
     PartitionList partitions;
     for (const Partition& partition : device.partitions) {
@@ -518,50 +542,14 @@ void PartitionDelegate::refreshVisual() {
           partition.type == PartitionType::Extended) {
         partitions.append(partition);
       } else if (partition.type == PartitionType::Unallocated) {
-        // Filters freespace.
-        if (partition.getByteLength() > kMinimumPartitionSizeToDisplay) {
+        // Filter unallocated partitions which are larger than 1MiB.
+        if (partition.getByteLength() >= kMebiByte) {
           partitions.append(partition);
         }
       }
     }
     device.partitions = partitions;
   }
-
-//  for (Device& device : devices_) {
-//    PartitionList new_partitions;
-//    const PartitionList& old_partitions = device.partitions;
-//    Partition unallocated_partition;
-//    for (int index = 0; index < old_partitions.length(); ) {
-//      if (old_partitions.at(index).type == PartitionType::Unallocated) {
-//        unallocated_partition = old_partitions.at(index);
-//        index ++;
-//
-//        while (index < old_partitions.length()) {
-//          if (old_partitions.at(index).type == PartitionType::Unallocated) {
-//            // Merge unallocated partitions.
-//            qDebug() << "merge partition:" << old_partitions.at(index);
-//            unallocated_partition.end_sector = old_partitions.at(index).end_sector;
-//            index ++;
-//          } else if (old_partitions.at(index).type == PartitionType::Extended) {
-//            // Ignores extended partition.
-//            index ++;
-//          } else {
-//            break;
-//          }
-//        }
-//
-//        // Ignore unallocated partition if it is too small.
-//        if (unallocated_partition.getByteLength() > kMinimumPartitionSizeToDisplay) {
-//          new_partitions.append(unallocated_partition);
-//        }
-//
-//      } else {
-//        new_partitions.append(old_partitions.at(index));
-//        index ++;
-//      }
-//    }
-//    device.partitions = new_partitions;
-//  }
 
   for (Device& device : devices_) {
     for (Operation& operation : operations_) {
@@ -570,6 +558,8 @@ void PartitionDelegate::refreshVisual() {
       }
     }
   }
+
+  // TODO(xushaohua): Merge unallocated partitions.
 
   emit this->deviceRefreshed();
 
@@ -592,7 +582,8 @@ void PartitionDelegate::initConnections() {
           partition_manager_, &PartitionManager::deleteLater);
 }
 
-void PartitionDelegate::createPrimaryPartition(const Partition& partition,
+bool PartitionDelegate::createPrimaryPartition(const Partition& partition,
+                                               PartitionType partition_type,
                                                bool align_start,
                                                FsType fs_type,
                                                const QString& mount_point,
@@ -603,12 +594,18 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
   //   extended partition, shrink extended partition or delete it if no other
   //   logical partitions.
 
+  if (partition_type != PartitionType::Normal &&
+      partition_type != PartitionType::Extended) {
+    qCritical() << "createPrimaryPartition() invalid part type:"
+                << partition_type;
+    return false;
+  }
+
   const int device_index = DeviceIndex(devices_, partition.device_path);
   if (device_index == -1) {
-    // TODO(xushaohua): Raise error msg
-    qCritical() << "createPartition() device index out of range:"
+    qCritical() << "createPrimaryPartition() device index out of range:"
                 << partition.device_path;
-    return;
+    return false;
   }
   const Device& device = devices_.at(device_index);
 
@@ -619,13 +616,13 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
   new_partition.path = partition.path;
   new_partition.sector_size = partition.sector_size;
   new_partition.status = PartitionStatus::New;
-  new_partition.type = PartitionType::Normal;
+  new_partition.type = partition_type;
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
   const int partition_number = AllocPrimaryPartitionNumber(device);
   if (partition_number < 0) {
     qCritical() << "Failed to allocate primary partition number!";
-    return;
+    return false;
   }
   new_partition.changeNumber(partition_number);
 
@@ -654,9 +651,18 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
     }
   }
 
-  Q_ASSERT(partition.start_sector <= new_partition.start_sector);
-  Q_ASSERT(new_partition.start_sector < new_partition.end_sector);
-  Q_ASSERT(new_partition.end_sector <= partition.end_sector);
+  // Align to nearest MebiBytes.
+  AlignPartition(new_partition);
+
+  // Check partition sector range.
+  // Also check whether partition size is less than 1MiB or not.
+  if (new_partition.start_sector < partition.start_sector ||
+      new_partition.start_sector >= partition.end_sector ||
+      new_partition.getByteLength() < kMebiByte ||
+      new_partition.end_sector > partition.end_sector) {
+    qCritical() << "Invalid partition sector range";
+    return false;
+  }
 
   if (is_simple) {
     Operation operation(OperationType::Create, partition, new_partition);
@@ -667,9 +673,11 @@ void PartitionDelegate::createPrimaryPartition(const Partition& partition,
     Operation operation(OperationType::Create, partition, new_partition);
     operations_.append(operation);
   }
+
+  return true;
 }
 
-void PartitionDelegate::createLogicalPartition(const Partition& partition,
+bool PartitionDelegate::createLogicalPartition(const Partition& partition,
                                                bool align_start,
                                                FsType fs_type,
                                                const QString& mount_point,
@@ -682,12 +690,56 @@ void PartitionDelegate::createLogicalPartition(const Partition& partition,
 
   const int device_index = DeviceIndex(devices_, partition.device_path);
   if (device_index == -1) {
-    // TODO(xushaohua): Raise error msg
-    qCritical() << "createPartition() device index out of range:"
+    qCritical() << "createLogicalPartition() device index out of range:"
                 << partition.device_path;
-    return;
+    return false;
   }
   const Device& device = devices_.at(device_index);
+
+  const int ext_index = ExtendedPartitionIndex(device.partitions);
+  Partition ext_partition;
+  if (ext_index == -1) {
+    if (is_simple) {
+      qCritical() << "Cannot create extended partition in simple mode";
+      return false;
+    }
+
+    // No extended partition found, create one.
+    if (!createPrimaryPartition(partition,
+                                PartitionType::Extended,
+                                align_start,
+                                FsType::Empty,
+                                "",
+                                total_sectors,
+                                false)) {
+      qCritical() << "Failed to create extended partition";
+      return false;
+    }
+
+    ext_partition = operations_.last().new_partition;
+  } else {
+    // No need to add extended partition or enlarge it.
+    ext_partition = device.partitions.at(ext_index);
+
+    // Enlarge extended partition if needed.
+    if (ext_partition.start_sector > partition.start_sector ||
+        ext_partition.end_sector < partition.end_sector) {
+      Partition new_ext_partition(ext_partition);
+      new_ext_partition.start_sector = qMin(ext_partition.start_sector,
+                                            partition.start_sector);
+      new_ext_partition.end_sector = qMax(ext_partition.end_sector,
+                                          partition.end_sector);
+
+      AlignPartition(new_ext_partition);
+
+      const Operation resize_ext_operation(OperationType::Resize,
+                                           ext_partition,
+                                           new_ext_partition);
+      operations_.append(resize_ext_operation);
+
+      ext_partition = new_ext_partition;
+    }
+  }
 
   Partition new_partition;
   new_partition.device_path = partition.device_path;
@@ -698,8 +750,10 @@ void PartitionDelegate::createLogicalPartition(const Partition& partition,
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
   const int partition_number = AllocLogicalPartitionNumber(device);
-  // FIXME(xushaohua): crashes here
-  Q_ASSERT(partition_number > -1);
+  if (partition_number < 0) {
+    qCritical() << "Failed to allocate logical part number!";
+    return false;
+  }
   new_partition.changeNumber(partition_number);
 
   // space is required for the Extended Boot Record.
@@ -708,63 +762,41 @@ void PartitionDelegate::createLogicalPartition(const Partition& partition,
   const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
   if (align_start) {
     // Align from start of |partition|.
-    new_partition.start_sector = partition.start_sector + oneMebiByteSector;
+    // Add space for Extended Boot Record.
+    new_partition.start_sector = ext_partition.start_sector + oneMebiByteSector;
     new_partition.end_sector = qMin(partition.end_sector,
         total_sectors + new_partition.start_sector - 1);
   } else {
     new_partition.end_sector = partition.end_sector;
     new_partition.start_sector = qMax(
-        partition.start_sector + oneMebiByteSector,
+        ext_partition.start_sector + oneMebiByteSector,
         partition.end_sector - total_sectors + 1);
   }
 
-  // No need to add extended partition or enlarge it.
-  const int ext_index = ExtendedPartitionIndex(device.partitions);
-  Partition ext_partition;
-  if (ext_index == -1) {
-    // No extended partition found, create one.
-    ext_partition.device_path = new_partition.device_path;
-    ext_partition.changeNumber(AllocPrimaryPartitionNumber(device));
-    ext_partition.type = PartitionType::Extended;
-    ext_partition.start_sector = new_partition.start_sector;
-    ext_partition.end_sector = new_partition.end_sector;
-    ext_partition.sector_size = new_partition.sector_size;
-    Q_ASSERT(ext_partition.partition_number > 0);
-    Operation ext_operation(OperationType::Create, partition, ext_partition);
-    operations_.append(ext_operation);
+  // Align to nearest MebiBytes.
+  AlignPartition(new_partition);
 
-    // Add space for Extended Boot Record.
-    new_partition.start_sector = new_partition.start_sector + oneMebiByteSector;
-  } else {
-    ext_partition = device.partitions.at(ext_index);
-  }
-  
-  Q_ASSERT(partition.start_sector <= new_partition.start_sector);
-  Q_ASSERT(new_partition.start_sector < new_partition.end_sector);
-  Q_ASSERT(new_partition.end_sector <= partition.end_sector);
-
-  // Enlarge extended partition if needed.
-  if (ext_partition.start_sector > new_partition.start_sector ||
-      ext_partition.end_sector < new_partition.end_sector) {
-    Partition new_ext_partition(ext_partition);
-    new_ext_partition.start_sector = qMin(ext_partition.start_sector,
-                                          new_partition.start_sector);
-    new_ext_partition.end_sector = qMax(ext_partition.end_sector,
-                                        new_partition.end_sector);
-    Operation resize_ext_operation(OperationType::Resize, ext_partition,
-                                   new_ext_partition);
-    operations_.append(resize_ext_operation);
+  // Check partition sector range.
+  // Also check whether partition size is less than 1MiB or not.
+  if (new_partition.start_sector < partition.start_sector ||
+      new_partition.start_sector >= partition.end_sector ||
+      new_partition.getByteLength() < kMebiByte ||
+      new_partition.end_sector > partition.end_sector) {
+    qCritical() << "Invalid partition sector range";
+    return false;
   }
 
   if (is_simple) {
-    Operation operation(OperationType::Create, partition, new_partition);
+    const Operation operation(OperationType::Create, partition, new_partition);
     simple_operations_.append(operation);
   } else {
     // Reset mount-point before append operation to advanced operation list.
     this->resetOperationMountPoint(mount_point);
-    Operation operation(OperationType::Create, partition, new_partition);
+    const Operation operation(OperationType::Create, partition, new_partition);
     operations_.append(operation);
   }
+
+  return true;
 }
 
 void PartitionDelegate::removeEmptyExtendedPartition(
@@ -773,8 +805,14 @@ void PartitionDelegate::removeEmptyExtendedPartition(
   if (ext_index > -1) {
     const PartitionList logical_parts = GetLogicalPartitions(partitions);
     if (logical_parts.length() == 0) {
-      Partition ext_partition = partitions.at(ext_index);
+      const Partition ext_partition = partitions.at(ext_index);
       Partition new_partition;
+      new_partition.device_path = ext_partition.device_path;
+      new_partition.path = "";
+      new_partition.start_sector = ext_partition.start_sector;
+      new_partition.end_sector = ext_partition.end_sector;
+      new_partition.sector_size = ext_partition.sector_size;
+      new_partition.type = PartitionType::Unallocated;
       Operation operation(OperationType::Delete, ext_partition, new_partition);
       operations_.append(operation);
     }
