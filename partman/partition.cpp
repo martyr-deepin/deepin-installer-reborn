@@ -66,7 +66,7 @@ Partition::Partition()
     : device_path(),
       path(),
       label(),
-      part_label(),
+      name(),
       partition_number(-1),
       type(PartitionType::Unallocated),
       status(PartitionStatus::Real),
@@ -130,6 +130,7 @@ QDebug& operator<<(QDebug& debug, const Partition& partition) {
         << "status:" << partition.status
         << "os:" << partition.os
         << "label:" << partition.label
+        << "name:" << partition.name
         << "mount point:" << partition.mount_point
         << "start:" << partition.start_sector
         << "end:" << partition.end_sector
