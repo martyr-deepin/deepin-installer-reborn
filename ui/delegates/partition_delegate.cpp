@@ -440,7 +440,7 @@ void PartitionDelegate::deletePartition(const Partition& partition) {
 void PartitionDelegate::formatPartition(const Partition& partition,
                                         FsType fs_type,
                                         const QString& mount_point) {
-  qDebug() << "formatPartition()" << partition.path << mount_point;
+  qDebug() << "formatPartition()" << partition << mount_point;
 
   this->resetOperationMountPoint(mount_point);
 
@@ -458,11 +458,13 @@ void PartitionDelegate::formatPartition(const Partition& partition,
   } else if (partition.status == PartitionStatus::New ||
              partition.status == PartitionStatus::Format) {
     // Update partition of old operation, instead of adding a new one.
+    // TODO(xushaohua): Move to operation.h
     new_partition.status = partition.status;
     for (int index = operations_.length() - 1; index >= 0; --index) {
       Operation& operation = operations_[index];
-      if (operation.type == OperationType::Format ||
-          operation.type == OperationType::Create) {
+      if ((operation.new_partition.path == partition.path) &&
+          (operation.type == OperationType::Format ||
+           operation.type == OperationType::Create)) {
         operation.new_partition = new_partition;
         return;
       }
@@ -547,9 +549,8 @@ void PartitionDelegate::refreshVisual() {
     MergeUnallocatedPartitions(device.partitions);
   }
 
+  qDebug() << "devices:" << devices_;
   emit this->deviceRefreshed();
-
-  qDebug() << "operations:" << operations_;
 }
 
 void PartitionDelegate::setBootloaderPath(const QString bootloader_path) {
@@ -805,17 +806,21 @@ void PartitionDelegate::removeEmptyExtendedPartition(
 }
 
 void PartitionDelegate::resetOperationMountPoint(const QString& mount_point) {
+  qDebug() << "resetOperationMountPoint:" << mount_point;
   for (int index = operations_.length() - 1; index >= 0; --index) {
     Operation& operation = operations_[index];
     if (operation.new_partition.mount_point == mount_point) {
       if (operation.type == OperationType::MountPoint) {
+        // TODO(xushaohua): move to operation.h
         // Remove MountPointOperation with same mount point.
         operations_.removeAt(index);
         return;
+      } else {
+        // Clear mount point of old operation.
+        operation.new_partition.mount_point = "";
+        qDebug() << "Clear mount-point of operation:" << operation;
+        return;
       }
-      // Clear mount point of old operation.
-      operation.new_partition.mount_point = "";
-      return;
     }
   }
 }

@@ -195,8 +195,14 @@ QString Operation::description() const {
 }
 
 void Operation::applyCreateVisual(PartitionList& partitions) const {
-  // FIXME(xushaohua): index == -1
+  // Policy:
+  // * Create unallocated partition if orig_partition is larger than
+  //   new_partition
+
+  qDebug() << "applyCreateVisual():" << partitions
+           << "orig partition:" << orig_partition;
   int index = PartitionIndex(partitions, orig_partition);
+  // FIXME(xushaohua): index == -1
   if (index == -1) {
     qCritical() << "applyCreateVisual() Failed to find partition:"
                 << orig_partition.path;
