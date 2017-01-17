@@ -26,9 +26,9 @@ void AlignPartition(Partition& partition) {
 
   // Align to nearest MebiBytes.
   const int start_size = static_cast<int>(
-      ceil(partition.start_sector / oneMebiByteSector));
+      ceil(partition.start_sector * 1.0 / oneMebiByteSector));
   const int end_size = static_cast<int>(
-      floor((partition.end_sector + 1) / oneMebiByteSector));
+      floor((partition.end_sector + 1) * 1.0 / oneMebiByteSector));
   partition.start_sector = start_size * oneMebiByteSector;
   partition.end_sector = end_size * oneMebiByteSector - 1;
 }
@@ -621,7 +621,50 @@ bool PartitionDelegate::createPrimaryPartition(const Partition& partition,
   }
   const Device& device = devices_.at(device_index);
 
-  // TODO(xushaohua): Handles extended partition here.
+  const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
+
+  // Shrink extended partition if needed.
+  const int ext_index = ExtendedPartitionIndex(device.partitions);
+  if (partition_type == PartitionType::Normal && ext_index > -1) {
+    const Partition ext_partition = device.partitions.at(ext_index);
+    const PartitionList logical_parts = GetLogicalPartitions(device.partitions);
+    if (logical_parts.isEmpty()) {
+      // Remove extended partition if no logical partitions.
+      Partition unallocated_partition;
+      unallocated_partition.device_path = ext_partition.device_path;
+      // Extended partition does not contain any sectors.
+      // This new allocated partition will be merged to other unallocated
+      // partitions.
+      unallocated_partition.start_sector = ext_partition.start_sector;
+      unallocated_partition.end_sector = ext_partition.end_sector;
+      unallocated_partition.sector_size = ext_partition.sector_size;
+      unallocated_partition.type = PartitionType::Unallocated;
+      const Operation operation(OperationType::Delete,
+                                ext_partition,
+                                unallocated_partition);
+      operations_.append(operation);
+
+    } else if (IsPartitionsJoint(ext_partition, partition)) {
+      // Shrink extended partition to fit logical partitions.
+      Partition new_ext_part;
+      new_ext_part.device_path = ext_partition.device_path;
+      new_ext_part.sector_size = ext_partition.sector_size;
+      new_ext_part.path = ext_partition.path;
+      new_ext_part.start_sector = logical_parts.first().start_sector -
+                                  oneMebiByteSector;
+      new_ext_part.end_sector = logical_parts.last().end_sector;
+
+      if (IsPartitionsJoint(new_ext_part, partition)) {
+        qCritical() << "Failed to shrink extended partition!";
+        return false;
+      }
+
+      const Operation operation(OperationType::Resize,
+                                ext_partition,
+                                new_ext_part);
+      operations_.append(operation);
+    }
+  }
 
   Partition new_partition;
   new_partition.device_path = partition.device_path;
@@ -641,7 +684,6 @@ bool PartitionDelegate::createPrimaryPartition(const Partition& partition,
   // Check whether space is required for the Master Boot Record.
   // Generally an additional track or MebiByte is required so for
   // our purposes reserve a MebiByte in front of the partition.
-  const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
   const bool need_mbr = (partition.start_sector <= oneMebiByteSector);
   if (align_start) {
     // Align from start of |partition|.
@@ -672,7 +714,9 @@ bool PartitionDelegate::createPrimaryPartition(const Partition& partition,
       new_partition.start_sector >= partition.end_sector ||
       new_partition.getByteLength() < kMebiByte ||
       new_partition.end_sector > partition.end_sector) {
-    qCritical() << "Invalid partition sector range";
+    qCritical() << "Invalid partition sector range"
+                << ", new_partition:" << new_partition
+                << ", partition:" << partition;
     return false;
   }
 
