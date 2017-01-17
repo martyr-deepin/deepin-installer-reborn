@@ -563,6 +563,10 @@ void PartitionDelegate::refreshVisual() {
   }
 
   for (Device& device : devices_) {
+
+    // Merge unallocated partitions.
+    MergeUnallocatedPartitions(device.partitions);
+
     for (Operation& operation : operations_) {
       if (operation.orig_partition.device_path == device.path) {
         operation.applyToVisual(device.partitions);
@@ -619,7 +623,7 @@ bool PartitionDelegate::createPrimaryPartition(const Partition& partition,
                 << partition.device_path;
     return false;
   }
-  const Device& device = devices_.at(device_index);
+  Device& device = devices_[device_index];
 
   const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
 
@@ -643,6 +647,9 @@ bool PartitionDelegate::createPrimaryPartition(const Partition& partition,
                                 ext_partition,
                                 unallocated_partition);
       operations_.append(operation);
+
+      // Remove extended partition from partition list explicitly.
+      device.partitions.removeAt(ext_index);
 
     } else if (IsPartitionsJoint(ext_partition, partition)) {
       // Shrink extended partition to fit logical partitions.
