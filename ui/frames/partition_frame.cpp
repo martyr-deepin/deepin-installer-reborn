@@ -66,10 +66,6 @@ void PartitionFrame::initConnections() {
   connect(next_button_, &QPushButton::clicked,
           this, &PartitionFrame::onNextButtonClicked);
 
-  // Pass deviceRefreshed() signal.
-  connect(delegate_, &PartitionDelegate::realDeviceRefreshed,
-          this, &PartitionFrame::realDeviceRefreshed);
-
   // Show main frame when device is refreshed.
   connect(delegate_, &PartitionDelegate::deviceRefreshed,
           this, &PartitionFrame::showMainFrame);

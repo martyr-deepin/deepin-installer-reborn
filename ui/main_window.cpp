@@ -58,11 +58,8 @@ void MainWindow::scanDevicesAndTimezone() {
     system_info_frame_->scanTimezone();
   }
 
-  if (GetSettingsBool(kSkipPartitionPage) ||
-      GetSettingsBool(kPartitionDoAutoPart)) {
-    // If auto-part is enabled or partition page is skipped, show window now.
-    this->fullscreen();
-  } else {
+  if (!GetSettingsBool(kSkipPartitionPage) &&
+      !GetSettingsBool(kPartitionDoAutoPart)) {
     // Notify background thread to scan device list.
     // When device is refreshed in partition_frame_, call fullscreen() method
     // to display main window.
@@ -103,8 +100,6 @@ void MainWindow::initConnections() {
   connect(install_success_frame_, &InstallSuccessFrame::finished,
           this, &MainWindow::rebootSystem);
 
-  connect(partition_frame_, &PartitionFrame::realDeviceRefreshed,
-          this, &MainWindow::fullscreen);
   connect(partition_frame_, &PartitionFrame::finished,
           this, &MainWindow::goNextPage);
 

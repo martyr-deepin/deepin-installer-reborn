@@ -35,9 +35,6 @@ class PartitionFrame : public QFrame {
   void autoPart();
 
  signals:
-  // Emitted after scanning local disk devices.
-  void realDeviceRefreshed();
-
   // Emitted when partition edition is done.
   void finished();
 
