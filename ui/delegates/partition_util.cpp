@@ -13,6 +13,13 @@
 
 namespace installer {
 
+namespace {
+
+// Maximum length of partition label.
+const int kLabelMaxLen = 12;
+
+}  // namespace
+
 QString GetDeviceModelAndCap(const Device& device) {
   const int gibi_size = ToGigByte(device.getByteLength());
   return QString("%1 (%2G)").arg(device.model).arg(gibi_size);
@@ -29,11 +36,12 @@ QString GetPartitionLabel(const Partition& partition) {
     }
     case PartitionType::Normal:  // pass through
     case PartitionType::Logical: {
-      if (partition.label.isEmpty()) {
-        return GetPartitionName(partition.path);
+      if (!partition.name.isEmpty()) {
+        return TrimText(partition.name, kLabelMaxLen);
+      } else if (!partition.label.isEmpty()) {
+        return TrimText(partition.label, kLabelMaxLen);
       } else {
-        // TODO(xushaohua): trim text
-        return partition.label;
+        return GetPartitionName(partition.path);
       }
     }
     default: {
@@ -49,12 +57,15 @@ QString GetPartitionLabelAndPath(const Partition& partition) {
     }
     case PartitionType::Normal:  // pass through
     case PartitionType::Logical: {
-      // TODO(xushaohua): Trim text to appropriate length.
       const QString name = GetPartitionName(partition.path);
-      if (partition.label.isEmpty()) {
-        return name;
+      if (!partition.name.isEmpty()) {
+        const QString label = TrimText(partition.name, kLabelMaxLen);
+        return QString("%1(%2)").arg(label).arg(name);
+      } else if (!partition.label.isEmpty()) {
+        const QString label = TrimText(partition.label, kLabelMaxLen);
+        return QString("%1(%2)").arg(label).arg(name);
       } else {
-        return QString("%1(%2)").arg(partition.label).arg(name);
+        return name;
       }
     }
     default: {
@@ -176,6 +187,14 @@ int ToGigByte(qint64 size) {
 
 int ToMebiByte(qint64 size) {
   return int(round(double(size) / kMebiByte));
+}
+
+QString TrimText(const QString& text, int max_len) {
+  if (text.length() > max_len) {
+    return text.left(max_len) + "..";
+  } else {
+    return text;
+  }
 }
 
 }  // namespace installer
