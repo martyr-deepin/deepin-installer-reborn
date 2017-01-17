@@ -315,9 +315,12 @@ void MergeUnallocatedPartitions(PartitionList& partitions) {
       if (next_part.type == PartitionType::Unallocated) {
         partitions[global_index].end_sector = next_part.end_sector;
         partitions.removeAt(index + 1);
-      } else {
-        // Ignores extended partition and other types
+      } else if (next_part.type == PartitionType::Extended) {
+        // Ignores extended partition
         ++ index;
+      } else {
+        // Breaks if next_part is logical partition or normal partition.
+        break;
       }
     }
 
