@@ -343,6 +343,7 @@ set(UNITTEST_FILES
     base/string_util_test.cpp
 
     partman/operation_test.cpp
+    partman/partition_test.cpp
 
     sysinfo/dev_disk_test.cpp
     sysinfo/iso3166_test.cpp

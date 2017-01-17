@@ -122,6 +122,9 @@ PartitionList GetPrimaryPartitions(const PartitionList& partitions);
 // Get all of logical partitions in |partition|.
 PartitionList GetLogicalPartitions(const PartitionList& partitions);
 
+// Check whether two partitions are intersected.
+bool IsPartitionsJoint(const Partition& part1, const Partition& part2);
+
 // Get index of |partition| in |partitions|. Returns -1 if not found.
 int PartitionIndex(const PartitionList& partitions, const Partition& partition);
 

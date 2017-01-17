@@ -173,6 +173,13 @@ PartitionList GetLogicalPartitions(const PartitionList& partitions) {
   return result;
 }
 
+bool IsPartitionsJoint(const Partition& part1, const Partition& part2) {
+  return ((part1.start_sector <= part2.start_sector &&
+          part2.start_sector <= part1.end_sector) ||
+         (part1.start_sector <= part2.end_sector &&
+          part2.end_sector <= part1.end_sector));
+}
+
 int PartitionIndex(const PartitionList& partitions,
                    const Partition& partition) {
   for (int i = 0; i < partitions.length(); ++i) {
