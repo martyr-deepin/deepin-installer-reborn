@@ -391,15 +391,15 @@ void PartitionDelegate::deletePartition(const Partition& partition) {
   // Policy:
   //  * Remove selected partition.
   //  * Merge unallocated partitions.
-  //  * Remove extended partition if no logical partition.
+  //  * Remove extended partition if no logical partitions found.
   //  * Update partition number if needed.
+
   Partition new_partition;
+  new_partition.device_path = partition.device_path;
   new_partition.sector_size = partition.sector_size;
   new_partition.start_sector = partition.start_sector;
   new_partition.end_sector = partition.end_sector;
-  new_partition.device_path = partition.device_path;
   new_partition.type = PartitionType::Unallocated;
-  new_partition.freespace = new_partition.length;
   new_partition.fs = FsType::Empty;
   new_partition.status = PartitionStatus::Delete;
 
@@ -407,6 +407,8 @@ void PartitionDelegate::deletePartition(const Partition& partition) {
     // If status of old partition is New, there shall be a CreateOperation
     // which generates that partition. Merge that CreateOperation
     // with DeleteOperation.
+
+    // TODO(xushaohua): Move to operation.h
     for (int index = operations_.length() - 1; index >= 0; --index) {
       const Operation& operation = operations_.at(index);
       if (operation.type == OperationType::Create &&
@@ -426,26 +428,12 @@ void PartitionDelegate::deletePartition(const Partition& partition) {
     if (device_index == -1) {
       qCritical() << "deletePartition() Failed to get device:"
                   << partition.device_path;
-    } else {
-      const Device& device = devices_.at(device_index);
-      const PartitionList logical_partitions =
-          GetLogicalPartitions(device.partitions);
-      if (logical_partitions.length() == 0) {
-        qDebug() << "deletePartition() delete ext partition!";
-        const int ext_index = ExtendedPartitionIndex(device.partitions);
-        Q_ASSERT(ext_index > -1);
-        Partition ext_partition = device.partitions.at(ext_index);
-        qDebug() << "ext partition:" << ext_partition.path;
-        Partition empty_partition = ext_partition;
-        empty_partition.type = PartitionType::Unallocated;
-
-        Operation delete_operation(OperationType::Delete, ext_partition,
-                                   empty_partition);
-        operations_.append(delete_operation);
-      }
+      return;
     }
+    Device& device = devices_[(device_index)];
+    this->removeEmptyExtendedPartition(device.partitions);
 
-    // TODO(xushaohua): Remove empty extended partition.
+    // TODO(xushaohua): Update partition number.
   }
 }
 
@@ -806,7 +794,6 @@ void PartitionDelegate::removeEmptyExtendedPartition(
       const Partition ext_partition = partitions.at(ext_index);
       Partition new_partition;
       new_partition.device_path = ext_partition.device_path;
-      new_partition.path = "";
       new_partition.start_sector = ext_partition.start_sector;
       new_partition.end_sector = ext_partition.end_sector;
       new_partition.sector_size = ext_partition.sector_size;
