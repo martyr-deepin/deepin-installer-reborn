@@ -47,6 +47,9 @@ int ToGigByte(qint64 size);
 // Convert |size| in byte to gibibyte.
 int ToMebiByte(qint64 size);
 
+// Trim |text| length to |max_len|.
+QString TrimText(const QString& text, int max_len);
+
 }  // namespace installer
 
 #endif  // INSTALLER_UI_DELEGATES_PARTITION_UTIL_H
