@@ -287,7 +287,7 @@ void MergeUnallocatedPartitions(PartitionList& partitions) {
   while (global_index < partitions.length()) {
     int index;
     // Find unallocated partition.
-    for (index = global_index; index < partitions.length(); ++index) {
+    for (index = global_index; index < partitions.length(); ++ index) {
       if (partitions.at(index).type == PartitionType::Unallocated) {
         break;
       }
@@ -299,14 +299,19 @@ void MergeUnallocatedPartitions(PartitionList& partitions) {
     }
 
     global_index = index;
-    // Find all connected unallocated partitions.
-    while ((index + 1 < partitions.length()) &&
-           (partitions.at(index + 1).type == PartitionType::Unallocated)) {
-      partitions[global_index].end_sector = partitions.at(index + 1).end_sector;
-      partitions.removeAt(index + 1);
+    // Find all connected unallocated partitions
+    while ((index + 1) < partitions.length()) {
+      const Partition& next_part = partitions.at(index + 1);
+      if (next_part.type == PartitionType::Unallocated) {
+        partitions[global_index].end_sector = next_part.end_sector;
+        partitions.removeAt(index + 1);
+      } else {
+        // Ignores extended partition and other types
+        ++ index;
+      }
     }
 
-    ++global_index;
+    ++ global_index;
   }
 }
 
