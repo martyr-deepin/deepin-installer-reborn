@@ -139,7 +139,6 @@ class PartitionDelegate : public QObject {
                               const QString& mount_point,
                               qint64 total_sectors,
                               bool is_simple);
-  void removeEmptyExtendedPartition(const PartitionList& partitions);
 
   // Clear mount point of operation.new_partition with value |mount_point|.
   void resetOperationMountPoint(const QString& mount_point);

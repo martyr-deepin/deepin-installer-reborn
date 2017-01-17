@@ -200,7 +200,8 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
   //   new_partition
 
   qDebug() << "applyCreateVisual():" << partitions
-           << "orig partition:" << orig_partition;
+           << "orig partition:" << orig_partition
+           << ", new_partition:" << new_partition;
   int index = PartitionIndex(partitions, orig_partition);
   // FIXME(xushaohua): index == -1
   if (index == -1) {
@@ -212,6 +213,9 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
   // Do not remove orig partition when creating extended partition.
   if (new_partition.type == PartitionType::Extended) {
     partitions.insert(index, new_partition);
+    // Extended partition does not consume any real sectors, so no need
+    // to insert unallocated partitions. Just leave orig_partition unchanged.
+    return;
   } else {
     partitions[index] = new_partition;
   }

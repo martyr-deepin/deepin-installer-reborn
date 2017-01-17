@@ -430,10 +430,34 @@ void PartitionDelegate::deletePartition(const Partition& partition) {
                   << partition.device_path;
       return;
     }
-    Device& device = devices_[(device_index)];
-    this->removeEmptyExtendedPartition(device.partitions);
 
-    // TODO(xushaohua): Update partition number.
+    Device& device = devices_[device_index];
+    PartitionList& partitions = device.partitions;
+
+    const int ext_index = ExtendedPartitionIndex(partitions);
+    if (ext_index > -1) {
+      const PartitionList logical_parts = GetLogicalPartitions(partitions);
+
+      // Only one logical partition, and it has been removed.
+      // Or logical partition list is empty.
+      if ((logical_parts.length() == 1 && logical_parts.at(0) == partition) ||
+          (logical_parts.length() == 0)) {
+        const Partition ext_partition = partitions.at(ext_index);
+        Partition unallocated_partition;
+        unallocated_partition.device_path = ext_partition.device_path;
+        // Extended partition does not contain any sectors.
+        // This new allocated partition will be merged to other unallocated
+        // partitions.
+        unallocated_partition.start_sector = ext_partition.start_sector;
+        unallocated_partition.end_sector = ext_partition.end_sector;
+        unallocated_partition.sector_size = ext_partition.sector_size;
+        unallocated_partition.type = PartitionType::Unallocated;
+        const Operation operation(OperationType::Delete,
+                                  ext_partition,
+                                  unallocated_partition);
+        operations_.append(operation);
+      }
+    }
   }
 }
 
@@ -550,6 +574,7 @@ void PartitionDelegate::refreshVisual() {
   }
 
   qDebug() << "devices:" << devices_;
+  qDebug() << "operations:" << operations_;
   emit this->deviceRefreshed();
 }
 
@@ -750,13 +775,20 @@ bool PartitionDelegate::createLogicalPartition(const Partition& partition,
   if (align_start) {
     // Align from start of |partition|.
     // Add space for Extended Boot Record.
-    new_partition.start_sector = ext_partition.start_sector + oneMebiByteSector;
-    new_partition.end_sector = qMin(partition.end_sector,
+    const qint64 start_sector = qMax(partition.start_sector,
+                                     ext_partition.start_sector);
+    new_partition.start_sector = start_sector + oneMebiByteSector;
+
+    const qint64 end_sector = qMin(partition.end_sector,
+                                   ext_partition.end_sector);
+    new_partition.end_sector = qMin(end_sector,
         total_sectors + new_partition.start_sector - 1);
   } else {
-    new_partition.end_sector = partition.end_sector;
-    new_partition.start_sector = qMax(
-        ext_partition.start_sector + oneMebiByteSector,
+    new_partition.end_sector = qMin(partition.end_sector,
+                                    ext_partition.end_sector);
+    const qint64 start_sector = qMax(partition.start_sector,
+                                     ext_partition.start_sector);
+    new_partition.start_sector = qMax(start_sector + oneMebiByteSector,
         partition.end_sector - total_sectors + 1);
   }
 
@@ -784,25 +816,6 @@ bool PartitionDelegate::createLogicalPartition(const Partition& partition,
   }
 
   return true;
-}
-
-void PartitionDelegate::removeEmptyExtendedPartition(
-    const PartitionList& partitions) {
-  const int ext_index = ExtendedPartitionIndex(partitions);
-  if (ext_index > -1) {
-    const PartitionList logical_parts = GetLogicalPartitions(partitions);
-    if (logical_parts.length() == 0) {
-      const Partition ext_partition = partitions.at(ext_index);
-      Partition new_partition;
-      new_partition.device_path = ext_partition.device_path;
-      new_partition.start_sector = ext_partition.start_sector;
-      new_partition.end_sector = ext_partition.end_sector;
-      new_partition.sector_size = ext_partition.sector_size;
-      new_partition.type = PartitionType::Unallocated;
-      Operation operation(OperationType::Delete, ext_partition, new_partition);
-      operations_.append(operation);
-    }
-  }
 }
 
 void PartitionDelegate::resetOperationMountPoint(const QString& mount_point) {
