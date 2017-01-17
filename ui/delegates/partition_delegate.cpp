@@ -653,10 +653,7 @@ bool PartitionDelegate::createPrimaryPartition(const Partition& partition,
 
     } else if (IsPartitionsJoint(ext_partition, partition)) {
       // Shrink extended partition to fit logical partitions.
-      Partition new_ext_part;
-      new_ext_part.device_path = ext_partition.device_path;
-      new_ext_part.sector_size = ext_partition.sector_size;
-      new_ext_part.path = ext_partition.path;
+      Partition new_ext_part(ext_partition);
       new_ext_part.start_sector = logical_parts.first().start_sector -
                                   oneMebiByteSector;
       new_ext_part.end_sector = logical_parts.last().end_sector;
