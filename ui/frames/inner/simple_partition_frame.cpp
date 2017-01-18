@@ -325,6 +325,12 @@ void SimplePartitionFrame::repaintDevices() {
         // Ignores extended partition or currently in-used partitions.
         continue;
       }
+
+      // Filter unallocated partitions which are larger than 2MiB.
+      if (partition.type == PartitionType::Unallocated &&
+          partition.getByteLength() <= 2 * kMebiByte) {
+        continue;
+      }
       SimplePartitionButton* button = new SimplePartitionButton(partition);
       button_group_->addButton(button);
       grid_layout_->addWidget(button, row, column, Qt::AlignHCenter);
