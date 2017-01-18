@@ -552,8 +552,8 @@ void PartitionDelegate::refreshVisual() {
           partition.type == PartitionType::Extended) {
         partitions.append(partition);
       } else if (partition.type == PartitionType::Unallocated) {
-        // Filter unallocated partitions which are larger than 1MiB.
-        if (partition.getByteLength() >= kMebiByte) {
+        // Filter unallocated partitions which are larger than 2MiB.
+        if (partition.getByteLength() >= 2 * kMebiByte) {
           partitions.append(partition);
         }
       }
