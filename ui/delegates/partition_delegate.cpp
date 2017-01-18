@@ -241,14 +241,13 @@ const FsTypeList& PartitionDelegate::getFsTypes() {
   return fs_types_;
 }
 
-void PartitionDelegate::doManualPart() {
-  // Merge simple_operations_ and operations_.
-  operations_.append(simple_operations_);
+void PartitionDelegate::doManualPart(bool simple_mode) {
+  OperationList operations = simple_mode ? simple_operations_ : operations_;
 
   // Set boot flags of boot partitions.
   bool is_boot_set = false;
   // First check EFI filesystem.
-  for (Operation& operation : operations_) {
+  for (Operation& operation : operations) {
     if (operation.new_partition.fs == FsType::EFI) {
       operation.new_partition.flags.append(PartitionFlag::Boot);
       operation.new_partition.flags.append(PartitionFlag::ESP);
@@ -258,7 +257,7 @@ void PartitionDelegate::doManualPart() {
 
   // Then, check /boot partition.
   if (!is_boot_set) {
-    for (Operation& operation : operations_) {
+    for (Operation& operation : operations) {
       if (operation.new_partition.mount_point == kMountPointBoot) {
         operation.new_partition.flags.append(PartitionFlag::Boot);
         is_boot_set = true;
@@ -268,7 +267,7 @@ void PartitionDelegate::doManualPart() {
 
   // At last, check / partition.
   if (!is_boot_set) {
-    for (Operation& operation : operations_) {
+    for (Operation& operation : operations) {
       if (operation.new_partition.mount_point == kMountPointRoot) {
         operation.new_partition.flags.append(PartitionFlag::Boot);
         is_boot_set = true;
@@ -281,7 +280,7 @@ void PartitionDelegate::doManualPart() {
     qCritical() << "No boot partition found!";
     emit this->onManualPartDone(false);
   } else {
-    emit partition_manager_->manualPart(operations_);
+    emit partition_manager_->manualPart(operations);
   }
 }
 

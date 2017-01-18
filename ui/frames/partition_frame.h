@@ -77,6 +77,9 @@ class PartitionFrame : public QFrame {
   void onAdvancedFrameButtonToggled();
   void onNextButtonClicked();
 
+  // Notify delegate to do manual part.
+  void onPrepareInstallFrameFinished();
+
   void showEditPartitionFrame(const Partition& partition);
   void showMainFrame();
   void showNewPartitionFrame(const Partition& partition);

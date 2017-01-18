@@ -92,9 +92,7 @@ void PartitionFrame::initConnections() {
   connect(prepare_install_frame_, &PrepareInstallFrame::aborted,
           this, &PartitionFrame::showMainFrame);
   connect(prepare_install_frame_, &PrepareInstallFrame::finished,
-          this, &PartitionFrame::finished);
-  connect(prepare_install_frame_, &PrepareInstallFrame::finished,
-          delegate_, &PartitionDelegate::doManualPart);
+          this, &PartitionFrame::onPrepareInstallFrameFinished);
 
   connect(select_bootloader_frame_, &SelectBootloaderFrame::bootloaderUpdated,
           advanced_partition_frame_,
@@ -212,7 +210,10 @@ void PartitionFrame::onAdvancedFrameButtonToggled() {
 }
 
 void PartitionFrame::onNextButtonClicked() {
-  if (partition_stacked_layout_->currentWidget() == simple_partition_frame_) {
+  QWidget* current_widget = partition_stacked_layout_->currentWidget();
+  const bool is_simple_page = (current_widget == simple_partition_frame_);
+  if (is_simple_page) {
+    // Validate simple partition frame.
     if (!simple_partition_frame_->validate()) {
       return;
     }
@@ -221,12 +222,18 @@ void PartitionFrame::onNextButtonClicked() {
     if (!advanced_partition_frame_->validate()) {
       return;
     }
-    // Clear simple_operations_ in delegate.
-    delegate_->resetSimpleOperations();
   }
 
   prepare_install_frame_->updateDescription();
   main_layout_->setCurrentWidget(prepare_install_frame_);
+}
+
+void PartitionFrame::onPrepareInstallFrameFinished() {
+  QWidget* current_widget = partition_stacked_layout_->currentWidget();
+  const bool is_simple_page = (current_widget == simple_partition_frame_);
+  delegate_->doManualPart(is_simple_page);
+
+  emit this->finished();
 }
 
 void PartitionFrame::showEditPartitionFrame(const Partition& partition) {

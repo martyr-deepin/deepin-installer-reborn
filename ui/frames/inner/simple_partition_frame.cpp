@@ -52,69 +52,36 @@ SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
 }
 
 bool SimplePartitionFrame::validate() {
-  bool efi_is_set = false;
-  bool efi_large_enough = false;
+  // Policy:
+  // * Check / partition is set.
+  // * Check / partition is large enough.
+  // * Check whether linux-swap exists.
   bool root_is_set = false;
   bool root_large_enough = false;
   bool swap_is_set = false;
-  bool boot_is_set = false;
-  bool boot_large_enough = false;
 
   const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
   const int root_with_swap_required =
       GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
-  const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
-  const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
-  const int efi_minimum = GetSettingsInt(kPartitionEFIMinimumSpace);
   Partition root_partition;
 
-  // First check whether partitions are modified in advanced mode.
-  for (const Device& device : delegate_->devices()) {
+  // Check whether linux-swap partition exists.
+  for (const Device& device : delegate_->realDevices()) {
     for (const Partition& partition : device.partitions) {
-      if (partition.mount_point == kMountPointRoot) {
-        // Check / partition.
-        root_is_set = true;
-        root_partition = partition;
-
-      } else if (partition.mount_point == kMountPointBoot) {
-        // Check /boot partition.
-        boot_is_set = true;
-        const qint64 recommend_bytes = boot_recommended * kMebiByte;
-        const qint64 real_bytes = partition.getByteLength() + kMebiByte;
-        boot_large_enough = (real_bytes >= recommend_bytes);
-
-      } else if (partition.fs == FsType::EFI) {
-        // Check EFI partition.
-        efi_is_set = true;
-
-
-        if (partition.status == PartitionStatus::Real) {
-          // For existing EFI partition.
-          const qint64 minimum_bytes = efi_minimum * kMebiByte;
-          const qint64 real_bytes = partition.getByteLength() + kMebiByte;
-          efi_large_enough = (real_bytes >= minimum_bytes);
-        } else {
-          // For newly created EFI partition.
-          const qint64 recommended_bytes = efi_recommended * kMebiByte;
-          const qint64 real_bytes = partition.getByteLength() + kMebiByte;
-          efi_large_enough = (real_bytes >= recommended_bytes);
-        }
-      } else if (partition.fs == FsType::LinuxSwap) {
+      if (partition.fs == FsType::LinuxSwap) {
         swap_is_set = true;
       }
     }
   }
 
   bool is_max_prims_reached = false;
-  if (!root_is_set) {
-    SimplePartitionButton* button =
-        qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
-    if (button) {
-      root_is_set = true;
-      root_partition = button->partition();
-    } else {
-      root_is_set = false;
-    }
+  SimplePartitionButton* button =
+      qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
+  if (button) {
+    root_is_set = true;
+    root_partition = button->partition();
+  } else {
+    root_is_set = false;
   }
 
   // If currently selected device reaches its maximum primary partitions and
@@ -155,20 +122,6 @@ bool SimplePartitionFrame::validate() {
     return false;
   }
 
-  if (IsEfiEnabled() && efi_is_set && !efi_large_enough) {
-    msg_label_->setText(
-        tr("At least %1 MB is required for EFI partition")
-            .arg(efi_recommended));
-    return false;
-  }
-
-  if (boot_is_set && !boot_large_enough) {
-    msg_label_->setText(
-        tr("At least %1 MB is required for /boot partition")
-            .arg(boot_recommended));
-    return false;
-  }
-
   // Create swap file is swap partition is not found.
   WriteRequiringSwapFile(!swap_is_set);
 
@@ -200,7 +153,7 @@ void SimplePartitionFrame::appendOperations() {
   delegate_->resetSimpleOperations();
 
   bool efi_is_set = false;
-  for (const Device& device : delegate_->devices()) {
+  for (const Device& device : delegate_->realDevices()) {
     for (const Partition& partition : device.partitions) {
       if (partition.fs == FsType::EFI) {
         efi_is_set = true;
@@ -210,32 +163,36 @@ void SimplePartitionFrame::appendOperations() {
 
   SimplePartitionButton* button =
       qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
-  Q_ASSERT(button);
+  if (!button) {
+    qCritical() << "Invalid SimplePartitionButton!";
+    return;
+  }
   Partition partition = button->partition();
   if (IsEfiEnabled() && !efi_is_set) {
     if (partition.type == PartitionType::Normal) {
-      // Delete partition first.
+      // Delete normal partition first.
       partition = delegate_->deleteSimplePartition(partition);
     }
+
     // Create root partition and EFI partition.
     const int efi_space = GetSettingsInt(kPartitionDefaultEFISpace);
     const qint64 efi_sectors = efi_space * kMebiByte / partition.sector_size;
     // Create EFI partition from start.
-    delegate_->createPartition(partition,
-                               PartitionType::Normal,
-                               true,
-                               FsType::EFI,
-                               "",
-                               efi_sectors);
+    delegate_->createSimplePartition(partition,
+                                     PartitionType::Normal,
+                                     true,
+                                     FsType::EFI,
+                                     "",
+                                     efi_sectors);
 
     // Create root partition from end.
     const qint64 remaining_sectors = partition.getSectorLength() - efi_sectors;
-    delegate_->createPartition(partition,
-                               PartitionType::Normal,
-                               false,
-                               GetPartitionDefaultFs(),
-                               kMountPointRoot,
-                               remaining_sectors);
+    delegate_->createSimplePartition(partition,
+                                     PartitionType::Normal,
+                                     false,
+                                     GetPartitionDefaultFs(),
+                                     kMountPointRoot,
+                                     remaining_sectors);
   } else {
     // Only create root partition.
     if (partition.type == PartitionType::Unallocated) {
@@ -259,6 +216,7 @@ void SimplePartitionFrame::appendOperations() {
         qCritical() << "Reached maximum primary partitions:" << partition.path;
       }
     } else {
+      // Format real partition.
       delegate_->formatSimplePartition(button->partition(),
                                        GetPartitionDefaultFs(),
                                        kMountPointRoot);
@@ -267,7 +225,8 @@ void SimplePartitionFrame::appendOperations() {
 }
 
 void SimplePartitionFrame::initConnections() {
-  connect(delegate_, &PartitionDelegate::deviceRefreshed,
+  // Repaint layout only when real device list is updated.
+  connect(delegate_, &PartitionDelegate::realDeviceRefreshed,
           this, &SimplePartitionFrame::onDeviceRefreshed);
   connect(button_group_,
           static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>
@@ -351,7 +310,7 @@ void SimplePartitionFrame::repaintDevices() {
 
   // Draw partitions.
   int row = 0, column = 0;
-  for (const Device& device : delegate_->devices()) {
+  for (const Device& device : delegate_->realDevices()) {
     DeviceModelLabel* device_model_label = new DeviceModelLabel();
     device_model_label->setText(GetDeviceModelAndCap(device));
     device_model_label->setFixedSize(kWindowWidth, 20);
@@ -416,30 +375,15 @@ void SimplePartitionFrame::onDeviceRefreshed() {
 void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
                                                     bool checked) {
   if (checked) {
+    // Show install-tip at bottom of current checked button.
     this->showInstallTip(button);
 
     // Clear warning message.
     msg_label_->clear();
   }
 
-  SimplePartitionButton* part_button =
-      qobject_cast<SimplePartitionButton*>(button);
-  if (part_button) {
-    if (!checked) {
-      // Clear mount point of old root partition.
-      delegate_->updateMountPoint(part_button->partition(), "");
-
-      // Do not refresh partition list here. Instead, call
-      // delegate_->refreshVisual() in PartitionFrame before switching to
-      // AdvancedPartitionFrame.
-    } else if(part_button->partition().mount_point != kMountPointRoot) {
-      // Clear mount point of new partition if it is not root.
-      delegate_->updateMountPoint(part_button->partition(), "");
-
-      if (this->validate()) {
-        this->appendOperations();
-      }
-    }
+  if (this->validate()) {
+    this->appendOperations();
   }
 }
 
