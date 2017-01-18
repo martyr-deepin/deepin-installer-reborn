@@ -236,7 +236,10 @@ int CopyItem(const char* fpath, const struct stat* sb,
   }
 
   if (!CopyXAttr(fpath, dest_file)) {
-    ok = false;
+    // NOTE(xushaohua): Do not exit when failed to copy file capacities.
+    // This may be happen in Alpha based computer.
+    qWarning() << "CopyXAttr() failed:" << fpath;
+//    ok = false;
   }
 
   // TODO(xushaohua): Update progress bar
@@ -341,6 +344,7 @@ int main(int argc, char* argv[]) {
   // Unmount from mount-point
 
   QCoreApplication app(argc, argv);
+  app.setApplicationName(kAppName);
   app.setApplicationVersion(kAppVersion);
 
   QCommandLineParser parser;
