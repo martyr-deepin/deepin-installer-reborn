@@ -6,7 +6,7 @@
 # Install deepin-license-activator in Professional version
 
 if [ -f /etc/deepin-version ] && grep -qr "Professional" /etc/lsb-release; then
-	msg "install deepin-license-activator"
-	apt-get install --no-install-recommends -y --force-yes \
-	  --allow-unauthenticated  deepin-license-activator
+  msg "install deepin-license-activator"
+  apt-get install --no-install-recommends -y --force-yes \
+    --allow-unauthenticated  deepin-license-activator
 fi

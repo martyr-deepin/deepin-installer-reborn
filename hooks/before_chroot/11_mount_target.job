@@ -82,15 +82,15 @@ mount --bind / ${target}/deepinhost
 # Split mount-point list.
 mount_points=$(echo ${DI_MOUNTPOINTS//;/ })
 for i in $(echo "${mount_points}"); do
-	mountpoint=$(echo $i | cut -d'=' -f1)
-	mountpath=$(echo $i | cut -d'=' -f2)
-	if [ $mountpath != "/" ] && [ $mountpath != "swap" ]; then
+  mountpoint=$(echo $i | cut -d'=' -f1)
+  mountpath=$(echo $i | cut -d'=' -f2)
+  if [ $mountpath != "/" ] && [ $mountpath != "swap" ]; then
     msg "mount ${mountpoint} -> ${mountpath}"
-		mkdir -p ${target}${mountpath}
-		mount $mountpoint ${target}${mountpath} || \
-		  error "Failed to mount ${mountpoint}"
+    mkdir -pv ${target}${mountpath}
+    mount $mountpoint ${target}${mountpath} || \
+      error "Failed to mount ${mountpoint}"
   elif [ $mountpath == "swap" ]; then
     msg "Detect swap partition, try swapon it first"
     swapon $mountpoint || true
-	fi
+  fi
 done
