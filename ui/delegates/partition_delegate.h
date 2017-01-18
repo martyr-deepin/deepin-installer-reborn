@@ -36,8 +36,11 @@ class PartitionDelegate : public QObject {
   bool canAddPrimary(const Partition& partition) const;
   bool canAddLogical(const Partition& partition) const;
 
-  // Get a list of devices found by libparted.
+  // Get a list of devices found by libparted, and modified by operations.
   const DeviceList& devices() const { return devices_; }
+
+  // Get a list of devices found by libparted, .
+  const DeviceList& realDevices() const { return real_devices_; }
 
   // Get human readable operation descriptions.
   QStringList getOperationDescriptions() const;
@@ -68,8 +71,10 @@ class PartitionDelegate : public QObject {
  public slots:
   // Notify partition_manager to do manual partition operations.
   // Validate operations before calling this method.
+  // If |simple_mode| is true, use simple_operations_.
+  // Else use operations_.
   // NOTE(xushaohua): This action can not be undo.
-  void doManualPart();
+  void doManualPart(bool simple_mode);
 
   void createSimplePartition(const Partition& partition,
                              PartitionType partition_type,
