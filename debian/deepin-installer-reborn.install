@@ -3,7 +3,6 @@ usr/bin/deepin-installer-adjtime
 usr/bin/deepin-installer-first-boot
 usr/bin/deepin-installer-settings
 usr/bin/deepin-installer-unsquashfs
-usr/bin/deepin-installer-unsquashfs-progress
 usr/share/deepin-installer-reborn/hooks/*
 usr/share/deepin-installer-reborn/resources/*
 usr/share/deepin-installer-reborn/tools/*

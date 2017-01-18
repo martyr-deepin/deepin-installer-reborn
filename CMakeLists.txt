@@ -78,7 +78,6 @@ add_subdirectory(third_party/CuteLogger)
 add_subdirectory(third_party/global_shortcut)
 add_subdirectory(third_party/googletest)
 add_subdirectory(third_party/qrencode)
-add_subdirectory(third_party/squashfs-tools)
 add_subdirectory(third_party/timezones)
 add_subdirectory(third_party/zlib_wrapper)
 
@@ -482,6 +481,12 @@ add_executable(deepin-installer-oem
                )
 target_link_libraries(deepin-installer-oem ${Qt_LIBS})
 
+add_executable(deepin-installer-unsquashfs
+
+               app/deepin_installer_unsquashfs.cpp
+               ${BASE_FILES}
+               )
+target_link_libraries(deepin-installer-unsquashfs ${Qt_LIBS})
 
 # xrandr-switchy
 add_executable(deepin-installer-xrandr-switchy
@@ -495,12 +500,12 @@ target_link_libraries(deepin-installer-xrandr-switchy ${QtCore_LIBS})
 
 
 # Unsquashfs progress
-add_executable(deepin-installer-unsquashfs-progress
-
-               app/unsquashfs_progress.cpp
-               ${BASE_FILES}
-               )
-target_link_libraries(deepin-installer-unsquashfs-progress ${QtCore_LIBS})
+#add_executable(deepin-installer-unsquashfs-progress
+#
+#               app/unsquashfs_progress.cpp
+#               ${BASE_FILES}
+#               )
+#target_link_libraries(deepin-installer-unsquashfs-progress ${QtCore_LIBS})
 
 
 # test reboot system
@@ -703,7 +708,7 @@ install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs-progress
+install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem

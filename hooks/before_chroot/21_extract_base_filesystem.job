@@ -41,11 +41,12 @@ extract_overlay_filesystem() {
 }
 
 # First, extract base filesystem
+readonly PROGRESS_FILE="/dev/shm/unsquashfs_progress"
 readonly BASE_MODULE="${LIVE_FILESYSTEM}/filesystem.squashfs"
 python $(dirname $0)/extract_base_filesystem --lang "${L}" --live "${LIVE}" || \
   error "Failed to extract base filesystem"
-#deepin-installer-unsquashfs -p ${PROCESSORS} -f -d /target "${BASE_MODULE}" || \
-#  error "installer-unsquashfs failed, ${BASE_MODULE}"
+#deepin-installer-unsquashfs --dest /target --progress "${PROGRESS_FILE}" \
+#  "${BASE_MODULE}" || error "installer-unsquashfs failed, ${BASE_MODULE}"
 
 # Then extract overlay_filesystem
 extract_overlay_filesystem || true
