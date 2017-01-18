@@ -164,6 +164,9 @@ class PartitionDelegate : public QObject {
   FsTypeList fs_types_;
   QString bootloader_path_;
 
+  // Use simple mode or advanced mode to do manual part.
+  bool simple_mode_;
+
  private slots:
   // Update physical and virtual partition list.
   void onDevicesRefreshed(const DeviceList& devices);

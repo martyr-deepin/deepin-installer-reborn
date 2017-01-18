@@ -75,7 +75,8 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
       operations_(),
       all_mount_points_(),
       fs_types_(),
-      bootloader_path_() {
+      bootloader_path_(),
+      simple_mode_(true) {
   this->setObjectName("partition_delegate");
 
   partition_manager_->moveToThread(partition_thread_);
@@ -242,6 +243,7 @@ const FsTypeList& PartitionDelegate::getFsTypes() {
 }
 
 void PartitionDelegate::doManualPart(bool simple_mode) {
+  simple_mode_ = simple_mode;
   OperationList operations = simple_mode ? simple_operations_ : operations_;
 
   // Set boot flags of boot partitions.
@@ -904,20 +906,27 @@ void PartitionDelegate::onManualPartDone(bool ok) {
     QString root_path;
     QStringList mount_points;
 
-    for (const Operation& operation : operations_) {
+    const OperationList operations = simple_mode_ ?
+                                     simple_operations_ :
+                                     operations_;
+    const DeviceList devices = simple_mode_ ? real_devices_ : devices_;
+
+    for (const Operation& operation : operations) {
       const Partition& new_partition = operation.new_partition;
 
       if (!new_partition.mount_point.isEmpty()) {
         // Add used partitions to mount_point list.
-        mount_points.append(QString("%1=%2").arg(new_partition.path)
-                                            .arg(new_partition.mount_point));
+        const QString record(QString("%1=%2").arg(new_partition.path)
+                                             .arg(new_partition.mount_point));
+        mount_points.append(record);
         if (new_partition.mount_point == kMountPointRoot) {
           root_disk = new_partition.device_path;
           root_path = new_partition.path;
         }
       } else if (new_partition.fs == FsType::LinuxSwap) {
         // Add swap area to mount_point list.
-        mount_points.append(QString("%1=swap").arg(new_partition.path));
+        const QString record(QString("%1=swap").arg(new_partition.path));
+        mount_points.append(record);
       }
     }
 
@@ -927,7 +936,7 @@ void PartitionDelegate::onManualPartDone(bool ok) {
       // EFI partition.
       WriteUEFI(true);
       QString esp_path;
-      for (const Operation& operation : operations_) {
+      for (const Operation& operation : operations) {
         if (operation.new_partition.fs == FsType::EFI) {
           // NOTE(xushaohua): There shall be only one EFI partition.
           esp_path = operation.new_partition.path;
@@ -937,7 +946,7 @@ void PartitionDelegate::onManualPartDone(bool ok) {
       if (esp_path.isEmpty()) {
         // If no new EFI partition is created, search in device list.
         bool esp_found = false;
-        for (const Device& device : devices_) {
+        for (const Device& device : devices) {
           for (const Partition& partition : device.partitions) {
             if (partition.fs == FsType::EFI) {
               esp_path = partition.path;
