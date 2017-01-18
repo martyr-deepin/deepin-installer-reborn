@@ -6,6 +6,7 @@
 CDROM=$(installer_get "CDROM")
 DI_LOCALE=$(installer_get "DI_LOCALE")
 LIVE_FILESYSTEM=$(installer_get "LIVE_FILESYSTEM")
+LIVE=$(installer_get "LIVE")
 
 L=${DI_LOCALE%.*}
 
@@ -41,8 +42,10 @@ extract_overlay_filesystem() {
 
 # First, extract base filesystem
 readonly BASE_MODULE="${LIVE_FILESYSTEM}/filesystem.squashfs"
-deepin-installer-unsquashfs -p ${PROCESSORS} -f -d /target "${BASE_MODULE}" || \
-  error "installer-unsquashfs failed, ${BASE_MODULE}"
+python $(dirname $0)/extract_base_filesystem --lang "${L}" --live "${LIVE}" || \
+  error "Failed to extract base filesystem"
+#deepin-installer-unsquashfs -p ${PROCESSORS} -f -d /target "${BASE_MODULE}" || \
+#  error "installer-unsquashfs failed, ${BASE_MODULE}"
 
 # Then extract overlay_filesystem
 extract_overlay_filesystem || true
