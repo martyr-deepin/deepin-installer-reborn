@@ -1,0 +1,10 @@
+#!/bin/sh
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# Copy deepin-installer-settings to /target.
+
+SRC_BIN=/usr/bin/deepin-installer-settings
+DEST_BIN="/target${SRC_BIN}"
+cp -v "$SRC_BIN" "$DEST_BIN"  || error "Failed to copy ${SRC_BIN}"
