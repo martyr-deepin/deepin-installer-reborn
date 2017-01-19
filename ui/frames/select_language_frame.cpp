@@ -92,7 +92,7 @@ void SelectLanguageFrame::initUI() {
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addStretch();
+  layout->addSpacing(30);
   layout->addWidget(logo_label, 0, Qt::AlignCenter);
   layout->addWidget(subtitle_label, 0, Qt::AlignCenter);
   layout->addWidget(subtitle2_label, 0, Qt::AlignCenter);
