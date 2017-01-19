@@ -10,7 +10,7 @@ QPushButton[flat="true"] {
 #timezone_button, #keyboard_button {
   border: none;
   padding: 0 0 0 30px;
-  font-size: 12px;
+  font-size: 14px;
   /* NOTE(xushaohua): Do not optimize css properties */
   background-clip: border;
   background-origin: padding;
