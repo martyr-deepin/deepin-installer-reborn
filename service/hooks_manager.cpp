@@ -19,9 +19,9 @@ namespace installer {
 namespace {
 
 const int kBeforeChrootEndVal = 60;
-const int kInChrootStartVal = 60;
-const int kInChrootEndVal = 80;
-const int kAfterChrootStartVal = 80;
+const int kInChrootStartVal = kBeforeChrootEndVal;
+const int kInChrootEndVal = 85;
+const int kAfterChrootStartVal = kInChrootEndVal;
 const int kAfterChrootEndVal = 100;
 
 const char kUnsquashfsProgressFile[] = "/dev/shm/unsquashfs_progress";
