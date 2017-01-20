@@ -4,14 +4,20 @@
 # in the LICENSE file.
 
 # Scale slide images to 960x640
-cd ../resources/slide
+cd ./resources/slide
 
 for folder in $(ls); do
   if [ -d $folder ]; then
     cd $folder
     for image_file in $(ls); do
-      convert $image_file -scale 960x640 /tmp/$image_file
-      mv -vf /tmp/$image_file $image_file
+      PREFIX=${image_file%-*}
+      EXT_NAME=${image_file#*.}
+      echo "${PREFIX}.${EXT_NAME}"
+      NEW_NAME="${PREFIX}.${EXT_NAME}"
+      TMP_NEW_NAME="/tmp/${NEW_NAME}"
+      mv "${image_file}" "${NEW_NAME}"
+      convert "${NEW_NAME}" -scale 960x640 "${TMP_NEW_NAME}"
+      mv -vf "${TMP_NEW_NAME}" "${NEW_NAME}"
     done
     cd ..
   fi
