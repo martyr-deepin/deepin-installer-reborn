@@ -4,12 +4,12 @@
 
 #include "ui/widgets/system_info_tip.h"
 
-#include <QDebug>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPainter>
-#include <QPainterPath>
 #include <QPaintEvent>
+
+#include "base/file_util.h"
 
 namespace installer {
 
@@ -111,9 +111,7 @@ void SystemInfoTip::paintEvent(QPaintEvent* event) {
 
 void SystemInfoTip::initUI() {
   label_ = new QLabel();
-  label_->setStyleSheet("background: transparent;"
-                        "color: #f9704f;"
-                        "font-size: 12px;");
+  label_->setObjectName("tooltip_label");
   label_->setWordWrap(false);
   label_->setMaximumWidth(kMaximumLabelWidth);
 
@@ -126,6 +124,8 @@ void SystemInfoTip::initUI() {
                            kWindowMarginRight, kWindowMarginBottom);
   this->setMaximumWidth(kMaximumWindowWidth);
   this->setMinimumHeight(kMinimumWindowHeight);
+
+  this->setStyleSheet(ReadFile(":/styles/system_info_tip.css"));
 }
 
 }  // namespace installer

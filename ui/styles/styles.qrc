@@ -26,6 +26,7 @@
     <file>simple_partition_button.css</file>
     <file>simple_partition_frame.css</file>
     <file>system_info_frame.css</file>
+    <file>system_info_tip.css</file>
     <file>system_info_keyboard_frame.css</file>
     <file>table_combo_box.css</file>
     <file>title_label.css</file>
