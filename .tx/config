@@ -7,7 +7,7 @@ mode = developer
 file_filter = i18n/installer-<lang>.ts
 source_file = i18n/installer.ts
 source_lang = en
-type = TS
+type = QT
 
 [deepin-installer-reborn.deepin-installer-oem]
 source_file = resources/deepin-installer-oem.desktop
