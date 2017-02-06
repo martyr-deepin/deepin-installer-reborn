@@ -172,23 +172,23 @@ bool SystemInfoFormFrame::validateUsername(QString& msg) {
                        GetSettingsInt(kSystemInfoUsernameMaxLen));
   switch (state) {
     case ValidateUsernameState::ReservedError: {
-      msg = tr("This username already exists");
+      msg = tr("This username is already in use");
       return false;
     }
     case ValidateUsernameState::EmptyError: {
-      msg = tr("Username is empty");
+      msg = tr("Username can no be empty");
       return false;
     }
     case ValidateUsernameState::FirstCharError: {
-      msg = tr("First character is invalid");
+      msg = tr("The first character must be in lower case");
       return false;
     }
     case ValidateUsernameState::InvalidCharError: {
-      msg = tr("Invalid character");
+      msg = tr("username must comprise a~z, 0~9, - or _");
       return false;
     }
     case ValidateUsernameState::TooLongError: {
-      msg = tr("Username length exceeds the limit");
+      msg = tr("Username is too long");
       return false;
     }
     case ValidateUsernameState::TooShortError: {
@@ -227,7 +227,7 @@ bool SystemInfoFormFrame::validateHostname(QString& msg) {
       return false;
     }
     case ValidateHostnameState::TooShortError: {
-      msg = tr("Computer is too short");
+      msg = tr("Computer name is too short");
       return false;
     }
     case ValidateHostnameState::Ok: {

@@ -103,7 +103,7 @@ void SystemInfoTimezoneFrame::writeConf() {
 void SystemInfoTimezoneFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Select Time Zone"));
-    comment_label_->setText(tr("Mark your zone in the map"));
+    comment_label_->setText(tr("Mark your zone on the map"));
     back_button_->setText(tr("Back"));
 
     // Also update timezone.
@@ -132,7 +132,7 @@ void SystemInfoTimezoneFrame::initConnections() {
 
 void SystemInfoTimezoneFrame::initUI() {
   title_label_ = new TitleLabel(tr("Select Time Zone"));
-  comment_label_ = new CommentLabel(tr("Mark your zone in the map"));
+  comment_label_ = new CommentLabel(tr("Mark your zone on the map"));
   timezone_map_ = new TimezoneMap(this);
   back_button_ = new NavButton(tr("Back"));
 
