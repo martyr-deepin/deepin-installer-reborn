@@ -41,10 +41,10 @@ extract_overlay_filesystem() {
 }
 
 # First, extract base filesystem
-readonly PROGRESS_FILE="/dev/shm/unsquashfs_progress"
-readonly BASE_MODULE="${LIVE_FILESYSTEM}/filesystem.squashfs"
-python ./extract_base_filesystem --lang "${L}" --live "${LIVE}" || \
+python ./extract_base_filesystem --live "${LIVE}" || \
   error "Failed to extract base filesystem"
+#readonly PROGRESS_FILE="/dev/shm/unsquashfs_progress"
+#readonly BASE_MODULE="${LIVE_FILESYSTEM}/filesystem.squashfs"
 #deepin-installer-unsquashfs --dest /target --progress "${PROGRESS_FILE}" \
 #  "${BASE_MODULE}" || error "installer-unsquashfs failed, ${BASE_MODULE}"
 

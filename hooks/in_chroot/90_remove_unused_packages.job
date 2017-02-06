@@ -5,6 +5,12 @@
 
 # Remove unused packages
 
+# TODO(xushaohua): It take too many time to uninstall packages in loongson.
+# So skip this step temporarily.
+if ! is_x86; then
+  return 0
+fi
+
 declare -a remove_pkgs
 declare -a REMOVE_PKGS
 

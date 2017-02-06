@@ -3,10 +3,14 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-# Update grub menu options like:
+# Update grub menu options on x86 based platformats like:
 #  * Set grub menu timeout;
 #  * Remove windows menu item;
 #  * Update grub background image;
+
+if ! is_x86; then
+  return 0
+fi
 
 GRUB_CONF=/etc/default/grub
 GRUB_NEED_UPDATE=false

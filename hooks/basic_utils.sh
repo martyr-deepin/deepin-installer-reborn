@@ -58,3 +58,48 @@ installer_set() {
   [ -z "${CONF_FILE}" ] && exit "CONF_FILE is not defined"
   deepin-installer-settings set "${CONF_FILE}" "${key}" "${value}"
 }
+
+# Check whether current platform is loongson or not.
+is_loongson() {
+  case $(uname -m) in
+    "mips*")
+      return 0
+      ;;
+    "loongson*")
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+# Check whether current platform is sw or not.
+is_sw() {
+  case $(uname -m) in
+    "sw*")
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+# Check whether current platform is x86/x86_64 or not.
+is_x86() {
+  case $(uname -m) in
+    "x86")
+      return 0
+      ;;
+    "x86_64")
+      return 0
+      ;;
+    "i386")
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}

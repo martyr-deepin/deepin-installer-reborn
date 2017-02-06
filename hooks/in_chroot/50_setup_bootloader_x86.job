@@ -3,7 +3,11 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-# install grub to detect machine
+# Install grub to disk. Only used in x86 based platforms
+
+if ! is_x86; then
+  return 0
+fi
 
 config_item() {
   if [ -f /etc/default/grub ]; then

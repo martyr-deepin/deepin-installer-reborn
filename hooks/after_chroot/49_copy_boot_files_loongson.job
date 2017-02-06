@@ -1,0 +1,29 @@
+#!/bin/bash
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# Copy boot folder to loongson system.
+
+if ! is_loongson; then
+  return 0
+fi
+
+TARGET=/target/boot
+
+rm -rf "${TARGET}" || error "Failed to remove boot"
+
+# Copy boot folder and follow symbolic link.
+cp -rP /cdrom/casper/boot/ /target/ || error "Failed to copy boot/"
+
+[ -f $TARGET/grub.cfg ] && [ -f $TARGET/boot.cfg ] && echo "boot files copied!" 
+
+# modify boot.cfg & grub.cfg set boot.cfg args root=UUID=xxx
+sed -i "s/\(args.*\)/\1 root=$rootuuid/g" $TARGET/boot.cfg
+sed -i "s/\(linux.*\)/\1 root=$rootuuid/g" $TARGET/grub.cfg
+sed -i "s/\(args.*\)/\1 root=$rootuuid/g" $TARGET/boot.cfg
+
+# fix boot.cfg
+if grep -wqs $TARGET /proc/mounts ; then
+    sed -e 's@boot/@@g' -i $TARGET/boot.cfg
+fi
