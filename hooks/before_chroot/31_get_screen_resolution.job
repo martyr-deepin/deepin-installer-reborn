@@ -9,13 +9,13 @@
 resolution=$(xrandr | grep primary | grep -oE '[0-9]+x[0-9]+')
 
 # if failed, try to get the master screen resolution
-if [ -z "$resolution" ]; then
+if [ -z "${resolution}" ]; then
   resolution=$(xrandr | grep Screen\ 0 | awk -F, '{print $2}' | \
                sed -e 's/current//g' -e 's/ //g')
 fi
 
 # if failed again, fallback to 1024x768
-if [ -z "$resolution" ]; then
+if [ -z "${resolution}" ]; then
   resolution="1024x768"
 fi
 

@@ -15,7 +15,7 @@ elif grep -q boot=live /proc/cmdline; then
   LUPIN_ROOT=/lib/live/mount/findiso
   DISTRIBUTION=debian
 else
-  error "[Error] No boot value found!"
+  error "No boot value found!"
 fi
 
 LIVE_FILESYSTEM="${CDROM}/${BOOT}"

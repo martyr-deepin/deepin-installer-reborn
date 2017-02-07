@@ -23,6 +23,7 @@ while true; do
   esac
 done
 EOF
-  chmod a+x "$RC"
+
+  chmod a+x "${RC}"
 fi
 
