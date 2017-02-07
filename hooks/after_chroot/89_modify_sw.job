@@ -1,0 +1,43 @@
+#!/bin/bash
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+if ! is_sw; then
+  return 0
+fi
+
+SYSTEM_NAME=$(cat /proc/cpuinfo |grep "system type" |awk '{print $4}')
+echo "CPUTYPE=$SYSTEM_NAME"
+
+SRCPATH=/lib/live/mount/medium/live/platform/$SYSTEM_NAME
+
+[ -d /target/boot/ ] && rm -rf /target/boot/*
+[ -d /target/lib/modules ] && rm -rf /target/lib/modules/*
+[ -d /lib/live/mount/medium/live/boot ] && cp -rf /lib/live/mount/medium/live/boot/* /target/boot/
+
+[ -f $SRCPATH/xorg.conf ] && cp -rf $SRCPATH/xorg.conf /target/etc/X11/
+
+# Replace kernel image and modules.
+[ -d $SRCPATH/modules ] && cp -rf $SRCPATH/modules /target/lib/
+[ -f $SRCPATH/vmlinux1.$SYSTEM_NAME ] && cp -rf $SRCPATH/vmlinux1.$SYSTEM_NAME /target/boot/
+[ -f $SRCPATH/grub.cfg ] && cp -rf $SRCPATH/grub.cfg /target/boot/grub/
+
+sed -i "/overlayfs/d" /target/etc/fstab
+#LOCALUUID=$(grep -i "relatime" /target/etc/fstab | awk '{print $1}' | cut -d = -f 2 )
+
+while read wOne wTwo wThree wFour wFive wSix                                    
+do                                                                              
+    	[ -z $wSix ] && continue                                                    
+	if [ $wSix = 1 ] ;then                                                      
+		LOCALUUID=$wOne
+	fi                                                                          
+done < /target/etc/fstab                                                                  
+
+echo "$LOCALUUID" 
+
+
+[ -f /target/etc/lightdm/lightdm.conf ] && sed -i -e "s|autologin-user=deepin|#autologin-user=deepin|g" /target/etc/lightdm/lightdm.conf
+[ -f /target/etc/sudoers ] && sed -i -e "s|deepin.*||g" /target/etc/sudoers
+[ -f /target/boot/grub/grub.cfg ] && sed -i -e "s|root=|root=$LOCALUUID|g" /target/boot/grub/grub.cfg
+
