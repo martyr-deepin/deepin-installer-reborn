@@ -6,7 +6,6 @@
 
 #include <QDebug>
 #include <QEvent>
-#include <QProgressBar>
 #include <QStyle>
 #include <QThread>
 #include <QTimer>
@@ -20,6 +19,7 @@
 #include "ui/frames/consts.h"
 #include "ui/frames/inner/install_progress_slide_frame.h"
 #include "ui/widgets/comment_label.h"
+#include "ui/widgets/rounded_progress_bar.h"
 #include "ui/widgets/tooltip_pin.h"
 #include "ui/widgets/title_label.h"
 
@@ -66,15 +66,16 @@ void InstallProgressFrame::startSlide() {
 void InstallProgressFrame::simulate() {
   QTimer* timer = new QTimer(this);
   timer->setSingleShot(false);
-  timer->setInterval(500);
+  timer->setInterval(100);
   connect(timer, &QTimer::timeout,
-          [&]() {
+          [=]() {
             int progress = progress_bar_->value();
             progress ++;
-            this->onProgressUpdate(progress);
-            if (progress >= progress_bar_->maximum()) {
-              timer->stop();
+            if (progress > progress_bar_->maximum()) {
+              // Infinite loop.
+              progress = progress_bar_->minimum();
             }
+            this->onProgressUpdate(progress);
           });
   timer->start();
 }
@@ -145,7 +146,10 @@ void InstallProgressFrame::initUI() {
   tooltip_label_->setAlignment(Qt::AlignHCenter);
   tooltip_label_->setText("0%");
 
-  progress_bar_ = new QProgressBar();
+  // NOTE(xushaohua): QProgressBar::paintEvent() has performance issue on
+  // loongson platform, when chunk style is set. So we override paintEvent()
+  // and draw progress bar chunk by hand.
+  progress_bar_ = new RoundedProgressBar();
   progress_bar_->setObjectName("progress_bar");
   progress_bar_->setFixedSize(kProgressBarWidth, 8);
   progress_bar_->setTextVisible(false);

@@ -9,14 +9,3 @@ QProgressBar {
   background-color: rgba(255, 255, 255, 0.1);
   border: none;
 }
-
-QProgressBar::chunk {
-  background-color: #2ca7f8;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-
-/* Add round corner at right side when progress value reaches 100% */
-QProgressBar::chunk[value="100"] {
-  border-radius: 4px;
-}
