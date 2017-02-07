@@ -5,7 +5,7 @@
 
 # Install package dependencies for development environment.
 
-sudo apt install \
+sudo aptitude install \
     cmake \
     g++ \
     gettext \

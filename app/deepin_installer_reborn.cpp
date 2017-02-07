@@ -29,11 +29,6 @@ int main(int argc, char* argv[]) {
   // Delete last installer config file as soon as possible.
   if (!installer::HasRootPrivilege()) {
     qCritical() << "Root privilege is required!";
-
-#ifdef NDEBUG
-    // Returns immediately if process permission is error.
-    return 1;
-#endif
   }
 
   // Initialize log service.
