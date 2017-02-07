@@ -36,7 +36,8 @@ generate_background_image() {
   local DST="/usr/share/deepin-installer-reborn/resources/default_wallpaper.jpg"
   if [ -f "${SRC}" ]; then
     echo "Generate default wallpaper.."
-    convert "${SRC}" -blur 0x32 "${DST}"
+    convert "${SRC}" -resize 25% -brightness-contrast -10 \
+      -modulate 100,120,100 -blur 0x16 -resize 400% "${DST}"
   fi
 }
 

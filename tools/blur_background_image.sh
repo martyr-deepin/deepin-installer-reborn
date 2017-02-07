@@ -5,5 +5,6 @@
 
 # Bluring image
 for file in $*; do
-  convert "$file" -blur 0x32 "blur-${file}"
+  convert "${file}" -resize 25% -brightness-contrast -10 \
+    -modulate 100,120,100 -blur 0x16 -resize 400% "blur-${file}"
 done
