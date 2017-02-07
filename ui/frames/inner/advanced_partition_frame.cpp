@@ -191,6 +191,7 @@ void AdvancedPartitionFrame::initUI() {
   partition_list_frame->setFixedWidth(kWindowWidth);
 
   QScrollArea* scroll_area = new QScrollArea();
+  scroll_area->setObjectName("scroll_area");
   scroll_area->setContentsMargins(0, 0, 0, 0);
   QSizePolicy scroll_area_size_policy(QSizePolicy::Fixed,
                                       QSizePolicy::MinimumExpanding);
@@ -235,13 +236,13 @@ void AdvancedPartitionFrame::initUI() {
   bottom_frame->setObjectName("bottom_frame");
   bottom_frame->setContentsMargins(0, 0, 0, 0);
   bottom_frame->setLayout(bottom_layout);
-  bottom_frame->setFixedWidth(kWindowWidth - 2);
+  bottom_frame->setFixedWidth(kWindowWidth);
 
   QVBoxLayout* main_layout = new QVBoxLayout();
   main_layout->setContentsMargins(0, 0, 0, 0);
   main_layout->setSpacing(0);
   main_layout->addWidget(scroll_area, 1, Qt::AlignHCenter);
-  main_layout->addSpacing(0);
+  main_layout->addSpacing(2);
   main_layout->addWidget(bottom_frame, 0, Qt::AlignHCenter);
 
   QFrame* main_frame = new QFrame();

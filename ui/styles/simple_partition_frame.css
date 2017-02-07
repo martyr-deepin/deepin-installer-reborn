@@ -1,5 +1,12 @@
 /** Used in SimplePartitionFrame class **/
 
+QScrollArea#scroll_area,
+QFrame#grid_wrapper {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
 QLabel#tip_label {
   color: #ff8000;
   font-size: 12px;

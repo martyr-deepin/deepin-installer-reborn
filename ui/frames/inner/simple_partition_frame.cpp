@@ -271,6 +271,7 @@ void SimplePartitionFrame::initUI() {
   install_tip_->setParent(grid_wrapper_);
 
   QScrollArea* scroll_area = new QScrollArea();
+  scroll_area->setObjectName("scroll_area");
   scroll_area->setWidget(grid_wrapper_);
   scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);

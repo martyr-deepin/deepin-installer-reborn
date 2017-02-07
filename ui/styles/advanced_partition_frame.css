@@ -1,7 +1,10 @@
 /** Used in AdvancedPartitionFrame class */
 
-#advanced_partition_frame, QScrollArea, #main_frame {
+QScrollArea#scroll_area,
+QFrame#main_frame {
   background: transparent;
+  border: none;
+  outline: none;
 }
 
 #partition_list_frame {
