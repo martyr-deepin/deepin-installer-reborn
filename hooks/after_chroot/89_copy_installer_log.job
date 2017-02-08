@@ -1,0 +1,10 @@
+#!/bin/bash
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# Backup log to disk.
+
+cp /var/log/deepin-installer-reborn.log /target/var/log/
+
+exit 0

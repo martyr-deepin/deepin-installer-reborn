@@ -22,6 +22,7 @@ SRCPATH=/lib/live/mount/medium/live/platform/$SYSTEM_NAME
 [ -d $SRCPATH/modules ] && cp -rf $SRCPATH/modules /target/lib/
 [ -f $SRCPATH/vmlinux1.$SYSTEM_NAME ] && cp -rf $SRCPATH/vmlinux1.$SYSTEM_NAME /target/boot/
 [ -f $SRCPATH/grub.cfg ] && cp -rf $SRCPATH/grub.cfg /target/boot/grub/
+cd /target/boot && ln -sf . boot
 
 sed -i "/overlayfs/d" /target/etc/fstab
 #LOCALUUID=$(grep -i "relatime" /target/etc/fstab | awk '{print $1}' | cut -d = -f 2 )
