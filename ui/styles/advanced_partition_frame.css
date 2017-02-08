@@ -45,7 +45,7 @@ QFrame#main_frame {
 #editing_button {
   border: none;
   outline: none;
-  color: #01bdff;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
 }
 
