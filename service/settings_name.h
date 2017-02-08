@@ -98,6 +98,8 @@ const char kInstallProgressPagePositionAnimation[] =
     "install_progress_page_position_animation";
 const char kInstallProgressPageOpacityAnimation[] =
     "install_progress_page_position_animation";
+const char kInstallProgressPageAnimationDuration[] =
+    "install_progress_page_animation_duration";
 
 // Install failed page
 const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";

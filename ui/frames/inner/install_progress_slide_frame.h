@@ -25,8 +25,14 @@ class InstallProgressSlideFrame : public QFrame {
  public slots:
   void setLocale(const QString& locale);
 
-  // Start/stop slide show.
-  void startSlide(bool position_animation, bool opacity_animation);
+  // Start slide show.
+  // If |position_animation| is true, enable horizontal movement animation.
+  // If |opacity_animation| is true, enable image opacity animation.
+  // |duration| defines animation interval.
+  void startSlide(bool position_animation,
+                  bool opacity_animation,
+                  int duration);
+  // Stop slide show.
   void stopSlide();
 
  private:

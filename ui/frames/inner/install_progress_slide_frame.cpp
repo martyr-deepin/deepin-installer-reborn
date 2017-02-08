@@ -17,9 +17,6 @@ namespace {
 
 const char kDefaultSlide[] = "default";
 
-// Duration of each slide.
-const int kSlideDuration = 5000;
-
 // Get absolute path to slide folder, based on |locale|.
 // |locale| might be empty or like "zh_CN" or "en_US".
 QString GetSlideDir(const QString& locale) {
@@ -54,7 +51,8 @@ void InstallProgressSlideFrame::setLocale(const QString& locale) {
 }
 
 void InstallProgressSlideFrame::startSlide(bool position_animation,
-                                           bool opacity_animation) {
+                                           bool opacity_animation,
+                                           int duration) {
   QDir slide_dir(GetSlideDir(locale_));
   Q_ASSERT(slide_dir.exists());
   for (const QString& filename : slide_dir.entryList(QDir::Files)) {
@@ -69,9 +67,11 @@ void InstallProgressSlideFrame::startSlide(bool position_animation,
 
   animation_group_->clear();
   if (position_animation) {
+    pos_animation_->setDuration(duration);
     animation_group_->addAnimation(pos_animation_);
   }
   if (opacity_animation) {
+    opacity_animation_->setDuration(duration);
     animation_group_->addAnimation(opacity_animation_);
   }
   animation_group_->start();
@@ -94,7 +94,6 @@ void InstallProgressSlideFrame::initUI() {
   pos_animation_->setKeyValueAt(0.1, QPoint(0, 0));
   pos_animation_->setKeyValueAt(0.9, QPoint(0, 0));
   pos_animation_->setKeyValueAt(1.0, QPoint(50, 0));
-  pos_animation_->setDuration(kSlideDuration);
 
   opacity_effect_ = new QGraphicsOpacityEffect(container_label_);
   container_label_->setGraphicsEffect(opacity_effect_);
@@ -103,7 +102,6 @@ void InstallProgressSlideFrame::initUI() {
   opacity_animation_->setKeyValueAt(0.1, 1.0);
   opacity_animation_->setKeyValueAt(0.9, 1.0);
   opacity_animation_->setKeyValueAt(1.0, 0.0);
-  opacity_animation_->setDuration(kSlideDuration);
 
   animation_group_ = new QParallelAnimationGroup(this);
   animation_group_->setLoopCount(-1);

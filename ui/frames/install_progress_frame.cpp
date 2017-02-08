@@ -56,11 +56,10 @@ InstallProgressFrame::~InstallProgressFrame() {
 }
 
 void InstallProgressFrame::startSlide() {
-  const bool position_animation = GetSettingsBool(
-      kInstallProgressPagePositionAnimation);
-  const bool opacity_animation = GetSettingsBool(
-      kInstallProgressPageOpacityAnimation);
-  slide_frame_->startSlide(position_animation, opacity_animation);
+  const bool position = GetSettingsBool(kInstallProgressPagePositionAnimation);
+  const bool opacity = GetSettingsBool(kInstallProgressPageOpacityAnimation);
+  const int duration = GetSettingsInt(kInstallProgressPageAnimationDuration);
+  slide_frame_->startSlide(position, opacity, duration);
 }
 
 void InstallProgressFrame::simulate() {
