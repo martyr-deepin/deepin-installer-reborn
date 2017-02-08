@@ -62,10 +62,7 @@ installer_set() {
 # Check whether current platform is loongson or not.
 is_loongson() {
   case $(uname -m) in
-    "mips*")
-      return 0
-      ;;
-    "loongson*")
+    loongson | mips*)
       return 0
       ;;
     *)
@@ -77,7 +74,7 @@ is_loongson() {
 # Check whether current platform is sw or not.
 is_sw() {
   case $(uname -m) in
-    "sw*")
+    sw*)
       return 0
       ;;
     *)
@@ -89,13 +86,7 @@ is_sw() {
 # Check whether current platform is x86/x86_64 or not.
 is_x86() {
   case $(uname -m) in
-    "x86")
-      return 0
-      ;;
-    "x86_64")
-      return 0
-      ;;
-    "i386")
+    i386 | x86 | x86_64)
       return 0
       ;;
     *)
