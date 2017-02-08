@@ -92,6 +92,7 @@ const char kPartitionDoAutoPart[] = "partition_do_auto_part";
 const char kPartitionMountPoints[] = "partition_mount_points";
 const char kPartitionFormattedMountPoints[] =
     "partition_formatted_mount_points";
+const char kPartitionEnableOsProber[] = "partition_enable_os_prober";
 
 // Install progress page
 const char kInstallProgressPagePositionAnimation[] =

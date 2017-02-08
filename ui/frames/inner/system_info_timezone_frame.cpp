@@ -48,16 +48,19 @@ SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
 
 void SystemInfoTimezoneFrame::readConf() {
   // Policy:
-  //  * Call `os-prober` if `system_info_use_windows_time` is enabled.
+  //  * Call `os-prober` if both "partition_enable_os_prober" and
+  //    "system_info_use_windows_time" are enabled.
   //  * Hide timezone-page and timezone-button if
-  //    `system_info_windows_disable_timezone_page` if enabled.
+  //    "system_info_windows_disable_timezone_page" if enabled.
   //  * If no windows partition is found, then:
   //    * Read default timezone from settings.
   //    * Scan wifi spot.
   //    * Send http request to get geo ip.
   //    * Or wait for user to choose timezone on map.
 
-  if (GetSettingsBool(kSystemInfoUseWindowsTime) && HasWindowsPartition()) {
+  if (GetSettingsBool(kPartitionEnableOsProber) &&
+      GetSettingsBool(kSystemInfoUseWindowsTime) &&
+      HasWindowsPartition()) {
     // If local time is used, set timezone to Etc/UTC.
     timezone_ = kDefaultTimezone;
     timezone_source_ = TimezoneSource::Local;

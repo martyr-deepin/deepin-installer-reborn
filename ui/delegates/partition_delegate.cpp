@@ -210,7 +210,15 @@ Partition PartitionDelegate::getRealPartition(
 void PartitionDelegate::scanDevices() const {
   // If auto-part is not set, scan devices right now.
   if (!GetSettingsBool(kPartitionDoAutoPart)) {
-    emit partition_manager_->refreshDevices(true);
+#ifndef NDEBUG
+    // Do not unmount any partitions in debug mode.
+    const bool umount = false;
+#else
+    const bool umount = true;
+#endif
+
+    const bool enable_os_prober = GetSettingsBool(kPartitionEnableOsProber);
+    emit partition_manager_->refreshDevices(umount, enable_os_prober);
   }
 }
 

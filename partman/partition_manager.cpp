@@ -111,11 +111,6 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
 
 // Unmount devices and swap partitions.
 bool UnmountDevices() {
-#ifndef NDEBUG
-  // Do not umount any partition in debug mode.
-  return true;
-#endif
-
   // Swap off partitions and files.
   bool ok;
   QString out, err;
@@ -130,6 +125,8 @@ bool UnmountDevices() {
       qWarning() << "umount /target failed" << out << err;
     }
   }
+
+  // TODO(xushaohua): Handles lvm.
 
   // umount --all almost always returns false.
   SpawnCmd("umount", {"--all"}, out, err);
@@ -161,13 +158,13 @@ void PartitionManager::initConnections() {
           this, &PartitionManager::doManualPart);
 }
 
-void PartitionManager::doRefreshDevices(bool umount) {
+void PartitionManager::doRefreshDevices(bool umount, bool enable_os_prober) {
   // Umount devices first.
   if (umount) {
     UnmountDevices();
   }
 
-  const DeviceList devices = ScanDevices();
+  const DeviceList devices = ScanDevices(enable_os_prober);
   emit this->devicesRefreshed(devices);
 }
 
@@ -197,7 +194,7 @@ void PartitionManager::doManualPart(const OperationList& operations) {
   emit this->manualPartDone(ok);
 }
 
-DeviceList ScanDevices() {
+DeviceList ScanDevices(bool enable_os_prober) {
   // 1. List Devices
   // 1.1. Retrieve metadata of each device.
   // 2. List partitions of each device.
@@ -208,8 +205,12 @@ DeviceList ScanDevices() {
 
   DeviceList devices;
   const LabelItems label_items = ParseLabelDir();
-  const OsTypeItems os_type_items = GetOsTypeItems();
   const MountItemList mount_items = ParseMountItems();
+
+  OsTypeItems os_type_items;
+  if (enable_os_prober) {
+    os_type_items = GetOsTypeItems();
+  }
 
   for (PedDevice* lp_device = ped_device_get_next(nullptr);
       lp_device != nullptr;

@@ -23,7 +23,8 @@ class PartitionManager : public QObject {
  signals:
   // Notify PartitionManager to scan devices.
   // If |umount| is true, umount partitions before scanning.
-  void refreshDevices(bool umount);
+  // If |enable_os_prober| is true, detect os types in partitions.
+  void refreshDevices(bool umount, bool enable_os_prober);
   void devicesRefreshed(const DeviceList& devices);
 
   // Run auto part script at |script_path|.
@@ -39,14 +40,15 @@ class PartitionManager : public QObject {
   void initConnections();
 
  private slots:
-  void doRefreshDevices(bool umount);
+  void doRefreshDevices(bool umount, bool enable_os_prober);
   void doAutoPart(const QString& script_path);
   void doManualPart(const OperationList& operations);
 };
 
 // Scan all disk devices on this machine.
+// Detect OS types if |enable_os_prober| is true.
 // Do not call this function directly, use PartitionManager instead.
-DeviceList ScanDevices();
+DeviceList ScanDevices(bool enable_os_prober);
 
 }  // namespace installer
 
