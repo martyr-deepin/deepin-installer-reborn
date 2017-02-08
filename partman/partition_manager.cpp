@@ -129,7 +129,7 @@ bool UnmountDevices() {
   // TODO(xushaohua): Handles lvm.
 
   // umount --all almost always returns false.
-  SpawnCmd("umount", {"--all"}, out, err);
+  //SpawnCmd("umount", {"--all"}, out, err);
 
   return ok;
 }
