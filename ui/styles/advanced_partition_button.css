@@ -15,34 +15,25 @@
 
 #name_label {
   color: #ffffff;
-  font-size: 14px;
+  font-size: 16px;
 }
 
-#path_label {
-  color: #ffffff;
-  font-size: 10px;
-  line-height: 1.6;
-}
-
+#path_label,
 #usage_label {
   color: #ffffff;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.6;
 }
 
-#mount_point_label {
+#mount_point_label,
+#fs_label {
   color: #ffffff;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 #tip_label {
   color: #ff8000;
-  font-size: 12px;
-}
-
-#fs_label {
-  color: #ffffff;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 #control_button_wrapper {
