@@ -143,26 +143,18 @@ QString GetOsTypeLargeIcon(OsType os_type) {
 
 QString GetLocalFsTypeName(FsType fs_type) {
   switch (fs_type) {
-    case FsType::Btrfs: return "btrfs journaling file system";
-    case FsType::EFI: {
-      return QObject::tr("EFI");
-    }
-    case FsType::Empty: {
-      return QObject::tr("do not use this partition");
-    }
-    case FsType::Ext2: return "Ext2 journaling file system";
-    case FsType::Ext3: return "Ext3 journaling file system";
-    case FsType::Ext4: return "Ext4 journaling file system";
-    case FsType::Fat16: return "FAT16 file system";
-    case FsType::Fat32: return "FAT32 file system";
-    case FsType::Jfs: return "JFS journaling file system";
-    case FsType::LinuxSwap: {
-      return QObject::tr("swap area");
-    }
-    case FsType::Xfs: return "XFS journaling file system";
-    default: {
-      return QObject::tr("Unknown");
-    }
+    case FsType::Btrfs: return "btrfs";
+    case FsType::EFI: return QObject::tr("efi");
+    case FsType::Empty: return QObject::tr("do not use this partition");
+    case FsType::Ext2: return "ext2";
+    case FsType::Ext3: return "ext3";
+    case FsType::Ext4: return "ext4";
+    case FsType::Fat16: return "fat16";
+    case FsType::Fat32: return "fat32";
+    case FsType::Jfs: return "jfs";
+    case FsType::LinuxSwap: return QObject::tr("swap area");
+    case FsType::Xfs: return "xfs";
+    default: return QObject::tr("Unknown");
   }
 }
 
