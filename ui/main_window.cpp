@@ -418,11 +418,6 @@ void MainWindow::goNextPage() {
     }
 
     case PageId::InstallProgressId: {
-      // First, save log file to disk.
-      if (!SaveLogFileToDisk()) {
-        qWarning() << "Failed to save log file to disk!";
-      }
-
       if (install_progress_frame_->failed()) {
         QString msg, encoded_msg;
         if (ReadErrorMsg(msg, encoded_msg)) {

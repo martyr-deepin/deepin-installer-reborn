@@ -125,9 +125,6 @@ const char kDdeSoundEffectSwitches[] = "dde_sound_effect_switches";
 const char kServiceEnabledServices[] = "service_enabled_services";
 const char kServiceDisabledServices[] = "service_disabled_services";
 
-// Misc
-const char kDiskLogFilePath[] = "disk_log_file_path";
-
 }  // namespace installer
 
 #endif  // INSTALLER_SERVICE_SETTINGS_NAME_H

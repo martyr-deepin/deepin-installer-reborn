@@ -33,9 +33,6 @@ bool IsPartitionTableMatch();
 // Returns false if failed.
 bool ReadErrorMsg(QString& msg, QString& encoded_msg);
 
-// Copy log file from memory to disk.
-bool SaveLogFileToDisk();
-
 }  // namespace installer
 
 #endif  // INSTALLER_UI_DELEGATES_MAIN_WINDOW_UTIL_H

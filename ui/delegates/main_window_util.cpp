@@ -94,13 +94,4 @@ bool ReadErrorMsg(QString& msg, QString& encoded_msg) {
   return true;
 }
 
-bool SaveLogFileToDisk() {
-  const QString filepath(GetSettingsString(kDiskLogFilePath));
-  if (filepath.isEmpty()) {
-    return false;
-  } else {
-    return QFile::copy(GetLogFilepath(), filepath);
-  }
-}
-
 }  // namespace installer
