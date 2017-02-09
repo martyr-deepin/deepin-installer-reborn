@@ -1,7 +1,7 @@
 /** Used by CommentLabel class **/
 
 QLabel {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.67;
   qproperty-alignment: AlignCenter;
   color: #ffffff;
