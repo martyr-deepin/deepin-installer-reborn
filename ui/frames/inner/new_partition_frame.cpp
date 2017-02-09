@@ -26,6 +26,13 @@
 
 namespace installer {
 
+namespace {
+
+// Minimum size of new partition is 100 Mib.
+const qint64 kMinimumPartitionSize = 100 * kMebiByte;
+
+}  // namespace
+
 NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
                                      QWidget* parent)
     : QFrame(parent),
@@ -70,7 +77,7 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
 
   // Set value range of size_slider_
   size_slider_->setMaximum(partition.getByteLength());
-  size_slider_->setMinimum(0);
+  size_slider_->setMinimum(kMinimumPartitionSize);
 }
 
 void NewPartitionFrame::changeEvent(QEvent* event) {
@@ -243,7 +250,7 @@ void NewPartitionFrame::onFsChanged(int index) {
     size_slider_->setValue(default_size);
   } else {
     // Reset minimum value of size_slider_.
-    size_slider_->setMinimum(0);
+    size_slider_->setMinimum(kMinimumPartitionSize);
 
     // And set current value to maximum value.
     size_slider_->setValue(size_slider_->maximum());
@@ -263,7 +270,7 @@ void NewPartitionFrame::onMountPointChanged(int index) {
     size_slider_->setValue(default_size);
   } else {
     // Reset minimum value of size_slider_.
-    size_slider_->setMinimum(0);
+    size_slider_->setMinimum(kMinimumPartitionSize);
 
     // And set current value to maximum value.
     size_slider_->setValue(size_slider_->maximum());
