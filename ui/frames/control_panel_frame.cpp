@@ -107,6 +107,8 @@ void ControlPanelFrame::initConnections() {
 
   connect(refresh_devices_button_, &QPushButton::clicked,
           this, &ControlPanelFrame::requestRefreshDevices);
+  connect(simulate_slide_button_, &QPushButton::clicked,
+          this, &ControlPanelFrame::requestSimulateSlide);
 }
 
 void ControlPanelFrame::initUI() {
@@ -145,9 +147,16 @@ void ControlPanelFrame::initUI() {
   refresh_devices_button_->setText("Refresh Device List");
   refresh_devices_button_->setFixedHeight(40);
 
+  simulate_slide_button_ = new PointerButton();
+  simulate_slide_button_->setObjectName("simulate_slide");
+  simulate_slide_button_->setText("Start slide");
+  simulate_slide_button_->setFixedHeight(40);
+
   QHBoxLayout* page_layout = new QHBoxLayout();
   page_layout->addWidget(page_combo_box_, 0, Qt::AlignLeft | Qt::AlignTop);
   page_layout->addWidget(refresh_devices_button_, 0,
+                         Qt::AlignLeft | Qt::AlignTop);
+  page_layout->addWidget(simulate_slide_button_, 0,
                          Qt::AlignLeft | Qt::AlignTop);
   page_layout->addStretch();
 

@@ -18,7 +18,8 @@ QTextEdit {
   selection-background-color: black;
 }
 
-QPushButton#refresh_devices {
+QPushButton#refresh_devices,
+QPushButton#simulate_slide {
   border: none;
   padding: 0px 4px;
   margin: 0px;

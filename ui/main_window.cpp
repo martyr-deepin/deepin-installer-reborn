@@ -87,6 +87,8 @@ void MainWindow::initConnections() {
           this, &MainWindow::onCurrentPageChanged);
   connect(control_panel_frame_, &ControlPanelFrame::requestRefreshDevices,
           partition_frame_, &PartitionFrame::scanDevices);
+  connect(control_panel_frame_, &ControlPanelFrame::requestSimulateSlide,
+          install_progress_frame_, &InstallProgressFrame::simulate);
 
   connect(disk_space_insufficient_frame_, &DiskSpaceInsufficientFrame::finished,
           this, &MainWindow::shutdownSystem);
