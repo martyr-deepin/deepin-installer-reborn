@@ -17,14 +17,14 @@
 # Update /etc/locale.gen and generate new locale cache.
 generate_locale() {
   local JSON="/usr/share/deepin-installer-reborn/resources/languages.json"
-  local locales
-  locales=$(grep 'locale' "${JSON}" | awk '{ print $2 }' | \
+  local LOCALES
+  LOCALES=$(grep 'locale' "${JSON}" | awk '{ print $2 }' | \
             sed 's/"//g'  | sed 's/,//g')
 
-  echo "locales: ${locales}"
-  for locale_name in $(echo "${locales}"); do
-    echo "${locale_name}"
-    sed -i "s/# \(${locale_name}\.UTF-8.*$\)/\1/g" /etc/locale.gen
+  echo "locales: ${LOCALES}"
+  for LOCALE_NAME in $(echo "${LOCALES}"); do
+    echo "${LOCALE_NAME}"
+    sed -i "s/# \(${LOCALE_NAME}\.UTF-8.*$\)/\1/g" /etc/locale.gen
   done
 
   locale-gen
@@ -41,5 +41,23 @@ generate_background_image() {
   fi
 }
 
+# Remove slide image for netease-cloud-music on non-x86 platforms
+remove_cloud_music_slide() {
+  case $(uname -m) in
+    i386 | amd64 | x86 | x86_64)
+      ;;
+    *)
+      ;;
+  esac
+
+  local ZH_CN_SLIDE=/usr/share/deepin-installer-reborn/resources/slide/zh_CN/18.png
+  local ZH_TW_SLIDE=/usr/share/deepin-installer-reborn/resources/slide/zh_TW/18.png
+  [ -f "${ZH_CN_SLIDE}" ] && rm "${ZH_CN_SLIDE}"
+  [ -f "${ZH_TW_SLIDE}" ] && rm "${ZH_TW_SLIDE}"
+
+  return 0
+}
+
 generate_locale
 generate_background_image
+remove_cloud_music_slide
