@@ -25,21 +25,29 @@ fi
 packets=$1
 duration=$2
 
-interfaceList=$(./airmon-ng)
-if [ $? != 0 ]; then
-  error "airmon-ng failed! ${interfaceList}"
-fi
-
 # Get the first availabel wireless device.
-interface=$(echo "${interfaceList}" | cut -f 2 | grep '[^Interface]' | head -n1)
+interface=$(./airmon-ng | cut -f 2 | grep '[^Interface]' | head -n1)
 echo "interface: ${interface}"
 
 if [ -z "${interface}" ]; then
   error "No interface availabel"
 fi
 
+# Start monitor monde.
+./airmon-ng start "${interface}"
+
+mon_interface=$(./airmon-ng | cut -f 2 | grep '[^Interface]' | head -n1)
+echo "monitor interface: ${mon_interface}"
+
+if [ -z "${mon_interface}" ]; then
+  error "No interface availabel"
+fi
+
 # Capture beacon packets and print to stdout.
-#tshark -c $packets -a duration:$duration -I -f 'wlan[0] == 0x80' -Tfields -e wlan.sa -e wlan_mgt.country_info.code 2>/dev/null
-tshark -c $packets -a duration:$duration -I -f 'wlan[0] == 0x80' -Tfields -e wlan.sa -e wlan_mgt.country_info.code -i ${interface}
+tshark -c "${packets}" -a duration:${duration} -I -f 'wlan[0] == 0x80' \
+  -Tfields -e wlan.sa -e wlan_mgt.country_info.code -i "${mon_interface}"
+
+# Stop monitor mode.
+./airmon-ng stop "${mon_interface}"
 
 exit 0

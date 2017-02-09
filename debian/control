@@ -30,6 +30,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
     btrfs-progs,
     dosfstools,
     e2fsprogs,
+    ethtool,
     hfsprogs,
     jfsutils,
     mtools,
