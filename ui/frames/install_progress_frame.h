@@ -9,6 +9,7 @@
 class QLabel;
 class QProgressBar;
 class QThread;
+class QTimer;
 
 namespace installer {
 
@@ -33,12 +34,12 @@ class InstallProgressFrame : public QFrame {
   // Returns true is installation process failed.
   bool failed() const { return failed_; }
 
-  // Update progress value with a qtimer object.
-  void simulate();
-
  public slots:
   // Run hooks when partition job is done
   void runHooks(bool ok);
+
+  // Update progress value with a qtimer object.
+  void simulate();
 
   // Choose slide package based on |locale|.
   void updateLanguage(const QString& locale);
@@ -66,6 +67,8 @@ class InstallProgressFrame : public QFrame {
   QLabel* tooltip_label_ = nullptr;
   QProgressBar* progress_bar_ = nullptr;
 
+  QTimer* simulation_timer_ = nullptr;
+
  private slots:
   // Handles error state
   void onHooksErrorOccurred();
@@ -76,6 +79,8 @@ class InstallProgressFrame : public QFrame {
   void onProgressUpdate(int progress);
 
   void onRetainingTimerTimeout();
+
+  void onSimulationTimerTimeout();
 };
 
 }  // namespace installer

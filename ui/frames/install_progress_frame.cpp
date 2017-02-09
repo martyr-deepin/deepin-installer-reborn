@@ -30,9 +30,12 @@ namespace {
 const int kProgressBarWidth = 640;
 const int kTooltipWidth = 60;
 const int kTooltipHeight = 31;
+const int kTooltipLabelMargin = 2;
 const int kTooltipFrameWidth = kProgressBarWidth + kTooltipWidth;
 
 const int kRetainingInterval = 3000;
+
+const int kSimulationTimerInterval = 100;
 
 }  // namespace
 
@@ -40,7 +43,8 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
     : QFrame(parent),
       failed_(true),
       hooks_manager_(new HooksManager()),
-      hooks_manager_thread_(new QThread(this)) {
+      hooks_manager_thread_(new QThread(this)),
+      simulation_timer_(new QTimer(this)) {
   this->setObjectName("install_progress_frame");
 
   hooks_manager_->moveToThread(hooks_manager_thread_);
@@ -49,6 +53,9 @@ InstallProgressFrame::InstallProgressFrame(QWidget* parent)
   this->initConnections();
 
   hooks_manager_thread_->start();
+
+  simulation_timer_->setSingleShot(false);
+  simulation_timer_->setInterval(kSimulationTimerInterval);
 }
 
 InstallProgressFrame::~InstallProgressFrame() {
@@ -63,20 +70,11 @@ void InstallProgressFrame::startSlide() {
 }
 
 void InstallProgressFrame::simulate() {
-  QTimer* timer = new QTimer(this);
-  timer->setSingleShot(false);
-  timer->setInterval(100);
-  connect(timer, &QTimer::timeout,
-          [=]() {
-            int progress = progress_bar_->value();
-            progress ++;
-            if (progress > progress_bar_->maximum()) {
-              // Infinite loop.
-              progress = progress_bar_->minimum();
-            }
-            this->onProgressUpdate(progress);
-          });
-  timer->start();
+  if (!simulation_timer_->isActive()) {
+    // Reset progress value.
+    this->onProgressUpdate(progress_bar_->minimum());
+    simulation_timer_->start();
+  }
 }
 
 void InstallProgressFrame::runHooks(bool ok) {
@@ -122,6 +120,9 @@ void InstallProgressFrame::initConnections() {
 
   connect(hooks_manager_thread_, &QThread::finished,
           hooks_manager_, &HooksManager::deleteLater);
+
+  connect(simulation_timer_, &QTimer::timeout,
+          this, &InstallProgressFrame::onSimulationTimerTimeout);
 }
 
 void InstallProgressFrame::initUI() {
@@ -144,6 +145,8 @@ void InstallProgressFrame::initUI() {
   tooltip_label_->setFixedSize(kTooltipWidth, kTooltipHeight);
   tooltip_label_->setAlignment(Qt::AlignHCenter);
   tooltip_label_->setText("0%");
+  // Add left margin.
+  tooltip_label_->move(kTooltipLabelMargin, tooltip_label_->y());
 
   // NOTE(xushaohua): QProgressBar::paintEvent() has performance issue on
   // loongson platform, when chunk style is set. So we override paintEvent()
@@ -193,7 +196,14 @@ void InstallProgressFrame::onHooksFinished() {
 void InstallProgressFrame::onProgressUpdate(int progress) {
   progress_bar_->setValue(progress);
   tooltip_label_->setText(QString("%1%").arg(progress));
-  const int x = kProgressBarWidth * progress / 100;
+  int x;
+  if (progress == progress_bar_->minimum()) {
+    // Add left margin.
+    x = kTooltipLabelMargin;
+  } else {
+    // Add right margin.
+    x = kProgressBarWidth * progress / 100 - kTooltipLabelMargin;
+  }
   const int y = tooltip_label_->y();
   tooltip_label_->move(x, y);
 
@@ -206,6 +216,15 @@ void InstallProgressFrame::onProgressUpdate(int progress) {
 void InstallProgressFrame::onRetainingTimerTimeout() {
   slide_frame_->stopSlide();
   emit this->finished();
+}
+
+void InstallProgressFrame::onSimulationTimerTimeout() {
+  const int progress = progress_bar_->value() + 1;
+  if (progress > progress_bar_->maximum()) {
+    simulation_timer_->stop();
+  } else {
+    this->onProgressUpdate(progress);
+  }
 }
 
 }  // namespace installer
