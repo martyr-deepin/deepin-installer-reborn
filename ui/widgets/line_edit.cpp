@@ -16,7 +16,8 @@ LineEdit::LineEdit(const QString& icon, QWidget* parent) : QLineEdit(parent) {
   this->setObjectName("line_edit");
 
   this->setStyleSheet(ReadFile(":/styles/line_edit.css"));
-  this->setFixedSize(340, 36);
+  // Same width as in table combobox.
+  this->setFixedSize(310, 36);
 
   // Disable context menu.
   this->setContextMenuPolicy(Qt::NoContextMenu);
