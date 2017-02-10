@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
+#include "ui/delegates/main_window_util.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/frosted_frame.h"
@@ -21,10 +22,10 @@ namespace installer {
 namespace {
 
 const int kContentWindowWidth = 580;
-const int kContentWindowHeight = 460;
+const int kContentWindowHeight = 320;
 
 const int kQrMargin = 8;
-const int kQrWindowSize = 400;
+const int kQrWindowSize = 280;
 
 const int kControlButtonSize = 32;
 
@@ -40,14 +41,20 @@ InstallFailedFrame::InstallFailedFrame(QWidget* parent) : QFrame(parent) {
   content_label_->hide();
 }
 
-void InstallFailedFrame::updateErrorMessage(const QString& msg,
-                                            const QString& encoded_msg) {
+void InstallFailedFrame::updateMessage() {
+  QString msg, encoded_msg;
+  if (!ReadErrorMsg(msg, encoded_msg)) {
+    msg = "Error: failed to read log file!";
+    encoded_msg = EncodeErrorMsg(msg);
+  }
+
   content_label_->setText(msg);
-  if (!encoded_msg.isEmpty()) {
+  if (encoded_msg.isEmpty()) {
     // If encoded_msg if empty, qr_widget will generate a rectangle filled with
     // red color, which is not what we expect.
-    qr_widget_->setText(encoded_msg);
+    encoded_msg = EncodeErrorMsg("Error: failed to read log");
   }
+  qr_widget_->setText(encoded_msg);
 }
 
 void InstallFailedFrame::changeEvent(QEvent* event) {
@@ -83,7 +90,8 @@ void InstallFailedFrame::initUI() {
   comment_layout->setSpacing(0);
   comment_layout->addWidget(comment_label_);
 
-  FrostedFrame* content_frame = new FrostedFrame();
+  QFrame* content_frame = new QFrame();
+  content_frame->setObjectName("content_frame");
   content_frame->setFixedSize(kContentWindowWidth, kContentWindowHeight);
   content_label_ = new QLabel(content_frame);
   content_label_->setObjectName("content_label");
@@ -107,6 +115,7 @@ void InstallFailedFrame::initUI() {
   reboot_button_ = new NavButton(tr("Exit installation"));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(status_label, 0, Qt::AlignCenter);
@@ -118,6 +127,7 @@ void InstallFailedFrame::initUI() {
   layout->addWidget(reboot_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
   this->setStyleSheet(ReadFile(":/styles/install_failed_frame.css"));
 }
 

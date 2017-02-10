@@ -33,8 +33,13 @@ void QRWidget::setText(const QString& content) {
 
 void QRWidget::paintEvent(QPaintEvent* event) {
   Q_UNUSED(event);
+
+  if (content_.isEmpty()) {
+    // Do not render qr widget when content is empty.
+    return;
+  }
+
   QPainter painter(this);
-  // TODO(xushaohua): Check content_ is empty or not.
   QRcode *qr = QRcode_encodeString(content_.toStdString().c_str(),
                                    1, QR_ECLEVEL_L, QR_MODE_8, 1);
   if (qr != NULL){

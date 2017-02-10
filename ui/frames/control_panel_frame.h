@@ -30,6 +30,9 @@ class ControlPanelFrame : public QFrame {
   // Emitted when refresh_device_button_ is clicked.
   void requestRefreshDevices();
 
+  // Emitted when refresh_qr_button_ is clicked.
+  void requestRefreshQR();
+
   // Emitted when simulate_slide_button_ is clicked.
   void requestSimulateSlide();
 
@@ -49,6 +52,7 @@ class ControlPanelFrame : public QFrame {
   // Displays page index
   TableComboBox* page_combo_box_ = nullptr;
   QPushButton* refresh_devices_button_ = nullptr;
+  QPushButton* refresh_qr_button_ = nullptr;
   QPushButton* simulate_slide_button_ = nullptr;
 
   QTextEdit* settings_viewer_ = nullptr;

@@ -87,6 +87,8 @@ void MainWindow::initConnections() {
           this, &MainWindow::onCurrentPageChanged);
   connect(control_panel_frame_, &ControlPanelFrame::requestRefreshDevices,
           partition_frame_, &PartitionFrame::scanDevices);
+  connect(control_panel_frame_, &ControlPanelFrame::requestRefreshQR,
+          install_failed_frame_, &InstallFailedFrame::updateMessage);
   connect(control_panel_frame_, &ControlPanelFrame::requestSimulateSlide,
           install_progress_frame_, &InstallProgressFrame::simulate);
 
@@ -419,14 +421,7 @@ void MainWindow::goNextPage() {
 
     case PageId::InstallProgressId: {
       if (install_progress_frame_->failed()) {
-        QString msg, encoded_msg;
-        if (ReadErrorMsg(msg, encoded_msg)) {
-          install_failed_frame_->updateErrorMessage(msg, encoded_msg);
-        } else {
-          msg = "Error: failed to read log file!";
-          encoded_msg = EncodeErrorMsg(msg);
-          install_failed_frame_->updateErrorMessage(msg, encoded_msg);
-        }
+        install_failed_frame_->updateMessage();
         this->setCurrentPage(PageId::InstallFailedId);
       } else {
         this->setCurrentPage(PageId::InstallSuccessId);

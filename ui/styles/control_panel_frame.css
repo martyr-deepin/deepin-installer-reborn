@@ -19,6 +19,7 @@ QTextEdit {
 }
 
 QPushButton#refresh_devices,
+QPushButton#refresh_qr,
 QPushButton#simulate_slide {
   border: none;
   padding: 0px 4px;
