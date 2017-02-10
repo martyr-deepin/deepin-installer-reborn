@@ -31,6 +31,8 @@ namespace {
 const int kWindowWidth = 640;
 const int kProgressBarWidth = 280;
 
+const int kContentSpacing = 15;
+
 // Check whether partition with |mount_point| should be formatted
 // compulsively.
 bool IsInFormattedMountPointList(const QString& mount_point) {
@@ -210,34 +212,36 @@ void EditPartitionFrame::initUI() {
   format_check_box_->setObjectName("format_check_box");
   format_check_box_->setFixedWidth(20);
 
-  QGridLayout* grid_layout = new QGridLayout();
-  grid_layout->setHorizontalSpacing(20);
-  grid_layout->setVerticalSpacing(20);
-  grid_layout->setContentsMargins(0, 0, 0, 0);
-  grid_layout->addWidget(fs_label_, 0, 0, Qt::AlignRight);
-  grid_layout->addWidget(mount_point_label_, 1, 0, Qt::AlignRight);
-  grid_layout->addWidget(fs_box_, 0, 1);
-  grid_layout->addWidget(mount_point_box_, 1, 1);
-  grid_layout->addWidget(format_check_box_, 2, 0, Qt::AlignRight);
-  grid_layout->addWidget(format_label_, 2, 1);
+  QHBoxLayout* format_layout =new QHBoxLayout();
+  format_layout->setContentsMargins(0, 0, 0, 0);
+  format_layout->setSpacing(0);
+  format_layout->addWidget(format_check_box_);
+  format_layout->addSpacing(10);
+  format_layout->addWidget(format_label_);
+  format_layout->addStretch();
 
-  QVBoxLayout* grid_wrapper_layout = new QVBoxLayout();
-  grid_wrapper_layout->setContentsMargins(0, 0, 0, 0);
-  grid_wrapper_layout->setSpacing(0);
-  grid_wrapper_layout->addLayout(grid_layout);
-  grid_wrapper_layout->addStretch();
+  QVBoxLayout* content_layout = new QVBoxLayout();
+  content_layout->setContentsMargins(0, 0, 0, 0);
+  content_layout->setSpacing(3);
+  content_layout->addWidget(fs_label_);
+  content_layout->addWidget(fs_box_);
+  content_layout->addSpacing(kContentSpacing);
+  content_layout->addWidget(mount_point_label_);
+  content_layout->addWidget(mount_point_box_);
+  content_layout->addSpacing(kContentSpacing);
+  content_layout->addLayout(format_layout);
 
-  QFrame* grid_frame = new QFrame();
-  grid_frame->setObjectName("grid_frame");
-  grid_frame->setContentsMargins(0, 0, 110, 0);
-  grid_frame->setFixedSize(400, 300);
-  grid_frame->setLayout(grid_wrapper_layout);
+  QFrame* content_frame = new QFrame();
+  content_frame->setObjectName("content_frame");
+  content_frame->setContentsMargins(0, 0, 0, 0);
+  content_frame->setLayout(content_layout);
+  // Same width as with table combobox.
+  content_frame->setFixedWidth(mount_point_box_->width());
 
   cancel_button_ = new NavButton(tr("Cancel"));
   ok_button_ = new NavButton(tr("OK"));
 
   QVBoxLayout* layout = new QVBoxLayout();
-  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignHCenter);
@@ -245,14 +249,14 @@ void EditPartitionFrame::initUI() {
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(os_label_, 0, Qt::AlignHCenter);
-  layout->addSpacing(kMainLayoutSpacing);
+  layout->addSpacing(10);
   layout->addWidget(name_frame, 0, Qt::AlignHCenter);
-  layout->addSpacing(kMainLayoutSpacing);
+  layout->addSpacing(10);
   layout->addWidget(usage_bar_, 0, Qt::AlignHCenter);
-  layout->addSpacing(20 + kMainLayoutSpacing);
+  layout->addSpacing(kMainLayoutSpacing);
   layout->addWidget(separator_label, 0, Qt::AlignHCenter);
-  layout->addSpacing(20 + kMainLayoutSpacing);
-  layout->addWidget(grid_frame, 0, Qt::AlignHCenter);
+  layout->addSpacing(kMainLayoutSpacing);
+  layout->addWidget(content_frame, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addWidget(cancel_button_, 0, Qt::AlignHCenter);
   layout->addSpacing(30);

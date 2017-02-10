@@ -31,6 +31,8 @@ namespace {
 // Minimum size of new partition is 100 Mib.
 const qint64 kMinimumPartitionSize = 100 * kMebiByte;
 
+const int kContentSpacing = 15;
+
 }  // namespace
 
 NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
@@ -122,14 +124,6 @@ void NewPartitionFrame::initUI() {
   comment_layout->setSpacing(0);
   comment_layout->addWidget(comment_label_);
 
-  QLabel* os_label = new QLabel();
-  os_label->setObjectName("os_label");
-  os_label->setPixmap(GetOsTypeLargeIcon(partition_.os));
-
-  QLabel* separator_label = new QLabel();
-  separator_label->setObjectName("separator_label");
-  separator_label->setFixedSize(560, 1);
-
   type_label_ = new QLabel(tr("Type"));
   type_label_->setObjectName("type_label");
   type_box_ = new TableComboBox();
@@ -159,26 +153,30 @@ void NewPartitionFrame::initUI() {
   size_slider_ = new PartitionSizeSlider();
   size_slider_->setFixedWidth(mount_point_box_->width());
 
-  QGridLayout* grid_layout = new QGridLayout();
-  grid_layout->setContentsMargins(0, 0, 0, 0);
-  grid_layout->setHorizontalSpacing(20);
-  grid_layout->setVerticalSpacing(20);
-  grid_layout->addWidget(type_label_, 0, 0, Qt::AlignRight);
-  grid_layout->addWidget(alignment_label_, 1, 0, Qt::AlignRight);
-  grid_layout->addWidget(fs_label_, 2, 0, Qt::AlignRight);
-  grid_layout->addWidget(mount_point_label_, 3, 0, Qt::AlignRight);
-  grid_layout->addWidget(size_label_, 4, 0, Qt::AlignRight);
-  grid_layout->addWidget(type_box_, 0, 1);
-  grid_layout->addWidget(alignment_box_, 1, 1);
-  grid_layout->addWidget(fs_box_, 2, 1);
-  grid_layout->addWidget(mount_point_box_, 3, 1);
-  grid_layout->addWidget(size_slider_, 4, 1);
+  QVBoxLayout* content_layout = new QVBoxLayout();
+  content_layout->setSpacing(3);
+  content_layout->setContentsMargins(0, 0, 0, 0);
+  content_layout->addWidget(type_label_);
+  content_layout->addWidget(type_box_);
+  content_layout->addSpacing(kContentSpacing);
+  content_layout->addWidget(alignment_label_);
+  content_layout->addWidget(alignment_box_);
+  content_layout->addSpacing(kContentSpacing);
+  content_layout->addWidget(fs_label_);
+  content_layout->addWidget(fs_box_);
+  content_layout->addSpacing(kContentSpacing);
+  content_layout->addWidget(mount_point_label_);
+  content_layout->addWidget(mount_point_box_);
+  content_layout->addSpacing(kContentSpacing);
+  content_layout->addWidget(size_label_);
+  content_layout->addWidget(size_slider_);
 
-  QFrame* grid_frame = new QFrame();
-  grid_frame->setObjectName("grid_frame");
-  grid_frame->setContentsMargins(0, 0, 20, 0);
-  grid_frame->setLayout(grid_layout);
-  grid_frame->setFixedWidth(400);
+  QFrame* content_frame = new QFrame();
+  content_frame->setObjectName("content_frame");
+  content_frame->setContentsMargins(0, 0, 0, 0);
+  content_frame->setLayout(content_layout);
+  // Same width as with table combobox.
+  content_frame->setFixedWidth(mount_point_box_->width());
 
   cancel_button_ = new NavButton(tr("Cancel"));
   create_button_ = new NavButton(tr("OK"));
@@ -190,11 +188,7 @@ void NewPartitionFrame::initUI() {
   layout->addSpacing(kMainLayoutSpacing);
   layout->addLayout(comment_layout);
   layout->addStretch();
-  layout->addWidget(os_label, 0, Qt::AlignCenter);
-  layout->addSpacing(10 + kMainLayoutSpacing);
-  layout->addWidget(separator_label, 0, Qt::AlignHCenter);
-  layout->addSpacing(10 + kMainLayoutSpacing);
-  layout->addWidget(grid_frame, 0, Qt::AlignHCenter);
+  layout->addWidget(content_frame, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addWidget(cancel_button_, 0, Qt::AlignCenter);
   layout->addSpacing(30);
