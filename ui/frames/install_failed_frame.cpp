@@ -12,7 +12,6 @@
 #include "ui/delegates/main_window_util.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
-#include "ui/widgets/frosted_frame.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/qr_widget.h"
 #include "ui/widgets/title_label.h"

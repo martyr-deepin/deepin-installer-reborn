@@ -284,8 +284,6 @@ set(UI_FILES
     ui/widgets/expanded_nav_button.h
     ui/widgets/flat_button.cpp
     ui/widgets/flat_button.h
-    ui/widgets/frosted_frame.cpp
-    ui/widgets/frosted_frame.h
     ui/widgets/icon_button.cpp
     ui/widgets/icon_button.h
 

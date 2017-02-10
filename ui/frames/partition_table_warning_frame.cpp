@@ -7,15 +7,12 @@
 #include <QDebug>
 #include <QEvent>
 #include <QGridLayout>
-#include <QHBoxLayout>
 #include <QLabel>
-#include <QVBoxLayout>
 
 #include "base/file_util.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/expanded_nav_button.h"
-#include "ui/widgets/frosted_frame.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
@@ -115,7 +112,8 @@ void PartitionTableWarningFrame::initUI() {
   left_frame_layout->addWidget(list_title2_);
   left_frame_layout->addWidget(list_item2_);
   left_frame_layout->addStretch();
-  FrostedFrame* left_frame = new FrostedFrame();
+  QFrame* left_frame = new QFrame();
+  left_frame->setObjectName("left_frame");
   left_frame->setFixedWidth(480);
   left_frame->setLayout(left_frame_layout);
 
@@ -134,7 +132,8 @@ void PartitionTableWarningFrame::initUI() {
   right_frame_layout->addWidget(list_title3_);
   right_frame_layout->addWidget(list_item3_);
   right_frame_layout->addStretch();
-  FrostedFrame* right_frame = new FrostedFrame();
+  QFrame* right_frame = new QFrame();
+  right_frame->setObjectName("right_frame");
   right_frame->setFixedWidth(480);
   right_frame->setLayout(right_frame_layout);
 
