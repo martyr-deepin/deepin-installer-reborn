@@ -98,6 +98,7 @@ fix_asus_u82u() {
         echo "blacklist asus-nb-wmi" | tee -a /etc/modprobe.d/blacklist_asus_nb_wmi.conf
     fi
 }
+
 # bcm4313 [14e4:4727] wireless driver
 fix_pci_bcm4313() {
   if is_pci_exists "14e4:4727"; then
@@ -138,6 +139,7 @@ fix_pci_bcm4322() {
     echo "blacklist wl" | tee -a /etc/modprobe.d/bcm.conf
   fi
 }
+
 # ar9485 [168C:0032] wireless driver
 fix_pci_ar9485_nohwcrypt() {
   # fix ar9485 issue that could not connect to wifi with password protect

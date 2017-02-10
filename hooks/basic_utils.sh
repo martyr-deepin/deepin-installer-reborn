@@ -12,6 +12,10 @@ export APT_OPTIONS='-y -o Dpkg::Options::="--force-confdef" \
   -o Dpkg::Options::="--force-confold" --force-yes --no-install-recommends \
   --allow-unauthenticated'
 
+# Absolute path to config file.
+# Do not read from/write to this file, call installer_get/installer_set instead.
+CONF_FILE=/etc/deepin-installer.conf
+
 # Print error message and exit
 error() {
   local msg="$@"

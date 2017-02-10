@@ -4,35 +4,7 @@
 # in the LICENSE file.
 
 # Automatically create disk partitions based on this policy:
-# Assumes /dev/sda is the device which has the largest capacity.
-# If UEFI is enabled:
-#   * Create label of /dev/sda to GPT
-#   If /dev/sda is less than 15G:
-#     * /dev/sda1 /boot/efi efi 512M
-#     * /dev/sda2 / ext4
-#   Else if /dev/sda is less than 60G:
-#     * /dev/sda1 /boot/efi efi 512M
-#     * /dev/sda2 / ext4
-#     * /dev/sda3 linux-swap 4G
-#   Else:
-#     * /dev/sda1 /boot/efi efi 512M
-#     * /dev/sda2 / ext4 30G
-#     * /dev/sda3 linux-swap 4G
-#     * /dev/sda4 /home ext4
-#   EndIf
-# Else:
-#   * Create label of /dev/sda to msdos
-#   If /dev/sda is less than 15G:
-#     * /dev/sda1 / ext4
-#   Else if /dev/sda is less than 60G:
-#     * /dev/sda1 / ext4
-#     * /dev/sda2 linux-swap 4G
-#   Else:
-#     * /dev/sda1 / ext4 30G
-#     * /dev/sda2 linux-swap 4G
-#     * /dev/sda3 /home ext4
-#   EndIf
-# EndIf
+# Partition policy is defined in settings.ini.
 
 kGibiByte=1048576
 k4Gib=4096
@@ -40,7 +12,7 @@ k15Gib=15360
 k30Gib=30720
 k60Gib=61440
 
-# Minimum disk capacity required, 15G.
+# Minimum disk capacity required, 15Gib.
 MINIMUM_DISK_SIZE=$k15Gib
 
 # The disk with largest storage capacity is used as system device.
@@ -60,190 +32,191 @@ get_max_capacity_device() {
 # Flush kernel message
 flush_message() {
   udevadm settle --timeout=5
+
+#  partprobe
 }
 
-# Create a EFI partition on /dev/sda1 with 512M
-make_efi() {
-  parted -s $DEVICE mkpart primary fat32 1Mib 512Mib || \
-    error "Failed to create partition ${DEVICE}1"
-  parted -s $DEVICE set 1 esp on || \
-    error "Failed to set esp flag on ${DEVICE}1"
-  flush_message
-  mkfs.msdos -F32 -v ${DEVICE}1 || \
-    error "Failed to make fat32 filesystem on ${DEVICE}1"
+# Format partition at $1 with filesystem $2
+format_partition() {
+  local PART_PATH=$1
+  local PART_FS=$2
+
+  case "${PART_FS}" in
+    ext2 | ext3 | ext4)
+      # Force mke2fs to create a filesystem.
+      mkfs -t "${PART_FS}" -F "${PART_PATH}" || \
+        error "Failed to create ${PART_FS} at ${PART_PATH}"
+      ;;
+    fat32)
+      mkfs.vfat -F32 "${PART_PATH}" || \
+        error "Failed to create ${PART_FS} at ${PART_PATH}"
+      ;;
+    fat16)
+      mkfs.vfat -F16 "${PART_PATH}" || \
+        error "Failed to create ${PART_FS} at ${PART_PATH}"
+      ;;
+    linux-swap)
+      mkswap "${PART_PATH}" || error "Failed to create swap ${PART_PATH}"
+      ;;
+    *)
+      mkfs "${PART_PATH}" || \
+        error "Failed to create ${PART_FS} at ${PART_PATH}"
+      ;;
+  esac
 }
 
-# Add boot flag to ${DEVICE}1
-mark_device1_bootable() {
-  parted -s $DEVICE set 1 boot on || \
-    error "Failed to set esp flag on ${DEVICE}1"
+# Check boot mode is UEFI or not.
+is_efi_mode() {
+  test -d "/sys/firmware/efi"
 }
 
-# Umount all swap partitions.
-swapoff -a || error "Failed to umount swap!"
+DEVICE=''
 
-DEVICE=$(get_max_capacity_device)
-if [ -z $DEVICE ]; then
-  echo 'Error: no supported storage device found!';
-  echo 'There shall be a IDE or SATA disk available at /dev/sda or /dev/hda';
-  exit 1;
-fi
+main() {
+  # Based on the following process:
+  #  * Get appropriate disk device.
+  #  * Get boot mode.
+  #  * Get partitioning policy.
+  #  * Create new partition table.
+  #  * Create partitions.
+  #  * Notify kernel.
 
-DEVICE_SIZE=$(blockdev --getsize64 $DEVICE)
-DEVICE_SIZE=$((DEVICE_SIZE / kGibiByte))
-if [ $DEVICE_SIZE -lt $MINIMUM_DISK_SIZE ]; then
-  # TODO(xushaohua): Read minimum size from conf file
-  #error 'Error: At least 30G is required to install!';
-  echo 'Error: At least 30G is required to install!';
-fi
+  # Umount all swap partitions.
+#  swapoff -a || error "Failed to umount swap!"
+  # TODO(xushaohua): Unmount other partitions.
 
-# Write bootloader info to conf.
-installer_set "DI_BOOTLOADER" ${DEVICE}
-installer_set "DI_ROOT_DISK" ${DEVICE}
+  DEVICE=$(get_max_capacity_device)
+  [ -z $DEVICE ] && error "no supported storage device found"
 
-if [ -d '/sys/firmware/efi' ]; then
-  # First create a GPT partition table.
-  parted -s $DEVICE mktable gpt || \
-    error "Failed to create msdos partition on $DEVICE";
-
-  if [ $DEVICE_SIZE -le $k15Gib ]; then
-    make_efi
-
-    parted -s $DEVICE mkpart primary ext4 512Mib 100% || \
-      error "Failed to create partition ${DEVICE}2";
-    flush_message
-    mkfs.ext4 -F ${DEVICE}2 || \
-      error "Failed to make ext4 filesystem on ${DEVICE}2";
-
-    installer_set "DI_ROOT_PARTITION" ${DEVICE}2
-    installer_set "DI_MOUNTPOINTS" "${DEVICE}1=/boot/efi"
-
-  elif [ $DEVICE_SIZE -le $k60Gib ]; then
-    make_efi
-
-    # / on /dev/sda2
-    START_SIZE=512
-    END_SIZE=$((DEVICE_SIZE - k4Gib + START_SIZE))
-    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}Mib ${END_SIZE}Mib || \
-      error "Failed to create linux-swap on ${DEVICE}2";
-    flush_message
-    mkfs.ext4 -F ${DEVICE}2 || \
-      error "Failed to call mkswap ${DEVICE}2";
-
-    # linux-swap on /dev/sda3
-    START_SIZE=$END_SIZE
-    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}Mib 100% || \
-      error "Failed to create partition ${DEVICE}3";
-    flush_message
-    mkswap ${DEVICE}3 || \
-      error "Failed to make linux-swap filesystem on ${DEVICE}3";
-
-    installer_set "DI_ROOT_PARTITION" "${DEVICE}2"
-    installer_set "DI_MOUNTPOINTS" "${DEVICE}1=/boot/efi;${DEVICE}3=swap"
-
-  else
-    make_efi
-
-    # / on /dev/sda2
-    START_SIZE=512
-    END_SIZE=$((START_SIZE + k30Gib))
-    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}Mib ${END_SIZE}Mib || \
-      error "Failed to create partition ${DEVICE}2";
-    flush_message
-    mkfs.ext4 -F ${DEVICE}2 || \
-      error "Failed to make ext4 filesystem on ${DEVICE}2";
-
-    START_SIZE=$END_SIZE
-    END_SIZE=$((START_SIZE + k4Gib))
-    # linux-swap on /dev/sda3
-    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}Mib \
-      ${END_SIZE}Mib || error "Failed to create linux-swap on ${DEVICE}3";
-    flush_message
-    mkswap ${DEVICE}3 || \
-      error "Failed to call mkswap ${DEVICE}3";
-
-    # /home on /dev/sda4
-    START_SIZE=$END_SIZE
-    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}Mib 100% || \
-      error "Failed to create partition ${DEVICE}4";
-    flush_message
-    mkfs.ext4 -F ${DEVICE}4 || \
-      error "Failed to make ext4 filesystem on ${DEVICE}4";
-
-    installer_set "DI_ROOT_PARTITION" "${DEVICE}2"
-    installer_set "DI_MOUNTPOINTS" "${DEVICE}1=/boot/efi;${DEVICE}3=swap;${DEVICE}4=/home"
+  DEVICE_SIZE=$(blockdev --getsize64 $DEVICE)
+  DEVICE_SIZE=$((DEVICE_SIZE / kGibiByte))
+  if [ $DEVICE_SIZE -lt $MINIMUM_DISK_SIZE ]; then
+    # TODO(xushaohua): Read minimum size from conf file
+    error "At least 30G is required to install!"
   fi
-else
-  # First create a msdos partition table.
-  parted -s $DEVICE mktable msdos || \
-    error "Failed to create msdos partition on $DEVICE";
 
-  if [ $DEVICE_SIZE -le $k15Gib ]; then
-    # / on /dev/sda1
-    parted -s $DEVICE mkpart primary ext4 1Mib 100% || \
-      error "Failed to create partition ${DEVICE}1";
-    flush_message
-    mark_device1_bootable
-    mkfs.ext4 -F ${DEVICE}1 || \
-      error "Failed to make ext4 filesystem on ${DEVICE}1";
+  # Write bootloader info to conf.
+  installer_set "DI_ROOT_DISK" "${DEVICE}"
 
-    installer_set "DI_ROOT_PARTITION" "${DEVICE}1"
+  echo "DEVICE: ${DEVICE}"
 
-  elif [ $DEVICE_SIZE -le $k60Gib ]; then
-    # / on /dev/sda1
-    END_SIZE=$((DEVICE_SIZE - k4Gib))
-    parted -s $DEVICE mkpart primary ext4 1Mib ${END_SIZE}Mib || \
-      error "Failed to create partition ${DEVICE}1";
-    flush_message
-    mark_device1_bootable
-    mkfs.ext4 -F ${DEVICE}1 || \
-      error "Failed to make ext4 filesystem on ${DEVICE}1";
-
-    # linux-swap on /dev/sda2
-    START_SIZE=$END_SIZE
-    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}Mib 100% || \
-      error "Failed to create linux-swap on ${DEVICE}2";
-    flush_message
-    mkswap ${DEVICE}2 || \
-      error "Failed to call mkswap ${DEVICE}2";
-
-    installer_set "DI_ROOT_PARTITION" "${DEVICE}1"
-    installer_set "DI_MOUNTPOINTS" "${DEVICE}2=swap"
-
+  # Partitioning policy.
+  local POLICY
+  if is_efi_mode; then
+     POLICY=$(installer_get "partition_auto_part_uefi_policy")
   else
-    # / on /dev/sda1
-    START_SIZE=1
-    END_SIZE=$k30Gib
-    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}Mib ${END_SIZE}Mib || \
-      error "Failed to create partition ${DEVICE}1";
-    flush_message
-    mark_device1_bootable
-    mkfs.ext4 -F ${DEVICE}1 || \
-      error "Failed to make ext4 filesystem on ${DEVICE}1";
-
-    # linux-swap on /dev/sda2
-    START_SIZE=$END_SIZE
-    END_SIZE=$((START_SIZE + k4Gib))
-    parted -s $DEVICE mkpart primary linux-swap ${START_SIZE}Mib \
-      ${END_SIZE}Mib || error "Failed to create linux-swap on ${DEVICE}2";
-    flush_message
-    mkswap ${DEVICE}2 || \
-      error "Failed to call mkswap ${DEVICE}2";
-
-    # /home on /dev/sda3
-    START_SIZE=$END_SIZE
-    parted -s $DEVICE mkpart primary ext4 ${START_SIZE}Mib 100% || \
-      error "Failed to create partition ${DEVICE}3";
-    flush_message
-    mkfs.ext4 -F ${DEVICE}3 || \
-      error "Failed to make ext4 filesystem on ${DEVICE}3";
-
-    installer_set "DI_ROOT_PARTITION" "${DEVICE}1"
-    installer_set "DI_MOUNTPOINTS" "${DEVICE}2=swap;${DEVICE}3=/home"
+     POLICY=$(installer_get "partition_auto_part_legacy_policy")
   fi
-fi
+  if [ -z "${POLICY}" ]; then
+    error "Partitioning policy is empty!"
+  fi
 
-# Commit to kernel.
-partprobe
+  # Create new partition table.
+  if is_efi_mode; then
+    msg "Use UEFI mode"
+    parted -s "${DEVICE}" mktable gpt || \
+      error "Failed to create msdos partition on ${DEVICE}"
+  else
+    msg "Use legacy mode"
+    parted -s ${DEVICE} mktable msdos || \
+      error "Failed to create msdos partition on ${DEVICE}"
+  fi
 
-exit 0
+  # Create new partitions.
+  local PART_ARR PART_PATH PART_MP PART_FS PART_START PART_END
+  local PART_NUM=0
+  local MP_LIST
+  local BOOTLOADER_NUM=0
+
+  for PART in ${POLICY//;/ }; do
+    # Increase partition number.
+    PART_NUM=$((PART_NUM + 1))
+    PART_PATH="${DEVICE}${PART_NUM}"
+
+    PART_ARR=(${PART//:/ })
+    PART_MP=${PART_ARR[0]}
+    PART_FS=${PART_ARR[1]}
+    PART_START=${PART_ARR[2]}
+    PART_END=${PART_ARR[3]}
+
+    echo "PART_ARR: ${PART_ARR}"
+    echo "PART_MP: ${PART_MP}, ${PART_FS}, ${PART_START}, ${PART_END}"
+
+    # Create new partition
+    case "${PART_FS}" in
+      efi)
+        # Replace efi with fat32.
+        echo "create efi partition"
+        parted -s "${DEVICE}" mkpart primary fat32 \
+          "${PART_START}" "${PART_END}" || \
+           error "Failed to create new partition ${PART_MP}"
+        ;;
+      *)
+        parted -s "${DEVICE}" mkpart primary "${PART_FS}" \
+          "${PART_START}" "${PART_END}" || \
+           error "Failed to create new partition ${PART_MP}"
+        ;;
+    esac
+
+    flush_message
+
+    # Create filesystem.
+    case "${PART_FS}" in
+      linux-swap)
+        format_partition "${PART_PATH}" "${PART_FS}"
+        MP_LIST="${MP_LIST};${PART_PATH}=swap"
+        ;;
+      efi)
+        format_partition "${PART_PATH}" fat32
+        MP_LIST="${MP_LIST};${PART_PATH}=${PART_MP}"
+
+        installer_set "DI_BOOTLOADER" "${PART_PATH}"
+
+        # Add boot flag
+        parted -s "${DEVICE}" set "${PART_NUM}" esp on || \
+          error "Failed to set esp flag on ${PART_PATH}"
+        flush_message
+        ;;
+      *)
+        format_partition "${PART_PATH}" "${PART_FS}"
+        # TODO(xushaohua): remove semicolon;
+        MP_LIST="${MP_LIST};${PART_PATH}=${PART_MP}"
+        ;;
+    esac
+
+    flush_message
+
+    case "${PART_MP}" in
+      /boot)
+        installer_set "DI_BOOTLOADER" "${PART_PATH}"
+
+        # Set boot flag.
+        if ! is_efi_mode; then
+          parted -s "${DEVICE}" set "${PART_NUM}" boot on || \
+            error "Failed to set boot flag on ${PART_PATH}"
+        fi
+        ;;
+      /)
+        installer_set "DI_ROOT_PARTITION" "${PART_PATH}"
+        # Set boot flag if /boot is not used in legacy mode.
+        if ! echo "${POLICY}" | grep -q "/boot:"; then
+          installer_set "DI_BOOTLOADER" "${PART_PATH}"
+          if ! is_efi_mode; then
+            parted -s "${DEVICE}" set "${PART_NUM}" boot on || \
+              error "Failed to set boot flag on ${PART_PATH}"
+          fi
+        fi
+        ;;
+      *)
+        ;;
+    esac
+
+  done
+  # Remove semicolon prefix.
+  MP_LIST=$(echo "${MP_LIST}" | sed 's/^;//')
+  installer_set "DI_MOUNTPOINTS" "${MP_LIST}"
+}
+
+. ./basic_utils.sh
+
+main

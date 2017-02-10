@@ -7,10 +7,6 @@
 # This script setups variables and function used in hook script.
 # Also handles chroot environment.
 
-# Absolute path to config file.
-# Do not read from/write to this file, call installer_get/installer_set instead.
-CONF_FILE=/etc/deepin-installer.conf
-
 # Folder path of hooks.
 HOOKS_DIR=/tmp/installer-reborn
 
