@@ -10,9 +10,6 @@ sudo aptitude install \
     g++ \
     gettext \
     libattr1-dev \
-    liblz4-dev \
-    liblzma-dev \
-    liblzo2-dev \
     libparted-dev \
     libqt5x11extras5-dev \
     libx11-dev \
@@ -30,11 +27,13 @@ sudo aptitude install \
     btrfs-progs \
     dosfstools \
     e2fsprogs \
+    ethtool \
     hfsprogs \
     jfsutils \
     mtools \
     ntfs-3g \
     os-prober \
+    parted \
     squashfs-tools \
     tshark \
     udev \

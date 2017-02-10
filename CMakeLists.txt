@@ -60,7 +60,7 @@ find_package(Qt5Network REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5X11Extras REQUIRED)
 find_package(Qt5Xml REQUIRED)
-FIND_PACKAGE(Qt5LinguistTools)
+find_package(Qt5LinguistTools)
 
 pkg_search_module(Parted REQUIRED libparted)
 pkg_search_module(X11 REQUIRED x11)
