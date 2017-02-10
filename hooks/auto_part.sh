@@ -3,37 +3,29 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-# Automatically create disk partitions based on this policy:
+# Automatically create disk partitions.
 # Partition policy is defined in settings.ini.
 
 kGibiByte=1048576
-k4Gib=4096
-k15Gib=15360
-k30Gib=30720
-k60Gib=61440
 
-# Minimum disk capacity required, 15Gib.
-MINIMUM_DISK_SIZE=$k15Gib
+# Check device capacity of $1 is larger than required device size or not.
+check_device_size() {
+  local DEVICE=$1
+  local DEVICE_SIZE
+  DEVICE_SIZE=$(blockdev --getsize64 $DEVICE)
+  DEVICE_SIZE=$((DEVICE_SIZE / kGibiByte))
 
-# The disk with largest storage capacity is used as system device.
-get_max_capacity_device() {
-  DEVICE=''
-  MAX_CAPACITY=0
-  lsblk -ndb -o NAME,SIZE 2>/dev/null | (while read NAME SIZE; do
-    #echo $NAME:$SIZE
-    #echo $DEVICE:$MAX_CAPACITY
-    if [ $MAX_CAPACITY -lt $SIZE ]; then
-      MAX_CAPACITY=$SIZE
-      DEVICE=$NAME
-    fi
-  done && echo /dev/$DEVICE)
+  local MINIMUM_DISK_SIZE
+  MINIMUM_DISK_SIZE=$(installer_get "partition_minimum_disk_space_required")
+
+  if [ "${DEVICE_SIZE}" -lt "${MINIMUM_DISK_SIZE}" ]; then
+    error "At least ${MINIMUM_DISK_SIZE} is required to install system!"
+  fi
 }
 
 # Flush kernel message
 flush_message() {
   udevadm settle --timeout=5
-
-#  partprobe
 }
 
 # Format partition at $1 with filesystem $2
@@ -65,15 +57,59 @@ format_partition() {
   esac
 }
 
-# Check boot mode is UEFI or not.
-is_efi_mode() {
-  test -d "/sys/firmware/efi"
+# The disk with largest storage capacity is used as system device.
+get_max_capacity_device() {
+  local DEVICE
+  local MAX_CAPACITY=0
+  lsblk -ndb -o NAME,SIZE 2>/dev/null | (while read NAME SIZE; do
+    #echo $NAME:$SIZE
+    #echo $DEVICE:$MAX_CAPACITY
+    if [ $MAX_CAPACITY -lt $SIZE ]; then
+      MAX_CAPACITY=$SIZE
+      DEVICE=$NAME
+    fi
+  done && echo /dev/$DEVICE)
 }
 
-DEVICE=''
+# Check boot mode is UEFI or not.
+is_efi_mode() {
+  test ! -d "/sys/firmware/efi"
+}
+
+# Read partition policy from settings.
+get_partition_policy() {
+  if is_efi_mode; then
+     installer_get "partition_auto_part_uefi_policy"
+  else
+     installer_get "partition_auto_part_legacy_policy"
+  fi
+}
+
+# Create new partition table.
+new_partition_table() {
+  local DEVICE=$1
+  if is_efi_mode; then
+    msg "Use UEFI mode"
+    parted -s "${DEVICE}" mktable gpt || \
+      error "Failed to create uefi partition on ${DEVICE}"
+  else
+    msg "Use legacy mode"
+    parted -s ${DEVICE} mktable msdos || \
+      error "Failed to create msdos partition on ${DEVICE}"
+  fi
+}
+
+umount_devices() {
+  # Umount all swap partitions.
+  swapoff -a
+
+  # Umount /target
+  [ -d /target ] && umount -R /target
+}
 
 main() {
   # Based on the following process:
+  #  * Umount devices
   #  * Get appropriate disk device.
   #  * Get boot mode.
   #  * Get partitioning policy.
@@ -81,46 +117,21 @@ main() {
   #  * Create partitions.
   #  * Notify kernel.
 
-  # Umount all swap partitions.
-#  swapoff -a || error "Failed to umount swap!"
-  # TODO(xushaohua): Unmount other partitions.
+  umount_devices
 
+  local DEVICE
   DEVICE=$(get_max_capacity_device)
-  [ -z $DEVICE ] && error "no supported storage device found"
+  [ -e "${DEVICE}" ] || error "supported storage device not found"
 
-  DEVICE_SIZE=$(blockdev --getsize64 $DEVICE)
-  DEVICE_SIZE=$((DEVICE_SIZE / kGibiByte))
-  if [ $DEVICE_SIZE -lt $MINIMUM_DISK_SIZE ]; then
-    # TODO(xushaohua): Read minimum size from conf file
-    error "At least 30G is required to install!"
-  fi
-
-  # Write bootloader info to conf.
-  installer_set "DI_ROOT_DISK" "${DEVICE}"
-
-  echo "DEVICE: ${DEVICE}"
+  echo "Target device: ${DEVICE}"
+  check_device_size "${DEVICE}"
 
   # Partitioning policy.
   local POLICY
-  if is_efi_mode; then
-     POLICY=$(installer_get "partition_auto_part_uefi_policy")
-  else
-     POLICY=$(installer_get "partition_auto_part_legacy_policy")
-  fi
-  if [ -z "${POLICY}" ]; then
-    error "Partitioning policy is empty!"
-  fi
+  POLICY=$(get_partition_policy)
+  [ -z "${POLICY}" ] && error "Partitioning policy is empty!"
 
-  # Create new partition table.
-  if is_efi_mode; then
-    msg "Use UEFI mode"
-    parted -s "${DEVICE}" mktable gpt || \
-      error "Failed to create msdos partition on ${DEVICE}"
-  else
-    msg "Use legacy mode"
-    parted -s ${DEVICE} mktable msdos || \
-      error "Failed to create msdos partition on ${DEVICE}"
-  fi
+  new_partition_table "${DEVICE}"
 
   # Create new partitions.
   local PART_ARR PART_PATH PART_MP PART_FS PART_START PART_END
@@ -186,6 +197,7 @@ main() {
 
     flush_message
 
+    # Set boot flag.
     case "${PART_MP}" in
       /boot)
         installer_set "DI_BOOTLOADER" "${PART_PATH}"
@@ -211,10 +223,14 @@ main() {
         ;;
     esac
 
+    flush_message
+
   done
   # Remove semicolon prefix.
   MP_LIST=$(echo "${MP_LIST}" | sed 's/^;//')
   installer_set "DI_MOUNTPOINTS" "${MP_LIST}"
+
+  installer_set "DI_ROOT_DISK" "${DEVICE}"
 }
 
 . ./basic_utils.sh
