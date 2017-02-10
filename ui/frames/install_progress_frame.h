@@ -8,6 +8,7 @@
 #include <QFrame>
 class QLabel;
 class QProgressBar;
+class QPropertyAnimation;
 class QThread;
 class QTimer;
 
@@ -23,20 +24,25 @@ class TitleLabel;
 // A progress bar is shown at bottom of page.
 class InstallProgressFrame : public QFrame {
   Q_OBJECT
+  Q_PROPERTY(int progress READ progress WRITE setProgress);
 
  public:
   explicit InstallProgressFrame(QWidget* parent = nullptr);
   ~InstallProgressFrame();
 
-  // Show slide now.
-  void startSlide();
-
   // Returns true is installation process failed.
   bool failed() const { return failed_; }
+
+  int progress() const { return progress_; }
+
+  // Show slide now.
+  void startSlide();
 
  public slots:
   // Run hooks when partition job is done
   void runHooks(bool ok);
+
+  void setProgress(int progress);
 
   // Update progress value with a qtimer object.
   void simulate();
@@ -56,7 +62,13 @@ class InstallProgressFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  // Update value of progress bar to |progress| and update tooltip position.
+  void updateProgressBar(int progress);
+
   bool failed_;
+
+  // Progress value.
+  int progress_;
 
   HooksManager* hooks_manager_ = nullptr;
   QThread* hooks_manager_thread_ = nullptr;
@@ -66,6 +78,8 @@ class InstallProgressFrame : public QFrame {
   InstallProgressSlideFrame* slide_frame_ = nullptr;
   QLabel* tooltip_label_ = nullptr;
   QProgressBar* progress_bar_ = nullptr;
+
+  QPropertyAnimation* progress_animation_ = nullptr;
 
   QTimer* simulation_timer_ = nullptr;
 

@@ -6,6 +6,7 @@
 
 #include <QDebug>
 #include <QEvent>
+#include <QPropertyAnimation>
 #include <QStyle>
 #include <QThread>
 #include <QTimer>
@@ -35,13 +36,16 @@ const int kTooltipFrameWidth = kProgressBarWidth + kTooltipWidth;
 
 const int kRetainingInterval = 3000;
 
-const int kSimulationTimerInterval = 100;
+const int kSimulationTimerInterval = 3000;
+
+const int kProgressAnimationDuration = 500;
 
 }  // namespace
 
 InstallProgressFrame::InstallProgressFrame(QWidget* parent)
     : QFrame(parent),
       failed_(true),
+      progress_(0),
       hooks_manager_(new HooksManager()),
       hooks_manager_thread_(new QThread(this)),
       simulation_timer_(new QTimer(this)) {
@@ -93,6 +97,11 @@ void InstallProgressFrame::runHooks(bool ok) {
   } else {
     this->onHooksErrorOccurred();
   }
+}
+
+void InstallProgressFrame::setProgress(int progress) {
+  progress_ = progress;
+  updateProgressBar(progress);
 }
 
 void InstallProgressFrame::updateLanguage(const QString& locale) {
@@ -175,6 +184,30 @@ void InstallProgressFrame::initUI() {
 
   this->setLayout(layout);
   this->setStyleSheet(ReadFile(":/styles/install_progress_frame.css"));
+
+  progress_animation_ = new QPropertyAnimation(this, "progress", this);
+  progress_animation_->setDuration(kProgressAnimationDuration);
+  progress_animation_->setEasingCurve(QEasingCurve::InOutCubic);
+}
+
+void InstallProgressFrame::updateProgressBar(int progress) {
+  tooltip_label_->setText(QString("%1%").arg(progress));
+  int x;
+  if (progress == progress_bar_->minimum()) {
+    // Add left margin.
+    x = kTooltipLabelMargin;
+  } else {
+    // Add right margin.
+    x = kProgressBarWidth * progress / 100 - kTooltipLabelMargin;
+  }
+  const int y = tooltip_label_->y();
+  tooltip_label_->move(x, y);
+  progress_bar_->setValue(progress);
+
+  // Force QProgressBar to repaint.
+  this->style()->unpolish(progress_bar_);
+  this->style()->polish(progress_bar_);
+  progress_bar_->repaint();
 }
 
 void InstallProgressFrame::onHooksErrorOccurred() {
@@ -194,23 +227,8 @@ void InstallProgressFrame::onHooksFinished() {
 }
 
 void InstallProgressFrame::onProgressUpdate(int progress) {
-  progress_bar_->setValue(progress);
-  tooltip_label_->setText(QString("%1%").arg(progress));
-  int x;
-  if (progress == progress_bar_->minimum()) {
-    // Add left margin.
-    x = kTooltipLabelMargin;
-  } else {
-    // Add right margin.
-    x = kProgressBarWidth * progress / 100 - kTooltipLabelMargin;
-  }
-  const int y = tooltip_label_->y();
-  tooltip_label_->move(x, y);
-
-  // Force QProgressBar to repaint.
-  this->style()->unpolish(progress_bar_);
-  this->style()->polish(progress_bar_);
-  progress_bar_->repaint();
+  progress_animation_->setEndValue(progress);
+  progress_animation_->start();
 }
 
 void InstallProgressFrame::onRetainingTimerTimeout() {
@@ -219,7 +237,7 @@ void InstallProgressFrame::onRetainingTimerTimeout() {
 }
 
 void InstallProgressFrame::onSimulationTimerTimeout() {
-  const int progress = progress_bar_->value() + 1;
+  const int progress = progress_bar_->value() + 5;
   if (progress > progress_bar_->maximum()) {
     simulation_timer_->stop();
   } else {
