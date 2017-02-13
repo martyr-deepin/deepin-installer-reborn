@@ -17,7 +17,8 @@ MultiHeadManager::MultiHeadManager(QObject* parent)
     : QObject(parent),
       wallpaper_items_(),
       multi_head_thread_(new QThread(this)),
-      multi_head_worker_(new MultiHeadWorker()) {
+      multi_head_worker_(new MultiHeadWorker()),
+      xrandr_output_() {
   this->setObjectName("wallpaper_manager");
 
   multi_head_worker_->moveToThread(multi_head_thread_);
@@ -39,6 +40,7 @@ void MultiHeadManager::switchXRandRMode() {
 }
 
 void MultiHeadManager::updateWallpaper() {
+  qDebug() << "MultiHeadManager::updateWallpaper()";
   // Clear old wallpaper items
   for (WallpaperItem* item : wallpaper_items_) {
     delete item;
@@ -50,6 +52,15 @@ void MultiHeadManager::updateWallpaper() {
   if (!RunXRandR(out)) {
     qCritical() << "RunXRandR() failed";
     return;
+  }
+
+  qDebug() << "xrandr output:" << out;
+
+  if (!out.isEmpty() && (out == xrandr_output_)) {
+    qDebug() << "xrandr not changed, ignored";
+    return;
+  } else {
+    xrandr_output_ = out;
   }
 
   XRandR xrandr;
