@@ -25,29 +25,10 @@ fi
 packets=$1
 duration=$2
 
-# Get the first availabel wireless device.
-interface=$(./airmon-ng | cut -f 2 | grep '[^Interface]' | head -n1)
-echo "interface: ${interface}"
-
-if [ -z "${interface}" ]; then
-  error "No interface availabel"
-fi
-
-# Start monitor monde.
-./airmon-ng start "${interface}"
-
-mon_interface=$(./airmon-ng | cut -f 2 | grep '[^Interface]' | head -n1)
-echo "monitor interface: ${mon_interface}"
-
-if [ -z "${mon_interface}" ]; then
-  error "No interface availabel"
-fi
-
 # Capture beacon packets and print to stdout.
-tshark -c "${packets}" -a duration:${duration} -I -f 'wlan[0] == 0x80' \
-  -Tfields -e wlan.sa -e wlan_mgt.country_info.code -i "${mon_interface}"
-
-# Stop monitor mode.
-./airmon-ng stop "${mon_interface}"
+# Do not switch up "monitor mode" with airmon-ng, which might cause kernel
+# crash in 4.4.0
+tshark -c "${packets}" -a duration:${duration} -I \
+  -f 'wlan[0] == 0x80' -Tfields -e wlan.sa -e wlan_mgt.country_info.code
 
 exit 0

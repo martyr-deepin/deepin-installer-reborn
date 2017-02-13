@@ -23,11 +23,9 @@ sudo aptitude install \
     qtbase5-dev \
     qttools5-dev-tools \
     zlib1g-dev \
-    aircrack-ng \
     btrfs-progs \
     dosfstools \
     e2fsprogs \
-    ethtool \
     hfsprogs \
     jfsutils \
     mtools \

@@ -26,11 +26,9 @@ Homepage: http://www.deepin.org
 Package: deepin-installer-reborn
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-    aircrack-ng,
     btrfs-progs,
     dosfstools,
     e2fsprogs,
-    ethtool,
     hfsprogs,
     jfsutils,
     mtools,
