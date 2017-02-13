@@ -6,6 +6,7 @@
 
 #include <QApplication>
 #include <QDebug>
+#include <QKeyEvent>
 #include <QLabel>
 #include <QTranslator>
 #include <QVBoxLayout>
@@ -34,6 +35,8 @@ SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
 
   this->initUI();
   this->initConnections();
+
+  language_view_->installEventFilter(this);
 }
 
 void SelectLanguageFrame::readConf() {
@@ -60,6 +63,19 @@ void SelectLanguageFrame::changeEvent(QEvent* event) {
   } else {
     QFrame::changeEvent(event);
   }
+}
+
+bool SelectLanguageFrame::eventFilter(QObject* obj, QEvent* event) {
+  if (event->type() == QEvent::KeyPress) {
+    QKeyEvent* key_event = static_cast<QKeyEvent*>(event);
+    if (key_event->key() == Qt::Key_Return ||
+        key_event->key() == Qt::Key_Enter) {
+      // Simulate button click event.
+      next_button_->click();
+      return true;
+    }
+  }
+  return QObject::eventFilter(obj, event);
 }
 
 void SelectLanguageFrame::initConnections() {
