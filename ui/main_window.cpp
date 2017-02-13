@@ -438,29 +438,21 @@ void MainWindow::goNextPage() {
 }
 
 void MainWindow::rebootSystem() {
-#ifdef N_DEBUG
-  // Do not reboot system in debug mode.
-  if (!RebootSystem()) {
+  if (!RebootSystemWithMagicKey()) {
     qWarning() << "RebootSystem failed!";
-    if (!RebootSystemWithMagicKey()) {
+    if (!RebootSystem()) {
       qWarning() << "RebootSystemWithMagicKey() failed!";
     }
   }
-#endif
-  qApp->quit();
 }
 
 void MainWindow::shutdownSystem() {
-#ifdef N_DEBUG
-  // Do not shutdown in debug mode.
-  if (!ShutdownSystem()) {
+  if (!ShutdownSystemWithMagicKey()) {
     qWarning() << "ShutdownSystem() failed!";
-    if (!ShutdownSystemWithMagicKey()) {
+    if (!ShutdownSystem()) {
       qWarning() << "ShutdownSystemWithMagicKey() failed!";
     }
   }
-#endif
-  qApp->quit();
 }
 
 }  // namespace installer
