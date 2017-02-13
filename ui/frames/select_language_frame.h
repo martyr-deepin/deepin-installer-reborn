@@ -40,6 +40,9 @@ class SelectLanguageFrame : public QFrame {
   // Update text of next_button_
   void changeEvent(QEvent* event) override;
 
+  // Handles key press event of language_view_.
+  bool eventFilter(QObject* obj, QEvent* event);
+
  private:
   void initConnections();
   void initUI();
