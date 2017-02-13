@@ -714,10 +714,12 @@ install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
 
 install(
     FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-oem.svg
+          ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-reborn.svg
     DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps
 )
 install(
     FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-oem.desktop
+          ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-reborn.desktop
     DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications
 )
 install(
@@ -738,4 +740,5 @@ install(
     DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
     PATTERN "deepin-installer-oem*" EXCLUDE
+    PATTERN "deepin-installer-reborn*" EXCLUDE
 )
