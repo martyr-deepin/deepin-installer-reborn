@@ -39,6 +39,7 @@ class MultiHeadManager : public QObject {
   QList<WallpaperItem*> wallpaper_items_;
   QThread* multi_head_thread_ = nullptr;
   MultiHeadWorker* multi_head_worker_ = nullptr;
+  QString xrandr_output_;
 
  private slots:
   // Repaint background when output added, changed or removed.
