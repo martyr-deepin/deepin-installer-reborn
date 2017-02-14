@@ -27,7 +27,7 @@ LanguageList GetLanguageList() {
   const QString content(ReadFile(RESOURCES_DIR "/languages.json"));
   const QJsonArray lang_list =
       QJsonDocument::fromJson(content.toUtf8()).array();
-  for(const QJsonValue& lang_value : lang_list) {
+  for (const QJsonValue& lang_value : lang_list) {
     const QJsonObject obj = lang_value.toObject();
     LanguageItem item;
     item.name = obj.value("name").toString();

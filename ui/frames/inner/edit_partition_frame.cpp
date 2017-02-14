@@ -289,7 +289,7 @@ void EditPartitionFrame::onOkButtonClicked() {
     const int index = mount_point_box_->currentIndex();
     mount_point = mount_point_model_->getMountPoint(index);
   }
-  if(format_check_box_->isChecked()) {
+  if (format_check_box_->isChecked()) {
     // Create an OperationFormat object.
     const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
     delegate_->formatPartition(partition_, fs_type, mount_point);
