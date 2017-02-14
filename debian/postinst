@@ -14,9 +14,12 @@
 # before switching to SystemInfoFrame.
 
 
+# Absolute path to installer misc folder.
+SHARE_DIR=/usr/share/deepin-installer-reborn
+
 # Update /etc/locale.gen and generate new locale cache.
 generate_locale() {
-  local JSON="/usr/share/deepin-installer-reborn/resources/languages.json"
+  local JSON="${SHARE_DIR}/resources/languages.json"
   local LOCALES
   LOCALES=$(grep 'locale' "${JSON}" | awk '{ print $2 }' | \
             sed 's/"//g'  | sed 's/,//g')
@@ -33,7 +36,7 @@ generate_locale() {
 # Generate new background image.
 generate_background_image() {
   local SRC="/usr/share/backgrounds/default_background.jpg"
-  local DST="/usr/share/deepin-installer-reborn/resources/default_wallpaper.jpg"
+  local DST="${SHARE_DIR}/resources/default_wallpaper.jpg"
   if [ -f "${SRC}" ]; then
     echo "Generate default wallpaper.."
     convert "${SRC}" -resize 25% -brightness-contrast -10 \
@@ -45,19 +48,43 @@ generate_background_image() {
 remove_cloud_music_slide() {
   case $(uname -m) in
     i386 | amd64 | x86 | x86_64)
+      # Do nothing.
+      return 0
       ;;
     *)
       ;;
   esac
 
-  local ZH_CN_SLIDE=/usr/share/deepin-installer-reborn/resources/slide/zh_CN/18.png
-  local ZH_TW_SLIDE=/usr/share/deepin-installer-reborn/resources/slide/zh_TW/18.png
+  local ZH_CN_SLIDE="${SHARE_DIR}/resources/slide/zh_CN/18.png"
+  local ZH_TW_SLIDE="${SHARE_DIR}/resources/slide/zh_TW/18.png"
   [ -f "${ZH_CN_SLIDE}" ] && rm "${ZH_CN_SLIDE}"
   [ -f "${ZH_TW_SLIDE}" ] && rm "${ZH_TW_SLIDE}"
 
   return 0
 }
 
+# Replace default settings on loongson/sw platform.
+replace_default_settings() {
+  case $(uname -m) in
+    mips*)
+      if [ -f "${SHARE_DIR}/resources/loongson_default_settings.ini" ]; then
+        /bin/cp -f "${SHARE_DIR}/resources/loongson_default_settings.ini" \
+          "${SHARE_DIR}/resources/default_settings.ini"
+      fi
+      ;;
+    sw*)
+      if [ -f "${SHARE_DIR}/resources/sw_default_settings.ini" ]; then
+        /bin/cp -f "${SHARE_DIR}/resources/sw_default_settings.ini" \
+          "${SHARE_DIR}/resources/default_settings.ini"
+      fi
+      ;;
+    *)
+      # Do nothing
+      ;;
+  esac
+}
+
 generate_locale
 generate_background_image
 remove_cloud_music_slide
+replace_default_settings
