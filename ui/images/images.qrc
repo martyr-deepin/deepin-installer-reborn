@@ -77,6 +77,7 @@
     <file>linux.png</file>
     <file>generate_qrc.py</file>
     <file>decrease_press.png</file>
+    <file>indicator_active.svg</file>
     <file>increase.png</file>
     <file>driver_128.png</file>
     <file>timezone_press.svg</file>
@@ -87,6 +88,7 @@
     <file>deepin.png</file>
     <file>images.qrc</file>
     <file>driver_linux_128.png</file>
+    <file>indicator_inactive.svg</file>
     <file>add_part_active.png</file>
     <file>hostname_12.png</file>
     <file>list_view_selected.png</file>

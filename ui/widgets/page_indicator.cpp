@@ -13,8 +13,8 @@ PageIndicator::PageIndicator(int pages, QWidget* parent)
   : QFrame(parent),
     pages_(pages),
     current_page_(-1),
-    indicator_active_(":/images/indicator_active.png"),
-    indicator_inactive_(":/images/indicator_inactive.png") {
+    indicator_active_(":/images/indicator_active.svg"),
+    indicator_inactive_(":/images/indicator_inactive.svg") {
   Q_ASSERT(pages > 0);
   this->setObjectName("page_indicator");
 
@@ -34,13 +34,14 @@ void PageIndicator::setCurrentPage(int page) {
 
 void PageIndicator::initUI() {
   layout_ = new QHBoxLayout();
+  layout_->setAlignment(Qt::AlignCenter);
 
   for (int i = 0; i < pages_; i++) {
     QLabel* label = new QLabel();
+    label->setFixedSize(13, 13);
     layout_->addWidget(label);
   }
 
-  layout_->setAlignment(Qt::AlignCenter);
   this->setLayout(layout_);
 }
 

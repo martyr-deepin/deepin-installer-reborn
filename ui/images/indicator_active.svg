@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>指示点－激活</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="7" cy="7" r="6"></circle>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="14" height="14">
+            <rect x="0" y="0" width="14" height="14" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="指示点－激活">
+            <g id="指示点－未激活">
+                <use fill-opacity="0.1" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <use stroke-opacity="0.1" stroke="#000000" mask="url(#mask-2)" stroke-width="2" xlink:href="#path-1"></use>
+            </g>
+            <circle id="Oval-4" fill-opacity="0.8" fill="#FFFFFF" cx="7" cy="7" r="6"></circle>
+        </g>
+    </g>
+</svg>
