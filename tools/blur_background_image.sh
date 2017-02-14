@@ -5,6 +5,7 @@
 
 # Bluring image
 for file in $*; do
+  output_name=blur-$(basename "${file}")
   convert "${file}" -resize 25% -brightness-contrast -10 \
-    -modulate 100,120,100 -blur 0x16 -resize 400% "blur-${file}"
+    -modulate 100,120,100 -blur 0x16 -resize 400% "${output_name}"
 done
