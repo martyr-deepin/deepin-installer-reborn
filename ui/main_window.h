@@ -66,7 +66,6 @@ class MainWindow : public QWidget {
     InstallProgressId,
     InstallSuccessId,
     PartitionId,
-    PartitionTableWarningId,
     SelectLanguageId,
     SystemInfoId,
     VirtualMachineId,
@@ -96,7 +95,6 @@ class MainWindow : public QWidget {
   InstallProgressFrame* install_progress_frame_ = nullptr;
   InstallSuccessFrame* install_success_frame_ = nullptr;
   PartitionFrame* partition_frame_ = nullptr;
-  PartitionTableWarningFrame* partition_table_warning_frame_ = nullptr;
   SelectLanguageFrame* select_language_frame_ = nullptr;
   SystemInfoFrame* system_info_frame_ = nullptr;
   VirtualMachineFrame* virtual_machine_frame_ = nullptr;

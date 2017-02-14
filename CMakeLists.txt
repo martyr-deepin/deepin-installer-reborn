@@ -207,6 +207,8 @@ set(UI_FILES
     ui/frames/inner/new_partition_frame.h
     ui/frames/inner/partition_loading_frame.cpp
     ui/frames/inner/partition_loading_frame.h
+    ui/frames/inner/partition_table_warning_frame.cpp
+    ui/frames/inner/partition_table_warning_frame.h
     ui/frames/inner/prepare_install_frame.cpp
     ui/frames/inner/prepare_install_frame.h
     ui/frames/inner/select_bootloader_frame.cpp
@@ -236,8 +238,6 @@ set(UI_FILES
     ui/frames/install_success_frame.h
     ui/frames/partition_frame.cpp
     ui/frames/partition_frame.h
-    ui/frames/partition_table_warning_frame.cpp
-    ui/frames/partition_table_warning_frame.h
     ui/frames/privilege_error_frame.cpp
     ui/frames/privilege_error_frame.h
     ui/frames/select_language_frame.cpp

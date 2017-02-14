@@ -64,9 +64,6 @@ void OemWindow::initUI() {
   QCheckBox* skip_language_box = settings_model_->addCheckBox(
       kSkipSelectLanguagePage);
   skip_language_box->setText(tr("Skip language selection page"));
-  QCheckBox* table_warning_box = settings_model_->addCheckBox(
-      kSkipPartitionTableWarningPage);
-  table_warning_box->setText(tr("Skip partition table warning page"));
   QCheckBox* system_info_box = settings_model_->addCheckBox(
       kSkipSystemInfoPage);
   system_info_box->setText(tr("Skip system info page"));

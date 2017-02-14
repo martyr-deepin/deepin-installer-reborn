@@ -38,6 +38,9 @@ QString GetLocalFsTypeName(FsType fs_type);
 // linux-swap and efi are mounted at fixed position and thus returns false.1
 bool IsMountPointSupported(FsType fs_type);
 
+// Check whether partition table matches machine settings.
+bool IsPartitionTableMatch(PartitionTableType type);
+
 // If physical memory is less than 4Gib, swap area is required.
 bool IsSwapAreaNeeded();
 
