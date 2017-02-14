@@ -7,7 +7,7 @@ if ! is_loongson; then
   return 0
 fi
 
-TARGET=/target/boot
+TARGET=/target/boot/*
 # Copy boot folder to loongson system.
 
 rm -rf "${TARGET}" || error "Failed to remove boot"
