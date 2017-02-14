@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/frames/partition_table_warning_frame.h"
+#include "partition_table_warning_frame.h"
 
 #include <QDebug>
 #include <QEvent>

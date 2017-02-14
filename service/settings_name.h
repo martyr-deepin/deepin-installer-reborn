@@ -13,8 +13,6 @@ namespace installer {
 const char kSkipDiskSpaceInsufficientPage[] =
     "skip_disk_space_insufficient_page";
 const char kSkipVirtualMachinePage[] = "skip_virtual_machine_page";
-const char kSkipPartitionTableWarningPage[] =
-    "skip_partition_table_warning_page";
 const char kSkipSelectLanguagePage[] = "skip_select_language_page";
 const char kSkipSystemInfoPage[] = "skip_system_info_page";
 const char kSkipPartitionPage[] = "skip_partition_page";

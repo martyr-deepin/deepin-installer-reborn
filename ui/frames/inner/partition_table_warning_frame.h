@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_UI_FRAMES_PARTITION_TABLE_WARNING_FRAME_H
-#define INSTALLER_UI_FRAMES_PARTITION_TABLE_WARNING_FRAME_H
+#ifndef INSTALLER_UI_FRAMES_INNER_PARTITION_TABLE_WARNING_FRAME_H
+#define INSTALLER_UI_FRAMES_INNER_PARTITION_TABLE_WARNING_FRAME_H
 
 #include <QFrame>
 class QLabel;
@@ -49,4 +49,4 @@ class PartitionTableWarningFrame : public QFrame {
 
 }  // namespace installer
 
-#endif  // INSTALLER_UI_FRAMES_PARTITION_TABLE_WARNING_FRAME_H
+#endif  // INSTALLER_UI_FRAMES_INNER_PARTITION_TABLE_WARNING_FRAME_H

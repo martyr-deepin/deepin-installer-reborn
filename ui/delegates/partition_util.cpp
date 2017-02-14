@@ -7,6 +7,7 @@
 #include <math.h>
 #include <QFileInfo>
 
+#include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/proc_meminfo.h"
@@ -163,6 +164,20 @@ bool IsMountPointSupported(FsType fs_type) {
           fs_type != FsType::LinuxSwap &&
           fs_type != FsType::Empty &&
           fs_type != FsType::Unknown);
+}
+
+bool IsPartitionTableMatch(PartitionTableType type) {
+  // If EFI is not enabled, always returns true.
+  if (!IsEfiEnabled()) {
+    return true;
+  }
+
+  // If partition table is empty(a raw disk device), returns true.
+  if (type == PartitionTableType::Empty) {
+    return true;
+  }
+
+  return type == PartitionTableType::GPT;
 }
 
 bool IsSwapAreaNeeded() {

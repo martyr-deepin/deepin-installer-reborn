@@ -26,7 +26,6 @@
 #include "ui/frames/install_progress_frame.h"
 #include "ui/frames/install_success_frame.h"
 #include "ui/frames/partition_frame.h"
-#include "ui/frames/partition_table_warning_frame.h"
 #include "ui/frames/select_language_frame.h"
 #include "ui/frames/system_info_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
@@ -107,11 +106,6 @@ void MainWindow::initConnections() {
   connect(partition_frame_, &PartitionFrame::finished,
           this, &MainWindow::goNextPage);
 
-  connect(partition_table_warning_frame_, &PartitionTableWarningFrame::declined,
-          this, &MainWindow::rebootSystem);
-  connect(partition_table_warning_frame_, &PartitionTableWarningFrame::accepted,
-          this, &MainWindow::goNextPage);
-
   connect(select_language_frame_, &SelectLanguageFrame::finished,
           this, &MainWindow::goNextPage);
   connect(select_language_frame_, &SelectLanguageFrame::languageUpdated,
@@ -168,10 +162,6 @@ void MainWindow::initPages() {
   partition_frame_ = new PartitionFrame(this);
   pages_.insert(PageId::PartitionId,
                 stacked_layout_->addWidget(partition_frame_));
-
-  partition_table_warning_frame_ = new PartitionTableWarningFrame(this);
-  pages_.insert(PageId::PartitionTableWarningId,
-                stacked_layout_->addWidget(partition_table_warning_frame_));
 
   system_info_frame_ = new SystemInfoFrame(this);
   pages_.insert(PageId::SystemInfoId,
@@ -313,7 +303,6 @@ void MainWindow::goNextPage() {
   //   * select language frame;
   //   * disk space insufficient page;
   //   * virtual machine page;
-  //   * partition table warning page;
   //   * system info page;
   //   * partition page;
   //   * install progress page;
@@ -368,19 +357,6 @@ void MainWindow::goNextPage() {
     }
 
     case PageId::VirtualMachineId: {
-      // Check whether to show PartitionTableWarningPage.
-      if (!GetSettingsBool(kSkipPartitionTableWarningPage) &&
-          !IsPartitionTableMatch()) {
-        this->setCurrentPage(PageId::PartitionTableWarningId);
-      } else {
-        prev_page_ = current_page_;
-        current_page_ = PageId::PartitionTableWarningId;
-        this->goNextPage();
-      }
-      break;
-    }
-
-    case PageId::PartitionTableWarningId: {
       // Check whether to show SystemInfoPage.
       system_info_frame_->readConf();
       if (GetSettingsBool(kSkipSystemInfoPage)) {

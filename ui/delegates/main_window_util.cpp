@@ -66,21 +66,6 @@ bool IsDiskSpaceInsufficient() {
   return minimum * kGibiByte > maximum_device_size;
 }
 
-bool IsPartitionTableMatch() {
-  // If EFI is not enabled, always returns true.
-  if (!IsEfiEnabled()) {
-    return true;
-  }
-
-  const PartitionTableType type = GetPrimaryDiskPartitionTable();
-  // If partition table is empty(a raw disk device), returns true.
-  if (type == PartitionTableType::Empty) {
-    return true;
-  }
-
-  return type == PartitionTableType::GPT;
-}
-
 bool ReadErrorMsg(QString& msg, QString& encoded_msg) {
   const QString raw_msg = ReadFile(GetLogFilepath());
   if (raw_msg.isEmpty()) {

@@ -25,9 +25,6 @@ int GetVisiblePages();
 // Check whether disk space is large enough to install new system.
 bool IsDiskSpaceInsufficient();
 
-// Check whether partition table matches machine settings.
-bool IsPartitionTableMatch();
-
 // Read log file content, stripped to tail, and encode with domain name of
 // feedback server.
 // Returns false if failed.
