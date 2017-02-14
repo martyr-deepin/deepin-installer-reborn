@@ -231,6 +231,13 @@ main() {
   installer_set "DI_MOUNTPOINTS" "${MP_LIST}"
 
   installer_set "DI_ROOT_DISK" "${DEVICE}"
+
+  # Write boot method
+  if is_efi_mode; then
+    installer_set "DI_UEFI" "true"
+  else
+    installer_set "DI_UEFI" "false"
+  fi
 }
 
 . ./basic_utils.sh
