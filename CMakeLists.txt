@@ -312,6 +312,8 @@ set(UI_FILES
     ui/widgets/rounded_progress_bar.h
     ui/widgets/simple_partition_button.cpp
     ui/widgets/simple_partition_button.h
+    ui/widgets/spinner_label.cpp
+    ui/widgets/spinner_label.h
     ui/widgets/system_info_tip.cpp
     ui/widgets/system_info_tip.h
     ui/widgets/table_combo_box.cpp
@@ -573,6 +575,17 @@ add_executable(qprogressbar_test
                ui/widgets/rounded_progress_bar.h
                )
 target_link_libraries(qprogressbar_test ${Qt_LIBS})
+
+# spinner test
+add_executable(spinner-test
+               ui/tests/spinner_test.cpp
+
+               ui/widgets/spinner_label.cpp
+               ui/widgets/spinner_label.h
+
+               ui/widgets/spinner/spinner.qrc
+               )
+target_link_libraries(spinner-test ${Qt_LIBS})
 
 
 # system info tip test

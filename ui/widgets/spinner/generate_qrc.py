@@ -21,8 +21,8 @@ def generate(prefix, folders, output):
         fd.write("</RCC>\n")
 
 def main():
-    prefix="/images"
-    output = "images.qrc"
+    prefix="/spinner"
+    output = "spinner.qrc"
     generate(prefix, ['.'], output)
 
 if __name__ == "__main__":
