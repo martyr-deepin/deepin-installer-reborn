@@ -23,7 +23,8 @@ namespace installer {
 
 namespace {
 
-const char kDefaultLanguageFile[] = ":/i18n/en_US.qm";
+const char kDefaultLanguageFile[] = I18N_DIR "/en_US.qm";
+const char kLanguageFileTpl[] = I18N_DIR "/installer-%1.qm";
 
 }  // namespace
 
@@ -125,7 +126,7 @@ void SelectLanguageFrame::updateTranslator(const QString& locale) {
     // Remove the old translator if it is loaded.
     qApp->removeTranslator(current_translator_);
   }
-  const QString locale_file(QString(":/i18n/installer-%1.qm").arg(locale));
+  const QString locale_file(QString(kLanguageFileTpl).arg(locale));
   if (!current_translator_->load(locale_file)) {
     qWarning() << "Failed to load locale file:" << locale_file;
     // Reset to English.

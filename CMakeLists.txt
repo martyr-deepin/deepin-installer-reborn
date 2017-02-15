@@ -25,7 +25,8 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
   # -fsanitize=leak, Enable memory leak sanitizer.
   # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=leak")
   # -fsanitize=memory, Enable detecting uninitited memory sanitizer.
-  # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=memory -fsanitize-memory-track-origins -fPIC -pie -fno-omit-frame-pointer")
+  #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=memory "
+  #    "-fsanitize-memory-track-origins -fPIC -pie -fno-omit-frame-pointer")
   
   # Enable Qt builtin debug mode
   add_definitions("-DQT_MESSAGELOGCONTEXT")
@@ -44,13 +45,15 @@ set(INSTALLER_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn)
 
 # Defines path to resource directories
 if (CMAKE_BUILD_TYPE MATCHES Debug)
-  add_definitions("-DTOOLS_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/tools\"")
   add_definitions("-DBUILTIN_HOOKS_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/hooks\"")
+  add_definitions("-DI18N_DIR=\"${CMAKE_CURRENT_BINARY_DIR}/i18n\"")
   add_definitions("-DRESOURCES_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/resources\"")
+  add_definitions("-DTOOLS_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/tools\"")
 else()
-  add_definitions("-DTOOLS_DIR=\"${INSTALLER_SHARE_DIR}/tools\"")
   add_definitions("-DBUILTIN_HOOKS_DIR=\"${INSTALLER_SHARE_DIR}/hooks\"")
+  add_definitions("-DI18N_DIR=\"${INSTALLER_SHARE_DIR}/i18n\"")
   add_definitions("-DRESOURCES_DIR=\"${INSTALLER_SHARE_DIR}/resources\"")
+  add_definitions("-DTOOLS_DIR=\"${INSTALLER_SHARE_DIR}/tools\"")
 endif()
 
 find_package(PkgConfig REQUIRED)
@@ -386,20 +389,10 @@ set(LINK_LIBS
 # Generate .qm files from .ts files.
 file(GLOB INSTALLER_TRANSLATION_TS
      ${CMAKE_CURRENT_SOURCE_DIR}/i18n/installer-*.ts)
-qt5_add_translation(INSTALLER_TRANSLATION_QM
-                    ${INSTALLER_TRANSLATION_TS}
-                    )
+set_source_files_properties(${INSTALLER_TRANSLATION_TS}
+                            PROPERTIES OUTPUT_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/i18n)
+qt5_add_translation(INSTALLER_TRANSLATION_QM ${INSTALLER_TRANSLATION_TS})
 add_custom_target(installer-qm-update DEPENDS ${INSTALLER_TRANSLATION_QM})
-# Generate installer_i18n.qrc file from template.
-foreach(_file ${INSTALLER_TRANSLATION_QM})
-  message(INFO ${_file})
-  get_filename_component(_qresource ${_file} NAME)
-  set(i18n_qresource "${i18n_qresource}\n    <file>${_qresource}</file>")
-  set_source_files_properties(${CMAKE_CURRENT_BINARY_DIR}/installer_i18n.qrc
-                              PROPERTIES OBJECT_DEPENDS ${_file})
-endforeach()
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/i18n/installer.qrc.in
-               ${CMAKE_BINARY_DIR}/installer_i18n.qrc)
 
 add_executable(deepin-installer-reborn
                app/deepin_installer_reborn.cpp
@@ -414,8 +407,6 @@ add_executable(deepin-installer-reborn
 
                ui/images/images.qrc
                ui/styles/styles.qrc
-
-               ${CMAKE_BINARY_DIR}/installer_i18n.qrc
                )
 
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
@@ -717,17 +708,17 @@ install(
     DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications
 )
 install(
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hooks
+    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hooks ${CMAKE_CURRENT_SOURCE_DIR}/tools
     DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
     PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 )
 install(
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tools
+    DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/i18n
     DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
-    PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 )
+
 # Install resources/ folde, excluding desktop file and icons.
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/resources

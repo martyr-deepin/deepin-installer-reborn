@@ -6,6 +6,7 @@ usr/bin/deepin-installer-settings
 usr/bin/deepin-installer-unsquashfs
 usr/share/applications/deepin-installer-reborn.desktop
 usr/share/deepin-installer-reborn/hooks/*
+usr/share/deepin-installer-reborn/i18n/*
 usr/share/deepin-installer-reborn/resources/*
 usr/share/deepin-installer-reborn/tools/*
 usr/share/icons/hicolor/scalable/apps/deepin-installer-reborn.svg
