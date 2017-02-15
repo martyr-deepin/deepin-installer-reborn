@@ -208,6 +208,8 @@ set(UI_FILES
     ui/frames/inner/install_progress_slide_frame.h
     ui/frames/inner/new_partition_frame.cpp
     ui/frames/inner/new_partition_frame.h
+    ui/frames/inner/new_table_loading_frame.cpp
+    ui/frames/inner/new_table_loading_frame.h
     ui/frames/inner/new_table_warning_frame.cpp
     ui/frames/inner/new_table_warning_frame.h
     ui/frames/inner/partition_loading_frame.cpp
