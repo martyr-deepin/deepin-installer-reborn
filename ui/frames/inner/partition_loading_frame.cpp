@@ -33,6 +33,7 @@ void PartitionLoadingFrame::initUI() {
   comment_label_ = new CommentLabel(tr("Scanning disks, please wait..."));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
@@ -40,6 +41,7 @@ void PartitionLoadingFrame::initUI() {
   layout->addStretch();
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 }  // namespace installer

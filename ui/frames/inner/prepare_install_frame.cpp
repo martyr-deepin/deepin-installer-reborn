@@ -97,15 +97,17 @@ void PrepareInstallFrame::initUI() {
   continue_button_ = new NavButton(tr("Continue"));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addStretch(1);
+  layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
-  layout->addStretch(1);
+  layout->addStretch();
   layout->addWidget(subtitle_label_, 0, Qt::AlignCenter);
   layout->addWidget(description_edit_, 0, Qt::AlignHCenter);
-  layout->addStretch(1);
+  layout->addStretch();
   layout->addWidget(abort_button_, 0, Qt::AlignCenter);
+  layout->addSpacing(kNavButtonVerticalSpacing);
   layout->addWidget(continue_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);

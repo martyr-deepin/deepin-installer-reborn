@@ -6,7 +6,6 @@
 
 #include <QEvent>
 #include <QHBoxLayout>
-#include <QVBoxLayout>
 
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
@@ -73,6 +72,7 @@ void DiskSpaceInsufficientFrame::initUI() {
   abort_button_ = new NavButton(tr("Exit installation"));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
@@ -81,6 +81,7 @@ void DiskSpaceInsufficientFrame::initUI() {
   layout->addWidget(abort_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 }  // namespace installer

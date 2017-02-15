@@ -151,6 +151,7 @@ void SystemInfoTimezoneFrame::initUI() {
   layout->addWidget(back_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 QString SystemInfoTimezoneFrame::parseTimezoneAlias(const QString& timezone) {

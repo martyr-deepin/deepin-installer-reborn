@@ -10,6 +10,9 @@ namespace installer {
 // Space between widgets in QVBoxLayout.
 const int kMainLayoutSpacing = 15;
 
+// Vertical space between NavButtons.
+const int kNavButtonVerticalSpacing = 15;
+
 }  // namespace installer
 
 #endif  // INSTALLER_UI_FRAMES_CONSTS_H

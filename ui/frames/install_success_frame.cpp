@@ -53,6 +53,7 @@ void InstallSuccessFrame::initUI() {
   reboot_button_ = new NavButton(tr("Experience now"));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(status_label, 0, Qt::AlignCenter);
@@ -62,6 +63,7 @@ void InstallSuccessFrame::initUI() {
   layout->addWidget(reboot_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 }  // namespace installer

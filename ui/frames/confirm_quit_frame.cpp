@@ -4,7 +4,6 @@
 
 #include "ui/frames/confirm_quit_frame.h"
 
-#include <QDebug>
 #include <QEvent>
 #include <QHBoxLayout>
 
@@ -56,16 +55,18 @@ void ConfirmQuitFrame::initUI() {
   abort_button_ = new NavButton(tr("Abort"));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addStretch();
   layout->addWidget(continue_button_, 0, Qt::AlignCenter);
-  layout->addSpacing(15);
+  layout->addSpacing(kNavButtonVerticalSpacing);
   layout->addWidget(abort_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 }  // namespace installer

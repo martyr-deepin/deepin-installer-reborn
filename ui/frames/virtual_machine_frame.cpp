@@ -56,6 +56,7 @@ void VirtualMachineFrame::initUI() {
   next_button_ = new NavButton(tr("Continue"));
 
   QVBoxLayout* layout = new QVBoxLayout(this);
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
@@ -64,6 +65,7 @@ void VirtualMachineFrame::initUI() {
   layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 }  // namespace installer

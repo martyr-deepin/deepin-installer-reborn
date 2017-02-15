@@ -23,8 +23,8 @@ namespace {
 const int kInvalidPageId = -1;
 const int kAvatarPageId = 0;
 const int kFormPageId = 1;
-const int kKeyboardPageId = 2;
-const int kTimezonePageId = 3;
+//const int kKeyboardPageId = 2;
+//const int kTimezonePageId = 3;
 
 }  // namespace
 
@@ -120,6 +120,8 @@ void SystemInfoFrame::initUI() {
   timezone_frame_ = new SystemInfoTimezoneFrame();
 
   stacked_layout_ = new QStackedLayout();
+  stacked_layout_->setContentsMargins(0, 0, 0, 0);
+  stacked_layout_->setSpacing(0);
   stacked_layout_->addWidget(avatar_frame_);
   stacked_layout_->addWidget(form_frame_);
   stacked_layout_->addWidget(keyboard_frame_);
@@ -130,9 +132,9 @@ void SystemInfoFrame::initUI() {
   layout->setSpacing(0);
   layout->addLayout(head_layout_);
   layout->addLayout(stacked_layout_);
-  layout->addSpacing(9);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
   this->setStyleSheet(ReadFile(":/styles/system_info_frame.css"));
 }
 

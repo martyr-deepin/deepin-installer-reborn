@@ -154,8 +154,8 @@ void NewPartitionFrame::initUI() {
   size_slider_->setFixedWidth(mount_point_box_->width());
 
   QVBoxLayout* content_layout = new QVBoxLayout();
-  content_layout->setSpacing(3);
   content_layout->setContentsMargins(0, 0, 0, 0);
+  content_layout->setSpacing(3);
   content_layout->addWidget(type_label_);
   content_layout->addWidget(type_box_);
   content_layout->addSpacing(kContentSpacing);
@@ -182,6 +182,7 @@ void NewPartitionFrame::initUI() {
   create_button_ = new NavButton(tr("OK"));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
@@ -195,6 +196,7 @@ void NewPartitionFrame::initUI() {
   layout->addWidget(create_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
   this->setStyleSheet(ReadFile(":/styles/new_partition_frame.css"));
 }
 

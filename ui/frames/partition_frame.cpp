@@ -136,14 +136,16 @@ void PartitionFrame::initUI() {
   button_group->addButton(simple_frame_button_);
   button_group->addButton(advanced_frame_button_);
   QHBoxLayout* button_layout = new QHBoxLayout();
-  button_layout->setSpacing(0);
   button_layout->setContentsMargins(0, 0, 0, 0);
+  button_layout->setSpacing(0);
   button_layout->addStretch();
   button_layout->addWidget(simple_frame_button_, 0, Qt::AlignRight);
   button_layout->addWidget(advanced_frame_button_, 0, Qt::AlignLeft);
   button_layout->addStretch();
 
   partition_stacked_layout_ = new QStackedLayout();
+  partition_stacked_layout_->setContentsMargins(0, 0, 0, 0);
+  partition_stacked_layout_->setSpacing(0);
   if (GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
     // Hide simple partition frame if it is disabled.
     simple_partition_frame_->hide();
@@ -157,16 +159,23 @@ void PartitionFrame::initUI() {
     partition_stacked_layout_->addWidget(advanced_partition_frame_);
   }
 
+  // TODO(xushaohua): Remove this layout.
   QHBoxLayout* partition_stacked_wrapper_layout = new QHBoxLayout();
+  partition_stacked_wrapper_layout->setContentsMargins(0, 0, 0, 0);
+  partition_stacked_wrapper_layout->setSpacing(0);
   partition_stacked_wrapper_layout->addStretch();
   partition_stacked_wrapper_layout->addLayout(partition_stacked_layout_);
   partition_stacked_wrapper_layout->addStretch();
 
+  // TODO(xushaohua): Move this button to simple partition
+  // and advanced partition page.
   next_button_ = new NavButton(tr("Start installation"));
   QHBoxLayout* next_layout = new QHBoxLayout();
+  next_layout->setContentsMargins(0, 0, 0, 0);
   next_layout->addWidget(next_button_);
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
   layout->addWidget(title_label_, 0, Qt::AlignHCenter);
   layout->addSpacing(kMainLayoutSpacing);
@@ -188,6 +197,7 @@ void PartitionFrame::initUI() {
   main_frame_->setStyleSheet(ReadFile(":/styles/partition_main_frame.css"));
 
   main_layout_ = new QStackedLayout();
+  main_layout_->setContentsMargins(0, 0, 0, 0);
   main_layout_->addWidget(partition_loading_frame_);
   main_layout_->addWidget(main_frame_);
   main_layout_->addWidget(edit_partition_frame_);
@@ -196,6 +206,7 @@ void PartitionFrame::initUI() {
   main_layout_->addWidget(select_bootloader_frame_);
 
   this->setLayout(main_layout_);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 void PartitionFrame::onSimpleFrameButtonToggled() {

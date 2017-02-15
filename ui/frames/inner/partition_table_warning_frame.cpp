@@ -141,6 +141,7 @@ void PartitionTableWarningFrame::initUI() {
   accept_button_ = new ExpandedNavButton(tr("Continue"));
 
   QGridLayout* content_layout = new QGridLayout();
+  content_layout->setContentsMargins(0, 0, 0, 0);
   content_layout->setAlignment(Qt::AlignCenter);
   content_layout->setVerticalSpacing(kMainLayoutSpacing);
   content_layout->setHorizontalSpacing(40);
@@ -152,6 +153,7 @@ void PartitionTableWarningFrame::initUI() {
   content_layout->addWidget(accept_button_, 1, 1);
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addLayout(title_layout);
@@ -161,6 +163,7 @@ void PartitionTableWarningFrame::initUI() {
   layout->addStretch();
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
   this->setStyleSheet(ReadFile(":/styles/partition_table_warning_frame.css"));
 }
 

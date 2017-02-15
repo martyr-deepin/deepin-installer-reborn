@@ -212,6 +212,7 @@ void MainWindow::initUI() {
   vbox_layout->addSpacing(32);
 
   this->setLayout(vbox_layout);
+  this->setContentsMargins(0, 0, 0, 0);
   this->setWindowFlags(Qt::FramelessWindowHint);
 
   control_panel_frame_ = new ControlPanelFrame(this);

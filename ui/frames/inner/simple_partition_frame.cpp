@@ -245,6 +245,8 @@ void SimplePartitionFrame::initUI() {
   tip_label_->setFixedHeight(18);
 
   QHBoxLayout* tip_layout = new QHBoxLayout();
+  tip_layout->setContentsMargins(0, 0, 0, 0);
+  tip_layout->setSpacing(0);
   tip_layout->addStretch();
   tip_layout->addWidget(tip_icon, 0, Qt::AlignVCenter);
   tip_layout->addWidget(tip_label_, 0, Qt::AlignVCenter);
@@ -290,6 +292,7 @@ void SimplePartitionFrame::initUI() {
   main_layout->addSpacing(10);
 
   this->setLayout(main_layout);
+  this->setContentsMargins(0, 0, 0, 0);
   this->setFixedWidth(kWindowWidth);
   QSizePolicy policy(QSizePolicy::Fixed, QSizePolicy::Expanding);
   policy.setVerticalStretch(100);

@@ -169,6 +169,7 @@ void InstallProgressFrame::initUI() {
   progress_bar_->setValue(0);
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
@@ -183,6 +184,7 @@ void InstallProgressFrame::initUI() {
   layout->addStretch();
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
   this->setStyleSheet(ReadFile(":/styles/install_progress_frame.css"));
 
   progress_animation_ = new QPropertyAnimation(this, "progress", this);

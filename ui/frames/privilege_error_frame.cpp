@@ -42,6 +42,7 @@ void PrivilegeErrorFrame::initUI() {
   layout->addStretch();
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 }  // namespace installer

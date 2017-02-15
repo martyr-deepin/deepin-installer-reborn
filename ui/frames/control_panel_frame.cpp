@@ -10,7 +10,6 @@
 #include <QStackedWidget>
 #include <QTabBar>
 #include <QTextEdit>
-#include <QTextFormat>
 #include <QTimer>
 #include <QVBoxLayout>
 
@@ -195,6 +194,7 @@ void ControlPanelFrame::initUI() {
   layout->addWidget(tab_bar_);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
   this->setStyleSheet(ReadFile(":/styles/control_panel_frame.css"));
   this->setFixedSize(kWindowWidth, kWindowHeight);
 }

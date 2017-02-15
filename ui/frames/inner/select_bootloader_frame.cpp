@@ -66,6 +66,7 @@ void SelectBootloaderFrame::initUI() {
   back_button_ = new NavButton(tr("Back"));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
@@ -78,6 +79,7 @@ void SelectBootloaderFrame::initUI() {
   layout->addWidget(back_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 void SelectBootloaderFrame::onModelChanged() {

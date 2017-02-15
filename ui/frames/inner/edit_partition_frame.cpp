@@ -242,6 +242,7 @@ void EditPartitionFrame::initUI() {
   ok_button_ = new NavButton(tr("OK"));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignHCenter);
