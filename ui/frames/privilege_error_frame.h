@@ -6,9 +6,10 @@
 #define INSTALLER_UI_FRAMES_PRIVILEGE_ERROR_FRAME_H
 
 #include <QFrame>
-#include <QPushButton>
 
 namespace installer {
+
+class NavButton;
 
 // Display this page when root privilege is not guaranteed.
 class PrivilegeErrorFrame : public QFrame {
@@ -18,14 +19,14 @@ class PrivilegeErrorFrame : public QFrame {
   explicit PrivilegeErrorFrame(QWidget* parent = nullptr);
 
  signals:
-  // Emitted when exit_button_ is clicked.
+  // Emitted when continue_button_ is clicked.
   void finished();
 
  private:
   void initConnection();
   void initUI();
 
-  QPushButton* exit_button_ = nullptr;
+  NavButton* continue_button_ = nullptr;
 };
 
 }  // namespace installer

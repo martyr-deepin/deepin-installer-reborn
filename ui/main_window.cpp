@@ -16,6 +16,7 @@
 #include "service/power_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "sysinfo/users.h"
 #include "sysinfo/virtual_machine.h"
 #include "third_party/global_shortcut/global_shortcut.h"
 #include "ui/delegates/main_window_util.h"
@@ -26,6 +27,7 @@
 #include "ui/frames/install_progress_frame.h"
 #include "ui/frames/install_success_frame.h"
 #include "ui/frames/partition_frame.h"
+#include "ui/frames/privilege_error_frame.h"
 #include "ui/frames/select_language_frame.h"
 #include "ui/frames/system_info_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
@@ -108,6 +110,9 @@ void MainWindow::initConnections() {
   connect(partition_frame_, &PartitionFrame::finished,
           this, &MainWindow::goNextPage);
 
+  connect(privilege_error_frame_, &PrivilegeErrorFrame::finished,
+          this, &MainWindow::goNextPage);
+
   connect(select_language_frame_, &SelectLanguageFrame::finished,
           this, &MainWindow::goNextPage);
   connect(select_language_frame_, &SelectLanguageFrame::languageUpdated,
@@ -164,6 +169,10 @@ void MainWindow::initPages() {
   partition_frame_ = new PartitionFrame(this);
   pages_.insert(PageId::PartitionId,
                 stacked_layout_->addWidget(partition_frame_));
+
+  privilege_error_frame_ = new PrivilegeErrorFrame(this);
+  pages_.insert(PageId::PrivilegeErrorId,
+                stacked_layout_->addWidget(privilege_error_frame_));
 
   system_info_frame_ = new SystemInfoFrame(this);
   pages_.insert(PageId::SystemInfoId,
@@ -303,6 +312,7 @@ void MainWindow::onPrimaryScreenChanged(const QRect& geometry) {
 
 void MainWindow::goNextPage() {
   // Page order:
+  //   * privilege error frame;
   //   * select language frame;
   //   * disk space insufficient page;
   //   * virtual machine page;
@@ -319,6 +329,16 @@ void MainWindow::goNextPage() {
     }
 
     case PageId::NullId: {
+      if (HasRootPrivilege()) {
+        current_page_ = PageId::PrivilegeErrorId;
+        this->goNextPage();
+      } else {
+        this->setCurrentPage(PageId::PrivilegeErrorId);
+      }
+      break;
+    }
+
+    case PageId::PrivilegeErrorId: {
       select_language_frame_->readConf();
       if (GetSettingsBool(kSkipSelectLanguagePage)) {
         select_language_frame_->writeConf();
