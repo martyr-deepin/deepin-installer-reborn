@@ -1,4 +1,5 @@
 usr/bin/deepin-installer-reborn
+usr/bin/deepin-installer-reborn-pkexec
 usr/bin/deepin-installer-adjtime
 usr/bin/deepin-installer-first-boot
 usr/bin/deepin-installer-settings
@@ -9,3 +10,4 @@ usr/share/deepin-installer-reborn/resources/*
 usr/share/deepin-installer-reborn/tools/*
 usr/share/icons/hicolor/scalable/apps/deepin-installer-reborn.svg
 usr/share/locale/*
+usr/share/polkit-1/actions/*

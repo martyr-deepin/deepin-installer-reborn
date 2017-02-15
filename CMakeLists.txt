@@ -698,20 +698,14 @@ target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 
 
 ## Installation
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn
+install(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-reborn-pkexec
+                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn
+                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-adjtime
+                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
+                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
+                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
+                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-adjtime
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-
-install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-
 install(
     FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-oem.svg
           ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-reborn.svg
@@ -734,11 +728,17 @@ install(
     FILES_MATCHING PATTERN "*"
     PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
 )
-# Install resources/ folde, excluding desktop file and icons of oem tool.
+# Install resources/ folde, excluding desktop file and icons.
 install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/resources
     DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
+    PATTERN "com.*.policy" EXCLUDE
     PATTERN "deepin-installer-oem*" EXCLUDE
     PATTERN "deepin-installer-reborn*" EXCLUDE
+)
+# Install PolicyKit file.
+install(
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/com.deepin.pkexec.installer.policy
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/polkit-1/actions/
 )

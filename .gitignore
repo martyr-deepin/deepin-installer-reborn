@@ -1,6 +1,15 @@
 .idea/
-obj-x86-linux-gnu/
-obj-x86_64-linux-gnu/
 cmake-build-debug/
 cmake-build-release/
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/deepin-installer-oem.debhelper.log
+debian/deepin-installer-oem.substvars
+debian/deepin-installer-oem/
+debian/deepin-installer-reborn.debhelper.log
+debian/deepin-installer-reborn.substvars
+debian/deepin-installer-reborn/
+debian/files
+debian/tmp/
 i18n/*.qm
+obj-*/

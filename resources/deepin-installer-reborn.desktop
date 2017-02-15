@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Settings;
 Comment=Installer for Linux Deepin
-Exec=/usr/bin/deepin-installer-reborn
+Exec=deepin-installer-reborn-pkexec
 Icon=deepin-installer-reborn
 Name=Install Deepin
 StartupNotify=false
@@ -9,11 +9,6 @@ Terminal=false
 Type=Application
 X-Desktop-File-Install-Version=0.21
 X-MultipleArgs=false
-
-
-
-# Translations
-
 
 # Translations
 Comment[am]=ለ ሊነክስ መግጠሚያ
