@@ -413,6 +413,7 @@ add_executable(deepin-installer-reborn
 
                ui/images/images.qrc
                ui/styles/styles.qrc
+               ui/widgets/spinner/spinner.qrc
                )
 
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})

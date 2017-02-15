@@ -9,6 +9,7 @@
 
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
+#include "ui/widgets/spinner_label.h"
 #include "ui/widgets/title_label.h"
 
 namespace installer {
@@ -28,9 +29,20 @@ void NewTableLoadingFrame::changeEvent(QEvent* event) {
   }
 }
 
+void NewTableLoadingFrame::hideEvent(QHideEvent* event) {
+  spinner_label_->stop();
+  QFrame::hideEvent(event);
+}
+
+void NewTableLoadingFrame::showEvent(QShowEvent* event) {
+  spinner_label_->start();
+  QFrame::showEvent(event);
+}
+
 void NewTableLoadingFrame::initUI() {
   title_label_ = new TitleLabel(tr("Scan disks"));
   comment_label_ = new CommentLabel(tr("Scanning disks, please wait..."));
+  spinner_label_ = new SpinnerLabel();
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
@@ -38,6 +50,8 @@ void NewTableLoadingFrame::initUI() {
   layout->addStretch();
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addWidget(comment_label_, 0, Qt::AlignCenter);
+  layout->addSpacing(15);
+  layout->addWidget(spinner_label_, 0, Qt::AlignCenter);
   layout->addStretch();
 
   this->setLayout(layout);

@@ -10,6 +10,7 @@
 namespace installer {
 
 class CommentLabel;
+class SpinnerLabel;
 class TitleLabel;
 
 // Display loading animation when creating new partition table.
@@ -22,11 +23,18 @@ class NewTableLoadingFrame : public QFrame {
  protected:
   void changeEvent(QEvent* event) override;
 
+  // Stop spinner animation.
+  void hideEvent(QHideEvent* event) override;
+
+  // Start spinner animation.
+  void showEvent(QShowEvent* event) override;
+
  private:
   void initUI();
 
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
+  SpinnerLabel* spinner_label_ = nullptr;
 };
 
 }  // namespace installer
