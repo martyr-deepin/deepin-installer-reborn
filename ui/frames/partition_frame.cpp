@@ -17,7 +17,10 @@
 #include "ui/frames/inner/advanced_partition_frame.h"
 #include "ui/frames/inner/edit_partition_frame.h"
 #include "ui/frames/inner/new_partition_frame.h"
+#include "ui/frames/inner/new_table_loading_frame.h"
+#include "ui/frames/inner/new_table_warning_frame.h"
 #include "ui/frames/inner/partition_loading_frame.h"
+#include "ui/frames/inner/partition_table_warning_frame.h"
 #include "ui/frames/inner/prepare_install_frame.h"
 #include "ui/frames/inner/select_bootloader_frame.h"
 #include "ui/frames/inner/simple_partition_frame.h"
@@ -89,6 +92,17 @@ void PartitionFrame::initConnections() {
   connect(new_partition_frame_, &NewPartitionFrame::finished,
           this, &PartitionFrame::showMainFrame);
 
+  connect(new_table_warning_frame_, &NewTableWarningFrame::canceled,
+          this, &PartitionFrame::showMainFrame);
+  connect(new_table_warning_frame_, &NewTableWarningFrame::confirmed,
+          this, &PartitionFrame::showNewTableLoadingFrame);
+
+  connect(partition_table_warning_frame_, &PartitionTableWarningFrame::reboot,
+          this, &PartitionFrame::reboot);
+  connect(partition_table_warning_frame_,
+          &PartitionTableWarningFrame::confirmed,
+          this, &PartitionFrame::showNewTableWarningFrame);
+
   connect(prepare_install_frame_, &PrepareInstallFrame::aborted,
           this, &PartitionFrame::showMainFrame);
   connect(prepare_install_frame_, &PrepareInstallFrame::finished,
@@ -107,7 +121,10 @@ void PartitionFrame::initUI() {
   advanced_partition_frame_ = new AdvancedPartitionFrame(delegate_, this);
   edit_partition_frame_ = new EditPartitionFrame(delegate_, this);
   new_partition_frame_ = new NewPartitionFrame(delegate_, this);
+  new_table_loading_frame_ = new NewTableLoadingFrame(this);
+  new_table_warning_frame_ = new NewTableWarningFrame(this);
   partition_loading_frame_ = new PartitionLoadingFrame(this);
+  partition_table_warning_frame_ = new PartitionTableWarningFrame(this);
   prepare_install_frame_ = new PrepareInstallFrame(delegate_, this);
   select_bootloader_frame_ = new SelectBootloaderFrame(delegate_, this);
   simple_partition_frame_ = new SimplePartitionFrame(delegate_, this);
@@ -202,7 +219,10 @@ void PartitionFrame::initUI() {
   main_layout_->addWidget(main_frame_);
   main_layout_->addWidget(edit_partition_frame_);
   main_layout_->addWidget(new_partition_frame_);
+  main_layout_->addWidget(new_table_loading_frame_);
+  main_layout_->addWidget(new_table_warning_frame_);
   main_layout_->addWidget(prepare_install_frame_);
+  main_layout_->addWidget(partition_table_warning_frame_);
   main_layout_->addWidget(select_bootloader_frame_);
 
   this->setLayout(main_layout_);
@@ -260,6 +280,18 @@ void PartitionFrame::showNewPartitionFrame(
     const Partition& partition) {
   new_partition_frame_->setPartition(partition);
   main_layout_->setCurrentWidget(new_partition_frame_);
+}
+
+void PartitionFrame::showNewTableLoadingFrame() {
+  main_layout_->setCurrentWidget(new_table_loading_frame_);
+}
+
+void PartitionFrame::showNewTableWarningFrame() {
+  main_layout_->setCurrentWidget(new_table_warning_frame_);
+}
+
+void PartitionFrame::showPartitionTableWarningFrame() {
+  main_layout_->setCurrentWidget(partition_table_warning_frame_);
 }
 
 void PartitionFrame::showSelectBootloaderFrame() {

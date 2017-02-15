@@ -57,9 +57,9 @@ void PartitionTableWarningFrame::changeEvent(QEvent* event) {
 
 void PartitionTableWarningFrame::initConnections() {
   connect(reject_button_, &QPushButton::clicked,
-          this, &PartitionTableWarningFrame::declined);
+          this, &PartitionTableWarningFrame::reboot);
   connect(accept_button_, &QPushButton::clicked,
-          this, &PartitionTableWarningFrame::accepted);
+          this, &PartitionTableWarningFrame::confirmed);
 }
 
 void PartitionTableWarningFrame::initUI() {

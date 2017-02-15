@@ -17,8 +17,11 @@ class CommentLabel;
 class EditPartitionFrame;
 class NavButton;
 class NewPartitionFrame;
+class NewTableLoadingFrame;
+class NewTableWarningFrame;
 class PartitionDelegate;
 class PartitionLoadingFrame;
+class PartitionTableWarningFrame;
 class PointerButton;
 class PrepareInstallFrame;
 class SelectBootloaderFrame;
@@ -38,6 +41,9 @@ class PartitionFrame : public QFrame {
   // Emitted when partition edition is done.
   void finished();
 
+  // Emitted when requesting reboot system.
+  void reboot();
+
   // Emitted when partition job is done.
   void autoPartDone(bool ok);
   void manualPartDone(bool ok);
@@ -56,7 +62,10 @@ class PartitionFrame : public QFrame {
   AdvancedPartitionFrame* advanced_partition_frame_ = nullptr;
   EditPartitionFrame* edit_partition_frame_ = nullptr;
   NewPartitionFrame* new_partition_frame_ = nullptr;
+  NewTableLoadingFrame* new_table_loading_frame_ = nullptr;
+  NewTableWarningFrame* new_table_warning_frame_ = nullptr;
   PartitionLoadingFrame* partition_loading_frame_ = nullptr;
+  PartitionTableWarningFrame* partition_table_warning_frame_ = nullptr;
   PrepareInstallFrame* prepare_install_frame_ = nullptr;
   SelectBootloaderFrame* select_bootloader_frame_ = nullptr;
   SimplePartitionFrame* simple_partition_frame_ = nullptr;
@@ -83,6 +92,9 @@ class PartitionFrame : public QFrame {
   void showEditPartitionFrame(const Partition& partition);
   void showMainFrame();
   void showNewPartitionFrame(const Partition& partition);
+  void showNewTableLoadingFrame();
+  void showNewTableWarningFrame();
+  void showPartitionTableWarningFrame();
   void showSelectBootloaderFrame();
 };
 

@@ -103,6 +103,8 @@ void MainWindow::initConnections() {
   connect(install_success_frame_, &InstallSuccessFrame::finished,
           this, &MainWindow::rebootSystem);
 
+  connect(partition_frame_, &PartitionFrame::reboot,
+          this, &MainWindow::rebootSystem);
   connect(partition_frame_, &PartitionFrame::finished,
           this, &MainWindow::goNextPage);
 

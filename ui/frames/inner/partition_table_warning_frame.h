@@ -23,10 +23,10 @@ class PartitionTableWarningFrame : public QFrame {
 
  signals:
   // Emitted when reboot button is clicked.
-  void declined();
+  void reboot();
 
   // Emitted when continue button is clicked.
-  void accepted();
+  void confirmed();
 
  protected:
   void changeEvent(QEvent* event) override;

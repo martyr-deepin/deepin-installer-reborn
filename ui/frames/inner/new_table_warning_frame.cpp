@@ -13,6 +13,7 @@
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -43,7 +44,11 @@ void NewTableWarningFrame::initConnections() {
 
 void NewTableWarningFrame::initUI() {
   QLabel* warning_label = new QLabel();
+  QPixmap warning_pixmap(":/images/warning.png");
+  warning_label->setPixmap(warning_pixmap);
   title_label_ = new TitleLabel(tr("Format Disk"));
+  title_label_->setStyleSheet(ReadFile(":/styles/new_table_warning_frame.css"));
+
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->setContentsMargins(0, 0, 0, 0);
   title_layout->setSpacing(0);
@@ -75,6 +80,7 @@ void NewTableWarningFrame::initUI() {
   layout->addWidget(confirm_button_, 0, Qt::AlignHCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 }  // namespace installer

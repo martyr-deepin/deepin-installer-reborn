@@ -1,0 +1,7 @@
+/** Used in NewTableWarningFrame **/
+
+QLabel {
+  font-size: 40px;
+  text-align: center;
+  color: #ff5959;
+}
