@@ -20,14 +20,18 @@ class SimplePartitionButton : public PointerButton {
 
   const Partition& partition() const { return partition_; }
 
+  // Get partition button selection state.
+  bool selected() const { return selected_; }
+
+  // Set whether current partition is selected.
+  void setSelected(bool selected);
+
  private:
   void initConnections();
   void initUI();
   const Partition& partition_;
   QLabel* os_label_ = nullptr;
-
- private slots:
-  void onButtonToggled();
+  bool selected_;
 };
 
 }  // namespace installer

@@ -25,17 +25,22 @@ const int kOsIconHeight = 120;
 SimplePartitionButton::SimplePartitionButton(const Partition& partition,
                                              QWidget* parent)
     : PointerButton(parent),
-      partition_(partition) {
+      partition_(partition),
+      selected_(false) {
   this->setObjectName("simple_partition_button");
   this->setFixedSize(kButtonWidth, kButtonHeight);
   this->setCheckable(true);
   this->initUI();
-  this->initConnections();
 }
 
-void SimplePartitionButton::initConnections() {
-  connect(this, &QPushButton::toggled,
-          this, &SimplePartitionButton::onButtonToggled);
+void SimplePartitionButton::setSelected(bool selected) {
+  if (selected) {
+    const QPixmap pixmap(":/images/driver_install_128.png");
+    os_label_->setPixmap(pixmap);
+  } else {
+    QPixmap pixmap(GetOsTypeLargeIcon(partition_.os));
+    os_label_->setPixmap(pixmap);
+  }
 }
 
 void SimplePartitionButton::initUI() {
@@ -74,16 +79,6 @@ void SimplePartitionButton::initUI() {
   this->setStyleSheet(ReadFile(":/styles/simple_partition_button.css"));
   this->setCheckable(true);
   this->setFixedSize(kButtonWidth, kButtonHeight);
-}
-
-void SimplePartitionButton::onButtonToggled() {
-  if (this->isChecked()) {
-    const QPixmap pixmap(":/images/driver_install_128.png");
-    os_label_->setPixmap(pixmap);
-  } else {
-    QPixmap pixmap(GetOsTypeLargeIcon(partition_.os));
-    os_label_->setPixmap(pixmap);
-  }
 }
 
 }  // namespace installer

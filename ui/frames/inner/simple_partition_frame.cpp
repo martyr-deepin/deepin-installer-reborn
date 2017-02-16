@@ -12,10 +12,8 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <QShowEvent>
-#include <QVBoxLayout>
 
 #include "base/file_util.h"
-#include "partman/structs.h"
 #include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
@@ -75,13 +73,20 @@ bool SimplePartitionFrame::validate() {
   }
 
   bool is_max_prims_reached = false;
-  SimplePartitionButton* button =
-      qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
-  if (button) {
+  QAbstractButton* button = button_group_->checkedButton();
+  SimplePartitionButton* part_button =
+      qobject_cast<SimplePartitionButton*>(button);
+  Q_ASSERT(part_button);
+  if (button && part_button->selected()) {
     root_is_set = true;
-    root_partition = button->partition();
+    root_partition = part_button->partition();
   } else {
     root_is_set = false;
+  }
+
+  if (!root_is_set) {
+    msg_label_->setText(tr("Please select one partition"));
+    return false;
   }
 
   // If currently selected device reaches its maximum primary partitions and
@@ -91,11 +96,6 @@ bool SimplePartitionFrame::validate() {
       !delegate_->canAddPrimary(root_partition) &&
       !delegate_->canAddLogical(root_partition)) {
     is_max_prims_reached = true;
-  }
-
-  if (!root_is_set) {
-    msg_label_->setText(tr("Please select one partition"));
-    return false;
   }
 
   if (is_max_prims_reached) {
@@ -142,16 +142,17 @@ void SimplePartitionFrame::showEvent(QShowEvent* event) {
 
   QAbstractButton* button = button_group_->checkedButton();
   if (button) {
-    // Display install_tip explicitly.
-    this->showInstallTip(button);
+    SimplePartitionButton* part_button =
+        qobject_cast<SimplePartitionButton*>(button);
+    Q_ASSERT(part_button);
+    if (part_button->selected()) {
+      // Display install_tip is button is selected.
+      this->showInstallTip(button);
+    }
   }
 }
 
-
 void SimplePartitionFrame::appendOperations() {
-  // Reset simple operations first.
-  delegate_->resetSimpleOperations();
-
   bool efi_is_set = false;
   for (const Device& device : delegate_->realDevices()) {
     for (const Partition& partition : device.partitions) {
@@ -163,10 +164,7 @@ void SimplePartitionFrame::appendOperations() {
 
   SimplePartitionButton* button =
       qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
-  if (!button) {
-    qCritical() << "Invalid SimplePartitionButton!";
-    return;
-  }
+  Q_ASSERT(button);
   Partition partition = button->partition();
   if (IsEfiEnabled() && !efi_is_set) {
     if (partition.type == PartitionType::Normal) {
@@ -384,29 +382,34 @@ void SimplePartitionFrame::onDeviceRefreshed() {
 
 void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
                                                     bool checked) {
-  if (!checked) {
-    return;
-  }
+  // Clear warning message first.
+  msg_label_->clear();
+
+  // Then reset simple operations.
+  delegate_->resetSimpleOperations();
 
   SimplePartitionButton* part_button =
       qobject_cast<SimplePartitionButton*>(button);
-  if (!button) {
-    qCritical() << "Not a simple partition button";
+  Q_ASSERT(part_button);
+  if (!checked) {
+    // Deselect previous button.
+    part_button->setSelected(false);
     return;
   }
+
   const QString device_path = part_button->partition().device_path;
   if (!delegate_->isPartitionTableMatch(device_path)) {
     emit this->requestNewTable(device_path);
     return;
   }
 
-  // Show install-tip at bottom of current checked button.
-  this->showInstallTip(button);
-
-  // Clear warning message.
-  msg_label_->clear();
-
   if (this->validate()) {
+    // Set partition button selected.
+    part_button->setSelected(true);
+
+    // Show install-tip at bottom of current checked button.
+    this->showInstallTip(button);
+
     this->appendOperations();
   }
 }
