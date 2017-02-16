@@ -28,6 +28,10 @@ class SimplePartitionFrame : public QFrame {
   // Validate whether a root partition is selected and large enough.
   bool validate();
 
+ signals:
+  // Emitted when partition table not appropriate at |device_path|.
+  void requestNewTable(const QString& device_path);
+
  protected:
   void changeEvent(QEvent* event) override;
 

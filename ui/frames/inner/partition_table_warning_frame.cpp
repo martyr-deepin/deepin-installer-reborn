@@ -18,11 +18,20 @@
 namespace installer {
 
 PartitionTableWarningFrame::PartitionTableWarningFrame(QWidget* parent)
-    : QFrame(parent) {
+    : QFrame(parent),
+      device_path_() {
   this->setObjectName("partition_table_warning_frame");
 
   this->initUI();
   this->initConnections();
+}
+
+QString PartitionTableWarningFrame::devicePath() const {
+  return device_path_;
+}
+
+void PartitionTableWarningFrame::setDevicePath(const QString& device_path) {
+  device_path_ = device_path;
 }
 
 void PartitionTableWarningFrame::changeEvent(QEvent* event) {
@@ -59,7 +68,7 @@ void PartitionTableWarningFrame::initConnections() {
   connect(reject_button_, &QPushButton::clicked,
           this, &PartitionTableWarningFrame::reboot);
   connect(accept_button_, &QPushButton::clicked,
-          this, &PartitionTableWarningFrame::confirmed);
+          this, &PartitionTableWarningFrame::onConfirmButtonClicked);
 }
 
 void PartitionTableWarningFrame::initUI() {
@@ -165,6 +174,10 @@ void PartitionTableWarningFrame::initUI() {
   this->setLayout(layout);
   this->setContentsMargins(0, 0, 0, 0);
   this->setStyleSheet(ReadFile(":/styles/partition_table_warning_frame.css"));
+}
+
+void PartitionTableWarningFrame::onConfirmButtonClicked() {
+  emit this->confirmed(device_path_);
 }
 
 }  // namespace installer

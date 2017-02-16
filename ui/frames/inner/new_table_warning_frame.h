@@ -20,12 +20,17 @@ class NewTableWarningFrame : public QFrame {
  public:
   explicit NewTableWarningFrame(QWidget* parent = nullptr);
 
+  // Set/get device_path_.
+  QString devicePath() const;
+  void setDevicePath(const QString& device_path);
+
  signals:
   // Emitted when cancel_button_ is clicked.
   void canceled();
 
   // Emitted when confirm_button_ is clicked.
-  void confirmed();
+  // |device_path| is the device disk path to be formatted.
+  void confirmed(const QString& device_path);
 
  protected:
   void changeEvent(QEvent* event) override;
@@ -38,6 +43,11 @@ class NewTableWarningFrame : public QFrame {
   CommentLabel* comment_label_ = nullptr;
   NavButton* cancel_button_ = nullptr;
   NavButton* confirm_button_ = nullptr;
+
+  QString device_path_;
+
+ private slots:
+  void onConfirmButtonClicked();
 };
 
 }  // namespace installer
