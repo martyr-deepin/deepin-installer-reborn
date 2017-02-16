@@ -36,12 +36,19 @@ generate_locale() {
 # Generate new background image.
 generate_background_image() {
   local SRC="/usr/share/backgrounds/default_background.jpg"
+  local TMP_SRC="/tmp/default_background.jpg"
   local DST="${SHARE_DIR}/resources/default_wallpaper.jpg"
-  if [ -f "${SRC}" ]; then
+
+  if [ -f "${TMP_SRC}" ]; then
+    # Copy pre-generated background image.
+    cp -f "${TMP_SRC}" "${DST}"
+  elif [ -f "${SRC}" ]; then
     echo "Generate default wallpaper.."
     convert "${SRC}" -resize 25% -brightness-contrast -10 \
       -modulate 100,120,100 -blur 0x16 -resize 400% "${DST}"
   fi
+
+  return 0
 }
 
 # Remove slide image for netease-cloud-music on non-x86 platforms
@@ -82,15 +89,17 @@ replace_default_settings() {
       # Do nothing
       ;;
   esac
+
+  return 0
 }
 
-case "$1" in 
-    configure)
-        generate_locale
-        generate_background_image
-        remove_cloud_music_slide
-        replace_default_settings
-        ;;
+case "$1" in
+  configure)
+    generate_locale
+    generate_background_image
+    remove_cloud_music_slide
+    replace_default_settings
+    ;;
 esac
 
 #DEBHELPER#
