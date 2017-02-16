@@ -68,13 +68,13 @@ replace_default_settings() {
   case $(uname -m) in
     mips*)
       if [ -f "${SHARE_DIR}/resources/loongson_default_settings.ini" ]; then
-        /bin/cp -f "${SHARE_DIR}/resources/loongson_default_settings.ini" \
+        install -Dm644 "${SHARE_DIR}/resources/loongson_default_settings.ini" \
           "${SHARE_DIR}/resources/default_settings.ini"
       fi
       ;;
     sw*)
       if [ -f "${SHARE_DIR}/resources/sw_default_settings.ini" ]; then
-        /bin/cp -f "${SHARE_DIR}/resources/sw_default_settings.ini" \
+        install -Dm644 "${SHARE_DIR}/resources/sw_default_settings.ini" \
           "${SHARE_DIR}/resources/default_settings.ini"
       fi
       ;;
@@ -84,7 +84,15 @@ replace_default_settings() {
   esac
 }
 
-generate_locale
-generate_background_image
-remove_cloud_music_slide
-replace_default_settings
+case "$1" in 
+    configure)
+        generate_locale
+        generate_background_image
+        remove_cloud_music_slide
+        replace_default_settings
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0
