@@ -20,7 +20,7 @@ rootuuid=${rootuuidline%%/*}
 
 # Copy boot folder and follow symbolic link.
 cp -rP /cdrom/casper/boot/ /target/ || error "Failed to copy boot/"
-ln -sf . /target/boot/boot
+cd /target/boot/boot && ln -sf . boot && cd -
 
 [ -f $TARGET/grub.cfg ] && [ -f $TARGET/boot.cfg ] && echo "boot files copied!" 
 
