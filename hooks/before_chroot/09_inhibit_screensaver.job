@@ -5,6 +5,6 @@
 
 # Inhibit display screensaver.
 
-setterm -powersave off -blank 0
+xset s off -dpms
 
 exit 0
