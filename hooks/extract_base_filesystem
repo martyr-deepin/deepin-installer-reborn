@@ -2,14 +2,15 @@
 # -*- coding:utf-8 -*-
 # 
 
-import hashlib
 import errno
-import subprocess
-import sys
+import hashlib
 import os
 import re
-import stat
 import shutil
+import sys
+import stat
+import subprocess
+import traceback
 
 _casper_config = None
 PROGRESS_FILE = '/dev/shm/unsquashfs_progress'
@@ -341,6 +342,7 @@ class Install:
                         try:
                             os.mkdir(targetpath, mode)
                         except OSError as e:
+                            traceback.print_exc()
                             if e.errno != errno.EEXIST:
                                 raise
                 elif stat.S_ISCHR(st.st_mode):
@@ -372,6 +374,8 @@ class Install:
                                 targetpath, attrname, attrvalue,
                                 follow_symlinks=False)
                     except OSError as e:
+                        print("source path:", sourcepath)
+                        traceback.print_exc()
                         if e.errno not in (
                                 errno.EPERM, errno.ENOTSUP, errno.ENODATA):
                             raise
@@ -396,9 +400,11 @@ class Install:
 
         for mountpoint in mountpoints:
             if not execute('umount', '-vl', mountpoint):
+                traceback.print_exc()
                 raise InstallError("Failed to umount %s" % mountpoint)
         for dev in devs:
             if (dev != '' and dev != 'unused' and not execute('losetup', '-d', dev)):
+                traceback.print_exc()
                 raise InstallError("Failed to detach loopback device %s" % dev)
 
     def run(self):
@@ -408,6 +414,7 @@ class Install:
         try:
             self.copy_all()
         except: 
+            traceback.print_exc()
             raise InstallError("Copy file failed, Install failed")
 
         if self.source == '/var/lib/deepin-installer/source':
