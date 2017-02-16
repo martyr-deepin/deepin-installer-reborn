@@ -17,11 +17,21 @@
 
 namespace installer {
 
-NewTableWarningFrame::NewTableWarningFrame(QWidget* parent) : QFrame(parent) {
+NewTableWarningFrame::NewTableWarningFrame(QWidget* parent)
+    : QFrame(parent),
+      device_path_() {
   this->setObjectName("new_table_warning_frame");
 
   this->initUI();
   this->initConnections();
+}
+
+QString NewTableWarningFrame::devicePath() const {
+  return device_path_;
+}
+
+void NewTableWarningFrame::setDevicePath(const QString& device_path) {
+  device_path_ = device_path;
 }
 
 void NewTableWarningFrame::changeEvent(QEvent* event) {
@@ -39,7 +49,7 @@ void NewTableWarningFrame::initConnections() {
   connect(cancel_button_, &QPushButton::clicked,
           this, &NewTableWarningFrame::canceled);
   connect(confirm_button_, &QPushButton::clicked,
-          this, &NewTableWarningFrame::confirmed);
+          this, &NewTableWarningFrame::onConfirmButtonClicked);
 }
 
 void NewTableWarningFrame::initUI() {
@@ -81,6 +91,10 @@ void NewTableWarningFrame::initUI() {
 
   this->setLayout(layout);
   this->setContentsMargins(0, 0, 0, 0);
+}
+
+void NewTableWarningFrame::onConfirmButtonClicked() {
+  emit this->confirmed(device_path_);
 }
 
 }  // namespace installer

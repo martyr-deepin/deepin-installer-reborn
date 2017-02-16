@@ -384,13 +384,34 @@ void SimplePartitionFrame::onDeviceRefreshed() {
 
 void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
                                                     bool checked) {
-  if (checked) {
-    // Show install-tip at bottom of current checked button.
-    this->showInstallTip(button);
-
-    // Clear warning message.
-    msg_label_->clear();
+  if (!checked) {
+    return;
   }
+
+  SimplePartitionButton* part_button =
+      qobject_cast<SimplePartitionButton*>(button);
+  if (!button) {
+    qCritical() << "Not a simple partition button";
+    return;
+  }
+  const QString device_path = part_button->partition().device_path;
+  const int device_index = DeviceIndex(delegate_->devices(), device_path);
+  if (device_index == -1) {
+    qCritical() << "Failed to find device:" << device_path;
+    return;
+  }
+  PartitionTableType table = delegate_->devices().at(device_index).table;
+  if (!IsPartitionTableMatch(table)) {
+    qDebug() << "Partition table not match";
+    emit this->requestNewTable(device_path);
+    return;
+  }
+
+  // Show install-tip at bottom of current checked button.
+  this->showInstallTip(button);
+
+  // Clear warning message.
+  msg_label_->clear();
 
   if (this->validate()) {
     this->appendOperations();

@@ -93,8 +93,8 @@ class PartitionFrame : public QFrame {
   void showMainFrame();
   void showNewPartitionFrame(const Partition& partition);
   void showNewTableLoadingFrame();
-  void showNewTableWarningFrame();
-  void showPartitionTableWarningFrame();
+  void showNewTableWarningFrame(const QString& device_path);
+  void showPartitionTableWarningFrame(const QString& device_path);
   void showSelectBootloaderFrame();
 };
 

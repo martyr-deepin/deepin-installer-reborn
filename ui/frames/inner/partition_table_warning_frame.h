@@ -21,12 +21,17 @@ class PartitionTableWarningFrame : public QFrame {
  public:
   explicit PartitionTableWarningFrame(QWidget* parent = nullptr);
 
+  // Get/set device_path_.
+  QString devicePath() const;
+  void setDevicePath(const QString& device_path);
+
  signals:
   // Emitted when reboot button is clicked.
   void reboot();
 
   // Emitted when continue button is clicked.
-  void confirmed();
+  // |device_path| is the device disk path to be formatted.
+  void confirmed(const QString& device_path);
 
  protected:
   void changeEvent(QEvent* event) override;
@@ -45,6 +50,11 @@ class PartitionTableWarningFrame : public QFrame {
   QLabel* list_item3_ = nullptr;
   ExpandedNavButton* reject_button_ = nullptr;
   ExpandedNavButton* accept_button_ = nullptr;
+
+  QString device_path_;
+
+ private slots:
+  void onConfirmButtonClicked();
 };
 
 }  // namespace installer

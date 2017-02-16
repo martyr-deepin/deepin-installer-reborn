@@ -115,6 +115,9 @@ void PartitionFrame::initConnections() {
           delegate_, &PartitionDelegate::setBootloaderPath);
   connect(select_bootloader_frame_, &SelectBootloaderFrame::finished,
           this, &PartitionFrame::showMainFrame);
+
+  connect(simple_partition_frame_, &SimplePartitionFrame::requestNewTable,
+          this, &PartitionFrame::showPartitionTableWarningFrame);
 }
 
 void PartitionFrame::initUI() {
@@ -286,11 +289,14 @@ void PartitionFrame::showNewTableLoadingFrame() {
   main_layout_->setCurrentWidget(new_table_loading_frame_);
 }
 
-void PartitionFrame::showNewTableWarningFrame() {
+void PartitionFrame::showNewTableWarningFrame(const QString& device_path) {
+  new_table_warning_frame_->setDevicePath(device_path);
   main_layout_->setCurrentWidget(new_table_warning_frame_);
 }
 
-void PartitionFrame::showPartitionTableWarningFrame() {
+void PartitionFrame::showPartitionTableWarningFrame(
+    const QString& device_path) {
+  partition_table_warning_frame_->setDevicePath(device_path);
   main_layout_->setCurrentWidget(partition_table_warning_frame_);
 }
 
