@@ -19,14 +19,15 @@ rootuuidline=$(grep -r "UUID" /target/etc/fstab | grep "/ ")
 rootuuid=${rootuuidline%%/*}
 
 # Copy boot folder and follow symbolic link.
-cp -rP /cdrom/casper/boot/ /target/ || error "Failed to copy boot/"
-cd /target/boot/boot && ln -sf . boot && cd -
+cp -rP /cdrom/casper/boot/* /target/boot/ && cp -rP /cdrom/casper/boot /target/boot/boot || error "Failed to copy boot/"
 
-[ -f $TARGET/grub.cfg ] && [ -f $TARGET/boot.cfg ] && echo "boot files copied!" 
+[ -f $TARGET/grub.cfg ] && [ -f $TARGET/boot.cfg ] && echo "boot files copied!"
 
 # modify boot.cfg & grub.cfg set boot.cfg args root=UUID=xxx
-sed -i "s/\(args.*\)/\1 root=$rootuuid/g" $TARGET/boot.cfg
-sed -i "s/\(linux.*\)/\1 root=$rootuuid/g" $TARGET/grub.cfg
+sed -i "s/\(args.*\)/\1 root=$rootuuid/g" /target/boot/boot.cfg
+sed -i "s/\(args.*\)/\1 root=$rootuuid/g" /target/boot/boot/boot.cfg
+sed -i "s/\(linux.*\)/\1 root=$rootuuid/g" /target/boot/grub.cfg
+sed -i "s/\(linux.*\)/\1 root=$rootuuid/g" /target/boot/boot/grub.cfg
 
 # fix boot.cfg
 if grep -wqs $TARGET /proc/mounts ; then
