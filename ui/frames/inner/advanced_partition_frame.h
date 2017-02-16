@@ -35,6 +35,10 @@ class AdvancedPartitionFrame : public QFrame {
  signals:
   void requestEditPartitionFrame(const Partition& partition);
   void requestNewPartitionFrame(const Partition& partition);
+
+  // Emitted when partition table not appropriate at |device_path|.
+  void requestNewTable(const QString& device_path);
+
   void requestSelectBootloaderFrame();
 
  public slots:
@@ -66,6 +70,9 @@ class AdvancedPartitionFrame : public QFrame {
   void onDeletePartitionTriggered(const Partition& partition);
   void onDeviceRefreshed();
   void onEditButtonToggled(bool toggle);
+
+  // Handles editPartitionTriggered() signal from advanced partition button.
+  void onEditPartitionTriggered(const Partition& partition);
 
   // Handles newPartitionTriggered() signal from advanced partition button.
   void onNewPartitionTriggered(const Partition& partition);

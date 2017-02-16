@@ -395,14 +395,7 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
     return;
   }
   const QString device_path = part_button->partition().device_path;
-  const int device_index = DeviceIndex(delegate_->devices(), device_path);
-  if (device_index == -1) {
-    qCritical() << "Failed to find device:" << device_path;
-    return;
-  }
-  PartitionTableType table = delegate_->devices().at(device_index).table;
-  if (!IsPartitionTableMatch(table)) {
-    qDebug() << "Partition table not match";
+  if (!delegate_->isPartitionTableMatch(device_path)) {
     emit this->requestNewTable(device_path);
     return;
   }

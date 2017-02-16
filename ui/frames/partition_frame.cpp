@@ -83,6 +83,8 @@ void PartitionFrame::initConnections() {
   connect(advanced_partition_frame_,
           &AdvancedPartitionFrame::requestNewPartitionFrame,
           this, &PartitionFrame::showNewPartitionFrame);
+  connect(advanced_partition_frame_, &AdvancedPartitionFrame::requestNewTable,
+          this, &PartitionFrame::showPartitionTableWarningFrame);
   connect(advanced_partition_frame_,
           &AdvancedPartitionFrame::requestSelectBootloaderFrame,
           this, &PartitionFrame::showSelectBootloaderFrame);

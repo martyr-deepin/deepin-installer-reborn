@@ -13,6 +13,7 @@
 #include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "ui/delegates/partition_util.h"
 
 namespace installer {
 
@@ -205,6 +206,17 @@ Partition PartitionDelegate::getRealPartition(
     }
   }
   return Partition();
+}
+
+bool PartitionDelegate::isPartitionTableMatch(
+    const QString& device_path) const {
+  const int device_index = DeviceIndex(devices_, device_path);
+  if (device_index == -1) {
+    qCritical() << "Failed to find device:" << device_path;
+    return false;
+  }
+  PartitionTableType table = devices_.at(device_index).table;
+  return IsPartitionTableMatch(table);
 }
 
 void PartitionDelegate::scanDevices() const {

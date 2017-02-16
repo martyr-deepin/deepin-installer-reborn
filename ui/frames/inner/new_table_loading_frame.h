@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_UI_FRAMES_INNER_NEW_TABLE_LOADING_FRAME_H_
-#define INSTALLER_UI_FRAMES_INNER_NEW_TABLE_LOADING_FRAME_H_
+#ifndef INSTALLER_UI_FRAMES_INNER_NEW_TABLE_LOADING_FRAME_H
+#define INSTALLER_UI_FRAMES_INNER_NEW_TABLE_LOADING_FRAME_H
 
 #include <QFrame>
 
@@ -39,4 +39,4 @@ class NewTableLoadingFrame : public QFrame {
 
 }  // namespace installer
 
-#endif  // INSTALLER_UI_FRAMES_INNER_NEW_TABLE_LOADING_FRAME_H_
+#endif  // INSTALLER_UI_FRAMES_INNER_NEW_TABLE_LOADING_FRAME_H
