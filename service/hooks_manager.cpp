@@ -25,8 +25,8 @@ const int kAfterChrootStartVal = kInChrootEndVal;
 const int kAfterChrootEndVal = 100;
 
 const char kUnsquashfsProgressFile[] = "/dev/shm/unsquashfs_progress";
-// Interval to read unsquashfs progress file, 500ms.
-const int kReadUnsquashfsInterval = 500;
+// Interval to read unsquashfs progress file, 5000ms.
+const int kReadUnsquashfsInterval = 5000;
 
 int ReadProgressValue(const QString& file) {
   if (QFile::exists(file)) {
