@@ -48,6 +48,9 @@ class PartitionDelegate : public QObject {
   // Get real partition on disk in which |virtual_partition| is located.
   Partition getRealPartition(const Partition& virtual_partition) const;
 
+  // Check whether device at |device_path| is appropriate for current system.
+  bool isPartitionTableMatch(const QString& device_path) const;
+
   // Notifies partition manager to scan devices.
   void scanDevices() const;
 

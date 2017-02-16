@@ -301,7 +301,7 @@ void AdvancedPartitionFrame::repaintDevices() {
       connect(editing_button_, &QPushButton::toggled,
               button, &AdvancedPartitionButton::setEditable);
       connect(button, &AdvancedPartitionButton::editPartitionTriggered,
-              this, &AdvancedPartitionFrame::requestEditPartitionFrame);
+              this, &AdvancedPartitionFrame::onEditPartitionTriggered);
       connect(button, &AdvancedPartitionButton::newPartitionTriggered,
               this, &AdvancedPartitionFrame::onNewPartitionTriggered);
       connect(button, &AdvancedPartitionButton::deletePartitionTriggered,
@@ -331,8 +331,25 @@ void AdvancedPartitionFrame::onEditButtonToggled(bool toggle) {
   }
 }
 
+void AdvancedPartitionFrame::onEditPartitionTriggered(
+    const Partition& partition) {
+  const QString device_path = partition.device_path;
+  // Check partition table type first.
+  if (! delegate_->isPartitionTableMatch(device_path)) {
+    emit this->requestNewTable(device_path);
+  } else {
+    emit this->requestEditPartitionFrame(partition);
+  }
+}
+
 void AdvancedPartitionFrame::onNewPartitionTriggered(
     const Partition& partition) {
+  const QString device_path = partition.device_path;
+  if (! delegate_->isPartitionTableMatch(device_path)) {
+    emit this->requestNewTable(device_path);
+    return;
+  }
+
   if (delegate_->canAddPrimary(partition) ||
       delegate_->canAddLogical(partition)) {
     // Switch to NewPartitionFrame only if a new partition can be added.
