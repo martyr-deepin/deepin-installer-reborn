@@ -79,6 +79,10 @@ class PartitionDelegate : public QObject {
   // NOTE(xushaohua): This action can not be undo.
   void doManualPart(bool simple_mode);
 
+  // Create partition table at |device_path| to match current booting method.
+  // After that, emit realDeviceRefreshed() and deviceRefreshed() signal.
+  void createPartitionTable(const QString& device_path);
+
   void createSimplePartition(const Partition& partition,
                              PartitionType partition_type,
                              bool align_start,

@@ -115,6 +115,56 @@ bool CreatePartition(const Partition& partition) {
   return ok;
 }
 
+bool CreatePartitionTable(const QString& device_path,
+                          PartitionTableType table) {
+  PedDiskType* disk_type = NULL;
+  switch (table) {
+    case PartitionTableType::GPT: {
+      disk_type = ped_disk_type_get(kPartitionTableGPT);
+      break;
+    }
+    case PartitionTableType::MsDos: {
+      disk_type = ped_disk_type_get(kPartitionTableMsDos);
+      break;
+    }
+
+    default: {
+      qCritical() << "CreatePartitionTable() Unsupported partition table.";
+      return false;
+    }
+  }
+
+  if (disk_type == NULL) {
+    qCritical() << "CreatePartitionTable() Failed to get disk type";
+    return false;
+  }
+
+  PedDevice* lp_device = NULL;
+  lp_device = ped_device_get(device_path.toStdString().c_str());
+
+  if (lp_device != NULL) {
+    PedDisk* lp_disk = NULL;
+    // Create a new device table but not commit changes to device.
+    lp_disk = ped_disk_new_fresh(lp_device, disk_type);
+    if (lp_disk != NULL) {
+      // Commit explicitly. Or else newly created partition table is only
+      // in memory.
+      Commit(lp_disk);
+      DestroyDeviceAndDisk(lp_device, lp_disk);
+      return true;
+    } else {
+      qCritical() << "CreatePartitionTable() Failed to create new disk"
+                  << device_path;
+      DestroyDevice(lp_device);
+      return false;
+    }
+  } else {
+    qCritical() << "CreatePartitionTable() Failed to get device at"
+                << device_path;
+    return false;
+  }
+}
+
 bool DeletePartition(const Partition& partition) {
   qDebug() << "DeletePartition()" << partition;
   bool ok = false;
@@ -147,6 +197,13 @@ bool DeletePartition(const Partition& partition) {
   }
 
   return ok;
+}
+
+void DestroyDevice(PedDevice* lp_device) {
+  if (lp_device) {
+    ped_device_destroy(lp_device);
+    lp_device = nullptr;
+  }
 }
 
 void DestroyDeviceAndDisk(PedDevice*& lp_device, PedDisk*& lp_disk) {
