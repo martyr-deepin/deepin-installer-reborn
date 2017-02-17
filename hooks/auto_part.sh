@@ -201,10 +201,9 @@ main() {
     # Set boot flag.
     case "${PART_MP}" in
       /boot)
-        installer_set "DI_BOOTLOADER" "${PART_PATH}"
-
         # Set boot flag.
         if ! is_efi_mode; then
+          installer_set "DI_BOOTLOADER" "${PART_PATH}"
           parted -s "${DEVICE}" set "${PART_NUM}" boot on || \
             error "Failed to set boot flag on ${PART_PATH}"
         fi
@@ -212,9 +211,9 @@ main() {
       /)
         installer_set "DI_ROOT_PARTITION" "${PART_PATH}"
         # Set boot flag if /boot is not used in legacy mode.
-        if ! echo "${POLICY}" | grep -q "/boot:"; then
-          installer_set "DI_BOOTLOADER" "${PART_PATH}"
-          if ! is_efi_mode; then
+        if ! is_efi_mode; then
+          if ! grep -q "/boot:" "${POLICY} 2>/dev/null"; then
+            installer_set "DI_BOOTLOADER" "${PART_PATH}"
             parted -s "${DEVICE}" set "${PART_NUM}" boot on || \
               error "Failed to set boot flag on ${PART_PATH}"
           fi
