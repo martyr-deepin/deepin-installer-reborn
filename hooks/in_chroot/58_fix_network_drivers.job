@@ -16,14 +16,14 @@ is_pci_exists() {
   local PCI_ID="$1"
   local PCI_INFO
   PCI_INFO=$(lspci -d "${PCI_ID}" 2>/dev/null)
-  return test -n "${PCI_INFO}"
+  test -n "${PCI_INFO}"
 }
 
 is_usb_exists() {
   local USB_ID="$1"
   local USB_INFO
   USB_INFO="$(lsusb -d "${USB_ID}" 2>/dev/null)"
-  return test -n "${USB_INFO}"
+  test -n "${USB_INFO}"
 }
 
 # Fix X550VC wlan software control

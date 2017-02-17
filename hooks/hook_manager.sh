@@ -46,7 +46,6 @@ case ${_HOOK_FILE} in
       exit $?
     else
       # Switch to chroot env.
-      msg "Run in chroot env"
       chroot /target "${_SELF}" "${_HOOK_FILE}" 'true'
       exit $?
     fi
