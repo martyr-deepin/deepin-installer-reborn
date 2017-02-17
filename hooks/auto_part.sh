@@ -73,7 +73,7 @@ get_max_capacity_device() {
 
 # Check boot mode is UEFI or not.
 is_efi_mode() {
-  test ! -d "/sys/firmware/efi"
+  test -d "/sys/firmware/efi"
 }
 
 # Read partition policy from settings.
@@ -129,6 +129,7 @@ main() {
   # Partitioning policy.
   local POLICY
   POLICY=$(get_partition_policy)
+  echo "Partitioning policy: ${POLICY}"
   [ -z "${POLICY}" ] && error "Partitioning policy is empty!"
 
   new_partition_table "${DEVICE}"
