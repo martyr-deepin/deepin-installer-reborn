@@ -24,7 +24,7 @@ void WidgetTreeWalk(QWidget* root, int indent) {
   prefix[indent] = '\0';
   qDebug() << prefix << root;
   for (QObject* child : root->children()) {
-    QWidget* item = qobject_cast<QWidget*>(child);
+    QWidget* item = dynamic_cast<QWidget*>(child);
     if (item) {
       WidgetTreeWalk(item, indent + 2);
     }
@@ -51,7 +51,7 @@ void ClearLayout(QLayout* layout) {
 bool SetChildTransparent(QWidget* root, const QString& child_name) {
   for (QObject* child : root->children()) {
     if (child_name == child->metaObject()->className()) {
-      QWidget* container = qobject_cast<QWidget*>(child);
+      QWidget* container = dynamic_cast<QWidget*>(child);
       if (container) {
         container->setAttribute(Qt::WA_TranslucentBackground, true);
         return true;

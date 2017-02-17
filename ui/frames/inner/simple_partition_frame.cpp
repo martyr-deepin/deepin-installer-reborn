@@ -74,14 +74,16 @@ bool SimplePartitionFrame::validate() {
 
   bool is_max_prims_reached = false;
   QAbstractButton* button = button_group_->checkedButton();
-  SimplePartitionButton* part_button =
-      qobject_cast<SimplePartitionButton*>(button);
-  Q_ASSERT(part_button);
-  if (button && part_button->selected()) {
-    root_is_set = true;
-    root_partition = part_button->partition();
-  } else {
-    root_is_set = false;
+  if (button) {
+    SimplePartitionButton* part_button =
+        dynamic_cast<SimplePartitionButton*>(button);
+    Q_ASSERT(part_button);
+    if (part_button && part_button->selected()) {
+      root_is_set = true;
+      root_partition = part_button->partition();
+    } else {
+      root_is_set = false;
+    }
   }
 
   if (!root_is_set) {
@@ -143,9 +145,9 @@ void SimplePartitionFrame::showEvent(QShowEvent* event) {
   QAbstractButton* button = button_group_->checkedButton();
   if (button) {
     SimplePartitionButton* part_button =
-        qobject_cast<SimplePartitionButton*>(button);
+        dynamic_cast<SimplePartitionButton*>(button);
     Q_ASSERT(part_button);
-    if (part_button->selected()) {
+    if (part_button && part_button->selected()) {
       // Display install_tip is button is selected.
       this->showInstallTip(button);
     }
@@ -163,8 +165,13 @@ void SimplePartitionFrame::appendOperations() {
   }
 
   SimplePartitionButton* button =
-      qobject_cast<SimplePartitionButton*>(button_group_->checkedButton());
+      dynamic_cast<SimplePartitionButton*>(button_group_->checkedButton());
   Q_ASSERT(button);
+  if (!button) {
+    qCritical() << "no partition button selected";
+    return;
+  }
+
   Partition partition = button->partition();
   if (IsEfiEnabled() && !efi_is_set) {
     if (partition.type == PartitionType::Normal) {
@@ -389,8 +396,13 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
   delegate_->resetSimpleOperations();
 
   SimplePartitionButton* part_button =
-      qobject_cast<SimplePartitionButton*>(button);
+      dynamic_cast<SimplePartitionButton*>(button);
   Q_ASSERT(part_button);
+  if (!part_button) {
+    qCritical() << "no partition button selected";
+    return;
+  }
+
   if (!checked) {
     // Deselect previous button.
     part_button->setSelected(false);
