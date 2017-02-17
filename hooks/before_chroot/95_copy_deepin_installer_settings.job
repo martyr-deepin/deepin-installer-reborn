@@ -7,4 +7,6 @@
 
 SRC_BIN=/usr/bin/deepin-installer-settings
 DEST_BIN="/target${SRC_BIN}"
-cp -v "$SRC_BIN" "$DEST_BIN"  || error "Failed to copy ${SRC_BIN}"
+if [ ! -e "${DEST_BIN}" ]; then
+  cp -v "$SRC_BIN" "$DEST_BIN"  || error "Failed to copy ${SRC_BIN}"
+fi
