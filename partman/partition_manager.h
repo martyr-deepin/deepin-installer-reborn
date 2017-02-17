@@ -27,6 +27,10 @@ class PartitionManager : public QObject {
   void refreshDevices(bool umount, bool enable_os_prober);
   void devicesRefreshed(const DeviceList& devices);
 
+  // Create new partition |table| at |device_path|.
+  void createPartitionTable(const QString& device_path,
+                            PartitionTableType table);
+
   // Run auto part script at |script_path|.
   void autoPart(const QString& script_path);
   // Emitted after auto_part.sh script is executed and exited.
@@ -39,7 +43,12 @@ class PartitionManager : public QObject {
  private:
   void initConnections();
 
+  bool enable_os_prober_;
+
  private slots:
+  void doCreatePartitionTable(const QString& device_path,
+                              PartitionTableType table);
+
   void doRefreshDevices(bool umount, bool enable_os_prober);
   void doAutoPart(const QString& script_path);
   void doManualPart(const OperationList& operations);

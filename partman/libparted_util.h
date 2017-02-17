@@ -18,8 +18,14 @@ bool Commit(PedDisk* lp_disk);
 // Create a new partition defined in |partition|.
 bool CreatePartition(const Partition& partition);
 
+// Create new partition |table| at |device_path|.
+bool CreatePartitionTable(const QString& device_path, PartitionTableType table);
+
 // Delete partition defined in |partition| from device.
 bool DeletePartition(const Partition& partition);
+
+// Destroy libparted-device object.
+void DestroyDevice(PedDevice* lp_device);
 
 // Destroy libparted-device and disk object.
 void DestroyDeviceAndDisk(PedDevice*& lp_device, PedDisk*& lp_disk);

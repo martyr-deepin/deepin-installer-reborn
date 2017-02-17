@@ -136,11 +136,15 @@ bool UnmountDevices() {
 
 }  // namespace
 
-PartitionManager::PartitionManager(QObject* parent) : QObject(parent) {
+PartitionManager::PartitionManager(QObject* parent)
+    : QObject(parent),
+      enable_os_prober_(true) {
   this->setObjectName("partition_manager");
 
+  // Register meta types used in signals.
   qRegisterMetaType<DeviceList>("DeviceList");
   qRegisterMetaType<OperationList>("OperationList");
+  qRegisterMetaType<PartitionTableType>("PartitionTableType");
   this->initConnections();
 }
 
@@ -150,6 +154,8 @@ PartitionManager::~PartitionManager() {
 }
 
 void PartitionManager::initConnections() {
+  connect(this, &PartitionManager::createPartitionTable,
+          this, &PartitionManager::doCreatePartitionTable);
   connect(this, &PartitionManager::refreshDevices,
           this, &PartitionManager::doRefreshDevices);
   connect(this, &PartitionManager::autoPart,
@@ -158,12 +164,23 @@ void PartitionManager::initConnections() {
           this, &PartitionManager::doManualPart);
 }
 
+void PartitionManager::doCreatePartitionTable(const QString& device_path,
+                                              PartitionTableType table) {
+  if (!CreatePartitionTable(device_path, table)) {
+    qCritical() << "PartitionManager failed to create partition table at"
+                << device_path;
+  }
+  const DeviceList devices = ScanDevices(enable_os_prober_);
+  emit this->devicesRefreshed(devices);
+}
+
 void PartitionManager::doRefreshDevices(bool umount, bool enable_os_prober) {
   // Umount devices first.
   if (umount) {
     UnmountDevices();
   }
 
+  enable_os_prober_ = enable_os_prober;
   const DeviceList devices = ScanDevices(enable_os_prober);
   emit this->devicesRefreshed(devices);
 }
@@ -225,6 +242,7 @@ DeviceList ScanDevices(bool enable_os_prober) {
       } else {
         disk_type = ped_disk_type_get(kPartitionTableMsDos);
       }
+
       if (disk_type != NULL) {
         // Create a new device table but not commit changes to device.
         lp_disk = ped_disk_new_fresh(lp_device, disk_type);
@@ -233,9 +251,13 @@ DeviceList ScanDevices(bool enable_os_prober) {
           // in memory.
           // TODO(xushaohua): Add FormatDisk in operation.h
           Commit(lp_disk);
+        } else {
+          qCritical() << "ScanDevices() new lp_disk is nullptr";
+          continue;
         }
       } else {
         qCritical() << "ScanDevices() disk_type is nullptr";
+        continue;
       }
     } else if (QString(kPartitionTableGPT) == disk_type->name ||
                QString(kPartitionTableMsDos) == disk_type->name) {

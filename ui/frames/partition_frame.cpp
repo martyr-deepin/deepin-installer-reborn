@@ -98,6 +98,8 @@ void PartitionFrame::initConnections() {
           this, &PartitionFrame::showMainFrame);
   connect(new_table_warning_frame_, &NewTableWarningFrame::confirmed,
           this, &PartitionFrame::showNewTableLoadingFrame);
+  connect(new_table_warning_frame_, &NewTableWarningFrame::confirmed,
+          delegate_, &PartitionDelegate::createPartitionTable);
 
   connect(partition_table_warning_frame_, &PartitionTableWarningFrame::reboot,
           this, &PartitionFrame::reboot);

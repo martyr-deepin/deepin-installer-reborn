@@ -306,6 +306,18 @@ void PartitionDelegate::doManualPart(bool simple_mode) {
   }
 }
 
+void PartitionDelegate::createPartitionTable(const QString& device_path) {
+  // TODO(xushaohua): Umount any lvm physical partitions on |device_path|.
+
+  if (IsEfiEnabled()) {
+    emit partition_manager_->createPartitionTable(device_path,
+                                                  PartitionTableType::GPT);
+  } else {
+    emit partition_manager_->createPartitionTable(device_path,
+                                                  PartitionTableType::MsDos);
+  }
+}
+
 void PartitionDelegate::createSimplePartition(const Partition& partition,
                                               PartitionType partition_type,
                                               bool align_start,
