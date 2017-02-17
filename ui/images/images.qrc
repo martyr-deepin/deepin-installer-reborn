@@ -1,4 +1,5 @@
-<RCC>
+<!DOCTYPE RCC>
+<RCC version="1.0">
   <qresource prefix="/images">
     <file>code_hover.png</file>
     <file>mode.png</file>
@@ -75,7 +76,6 @@
     <file>driver_install_32.png</file>
     <file>username_12.png</file>
     <file>linux.png</file>
-    <file>generate_qrc.py</file>
     <file>decrease_press.png</file>
     <file>indicator_active.svg</file>
     <file>increase.png</file>
