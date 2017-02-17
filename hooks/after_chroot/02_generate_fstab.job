@@ -17,10 +17,11 @@ if [ x${DI_LUPIN} = xtrue ]; then
   exit 0
 fi
 
-type ./genfstab >/dev/null 2>&1 || \
+readonly GENFSTAB="${HOOKS_DIR}/after_chroot/genfstab"
+[ -f "${GENFSTAB}" ] || \
   error "require genfstab but it's not found. Abort!"
 umount -v /target/media/cdrom
-./genfstab -p -U /target > /target/etc/fstab
+"${GENFSTAB}" -p -U /target > /target/etc/fstab
 
 # Add swap file option if it is set.
 SWAP_FILE_REQUIRED=$(installer_get "DI_SWAP_FILE_REQUIRED")
