@@ -1,0 +1,7 @@
+Name: qtermwidget
+Author: konsole authors
+License: GPLv2
+Version: 0.7.1
+Home: https://github.com/descent/qt_terminal
+Description: Terminal widget for Qt5
+

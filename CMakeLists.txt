@@ -81,6 +81,7 @@ add_subdirectory(third_party/CuteLogger)
 add_subdirectory(third_party/global_shortcut)
 add_subdirectory(third_party/googletest)
 add_subdirectory(third_party/qrencode)
+add_subdirectory(third_party/qtermwidget)
 add_subdirectory(third_party/timezones)
 add_subdirectory(third_party/zlib_wrapper)
 
