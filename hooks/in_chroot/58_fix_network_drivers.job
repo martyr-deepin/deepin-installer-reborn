@@ -8,27 +8,22 @@
 # Match model name of machine, like "UX31A".
 is_productname_exists() {
   local NAME="$1"
-  local RET
-  RET="$(cat /sys/class/dmi/id/product_name | grep -q "${NAME}" 2>/dev/null)"
-  return "${RET}"
+  grep -q "${NAME}" /sys/class/dmi/id/product_name 2>/dev/null
 }
 
+# Check PCI device with id
 is_pci_exists() {
-  local pci_info
-  pci_info="$(lspci -d "${1}" 2>/dev/null)"
-  if [ -n "${pci_info}" ]; then
-    return 0
-  fi
-  return 1
+  local PCI_ID="$1"
+  local PCI_INFO
+  PCI_INFO=$(lspci -d "${PCI_ID}" 2>/dev/null)
+  return test -n "${PCI_INFO}"
 }
 
 is_usb_exists() {
-  local usb_info
-  usb_info="$(lsusb -d "${1}" 2>/dev/null)"
-  if [ -n "${usb_info}" ]; then
-    return 0
-  fi
-  return 1
+  local USB_ID="$1"
+  local USB_INFO
+  USB_INFO="$(lsusb -d "${USB_ID}" 2>/dev/null)"
+  return test -n "${USB_INFO}"
 }
 
 # Fix X550VC wlan software control
