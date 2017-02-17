@@ -22,10 +22,10 @@ bool RunHook(const QString& hook) {
   const QStringList args = {kHookManagerFile, hook};
   const bool ok = RunScriptFile(args, output, err);
   if (!output.isEmpty()) {
-    qDebug() << GetFileName(hook) << "\n" << output;
+    qDebug() << "OUT:" << GetFileName(hook) << "\n" << output;
   }
   if (!err.isEmpty()) {
-    qCritical() << GetFileName(hook) << "\n" << err;
+    qCritical() << "ERR:" << GetFileName(hook) << "\n" << err;
   }
   return ok;
 }
