@@ -180,7 +180,8 @@ main() {
         ;;
       efi)
         format_partition "${PART_PATH}" fat32
-        MP_LIST="${MP_LIST};${PART_PATH}=${PART_MP}"
+        # No need to append EFI partition to mount point list.
+        #MP_LIST="${MP_LIST};${PART_PATH}=${PART_MP}"
 
         installer_set "DI_BOOTLOADER" "${PART_PATH}"
 
@@ -191,7 +192,6 @@ main() {
         ;;
       *)
         format_partition "${PART_PATH}" "${PART_FS}"
-        # TODO(xushaohua): remove semicolon;
         MP_LIST="${MP_LIST};${PART_PATH}=${PART_MP}"
         ;;
     esac
