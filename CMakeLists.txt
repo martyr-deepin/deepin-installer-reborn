@@ -84,6 +84,12 @@ add_subdirectory(third_party/qrencode)
 add_subdirectory(third_party/timezones)
 add_subdirectory(third_party/zlib_wrapper)
 
+# Import resource folders
+add_subdirectory(docs)
+add_subdirectory(hooks)
+add_subdirectory(resources)
+add_subdirectory(tools)
+
 
 set(BASE_FILES
     base/command.cpp
@@ -715,39 +721,9 @@ install(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-reborn-pkexec
                  ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
                  ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-install(
-    FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-oem.svg
-          ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-reborn.svg
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps
-)
-install(
-    FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-oem.desktop
-          ${CMAKE_CURRENT_SOURCE_DIR}/resources/deepin-installer-reborn.desktop
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications
-)
-install(
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hooks ${CMAKE_CURRENT_SOURCE_DIR}/tools
-    DESTINATION ${INSTALLER_SHARE_DIR}
-    FILES_MATCHING PATTERN "*"
-    PERMISSIONS OWNER_READ OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
-)
+
 install(
     DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/i18n
     DESTINATION ${INSTALLER_SHARE_DIR}
     FILES_MATCHING PATTERN "*"
-)
-
-# Install resources/ folde, excluding desktop file and icons.
-install(
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/resources
-    DESTINATION ${INSTALLER_SHARE_DIR}
-    FILES_MATCHING PATTERN "*"
-    PATTERN "com.*.policy" EXCLUDE
-    PATTERN "deepin-installer-oem*" EXCLUDE
-    PATTERN "deepin-installer-reborn*" EXCLUDE
-)
-# Install PolicyKit file.
-install(
-    FILES ${CMAKE_CURRENT_SOURCE_DIR}/resources/com.deepin.pkexec.installer.policy
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/polkit-1/actions/
 )
