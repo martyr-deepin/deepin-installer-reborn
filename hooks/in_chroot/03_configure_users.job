@@ -3,6 +3,13 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+# Add user to group which is found in /etc/group
+add_user_to_existed_group() {
+  local USER=$1
+  local GROUP=$2
+  grep -q "^${GROUP}:" /etc/group 2>/dev/null && gpasswd -a "${USER}" "${GROUP}"
+}
+
 # Setup username, password and hostname.
 setup_username_password() {
   local DI_HOSTNAME DI_PASSWORD DI_USERNAME REAL_PASSWORD
@@ -24,15 +31,15 @@ setup_username_password() {
 
   # Add user to groups.
   set +e
-  gpasswd -a ${DI_USERNAME} sudo
-  gpasswd -a ${DI_USERNAME} users
-  gpasswd -a ${DI_USERNAME} wheel
-  gpasswd -a ${DI_USERNAME} netdev
-  gpasswd -a ${DI_USERNAME} storage
-  gpasswd -a ${DI_USERNAME} lp
-  gpasswd -a ${DI_USERNAME} scanner
-  gpasswd -a ${DI_USERNAME} lpadmin
-  gpasswd -a ${DI_USERNAME} network
+  add_user_to_existed_group "${DI_USERNAME}" lp
+  add_user_to_existed_group "${DI_USERNAME}" lpadmin
+  add_user_to_existed_group "${DI_USERNAME}" netdev
+  add_user_to_existed_group "${DI_USERNAME}" network
+  add_user_to_existed_group "${DI_USERNAME}" scanner
+  add_user_to_existed_group "${DI_USERNAME}" storage
+  add_user_to_existed_group "${DI_USERNAME}" sudo
+  add_user_to_existed_group "${DI_USERNAME}" users
+  add_user_to_existed_group "${DI_USERNAME}" wheel
   set -e
 
   msg "Fix Home directory permission to ${DI_USERNAME}."
