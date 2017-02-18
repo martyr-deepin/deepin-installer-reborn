@@ -14,6 +14,11 @@ QHash<QString, QString> ParseDevDir(const QString& dir_name) {
   QHash<QString, QString> result;
 
   QDir dir(dir_name);
+  if (!dir.exists()) {
+    // Returns an empty list if that folder does not exist.
+    return result;
+  }
+
   const QFileInfoList items = dir.entryInfoList(QDir::NoDotAndDotDot |
                                                 QDir::Files);
   for (const QFileInfo& info : items) {
