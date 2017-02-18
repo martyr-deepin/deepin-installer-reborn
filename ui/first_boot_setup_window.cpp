@@ -19,13 +19,13 @@ FirstBootSetupWindow::FirstBootSetupWindow(QWidget *parent) : QFrame(parent) {
 
   this->initUI();
   this->initConnections();
+
+  // Read default settings.
+  system_info_frame_->readConf();
 }
 
 void FirstBootSetupWindow::fullscreen() {
   this->showFullScreen();
-
-  // Read default settings.
-  system_info_frame_->readConf();
 }
 
 void FirstBootSetupWindow::resizeEvent(QResizeEvent *event) {

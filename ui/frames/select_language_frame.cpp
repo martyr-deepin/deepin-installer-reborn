@@ -14,19 +14,13 @@
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "ui/delegates/language_delegate.h"
 #include "ui/frames/consts.h"
 #include "ui/models/language_list_model.h"
 #include "ui/views/frameless_list_view.h"
 #include "ui/widgets/nav_button.h"
 
 namespace installer {
-
-namespace {
-
-const char kDefaultLanguageFile[] = I18N_DIR "/en_US.qm";
-const char kLanguageFileTpl[] = I18N_DIR "/installer-%1.qm";
-
-}  // namespace
 
 SelectLanguageFrame::SelectLanguageFrame(QWidget* parent)
     : QFrame(parent),
@@ -128,11 +122,11 @@ void SelectLanguageFrame::updateTranslator(const QString& locale) {
     // Remove the old translator if it is loaded.
     qApp->removeTranslator(current_translator_);
   }
-  const QString locale_file(QString(kLanguageFileTpl).arg(locale));
+  const QString locale_file(GetLocalePath(locale));
   if (!current_translator_->load(locale_file)) {
     qWarning() << "Failed to load locale file:" << locale_file;
     // Reset to English.
-    current_translator_->load(kDefaultLanguageFile);
+    current_translator_->load(GetDefaultLocalePath());
   }
   if (!qApp->installTranslator(current_translator_)) {
     qWarning() << "Failed to update ui language at:" << locale_file;

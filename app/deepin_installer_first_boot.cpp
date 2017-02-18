@@ -8,11 +8,13 @@
 #include <QApplication>
 #include <QDebug>
 #include <QIcon>
+#include <QTranslator>
 
 #include "base/consts.h"
 #include "service/log_manager.h"
 #include "service/settings_manager.h"
 #include "sysinfo/users.h"
+#include "ui/delegates/language_delegate.h"
 #include "ui/first_boot_setup_window.h"
 
 int main(int argc, char* argv[]) {
@@ -26,6 +28,17 @@ int main(int argc, char* argv[]) {
   if (!installer::HasRootPrivilege()) {
     qCritical() << "Root privilege is required!";
   }
+
+  // Set language.
+  QTranslator translator;
+  // TODO(xushaohua): Read locale from settings.
+  const QString locale;
+  if (locale.isEmpty()) {
+    translator.load(installer::GetDefaultLocalePath());
+  } else {
+    translator.load(installer::GetLocalePath(locale));
+  }
+  app.installTranslator(&translator);
 
   installer::FirstBootSetupWindow window;
   window.fullscreen();
