@@ -5,9 +5,6 @@ project(qtermwidget)
 include(GNUInstallDirs)
 include(CheckFunctionExists)
 
-set(CMAKE_C_COMPILER  /usr/bin/clang)
-set(CMAKE_CXX_COMPILER  /usr/bin/clang++)
-
 option(BUILD_TEST "Build test application. Default OFF." OFF)
 # just change version for releases
 set(QTERMWIDGET_VERSION_MAJOR "0")

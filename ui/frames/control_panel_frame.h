@@ -9,6 +9,7 @@
 class QPushButton;
 class QStackedWidget;
 class QTabBar;
+class QTermWidget;
 class QTextEdit;
 class QTimer;
 
@@ -56,6 +57,8 @@ class ControlPanelFrame : public QFrame {
   QPushButton* simulate_slide_button_ = nullptr;
 
   QTextEdit* settings_viewer_ = nullptr;
+
+  QTermWidget* term_widget_ = nullptr;
 
   QTimer* timer_ = nullptr;
   QString log_file_path_;

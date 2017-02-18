@@ -395,6 +395,7 @@ set(LINK_LIBS
     CuteLogger
     global_shortcut
     qrencode
+    qtermwidget5
     zlib_wrapper
     )
 
@@ -421,6 +422,10 @@ add_executable(deepin-installer-reborn
                ui/images/images.qrc
                ui/styles/styles.qrc
                ui/widgets/spinner/spinner.qrc
+
+               # Also include color-schems used in qtermwidget.
+               third_party/qtermwidget/lib/color-schemes/color-schemes.qrc
+               third_party/qtermwidget/lib/kb-layouts/kb-layouts.qrc
                )
 
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})

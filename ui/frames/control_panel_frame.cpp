@@ -17,6 +17,7 @@
 #include "service/log_manager.h"
 #include "ui/widgets/pointer_button.h"
 #include "ui/widgets/table_combo_box.h"
+#include "third_party/qtermwidget/lib/qtermwidget.h"
 
 namespace installer {
 
@@ -118,6 +119,7 @@ void ControlPanelFrame::initUI() {
   tab_bar_->addTab("Log");
   tab_bar_->addTab("Pages");
   tab_bar_->addTab("Settings");
+  tab_bar_->addTab("Terminal");
 
   log_viewer_ = new QTextEdit();
   log_viewer_->setObjectName("log_viewer");
@@ -182,10 +184,20 @@ void ControlPanelFrame::initUI() {
   settings_viewer_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   settings_viewer_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+  term_widget_ = new QTermWidget();
+  QFont term_font = this->font();
+  term_font.setPixelSize(14);
+  term_font.setFamily("Monospace");
+  term_widget_->setTerminalFont(term_font);
+  // Hide scroll bar.
+  term_widget_->setScrollBarPosition(QTermWidget::NoScrollBar);
+  term_widget_->setColorScheme("WhiteOnBlack");
+
   stacked_widget_ = new QStackedWidget();
   stacked_widget_->addWidget(log_viewer_);
   stacked_widget_->addWidget(page_frame);
   stacked_widget_->addWidget(settings_viewer_);
+  stacked_widget_->addWidget(term_widget_);
 
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
