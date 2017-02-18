@@ -7,7 +7,8 @@
 # This script is used to setup system info after installation.
 
 # Absolute path to config file.
-# Do not read from/write to this file, call installer_get/installer_set instead.
+# Do not read/write this file directly, call installer_get and installer_set
+# instead.
 CONF_FILE=/etc/deepin-installer.conf
 
 # Absolute path to hooks folder.

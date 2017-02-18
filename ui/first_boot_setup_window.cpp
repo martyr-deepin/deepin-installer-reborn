@@ -23,6 +23,9 @@ FirstBootSetupWindow::FirstBootSetupWindow(QWidget *parent) : QFrame(parent) {
 
 void FirstBootSetupWindow::fullscreen() {
   this->showFullScreen();
+
+  // Read default settings.
+  system_info_frame_->readConf();
 }
 
 void FirstBootSetupWindow::resizeEvent(QResizeEvent *event) {
@@ -43,7 +46,6 @@ void FirstBootSetupWindow::initUI() {
   stacked_layout_ = new QStackedLayout(this);
   stacked_layout_->setContentsMargins(0, 0, 0, 0);
   stacked_layout_->setSpacing(0);
-
   stacked_layout_->addWidget(system_info_frame_);
 
   this->setLayout(stacked_layout_);
