@@ -141,6 +141,8 @@ set(SERVICE_FILES
     service/backend/wifi_inspect_worker.cpp
     service/backend/wifi_inspect_worker.h
 
+    service/first_boot_hook_worker.cpp
+    service/first_boot_hook_worker.h
     service/hooks_manager.cpp
     service/hooks_manager.h
     service/log_manager.cpp
@@ -344,6 +346,12 @@ set(UI_FILES
     ui/xrandr/multi_head_worker.h
     ui/xrandr/xrandr_wrapper.cpp
     ui/xrandr/xrandr_wrapper.h
+
+    ui/images/images.qrc
+    ui/styles/styles.qrc
+
+    # Required by SpinnerLabel.
+    ui/widgets/spinner/spinner.qrc
     )
 
 set(ROOT_UNITTEST_FILES
@@ -423,12 +431,6 @@ add_executable(deepin-installer-reborn
                ${SYSINFO_FILES}
                ${UI_FILES}
 
-               ui/images/images.qrc
-               ui/styles/styles.qrc
-
-               # Required by SpinnerLabel.
-               ui/widgets/spinner/spinner.qrc
-
                # Also include color-schems used in qtermwidget.
                third_party/qtermwidget/lib/color-schemes/color-schemes.qrc
                third_party/qtermwidget/lib/kb-layouts/kb-layouts.qrc
@@ -464,11 +466,7 @@ add_executable(deepin-installer-first-boot
                ${SYSINFO_FILES}
                ${UI_FILES}
 
-               ui/images/images.qrc
-               ui/styles/styles.qrc
 
-               # Required by SpinnerLabel.
-               ui/widgets/spinner/spinner.qrc
                )
 target_link_libraries(deepin-installer-first-boot ${LINK_LIBS})
 
