@@ -10,6 +10,7 @@
 #include <QStackedLayout>
 
 #include "service/settings_manager.h"
+#include "ui/frames/first_boot_loading_frame.h"
 #include "ui/frames/system_info_frame.h"
 
 namespace installer {
@@ -42,11 +43,13 @@ void FirstBootSetupWindow::initUI() {
   background_label_ = new QLabel(this);
 
   system_info_frame_ = new SystemInfoFrame(this);
+  loading_frame_ = new FirstBootLoadingFrame(this);
 
   stacked_layout_ = new QStackedLayout(this);
   stacked_layout_->setContentsMargins(0, 0, 0, 0);
   stacked_layout_->setSpacing(0);
   stacked_layout_->addWidget(system_info_frame_);
+  stacked_layout_->addWidget(loading_frame_);
 
   this->setLayout(stacked_layout_);
   this->setContentsMargins(0, 36, 0, 36);
@@ -66,6 +69,10 @@ void FirstBootSetupWindow::updateBackground() {
 }
 
 void FirstBootSetupWindow::onSystemInfoFinished() {
+  // Display loading frame.
+  stacked_layout_->setCurrentWidget(loading_frame_);
+
+  // TODO(xushaohua): Add a worker.
   // TODO(xushaohua): Call "hooks/first_boot_setup.sh".
 }
 

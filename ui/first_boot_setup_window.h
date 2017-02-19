@@ -12,6 +12,7 @@ class QStackedLayout;
 
 namespace installer {
 
+class FirstBootLoadingFrame;
 class SystemInfoFrame;
 
 // Main window of deepin_installer_first_boot.
@@ -35,6 +36,7 @@ class FirstBootSetupWindow : public QFrame {
 
   QLabel* background_label_ = nullptr;
   SystemInfoFrame* system_info_frame_ = nullptr;
+  FirstBootLoadingFrame* loading_frame_ = nullptr;
   QStackedLayout* stacked_layout_ = nullptr;
 
  private slots:

@@ -246,6 +246,8 @@ set(UI_FILES
     ui/frames/control_panel_frame.h
     ui/frames/disk_space_insufficient_frame.cpp
     ui/frames/disk_space_insufficient_frame.h
+    ui/frames/first_boot_loading_frame.cpp
+    ui/frames/first_boot_loading_frame.h
     ui/frames/install_failed_frame.cpp
     ui/frames/install_failed_frame.h
     ui/frames/install_progress_frame.cpp
@@ -423,6 +425,8 @@ add_executable(deepin-installer-reborn
 
                ui/images/images.qrc
                ui/styles/styles.qrc
+
+               # Required by SpinnerLabel.
                ui/widgets/spinner/spinner.qrc
 
                # Also include color-schems used in qtermwidget.
@@ -462,6 +466,9 @@ add_executable(deepin-installer-first-boot
 
                ui/images/images.qrc
                ui/styles/styles.qrc
+
+               # Required by SpinnerLabel.
+               ui/widgets/spinner/spinner.qrc
                )
 target_link_libraries(deepin-installer-first-boot ${LINK_LIBS})
 
