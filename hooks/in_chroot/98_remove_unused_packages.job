@@ -37,7 +37,10 @@ detect_vbox() {
 }
 
 # TODO(xushaohua): Support "setup_after_reboot"
-REMOVE_PKGS+=(deepin-installer-reborn)
+# Uninstall "deepin-installer-reborn" only if reboot_setup is false.
+if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
+  REMOVE_PKGS+=(deepin-installer-reborn)
+fi
 
 if grep -q boot=casper /proc/cmdline; then
   REMOVE_PKGS+=("casper")
