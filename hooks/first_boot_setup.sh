@@ -11,15 +11,12 @@
 # instead.
 CONF_FILE=/etc/deepin-installer.conf
 
-# Absolute path to hooks folder.
-HOOKS_DIR=/usr/share/deepin-installer-reborn
+. ./basic_utils.sh
 
-. "${HOOKS_DIR}/basic_utils.sh"
-
-. "${HOOKS_DIR}/in_chroot/01_setup_locale_timezone.job"
-. "${HOOKS_DIR}/in_chroot/03_configure_users.job"
-. "${HOOKS_DIR}/in_chroot/04_setup_keyboard.job"
-. "${HOOKS_DIR}/in_chroot/05_setup_avatar.job"
+. ./in_chroot/01_setup_locale_timezone.job
+. ./in_chroot/03_configure_users.job
+. ./in_chroot/04_setup_keyboard.job
+. ./in_chroot/05_setup_avatar.job
 
 main() {
   setup_avatar && \
@@ -30,4 +27,4 @@ main() {
   # TODO(xushaohua): Clear packages.
 }
 
-main
+#main

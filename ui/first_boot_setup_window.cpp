@@ -4,25 +4,40 @@
 
 #include "ui/first_boot_setup_window.h"
 
+#include <QApplication>
 #include <QDebug>
 #include <QLabel>
 #include <QResizeEvent>
 #include <QStackedLayout>
+#include <QThread>
 
+#include "service/first_boot_hook_worker.h"
 #include "service/settings_manager.h"
 #include "ui/frames/first_boot_loading_frame.h"
 #include "ui/frames/system_info_frame.h"
 
 namespace installer {
 
-FirstBootSetupWindow::FirstBootSetupWindow(QWidget *parent) : QFrame(parent) {
+FirstBootSetupWindow::FirstBootSetupWindow(QWidget *parent)
+    : QFrame(parent),
+      hook_worker_thread_(new QThread(this)),
+      hook_worker_(new FirstBootHookWorker()) {
   this->setObjectName("first_boot_setup_window");
+
+  hook_worker_thread_->start();
+  hook_worker_->moveToThread(hook_worker_thread_);
 
   this->initUI();
   this->initConnections();
 
   // Read default settings.
   system_info_frame_->readConf();
+}
+
+FirstBootSetupWindow::~FirstBootSetupWindow() {
+  qCritical() << "destructor";
+  hook_worker_thread_->quit();
+  hook_worker_thread_->wait(3);
 }
 
 void FirstBootSetupWindow::fullscreen() {
@@ -37,6 +52,9 @@ void FirstBootSetupWindow::resizeEvent(QResizeEvent *event) {
 void FirstBootSetupWindow::initConnections() {
   connect(system_info_frame_, &SystemInfoFrame::finished,
           this, &FirstBootSetupWindow::onSystemInfoFinished);
+
+  connect(hook_worker_, &FirstBootHookWorker::hookFinished,
+          this, &FirstBootSetupWindow::onHookFinished);
 }
 
 void FirstBootSetupWindow::initUI() {
@@ -68,12 +86,20 @@ void FirstBootSetupWindow::updateBackground() {
   background_label_->setFixedSize(size());
 }
 
+void FirstBootSetupWindow::onHookFinished(bool ok) {
+  if (!ok) {
+    qCritical() << "First boot hook failed!";
+  }
+
+  // TODO(xushaohua): Remove first-boot-setup itself.
+  qApp->exit(1);
+}
+
 void FirstBootSetupWindow::onSystemInfoFinished() {
   // Display loading frame.
   stacked_layout_->setCurrentWidget(loading_frame_);
 
-  // TODO(xushaohua): Add a worker.
-  // TODO(xushaohua): Call "hooks/first_boot_setup.sh".
+  emit hook_worker_->startHook();
 }
 
 }  // namespace installer

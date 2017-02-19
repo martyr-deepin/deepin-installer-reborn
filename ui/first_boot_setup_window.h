@@ -9,10 +9,12 @@
 class QLabel;
 class QResizeEvent;
 class QStackedLayout;
+class QThread;
 
 namespace installer {
 
 class FirstBootLoadingFrame;
+class FirstBootHookWorker;
 class SystemInfoFrame;
 
 // Main window of deepin_installer_first_boot.
@@ -21,6 +23,7 @@ class FirstBootSetupWindow : public QFrame {
 
  public:
   explicit FirstBootSetupWindow(QWidget* parent = nullptr);
+  ~FirstBootSetupWindow();
 
   // Show fullscreen.
   void fullscreen();
@@ -39,7 +42,13 @@ class FirstBootSetupWindow : public QFrame {
   FirstBootLoadingFrame* loading_frame_ = nullptr;
   QStackedLayout* stacked_layout_ = nullptr;
 
+  QThread* hook_worker_thread_ = nullptr;
+  FirstBootHookWorker* hook_worker_ = nullptr;
+
  private slots:
+  // Handles result of hook worker.
+  void onHookFinished(bool ok);
+
   // Run "first_boot_setup.sh" after system_info_frame_ is finished.
   void onSystemInfoFinished();
 };
