@@ -59,7 +59,7 @@ bool DeleteConfigFile();
 void WriteUEFI(bool is_efi);
 //void WriteInstallerMode(bool is_simple_mode);
 
-// Get current locale if set.
+// Get current locale.
 QString ReadLocale();
 void WriteLocale(const QString& locale);
 void WriteUsername(const QString& username);

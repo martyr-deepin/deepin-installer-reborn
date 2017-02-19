@@ -31,8 +31,7 @@ int main(int argc, char* argv[]) {
 
   // Set language.
   QTranslator translator;
-  // TODO(xushaohua): Read locale from settings.
-  const QString locale;
+  const QString locale(installer::ReadLocale());
   if (locale.isEmpty()) {
     translator.load(installer::GetDefaultLocalePath());
   } else {

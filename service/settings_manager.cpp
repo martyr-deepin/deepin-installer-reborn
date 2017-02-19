@@ -29,6 +29,8 @@ namespace {
 // Absolute path to oem dir.
 QString g_oem_dir;
 
+const char kLocaleKey[] = "DI_LOCALE";
+
 // Absolute path to installer config file.
 const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
 
@@ -232,7 +234,22 @@ void WriteUEFI(bool is_efi) {
 
 QString ReadLocale() {
   QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
-  return settings.value("DI_LOCALE", kDefaultLocale).toString();
+  QString locale;
+
+  // Get user-selected locale.
+  locale = settings.value(kLocaleKey).toString();
+  if (!locale.isEmpty()) {
+    return locale;
+  }
+
+  // Get default locale in settings.ini.
+  locale = settings.value(kSelectLanguageDefaultLocale).toString();
+  if (!locale.isEmpty()) {
+    return locale;
+  }
+
+  // Get fallback locale.
+  return kDefaultLocale;
 }
 
 void WriteLocale(const QString& locale) {
