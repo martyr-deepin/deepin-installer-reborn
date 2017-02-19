@@ -32,6 +32,7 @@ FirstBootSetupWindow::FirstBootSetupWindow(QWidget *parent)
 
   // Read default settings.
   system_info_frame_->readConf();
+  system_info_frame_->scanTimezone();
 }
 
 FirstBootSetupWindow::~FirstBootSetupWindow() {
