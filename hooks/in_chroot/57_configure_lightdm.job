@@ -6,27 +6,53 @@
 # Config lightdm greeter to deepin-lightdm-greeter.
 # Update background of lightdm.
 
-cat > /etc/X11/default-display-manager <<EOF
+# Set lightdm as default display manager.
+setup_default_dm() {
+  cat > /etc/X11/default-display-manager <<EOF
 /usr/sbin/lightdm
 EOF
+}
 
-if [ -f /etc/lightdm/lightdm.conf ]; then
-  sed -i -r -e "s|^#.*greeter-session=.*\$|greeter-session=lightdm-deepin-greeter|" \
-    -e "s|^#.*user-session=.*\$|user-session=deepin|" \
-  /etc/lightdm/lightdm.conf
-fi
+enable_deepin_lightdm_greeter() {
+  if [ -f /etc/lightdm/lightdm.conf ]; then
+    sed -i -r \
+      -e "s|^#.*greeter-session=.*\$|greeter-session=lightdm-deepin-greeter|" \
+      -e "s|^#.*user-session=.*\$|user-session=deepin|" \
+      /etc/lightdm/lightdm.conf
+  fi
+}
 
-SRC_FILE="${OEM_DIR}/lightdm.png"
-DEST_FILE=/usr/share/backgrounds/lightdm.png
+# Constomize lightdm background.
+update_background() {
+  local SRC_FILE
+  SRC_FILE="${OEM_DIR}/lightdm.png"
+  local DEST_FILE=/usr/share/backgrounds/lightdm.png
 
-if [ -f "${SRC_FILE}" ]; then
-  cp -f "${SRC_FILE}" "${DEST_FILE}" || \
-    warn_exit "Failed to copy lightdm background"
-  chmod a+r "${DEST_FILE}"
+  if [ -f "${SRC_FILE}" ]; then
+    install -m644 "${SRC_FILE}" "${DEST_FILE}" || \
+      warn "Failed to copy lightdm background"
 
-  # Update lightdm background path in config file.
-  USERNAME=$(installer_get "DI_USERNAME")
-  USER_CONF="/var/lib/AccountsService/users/${USERNAME}"
-  deepin-installer-settings set "${USER_CONF}" "Users" "GreeterBackground" \
-    "${DEST_FILE}"
-fi
+    # Update lightdm background path in config file.
+    local USERNAME USER_CONF
+    USERNAME=$(installer_get "DI_USERNAME")
+    USER_CONF="/var/lib/AccountsService/users/${USERNAME}"
+    if [ -f "${DEST_FILE}" ]; then
+      deepin-installer-settings set "${USER_CONF}" "Users" "GreeterBackground" \
+        "${DEST_FILE}"
+    fi
+  fi
+}
+
+main() {
+  setup_default_dm
+  update_background
+
+  # Do no replace greeter if reboot_setup is enabled during installation
+  # process.
+  # Instead, call this function in first_boot_setup.sh.
+  if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
+    enable_deepin_lightdm_greeter
+  fi
+}
+
+main

@@ -5,6 +5,9 @@
 
 # Backup log to disk.
 
-cp /var/log/deepin-installer-reborn.log /target/var/log/
+readonly SRC=/var/log/deepin-installer-reborn.log
+if [ -f "${SRC}" ]; then
+  cp -f "${SRC}" /target/var/log/
+fi
 
 exit 0

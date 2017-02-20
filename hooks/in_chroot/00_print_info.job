@@ -6,4 +6,5 @@
 # Print system info
 blkid
 mount
+
 exit 0

@@ -36,7 +36,6 @@ detect_vbox() {
   return 1
 }
 
-# TODO(xushaohua): Support "setup_after_reboot"
 # Uninstall "deepin-installer-reborn" only if reboot_setup is false.
 if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
   REMOVE_PKGS+=(deepin-installer-reborn)

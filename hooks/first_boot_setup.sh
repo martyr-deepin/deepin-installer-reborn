@@ -17,6 +17,7 @@ CONF_FILE=/etc/deepin-installer.conf
 . ./in_chroot/03_configure_users.job
 . ./in_chroot/04_setup_keyboard.job
 . ./in_chroot/05_setup_avatar.job
+. ./in_chroot/57_configure_lightdm.job
 
 # Purge installer package
 uninstall_installer() {
@@ -29,7 +30,10 @@ main() {
   setup_locale_timezone && \
   setup_username_password
 
-  uninstall_installer()
+  uninstall_installer
+
+  # Replace default lightdm greeter.
+  enable_deepin_lightdm_greeter
 }
 
 main
