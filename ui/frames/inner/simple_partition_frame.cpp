@@ -319,7 +319,15 @@ void SimplePartitionFrame::repaintDevices() {
 
   // Draw partitions.
   int row = 0, column = 0;
+  const QString installer_device_path(GetInstallerDevicePath());
+  qDebug() << "installer_device_path:" << installer_device_path;
   for (const Device& device : delegate_->realDevices()) {
+    // Ignores installer device.
+    if (installer_device_path.startsWith(device.path)) {
+      qDebug() << "Ignore installer device:" << installer_device_path;
+      continue;
+    }
+
     DeviceModelLabel* device_model_label = new DeviceModelLabel();
     device_model_label->setText(GetDeviceModelAndCap(device));
     device_model_label->setFixedSize(kWindowWidth, 20);

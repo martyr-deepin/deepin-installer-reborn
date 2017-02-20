@@ -281,7 +281,14 @@ void AdvancedPartitionFrame::repaintDevices() {
   // Remove all widgets in partition layout.
   ClearLayout(partition_layout_);
 
+  const QString installer_device_path(GetInstallerDevicePath());
   for (const Device& device : delegate_->devices()) {
+    // Ignores installer device.
+    if (installer_device_path.startsWith(device.path)) {
+      qDebug() << "Ignore installer device:" << installer_device_path;
+      continue;
+    }
+
     QLabel* model_label = new QLabel();
     model_label->setObjectName("model_label");
     model_label->setText(GetDeviceModelAndCap(device));

@@ -578,16 +578,7 @@ void PartitionDelegate::refreshVisual() {
 
   devices_ = real_devices_;
 
-  const QString installer_device_path(GetInstallerDevicePath());
-  qDebug() << "installer_device_path:" << installer_device_path;
-
   for (Device& device : devices_) {
-    // Ignores installer device.
-    if (installer_device_path.startsWith(device.path)) {
-      qDebug() << "Ignore install device:" << installer_device_path;
-      continue;
-    }
-
     PartitionList partitions;
     for (const Partition& partition : device.partitions) {
       if (partition.type == PartitionType::Normal ||
@@ -605,7 +596,6 @@ void PartitionDelegate::refreshVisual() {
   }
 
   for (Device& device : devices_) {
-
     // Merge unallocated partitions.
     MergeUnallocatedPartitions(device.partitions);
 
