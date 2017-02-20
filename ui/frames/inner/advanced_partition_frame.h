@@ -61,12 +61,33 @@ class AdvancedPartitionFrame : public QFrame {
   QVBoxLayout* partition_layout_ = nullptr;
   QPushButton* bootloader_button_ = nullptr;
   QPushButton* editing_button_ = nullptr;
-  // Display message at bottom of page.
-  // Its content is set in validate() and is cleared when NewPartitionFrame or
-  // EditPartitionFrame is raised.
-  QLabel* msg_label_ = nullptr;
+
+  QFrame* msg_container_frame_ = nullptr;
+  QVBoxLayout* msg_layout_ = nullptr;
+  QLabel* msg_head_label_ = nullptr;
+  enum class ErrorMessageType {
+    BootTooSmall,
+    EfiMissing,
+    EfiTooSmall,
+    NoMorePrimNum,
+    RootMissing,
+    RootTooSmall,
+  };
+  struct ErrorMessage {
+    QString text;
+    ErrorMessageType type;
+  };
+  typedef QVector<ErrorMessage> ErrorMessageList;
+  ErrorMessageList error_messages_;
+
+  // Add a new error message to list.
+  // And show error message container.
+  void addErrorMessage(const QString& text, ErrorMessageType type);
 
  private slots:
+  // Clear error message list and hide message container.
+  void clearErrorMessages();
+
   void onDeletePartitionTriggered(const Partition& partition);
   void onDeviceRefreshed();
   void onEditButtonToggled(bool toggle);

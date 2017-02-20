@@ -25,12 +25,16 @@ namespace {
 
 const int kWindowWidth = 960;
 
+// Vertical spacing between error message labels.
+const int kMsgLabelSpacing = 2;
+
 }  // namespace
 
 AdvancedPartitionFrame::AdvancedPartitionFrame(PartitionDelegate* delegate_,
                                                QWidget* parent)
     : QFrame(parent),
-      delegate_(delegate_) {
+      delegate_(delegate_),
+      error_messages_() {
   this->setObjectName("advanced_partition_frame");
 
   this->initUI();
@@ -38,6 +42,9 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(PartitionDelegate* delegate_,
 }
 
 bool AdvancedPartitionFrame::validate() {
+  // Clear error messages first.
+  this->clearErrorMessages();
+
   bool efi_is_set = false;
   bool efi_large_enough = false;
   bool root_is_set = false;
@@ -91,8 +98,8 @@ bool AdvancedPartitionFrame::validate() {
   }
 
   if (!root_is_set) {
-    msg_label_->setText(tr("A root partition is required"));
-    return false;
+    addErrorMessage(tr("A root partition is required"),
+                    ErrorMessageType::RootMissing);
   }
 
   if (swap_is_set) {
@@ -107,38 +114,40 @@ bool AdvancedPartitionFrame::validate() {
     root_large_enough = (real_bytes >= minimum_bytes);
   }
 
-  if (!root_large_enough) {
-    msg_label_->setText(
-        tr("At least %1 GB is required for root partition")
-            .arg(root_required));
-    return false;
+  // Check root size only if root is set.
+  if (root_is_set && !root_large_enough) {
+    addErrorMessage(tr("At least %1 GB is required for root partition")
+                        .arg(root_required),
+                    ErrorMessageType::RootTooSmall);
   }
 
   if (IsEfiEnabled()) {
     if (!efi_is_set) {
-      msg_label_->setText(tr("An EFI partition is required"));
-      return false;
+      addErrorMessage(tr("An EFI partition is required"),
+                      ErrorMessageType::EfiMissing);
     }
     if (!efi_large_enough) {
-      msg_label_->setText(
-          tr("At least %1 MB is required for EFI partition")
-              .arg(efi_recommended));
-      return false;
+      addErrorMessage(tr("At least %1 MB is required for EFI partition")
+                          .arg(efi_recommended),
+                      ErrorMessageType::EfiTooSmall);
     }
   }
 
   if (boot_is_set && !boot_large_enough) {
-    msg_label_->setText(
-        tr("At least %1 MB is required for /boot partition")
-            .arg(boot_recommended));
-    return false;
+    addErrorMessage(tr("At least %1 MB is required for /boot partition")
+                        .arg( boot_recommended),
+                    ErrorMessageType::BootTooSmall);
   }
 
-  // Create swap file is swap partition is not found.
-  WriteRequiringSwapFile(!swap_is_set);
+  if (error_messages_.isEmpty()) {
+    // No error found.
 
-  msg_label_->clear();
-  return true;
+    // Create swap file is swap partition is not found.
+    WriteRequiringSwapFile(!swap_is_set);
+    return true;
+  } else {
+    return false;
+  }
 }
 
 void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
@@ -147,6 +156,7 @@ void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
 
 void AdvancedPartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
+    msg_head_label_->setText(tr("error title"));
     bootloader_tip_button_->setText(tr("Select location for boot loader"));
     if (editing_button_->isChecked()) {
       editing_button_->setText(tr("Done"));
@@ -171,12 +181,33 @@ void AdvancedPartitionFrame::initConnections() {
   // Clear content in msg_label when NewPartitionFrame or EditPartitionFrame is
   // raised.
   connect(this, &AdvancedPartitionFrame::requestEditPartitionFrame,
-          msg_label_, &QLabel::clear);
+          this, &AdvancedPartitionFrame::clearErrorMessages);
   connect(this, &AdvancedPartitionFrame::requestNewPartitionFrame,
-          msg_label_, &QLabel::clear);
+          this, &AdvancedPartitionFrame::clearErrorMessages);
 }
 
 void AdvancedPartitionFrame::initUI() {
+  msg_head_label_ = new QLabel();
+  msg_head_label_->setObjectName("err_msg_top_label");
+  msg_head_label_->setText(tr("error title"));
+
+  msg_layout_ = new QVBoxLayout();
+  msg_layout_->setContentsMargins(0, 0, 0, 0);
+  msg_layout_->setSpacing(kMsgLabelSpacing);
+
+  QVBoxLayout* msg_container_layout = new QVBoxLayout();
+  msg_container_layout->setContentsMargins(0, 0, 0, 0);
+  msg_container_layout->setSpacing(0);
+  msg_container_layout->addWidget(msg_head_label_);
+  msg_container_layout->addSpacing(kMsgLabelSpacing);
+  msg_container_layout->addLayout(msg_layout_);
+
+  msg_container_frame_ = new QFrame();
+  msg_container_frame_->setObjectName("msg_container_frame");
+  msg_container_frame_->setContentsMargins(0, 0, 0, 0);
+  msg_container_frame_->setFixedWidth(kWindowWidth);
+  msg_container_frame_->setLayout(msg_container_layout);
+
   partition_button_group_ = new QButtonGroup(this);
 
   partition_layout_ = new QVBoxLayout();
@@ -190,6 +221,18 @@ void AdvancedPartitionFrame::initUI() {
   partition_list_frame->setLayout(partition_layout_);
   partition_list_frame->setFixedWidth(kWindowWidth);
 
+  QVBoxLayout* scroll_layout = new QVBoxLayout();
+  scroll_layout->setContentsMargins(0, 0, 0, 0);
+  scroll_layout->setSpacing(0);
+  scroll_layout->addWidget(msg_container_frame_);
+  scroll_layout->addSpacing(8);
+  scroll_layout->addWidget(partition_list_frame);
+
+  QFrame* scroll_frame = new QFrame();
+  scroll_frame->setObjectName("scroll_frame");
+  scroll_frame->setContentsMargins(0, 0, 0, 0);
+  scroll_frame->setLayout(scroll_layout);
+
   QScrollArea* scroll_area = new QScrollArea();
   scroll_area->setObjectName("scroll_area");
   scroll_area->setContentsMargins(0, 0, 0, 0);
@@ -198,7 +241,7 @@ void AdvancedPartitionFrame::initUI() {
   scroll_area_size_policy.setHorizontalStretch(10);
   scroll_area_size_policy.setVerticalStretch(10);
   scroll_area->setSizePolicy(scroll_area_size_policy);
-  scroll_area->setWidget(partition_list_frame);
+  scroll_area->setWidget(scroll_frame);
   scroll_area->setWidgetResizable(true);
   scroll_area->setFixedWidth(kWindowWidth);
   scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -244,25 +287,9 @@ void AdvancedPartitionFrame::initUI() {
   main_layout->addWidget(scroll_area, 1, Qt::AlignHCenter);
   main_layout->addSpacing(2);
   main_layout->addWidget(bottom_frame, 0, Qt::AlignHCenter);
+  main_layout->addSpacing(8);
 
-  QFrame* main_frame = new QFrame();
-  main_frame->setObjectName("main_frame");
-  main_frame->setContentsMargins(0, 0, 0, 0);
-  main_frame->setLayout(main_layout);
-
-  msg_label_ = new QLabel();
-  msg_label_->setObjectName("msg_label");
-  msg_label_->setFixedHeight(20);
-
-  QVBoxLayout* layout = new QVBoxLayout();
-  layout->setContentsMargins(0, 0, 0, 0);
-  layout->setSpacing(0);
-  layout->addWidget(main_frame, 0, Qt::AlignHCenter);
-  layout->addSpacing(20);
-  layout->addWidget(msg_label_, 0, Qt::AlignHCenter);
-  layout->addSpacing(10);
-
-  this->setLayout(layout);
+  this->setLayout(main_layout);
   this->setContentsMargins(0, 0, 0, 0);
   this->setFixedWidth(kWindowWidth);
   QSizePolicy container_policy(QSizePolicy::Fixed, QSizePolicy::Expanding);
@@ -320,6 +347,41 @@ void AdvancedPartitionFrame::repaintDevices() {
   partition_layout_->addStretch();
 }
 
+void AdvancedPartitionFrame::addErrorMessage(
+    const QString& text, AdvancedPartitionFrame::ErrorMessageType type) {
+  const ErrorMessage msg = { text, type };
+  qDebug() << "error msg:" << text;
+  error_messages_.append(msg);
+
+  ClearLayout(msg_layout_);
+  for (int i = 0; i < error_messages_.length(); i++) {
+    QLabel* error_label = new QLabel();
+    if (i == error_messages_.length() - 1) {
+      error_label->setObjectName("err_msg_bottom_label");
+    } else {
+      error_label->setObjectName("err_msg_label");
+    }
+    error_label->setText(error_messages_.at(i).text);
+    msg_layout_->addWidget(error_label);
+    error_label->show();
+  }
+
+
+  // Show msg container if it is invisible.
+  if (msg_container_frame_->isHidden()) {
+    msg_container_frame_->show();
+  }
+  msg_container_frame_->show();
+}
+
+void AdvancedPartitionFrame::clearErrorMessages() {
+  error_messages_.clear();
+  ClearLayout(msg_layout_);
+
+  // Also hide msg container.
+  msg_container_frame_->hide();
+}
+
 void AdvancedPartitionFrame::onDeletePartitionTriggered(
     const Partition& partition) {
   delegate_->deletePartition(partition);
@@ -363,7 +425,8 @@ void AdvancedPartitionFrame::onNewPartitionTriggered(
     emit this->requestNewPartitionFrame(partition);
   } else {
     qWarning() << "Can not add new partition any more" << partition;
-    msg_label_->setText(tr("No more partition can be created"));
+    addErrorMessage(tr("No more partition can be created"),
+                    ErrorMessageType::NoMorePrimNum);
   }
 }
 
