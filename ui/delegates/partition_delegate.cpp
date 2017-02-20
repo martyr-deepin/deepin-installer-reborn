@@ -578,7 +578,14 @@ void PartitionDelegate::refreshVisual() {
 
   devices_ = real_devices_;
 
+  const QString installer_device_path(GetInstallerDevicePath());
+
   for (Device& device : devices_) {
+    // Ignores installer device.
+    if (installer_device_path.startsWith(device.path)) {
+      continue;
+    }
+
     PartitionList partitions;
     for (const Partition& partition : device.partitions) {
       if (partition.type == PartitionType::Normal ||

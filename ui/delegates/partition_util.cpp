@@ -11,6 +11,7 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/proc_meminfo.h"
+#include "sysinfo/proc_mounts.h"
 
 namespace installer {
 
@@ -19,6 +20,10 @@ namespace {
 // Maximum length of partition label.
 const int kLabelMaxLen = 12;
 
+// Mount points of live system in use currently.
+const char kCasperMountPoint[] = "/cdrom";
+const char kLiveMountPoint[] = "/lib/live/mount/medium";
+
 }  // namespace
 
 QString GetDeviceModelAndCap(const Device& device) {
@@ -26,8 +31,68 @@ QString GetDeviceModelAndCap(const Device& device) {
   return QString("%1 (%2G)").arg(device.model).arg(gibi_size);
 }
 
-QString GetPartitionName(const QString& path) {
-  return QFileInfo(path).fileName();
+QString GetInstallerDevicePath() {
+  const MountItemList list(ParseMountItems());
+
+  for (const MountItem& item : list) {
+    if (item.mount == kCasperMountPoint || item.mount == kLiveMountPoint) {
+      return item.path;
+    }
+  }
+
+  // Returns an empty string if not found.
+  return QString();
+}
+
+QString GetLocalFsTypeName(FsType fs_type) {
+  switch (fs_type) {
+    case FsType::Btrfs: return "btrfs";
+    case FsType::EFI: return QObject::tr("efi");
+    case FsType::Empty: return QObject::tr("do not use this partition");
+    case FsType::Ext2: return "ext2";
+    case FsType::Ext3: return "ext3";
+    case FsType::Ext4: return "ext4";
+    case FsType::Fat16: return "fat16";
+    case FsType::Fat32: return "fat32";
+    case FsType::Jfs: return "jfs";
+    case FsType::LinuxSwap: return QObject::tr("swap area");
+    case FsType::Xfs: return "xfs";
+    default: return QObject::tr("Unknown");
+  }
+}
+
+QString GetOsTypeIcon(OsType os_type) {
+  switch (os_type) {
+    case OsType::Linux: {
+      return ":/images/driver_linux_32.png";
+    }
+    case OsType::Mac: {
+      return ":/images/driver_mac_32.png";
+    }
+    case OsType::Windows: {
+      return ":/images/driver_windows_32.png";
+    }
+    default: {
+      return ":/images/driver_32.png";
+    }
+  }
+}
+
+QString GetOsTypeLargeIcon(OsType os_type) {
+  switch (os_type) {
+    case OsType::Linux: {
+      return ":/images/driver_linux_128.png";
+    }
+    case OsType::Mac: {
+      return ":/images/driver_mac_128.png";
+    }
+    case OsType::Windows: {
+      return ":/images/driver_windows_128.png";
+    }
+    default: {
+      return ":/images/driver_128.png";
+    }
+  }
 }
 
 QString GetPartitionLabel(const Partition& partition) {
@@ -75,6 +140,10 @@ QString GetPartitionLabelAndPath(const Partition& partition) {
   }
 }
 
+QString GetPartitionName(const QString& path) {
+  return QFileInfo(path).fileName();
+}
+
 QString GetPartitionUsage(const Partition& partition) {
   qint64 total, used;
   if ((partition.length > 0) && (partition.length >= partition.freespace)) {
@@ -105,57 +174,6 @@ int GetPartitionUsageValue(const Partition& partition) {
     return int(100.0 * used / total);
   } else {
     return 0;
-  }
-}
-
-QString GetOsTypeIcon(OsType os_type) {
-  switch (os_type) {
-    case OsType::Linux: {
-      return ":/images/driver_linux_32.png";
-    }
-    case OsType::Mac: {
-      return ":/images/driver_mac_32.png";
-    }
-    case OsType::Windows: {
-      return ":/images/driver_windows_32.png";
-    }
-    default: {
-      return ":/images/driver_32.png";
-    }
-  }
-}
-
-QString GetOsTypeLargeIcon(OsType os_type) {
-  switch (os_type) {
-    case OsType::Linux: {
-      return ":/images/driver_linux_128.png";
-    }
-    case OsType::Mac: {
-      return ":/images/driver_mac_128.png";
-    }
-    case OsType::Windows: {
-      return ":/images/driver_windows_128.png";
-    }
-    default: {
-      return ":/images/driver_128.png";
-    }
-  }
-}
-
-QString GetLocalFsTypeName(FsType fs_type) {
-  switch (fs_type) {
-    case FsType::Btrfs: return "btrfs";
-    case FsType::EFI: return QObject::tr("efi");
-    case FsType::Empty: return QObject::tr("do not use this partition");
-    case FsType::Ext2: return "ext2";
-    case FsType::Ext3: return "ext3";
-    case FsType::Ext4: return "ext4";
-    case FsType::Fat16: return "fat16";
-    case FsType::Fat32: return "fat32";
-    case FsType::Jfs: return "jfs";
-    case FsType::LinuxSwap: return QObject::tr("swap area");
-    case FsType::Xfs: return "xfs";
-    default: return QObject::tr("Unknown");
   }
 }
 
