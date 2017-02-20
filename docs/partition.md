@@ -42,6 +42,22 @@ EFI 分区(ESP), 应该添加boot及esp标记. 当加入这个标记后, EFI分�
 
 根分区及boot分区不需要添加boot标记.
 
+# 自动分区
+如果要使用自动分区, 需要在 settings.ini 中, 把 "skip_partition_page" 设置为 true;
+把 "partition_do_auto_part" 设置为 true; 还可以修改一下默认的自动分区策略.
+
+* "partition_auto_part_legacy_policy" 这个选项定义了 legacy 模式下的分区策略;
+* "partition_auto_part_uefi_policy" 这个选项定义了 UEFI 模式下的分区策略;
+
+下面是一个 UEFI 模式下的基本的分区策略,
+`/boot/efi:efi:1Mib:300Mib;linux-swap:linux-swap:300Mib:4300Mib;/:ext4:4300Mib:100%`
+* 创建一个分区, 分区之前由分号分隔.
+* 每个分区的定义, 分成了四个部分, 挂载点:文件系统类型:分区起始位置:分区结束位置.
+* 如果是交换分区, 可以把挂载点写成 linux-swap.
+* 文件系统类型, 与在 settings.ini 其它选项中一样, 都是小写的.
+* 分区的起始位置和分区结束位置, 使用的单位与 parted 命令中的相同, 可以是 15% 这样的百分比,
+可以是 4300 Mib 这样的具体的大小值.
+
 
 # Tips
 后台开始扫描磁盘之前, 会尽可能卸载所有可卸载的分区 (Debug 模式不会卸载交换分区). 如果卸载失败,
@@ -50,6 +66,8 @@ EFI 分区(ESP), 应该添加boot及esp标记. 当加入这个标记后, EFI分�
 容量的单位是MiB, GiB, 但是为了保证与deepin文件管理器的统一, 现在改为MB和GB.
 
 交换文件默认位于/swapfile.
+
+安装时, 安装介质所在的设备, 比如 /dev/sdb, 会在分区列表里面被隐藏掉.
 
 # 限制
 如果机器的内存小于4GiB, 需要手动创建 swap 分区或者自动创建 swap 文件. 这时, 硬盘的最小容量
