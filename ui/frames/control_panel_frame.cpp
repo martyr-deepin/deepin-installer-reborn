@@ -192,6 +192,8 @@ void ControlPanelFrame::initUI() {
   // Hide scroll bar.
   term_widget_->setScrollBarPosition(QTermWidget::NoScrollBar);
   term_widget_->setColorScheme("WhiteOnBlack");
+  // Set bash as default shell program.
+  term_widget_->setShellProgram("/bin/bash");
 
   stacked_widget_ = new QStackedWidget();
   stacked_widget_->addWidget(log_viewer_);
