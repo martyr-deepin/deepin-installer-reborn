@@ -12,6 +12,7 @@
 #include <QThread>
 
 #include "service/first_boot_hook_worker.h"
+#include "service/power_manager.h"
 #include "service/settings_manager.h"
 #include "ui/frames/first_boot_loading_frame.h"
 #include "ui/frames/system_info_frame.h"
@@ -92,8 +93,11 @@ void FirstBootSetupWindow::onHookFinished(bool ok) {
     qCritical() << "First boot hook failed!";
   }
 
-  // TODO(xushaohua): Remove first-boot-setup itself.
-  qApp->exit(1);
+  // Reboot system now.
+  // TODO(xushaohua): call systemd-firstboot.
+  if (!RebootSystemWithMagicKey()) {
+    RebootSystem();
+  }
 }
 
 void FirstBootSetupWindow::onSystemInfoFinished() {
