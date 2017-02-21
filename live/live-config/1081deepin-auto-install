@@ -25,7 +25,6 @@ Comment=Deepin Auto Installer
 Exec=$HELPER_FILE
 TryExec=gksudo
 EOF
-
 }
 
 # Modify lightdm config file.
@@ -38,7 +37,6 @@ greeter-setup-script=$HELPER_FILE
 greeter-session=deepin-lightdm-xgreeter
 user-session=deepin-livecd-installer
 EOF
-
 }
 
 generate_installer_helper() {
@@ -53,7 +51,6 @@ generate_installer_helper() {
 gconftool-2 --set --type=bool /apps/gksu/display-no-pass-info false || true
 gksudo -- /usr/bin/deepin-installer-reborn -c "${CONF_FILE}" -l "${LOG_FILE}"
 EOF
-
 }
 
 # Read kernel parameter and set global variables.
