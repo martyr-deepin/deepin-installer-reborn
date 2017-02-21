@@ -34,6 +34,9 @@ main() {
 
   # Replace default lightdm greeter.
   enable_deepin_lightdm_greeter
+
+  # Restore lightdm.conf
+  cleanup_reboot_setup_mode
 }
 
 main
