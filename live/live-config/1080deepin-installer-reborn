@@ -1,0 +1,37 @@
+#!/bin/sh
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+#set -e
+
+# Parse live username from cmdline.
+Cmdline () {
+  # Reading kernel command line
+  for _PARAMETER in ${LIVE_CONFIG_CMDLINE}; do
+    case "${_PARAMETER}" in
+      live-config.username=*|username=*)
+        LIVE_USERNAME="${_PARAMETER#*username=}"
+        ;;
+    esac
+  done
+}
+
+Config () {
+  # Copy installer launcher file to Desktop.
+  local file=/usr/share/applications/deepin-installer-reborn.desktop
+  if [ -f "$file" ]; then
+    install -d -o $LIVE_USERNAME -g $LIVE_USERNAME /home/$LIVE_USERNAME/Desktop
+    install -D -o $LIVE_USERNAME -g $LIVE_USERNAME $file /home/$LIVE_USERNAME/Desktop/$(basename "$file")
+  fi
+
+  install -d -o $LIVE_USERNAME -g $LIVE_USERNAME /home/$LIVE_USERNAME/.config
+  cat > /home/$LIVE_USERNAME/.config/not_first_run_dde << EOF
+Generate by deepin-installer.
+Timestamp: `LC_ALL=C date`
+EOF
+  chown $LIVE_USERNAME:$LIVE_USERNAME /home/$LIVE_USERNAME/.config/not_first_run_dde
+}
+
+Cmdline
+Config

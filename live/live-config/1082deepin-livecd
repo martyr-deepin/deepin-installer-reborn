@@ -1,0 +1,67 @@
+#!/bin/sh
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# Generate a new xsession desktop file at $1
+generate_livecd_installer() {
+  local DESKTOP_FILE="$1"
+  local HELPER_FILE="$2"
+  cat > "${DESKTOP_FILE}" <<EOF
+[Desktop Entry]
+Name=DeepinLiveCDInstaller
+Comment=Deepin LiveCD Installer
+Exec=$HELPER_FILE
+TryExec=gksudo
+EOF
+
+}
+
+generate_lightdm_conf() {
+  local CONF_FILE="$1"
+  local HELPER_FILE="$2"
+  cat > "${CONF_FILE}" <<EOF
+[SeatDefaults]
+greeter-setup-script=$HELPER_FILE
+greeter-session=deepin-lightdm-xgreeter
+user-session=deepin-livecd-installer
+EOF
+
+}
+
+generate_installer_helper() {
+  local HELPER_FILE="$1"
+  cat > "${HELPER_FILE}" <<EOF
+#!/bin/sh
+
+gksudo -- /usr/bin/deepin-installer-reborn
+EOF
+
+}
+
+# Parse live config cmdline to check whether in live mode.
+parse_cmdline () {
+  # Reading kernel command line
+  for _PARAMETER in ${LIVE_CONFIG_CMDLINE}; do
+    case "${_PARAMETER}" in
+      live-config.livecd-installer|livecd-installer)
+        LIVE_MODE=true
+        ;;
+    esac
+  done
+}
+
+# Setup lightdm if in live mode.
+config_live_mode() {
+  local DESKTOP_FILE=/usr/share/xsessions/deepin-livecd-installer.desktop
+  local HELPER_FILE=/usr/lib/deepin-installer-helper
+  if [ x"$LIVE_MODE" = "xtrue" ]; then
+    $(generate_installer_helper "${HELPER_FILE}")
+    $(generate_livecd_installer "${DESKTOP_FILE}"  "${HELPER_FILE}")
+    $(generate_lightdm_conf /etc/lightdm/lightdm.conf "${HELPER_FILE}")
+    chmod +x "${HELPER_FILE}"
+  fi
+}
+
+parse_cmdline
+config_live_mode

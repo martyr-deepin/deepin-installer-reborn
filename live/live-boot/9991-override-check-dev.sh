@@ -1,9 +1,12 @@
 #!/bin/sh
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
 
 #set -e
 
-check_dev ()
-{
+# Override default check_dev() function.
+check_dev () {
 	sysdev="${1}"
 	devname="${2}"
 	skip_uuid_check="${3}"
