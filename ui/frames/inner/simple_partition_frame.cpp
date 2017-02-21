@@ -59,8 +59,6 @@ bool SimplePartitionFrame::validate() {
   bool swap_is_set = false;
 
   const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-  const int root_with_swap_required =
-      GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
   Partition root_partition;
 
   // Check whether linux-swap partition exists.
@@ -105,17 +103,9 @@ bool SimplePartitionFrame::validate() {
     return false;
   }
 
-  if (swap_is_set) {
-    const qint64 minimum_bytes = root_required * kGibiByte;
-    const qint64 real_bytes = root_partition.getByteLength() + kMebiByte;
-    root_large_enough = (real_bytes >= minimum_bytes);
-  } else {
-    // If no swap partition is created, more space is required for
-    // root partition.
-    const qint64 minimum_bytes = root_with_swap_required * kGibiByte;
-    const qint64 real_bytes = root_partition.getByteLength() + kMebiByte;
-    root_large_enough = (real_bytes >= minimum_bytes);
-  }
+  const qint64 root_minimum_bytes = root_required * kGibiByte;
+  const qint64 root_real_bytes = root_partition.getByteLength() + kMebiByte;
+  root_large_enough = (root_real_bytes >= root_minimum_bytes);
 
   if (!root_large_enough) {
     msg_label_->setText(

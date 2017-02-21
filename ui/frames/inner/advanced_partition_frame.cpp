@@ -54,8 +54,6 @@ bool AdvancedPartitionFrame::validate() {
   bool boot_large_enough = false;
 
   const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-  const int root_with_swap_required =
-      GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
   const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
   const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
   const int efi_minimum = GetSettingsInt(kPartitionEFIMinimumSpace);
@@ -71,10 +69,10 @@ bool AdvancedPartitionFrame::validate() {
       } else if (partition.mount_point == kMountPointBoot) {
         // Check /boot partition.
         boot_is_set = true;
-        const qint64 recommend_bytes = boot_recommended * kMebiByte;
+        const qint64 boot_recommend_bytes = boot_recommended * kMebiByte;
         // Add 1Mib to partition size.
-        const qint64 real_bytes = partition.getByteLength() + kMebiByte;
-        boot_large_enough = (real_bytes >= recommend_bytes);
+        const qint64 boot_real_bytes = partition.getByteLength() + kMebiByte;
+        boot_large_enough = (boot_real_bytes >= boot_recommend_bytes);
 
       } else if (partition.fs == FsType::EFI) {
         // Check EFI partition.
@@ -82,14 +80,14 @@ bool AdvancedPartitionFrame::validate() {
 
         if (partition.status == PartitionStatus::Real) {
           // For existing EFI partition.
-          const qint64 minimum_bytes = efi_minimum * kMebiByte;
-          const qint64 real_bytes = partition.getByteLength() + kMebiByte;
-          efi_large_enough = (real_bytes >= minimum_bytes);
+          const qint64 efi_minimum_bytes = efi_minimum * kMebiByte;
+          const qint64 efi_real_bytes = partition.getByteLength() + kMebiByte;
+          efi_large_enough = (efi_real_bytes >= efi_minimum_bytes);
         } else {
           // For newly created EFI partition.
-          const qint64 recommended_bytes = efi_recommended * kMebiByte;
-          const qint64 real_bytes = partition.getByteLength() + kMebiByte;
-          efi_large_enough = (real_bytes >= recommended_bytes);
+          const qint64 efi_recommended_bytes = efi_recommended * kMebiByte;
+          const qint64 efi_real_bytes = partition.getByteLength() + kMebiByte;
+          efi_large_enough = (efi_real_bytes >= efi_recommended_bytes);
         }
       } else if (partition.fs == FsType::LinuxSwap) {
         swap_is_set = true;
@@ -102,17 +100,9 @@ bool AdvancedPartitionFrame::validate() {
                     ErrorMessageType::RootMissing);
   }
 
-  if (swap_is_set) {
-    const qint64 minimum_bytes = root_required * kGibiByte;
-    const qint64 real_bytes = root_partition.getByteLength() + kMebiByte;
-    root_large_enough = (real_bytes >= minimum_bytes);
-  } else {
-    // If no swap partition is created, more space is required for
-    // root partition.
-    const qint64 minimum_bytes = root_with_swap_required * kGibiByte;
-    const qint64 real_bytes = root_partition.getByteLength() + kMebiByte;
-    root_large_enough = (real_bytes >= minimum_bytes);
-  }
+  const qint64 root_minimum_bytes = root_required * kGibiByte;
+  const qint64 root_real_bytes = root_partition.getByteLength() + kMebiByte;
+  root_large_enough = (root_real_bytes >= root_minimum_bytes);
 
   // Check root size only if root is set.
   if (root_is_set && !root_large_enough) {

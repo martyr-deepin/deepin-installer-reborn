@@ -54,14 +54,7 @@ int GetVisiblePages() {
 }
 
 bool IsDiskSpaceInsufficient() {
-  int minimum = 0;
-  // Check whether memory is too small.
-  if (IsSwapAreaNeeded()) {
-    minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
-  } else {
-    minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-  }
-
+  const int minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
   const qint64 maximum_device_size = GetMaximumDeviceSize();
   return minimum * kGibiByte > maximum_device_size;
 }

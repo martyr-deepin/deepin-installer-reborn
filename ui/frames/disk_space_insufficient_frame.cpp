@@ -22,13 +22,7 @@ namespace {
 // Get content of comment label.
 // Value of minimum disk space is changed based on size of physical memory.
 QString GetCommentLabel() {
-  int minimum = 0;
-  // Check whether memory is too small.
-  if (IsSwapAreaNeeded()) {
-    minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequiredInLowMemory);
-  } else {
-    minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-  }
+  const int minimum = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
   const int recommended = GetSettingsInt(kPartitionRecommendedDiskSpace);
   return QObject::tr("It takes at lease %1GB disk space to install deepin, "
       "for better performance, %2GB and more space is recommended")
