@@ -423,10 +423,10 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
     return;
   }
 
-  if (this->validate()) {
-    // Set partition button selected.
-    part_button->setSelected(true);
+  // Set partition button selected.
+  part_button->setSelected(true);
 
+  if (this->validate()) {
     // Show install-tip at bottom of current checked button.
     this->showInstallTip(button);
 
