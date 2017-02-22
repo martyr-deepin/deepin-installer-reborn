@@ -63,6 +63,9 @@ QModelIndex BootloaderListModel::getRecommendedIndex() const {
 }
 
 void BootloaderListModel::onDeviceRefreshed() {
+  this->beginResetModel();
+
+  // Clear old bootloader list.
   bootloader_list_.clear();
 
   const QString installer_device_path(GetInstallerDevicePath());
@@ -124,6 +127,8 @@ void BootloaderListModel::onDeviceRefreshed() {
       }
     }
   }
+
+  this->endResetModel();
 
   emit this->rowChanged();
 }
