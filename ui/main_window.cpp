@@ -19,6 +19,7 @@
 #include "sysinfo/users.h"
 #include "sysinfo/virtual_machine.h"
 #include "third_party/global_shortcut/global_shortcut.h"
+#include "ui/delegates/args_parser.h"
 #include "ui/delegates/main_window_util.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/control_panel_frame.h"
@@ -42,14 +43,21 @@ MainWindow::MainWindow()
     : QWidget(),
       pages_(),
       prev_page_(PageId::NullId),
-      current_page_(PageId::NullId) {
+      current_page_(PageId::NullId),
+      args_parser_(new ArgsParser()) {
   this->setObjectName("main_window");
 
   this->initUI();
   this->initPages();
   this->registerShortcut();
   this->initConnections();
-  this->goNextPage();
+}
+
+MainWindow::~MainWindow() {
+  if (args_parser_) {
+    delete args_parser_;
+    args_parser_ = nullptr;
+  }
 }
 
 void MainWindow::scanDevicesAndTimezone() {
@@ -71,6 +79,24 @@ void MainWindow::scanDevicesAndTimezone() {
 void MainWindow::fullscreen() {
   multi_head_manager_->updateWallpaper();
   ShowFullscreen(this);
+
+  // Parse arguments.
+  if (!args_parser_->parse(qApp->arguments())) {
+    qCritical() << "Failed to parse argument list";
+  } else {
+    const QString conf_file = args_parser_->getConfFile();
+    if (!conf_file.isEmpty()) {
+      // Append conf options.
+    }
+
+    const bool auto_install = args_parser_->isAutoInstallSet();
+    if (auto_install) {
+      // Read default locale from settings.ini and go to InstallProgressFrame.
+      current_page_ = PageId::SystemInfoId;
+    }
+  }
+
+  this->goNextPage();
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
@@ -246,6 +272,14 @@ void MainWindow::registerShortcut() {
     if (!monitor_mode_shortcut_->registerNow()) {
       qWarning() << "Failed to register global shortcut of Ctrl+Alt+P";
     }
+  }
+}
+
+void MainWindow::saveLogFile() {
+  const QString log_file = args_parser_->getLogFile();
+  if (!log_file.isEmpty()) {
+    // Copy log file.
+    CopyLogFile(log_file);
   }
 }
 
@@ -437,6 +471,8 @@ void MainWindow::goNextPage() {
 }
 
 void MainWindow::rebootSystem() {
+  this->saveLogFile();
+
   if (!RebootSystemWithMagicKey()) {
     qWarning() << "RebootSystem failed!";
     if (!RebootSystem()) {
@@ -446,6 +482,8 @@ void MainWindow::rebootSystem() {
 }
 
 void MainWindow::shutdownSystem() {
+  this->saveLogFile();
+
   if (!ShutdownSystemWithMagicKey()) {
     qWarning() << "ShutdownSystem() failed!";
     if (!ShutdownSystem()) {

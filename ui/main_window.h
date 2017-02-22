@@ -17,6 +17,7 @@ class GlobalShortcut;
 
 namespace installer {
 
+class ArgsParser;
 class ConfirmQuitFrame;
 class ControlPanelFrame;
 class DiskSpaceInsufficientFrame;
@@ -44,6 +45,7 @@ class MainWindow : public QWidget {
 
  public:
   MainWindow();
+  ~MainWindow();
 
   // Notify background thread to scan disk devices if needed.
   // And read current timezone.
@@ -77,6 +79,9 @@ class MainWindow : public QWidget {
   void initPages();
   void initUI();
   void registerShortcut();
+
+  // Copy log file if needed.
+  void saveLogFile();
 
   // Switch frame page based on name.
   void setCurrentPage(PageId page_id);
@@ -115,6 +120,8 @@ class MainWindow : public QWidget {
 
   // Shortcut used to switch mirror modes.
   GlobalShortcut* monitor_mode_shortcut_ = nullptr;
+
+  ArgsParser* args_parser_ = nullptr;
 
  private slots:
   // Go next page when current page index is changed in ControlPanelFrame.
