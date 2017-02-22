@@ -27,6 +27,10 @@ $ tshark -c 1000 -a duration:30 -I -f 'wlan[0] == 0x80' -Tfields -e wlan.sa -e w
 ## airmon-ng
 用于切换无线设备的监控模式的一个脚本. 比如 `$ sudo airmon-ng start wlan0`
 
+目前, airmon-ng 会在 4.4 内核中出现问题, 可能导致内核卡死, 已经临时禁用它了. 现在直接使用
+tshark 的监听模式来抓包的, 但后者的监听模式在一些无线网卡上是无法开启的, 就会导致无法抓取到
+beacon packets.
+
 # 参考
 https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 https://en.wikipedia.org/wiki/Beacon_frame
