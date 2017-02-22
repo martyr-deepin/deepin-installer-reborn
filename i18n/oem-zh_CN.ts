@@ -33,131 +33,126 @@
     </message>
     <message>
         <location filename="../ui/oem/oem_window.cpp" line="69"/>
-        <source>Skip partition table warning page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/oem/oem_window.cpp" line="72"/>
         <source>Skip system info page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="75"/>
+        <location filename="../ui/oem/oem_window.cpp" line="72"/>
         <source>Skip partition page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="80"/>
+        <location filename="../ui/oem/oem_window.cpp" line="77"/>
         <source>Default locale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="102"/>
+        <location filename="../ui/oem/oem_window.cpp" line="99"/>
         <source>Vendor name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="106"/>
+        <location filename="../ui/oem/oem_window.cpp" line="103"/>
         <source>Lock username</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="109"/>
+        <location filename="../ui/oem/oem_window.cpp" line="106"/>
         <source>Default username</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="113"/>
+        <location filename="../ui/oem/oem_window.cpp" line="110"/>
         <source>Lock hostname</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="116"/>
+        <location filename="../ui/oem/oem_window.cpp" line="113"/>
         <source>Default hostname</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="120"/>
+        <location filename="../ui/oem/oem_window.cpp" line="117"/>
         <source>Lock password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="123"/>
+        <location filename="../ui/oem/oem_window.cpp" line="120"/>
         <source>Default password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="128"/>
+        <location filename="../ui/oem/oem_window.cpp" line="125"/>
         <source>Skip simple partition page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="131"/>
+        <location filename="../ui/oem/oem_window.cpp" line="128"/>
         <source>Skip advanced partition page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="140"/>
+        <location filename="../ui/oem/oem_window.cpp" line="137"/>
         <source>Supported mount points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="145"/>
+        <location filename="../ui/oem/oem_window.cpp" line="142"/>
         <source>Mount points to be formatted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="151"/>
+        <location filename="../ui/oem/oem_window.cpp" line="148"/>
         <source>Position animation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="154"/>
+        <location filename="../ui/oem/oem_window.cpp" line="151"/>
         <source>Fade animation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="168"/>
+        <location filename="../ui/oem/oem_window.cpp" line="165"/>
         <source>Grub menu timeout:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="175"/>
+        <location filename="../ui/oem/oem_window.cpp" line="172"/>
         <source>Disable Windows in grub menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="179"/>
+        <location filename="../ui/oem/oem_window.cpp" line="176"/>
         <source>apps to be added to dock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="183"/>
+        <location filename="../ui/oem/oem_window.cpp" line="180"/>
         <source>apps to be added to launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="188"/>
+        <location filename="../ui/oem/oem_window.cpp" line="185"/>
         <source>apps to be prevented from uninstall in launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="193"/>
+        <location filename="../ui/oem/oem_window.cpp" line="190"/>
         <source>Set desktop content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="197"/>
+        <location filename="../ui/oem/oem_window.cpp" line="194"/>
         <source>Set sound effect switches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="203"/>
+        <location filename="../ui/oem/oem_window.cpp" line="200"/>
         <source>enabled services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="207"/>
+        <location filename="../ui/oem/oem_window.cpp" line="204"/>
         <source>disabled services</source>
         <translation type="unfinished"></translation>
     </message>
