@@ -67,6 +67,9 @@ bool MainWindow::parseArguments() {
     const QString conf_file = args_parser_->getConfFile();
     if (!conf_file.isEmpty()) {
       // Append conf options.
+      if (!AppendConfigFile(conf_file)) {
+        qCritical() << "Failed to append conf file:" << conf_file;
+      }
     }
 
     const bool auto_install = args_parser_->isAutoInstallSet();

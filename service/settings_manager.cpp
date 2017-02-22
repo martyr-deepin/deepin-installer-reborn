@@ -217,6 +217,23 @@ QString GetWindowBackground() {
   return kDefaultWallpaperFile;
 }
 
+bool AppendConfigFile(const QString& conf_file) {
+  if (!QFile::exists(conf_file)) {
+    qCritical() << "conf_file not found:" << conf_file;
+    return false;
+  }
+
+  QSettings target_settings(kInstallerConfigFile, QSettings::IniFormat);
+  QSettings new_settings(conf_file, QSettings::IniFormat);
+
+  for (const QString& key : new_settings.allKeys()) {
+    const QVariant value = new_settings.value(key);
+    target_settings.setValue(key, value);
+  }
+
+  return true;
+}
+
 bool DeleteConfigFile() {
   QFile file(kInstallerConfigFile);
   if (file.exists()) {
