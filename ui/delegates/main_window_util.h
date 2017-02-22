@@ -11,6 +11,9 @@
 
 namespace installer {
 
+// Copy log file to |log_file|.
+void CopyLogFile(const QString& log_file);
+
 // Encode |msg| with base64()
 QString EncodeErrorMsg(const QString& msg);
 

@@ -12,7 +12,7 @@ namespace installer {
 // Parse argument list.
 class ArgsParser {
  public:
-  explicit ArgsParser();
+  ArgsParser();
 
   // Parse |args| list.
   bool parse(const QStringList& args);

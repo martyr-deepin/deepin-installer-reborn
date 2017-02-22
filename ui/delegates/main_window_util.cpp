@@ -15,6 +15,13 @@
 
 namespace installer {
 
+void CopyLogFile(const QString& log_file) {
+  const QString current_log_file(GetLogFilepath());
+  if (!CopyFile(current_log_file, log_file, true)) {
+    qCritical() << "Failed to copy log to:" << log_file;
+  }
+}
+
 // Encode |msg| with base64()
 QString EncodeErrorMsg(const QString& msg) {
   const QString prefix = GetSettingsString(kInstallFailedFeedbackServer);
