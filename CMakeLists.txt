@@ -192,6 +192,8 @@ set(SYSINFO_FILES
 
 set(UI_FILES
 
+    ui/delegates/args_parser.cpp
+    ui/delegates/args_parser.h
     ui/delegates/avatar_list_delegate.cpp
     ui/delegates/avatar_list_delegate.h
     ui/delegates/frameless_list_delegate.cpp
@@ -384,6 +386,10 @@ set(UNITTEST_FILES
     sysinfo/validate_password_test.cpp
     sysinfo/validate_username_test.cpp
 
+
+    ui/delegates/args_parser.cpp
+    ui/delegates/args_parser.h
+    ui/delegates/args_parser_test.cpp
     ui/delegates/timezone_map_util_test.cpp
     )
 
