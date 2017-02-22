@@ -39,6 +39,9 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(PartitionDelegate* delegate_,
 
   this->initUI();
   this->initConnections();
+
+  // Hide error message container by default.
+  msg_container_frame_->hide();
 }
 
 bool AdvancedPartitionFrame::validate() {
@@ -146,7 +149,6 @@ void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
 
 void AdvancedPartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    msg_head_label_->setText(tr("error title"));
     bootloader_tip_button_->setText(tr("Select location for boot loader"));
     if (editing_button_->isChecked()) {
       editing_button_->setText(tr("Done"));
@@ -179,7 +181,6 @@ void AdvancedPartitionFrame::initConnections() {
 void AdvancedPartitionFrame::initUI() {
   msg_head_label_ = new QLabel();
   msg_head_label_->setObjectName("err_msg_top_label");
-  msg_head_label_->setText(tr("error title"));
 
   msg_layout_ = new QVBoxLayout();
   msg_layout_->setContentsMargins(0, 0, 0, 0);
@@ -356,6 +357,10 @@ void AdvancedPartitionFrame::addErrorMessage(
     error_label->show();
   }
 
+  const int err_count = error_messages_.length();
+  msg_head_label_->setText(
+      tr("Found %n error(s), fix the error(s) to continue install "
+         "or switch to simple mode", "error", err_count));
 
   // Show msg container if it is invisible.
   if (msg_container_frame_->isHidden()) {
