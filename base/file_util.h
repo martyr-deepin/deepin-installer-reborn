@@ -14,6 +14,11 @@ namespace installer {
 // returns a QDir object referencing to its absolute path.
 QDir ConcateDir(const QDir& parent_dir, const QString& folder_name);
 
+// Copy file from |src_file| to |dest_file|.
+// If |dest_file| exists, overwrite its content if |overwrite| is true, or
+// returns false if not overwrite.
+bool CopyFile(const QString& src_file, const QString& dest_file, bool overwrite);
+
 // Folder content in |src_dir| into |dest_dir|.
 // This method only copy normal files, folders and symbolic link file.
 // Other type of files and character device, FIFO and device file are ignored.

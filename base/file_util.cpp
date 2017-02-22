@@ -23,6 +23,24 @@ QDir ConcateDir(const QDir& parent_dir, const QString& folder_name) {
   return QDir(parent_dir.filePath(folder_name));
 }
 
+bool CopyFile(const QString& src_file,
+              const QString& dest_file,
+              bool overwrite) {
+  QFile dest(dest_file);
+  if (dest.exists()) {
+    if (overwrite) {
+      if (!dest.remove()) {
+        qCritical() << "Failed to remove:" << dest_file;
+        return false;
+      }
+    } else {
+      qCritical() << dest_file << "exists but is not overwritten";
+      return false;
+    }
+  }
+  return QFile::copy(src_file, dest_file);
+}
+
 bool CopyFolder(const QString src_dir, const QString& dest_dir,
                 bool recursive) {
   QDirIterator::IteratorFlag iter_flag;
