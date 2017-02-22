@@ -19,7 +19,7 @@ $ tshark -c 1000 -a duration:30 -I -f 'wlan[0] == 0x80' -Tfields -e wlan.sa -e w
 * `-c 1000`, 抓取1000个数据包后停止
 * `-a duration:30`, 抓取30秒之后停止
 * `-I`, 开启网卡的监听模式 (monitor mode), 不然, 无法抓取无线广播. 这个选项在已经
-  接入无线热点时, 才有效果, 如果没有接入, 使用 `airmon-ng`.
+ 接入无线热点时, 才有效果, 如果没有接入, 使用 `airmon-ng`.
 * `-f 'wlan[0] == 0x80'`, 只抓取 beacon packet
 * `-Tfields -e wlan.sa -e wlan_mgt.country_info.code `, 只显示包的
   sent address 和 country code

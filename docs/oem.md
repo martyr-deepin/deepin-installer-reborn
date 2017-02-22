@@ -25,7 +25,7 @@ oem 目录放在 /tmp 目录里. 它们的优先级从高到低依次是, /tmp/o
 * GRUB引导画面背景. 可以把图片放到 `oem/grub.png`.
 * 登录界面背景. 可以放到 `oem/lightdm.png`
 * plymouth 开机动画是一系统图片组成的, 放到 `oem/plymouth-theme/deepin-logo/` 目录中.
-  可以参考 `plymouth-theme-deepin-logo` 这个deb包的结构.
+ 可以参考 `plymouth-theme-deepin-logo` 这个deb包的结构.
 * deepin 控制中心和桌面登录界面中用到的logo, 目前还不支持被定制.
 * 光盘启动动画. 待补充.
 

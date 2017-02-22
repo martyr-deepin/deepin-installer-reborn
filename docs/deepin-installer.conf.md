@@ -21,7 +21,7 @@ resources/default_settings.ini 文件里面有定义, 并且在 docs/oem.md 里�
 
 ## 分区信息
 * DI_BOOTLOADER, 引导器位置, 可以为空. 如果为空, 就不会安装grub. 如果是 EFI 引导模式,
-这个选项的值应该是 EFI 分区的路径
+ 这个选项的值应该是 EFI 分区的路径
 * DI_UEFI, 是否支持EFI, "true" 或者 "false", 不可以为空.
 * DI_HOST_DEV,
 * DI_ROOT_PARTITION, 系统根分区, 不可以为空.
