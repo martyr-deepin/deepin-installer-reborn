@@ -64,25 +64,67 @@ QModelIndex BootloaderListModel::getRecommendedIndex() const {
 
 void BootloaderListModel::onDeviceRefreshed() {
   bootloader_list_.clear();
-  bool recommended_flag = true;
-  for (const Device& device : delegate_->devices()) {
-    // Use the first available device path as recommended one.
-    // TODO(xushaohua): Filters removable device.
-    bootloader_list_.append({device.path,
-                            GetDeviceModelAndCap(device),
-                            recommended_flag});
-    recommended_flag = false;
 
+  const QString installer_device_path(GetInstallerDevicePath());
+  const DeviceList& devices = delegate_->devices();
+
+  QString boot_device;
+  QString root_device;
+  QString first_device;
+
+  for (const Device& device : devices) {
+    // Ignores installer device.
+    if (installer_device_path.startsWith(device.path)) {
+      qDebug() << "Ignore installer device:" << installer_device_path;
+      continue;
+    }
+
+    if (first_device.isEmpty()) {
+      first_device = device.path;
+    }
+
+    for (const Partition& partition : device.partitions) {
+      if (partition.mount_point == kMountPointRoot) {
+        root_device = partition.device_path;
+      } else if (partition.mount_point == kMountPointBoot) {
+        boot_device = partition.device_path;
+      }
+    }
+  }
+
+  // Get recommended device path.
+  QString recommended_device;
+  if (!boot_device.isEmpty()) {
+    recommended_device = boot_device;
+  } else if (!root_device.isEmpty()) {
+    recommended_device = root_device;
+  } else {
+    recommended_device = first_device;
+  }
+
+  for (const Device& device : devices) {
+    // Ignores installer device.
+    if (installer_device_path.startsWith(device.path)) {
+      qDebug() << "Ignore installer device:" << installer_device_path;
+      continue;
+    }
+
+    // Set recommended flag to false.
+    const bool is_recommended = (device.path == recommended_device);
+    bootloader_list_.append({device.path,
+                             GetDeviceModelAndCap(device),
+                             is_recommended});
     for (const Partition& partition : device.partitions) {
       // Filters primary and logical partitions.
       if ((partition.type == PartitionType::Normal ||
-          partition.type == PartitionType::Logical) &&
+           partition.type == PartitionType::Logical) &&
           !partition.path.isEmpty() && !partition.busy) {
-        // TODO(xushaohua): It is good to filter fs type.
+        // TODO(xushaohua): It is better to filter fs type.
         bootloader_list_.append({partition.path, "", false});
       }
     }
   }
+
   emit this->rowChanged();
 }
 
