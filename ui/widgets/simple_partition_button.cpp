@@ -34,6 +34,7 @@ SimplePartitionButton::SimplePartitionButton(const Partition& partition,
 }
 
 void SimplePartitionButton::setSelected(bool selected) {
+  selected_ = selected;
   if (selected) {
     const QPixmap pixmap(":/images/driver_install_128.png");
     os_label_->setPixmap(pixmap);
