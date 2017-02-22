@@ -99,8 +99,8 @@ void SelectBootloaderFrame::onPartitionListViewSelected(
     const QString path = list_model_->getPath(current);
     if (!path.isEmpty()) {
       // Both AdvancedPartitionFrame and PartitionDelegate will
-      // update bootloader path
-      emit this->bootloaderUpdated(path);
+      // update advanced bootloader path
+      emit this->bootloaderUpdated(path, false);
     }
   }
 }
