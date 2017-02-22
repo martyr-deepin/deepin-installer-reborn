@@ -38,16 +38,17 @@ bool ArgsParser::parse(const QStringList& args) {
     qCritical() << "Failed to parse argument" << args;
     // Also print help text if QCoreApplication is initialized.
     if (QCoreApplication::instance()) {
-      qDebug() << parser.helpText();
+      qCritical() << parser.helpText();
     }
     return false;
   }
 
   // Print help text and exit normally.
-  // TODO(xushaohua): Do not exit process.
-  if (parser.isSet("version") || parser.isSet("help")) {
+  if (parser.isSet("help")) {
     if (QCoreApplication::instance()) {
-      parser.showHelp(0);
+      qCritical() << parser.helpText();
+      // NOTE(xushaohua): Return false to notify caller to exit.
+      return false;
     }
   }
 

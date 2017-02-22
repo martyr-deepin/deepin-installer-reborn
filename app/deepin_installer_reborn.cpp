@@ -39,6 +39,10 @@ int main(int argc, char* argv[]) {
   installer::AddConfigFile();
 
   installer::MainWindow main_window;
+  if (!main_window.parseArguments()) {
+    // Returns immediately if failed to parse arguments.
+    return 2;
+  }
 
   // Notify background thread to scan device info.
   main_window.scanDevicesAndTimezone();

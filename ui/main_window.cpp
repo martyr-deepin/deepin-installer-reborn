@@ -60,6 +60,24 @@ MainWindow::~MainWindow() {
   }
 }
 
+bool MainWindow::parseArguments() {
+  if (!args_parser_->parse(qApp->arguments())) {
+    return false;
+  } else {
+    const QString conf_file = args_parser_->getConfFile();
+    if (!conf_file.isEmpty()) {
+      // Append conf options.
+    }
+
+    const bool auto_install = args_parser_->isAutoInstallSet();
+    if (auto_install) {
+      // Read default locale from settings.ini and go to InstallProgressFrame.
+      current_page_ = PageId::PartitionId;
+    }
+  }
+  return true;
+}
+
 void MainWindow::scanDevicesAndTimezone() {
   // If system_info_frame_ is not omitted, scan wireless hot spot and update
   // timezone in background.
@@ -79,23 +97,6 @@ void MainWindow::scanDevicesAndTimezone() {
 void MainWindow::fullscreen() {
   multi_head_manager_->updateWallpaper();
   ShowFullscreen(this);
-
-  // Parse arguments.
-  if (!args_parser_->parse(qApp->arguments())) {
-    qCritical() << "Failed to parse argument list";
-  } else {
-    const QString conf_file = args_parser_->getConfFile();
-    if (!conf_file.isEmpty()) {
-      // Append conf options.
-    }
-
-    const bool auto_install = args_parser_->isAutoInstallSet();
-    if (auto_install) {
-      // Read default locale from settings.ini and go to InstallProgressFrame.
-      current_page_ = PageId::SystemInfoId;
-    }
-  }
-
   this->goNextPage();
 }
 

@@ -47,6 +47,9 @@ class MainWindow : public QWidget {
   MainWindow();
   ~MainWindow();
 
+  // Parse command line argument list. Returns false if failed.
+  bool parseArguments();
+
   // Notify background thread to scan disk devices if needed.
   // And read current timezone.
   void scanDevicesAndTimezone();
