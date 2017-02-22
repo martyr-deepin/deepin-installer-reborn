@@ -145,6 +145,9 @@ void SimplePartitionFrame::showEvent(QShowEvent* event) {
 }
 
 void SimplePartitionFrame::appendOperations() {
+  // Reset simple operations.
+  delegate_->resetSimpleOperations();
+
   bool efi_is_set = false;
   for (const Device& device : delegate_->realDevices()) {
     for (const Partition& partition : device.partitions) {
@@ -191,22 +194,22 @@ void SimplePartitionFrame::appendOperations() {
   } else {
     // Only create root partition.
     if (partition.type == PartitionType::Unallocated) {
-      // First try to add logical partition, then primary partition.
-      if (delegate_->canAddLogical(partition)) {
-        delegate_->createSimplePartition(partition,
-                                         PartitionType::Logical,
-                                         false,
-                                         GetPartitionDefaultFs(),
-                                         kMountPointRoot,
-                                         partition.getSectorLength());
-      } else if (delegate_->canAddPrimary(partition)) {
+      // First try to add primary partition, then logical partition.
+      if (delegate_->canAddPrimary(partition)) {
         delegate_->createSimplePartition(partition,
                                          PartitionType::Normal,
                                          false,
                                          GetPartitionDefaultFs(),
                                          kMountPointRoot,
                                          partition.getSectorLength());
-      } else {
+      } else if (delegate_->canAddLogical(partition)) {
+        delegate_->createSimplePartition(partition,
+                                         PartitionType::Logical,
+                                         false,
+                                         GetPartitionDefaultFs(),
+                                         kMountPointRoot,
+                                         partition.getSectorLength());
+      }  else {
         // We shall never reach here.
         qCritical() << "Reached maximum primary partitions:" << partition.path;
       }
@@ -393,9 +396,6 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
                                                     bool checked) {
   // Clear warning message first.
   msg_label_->clear();
-
-  // Then reset simple operations.
-  delegate_->resetSimpleOperations();
 
   SimplePartitionButton* part_button =
       dynamic_cast<SimplePartitionButton*>(button);
