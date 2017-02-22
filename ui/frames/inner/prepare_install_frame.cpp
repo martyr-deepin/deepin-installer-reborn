@@ -28,8 +28,8 @@ PrepareInstallFrame::PrepareInstallFrame(PartitionDelegate* delegate,
   this->initConnections();
 }
 
-void PrepareInstallFrame::updateDescription() {
-  const QStringList desc_list(delegate_->getOperationDescriptions());
+void PrepareInstallFrame::updateDescription(bool simple_mode) {
+  const QStringList desc_list(delegate_->getOperationDescriptions(simple_mode));
   const QString prefix("•   ");
   QStringList modified_desc_list;
   int max_width = 0;

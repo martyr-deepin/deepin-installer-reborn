@@ -43,7 +43,9 @@ class PartitionDelegate : public QObject {
   const DeviceList& realDevices() const { return real_devices_; }
 
   // Get human readable operation descriptions.
-  QStringList getOperationDescriptions() const;
+  // If |simple_mode| is true, return descriptions of simple_operations_.
+  // Else return descriptions of operations_.
+  QStringList getOperationDescriptions(bool simple_mode) const;
 
   // Get real partition on disk in which |virtual_partition| is located.
   Partition getRealPartition(const Partition& virtual_partition) const;

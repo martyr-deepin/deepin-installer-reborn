@@ -180,9 +180,9 @@ bool PartitionDelegate::canAddLogical(const Partition& partition) const {
   return logical_ok;
 }
 
-QStringList PartitionDelegate::getOperationDescriptions() const {
+QStringList PartitionDelegate::getOperationDescriptions(bool simple_mode) const {
   QStringList descriptions;
-  if (simple_mode_) {
+  if (simple_mode) {
     for (const Operation& operation : simple_operations_) {
       descriptions.append(operation.description());
     }
@@ -269,6 +269,7 @@ const FsTypeList& PartitionDelegate::getFsTypes() {
 void PartitionDelegate::doManualPart(bool simple_mode) {
   simple_mode_ = simple_mode;
   OperationList operations = simple_mode ? simple_operations_ : operations_;
+  qDebug() << "doManualPart:" << operations;
 
   // Set boot flags of boot partitions.
   bool is_boot_set = false;

@@ -23,7 +23,7 @@ class PrepareInstallFrame : public QFrame {
   PrepareInstallFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
 
   // Update descriptions of operations.
-  void updateDescription();
+  void updateDescription(bool simple_mode);
 
  signals:
   // Emitted when abort-button is clicked, returning to previous page.

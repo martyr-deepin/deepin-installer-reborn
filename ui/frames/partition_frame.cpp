@@ -262,7 +262,7 @@ void PartitionFrame::onNextButtonClicked() {
     }
   }
 
-  prepare_install_frame_->updateDescription();
+  prepare_install_frame_->updateDescription(is_simple_page);
   main_layout_->setCurrentWidget(prepare_install_frame_);
 }
 
