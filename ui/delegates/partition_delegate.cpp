@@ -182,11 +182,14 @@ bool PartitionDelegate::canAddLogical(const Partition& partition) const {
 
 QStringList PartitionDelegate::getOperationDescriptions() const {
   QStringList descriptions;
-  for (const Operation& operation : operations_) {
-    descriptions.append(operation.description());
-  }
-  for (const Operation& operation : simple_operations_) {
-    descriptions.append(operation.description());
+  if (simple_mode_) {
+    for (const Operation& operation : simple_operations_) {
+      descriptions.append(operation.description());
+    }
+  } else {
+    for (const Operation& operation : operations_) {
+      descriptions.append(operation.description());
+    }
   }
 
   qDebug() << "operation descriptions:" << descriptions;
@@ -325,6 +328,7 @@ void PartitionDelegate::createSimplePartition(const Partition& partition,
                                               FsType fs_type,
                                               const QString& mount_point,
                                               qint64 total_sectors) {
+  qDebug() << "Create simple partition" << partition << mount_point;
   if (partition_type == PartitionType::Normal) {
     createPrimaryPartition(partition,
                            partition_type,
@@ -617,6 +621,7 @@ void PartitionDelegate::refreshVisual() {
 
 void PartitionDelegate::setBootloaderPath(const QString bootloader_path,
                                           bool simple_mode) {
+  qDebug() << "setBootloaderPath()" << bootloader_path << simple_mode;
   if (simple_mode) {
     simple_bootloader_path_ = bootloader_path;
   } else {
