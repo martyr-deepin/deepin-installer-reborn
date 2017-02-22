@@ -61,17 +61,17 @@ void WriteUEFI(bool is_efi);
 
 // Get current locale.
 QString ReadLocale();
-void WriteLocale(const QString& locale);
-void WriteUsername(const QString& username);
-void WriteHostname(const QString& hostname);
-void WritePassword(const QString& password);
 void WriteAvatar(const QString& avatar);
-void WriteTimezone(const QString& timezone, bool is_local_time);
-
+void WriteFoundWindowsPartition(bool found);
+void WriteHostname(const QString& hostname);
 // Write keyboard model, layout and layout variant name.
 void WriteKeyboard(const QString& model,
                    const QString& layout,
                    const QString& variant);
+void WriteLocale(const QString& locale);
+void WritePassword(const QString& password);
+void WriteTimezone(const QString& timezone, bool is_local_time);
+void WriteUsername(const QString& username);
 
 // Write disk info.
 //  * |root_disk|, device path to install system into, like /dev/sda;

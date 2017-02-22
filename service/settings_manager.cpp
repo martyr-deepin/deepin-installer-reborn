@@ -252,31 +252,16 @@ QString ReadLocale() {
   return kDefaultLocale;
 }
 
-void WriteLocale(const QString& locale) {
-  AppendToConfigFile("DI_LOCALE", locale);
-}
-
-void WriteUsername(const QString& username) {
-  AppendToConfigFile("DI_USERNAME", username);
-}
-
-void WriteHostname(const QString& hostname) {
-  AppendToConfigFile("DI_HOSTNAME", hostname);
-}
-
-void WritePassword(const QString& password) {
-  const QString encoded_password = password.toUtf8().toBase64();
-  AppendToConfigFile("DI_PASSWORD", encoded_password);
-}
-
 void WriteAvatar(const QString& avatar) {
   AppendToConfigFile("DI_AVATAR", avatar);
 }
 
-void WriteTimezone(const QString& timezone, bool is_local_time) {
-  QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
-  settings.setValue("DI_TIMEZONE", timezone);
-  settings.setValue("DI_IS_LOCAL_TIME", is_local_time);
+void WriteFoundWindowsPartition(bool found) {
+  AppendToConfigFile(kSystemInfoFoundWindowsSystem, found);
+}
+
+void WriteHostname(const QString& hostname) {
+  AppendToConfigFile("DI_HOSTNAME", hostname);
 }
 
 void WriteKeyboard(const QString& model,
@@ -286,6 +271,25 @@ void WriteKeyboard(const QString& model,
   settings.setValue("DI_KEYBOARD_MODEL", model);
   settings.setValue("DI_KEYBOARD_LAYOUT", layout);
   settings.setValue("DI_KEYBOARD_LAYOUT_VARIANT", variant);
+}
+
+void WriteLocale(const QString& locale) {
+  AppendToConfigFile("DI_LOCALE", locale);
+}
+
+void WritePassword(const QString& password) {
+  const QString encoded_password = password.toUtf8().toBase64();
+  AppendToConfigFile("DI_PASSWORD", encoded_password);
+}
+
+void WriteTimezone(const QString& timezone, bool is_local_time) {
+  QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
+  settings.setValue("DI_TIMEZONE", timezone);
+  settings.setValue("DI_IS_LOCAL_TIME", is_local_time);
+}
+
+void WriteUsername(const QString& username) {
+  AppendToConfigFile("DI_USERNAME", username);
 }
 
 void WritePartitionInfo(const QString& root_disk,
