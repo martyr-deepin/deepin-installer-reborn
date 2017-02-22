@@ -76,7 +76,8 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
       operations_(),
       all_mount_points_(),
       fs_types_(),
-      bootloader_path_(),
+      advanced_bootloader_path_(),
+      simple_bootloader_path_(),
       simple_mode_(true) {
   this->setObjectName("partition_delegate");
 
@@ -614,8 +615,13 @@ void PartitionDelegate::refreshVisual() {
   emit this->deviceRefreshed();
 }
 
-void PartitionDelegate::setBootloaderPath(const QString bootloader_path) {
-  bootloader_path_ = bootloader_path;
+void PartitionDelegate::setBootloaderPath(const QString bootloader_path,
+                                          bool simple_mode) {
+  if (simple_mode) {
+    simple_bootloader_path_ = bootloader_path;
+  } else {
+    advanced_bootloader_path_ = bootloader_path;
+  }
 }
 
 void PartitionDelegate::initConnections() {
@@ -999,8 +1005,13 @@ void PartitionDelegate::onManualPartDone(bool ok) {
                          mount_points.join(';'));
     } else {
       // In legacy mode.
-      WritePartitionInfo(root_disk, root_path, bootloader_path_,
-                         mount_points.join(';'));
+      if (simple_mode_) {
+        WritePartitionInfo(root_disk, root_path, simple_bootloader_path_,
+                           mount_points.join(';'));
+      } else {
+        WritePartitionInfo(root_disk, root_path, advanced_bootloader_path_,
+                           mount_points.join(';'));
+      }
     }
   }
 

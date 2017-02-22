@@ -127,8 +127,9 @@ class PartitionDelegate : public QObject {
   void refreshVisual();
 
   // Set bootloader path to |bootloader_path|
-  // This slot is used only in SelectBootloaderFrame.
-  void setBootloaderPath(const QString bootloader_path);
+  // If |simple_mode| is true, update simple_bootloader_path_.
+  // Else update advanced_bootloader_path_.
+  void setBootloaderPath(const QString bootloader_path, bool simple_mode);
 
  private:
   void initConnections();
@@ -165,11 +166,18 @@ class PartitionDelegate : public QObject {
 
   // simple_operations_ is only used for SimplePartitionFrame
   OperationList simple_operations_;
+
+  // Operations defined in advanced AdvancedPartitionFrame.
   OperationList operations_;
 
   QStringList all_mount_points_;
   FsTypeList fs_types_;
-  QString bootloader_path_;
+
+  // Bootloader path defined in AdvancedPartitionFrame.
+  QString advanced_bootloader_path_;
+
+  // Bootloader path defined in SimplePartitionFrame.
+  QString simple_bootloader_path_;
 
   // Use simple mode or advanced mode to do manual part.
   bool simple_mode_;

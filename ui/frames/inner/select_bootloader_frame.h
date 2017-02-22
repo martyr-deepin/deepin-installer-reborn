@@ -29,7 +29,7 @@ class SelectBootloaderFrame : public QFrame {
 
  signals:
   // Emitted when currently used bootloader path is updated.
-  void bootloaderUpdated(const QString& bootloader_path);
+  void bootloaderUpdated(const QString& bootloader_path, bool simple_mode);
 
   // Emitted when back-button is clicked.
   void finished();
