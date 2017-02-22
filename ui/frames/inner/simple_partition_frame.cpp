@@ -217,6 +217,10 @@ void SimplePartitionFrame::appendOperations() {
                                        kMountPointRoot);
     }
   }
+
+  // Update simple bootloader path.
+  const QString bootloader_path = button->partition().device_path;
+  delegate_->setBootloaderPath(bootloader_path, true);
 }
 
 void SimplePartitionFrame::initConnections() {
