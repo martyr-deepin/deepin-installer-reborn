@@ -90,6 +90,21 @@ bool Operation::applyToDisk() const {
       break;
     }
 
+    case OperationType::Invalid: {
+      qCritical() << "Invalid operation!";
+      return false;
+    }
+
+    case OperationType::MountPoint: {
+      // Do nothing if only mount-point of partition is updated.
+      return true;
+    }
+
+    case OperationType::NewPartTable: {
+      // TODO(xushaohua): Support this operation.
+      return true;
+    }
+
     case OperationType::Resize: {
       ok = ResizeMovePartition(new_partition);
       qDebug() << "applyToDisk() resize partition:" << ok;
@@ -97,8 +112,8 @@ bool Operation::applyToDisk() const {
     }
 
     default: {
-      ok = false;
-      break;
+      qCritical() << "TODO(xushaohua): Handles other type of operation" << type;
+      return false;
     }
   }
 
