@@ -371,7 +371,7 @@ Partition PartitionDelegate::deleteSimplePartition(const Partition& partition) {
   // No need to delete extended partition.
 
   Operation operation(OperationType::Delete, partition, new_partition);
-  operations_.append(operation);
+  simple_operations_.append(operation);
 
   return new_partition;
 }
