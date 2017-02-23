@@ -403,6 +403,9 @@ void PartitionDelegate::formatSimplePartition(const Partition& partition,
 
 void PartitionDelegate::resetSimpleOperations() {
   simple_operations_.clear();
+
+  // Also reset simple device list.
+  simple_devices_ = real_devices_;
 }
 
 void PartitionDelegate::createPartition(const Partition& partition,
@@ -730,7 +733,19 @@ bool PartitionDelegate::createPrimaryPartition(const Partition& partition,
   new_partition.type = partition_type;
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
-  const int partition_number = AllocPrimaryPartitionNumber(device);
+
+  int partition_number;
+  if (simple_mode) {
+    // In simple mode, operations has never been applied to partition list.
+    // So do it temporarily.
+    Device tmp_device = device;
+    for (const Operation& operation : simple_operations_) {
+      operation.applyToVisual(tmp_device.partitions);
+    }
+    partition_number = AllocPrimaryPartitionNumber(tmp_device);
+  } else {
+    partition_number = AllocPrimaryPartitionNumber(device);
+  }
   if (partition_number < 0) {
     qCritical() << "Failed to allocate primary partition number!";
     return false;
