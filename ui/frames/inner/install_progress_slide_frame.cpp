@@ -55,7 +55,9 @@ void InstallProgressSlideFrame::startSlide(bool position_animation,
                                            int duration) {
   QDir slide_dir(GetSlideDir(locale_));
   Q_ASSERT(slide_dir.exists());
-  for (const QString& filename : slide_dir.entryList(QDir::Files)) {
+
+  // List all png files only.
+  for (const QString& filename : slide_dir.entryList({"*.png"}, QDir::Files)) {
     slide_files_.append(slide_dir.absoluteFilePath(filename));
   }
   if (slide_files_.isEmpty()) {
