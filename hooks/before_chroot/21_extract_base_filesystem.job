@@ -34,6 +34,7 @@ extract_overlay_filesystem() {
 
   if [ -f ${MODULE} ]; then
     for file in $(cat ${MODULE}); do
+      # TODO(xushaohua): Replace unsquashfs with deepin-installer-unsquashfs
       unsquashfs -p "${PROCESSORS}" -f -d /target ${CDROM}/overlay/${file} || \
         error "unsquashfs failed" ${CDROM}/overlay/${file}
     done
@@ -41,12 +42,12 @@ extract_overlay_filesystem() {
 }
 
 # First, extract base filesystem
-python "${HOOKS_DIR}/before_chroot/extract_base_filesystem" \
-  --live "${LIVE}" || error "Failed to extract base filesystem"
-#readonly PROGRESS_FILE="/dev/shm/unsquashfs_progress"
-#readonly BASE_MODULE="${LIVE_FILESYSTEM}/filesystem.squashfs"
-#deepin-installer-unsquashfs --dest /target --progress "${PROGRESS_FILE}" \
-#  "${BASE_MODULE}" || error "installer-unsquashfs failed, ${BASE_MODULE}"
+#python "${HOOKS_DIR}/before_chroot/extract_base_filesystem" \
+#  --live "${LIVE}" || error "Failed to extract base filesystem"
+readonly PROGRESS_FILE="/dev/shm/unsquashfs_progress"
+readonly BASE_MODULE="${LIVE_FILESYSTEM}/filesystem.squashfs"
+deepin-installer-unsquashfs --dest /target --progress "${PROGRESS_FILE}" \
+  "${BASE_MODULE}" || error "installer-unsquashfs failed, ${BASE_MODULE}"
 
 # Then extract overlay_filesystem
 extract_overlay_filesystem || true
