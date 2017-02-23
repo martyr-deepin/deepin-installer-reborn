@@ -53,25 +53,6 @@ generate_background_image() {
   return 0
 }
 
-# Remove slide image for netease-cloud-music on non-x86 platforms
-remove_cloud_music_slide() {
-  case $(uname -m) in
-    i386 | amd64 | x86 | x86_64)
-      # Do nothing.
-      return 0
-      ;;
-    *)
-      ;;
-  esac
-
-  local ZH_CN_SLIDE="${SHARE_DIR}/resources/slide/zh_CN/18.png"
-  local ZH_TW_SLIDE="${SHARE_DIR}/resources/slide/zh_TW/18.png"
-  [ -f "${ZH_CN_SLIDE}" ] && rm "${ZH_CN_SLIDE}"
-  [ -f "${ZH_TW_SLIDE}" ] && rm "${ZH_TW_SLIDE}"
-
-  return 0
-}
-
 # Replace default settings on loongson/sw platform.
 replace_default_settings() {
   case $(uname -m) in
@@ -99,7 +80,6 @@ case "$1" in
   configure)
     generate_locale
     generate_background_image
-    remove_cloud_music_slide
     replace_default_settings
     ;;
 esac
