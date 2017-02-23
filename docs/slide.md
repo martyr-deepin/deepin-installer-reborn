@@ -16,6 +16,10 @@
 * 如果在 images.json 文件中, 没有定义这个平台的图片列表, 就会使用这个目录里面的所有 png 图片.
 * 图片显示顺序是在 images.json 中定义的顺序.
 
-
 ### 格式要求
 幻灯片中的图片应该 png 格式的图片, 分辨率不大于 960*640, 有半透明效果.
+
+## 选项
+* "install_progress_page_disable_slide", 启用/禁用幻灯片切换.
+* "install_progress_page_disable_slide_animation", 启用/禁用幻灯片切换时的过渡动画.
+* "install_progress_page_animation_duration", 定义幻灯片切换时间间隔, 默认是 8000 毫秒.
