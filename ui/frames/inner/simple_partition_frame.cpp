@@ -93,8 +93,8 @@ bool SimplePartitionFrame::validate() {
   // button->partition() is a Freespace, it is impossible to created a new
   // primary partition.
   if ((root_partition.type == PartitionType::Unallocated) &&
-      !delegate_->canAddPrimary(root_partition) &&
-      !delegate_->canAddLogical(root_partition)) {
+      !delegate_->canAddPrimary(root_partition, true) &&
+      !delegate_->canAddLogical(root_partition, true)) {
     is_max_prims_reached = true;
   }
 
@@ -195,14 +195,14 @@ void SimplePartitionFrame::appendOperations() {
     // Only create root partition.
     if (partition.type == PartitionType::Unallocated) {
       // First try to add primary partition, then logical partition.
-      if (delegate_->canAddPrimary(partition)) {
+      if (delegate_->canAddPrimary(partition, true)) {
         delegate_->createSimplePartition(partition,
                                          PartitionType::Normal,
                                          false,
                                          GetPartitionDefaultFs(),
                                          kMountPointRoot,
                                          partition.getSectorLength());
-      } else if (delegate_->canAddLogical(partition)) {
+      } else if (delegate_->canAddLogical(partition, true)) {
         delegate_->createSimplePartition(partition,
                                          PartitionType::Logical,
                                          false,

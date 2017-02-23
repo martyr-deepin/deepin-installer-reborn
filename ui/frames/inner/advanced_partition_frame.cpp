@@ -414,8 +414,8 @@ void AdvancedPartitionFrame::onNewPartitionTriggered(
     return;
   }
 
-  if (delegate_->canAddPrimary(partition) ||
-      delegate_->canAddLogical(partition)) {
+  if (delegate_->canAddPrimary(partition, false) ||
+      delegate_->canAddLogical(partition, false)) {
     // Switch to NewPartitionFrame only if a new partition can be added.
     emit this->requestNewPartitionFrame(partition);
   } else {

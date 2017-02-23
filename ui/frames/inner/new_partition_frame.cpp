@@ -49,8 +49,8 @@ NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
 void NewPartitionFrame::setPartition(const Partition& partition) {
   partition_ = partition;
 
-  const bool primary_ok = delegate_->canAddPrimary(partition);
-  const bool logical_ok = delegate_->canAddLogical(partition);
+  const bool primary_ok = delegate_->canAddPrimary(partition, false);
+  const bool logical_ok = delegate_->canAddLogical(partition, false);
   if (!primary_ok && !logical_ok) {
     qCritical() << "No more partition available!";
   }

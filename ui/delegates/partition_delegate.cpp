@@ -97,17 +97,19 @@ void PartitionDelegate::autoConf() {
   emit partition_manager_->autoPart(script_path);
 }
 
-bool PartitionDelegate::canAddPrimary(const Partition& partition) const {
-  const int index = DeviceIndex(devices_, partition.device_path);
+bool PartitionDelegate::canAddPrimary(const Partition& partition,
+                                      bool simple_mode) const {
+  const DeviceList& devices = simple_mode ? real_devices_ : devices_;
+  const int index = DeviceIndex(devices, partition.device_path);
   if (index == -1) {
     qCritical() << "getSupportedPartitionType() no device found at:"
                 << partition.device_path;
     return false;
   }
-  const Device& device = devices_.at(index);
+  const Device& device = devices.at(index);
   const PartitionList prim_partitions = GetPrimaryPartitions(device.partitions);
-  const PartitionList logical_partitions = GetLogicalPartitions(
-      device.partitions);
+  const PartitionList logical_partitions =
+      GetLogicalPartitions(device.partitions);
 
   // Check primary type
   bool primary_ok = true;
@@ -133,14 +135,16 @@ bool PartitionDelegate::canAddPrimary(const Partition& partition) const {
   return primary_ok;
 }
 
-bool PartitionDelegate::canAddLogical(const Partition& partition) const {
-  const int index = DeviceIndex(devices_, partition.device_path);
+bool PartitionDelegate::canAddLogical(const Partition& partition,
+                                      bool simple_mode) const {
+  const DeviceList& devices = simple_mode ? real_devices_ : devices_;
+  const int index = DeviceIndex(devices, partition.device_path);
   if (index == -1) {
     qCritical() << "getSupportedPartitionType() no device found at:"
                 << partition.device_path;
     return false;
   }
-  const Device& device = devices_.at(index);
+  const Device& device = devices.at(index);
 
   // Ignores gpt table.
   if (device.table != PartitionTableType::MsDos) {
@@ -616,6 +620,7 @@ void PartitionDelegate::refreshVisual() {
   }
 
   qDebug() << "devices:" << devices_;
+  qDebug() << "simple_operations:" << simple_operations_;
   qDebug() << "operations:" << operations_;
   emit this->deviceRefreshed();
 }

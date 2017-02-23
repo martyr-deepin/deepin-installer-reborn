@@ -33,8 +33,10 @@ class PartitionDelegate : public QObject {
 
   // Get alternative partition type. Used while creating a new partition.
   // |partition| is an unallocated partition.
-  bool canAddPrimary(const Partition& partition) const;
-  bool canAddLogical(const Partition& partition) const;
+  // If |simple_mode| is true, check in real_devices_.
+  // Else check in devices_.
+  bool canAddPrimary(const Partition& partition, bool simple_mode) const;
+  bool canAddLogical(const Partition& partition, bool simple_mode) const;
 
   // Get a list of devices found by libparted, and modified by operations.
   const DeviceList& devices() const { return devices_; }
