@@ -28,6 +28,11 @@
 
 #define S_IMODE 0777
 
+// TODO(xushaohua): Added --debug option.
+// TODO(xushaohua): Added --force option.
+// TODO(xushaohua): Unmount squashfs file on error.
+// TODO(xushaohua): Print progress value in single line.
+
 namespace {
 
 const char kAppName[] = "deepin-installer-unsquashfs";
@@ -89,8 +94,13 @@ bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
   while (num_to_read > 0) {
     const ssize_t num_sent = sendfile(dest_fd, src_fd, NULL, num_to_read);
     if (num_sent <= 0) {
-      perror("sendfile() error");
-      ok = false;
+      fprintf(stderr, "sendfile() error: %s\nSkip %s\n",
+              strerror(errno), src_file);
+      // NOTE(xushaohua): Skip sendfile() error.
+      // xz uncompress error, Input/output error.
+      // squashfs file might have some defects.
+//      ok = false;
+      ok = true;
       break;
     }
     num_to_read -= num_sent;
