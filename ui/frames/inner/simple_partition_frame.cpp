@@ -62,7 +62,7 @@ bool SimplePartitionFrame::validate() {
   Partition root_partition;
 
   // Check whether linux-swap partition exists.
-  for (const Device& device : delegate_->realDevices()) {
+  for (const Device& device : delegate_->simpleDevices()) {
     for (const Partition& partition : device.partitions) {
       if (partition.fs == FsType::LinuxSwap) {
         swap_is_set = true;
@@ -149,7 +149,7 @@ void SimplePartitionFrame::appendOperations() {
   delegate_->resetSimpleOperations();
 
   bool efi_is_set = false;
-  for (const Device& device : delegate_->realDevices()) {
+  for (const Device& device : delegate_->simpleDevices()) {
     for (const Partition& partition : device.partitions) {
       if (partition.fs == FsType::EFI) {
         efi_is_set = true;
@@ -318,7 +318,7 @@ void SimplePartitionFrame::repaintDevices() {
   int row = 0, column = 0;
   const QString installer_device_path(GetInstallerDevicePath());
   qDebug() << "installer_device_path:" << installer_device_path;
-  for (const Device& device : delegate_->realDevices()) {
+  for (const Device& device : delegate_->simpleDevices()) {
     // Ignores installer device.
     if (installer_device_path.startsWith(device.path)) {
       qDebug() << "Ignore installer device:" << installer_device_path;

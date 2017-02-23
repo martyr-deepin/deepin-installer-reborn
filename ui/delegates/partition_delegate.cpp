@@ -71,6 +71,7 @@ PartitionDelegate::PartitionDelegate(QObject* parent)
       partition_manager_(new PartitionManager()),
       partition_thread_(new QThread(this)),
       devices_(),
+      simple_devices_(),
       real_devices_(),
       simple_operations_(),
       operations_(),
@@ -99,7 +100,7 @@ void PartitionDelegate::autoConf() {
 
 bool PartitionDelegate::canAddPrimary(const Partition& partition,
                                       bool simple_mode) const {
-  const DeviceList& devices = simple_mode ? real_devices_ : devices_;
+  const DeviceList& devices = simple_mode ? simple_devices_ : devices_;
   const int index = DeviceIndex(devices, partition.device_path);
   if (index == -1) {
     qCritical() << "getSupportedPartitionType() no device found at:"
@@ -137,7 +138,7 @@ bool PartitionDelegate::canAddPrimary(const Partition& partition,
 
 bool PartitionDelegate::canAddLogical(const Partition& partition,
                                       bool simple_mode) const {
-  const DeviceList& devices = simple_mode ? real_devices_ : devices_;
+  const DeviceList& devices = simple_mode ? simple_devices_ : devices_;
   const int index = DeviceIndex(devices, partition.device_path);
   if (index == -1) {
     qCritical() << "getSupportedPartitionType() no device found at:"
@@ -653,7 +654,7 @@ bool PartitionDelegate::createPrimaryPartition(const Partition& partition,
                                                FsType fs_type,
                                                const QString& mount_point,
                                                qint64 total_sectors,
-                                               bool is_simple) {
+                                               bool simple_mode) {
   // Policy:
   // * If new primary partition is contained in or intersected with
   //   extended partition, shrink extended partition or delete it if no other
@@ -666,13 +667,15 @@ bool PartitionDelegate::createPrimaryPartition(const Partition& partition,
     return false;
   }
 
-  const int device_index = DeviceIndex(devices_, partition.device_path);
+  DeviceList& devices = simple_mode ? simple_devices_ : devices_;
+
+  const int device_index = DeviceIndex(devices, partition.device_path);
   if (device_index == -1) {
     qCritical() << "createPrimaryPartition() device index out of range:"
                 << partition.device_path;
     return false;
   }
-  Device& device = devices_[device_index];
+  Device& device = devices[device_index];
 
   const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
 
@@ -773,7 +776,7 @@ bool PartitionDelegate::createPrimaryPartition(const Partition& partition,
     return false;
   }
 
-  if (is_simple) {
+  if (simple_mode) {
     Operation operation(OperationType::Create, partition, new_partition);
     simple_operations_.append(operation);
   } else {
@@ -791,24 +794,27 @@ bool PartitionDelegate::createLogicalPartition(const Partition& partition,
                                                FsType fs_type,
                                                const QString& mount_point,
                                                qint64 total_sectors,
-                                               bool is_simple) {
+                                               bool simple_mode) {
   // Policy:
   // * Create extended partition if not found;
   // * If new logical partition is not contained in or is intersected with
   //   extended partition, enlarge extended partition.
 
-  const int device_index = DeviceIndex(devices_, partition.device_path);
+  const DeviceList& devices = simple_mode ? simple_devices_ : devices_;
+
+  const int device_index = DeviceIndex(devices, partition.device_path);
   if (device_index == -1) {
     qCritical() << "createLogicalPartition() device index out of range:"
                 << partition.device_path;
     return false;
   }
-  const Device& device = devices_.at(device_index);
+  const Device& device = devices.at(device_index);
 
   const int ext_index = ExtendedPartitionIndex(device.partitions);
   Partition ext_partition;
   if (ext_index == -1) {
-    if (is_simple) {
+    if (simple_mode) {
+      // TODO(xushaohua): Support extended partition in simple mode.
       qCritical() << "Cannot create extended partition in simple mode";
       return false;
     }
@@ -902,7 +908,7 @@ bool PartitionDelegate::createLogicalPartition(const Partition& partition,
     return false;
   }
 
-  if (is_simple) {
+  if (simple_mode) {
     const Operation operation(OperationType::Create, partition, new_partition);
     simple_operations_.append(operation);
   } else {
@@ -937,11 +943,14 @@ void PartitionDelegate::resetOperationMountPoint(const QString& mount_point) {
 
 void PartitionDelegate::onDevicesRefreshed(const DeviceList& devices) {
   qDebug() << "device refreshed:" << devices;
-  this->real_devices_ = devices;
+  real_devices_ = devices;
 
   // Clear operation list.
   simple_operations_.clear();
   operations_.clear();
+
+  // No need to update simple_devices_ in refreshVisual().
+  simple_devices_ = real_devices_;
 
   emit this->realDeviceRefreshed();
 
@@ -957,7 +966,7 @@ void PartitionDelegate::onManualPartDone(bool ok) {
     const OperationList operations = simple_mode_ ?
                                      simple_operations_ :
                                      operations_;
-    const DeviceList devices = simple_mode_ ? real_devices_ : devices_;
+    const DeviceList devices = simple_mode_ ? simple_devices_ : devices_;
 
     for (const Operation& operation : operations) {
       const Partition& new_partition = operation.new_partition;

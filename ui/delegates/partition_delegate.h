@@ -38,8 +38,11 @@ class PartitionDelegate : public QObject {
   bool canAddPrimary(const Partition& partition, bool simple_mode) const;
   bool canAddLogical(const Partition& partition, bool simple_mode) const;
 
-  // Get a list of devices found by libparted, and modified by operations.
+  // Get a list of devices used for AdvancedPartitionFrame.
   const DeviceList& devices() const { return devices_; }
+
+  // Get a list of devices used for SimplePartitionFrame.
+  const DeviceList& simpleDevices() const { return simple_devices_; }
 
   // Get a list of devices found by libparted, .
   const DeviceList& realDevices() const { return real_devices_; }
@@ -146,7 +149,7 @@ class PartitionDelegate : public QObject {
                               FsType fs_type,
                               const QString& mount_point,
                               qint64 total_sectors,
-                              bool is_simple);
+                              bool simple_mode);
 
   // Create logical partition. If |is_simple| is true, append operation to
   // simple_partitions_ list.
@@ -155,7 +158,7 @@ class PartitionDelegate : public QObject {
                               FsType fs_type,
                               const QString& mount_point,
                               qint64 total_sectors,
-                              bool is_simple);
+                              bool simple_mode);
 
   // Clear mount point of operation.new_partition with value |mount_point|.
   void resetOperationMountPoint(const QString& mount_point);
@@ -163,9 +166,13 @@ class PartitionDelegate : public QObject {
   PartitionManager* partition_manager_ = nullptr;
   QThread* partition_thread_ = nullptr;
 
-  // device list which are managed by this delegate.
+  // Device list used for AdvancedPartitionFrame.
   DeviceList devices_;
-  // Physical device list.
+
+  // Device list used for SimplePartitionFrame.
+  DeviceList simple_devices_;
+
+  // Real device list.
   DeviceList real_devices_;
 
   // simple_operations_ is only used for SimplePartitionFrame
