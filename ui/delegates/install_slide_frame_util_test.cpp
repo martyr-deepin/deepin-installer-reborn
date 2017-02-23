@@ -4,9 +4,6 @@
 
 #include "ui/delegates/install_slide_frame_util.h"
 
-#include <QDebug>
-#include <QStringList>
-
 #include "third_party/googletest/include/gtest/gtest.h"
 
 namespace installer {

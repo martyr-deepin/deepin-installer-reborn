@@ -5,6 +5,7 @@
 #include "ui/frames/inner/install_progress_slide_frame.h"
 
 #include <QDebug>
+#include <QFile>
 #include <QGraphicsOpacityEffect>
 #include <QLabel>
 #include <QPropertyAnimation>
@@ -29,25 +30,33 @@ void InstallProgressSlideFrame::setLocale(const QString& locale) {
   locale_ = locale;
 }
 
-void InstallProgressSlideFrame::startSlide(bool position_animation,
-                                           bool opacity_animation,
+void InstallProgressSlideFrame::startSlide(bool disable_slide,
+                                           bool disable_animation,
                                            int duration) {
-  slide_files_.clear();
   slide_files_ = GetSlideFiles(locale_);
 
   if (slide_files_.isEmpty()) {
     qCritical() << "startSlide() no slide files found!";
     return;
   }
+
+  // Read the first slide image.
   slide_index_ = 0;
   this->updateSlideImage();
 
+  if (disable_slide) {
+    qDebug() << "slide disabled";
+    return;
+  }
+
   animation_group_->clear();
-  if (position_animation) {
+  if (disable_animation) {
+    qDebug() << "slide animation disabled";
+    null_animation_->setDuration(duration);
+    animation_group_->addAnimation(null_animation_);
+  } else {
     pos_animation_->setDuration(duration);
     animation_group_->addAnimation(pos_animation_);
-  }
-  if (opacity_animation) {
     opacity_animation_->setDuration(duration);
     animation_group_->addAnimation(opacity_animation_);
   }
@@ -80,6 +89,8 @@ void InstallProgressSlideFrame::initUI() {
   opacity_animation_->setKeyValueAt(0.9, 1.0);
   opacity_animation_->setKeyValueAt(1.0, 0.0);
 
+  null_animation_ = new QVariantAnimation(this);
+
   animation_group_ = new QParallelAnimationGroup(this);
   animation_group_->setLoopCount(-1);
   // Slide window size shall be the same with slide images
@@ -88,8 +99,13 @@ void InstallProgressSlideFrame::initUI() {
 
 void InstallProgressSlideFrame::updateSlideImage() {
   Q_ASSERT(slide_index_ < slide_files_.length());
-  const QPixmap pixmap(slide_files_.at(slide_index_));
-  container_label_->setPixmap(pixmap);
+  const QString filepath(slide_files_.at(slide_index_));
+  if (QFile::exists(filepath)) {
+    const QPixmap pixmap(filepath);
+    container_label_->setPixmap(pixmap);
+  } else {
+    qWarning() << "slide file not found:" << filepath;
+  }
   container_label_->show();
   slide_index_ = (slide_index_ + 1) % slide_files_.length();
 }

@@ -67,14 +67,18 @@ InstallProgressFrame::~InstallProgressFrame() {
 }
 
 void InstallProgressFrame::startSlide() {
-  const bool position = GetSettingsBool(kInstallProgressPagePositionAnimation);
-  const bool opacity = GetSettingsBool(kInstallProgressPageOpacityAnimation);
+  const bool disable_slide =
+      GetSettingsBool(kInstallProgressPageDisableSlide);
+  const bool disable_animation =
+      GetSettingsBool(kInstallProgressPageDisableSlideAnimation);
   const int duration = GetSettingsInt(kInstallProgressPageAnimationDuration);
-  slide_frame_->startSlide(position, opacity, duration);
+  slide_frame_->startSlide(disable_slide, disable_animation, duration);
 }
 
 void InstallProgressFrame::simulate() {
   if (!simulation_timer_->isActive()) {
+    this->startSlide();
+
     // Reset progress value.
     this->onProgressUpdate(progress_bar_->minimum());
     simulation_timer_->start();

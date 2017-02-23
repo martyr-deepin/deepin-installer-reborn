@@ -92,10 +92,10 @@ const char kPartitionFormattedMountPoints[] =
 const char kPartitionEnableOsProber[] = "partition_enable_os_prober";
 
 // Install progress page
-const char kInstallProgressPagePositionAnimation[] =
-    "install_progress_page_position_animation";
-const char kInstallProgressPageOpacityAnimation[] =
-    "install_progress_page_position_animation";
+const char kInstallProgressPageDisableSlide[] =
+    "install_progress_page_disable_slide";
+const char kInstallProgressPageDisableSlideAnimation[] =
+    "install_progress_page_disable_slide_animation";
 const char kInstallProgressPageAnimationDuration[] =
     "install_progress_page_animation_duration";
 
