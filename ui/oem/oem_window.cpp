@@ -142,15 +142,7 @@ void OemWindow::initUI() {
       tr("Mount points to be formatted"));
   formatted_mount_points->setToolTip(formatted_mount_points->placeholderText());
 
-  // Install progress frame
-  QCheckBox* position_animation = settings_model_->addCheckBox(
-      kInstallProgressPagePositionAnimation);
-  position_animation->setText(tr("Position animation"));
-  QCheckBox* opacity_animation = settings_model_->addCheckBox(
-      kInstallProgressPageOpacityAnimation);
-  opacity_animation->setText(tr("Fade animation"));
-
-  // Install failed frame
+    // Install failed frame
   QSpinBox* qr_err_msg = settings_model_->addSpinBox(kInstallFailedQRErrMsgLen,
                                                      100, 500);
 
@@ -233,8 +225,6 @@ void OemWindow::initUI() {
 
   // Install progress frame
   right_layout->addSpacing(kSectionSpace);
-  right_layout->addWidget(position_animation);
-  right_layout->addWidget(opacity_animation);
 
   // Install failed frame
   right_layout->addWidget(qr_err_msg);

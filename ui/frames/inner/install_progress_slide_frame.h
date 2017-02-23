@@ -12,6 +12,7 @@ class QLabel;
 class QGraphicsOpacityEffect;
 class QPropertyAnimation;
 class QParallelAnimationGroup;
+class QVariantAnimation;
 
 namespace installer {
 
@@ -26,12 +27,11 @@ class InstallProgressSlideFrame : public QFrame {
   void setLocale(const QString& locale);
 
   // Start slide show.
-  // If |position_animation| is true, enable horizontal movement animation.
-  // If |opacity_animation| is true, enable image opacity animation.
+  // If |disable_slide| is true, do no switch slide images.
+  // If |disable_animation| is true, do no apply animation.
   // |duration| defines animation interval.
-  void startSlide(bool position_animation,
-                  bool opacity_animation,
-                  int duration);
+  void startSlide(bool disable_slide, bool disable_animation, int duration);
+
   // Stop slide show.
   void stopSlide();
 
@@ -46,6 +46,7 @@ class InstallProgressSlideFrame : public QFrame {
   QGraphicsOpacityEffect* opacity_effect_ = nullptr;
   QPropertyAnimation* opacity_animation_ = nullptr;
   QParallelAnimationGroup* animation_group_ = nullptr;
+  QVariantAnimation* null_animation_ = nullptr;
 
   QString locale_;
   int slide_index_;
