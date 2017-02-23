@@ -198,6 +198,8 @@ set(UI_FILES
     ui/delegates/avatar_list_delegate.h
     ui/delegates/frameless_list_delegate.cpp
     ui/delegates/frameless_list_delegate.h
+    ui/delegates/install_slide_frame_util.cpp
+    ui/delegates/install_slide_frame_util.h
     ui/delegates/language_delegate.cpp
     ui/delegates/language_delegate.h
     ui/delegates/main_window_util.cpp
@@ -386,10 +388,12 @@ set(UNITTEST_FILES
     sysinfo/validate_password_test.cpp
     sysinfo/validate_username_test.cpp
 
-
     ui/delegates/args_parser.cpp
     ui/delegates/args_parser.h
     ui/delegates/args_parser_test.cpp
+    ui/delegates/install_slide_frame_util.cpp
+    ui/delegates/install_slide_frame_util.h
+    ui/delegates/install_slide_frame_util_test.cpp
     ui/delegates/timezone_map_util_test.cpp
     )
 

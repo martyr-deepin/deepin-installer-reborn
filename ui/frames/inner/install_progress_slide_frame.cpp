@@ -5,34 +5,14 @@
 #include "ui/frames/inner/install_progress_slide_frame.h"
 
 #include <QDebug>
-#include <QDir>
 #include <QGraphicsOpacityEffect>
 #include <QLabel>
 #include <QPropertyAnimation>
 #include <QParallelAnimationGroup>
 
+#include "ui/delegates/install_slide_frame_util.h"
+
 namespace installer {
-
-namespace {
-
-const char kDefaultSlide[] = "default";
-
-// Get absolute path to slide folder, based on |locale|.
-// |locale| might be empty or like "zh_CN" or "en_US".
-QString GetSlideDir(const QString& locale) {
-  QDir dir(RESOURCES_DIR "/slide");
-  Q_ASSERT(dir.exists());
-  for (const QFileInfo& fileinfo :
-       dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
-    if (fileinfo.fileName() == locale) {
-      return fileinfo.absoluteFilePath();
-    }
-  }
-
-  return dir.absoluteFilePath(kDefaultSlide);
-}
-
-}  // namespace
 
 InstallProgressSlideFrame::InstallProgressSlideFrame(QWidget* parent)
     : QFrame(parent),
@@ -45,7 +25,6 @@ InstallProgressSlideFrame::InstallProgressSlideFrame(QWidget* parent)
   this->initConnections();
 }
 
-
 void InstallProgressSlideFrame::setLocale(const QString& locale) {
   locale_ = locale;
 }
@@ -53,15 +32,11 @@ void InstallProgressSlideFrame::setLocale(const QString& locale) {
 void InstallProgressSlideFrame::startSlide(bool position_animation,
                                            bool opacity_animation,
                                            int duration) {
-  QDir slide_dir(GetSlideDir(locale_));
-  Q_ASSERT(slide_dir.exists());
+  slide_files_.clear();
+  slide_files_ = GetSlideFiles(locale_);
 
-  // List all png files only.
-  for (const QString& filename : slide_dir.entryList({"*.png"}, QDir::Files)) {
-    slide_files_.append(slide_dir.absoluteFilePath(filename));
-  }
   if (slide_files_.isEmpty()) {
-    qCritical() << "startSlide() no slide files found!" << slide_dir;
+    qCritical() << "startSlide() no slide files found!";
     return;
   }
   slide_index_ = 0;

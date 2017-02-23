@@ -9,7 +9,6 @@
 
 namespace installer {
 
-// TODO(xushaohua): Support sw
 enum class MachineArch {
   Alpha,
   Alpha64,
@@ -17,6 +16,8 @@ enum class MachineArch {
   ARM64,
   MIPS,
   MIPS64,
+  SW,
+  SW64,
   X86,
   X86_64,
 
