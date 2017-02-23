@@ -26,7 +26,7 @@
 #include "base/command.h"
 #include "base/file_util.h"
 
-#define S_IMODE 0777
+#define S_IMODE 07777
 
 // TODO(xushaohua): Added --debug option.
 // TODO(xushaohua): Added --force option.
@@ -230,19 +230,23 @@ int CopyItem(const char* fpath, const struct stat* sb,
   }
 
   // TODO(xushaohua): Keep file descriptor.
-  if (!S_ISLNK(st.st_mode)) {
-    if (chmod(dest_file, mode) != 0) {
-      fprintf(stderr, "CopyItem() chmod failed: %s, %ul\n", dest_file, mode);
-      perror("chmod()");
-      ok = false;
-    }
-  }
-  // Update permissions
+  // Update ownership first, or chmod() might ignore SUID/SGID or sticky flag.
   if (lchown(dest_file, st.st_uid, st.st_gid) != 0) {
     fprintf(stderr, "CopyItem() lchown() failed: %s, %d, %d\n",
             dest_file, st.st_uid, st.st_gid);
     perror("lchown()");
     ok = false;
+  }
+  // Update permissions.
+  if (!S_ISLNK(st.st_mode)) {
+    if (dest_filepath.endsWith("bin/sudo")  ) {
+      qDebug() << "mod:" << mode;
+    }
+    if (chmod(dest_file, mode) != 0) {
+      fprintf(stderr, "CopyItem() chmod failed: %s, %ul\n", dest_file, mode);
+      perror("chmod()");
+      ok = false;
+    }
   }
 
   if (!CopyXAttr(fpath, dest_file)) {
