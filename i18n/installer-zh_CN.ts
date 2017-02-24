@@ -127,27 +127,44 @@
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="154"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="393"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="399"/>
         <source>Done</source>
         <translation>完成</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="156"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="249"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="395"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="401"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="364"/>
+        <source>Found %1 error, fix the error to continue install or switch to simple mode</source>
+        <translation>发现 %1 处错误，修复后即可继续安装或切换到简单模式</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="368"/>
+        <source>Found %1 errors, fix the errors to continue install or switch to simple mode</source>
+        <translation>发现 %1 处错误，修复后即可继续安装或切换到简单模式</translation>
+    </message>
+    <message>
+        <source>Found %s error, fix the error to continue install or switch to simple mode</source>
+        <translation type="vanished">发现 %s 处错误，修复后即可继续安装或切换到简单模式</translation>
+    </message>
+    <message>
+        <source>Found %s errors, fix the errors to continue install or switch to simple mode</source>
+        <translation type="vanished">发现 %s 处错误，修复后即可继续安装或切换到简单模式</translation>
+    </message>
     <message numerus="yes">
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="363"/>
         <source>Found %n error(s), fix the error(s) to continue install or switch to simple mode</source>
         <comment>error</comment>
-        <translation type="unfinished">
+        <translation type="obsolete">
             <numerusform>发现 %n 处错误，修复后即可继续安装或切换到简单模式</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="424"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="430"/>
         <source>No more partition can be created</source>
         <translation>无法创建更多分区</translation>
     </message>
@@ -286,14 +303,14 @@
 <context>
     <name>installer::InstallProgressFrame</name>
     <message>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="113"/>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="138"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="117"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="142"/>
         <source>Installing</source>
         <translation>正在安装</translation>
     </message>
     <message>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="119"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="144"/>
         <source>You will be experiencing the incredible pleasant of deepin after the time for just a cup of coffee</source>
         <translation>只需一杯咖啡的时间, 你就可以体验deepin给您带来的畅快感</translation>
     </message>

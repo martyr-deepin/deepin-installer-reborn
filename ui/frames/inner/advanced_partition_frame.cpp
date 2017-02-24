@@ -358,9 +358,16 @@ void AdvancedPartitionFrame::addErrorMessage(
   }
 
   const int err_count = error_messages_.length();
-  msg_head_label_->setText(
-      tr("Found %n error(s), fix the error(s) to continue install "
-         "or switch to simple mode", "error", err_count));
+  // NOTE(xushaohua): Transifex does not ts plural format.
+  if (err_count <= 1) {
+      msg_head_label_->setText(
+          tr("Found %1 error, fix the error to continue install "
+             "or switch to simple mode").arg(err_count));
+  } else {
+    msg_head_label_->setText(
+        tr("Found %1 errors, fix the errors to continue install "
+           "or switch to simple mode").arg(err_count));
+  }
 
   // Show msg container if it is invisible.
   if (msg_container_frame_->isHidden()) {

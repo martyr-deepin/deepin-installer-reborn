@@ -102,57 +102,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="148"/>
-        <source>Position animation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/oem/oem_window.cpp" line="151"/>
-        <source>Fade animation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/oem/oem_window.cpp" line="165"/>
+        <location filename="../ui/oem/oem_window.cpp" line="157"/>
         <source>Grub menu timeout:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="172"/>
+        <location filename="../ui/oem/oem_window.cpp" line="164"/>
         <source>Disable Windows in grub menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="176"/>
+        <location filename="../ui/oem/oem_window.cpp" line="168"/>
         <source>apps to be added to dock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="180"/>
+        <location filename="../ui/oem/oem_window.cpp" line="172"/>
         <source>apps to be added to launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="185"/>
+        <location filename="../ui/oem/oem_window.cpp" line="177"/>
         <source>apps to be prevented from uninstall in launcher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="190"/>
+        <location filename="../ui/oem/oem_window.cpp" line="182"/>
         <source>Set desktop content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="194"/>
+        <location filename="../ui/oem/oem_window.cpp" line="186"/>
         <source>Set sound effect switches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="200"/>
+        <location filename="../ui/oem/oem_window.cpp" line="192"/>
         <source>enabled services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/oem/oem_window.cpp" line="204"/>
+        <location filename="../ui/oem/oem_window.cpp" line="196"/>
         <source>disabled services</source>
         <translation type="unfinished"></translation>
     </message>
