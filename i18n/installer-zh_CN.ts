@@ -416,16 +416,12 @@
 <context>
     <name>installer::NewTableLoadingFrame</name>
     <message>
-        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="25"/>
-        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="43"/>
         <source>Formatting disk</source>
-        <translation>格式化硬盘</translation>
+        <translation type="vanished">格式化硬盘</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="26"/>
-        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="44"/>
         <source>Formatting disks, please wait...</source>
-        <translation>正在格式化硬盘, 请稍候...</translation>
+        <translation type="vanished">正在格式化硬盘, 请稍候...</translation>
     </message>
     <message>
         <source>Scan disks</source>
@@ -435,30 +431,44 @@
         <source>Scanning disks, please wait...</source>
         <translation type="obsolete">正在扫描磁盘，请稍候...</translation>
     </message>
+    <message>
+        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="24"/>
+        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="41"/>
+        <source>Formatting...</source>
+        <translation>正在格式化...</translation>
+    </message>
 </context>
 <context>
     <name>installer::NewTableWarningFrame</name>
     <message>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="39"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
         <source>Format Disk</source>
-        <translation>格式化磁盘</translation>
+        <translation type="vanished">格式化磁盘</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="40"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="72"/>
         <source>All data will be erased on that disk!</source>
-        <translation>硬盘上的所有数据都将被擦除!</translation>
+        <translation type="vanished">硬盘上的所有数据都将被擦除!</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="39"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="61"/>
+        <source>Disk Format Warning</source>
+        <translation>磁盘格式化警告</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="41"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="78"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="74"/>
+        <source>Continue install will format the whole disk, please backup all your data to avoid data lost</source>
+        <translation>继续安装将格式化整个磁盘，请全盘备份您的数据，以免丢失数据</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="43"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="81"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="79"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
         <source>Continue</source>
         <translation>继续</translation>
     </message>

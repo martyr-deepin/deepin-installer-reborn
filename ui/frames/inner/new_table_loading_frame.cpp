@@ -10,7 +10,6 @@
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/spinner_label.h"
-#include "ui/widgets/title_label.h"
 
 namespace installer {
 
@@ -22,8 +21,7 @@ NewTableLoadingFrame::NewTableLoadingFrame(QWidget* parent) : QFrame(parent) {
 
 void NewTableLoadingFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr("Formatting disk"));
-    comment_label_->setText(tr("Formatting disks, please wait..."));
+    comment_label_->setText(tr("Formatting..."));
   } else {
     QFrame::changeEvent(event);
   }
@@ -40,18 +38,16 @@ void NewTableLoadingFrame::showEvent(QShowEvent* event) {
 }
 
 void NewTableLoadingFrame::initUI() {
-  title_label_ = new TitleLabel(tr("Formatting disk"));
-  comment_label_ = new CommentLabel(tr("Formatting disks, please wait..."));
+  comment_label_ = new CommentLabel(tr("Formatting..."));
   spinner_label_ = new SpinnerLabel();
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
-  layout->addWidget(title_label_, 0, Qt::AlignCenter);
-  layout->addWidget(comment_label_, 0, Qt::AlignCenter);
-  layout->addSpacing(15);
   layout->addWidget(spinner_label_, 0, Qt::AlignCenter);
+  layout->addSpacing(15);
+  layout->addWidget(comment_label_, 0, Qt::AlignCenter);
   layout->addStretch();
 
   this->setLayout(layout);

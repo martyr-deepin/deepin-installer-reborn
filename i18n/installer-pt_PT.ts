@@ -397,15 +397,9 @@
 <context>
     <name>installer::NewTableLoadingFrame</name>
     <message>
-        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="25"/>
-        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="43"/>
-        <source>Formatting disk</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="26"/>
-        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="44"/>
-        <source>Formatting disks, please wait...</source>
+        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="24"/>
+        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="41"/>
+        <source>Formatting...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -413,25 +407,25 @@
     <name>installer::NewTableWarningFrame</name>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="39"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
-        <source>Format Disk</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="40"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="72"/>
-        <source>All data will be erased on that disk!</source>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="61"/>
+        <source>Disk Format Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="41"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="78"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="74"/>
+        <source>Continue install will format the whole disk, please backup all your data to avoid data lost</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="43"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="81"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="79"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>

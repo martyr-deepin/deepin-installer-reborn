@@ -36,8 +36,10 @@ void NewTableWarningFrame::setDevicePath(const QString& device_path) {
 
 void NewTableWarningFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr("Format Disk"));
-    comment_label_->setText(tr("All data will be erased on that disk!"));
+    title_label_->setText(tr("Disk Format Warning"));
+    comment_label_->setText(
+        tr("Continue install will format the whole disk, please backup "
+           "all your data to avoid data lost"));
     cancel_button_->setText(tr("Cancel"));
     confirm_button_->setText(tr("Continue"));
   } else {
@@ -56,7 +58,7 @@ void NewTableWarningFrame::initUI() {
   QLabel* warning_label = new QLabel();
   QPixmap warning_pixmap(":/images/warning.png");
   warning_label->setPixmap(warning_pixmap);
-  title_label_ = new TitleLabel(tr("Format Disk"));
+  title_label_ = new TitleLabel(tr("Disk Format Warning"));
   title_label_->setStyleSheet(ReadFile(":/styles/new_table_warning_frame.css"));
 
   QHBoxLayout* title_layout = new QHBoxLayout();
@@ -69,7 +71,8 @@ void NewTableWarningFrame::initUI() {
   title_layout->addStretch();
 
   comment_label_ = new CommentLabel(
-      tr("All data will be erased on that disk!"));
+      tr("Continue install will format the whole disk, please backup "
+         "all your data to avoid data lost"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
