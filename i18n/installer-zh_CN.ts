@@ -16,7 +16,7 @@
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="50"/>
         <source>efi</source>
-        <translation type="unfinished"></translation>
+        <translation>efi</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="51"/>
@@ -270,13 +270,13 @@
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="47"/>
         <source>Tuning system</source>
-        <translation type="unfinished"></translation>
+        <translation>优化系统配置</translation>
     </message>
     <message>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="26"/>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="49"/>
         <source>Applying changes to your system, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在更新系统设置, 请稍候...</translation>
     </message>
 </context>
 <context>
@@ -417,23 +417,23 @@
     <name>installer::NewTableLoadingFrame</name>
     <message>
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="25"/>
+        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="43"/>
         <source>Formatting disk</source>
-        <translation type="unfinished"></translation>
+        <translation>格式化硬盘</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="26"/>
-        <source>Formatting disks, please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="43"/>
-        <source>Scan disks</source>
-        <translation type="unfinished">扫描磁盘</translation>
-    </message>
-    <message>
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="44"/>
+        <source>Formatting disks, please wait...</source>
+        <translation>正在格式化硬盘, 请稍候...</translation>
+    </message>
+    <message>
+        <source>Scan disks</source>
+        <translation type="obsolete">扫描磁盘</translation>
+    </message>
+    <message>
         <source>Scanning disks, please wait...</source>
-        <translation type="unfinished">正在扫描磁盘，请稍候...</translation>
+        <translation type="obsolete">正在扫描磁盘，请稍候...</translation>
     </message>
 </context>
 <context>
@@ -442,25 +442,25 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="39"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
         <source>Format Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>格式化磁盘</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="40"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="72"/>
         <source>All data will be erased on that disk!</source>
-        <translation type="unfinished"></translation>
+        <translation>硬盘上的所有数据都将被擦除!</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="41"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="78"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="79"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>继续</translation>
     </message>
 </context>
 <context>

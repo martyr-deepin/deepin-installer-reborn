@@ -398,22 +398,14 @@
     <name>installer::NewTableLoadingFrame</name>
     <message>
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="25"/>
+        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="43"/>
         <source>Formatting disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="26"/>
-        <source>Formatting disks, please wait...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="43"/>
-        <source>Scan disks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="44"/>
-        <source>Scanning disks, please wait...</source>
+        <source>Formatting disks, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

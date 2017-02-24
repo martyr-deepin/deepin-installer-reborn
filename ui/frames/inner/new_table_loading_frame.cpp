@@ -40,8 +40,8 @@ void NewTableLoadingFrame::showEvent(QShowEvent* event) {
 }
 
 void NewTableLoadingFrame::initUI() {
-  title_label_ = new TitleLabel(tr("Scan disks"));
-  comment_label_ = new CommentLabel(tr("Scanning disks, please wait..."));
+  title_label_ = new TitleLabel(tr("Formatting disk"));
+  comment_label_ = new CommentLabel(tr("Formatting disks, please wait..."));
   spinner_label_ = new SpinnerLabel();
 
   QVBoxLayout* layout = new QVBoxLayout();
