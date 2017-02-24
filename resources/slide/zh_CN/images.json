@@ -15,9 +15,9 @@
 		"13_deepin_control_center.png",
 		"14_deepin_kernel.png",
 		"15_system_animation.png",
-		"16_wps_youdao.png",
-		"17_wine_qq.png",
-		"18_netease_cloud_music.png"
+		"21_wps_office.png",
+		"22_youdao_dict.png",
+		"23_deepin_screen_recorder.png"
 	],
 	"sw": [
 		"01_deepin_file_manager.png",
@@ -35,9 +35,9 @@
 		"13_deepin_control_center.png",
 		"14_deepin_kernel.png",
 		"15_system_animation.png",
-		"16_wps_youdao.png",
-		"17_wine_qq.png",
-		"18_netease_cloud_music.png"
+		"21_wps_office.png",
+		"22_youdao_dict.png",
+		"23_deepin_screen_recorder.png"
 	],
 	"x86": [
 		"01_deepin_file_manager.png",
