@@ -7,6 +7,8 @@
 // chroot environment.
 // Most parts of this program are copied directly from systemd source repo.
 
+// TODO(xushaohua): Enable system bus in chroot env.
+
 #include <stdio.h>
 #include <string.h>
 

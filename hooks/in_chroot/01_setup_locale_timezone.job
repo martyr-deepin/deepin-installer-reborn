@@ -6,7 +6,7 @@
 # Setup locale and timezone.
 # This function used in hook_manager.sh and first_boot_setup.sh
 setup_locale_timezone() {
-  local DI_LOCALE DI_TIMEZONE LOCALE DI_IS_LOCAL_TIME
+  local DI_LOCALE DI_TIMEZONE LOCALE
   DI_LOCALE=$(installer_get "DI_LOCALE")
   DI_TIMEZONE=$(installer_get "DI_TIMEZONE")
 
@@ -47,8 +47,13 @@ EOF
   dpkg-reconfigure --frontend noninteractive tzdata
 
   # Set using local time or not
+  local DI_IS_LOCAL_TIME
   DI_IS_LOCAL_TIME=$(installer_get "DI_IS_LOCAL_TIME")
+  # TODO(xushaohua): Enable system bus in chroot environment.
   if [ x"${DI_IS_LOCAL_TIME}" = xtrue ]; then
+    # Disable timesyncd service, "timedatectl set-ntp 0"
+    rm -f /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
+    # Use RTC time, "timedatectl set-local-rtc 1"
     deepin-installer-adjtime 1
   fi
 
