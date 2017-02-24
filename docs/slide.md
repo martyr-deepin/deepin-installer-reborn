@@ -23,3 +23,12 @@
 * "install_progress_page_disable_slide", 启用/禁用幻灯片切换.
 * "install_progress_page_disable_slide_animation", 启用/禁用幻灯片切换时的过渡动画.
 * "install_progress_page_animation_duration", 定义幻灯片切换时间间隔, 默认是 8000 毫秒.
+
+## oem
+如果需要定制幻灯片动画, 只需要把 slide 目录, 放置到 ISO_ROOT/oem/ 目录里面就可以了. 其中,
+slide 目录的结果应该与 resources/slide 目录相同.
+比如, 简体中文界面, 幻灯片的查找顺序依次是:
+* ISO_ROOT/oem/slide/zh_CN
+* /usr/share/deepin-installer-reborn/resources/slide/zh_CN
+* ISO_ROOT/oem/slide/default
+* /usr/share/deepin-installer-reborn/resources/slide/default
