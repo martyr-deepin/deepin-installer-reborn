@@ -23,6 +23,10 @@ QLabel#err_msg_top_label {
   border-top-right-radius: 4px;
 }
 
+QLabel#err_msg_label {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 QLabel#err_msg_bottom_label {
   background: rgba(255, 255, 255, 0.1);
   border-bottom-left-radius: 4px;
