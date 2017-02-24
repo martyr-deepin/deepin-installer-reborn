@@ -5,11 +5,15 @@
 #ifndef INSTALLER_SETTINGS_MANAGER_H
 #define INSTALLER_SETTINGS_MANAGER_H
 
+#include <QDir>
 #include <QString>
 #include <QStringList>
 #include <QVariant>
 
 namespace installer {
+
+// Get absolute path to oem/ folder. Note that oem folder may not exist.
+QDir GetOemDir();
 
 // Read settings value from ini file.
 

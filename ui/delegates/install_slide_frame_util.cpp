@@ -5,12 +5,12 @@
 #include "ui/delegates/install_slide_frame_util.h"
 
 #include <QDebug>
-#include <QDir>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 
 #include "base/file_util.h"
+#include "service/settings_manager.h"
 #include "sysinfo/machine.h"
 
 namespace installer {
@@ -61,16 +61,27 @@ bool ParseImagesJson(const QString& images_json_file, ImagesJson& images_json) {
 }  // namespace
 
 QString GetSlideDir(const QString& locale) {
-  QDir dir(kSlideFolder);
-  Q_ASSERT(dir.exists());
-  for (const QFileInfo& fileinfo :
-      dir.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
-    if (fileinfo.fileName() == locale) {
-      return fileinfo.absoluteFilePath();
-    }
+  QDir installer_dir(kSlideFolder);
+  Q_ASSERT(installer_dir.exists());
+  QDir oem_dir(GetOemDir());
+
+  // Check existence of folders one by one.
+  QFileInfo file_info(oem_dir.absoluteFilePath(locale));
+  if (file_info.isDir() && file_info.exists()) {
+    return file_info.absoluteFilePath();
   }
 
-  return dir.absoluteFilePath(kDefaultSlide);
+  file_info.setFile(installer_dir.absoluteFilePath(locale));
+  if (file_info.isDir() && file_info.exists()) {
+    return file_info.absoluteFilePath();
+  }
+
+  file_info.setFile(oem_dir.absoluteFilePath(kDefaultSlide));
+  if (file_info.isDir() && file_info.exists()) {
+    return file_info.absoluteFilePath();
+  }
+
+  return installer_dir.absoluteFilePath(kDefaultSlide);
 }
 
 // Get slide image file list with specific |locale|.

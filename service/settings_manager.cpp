@@ -77,7 +77,8 @@ QStringList ListImageFiles(const QString& dir_name) {
   return result;
 }
 
-// Note that oem folder might not exist.
+}  // namespace
+
 QDir GetOemDir() {
   if (g_oem_dir.isEmpty()) {
     if (QDir(kDebugOemDir).exists()) {
@@ -90,8 +91,6 @@ QDir GetOemDir() {
   }
   return QDir(g_oem_dir);
 }
-
-}  // namespace
 
 bool GetSettingsBool(const QString& key) {
   const QVariant value = GetSettingsValue(key);
