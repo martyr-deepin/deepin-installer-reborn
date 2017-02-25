@@ -11,11 +11,13 @@
 #include <QStackedLayout>
 #include <QThread>
 
+#include "base/thread_util.h"
 #include "service/first_boot_hook_worker.h"
 #include "service/power_manager.h"
 #include "service/settings_manager.h"
 #include "ui/frames/first_boot_loading_frame.h"
 #include "ui/frames/system_info_frame.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -37,13 +39,11 @@ FirstBootSetupWindow::FirstBootSetupWindow(QWidget *parent)
 }
 
 FirstBootSetupWindow::~FirstBootSetupWindow() {
-  qCritical() << "destructor";
-  hook_worker_thread_->quit();
-  hook_worker_thread_->wait(3);
+  QuitThread(hook_worker_thread_);
 }
 
 void FirstBootSetupWindow::fullscreen() {
-  this->showFullScreen();
+  ShowFullscreen(this);
 }
 
 void FirstBootSetupWindow::resizeEvent(QResizeEvent *event) {
