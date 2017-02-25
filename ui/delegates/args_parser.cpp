@@ -26,15 +26,16 @@ bool ArgsParser::parse(const QStringList& args) {
   // Add pre-defined options.
   QCommandLineParser parser;
   const QCommandLineOption conf_file_option(
-      "conf-file","Read config from \"file\"", "file", "");
+      "conf-file","Read config from <file>", "file", "");
   parser.addOption(conf_file_option);
   const QCommandLineOption log_file_option(
-      "log-file", "Write log to \"file\"", "file", "");
+      "log-file", "Write log to <file>", "file", "");
   parser.addOption(log_file_option);
   const QCommandLineOption auto_install_option(
       "auto-install", "Enable auto-install mode", "", "");
   parser.addOption(auto_install_option);
   parser.addHelpOption();
+  parser.addVersionOption();
 
   if (!parser.parse(args)) {
     qCritical() << "Failed to parse argument" << args;
@@ -43,6 +44,12 @@ bool ArgsParser::parse(const QStringList& args) {
       qCritical().noquote() << parser.helpText();
     }
     return false;
+  }
+
+  if (parser.isSet("version")) {
+    if (QCoreApplication::instance()) {
+      parser.showVersion();
+    }
   }
 
   // Print help text and exit normally.
