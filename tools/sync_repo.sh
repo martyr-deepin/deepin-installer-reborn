@@ -6,7 +6,7 @@
 # Sync project repo and build.
 
 rsync -ave ssh demo@ip:/tmp/deepin-installer-reborn/ installer \
-  --exclude cmake-build-debug && \
+  --exclude cmake-build-debug --exclude .git && \
   mkdir -p installer/build && \
   cd installer/build && \
   cmake -DCMAKE_INSTALL_PREFIX=/usr .. && \
