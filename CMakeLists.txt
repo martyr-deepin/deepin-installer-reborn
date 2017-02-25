@@ -740,13 +740,14 @@ target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 
 
 ## Installation
-install(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-reborn-pkexec
-                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn
-                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-adjtime
-                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
-                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
-                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
-                 ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
+install(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-first-boot-pkexec
+        ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-reborn-pkexec
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-adjtime
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 
 install(

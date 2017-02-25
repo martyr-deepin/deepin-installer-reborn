@@ -1,7 +1,8 @@
-usr/bin/deepin-installer-reborn
-usr/bin/deepin-installer-reborn-pkexec
 usr/bin/deepin-installer-adjtime
 usr/bin/deepin-installer-first-boot
+usr/bin/deepin-installer-first-boot-pkexec
+usr/bin/deepin-installer-reborn
+usr/bin/deepin-installer-reborn-pkexec
 usr/bin/deepin-installer-settings
 usr/bin/deepin-installer-unsquashfs
 usr/share/applications/deepin-installer-reborn.desktop
