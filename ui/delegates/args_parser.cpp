@@ -35,13 +35,12 @@ bool ArgsParser::parse(const QStringList& args) {
       "auto-install", "Enable auto-install mode", "", "");
   parser.addOption(auto_install_option);
   parser.addHelpOption();
-  parser.addVersionOption();
 
   if (!parser.parse(args)) {
     qCritical() << "Failed to parse argument" << args;
     // Also print help text if QCoreApplication is initialized.
     if (QCoreApplication::instance()) {
-      qCritical() << parser.helpText();
+      qCritical().noquote() << parser.helpText();
     }
     return false;
   }
@@ -49,8 +48,11 @@ bool ArgsParser::parse(const QStringList& args) {
   // Print help text and exit normally.
   if (parser.isSet("help")) {
     if (QCoreApplication::instance()) {
-      qCritical() << parser.helpText();
+      parser.showHelp(0);
+      return true;
+    } else {
       // NOTE(xushaohua): Return false to notify caller to exit.
+      qCritical().noquote() << parser.helpText();
       return false;
     }
   }
