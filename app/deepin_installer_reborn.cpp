@@ -28,14 +28,12 @@ int main(int argc, char* argv[]) {
 
   const char kLogFileName[] = "deepin-installer-reborn.log";
   QString log_file;
-  // Delete last installer config file as soon as possible.
   if (!installer::HasRootPrivilege()) {
     qCritical() << "Root privilege is required!";
     log_file = QString("/tmp/%1").arg(kLogFileName);
   } else {
     log_file = QString("/var/log/%1").arg(kLogFileName);
   }
-
   // Initialize log service.
   installer::RedirectLog(log_file);
 
