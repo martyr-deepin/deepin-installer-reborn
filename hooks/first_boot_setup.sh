@@ -21,7 +21,8 @@ CONF_FILE=/etc/deepin-installer.conf
 
 # Purge installer package
 uninstall_installer() {
-  apt-get purge deepin-installer-reborn
+  apt-get -y purge deepin-installer-reborn
+  apt-get -y autoremove --purge
 }
 
 main() {
@@ -30,13 +31,13 @@ main() {
   setup_locale_timezone && \
   setup_username_password
 
-  uninstall_installer
-
   # Restore lightdm.conf
   cleanup_reboot_setup_mode
 
   # Replace default lightdm greeter.
   enable_deepin_lightdm_greeter
+
+  uninstall_installer
 }
 
 main
