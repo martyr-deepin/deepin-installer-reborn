@@ -5,65 +5,107 @@
 #include "service/log_manager.h"
 
 #include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <QDateTime>
+#include <QDebug>
 #include <QFile>
 #include <QFileInfo>
 #include <QtGlobal>
-
-#include "sysinfo/users.h"
-
-#include "third_party/CuteLogger/CuteLogger/ConsoleAppender.h"
-#include "third_party/CuteLogger/CuteLogger/FileAppender.h"
-#include "third_party/CuteLogger/CuteLogger/Logger.h"
 
 namespace installer {
 
 namespace {
 
-// Defines log format.
-const char kDebugLogFormat[] =
-    "[%{type:-7}] [%{file:-25} %{line}] %{message}\n";
-
-const char kReleaseLogFormat[] = "%{message}\n";
-
-const char kLogFileName[] = "deepin-installer-reborn.log";
+// Application-wide log filepath.
+QString g_log_file;
 
 void BackupLogFile() {
-  const QString log_file = GetLogFilepath();
-  QFile file(log_file);
+  QFile file(g_log_file);
   if (file.exists()) {
     const qint64 timestamp = QDateTime::currentMSecsSinceEpoch();
-    const QString old_log_file = QString("%1.%2").arg(log_file).arg(timestamp);
-    file.rename(old_log_file);
+    const QString new_path = QString("%1.%2").arg(g_log_file).arg(timestamp);
+    file.rename(new_path);
   }
 }
+
+#ifndef N_DEBUG
+// Customized QtMessageHandler.
+void InstallerMessageOutput(QtMsgType msg_type,
+                            const QMessageLogContext& context,
+                            const QString& msg) {
+  const QByteArray& local_msg(msg.toLocal8Bit());
+  switch (msg_type) {
+    case QtDebugMsg: {
+      fprintf(stdout, "[Debug: %s:%u, %s] %s\n", context.file, context.line,
+              context.function, local_msg.constData());
+      fflush(stdout);
+      break;
+    }
+    case QtInfoMsg: {
+      fprintf(stdout, "[Info: %s:%u, %s] %s\n", context.file, context.line,
+              context.function, local_msg.constData());
+      fflush(stdout);
+      break;
+    }
+    case QtWarningMsg: {
+      fprintf(stderr, "[Warning: %s:%u, %s] %s\n", context.file, context.line,
+              context.function, local_msg.constData());
+      fflush(stderr);
+      break;
+    }
+    case QtCriticalMsg: {
+      fprintf(stderr, "[Critical: %s:%u, %s] %s\n", context.file, context.line,
+              context.function, local_msg.constData());
+      fflush(stderr);
+      break;
+    }
+    case QtFatalMsg: {
+      fprintf(stderr, "[Fatal: %s:%u, %s] %s\n", context.file, context.line,
+              context.function, local_msg.constData());
+      fflush(stderr);
+      // Abort process.
+      abort();
+    }
+  }
+}
+#endif
 
 }  // namespace
 
 QString GetLogFilepath() {
-  if (HasRootPrivilege()) {
-    return QString("/var/log/%1").arg(kLogFileName);
-  }
-
-  const QString tmp_log = QString("/tmp/%1").arg(kLogFileName);
-  return tmp_log;
+  return g_log_file;
 }
 
-void InitLogService() {
+bool RedirectLog(const QString& log_file) {
+  // Store log filepath and backup old log file.
+  g_log_file = log_file;
   BackupLogFile();
 
-  // TODO(xushaohua): Release log appender.
-  ConsoleAppender* console_appender = new ConsoleAppender();
-  console_appender->setDetailsLevel(Logger::Debug);
-  logger->registerAppender(console_appender);
-  console_appender->setFormat(kDebugLogFormat);
+#ifndef N_DEBUG
+  // Customize qt message in debug mode.
+  qInstallMessageHandler(InstallerMessageOutput);
+#endif
 
-  FileAppender* file_appender = new FileAppender(GetLogFilepath());
-  file_appender->setDetailsLevel(Logger::Debug);
-  file_appender->setFormat(kReleaseLogFormat);
-  logger->registerAppender(file_appender);
+  int log_fd = open(log_file.toStdString().c_str(), O_RDWR | O_CREAT | O_TRUNC,
+                    S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+  if (log_fd == -1) {
+    qCritical() << "Failed to create log file:" << log_file;
+    return false;
+  }
+  bool ok = true;
+  if (dup2(log_fd, STDOUT_FILENO) == -1) {
+    qCritical() << "Failed to redirect stdout";
+    ok = false;
+  }
+  if (dup2(log_fd, STDERR_FILENO) == -1) {
+    qCritical() << "Failed to redirect stderr";
+    ok = false;
+  }
+  return ok;
 }
 
 }  // namespace installer

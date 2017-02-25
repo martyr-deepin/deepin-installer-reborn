@@ -26,13 +26,18 @@ int main(int argc, char* argv[]) {
   app.setOrganizationDomain(installer::kDomainName);
   app.setWindowIcon(QIcon(":/images/deepin_installer_reborn.svg"));
 
+  const char kLogFileName[] = "deepin-installer-reborn.log";
+  QString log_file;
   // Delete last installer config file as soon as possible.
   if (!installer::HasRootPrivilege()) {
     qCritical() << "Root privilege is required!";
+    log_file = QString("/tmp/%1").arg(kLogFileName);
+  } else {
+    log_file = QString("/var/log/%1").arg(kLogFileName);
   }
 
   // Initialize log service.
-  installer::InitLogService();
+  installer::RedirectLog(log_file);
 
   // Delete old settings file and generate a new one.
   installer::DeleteConfigFile();
