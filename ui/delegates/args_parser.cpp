@@ -23,6 +23,7 @@ bool ArgsParser::parse(const QStringList& args) {
   conf_file_ = "";
   log_file_ = "";
 
+  // Add pre-defined options.
   QCommandLineParser parser;
   const QCommandLineOption conf_file_option(
       "conf-file","Read config from \"file\"", "file", "");
@@ -33,6 +34,8 @@ bool ArgsParser::parse(const QStringList& args) {
   const QCommandLineOption auto_install_option(
       "auto-install", "Enable auto-install mode", "", "");
   parser.addOption(auto_install_option);
+  parser.addHelpOption();
+  parser.addVersionOption();
 
   if (!parser.parse(args)) {
     qCritical() << "Failed to parse argument" << args;

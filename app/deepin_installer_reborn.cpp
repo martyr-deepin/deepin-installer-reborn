@@ -12,6 +12,7 @@
 #include "service/log_manager.h"
 #include "service/settings_manager.h"
 #include "sysinfo/users.h"
+#include "ui/delegates/args_parser.h"
 #include "ui/main_window.h"
 
 int main(int argc, char* argv[]) {
@@ -26,6 +27,22 @@ int main(int argc, char* argv[]) {
   app.setOrganizationDomain(installer::kDomainName);
   app.setWindowIcon(QIcon(":/images/deepin_installer_reborn.svg"));
 
+  // Parse argument list.
+  installer::ArgsParser args_parser;
+  // Returns false if failed to parse arguments.
+  if (!args_parser.parse(app.arguments())) {
+    return 1;
+  }
+
+  const QString conf_file(args_parser.getConfFile());
+  if (!conf_file.isEmpty()) {
+    // Append conf options.
+    if (!installer::AppendConfigFile(conf_file)) {
+      qCritical() << "Failed to append conf file:" << conf_file;
+    }
+  }
+
+  // Initialize log service.
   const char kLogFileName[] = "deepin-installer-reborn.log";
   QString log_file;
   if (!installer::HasRootPrivilege()) {
@@ -34,7 +51,6 @@ int main(int argc, char* argv[]) {
   } else {
     log_file = QString("/var/log/%1").arg(kLogFileName);
   }
-  // Initialize log service.
   installer::RedirectLog(log_file);
 
   // Delete old settings file and generate a new one.
@@ -42,14 +58,10 @@ int main(int argc, char* argv[]) {
   installer::AddConfigFile();
 
   installer::MainWindow main_window;
-  if (!main_window.parseArguments()) {
-    // Returns immediately if failed to parse arguments.
-    return 2;
-  }
-
+  main_window.setEnableAutoInstall(args_parser.isAutoInstallSet());
+  main_window.setLogFile(args_parser.getLogFile());
   // Notify background thread to scan device info.
   main_window.scanDevicesAndTimezone();
-
   main_window.fullscreen();
 
   return app.exec();

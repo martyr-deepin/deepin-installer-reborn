@@ -17,7 +17,6 @@ class GlobalShortcut;
 
 namespace installer {
 
-class ArgsParser;
 class ConfirmQuitFrame;
 class ControlPanelFrame;
 class DiskSpaceInsufficientFrame;
@@ -45,18 +44,19 @@ class MainWindow : public QWidget {
 
  public:
   MainWindow();
-  ~MainWindow();
 
-  // Parse command line argument list. Returns false if failed.
-  bool parseArguments();
+  // Show fullscreen.
+  void fullscreen();
 
   // Notify background thread to scan disk devices if needed.
   // And read current timezone.
   void scanDevicesAndTimezone();
 
- public slots:
-  // Show fullscreen.
-  void fullscreen();
+  // Enable auto-install mode.
+  void setEnableAutoInstall(bool auto_install);
+
+  // Set filepath to which log file will be backup.
+  void setLogFile(const QString& log_file);
 
  protected:
   // Move close button to appropriate position when window is resized.
@@ -124,7 +124,7 @@ class MainWindow : public QWidget {
   // Shortcut used to switch mirror modes.
   GlobalShortcut* monitor_mode_shortcut_ = nullptr;
 
-  ArgsParser* args_parser_ = nullptr;
+  QString log_file_;
 
  private slots:
   // Go next page when current page index is changed in ControlPanelFrame.

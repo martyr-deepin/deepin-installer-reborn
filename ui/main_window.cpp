@@ -19,7 +19,6 @@
 #include "sysinfo/users.h"
 #include "sysinfo/virtual_machine.h"
 #include "third_party/global_shortcut/global_shortcut.h"
-#include "ui/delegates/args_parser.h"
 #include "ui/delegates/main_window_util.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/control_panel_frame.h"
@@ -44,7 +43,7 @@ MainWindow::MainWindow()
       pages_(),
       prev_page_(PageId::NullId),
       current_page_(PageId::NullId),
-      args_parser_(new ArgsParser()) {
+      log_file_() {
   this->setObjectName("main_window");
 
   this->initUI();
@@ -53,32 +52,10 @@ MainWindow::MainWindow()
   this->initConnections();
 }
 
-MainWindow::~MainWindow() {
-  if (args_parser_) {
-    delete args_parser_;
-    args_parser_ = nullptr;
-  }
-}
-
-bool MainWindow::parseArguments() {
-  if (!args_parser_->parse(qApp->arguments())) {
-    return false;
-  } else {
-    const QString conf_file = args_parser_->getConfFile();
-    if (!conf_file.isEmpty()) {
-      // Append conf options.
-      if (!AppendConfigFile(conf_file)) {
-        qCritical() << "Failed to append conf file:" << conf_file;
-      }
-    }
-
-    const bool auto_install = args_parser_->isAutoInstallSet();
-    if (auto_install) {
-      // Read default locale from settings.ini and go to InstallProgressFrame.
-      current_page_ = PageId::PartitionId;
-    }
-  }
-  return true;
+void MainWindow::fullscreen() {
+  multi_head_manager_->updateWallpaper();
+  ShowFullscreen(this);
+  this->goNextPage();
 }
 
 void MainWindow::scanDevicesAndTimezone() {
@@ -97,10 +74,15 @@ void MainWindow::scanDevicesAndTimezone() {
   }
 }
 
-void MainWindow::fullscreen() {
-  multi_head_manager_->updateWallpaper();
-  ShowFullscreen(this);
-  this->goNextPage();
+void MainWindow::setEnableAutoInstall(bool auto_install) {
+  if (auto_install) {
+    // Read default locale from settings.ini and go to InstallProgressFrame.
+    current_page_ = PageId::PartitionId;
+  }
+}
+
+void MainWindow::setLogFile(const QString& log_file) {
+  log_file_ = log_file;
 }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
@@ -280,10 +262,9 @@ void MainWindow::registerShortcut() {
 }
 
 void MainWindow::saveLogFile() {
-  const QString log_file = args_parser_->getLogFile();
-  if (!log_file.isEmpty()) {
+  if (!log_file_.isEmpty()) {
     // Copy log file.
-    CopyLogFile(log_file);
+    CopyLogFile(log_file_);
   }
 }
 
