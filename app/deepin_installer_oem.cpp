@@ -11,9 +11,10 @@
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
-  app.setApplicationDisplayName(installer::kAppDisplayName);
-  app.setApplicationName(installer::kAppName);
-  app.setOrganizationDomain(installer::kDomainName);
+  app.setApplicationDisplayName("Deepin Installer Oem");
+  app.setApplicationName("deepin-installer-oem");
+  app.setApplicationVersion(installer::kAppVersion);
+  app.setOrganizationDomain(installer::kOrganizationDomain);
 
   installer::OemWindow oem_window;
   oem_window.show();

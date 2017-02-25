@@ -19,9 +19,10 @@
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
-  app.setApplicationDisplayName(installer::kAppDisplayName);
-  app.setApplicationName(installer::kAppName);
-  app.setOrganizationDomain(installer::kDomainName);
+  app.setApplicationDisplayName("Deepin Installer First Boot");
+  app.setApplicationName("deepin-installer-first-boot");
+  app.setApplicationVersion(installer::kAppVersion);
+  app.setOrganizationDomain(installer::kOrganizationDomain);
   app.setWindowIcon(QIcon(":/images/deepin_installer_reborn.svg"));
 
   const char kLogFileName[] = "deepin-installer-first-boot.log";

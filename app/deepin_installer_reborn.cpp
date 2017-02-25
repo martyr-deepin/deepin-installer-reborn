@@ -22,9 +22,10 @@ int main(int argc, char* argv[]) {
   qputenv("LANG", installer::kDefaultLocale);
 
   QApplication app(argc, argv);
-  app.setApplicationDisplayName(installer::kAppDisplayName);
-  app.setApplicationName(installer::kAppName);
-  app.setOrganizationDomain(installer::kDomainName);
+  app.setApplicationDisplayName("Deepin Installer Reborn");
+  app.setApplicationName("deepin-installer-reborn");
+  app.setApplicationVersion(installer::kAppVersion);
+  app.setOrganizationDomain(installer::kOrganizationDomain);
   app.setWindowIcon(QIcon(":/images/deepin_installer_reborn.svg"));
 
   // Parse argument list.

@@ -7,16 +7,12 @@
 
 namespace installer {
 
-// Name of application. This name can be used as folder name.
-const char kAppName[] = "deepin-installer-reborn";
-
-// Human readable application name.
-const char kAppDisplayName[] = "Deepin Installer Reborn";
-
-const char kDomainName[] = "deepin.org";
+const char kAppVersion[] = "0.1.3";
 
 // Default locale used in program.
 const char kDefaultLocale[] = "en_US.UTF-8";
+
+const char kOrganizationDomain[] = "deepin.org";
 
 }
 
