@@ -37,35 +37,37 @@ void BackupLogFile() {
 void InstallerMessageOutput(QtMsgType msg_type,
                             const QMessageLogContext& context,
                             const QString& msg) {
-  const QByteArray& local_msg(msg.toLocal8Bit());
+  const QByteArray& msg_ref(msg.toLocal8Bit());
+  const QString filename = QFileInfo(context.file).fileName();
+  const QByteArray& filename_ref(filename.toLocal8Bit());
   switch (msg_type) {
     case QtDebugMsg: {
-      fprintf(stdout, "[Debug: %s:%u, %s] %s\n", context.file, context.line,
-              context.function, local_msg.constData());
+      fprintf(stdout, "[Debug: %s:%u] %s\n",
+              filename_ref.constData(), context.line, msg_ref.constData());
       fflush(stdout);
       break;
     }
     case QtInfoMsg: {
-      fprintf(stdout, "[Info: %s:%u, %s] %s\n", context.file, context.line,
-              context.function, local_msg.constData());
+      fprintf(stdout, "[Info: %s:%u] %s\n",
+              filename_ref.constData(), context.line, msg_ref.constData());
       fflush(stdout);
       break;
     }
     case QtWarningMsg: {
-      fprintf(stderr, "[Warning: %s:%u, %s] %s\n", context.file, context.line,
-              context.function, local_msg.constData());
+      fprintf(stderr, "[Warning: %s:%u] %s\n",
+              filename_ref.constData(), context.line, msg_ref.constData());
       fflush(stderr);
       break;
     }
     case QtCriticalMsg: {
-      fprintf(stderr, "[Critical: %s:%u, %s] %s\n", context.file, context.line,
-              context.function, local_msg.constData());
+      fprintf(stderr, "[Critical: %s:%u] %s\n",
+              filename_ref.constData(), context.line, msg_ref.constData());
       fflush(stderr);
       break;
     }
     case QtFatalMsg: {
-      fprintf(stderr, "[Fatal: %s:%u, %s] %s\n", context.file, context.line,
-              context.function, local_msg.constData());
+      fprintf(stderr, "[Fatal: %s:%u] %s\n",
+              filename_ref.constData(), context.line, msg_ref.constData());
       fflush(stderr);
       // Abort process.
       abort();
