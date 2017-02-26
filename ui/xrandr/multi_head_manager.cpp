@@ -18,7 +18,8 @@ MultiHeadManager::MultiHeadManager(QObject* parent)
       wallpaper_items_(),
       multi_head_thread_(new QThread(this)),
       multi_head_worker_(new MultiHeadWorker()),
-      xrandr_output_() {
+      xrandr_output_(),
+      connected_monitors_(1) {
   this->setObjectName("wallpaper_manager");
 
   multi_head_worker_->moveToThread(multi_head_thread_);
@@ -54,7 +55,7 @@ void MultiHeadManager::updateWallpaper() {
     return;
   }
 
-  qDebug() << "xrandr output:" << out;
+  qDebug().noquote() << "xrandr output:" << out;
 
   if (!out.isEmpty() && (out == xrandr_output_)) {
     qDebug() << "xrandr not changed, ignored";
@@ -65,8 +66,10 @@ void MultiHeadManager::updateWallpaper() {
 
   XRandR xrandr;
   if (ParseXRandR(out, xrandr)) {
+    int connected_monitors = 0;
     for (const Output& output : xrandr.outputs) {
       if (output.is_connected) {
+        connected_monitors ++;
         const QRect geometry(output.x, output.y, output.width, output.height);
         WallpaperItem* item = new WallpaperItem(geometry);
         wallpaper_items_.append(item);
@@ -78,23 +81,37 @@ void MultiHeadManager::updateWallpaper() {
         }
       }
     }
+
+    if (connected_monitors != connected_monitors_) {
+      connected_monitors_ = connected_monitors;
+      emit this->switchToMirrorMode();
+    }
   } else {
     qCritical() << "updateWallpaper() parse xrandr failed!";
   }
 }
 
 void MultiHeadManager::initConnections() {
-  connect(multi_head_worker_, &MultiHeadWorker::screenCountChanged,
-          this, &MultiHeadManager::onScreenCountChanged);
-
-  connect(multi_head_thread_, &QThread::finished,
-          multi_head_worker_, &MultiHeadWorker::stop);
-  connect(multi_head_thread_, &QThread::finished,
-          multi_head_worker_, &MultiHeadWorker::deleteLater);
+  connect(multi_head_worker_, &MultiHeadWorker::monitorsChanged,
+          this, &MultiHeadManager::onMonitorsChanged);
+  connect(this, &MultiHeadManager::switchToMirrorMode,
+          this, &MultiHeadManager::doSwitchToMirrorMode);
+//  connect(multi_head_thread_, &QThread::finished,
+//          multi_head_worker_, &MultiHeadWorker::stop);
+//  connect(multi_head_thread_, &QThread::finished,
+//          multi_head_worker_, &MultiHeadWorker::deleteLater);
 }
 
-void MultiHeadManager::onScreenCountChanged() {
+void MultiHeadManager::onMonitorsChanged() {
   this->updateWallpaper();
+}
+
+void MultiHeadManager::doSwitchToMirrorMode() {
+  qDebug() << "Switch to mirror mode";
+  // Use mirror mode only if multiple monitors are connected.
+  if (connected_monitors_ > 1) {
+    SwitchToMirrorMode();
+  }
 }
 
 }  // namespace installer

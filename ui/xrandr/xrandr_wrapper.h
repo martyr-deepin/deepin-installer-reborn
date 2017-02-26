@@ -81,6 +81,9 @@ bool SwitchMode(const XRandR& xrandr);
 // Parse xrandr output and switch mode
 bool SwitchModeWrapper();
 
+// Switch to mirror mode if multiple monitors are connected.
+bool SwitchToMirrorMode();
+
 }  // namespace installer
 
 #endif  // INSTALLER_UI_XRANDR_XRANDR_WRAPPER_H

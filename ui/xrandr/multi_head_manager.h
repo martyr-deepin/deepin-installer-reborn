@@ -33,6 +33,9 @@ class MultiHeadManager : public QObject {
   // Emitted when primary screen changed to |geometry|.
   void primaryScreenChanged(const QRect& geometry);
 
+  // Emit this signal to notify xrandr to switch to mirror mode.
+  void switchToMirrorMode();
+
  private:
   void initConnections();
 
@@ -41,9 +44,17 @@ class MultiHeadManager : public QObject {
   MultiHeadWorker* multi_head_worker_ = nullptr;
   QString xrandr_output_;
 
+  // Number of monitors defined in last xrandr output.
+  // This values changes when a new monitor is connected to or an existing
+  // monitor is disconnected from system.
+  // If so, switch to mirror mode if possible.
+  int connected_monitors_;
+
  private slots:
   // Repaint background when output added, changed or removed.
-  void onScreenCountChanged();
+  void onMonitorsChanged();
+
+  void doSwitchToMirrorMode();
 };
 
 }  // namespace installer

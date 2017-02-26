@@ -198,7 +198,7 @@ bool SwitchMode(const XRandR& xrandr) {
   if (connected_outputs.length() == 1) {
     // Only one monitor is connected, using `prefer` mode
     const Output& output = connected_outputs.first();
-    args.append({"--output", output.name, "--preferred", "--scale", "1x1"});
+    args << "--output" << output.name << "--preferred" << "--scale" << "1x1";
   } else {
     // Check mirror mode
     int starts_from_o_point = 0;
@@ -213,12 +213,13 @@ bool SwitchMode(const XRandR& xrandr) {
       // If it was mirror mode, set the first output as primary
       for (int i = 0; i < connected_outputs.length(); i++) {
         const Output& output = connected_outputs.at(i);
-        args.append({"--output", output.name,"--preferred", "--scale", "1x1"});
+        args << "--output" << output.name << "--preferred"
+             << "--scale" << "1x1";
         if (i == 0) {
-          args.append("--primary");
+          args << "--primary";
         } else {
           // Expand horizontally
-          args.append({"--right-of", connected_outputs.at(i-1).name});
+          args << "--right-of" << connected_outputs.at(i-1).name;
         }
       }
     } else {
@@ -234,16 +235,16 @@ bool SwitchMode(const XRandR& xrandr) {
         for (int i = 0; i < connected_outputs.length(); i++) {
           const Output& output = connected_outputs.at(i);
           if (i == 0) {
-            args.append({"--output", output.name, "--scale", "1x1",
-                         "--preferred"});
+            args << "--output" << output.name << "--scale" << "1x1"
+                 << "--preferred";
           } else {
-            args.append({"--output", output.name, "--scale", "1x1",
-                         "--preferred",
-                         "--right-of", connected_outputs.at(i-1).name});
+            args << "--output" << output.name << "--scale" << "1x1"
+                 << "--preferred" << "--right-of"
+                 << connected_outputs.at(i-1).name;
           }
           if (i == primary_index + 1) {
             // Set next output as primary
-            args.append("--primary");
+            args << "--primary";
           }
         }
       } else {
@@ -265,15 +266,15 @@ bool SwitchMode(const XRandR& xrandr) {
         }
 
         for (const Output& output : connected_outputs) {
-          args.append({"--output", output.name, "--scale", "1x1",
-                       "--mode", mini_mode.name, "--pos", "0x0"});
+          args << "--output" << output.name << "--scale" << "1x1"
+               << "--mode" << mini_mode.name << "--pos" << "0x0";
         }
       }
     }
   }
 
   QString out, err;
-  qDebug() << "args:" << args;
+  qDebug() << "xrandr args:" << args;
   if (installer::SpawnCmd(kXRandRApp, args, out, err)) {
     return true;
   } else {
@@ -305,6 +306,73 @@ bool SwitchModeWrapper() {
   }
 
   return true;
+}
+
+bool SwitchToMirrorMode() {
+  QString out;
+  if (!installer::RunXRandR(out)) {
+    qCritical() << "Run xrandr failed";
+    return false;
+  }
+  if (out.isEmpty()) {
+    qCritical() << "xrandr returns an empty string!";
+    return false;
+  }
+
+  installer::XRandR xrandr;
+  if (!installer::ParseXRandR(out, xrandr)) {
+    qCritical() << "Parse XRandR failed!";
+    return false;
+  }
+
+  QStringList args;
+  QList<Output> connected_outputs;
+  for (const Output& output : xrandr.outputs) {
+    if (output.is_connected && (!output.modes.isEmpty())) {
+      connected_outputs.append(output);
+    }
+  }
+
+  if (connected_outputs.length() == 0) {
+    qCritical() << "No connected output found!";
+    return false;
+  }
+
+  if (connected_outputs.length() == 1) {
+    qWarning() << "Only one monitor is connected, no need to set mirror mode.";
+    return true;
+  }
+
+  // If last connected output is primary, use mirror mode.
+  // Get minimum mode.
+  Mode mini_mode = connected_outputs.at(0).modes.at(0);
+  for (const Output& output : connected_outputs) {
+    Mode pref_mode = output.modes.at(0);
+    for (const Mode& mode : output.modes) {
+      if (mode.is_preferred) {
+        pref_mode = mode;
+      }
+    }
+
+    if (mini_mode.width > pref_mode.width &&
+        mini_mode.height > pref_mode.height) {
+      mini_mode = pref_mode;
+    }
+  }
+
+  for (const Output& output : connected_outputs) {
+    args.append({"--output", output.name, "--scale", "1x1",
+                 "--mode", mini_mode.name, "--pos", "0x0"});
+  }
+
+  QString err;
+  qDebug() << "xarndr args:" << args;
+  if (installer::SpawnCmd(kXRandRApp, args, out, err)) {
+    return true;
+  } else {
+    qCritical() << "Run xrandr failed:" << err << ", args:" << args;
+    return false;
+  }
 }
 
 }  // namespace installer

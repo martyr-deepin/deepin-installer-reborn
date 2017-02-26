@@ -24,7 +24,8 @@ class MultiHeadWorker : public QObject {
   void stop();
 
  signals:
-  void screenCountChanged();
+  // Emitted when number or order of screens changed.
+  void monitorsChanged();
 
   void start();
 

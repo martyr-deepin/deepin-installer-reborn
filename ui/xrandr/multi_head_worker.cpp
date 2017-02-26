@@ -83,7 +83,7 @@ void MultiHeadWorker::doStart() {
 
     switch (event.type - event_base) {
       case RRScreenChangeNotify: {
-        emit this->screenCountChanged();
+        emit this->monitorsChanged();
         break;
       }
       default: {
