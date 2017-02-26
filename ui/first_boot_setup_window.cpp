@@ -15,9 +15,11 @@
 #include "service/first_boot_hook_worker.h"
 #include "service/power_manager.h"
 #include "service/settings_manager.h"
+#include "third_party/global_shortcut/global_shortcut.h"
 #include "ui/frames/first_boot_loading_frame.h"
 #include "ui/frames/system_info_frame.h"
 #include "ui/utils/widget_util.h"
+#include "ui/xrandr/multi_head_manager.h"
 
 namespace installer {
 
@@ -31,6 +33,7 @@ FirstBootSetupWindow::FirstBootSetupWindow(QWidget *parent)
   hook_worker_->moveToThread(hook_worker_thread_);
 
   this->initUI();
+  this->registerShortcut();
   this->initConnections();
 
   // Read default settings.
@@ -57,6 +60,11 @@ void FirstBootSetupWindow::initConnections() {
 
   connect(hook_worker_, &FirstBootHookWorker::hookFinished,
           this, &FirstBootSetupWindow::onHookFinished);
+
+  connect(monitor_mode_shortcut_, &GlobalShortcut::activated,
+          multi_head_manager_, &MultiHeadManager::switchXRandRMode);
+  connect(multi_head_manager_, &MultiHeadManager::primaryScreenChanged,
+          this, &FirstBootSetupWindow::onPrimaryScreenChanged);
 }
 
 void FirstBootSetupWindow::initUI() {
@@ -73,6 +81,16 @@ void FirstBootSetupWindow::initUI() {
 
   this->setLayout(stacked_layout_);
   this->setContentsMargins(0, 36, 0, 36);
+}
+
+void FirstBootSetupWindow::registerShortcut() {
+//  monitor_mode_shortcut_ = new GlobalShortcut(QKeySequence("Meta+P"), this);
+  monitor_mode_shortcut_ = new GlobalShortcut(QKeySequence("Ctrl+Alt+P"), this);
+  if (!monitor_mode_shortcut_->registerNow()) {
+    qWarning() << "Failed to register global shortcut of Meta+P";
+  }
+
+  multi_head_manager_ = new MultiHeadManager(this);
 }
 
 void FirstBootSetupWindow::updateBackground() {
@@ -94,10 +112,16 @@ void FirstBootSetupWindow::onHookFinished(bool ok) {
   }
 
   // Reboot system now.
-  // TODO(xushaohua): call systemd-firstboot.
+  // TODO(xushaohua): call systemd-firstboot instead.
   if (!RebootSystemWithMagicKey()) {
     RebootSystem();
   }
+}
+
+void FirstBootSetupWindow::onPrimaryScreenChanged(const QRect& geometry) {
+  qDebug() << "on primary screen changed" << geometry;
+  this->move(geometry.topLeft());
+  this->setFixedSize(geometry.size());
 }
 
 void FirstBootSetupWindow::onSystemInfoFinished() {

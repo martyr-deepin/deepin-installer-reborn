@@ -11,10 +11,13 @@ class QResizeEvent;
 class QStackedLayout;
 class QThread;
 
+class GlobalShortcut;
+
 namespace installer {
 
 class FirstBootLoadingFrame;
 class FirstBootHookWorker;
+class MultiHeadManager;
 class SystemInfoFrame;
 
 // Main window of deepin_installer_first_boot.
@@ -35,6 +38,7 @@ class FirstBootSetupWindow : public QFrame {
   void initConnections();
   void initUI();
 
+  void registerShortcut();
   void updateBackground();
 
   QLabel* background_label_ = nullptr;
@@ -45,9 +49,15 @@ class FirstBootSetupWindow : public QFrame {
   QThread* hook_worker_thread_ = nullptr;
   FirstBootHookWorker* hook_worker_ = nullptr;
 
+  // Shortcut used to switch mirror modes.
+  GlobalShortcut* monitor_mode_shortcut_ = nullptr;
+  MultiHeadManager* multi_head_manager_ = nullptr;
+
  private slots:
   // Handles result of hook worker.
   void onHookFinished(bool ok);
+
+  void onPrimaryScreenChanged(const QRect& geometry);
 
   // Run "first_boot_setup.sh" after system_info_frame_ is finished.
   void onSystemInfoFinished();
