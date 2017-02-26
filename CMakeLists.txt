@@ -77,7 +77,6 @@ include_directories(AFTER ${X11EXT_INCLUDE_DIRS})
 include_directories(AFTER ${X11TST_INCLUDE_DIRS})
 include_directories(AFTER ${X11RandR_INCLUDE_DIRS})
 
-add_subdirectory(third_party/CuteLogger)
 add_subdirectory(third_party/global_shortcut)
 add_subdirectory(third_party/googletest)
 add_subdirectory(third_party/qrencode)
@@ -411,7 +410,6 @@ set(LINK_LIBS
     ${X11TST_LIBRARIES}
     ${X11RandR_LIBRARIES}
 
-    CuteLogger
     global_shortcut
     qrencode
     qtermwidget5
@@ -472,10 +470,11 @@ add_executable(deepin-installer-first-boot
                ${SERVICE_FILES}
                ${SYSINFO_FILES}
                ${UI_FILES}
-
-
                )
-target_link_libraries(deepin-installer-first-boot ${LINK_LIBS})
+target_link_libraries(deepin-installer-first-boot
+                      ${LINK_LIBS}
+                      global_shortcut
+                      )
 
 # deepin-installer-oem
 add_executable(deepin-installer-oem
