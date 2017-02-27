@@ -31,6 +31,12 @@ QString GetDeviceModelAndCap(const Device& device) {
   return QString("%1 (%2G)").arg(device.model).arg(gibi_size);
 }
 
+QString GetDeviceModelCapAndPath(const Device& device) {
+  const int gibi_size = ToGigByte(device.getByteLength());
+  const QString name(QFileInfo(device.path).fileName());
+  return QString("%1 %2G(%3)").arg(device.model).arg(gibi_size).arg(name);
+}
+
 QString GetInstallerDevicePath() {
   const MountItemList list(ParseMountItems());
 

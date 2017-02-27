@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
+#include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
@@ -18,8 +19,10 @@
 
 namespace installer {
 
-NewTableWarningFrame::NewTableWarningFrame(QWidget* parent)
+NewTableWarningFrame::NewTableWarningFrame(PartitionDelegate* delegate,
+                                           QWidget* parent)
     : QFrame(parent),
+      delegate_(delegate),
       device_path_() {
   this->setObjectName("new_table_warning_frame");
 
@@ -33,6 +36,15 @@ QString NewTableWarningFrame::devicePath() const {
 
 void NewTableWarningFrame::setDevicePath(const QString& device_path) {
   device_path_ = device_path;
+  const DeviceList& devices = delegate_->devices();
+  const int device_index = DeviceIndex(devices, device_path);
+  Q_ASSERT(device_index > -1);
+  if (device_index == -1) {
+    qCritical() << "Failed to find device at:" << device_path;
+    return;
+  }
+  const Device& device = devices.at(device_index);
+  disk_name_label_->setText(GetDeviceModelCapAndPath(device));
 }
 
 void NewTableWarningFrame::changeEvent(QEvent* event) {
@@ -60,10 +72,12 @@ void NewTableWarningFrame::initUI() {
   QPixmap warning_pixmap(":/images/warning.png");
   warning_label->setPixmap(warning_pixmap);
   title_label_ = new TitleLabel(tr("Disk Format Warning"));
-  title_label_->setStyleSheet(ReadFile(":/styles/new_table_warning_frame.css"));
+  title_label_->setObjectName("title_label");
 
   QLabel* disk_label = new QLabel();
   disk_label->setPixmap(QPixmap(GetOsTypeLargeIcon(OsType::Empty)));
+  disk_name_label_ = new QLabel();
+  disk_name_label_->setObjectName("disk_name_label");
 
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->setContentsMargins(0, 0, 0, 0);
@@ -90,6 +104,7 @@ void NewTableWarningFrame::initUI() {
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
   layout->addWidget(disk_label, 0, Qt::AlignHCenter);
+  layout->addWidget(disk_name_label_, 0, Qt::AlignHCenter);
   layout->addSpacing(40);
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
@@ -100,6 +115,9 @@ void NewTableWarningFrame::initUI() {
 
   this->setLayout(layout);
   this->setContentsMargins(0, 0, 0, 0);
+  const QString style(ReadFile(":/styles/new_table_warning_frame.css"));
+  this->setStyleSheet(style);
+  AppendStyleSheet(title_label_, style);
 }
 
 void NewTableWarningFrame::onConfirmButtonClicked() {

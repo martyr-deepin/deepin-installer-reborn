@@ -129,7 +129,7 @@ void PartitionFrame::initUI() {
   edit_partition_frame_ = new EditPartitionFrame(delegate_, this);
   new_partition_frame_ = new NewPartitionFrame(delegate_, this);
   new_table_loading_frame_ = new NewTableLoadingFrame(this);
-  new_table_warning_frame_ = new NewTableWarningFrame(this);
+  new_table_warning_frame_ = new NewTableWarningFrame(delegate_, this);
   partition_loading_frame_ = new PartitionLoadingFrame(this);
   partition_table_warning_frame_ = new PartitionTableWarningFrame(this);
   prepare_install_frame_ = new PrepareInstallFrame(delegate_, this);

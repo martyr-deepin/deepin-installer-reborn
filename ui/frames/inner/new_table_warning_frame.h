@@ -6,11 +6,13 @@
 #define INSTALLER_UI_FRAMES_INNER_NEW_TABLE_WARNING_FRAME_H
 
 #include <QFrame>
+class QLabel;
 
 namespace installer {
 
 class CommentLabel;
 class NavButton;
+class PartitionDelegate;
 class TitleLabel;
 
 // Display warning message before creating new partition table.
@@ -18,7 +20,7 @@ class NewTableWarningFrame : public QFrame {
   Q_OBJECT
 
  public:
-  explicit NewTableWarningFrame(QWidget* parent = nullptr);
+  NewTableWarningFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
 
   // Set/get device_path_.
   QString devicePath() const;
@@ -39,6 +41,9 @@ class NewTableWarningFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  PartitionDelegate* delegate_ = nullptr;
+
+  QLabel* disk_name_label_ = nullptr;
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
   NavButton* cancel_button_ = nullptr;
