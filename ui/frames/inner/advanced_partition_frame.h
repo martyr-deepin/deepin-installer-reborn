@@ -72,6 +72,7 @@ class AdvancedPartitionFrame : public QFrame {
     NoMorePrimNum,
     RootMissing,
     RootTooSmall,
+    // TODO(xushaohua): Loongson boot position.
   };
   struct ErrorMessage {
     QString text;

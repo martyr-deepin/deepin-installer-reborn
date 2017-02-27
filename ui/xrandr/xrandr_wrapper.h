@@ -14,6 +14,7 @@ struct Screen {
  public:
   Screen() : id(0), min_width(0), min_height(0), curr_width(0), curr_height(0),
              max_width(0), max_height(0) {}
+
   int id;
   int min_width;
   int min_height;
@@ -29,6 +30,7 @@ QDebug& operator<<(QDebug& debug, const Screen& screen);
 struct Mode {
  public:
   Mode() : name(), width(0), height(0), is_used(false), is_preferred(false) {}
+
   QString name;  // mode name
   int width;
   int height;
@@ -42,6 +44,7 @@ struct Output {
  public:
   Output() : name(), is_connected(false), is_primary(false),
              width(0), height(0), x(0), y(0), modes() {}
+
   QString name;  // Output name, like "eDP-1", "HDMI-1"
   bool is_connected;
   bool is_primary;
@@ -58,6 +61,7 @@ QDebug& operator<<(QDebug& debug, const Output& output);
 struct XRandR {
  public:
   XRandR() : screens(), outputs() {}
+
   ScreenList screens;
   OutputList outputs;
 };
