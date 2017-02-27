@@ -125,6 +125,7 @@ class MainWindow : public QWidget {
   GlobalShortcut* monitor_mode_shortcut_ = nullptr;
 
   QString log_file_;
+  bool auto_install_;
 
  private slots:
   // Go next page when current page index is changed in ControlPanelFrame.

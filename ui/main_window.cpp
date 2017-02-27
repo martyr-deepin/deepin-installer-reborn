@@ -43,7 +43,8 @@ MainWindow::MainWindow()
       pages_(),
       prev_page_(PageId::NullId),
       current_page_(PageId::NullId),
-      log_file_() {
+      log_file_(),
+      auto_install_(false) {
   this->setObjectName("main_window");
 
   this->initUI();
@@ -53,12 +54,28 @@ MainWindow::MainWindow()
 }
 
 void MainWindow::fullscreen() {
+  if (auto_install_) {
+    // Read default locale from settings.ini and go to InstallProgressFrame.
+    current_page_ = PageId::PartitionId;
+  }
+
   multi_head_manager_->updateWallpaper();
   ShowFullscreen(this);
   this->goNextPage();
+
+  if (auto_install_) {
+    // In auto-install mode, partitioning is done in hook script.
+    // So notify InstallProgressFrame to run hooks directly.
+    emit partition_frame_->autoPartDone(true);
+  }
 }
 
 void MainWindow::scanDevicesAndTimezone() {
+  // Do nothing in auto-install mode.
+  if (auto_install_) {
+    return;
+  }
+
   // If system_info_frame_ is not omitted, scan wireless hot spot and update
   // timezone in background.
   if (!GetSettingsBool(kSkipSystemInfoPage)) {
@@ -75,10 +92,7 @@ void MainWindow::scanDevicesAndTimezone() {
 }
 
 void MainWindow::setEnableAutoInstall(bool auto_install) {
-  if (auto_install) {
-    // Read default locale from settings.ini and go to InstallProgressFrame.
-    current_page_ = PageId::PartitionId;
-  }
+  auto_install_ = auto_install;
 }
 
 void MainWindow::setLogFile(const QString& log_file) {
