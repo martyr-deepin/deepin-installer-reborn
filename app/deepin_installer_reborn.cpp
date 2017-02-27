@@ -35,14 +35,6 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  const QString conf_file(args_parser.getConfFile());
-  if (!conf_file.isEmpty()) {
-    // Append conf options.
-    if (!installer::AppendConfigFile(conf_file)) {
-      qCritical() << "Failed to append conf file:" << conf_file;
-    }
-  }
-
   // Initialize log service.
   const char kLogFileName[] = "deepin-installer-reborn.log";
   QString log_file;
@@ -57,6 +49,14 @@ int main(int argc, char* argv[]) {
   // Delete old settings file and generate a new one.
   installer::DeleteConfigFile();
   installer::AddConfigFile();
+
+  const QString conf_file(args_parser.getConfFile());
+  // Append customized configurations.
+  if (!conf_file.isEmpty()) {
+    if (!installer::AppendConfigFile(conf_file)) {
+      qCritical() << "Failed to append conf file:" << conf_file;
+    }
+  }
 
   installer::MainWindow main_window;
   main_window.setEnableAutoInstall(args_parser.isAutoInstallSet());
