@@ -157,7 +157,7 @@ bool ParseXRandR(const QString& text, XRandR& xrandr) {
       } else {
         qCritical() << "Parse screen failed:" << line;
       }
-    } else if (line.startsWith(' ')) {
+    } else if (line.startsWith("  ")) {
       Mode mode;
       if (!xrandr.outputs.isEmpty()) {
         Output& output = xrandr.outputs.last();

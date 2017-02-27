@@ -4,6 +4,7 @@
 # in the LICENSE file.
 
 # Generate default settings for loongson and sw platforms.
+# Execute this program after updating options in resources/default_settings.ini.
 
 import configparser
 import os

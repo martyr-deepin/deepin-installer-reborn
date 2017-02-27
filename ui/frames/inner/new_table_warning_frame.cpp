@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
+#include "ui/delegates/partition_util.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
@@ -61,6 +62,9 @@ void NewTableWarningFrame::initUI() {
   title_label_ = new TitleLabel(tr("Disk Format Warning"));
   title_label_->setStyleSheet(ReadFile(":/styles/new_table_warning_frame.css"));
 
+  QLabel* disk_label = new QLabel();
+  disk_label->setPixmap(QPixmap(GetOsTypeLargeIcon(OsType::Empty)));
+
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->setContentsMargins(0, 0, 0, 0);
   title_layout->setSpacing(0);
@@ -85,6 +89,8 @@ void NewTableWarningFrame::initUI() {
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
   layout->addStretch();
+  layout->addWidget(disk_label, 0, Qt::AlignHCenter);
+  layout->addSpacing(40);
   layout->addLayout(title_layout);
   layout->addLayout(comment_layout);
   layout->addStretch();
