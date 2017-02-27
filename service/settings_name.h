@@ -67,7 +67,6 @@ const char kSystemInfoWindowsDisableTimezonePage[] =
 const char kSystemInfoTimezoneUseGeoIp[] = "system_info_timezone_use_geoip";
 const char kSystemInfoTimezoneUseRegdomain[] =
     "system_info_timezone_use_regdomain";
-const char kSystemInfoFoundWindowsSystem[] = "system_info_found_windows_system";
 
 // Partition
 const char kPartitionSkipSimplePartitionPage[] =

@@ -70,7 +70,6 @@ void WriteUEFI(bool is_efi);
 // Get current locale.
 QString ReadLocale();
 void WriteAvatar(const QString& avatar);
-void WriteFoundWindowsPartition(bool found);
 void WriteHostname(const QString& hostname);
 // Write keyboard model, layout and layout variant name.
 void WriteKeyboard(const QString& model,

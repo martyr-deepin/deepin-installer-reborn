@@ -272,10 +272,6 @@ void WriteAvatar(const QString& avatar) {
   AppendToConfigFile("DI_AVATAR", avatar);
 }
 
-void WriteFoundWindowsPartition(bool found) {
-  AppendToConfigFile(kSystemInfoFoundWindowsSystem, found);
-}
-
 void WriteHostname(const QString& hostname) {
   AppendToConfigFile("DI_HOSTNAME", hostname);
 }

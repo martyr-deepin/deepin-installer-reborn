@@ -52,8 +52,6 @@ void SystemInfoTimezoneFrame::readConf() {
   //    "system_info_use_windows_time" are enabled.
   //  * Hide timezone-page and timezone-button if
   //    "system_info_windows_disable_timezone_page" if enabled.
-  //  * If windows partition is found, then:
-  //    * Set "system_info_found_windows_system" to true.
   //  * If no windows partition found, then:
   //    * Read default timezone from settings.
   //    * Scan wifi spot.
@@ -63,8 +61,6 @@ void SystemInfoTimezoneFrame::readConf() {
   if (GetSettingsBool(kPartitionEnableOsProber) &&
       GetSettingsBool(kSystemInfoUseWindowsTime) &&
       HasWindowsPartition()) {
-    WriteFoundWindowsPartition(true);
-
     // If local time is used, set timezone to Etc/UTC.
     timezone_ = kDefaultTimezone;
     timezone_source_ = TimezoneSource::Local;
