@@ -17,3 +17,8 @@ rm -rf /target/deepinhost
 for i in $(cat /proc/mounts | awk '{print $2}' | grep -e ^$target | sort -r); do
   umount -v $i
 done
+
+sync
+
+# Exit normal value explicitly.
+exit 0
