@@ -274,6 +274,7 @@ const FsTypeList& PartitionDelegate::getFsTypes() {
 void PartitionDelegate::doManualPart(bool simple_mode) {
   simple_mode_ = simple_mode;
   OperationList operations = simple_mode ? simple_operations_ : operations_;
+  const DeviceList& devices = simple_mode ? simple_devices_ : devices_;
   qDebug() << "doManualPart:" << operations;
 
   // Set boot flags of boot partitions.
@@ -284,6 +285,19 @@ void PartitionDelegate::doManualPart(bool simple_mode) {
       operation.new_partition.flags.append(PartitionFlag::Boot);
       operation.new_partition.flags.append(PartitionFlag::ESP);
       is_boot_set = true;
+    }
+  }
+
+  // Check existing EFI partition.
+  for (const Device& device : devices) {
+    if (is_boot_set) {
+      break;
+    }
+    for (const Partition& partition : device.partitions) {
+      if (partition.fs == FsType::EFI) {
+        is_boot_set = true;
+        break;
+      }
     }
   }
 
