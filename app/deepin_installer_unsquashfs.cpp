@@ -20,7 +20,6 @@
 #include <QDebug>
 #include <QDir>
 #include <QFile>
-#include <QFileInfo>
 #include <QtMath>
 
 #include "base/command.h"
@@ -66,8 +65,12 @@ int g_current_files = 0;
 
 // Write progress value to file.
 void WriteProgress(int progress) {
-  fseek(g_progress_fd, 0, SEEK_SET);
-  fprintf(g_progress_fd, "%d", progress);
+  if (g_progress_fd) {
+    fseek(g_progress_fd, 0, SEEK_SET);
+    fprintf(g_progress_fd, "%d", progress);
+  } else {
+    fprintf(stdout, "\r%d", progress);
+  }
 }
 
 // Copy regular file with sendfile() system call, from |src_file| to
@@ -239,9 +242,6 @@ int CopyItem(const char* fpath, const struct stat* sb,
   }
   // Update permissions.
   if (!S_ISLNK(st.st_mode)) {
-    if (dest_filepath.endsWith("bin/sudo")  ) {
-      qDebug() << "mod:" << mode;
-    }
     if (chmod(dest_file, mode) != 0) {
       fprintf(stderr, "CopyItem() chmod failed: %s, %ul\n", dest_file, mode);
       perror("chmod()");
@@ -252,7 +252,7 @@ int CopyItem(const char* fpath, const struct stat* sb,
   if (!CopyXAttr(fpath, dest_file)) {
     // NOTE(xushaohua): Do not exit when failed to copy file capacities.
     // This may be happen in Alpha based computer.
-    qWarning() << "CopyXAttr() failed:" << fpath;
+    fprintf(stderr, "CopyXAttr() failed: %s\n", fpath);
 //    ok = false;
   }
 
@@ -278,7 +278,8 @@ int CountItem(const char* fpath, const struct stat* sb,
 bool CopyFiles(const QString& src_dir, const QString& dest_dir,
                const QString& progress_file) {
   if (!installer::CreateDirs(dest_dir)) {
-    qCritical() << "CopyFiles() create dest dir failed:" << dest_dir;
+    fprintf(stderr, "CopyFiles() failed to create dest dir: %s\n",
+            dest_dir.toLocal8Bit().constData());
     return false;
   }
 
@@ -289,11 +290,8 @@ bool CopyFiles(const QString& src_dir, const QString& dest_dir,
     // Set progress file descriptor.
     g_progress_fd = fopen(progress_file.toStdString().c_str(), "w");
     if (g_progress_fd == NULL) {
-      g_progress_fd = stdout;
       perror("fopen() Failed to open progress file");
     }
-  } else {
-    g_progress_fd = stdout;
   }
 
   g_src_dir = src_dir;
@@ -303,7 +301,7 @@ bool CopyFiles(const QString& src_dir, const QString& dest_dir,
   bool ok = (nftw(src_dir.toUtf8().data(),
                   CountItem, kMaxOpenFd, FTW_PHYS) == 0);
   if (!ok || (g_total_files == 0)) {
-    qWarning() << "CopyFiles() Failed to count file number!";
+    fprintf(stderr, "CopyFiles() Failed to count file number!\n");
   } else {
     ok = (nftw(src_dir.toUtf8().data(), CopyItem, kMaxOpenFd, FTW_PHYS) == 0);
   }
@@ -315,7 +313,7 @@ bool CopyFiles(const QString& src_dir, const QString& dest_dir,
     WriteProgress(100);
   }
 
-  if (g_progress_fd != stdout) {
+  if (g_progress_fd) {
     fclose(g_progress_fd);
   }
 
@@ -325,13 +323,14 @@ bool CopyFiles(const QString& src_dir, const QString& dest_dir,
 // Mount filesystem at |src| to |mount_point|
 bool MountFs(const QString& src, const QString& mount_point) {
   if (!installer::CreateDirs(mount_point)) {
-    qCritical() << "MountFs() Failed to create folder:" << mount_point;
+    fprintf(stderr, "MountFs() failed to create folder: %s\n",
+            mount_point.toLocal8Bit().constData());
     return false;
   }
   QString output, err;
   const bool ok = installer::SpawnCmd("mount", {src, mount_point}, output, err);
   if (!ok) {
-    qCritical() << "MountFs() err:" << err;
+    fprintf(stderr, "MountFs() err: %s\n", err.toLocal8Bit().constData());
   }
 
   // TODO(xushaohua): Check |mount_point| dir is not empty.
@@ -344,7 +343,7 @@ bool UnMountFs(const QString& mount_point) {
   QString out, err;
   const bool ok = installer::SpawnCmd("umount", {mount_point}, out, err);
   if (!ok) {
-    qCritical() << "Umount err:" << err;
+    fprintf(stderr, "Umount err: %s\n", err.toLocal8Bit().constData());
   }
   return ok;
 }
@@ -367,7 +366,7 @@ int main(int argc, char* argv[]) {
       "pathname", kDefaultDest);
   parser.addOption(dest_option);
   const QCommandLineOption progress_option(
-      "progress","print progress info to \"file\"",
+      "progress","print progress info to <file>",
       "file", "");
   parser.addOption(progress_option);
   parser.setApplicationDescription(kAppDesc);
@@ -386,18 +385,18 @@ int main(int argc, char* argv[]) {
 
   const QStringList positional_args = parser.positionalArguments();
   if (positional_args.length() != 1) {
-    qCritical() << "Too many files to extract, expect one!";
+    fprintf(stderr, "Too many files to extract, expect one!\n");
     parser.showHelp(kExitErr);
   }
 
   const QString src(positional_args.at(0));
   const QFile src_file(src);
   if (!src_file.exists()) {
-    qCritical() << "File not found!:" << src;
+    fprintf(stderr, "File not found: %s\n", src.toLocal8Bit().constData());
     parser.showHelp(kExitErr);
   }
   if (src_file.size() == 0) {
-    qCritical() << "Filesystem is empty!" << src;
+    fprintf(stderr, "Filesystem is empty: %s\n", src.toLocal8Bit().constData());
     parser.showHelp(kExitErr);
   }
 
@@ -407,17 +406,20 @@ int main(int argc, char* argv[]) {
   const QString progress_file = parser.value(progress_option);
 
   if (!MountFs(src, mount_point)) {
-    qCritical() << "Mount" << src << "to" << mount_point << "failed!";
+    fprintf(stderr, "Mount %s to %s failed!\n",
+            src.toLocal8Bit().constData(),
+            mount_point.toLocal8Bit().constData());
     exit(kExitErr);
   }
 
   const bool ok = CopyFiles(mount_point, dest_dir, progress_file);
   if (!ok) {
-    qCritical() << "Copy files failed!";
+    fprintf(stderr, "Copy files failed!\n");
   }
 
   if (!UnMountFs(mount_point)) {
-    qCritical() << "UnMount failed:" << mount_point;
+    fprintf(stderr, "Unmount %s failed\n",
+            mount_point.toLocal8Bit().constData());
     exit(kExitErr);
   }
 
