@@ -108,9 +108,8 @@ void SystemInfoFrame::initUI() {
 
   head_layout_ = new QHBoxLayout();
   head_layout_->setContentsMargins(30, 0, 0, 0);
-  head_layout_->setSpacing(0);
+  head_layout_->setSpacing(30);
   head_layout_->addWidget(timezone_button_);
-  head_layout_->addSpacing(30);
   head_layout_->addWidget(keyboard_button_);
   head_layout_->addStretch();
 
