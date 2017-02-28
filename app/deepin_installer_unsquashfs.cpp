@@ -30,7 +30,6 @@
 // TODO(xushaohua): Added --debug option.
 // TODO(xushaohua): Added --force option.
 // TODO(xushaohua): Unmount squashfs file on error.
-// TODO(xushaohua): Print progress value in single line.
 
 namespace {
 
@@ -228,24 +227,27 @@ int CopyItem(const char* fpath, const struct stat* sb,
   }
 
   if (!ok) {
+    fprintf(stderr, "Failed to copy item: %s\n", dest_file);
+    // Ignore copy file error.
     // Return if error occurs
-    return 1;
+//    return 1;
   }
 
-  // TODO(xushaohua): Keep file descriptor.
   // Update ownership first, or chmod() might ignore SUID/SGID or sticky flag.
   if (lchown(dest_file, st.st_uid, st.st_gid) != 0) {
     fprintf(stderr, "CopyItem() lchown() failed: %s, %d, %d\n",
             dest_file, st.st_uid, st.st_gid);
     perror("lchown()");
-    ok = false;
+    // Ignores copy file error.
+//    ok = false;
   }
   // Update permissions.
   if (!S_ISLNK(st.st_mode)) {
     if (chmod(dest_file, mode) != 0) {
       fprintf(stderr, "CopyItem() chmod failed: %s, %ul\n", dest_file, mode);
       perror("chmod()");
-      ok = false;
+      // Ignores chmod error.
+//      ok = false;
     }
   }
 
@@ -256,7 +258,6 @@ int CopyItem(const char* fpath, const struct stat* sb,
 //    ok = false;
   }
 
-  // TODO(xushaohua): Update progress bar
   g_current_files ++;
   const int progress = qFloor(g_current_files * 100.0 / g_total_files);
   WriteProgress(progress);
