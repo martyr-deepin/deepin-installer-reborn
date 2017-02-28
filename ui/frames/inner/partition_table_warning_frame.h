@@ -12,6 +12,7 @@ namespace installer {
 
 class CommentLabel;
 class ExpandedNavButton;
+class NavButton;
 class TitleLabel;
 
 // Displayed when partition table type and system boot method does not match.
@@ -26,12 +27,15 @@ class PartitionTableWarningFrame : public QFrame {
   void setDevicePath(const QString& device_path);
 
  signals:
-  // Emitted when reboot button is clicked.
-  void reboot();
+  // Emitted when cancel button is clicked.
+  void canceled();
 
   // Emitted when continue button is clicked.
   // |device_path| is the device disk path to be formatted.
   void confirmed(const QString& device_path);
+
+  // Emitted when reboot button is clicked.
+  void reboot();
 
  protected:
   void changeEvent(QEvent* event) override;
@@ -50,6 +54,7 @@ class PartitionTableWarningFrame : public QFrame {
   QLabel* list_item3_ = nullptr;
   ExpandedNavButton* reject_button_ = nullptr;
   ExpandedNavButton* accept_button_ = nullptr;
+  NavButton* cancel_button_ = nullptr;
 
   QString device_path_;
 

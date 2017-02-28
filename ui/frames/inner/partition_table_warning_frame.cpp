@@ -59,6 +59,7 @@ void PartitionTableWarningFrame::changeEvent(QEvent* event) {
            "2.Continue installation will format your disk"));
     reject_button_->setText(tr("Reboot"));
     accept_button_->setText(tr("Continue"));
+    cancel_button_->setText(tr("Back"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -69,6 +70,8 @@ void PartitionTableWarningFrame::initConnections() {
           this, &PartitionTableWarningFrame::reboot);
   connect(accept_button_, &QPushButton::clicked,
           this, &PartitionTableWarningFrame::onConfirmButtonClicked);
+  connect(cancel_button_, &QPushButton::clicked,
+          this, &PartitionTableWarningFrame::canceled);
 }
 
 void PartitionTableWarningFrame::initUI() {
@@ -148,6 +151,7 @@ void PartitionTableWarningFrame::initUI() {
 
   reject_button_ = new ExpandedNavButton(tr("Reboot"));
   accept_button_ = new ExpandedNavButton(tr("Continue"));
+  cancel_button_ = new NavButton(tr("Back"));
 
   QGridLayout* content_layout = new QGridLayout();
   content_layout->setContentsMargins(0, 0, 0, 0);
@@ -170,6 +174,7 @@ void PartitionTableWarningFrame::initUI() {
   layout->addStretch();
   layout->addLayout(content_layout);
   layout->addStretch();
+  layout->addWidget(cancel_button_, 0, Qt::AlignHCenter);
 
   this->setLayout(layout);
   this->setContentsMargins(0, 0, 0, 0);

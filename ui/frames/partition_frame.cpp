@@ -101,11 +101,13 @@ void PartitionFrame::initConnections() {
   connect(new_table_warning_frame_, &NewTableWarningFrame::confirmed,
           delegate_, &PartitionDelegate::createPartitionTable);
 
-  connect(partition_table_warning_frame_, &PartitionTableWarningFrame::reboot,
-          this, &PartitionFrame::reboot);
+  connect(partition_table_warning_frame_, &PartitionTableWarningFrame::canceled,
+          this, &PartitionFrame::showMainFrame);
   connect(partition_table_warning_frame_,
           &PartitionTableWarningFrame::confirmed,
           this, &PartitionFrame::showNewTableWarningFrame);
+  connect(partition_table_warning_frame_, &PartitionTableWarningFrame::reboot,
+          this, &PartitionFrame::reboot);
 
   connect(prepare_install_frame_, &PrepareInstallFrame::aborted,
           this, &PartitionFrame::showMainFrame);
