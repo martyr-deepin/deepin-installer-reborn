@@ -7,5 +7,5 @@
 
 if [ -f "${CONF_FILE}" ]; then
   cp -f "${CONF_FILE}"  "/target/${CONF_FILE}" || \
-    error "Failed to copy ${CONF_FILE}"
+    warn_exit "Failed to copy ${CONF_FILE}"
 fi
