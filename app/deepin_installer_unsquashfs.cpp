@@ -347,10 +347,9 @@ bool MountFs(const QString& src, const QString& mount_point) {
 
 // Umount filesystem from |mount_point|.
 bool UnMountFs(const QString& mount_point) {
-  QString out, err;
-  const bool ok = installer::SpawnCmd("umount", {mount_point}, out, err);
+  const bool ok = installer::SpawnCmd("umount", {"-R", mount_point});
   if (!ok) {
-    fprintf(stderr, "Umount err: %s\n", err.toLocal8Bit().constData());
+    fprintf(stderr, "Umount %s failed!", mount_point.toLocal8Bit().constData());
   }
   return ok;
 }
@@ -431,6 +430,7 @@ int main(int argc, char* argv[]) {
     if (!UnMountFs(mount_point)) {
       fprintf(stderr, "Unmount %s failed\n",
               mount_point.toLocal8Bit().constData());
+      sleep((unsigned int)(retry * 2 + 1));
     } else {
       break;
     }
