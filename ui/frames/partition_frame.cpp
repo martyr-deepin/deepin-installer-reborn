@@ -20,6 +20,7 @@
 #include "ui/frames/inner/new_table_loading_frame.h"
 #include "ui/frames/inner/new_table_warning_frame.h"
 #include "ui/frames/inner/partition_loading_frame.h"
+#include "ui/frames/inner/partition_number_limitation_frame.h"
 #include "ui/frames/inner/partition_table_warning_frame.h"
 #include "ui/frames/inner/prepare_install_frame.h"
 #include "ui/frames/inner/select_bootloader_frame.h"
@@ -86,6 +87,9 @@ void PartitionFrame::initConnections() {
   connect(advanced_partition_frame_, &AdvancedPartitionFrame::requestNewTable,
           this, &PartitionFrame::showPartitionTableWarningFrame);
   connect(advanced_partition_frame_,
+          &AdvancedPartitionFrame::requestPartitionNumberLimitationFrame,
+          this, &PartitionFrame::showPartitionNumberLimitationFrame);
+  connect(advanced_partition_frame_,
           &AdvancedPartitionFrame::requestSelectBootloaderFrame,
           this, &PartitionFrame::showSelectBootloaderFrame);
 
@@ -100,6 +104,10 @@ void PartitionFrame::initConnections() {
           this, &PartitionFrame::showNewTableLoadingFrame);
   connect(new_table_warning_frame_, &NewTableWarningFrame::confirmed,
           delegate_, &PartitionDelegate::createPartitionTable);
+
+  connect(partition_number_limitation_frame_,
+          &PartitionNumberLimitationFrame::finished,
+          this, &PartitionFrame::showMainFrame);
 
   connect(partition_table_warning_frame_, &PartitionTableWarningFrame::canceled,
           this, &PartitionFrame::showMainFrame);
@@ -133,6 +141,7 @@ void PartitionFrame::initUI() {
   new_table_loading_frame_ = new NewTableLoadingFrame(this);
   new_table_warning_frame_ = new NewTableWarningFrame(delegate_, this);
   partition_loading_frame_ = new PartitionLoadingFrame(this);
+  partition_number_limitation_frame_ = new PartitionNumberLimitationFrame(this);
   partition_table_warning_frame_ = new PartitionTableWarningFrame(this);
   prepare_install_frame_ = new PrepareInstallFrame(delegate_, this);
   select_bootloader_frame_ = new SelectBootloaderFrame(delegate_, this);
@@ -230,8 +239,9 @@ void PartitionFrame::initUI() {
   main_layout_->addWidget(new_partition_frame_);
   main_layout_->addWidget(new_table_loading_frame_);
   main_layout_->addWidget(new_table_warning_frame_);
-  main_layout_->addWidget(prepare_install_frame_);
+  main_layout_->addWidget(partition_number_limitation_frame_);
   main_layout_->addWidget(partition_table_warning_frame_);
+  main_layout_->addWidget(prepare_install_frame_);
   main_layout_->addWidget(select_bootloader_frame_);
 
   this->setLayout(main_layout_);
@@ -298,6 +308,10 @@ void PartitionFrame::showNewTableLoadingFrame() {
 void PartitionFrame::showNewTableWarningFrame(const QString& device_path) {
   new_table_warning_frame_->setDevicePath(device_path);
   main_layout_->setCurrentWidget(new_table_warning_frame_);
+}
+
+void PartitionFrame::showPartitionNumberLimitationFrame() {
+  main_layout_->setCurrentWidget(partition_number_limitation_frame_);
 }
 
 void PartitionFrame::showPartitionTableWarningFrame(

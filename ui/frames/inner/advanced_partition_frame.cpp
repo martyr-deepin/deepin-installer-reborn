@@ -427,8 +427,7 @@ void AdvancedPartitionFrame::onNewPartitionTriggered(
     emit this->requestNewPartitionFrame(partition);
   } else {
     qWarning() << "Can not add new partition any more" << partition;
-    addErrorMessage(tr("No more partition can be created"),
-                    ErrorMessageType::NoMorePrimNum);
+    emit this->requestPartitionNumberLimitationFrame();
   }
 }
 

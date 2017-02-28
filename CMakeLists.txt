@@ -229,6 +229,8 @@ set(UI_FILES
     ui/frames/inner/new_table_warning_frame.h
     ui/frames/inner/partition_loading_frame.cpp
     ui/frames/inner/partition_loading_frame.h
+    ui/frames/inner/partition_number_limitation_frame.cpp
+    ui/frames/inner/partition_number_limitation_frame.h
     ui/frames/inner/partition_table_warning_frame.cpp
     ui/frames/inner/partition_table_warning_frame.h
     ui/frames/inner/prepare_install_frame.cpp

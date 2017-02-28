@@ -39,6 +39,10 @@ class AdvancedPartitionFrame : public QFrame {
   // Emitted when partition table not appropriate at |device_path|.
   void requestNewTable(const QString& device_path);
 
+  // Show PartitionNumberLimitationFrame.
+  void requestPartitionNumberLimitationFrame();
+
+  // Show SelectBootloaderFrame.
   void requestSelectBootloaderFrame();
 
  public slots:
@@ -69,7 +73,6 @@ class AdvancedPartitionFrame : public QFrame {
     BootTooSmall,
     EfiMissing,
     EfiTooSmall,
-    NoMorePrimNum,
     RootMissing,
     RootTooSmall,
     // TODO(xushaohua): Loongson boot position.

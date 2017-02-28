@@ -21,6 +21,7 @@ class NewTableLoadingFrame;
 class NewTableWarningFrame;
 class PartitionDelegate;
 class PartitionLoadingFrame;
+class PartitionNumberLimitationFrame;
 class PartitionTableWarningFrame;
 class PointerButton;
 class PrepareInstallFrame;
@@ -65,6 +66,7 @@ class PartitionFrame : public QFrame {
   NewTableLoadingFrame* new_table_loading_frame_ = nullptr;
   NewTableWarningFrame* new_table_warning_frame_ = nullptr;
   PartitionLoadingFrame* partition_loading_frame_ = nullptr;
+  PartitionNumberLimitationFrame* partition_number_limitation_frame_ = nullptr;
   PartitionTableWarningFrame* partition_table_warning_frame_ = nullptr;
   PrepareInstallFrame* prepare_install_frame_ = nullptr;
   SelectBootloaderFrame* select_bootloader_frame_ = nullptr;
@@ -94,6 +96,7 @@ class PartitionFrame : public QFrame {
   void showNewPartitionFrame(const Partition& partition);
   void showNewTableLoadingFrame();
   void showNewTableWarningFrame(const QString& device_path);
+  void showPartitionNumberLimitationFrame();
   void showPartitionTableWarningFrame(const QString& device_path);
   void showSelectBootloaderFrame();
 };
