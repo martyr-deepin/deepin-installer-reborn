@@ -10,14 +10,6 @@ LIVE=$(installer_get "LIVE")
 
 L=${DI_LOCALE%.*}
 
-# Get number of processors available for current process, minus 1.
-PROCESSORS=$(getconf _NPROCESSORS_ONLN)
-if [ $PROCESSORS -ge 2 ]; then
-  PROCESSORS=$((PROCESSORS - 1))
-else
-  PROCESSORS=1
-fi
-
 # Extract all overlay modules.
 extract_overlay_filesystem() {
   case ${L} in
@@ -34,15 +26,13 @@ extract_overlay_filesystem() {
 
   if [ -f ${MODULE} ]; then
     for file in $(cat ${MODULE}); do
-      unsquashfs -p "${PROCESSORS}" -f -d /target ${CDROM}/overlay/${file} || \
-        error "unsquashfs failed" ${CDROM}/overlay/${file}
+      deepin-installer-unsquashfs --dest /target ${CDROM}/overlay/${file} \
+        1>/dev/null || error "unsquashfs failed" ${CDROM}/overlay/${file}
     done
   fi
 }
 
 # First, extract base filesystem
-#python "${HOOKS_DIR}/before_chroot/extract_base_filesystem" \
-#  --live "${LIVE}" || error "Failed to extract base filesystem"
 readonly PROGRESS_FILE="/dev/shm/unsquashfs_progress"
 readonly BASE_MODULE="${LIVE_FILESYSTEM}/filesystem.squashfs"
 deepin-installer-unsquashfs --dest /target --progress "${PROGRESS_FILE}" \
