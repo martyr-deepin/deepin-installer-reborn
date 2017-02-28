@@ -53,34 +53,10 @@ generate_background_image() {
   return 0
 }
 
-# Replace default settings on loongson/sw platform.
-replace_default_settings() {
-  case $(uname -m) in
-    mips*)
-      if [ -f "${SHARE_DIR}/resources/loongson_default_settings.ini" ]; then
-        install -Dm644 "${SHARE_DIR}/resources/loongson_default_settings.ini" \
-          "${SHARE_DIR}/resources/default_settings.ini"
-      fi
-      ;;
-    sw*)
-      if [ -f "${SHARE_DIR}/resources/sw_default_settings.ini" ]; then
-        install -Dm644 "${SHARE_DIR}/resources/sw_default_settings.ini" \
-          "${SHARE_DIR}/resources/default_settings.ini"
-      fi
-      ;;
-    *)
-      # Do nothing
-      ;;
-  esac
-
-  return 0
-}
-
 case "$1" in
   configure)
     generate_locale
     generate_background_image
-    replace_default_settings
     ;;
 esac
 
