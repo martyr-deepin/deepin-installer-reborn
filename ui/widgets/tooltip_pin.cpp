@@ -80,8 +80,8 @@ void TooltipPin::paintEvent(QPaintEvent* event) {
   const int label_length = label_font_metrics.width(this->text());
   painter.setPen(QPen(Qt::black));
   painter.setFont(label_font);
-  // Set text alignment to center
-  painter.drawText((kWidth - label_length) / 2, 16, this->text());
+  // Set text alignment to center.
+  painter.drawText((kWidth - label_length) / 2 + 2, 17, this->text());
 }
 
 }  // namespace installer
