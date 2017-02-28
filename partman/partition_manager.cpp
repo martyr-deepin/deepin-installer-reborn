@@ -191,12 +191,7 @@ void PartitionManager::doAutoPart(const QString& script_path) {
     emit this->autoPartDone(false);
     return;
   }
-  QString output, err;
-  const bool ok = RunScriptFile({kHookManagerFile, script_path}, output, err);
-  if (!ok) {
-    qCritical() << "Output of auto_part:" << output
-                << "Error of auto_part:" << err;
-  }
+  const bool ok = RunScriptFile({kHookManagerFile, script_path});
   emit this->autoPartDone(ok);
 }
 
