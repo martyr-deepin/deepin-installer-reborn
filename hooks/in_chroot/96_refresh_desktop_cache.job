@@ -14,3 +14,5 @@ if [ -x /var/lib/lastore/scripts/build_system_info ];then
   /usr/bin/lastore-tools update -j=desktop -o /var/lib/lastore/ || true
 fi
 msg "refresh desktop cache done."
+
+exit 0

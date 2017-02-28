@@ -37,3 +37,5 @@ EOF
     fi
     ;;
 esac
+
+exit 0

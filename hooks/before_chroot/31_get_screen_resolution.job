@@ -20,3 +20,5 @@ if [ -z "${resolution}" ]; then
 fi
 
 installer_set "DI_CUR_RESOLUTION" "${resolution}"
+
+exit 0

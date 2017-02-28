@@ -40,4 +40,6 @@ deepin-installer-unsquashfs --dest /target --progress "${PROGRESS_FILE}" \
   error "installer-unsquashfs failed, ${BASE_MODULE}"
 
 # Then extract overlay_filesystem
-extract_overlay_filesystem || true
+extract_overlay_filesystem
+
+exit 0

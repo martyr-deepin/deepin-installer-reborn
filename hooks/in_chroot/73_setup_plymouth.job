@@ -13,3 +13,5 @@ if [ -d "${SRC_DIR}" ]; then
     warn_exit "Failed to copy plymouth theme to system"
   chmod +R 644 "${DEST_DIR}"
 fi
+
+exit 0

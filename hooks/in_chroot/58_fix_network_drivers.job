@@ -193,3 +193,5 @@ fix_lenovo_y700 || true
 fix_asus_x450jb || true
 fix_asus_x450jn || true
 fix_asus_u82u || true
+
+exit 0

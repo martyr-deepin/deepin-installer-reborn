@@ -7,5 +7,4 @@
 
 fc-cache
 
-# Exit normally.
 exit 0

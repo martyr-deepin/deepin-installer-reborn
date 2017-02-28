@@ -36,4 +36,5 @@ update_plymouth() {
 
 detect_rootblk 
 [ -n $ROOTBLK ] && update_plymouth
+
 exit 0

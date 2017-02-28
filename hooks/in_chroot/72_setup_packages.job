@@ -16,3 +16,5 @@ if [ -n "${UNINSTALLED_PKGS}" ]; then
   apt-get -y purge "${UNINSTALLED_PKGS}" || \
     warn_exit "Failed to install packages: ${UNINSTALLED_PKGS}"
 fi
+
+exit 0

@@ -31,5 +31,5 @@ sed -i "s/\(linux.*\)/\1 root=$rootuuid/g" /target/boot/boot/grub.cfg
 
 # fix boot.cfg
 if grep -wqs $TARGET /proc/mounts ; then
-    sed -e 's@boot/@@g' -i $TARGET/boot.cfg
+  sed -e 's@boot/@@g' -i $TARGET/boot.cfg
 fi

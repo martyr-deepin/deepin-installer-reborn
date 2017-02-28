@@ -5,3 +5,4 @@
 
 # Update /etc/deepin-version.
 # TODO(xushaohua): Read version from settings file.
+exit 0

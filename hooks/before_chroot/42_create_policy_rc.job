@@ -27,3 +27,4 @@ EOF
   chmod a+x "${RC}"
 fi
 
+exit 0

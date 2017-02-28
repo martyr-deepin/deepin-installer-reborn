@@ -13,3 +13,5 @@ if [ -f "${OEM_WALLPAPER}" ]; then
     warn_exit "Failed to copy wallpaper to system"
   chmod a+r "${SYS_WALLPAPER}"
 fi
+
+exit 0

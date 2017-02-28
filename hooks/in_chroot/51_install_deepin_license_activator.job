@@ -10,3 +10,5 @@ if [ -f /etc/deepin-version ] && grep -qr "Professional" /etc/lsb-release; then
   apt-get install --no-install-recommends -y --force-yes \
     --allow-unauthenticated  deepin-license-activator
 fi
+
+exit 0

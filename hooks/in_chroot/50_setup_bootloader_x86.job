@@ -188,9 +188,4 @@ esac
   sed -i 's|^\(GRUB_CMDLINE_LINUX_DEFAULT\)=.*|\1="splash quiet"|g' \
     /etc/default/grub
 
-# ignore uefi checking for windows partitions which effect by
-# /usr/lib/os-probes/mounted/20microsoft
-#mkdir -p /var/lib/partman
-#touch /var/lib/partman/ignore_uefi
-
 /usr/sbin/update-grub

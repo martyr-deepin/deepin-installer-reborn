@@ -9,5 +9,4 @@
 [ -d /target/deepinhost/var/lib/apt/lists ] && \
   cp -r /target/deepinhost/var/lib/apt/lists /target/var/lib/apt
 
-# NOTE(xushaohua): Always returns true. cp operations might cause IO error.
 exit 0
