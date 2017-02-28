@@ -4,28 +4,28 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="101"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="122"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="107"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="128"/>
         <source>Freespace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="50"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="56"/>
         <source>efi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="51"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="57"/>
         <source>do not use this partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="58"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="64"/>
         <source>swap area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="60"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="66"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -142,11 +142,6 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="368"/>
         <source>Found %1 errors, fix the errors to continue install or switch to simple mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="430"/>
-        <source>No more partition can be created</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -406,26 +401,26 @@
 <context>
     <name>installer::NewTableWarningFrame</name>
     <message>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="39"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="61"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="52"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="74"/>
         <source>Disk Format Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="41"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="74"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="54"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="92"/>
         <source>Continue install will format the whole disk, please backup all your data to avoid data lost</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="43"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="81"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="56"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="99"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="100"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
@@ -433,32 +428,32 @@
 <context>
     <name>installer::PartitionFrame</name>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="52"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="139"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="53"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="150"/>
         <source>Select Installation Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="54"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="141"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="55"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="152"/>
         <source>Please make sure you have backed up important data, then select the disk to install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="56"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="149"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="57"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="160"/>
         <source>Simple</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="57"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="155"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="58"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="166"/>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="58"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="196"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="59"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="207"/>
         <source>Start installation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -479,41 +474,68 @@
     </message>
 </context>
 <context>
+    <name>installer::PartitionNumberLimitationFrame</name>
+    <message>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="26"/>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
+        <source>Cannot create new partitions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="28"/>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="46"/>
+        <source>You need to delete a primary partition to create a new primary partition</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="31"/>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
+        <source>New logical partitions can only be created near existing logical partitions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="33"/>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="51"/>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>installer::PartitionTableWarningFrame</name>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="39"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="78"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="81"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="41"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="89"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="92"/>
         <source>It is detected that your motherboard boot loader is EFI and the disk format is MBR, thus the system can not be installed directly; to continue, please select one of the solutions below.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="45"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="98"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="101"/>
         <source>A. Disable UEFI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="47"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="101"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="104"/>
         <source>1.Reboot, enter BIOS, and disable UEFI
 2.Exit BIOS, and enter deepin installation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="49"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="105"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="108"/>
         <source>B.Format the disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="108"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="111"/>
         <source>1.Please make backup for all your data to avoid data loss
 2.Please double check if you have made backup for all the data, and reboot to enter this interface, Please double check if you have</source>
         <translation type="unfinished"></translation>
@@ -521,22 +543,28 @@
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="55"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="129"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="150"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="132"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="153"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="57"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="132"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="135"/>
         <source>1.Please make sure you have made backup for all the data, then continue
 2.Continue installation will format your disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="149"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
         <source>Reboot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="62"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
+        <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -822,20 +850,20 @@
 <context>
     <name>installer::SystemInfoTimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="112"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="141"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="108"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="137"/>
         <source>Select Time Zone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="113"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="142"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="109"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="138"/>
         <source>Mark your zone on the map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="114"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="144"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="140"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
