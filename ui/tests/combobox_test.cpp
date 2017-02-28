@@ -21,6 +21,8 @@ int main(int argc, char* argv[]) {
   frame.setAttribute(Qt::WA_TranslucentBackground, true);
   frame.show();
 
+  installer::WidgetTreeWalk(&box);
+
   QMenu menu;
   menu.addAction("Help");
   menu.addAction("About");
