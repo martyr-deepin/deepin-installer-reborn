@@ -9,12 +9,12 @@
 
 namespace installer {
 
-// Run a script file at |filepath|, no matter |filepath| is executable or not.
-// Current working directory is changed to folder of |filepath|.
-// Returns true if |filepath| executed and exited with 0.
-bool RunScriptFile(const QString& filepath);
+// Run a script file in bash, no matter it is executable or not.
 // First argument in |args| is the path to script file.
+// Current working directory is changed to folder of |args[0]|.
+// Returns true if |args[0]| executed and exited with 0.
 // |output| and |err| are content of stdout and stderr.
+bool RunScriptFile(const QStringList& args);
 bool RunScriptFile(const QStringList& args, QString& output, QString& err);
 
 // Run |cmd| with |args| in background and returns its result.
