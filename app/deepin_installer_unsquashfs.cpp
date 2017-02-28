@@ -144,9 +144,15 @@ bool CopyXAttr(const char* src_file, const char* dest_file) {
   char value[XATTR_NAME_MAX];
   ssize_t xlist_len = llistxattr(src_file, list, XATTR_LIST_MAX);
   if (xlist_len < 0) {
-    fprintf(stderr, "CopyXAttr() llistxattr() failed: %s\n", src_file);
-    perror("llistxattr() error");
-    ok = false;
+    // Check errno.
+    if (errno == ENOTSUP) {
+      // Target filesystem does not support extended attributes.
+      ok = true;
+    } else {
+      fprintf(stderr, "CopyXAttr() llistxattr() failed: %s\n", src_file);
+      perror("llistxattr() error");
+      ok = false;
+    }
   } else {
     ssize_t value_len;
     for (int ns = 0; ns < xlist_len; ns += strlen(&list[ns] + 1)) {
@@ -418,10 +424,16 @@ int main(int argc, char* argv[]) {
     fprintf(stderr, "Copy files failed!\n");
   }
 
-  if (!UnMountFs(mount_point)) {
-    fprintf(stderr, "Unmount %s failed\n",
-            mount_point.toLocal8Bit().constData());
-    exit(kExitErr);
+  // Commit filesystem caches to disk.
+//  sync();
+
+  for (int retry = 0; retry < 5; ++retry) {
+    if (!UnMountFs(mount_point)) {
+      fprintf(stderr, "Unmount %s failed\n",
+              mount_point.toLocal8Bit().constData());
+    } else {
+      break;
+    }
   }
 
   exit(ok ? kExitOk : kExitErr);
