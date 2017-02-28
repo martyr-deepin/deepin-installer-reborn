@@ -35,5 +35,4 @@ QComboBox QAbstractItemView::item {
   color: #ffffff;
   font-size: 10px;
   border: none;
-  box-shadow: none;
 }

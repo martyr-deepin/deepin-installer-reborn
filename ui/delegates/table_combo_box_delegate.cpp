@@ -69,14 +69,15 @@ void TableComboBoxDelegate::paint(QPainter* painter,
   painter->drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, text);
 
   // Draw bottom border of item without last one.
-  if (index.row() + 1 != index.model()->rowCount(index)) {
-    const QColor border_color(0, 0, 0, 20);
-    QPen border_pen(border_color);
-    border_pen.setWidth(kBorderBottom);
-    painter->setPen(border_pen);
-    const QLine border_line(option.rect.bottomLeft(), option.rect.bottomRight());
-    painter->drawLine(border_line);
-  }
+  // NOTE(xushaohua): Do not draw separator any more.
+//  if (index.row() + 1 != index.model()->rowCount(index)) {
+//    const QColor border_color(0, 0, 0, 20);
+//    QPen border_pen(border_color);
+//    border_pen.setWidth(kBorderBottom);
+//    painter->setPen(border_pen);
+//    const QLine border_line(option.rect.bottomLeft(), option.rect.bottomRight());
+//    painter->drawLine(border_line);
+//  }
 
   painter->restore();
 }
