@@ -46,7 +46,7 @@ extract_overlay_filesystem() {
 readonly PROGRESS_FILE="/dev/shm/unsquashfs_progress"
 readonly BASE_MODULE="${LIVE_FILESYSTEM}/filesystem.squashfs"
 deepin-installer-unsquashfs --dest /target --progress "${PROGRESS_FILE}" \
-  "${BASE_MODULE}" 1>/dev/null 2>&1 || \
+  "${BASE_MODULE}" 1>/dev/null || \
   error "installer-unsquashfs failed, ${BASE_MODULE}"
 
 # Then extract overlay_filesystem
