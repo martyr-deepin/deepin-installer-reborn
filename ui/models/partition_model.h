@@ -44,6 +44,9 @@ class PartitionModel : public QObject {
   // After that, emit deviceRefreshed() signal.
   void createPartitionTable(const QString& device_path);
 
+  // Do manual partitioning based on these |operations|.
+  void manualPart(const OperationList& operations);
+
   // Notifies partition manager to scan devices.
   void scanDevices();
 

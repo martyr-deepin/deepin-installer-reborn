@@ -6,6 +6,7 @@
 #define INSTALLER_UI_DELEGATES_ADVANCED_PARTITION_DELEGATE_H
 
 #include <QObject>
+#include <partman/operation.h>
 
 #include "partman/device.h"
 
@@ -20,15 +21,24 @@ class AdvancedPartitionDelegate : public QObject {
   const DeviceList& real_devices() const { return real_devices_; }
   const DeviceList& virtual_devices() const { return virtual_devices_; }
 
+  // Get alternative partition type. Used while creating a new partition.
+  // |partition| is an unallocated partition.
   bool canAddPrimary(const Partition& partition) const;
   bool canAddLogical(const Partition& partition) const;
 
+  // Get all supported fs type.
   FsTypeList getFsTypeList() const;
+
+  // Get all available mount points, defined in settings file.
   QStringList getMountPoints() const;
 
-  Partition getRealPartition(const Partition& partition) const;
+  // Get real partition on disk where |virtual_partition| is located.
+  Partition getRealPartition(const Partition& virtual_partition) const;
 
+  // Check whether device at |device_path| is appropriate for current system.
   bool isPartitionTableMatch(const QString& device_path) const;
+
+  const OperationList& operations() const { return operations_; };
 
  signals:
   void deviceRefreshed(const DeviceList& devices);
@@ -47,6 +57,7 @@ class AdvancedPartitionDelegate : public QObject {
 
   void refreshVisual();
 
+  // Set bootloader path to |path|.
   void setBootloaderPath(const QString& path);
 
   void unFormatPartition(const Partition& partition);
@@ -56,6 +67,11 @@ class AdvancedPartitionDelegate : public QObject {
  private:
   DeviceList real_devices_;
   DeviceList virtual_devices_;
+
+  QString bootloader_path_;
+
+  // Currently defined operations.
+  OperationList operations_;
 };
 
 }  // namespace installer

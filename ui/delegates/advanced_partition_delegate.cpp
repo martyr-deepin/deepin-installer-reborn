@@ -4,12 +4,25 @@
 
 #include "ui/delegates/advanced_partition_delegate.h"
 
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
+#include "ui/delegates/partition_util.h"
+
 namespace installer {
+
+namespace {
+
+// "unused" mount point.
+const char kMountPointUnused[] = "unused";
+
+}  // namespace
 
 AdvancedPartitionDelegate::AdvancedPartitionDelegate(QObject* parent)
     : QObject(parent),
       real_devices_(),
-      virtual_devices_() {
+      virtual_devices_(),
+      bootloader_path_(),
+      operations_() {
   this->setObjectName("advanced_partition_delegate");
 }
 
@@ -26,23 +39,56 @@ bool AdvancedPartitionDelegate::canAddLogical(
 }
 
 FsTypeList AdvancedPartitionDelegate::getFsTypeList() const {
-  return installer::FsTypeList();
+  FsTypeList fs_types;
+  if (fs_types.isEmpty()) {
+    const QString name = GetSettingsString(kPartitionSupportedFs);
+    Q_ASSERT(!name.isEmpty());
+    const QStringList fs_names = name.split(';');
+    for (const QString& fs_name : fs_names) {
+      FsType type = GetFsTypeByName(fs_name);
+      fs_types.append(type);
+    }
+  }
+  return fs_types;
 }
 
 QStringList AdvancedPartitionDelegate::getMountPoints() const {
-  return QStringList();
+  QStringList mount_points;
+  if (mount_points.isEmpty()) {
+    // Read available mount points.
+    mount_points = GetSettingsStringList(kPartitionMountPoints);
+
+    // Replace "unused" mount point with ""
+    for (QString& mount_point : mount_points) {
+      if (mount_point == kMountPointUnused) {
+        mount_point = "";
+      }
+    }
+  }
+  return mount_points;
 }
 
 Partition AdvancedPartitionDelegate::getRealPartition(
-    const Partition& partition) const {
-  Q_UNUSED(partition);
+    const Partition& virtual_partition) const {
+  const int index = DeviceIndex(real_devices_, virtual_partition.device_path);
+  if (index == -1) {
+    qWarning() << "failed to find device:" << virtual_partition.device_path;
+    return Partition();
+  }
+
+  for (const Partition& partition : real_devices_.at(index).partitions) {
+    if (partition == virtual_partition) {
+      return partition;
+    }
+  }
+
+  qWarning() << "Failed to find partition at:" << virtual_partition;
   return Partition();
 }
 
 bool AdvancedPartitionDelegate::isPartitionTableMatch(
     const QString& device_path) const {
-  Q_UNUSED(device_path);
-  return false;
+  return IsPartitionTableMatch(real_devices_, device_path);
 }
 
 void AdvancedPartitionDelegate::createPartition(const Partition& partition,
@@ -72,7 +118,7 @@ void AdvancedPartitionDelegate::refreshVisual() {
 }
 
 void AdvancedPartitionDelegate::setBootloaderPath(const QString& path) {
-  Q_UNUSED(path);
+  bootloader_path_ = path;
 }
 
 void AdvancedPartitionDelegate::unFormatPartition(const Partition& partition) {
