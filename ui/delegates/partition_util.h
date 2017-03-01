@@ -48,6 +48,10 @@ bool IsMountPointSupported(FsType fs_type);
 
 // Check whether partition table matches machine settings.
 bool IsPartitionTableMatch(PartitionTableType type);
+// Check whether partition table of device at |device_path| in |devices|
+// matches current machine state.
+bool IsPartitionTableMatch(const DeviceList& devices,
+                           const QString& device_path);
 
 // If physical memory is less than 4Gib, swap area is required.
 bool IsSwapAreaNeeded();

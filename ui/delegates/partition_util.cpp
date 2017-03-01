@@ -204,6 +204,17 @@ bool IsPartitionTableMatch(PartitionTableType type) {
   return type == PartitionTableType::GPT;
 }
 
+bool IsPartitionTableMatch(const DeviceList& devices,
+                           const QString& device_path) {
+  const int device_index = DeviceIndex(devices, device_path);
+  if (device_index == -1) {
+    qCritical() << "Failed to find device:" << device_path;
+    return false;
+  }
+  PartitionTableType table = devices.at(device_index).table;
+  return IsPartitionTableMatch(table);
+}
+
 bool IsSwapAreaNeeded() {
   const MemInfo mem_info = GetMemInfo();
   const qint64 mem_threshold =

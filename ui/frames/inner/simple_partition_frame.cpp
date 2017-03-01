@@ -229,7 +229,7 @@ void SimplePartitionFrame::appendOperations() {
 
 void SimplePartitionFrame::initConnections() {
   // Repaint layout only when real device list is updated.
-  connect(delegate_, &SimplePartitionDelegate::realDeviceRefreshed,
+  connect(delegate_, &SimplePartitionDelegate::deviceRefreshed,
           this, &SimplePartitionFrame::onDeviceRefreshed);
   connect(button_group_,
           static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>

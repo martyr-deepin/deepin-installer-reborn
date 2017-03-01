@@ -27,16 +27,29 @@ class PartitionModel : public QObject {
   ~PartitionModel();
 
  signals:
+  // Emitted when auto partitioning job is done.
   void autoPartDone(bool ok);
-  void deviceRefreshed();
+
+  // Emitted after scanning local disk devices.
+  void deviceRefreshed(const DeviceList& devices);
+
+  // Emitted when manual partitioning job is done.
   void manualPartDone(bool ok);
 
  public slots:
+  // Notify PartitionManager to do auto-part
   void autoPart();
+
+  // Create partition table at |device_path| to match current booting method.
+  // After that, emit deviceRefreshed() signal.
   void createPartitionTable(const QString& device_path);
+
+  // Notifies partition manager to scan devices.
   void scanDevices();
 
  private:
+  void initConnections();
+
   PartitionManager* partition_manager_ = nullptr;
   QThread* partition_thread_ = nullptr;
 };
