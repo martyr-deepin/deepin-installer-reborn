@@ -32,18 +32,9 @@ QString NewTableWarningFrame::devicePath() const {
 }
 
 void NewTableWarningFrame::setDevicePath(const QString& device_path,
-                                         const QString& disk_info) {
+                                         const QString& device_info) {
   device_path_ = device_path;
-//  const DeviceList& devices = delegate_->devices();
-//  const int device_index = DeviceIndex(devices, device_path);
-//  Q_ASSERT(device_index > -1);
-//  if (device_index == -1) {
-//    qCritical() << "Failed to find device at:" << device_path;
-//    return;
-//  }
-//  const Device& device = devices.at(device_index);
-//  disk_name_label_->setText(GetDeviceModelCapAndPath(device));
-  disk_name_label_->setText(disk_info);
+  disk_name_label_->setText(device_info);
 }
 
 void NewTableWarningFrame::changeEvent(QEvent* event) {

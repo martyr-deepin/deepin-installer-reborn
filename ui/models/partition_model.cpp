@@ -48,6 +48,10 @@ void PartitionModel::createPartitionTable(const QString& device_path) {
   }
 }
 
+void PartitionModel::manualPart(const OperationList& operations) {
+  emit partition_manager_->manualPart(operations);
+}
+
 void PartitionModel::scanDevices() {
   // If auto-part is not set, scan devices right now.
   if (!GetSettingsBool(kPartitionDoAutoPart)) {

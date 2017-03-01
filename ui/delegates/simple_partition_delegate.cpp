@@ -12,7 +12,8 @@ SimplePartitionDelegate::SimplePartitionDelegate(QObject* parent)
     : QObject(parent),
       real_devices_(),
       virtual_devices_(),
-      bootloader_path_() {
+      bootloader_path_(),
+      operations_() {
   this->setObjectName("simple_partition_delegate");
 }
 
@@ -32,7 +33,7 @@ bool SimplePartitionDelegate::isPartitionTableMatch(
 }
 
 void SimplePartitionDelegate::resetOperations() {
-
+  operations_.clear();
 }
 
 void SimplePartitionDelegate::createPartition(const Partition& partition,

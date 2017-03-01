@@ -14,6 +14,7 @@
 #include "service/settings_name.h"
 #include "ui/delegates/advanced_partition_delegate.h"
 #include "ui/delegates/simple_partition_delegate.h"
+#include "ui/delegates/partition_util.h"
 #include "ui/frames/consts.h"
 #include "ui/frames/inner/advanced_partition_frame.h"
 #include "ui/frames/inner/edit_partition_frame.h"
@@ -289,11 +290,22 @@ void PartitionFrame::onNextButtonClicked() {
 }
 
 void PartitionFrame::onPrepareInstallFrameFinished() {
-//  QWidget* current_widget = partition_stacked_layout_->currentWidget();
-//  const bool is_simple_page = (current_widget == simple_partition_frame_);
-//  delegate_->doManualPart(is_simple_page);
+  QWidget* current_widget = partition_stacked_layout_->currentWidget();
+  const bool is_simple_page = (current_widget == simple_partition_frame_);
+  OperationList operations;
+  if (is_simple_page) {
+    operations = simple_delegate_->operations();
+  } else {
+    operations = advanced_delegate_->operations();
+  }
 
-  emit this->finished();
+  if (operations.isEmpty()) {
+    qCritical() << "Operation list is empty, simple mode:" << is_simple_page;
+    return;
+  } else {
+    partition_model_->manualPart(operations);
+    emit this->finished();
+  }
 }
 
 void PartitionFrame::showEditPartitionFrame(const Partition& partition) {
@@ -316,8 +328,21 @@ void PartitionFrame::showNewTableLoadingFrame() {
 }
 
 void PartitionFrame::showNewTableWarningFrame(const QString& device_path) {
-  Q_UNUSED(device_path);
-//  new_table_warning_frame_->setDevicePath(device_path);
+  QWidget* current_widget = partition_stacked_layout_->currentWidget();
+  const bool is_simple_page = (current_widget == simple_partition_frame_);
+  const DeviceList& devices = is_simple_page ?
+                              simple_delegate_->real_devices() :
+                              advanced_delegate_->real_devices();
+  const int device_index = DeviceIndex(devices, device_path);
+  Q_ASSERT(device_index > -1);
+  if (device_index == -1) {
+    qCritical() << "Failed to find device at:" << device_path;
+    return;
+  }
+  const Device& device = devices.at(device_index);
+  const QString device_info = GetDeviceModelCapAndPath(device);
+
+  new_table_warning_frame_->setDevicePath(device_path, device_info);
   main_layout_->setCurrentWidget(new_table_warning_frame_);
 }
 

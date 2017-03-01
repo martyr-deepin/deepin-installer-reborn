@@ -23,7 +23,7 @@ class NewTableWarningFrame : public QFrame {
 
   // Set/get device_path_.
   QString devicePath() const;
-  void setDevicePath(const QString& device_path, const QString& disk_info);
+  void setDevicePath(const QString& device_path, const QString& device_info);
 
  signals:
   // Emitted when cancel_button_ is clicked.

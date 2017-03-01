@@ -6,6 +6,7 @@
 #define INSTALLER_UI_DELEGATES_SIMPLE_PARTITION_DELEGATE_H
 
 #include <QObject>
+#include <partman/operation.h>
 
 #include "partman/device.h"
 
@@ -32,6 +33,9 @@ class SimplePartitionDelegate : public QObject {
 
   // Check whether device at |device_path| is appropriate for current system.
   bool isPartitionTableMatch(const QString& device_path) const;
+
+  // Get current operation list.
+  const OperationList& operations() const { return operations_; }
 
  signals:
   void deviceRefreshed(const DeviceList& devices);
@@ -61,6 +65,8 @@ class SimplePartitionDelegate : public QObject {
   DeviceList virtual_devices_;
 
   QString bootloader_path_;
+
+  OperationList operations_;
 };
 
 }  // namespace installer
