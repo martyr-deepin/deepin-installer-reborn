@@ -23,8 +23,8 @@ class AdvancedPartitionDelegate : public QObject {
 
   // Get alternative partition type. Used while creating a new partition.
   // |partition| is an unallocated partition.
-  bool canAddPrimary(const Partition& partition) const;
   bool canAddLogical(const Partition& partition) const;
+  bool canAddPrimary(const Partition& partition) const;
 
   // Get all supported fs type.
   FsTypeList getFsTypeList() const;
