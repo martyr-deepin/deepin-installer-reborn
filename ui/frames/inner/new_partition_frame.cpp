@@ -13,7 +13,7 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "ui/frames/consts.h"
-#include "ui/delegates/partition_delegate.h"
+#include "ui/delegates/advanced_partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/models/fs_model.h"
 #include "ui/models/mount_point_model.h"
@@ -35,7 +35,7 @@ const int kContentSpacing = 15;
 
 }  // namespace
 
-NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
+NewPartitionFrame::NewPartitionFrame(AdvancedPartitionDelegate* delegate,
                                      QWidget* parent)
     : QFrame(parent),
       delegate_(delegate),
@@ -49,8 +49,8 @@ NewPartitionFrame::NewPartitionFrame(PartitionDelegate* delegate,
 void NewPartitionFrame::setPartition(const Partition& partition) {
   partition_ = partition;
 
-  const bool primary_ok = delegate_->canAddPrimary(partition, false);
-  const bool logical_ok = delegate_->canAddLogical(partition, false);
+  const bool primary_ok = delegate_->canAddPrimary(partition);
+  const bool logical_ok = delegate_->canAddLogical(partition);
   if (!primary_ok && !logical_ok) {
     qCritical() << "No more partition available!";
   }
@@ -138,13 +138,13 @@ void NewPartitionFrame::initUI() {
   fs_label_ = new QLabel(tr("Filesystem"));
   fs_label_->setObjectName("fs_label");
   fs_box_ = new TableComboBox();
-  fs_model_ = new FsModel(delegate_, fs_box_);
+  fs_model_ = new FsModel(delegate_->getFsTypeList(), fs_box_);
   fs_box_->setModel(fs_model_);
 
   mount_point_label_ = new QLabel(tr("Mount point"));
   mount_point_label_->setObjectName("mount_point_label");
   mount_point_box_ = new TableComboBox();
-  mount_point_model_ = new MountPointModel(delegate_->allMountPoints(),
+  mount_point_model_ = new MountPointModel(delegate_->getMountPoints(),
                                            mount_point_box_);
   mount_point_box_->setModel(mount_point_model_);
 

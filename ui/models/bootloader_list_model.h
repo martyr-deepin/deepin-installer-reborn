@@ -8,16 +8,16 @@
 #include <QAbstractListModel>
 #include <QStringList>
 
-namespace installer {
+#include "partman/device.h"
 
-class PartitionDelegate;
+namespace installer {
 
 // Reimplemented model used in SelectBootloaderFrame
 class BootloaderListModel : public QAbstractListModel {
   Q_OBJECT
 
  public:
-  BootloaderListModel(PartitionDelegate* delegate, QObject* parent = nullptr);
+  explicit BootloaderListModel(QObject* parent = nullptr);
 
   virtual QVariant data(const QModelIndex& index, int role) const override;
   virtual int rowCount(const QModelIndex& parent) const override;
@@ -32,9 +32,11 @@ class BootloaderListModel : public QAbstractListModel {
   // condition.
   void rowChanged();
 
- private:
-  PartitionDelegate* delegate_ = nullptr;
+ public slots:
+  // Update bootloader list when device list is updated in delegate.
+  void onDeviceRefreshed(const DeviceList& devices);
 
+ private:
   struct PartitionItem {
     PartitionItem(const QString& path, const QString& label, bool recommended)
         : path(path), label(label), recommended(recommended) {}
@@ -49,10 +51,6 @@ class BootloaderListModel : public QAbstractListModel {
 
   // To store path of available partitions and devices.
   QList<PartitionItem> bootloader_list_;
-
- private slots:
-  // Update bootloader list when device list is updated in delegate.
-  void onDeviceRefreshed();
 };
 
 }  // namespace installer

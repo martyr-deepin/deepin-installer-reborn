@@ -9,7 +9,6 @@
 #include <QVBoxLayout>
 
 #include "base/file_util.h"
-#include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
@@ -19,10 +18,8 @@
 
 namespace installer {
 
-NewTableWarningFrame::NewTableWarningFrame(PartitionDelegate* delegate,
-                                           QWidget* parent)
+NewTableWarningFrame::NewTableWarningFrame(QWidget* parent)
     : QFrame(parent),
-      delegate_(delegate),
       device_path_() {
   this->setObjectName("new_table_warning_frame");
 
@@ -34,17 +31,19 @@ QString NewTableWarningFrame::devicePath() const {
   return device_path_;
 }
 
-void NewTableWarningFrame::setDevicePath(const QString& device_path) {
+void NewTableWarningFrame::setDevicePath(const QString& device_path,
+                                         const QString& disk_info) {
   device_path_ = device_path;
-  const DeviceList& devices = delegate_->devices();
-  const int device_index = DeviceIndex(devices, device_path);
-  Q_ASSERT(device_index > -1);
-  if (device_index == -1) {
-    qCritical() << "Failed to find device at:" << device_path;
-    return;
-  }
-  const Device& device = devices.at(device_index);
-  disk_name_label_->setText(GetDeviceModelCapAndPath(device));
+//  const DeviceList& devices = delegate_->devices();
+//  const int device_index = DeviceIndex(devices, device_path);
+//  Q_ASSERT(device_index > -1);
+//  if (device_index == -1) {
+//    qCritical() << "Failed to find device at:" << device_path;
+//    return;
+//  }
+//  const Device& device = devices.at(device_index);
+//  disk_name_label_->setText(GetDeviceModelCapAndPath(device));
+  disk_name_label_->setText(disk_info);
 }
 
 void NewTableWarningFrame::changeEvent(QEvent* event) {

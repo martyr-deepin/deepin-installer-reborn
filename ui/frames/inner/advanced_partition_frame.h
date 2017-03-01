@@ -15,14 +15,14 @@ class QVBoxLayout;
 
 namespace installer {
 
-class PartitionDelegate;
+class AdvancedPartitionDelegate;
 
 // Advanced partition mode
 class AdvancedPartitionFrame : public QFrame {
   Q_OBJECT
 
  public:
-  AdvancedPartitionFrame(PartitionDelegate* delegate_,
+  AdvancedPartitionFrame(AdvancedPartitionDelegate* delegate_,
                          QWidget* parent = nullptr);
 
   // Check whether partition operations are appropriate:
@@ -58,7 +58,7 @@ class AdvancedPartitionFrame : public QFrame {
   void initUI();
   void repaintDevices();
 
-  PartitionDelegate* delegate_ = nullptr;
+  AdvancedPartitionDelegate* delegate_ = nullptr;
 
   QPushButton* bootloader_tip_button_ = nullptr;
   QButtonGroup* partition_button_group_ = nullptr;

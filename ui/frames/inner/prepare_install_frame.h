@@ -13,17 +13,16 @@ namespace installer {
 
 class CommentLabel;
 class NavButton;
-class PartitionDelegate;
 class TitleLabel;
 
 class PrepareInstallFrame : public QFrame {
   Q_OBJECT
 
  public:
-  PrepareInstallFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
+  explicit PrepareInstallFrame(QWidget* parent = nullptr);
 
   // Update descriptions of operations.
-  void updateDescription(bool simple_mode);
+  void updateDescription(const QStringList& descriptions);
 
  signals:
   // Emitted when abort-button is clicked, returning to previous page.
@@ -45,8 +44,6 @@ class PrepareInstallFrame : public QFrame {
   NavButton* abort_button_ = nullptr;
   NavButton* continue_button_ = nullptr;
   QTextEdit* description_edit_ = nullptr;
-
-  PartitionDelegate* delegate_ = nullptr;
 };
 
 }  // namespace installer

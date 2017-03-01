@@ -14,11 +14,11 @@ class QProgressBar;
 
 namespace installer {
 
+class AdvancedPartitionDelegate;
 class CommentLabel;
 class FsModel;
 class MountPointModel;
 class NavButton;
-class PartitionDelegate;
 class TableComboBox;
 class TitleLabel;
 
@@ -26,7 +26,8 @@ class EditPartitionFrame : public QFrame {
   Q_OBJECT
 
  public:
-  EditPartitionFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
+  EditPartitionFrame(AdvancedPartitionDelegate* delegate,
+                     QWidget* parent = nullptr);
 
   // Set partition information at |partition_path|.
   void setPartition(const Partition& partition);
@@ -62,7 +63,7 @@ class EditPartitionFrame : public QFrame {
   NavButton* cancel_button_ = nullptr;
   NavButton* ok_button_ = nullptr;
 
-  PartitionDelegate* delegate_ = nullptr;
+  AdvancedPartitionDelegate* delegate_ = nullptr;
   FsModel* fs_model_ = nullptr;
   MountPointModel* mount_point_model_ = nullptr;
   Partition partition_;

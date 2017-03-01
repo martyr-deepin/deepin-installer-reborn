@@ -11,13 +11,11 @@
 
 namespace installer {
 
-class PartitionDelegate;
-
 class FsModel : public QAbstractListModel {
   Q_OBJECT
 
  public:
-  FsModel(PartitionDelegate* delegate, QObject* parent = nullptr);
+  FsModel(const FsTypeList& fs_list, QObject* parent = nullptr);
 
   QVariant data(const QModelIndex& index, int role) const override;
   int rowCount(const QModelIndex& parent) const override;
@@ -29,7 +27,6 @@ class FsModel : public QAbstractListModel {
   FsType getFs(int index) const;
 
  private:
-  PartitionDelegate* delegate_ = nullptr;
   FsTypeList fs_list_;
 };
 

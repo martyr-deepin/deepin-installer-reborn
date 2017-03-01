@@ -17,7 +17,7 @@
 #include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
-#include "ui/delegates/partition_delegate.h"
+#include "ui/delegates/simple_partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/device_model_label.h"
 #include "ui/widgets/simple_partition_button.h"
@@ -38,7 +38,7 @@ FsType GetPartitionDefaultFs() {
 
 }  // namespace
 
-SimplePartitionFrame::SimplePartitionFrame(PartitionDelegate* delegate,
+SimplePartitionFrame::SimplePartitionFrame(SimplePartitionDelegate* delegate,
                                            QWidget* parent)
     : QFrame(parent),
       delegate_(delegate) {
@@ -62,7 +62,7 @@ bool SimplePartitionFrame::validate() {
   Partition root_partition;
 
   // Check whether linux-swap partition exists.
-  for (const Device& device : delegate_->simpleDevices()) {
+  for (const Device& device : delegate_->virtual_devices()) {
     for (const Partition& partition : device.partitions) {
       if (partition.fs == FsType::LinuxSwap) {
         swap_is_set = true;
@@ -93,8 +93,8 @@ bool SimplePartitionFrame::validate() {
   // button->partition() is a Freespace, it is impossible to created a new
   // primary partition.
   if ((root_partition.type == PartitionType::Unallocated) &&
-      !delegate_->canAddPrimary(root_partition, true) &&
-      !delegate_->canAddLogical(root_partition, true)) {
+      !delegate_->canAddPrimary(root_partition) &&
+      !delegate_->canAddLogical(root_partition)) {
     is_max_prims_reached = true;
   }
 
@@ -147,10 +147,10 @@ void SimplePartitionFrame::showEvent(QShowEvent* event) {
 
 void SimplePartitionFrame::appendOperations() {
   // Reset simple operations.
-  delegate_->resetSimpleOperations();
+  delegate_->resetOperations();
 
   bool efi_is_set = false;
-  for (const Device& device : delegate_->simpleDevices()) {
+  for (const Device& device : delegate_->virtual_devices()) {
     for (const Partition& partition : device.partitions) {
       if (partition.fs == FsType::EFI) {
         efi_is_set = true;
@@ -170,66 +170,66 @@ void SimplePartitionFrame::appendOperations() {
   if (IsEfiEnabled() && !efi_is_set) {
     if (partition.type == PartitionType::Normal) {
       // Delete normal partition first.
-      partition = delegate_->deleteSimplePartition(partition);
+      partition = delegate_->deletePartition(partition);
     }
 
     // Create root partition and EFI partition.
     const int efi_space = GetSettingsInt(kPartitionDefaultEFISpace);
     const qint64 efi_sectors = efi_space * kMebiByte / partition.sector_size;
     // Create EFI partition from start.
-    delegate_->createSimplePartition(partition,
-                                     PartitionType::Normal,
-                                     true,
-                                     FsType::EFI,
-                                     "",
-                                     efi_sectors);
+    delegate_->createPartition(partition,
+                               PartitionType::Normal,
+                               true,
+                               FsType::EFI,
+                               "",
+                               efi_sectors);
 
     // Create root partition from end.
     const qint64 remaining_sectors = partition.getSectorLength() - efi_sectors;
-    delegate_->createSimplePartition(partition,
-                                     PartitionType::Normal,
-                                     false,
-                                     GetPartitionDefaultFs(),
-                                     kMountPointRoot,
-                                     remaining_sectors);
+    delegate_->createPartition(partition,
+                               PartitionType::Normal,
+                               false,
+                               GetPartitionDefaultFs(),
+                               kMountPointRoot,
+                               remaining_sectors);
   } else {
     // Only create root partition.
     if (partition.type == PartitionType::Unallocated) {
       // First try to add primary partition, then logical partition.
-      if (delegate_->canAddPrimary(partition, true)) {
-        delegate_->createSimplePartition(partition,
-                                         PartitionType::Normal,
-                                         false,
-                                         GetPartitionDefaultFs(),
-                                         kMountPointRoot,
-                                         partition.getSectorLength());
-      } else if (delegate_->canAddLogical(partition, true)) {
-        delegate_->createSimplePartition(partition,
-                                         PartitionType::Logical,
-                                         false,
-                                         GetPartitionDefaultFs(),
-                                         kMountPointRoot,
-                                         partition.getSectorLength());
+      if (delegate_->canAddPrimary(partition)) {
+        delegate_->createPartition(partition,
+                                   PartitionType::Normal,
+                                   false,
+                                   GetPartitionDefaultFs(),
+                                   kMountPointRoot,
+                                   partition.getSectorLength());
+      } else if (delegate_->canAddLogical(partition)) {
+        delegate_->createPartition(partition,
+                                   PartitionType::Logical,
+                                   false,
+                                   GetPartitionDefaultFs(),
+                                   kMountPointRoot,
+                                   partition.getSectorLength());
       }  else {
         // We shall never reach here.
         qCritical() << "Reached maximum primary partitions:" << partition.path;
       }
     } else {
       // Format real partition.
-      delegate_->formatSimplePartition(button->partition(),
-                                       GetPartitionDefaultFs(),
-                                       kMountPointRoot);
+      delegate_->formatPartition(button->partition(),
+                                 GetPartitionDefaultFs(),
+                                 kMountPointRoot);
     }
   }
 
   // Update simple bootloader path.
   const QString bootloader_path = button->partition().device_path;
-  delegate_->setBootloaderPath(bootloader_path, true);
+  delegate_->setBootloaderPath(bootloader_path);
 }
 
 void SimplePartitionFrame::initConnections() {
   // Repaint layout only when real device list is updated.
-  connect(delegate_, &PartitionDelegate::realDeviceRefreshed,
+  connect(delegate_, &SimplePartitionDelegate::realDeviceRefreshed,
           this, &SimplePartitionFrame::onDeviceRefreshed);
   connect(button_group_,
           static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>
@@ -319,7 +319,7 @@ void SimplePartitionFrame::repaintDevices() {
   int row = 0, column = 0;
   const QString installer_device_path(GetInstallerDevicePath());
   qDebug() << "installer_device_path:" << installer_device_path;
-  for (const Device& device : delegate_->simpleDevices()) {
+  for (const Device& device : delegate_->virtual_devices()) {
     // Ignores installer device.
     if (installer_device_path.startsWith(device.path)) {
       qDebug() << "Ignore installer device:" << installer_device_path;

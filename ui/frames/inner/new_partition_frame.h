@@ -16,7 +16,7 @@ class CommentLabel;
 class FsModel;
 class MountPointModel;
 class NavButton;
-class PartitionDelegate;
+class AdvancedPartitionDelegate;
 class PartitionTypeModel;
 class PartitionSizeSlider;
 class TableComboBox;
@@ -26,7 +26,8 @@ class NewPartitionFrame : public QFrame {
   Q_OBJECT
 
  public:
-  NewPartitionFrame(PartitionDelegate* delegate_, QWidget* parent = nullptr);
+  NewPartitionFrame(AdvancedPartitionDelegate* delegate,
+                    QWidget* parent = nullptr);
 
   // Reset partition information at |partition_path|.
   void setPartition(const Partition& partition);
@@ -57,7 +58,7 @@ class NewPartitionFrame : public QFrame {
   NavButton* cancel_button_ = nullptr;
   NavButton* create_button_ = nullptr;
 
-  PartitionDelegate* delegate_ = nullptr;
+  AdvancedPartitionDelegate* delegate_ = nullptr;
   FsModel* fs_model_ = nullptr;
   MountPointModel* mount_point_model_ = nullptr;
   PartitionTypeModel* type_model_ = nullptr;

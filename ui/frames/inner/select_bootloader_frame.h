@@ -7,12 +7,13 @@
 
 #include <QFrame>
 
+#include "partman/device.h"
+
 namespace installer {
 
 class CommentLabel;
 class FramelessListView;
 class NavButton;
-class PartitionDelegate;
 class BootloaderListModel;
 class TitleLabel;
 
@@ -25,11 +26,13 @@ class SelectBootloaderFrame : public QFrame {
   Q_OBJECT
 
  public:
-  SelectBootloaderFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
+  explicit SelectBootloaderFrame(QWidget* parent = nullptr);
 
  signals:
   // Emitted when currently used bootloader path is updated.
   void bootloaderUpdated(const QString& bootloader_path, bool simple_mode);
+
+  void deviceRefreshed(const DeviceList& devices);
 
   // Emitted when back-button is clicked.
   void finished();
@@ -41,7 +44,6 @@ class SelectBootloaderFrame : public QFrame {
   void initConnections();
   void initUI();
 
-  PartitionDelegate* delegate_ = nullptr;
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
   FramelessListView* list_view_ = nullptr;

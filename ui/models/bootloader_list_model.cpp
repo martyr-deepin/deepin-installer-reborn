@@ -4,21 +4,14 @@
 
 #include "ui/models/bootloader_list_model.h"
 
-#include "partman/device.h"
-#include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 
 namespace installer {
 
-BootloaderListModel::BootloaderListModel(PartitionDelegate* delegate,
-                                       QObject* parent)
+BootloaderListModel::BootloaderListModel(QObject* parent)
     : QAbstractListModel(parent),
-      delegate_(delegate),
       bootloader_list_() {
   this->setObjectName("bootloader_list_model");
-
-  connect(delegate_, &PartitionDelegate::deviceRefreshed,
-          this, &BootloaderListModel::onDeviceRefreshed);
 }
 
 QVariant BootloaderListModel::data(const QModelIndex& index, int role) const {
@@ -62,14 +55,13 @@ QModelIndex BootloaderListModel::getRecommendedIndex() const {
   return QModelIndex();
 }
 
-void BootloaderListModel::onDeviceRefreshed() {
+void BootloaderListModel::onDeviceRefreshed(const DeviceList& devices) {
   this->beginResetModel();
 
   // Clear old bootloader list.
   bootloader_list_.clear();
 
   const QString installer_device_path(GetInstallerDevicePath());
-  const DeviceList& devices = delegate_->devices();
 
   QString boot_device;
   QString root_device;

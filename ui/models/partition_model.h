@@ -14,6 +14,8 @@ class QThread;
 
 namespace installer {
 
+class PartitionManager;
+
 // Communication with partman/PartitionManager.
 // Both SimplePartitionDelegate and AdvancedPartitionDelegate read real device
 // list and send operation list to this class.
@@ -22,8 +24,21 @@ class PartitionModel : public QObject {
 
  public:
   explicit PartitionModel(QObject* parent = nullptr);
+  ~PartitionModel();
 
  signals:
+  void autoPartDone(bool ok);
+  void deviceRefreshed();
+  void manualPartDone(bool ok);
+
+ public slots:
+  void autoPart();
+  void createPartitionTable(const QString& device_path);
+  void scanDevices();
+
+ private:
+  PartitionManager* partition_manager_ = nullptr;
+  QThread* partition_thread_ = nullptr;
 };
 
 }  // namespace installer
