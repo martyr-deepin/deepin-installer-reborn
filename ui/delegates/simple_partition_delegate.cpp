@@ -4,16 +4,15 @@
 
 #include "ui/delegates/simple_partition_delegate.h"
 
-#include "ui/models/partition_model.h"
+#include "ui/delegates/partition_util.h"
 
 namespace installer {
 
-SimplePartitionDelegate::SimplePartitionDelegate(PartitionModel* model,
-                                                 QObject* parent)
+SimplePartitionDelegate::SimplePartitionDelegate(QObject* parent)
     : QObject(parent),
-      model_(model),
       real_devices_(),
-      virtual_devices_() {
+      virtual_devices_(),
+      bootloader_path_() {
   this->setObjectName("simple_partition_delegate");
 }
 
@@ -29,8 +28,7 @@ bool SimplePartitionDelegate::canAddPrimary(const Partition& partition) const {
 
 bool SimplePartitionDelegate::isPartitionTableMatch(
     const QString& device_path) const {
-  Q_UNUSED(device_path);
-  return false;
+  return IsPartitionTableMatch(real_devices_, device_path);
 }
 
 void SimplePartitionDelegate::resetOperations() {
@@ -64,8 +62,13 @@ void SimplePartitionDelegate::formatPartition(const Partition& partition,
   Q_UNUSED(mount_point);
 }
 
+void SimplePartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
+  real_devices_ = devices;
+  // TODO(xushaohua): Update virtual device list.
+}
+
 void SimplePartitionDelegate::setBootloaderPath(const QString& path) {
-  Q_UNUSED(path);
+  bootloader_path_ = path;
 }
 
 }  // namespace installer

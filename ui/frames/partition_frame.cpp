@@ -34,12 +34,11 @@
 namespace installer {
 
 PartitionFrame::PartitionFrame(QWidget* parent)
-    : QFrame(parent) {
+    : QFrame(parent),
+      partition_model_(new PartitionModel(this)),
+      advanced_delegate_(new AdvancedPartitionDelegate(this)),
+      simple_delegate_(new SimplePartitionDelegate(this)) {
   this->setObjectName("partition_frame");
-
-  partition_model_ = new PartitionModel(this);
-  advanced_delegate_ = new AdvancedPartitionDelegate(partition_model_, this);
-  simple_delegate_ = new SimplePartitionDelegate(partition_model_, this);
 
   this->initUI();
   this->initConnections();
@@ -136,6 +135,9 @@ void PartitionFrame::initConnections() {
           this, &PartitionFrame::showMainFrame);
   connect(advanced_delegate_, &AdvancedPartitionDelegate::deviceRefreshed,
           select_bootloader_frame_, &SelectBootloaderFrame::deviceRefreshed);
+
+  connect(partition_model_, &PartitionModel::deviceRefreshed,
+          simple_delegate_, &SimplePartitionDelegate::onDeviceRefreshed);
 
   connect(simple_partition_frame_, &SimplePartitionFrame::requestNewTable,
           this, &PartitionFrame::showPartitionTableWarningFrame);

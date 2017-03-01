@@ -11,26 +11,30 @@
 
 namespace installer {
 
-class PartitionModel;
-
 // Partition delegate used in SimplePartitionFrame.
 class SimplePartitionDelegate : public QObject {
   Q_OBJECT
  public:
   // Note that this objects of this class does not take ownership of model.
   // Nor does it handle life time of model.
-  SimplePartitionDelegate(PartitionModel* model, QObject* parent = nullptr);
+  explicit SimplePartitionDelegate(QObject* parent = nullptr);
 
+  // Get physical device list.
   const DeviceList& real_devices() const { return real_devices_; }
+
+  // Get virtual device list.
   const DeviceList& virtual_devices() const { return virtual_devices_; }
 
+  // Get alternative partition type. Used while creating a new partition.
+  // |partition| is an unallocated partition.
   bool canAddLogical(const Partition& partition) const;
   bool canAddPrimary(const Partition& partition) const;
 
+  // Check whether device at |device_path| is appropriate for current system.
   bool isPartitionTableMatch(const QString& device_path) const;
 
  signals:
-  void realDeviceRefreshed();
+  void deviceRefreshed(const DeviceList& devices);
 
  public slots:
   void resetOperations();
@@ -46,12 +50,17 @@ class SimplePartitionDelegate : public QObject {
                        FsType fs_type,
                        const QString& mount_point);
 
+  // Save real device list when it is refreshed.
+  void onDeviceRefreshed(const DeviceList& devices);
+
+  // Update bootloader settings to |path|.
   void setBootloaderPath(const QString& path);
 
  private:
-  PartitionModel* model_ = nullptr;
   DeviceList real_devices_;
   DeviceList virtual_devices_;
+
+  QString bootloader_path_;
 };
 
 }  // namespace installer

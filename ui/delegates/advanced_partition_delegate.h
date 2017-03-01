@@ -11,13 +11,11 @@
 
 namespace installer {
 
-class PartitionModel;
-
 // Partition delegate used in AdvancedPartitionFrame and other sub frame pages.
 class AdvancedPartitionDelegate : public QObject {
   Q_OBJECT
  public:
-  AdvancedPartitionDelegate(PartitionModel* model, QObject* parent = nullptr);
+  explicit AdvancedPartitionDelegate(QObject* parent = nullptr);
 
   const DeviceList& real_devices() const { return real_devices_; }
   const DeviceList& virtual_devices() const { return virtual_devices_; }
@@ -56,7 +54,6 @@ class AdvancedPartitionDelegate : public QObject {
   void updateMountPoint(const Partition& partition, const QString& mount_point);
 
  private:
-  PartitionModel* model_ = nullptr;
   DeviceList real_devices_;
   DeviceList virtual_devices_;
 };

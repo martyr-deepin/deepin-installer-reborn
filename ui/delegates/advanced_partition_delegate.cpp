@@ -4,14 +4,10 @@
 
 #include "ui/delegates/advanced_partition_delegate.h"
 
-#include "ui/models/partition_model.h"
-
 namespace installer {
 
-AdvancedPartitionDelegate::AdvancedPartitionDelegate(PartitionModel* model,
-                                                     QObject* parent)
+AdvancedPartitionDelegate::AdvancedPartitionDelegate(QObject* parent)
     : QObject(parent),
-      model_(model),
       real_devices_(),
       virtual_devices_() {
   this->setObjectName("advanced_partition_delegate");
