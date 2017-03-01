@@ -38,25 +38,24 @@ void PartitionTableWarningFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Warning"));
     comment_label_->setText(
-        tr("It is detected that your motherboard boot loader "
-           "is EFI and the disk format is MBR, thus the system can not be "
-           "installed directly; to continue, please select one of "
-           "the solutions below."));
-    list_title1_->setText(tr("A. Disable UEFI"));
+        tr("Unable to install directly due to EFI motherboard boot loader "
+           "and MBR disk detected, please select one of the solutions below "
+           "to continue."));
     list_item1_->setText(
-        tr("1.Reboot, enter BIOS, and disable UEFI\n"
-           "2.Exit BIOS, and enter deepin installation"));
-    list_title2_->setText(tr("B.Format the disk"));
+        QString("1.%1\n2.%2")
+            .arg(tr("Reboot, enter BIOS, and disable UEFI"))
+            .arg(tr("Exit BIOS, and enter deepin to install")));
     list_item2_->setText(
-        tr("1.Please make backup for all your data to avoid data loss\n"
-           "2.Please double check if you have made backup for all the data, "
-           "and reboot to enter this interface, Please double check if "
-           "you have"));
+        QString("1.%1\n2.%2")
+            .arg(tr("Please back up all your data to avoid data loss"))
+            .arg(tr("Please double check if you have backed up all the data, "
+                    "and reboot to enter this interface")));
     list_title3_->setText(tr("Continue"));
     list_item3_->setText(
-        tr("1.Please make sure you have made backup for all the data, then "
-           "continue\n"
-           "2.Continue installation will format your disk"));
+        QString("1.%1\n2.%2")
+            .arg(tr("Please make sure you have backed up all the data, "
+                    "then continue"))
+            .arg(tr("Continue installation will format your disk")));
     reject_button_->setText(tr("Reboot"));
     accept_button_->setText(tr("Continue"));
     cancel_button_->setText(tr("Back"));
@@ -89,28 +88,30 @@ void PartitionTableWarningFrame::initUI() {
   title_layout->addStretch();
 
   comment_label_ = new CommentLabel(
-      tr("It is detected that your motherboard boot loader "
-         "is EFI and the disk format is MBR, thus the system can not be "
-         "installed directly; to continue, please select one of "
-         "the solutions below."));
+      tr("Unable to install directly due to EFI motherboard boot loader "
+         "and MBR disk detected, please select one of the solutions below "
+         "to continue."));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
   comment_layout->addWidget(comment_label_);
 
-  list_title1_ = new QLabel(tr("A. Disable UEFI"), this);
+  list_title1_ = new QLabel(QString("A.%1").arg(tr("Disable UEFI")), this);
   list_title1_->setObjectName("list_title1");
   list_item1_ = new QLabel(
-      tr("1.Reboot, enter BIOS, and disable UEFI\n"
-         "2.Exit BIOS, and enter deepin installation"), this);
+      QString("1.%1\n2.%2")
+          .arg(tr("Reboot, enter BIOS, and disable UEFI"))
+          .arg(tr("Exit BIOS, and enter deepin to install")),
+      this);
   list_item1_->setObjectName("list_item1");
   list_item1_->setWordWrap(true);
-  list_title2_ = new QLabel(tr("B.Format the disk"), this);
+  list_title2_ = new QLabel(QString("B.%1").arg(tr("Format the disk")), this);
   list_title2_->setObjectName("list_title2");
   list_item2_ = new QLabel(
-      tr("1.Please make backup for all your data to avoid data loss\n"
-         "2.Please double check if you have made backup for all the data, "
-         "and reboot to enter this interface, Please double check if you have"),
+      QString("1.%1\n2.%2")
+          .arg(tr("Please back up all your data to avoid data loss"))
+          .arg(tr("Please double check if you have backed up all the data, "
+               "and reboot to enter this interface")),
       this);
   list_item2_->setObjectName("list_item2");
   list_item2_->setWordWrap(true);
@@ -132,9 +133,10 @@ void PartitionTableWarningFrame::initUI() {
   list_title3_ = new QLabel(tr("Continue"), this);
   list_title3_->setObjectName("list_title3");
   list_item3_ = new QLabel(
-      tr("1.Please make sure you have made backup for all the data, then "
-         "continue\n"
-         "2.Continue installation will format your disk"),
+      QString("1.%1\n2.%2")
+          .arg(tr("Please make sure you have backed up all the data, "
+                  "then continue"))
+          .arg(tr("Continue installation will format your disk")),
       this);
   list_item3_->setObjectName("list_item3");
   list_item3_->setWordWrap(true);

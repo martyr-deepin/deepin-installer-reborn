@@ -91,7 +91,7 @@ void AdvancedPartitionButton::initUI() {
     tip_label->setText(tr("Install here"));
   } else if (partition_.status == PartitionStatus::Format ||
              partition_.status == PartitionStatus::New) {
-    tip_label->setText(tr("Format"));
+    tip_label->setText(tr("To be formatted"));
   }
 
   // filesystem name

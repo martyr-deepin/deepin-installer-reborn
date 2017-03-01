@@ -53,15 +53,15 @@ QString GetInstallerDevicePath() {
 QString GetLocalFsTypeName(FsType fs_type) {
   switch (fs_type) {
     case FsType::Btrfs: return "btrfs";
-    case FsType::EFI: return QObject::tr("efi");
-    case FsType::Empty: return QObject::tr("do not use this partition");
+    case FsType::EFI: return "efi";
+    case FsType::Empty: return QObject::tr("Do not use this partition");
     case FsType::Ext2: return "ext2";
     case FsType::Ext3: return "ext3";
     case FsType::Ext4: return "ext4";
     case FsType::Fat16: return "fat16";
     case FsType::Fat32: return "fat32";
     case FsType::Jfs: return "jfs";
-    case FsType::LinuxSwap: return QObject::tr("swap area");
+    case FsType::LinuxSwap: return QObject::tr("Swap partition");
     case FsType::Xfs: return "xfs";
     default: return QObject::tr("Unknown");
   }

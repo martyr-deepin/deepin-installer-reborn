@@ -23,7 +23,7 @@ QVariant MountPointModel::data(const QModelIndex& index, int role) const {
   if (index.isValid()) {
     const QString name = mount_points_.at(index.row());
     if (name.isEmpty()) {
-      return tr("do not use");
+      return tr("Do not use");
     } else {
       return name;
     }

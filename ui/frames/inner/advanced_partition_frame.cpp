@@ -99,7 +99,7 @@ bool AdvancedPartitionFrame::validate() {
   }
 
   if (!root_is_set) {
-    addErrorMessage(tr("A root partition is required"),
+    addErrorMessage(tr("Add a Root partition to continue"),
                     ErrorMessageType::RootMissing);
   }
 
@@ -109,14 +109,14 @@ bool AdvancedPartitionFrame::validate() {
 
   // Check root size only if root is set.
   if (root_is_set && !root_large_enough) {
-    addErrorMessage(tr("At least %1 GB is required for root partition")
+    addErrorMessage(tr("At least %1 GB is required for Root partition")
                         .arg(root_required),
                     ErrorMessageType::RootTooSmall);
   }
 
   if (IsEfiEnabled()) {
     if (!efi_is_set) {
-      addErrorMessage(tr("An EFI partition is required"),
+      addErrorMessage(tr("Add an EFI partition to continue"),
                       ErrorMessageType::EfiMissing);
     }
     if (!efi_large_enough) {
@@ -149,7 +149,7 @@ void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
 
 void AdvancedPartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    bootloader_tip_button_->setText(tr("Select location for boot loader"));
+    bootloader_tip_button_->setText(tr("Change boot loader"));
     if (editing_button_->isChecked()) {
       editing_button_->setText(tr("Done"));
     } else {
@@ -238,8 +238,7 @@ void AdvancedPartitionFrame::initUI() {
   scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-  bootloader_tip_button_ = new PointerButton(
-      tr("Select location for boot loader"), this);
+  bootloader_tip_button_ = new PointerButton(tr("Change boot loader"), this);
   bootloader_tip_button_->setObjectName("bootloader_tip_button");
   bootloader_tip_button_->setFlat(true);
   bootloader_button_ = new PointerButton(this);
@@ -361,12 +360,12 @@ void AdvancedPartitionFrame::addErrorMessage(
   // NOTE(xushaohua): Transifex does not ts plural format.
   if (err_count <= 1) {
       msg_head_label_->setText(
-          tr("Found %1 error, fix the error to continue install "
-             "or switch to simple mode").arg(err_count));
+          tr("%1 error found, fix to continue installation or "
+             "switch to simple mode").arg(err_count));
   } else {
     msg_head_label_->setText(
-        tr("Found %1 errors, fix the errors to continue install "
-           "or switch to simple mode").arg(err_count));
+        tr("%1 errors found, fix to continue installation or "
+           "switch to simple mode").arg(err_count));
   }
 
   // Show msg container if it is invisible.

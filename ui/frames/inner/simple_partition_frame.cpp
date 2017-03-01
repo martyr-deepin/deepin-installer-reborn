@@ -85,7 +85,7 @@ bool SimplePartitionFrame::validate() {
   }
 
   if (!root_is_set) {
-    msg_label_->setText(tr("Please select one partition"));
+    msg_label_->setText(tr("Please select one of the partitions to install!"));
     return false;
   }
 
@@ -99,7 +99,8 @@ bool SimplePartitionFrame::validate() {
   }
 
   if (is_max_prims_reached) {
-    msg_label_->setText(tr("No more partition can be created"));
+    msg_label_->setText(tr("Unable to create new partition, please "
+                           "select one of the existing partitions!"));
     return false;
   }
 

@@ -54,7 +54,7 @@ void SystemInfoFormFrame::changeEvent(QEvent* event) {
     username_edit_->setPlaceholderText(tr("Username"));
     hostname_edit_->setPlaceholderText(tr("Computer name"));
     password_edit_->setPlaceholderText(tr("Password"));
-    password2_edit_->setPlaceholderText(tr("Reenter password"));
+    password2_edit_->setPlaceholderText(tr("Confirm password"));
     next_button_->setText(tr("Next"));
   } else {
     QFrame::changeEvent(event);
@@ -135,7 +135,7 @@ void SystemInfoFormFrame::initUI() {
   password_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockPassword));
 
   password2_edit_ = new LineEdit(":/images/password_12.png");
-  password2_edit_->setPlaceholderText(tr("Reenter password"));
+  password2_edit_->setPlaceholderText(tr("Confirm password"));
   password2_edit_->setEchoMode(QLineEdit::Password);
   password2_edit_->setText(password_edit_->text());
   password2_edit_->setReadOnly(password_edit_->isReadOnly());
@@ -166,33 +166,30 @@ void SystemInfoFormFrame::initUI() {
 }
 
 bool SystemInfoFormFrame::validateUsername(QString& msg) {
-  const ValidateUsernameState state =
-      ValidateUsername(username_edit_->text(),
-                       GetSettingsInt(kSystemInfoUsernameMinLen),
-                       GetSettingsInt(kSystemInfoUsernameMaxLen));
+  const int min_len = GetSettingsInt(kSystemInfoUsernameMinLen);
+  const int max_len = GetSettingsInt(kSystemInfoUsernameMaxLen);
+  const ValidateUsernameState state = ValidateUsername(username_edit_->text(),
+                                                       min_len,
+                                                       max_len);
   switch (state) {
     case ValidateUsernameState::ReservedError: {
-      msg = tr("This username is already in use");
-      return false;
-    }
-    case ValidateUsernameState::EmptyError: {
-      msg = tr("Username can no be empty");
+      msg = tr("This username already exists");
       return false;
     }
     case ValidateUsernameState::FirstCharError: {
-      msg = tr("The first character must be in lower case");
+      msg = tr("The first letter must be in lowercase");
       return false;
     }
+    case ValidateUsernameState::EmptyError:  // fall through
     case ValidateUsernameState::InvalidCharError: {
-      msg = tr("username must comprise a~z, 0~9, - or _");
+      msg = tr("Username must contains English letters (case-sensitive), "
+               "numbers or special symbols(_-)");
       return false;
     }
-    case ValidateUsernameState::TooLongError: {
-      msg = tr("Username is too long");
-      return false;
-    }
+    case ValidateUsernameState::TooLongError:  // fall through
     case ValidateUsernameState::TooShortError: {
-      msg = tr("Username is too short");
+      msg = tr("Please input username longer than %1 characters and "
+               "shorter than %2 characters").arg(min_len).arg(max_len);
       return false;
     }
     case ValidateUsernameState::Ok: {
@@ -204,14 +201,17 @@ bool SystemInfoFormFrame::validateUsername(QString& msg) {
 }
 
 bool SystemInfoFormFrame::validateHostname(QString& msg) {
-  const ValidateHostnameState state =
-      ValidateHostname(hostname_edit_->text(),
-                       GetSettingsInt(kSystemInfoHostnameMinLen),
-                       GetSettingsInt(kSystemInfoHostnameMaxLen),
-                       GetSettingsStringList(kSystemInfoHostnameReserved));
+  const int min_len = GetSettingsInt(kSystemInfoHostnameMinLen);
+  const int max_len = GetSettingsInt(kSystemInfoHostnameMaxLen);
+  const QStringList reserved =
+      GetSettingsStringList(kSystemInfoHostnameReserved);
+  const ValidateHostnameState state = ValidateHostname(hostname_edit_->text(),
+                                                       min_len,
+                                                       max_len,
+                                                       reserved);
   switch (state) {
     case ValidateHostnameState::EmptyError: {
-      msg = tr("Computer name is empty");
+      msg = tr("Please input computer name");
       return false;
     }
     case ValidateHostnameState::InvalidChar: {
@@ -219,15 +219,13 @@ bool SystemInfoFormFrame::validateHostname(QString& msg) {
       return false;
     }
     case ValidateHostnameState::ReservedError: {
-      msg = tr("Computer name is reserved");
+      msg = tr("Computer name already exists, please input another one");
       return false;
     }
-    case ValidateHostnameState::TooLongError: {
-      msg = tr("Computer name is too long");
-      return false;
-    }
+    case ValidateHostnameState::TooLongError:  // fall through
     case ValidateHostnameState::TooShortError: {
-      msg = tr("Computer name is too short");
+      msg = tr("Please input computer name longer than %1 characters and "
+               "shorter than %2 characters").arg(min_len).arg(max_len);
       return false;
     }
     case ValidateHostnameState::Ok: {
@@ -239,10 +237,10 @@ bool SystemInfoFormFrame::validateHostname(QString& msg) {
 }
 
 bool SystemInfoFormFrame::validatePassword(QString& msg) {
+  const int min_len = GetSettingsInt(kSystemInfoPasswordMinLen);
+  const int max_len = GetSettingsInt(kSystemInfoPasswordMaxLen);
   const ValidatePasswordState state =
-      ValidatePassword(password_edit_->text(),
-                       GetSettingsInt(kSystemInfoPasswordMinLen),
-                       GetSettingsInt(kSystemInfoPasswordMaxLen),
+      ValidatePassword(password_edit_->text(), min_len, max_len,
                        GetSettingsBool(kSystemInfoPasswordRequireNumber),
                        GetSettingsBool(kSystemInfoPasswordRequireLowerCase),
                        GetSettingsBool(kSystemInfoPasswordRequireUpperCase),
@@ -250,31 +248,22 @@ bool SystemInfoFormFrame::validatePassword(QString& msg) {
 
   switch (state) {
     case ValidatePasswordState::EmptyError: {
-      msg = tr("Password is empty");
+      msg = tr("Please input password longer than %1 characters and "
+               "shorter than %2 characters").arg(max_len).arg(max_len);
       return false;
     }
-    case ValidatePasswordState::NoLowerCharError: {
-      msg = tr("Password does not contain lower case character");
-      return false;
-    }
-    case ValidatePasswordState::NoUpperCharError: {
-      msg = tr("Password does not contain upper case character");
-      return false;
-    }
-    case ValidatePasswordState::NoNumberError: {
-      msg = tr("Password does not contain number");
-      return false;
-    }
+    case ValidatePasswordState::NoLowerCharError:  // fall through
+    case ValidatePasswordState::NoUpperCharError:  // fall through
+    case ValidatePasswordState::NoNumberError:  // fall through
     case ValidatePasswordState::NoSpecialCharError: {
-      msg = tr("Password does not contain special characters");
+      msg = tr("The password must contain English letters (case-sensitive), "
+               "numbers or special symbols (~!@#$%^&*()[]{}\\|/?,.<>)");
       return false;
     }
-    case ValidatePasswordState::TooShortError: {
-      msg = tr("Password too short");
-      return false;
-    }
+    case ValidatePasswordState::TooShortError: // fall through
     case ValidatePasswordState::TooLongError: {
-      msg = tr("Password too long");
+      msg = tr("Please input password longer than %1 characters and "
+               "shorter than %2 characters").arg(max_len).arg(max_len);
       return false;
     }
     case ValidatePasswordState::Ok: {
@@ -287,7 +276,7 @@ bool SystemInfoFormFrame::validatePassword(QString& msg) {
 
 bool SystemInfoFormFrame::validatePassword2(QString& msg) {
   if (password_edit_->text() != password2_edit_->text()) {
-    msg = tr("Password not match");
+    msg = tr("The two passwords don't match");
     return false;
   } else {
     return true;

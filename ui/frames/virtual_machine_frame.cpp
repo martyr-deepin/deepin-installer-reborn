@@ -26,10 +26,10 @@ void VirtualMachineFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Friendly Reminder"));
     comment_label_->setText(
-        tr("System has detected that you are using "
-           "a virtual machine, which will affect the system performance and "
-           "operation experience, for a smooth experience, it is recommended "
-           "to install deepin in real-machine environment"));
+        tr("System has detected that you are using a virtual machine, "
+           "which will affect the system performance and operation experience, "
+           "for a smooth experience, it is recommended to install deepin "
+           "in real-machine environment"));
     next_button_->setText(tr("Continue"));
   } else {
     QFrame::changeEvent(event);
@@ -44,10 +44,10 @@ void VirtualMachineFrame::initConnections() {
 void VirtualMachineFrame::initUI() {
   title_label_ = new TitleLabel(tr("Friendly Reminder"));
   comment_label_ = new CommentLabel(
-      tr("System has detected that you are using "
-         "a virtual machine, which will affect the system performance and "
-         "operation experience, for a smooth experience, it is recommended "
-         "to install deepin in real-machine environment"));
+      tr("System has detected that you are using a virtual machine, "
+         "which will affect the system performance and operation experience, "
+         "for a smooth experience, it is recommended to install deepin "
+         "in real-machine environment"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
