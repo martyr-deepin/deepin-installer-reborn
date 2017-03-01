@@ -26,16 +26,89 @@ AdvancedPartitionDelegate::AdvancedPartitionDelegate(QObject* parent)
   this->setObjectName("advanced_partition_delegate");
 }
 
-bool AdvancedPartitionDelegate::canAddPrimary(
-    const Partition& partition) const {
-  Q_UNUSED(partition);
-  return false;
-}
-
 bool AdvancedPartitionDelegate::canAddLogical(
     const Partition& partition) const {
-  Q_UNUSED(partition);
-  return false;
+  const int index = DeviceIndex(virtual_devices_, partition.device_path);
+  if (index == -1) {
+    qCritical() << "getSupportedPartitionType() no device found at:"
+                << partition.device_path;
+    return false;
+  }
+  const Device& device = virtual_devices_.at(index);
+
+  // Ignores gpt table.
+  if (device.table != PartitionTableType::MsDos) {
+    return false;
+  }
+
+  bool logical_ok = true;
+  const int ext_index = ExtendedPartitionIndex(device.partitions);
+  if (ext_index == -1) {
+    // No extended partition found, so check a new primary partition is
+    // available or not.
+    if (GetPrimaryPartitions(device.partitions).length() >= device.max_prims) {
+      logical_ok = false;
+    }
+  } else {
+    // Check whether there is primary partition between |partition| and
+    // extended partition.
+    const Partition ext_partition = device.partitions.at(ext_index);
+    const PartitionList prim_partitions = GetPrimaryPartitions(
+        device.partitions);
+    if (partition.end_sector < ext_partition.start_sector) {
+      for (const Partition& prim_partition : prim_partitions) {
+        if (prim_partition.end_sector > partition.start_sector &&
+            prim_partition.start_sector < ext_partition.start_sector) {
+          logical_ok = false;
+        }
+      }
+    } else if (partition.start_sector > ext_partition.end_sector) {
+      for (const Partition& prim_partition : prim_partitions) {
+        if (prim_partition.end_sector < partition.start_sector &&
+            prim_partition.start_sector > ext_partition.end_sector) {
+          logical_ok =false;
+        }
+      }
+    }
+  }
+  return logical_ok;
+}
+
+bool AdvancedPartitionDelegate::canAddPrimary(
+    const Partition& partition) const {
+  const int index = DeviceIndex(virtual_devices_, partition.device_path);
+  if (index == -1) {
+    qCritical() << "getSupportedPartitionType() no device found at:"
+                << partition.device_path;
+    return false;
+  }
+  const Device& device = virtual_devices_.at(index);
+  const PartitionList prim_partitions = GetPrimaryPartitions(device.partitions);
+  const PartitionList logical_partitions =
+      GetLogicalPartitions(device.partitions);
+
+  // Check primary type
+  bool primary_ok = true;
+  if (prim_partitions.length() >= device.max_prims) {
+    primary_ok = false;
+  } else {
+    // Check whether |partition| is between two logical partitions.
+    bool has_logical_before = false;
+    bool has_logical_after = false;
+    for (const Partition& logical_partition : logical_partitions) {
+      if (logical_partition.start_sector < partition.start_sector) {
+        has_logical_before = true;
+      }
+      if (logical_partition.end_sector > partition.end_sector) {
+        has_logical_after = true;
+      }
+    }
+    if (has_logical_after && has_logical_before) {
+      primary_ok = false;
+    }
+  }
+
+  return primary_ok;
 }
 
 FsTypeList AdvancedPartitionDelegate::getFsTypeList() const {
