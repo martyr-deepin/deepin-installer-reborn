@@ -191,6 +191,8 @@ set(SYSINFO_FILES
 
 set(UI_FILES
 
+    ui/delegates/advanced_partition_delegate.cpp
+    ui/delegates/advanced_partition_delegate.h
     ui/delegates/args_parser.cpp
     ui/delegates/args_parser.h
     ui/delegates/avatar_list_delegate.cpp
@@ -209,6 +211,8 @@ set(UI_FILES
     ui/delegates/partition_util.h
     ui/delegates/popup_menu_delegate.cpp
     ui/delegates/popup_menu_delegate.h
+    ui/delegates/simple_partition_delegate.cpp
+    ui/delegates/simple_partition_delegate.h
     ui/delegates/table_combo_box_delegate.cpp
     ui/delegates/table_combo_box_delegate.h
     ui/delegates/timezone_map_util.cpp
@@ -285,6 +289,8 @@ set(UI_FILES
     ui/models/language_list_model.h
     ui/models/mount_point_model.cpp
     ui/models/mount_point_model.h
+    ui/models/partition_model.cpp
+    ui/models/partition_model.h
     ui/models/partition_type_model.cpp
     ui/models/partition_type_model.h
 
