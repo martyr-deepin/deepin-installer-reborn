@@ -4,24 +4,19 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="107"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="128"/>
-        <source>Freespace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="56"/>
-        <source>efi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/delegates/partition_util.cpp" line="57"/>
-        <source>do not use this partition</source>
+        <source>Do not use this partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="64"/>
-        <source>swap area</source>
+        <source>Swap partition</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/delegates/partition_util.cpp" line="107"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="128"/>
+        <source>Freespace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -41,37 +36,37 @@
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="166"/>
-        <source>Create partition %1 with %2</source>
+        <source>Create new partition %1, type is %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="170"/>
-        <source>Create partition %1 for %2 with %3</source>
+        <source>Create new partition %1 as %2(mountpoint), type is %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="178"/>
-        <source>Delete partition %1</source>
+        <location filename="../partman/operation.cpp" line="179"/>
+        <source>Delete %1 partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="183"/>
-        <source>Format %1 with %2</source>
+        <location filename="../partman/operation.cpp" line="184"/>
+        <source>Format %1 partition, type is %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="187"/>
-        <source>Format %1 for %2 with %3</source>
+        <location filename="../partman/operation.cpp" line="188"/>
+        <source>Format %1 partition as %2(mountpoint), type is %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="195"/>
-        <source>Use %1 for %2</source>
+        <location filename="../partman/operation.cpp" line="196"/>
+        <source>Use %1 partition as %2(mountpoint)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="201"/>
-        <source>Resize partition %1</source>
+        <location filename="../partman/operation.cpp" line="202"/>
+        <source>Adjust the size of %1 partition</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -84,7 +79,7 @@
     </message>
     <message>
         <location filename="../ui/widgets/advanced_partition_button.cpp" line="94"/>
-        <source>Format</source>
+        <source>To be formatted</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -92,17 +87,17 @@
     <name>installer::AdvancedPartitionFrame</name>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="102"/>
-        <source>A root partition is required</source>
+        <source>Add a Root partition to continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="112"/>
-        <source>At least %1 GB is required for root partition</source>
+        <source>At least %1 GB is required for Root partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="119"/>
-        <source>An EFI partition is required</source>
+        <source>Add an EFI partition to continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -117,31 +112,31 @@
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="152"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="242"/>
-        <source>Select location for boot loader</source>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="241"/>
+        <source>Change boot loader</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="363"/>
+        <source>%1 error found, fix to continue installation or switch to simple mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="367"/>
+        <source>%1 errors found, fix to continue installation or switch to simple mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="154"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="399"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="398"/>
         <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="156"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="249"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="401"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="248"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="400"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="364"/>
-        <source>Found %1 error, fix the error to continue install or switch to simple mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="368"/>
-        <source>Found %1 errors, fix the errors to continue install or switch to simple mode</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -259,19 +254,19 @@
     <name>installer::InstallFailedFrame</name>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="61"/>
-        <location filename="../ui/frames/install_failed_frame.cpp" line="82"/>
+        <location filename="../ui/frames/install_failed_frame.cpp" line="81"/>
         <source>Installation Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
-        <location filename="../ui/frames/install_failed_frame.cpp" line="84"/>
-        <source>Sorry for the inconvenience, you can photo or scan the QR code to send us the error log, so we can better solve the issue</source>
+        <location filename="../ui/frames/install_failed_frame.cpp" line="83"/>
+        <source>Sorry for the inconvenience, you can photo or scan the 2D code to send error log, so we can better solve the issue.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/install_failed_frame.cpp" line="66"/>
-        <location filename="../ui/frames/install_failed_frame.cpp" line="114"/>
+        <location filename="../ui/frames/install_failed_frame.cpp" line="65"/>
+        <location filename="../ui/frames/install_failed_frame.cpp" line="112"/>
         <source>Exit installation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -316,7 +311,7 @@
     <name>installer::MountPointModel</name>
     <message>
         <location filename="../ui/models/mount_point_model.cpp" line="26"/>
-        <source>do not use</source>
+        <source>Do not use</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -409,7 +404,7 @@
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="92"/>
-        <source>Continue install will format the whole disk, please backup all your data to avoid data lost</source>
+        <source>Continuous installation will format the whole disk, please back up all your data to avoid data loss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -476,26 +471,33 @@
 <context>
     <name>installer::PartitionNumberLimitationFrame</name>
     <message>
-        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="26"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="63"/>
         <source>Cannot create new partitions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="28"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="46"/>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="65"/>
         <source>You need to delete a primary partition to create a new primary partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="31"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="68"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="33"/>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="36"/>
+        <source>You need to delete a primary partition to create the new partition</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="51"/>
+        <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="70"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
@@ -504,67 +506,80 @@
     <name>installer::PartitionTableWarningFrame</name>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="39"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="81"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="80"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="41"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="92"/>
-        <source>It is detected that your motherboard boot loader is EFI and the disk format is MBR, thus the system can not be installed directly; to continue, please select one of the solutions below.</source>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="133"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="155"/>
+        <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="45"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="101"/>
-        <source>A. Disable UEFI</source>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="41"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="91"/>
+        <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="46"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="103"/>
+        <source>Reboot, enter BIOS, and disable UEFI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="47"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="104"/>
-        <source>1.Reboot, enter BIOS, and disable UEFI
-2.Exit BIOS, and enter deepin installation</source>
+        <source>Exit BIOS, and enter deepin to install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="49"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="108"/>
-        <source>B.Format the disk</source>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
+        <source>Please back up all your data to avoid data loss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="111"/>
-        <source>1.Please make backup for all your data to avoid data loss
-2.Please double check if you have made backup for all the data, and reboot to enter this interface, Please double check if you have</source>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
+        <source>Please double check if you have backed up all the data, and reboot to enter this interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="55"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="132"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="153"/>
-        <source>Continue</source>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="56"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="137"/>
+        <source>Please make sure you have backed up all the data, then continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="57"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="135"/>
-        <source>1.Please make sure you have made backup for all the data, then continue
-2.Continue installation will format your disk</source>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="139"/>
+        <source>Continue installation will format your disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="59"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
         <source>Reboot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="62"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="156"/>
         <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="99"/>
+        <source>Disable UEFI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="108"/>
+        <source>Format the disk</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -593,7 +608,7 @@
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="76"/>
-        <source>Please backup important data and confirm the following operations</source>
+        <source>Please back up important data and confirm the following operations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -649,22 +664,22 @@
     <name>installer::SimplePartitionFrame</name>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="88"/>
-        <source>Please select one partition</source>
+        <source>Please select one of the partitions to install!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="102"/>
-        <source>No more partition can be created</source>
+        <source>Unable to create new partition, please select one of the existing partitions!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="112"/>
+        <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="113"/>
         <source>At least %1 GB is required for root partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="126"/>
-        <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="245"/>
+        <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="127"/>
+        <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="246"/>
         <source>Install here</source>
         <translation type="unfinished"></translation>
     </message>
@@ -719,7 +734,58 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="138"/>
-        <source>Reenter password</source>
+        <source>Confirm password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="176"/>
+        <source>This username already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="180"/>
+        <source>The first letter must be in lowercase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="185"/>
+        <source>Username must contains English letters (case-sensitive), numbers or special symbols(_-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="191"/>
+        <source>Please input username longer than %1 characters and shorter than %2 characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="214"/>
+        <source>Please input computer name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="222"/>
+        <source>Computer name already exists, please input another one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="227"/>
+        <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="251"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
+        <source>Please input password longer than %1 characters and shorter than %2 characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="259"/>
+        <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
+        <source>The two passwords don&apos;t match</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -729,98 +795,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="191"/>
-        <source>Username is too long</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="230"/>
-        <source>Computer name is too short</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="195"/>
-        <source>Username is too short</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="175"/>
-        <source>This username is already in use</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="179"/>
-        <source>Username can no be empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="183"/>
-        <source>The first character must be in lower case</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
-        <source>username must comprise a~z, 0~9, - or _</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="214"/>
-        <source>Computer name is empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="218"/>
         <source>Computer name is invalid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="222"/>
-        <source>Computer name is reserved</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="226"/>
-        <source>Computer name is too long</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
-        <source>Password is empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="257"/>
-        <source>Password does not contain lower case character</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
-        <source>Password does not contain upper case character</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
-        <source>Password does not contain number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="269"/>
-        <source>Password does not contain special characters</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="273"/>
-        <source>Password too short</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="277"/>
-        <source>Password too long</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="290"/>
-        <source>Password not match</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
