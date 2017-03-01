@@ -21,49 +21,6 @@ namespace {
 
 const char kMountPointUnused[] = "unused";
 
-// Align partition to nearest mebibytes.
-void AlignPartition(Partition& partition) {
-  const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
-
-  // Align to nearest MebiBytes.
-  const int start_size = static_cast<int>(
-      ceil(partition.start_sector * 1.0 / oneMebiByteSector));
-  const int end_size = static_cast<int>(
-      floor((partition.end_sector + 1) * 1.0 / oneMebiByteSector));
-  partition.start_sector = start_size * oneMebiByteSector;
-  partition.end_sector = end_size * oneMebiByteSector - 1;
-}
-
-// Calculate new primary partition number.
-// Returns -1 on failed.
-int AllocPrimaryPartitionNumber(const Device& device) {
-  for (int num = 1; num <= device.max_prims; num++) {
-    bool in_use = false;
-    for (const Partition& partition : device.partitions) {
-      if (partition.partition_number == num) {
-        in_use = true;
-        break;
-      }
-    }
-
-    if (!in_use) {
-      return num;
-    }
-  }
-  return -1;
-}
-
-// Calculate new logical partition number.
-int AllocLogicalPartitionNumber(const Device& device) {
-  int num = device.max_prims;
-  for (const Partition& partition : device.partitions) {
-    if (partition.partition_number >= num) {
-      num = partition.partition_number;
-    }
-  }
-  return num + 1;
-}
-
 }  // namespace
 
 PartitionDelegate::PartitionDelegate(QObject* parent)

@@ -44,23 +44,37 @@ class AdvancedPartitionDelegate : public QObject {
   void deviceRefreshed(const DeviceList& devices);
 
  public slots:
-  void createPartition(const Partition& partition,
+  bool createPartition(const Partition& partition,
                        PartitionType partition_type,
                        bool align_start,
                        FsType fs_type,
                        const QString& mount_point,
                        qint64 total_sectors);
-
+  bool createLogicalPartition(const Partition& partition,
+                              bool align_start,
+                              FsType fs_type,
+                              const QString& mount_point,
+                              qint64 total_sectors);
+  bool createPrimaryPartition(const Partition& partition,
+                              PartitionType partition_type,
+                              bool align_start,
+                              FsType fs_type,
+                              const QString& mount_point,
+                              qint64 total_sectors);
+  void deletePartition(const Partition& partition);
   void formatPartition(const Partition& partition,
                        FsType fs_type,
                        const QString& mount_point);
 
   void refreshVisual();
 
+  // Clear mount point of operation.new_partition with value |mount_point|.
+  void resetOperationMountPoint(const QString& mount_point);
+
   // Set bootloader path to |path|.
   void setBootloaderPath(const QString& path);
 
-  void unFormatPartition(const Partition& partition);
+  bool unFormatPartition(const Partition& partition);
 
   void updateMountPoint(const Partition& partition, const QString& mount_point);
 
