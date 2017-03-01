@@ -12,6 +12,7 @@ class QStackedLayout;
 
 namespace installer {
 
+class AdvancedPartitionDelegate;
 class AdvancedPartitionFrame;
 class CommentLabel;
 class EditPartitionFrame;
@@ -19,13 +20,14 @@ class NavButton;
 class NewPartitionFrame;
 class NewTableLoadingFrame;
 class NewTableWarningFrame;
-class PartitionDelegate;
 class PartitionLoadingFrame;
+class PartitionModel;
 class PartitionNumberLimitationFrame;
 class PartitionTableWarningFrame;
 class PointerButton;
 class PrepareInstallFrame;
 class SelectBootloaderFrame;
+class SimplePartitionDelegate;
 class SimplePartitionFrame;
 class TitleLabel;
 
@@ -81,7 +83,9 @@ class PartitionFrame : public QFrame {
   PointerButton* advanced_frame_button_ = nullptr;
   NavButton* next_button_ = nullptr;
 
-  PartitionDelegate* delegate_ = nullptr;
+  PartitionModel* partition_model_ = nullptr;
+  AdvancedPartitionDelegate* advanced_delegate_ = nullptr;
+  SimplePartitionDelegate* simple_delegate_ = nullptr;
 
  private slots:
   void onSimpleFrameButtonToggled();

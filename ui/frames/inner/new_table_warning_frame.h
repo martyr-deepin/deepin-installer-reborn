@@ -12,7 +12,6 @@ namespace installer {
 
 class CommentLabel;
 class NavButton;
-class PartitionDelegate;
 class TitleLabel;
 
 // Display warning message before creating new partition table.
@@ -20,11 +19,11 @@ class NewTableWarningFrame : public QFrame {
   Q_OBJECT
 
  public:
-  NewTableWarningFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
+  explicit NewTableWarningFrame(QWidget* parent = nullptr);
 
   // Set/get device_path_.
   QString devicePath() const;
-  void setDevicePath(const QString& device_path);
+  void setDevicePath(const QString& device_path, const QString& disk_info);
 
  signals:
   // Emitted when cancel_button_ is clicked.
@@ -40,8 +39,6 @@ class NewTableWarningFrame : public QFrame {
  private:
   void initConnections();
   void initUI();
-
-  PartitionDelegate* delegate_ = nullptr;
 
   QLabel* disk_name_label_ = nullptr;
   TitleLabel* title_label_ = nullptr;

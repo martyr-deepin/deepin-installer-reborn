@@ -14,7 +14,7 @@
 #include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
-#include "ui/delegates/partition_delegate.h"
+#include "ui/delegates/advanced_partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/advanced_partition_button.h"
 #include "ui/utils/widget_util.h"
@@ -30,8 +30,8 @@ const int kMsgLabelSpacing = 2;
 
 }  // namespace
 
-AdvancedPartitionFrame::AdvancedPartitionFrame(PartitionDelegate* delegate_,
-                                               QWidget* parent)
+AdvancedPartitionFrame::AdvancedPartitionFrame(
+    AdvancedPartitionDelegate* delegate_, QWidget* parent)
     : QFrame(parent),
       delegate_(delegate_),
       error_messages_() {
@@ -62,7 +62,7 @@ bool AdvancedPartitionFrame::validate() {
   const int efi_minimum = GetSettingsInt(kPartitionEFIMinimumSpace);
   Partition root_partition;
 
-  for (const Device& device : delegate_->devices()) {
+  for (const Device& device : delegate_->virtual_devices()) {
     for (const Partition& partition : device.partitions) {
       if (partition.mount_point == kMountPointRoot) {
         // Check / partition.
@@ -161,7 +161,7 @@ void AdvancedPartitionFrame::changeEvent(QEvent* event) {
 }
 
 void AdvancedPartitionFrame::initConnections() {
-  connect(delegate_, &PartitionDelegate::deviceRefreshed,
+  connect(delegate_, &AdvancedPartitionDelegate::deviceRefreshed,
           this, &AdvancedPartitionFrame::onDeviceRefreshed);
   connect(bootloader_tip_button_, &QPushButton::clicked,
           this, &AdvancedPartitionFrame::requestSelectBootloaderFrame);
@@ -299,7 +299,7 @@ void AdvancedPartitionFrame::repaintDevices() {
   ClearLayout(partition_layout_);
 
   const QString installer_device_path(GetInstallerDevicePath());
-  for (const Device& device : delegate_->devices()) {
+  for (const Device& device : delegate_->virtual_devices()) {
     // Ignores installer device.
     if (installer_device_path.startsWith(device.path)) {
       qDebug() << "Ignore installer device:" << installer_device_path;
@@ -385,8 +385,9 @@ void AdvancedPartitionFrame::clearErrorMessages() {
 
 void AdvancedPartitionFrame::onDeletePartitionTriggered(
     const Partition& partition) {
-  delegate_->deletePartition(partition);
-  delegate_->refreshVisual();
+//  delegate_->deletePartition(partition);
+//  delegate_->refreshVisual();
+  Q_UNUSED(partition);
 }
 
 void AdvancedPartitionFrame::onDeviceRefreshed() {
@@ -420,8 +421,8 @@ void AdvancedPartitionFrame::onNewPartitionTriggered(
     return;
   }
 
-  if (delegate_->canAddPrimary(partition, false) ||
-      delegate_->canAddLogical(partition, false)) {
+  if (delegate_->canAddPrimary(partition) ||
+      delegate_->canAddLogical(partition)) {
     // Switch to NewPartitionFrame only if a new partition can be added.
     emit this->requestNewPartitionFrame(partition);
   } else {

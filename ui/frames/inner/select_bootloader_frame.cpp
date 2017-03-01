@@ -17,10 +17,8 @@
 
 namespace installer {
 
-SelectBootloaderFrame::SelectBootloaderFrame(PartitionDelegate* delegate,
-                                             QWidget* parent)
-    : QFrame(parent),
-      delegate_(delegate) {
+SelectBootloaderFrame::SelectBootloaderFrame(QWidget* parent)
+    : QFrame(parent) {
   this->setObjectName("select_bootloader_frame");
 
   this->initUI();
@@ -46,6 +44,9 @@ void SelectBootloaderFrame::initConnections() {
           this, &SelectBootloaderFrame::onPartitionListViewSelected);
   connect(list_model_, &BootloaderListModel::rowChanged,
           this, &SelectBootloaderFrame::onModelChanged);
+
+  connect(this, &SelectBootloaderFrame::deviceRefreshed,
+          list_model_, &BootloaderListModel::onDeviceRefreshed);
 }
 
 void SelectBootloaderFrame::initUI() {
@@ -60,7 +61,7 @@ void SelectBootloaderFrame::initUI() {
 
   list_view_ = new FramelessListView();
   list_view_->setFixedWidth(560);
-  list_model_ = new BootloaderListModel(delegate_, this);
+  list_model_ = new BootloaderListModel(this);
   list_view_->setModel(list_model_);
 
   back_button_ = new NavButton(tr("Back"));

@@ -16,14 +16,15 @@ class QShowEvent;
 
 namespace installer {
 
-class PartitionDelegate;
+class SimplePartitionDelegate;
 
 // List device partitions in simple mode.
 class SimplePartitionFrame : public QFrame {
   Q_OBJECT
 
  public:
-  SimplePartitionFrame(PartitionDelegate* delegate, QWidget* parent = nullptr);
+  SimplePartitionFrame(SimplePartitionDelegate* delegate,
+                       QWidget* parent = nullptr);
 
   // Validate whether a root partition is selected and large enough.
   bool validate();
@@ -61,7 +62,7 @@ class SimplePartitionFrame : public QFrame {
   QLabel* tip_label_ = nullptr;
   QFrame* grid_wrapper_ = nullptr;
   QGridLayout* grid_layout_ = nullptr;
-  PartitionDelegate* delegate_ = nullptr;
+  SimplePartitionDelegate* delegate_ = nullptr;
 
   // Displays error message in validate().
   // It is cleared when another SimplePartitionButton is selected.

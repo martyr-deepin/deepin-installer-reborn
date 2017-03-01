@@ -18,30 +18,27 @@
 
 namespace installer {
 
-PrepareInstallFrame::PrepareInstallFrame(PartitionDelegate* delegate,
-                                         QWidget* parent)
-    : QFrame(parent),
-      delegate_(delegate) {
+PrepareInstallFrame::PrepareInstallFrame(QWidget* parent)
+    : QFrame(parent) {
   this->setObjectName("prepare_install_frame");
 
   this->initUI();
   this->initConnections();
 }
 
-void PrepareInstallFrame::updateDescription(bool simple_mode) {
-  const QStringList desc_list(delegate_->getOperationDescriptions(simple_mode));
+void PrepareInstallFrame::updateDescription(const QStringList& descriptions) {
   const QString prefix("•   ");
   QStringList modified_desc_list;
   int max_width = 0;
   QFontMetrics metrics(description_edit_->font());
-  for (const QString& desc_item : desc_list) {
-    const QString content = prefix + desc_item;
+  for (const QString& description : descriptions) {
+    const QString content = prefix + description;
     modified_desc_list.append(content);
     max_width = qMax(metrics.width(content), max_width);
   }
-  const QString description = modified_desc_list.join("\n");
-  qDebug() << "description:" << description;
-  description_edit_->setPlainText(description);
+  const QString description_text = modified_desc_list.join("\n");
+  qDebug() << "description:" << description_text;
+  description_edit_->setPlainText(description_text);
   Q_ASSERT(max_width >= 0);
   // Add horizontal margins.
   description_edit_->setFixedWidth(max_width + 20);

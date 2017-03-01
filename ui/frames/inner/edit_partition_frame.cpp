@@ -14,7 +14,7 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "ui/frames/consts.h"
-#include "ui/delegates/partition_delegate.h"
+#include "ui/delegates/advanced_partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/models/fs_model.h"
 #include "ui/models/mount_point_model.h"
@@ -42,7 +42,7 @@ bool IsInFormattedMountPointList(const QString& mount_point) {
 
 }  // namespace
 
-EditPartitionFrame::EditPartitionFrame(PartitionDelegate* delegate,
+EditPartitionFrame::EditPartitionFrame(AdvancedPartitionDelegate* delegate,
                                        QWidget* parent)
     : QFrame(parent),
       delegate_(delegate),
@@ -200,12 +200,12 @@ void EditPartitionFrame::initUI() {
 
   fs_box_ = new TableComboBox();
   fs_box_->setObjectName("fs_box");
-  fs_model_ = new FsModel(delegate_, this);
+  fs_model_ = new FsModel(delegate_->getFsTypeList(), this);
   fs_box_->setModel(fs_model_);
 
   mount_point_box_ = new TableComboBox();
   mount_point_box_->setObjectName("mount_point_box");
-  mount_point_model_ = new MountPointModel(delegate_->allMountPoints(), this);
+  mount_point_model_ = new MountPointModel(delegate_->getMountPoints(), this);
   mount_point_box_->setModel(mount_point_model_);
 
   format_check_box_ = new QCheckBox();

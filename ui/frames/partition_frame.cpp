@@ -12,8 +12,9 @@
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "ui/delegates/advanced_partition_delegate.h"
+#include "ui/delegates/simple_partition_delegate.h"
 #include "ui/frames/consts.h"
-#include "ui/delegates/partition_delegate.h"
 #include "ui/frames/inner/advanced_partition_frame.h"
 #include "ui/frames/inner/edit_partition_frame.h"
 #include "ui/frames/inner/new_partition_frame.h"
@@ -25,6 +26,7 @@
 #include "ui/frames/inner/prepare_install_frame.h"
 #include "ui/frames/inner/select_bootloader_frame.h"
 #include "ui/frames/inner/simple_partition_frame.h"
+#include "ui/models/partition_model.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
@@ -32,20 +34,23 @@
 namespace installer {
 
 PartitionFrame::PartitionFrame(QWidget* parent)
-    : QFrame(parent),
-      delegate_(new PartitionDelegate(this)) {
+    : QFrame(parent) {
   this->setObjectName("partition_frame");
+
+  partition_model_ = new PartitionModel(this);
+  advanced_delegate_ = new AdvancedPartitionDelegate(partition_model_, this);
+  simple_delegate_ = new SimplePartitionDelegate(partition_model_, this);
 
   this->initUI();
   this->initConnections();
 }
 
 void PartitionFrame::autoPart() {
-  delegate_->autoConf();
+  partition_model_->autoPart();
 }
 
 void PartitionFrame::scanDevices() const {
-  delegate_->scanDevices();
+  partition_model_->scanDevices();
 }
 
 void PartitionFrame::changeEvent(QEvent* event) {
@@ -71,11 +76,11 @@ void PartitionFrame::initConnections() {
           this, &PartitionFrame::onNextButtonClicked);
 
   // Show main frame when device is refreshed.
-  connect(delegate_, &PartitionDelegate::deviceRefreshed,
+  connect(partition_model_, &PartitionModel::deviceRefreshed,
           this, &PartitionFrame::showMainFrame);
-  connect(delegate_, &PartitionDelegate::autoPartDone,
+  connect(partition_model_, &PartitionModel::autoPartDone,
           this, &PartitionFrame::autoPartDone);
-  connect(delegate_, &PartitionDelegate::manualPartDone,
+  connect(partition_model_, &PartitionModel::manualPartDone,
           this, &PartitionFrame::manualPartDone);
 
   connect(advanced_partition_frame_,
@@ -103,7 +108,7 @@ void PartitionFrame::initConnections() {
   connect(new_table_warning_frame_, &NewTableWarningFrame::confirmed,
           this, &PartitionFrame::showNewTableLoadingFrame);
   connect(new_table_warning_frame_, &NewTableWarningFrame::confirmed,
-          delegate_, &PartitionDelegate::createPartitionTable);
+          partition_model_, &PartitionModel::createPartitionTable);
 
   connect(partition_number_limitation_frame_,
           &PartitionNumberLimitationFrame::finished,
@@ -126,26 +131,29 @@ void PartitionFrame::initConnections() {
           advanced_partition_frame_,
           &AdvancedPartitionFrame::setBootloaderPath);
   connect(select_bootloader_frame_, &SelectBootloaderFrame::bootloaderUpdated,
-          delegate_, &PartitionDelegate::setBootloaderPath);
+          advanced_delegate_, &AdvancedPartitionDelegate::setBootloaderPath);
   connect(select_bootloader_frame_, &SelectBootloaderFrame::finished,
           this, &PartitionFrame::showMainFrame);
+  connect(advanced_delegate_, &AdvancedPartitionDelegate::deviceRefreshed,
+          select_bootloader_frame_, &SelectBootloaderFrame::deviceRefreshed);
 
   connect(simple_partition_frame_, &SimplePartitionFrame::requestNewTable,
           this, &PartitionFrame::showPartitionTableWarningFrame);
 }
 
 void PartitionFrame::initUI() {
-  advanced_partition_frame_ = new AdvancedPartitionFrame(delegate_, this);
-  edit_partition_frame_ = new EditPartitionFrame(delegate_, this);
-  new_partition_frame_ = new NewPartitionFrame(delegate_, this);
+  advanced_partition_frame_ = new AdvancedPartitionFrame(advanced_delegate_,
+                                                         this);
+  edit_partition_frame_ = new EditPartitionFrame(advanced_delegate_, this);
+  new_partition_frame_ = new NewPartitionFrame(advanced_delegate_, this);
   new_table_loading_frame_ = new NewTableLoadingFrame(this);
-  new_table_warning_frame_ = new NewTableWarningFrame(delegate_, this);
+  new_table_warning_frame_ = new NewTableWarningFrame(this);
   partition_loading_frame_ = new PartitionLoadingFrame(this);
   partition_number_limitation_frame_ = new PartitionNumberLimitationFrame(this);
   partition_table_warning_frame_ = new PartitionTableWarningFrame(this);
-  prepare_install_frame_ = new PrepareInstallFrame(delegate_, this);
-  select_bootloader_frame_ = new SelectBootloaderFrame(delegate_, this);
-  simple_partition_frame_ = new SimplePartitionFrame(delegate_, this);
+  prepare_install_frame_ = new PrepareInstallFrame(this);
+  select_bootloader_frame_ = new SelectBootloaderFrame(this);
+  simple_partition_frame_ = new SimplePartitionFrame(simple_delegate_, this);
 
   title_label_ = new TitleLabel(tr("Select Installation Location"));
   comment_label_ = new CommentLabel(
@@ -255,7 +263,7 @@ void PartitionFrame::onSimpleFrameButtonToggled() {
 void PartitionFrame::onAdvancedFrameButtonToggled() {
   // Refresh device list before showing advanced partition frame.
   // Because mount-point of partitions might have be updated.
-  delegate_->refreshVisual();
+//  delegate_->refreshVisual();
   partition_stacked_layout_->setCurrentWidget(advanced_partition_frame_);
 }
 
@@ -274,14 +282,14 @@ void PartitionFrame::onNextButtonClicked() {
     }
   }
 
-  prepare_install_frame_->updateDescription(is_simple_page);
+//  prepare_install_frame_->updateDescription(is_simple_page);
   main_layout_->setCurrentWidget(prepare_install_frame_);
 }
 
 void PartitionFrame::onPrepareInstallFrameFinished() {
-  QWidget* current_widget = partition_stacked_layout_->currentWidget();
-  const bool is_simple_page = (current_widget == simple_partition_frame_);
-  delegate_->doManualPart(is_simple_page);
+//  QWidget* current_widget = partition_stacked_layout_->currentWidget();
+//  const bool is_simple_page = (current_widget == simple_partition_frame_);
+//  delegate_->doManualPart(is_simple_page);
 
   emit this->finished();
 }
@@ -306,7 +314,8 @@ void PartitionFrame::showNewTableLoadingFrame() {
 }
 
 void PartitionFrame::showNewTableWarningFrame(const QString& device_path) {
-  new_table_warning_frame_->setDevicePath(device_path);
+  Q_UNUSED(device_path);
+//  new_table_warning_frame_->setDevicePath(device_path);
   main_layout_->setCurrentWidget(new_table_warning_frame_);
 }
 

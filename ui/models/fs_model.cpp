@@ -9,10 +9,9 @@
 
 namespace installer {
 
-FsModel::FsModel(PartitionDelegate* delegate, QObject* parent)
+FsModel::FsModel(const FsTypeList& fs_list, QObject* parent)
     : QAbstractListModel(parent),
-      delegate_(delegate),
-      fs_list_(delegate_->getFsTypes()) {
+      fs_list_(fs_list) {
   this->setObjectName("fs_model");
 }
 
