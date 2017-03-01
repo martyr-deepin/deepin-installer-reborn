@@ -13,6 +13,15 @@
 
 namespace installer {
 
+// Align partition to nearest mebibytes.
+void AlignPartition(Partition& partition);
+
+// Calculate new logical partition number.
+int AllocLogicalPartitionNumber(const Device& device);
+
+// Calculate new primary partition number. Returns -1 on failed.
+int AllocPrimaryPartitionNumber(const Device& device);
+
 // Get device model name and capacity.
 QString GetDeviceModelAndCap(const Device& device);
 

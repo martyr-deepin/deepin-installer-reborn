@@ -385,8 +385,8 @@ void AdvancedPartitionFrame::clearErrorMessages() {
 
 void AdvancedPartitionFrame::onDeletePartitionTriggered(
     const Partition& partition) {
-//  delegate_->deletePartition(partition);
-//  delegate_->refreshVisual();
+  delegate_->deletePartition(partition);
+  delegate_->refreshVisual();
   Q_UNUSED(partition);
 }
 

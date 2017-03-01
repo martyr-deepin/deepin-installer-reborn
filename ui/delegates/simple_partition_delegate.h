@@ -41,14 +41,23 @@ class SimplePartitionDelegate : public QObject {
   void deviceRefreshed(const DeviceList& devices);
 
  public slots:
-  void resetOperations();
-
-  void createPartition(const Partition& partition,
-                       PartitionType part_type,
+  bool createPartition(const Partition& partition,
+                       PartitionType partition_type,
                        bool align_start,
                        FsType fs_type,
                        const QString& mount_point,
                        qint64 total_sectors);
+  bool createLogicalPartition(const Partition& partition,
+                              bool align_start,
+                              FsType fs_type,
+                              const QString& mount_point,
+                              qint64 total_sectors);
+  bool createPrimaryPartition(const Partition& partition,
+                              PartitionType partition_type,
+                              bool align_start,
+                              FsType fs_type,
+                              const QString& mount_point,
+                              qint64 total_sectors);
   Partition deletePartition(const Partition& partition);
   void formatPartition(const Partition& partition,
                        FsType fs_type,
@@ -56,6 +65,9 @@ class SimplePartitionDelegate : public QObject {
 
   // Save real device list when it is refreshed.
   void onDeviceRefreshed(const DeviceList& devices);
+
+  // Clear operation list.
+  void resetOperations();
 
   // Update bootloader settings to |path|.
   void setBootloaderPath(const QString& path);
