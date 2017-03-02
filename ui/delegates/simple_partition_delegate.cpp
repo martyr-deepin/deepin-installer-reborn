@@ -454,6 +454,17 @@ void SimplePartitionDelegate::formatPartition(const Partition& partition,
 void SimplePartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
   real_devices_ = devices;
   virtual_devices_ = real_devices_;
+
+  const QString installer_device_path(GetInstallerDevicePath());
+  qDebug() << "installer_device_path:" << installer_device_path;
+  virtual_devices_.clear();
+  for (const Device& device : real_devices_) {
+    // Ignores installer device.
+    if (!installer_device_path.startsWith(device.path)) {
+      virtual_devices_.append(device);
+    }
+  }
+
   emit this->deviceRefreshed(real_devices_);
 }
 
