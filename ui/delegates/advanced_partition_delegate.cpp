@@ -556,7 +556,47 @@ void AdvancedPartitionDelegate::formatPartition(const Partition& partition,
 }
 
 void AdvancedPartitionDelegate::refreshVisual() {
+// Filters partition list based on the following policy:
+  // * Remove extended partition if no logical partition exists;
+  // * Merge unallocated partition with next unallocated one;
+  // * Ignore partitions with size less than 100Mib;
 
+  virtual_devices_ = real_devices_;
+
+  for (Device& device : virtual_devices_) {
+    PartitionList partitions;
+    for (const Partition& partition : device.partitions) {
+      if (partition.type == PartitionType::Normal ||
+          partition.type == PartitionType::Logical ||
+          partition.type == PartitionType::Extended) {
+        partitions.append(partition);
+      } else if (partition.type == PartitionType::Unallocated) {
+        // Filter unallocated partitions which are larger than 2MiB.
+        if (partition.getByteLength() >= 2 * kMebiByte) {
+          partitions.append(partition);
+        }
+      }
+    }
+    device.partitions = partitions;
+  }
+
+  for (Device& device : virtual_devices_) {
+    // Merge unallocated partitions.
+    MergeUnallocatedPartitions(device.partitions);
+
+    for (Operation& operation : operations_) {
+      if (operation.orig_partition.device_path == device.path) {
+        operation.applyToVisual(device.partitions);
+      }
+    }
+
+    // Merge unallocated partitions.
+    MergeUnallocatedPartitions(device.partitions);
+  }
+
+  qDebug() << "devices:" << virtual_devices_;
+  qDebug() << "operations:" << operations_;
+  emit this->deviceRefreshed(virtual_devices_);
 }
 
 void AdvancedPartitionDelegate::resetOperationMountPoint(
