@@ -88,6 +88,9 @@ const char kPartitionDoAutoPart[] = "partition_do_auto_part";
 const char kPartitionMountPoints[] = "partition_mount_points";
 const char kPartitionFormattedMountPoints[] =
     "partition_formatted_mount_points";
+const char kPartitionBootOnFirstPartition[] =
+    "partition_boot_on_first_partition";
+const char kPartitionBootPartitionFs[] = "partition_boot_partition_fs";
 const char kPartitionEnableOsProber[] = "partition_enable_os_prober";
 
 // Install progress page
