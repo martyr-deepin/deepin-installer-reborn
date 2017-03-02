@@ -567,7 +567,8 @@ void AdvancedPartitionDelegate::formatPartition(const Partition& partition,
 
 void AdvancedPartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
   real_devices_ = devices;
-  virtual_devices_ = real_devices_;
+  virtual_devices_ = FilterInstallerDevice(real_devices_);
+
   emit this->deviceRefreshed(virtual_devices_);
 }
 
@@ -646,7 +647,7 @@ void AdvancedPartitionDelegate::refreshVisual() {
   // * Merge unallocated partition with next unallocated one;
   // * Ignore partitions with size less than 100Mib;
 
-  virtual_devices_ = real_devices_;
+  virtual_devices_ = FilterInstallerDevice(real_devices_);
 
   for (Device& device : virtual_devices_) {
     PartitionList partitions;

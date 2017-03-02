@@ -22,6 +22,9 @@ int AllocLogicalPartitionNumber(const Device& device);
 // Calculate new primary partition number. Returns -1 on failed.
 int AllocPrimaryPartitionNumber(const Device& device);
 
+// Filters installer device disk from |devices|.
+DeviceList FilterInstallerDevice(const DeviceList& devices);
+
 // Get default filesystem from settings.
 FsType GetDefaultFsType();
 

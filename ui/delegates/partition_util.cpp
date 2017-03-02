@@ -65,6 +65,18 @@ int AllocPrimaryPartitionNumber(const Device& device) {
   return -1;
 }
 
+DeviceList FilterInstallerDevice(const DeviceList& devices) {
+  DeviceList filtered_devices;
+  const QString installer_device_path(GetInstallerDevicePath());
+  for (const Device& device : devices) {
+    if (!installer_device_path.startsWith(device.path)) {
+      filtered_devices.append(device);
+    }
+  }
+
+  return filtered_devices;
+}
+
 FsType GetDefaultFsType() {
   const QString default_fs_name = GetSettingsString(kPartitionDefaultFs);
   return GetFsTypeByName(default_fs_name);

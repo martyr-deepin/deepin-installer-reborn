@@ -61,19 +61,11 @@ void BootloaderListModel::onDeviceRefreshed(const DeviceList& devices) {
   // Clear old bootloader list.
   bootloader_list_.clear();
 
-  const QString installer_device_path(GetInstallerDevicePath());
-
   QString boot_device;
   QString root_device;
   QString first_device;
 
   for (const Device& device : devices) {
-    // Ignores installer device.
-    if (installer_device_path.startsWith(device.path)) {
-      qDebug() << "Ignore installer device:" << installer_device_path;
-      continue;
-    }
-
     if (first_device.isEmpty()) {
       first_device = device.path;
     }
@@ -98,12 +90,6 @@ void BootloaderListModel::onDeviceRefreshed(const DeviceList& devices) {
   }
 
   for (const Device& device : devices) {
-    // Ignores installer device.
-    if (installer_device_path.startsWith(device.path)) {
-      qDebug() << "Ignore installer device:" << installer_device_path;
-      continue;
-    }
-
     // Set recommended flag to false.
     const bool is_recommended = (device.path == recommended_device);
     bootloader_list_.append({device.path,

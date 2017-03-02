@@ -44,6 +44,7 @@ class AdvancedPartitionDelegate : public QObject {
   const OperationList& operations() const { return operations_; };
 
  signals:
+  // Emitted when virtual device list is updated.
   void deviceRefreshed(const DeviceList& devices);
 
  public slots:
