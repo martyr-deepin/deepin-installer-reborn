@@ -81,7 +81,7 @@ void PartitionFrame::initConnections() {
   connect(partition_model_, &PartitionModel::autoPartDone,
           this, &PartitionFrame::autoPartDone);
   connect(partition_model_, &PartitionModel::manualPartDone,
-          this, &PartitionFrame::manualPartDone);
+          this, &PartitionFrame::onManualPartDone);
 
   connect(advanced_partition_frame_,
           &AdvancedPartitionFrame::requestEditPartitionFrame,
@@ -259,6 +259,11 @@ void PartitionFrame::initUI() {
   this->setContentsMargins(0, 0, 0, 0);
 }
 
+bool PartitionFrame::isSimpleMode() {
+  QWidget* current_widget = partition_stacked_layout_->currentWidget();
+  return (current_widget == simple_partition_frame_);
+}
+
 void PartitionFrame::onSimpleFrameButtonToggled() {
   partition_stacked_layout_->setCurrentWidget(simple_partition_frame_);
 }
@@ -266,14 +271,14 @@ void PartitionFrame::onSimpleFrameButtonToggled() {
 void PartitionFrame::onAdvancedFrameButtonToggled() {
   // Refresh device list before showing advanced partition frame.
   // Because mount-point of partitions might have be updated.
-//  delegate_->refreshVisual();
+  advanced_delegate_->refreshVisual();
   partition_stacked_layout_->setCurrentWidget(advanced_partition_frame_);
 }
 
 void PartitionFrame::onNextButtonClicked() {
-  QWidget* current_widget = partition_stacked_layout_->currentWidget();
-  const bool is_simple_page = (current_widget == simple_partition_frame_);
-  if (is_simple_page) {
+  const bool is_simple_mode = this->isSimpleMode();
+  if (is_simple_mode) {
+    // TODO(xushaohua): Move valiate() to delegate.
     // Validate simple partition frame.
     if (!simple_partition_frame_->validate()) {
       return;
@@ -285,22 +290,38 @@ void PartitionFrame::onNextButtonClicked() {
     }
   }
 
-//  prepare_install_frame_->updateDescription(is_simple_page);
+  const QStringList descriptions = is_simple_mode ?
+                                   simple_delegate_->getOptDescriptions() :
+                                   advanced_delegate_->getOptDescriptions();
+
+  prepare_install_frame_->updateDescription(descriptions);
   main_layout_->setCurrentWidget(prepare_install_frame_);
 }
 
+void PartitionFrame::onManualPartDone(bool ok) {
+  if (ok) {
+    // Write settings to file.
+    if (this->isSimpleMode()) {
+      simple_delegate_->onManualPartDone();
+    } else {
+      advanced_delegate_->onManualPartDone();
+    }
+  }
+
+  emit this->manualPartDone(ok);
+}
+
 void PartitionFrame::onPrepareInstallFrameFinished() {
-  QWidget* current_widget = partition_stacked_layout_->currentWidget();
-  const bool is_simple_page = (current_widget == simple_partition_frame_);
+  const bool is_simple_mode = this->isSimpleMode();
   OperationList operations;
-  if (is_simple_page) {
+  if (is_simple_mode) {
     operations = simple_delegate_->operations();
   } else {
     operations = advanced_delegate_->operations();
   }
 
   if (operations.isEmpty()) {
-    qCritical() << "Operation list is empty, simple mode:" << is_simple_page;
+    qCritical() << "Operation list is empty, simple mode:" << is_simple_mode;
     return;
   } else {
     partition_model_->manualPart(operations);
@@ -328,9 +349,7 @@ void PartitionFrame::showNewTableLoadingFrame() {
 }
 
 void PartitionFrame::showNewTableWarningFrame(const QString& device_path) {
-  QWidget* current_widget = partition_stacked_layout_->currentWidget();
-  const bool is_simple_page = (current_widget == simple_partition_frame_);
-  const DeviceList& devices = is_simple_page ?
+  const DeviceList& devices = this->isSimpleMode() ?
                               simple_delegate_->real_devices() :
                               advanced_delegate_->real_devices();
   const int device_index = DeviceIndex(devices, device_path);

@@ -4,6 +4,8 @@
 
 #include "ui/delegates/simple_partition_delegate.h"
 
+#include "partman/utils.h"
+#include "service/settings_manager.h"
 #include "ui/delegates/partition_util.h"
 
 namespace installer {
@@ -98,6 +100,15 @@ bool SimplePartitionDelegate::canAddPrimary(const Partition& partition) const {
   }
 
   return primary_ok;
+}
+
+QStringList SimplePartitionDelegate::getOptDescriptions() const {
+  QStringList descriptions;
+  for (const Operation& operation : operations_) {
+    descriptions.append(operation.description());
+  }
+
+  return descriptions;
 }
 
 bool SimplePartitionDelegate::isPartitionTableMatch(
@@ -444,6 +455,74 @@ void SimplePartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
   real_devices_ = devices;
   virtual_devices_ = real_devices_;
   emit this->deviceRefreshed(real_devices_);
+}
+
+void SimplePartitionDelegate::onManualPartDone() {
+  QString root_disk;
+  QString root_path;
+  QStringList mount_points;
+
+  for (const Operation& operation : operations_) {
+    const Partition& new_partition = operation.new_partition;
+
+    if (!new_partition.mount_point.isEmpty()) {
+      // Add used partitions to mount_point list.
+      const QString record(QString("%1=%2").arg(new_partition.path)
+                               .arg(new_partition.mount_point));
+      mount_points.append(record);
+      if (new_partition.mount_point == kMountPointRoot) {
+        root_disk = new_partition.device_path;
+        root_path = new_partition.path;
+      }
+    } else if (new_partition.fs == FsType::LinuxSwap) {
+      // Add swap area to mount_point list.
+      const QString record(QString("%1=swap").arg(new_partition.path));
+      mount_points.append(record);
+    }
+  }
+
+  if (IsEfiEnabled()) {
+    // Enable EFI mode.
+    // First check newly created EFI partition. If not found, check existing
+    // EFI partition.
+    WriteUEFI(true);
+    QString esp_path;
+    for (const Operation& operation : operations_) {
+      if (operation.new_partition.fs == FsType::EFI) {
+        // NOTE(xushaohua): There shall be only one EFI partition.
+        esp_path = operation.new_partition.path;
+        break;
+      }
+    }
+    if (esp_path.isEmpty()) {
+      // If no new EFI partition is created, search in device list.
+      bool esp_found = false;
+      for (const Device& device : virtual_devices_) {
+        for (const Partition& partition : device.partitions) {
+          if (partition.fs == FsType::EFI) {
+            esp_path = partition.path;
+            esp_found = true;
+            break;
+          }
+        }
+
+        if (esp_found) {
+          break;
+        }
+      }
+    }
+
+    if (esp_path.isEmpty()) {
+      qCritical() << "esp path is empty!";
+    }
+    WritePartitionInfo(root_disk, root_path, esp_path, mount_points.join(';'));
+  } else {
+    // In legacy mode.
+    WritePartitionInfo(root_disk,
+                       root_path,
+                       bootloader_path_,
+                       mount_points.join(';'));
+  }
 }
 
 void SimplePartitionDelegate::setBootloaderPath(const QString& path) {

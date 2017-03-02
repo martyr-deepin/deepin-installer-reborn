@@ -31,6 +31,9 @@ class SimplePartitionDelegate : public QObject {
   bool canAddLogical(const Partition& partition) const;
   bool canAddPrimary(const Partition& partition) const;
 
+  // Get human readable operation descriptions.
+  QStringList getOptDescriptions() const;
+
   // Check whether device at |device_path| is appropriate for current system.
   bool isPartitionTableMatch(const QString& device_path) const;
 
@@ -65,6 +68,9 @@ class SimplePartitionDelegate : public QObject {
 
   // Save real device list when it is refreshed.
   void onDeviceRefreshed(const DeviceList& devices);
+
+  // Write partitioning settings to file.
+  void onManualPartDone();
 
   // Clear operation list.
   void resetOperations();
