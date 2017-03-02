@@ -62,6 +62,9 @@ class PartitionFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  // Check current partition mode is simple mode or advanced mode.
+  bool isSimpleMode();
+
   AdvancedPartitionFrame* advanced_partition_frame_ = nullptr;
   EditPartitionFrame* edit_partition_frame_ = nullptr;
   NewPartitionFrame* new_partition_frame_ = nullptr;
@@ -91,6 +94,8 @@ class PartitionFrame : public QFrame {
   void onSimpleFrameButtonToggled();
   void onAdvancedFrameButtonToggled();
   void onNextButtonClicked();
+
+  void onManualPartDone(bool ok);
 
   // Notify delegate to do manual part.
   void onPrepareInstallFrameFinished();

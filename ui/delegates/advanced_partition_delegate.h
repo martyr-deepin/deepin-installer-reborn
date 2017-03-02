@@ -32,6 +32,9 @@ class AdvancedPartitionDelegate : public QObject {
   // Get all available mount points, defined in settings file.
   QStringList getMountPoints() const;
 
+  // Get human readable operation descriptions.
+  QStringList getOptDescriptions() const;
+
   // Get real partition on disk where |virtual_partition| is located.
   Partition getRealPartition(const Partition& virtual_partition) const;
 
@@ -66,6 +69,10 @@ class AdvancedPartitionDelegate : public QObject {
                        FsType fs_type,
                        const QString& mount_point);
 
+  // Write partitioning settings to file.
+  void onManualPartDone();
+
+  // Refresh virtual device list based on current operations.
   void refreshVisual();
 
   // Clear mount point of operation.new_partition with value |mount_point|.
