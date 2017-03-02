@@ -4,8 +4,6 @@
 
 #include "mount_point_model.h"
 
-#include "ui/delegates/partition_delegate.h"
-
 namespace installer {
 
 MountPointModel::MountPointModel(const QStringList& mount_points,

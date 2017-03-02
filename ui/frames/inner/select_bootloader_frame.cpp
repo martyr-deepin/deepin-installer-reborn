@@ -7,7 +7,6 @@
 #include <QEvent>
 #include <QHBoxLayout>
 
-#include "ui/delegates/partition_delegate.h"
 #include "ui/frames/consts.h"
 #include "ui/models/bootloader_list_model.h"
 #include "ui/views/frameless_list_view.h"

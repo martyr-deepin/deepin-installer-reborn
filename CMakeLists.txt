@@ -205,8 +205,6 @@ set(UI_FILES
     ui/delegates/language_delegate.h
     ui/delegates/main_window_util.cpp
     ui/delegates/main_window_util.h
-    ui/delegates/partition_delegate.cpp
-    ui/delegates/partition_delegate.h
     ui/delegates/partition_util.cpp
     ui/delegates/partition_util.h
     ui/delegates/popup_menu_delegate.cpp

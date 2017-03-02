@@ -4,7 +4,6 @@
 
 #include "fs_model.h"
 
-#include "ui/delegates/partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 
 namespace installer {

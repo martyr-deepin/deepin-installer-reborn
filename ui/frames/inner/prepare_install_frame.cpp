@@ -4,13 +4,13 @@
 
 #include "ui/frames/inner/prepare_install_frame.h"
 
+#include <QDebug>
 #include <QEvent>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QTextEdit>
 
 #include "base/file_util.h"
-#include "ui/delegates/partition_delegate.h"
 #include "ui/frames/consts.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"

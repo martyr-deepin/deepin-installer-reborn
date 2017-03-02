@@ -5,14 +5,14 @@
 #include <QApplication>
 #include <QFrame>
 
-#include "ui/delegates/partition_delegate.h"
+#include "ui/delegates/simple_partition_delegate.h"
 #include "ui/frames/inner/simple_partition_frame.h"
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
 
   QFrame window;
-  installer::PartitionDelegate delegate;
+  installer::SimplePartitionDelegate delegate;
   installer::SimplePartitionFrame frame(&delegate, &window);
   delegate.scanDevices();
   window.resize(640, 480);
