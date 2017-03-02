@@ -1,33 +1,19 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Alick Zhao <alick9188@gmail.com>, 2012-2013
-# Ben Wu <hpwu@redhat.com>, 2002-2003
-# Chester Cheng <ccheng@redhat.com>, 2004-2007
-# Christopher Meng <cickumqt@gmail.com>, 2012-2013
-# Huan Chen <chenhuan126@126.com>, 2011
-# chenh <chenhuan.gt@gmail.com>, 2010
-# Leah Liu <lliu@redhat.com>, 2010
-# Leah Liu <weliu@redhat.com>, 2005
-# 臻博 李 <litimetal@gmail.com>, 2013
-# Tommy He <lovenemesis@gmail.com>, 2011
-# pingman <pingman@fedoraproject.org>, 2009
-# Terry Chuang <tchuang@redhat.com>, 2008-2009
-# Tiansworld <tiansworld@fedoraproject.org>, 2013
-# Waika Liu <wliu@redhat.com>, 2005
-# Walter Cheuk <wwycheuk@netvigator.com>, 2005
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: system-config-date\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-10 17:18+0100\n"
-"PO-Revision-Date: 2013-11-20 12:31+0000\n"
-"Last-Translator: Dimitris Glezos <glezos@transifex.com>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/fedora/language/zh_CN/)\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Michael Jay Tong <michaeljayt@gmail.com>, 2017\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/linuxdeepin/teams/3976/zh_CN/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -66,7 +52,7 @@ msgstr "非洲/班吉"
 
 #: system-config-date-timezones.h:9
 msgid "Africa/Banjul"
-msgstr "非洲/班珠"
+msgstr "非洲/班珠尔"
 
 #: system-config-date-timezones.h:10
 msgid "Africa/Bissau"
@@ -164,7 +150,7 @@ msgstr "非洲/金沙萨"
 #. comment for time zone Africa/Kinshasa
 #: system-config-date-timezones.h:35
 msgid "west Dem. Rep. of Congo"
-msgstr "刚果民主共和国西部"
+msgstr "民主刚果西部"
 
 #: system-config-date-timezones.h:36
 msgid "Africa/Lagos"
@@ -189,7 +175,7 @@ msgstr "非洲/卢本巴希"
 #. comment for time zone Africa/Lubumbashi
 #: system-config-date-timezones.h:42
 msgid "east Dem. Rep. of Congo"
-msgstr "刚果民主共和国东部"
+msgstr "民主刚果东部"
 
 #: system-config-date-timezones.h:43
 msgid "Africa/Lusaka"
@@ -209,7 +195,7 @@ msgstr "非洲/马塞卢"
 
 #: system-config-date-timezones.h:47
 msgid "Africa/Mbabane"
-msgstr "非洲/姆巴巴内"
+msgstr "非洲/姆巴巴纳"
 
 #: system-config-date-timezones.h:48
 msgid "Africa/Mogadishu"
@@ -221,7 +207,7 @@ msgstr "非洲/蒙罗维亚"
 
 #: system-config-date-timezones.h:50
 msgid "Africa/Nairobi"
-msgstr "非洲/内罗比"
+msgstr "非洲/内罗毕"
 
 #: system-config-date-timezones.h:51
 msgid "Africa/Ndjamena"
@@ -249,7 +235,7 @@ msgstr "非洲/圣多美"
 
 #: system-config-date-timezones.h:57
 msgid "Africa/Timbuktu"
-msgstr "非洲/通布图"
+msgstr "非洲/廷巴克图"
 
 #: system-config-date-timezones.h:58
 msgid "Africa/Tripoli"
@@ -265,7 +251,7 @@ msgstr "非洲/温得和克"
 
 #: system-config-date-timezones.h:61
 msgid "America/Adak"
-msgstr "美洲/阿达克"
+msgstr "美洲/艾德克"
 
 #. comment for time zone America/Adak
 #: system-config-date-timezones.h:63
@@ -291,7 +277,7 @@ msgstr "美洲/安提瓜"
 
 #: system-config-date-timezones.h:69
 msgid "America/Araguaina"
-msgstr "美洲/阿拉瓜伊那"
+msgstr "美洲/阿拉瓜伊纳"
 
 #. comment for time zone America/Araguaina
 #: system-config-date-timezones.h:71
@@ -305,7 +291,7 @@ msgstr "美洲/阿根廷/布宜诺斯艾利斯"
 #. comment for time zone America/Argentina/Buenos_Aires
 #: system-config-date-timezones.h:74
 msgid "Buenos Aires (BA, CF)"
-msgstr "布宜诺斯艾利斯（BA，CF）"
+msgstr "布宜诺斯艾利斯 (BA, CF)"
 
 #: system-config-date-timezones.h:75
 msgid "America/Argentina/Catamarca"
@@ -314,20 +300,20 @@ msgstr "美洲/阿根廷/卡塔马卡"
 #. comment for time zone America/Argentina/Catamarca
 #: system-config-date-timezones.h:77
 msgid "Catamarca (CT), Chubut (CH)"
-msgstr "卡塔马卡（CT）,丘布特（CH）"
+msgstr "卡塔马卡 (CT), 丘布特 (CH)"
 
 #: system-config-date-timezones.h:78
 msgid "America/Argentina/ComodRivadavia"
-msgstr "美洲∕阿根廷∕科莫多罗里瓦达维亚"
+msgstr "美洲/阿根廷/里瓦达维亚海军准将城"
 
 #: system-config-date-timezones.h:79
 msgid "America/Argentina/Cordoba"
-msgstr "美洲/阿根廷/科尔多瓦"
+msgstr "美洲/阿根廷/科尔多巴"
 
 #. comment for time zone America/Argentina/Cordoba
 #: system-config-date-timezones.h:81
 msgid "most locations (CB, CC, CN, ER, FM, MN, SE, SF)"
-msgstr "大部分地区（CB，CC，CN，ER，FM，MN，SE，SF）"
+msgstr "多数位置 (CB, CC, CN, ER, FM, MN, SE, SF)"
 
 #: system-config-date-timezones.h:82
 msgid "America/Argentina/Jujuy"
@@ -336,7 +322,7 @@ msgstr "美洲/阿根廷/胡胡伊"
 #. comment for time zone America/Argentina/Jujuy
 #: system-config-date-timezones.h:84
 msgid "Jujuy (JY)"
-msgstr "胡胡伊（JY）"
+msgstr "胡胡伊 (JY)"
 
 #: system-config-date-timezones.h:85
 msgid "America/Argentina/La_Rioja"
@@ -345,7 +331,7 @@ msgstr "美洲/阿根廷/拉里奥哈"
 #. comment for time zone America/Argentina/La_Rioja
 #: system-config-date-timezones.h:87
 msgid "La Rioja (LR)"
-msgstr "拉里奥哈（LR）"
+msgstr "拉里奥哈 (LR)"
 
 #: system-config-date-timezones.h:88
 msgid "America/Argentina/Mendoza"
@@ -354,16 +340,16 @@ msgstr "美洲/阿根廷/门多萨"
 #. comment for time zone America/Argentina/Mendoza
 #: system-config-date-timezones.h:90
 msgid "Mendoza (MZ)"
-msgstr "门多萨（MZ）"
+msgstr "门多萨 (MZ)"
 
 #: system-config-date-timezones.h:91
 msgid "America/Argentina/Rio_Gallegos"
-msgstr "美洲∕阿根廷∕里奥加耶戈斯"
+msgstr "美洲/阿根廷/里奥加耶戈斯"
 
 #. comment for time zone America/Argentina/Rio_Gallegos
 #: system-config-date-timezones.h:93
 msgid "Santa Cruz (SC)"
-msgstr "圣克鲁斯（SC）"
+msgstr "圣克鲁斯 (SC)"
 
 #: system-config-date-timezones.h:94
 msgid "America/Argentina/Salta"
@@ -372,7 +358,7 @@ msgstr "美洲/阿根廷/萨尔塔"
 #. comment for time zone America/Argentina/Salta
 #: system-config-date-timezones.h:96
 msgid "(SA, LP, NQ, RN)"
-msgstr "(SA，LP，NQ，RN）"
+msgstr "(SA, LP, NQ, RN)"
 
 #: system-config-date-timezones.h:97
 msgid "America/Argentina/San_Juan"
@@ -381,7 +367,7 @@ msgstr "美洲/阿根廷/圣胡安"
 #. comment for time zone America/Argentina/San_Juan
 #: system-config-date-timezones.h:99
 msgid "San Juan (SJ)"
-msgstr "圣胡安（SJ）"
+msgstr "圣胡安 (SJ)"
 
 #: system-config-date-timezones.h:100
 msgid "America/Argentina/San_Luis"
@@ -390,7 +376,7 @@ msgstr "美洲/阿根廷/圣路易斯"
 #. comment for time zone America/Argentina/San_Luis
 #: system-config-date-timezones.h:102
 msgid "San Luis (SL)"
-msgstr "圣路易斯（SL）"
+msgstr "圣路易斯 (SL)"
 
 #: system-config-date-timezones.h:103
 msgid "America/Argentina/Tucuman"
@@ -399,7 +385,7 @@ msgstr "美洲/阿根廷/图库曼"
 #. comment for time zone America/Argentina/Tucuman
 #: system-config-date-timezones.h:105
 msgid "Tucuman (TM)"
-msgstr "图库曼（TM）"
+msgstr "图库曼 (TM)"
 
 #: system-config-date-timezones.h:106
 msgid "America/Argentina/Ushuaia"
@@ -408,7 +394,7 @@ msgstr "美洲/阿根廷/乌斯怀亚"
 #. comment for time zone America/Argentina/Ushuaia
 #: system-config-date-timezones.h:108
 msgid "Tierra del Fuego (TF)"
-msgstr "火地岛（TF）"
+msgstr "火地岛 (TF)"
 
 #: system-config-date-timezones.h:109
 msgid "America/Aruba"
@@ -416,16 +402,16 @@ msgstr "美洲/阿鲁巴"
 
 #: system-config-date-timezones.h:110
 msgid "America/Asuncion"
-msgstr "美洲/阿孙西翁"
+msgstr "美洲/亚松森"
 
 #: system-config-date-timezones.h:111
 msgid "America/Atikokan"
-msgstr "美洲∕阿蒂科肯"
+msgstr "美洲/阿蒂科肯"
 
 #. comment for time zone America/Atikokan
 #: system-config-date-timezones.h:113
 msgid "Eastern Standard Time - Atikokan, Ontario and Southampton I, Nunavut"
-msgstr "东部标准时间 - 阿蒂科肯，安大略和南安普敦岛，纽纳瓦特"
+msgstr "东部标准时间 - 安大略阿蒂科肯和努纳武特南安普顿岛"
 
 #: system-config-date-timezones.h:114
 msgid "America/Atka"
@@ -442,12 +428,12 @@ msgstr "巴伊亚"
 
 #: system-config-date-timezones.h:118
 msgid "America/Bahia_Banderas"
-msgstr "美洲/巴伊亚_班德拉斯"
+msgstr "美洲/班德拉斯湾"
 
 #. comment for time zone America/Bahia_Banderas
 #: system-config-date-timezones.h:120
 msgid "Mexican Central Time - Bahia de Banderas"
-msgstr "墨西哥中部时间 - 巴伊亚德班德拉斯"
+msgstr "墨西哥中部时间 - 班德拉斯湾"
 
 #: system-config-date-timezones.h:121
 msgid "America/Barbados"
@@ -460,15 +446,15 @@ msgstr "美洲/贝伦"
 #. comment for time zone America/Belem
 #: system-config-date-timezones.h:124
 msgid "Amapa, E Para"
-msgstr "阿马帕，巴拉东部"
+msgstr "帕拉东部阿马帕"
 
 #: system-config-date-timezones.h:125
 msgid "America/Belize"
-msgstr "美洲/伯利茲"
+msgstr "美洲/伯利兹"
 
 #: system-config-date-timezones.h:126
 msgid "America/Blanc-Sablon"
-msgstr "美洲∕布朗萨布隆"
+msgstr "美洲/布朗萨布隆"
 
 #. comment for time zone America/Blanc-Sablon
 #: system-config-date-timezones.h:128
@@ -503,12 +489,12 @@ msgstr "美洲/布宜诺斯艾利斯"
 
 #: system-config-date-timezones.h:137
 msgid "America/Cambridge_Bay"
-msgstr "美洲/剑桥湾"
+msgstr "美洲/坎布里季贝"
 
 #. comment for time zone America/Cambridge_Bay
 #: system-config-date-timezones.h:139
 msgid "Mountain Time - west Nunavut"
-msgstr "山地时间 - 纽纳瓦特西部"
+msgstr "山地时间 - 努纳武特西部"
 
 #: system-config-date-timezones.h:140
 msgid "America/Campo_Grande"
@@ -517,7 +503,7 @@ msgstr "美洲/大坎普"
 #. comment for time zone America/Campo_Grande
 #: system-config-date-timezones.h:142
 msgid "Mato Grosso do Sul"
-msgstr "马托格罗索南部"
+msgstr "南马托格罗索"
 
 #: system-config-date-timezones.h:143
 msgid "America/Cancun"
@@ -560,11 +546,11 @@ msgstr "美洲/奇瓦瓦"
 #. comment for time zone America/Chihuahua
 #: system-config-date-timezones.h:155
 msgid "Mexican Mountain Time - Chihuahua away from US border"
-msgstr "墨西哥山地时间 - 美国边境的奇瓦瓦"
+msgstr "墨西哥山地时间 - 远离美国边境的奇瓦瓦"
 
 #: system-config-date-timezones.h:156
 msgid "America/Coral_Harbour"
-msgstr "美洲/科勒尔哈伯（珊瑚港）"
+msgstr "美洲/珊瑚港"
 
 #: system-config-date-timezones.h:157
 msgid "America/Cordoba"
@@ -581,7 +567,7 @@ msgstr "美洲/克雷斯顿"
 #. comment for time zone America/Creston
 #: system-config-date-timezones.h:161
 msgid "Mountain Standard Time - Creston, British Columbia"
-msgstr "山地标准时间 - 克雷斯顿，不列颠哥伦比亚省"
+msgstr "山地标准时间 - 不列颠哥伦比亚克雷斯顿"
 
 #: system-config-date-timezones.h:162
 msgid "America/Cuiaba"
@@ -594,16 +580,16 @@ msgstr "马托格罗索"
 
 #: system-config-date-timezones.h:165
 msgid "America/Curacao"
-msgstr "美洲/库拉索岛"
+msgstr "美洲/库拉卡"
 
 #: system-config-date-timezones.h:166
 msgid "America/Danmarkshavn"
-msgstr "美洲/丹麦沙文"
+msgstr "美洲/丹麦港"
 
 #. comment for time zone America/Danmarkshavn
 #: system-config-date-timezones.h:168
 msgid "east coast, north of Scoresbysund"
-msgstr "东海岸，斯科斯比松北部"
+msgstr "斯科斯比松北部东海岸"
 
 #: system-config-date-timezones.h:169
 msgid "America/Dawson"
@@ -622,7 +608,7 @@ msgstr "美洲/道森克里克"
 #: system-config-date-timezones.h:174
 msgid ""
 "Mountain Standard Time - Dawson Creek & Fort Saint John, British Columbia"
-msgstr "山地标准时间 - 道森克里克和圣约翰堡，不列颠哥伦比亚"
+msgstr "山地标准时间 - 不列颠哥伦比亚道森克里克和圣约翰堡"
 
 #: system-config-date-timezones.h:175
 msgid "America/Denver"
@@ -640,7 +626,7 @@ msgstr "美洲/底特律"
 #. comment for time zone America/Detroit
 #: system-config-date-timezones.h:180
 msgid "Eastern Time - Michigan - most locations"
-msgstr "东部时间 - 密歇根 - 大部分地区"
+msgstr "东部时间 - 密歇根 - 多数位置"
 
 #: system-config-date-timezones.h:181
 msgid "America/Dominica"
@@ -653,16 +639,16 @@ msgstr "美洲/埃德蒙顿"
 #. comment for time zone America/Edmonton
 #: system-config-date-timezones.h:184
 msgid "Mountain Time - Alberta, east British Columbia & west Saskatchewan"
-msgstr "山地时间 - 艾伯塔，不列颠哥伦比亚东部和萨斯喀彻温西部"
+msgstr "山地标准时间 - 不列颠哥伦比亚东部阿尔伯塔和萨斯喀彻温东部"
 
 #: system-config-date-timezones.h:185
 msgid "America/Eirunepe"
-msgstr "美洲/埃鲁内佩"
+msgstr "美洲/依伦尼贝"
 
 #. comment for time zone America/Eirunepe
 #: system-config-date-timezones.h:187
 msgid "W Amazonas"
-msgstr "亚马孙西部"
+msgstr "亚马逊西部"
 
 #: system-config-date-timezones.h:188
 msgid "America/El_Salvador"
@@ -674,12 +660,12 @@ msgstr "美洲/恩塞纳达"
 
 #: system-config-date-timezones.h:190
 msgid "America/Fortaleza"
-msgstr "美洲/福塔莱萨"
+msgstr "美洲/福塔雷萨"
 
 #. comment for time zone America/Fortaleza
 #: system-config-date-timezones.h:192
 msgid "NE Brazil (MA, PI, CE, RN, PB)"
-msgstr "巴西东北部（MA，PI，CE，RN，PB）"
+msgstr "巴西东北部 (MA, PI, CE, RN, PB)"
 
 #: system-config-date-timezones.h:193
 msgid "America/Fort_Wayne"
@@ -687,17 +673,17 @@ msgstr "美洲/韦恩堡"
 
 #: system-config-date-timezones.h:194
 msgid "America/Glace_Bay"
-msgstr "美洲/格莱斯湾"
+msgstr "美洲/格莱斯贝"
 
 #. comment for time zone America/Glace_Bay
 #: system-config-date-timezones.h:196
 msgid ""
 "Atlantic Time - Nova Scotia - places that did not observe DST 1966-1971"
-msgstr "大西洋时间 - 新斯科舍 - 不遵守 DST1966 - 1971 的地方"
+msgstr "大西洋时间 - 新斯科舍 - 在1966-1971年间不遵守夏令时的地方"
 
 #: system-config-date-timezones.h:197
 msgid "America/Godthab"
-msgstr "美洲/高特哈"
+msgstr "美洲/戈特霍布"
 
 #. comment for time zone America/Godthab
 #. comment for time zone America/Santiago
@@ -711,7 +697,7 @@ msgstr "美洲/高特哈"
 #: system-config-date-timezones.h:774 system-config-date-timezones.h:870
 #: system-config-date-timezones.h:912
 msgid "most locations"
-msgstr "大部分地区"
+msgstr "多数位置"
 
 #: system-config-date-timezones.h:200
 msgid "America/Goose_Bay"
@@ -720,11 +706,11 @@ msgstr "美洲/古斯湾"
 #. comment for time zone America/Goose_Bay
 #: system-config-date-timezones.h:202
 msgid "Atlantic Time - Labrador - most locations"
-msgstr "大西洋时间 - 拉布拉多 - 大部分地区"
+msgstr "大西洋时间 - 拉布拉多 - 多数位置"
 
 #: system-config-date-timezones.h:203
 msgid "America/Grand_Turk"
-msgstr "美洲/大特克"
+msgstr "美洲/大土耳其"
 
 #: system-config-date-timezones.h:204
 msgid "America/Grenada"
@@ -732,7 +718,7 @@ msgstr "美洲/格林纳达"
 
 #: system-config-date-timezones.h:205
 msgid "America/Guadeloupe"
-msgstr "美洲/瓜德卢普"
+msgstr "美洲/瓜德罗普"
 
 #: system-config-date-timezones.h:206
 msgid "America/Guatemala"
@@ -761,7 +747,7 @@ msgstr "美洲/哈利法克斯"
 #. comment for time zone America/Halifax
 #: system-config-date-timezones.h:213
 msgid "Atlantic Time - Nova Scotia (most places), PEI"
-msgstr "大西洋时间 - 新斯科舍（大部分地区），爱德华王子岛"
+msgstr "大西洋时间 - 爱德华王子岛新斯科舍(多数地方)"
 
 #: system-config-date-timezones.h:214
 msgid "America/Havana"
@@ -769,7 +755,7 @@ msgstr "美洲/哈瓦那"
 
 #: system-config-date-timezones.h:215
 msgid "America/Hermosillo"
-msgstr "美洲/哈模斯罗"
+msgstr "美洲/埃莫西约"
 
 #. comment for time zone America/Hermosillo
 #: system-config-date-timezones.h:217
@@ -778,79 +764,79 @@ msgstr "山地标准时间 - 索诺拉"
 
 #: system-config-date-timezones.h:218
 msgid "America/Indiana/Indianapolis"
-msgstr "美洲/印第安纳/印第安纳波利斯"
+msgstr "美洲/印地安那/印第安纳波利斯"
 
 #. comment for time zone America/Indiana/Indianapolis
 #: system-config-date-timezones.h:220
 msgid "Eastern Time - Indiana - most locations"
-msgstr "东部时间 - 印地安纳 - 大部分地区"
+msgstr "东部时间 - 印第安纳 - 多数位置"
 
 #: system-config-date-timezones.h:221
 msgid "America/Indiana/Knox"
-msgstr "美洲/印第安纳/诺克斯"
+msgstr "美洲/印地安那/诺克斯"
 
 #. comment for time zone America/Indiana/Knox
 #: system-config-date-timezones.h:223
 msgid "Central Time - Indiana - Starke County"
-msgstr "中部时间 - 印地安纳 - 斯塔克县"
+msgstr "中部时间 - 印第安纳 - 斯塔克县"
 
 #: system-config-date-timezones.h:224
 msgid "America/Indiana/Marengo"
-msgstr "美洲/印第安纳/马伦戈"
+msgstr "美洲/印地安那/马伦戈"
 
 #. comment for time zone America/Indiana/Marengo
 #: system-config-date-timezones.h:226
 msgid "Eastern Time - Indiana - Crawford County"
-msgstr "东部时间——印地安那——克劳福德县"
+msgstr "东部时间 - 印第安纳 - 克劳福德县"
 
 #: system-config-date-timezones.h:227
 msgid "America/Indiana/Petersburg"
-msgstr "美洲∕印第安那∕彼得斯堡"
+msgstr "美洲/印地安那/彼得斯堡"
 
 #. comment for time zone America/Indiana/Petersburg
 #: system-config-date-timezones.h:229
 msgid "Eastern Time - Indiana - Pike County"
-msgstr "东部时间 - 印地安那 - 派克县"
+msgstr "东部时间 - 印第安纳 - 派克县"
 
 #: system-config-date-timezones.h:230
 msgid "America/Indianapolis"
-msgstr "美洲/印第安纳波利斯"
+msgstr "美洲/印地安纳波利斯"
 
 #: system-config-date-timezones.h:231
 msgid "America/Indiana/Tell_City"
-msgstr "美洲∕印第安纳∕特尔城"
+msgstr "美洲/印地安那/退尔城"
 
 #. comment for time zone America/Indiana/Tell_City
 #: system-config-date-timezones.h:233
 msgid "Central Time - Indiana - Perry County"
-msgstr "中部时间 - 印地安纳 - 佩里县"
+msgstr "中部时间 - 印第安纳 - 佩里县"
 
 #: system-config-date-timezones.h:234
 msgid "America/Indiana/Vevay"
-msgstr "美洲/印第安那/韦韦"
+msgstr "美洲/印地安那/维维市"
 
 #. comment for time zone America/Indiana/Vevay
 #: system-config-date-timezones.h:236
 msgid "Eastern Time - Indiana - Switzerland County"
-msgstr "东部时间 - 印地安纳 - 瑞士县"
+msgstr "东部时间 - 印第安纳 - 瑞士县"
 
 #: system-config-date-timezones.h:237
 msgid "America/Indiana/Vincennes"
-msgstr "美洲∕印第安纳∕温森斯"
+msgstr "美洲/印地安那/温森斯"
 
 #. comment for time zone America/Indiana/Vincennes
 #: system-config-date-timezones.h:239
 msgid "Eastern Time - Indiana - Daviess, Dubois, Knox & Martin Counties"
-msgstr "东部时间 - 印地安纳 - 戴维斯，杜波依斯，诺克斯和马丁县"
+msgstr "东部时间 - 印第安纳 - 戴维斯、杜波依斯、诺克斯和马丁县"
 
 #: system-config-date-timezones.h:240
 msgid "America/Indiana/Winamac"
-msgstr "美洲∕印第安纳∕威纳马克"
+msgstr "美洲/印地安那/威纳马克"
 
 #. comment for time zone America/Indiana/Winamac
 #: system-config-date-timezones.h:242
 msgid "Eastern Time - Indiana - Pulaski County"
-msgstr "东部时间 - 印地安纳 - 珀拉斯凯县"
+msgstr "东部时间 - 印第安纳 - 珀拉斯凯县"
 
 #: system-config-date-timezones.h:243
 msgid "America/Inuvik"
@@ -859,16 +845,16 @@ msgstr "美洲/伊努维克"
 #. comment for time zone America/Inuvik
 #: system-config-date-timezones.h:245
 msgid "Mountain Time - west Northwest Territories"
-msgstr "山地时间 - 西西北区"
+msgstr "山地时间 - 西北西部区域"
 
 #: system-config-date-timezones.h:246
 msgid "America/Iqaluit"
-msgstr "美洲/伊卡卢伊特"
+msgstr "美洲/伊魁鲁伊特"
 
 #. comment for time zone America/Iqaluit
 #: system-config-date-timezones.h:248
 msgid "Eastern Time - east Nunavut - most locations"
-msgstr "东部时间 - 纽纳瓦特东部 - 大部分地区"
+msgstr "东部时间 - 努纳武特东部 - 多数位置"
 
 #: system-config-date-timezones.h:249
 msgid "America/Jamaica"
@@ -876,7 +862,7 @@ msgstr "美洲/牙买加"
 
 #: system-config-date-timezones.h:250
 msgid "America/Jujuy"
-msgstr "美洲/胡惠"
+msgstr "美洲/胡胡伊"
 
 #: system-config-date-timezones.h:251
 msgid "America/Juneau"
@@ -885,7 +871,7 @@ msgstr "美洲/朱诺"
 #. comment for time zone America/Juneau
 #: system-config-date-timezones.h:253
 msgid "Alaska Time - Alaska panhandle"
-msgstr "阿拉斯加时间 - 阿拉斯加锅柄状地区"
+msgstr "阿拉斯加时间 - 阿拉斯加狭地"
 
 #: system-config-date-timezones.h:254
 msgid "America/Kentucky/Louisville"
@@ -894,7 +880,7 @@ msgstr "美洲/肯塔基/路易斯维尔"
 #. comment for time zone America/Kentucky/Louisville
 #: system-config-date-timezones.h:256
 msgid "Eastern Time - Kentucky - Louisville area"
-msgstr "东部时间 - 肯塔基 - 路易斯维尔地区"
+msgstr "东部时间 - 肯塔基 - 路易斯维尔区域"
 
 #: system-config-date-timezones.h:257
 msgid "America/Kentucky/Monticello"
@@ -907,7 +893,7 @@ msgstr "东部时间 - 肯塔基 - 韦恩县"
 
 #: system-config-date-timezones.h:260
 msgid "America/Knox_IN"
-msgstr "美洲∕诺克斯（印第安纳）"
+msgstr "美洲/诺克斯（印第安纳）"
 
 #: system-config-date-timezones.h:261
 msgid "America/Kralendijk"
@@ -936,7 +922,7 @@ msgstr "美洲/路易斯维尔"
 
 #: system-config-date-timezones.h:268
 msgid "America/Lower_Princes"
-msgstr "美洲/太子港"
+msgstr "美洲/小王子"
 
 #: system-config-date-timezones.h:269
 msgid "America/Maceio"
@@ -962,11 +948,11 @@ msgstr "亚马逊东部"
 
 #: system-config-date-timezones.h:276
 msgid "America/Marigot"
-msgstr "美洲∕马里戈特"
+msgstr "美洲/马里戈"
 
 #: system-config-date-timezones.h:277
 msgid "America/Martinique"
-msgstr "美洲/马蒂尼克"
+msgstr "美洲/马提尼克"
 
 #: system-config-date-timezones.h:278
 msgid "America/Matamoros"
@@ -976,7 +962,7 @@ msgstr "美洲/马塔莫罗斯"
 #: system-config-date-timezones.h:280
 msgid ""
 "US Central Time - Coahuila, Durango, Nuevo Leon, Tamaulipas near US border"
-msgstr "美国中部时间 - 靠近美国边境的科阿韦拉，杜兰戈，新莱昂，塔毛利帕斯"
+msgstr "美国中部时间 - 靠近美国边境的科阿韦拉、杜兰戈、新莱昂和塔毛利帕斯"
 
 #: system-config-date-timezones.h:281
 msgid "America/Mazatlan"
@@ -985,7 +971,7 @@ msgstr "美洲/马萨特兰"
 #. comment for time zone America/Mazatlan
 #: system-config-date-timezones.h:283
 msgid "Mountain Time - S Baja, Nayarit, Sinaloa"
-msgstr "山地时间——巴哈南部，纳亚里特，锡那罗亚"
+msgstr "山地时间 - 南巴哈、纳亚里特、锡那罗亚"
 
 #: system-config-date-timezones.h:284
 msgid "America/Mendoza"
@@ -993,13 +979,13 @@ msgstr "美洲/门多萨"
 
 #: system-config-date-timezones.h:285
 msgid "America/Menominee"
-msgstr "美洲/梅诺米尼"
+msgstr "美洲/密诺米尼"
 
 #. comment for time zone America/Menominee
 #: system-config-date-timezones.h:287
 msgid ""
 "Central Time - Michigan - Dickinson, Gogebic, Iron & Menominee Counties"
-msgstr "中部时间 - 密歇根 - 迪金森，戈吉比克，艾恩和梅诺米尼县"
+msgstr "中部时间 - 密歇根 - 狄金森、戈吉比克、艾恩和梅诺米尼县"
 
 #: system-config-date-timezones.h:288
 msgid "America/Merida"
@@ -1008,7 +994,7 @@ msgstr "美洲/梅里达"
 #. comment for time zone America/Merida
 #: system-config-date-timezones.h:290
 msgid "Central Time - Campeche, Yucatan"
-msgstr "中部时间——康佩什，尤卡坦"
+msgstr "中部时间 - 尤卡坦坎佩切"
 
 #: system-config-date-timezones.h:291
 msgid "America/Metlakatla"
@@ -1026,7 +1012,7 @@ msgstr "美洲/墨西哥城"
 #. comment for time zone America/Mexico_City
 #: system-config-date-timezones.h:296
 msgid "Central Time - most locations"
-msgstr "中部时间——大部分地区"
+msgstr "中部时间 - 多数位置"
 
 #: system-config-date-timezones.h:297
 msgid "America/Miquelon"
@@ -1034,12 +1020,12 @@ msgstr "美洲/密克隆"
 
 #: system-config-date-timezones.h:298
 msgid "America/Moncton"
-msgstr "美洲∕蒙克顿"
+msgstr "美洲/蒙克顿"
 
 #. comment for time zone America/Moncton
 #: system-config-date-timezones.h:300
 msgid "Atlantic Time - New Brunswick"
-msgstr "大西洋时间——新不伦瑞克"
+msgstr "大西洋时间 - 新不伦瑞克"
 
 #: system-config-date-timezones.h:301
 msgid "America/Monterrey"
@@ -1050,11 +1036,11 @@ msgstr "美洲/蒙特雷"
 msgid ""
 "Mexican Central Time - Coahuila, Durango, Nuevo Leon, Tamaulipas away from "
 "US border"
-msgstr "墨西哥中部时间——远离美国边境的科阿韦拉，杜兰戈，新莱昂，塔毛利帕斯"
+msgstr "墨西哥中部时间 - 远离美国边境的科阿韦拉、杜兰戈、新莱昂和塔毛利帕斯"
 
 #: system-config-date-timezones.h:304
 msgid "America/Montevideo"
-msgstr "美洲/蒙特维的亚"
+msgstr "美洲/蒙得维的亚"
 
 #: system-config-date-timezones.h:305
 msgid "America/Montreal"
@@ -1063,11 +1049,11 @@ msgstr "美洲/蒙特利尔"
 #. comment for time zone America/Montreal
 #: system-config-date-timezones.h:307
 msgid "Eastern Time - Quebec - most locations"
-msgstr "东部时间 - 魁北克 - 大部分地区"
+msgstr "东部时间 - 魁北克 - 多数位置"
 
 #: system-config-date-timezones.h:308
 msgid "America/Montserrat"
-msgstr "美洲/蒙塞拉特"
+msgstr "美洲/蒙特塞拉特"
 
 #: system-config-date-timezones.h:309
 msgid "America/Nassau"
@@ -1090,7 +1076,7 @@ msgstr "美洲/尼皮贡"
 #: system-config-date-timezones.h:315
 msgid ""
 "Eastern Time - Ontario & Quebec - places that did not observe DST 1967-1973"
-msgstr "东部时间 - 安大略和魁北克 - 不遵守 DST 1967-1973 的地方"
+msgstr "东部时间 - 安大略和魁北克 - 在1967-1973年间不遵守夏令时的地方"
 
 #: system-config-date-timezones.h:316
 msgid "America/Nome"
@@ -1103,7 +1089,7 @@ msgstr "阿拉斯加时间 - 阿拉斯加西部"
 
 #: system-config-date-timezones.h:319
 msgid "America/Noronha"
-msgstr "美洲/诺罗尼亚"
+msgstr "美洲/洛罗尼亚"
 
 #. comment for time zone America/Noronha
 #: system-config-date-timezones.h:321
@@ -1112,7 +1098,7 @@ msgstr "大西洋群岛"
 
 #: system-config-date-timezones.h:322
 msgid "America/North_Dakota/Beulah"
-msgstr "美洲∕北达科他∕比尤拉"
+msgstr "美洲/北达科他/比尤拉"
 
 #. comment for time zone America/North_Dakota/Beulah
 #: system-config-date-timezones.h:324
@@ -1121,7 +1107,7 @@ msgstr "中部时间 - 北达科他 - 默瑟县"
 
 #: system-config-date-timezones.h:325
 msgid "America/North_Dakota/Center"
-msgstr "美洲∕北达科他∕中部"
+msgstr "美洲/北达科他/中心"
 
 #. comment for time zone America/North_Dakota/Center
 #: system-config-date-timezones.h:327
@@ -1130,12 +1116,12 @@ msgstr "中部时间 - 北达科他 - 奥利弗县"
 
 #: system-config-date-timezones.h:328
 msgid "America/North_Dakota/New_Salem"
-msgstr "美洲∕北达科他∕纽沙伦"
+msgstr "美洲/北达科他/新萨勒姆"
 
 #. comment for time zone America/North_Dakota/New_Salem
 #: system-config-date-timezones.h:330
 msgid "Central Time - North Dakota - Morton County (except Mandan area)"
-msgstr "中部时间 - 北达科他 - 莫顿县(曼丹地区除外)"
+msgstr "中部时间 - 北达科他 - 莫顿县(除曼丹区域)"
 
 #: system-config-date-timezones.h:331
 msgid "America/Ojinaga"
@@ -1152,16 +1138,16 @@ msgstr "美洲/巴拿马"
 
 #: system-config-date-timezones.h:335
 msgid "America/Pangnirtung"
-msgstr "美洲/庞纳唐"
+msgstr "美洲/旁涅唐"
 
 #. comment for time zone America/Pangnirtung
 #: system-config-date-timezones.h:337
 msgid "Eastern Time - Pangnirtung, Nunavut"
-msgstr "东部时间——庞纳唐，纽纳瓦特"
+msgstr "东部时间 - 努纳武特庞纳唐"
 
 #: system-config-date-timezones.h:338
 msgid "America/Paramaribo"
-msgstr "美洲/帕拉马里博"
+msgstr "美洲/帕拉马利玻"
 
 #: system-config-date-timezones.h:339
 msgid "America/Phoenix"
@@ -1178,7 +1164,7 @@ msgstr "美洲/太子港"
 
 #: system-config-date-timezones.h:343
 msgid "America/Porto_Acre"
-msgstr "美洲∕阿克里港"
+msgstr "美洲/阿克里港"
 
 #: system-config-date-timezones.h:344
 msgid "America/Port_of_Spain"
@@ -1186,7 +1172,7 @@ msgstr "美洲/西班牙港"
 
 #: system-config-date-timezones.h:345
 msgid "America/Porto_Velho"
-msgstr "美洲/韦柳港"
+msgstr "美洲/波多韦柳"
 
 #. comment for time zone America/Porto_Velho
 #: system-config-date-timezones.h:347
@@ -1199,25 +1185,25 @@ msgstr "美洲/波多黎各"
 
 #: system-config-date-timezones.h:349
 msgid "America/Rainy_River"
-msgstr "美洲/雷尼里弗"
+msgstr "美洲/雨河"
 
 #. comment for time zone America/Rainy_River
 #: system-config-date-timezones.h:351
 msgid "Central Time - Rainy River & Fort Frances, Ontario"
-msgstr "中部时间 - 雷尼河和弗朗西斯堡，安大略"
+msgstr "中部时间 - 安大略的雨河和弗朗西斯堡"
 
 #: system-config-date-timezones.h:352
 msgid "America/Rankin_Inlet"
-msgstr "美洲/兰金因莱特"
+msgstr "美洲/雷今海口"
 
 #. comment for time zone America/Rankin_Inlet
 #: system-config-date-timezones.h:354
 msgid "Central Time - central Nunavut"
-msgstr "中部时间 - 纽纳瓦特中部"
+msgstr "中部时间 - 努纳武特中部"
 
 #: system-config-date-timezones.h:355
 msgid "America/Recife"
-msgstr "美洲/雷西腓"
+msgstr "美洲/累西腓"
 
 #. comment for time zone America/Recife
 #: system-config-date-timezones.h:357
@@ -1226,25 +1212,25 @@ msgstr "伯南布哥"
 
 #: system-config-date-timezones.h:358
 msgid "America/Regina"
-msgstr "美洲/里贾那"
+msgstr "美洲/里贾纳"
 
 #. comment for time zone America/Regina
 #: system-config-date-timezones.h:360
 msgid "Central Standard Time - Saskatchewan - most locations"
-msgstr "中部标准时间 - 萨斯喀彻温 - 大部分地区"
+msgstr "中部标准时间 - 萨斯喀彻温 - 多数位置"
 
 #: system-config-date-timezones.h:361
 msgid "America/Resolute"
-msgstr "美洲∕雷索卢特"
+msgstr "美洲/雷索卢特"
 
 #. comment for time zone America/Resolute
 #: system-config-date-timezones.h:363
 msgid "Central Standard Time - Resolute, Nunavut"
-msgstr "中部标准时间 - 雷索卢特，努纳武特地区"
+msgstr "中部标准时间 - 努纳武特雷索卢特"
 
 #: system-config-date-timezones.h:364
 msgid "America/Rio_Branco"
-msgstr "美洲/里奥布朗库"
+msgstr "美洲/里奥布郎库"
 
 #. comment for time zone America/Rio_Branco
 #: system-config-date-timezones.h:366
@@ -1257,21 +1243,21 @@ msgstr "美洲/罗萨里奥"
 
 #: system-config-date-timezones.h:368
 msgid "America/Santa_Isabel"
-msgstr "美国/圣伊莎贝尔"
+msgstr "美洲/圣伊萨贝尔"
 
 #. comment for time zone America/Santa_Isabel
 #: system-config-date-timezones.h:370
 msgid "Mexican Pacific Time - Baja California away from US border"
-msgstr "墨西哥太平洋地区时间 - 远离美国边境的下加利福尼亚"
+msgstr "墨西哥太平洋时间 - 远离美国边境的巴哈加利福尼亚"
 
 #: system-config-date-timezones.h:371
 msgid "America/Santarem"
-msgstr "美国/圣塔伦"
+msgstr "美洲/圣塔伦"
 
 #. comment for time zone America/Santarem
 #: system-config-date-timezones.h:373
 msgid "W Para"
-msgstr "巴拉西部"
+msgstr "帕拉西部"
 
 #: system-config-date-timezones.h:374
 msgid "America/Santiago"
@@ -1279,7 +1265,7 @@ msgstr "美洲/圣地亚哥"
 
 #: system-config-date-timezones.h:377
 msgid "America/Santo_Domingo"
-msgstr "美洲/圣多明戈"
+msgstr "美洲/圣多明各"
 
 #: system-config-date-timezones.h:378
 msgid "America/Sao_Paulo"
@@ -1288,20 +1274,20 @@ msgstr "美洲/圣保罗"
 #. comment for time zone America/Sao_Paulo
 #: system-config-date-timezones.h:380
 msgid "S & SE Brazil (GO, DF, MG, ES, RJ, SP, PR, SC, RS)"
-msgstr "巴西南部和东南部(GO，DF，MG，ES，RJ，SP，PR，SC，RS)"
+msgstr "巴西南部和东南部 (GO, DF, MG, ES, RJ, SP, PR, SC, RS)"
 
 #: system-config-date-timezones.h:381
 msgid "America/Scoresbysund"
-msgstr "美洲/斯科斯比松"
+msgstr "美洲/斯科列斯比桑德"
 
 #. comment for time zone America/Scoresbysund
 #: system-config-date-timezones.h:383
 msgid "Scoresbysund / Ittoqqortoormiit"
-msgstr "斯科斯比松/伊托科尔托米特"
+msgstr "斯科列斯比桑德 / 依托克拖米特"
 
 #: system-config-date-timezones.h:384
 msgid "America/Shiprock"
-msgstr "美洲/希普罗克"
+msgstr "美洲/舰石城"
 
 #. comment for time zone America/Shiprock
 #: system-config-date-timezones.h:386
@@ -1315,15 +1301,15 @@ msgstr "美洲/锡特卡"
 #. comment for time zone America/Sitka
 #: system-config-date-timezones.h:389
 msgid "Alaska Time - southeast Alaska panhandle"
-msgstr "阿拉斯加时间 - 东南阿拉斯加锅柄状地区"
+msgstr "阿拉斯加时间 - 阿拉斯加东南狭地"
 
 #: system-config-date-timezones.h:390
 msgid "America/St_Barthelemy"
-msgstr "美洲∕圣巴泰勒米"
+msgstr "美洲/圣巴托洛缪岛"
 
 #: system-config-date-timezones.h:391
 msgid "America/St_Johns"
-msgstr "美洲/圣约翰斯"
+msgstr "美洲/圣约翰"
 
 #. comment for time zone America/St_Johns
 #: system-config-date-timezones.h:393
@@ -1332,7 +1318,7 @@ msgstr "纽芬兰时间，包括拉布拉多东南部"
 
 #: system-config-date-timezones.h:394
 msgid "America/St_Kitts"
-msgstr "美洲/圣基茨"
+msgstr "美洲/圣基茨岛"
 
 #: system-config-date-timezones.h:395
 msgid "America/St_Lucia"
@@ -1366,16 +1352,16 @@ msgstr "美洲/图勒"
 #. comment for time zone America/Thule
 #: system-config-date-timezones.h:404
 msgid "Thule / Pituffik"
-msgstr "图勒/皮图菲克"
+msgstr "图勒 / 皮图菲克"
 
 #: system-config-date-timezones.h:405
 msgid "America/Thunder_Bay"
-msgstr "美洲/桑德湾"
+msgstr "美洲/桑德贝"
 
 #. comment for time zone America/Thunder_Bay
 #: system-config-date-timezones.h:407
 msgid "Eastern Time - Thunder Bay, Ontario"
-msgstr "东部时间 - 桑德湾，安大略"
+msgstr "东部时间 - 安大略桑德贝"
 
 #: system-config-date-timezones.h:408
 msgid "America/Tijuana"
@@ -1384,7 +1370,7 @@ msgstr "美洲/提华纳"
 #. comment for time zone America/Tijuana
 #: system-config-date-timezones.h:410
 msgid "US Pacific Time - Baja California near US border"
-msgstr "美国太平洋地区时间 - 靠近美国边境的下加利福尼亚"
+msgstr "美国太平洋时间 - 靠近美国边境的巴哈加利福尼亚"
 
 #: system-config-date-timezones.h:411
 msgid "America/Toronto"
@@ -1393,11 +1379,11 @@ msgstr "美洲/多伦多"
 #. comment for time zone America/Toronto
 #: system-config-date-timezones.h:413
 msgid "Eastern Time - Ontario - most locations"
-msgstr "东部时间 - 安大略 - 大部分地区"
+msgstr "东部时间 - 安大略 - 多数位置"
 
 #: system-config-date-timezones.h:414
 msgid "America/Tortola"
-msgstr "美洲/托尔托拉"
+msgstr "美洲/托尔托拉岛"
 
 #: system-config-date-timezones.h:415
 msgid "America/Vancouver"
@@ -1410,7 +1396,7 @@ msgstr "太平洋时间 - 不列颠哥伦比亚西部"
 
 #: system-config-date-timezones.h:418
 msgid "America/Virgin"
-msgstr "美洲∕维尔京"
+msgstr "美洲/英属维尔京群岛"
 
 #: system-config-date-timezones.h:419
 msgid "America/Whitehorse"
@@ -1428,7 +1414,7 @@ msgstr "美洲/温尼伯"
 #. comment for time zone America/Winnipeg
 #: system-config-date-timezones.h:424
 msgid "Central Time - Manitoba & west Ontario"
-msgstr "中部时间 - 马尼托巴和安大略西部"
+msgstr "中部时间 - 曼尼托巴和安大略西部"
 
 #: system-config-date-timezones.h:425
 msgid "America/Yakutat"
@@ -1437,7 +1423,7 @@ msgstr "美洲/亚库塔特"
 #. comment for time zone America/Yakutat
 #: system-config-date-timezones.h:427
 msgid "Alaska Time - Alaska panhandle neck"
-msgstr "阿拉斯加时间 - 阿拉斯加锅柄状地峡"
+msgstr "阿拉斯加时间 - 阿拉斯加狭地岩颈"
 
 #: system-config-date-timezones.h:428
 msgid "America/Yellowknife"
@@ -1446,16 +1432,16 @@ msgstr "美洲/耶洛奈夫"
 #. comment for time zone America/Yellowknife
 #: system-config-date-timezones.h:430
 msgid "Mountain Time - central Northwest Territories"
-msgstr "山地时间 - 西北区中部"
+msgstr "山地时间 - 西北中部区域"
 
 #: system-config-date-timezones.h:431
 msgid "Antarctica/Casey"
-msgstr "南极洲/凯西"
+msgstr "南极洲/卡塞"
 
 #. comment for time zone Antarctica/Casey
 #: system-config-date-timezones.h:433
 msgid "Casey Station, Bailey Peninsula"
-msgstr "凯西站，贝利半岛"
+msgstr "贝利半岛凯西站"
 
 #: system-config-date-timezones.h:434
 msgid "Antarctica/Davis"
@@ -1464,25 +1450,25 @@ msgstr "南极洲/戴维斯"
 #. comment for time zone Antarctica/Davis
 #: system-config-date-timezones.h:436
 msgid "Davis Station, Vestfold Hills"
-msgstr "戴维斯站，韦斯特福尔德丘陵"
+msgstr "西福尔丘陵戴维斯站"
 
 #: system-config-date-timezones.h:437
 msgid "Antarctica/DumontDUrville"
-msgstr "南极洲/杜蒙特迪维尔"
+msgstr "南极洲/杜蒙杜威勒"
 
 #. comment for time zone Antarctica/DumontDUrville
 #: system-config-date-timezones.h:439
 msgid "Dumont-d'Urville Station, Terre Adelie"
-msgstr "杜蒙特迪维尔站，特雷阿德利"
+msgstr "阿黛利地迪蒙·迪维尔站"
 
 #: system-config-date-timezones.h:440
 msgid "Antarctica/Macquarie"
-msgstr "南极洲/麦夸里"
+msgstr "南极洲/麦考瑞"
 
 #. comment for time zone Antarctica/Macquarie
 #: system-config-date-timezones.h:442
 msgid "Macquarie Island Station, Macquarie Island"
-msgstr "麦夸利岛站，麦夸利岛"
+msgstr "麦夸里岛麦夸里岛站"
 
 #: system-config-date-timezones.h:443
 msgid "Antarctica/Mawson"
@@ -1491,34 +1477,34 @@ msgstr "南极洲/莫森"
 #. comment for time zone Antarctica/Mawson
 #: system-config-date-timezones.h:445
 msgid "Mawson Station, Holme Bay"
-msgstr "莫森站，霍姆湾"
+msgstr "霍姆湾莫森站"
 
 #: system-config-date-timezones.h:446
 msgid "Antarctica/McMurdo"
-msgstr "南极洲/麦克默多"
+msgstr "南极洲/马克默多"
 
 #. comment for time zone Antarctica/McMurdo
 #: system-config-date-timezones.h:448
 msgid "McMurdo Station, Ross Island"
-msgstr "麦克默多站，罗斯岛"
+msgstr "罗斯岛麦克默多站"
 
 #: system-config-date-timezones.h:449
 msgid "Antarctica/Palmer"
-msgstr "南极洲/帕默"
+msgstr "南极洲/帕默尔"
 
 #. comment for time zone Antarctica/Palmer
 #: system-config-date-timezones.h:451
 msgid "Palmer Station, Anvers Island"
-msgstr "帕默站，安弗斯岛"
+msgstr "昂韦尔岛帕默站"
 
 #: system-config-date-timezones.h:452
 msgid "Antarctica/Rothera"
-msgstr "南极洲∕罗瑟拉"
+msgstr "南极洲/罗瑟拉"
 
 #. comment for time zone Antarctica/Rothera
 #: system-config-date-timezones.h:454
 msgid "Rothera Station, Adelaide Island"
-msgstr "罗瑟拉站，阿德莱德岛"
+msgstr "阿德莱德岛罗瑟拉站"
 
 #: system-config-date-timezones.h:455
 msgid "Antarctica/South_Pole"
@@ -1527,25 +1513,25 @@ msgstr "南极洲/南极"
 #. comment for time zone Antarctica/South_Pole
 #: system-config-date-timezones.h:457
 msgid "Amundsen-Scott Station, South Pole"
-msgstr "阿蒙德森 - 斯科特站，南极"
+msgstr "南极阿蒙森-史葛站"
 
 #: system-config-date-timezones.h:458
 msgid "Antarctica/Syowa"
-msgstr "南极洲/昭和"
+msgstr "南极洲/斯尤瓦"
 
 #. comment for time zone Antarctica/Syowa
 #: system-config-date-timezones.h:460
 msgid "Syowa Station, E Ongul I"
-msgstr "昭和站，翁古尔岛东部"
+msgstr "东翁古尔岛昭和站"
 
 #: system-config-date-timezones.h:461
 msgid "Antarctica/Vostok"
-msgstr "南极洲/东方"
+msgstr "南极洲/沃斯托克"
 
 #. comment for time zone Antarctica/Vostok
 #: system-config-date-timezones.h:463
 msgid "Vostok Station, Lake Vostok"
-msgstr "沃斯托克站，沃斯托克湖"
+msgstr "沃斯托克湖沃斯托克站"
 
 #: system-config-date-timezones.h:464
 msgid "Arctic/Longyearbyen"
@@ -1574,21 +1560,21 @@ msgstr "莫斯科+08 - 白令海"
 
 #: system-config-date-timezones.h:473
 msgid "Asia/Aqtau"
-msgstr "亚洲/阿克套"
+msgstr "亚洲/阿克图"
 
 #. comment for time zone Asia/Aqtau
 #: system-config-date-timezones.h:475
 msgid "Atyrau (Atirau, Gur'yev), Mangghystau (Mankistau)"
-msgstr "阿特劳(阿特劳，古里耶夫)，曼格斯套(曼吉斯陶)"
+msgstr "阿特劳 (古里耶夫), 曼格斯套 (曼格斯套)"
 
 #: system-config-date-timezones.h:476
 msgid "Asia/Aqtobe"
-msgstr "亚洲/阿克托比"
+msgstr "亚洲/阿克托别"
 
 #. comment for time zone Asia/Aqtobe
 #: system-config-date-timezones.h:478
 msgid "Aqtobe (Aktobe)"
-msgstr "阿克托比(阿克托别)"
+msgstr "阿克托别 (阿克托别)"
 
 #: system-config-date-timezones.h:479
 msgid "Asia/Ashgabat"
@@ -1596,7 +1582,7 @@ msgstr "亚洲/阿什哈巴德"
 
 #: system-config-date-timezones.h:480
 msgid "Asia/Ashkhabad"
-msgstr "亚洲∕阿什哈巴德"
+msgstr "亚洲/阿什哈巴德"
 
 #: system-config-date-timezones.h:481
 msgid "Asia/Baghdad"
@@ -1632,25 +1618,25 @@ msgstr "亚洲/加尔各答"
 
 #: system-config-date-timezones.h:489
 msgid "Asia/Choibalsan"
-msgstr "亚洲∕乔巴山"
+msgstr "亚洲/卓巴尔塞"
 
 #. comment for time zone Asia/Choibalsan
 #: system-config-date-timezones.h:491
 msgid "Dornod, Sukhbaatar"
-msgstr "东方，苏赫巴托尔"
+msgstr "东方省，苏赫巴托尔"
 
 #: system-config-date-timezones.h:492
 msgid "Asia/Chongqing"
-msgstr "亚洲∕重庆"
+msgstr "亚洲/重庆"
 
 #. comment for time zone Asia/Chongqing
 #: system-config-date-timezones.h:494
 msgid "central China - Sichuan, Yunnan, Guangxi, Shaanxi, Guizhou, etc."
-msgstr "中国中部 - 四川，云南，广西，陕西，贵州等。"
+msgstr "中国中部 - 四川、云南、广西、陕西、贵州等"
 
 #: system-config-date-timezones.h:495
 msgid "Asia/Chungking"
-msgstr "亚洲∕重庆"
+msgstr "亚洲/重庆"
 
 #: system-config-date-timezones.h:496
 msgid "Asia/Colombo"
@@ -1658,7 +1644,7 @@ msgstr "亚洲/科伦坡"
 
 #: system-config-date-timezones.h:497
 msgid "Asia/Dacca"
-msgstr "亚洲∕达卡(Dacca)"
+msgstr "亚洲/达卡"
 
 #: system-config-date-timezones.h:498
 msgid "Asia/Damascus"
@@ -1678,7 +1664,7 @@ msgstr "亚洲/迪拜"
 
 #: system-config-date-timezones.h:502
 msgid "Asia/Dushanbe"
-msgstr "亚洲/杜尚別"
+msgstr "亚洲/杜尚别"
 
 #: system-config-date-timezones.h:503
 msgid "Asia/Gaza"
@@ -1696,20 +1682,20 @@ msgstr "亚洲/哈尔滨"
 #. comment for time zone Asia/Harbin
 #: system-config-date-timezones.h:508
 msgid "Heilongjiang (except Mohe), Jilin"
-msgstr "黑龙江(漠河除外)，吉林"
+msgstr "黑龙江 (除漠河)、吉林"
 
 #: system-config-date-timezones.h:509
 msgid "Asia/Hebron"
-msgstr "亚洲/希伯伦"
+msgstr "亚洲/希伯仑"
 
 #. comment for time zone Asia/Hebron
 #: system-config-date-timezones.h:511
 msgid "West Bank"
-msgstr "约旦河西岸"
+msgstr "西岸"
 
 #: system-config-date-timezones.h:512
 msgid "Asia/Ho_Chi_Minh"
-msgstr "亚洲∕胡志明"
+msgstr "亚洲/胡志明"
 
 #: system-config-date-timezones.h:513
 msgid "Asia/Hong_Kong"
@@ -1722,11 +1708,11 @@ msgstr "亚洲/科布多"
 #. comment for time zone Asia/Hovd
 #: system-config-date-timezones.h:516
 msgid "Bayan-Olgiy, Govi-Altai, Hovd, Uvs, Zavkhan"
-msgstr "巴彦 - 乌列盖，戈壁阿尔泰，科布多，乌布苏，扎布汗"
+msgstr "巴彦乌列盖、戈壁阿尔泰、科布多、乌布苏、扎布汗"
 
 #: system-config-date-timezones.h:517
 msgid "Asia/Irkutsk"
-msgstr "亚洲/伊尔库次克"
+msgstr "亚洲/伊尔库茨克"
 
 #. comment for time zone Asia/Irkutsk
 #: system-config-date-timezones.h:519
@@ -1753,7 +1739,7 @@ msgstr "亚洲/查亚普拉"
 #. comment for time zone Asia/Jayapura
 #: system-config-date-timezones.h:526
 msgid "west New Guinea (Irian Jaya) & Malukus (Moluccas)"
-msgstr "西新几内亚(伊里安岛 查亚峰) 和马鲁古群岛(摩鹿加群岛)"
+msgstr "新几内亚西部(伊里安查亚)和马鲁古(摩鹿加)"
 
 #: system-config-date-timezones.h:527
 msgid "Asia/Jerusalem"
@@ -1783,7 +1769,7 @@ msgstr "亚洲/喀什"
 #. comment for time zone Asia/Kashgar
 #: system-config-date-timezones.h:535
 msgid "west Tibet & Xinjiang"
-msgstr "西藏和新疆西部"
+msgstr "西藏西部和新疆"
 
 #: system-config-date-timezones.h:536
 msgid "Asia/Kathmandu"
@@ -1822,7 +1808,7 @@ msgstr "亚洲/古晋"
 #. comment for time zone Asia/Kuching
 #: system-config-date-timezones.h:547
 msgid "Sabah & Sarawak"
-msgstr "萨巴赫和萨拉瓦克"
+msgstr "沙巴和砂拉越"
 
 #: system-config-date-timezones.h:548
 msgid "Asia/Kuwait"
@@ -1847,13 +1833,13 @@ msgstr "莫斯科+08 - 马加丹"
 
 #: system-config-date-timezones.h:554
 msgid "Asia/Makassar"
-msgstr "亚洲∕望加锡"
+msgstr "亚洲/望加锡"
 
 #. comment for time zone Asia/Makassar
 #: system-config-date-timezones.h:556
 msgid ""
 "east & south Borneo, Sulawesi (Celebes), Bali, Nusa Tengarra, west Timor"
-msgstr "东部及南部婆罗洲，苏拉威西(西里伯斯)，巴厘岛，小巽他群岛，帝汶岛"
+msgstr "婆罗洲东部和南部、苏拉威西 (西里伯斯)、巴厘、努沙登加拉、西帝汶"
 
 #: system-config-date-timezones.h:557
 msgid "Asia/Manila"
@@ -1878,12 +1864,12 @@ msgstr "莫斯科+03 - 新库兹涅茨克"
 
 #: system-config-date-timezones.h:563
 msgid "Asia/Novosibirsk"
-msgstr "亚洲/新西伯利亚"
+msgstr "亚洲/诺沃西比尔斯克"
 
 #. comment for time zone Asia/Novosibirsk
 #: system-config-date-timezones.h:565
 msgid "Moscow+03 - Novosibirsk"
-msgstr "莫斯科+03 - 新西伯利亚"
+msgstr "莫斯科+03 - 诺沃西比尔斯克"
 
 #: system-config-date-timezones.h:566
 msgid "Asia/Omsk"
@@ -1896,7 +1882,7 @@ msgstr "莫斯科+03 - 西伯利亚西部"
 
 #: system-config-date-timezones.h:569
 msgid "Asia/Oral"
-msgstr "亚洲∕奥勒尔"
+msgstr "亚洲/乌拉尔"
 
 #. comment for time zone Asia/Oral
 #: system-config-date-timezones.h:571
@@ -1914,7 +1900,7 @@ msgstr "亚洲/坤甸"
 #. comment for time zone Asia/Pontianak
 #: system-config-date-timezones.h:575
 msgid "west & central Borneo"
-msgstr "婆罗洲西和中部"
+msgstr "婆罗洲西部和中部"
 
 #: system-config-date-timezones.h:576
 msgid "Asia/Pyongyang"
@@ -1926,12 +1912,12 @@ msgstr "亚洲/卡塔尔"
 
 #: system-config-date-timezones.h:578
 msgid "Asia/Qyzylorda"
-msgstr "亚洲∕克孜勒奥尔达"
+msgstr "亚洲/克孜勒奥尔达"
 
 #. comment for time zone Asia/Qyzylorda
 #: system-config-date-timezones.h:580
 msgid "Qyzylorda (Kyzylorda, Kzyl-Orda)"
-msgstr "克孜勒奥尔达(克孜勒奥尔达）"
+msgstr "克孜勒奥尔达 (克孜勒奥尔达)"
 
 #: system-config-date-timezones.h:581
 msgid "Asia/Rangoon"
@@ -1955,11 +1941,11 @@ msgstr "亚洲/利雅得89"
 
 #: system-config-date-timezones.h:586
 msgid "Asia/Saigon"
-msgstr "亚洲/西贡"
+msgstr "亚洲/胡志明市"
 
 #: system-config-date-timezones.h:587
 msgid "Asia/Sakhalin"
-msgstr "亚洲∕萨哈林"
+msgstr "亚洲/萨哈林"
 
 #. comment for time zone Asia/Sakhalin
 #: system-config-date-timezones.h:589
@@ -1986,7 +1972,7 @@ msgstr "亚洲/上海"
 #. comment for time zone Asia/Shanghai
 #: system-config-date-timezones.h:596
 msgid "east China - Beijing, Guangdong, Shanghai, etc."
-msgstr "中国东部 - 北京，广东，上海等。"
+msgstr "中国东部 - 北京、广东、上海等"
 
 #: system-config-date-timezones.h:597
 msgid "Asia/Singapore"
@@ -2015,7 +2001,7 @@ msgstr "亚洲/德黑兰"
 
 #: system-config-date-timezones.h:604
 msgid "Asia/Tel_Aviv"
-msgstr "亚洲∕特拉维夫"
+msgstr "亚洲/特拉维夫"
 
 #: system-config-date-timezones.h:605
 msgid "Asia/Thimbu"
@@ -2048,7 +2034,7 @@ msgstr "亚洲/乌鲁木齐"
 #. comment for time zone Asia/Urumqi
 #: system-config-date-timezones.h:615
 msgid "most of Tibet & Xinjiang"
-msgstr "新疆和西藏大部分地区"
+msgstr "西藏和新疆大部"
 
 #: system-config-date-timezones.h:616
 msgid "Asia/Vientiane"
@@ -2056,7 +2042,7 @@ msgstr "亚洲/万象"
 
 #: system-config-date-timezones.h:617
 msgid "Asia/Vladivostok"
-msgstr "亚洲/海参崴"
+msgstr "亚洲/符拉迪沃斯托克"
 
 #. comment for time zone Asia/Vladivostok
 #: system-config-date-timezones.h:619
@@ -2074,12 +2060,12 @@ msgstr "莫斯科+06 - 勒拿河"
 
 #: system-config-date-timezones.h:623
 msgid "Asia/Yekaterinburg"
-msgstr "亚洲/叶卡杰琳堡"
+msgstr "亚洲/叶卡捷林堡"
 
 #. comment for time zone Asia/Yekaterinburg
 #: system-config-date-timezones.h:625
 msgid "Moscow+02 - Urals"
-msgstr "莫斯科+02 - 乌拉尔山脉"
+msgstr "莫斯科+02 - 乌拉尔"
 
 #: system-config-date-timezones.h:626
 msgid "Asia/Yerevan"
@@ -2087,16 +2073,16 @@ msgstr "亚洲/埃里温"
 
 #: system-config-date-timezones.h:627
 msgid "Atlantic/Azores"
-msgstr "大西洋/阿索雷斯"
+msgstr "大西洋/亚述尔群岛"
 
 #. comment for time zone Atlantic/Azores
 #: system-config-date-timezones.h:629
 msgid "Azores"
-msgstr "阿索雷斯"
+msgstr "亚述尔群岛"
 
 #: system-config-date-timezones.h:630
 msgid "Atlantic/Bermuda"
-msgstr "大西洋/百慕达"
+msgstr "大西洋/百慕大"
 
 #: system-config-date-timezones.h:631
 msgid "Atlantic/Canary"
@@ -2146,20 +2132,20 @@ msgstr "大西洋/斯坦利"
 
 #: system-config-date-timezones.h:644
 msgid "Atlantic/St_Helena"
-msgstr "大西洋/圣海伦纳"
+msgstr "大西洋/圣赫勒拿"
 
 #: system-config-date-timezones.h:645
 msgid "Australia/ACT"
-msgstr "澳洲∕澳大利亚首都地区"
+msgstr "澳洲/ACT"
 
 #: system-config-date-timezones.h:646
 msgid "Australia/Adelaide"
-msgstr "澳洲∕阿德莱德"
+msgstr "澳洲/阿德莱德"
 
 #. comment for time zone Australia/Adelaide
 #: system-config-date-timezones.h:648
 msgid "South Australia"
-msgstr "南澳大利亚"
+msgstr "澳大利亚南部"
 
 #: system-config-date-timezones.h:649
 msgid "Australia/Brisbane"
@@ -2168,11 +2154,11 @@ msgstr "澳洲/布里斯班"
 #. comment for time zone Australia/Brisbane
 #: system-config-date-timezones.h:651
 msgid "Queensland - most locations"
-msgstr "昆士兰 - 大部分地区"
+msgstr "昆士兰 - 多数位置"
 
 #: system-config-date-timezones.h:652
 msgid "Australia/Broken_Hill"
-msgstr "澳洲∕布罗肯希尔"
+msgstr "澳洲/布罗肯希尔"
 
 #. comment for time zone Australia/Broken_Hill
 #: system-config-date-timezones.h:654
@@ -2181,16 +2167,16 @@ msgstr "新南威尔士 - 扬科维纳"
 
 #: system-config-date-timezones.h:655
 msgid "Australia/Canberra"
-msgstr "澳洲∕堪培拉"
+msgstr "澳洲/堪培拉"
 
 #: system-config-date-timezones.h:656
 msgid "Australia/Currie"
-msgstr "澳洲∕柯里"
+msgstr "澳洲/库利"
 
 #. comment for time zone Australia/Currie
 #: system-config-date-timezones.h:658
 msgid "Tasmania - King Island"
-msgstr "塔斯马尼亚 - 金岛"
+msgstr "塔斯马尼亚 - 国王岛"
 
 #: system-config-date-timezones.h:659
 msgid "Australia/Darwin"
@@ -2199,7 +2185,7 @@ msgstr "澳洲/达尔文"
 #. comment for time zone Australia/Darwin
 #: system-config-date-timezones.h:661
 msgid "Northern Territory"
-msgstr "北区"
+msgstr "北部区域"
 
 #: system-config-date-timezones.h:662
 msgid "Australia/Eucla"
@@ -2208,7 +2194,7 @@ msgstr "澳洲/尤克拉"
 #. comment for time zone Australia/Eucla
 #: system-config-date-timezones.h:664
 msgid "Western Australia - Eucla area"
-msgstr "澳大利亚西部 - 尤克拉地区"
+msgstr "澳大利亚西部 - 尤克拉区域"
 
 #: system-config-date-timezones.h:665
 msgid "Australia/Hobart"
@@ -2217,11 +2203,11 @@ msgstr "澳洲/霍巴特"
 #. comment for time zone Australia/Hobart
 #: system-config-date-timezones.h:667
 msgid "Tasmania - most locations"
-msgstr "塔斯马尼亚 - 大部分地区"
+msgstr "塔斯马尼亚 - 多数位置"
 
 #: system-config-date-timezones.h:668
 msgid "Australia/LHI"
-msgstr "澳洲∕豪勋爵岛"
+msgstr "澳洲/LHI"
 
 #: system-config-date-timezones.h:669
 msgid "Australia/Lindeman"
@@ -2230,7 +2216,7 @@ msgstr "澳洲/林德曼"
 #. comment for time zone Australia/Lindeman
 #: system-config-date-timezones.h:671
 msgid "Queensland - Holiday Islands"
-msgstr "昆士兰 - 假日群岛"
+msgstr "昆士兰 - 假日岛"
 
 #: system-config-date-timezones.h:672
 msgid "Australia/Lord_Howe"
@@ -2252,20 +2238,20 @@ msgstr "维多利亚"
 
 #: system-config-date-timezones.h:678
 msgid "Australia/North"
-msgstr "澳洲∕北部"
+msgstr "澳洲/北部"
 
 #: system-config-date-timezones.h:679
 msgid "Australia/NSW"
-msgstr "澳洲∕新南威尔士"
+msgstr "澳洲/NSW"
 
 #: system-config-date-timezones.h:680
 msgid "Australia/Perth"
-msgstr "澳洲/珀斯"
+msgstr "澳洲/佩思"
 
 #. comment for time zone Australia/Perth
 #: system-config-date-timezones.h:682
 msgid "Western Australia - most locations"
-msgstr "澳大利亚西部 - 大部分地区"
+msgstr "澳大利亚西部 - 多数位置"
 
 #: system-config-date-timezones.h:683
 msgid "Australia/Queensland"
@@ -2273,7 +2259,7 @@ msgstr "澳洲/昆士兰"
 
 #: system-config-date-timezones.h:684
 msgid "Australia/South"
-msgstr "澳洲∕南部"
+msgstr "澳洲/南部"
 
 #: system-config-date-timezones.h:685
 msgid "Australia/Sydney"
@@ -2282,91 +2268,91 @@ msgstr "澳洲/悉尼"
 #. comment for time zone Australia/Sydney
 #: system-config-date-timezones.h:687
 msgid "New South Wales - most locations"
-msgstr "新南威尔士 - 大部分地区"
+msgstr "新南威尔士 - 多数位置"
 
 #: system-config-date-timezones.h:688
 msgid "Australia/Tasmania"
-msgstr "澳洲∕塔斯马尼亚"
+msgstr "澳洲/塔斯马尼亚"
 
 #: system-config-date-timezones.h:689
 msgid "Australia/Victoria"
-msgstr "澳洲∕维多利亚"
+msgstr "澳洲/维多利亚"
 
 #: system-config-date-timezones.h:690
 msgid "Australia/West"
-msgstr "澳洲∕西部"
+msgstr "澳洲/西部"
 
 #: system-config-date-timezones.h:691
 msgid "Australia/Yancowinna"
-msgstr "澳洲∕扬科维纳"
+msgstr "澳洲/扬科维纳"
 
 #: system-config-date-timezones.h:692
 msgid "Brazil/Acre"
-msgstr "巴西∕阿克里"
+msgstr "巴西/阿克里"
 
 #: system-config-date-timezones.h:693
 msgid "Brazil/DeNoronha"
-msgstr "巴西∕迪诺罗尼亚"
+msgstr "巴西/迪诺罗尼亚"
 
 #: system-config-date-timezones.h:694
 msgid "Brazil/East"
-msgstr "巴西∕东部"
+msgstr "巴西/东部"
 
 #: system-config-date-timezones.h:695
 msgid "Brazil/West"
-msgstr "巴西∕西部"
+msgstr "巴西/西部"
 
 #: system-config-date-timezones.h:696
 msgid "Canada/Atlantic"
-msgstr "加拿大∕大西洋沿岸"
+msgstr "加拿大/大西洋"
 
 #: system-config-date-timezones.h:697
 msgid "Canada/Central"
-msgstr "加拿大∕中部"
+msgstr "加拿大/中部"
 
 #: system-config-date-timezones.h:698
 msgid "Canada/Eastern"
-msgstr "加拿大∕东部"
+msgstr "加拿大/东部"
 
 #: system-config-date-timezones.h:699
 msgid "Canada/East-Saskatchewan"
-msgstr "加拿大∕萨斯喀彻温东部"
+msgstr "加拿大/东萨斯喀彻温"
 
 #: system-config-date-timezones.h:700
 msgid "Canada/Mountain"
-msgstr "加拿大∕山地"
+msgstr "加拿大/山地"
 
 #: system-config-date-timezones.h:701
 msgid "Canada/Newfoundland"
-msgstr "加拿大∕纽芬兰"
+msgstr "加拿大/纽芬兰"
 
 #: system-config-date-timezones.h:702
 msgid "Canada/Pacific"
-msgstr "加拿大∕太平洋沿岸"
+msgstr "加拿大/太平洋"
 
 #: system-config-date-timezones.h:703
 msgid "Canada/Saskatchewan"
-msgstr "加拿大∕萨斯喀彻温"
+msgstr "加拿大/萨斯喀彻温"
 
 #: system-config-date-timezones.h:704
 msgid "Canada/Yukon"
-msgstr "加拿大∕育空"
+msgstr "加拿大/育空"
 
 #: system-config-date-timezones.h:705
 msgid "CET"
-msgstr "CET（欧洲中部时间）"
+msgstr "欧洲中部时间"
 
 #: system-config-date-timezones.h:706
 msgid "Chile/Continental"
-msgstr "智利∕大陆"
+msgstr "智利/大陆"
 
 #: system-config-date-timezones.h:707
 msgid "Chile/EasterIsland"
-msgstr "智利∕复活节岛"
+msgstr "智利/复活节岛"
 
 #: system-config-date-timezones.h:708
 msgid "CST6CDT"
-msgstr "CST（美国中部标准时间）6CDT（美国中部夏令时间）"
+msgstr "中部夏令时间"
 
 #: system-config-date-timezones.h:709
 msgid "Cuba"
@@ -2374,7 +2360,7 @@ msgstr "古巴"
 
 #: system-config-date-timezones.h:710
 msgid "EET"
-msgstr "EET（欧洲东部时间）"
+msgstr "欧洲东部时间"
 
 #: system-config-date-timezones.h:711
 msgid "Egypt"
@@ -2386,151 +2372,151 @@ msgstr "爱尔兰"
 
 #: system-config-date-timezones.h:713
 msgid "EST"
-msgstr "EST（美国东部标准时间）"
+msgstr "东部标准时间"
 
 #: system-config-date-timezones.h:714
 msgid "EST5EDT"
-msgstr "EST5EDT（美国东部夏令时间）"
+msgstr "东部夏令时间"
 
 #: system-config-date-timezones.h:715
 msgid "Etc/GMT"
-msgstr "Etc/GMT（格林尼治标准时间）"
+msgstr "其他/GMT"
 
 #: system-config-date-timezones.h:716
 msgid "Etc/GMT0"
-msgstr "Etc/GMT0"
+msgstr "其他/GMT0"
 
 #: system-config-date-timezones.h:717
 msgid "Etc/GMT-0"
-msgstr "Etc/GMT-0"
+msgstr "其他/GMT-0"
 
 #: system-config-date-timezones.h:718
 msgid "Etc/GMT+0"
-msgstr "Etc/GMT+0"
+msgstr "其他/GMT+0"
 
 #: system-config-date-timezones.h:719
 msgid "Etc/GMT-1"
-msgstr "Etc/GMT-1"
+msgstr "其他/GMT-1"
 
 #: system-config-date-timezones.h:720
 msgid "Etc/GMT+1"
-msgstr "Etc/GMT+1"
+msgstr "其他/GMT+1"
 
 #: system-config-date-timezones.h:721
 msgid "Etc/GMT-10"
-msgstr "Etc/GMT-10"
+msgstr "其他/GMT-10"
 
 #: system-config-date-timezones.h:722
 msgid "Etc/GMT+10"
-msgstr "Etc/GMT+10"
+msgstr "其他/GMT+10"
 
 #: system-config-date-timezones.h:723
 msgid "Etc/GMT-11"
-msgstr "Etc/GMT-11"
+msgstr "其他/GMT-11"
 
 #: system-config-date-timezones.h:724
 msgid "Etc/GMT+11"
-msgstr "Etc/GMT+11"
+msgstr "其他/GMT+11"
 
 #: system-config-date-timezones.h:725
 msgid "Etc/GMT-12"
-msgstr "Etc/GMT-12"
+msgstr "其他/GMT-12"
 
 #: system-config-date-timezones.h:726
 msgid "Etc/GMT+12"
-msgstr "Etc/GMT+12"
+msgstr "其他/GMT+12"
 
 #: system-config-date-timezones.h:727
 msgid "Etc/GMT-13"
-msgstr "Etc/GMT-13"
+msgstr "其他/GMT-13"
 
 #: system-config-date-timezones.h:728
 msgid "Etc/GMT-14"
-msgstr "Etc/GMT-14"
+msgstr "其他/GMT-14"
 
 #: system-config-date-timezones.h:729
 msgid "Etc/GMT-2"
-msgstr "Etc/GMT-2"
+msgstr "其他/GMT-2"
 
 #: system-config-date-timezones.h:730
 msgid "Etc/GMT+2"
-msgstr "Etc/GMT+2"
+msgstr "其他/GMT+2"
 
 #: system-config-date-timezones.h:731
 msgid "Etc/GMT-3"
-msgstr "Etc/GMT-3"
+msgstr "其他/GMT-3"
 
 #: system-config-date-timezones.h:732
 msgid "Etc/GMT+3"
-msgstr "Etc/GMT+3"
+msgstr "其他/GMT+3"
 
 #: system-config-date-timezones.h:733
 msgid "Etc/GMT-4"
-msgstr "Etc/GMT-4"
+msgstr "其他/GMT-4"
 
 #: system-config-date-timezones.h:734
 msgid "Etc/GMT+4"
-msgstr "Etc/GMT+4"
+msgstr "其他/GMT+4"
 
 #: system-config-date-timezones.h:735
 msgid "Etc/GMT-5"
-msgstr "Etc/GMT-5"
+msgstr "其他/GMT-5"
 
 #: system-config-date-timezones.h:736
 msgid "Etc/GMT+5"
-msgstr "Etc/GMT+5"
+msgstr "其他/GMT+5"
 
 #: system-config-date-timezones.h:737
 msgid "Etc/GMT-6"
-msgstr "Etc/GMT-6"
+msgstr "其他/GMT-6"
 
 #: system-config-date-timezones.h:738
 msgid "Etc/GMT+6"
-msgstr "Etc/GMT+6"
+msgstr "其他/GMT+6"
 
 #: system-config-date-timezones.h:739
 msgid "Etc/GMT-7"
-msgstr "Etc/GMT-7"
+msgstr "其他/GMT-7"
 
 #: system-config-date-timezones.h:740
 msgid "Etc/GMT+7"
-msgstr "Etc/GMT+7"
+msgstr "其他/GMT+7"
 
 #: system-config-date-timezones.h:741
 msgid "Etc/GMT-8"
-msgstr "Etc/GMT-8"
+msgstr "其他/GMT-8"
 
 #: system-config-date-timezones.h:742
 msgid "Etc/GMT+8"
-msgstr "Etc/GMT+8"
+msgstr "其他/GMT+8"
 
 #: system-config-date-timezones.h:743
 msgid "Etc/GMT-9"
-msgstr "Etc/GMT-9"
+msgstr "其他/GMT-9"
 
 #: system-config-date-timezones.h:744
 msgid "Etc/GMT+9"
-msgstr "Etc/GMT+9"
+msgstr "其他/GMT+9"
 
 #: system-config-date-timezones.h:745
 msgid "Etc/Greenwich"
-msgstr "Etc/格林尼治时"
+msgstr "其他/格林尼治"
 
 #: system-config-date-timezones.h:746
 msgid "Etc/UCT"
-msgstr "Etc/UCT(协调世界时)"
+msgstr "Etc/UCT"
 
 #: system-config-date-timezones.h:747
 msgid "Etc/Universal"
-msgstr "Etc/世界时"
+msgstr "其他/通用"
 
 #: system-config-date-timezones.h:748
 msgid "Etc/UTC"
-msgstr "Etc/协调世界时"
+msgstr "其他/UTC"
 
 #: system-config-date-timezones.h:749
 msgid "Etc/Zulu"
-msgstr "Etc/祖鲁"
+msgstr "其他/祖鲁"
 
 #: system-config-date-timezones.h:750
 msgid "Europe/Amsterdam"
@@ -2590,7 +2576,7 @@ msgstr "欧洲/直布罗陀"
 
 #: system-config-date-timezones.h:764
 msgid "Europe/Guernsey"
-msgstr "欧洲∕根西"
+msgstr "欧洲/根西"
 
 #: system-config-date-timezones.h:765
 msgid "Europe/Helsinki"
@@ -2598,7 +2584,7 @@ msgstr "欧洲/赫尔辛基"
 
 #: system-config-date-timezones.h:766
 msgid "Europe/Isle_of_Man"
-msgstr "欧洲∕马恩岛"
+msgstr "欧洲/马恩岛"
 
 #: system-config-date-timezones.h:767
 msgid "Europe/Istanbul"
@@ -2606,7 +2592,7 @@ msgstr "欧洲/伊斯坦布尔"
 
 #: system-config-date-timezones.h:768
 msgid "Europe/Jersey"
-msgstr "欧洲∕耶尔赛"
+msgstr "欧洲/泽西"
 
 #: system-config-date-timezones.h:769
 msgid "Europe/Kaliningrad"
@@ -2647,11 +2633,11 @@ msgstr "欧洲/马耳他"
 
 #: system-config-date-timezones.h:785
 msgid "Europe/Mariehamn"
-msgstr "欧洲∕玛丽港"
+msgstr "欧洲/玛丽港"
 
 #: system-config-date-timezones.h:786
 msgid "Europe/Minsk"
-msgstr "欧洲/明思克"
+msgstr "欧洲/明斯克"
 
 #: system-config-date-timezones.h:787
 msgid "Europe/Monaco"
@@ -2688,7 +2674,7 @@ msgstr "欧洲/布拉格"
 
 #: system-config-date-timezones.h:796
 msgid "Europe/Riga"
-msgstr "欧洲/里察"
+msgstr "欧洲/里加"
 
 #: system-config-date-timezones.h:797
 msgid "Europe/Rome"
@@ -2701,7 +2687,7 @@ msgstr "欧洲/萨马拉"
 #. comment for time zone Europe/Samara
 #: system-config-date-timezones.h:800
 msgid "Moscow+00 - Samara, Udmurtia"
-msgstr "莫斯科+00 - 萨马拉，乌德穆尔特"
+msgstr "莫斯科+00 - 乌德穆尔特萨马拉"
 
 #: system-config-date-timezones.h:801
 msgid "Europe/San_Marino"
@@ -2718,7 +2704,7 @@ msgstr "欧洲/辛菲罗波尔"
 #. comment for time zone Europe/Simferopol
 #: system-config-date-timezones.h:805
 msgid "central Crimea"
-msgstr "克里梅中部"
+msgstr "克里米亚中部"
 
 #: system-config-date-timezones.h:806
 msgid "Europe/Skopje"
@@ -2742,7 +2728,7 @@ msgstr "欧洲/地拉那"
 
 #: system-config-date-timezones.h:811
 msgid "Europe/Tiraspol"
-msgstr "欧洲∕蒂拉斯波尔"
+msgstr "欧洲/蒂拉斯波尔"
 
 #: system-config-date-timezones.h:812
 msgid "Europe/Uzhgorod"
@@ -2751,7 +2737,7 @@ msgstr "欧洲/乌日戈罗德"
 #. comment for time zone Europe/Uzhgorod
 #: system-config-date-timezones.h:814
 msgid "Ruthenia"
-msgstr "罗塞尼亚"
+msgstr "鲁塞尼亚"
 
 #: system-config-date-timezones.h:815
 msgid "Europe/Vaduz"
@@ -2771,7 +2757,7 @@ msgstr "欧洲/维尔纽斯"
 
 #: system-config-date-timezones.h:819
 msgid "Europe/Volgograd"
-msgstr "欧洲∕伏尔加格勒"
+msgstr "欧洲/伏尔加格勒"
 
 #. comment for time zone Europe/Volgograd
 #: system-config-date-timezones.h:821
@@ -2793,7 +2779,7 @@ msgstr "欧洲/扎波罗热"
 #. comment for time zone Europe/Zaporozhye
 #: system-config-date-timezones.h:826
 msgid "Zaporozh'ye, E Lugansk / Zaporizhia, E Luhansk"
-msgstr "扎波罗热，卢甘斯克东部/扎波罗热，卢甘斯克东部"
+msgstr "扎波罗热、东卢甘斯克 / 扎波罗热、东卢甘斯克"
 
 #: system-config-date-timezones.h:827
 msgid "Europe/Zurich"
@@ -2805,11 +2791,11 @@ msgstr "英国"
 
 #: system-config-date-timezones.h:829
 msgid "GB-Eire"
-msgstr "英国——爱尔兰"
+msgstr "英国北爱尔兰"
 
 #: system-config-date-timezones.h:830
 msgid "GMT"
-msgstr "GMT"
+msgstr "格林尼治标准时间"
 
 #: system-config-date-timezones.h:831
 msgid "GMT0"
@@ -2833,7 +2819,7 @@ msgstr "香港"
 
 #: system-config-date-timezones.h:836
 msgid "HST"
-msgstr "HST（美国夏威夷标准时间）"
+msgstr "夏威夷标准时间"
 
 #: system-config-date-timezones.h:837
 msgid "Iceland"
@@ -2841,7 +2827,7 @@ msgstr "冰岛"
 
 #: system-config-date-timezones.h:838
 msgid "Indian/Antananarivo"
-msgstr "印度洋/安塔那那利佛"
+msgstr "印度洋/塔那那利佛"
 
 #: system-config-date-timezones.h:839
 msgid "Indian/Chagos"
@@ -2849,7 +2835,7 @@ msgstr "印度洋/查戈斯"
 
 #: system-config-date-timezones.h:840
 msgid "Indian/Christmas"
-msgstr "印度洋/圣诞"
+msgstr "印度洋/圣诞岛"
 
 #: system-config-date-timezones.h:841
 msgid "Indian/Cocos"
@@ -2861,11 +2847,11 @@ msgstr "印度洋/科摩罗"
 
 #: system-config-date-timezones.h:843
 msgid "Indian/Kerguelen"
-msgstr "印度洋/凯尔格朗"
+msgstr "印度洋/凯尔盖朗"
 
 #: system-config-date-timezones.h:844
 msgid "Indian/Mahe"
-msgstr "印度洋/马埃"
+msgstr "印度洋/马埃岛"
 
 #: system-config-date-timezones.h:845
 msgid "Indian/Maldives"
@@ -2902,7 +2888,7 @@ msgstr "日本"
 #. comment for time zone Pacific/Kwajalein
 #: system-config-date-timezones.h:853 system-config-date-timezones.h:909
 msgid "Kwajalein"
-msgstr "夸贾莱因"
+msgstr "夸贾林"
 
 #: system-config-date-timezones.h:854
 msgid "Libya"
@@ -2910,39 +2896,39 @@ msgstr "利比亚"
 
 #: system-config-date-timezones.h:855
 msgid "MET"
-msgstr "MET（欧洲中部时间）"
+msgstr "欧洲中部时间"
 
 #: system-config-date-timezones.h:856
 msgid "Mexico/BajaNorte"
-msgstr "墨西哥∕北下诺特"
+msgstr "墨西哥/北巴哈加利福尼亚"
 
 #: system-config-date-timezones.h:857
 msgid "Mexico/BajaSur"
-msgstr "墨西哥∕北下苏尔"
+msgstr "墨西哥/南巴哈加利福尼亚"
 
 #: system-config-date-timezones.h:858
 msgid "Mexico/General"
-msgstr "墨西哥∕普通地区"
+msgstr "墨西哥/通用"
 
 #: system-config-date-timezones.h:859
 msgid "Mideast/Riyadh87"
-msgstr "中东∕利雅德87"
+msgstr "中东/利雅得87"
 
 #: system-config-date-timezones.h:860
 msgid "Mideast/Riyadh88"
-msgstr "中东∕利雅德88"
+msgstr "中东/利雅得88"
 
 #: system-config-date-timezones.h:861
 msgid "Mideast/Riyadh89"
-msgstr "中东∕利雅德89"
+msgstr "中东/利雅得89"
 
 #: system-config-date-timezones.h:862
 msgid "MST"
-msgstr "MST（山地标准时间）"
+msgstr "山地标准时间"
 
 #: system-config-date-timezones.h:863
 msgid "MST7MDT"
-msgstr "MST7MDT（山地夏令时间）"
+msgstr "山地夏令时间"
 
 #: system-config-date-timezones.h:864
 msgid "Navajo"
@@ -2954,7 +2940,7 @@ msgstr "新西兰"
 
 #: system-config-date-timezones.h:866
 msgid "NZ-CHAT"
-msgstr "NZ-CHAT"
+msgstr "新西兰查塔姆"
 
 #: system-config-date-timezones.h:867
 msgid "Pacific/Apia"
@@ -2980,7 +2966,7 @@ msgstr "太平洋/楚克"
 #. comment for time zone Pacific/Chuuk
 #: system-config-date-timezones.h:876
 msgid "Chuuk (Truk) and Yap"
-msgstr "楚克（特鲁克）和雅普"
+msgstr "楚克 (丘克) 和雅浦"
 
 #: system-config-date-timezones.h:877
 msgid "Pacific/Easter"
@@ -2989,7 +2975,7 @@ msgstr "太平洋/复活节岛"
 #. comment for time zone Pacific/Easter
 #: system-config-date-timezones.h:879
 msgid "Easter Island & Sala y Gomez"
-msgstr "复活节岛和萨拉戈麦斯"
+msgstr "复活节岛和萨拉戈麦斯岛"
 
 #: system-config-date-timezones.h:880
 msgid "Pacific/Efate"
@@ -2997,7 +2983,7 @@ msgstr "太平洋/埃法特"
 
 #: system-config-date-timezones.h:881
 msgid "Pacific/Enderbury"
-msgstr "太平洋/恩德伯里"
+msgstr "太平洋/恩德贝里"
 
 #. comment for time zone Pacific/Enderbury
 #: system-config-date-timezones.h:883
@@ -3014,7 +3000,7 @@ msgstr "太平洋/斐济"
 
 #: system-config-date-timezones.h:886
 msgid "Pacific/Funafuti"
-msgstr "太平洋/富那富提"
+msgstr "太平洋/富纳富提"
 
 #: system-config-date-timezones.h:887
 msgid "Pacific/Galapagos"
@@ -3044,12 +3030,12 @@ msgstr "太平洋/关岛"
 
 #: system-config-date-timezones.h:895
 msgid "Pacific/Honolulu"
-msgstr "太平洋/火奴鲁鲁（檀香山）"
+msgstr "太平洋/檀香山"
 
 #. comment for time zone Pacific/Honolulu
 #: system-config-date-timezones.h:897
 msgid "Hawaii"
-msgstr "夏威夷岛"
+msgstr "夏威夷"
 
 #: system-config-date-timezones.h:898
 msgid "Pacific/Johnston"
@@ -3062,7 +3048,7 @@ msgstr "约翰斯顿环礁"
 
 #: system-config-date-timezones.h:901
 msgid "Pacific/Kiritimati"
-msgstr "太平洋/基里马斯岛"
+msgstr "太平洋/基里地马地岛"
 
 #. comment for time zone Pacific/Kiritimati
 #: system-config-date-timezones.h:903
@@ -3080,11 +3066,11 @@ msgstr "科斯雷岛"
 
 #: system-config-date-timezones.h:907
 msgid "Pacific/Kwajalein"
-msgstr "太平洋/夸贾莱因"
+msgstr "太平洋/夸贾林"
 
 #: system-config-date-timezones.h:910
 msgid "Pacific/Majuro"
-msgstr "太平洋/马朱罗岛"
+msgstr "太平洋/马朱罗"
 
 #: system-config-date-timezones.h:913
 msgid "Pacific/Marquesas"
@@ -3102,7 +3088,7 @@ msgstr "太平洋/中途岛"
 #. comment for time zone Pacific/Midway
 #: system-config-date-timezones.h:918
 msgid "Midway Islands"
-msgstr "中途群岛"
+msgstr "中途岛"
 
 #: system-config-date-timezones.h:919
 msgid "Pacific/Nauru"
@@ -3114,7 +3100,7 @@ msgstr "太平洋/纽埃"
 
 #: system-config-date-timezones.h:921
 msgid "Pacific/Norfolk"
-msgstr "太平洋/诺福克岛"
+msgstr "太平洋/诺福克"
 
 #: system-config-date-timezones.h:922
 msgid "Pacific/Noumea"
@@ -3122,7 +3108,7 @@ msgstr "太平洋/努美阿"
 
 #: system-config-date-timezones.h:923
 msgid "Pacific/Pago_Pago"
-msgstr "太平洋/帕果帕果"
+msgstr "太平洋/帕果-帕果"
 
 #: system-config-date-timezones.h:924
 msgid "Pacific/Palau"
@@ -3139,7 +3125,7 @@ msgstr "太平洋/波纳佩"
 #. comment for time zone Pacific/Pohnpei
 #: system-config-date-timezones.h:928
 msgid "Pohnpei (Ponape)"
-msgstr "波纳佩（波纳佩岛）"
+msgstr "波纳佩岛 (波纳佩岛)"
 
 #: system-config-date-timezones.h:929
 msgid "Pacific/Ponape"
@@ -3159,11 +3145,11 @@ msgstr "太平洋/塞班"
 
 #: system-config-date-timezones.h:933
 msgid "Pacific/Samoa"
-msgstr "太平洋∕萨摩亚"
+msgstr "太平洋/萨摩亚"
 
 #: system-config-date-timezones.h:934
 msgid "Pacific/Tahiti"
-msgstr "太平洋/塔希提岛"
+msgstr "太平洋/塔希提"
 
 #. comment for time zone Pacific/Tahiti
 #: system-config-date-timezones.h:936
@@ -3172,7 +3158,7 @@ msgstr "社会群岛"
 
 #: system-config-date-timezones.h:937
 msgid "Pacific/Tarawa"
-msgstr "太平洋/塔拉瓦环礁"
+msgstr "太平洋/塔拉瓦"
 
 #. comment for time zone Pacific/Tarawa
 #: system-config-date-timezones.h:939
@@ -3181,11 +3167,11 @@ msgstr "吉尔伯特群岛"
 
 #: system-config-date-timezones.h:940
 msgid "Pacific/Tongatapu"
-msgstr "太平洋/汤加塔布"
+msgstr "太平洋/东加塔布"
 
 #: system-config-date-timezones.h:941
 msgid "Pacific/Truk"
-msgstr "太平洋/特鲁克"
+msgstr "太平洋/特鲁克群岛"
 
 #: system-config-date-timezones.h:942
 msgid "Pacific/Wake"
@@ -3214,19 +3200,19 @@ msgstr "葡萄牙"
 
 #: system-config-date-timezones.h:949
 msgid "PRC"
-msgstr "PRC"
+msgstr "中国"
 
 #: system-config-date-timezones.h:950
 msgid "PST8PDT"
-msgstr "PST8PDT"
+msgstr "太平洋夏令时间"
 
 #: system-config-date-timezones.h:951
 msgid "ROC"
-msgstr "ROC"
+msgstr "台湾"
 
 #: system-config-date-timezones.h:952
 msgid "ROK"
-msgstr "ROK"
+msgstr "韩国"
 
 #: system-config-date-timezones.h:953
 msgid "Singapore"
@@ -3238,11 +3224,11 @@ msgstr "土耳其"
 
 #: system-config-date-timezones.h:955
 msgid "UCT"
-msgstr "UCT（协调世界时）"
+msgstr "协调世界时"
 
 #: system-config-date-timezones.h:956
 msgid "Universal"
-msgstr "全球"
+msgstr "通用"
 
 #: system-config-date-timezones.h:957
 msgid "US/Alaska"
@@ -3254,7 +3240,7 @@ msgstr "美国/阿留申"
 
 #: system-config-date-timezones.h:959
 msgid "US/Arizona"
-msgstr "美国/亚利桑纳"
+msgstr "美国/亚利桑那"
 
 #: system-config-date-timezones.h:960
 msgid "US/Central"
@@ -3266,7 +3252,7 @@ msgstr "美国/东部"
 
 #: system-config-date-timezones.h:962
 msgid "US/East-Indiana"
-msgstr "美国/东印第安那"
+msgstr "美国/东印第安纳"
 
 #: system-config-date-timezones.h:963
 msgid "US/Hawaii"
@@ -3274,7 +3260,7 @@ msgstr "美国/夏威夷"
 
 #: system-config-date-timezones.h:964
 msgid "US/Indiana-Starke"
-msgstr "美国/印第安那——斯塔克"
+msgstr "美国/印第安纳斯塔克"
 
 #: system-config-date-timezones.h:965
 msgid "US/Michigan"
@@ -3282,7 +3268,7 @@ msgstr "美国/密歇根"
 
 #: system-config-date-timezones.h:966
 msgid "US/Mountain"
-msgstr "美国/山地时间"
+msgstr "美国/山地"
 
 #: system-config-date-timezones.h:967
 msgid "US/Pacific"
@@ -3298,15 +3284,15 @@ msgstr "美国/萨摩亚"
 
 #: system-config-date-timezones.h:970
 msgid "UTC"
-msgstr "UTC（协调世界时）"
+msgstr "协调世界时"
 
 #: system-config-date-timezones.h:971
 msgid "WET"
-msgstr "WET（欧洲西部时间）"
+msgstr "欧洲西部时间"
 
 #: system-config-date-timezones.h:972
 msgid "W-SU"
-msgstr "W-SU"
+msgstr "苏联西部"
 
 #: system-config-date-timezones.h:973
 msgid "Zulu"
