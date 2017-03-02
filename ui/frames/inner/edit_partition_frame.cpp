@@ -124,24 +124,23 @@ void EditPartitionFrame::forceFormat(bool force) {
 }
 
 void EditPartitionFrame::updateFormatBoxState() {
-  // Format partition forcefully if its type is changed.
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
   const Partition real_partition(delegate_->getRealPartition(partition_));
   const int mp_index = mount_point_box_->currentIndex();
   const QString mount_point = mount_point_model_->getMountPoint(mp_index);
 
-  // If fs type changed and used, or mount-point is in formatted-mount-point
-  // list, format that partition compulsively.
+  // Format this partition compulsively if its fs type changed.
   bool format = (fs_type != FsType::Empty && fs_type != real_partition.fs);
+  // Format this partition if mount-point is in formatted-mount-point list.
   format |= IsInFormattedMountPointList(mount_point);
   this->forceFormat(format);
 
-  // TODO(xushaohua): If partition.fs is empty, hide format box.
-
-  // If it is linux-swap, hide format_box_ option.
-  const bool is_swap = (fs_type == FsType::LinuxSwap);
-  format_label_->setVisible(!is_swap);
-  format_check_box_->setVisible(!is_swap);
+  // If it is linux-swap, hide format box.
+  bool invisible = (fs_type == FsType::LinuxSwap);
+  // If fs is not set or unknown, hide format box.
+  invisible |= (fs_type == FsType::Empty);
+  format_label_->setVisible(!invisible);
+  format_check_box_->setVisible(!invisible);
 }
 
 void EditPartitionFrame::initConnections() {
