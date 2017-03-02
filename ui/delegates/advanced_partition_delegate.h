@@ -69,6 +69,9 @@ class AdvancedPartitionDelegate : public QObject {
                        FsType fs_type,
                        const QString& mount_point);
 
+  // Save real device list when it is refreshed.
+  void onDeviceRefreshed(const DeviceList& devices);
+
   // Write partitioning settings to file.
   void onManualPartDone();
 

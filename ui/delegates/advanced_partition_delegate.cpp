@@ -565,6 +565,12 @@ void AdvancedPartitionDelegate::formatPartition(const Partition& partition,
   operations_.append(operation);
 }
 
+void AdvancedPartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
+  real_devices_ = devices;
+  virtual_devices_ = real_devices_;
+  emit this->deviceRefreshed(virtual_devices_);
+}
+
 void AdvancedPartitionDelegate::onManualPartDone() {
   QString root_disk;
   QString root_path;
