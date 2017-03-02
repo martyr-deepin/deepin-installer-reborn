@@ -442,7 +442,8 @@ void SimplePartitionDelegate::formatPartition(const Partition& partition,
 
 void SimplePartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
   real_devices_ = devices;
-  // TODO(xushaohua): Update virtual device list.
+  virtual_devices_ = real_devices_;
+  emit this->deviceRefreshed(real_devices_);
 }
 
 void SimplePartitionDelegate::setBootloaderPath(const QString& path) {
