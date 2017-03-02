@@ -54,8 +54,8 @@ EditPartitionFrame::EditPartitionFrame(AdvancedPartitionDelegate* delegate,
 }
 
 void EditPartitionFrame::setPartition(const Partition& partition) {
+  // Update partition information.
   partition_ = partition;
-
   os_label_->setPixmap(QPixmap(GetOsTypeLargeIcon(partition.os)));
   name_label_->setText(GetPartitionLabelAndPath(partition));
   usage_label_->setText(GetPartitionUsage(partition));
@@ -64,12 +64,13 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
   // Reset fs index.
   int fs_index = fs_model_->index(partition.fs);
   if (fs_index == -1) {
-    // If partition fs type not in current fs_list, selected the first one.
-    fs_index = 0;
+    // Get index of unused filesystem in filesystem list.
+    fs_index = fs_model_->index(FsType::Empty);
   }
+  // If partition fs type not in current fs_list, select nothing.
   fs_box_->setCurrentIndex(fs_index);
 
-  // Reset mount point box. partition.mount_point might be empty.
+  // Reset mount point box. mount_point might be empty.
   const int mp_index = mount_point_model_->index(partition.mount_point);
   mount_point_box_->setCurrentIndex(mp_index);
 
@@ -77,6 +78,7 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
     case PartitionStatus::Format: {
       // Compare between real filesystem type and current one.
       const Partition real_partition(delegate_->getRealPartition(partition_));
+      // If filesystem changed, force format this partition.
       format_check_box_->setEnabled(real_partition.fs == partition_.fs);
       format_check_box_->setChecked(true);
       break;
@@ -133,6 +135,8 @@ void EditPartitionFrame::updateFormatBoxState() {
   bool format = (fs_type != FsType::Empty && fs_type != real_partition.fs);
   format |= IsInFormattedMountPointList(mount_point);
   this->forceFormat(format);
+
+  // TODO(xushaohua): If partition.fs is empty, hide format box.
 
   // If it is linux-swap, hide format_box_ option.
   const bool is_swap = (fs_type == FsType::LinuxSwap);

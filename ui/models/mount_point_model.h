@@ -20,11 +20,11 @@ class MountPointModel : public QAbstractListModel {
   QVariant data(const QModelIndex& index, int role) const override;
   int rowCount(const QModelIndex& parent) const override;
 
-  // Get index of |mount_point|, if not found returns -1.
-  int index(const QString& mount_point) const;
-
   // Get mount_point at |index|.
   QString getMountPoint(int index) const;
+
+  // Get index of |mount_point|, if not found returns -1.
+  int index(const QString& mount_point) const;
 
  private:
   const QStringList mount_points_;

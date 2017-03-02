@@ -20,14 +20,18 @@ class FsModel : public QAbstractListModel {
   QVariant data(const QModelIndex& index, int role) const override;
   int rowCount(const QModelIndex& parent) const override;
 
-  // Index fs type. Returns -1 if not found.
-  int index(FsType fs_type) const;
-
   // Get fs type at |index|.
   FsType getFs(int index) const;
 
+  // Index fs type. Returns -1 if not found.
+  int index(FsType fs_type) const;
+
+  // If |efi_enabled| is false, remove efi from fs list.
+  void setEfiEnabled(bool efi_enabled);
+
  private:
   FsTypeList fs_list_;
+  FsTypeList inited_fs_list_;
 };
 
 }  // namespace installer

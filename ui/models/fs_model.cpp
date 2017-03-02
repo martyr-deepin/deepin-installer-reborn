@@ -10,27 +10,9 @@ namespace installer {
 
 FsModel::FsModel(const FsTypeList& fs_list, QObject* parent)
     : QAbstractListModel(parent),
-      fs_list_(fs_list) {
+      fs_list_(fs_list),
+      inited_fs_list_(fs_list) {
   this->setObjectName("fs_model");
-}
-
-int FsModel::index(FsType fs_type) const {
-  // Might return -1.
-  return fs_list_.indexOf(fs_type);
-}
-
-FsType FsModel::getFs(int index) const {
-  Q_ASSERT(index < fs_list_.length());
-  if (index >= 0 && index < fs_list_.length()) {
-    return fs_list_.at(index);
-  } else {
-    return FsType::Unknown;
-  }
-}
-
-int FsModel::rowCount(const QModelIndex& parent) const {
-  Q_UNUSED(parent);
-  return fs_list_.length();
 }
 
 QVariant FsModel::data(const QModelIndex& index, int role) const {
@@ -45,6 +27,36 @@ QVariant FsModel::data(const QModelIndex& index, int role) const {
   } else {
     return QVariant();
   }
+}
+
+int FsModel::rowCount(const QModelIndex& parent) const {
+  Q_UNUSED(parent);
+  return fs_list_.length();
+}
+
+FsType FsModel::getFs(int index) const {
+  Q_ASSERT(index < fs_list_.length());
+  if (index >= 0 && index < fs_list_.length()) {
+    return fs_list_.at(index);
+  } else {
+    return FsType::Unknown;
+  }
+}
+
+int FsModel::index(FsType fs_type) const {
+  // Might return -1.
+  return fs_list_.indexOf(fs_type);
+}
+
+void FsModel::setEfiEnabled(bool efi_enabled) {
+  this->beginResetModel();
+
+  fs_list_ = inited_fs_list_;
+  if (!efi_enabled) {
+    fs_list_.removeOne(FsType::EFI);
+  }
+
+  this->endResetModel();
 }
 
 }  // namespace installer

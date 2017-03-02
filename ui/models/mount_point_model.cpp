@@ -35,10 +35,6 @@ int MountPointModel::rowCount(const QModelIndex& parent) const {
   return mount_points_.length();
 }
 
-int MountPointModel::index(const QString& mount_point) const {
-  return mount_points_.indexOf(mount_point);
-}
-
 QString MountPointModel::getMountPoint(int index) const {
   Q_ASSERT(index < mount_points_.length());
   if (index >= 0 && index < mount_points_.length()) {
@@ -46,6 +42,10 @@ QString MountPointModel::getMountPoint(int index) const {
   } else {
     return QString();
   }
+}
+
+int MountPointModel::index(const QString& mount_point) const {
+  return mount_points_.indexOf(mount_point);
 }
 
 }  // namespace installer
