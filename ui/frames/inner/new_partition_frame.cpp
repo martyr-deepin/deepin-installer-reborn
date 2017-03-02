@@ -47,19 +47,25 @@ NewPartitionFrame::NewPartitionFrame(AdvancedPartitionDelegate* delegate,
 }
 
 void NewPartitionFrame::setPartition(const Partition& partition) {
+  // Update partition information.
   partition_ = partition;
-
   const bool primary_ok = delegate_->canAddPrimary(partition);
   const bool logical_ok = delegate_->canAddLogical(partition);
-  if (!primary_ok && !logical_ok) {
+  if (! (primary_ok || logical_ok)) {
+    // If neither primary partition nor logical partition can be added,
+    // returns immediately.
+    // We shall never reach here.
     qCritical() << "No more partition available!";
+    emit this->finished();
+    return;
   }
+
   type_model_->setPrimaryVisible(primary_ok);
   type_model_->setLogicalVisible(logical_ok);
-  // Select logical partition is available.
+  // Select logical partition first is available.
   if (logical_ok) {
     type_box_->setCurrentIndex(type_model_->getLogicalIndex());
-  } else if (primary_ok) {
+  } else {
     type_box_->setCurrentIndex(type_model_->getPrimaryIndex());
   }
 
@@ -68,9 +74,8 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
 
   // Select default fs type.
   const FsType default_fs = GetDefaultFsType();
-  const int fs_index = fs_model_->index(default_fs);
-  // fs_index might be -1.
-  fs_box_->setCurrentIndex(fs_index);
+  const int default_fs_index = fs_model_->index(default_fs);
+  fs_box_->setCurrentIndex(default_fs_index);
 
   // Select empty mount-point.
   const int mount_point_index = mount_point_model_->index("");
@@ -261,8 +266,9 @@ void NewPartitionFrame::onMountPointChanged(int index) {
     // Its value will also be checked in AdvancedPartitionFrame.
     const qint64 default_size = GetSettingsInt(kPartitionDefaultBootSpace) *
                                 kMebiByte;
-    size_slider_->setMinimum(default_size);
-    size_slider_->setValue(default_size);
+    const qint64 real_size = qMin(default_size, partition_.getByteLength());
+    size_slider_->setMinimum(real_size);
+    size_slider_->setValue(real_size);
   } else {
     // Reset minimum value of size_slider_.
     size_slider_->setMinimum(kMinimumPartitionSize);
