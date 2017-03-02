@@ -246,8 +246,9 @@ void NewPartitionFrame::onFsChanged(int index) {
     // Its value will also be checked in AdvancedPartitionFrame.
     const qint64 default_size = GetSettingsInt(kPartitionDefaultEFISpace) *
                                 kMebiByte;
-    size_slider_->setMinimum(default_size);
-    size_slider_->setValue(default_size);
+    const qint64 real_size = qMin(default_size, partition_.getByteLength());
+    size_slider_->setMinimum(real_size);
+    size_slider_->setValue(real_size);
   } else {
     // Reset minimum value of size_slider_.
     size_slider_->setMinimum(kMinimumPartitionSize);
