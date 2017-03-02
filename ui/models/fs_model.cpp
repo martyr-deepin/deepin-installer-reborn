@@ -10,8 +10,7 @@ namespace installer {
 
 FsModel::FsModel(const FsTypeList& fs_list, QObject* parent)
     : QAbstractListModel(parent),
-      fs_list_(fs_list),
-      inited_fs_list_(fs_list) {
+      fs_list_(fs_list) {
   this->setObjectName("fs_model");
 }
 
@@ -48,12 +47,35 @@ int FsModel::index(FsType fs_type) const {
   return fs_list_.indexOf(fs_type);
 }
 
-void FsModel::setEfiEnabled(bool efi_enabled) {
+void FsModel::setShowEFI(bool show_efi) {
   this->beginResetModel();
 
-  fs_list_ = inited_fs_list_;
-  if (!efi_enabled) {
-    fs_list_.removeOne(FsType::EFI);
+  if (show_efi) {
+    if (fs_list_.indexOf(FsType::EFI) == -1) {
+      fs_list_.append(FsType::EFI);
+    }
+  } else {
+    const int index = fs_list_.indexOf(FsType::EFI);
+    if (index != -1) {
+      fs_list_.removeAt(index);
+    }
+  }
+
+  this->endResetModel();
+}
+
+void FsModel::setShowUnknown(bool show_unknown) {
+  this->beginResetModel();
+
+  if (show_unknown) {
+    if (fs_list_.indexOf(FsType::Unknown) == -1) {
+      fs_list_.append(FsType::Unknown);
+    }
+  } else {
+    const int index = fs_list_.indexOf(FsType::Unknown);
+    if (index != -1) {
+      fs_list_.removeAt(index);
+    }
   }
 
   this->endResetModel();

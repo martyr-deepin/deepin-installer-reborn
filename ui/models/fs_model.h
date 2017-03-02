@@ -26,12 +26,14 @@ class FsModel : public QAbstractListModel {
   // Index fs type. Returns -1 if not found.
   int index(FsType fs_type) const;
 
-  // If |efi_enabled| is false, remove efi from fs list.
-  void setEfiEnabled(bool efi_enabled);
+  // If |show_efi| is false, remove efi from fs list.
+  void setShowEFI(bool show_efi);
+
+  // If |show_unknown| is true, append it to fs list.
+  void setShowUnknown(bool show_unknown);
 
  private:
   FsTypeList fs_list_;
-  FsTypeList inited_fs_list_;
 };
 
 }  // namespace installer

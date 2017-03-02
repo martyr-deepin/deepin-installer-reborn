@@ -11,6 +11,7 @@
 #include <QLabel>
 
 #include "base/file_util.h"
+#include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "ui/frames/consts.h"
@@ -60,6 +61,10 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
   name_label_->setText(GetPartitionLabelAndPath(partition));
   usage_label_->setText(GetPartitionUsage(partition));
   usage_bar_->setValue(GetPartitionUsageValue(partition));
+
+  // Update fs list.
+  fs_model_->setShowEFI(IsEfiEnabled());
+  fs_model_->setShowUnknown(partition.fs == FsType::Unknown);
 
   // Reset fs index.
   int fs_index = fs_model_->index(partition.fs);
@@ -135,10 +140,10 @@ void EditPartitionFrame::updateFormatBoxState() {
   format |= IsInFormattedMountPointList(mount_point);
   this->forceFormat(format);
 
-  // If it is linux-swap, hide format box.
-  bool invisible = (fs_type == FsType::LinuxSwap);
-  // If fs is not set or unknown, hide format box.
-  invisible |= (fs_type == FsType::Empty);
+  // If it is linux-swap, empty or known, hide format box.
+  bool invisible = (fs_type == FsType::LinuxSwap ||
+      fs_type == FsType::Empty ||
+      fs_type == FsType::Unknown);
   format_label_->setVisible(!invisible);
   format_check_box_->setVisible(!invisible);
 }
@@ -282,7 +287,22 @@ void EditPartitionFrame::onFsChanged(int index) {
 }
 
 void EditPartitionFrame::onMountPointChanged(int index) {
-  Q_UNUSED(index);
+  const QString mount_point = mount_point_model_->getMountPoint(index);
+  const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
+  const FsType default_fs = GetDefaultFsType();
+  const int default_fs_index = fs_model_->index(default_fs);
+
+  // If mount point is not empty, partition fs shall be not empty and can not
+  // be linux-swap or efi.
+  if (!mount_point.isEmpty()) {
+    // If fs is empty, select default fs.
+    if (fs_type == FsType::Empty ||
+        fs_type == FsType::LinuxSwap ||
+        fs_type == FsType::EFI) {
+      fs_box_->setCurrentIndex(default_fs_index);
+    }
+  }
+
   this->updateFormatBoxState();
 }
 

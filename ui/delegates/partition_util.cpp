@@ -65,6 +65,11 @@ int AllocPrimaryPartitionNumber(const Device& device) {
   return -1;
 }
 
+FsType GetDefaultFsType() {
+  const QString default_fs_name = GetSettingsString(kPartitionDefaultFs);
+  return GetFsTypeByName(default_fs_name);
+}
+
 QString GetDeviceModelAndCap(const Device& device) {
   const int gibi_size = ToGigByte(device.getByteLength());
   return QString("%1 (%2G)").arg(device.model).arg(gibi_size);

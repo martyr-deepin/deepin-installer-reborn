@@ -22,6 +22,9 @@ int AllocLogicalPartitionNumber(const Device& device);
 // Calculate new primary partition number. Returns -1 on failed.
 int AllocPrimaryPartitionNumber(const Device& device);
 
+// Get default filesystem from settings.
+FsType GetDefaultFsType();
+
 // Get device model name and capacity.
 QString GetDeviceModelAndCap(const Device& device);
 

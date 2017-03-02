@@ -32,10 +32,6 @@ const int kPartitionColumns = 4;
 
 const int kWindowWidth = 960;
 
-FsType GetPartitionDefaultFs() {
-  return GetFsTypeByName(GetSettingsString(kPartitionDefaultFs));
-}
-
 }  // namespace
 
 SimplePartitionFrame::SimplePartitionFrame(SimplePartitionDelegate* delegate,
@@ -189,7 +185,7 @@ void SimplePartitionFrame::appendOperations() {
     delegate_->createPartition(partition,
                                PartitionType::Normal,
                                false,
-                               GetPartitionDefaultFs(),
+                               GetDefaultFsType(),
                                kMountPointRoot,
                                remaining_sectors);
   } else {
@@ -200,14 +196,14 @@ void SimplePartitionFrame::appendOperations() {
         delegate_->createPartition(partition,
                                    PartitionType::Normal,
                                    false,
-                                   GetPartitionDefaultFs(),
+                                   GetDefaultFsType(),
                                    kMountPointRoot,
                                    partition.getSectorLength());
       } else if (delegate_->canAddLogical(partition)) {
         delegate_->createPartition(partition,
                                    PartitionType::Logical,
                                    false,
-                                   GetPartitionDefaultFs(),
+                                   GetDefaultFsType(),
                                    kMountPointRoot,
                                    partition.getSectorLength());
       }  else {
@@ -217,7 +213,7 @@ void SimplePartitionFrame::appendOperations() {
     } else {
       // Format real partition.
       delegate_->formatPartition(button->partition(),
-                                 GetPartitionDefaultFs(),
+                                 GetDefaultFsType(),
                                  kMountPointRoot);
     }
   }

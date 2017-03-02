@@ -72,7 +72,7 @@ class EditPartitionFrame : public QFrame {
   // Hide mount_point_box_ when specific fs is selected
   void onFsChanged(int index);
 
-  // Check format-box when mount-point is root.
+  // Update format box state when mount-point is root.
   void onMountPointChanged(int index);
 
   void onOkButtonClicked();

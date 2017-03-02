@@ -67,8 +67,7 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
   alignment_box_->setCurrentIndex(0);
 
   // Select default fs type.
-  const QString default_fs_name = GetSettingsString(kPartitionDefaultFs);
-  const FsType default_fs = GetFsTypeByName(default_fs_name);
+  const FsType default_fs = GetDefaultFsType();
   const int fs_index = fs_model_->index(default_fs);
   // fs_index might be -1.
   fs_box_->setCurrentIndex(fs_index);
