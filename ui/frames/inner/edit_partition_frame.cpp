@@ -277,9 +277,10 @@ void EditPartitionFrame::initUI() {
 }
 
 void EditPartitionFrame::onFsChanged(int index) {
+  // Hide mount point box if current selected filesystem does not need
+  // mount point.
   const FsType fs_type = fs_model_->getFs(index);
   const bool visible = IsMountPointSupported(fs_type);
-
   mount_point_label_->setVisible(visible);
   mount_point_box_->setVisible(visible);
 
@@ -317,7 +318,6 @@ void EditPartitionFrame::onOkButtonClicked() {
     // Create an OperationFormat object.
     const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
     delegate_->formatPartition(partition_, fs_type, mount_point);
-    delegate_->refreshVisual();
   } else {
     // If FormatOperation is reverted.
     if (partition_.status == PartitionStatus::Format) {
@@ -330,8 +330,8 @@ void EditPartitionFrame::onOkButtonClicked() {
     if (partition_.mount_point != mount_point) {
       delegate_->updateMountPoint(partition_, mount_point);
     }
-    delegate_->refreshVisual();
   }
+  delegate_->refreshVisual();
 
   emit this->finished();
 }

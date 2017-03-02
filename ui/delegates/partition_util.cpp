@@ -227,6 +227,8 @@ int GetPartitionUsageValue(const Partition& partition) {
   }
 }
 
+// Returns true if |fs_type| may be mounted to system with customized
+// mount point.
 bool IsMountPointSupported(FsType fs_type) {
   return (fs_type != FsType::EFI &&
           fs_type != FsType::LinuxSwap &&
