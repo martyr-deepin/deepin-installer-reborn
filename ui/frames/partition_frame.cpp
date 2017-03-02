@@ -138,6 +138,8 @@ void PartitionFrame::initConnections() {
           select_bootloader_frame_, &SelectBootloaderFrame::deviceRefreshed);
 
   connect(partition_model_, &PartitionModel::deviceRefreshed,
+          advanced_delegate_, &AdvancedPartitionDelegate::onDeviceRefreshed);
+  connect(partition_model_, &PartitionModel::deviceRefreshed,
           simple_delegate_, &SimplePartitionDelegate::onDeviceRefreshed);
 
   connect(simple_partition_frame_, &SimplePartitionFrame::requestNewTable,
