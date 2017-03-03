@@ -200,6 +200,10 @@ ValidateStates AdvancedPartitionDelegate::validate() const {
   FsType boot_fs = FsType::Empty;
   FsType root_fs = FsType::Empty;
 
+  // Partition number of /boot and /.
+  int boot_part_number = -1;
+  int root_part_number = -1;
+
   const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
   const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
   const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
@@ -211,6 +215,7 @@ ValidateStates AdvancedPartitionDelegate::validate() const {
         // Check / partition.
         found_root = true;
         root_fs = partition.fs;
+        root_part_number = partition.partition_number;
         const qint64 root_real_bytes = partition.getByteLength() + kMebiByte;
         const qint64 root_minimum_bytes = root_required * kGibiByte;
         root_large_enough = (root_real_bytes >= root_minimum_bytes);
@@ -219,6 +224,7 @@ ValidateStates AdvancedPartitionDelegate::validate() const {
         // Check /boot partition.
         found_boot = true;
         boot_fs = partition.fs;
+        root_part_number = partition.partition_number;
         const qint64 boot_recommend_bytes = boot_recommended * kMebiByte;
         // Add 1Mib to partition size.
         const qint64 boot_real_bytes = partition.getByteLength() + kMebiByte;
@@ -270,6 +276,17 @@ ValidateStates AdvancedPartitionDelegate::validate() const {
   const FsTypeList boot_fs_list = this->getBootFsTypeList();
   if (!boot_fs_list.contains(boot_root_fs)) {
     states.append(ValidateState::BootFsInvalid);
+  }
+
+  // If /boot folder is required to be the first partition, validate it.
+  if (GetSettingsBool(kPartitionBootOnFirstPartition)) {
+    const int boot_root_part_num = found_boot ?
+                                   boot_part_number :
+                                   root_part_number;
+    // If /boot or / is set, validate its partition number.
+    if ((boot_root_part_num != -1) && (boot_root_part_num != 1)) {
+      states.append(ValidateState::BootPartNumberInvalid);
+    }
   }
 
   return states;

@@ -285,6 +285,10 @@ QString AdvancedPartitionFrame::validateStateToText(ValidateState state) {
       // TODO(xushaohua): add message here.
       return "filesystem for /boot is invalid, only ext4/ext3/ext3 satisfied.";
     }
+    case ValidateState::BootPartNumberInvalid: {
+      // TODO(xushaohua): add message.
+      return "/boot should be located at the first partition of disk.";
+    }
     case ValidateState::BootTooSmall: {
       const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
       return tr("At least %1 MB is required for /boot partition")

@@ -14,6 +14,7 @@ namespace installer {
 
 enum class ValidateState {
   BootFsInvalid,  // Filesystem used for /boot is not in supported fs list.
+  BootPartNumberInvalid,  // Partition for /boot is not the first partition.
   BootTooSmall,
   EfiMissing,
   EfiTooSmall,
