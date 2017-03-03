@@ -108,10 +108,6 @@ void InstallProgressFrame::setProgress(int progress) {
   updateProgressBar(progress);
 }
 
-void InstallProgressFrame::updateLanguage(const QString& locale) {
-  slide_frame_->setLocale(locale);
-}
-
 void InstallProgressFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Installing"));

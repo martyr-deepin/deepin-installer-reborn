@@ -44,11 +44,8 @@ class InstallProgressFrame : public QFrame {
 
   void setProgress(int progress);
 
-  // Update progress value with a qtimer object.
+  // Update progress value with a QTimer object.
   void simulate();
-
-  // Choose slide package based on |locale|.
-  void updateLanguage(const QString& locale);
 
  signals:
   // Emitted when installation finished or failed.

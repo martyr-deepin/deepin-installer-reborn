@@ -45,11 +45,7 @@ void SelectLanguageFrame::readConf() {
 }
 
 void SelectLanguageFrame::writeConf() {
-  // Update locale environment.
-  // "LC_ALL" is used in sysinfo/timezone.h, sysinfo/keyboard.h and
-  // ui/models/keyboard_layout_model.h.
   WriteLocale(lang_.lc_all);
-  emit this->languageUpdated(lang_.locale);
 }
 
 void SelectLanguageFrame::changeEvent(QEvent* event) {

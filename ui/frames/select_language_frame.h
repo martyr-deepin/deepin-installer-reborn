@@ -33,9 +33,6 @@ class SelectLanguageFrame : public QFrame {
  signals:
   void finished();
 
-  // Emitted when new language is selected.
-  void languageUpdated(const QString& locale);
-
  protected:
   // Update text of next_button_
   void changeEvent(QEvent* event) override;

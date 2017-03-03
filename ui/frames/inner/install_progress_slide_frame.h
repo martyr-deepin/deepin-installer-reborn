@@ -24,8 +24,6 @@ class InstallProgressSlideFrame : public QFrame {
   explicit InstallProgressSlideFrame(QWidget* parent = nullptr);
 
  public slots:
-  void setLocale(const QString& locale);
-
   // Start slide show.
   // If |disable_slide| is true, do no switch slide images.
   // If |disable_animation| is true, do no apply animation.
@@ -48,7 +46,6 @@ class InstallProgressSlideFrame : public QFrame {
   QParallelAnimationGroup* animation_group_ = nullptr;
   QVariantAnimation* null_animation_ = nullptr;
 
-  QString locale_;
   int slide_index_;
   QStringList slide_files_;
 

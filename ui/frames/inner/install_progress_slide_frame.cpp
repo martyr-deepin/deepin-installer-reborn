@@ -11,13 +11,13 @@
 #include <QPropertyAnimation>
 #include <QParallelAnimationGroup>
 
+#include "service/settings_manager.h"
 #include "ui/delegates/install_slide_frame_util.h"
 
 namespace installer {
 
 InstallProgressSlideFrame::InstallProgressSlideFrame(QWidget* parent)
     : QFrame(parent),
-      locale_(),
       slide_index_(0),
       slide_files_() {
   this->setObjectName("install_progress_frame");
@@ -26,14 +26,11 @@ InstallProgressSlideFrame::InstallProgressSlideFrame(QWidget* parent)
   this->initConnections();
 }
 
-void InstallProgressSlideFrame::setLocale(const QString& locale) {
-  locale_ = locale;
-}
-
 void InstallProgressSlideFrame::startSlide(bool disable_slide,
                                            bool disable_animation,
                                            int duration) {
-  slide_files_ = GetSlideFiles(locale_);
+  const QString locale = ReadLocale();
+  slide_files_ = GetSlideFiles(locale);
 
   if (slide_files_.isEmpty()) {
     qCritical() << "startSlide() no slide files found!";
