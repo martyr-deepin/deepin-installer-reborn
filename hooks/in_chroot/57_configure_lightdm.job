@@ -25,7 +25,7 @@ prepare_lightdm_for_reboot_setup_mode() {
   # Override lightdm.conf
   cat > "${CONF_FILE}" <<EOF
 [Seat:*]
-greeter-setup-script=/usr/bin/deepin-installer-first-boot-pkexec
+greeter-setup-script=/usr/bin/deepin-installer-first-boot
 EOF
 }
 
@@ -39,7 +39,7 @@ cleanup_reboot_setup_mode() {
 }
 
 enable_deepin_lightdm_greeter() {
-  local CONF_FILLE=/etc/lightdm/lightdm.conf
+  local CONF_FILE=/etc/lightdm/lightdm.conf
   if [ -f "${CONF_FILE}" ]; then
     sed -i -r \
       -e "s|^#.*greeter-session=.*\$|greeter-session=lightdm-deepin-greeter|" \
@@ -48,7 +48,7 @@ enable_deepin_lightdm_greeter() {
   fi
 }
 
-# Constomize lightdm background.
+# Customize lightdm background.
 update_background() {
   local SRC_FILE
   SRC_FILE="${OEM_DIR}/lightdm.png"
