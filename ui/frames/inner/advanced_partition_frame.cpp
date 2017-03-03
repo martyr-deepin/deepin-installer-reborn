@@ -14,7 +14,6 @@
 #include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
-#include "ui/delegates/advanced_partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/advanced_partition_button.h"
 #include "ui/utils/widget_util.h"
