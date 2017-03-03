@@ -68,7 +68,7 @@ bool IsPartitionTableMatch(PartitionTableType type);
 bool IsPartitionTableMatch(const DeviceList& devices,
                            const QString& device_path);
 
-// If physical memory is less than 4Gib, swap area is required.
+// If physical memory is less than 4Gib, swap partition of swap file is needed.
 bool IsSwapAreaNeeded();
 
 // Convert |size| in byte to gibibyte.

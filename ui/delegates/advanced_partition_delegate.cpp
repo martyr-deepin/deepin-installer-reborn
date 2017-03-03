@@ -767,8 +767,13 @@ void AdvancedPartitionDelegate::onManualPartDone() {
                        mount_points.join(';'));
   }
 
-  // Create swap file is swap partition is not found.
-  WriteRequiringSwapFile(!found_swap);
+  // Create swap file if physical memory is less than 4Gib and
+  // swap partition is not found.
+  if (IsSwapAreaNeeded()) {
+    WriteRequiringSwapFile(!found_swap);
+  } else {
+    WriteRequiringSwapFile(false);
+  }
 }
 
 void AdvancedPartitionDelegate::refreshVisual() {
