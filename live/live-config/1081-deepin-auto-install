@@ -3,6 +3,8 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+# If in auto-install mode, replace default lightdm.conf and launch installer.
+
 prereqs() {
   echo "$PREREQ"
 }

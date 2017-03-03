@@ -55,7 +55,7 @@ generate_background_image() {
 
 case "$1" in
   configure)
-    generate_locale
+    #generate_locale
     generate_background_image
     ;;
 esac
