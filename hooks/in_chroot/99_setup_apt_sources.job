@@ -38,4 +38,4 @@ EOF
     ;;
 esac
 
-exit 0
+return 0

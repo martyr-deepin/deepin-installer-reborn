@@ -9,4 +9,4 @@
 [ -d /target/deepinhost/var/lib/apt/lists ] && \
   cp -r /target/deepinhost/var/lib/apt/lists /target/var/lib/apt
 
-exit 0
+return 0

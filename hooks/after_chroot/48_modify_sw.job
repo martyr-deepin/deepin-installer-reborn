@@ -37,8 +37,8 @@ done < /target/etc/fstab
 
 echo "$LOCALUUID" 
 
-
 [ -f /target/etc/lightdm/lightdm.conf ] && sed -i -e "s|autologin-user=deepin|#autologin-user=deepin|g" /target/etc/lightdm/lightdm.conf
 [ -f /target/etc/sudoers ] && sed -i -e "s|deepin.*||g" /target/etc/sudoers
 [ -f /target/boot/grub/grub.cfg ] && sed -i -e "s|root=|root=$LOCALUUID|g" /target/boot/grub/grub.cfg
 
+return 0

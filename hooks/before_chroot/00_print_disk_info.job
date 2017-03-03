@@ -6,4 +6,4 @@
 # Print partition list in system.
 parted -l -m -s
 
-exit 0
+return 0

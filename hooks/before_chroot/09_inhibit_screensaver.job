@@ -7,4 +7,4 @@
 
 xset s off -dpms
 
-exit 0
+return 0

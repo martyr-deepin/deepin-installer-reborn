@@ -42,4 +42,4 @@ deepin-installer-unsquashfs --dest /target --progress "${PROGRESS_FILE}" \
 # Then extract overlay_filesystem
 extract_overlay_filesystem
 
-exit 0
+return 0

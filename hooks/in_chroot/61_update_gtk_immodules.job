@@ -14,4 +14,4 @@ if dpkg -l | grep -q ^ii\ \ libgtk-3-0;then
   dpkg-reconfigure libgtk-3-0 || true
 fi
 
-exit 0
+return 0

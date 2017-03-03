@@ -14,4 +14,4 @@ fi
 
 chmod 644 /etc/machine-id
 
-exit 0
+return 0

@@ -7,4 +7,4 @@
 blkid
 mount
 
-exit 0
+return 0

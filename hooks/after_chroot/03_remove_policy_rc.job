@@ -14,4 +14,4 @@ else
   msg "policy-rc.d not exists"
 fi
 
-exit 0
+return 0

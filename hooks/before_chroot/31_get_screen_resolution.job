@@ -21,4 +21,4 @@ fi
 
 installer_set "DI_CUR_RESOLUTION" "${resolution}"
 
-exit 0
+return 0
