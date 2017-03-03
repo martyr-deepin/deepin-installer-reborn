@@ -14,4 +14,4 @@ if [ -d "${SRC_DIR}" ]; then
   chmod +R 644 "${DEST_DIR}"
 fi
 
-exit 0
+return 0

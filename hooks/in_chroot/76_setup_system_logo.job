@@ -7,4 +7,4 @@
 # Update logo used in about-page of dde-control-center.
 # NOTE(xushaohua): dde-control-center and lightdm-deepin-greeter do not support
 # reading logo image from system currently.
-exit 0
+return 0

@@ -5,4 +5,4 @@
 
 cat /etc/deepin-installer.conf
 
-exit 0
+return 0

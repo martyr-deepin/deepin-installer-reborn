@@ -12,4 +12,4 @@ ls -lh /target/deepinhost
 echo "-----------------------------DEBUG INFO: mount ----------------------"
 mount
 
-exit 0
+return 0

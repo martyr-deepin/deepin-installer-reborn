@@ -15,4 +15,4 @@ if [ -x /var/lib/lastore/scripts/build_system_info ];then
 fi
 msg "refresh desktop cache done."
 
-exit 0
+return 0

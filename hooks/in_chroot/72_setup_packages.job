@@ -17,4 +17,4 @@ if [ -n "${UNINSTALLED_PKGS}" ]; then
     warn_exit "Failed to install packages: ${UNINSTALLED_PKGS}"
 fi
 
-exit 0
+return 0

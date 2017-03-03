@@ -11,4 +11,4 @@ if [ -f /etc/deepin-version ] && grep -qr "Professional" /etc/lsb-release; then
     --allow-unauthenticated  deepin-license-activator
 fi
 
-exit 0
+return 0

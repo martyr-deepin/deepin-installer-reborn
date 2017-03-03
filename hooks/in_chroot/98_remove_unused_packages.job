@@ -62,4 +62,4 @@ apt-get -y autoremove --purge
 
 # Returns 0 explicitly, because apt-get --purge might returns error if package
 # dependency does not fit.
-exit 0
+return 0

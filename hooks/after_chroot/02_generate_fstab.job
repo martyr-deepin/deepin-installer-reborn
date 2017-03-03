@@ -14,7 +14,7 @@ if [ x${DI_LUPIN} = xtrue ]; then
   echo "# <file system> <mount point>   <type>  <options>       <dump>  <pass>" > /target/etc/fstab
   echo "${DI_LOOP_ROOT_FILE} /               ext4    loop,errors=remount-ro 0       1" >> /target/etc/fstab
   echo "${DI_LOOP_SWAP_FILE} none            swap    loop,sw         0       0" >> /target/etc/fstab
-  exit 0
+  return 0
 fi
 
 readonly GENFSTAB="${HOOKS_DIR}/after_chroot/genfstab"
