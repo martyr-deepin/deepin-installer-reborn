@@ -302,6 +302,8 @@ void SimplePartitionFrame::repaintDevices() {
         button_group_->blockSignals(false);
         this->showInstallTip(button);
       }
+      connect(button, &QPushButton::clicked,
+              this, &SimplePartitionFrame::onPartitionButtonClicked);
 
       column += 1;
       // Add rows.
@@ -338,19 +340,47 @@ void SimplePartitionFrame::onDeviceRefreshed() {
   this->repaintDevices();
 }
 
-void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
-                                                    bool checked) {
+void SimplePartitionFrame::onPartitionButtonClicked() {
   // Clear warning message first.
   msg_label_->clear();
 
   // Hide tooltip.
   install_tip_->hide();
 
+  SimplePartitionButton* button =
+      dynamic_cast<SimplePartitionButton*>(this->sender());
+  Q_ASSERT(button);
+  if (!button) {
+    qCritical() << "no partition button is selected";
+    return;
+  }
+
+  // Check partition table type.
+  const QString device_path = button->partition().device_path;
+  if (!delegate_->isPartitionTableMatch(device_path)) {
+    emit this->requestNewTable(device_path);
+    return;
+  }
+
+  // Update selected partition.
+  delegate_->selectPartition(button->partition());
+
+  if (this->validate()) {
+    button->setSelected(true);
+
+    // Show install-tip at bottom of current checked button.
+    this->showInstallTip(button);
+
+    this->appendOperations();
+  }
+}
+
+void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
+                                                    bool checked) {
   SimplePartitionButton* part_button =
       dynamic_cast<SimplePartitionButton*>(button);
-  Q_ASSERT(part_button);
   if (!part_button) {
-    qCritical() << "no partition button selected";
+    qCritical() << "no partition button is selected";
     return;
   }
 
@@ -358,24 +388,6 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
     // Deselect previous button.
     part_button->setSelected(false);
     return;
-  }
-
-  // Check partition table type.
-  const QString device_path = part_button->partition().device_path;
-  if (!delegate_->isPartitionTableMatch(device_path)) {
-    emit this->requestNewTable(device_path);
-    return;
-  }
-
-  delegate_->selectPartition(part_button->partition());
-
-  if (this->validate()) {
-    part_button->setSelected(true);
-
-    // Show install-tip at bottom of current checked button.
-    this->showInstallTip(button);
-
-    this->appendOperations();
   }
 }
 

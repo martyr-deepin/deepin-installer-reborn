@@ -70,6 +70,9 @@ class SimplePartitionFrame : public QFrame {
 
  private slots:
   void onDeviceRefreshed();
+  
+  void onPartitionButtonClicked();
+  // Di-select the unchecked button.
   void onPartitionButtonToggled(QAbstractButton* button, bool checked);
 };
 
