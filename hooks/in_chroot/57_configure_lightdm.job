@@ -24,7 +24,7 @@ prepare_lightdm_for_reboot_setup_mode() {
 
   # Override lightdm.conf
   cat > "${CONF_FILE}" <<EOF
-[SeatDefaults]
+[Seat:*]
 greeter-setup-script=/usr/bin/deepin-installer-first-boot-pkexec
 EOF
 }
