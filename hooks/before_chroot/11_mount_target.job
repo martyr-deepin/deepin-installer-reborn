@@ -6,9 +6,9 @@
 # Mount root partition to /target.
 
 target="/target"
-mkdir -p ${target}
+mkdir -pv ${target}
 #Try to fix wrong permission (owned by 1001)
-chown root:root ${target}
+chown -v root:root ${target}
 
 DI_LUPIN=$(installer_get "DI_LUPIN")
 DI_LUPIN_ROOT=$(installer_get "DI_LUPIN_ROOT")
@@ -21,9 +21,12 @@ if [ x${DI_LUPIN} = xtrue ];then
   hostdev=`df ${DI_LUPIN_ROOT} | tail -1 | awk '{printf $1}'`
   installer_set "DI_HOST_DEV" "${hostdev}"
   mkdir -v /host
-  mount --bind ${DI_LUPIN_ROOT} /host
-  losetup ${DI_ROOT_PARTITION} /host/${DI_LOOP_ROOT_FILE}
-  mkfs.ext4 -L "Computer" -F -F ${DI_ROOT_PARTITION}
+  mount --bind ${DI_LUPIN_ROOT} /host || \
+    error "mount failed: ${DI_LUPIN_ROOT}"
+  losetup ${DI_ROOT_PARTITION} /host/${DI_LOOP_ROOT_FILE} || \
+    error "losetup failed /host/${DI_LOOP_ROOT_FILE} -> ${DI_ROOT_PARTITION}"
+  mkfs.ext4 -L "Computer" -F -F ${DI_ROOT_PARTITION} || \
+    error "mkfs.ext4 failed: ${DI_ROOT_PARTITION}"
 fi
 
 get_fstype() {
@@ -57,7 +60,7 @@ find_target() {
 msg "mount rootfs(${DI_ROOT_PARTITION}) to ${target}"
 n=0
 DI_ROOT_FSTYPE=$(get_fstype ${DI_ROOT_PARTITION})
-while [ "$n" -lt 30 ]; do
+while [ "$n" -lt 10 ]; do
   if [ ${DI_ROOT_FSTYPE} != "unknown" ]; then
     mount -t ${DI_ROOT_FSTYPE} ${DI_ROOT_PARTITION} ${target}
   else
