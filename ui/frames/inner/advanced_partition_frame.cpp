@@ -34,7 +34,7 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(
     AdvancedPartitionDelegate* delegate_, QWidget* parent)
     : QFrame(parent),
       delegate_(delegate_),
-      error_messages_() {
+      validate_states_() {
   this->setObjectName("advanced_partition_frame");
 
   this->initUI();
@@ -48,97 +48,11 @@ bool AdvancedPartitionFrame::validate() {
   // Clear error messages first.
   this->clearErrorMessages();
 
-  bool efi_is_set = false;
-  bool efi_large_enough = false;
-  bool root_is_set = false;
-  bool root_large_enough = false;
-  bool swap_is_set = false;
-  bool boot_is_set = false;
-  bool boot_large_enough = false;
-
-  const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-  const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
-  const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
-  const int efi_minimum = GetSettingsInt(kPartitionEFIMinimumSpace);
-  Partition root_partition;
-
-  for (const Device& device : delegate_->virtual_devices()) {
-    for (const Partition& partition : device.partitions) {
-      if (partition.mount_point == kMountPointRoot) {
-        // Check / partition.
-        root_is_set = true;
-        root_partition = partition;
-
-      } else if (partition.mount_point == kMountPointBoot) {
-        // Check /boot partition.
-        boot_is_set = true;
-        const qint64 boot_recommend_bytes = boot_recommended * kMebiByte;
-        // Add 1Mib to partition size.
-        const qint64 boot_real_bytes = partition.getByteLength() + kMebiByte;
-        boot_large_enough = (boot_real_bytes >= boot_recommend_bytes);
-
-      } else if (partition.fs == FsType::EFI) {
-        // Check EFI partition.
-        efi_is_set = true;
-
-        if (partition.status == PartitionStatus::Real) {
-          // For existing EFI partition.
-          const qint64 efi_minimum_bytes = efi_minimum * kMebiByte;
-          const qint64 efi_real_bytes = partition.getByteLength() + kMebiByte;
-          efi_large_enough = (efi_real_bytes >= efi_minimum_bytes);
-        } else {
-          // For newly created EFI partition.
-          const qint64 efi_recommended_bytes = efi_recommended * kMebiByte;
-          const qint64 efi_real_bytes = partition.getByteLength() + kMebiByte;
-          efi_large_enough = (efi_real_bytes >= efi_recommended_bytes);
-        }
-      } else if (partition.fs == FsType::LinuxSwap) {
-        swap_is_set = true;
-      }
-    }
-  }
-
-  if (!root_is_set) {
-    addErrorMessage(tr("Add a Root partition to continue"),
-                    ErrorMessageType::RootMissing);
-  }
-
-  const qint64 root_minimum_bytes = root_required * kGibiByte;
-  const qint64 root_real_bytes = root_partition.getByteLength() + kMebiByte;
-  root_large_enough = (root_real_bytes >= root_minimum_bytes);
-
-  // Check root size only if root is set.
-  if (root_is_set && !root_large_enough) {
-    addErrorMessage(tr("At least %1 GB is required for Root partition")
-                        .arg(root_required),
-                    ErrorMessageType::RootTooSmall);
-  }
-
-  if (IsEfiEnabled()) {
-    if (!efi_is_set) {
-      addErrorMessage(tr("Add an EFI partition to continue"),
-                      ErrorMessageType::EfiMissing);
-    }
-    if (!efi_large_enough) {
-      addErrorMessage(tr("At least %1 MB is required for EFI partition")
-                          .arg(efi_recommended),
-                      ErrorMessageType::EfiTooSmall);
-    }
-  }
-
-  if (boot_is_set && !boot_large_enough) {
-    addErrorMessage(tr("At least %1 MB is required for /boot partition")
-                        .arg( boot_recommended),
-                    ErrorMessageType::BootTooSmall);
-  }
-
-  if (error_messages_.isEmpty()) {
-    // No error found.
-
-    // Create swap file is swap partition is not found.
-    WriteRequiringSwapFile(!swap_is_set);
+  validate_states_ = delegate_->validate();
+  if (validate_states_.isEmpty()) {
     return true;
   } else {
+    this->showErrorMessages();
     return false;
   }
 }
@@ -330,31 +244,29 @@ void AdvancedPartitionFrame::repaintDevices() {
   partition_layout_->addStretch();
 }
 
-void AdvancedPartitionFrame::addErrorMessage(
-    const QString& text, AdvancedPartitionFrame::ErrorMessageType type) {
-  const ErrorMessage msg = { text, type };
-  qDebug() << "error msg:" << text;
-  error_messages_.append(msg);
-
+void AdvancedPartitionFrame::showErrorMessages() {
   ClearLayout(msg_layout_);
-  for (int i = 0; i < error_messages_.length(); i++) {
+
+  for (int i = 0; i < validate_states_.length(); i++) {
     QLabel* error_label = new QLabel();
-    if (i == error_messages_.length() - 1) {
+    if (i == validate_states_.length() - 1) {
       error_label->setObjectName("err_msg_bottom_label");
     } else {
       error_label->setObjectName("err_msg_label");
     }
-    error_label->setText(error_messages_.at(i).text);
+
+    const QString text = this->validateStateToText(validate_states_.at(i));
+    error_label->setText(text);
     msg_layout_->addWidget(error_label);
     error_label->show();
   }
 
-  const int err_count = error_messages_.length();
+  const int err_count = validate_states_.length();
   // NOTE(xushaohua): Transifex does not ts plural format.
   if (err_count <= 1) {
-      msg_head_label_->setText(
-          tr("%1 error found, fix to continue installation or "
-             "switch to simple mode").arg(err_count));
+    msg_head_label_->setText(
+        tr("%1 error found, fix to continue installation or "
+           "switch to simple mode").arg(err_count));
   } else {
     msg_head_label_->setText(
         tr("%1 errors found, fix to continue installation or "
@@ -365,11 +277,45 @@ void AdvancedPartitionFrame::addErrorMessage(
   if (msg_container_frame_->isHidden()) {
     msg_container_frame_->show();
   }
-  msg_container_frame_->show();
+}
+
+QString AdvancedPartitionFrame::validateStateToText(ValidateState state) {
+  switch (state) {
+    case ValidateState::BootFsInvalid: {
+      // TODO(xushaohua): add message here.
+      return "filesystem for /boot is invalid, only ext4/ext3/ext3 satisfied.";
+    }
+    case ValidateState::BootTooSmall: {
+      const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
+      return tr("At least %1 MB is required for /boot partition")
+          .arg( boot_recommended);
+    }
+    case ValidateState::EfiMissing: {
+      return tr("Add an EFI partition to continue");
+    }
+    case ValidateState::EfiTooSmall: {
+      const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
+      return tr("At least %1 MB is required for EFI partition")
+          .arg(efi_recommended);
+    }
+    case ValidateState::RootMissing: {
+      return tr("Add a Root partition to continue");
+    }
+    case ValidateState::RootTooSmall: {
+      const int root_required =
+          GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+      return tr("At least %1 GB is required for Root partition")
+          .arg(root_required);
+    }
+    default: {
+      // We shall never reach here.
+      return "";
+    }
+  }
 }
 
 void AdvancedPartitionFrame::clearErrorMessages() {
-  error_messages_.clear();
+  validate_states_.clear();
   ClearLayout(msg_layout_);
 
   // Also hide msg container.

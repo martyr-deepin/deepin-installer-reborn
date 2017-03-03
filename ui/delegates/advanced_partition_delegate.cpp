@@ -174,6 +174,84 @@ bool AdvancedPartitionDelegate::isPartitionTableMatch(
   return IsPartitionTableMatch(real_devices_, device_path);
 }
 
+ValidateStates AdvancedPartitionDelegate::validate() const {
+  ValidateStates states;
+  bool found_efi = false;
+  bool efi_large_enough = false;
+  bool found_root = false;
+  bool root_large_enough = false;
+  bool found_boot = false;
+  bool boot_large_enough = false;
+
+  const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
+  const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
+  const int efi_minimum = GetSettingsInt(kPartitionEFIMinimumSpace);
+  Partition root_partition;
+
+  for (const Device& device : virtual_devices_) {
+    for (const Partition& partition : device.partitions) {
+      if (partition.mount_point == kMountPointRoot) {
+        // Check / partition.
+        found_root = true;
+        root_partition = partition;
+
+      } else if (partition.mount_point == kMountPointBoot) {
+        // Check /boot partition.
+        found_boot = true;
+        const qint64 boot_recommend_bytes = boot_recommended * kMebiByte;
+        // Add 1Mib to partition size.
+        const qint64 boot_real_bytes = partition.getByteLength() + kMebiByte;
+        boot_large_enough = (boot_real_bytes >= boot_recommend_bytes);
+
+      } else if (partition.fs == FsType::EFI) {
+        // Check EFI partition.
+        found_efi = true;
+
+        if (partition.status == PartitionStatus::Real) {
+          // For existing EFI partition.
+          const qint64 efi_minimum_bytes = efi_minimum * kMebiByte;
+          const qint64 efi_real_bytes = partition.getByteLength() + kMebiByte;
+          efi_large_enough = (efi_real_bytes >= efi_minimum_bytes);
+        } else {
+          // For newly created EFI partition.
+          const qint64 efi_recommended_bytes = efi_recommended * kMebiByte;
+          const qint64 efi_real_bytes = partition.getByteLength() + kMebiByte;
+          efi_large_enough = (efi_real_bytes >= efi_recommended_bytes);
+        }
+      }
+    }
+  }
+
+  if (!found_root) {
+    states.append(ValidateState::RootMissing);
+  }
+
+  const qint64 root_minimum_bytes = root_required * kGibiByte;
+  const qint64 root_real_bytes = root_partition.getByteLength() + kMebiByte;
+  root_large_enough = (root_real_bytes >= root_minimum_bytes);
+
+  // Check root size only if root is set.
+  if (found_root && !root_large_enough) {
+    states.append(ValidateState::RootTooSmall);
+  }
+
+  if (IsEfiEnabled()) {
+    if (!found_efi) {
+      states.append(ValidateState::EfiMissing);
+    }
+    if (!efi_large_enough) {
+      states.append(ValidateState::EfiTooSmall);
+    }
+  }
+
+  if (found_boot && !boot_large_enough) {
+    states.append(ValidateState::BootTooSmall);
+  }
+
+  return states;
+}
+
 bool AdvancedPartitionDelegate::createPartition(const Partition& partition,
                                                 PartitionType partition_type,
                                                 bool align_start,
@@ -576,6 +654,7 @@ void AdvancedPartitionDelegate::onManualPartDone() {
   QString root_disk;
   QString root_path;
   QStringList mount_points;
+  bool found_swap = false;
 
   for (const Operation& operation : operations_) {
     const Partition& new_partition = operation.new_partition;
@@ -589,10 +668,20 @@ void AdvancedPartitionDelegate::onManualPartDone() {
         root_disk = new_partition.device_path;
         root_path = new_partition.path;
       }
-    } else if (new_partition.fs == FsType::LinuxSwap) {
-      // Add swap area to mount_point list.
-      const QString record(QString("%1=swap").arg(new_partition.path));
-      mount_points.append(record);
+    }
+  }
+
+  // Check linux-swap.
+  for (const Device& device : virtual_devices_) {
+    for (const Partition& partition : device.partitions) {
+      if (partition.fs == FsType::LinuxSwap) {
+        found_swap = true;
+
+        // Add swap area to mount_point list.
+        // NOTE(xushaohua): Multiple swap partitions may be set.
+        const QString record(QString("%1=swap").arg(partition.path));
+        mount_points.append(record);
+      }
     }
   }
 
@@ -611,17 +700,17 @@ void AdvancedPartitionDelegate::onManualPartDone() {
     }
     if (esp_path.isEmpty()) {
       // If no new EFI partition is created, search in device list.
-      bool esp_found = false;
+      bool found_efi = false;
       for (const Device& device : virtual_devices_) {
         for (const Partition& partition : device.partitions) {
           if (partition.fs == FsType::EFI) {
             esp_path = partition.path;
-            esp_found = true;
+            found_efi = true;
             break;
           }
         }
 
-        if (esp_found) {
+        if (found_efi) {
           break;
         }
       }
@@ -639,6 +728,9 @@ void AdvancedPartitionDelegate::onManualPartDone() {
                        bootloader_path_,
                        mount_points.join(';'));
   }
+
+  // Create swap file is swap partition is not found.
+  WriteRequiringSwapFile(!found_swap);
 }
 
 void AdvancedPartitionDelegate::refreshVisual() {

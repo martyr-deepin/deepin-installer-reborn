@@ -12,10 +12,9 @@ class QPushButton;
 class QVBoxLayout;
 
 #include "partman/partition.h"
+#include "ui/delegates/advanced_partition_delegate.h"
 
 namespace installer {
-
-class AdvancedPartitionDelegate;
 
 // Advanced partition mode
 class AdvancedPartitionFrame : public QFrame {
@@ -25,10 +24,8 @@ class AdvancedPartitionFrame : public QFrame {
   AdvancedPartitionFrame(AdvancedPartitionDelegate* delegate_,
                          QWidget* parent = nullptr);
 
-  // Check whether partition operations are appropriate:
-  //  * / partition is set and large enough;
-  //  * An EFI partition is created if EFI mode is on;
-  //  * A linux-swap partition is set;
+  // Check whether partition operations are appropriate.
+  // If partition operation is not satisfied, show error message list.
   // This method is called when next-button is clicked in PartitionFrame
   bool validate();
 
@@ -58,6 +55,11 @@ class AdvancedPartitionFrame : public QFrame {
   void initUI();
   void repaintDevices();
 
+  // Show error message container.
+  void showErrorMessages();
+  // Returns error message related to this |state|.
+  QString validateStateToText(ValidateState state);
+
   AdvancedPartitionDelegate* delegate_ = nullptr;
 
   QPushButton* bootloader_tip_button_ = nullptr;
@@ -69,24 +71,8 @@ class AdvancedPartitionFrame : public QFrame {
   QFrame* msg_container_frame_ = nullptr;
   QVBoxLayout* msg_layout_ = nullptr;
   QLabel* msg_head_label_ = nullptr;
-  enum class ErrorMessageType {
-    BootTooSmall,
-    EfiMissing,
-    EfiTooSmall,
-    RootMissing,
-    RootTooSmall,
-    // TODO(xushaohua): Loongson boot position.
-  };
-  struct ErrorMessage {
-    QString text;
-    ErrorMessageType type;
-  };
-  typedef QVector<ErrorMessage> ErrorMessageList;
-  ErrorMessageList error_messages_;
 
-  // Add a new error message to list.
-  // And show error message container.
-  void addErrorMessage(const QString& text, ErrorMessageType type);
+  ValidateStates validate_states_;
 
  private slots:
   // Clear error message list and hide message container.

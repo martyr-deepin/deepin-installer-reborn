@@ -12,6 +12,16 @@
 
 namespace installer {
 
+enum class ValidateState {
+  BootFsInvalid,  // Filesystem used for /boot is not in supported fs list.
+  BootTooSmall,
+  EfiMissing,
+  EfiTooSmall,
+  RootMissing,
+  RootTooSmall,
+};
+typedef QList<ValidateState> ValidateStates;
+
 // Partition delegate used in AdvancedPartitionFrame and other sub frame pages.
 class AdvancedPartitionDelegate : public QObject {
   Q_OBJECT
@@ -42,6 +52,11 @@ class AdvancedPartitionDelegate : public QObject {
   bool isPartitionTableMatch(const QString& device_path) const;
 
   const OperationList& operations() const { return operations_; };
+
+  // Check whether partition operations are appropriate.
+  //  * / partition is set and large enough;
+  //  * An EFI partition exists if EFI mode is on;
+  ValidateStates validate() const;
 
  signals:
   // Emitted when virtual device list is updated.
