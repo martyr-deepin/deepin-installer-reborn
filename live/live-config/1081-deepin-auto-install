@@ -16,28 +16,13 @@ case $1 in
     ;;
 esac
 
-# Generate a new xsession desktop file at $1.
-generate_auto_installer() {
-  local DESKTOP_FILE="$1"
-  local HELPER_FILE="$2"
-  cat > "${DESKTOP_FILE}" <<EOF
-[Desktop Entry]
-Name=DeepinAutoInstaller
-Comment=Deepin Auto Installer
-Exec=$HELPER_FILE
-TryExec=gksudo
-EOF
-}
-
 # Modify lightdm config file.
 generate_lightdm_conf() {
   local CONF_FILE="$1"
   local HELPER_FILE="$2"
   cat > "${CONF_FILE}" <<EOF
-[SeatDefaults]
+[Seat:*]
 greeter-setup-script=$HELPER_FILE
-greeter-session=deepin-lightdm-xgreeter
-user-session=deepin-livecd-installer
 EOF
 }
 
@@ -47,7 +32,6 @@ generate_installer_helper() {
   local CONF_FILE="$3"
   local LOG_FILE="$4"
 
-  # TODO(xushaohua): Write "DI_LOCALE" to "CONF_FILE"
   cat > "${HELPER_FILE}" <<EOF
 #!/bin/sh
 gconftool-2 --set --type=bool /apps/gksu/display-no-pass-info false || true
@@ -93,7 +77,6 @@ config_auto_mode() {
     installer_log=$install_path/install/deepin-installer.log
     installer_helper=/usr/lib/deepin-installer-helper
     generate_installer_helper $installer_helper $locale $installer_conf $installer_log
-    generate_auto_installer /usr/share/xsessions/deepin-auto-installer.desktop $installer_helper
     generate_lightdm_conf /etc/lightdm/lightdm.conf $installer_helper
 
     chmod +x $installer_helper
