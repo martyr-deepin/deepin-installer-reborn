@@ -6,8 +6,8 @@
 # Setup keyboard layout and model.
 setup_keyboard() {
   local XKBLAYOUT XKBVARIANT XKBMODEL XKBOPTIONS
-  XKBLAYOUT=$(installer_get "DI_KEYBOARD_LAYOUT")
-  XKBVARIANT=$(installer_get "DI_KEYBOARD_LAYOUT_VARIANT")
+  XKBLAYOUT=$(installer_get "DI_LAYOUT")
+  XKBVARIANT=$(installer_get "DI_LAYOUT_VARIANT")
   XKBMODEL=$(installer_get "DI_KEYBOARD_MODEL")
   XKBOPTIONS=$(installer_get "DI_KEYBOARD_OPTIONS")
 

@@ -281,8 +281,8 @@ void WriteKeyboard(const QString& model,
                    const QString& variant) {
   QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
   settings.setValue("DI_KEYBOARD_MODEL", model);
-  settings.setValue("DI_KEYBOARD_LAYOUT", layout);
-  settings.setValue("DI_KEYBOARD_LAYOUT_VARIANT", variant);
+  settings.setValue("DI_LAYOUT", layout);
+  settings.setValue("DI_LAYOUT_VARIANT", variant);
 }
 
 void WriteLocale(const QString& locale) {
