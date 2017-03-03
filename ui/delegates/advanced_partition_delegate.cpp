@@ -187,8 +187,8 @@ bool AdvancedPartitionDelegate::isPartitionTableMatch(
   return IsPartitionTableMatch(real_devices_, device_path);
 }
 
-ValidateStates AdvancedPartitionDelegate::validate() const {
-  ValidateStates states;
+AdvancedValidateStates AdvancedPartitionDelegate::validate() const {
+  AdvancedValidateStates states;
   bool found_efi = false;
   bool efi_large_enough = false;
   bool found_root = false;
@@ -252,30 +252,30 @@ ValidateStates AdvancedPartitionDelegate::validate() const {
   if (found_root) {
     // Check root size only if root is set.
     if (!root_large_enough) {
-      states.append(ValidateState::RootTooSmall);
+      states.append(AdvancedValidateState::RootTooSmall);
     }
   } else {
-    states.append(ValidateState::RootMissing);
+    states.append(AdvancedValidateState::RootMissing);
   }
 
   if (IsEfiEnabled()) {
     if (!found_efi) {
-      states.append(ValidateState::EfiMissing);
+      states.append(AdvancedValidateState::EfiMissing);
     }
     if (!efi_large_enough) {
-      states.append(ValidateState::EfiTooSmall);
+      states.append(AdvancedValidateState::EfiTooSmall);
     }
   }
 
   if (found_boot && !boot_large_enough) {
-    states.append(ValidateState::BootTooSmall);
+    states.append(AdvancedValidateState::BootTooSmall);
   }
 
   // Check filesystem type is suitable for /boot folder.
   const FsType boot_root_fs = found_boot ? boot_fs : root_fs;
   const FsTypeList boot_fs_list = this->getBootFsTypeList();
   if (!boot_fs_list.contains(boot_root_fs)) {
-    states.append(ValidateState::BootFsInvalid);
+    states.append(AdvancedValidateState::BootFsInvalid);
   }
 
   // If /boot folder is required to be the first partition, validate it.
@@ -285,7 +285,7 @@ ValidateStates AdvancedPartitionDelegate::validate() const {
                                    root_part_number;
     // If /boot or / is set, validate its partition number.
     if ((boot_root_part_num != -1) && (boot_root_part_num != 1)) {
-      states.append(ValidateState::BootPartNumberInvalid);
+      states.append(AdvancedValidateState::BootPartNumberInvalid);
     }
   }
 
@@ -696,9 +696,9 @@ void AdvancedPartitionDelegate::onManualPartDone() {
   QStringList mount_points;
   bool found_swap = false;
 
+  // Check use-specified partitions with mount point.
   for (const Operation& operation : operations_) {
     const Partition& new_partition = operation.new_partition;
-
     if (!new_partition.mount_point.isEmpty()) {
       // Add used partitions to mount_point list.
       const QString record(QString("%1=%2").arg(new_partition.path)
@@ -726,9 +726,8 @@ void AdvancedPartitionDelegate::onManualPartDone() {
   }
 
   if (IsEfiEnabled()) {
-    // Enable EFI mode.
-    // First check newly created EFI partition. If not found, check existing
-    // EFI partition.
+    // Enable EFI mode. First check newly created EFI partition. If not found,
+    // check existing EFI partition.
     WriteUEFI(true);
     QString esp_path;
     for (const Operation& operation : operations_) {
@@ -738,9 +737,10 @@ void AdvancedPartitionDelegate::onManualPartDone() {
         break;
       }
     }
+
+    // If no new EFI partition is created, search in device list.
+    bool found_efi = false;
     if (esp_path.isEmpty()) {
-      // If no new EFI partition is created, search in device list.
-      bool found_efi = false;
       for (const Device& device : virtual_devices_) {
         for (const Partition& partition : device.partitions) {
           if (partition.fs == FsType::EFI) {
@@ -757,15 +757,13 @@ void AdvancedPartitionDelegate::onManualPartDone() {
     }
 
     if (esp_path.isEmpty()) {
+      // We shall never reach here.
       qCritical() << "esp path is empty!";
     }
-    WritePartitionInfo(root_disk, root_path, esp_path,
-                       mount_points.join(';'));
+    WritePartitionInfo(root_disk, root_path, esp_path, mount_points.join(';'));
   } else {
     // In legacy mode.
-    WritePartitionInfo(root_disk,
-                       root_path,
-                       bootloader_path_,
+    WritePartitionInfo(root_disk, root_path, bootloader_path_,
                        mount_points.join(';'));
   }
 

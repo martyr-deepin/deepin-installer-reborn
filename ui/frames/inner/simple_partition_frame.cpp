@@ -46,76 +46,33 @@ SimplePartitionFrame::SimplePartitionFrame(SimplePartitionDelegate* delegate,
 }
 
 bool SimplePartitionFrame::validate() {
-  // Policy:
-  // * Check / partition is set.
-  // * Check / partition is large enough.
-  // * Check whether linux-swap exists.
-  bool root_is_set = false;
-  bool root_large_enough = false;
-  bool swap_is_set = false;
-
-  const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-  Partition root_partition;
-
-  // Check whether linux-swap partition exists.
-  for (const Device& device : delegate_->virtual_devices()) {
-    for (const Partition& partition : device.partitions) {
-      if (partition.fs == FsType::LinuxSwap) {
-        swap_is_set = true;
-      }
+  switch (delegate_->validate()) {
+    case SimpleValidateState::Ok: {
+      msg_label_->clear();
+      return true;
+    }
+    case SimpleValidateState::MaxPrimPartErr: {
+      msg_label_->setText(
+          tr("Unable to create new partition, please "
+             "select one of the existing partitions!"));
+      break;
+    }
+    case SimpleValidateState::RootMissing: {
+      msg_label_->setText(
+          tr("Please select one of the partitions to install!"));
+      break;
+    }
+    case SimpleValidateState::RootTooSmall: {
+      const int root_required =
+          GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+      msg_label_->setText(
+          tr("At least %1 GB is required for root partition")
+              .arg(root_required));
+      break;
     }
   }
 
-  bool is_max_prims_reached = false;
-  QAbstractButton* button = button_group_->checkedButton();
-  if (button) {
-    SimplePartitionButton* part_button =
-        dynamic_cast<SimplePartitionButton*>(button);
-    Q_ASSERT(part_button);
-    if (part_button && part_button->selected()) {
-      root_is_set = true;
-      root_partition = part_button->partition();
-    } else {
-      root_is_set = false;
-    }
-  }
-
-  if (!root_is_set) {
-    msg_label_->setText(tr("Please select one of the partitions to install!"));
-    return false;
-  }
-
-  // If currently selected device reaches its maximum primary partitions and
-  // button->partition() is a Freespace, it is impossible to created a new
-  // primary partition.
-  if ((root_partition.type == PartitionType::Unallocated) &&
-      !delegate_->canAddPrimary(root_partition) &&
-      !delegate_->canAddLogical(root_partition)) {
-    is_max_prims_reached = true;
-  }
-
-  if (is_max_prims_reached) {
-    msg_label_->setText(tr("Unable to create new partition, please "
-                           "select one of the existing partitions!"));
-    return false;
-  }
-
-  const qint64 root_minimum_bytes = root_required * kGibiByte;
-  const qint64 root_real_bytes = root_partition.getByteLength() + kMebiByte;
-  root_large_enough = (root_real_bytes >= root_minimum_bytes);
-
-  if (!root_large_enough) {
-    msg_label_->setText(
-        tr("At least %1 GB is required for root partition")
-            .arg(root_required));
-    return false;
-  }
-
-  // Create swap file is swap partition is not found.
-  WriteRequiringSwapFile(!swap_is_set);
-
-  msg_label_->clear();
-  return true;
+  return false;
 }
 
 void SimplePartitionFrame::changeEvent(QEvent* event) {
@@ -386,6 +343,9 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
   // Clear warning message first.
   msg_label_->clear();
 
+  // Hide tooltip.
+  install_tip_->hide();
+
   SimplePartitionButton* part_button =
       dynamic_cast<SimplePartitionButton*>(button);
   Q_ASSERT(part_button);
@@ -400,16 +360,18 @@ void SimplePartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
     return;
   }
 
+  // Check partition table type.
   const QString device_path = part_button->partition().device_path;
   if (!delegate_->isPartitionTableMatch(device_path)) {
     emit this->requestNewTable(device_path);
     return;
   }
 
-  // Set partition button selected.
-  part_button->setSelected(true);
+  delegate_->selectPartition(part_button->partition());
 
   if (this->validate()) {
+    part_button->setSelected(true);
+
     // Show install-tip at bottom of current checked button.
     this->showInstallTip(button);
 

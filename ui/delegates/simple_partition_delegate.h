@@ -12,6 +12,13 @@
 
 namespace installer {
 
+enum class SimpleValidateState {
+  Ok,
+  MaxPrimPartErr,  // All primary partition numbers are used.
+  RootMissing,
+  RootTooSmall,
+};
+
 // Partition delegate used in SimplePartitionFrame.
 class SimplePartitionDelegate : public QObject {
   Q_OBJECT
@@ -39,6 +46,15 @@ class SimplePartitionDelegate : public QObject {
 
   // Get current operation list.
   const OperationList& operations() const { return operations_; }
+
+  // Select |partition| as root partition.
+  // It may be separated into two partitions if needed.
+  // Call validate() to check whether this |partition| is appropriate before
+  // using it.
+  void selectPartition(const Partition& partition);
+
+  // Validate whether selected partition is appropriate.
+  SimpleValidateState validate() const;
 
  signals:
   void deviceRefreshed(const DeviceList& devices);
@@ -85,6 +101,8 @@ class SimplePartitionDelegate : public QObject {
   QString bootloader_path_;
 
   OperationList operations_;
+
+  Partition selected_partition_;
 };
 
 }  // namespace installer

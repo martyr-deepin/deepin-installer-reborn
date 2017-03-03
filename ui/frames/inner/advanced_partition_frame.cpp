@@ -278,33 +278,33 @@ void AdvancedPartitionFrame::showErrorMessages() {
   }
 }
 
-QString AdvancedPartitionFrame::validateStateToText(ValidateState state) {
+QString AdvancedPartitionFrame::validateStateToText(AdvancedValidateState state) {
   switch (state) {
-    case ValidateState::BootFsInvalid: {
+    case AdvancedValidateState::BootFsInvalid: {
       // TODO(xushaohua): add message here.
       return "filesystem for /boot is invalid, only ext4/ext3/ext3 satisfied.";
     }
-    case ValidateState::BootPartNumberInvalid: {
+    case AdvancedValidateState::BootPartNumberInvalid: {
       // TODO(xushaohua): add message.
       return "/boot should be located at the first partition of disk.";
     }
-    case ValidateState::BootTooSmall: {
+    case AdvancedValidateState::BootTooSmall: {
       const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
       return tr("At least %1 MB is required for /boot partition")
           .arg( boot_recommended);
     }
-    case ValidateState::EfiMissing: {
+    case AdvancedValidateState::EfiMissing: {
       return tr("Add an EFI partition to continue");
     }
-    case ValidateState::EfiTooSmall: {
+    case AdvancedValidateState::EfiTooSmall: {
       const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
       return tr("At least %1 MB is required for EFI partition")
           .arg(efi_recommended);
     }
-    case ValidateState::RootMissing: {
+    case AdvancedValidateState::RootMissing: {
       return tr("Add a Root partition to continue");
     }
-    case ValidateState::RootTooSmall: {
+    case AdvancedValidateState::RootTooSmall: {
       const int root_required =
           GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
       return tr("At least %1 GB is required for Root partition")

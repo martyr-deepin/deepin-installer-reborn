@@ -58,7 +58,7 @@ class AdvancedPartitionFrame : public QFrame {
   // Show error message container.
   void showErrorMessages();
   // Returns error message related to this |state|.
-  QString validateStateToText(ValidateState state);
+  QString validateStateToText(AdvancedValidateState state);
 
   AdvancedPartitionDelegate* delegate_ = nullptr;
 
@@ -72,7 +72,8 @@ class AdvancedPartitionFrame : public QFrame {
   QVBoxLayout* msg_layout_ = nullptr;
   QLabel* msg_head_label_ = nullptr;
 
-  ValidateStates validate_states_;
+  // TODO(xushaohua): Remove this property.
+  AdvancedValidateStates validate_states_;
 
  private slots:
   // Clear error message list and hide message container.

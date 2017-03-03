@@ -27,8 +27,8 @@ class SimplePartitionButton : public PointerButton {
   void setSelected(bool selected);
 
  private:
-  void initConnections();
   void initUI();
+
   const Partition& partition_;
   QLabel* os_label_ = nullptr;
   bool selected_;

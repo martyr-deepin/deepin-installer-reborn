@@ -12,7 +12,7 @@
 
 namespace installer {
 
-enum class ValidateState {
+enum class AdvancedValidateState {
   BootFsInvalid,  // Filesystem used for /boot is not in supported fs list.
   BootPartNumberInvalid,  // Partition for /boot is not the first partition.
   BootTooSmall,
@@ -21,7 +21,7 @@ enum class ValidateState {
   RootMissing,
   RootTooSmall,
 };
-typedef QList<ValidateState> ValidateStates;
+typedef QList<AdvancedValidateState> AdvancedValidateStates;
 
 // Partition delegate used in AdvancedPartitionFrame and other sub frame pages.
 class AdvancedPartitionDelegate : public QObject {
@@ -60,7 +60,7 @@ class AdvancedPartitionDelegate : public QObject {
   // Check whether partition operations are appropriate.
   //  * / partition is set and large enough;
   //  * An EFI partition exists if EFI mode is on;
-  ValidateStates validate() const;
+  AdvancedValidateStates validate() const;
 
  signals:
   // Emitted when virtual device list is updated.

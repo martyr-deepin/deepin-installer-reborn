@@ -6,6 +6,7 @@
 
 #include "partman/utils.h"
 #include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/delegates/partition_util.h"
 
 namespace installer {
@@ -15,7 +16,8 @@ SimplePartitionDelegate::SimplePartitionDelegate(QObject* parent)
       real_devices_(),
       virtual_devices_(),
       bootloader_path_(),
-      operations_() {
+      operations_(),
+      selected_partition_() {
   this->setObjectName("simple_partition_delegate");
 }
 
@@ -114,6 +116,39 @@ QStringList SimplePartitionDelegate::getOptDescriptions() const {
 bool SimplePartitionDelegate::isPartitionTableMatch(
     const QString& device_path) const {
   return IsPartitionTableMatch(real_devices_, device_path);
+}
+
+void SimplePartitionDelegate::selectPartition(const Partition& partition) {
+  selected_partition_ = partition;
+}
+
+SimpleValidateState SimplePartitionDelegate::validate() const {
+  // Policy:
+  // * Check / partition is set.
+  // * Check / partition is large enough.
+
+  const Partition root_partition = selected_partition_;
+  if (root_partition.device_path.isEmpty()) {
+    return SimpleValidateState::RootMissing;
+  }
+
+   // If currently selected device reaches its maximum primary partitions and
+  // root partition is a Freespace, it is impossible to created a new
+  // primary partition.
+  if ((root_partition.type == PartitionType::Unallocated) &&
+      !this->canAddPrimary(root_partition) &&
+      !this->canAddLogical(root_partition)) {
+    return SimpleValidateState::MaxPrimPartErr;
+  }
+
+  const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+  const qint64 root_minimum_bytes = root_required * kGibiByte;
+  const qint64 root_real_bytes = root_partition.getByteLength() + kMebiByte;
+  if (root_real_bytes < root_minimum_bytes) {
+    return SimpleValidateState::RootTooSmall;
+  }
+
+  return SimpleValidateState::Ok;
 }
 
 void SimplePartitionDelegate::resetOperations() {
@@ -461,10 +496,11 @@ void SimplePartitionDelegate::onManualPartDone() {
   QString root_disk;
   QString root_path;
   QStringList mount_points;
+  bool found_swap = false;
 
+  // Check use-specified partitions with mount point.
   for (const Operation& operation : operations_) {
     const Partition& new_partition = operation.new_partition;
-
     if (!new_partition.mount_point.isEmpty()) {
       // Add used partitions to mount_point list.
       const QString record(QString("%1=%2").arg(new_partition.path)
@@ -474,17 +510,26 @@ void SimplePartitionDelegate::onManualPartDone() {
         root_disk = new_partition.device_path;
         root_path = new_partition.path;
       }
-    } else if (new_partition.fs == FsType::LinuxSwap) {
-      // Add swap area to mount_point list.
-      const QString record(QString("%1=swap").arg(new_partition.path));
-      mount_points.append(record);
+    }
+  }
+
+  // Check linux-swap.
+  for (const Device& device : virtual_devices_) {
+    for (const Partition& partition : device.partitions) {
+      if (partition.fs == FsType::LinuxSwap) {
+        found_swap = true;
+
+        // Add swap area to mount_point list.
+        // NOTE(xushaohua): Multiple swap partitions may be set.
+        const QString record(QString("%1=swap").arg(partition.path));
+        mount_points.append(record);
+      }
     }
   }
 
   if (IsEfiEnabled()) {
-    // Enable EFI mode.
-    // First check newly created EFI partition. If not found, check existing
-    // EFI partition.
+    // Enable EFI mode. First check newly created EFI partition. If not found,
+    // check existing EFI partition.
     WriteUEFI(true);
     QString esp_path;
     for (const Operation& operation : operations_) {
@@ -494,8 +539,9 @@ void SimplePartitionDelegate::onManualPartDone() {
         break;
       }
     }
+
+    // If no new EFI partition is created, search in device list.
     if (esp_path.isEmpty()) {
-      // If no new EFI partition is created, search in device list.
       bool esp_found = false;
       for (const Device& device : virtual_devices_) {
         for (const Partition& partition : device.partitions) {
@@ -518,11 +564,12 @@ void SimplePartitionDelegate::onManualPartDone() {
     WritePartitionInfo(root_disk, root_path, esp_path, mount_points.join(';'));
   } else {
     // In legacy mode.
-    WritePartitionInfo(root_disk,
-                       root_path,
-                       bootloader_path_,
+    WritePartitionInfo(root_disk, root_path, bootloader_path_,
                        mount_points.join(';'));
   }
+
+  // Create swap file is swap partition is not found.
+  WriteRequiringSwapFile(!found_swap);
 }
 
 void SimplePartitionDelegate::setBootloaderPath(const QString& path) {
