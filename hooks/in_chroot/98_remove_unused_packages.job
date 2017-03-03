@@ -15,8 +15,7 @@ if ! is_x86; then
   return 0
 fi
 
-declare -a remove_pkgs
-declare -a REMOVE_PKGS
+declare -a UNUSED_PKGS
 
 DI_LUPIN=$(installer_get "DI_LUPIN")
 
@@ -38,27 +37,27 @@ detect_vbox() {
 
 # Uninstall "deepin-installer-reborn" only if reboot_setup is false.
 if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
-  REMOVE_PKGS+=(deepin-installer-reborn)
+  UNUSED_PKGS+=(deepin-installer-reborn)
 fi
 
 if grep -q boot=casper /proc/cmdline; then
-  REMOVE_PKGS+=("casper")
+  UNUSED_PKGS+=("casper")
 fi
 if grep -q boot=live /proc/cmdline; then
-  REMOVE_PKGS+=("live-boot*" "live-config*")
+  UNUSED_PKGS+=("live-boot*" "live-config*")
 fi
 
-detect_btrfs || remove_pkgs+=("btrfs-tools")
-[ x${DI_LUPIN} = "xtrue" ] || remove_pkgs+=("lupin-support")
-detect_vbox || remove_pkgs+=("virtualbox-guest-*")
+detect_btrfs || UNUSED_PKGS+=("btrfs-tools")
+[ x${DI_LUPIN} = "xtrue" ] || UNUSED_PKGS+=("lupin-support")
+detect_vbox || UNUSED_PKGS+=("virtualbox-guest-*")
 
-# Remove selected packages.
-for pkg in ${remove_pkgs[@]}; do
-  dpkg -l | grep -q $pkg && REMOVE_PKGS+=($pkg)
+# Check package existence.
+declare -a EXISTING_UNUSED_PKGS
+for pkg in ${UNUSED_PKGS[@]}; do
+  dpkg -l | grep -q $pkg && EXISTING_UNUSED_PKGS+=($pkg)
 done
-
-msg "Remove packages: ${REMOVE_PKGS[@]}"
-apt-get -y purge ${REMOVE_PKGS[@]}
+msg "Remove packages: ${EXISTING_UNUSED_PKGS[@]}"
+apt-get -y purge ${EXISTING_UNUSED_PKGS[@]}
 apt-get -y autoremove --purge
 
 # Returns 0 explicitly, because apt-get --purge might returns error if package
