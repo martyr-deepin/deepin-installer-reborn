@@ -126,6 +126,19 @@ FsTypeList AdvancedPartitionDelegate::getFsTypeList() const {
   return fs_types;
 }
 
+FsTypeList AdvancedPartitionDelegate::getBootFsTypeList() const {
+  FsTypeList fs_types;
+  if (fs_types.isEmpty()) {
+    const QString name = GetSettingsString(kPartitionBootPartitionFs);
+    Q_ASSERT(!name.isEmpty());
+    const QStringList fs_names = name.split(';');
+    for (const QString& fs_name : fs_names) {
+      FsType type = GetFsTypeByName(fs_name);
+      fs_types.append(type);
+    }
+  }
+  return fs_types;}
+
 QStringList AdvancedPartitionDelegate::getMountPoints() const {
   QStringList mount_points;
   if (mount_points.isEmpty()) {
@@ -183,22 +196,29 @@ ValidateStates AdvancedPartitionDelegate::validate() const {
   bool found_boot = false;
   bool boot_large_enough = false;
 
+  // Filesystem of /boot and /.
+  FsType boot_fs = FsType::Empty;
+  FsType root_fs = FsType::Empty;
+
   const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
   const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
   const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
   const int efi_minimum = GetSettingsInt(kPartitionEFIMinimumSpace);
-  Partition root_partition;
 
   for (const Device& device : virtual_devices_) {
     for (const Partition& partition : device.partitions) {
       if (partition.mount_point == kMountPointRoot) {
         // Check / partition.
         found_root = true;
-        root_partition = partition;
+        root_fs = partition.fs;
+        const qint64 root_real_bytes = partition.getByteLength() + kMebiByte;
+        const qint64 root_minimum_bytes = root_required * kGibiByte;
+        root_large_enough = (root_real_bytes >= root_minimum_bytes);
 
       } else if (partition.mount_point == kMountPointBoot) {
         // Check /boot partition.
         found_boot = true;
+        boot_fs = partition.fs;
         const qint64 boot_recommend_bytes = boot_recommended * kMebiByte;
         // Add 1Mib to partition size.
         const qint64 boot_real_bytes = partition.getByteLength() + kMebiByte;
@@ -223,17 +243,13 @@ ValidateStates AdvancedPartitionDelegate::validate() const {
     }
   }
 
-  if (!found_root) {
+  if (found_root) {
+    // Check root size only if root is set.
+    if (!root_large_enough) {
+      states.append(ValidateState::RootTooSmall);
+    }
+  } else {
     states.append(ValidateState::RootMissing);
-  }
-
-  const qint64 root_minimum_bytes = root_required * kGibiByte;
-  const qint64 root_real_bytes = root_partition.getByteLength() + kMebiByte;
-  root_large_enough = (root_real_bytes >= root_minimum_bytes);
-
-  // Check root size only if root is set.
-  if (found_root && !root_large_enough) {
-    states.append(ValidateState::RootTooSmall);
   }
 
   if (IsEfiEnabled()) {
@@ -247,6 +263,13 @@ ValidateStates AdvancedPartitionDelegate::validate() const {
 
   if (found_boot && !boot_large_enough) {
     states.append(ValidateState::BootTooSmall);
+  }
+
+  // Check filesystem type is suitable for /boot folder.
+  const FsType boot_root_fs = found_boot ? boot_fs : root_fs;
+  const FsTypeList boot_fs_list = this->getBootFsTypeList();
+  if (!boot_fs_list.contains(boot_root_fs)) {
+    states.append(ValidateState::BootFsInvalid);
   }
 
   return states;

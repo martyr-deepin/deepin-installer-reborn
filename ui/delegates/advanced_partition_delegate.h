@@ -36,8 +36,11 @@ class AdvancedPartitionDelegate : public QObject {
   bool canAddLogical(const Partition& partition) const;
   bool canAddPrimary(const Partition& partition) const;
 
-  // Get all supported fs type.
+  // Get all supported filesystems.
   FsTypeList getFsTypeList() const;
+
+  // Get all supported filesystems for /boot folder.
+  FsTypeList getBootFsTypeList() const;
 
   // Get all available mount points, defined in settings file.
   QStringList getMountPoints() const;
