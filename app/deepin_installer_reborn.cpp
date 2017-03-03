@@ -12,7 +12,7 @@
 #include "service/log_manager.h"
 #include "service/settings_manager.h"
 #include "sysinfo/users.h"
-#include "ui/delegates/args_parser.h"
+#include "ui/delegates/installer_args_parser.h"
 #include "ui/main_window.h"
 
 int main(int argc, char* argv[]) {
@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
   app.setWindowIcon(QIcon(":/images/deepin_installer_reborn.svg"));
 
   // Parse argument list.
-  installer::ArgsParser args_parser;
+  installer::InstallerArgsParser args_parser;
   // Returns false if failed to parse arguments.
   if (!args_parser.parse(app.arguments())) {
     return 1;

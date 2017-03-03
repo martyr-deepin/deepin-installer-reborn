@@ -2,17 +2,18 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_UI_DELEGATES_ARGS_PARSER_H
-#define INSTALLER_UI_DELEGATES_ARGS_PARSER_H
+#ifndef INSTALLER_UI_DELEGATES_INSTALLER_ARGS_PARSER_H
+#define INSTALLER_UI_DELEGATES_INSTALLER_ARGS_PARSER_H
 
 #include <QStringList>
 
 namespace installer {
 
-// Parse argument list.
-class ArgsParser {
+// Parse argument list for deepin-installer-reborn.
+// Do not use it in first-boot-setup.
+class InstallerArgsParser {
  public:
-  ArgsParser();
+  InstallerArgsParser();
 
   // Parse |args| list.
   bool parse(const QStringList& args);
@@ -34,4 +35,4 @@ class ArgsParser {
 
 }  // namespace installer
 
-#endif  // INSTALLER_UI_DELEGATES_ARGS_PARSER_H
+#endif  // INSTALLER_UI_DELEGATES_INSTALLER_ARGS_PARSER_H
