@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/delegates/args_parser.h"
+#include "ui/delegates/installer_args_parser.h"
 
 #include <QCoreApplication>
 #include <QDebug>
@@ -11,13 +11,13 @@
 
 namespace installer {
 
-ArgsParser::ArgsParser()
+InstallerArgsParser::InstallerArgsParser()
     : auto_install_(false),
       conf_file_(""),
       log_file_("") {
 }
 
-bool ArgsParser::parse(const QStringList& args) {
+bool InstallerArgsParser::parse(const QStringList& args) {
   // Reset options.
   auto_install_ = false;
   conf_file_ = "";
@@ -26,10 +26,10 @@ bool ArgsParser::parse(const QStringList& args) {
   // Add pre-defined options.
   QCommandLineParser parser;
   const QCommandLineOption conf_file_option(
-      "conf-file","Read config from <file>", "file", "");
+      "conf","Read config from <file>", "file", "");
   parser.addOption(conf_file_option);
   const QCommandLineOption log_file_option(
-      "log-file", "Write log to <file>", "file", "");
+      "log", "Write log to <file>", "file", "");
   parser.addOption(log_file_option);
   const QCommandLineOption auto_install_option(
       "auto-install", "Enable auto-install mode", "", "");
@@ -79,15 +79,15 @@ bool ArgsParser::parse(const QStringList& args) {
   return true;
 }
 
-bool ArgsParser::isAutoInstallSet() const {
+bool InstallerArgsParser::isAutoInstallSet() const {
   return auto_install_;
 }
 
-QString ArgsParser::getConfFile() const {
+QString InstallerArgsParser::getConfFile() const {
   return conf_file_;
 }
 
-QString ArgsParser::getLogFile() const {
+QString InstallerArgsParser::getLogFile() const {
   return log_file_;
 }
 
