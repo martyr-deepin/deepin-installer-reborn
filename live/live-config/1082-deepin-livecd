@@ -3,6 +3,9 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+# If in live mode, replace default lightdm.conf, launch installer instead of
+# default lightdm greeter.
+
 generate_lightdm_conf() {
   local CONF_FILE="$1"
   cat > "${CONF_FILE}" <<EOF
