@@ -101,8 +101,9 @@ bool Operation::applyToDisk() const {
     }
 
     case OperationType::NewPartTable: {
-      // TODO(xushaohua): Support this operation.
-      return true;
+      ok = CreatePartitionTable(device.path, device.table);
+      qDebug() << "CreatePartitionTable():" << device << ok;
+      break;
     }
 
     case OperationType::Resize: {
@@ -126,7 +127,8 @@ bool Operation::applyToDisk() const {
   return ok;
 }
 
-void Operation::applyToVisual(PartitionList& partitions) const {
+void Operation::applyToVisual(Device& device) const {
+  PartitionList& partitions = device.partitions;
   switch (type) {
     case OperationType::Create: {
       this->applyCreateVisual(partitions);
@@ -142,6 +144,10 @@ void Operation::applyToVisual(PartitionList& partitions) const {
     }
     case OperationType::MountPoint: {
       this->substitute(partitions);
+      break;
+    }
+    case OperationType::NewPartTable: {
+      this->applyNewTableVisual(device);
       break;
     }
     case OperationType::Resize: {
@@ -270,6 +276,11 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
 void Operation::applyDeleteVisual(PartitionList& partitions) const {
   this->substitute(partitions);
   MergeUnallocatedPartitions(partitions);
+}
+
+void Operation::applyNewTableVisual(Device& device) const {
+  device.table = this->device.table;
+  device.partitions.clear();
 }
 
 void Operation::applyResizeVisual(PartitionList& partitions) const {

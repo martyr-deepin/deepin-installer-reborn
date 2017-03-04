@@ -806,8 +806,10 @@ void AdvancedPartitionDelegate::refreshVisual() {
     MergeUnallocatedPartitions(device.partitions);
 
     for (Operation& operation : operations_) {
-      if (operation.orig_partition.device_path == device.path) {
-        operation.applyToVisual(device.partitions);
+      if ((operation.type == OperationType::NewPartTable &&
+          operation.device.path == device.path) ||
+          (operation.orig_partition.device_path == device.path)) {
+        operation.applyToVisual(device);
       }
     }
 

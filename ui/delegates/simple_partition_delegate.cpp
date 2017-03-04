@@ -386,7 +386,11 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition& partition,
   // So do it temporarily.
   Device tmp_device = device;
   for (const Operation& operation : operations_) {
-    operation.applyToVisual(tmp_device.partitions);
+    if ((operation.type == OperationType::NewPartTable &&
+         operation.device.path == tmp_device.path) ||
+        (operation.orig_partition.device_path == tmp_device.path)) {
+      operation.applyToVisual(tmp_device);
+    }
   }
 
   partition_number = AllocPrimaryPartitionNumber(tmp_device);
