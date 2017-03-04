@@ -292,6 +292,13 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
 void Operation::applyNewTableVisual(Device& device) const {
   device.table = this->device.table;
   device.partitions.clear();
+
+  // Update max primary partition number.
+  if (device.table == PartitionTableType::MsDos) {
+    device.max_prims = kMsDosPartitionNums;
+  } else if (device.table == PartitionTableType::GPT) {
+    device.max_prims = kGPTPartitionNums;
+  }
 }
 
 void Operation::applyResizeVisual(PartitionList& partitions) const {

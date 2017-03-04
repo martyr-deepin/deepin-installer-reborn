@@ -47,6 +47,10 @@ const char* GetPartTableName(PartitionTableType table_type);
 const char kPartitionTableGPT[] = "gpt";
 const char kPartitionTableMsDos[] = "msdos";
 
+// Number of partitions supported by these partition tables.
+const int kGPTPartitionNums = 128;
+const int kMsDosPartitionNums = 4;
+
 }  // namespace installer
 
 #endif  // INSTALLER_PARTMAN_STRUCTS_H
