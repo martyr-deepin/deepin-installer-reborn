@@ -134,11 +134,16 @@ QStringList GetSettingsStringList(const QString& key) {
 
 QVariant GetSettingsValue(const QString& key) {
   QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
-  const QVariant value(settings.value(key));
-  if (!value.isValid()) {
+  if (settings.contains(key)) {
+    return settings.value(key);
+  }
+
+  // Read default settings
+  QSettings default_settings(kDefaultSettingsFile, QSettings::IniFormat);
+  if (!default_settings.contains(key)) {
     qWarning() << "getSettingsValue() Invalid key:" << key;
   }
-  return value;
+  return default_settings.value(key);
 }
 
 QString GetAutoPartFile() {
