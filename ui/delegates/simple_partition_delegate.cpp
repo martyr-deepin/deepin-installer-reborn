@@ -30,6 +30,11 @@ bool SimplePartitionDelegate::canAddLogical(const Partition& partition) const {
   }
   const Device& device = virtual_devices_.at(index);
 
+  // If partition table is empty, always returns true.
+  if (device.table == PartitionTableType::Empty) {
+    return true;
+  }
+
   // Ignores gpt table.
   if (device.table != PartitionTableType::MsDos) {
     return false;
@@ -76,6 +81,12 @@ bool SimplePartitionDelegate::canAddPrimary(const Partition& partition) const {
     return false;
   }
   const Device& device = virtual_devices_.at(index);
+
+  // If partition table is empty, always returns true.
+  if (device.table == PartitionTableType::Empty) {
+    return true;
+  }
+
   const PartitionList prim_partitions = GetPrimaryPartitions(device.partitions);
   const PartitionList logical_partitions =
       GetLogicalPartitions(device.partitions);
@@ -124,10 +135,25 @@ void SimplePartitionDelegate::selectPartition(const Partition& partition) {
 
 SimpleValidateState SimplePartitionDelegate::validate() const {
   // Policy:
+  // * Returns ok if partition table of selected partition is empty.
   // * Check / partition is set.
   // * Check / partition is large enough.
 
   const Partition root_partition = selected_partition_;
+
+  // Check partition table is empty or not.
+  const int device_index = DeviceIndex(virtual_devices_,
+                                       root_partition.device_path);
+  if (device_index == -1) {
+    qCritical() << "validate() device index out of range:"
+                << root_partition.device_path;
+    return SimpleValidateState::RootMissing;
+  }
+  const Device& device = virtual_devices_.at(device_index);
+  if (device.table == PartitionTableType::Empty) {
+    return SimpleValidateState::Ok;
+  }
+
   if (root_partition.device_path.isEmpty()) {
     return SimpleValidateState::RootMissing;
   }

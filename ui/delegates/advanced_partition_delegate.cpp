@@ -37,6 +37,11 @@ bool AdvancedPartitionDelegate::canAddLogical(
   }
   const Device& device = virtual_devices_.at(index);
 
+  // If partition table is empty, always returns true.
+  if (device.table == PartitionTableType::Empty) {
+    return true;
+  }
+
   // Ignores gpt table.
   if (device.table != PartitionTableType::MsDos) {
     return false;
@@ -84,6 +89,12 @@ bool AdvancedPartitionDelegate::canAddPrimary(
     return false;
   }
   const Device& device = virtual_devices_.at(index);
+
+  // If partition table is empty, always returns true.
+  if (device.table == PartitionTableType::Empty) {
+    return true;
+  }
+
   const PartitionList prim_partitions = GetPrimaryPartitions(device.partitions);
   const PartitionList logical_partitions =
       GetLogicalPartitions(device.partitions);
