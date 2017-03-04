@@ -37,8 +37,6 @@ else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2 -Wl,-O1 -Wl,--gc-sections -Wno-unused-result")
 endif()
 
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(INSTALLER_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn)
@@ -64,6 +62,9 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5X11Extras REQUIRED)
 find_package(Qt5Xml REQUIRED)
 find_package(Qt5LinguistTools)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
 pkg_search_module(Parted REQUIRED libparted)
 pkg_search_module(X11 REQUIRED x11)
