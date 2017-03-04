@@ -222,6 +222,7 @@ DeviceList ScanDevices(bool enable_os_prober) {
     os_type_items = GetOsTypeItems();
   }
 
+  // Walk through all devices.
   for (PedDevice* lp_device = ped_device_get_next(nullptr);
       lp_device != nullptr;
       lp_device = ped_device_get_next(lp_device)) {
@@ -254,10 +255,12 @@ DeviceList ScanDevices(bool enable_os_prober) {
     device.heads = lp_device->bios_geom.heads;
     device.sectors = lp_device->bios_geom.sectors;
     device.cylinders = lp_device->bios_geom.cylinders;
-    device.max_prims = ped_disk_get_max_primary_partition_count(lp_disk);
 
     if (device.table == PartitionTableType::MsDos ||
         device.table == PartitionTableType::GPT) {
+
+      device.max_prims = ped_disk_get_max_primary_partition_count(lp_disk);
+
       // If partition table is known, scan partitions in this device.
       device.partitions = ReadPartitions(lp_disk);
       // Add additional info to partitions.
@@ -283,7 +286,9 @@ DeviceList ScanDevices(bool enable_os_prober) {
     }
 
     devices.append(device);
-    ped_disk_destroy(lp_disk);
+    if (lp_disk) {
+      ped_disk_destroy(lp_disk);
+    }
   }
 
   return devices;
