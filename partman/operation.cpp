@@ -47,6 +47,11 @@ QDebug& operator<<(QDebug& debug, const OperationType& op_type) {
   return debug;
 }
 
+Operation::Operation(const Device& device)
+    : type(OperationType::NewPartTable),
+      device(device) {
+}
+
 Operation::Operation(OperationType type,
                      const Partition& orig_partition,
                      const Partition& new_partition)
@@ -202,6 +207,12 @@ QString Operation::description() const {
       desc = QObject::tr("Use %1 partition as %2(mountpoint)")
           .arg(new_partition.path)
           .arg(new_partition.mount_point);
+      break;
+    }
+    case OperationType::NewPartTable: {
+      desc = QObject::tr("Create new partition table %1 for %2")
+          .arg(GetPartTableName(device.table))
+          .arg(device.path);
       break;
     }
     case OperationType::Resize: {

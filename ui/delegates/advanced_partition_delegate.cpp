@@ -298,6 +298,29 @@ bool AdvancedPartitionDelegate::createPartition(const Partition& partition,
                                                 FsType fs_type,
                                                 const QString& mount_point,
                                                 qint64 total_sectors) {
+  // Policy:
+  // * If partition table is empty, create a new one.
+  const int device_index = DeviceIndex(virtual_devices_, partition.device_path);
+  if (device_index == -1) {
+    qCritical() << "createPartition() device index out of range:"
+                << partition.device_path;
+    return false;
+  }
+  Device& device = virtual_devices_[device_index];
+
+  if (device.table == PartitionTableType::Empty) {
+    // Add NewPartTable operation.
+    Device new_device = device;
+    new_device.partitions.clear();
+    new_device.table = IsEfiEnabled() ?
+                       PartitionTableType::GPT :
+                       PartitionTableType::MsDos;
+    const Operation operation(new_device);
+    operations_.append(operation);
+    // Update virtual device property at the same time.
+    operation.applyToVisual(device);
+  }
+
   if (partition_type == PartitionType::Normal) {
     return createPrimaryPartition(partition,
                                   PartitionType::Normal,

@@ -42,6 +42,7 @@ enum class PartitionTableType {
   Unknown,
 };
 QDebug& operator<<(QDebug& debug, const PartitionTableType& table_type);
+const char* GetPartTableName(PartitionTableType table_type);
 
 const char kPartitionTableGPT[] = "gpt";
 const char kPartitionTableMsDos[] = "msdos";

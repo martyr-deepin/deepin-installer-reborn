@@ -26,6 +26,9 @@ QDebug& operator<<(QDebug& debug, const OperationType& op_type);
 // Abstract class for operations.
 class Operation {
  public:
+  // Create a new operation, with type OperationType::NewPartTable.
+  explicit Operation(const Device& device);
+
   Operation(OperationType type,
             const Partition& orig_partition,
             const Partition& new_partition);

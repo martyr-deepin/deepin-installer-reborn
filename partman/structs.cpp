@@ -30,29 +30,28 @@ QDebug& operator<<(QDebug& debug, const OsType& os_type) {
 }
 
 QDebug& operator<<(QDebug& debug, const PartitionTableType& table_type) {
-  QString table;
+  debug << GetPartTableName(table_type);
+  return debug;
+}
+
+const char* GetPartTableName(PartitionTableType table_type) {
   switch (table_type) {
     case PartitionTableType::GPT: {
-      table = "GPT";
-      break;
+      return  "GPT";
     }
     case PartitionTableType::MsDos: {
-      table = "MsDos";
-      break;
+      return "MsDos";
     }
     case PartitionTableType::Others: {
-      table = "Others";
+      return "Others";
     }
     case PartitionTableType::Unknown: {
-      table = "Unknown";
-      break;
+      return "Unknown";
     }
     default: {
-      // pass
+      return "Unknown";
     }
   }
-  debug << table;
-  return debug;
 }
 
 }  // namespace installer
