@@ -7,13 +7,11 @@
 #include <parted/parted.h>
 #include <QDebug>
 #include <QDir>
-#include <QFile>
 
 #include "base/command.h"
 #include "partman/libparted_util.h"
 #include "partman/os_prober.h"
 #include "partman/partition_usage.h"
-#include "partman/utils.h"
 #include "sysinfo/dev_disk.h"
 #include "sysinfo/proc_mounts.h"
 
@@ -229,42 +227,26 @@ DeviceList ScanDevices(bool enable_os_prober) {
       lp_device = ped_device_get_next(lp_device)) {
     PedDiskType* disk_type = ped_disk_probe(lp_device);
     PedDisk* lp_disk = nullptr;
-    // TODO(xushaohua): Filters USB device.
+    Device device;
     if (disk_type == nullptr) {
-      // Raw disk found.
-      if (IsEfiEnabled()) {
-        disk_type = ped_disk_type_get(kPartitionTableGPT);
+      // Current device has no partition table.
+      device.table = PartitionTableType::Empty;
+    } else {
+      const QString disk_type_name(disk_type->name);
+      if (disk_type_name == kPartitionTableGPT) {
+        lp_disk = ped_disk_new(lp_device);
+        device.table = PartitionTableType::GPT;
+      } else if (disk_type_name == kPartitionTableMsDos) {
+        lp_disk = ped_disk_new(lp_device);
+        device.table = PartitionTableType::MsDos;
       } else {
-        disk_type = ped_disk_type_get(kPartitionTableMsDos);
-      }
-
-      if (disk_type != NULL) {
-        // Create a new device table but not commit changes to device.
-        lp_disk = ped_disk_new_fresh(lp_device, disk_type);
-        if (lp_disk) {
-          // Commit explicitly. Or else newly created partition table is only
-          // in memory.
-          // TODO(xushaohua): Add FormatDisk in operation.h
-          Commit(lp_disk);
-        } else {
-          qCritical() << "ScanDevices() new lp_disk is nullptr";
-          continue;
-        }
-      } else {
-        qCritical() << "ScanDevices() disk_type is nullptr";
+        // Ignores other type of device.
+        qWarning() << "Ignores other type of device:" << lp_device->path
+                   << disk_type->name;
         continue;
       }
-    } else if (QString(kPartitionTableGPT) == disk_type->name ||
-               QString(kPartitionTableMsDos) == disk_type->name) {
-      lp_disk = ped_disk_new(lp_device);
-    } else {
-      // Ignores other type of device.
-      qWarning() << "Ignores other type of device:" << lp_device->path
-                 << disk_type->name;
-      continue;
     }
 
-    Device device;
     device.path = lp_device->path;
     device.model = lp_device->model;
     device.length = lp_device->length;
@@ -272,31 +254,29 @@ DeviceList ScanDevices(bool enable_os_prober) {
     device.heads = lp_device->bios_geom.heads;
     device.sectors = lp_device->bios_geom.sectors;
     device.cylinders = lp_device->bios_geom.cylinders;
-    const QString disk_type_name(disk_type->name);
-    if (disk_type_name == kPartitionTableMsDos) {
-      device.table = PartitionTableType::MsDos;
-    } else if (disk_type_name == kPartitionTableGPT) {
-      device.table = PartitionTableType::GPT;
-    }
     device.max_prims = ped_disk_get_max_primary_partition_count(lp_disk);
 
-    device.partitions = ReadPartitions(lp_disk);
-    // Add additional info to partitions.
-    for (Partition& partition : device.partitions) {
-      partition.device_path = device.path;
-      partition.sector_size = device.sector_size;
-      if (!partition.path.isEmpty() &&
-          partition.type != PartitionType::Unallocated) {
-        // Read partition label and os.
-        const QString empty_str;
-        partition.label = label_items.value(partition.path, empty_str);
-        partition.os = os_type_items.value(partition.path, OsType::Empty);
+    if (device.table == PartitionTableType::MsDos ||
+        device.table == PartitionTableType::GPT) {
+      // If partition table is known, scan partitions in this device.
+      device.partitions = ReadPartitions(lp_disk);
+      // Add additional info to partitions.
+      for (Partition& partition : device.partitions) {
+        partition.device_path = device.path;
+        partition.sector_size = device.sector_size;
+        if (!partition.path.isEmpty() &&
+            partition.type != PartitionType::Unallocated) {
+          // Read partition label and os.
+          const QString empty_str;
+          partition.label = label_items.value(partition.path, empty_str);
+          partition.os = os_type_items.value(partition.path, OsType::Empty);
 
-        // Mark busy flag of this partition when it is mounted in system.
-        for (const MountItem& mount_item : mount_items) {
-          if (mount_item.path == partition.path) {
-            partition.busy = true;
-            break;
+          // Mark busy flag of this partition when it is mounted in system.
+          for (const MountItem& mount_item : mount_items) {
+            if (mount_item.path == partition.path) {
+              partition.busy = true;
+              break;
+            }
           }
         }
       }
