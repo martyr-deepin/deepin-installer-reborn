@@ -227,7 +227,6 @@ DeviceList ScanDevices(bool enable_os_prober) {
       lp_device != nullptr;
       lp_device = ped_device_get_next(lp_device)) {
     PedDiskType* disk_type = ped_disk_probe(lp_device);
-    PedDisk* lp_disk = nullptr;
     Device device;
     if (disk_type == nullptr) {
       // Current device has no partition table.
@@ -235,10 +234,8 @@ DeviceList ScanDevices(bool enable_os_prober) {
     } else {
       const QString disk_type_name(disk_type->name);
       if (disk_type_name == kPartitionTableGPT) {
-        lp_disk = ped_disk_new(lp_device);
         device.table = PartitionTableType::GPT;
       } else if (disk_type_name == kPartitionTableMsDos) {
-        lp_disk = ped_disk_new(lp_device);
         device.table = PartitionTableType::MsDos;
       } else {
         // Ignores other type of device.
@@ -256,39 +253,53 @@ DeviceList ScanDevices(bool enable_os_prober) {
     device.sectors = lp_device->bios_geom.sectors;
     device.cylinders = lp_device->bios_geom.cylinders;
 
-    if (device.table == PartitionTableType::MsDos ||
+    if (device.table == PartitionTableType::Empty) {
+      Partition free_partition;
+      free_partition.device_path = device.path;
+      free_partition.start_sector = 1;
+      free_partition.end_sector = device.length;
+      free_partition.sector_size = device.sector_size;
+      free_partition.type = PartitionType::Unallocated;
+      device.partitions.append(free_partition);
+
+    } else if (device.table == PartitionTableType::MsDos ||
         device.table == PartitionTableType::GPT) {
+      PedDisk* lp_disk = nullptr;
+      lp_disk = ped_disk_new(lp_device);
 
-      device.max_prims = ped_disk_get_max_primary_partition_count(lp_disk);
+      if (lp_disk) {
+        device.max_prims = ped_disk_get_max_primary_partition_count(lp_disk);
 
-      // If partition table is known, scan partitions in this device.
-      device.partitions = ReadPartitions(lp_disk);
-      // Add additional info to partitions.
-      for (Partition& partition : device.partitions) {
-        partition.device_path = device.path;
-        partition.sector_size = device.sector_size;
-        if (!partition.path.isEmpty() &&
-            partition.type != PartitionType::Unallocated) {
-          // Read partition label and os.
-          const QString empty_str;
-          partition.label = label_items.value(partition.path, empty_str);
-          partition.os = os_type_items.value(partition.path, OsType::Empty);
+        // If partition table is known, scan partitions in this device.
+        device.partitions = ReadPartitions(lp_disk);
+        // Add additional info to partitions.
+        for (Partition& partition : device.partitions) {
+          partition.device_path = device.path;
+          partition.sector_size = device.sector_size;
+          if (!partition.path.isEmpty() &&
+              partition.type != PartitionType::Unallocated) {
+            // Read partition label and os.
+            const QString empty_str;
+            partition.label = label_items.value(partition.path, empty_str);
+            partition.os = os_type_items.value(partition.path, OsType::Empty);
 
-          // Mark busy flag of this partition when it is mounted in system.
-          for (const MountItem& mount_item : mount_items) {
-            if (mount_item.path == partition.path) {
-              partition.busy = true;
-              break;
+            // Mark busy flag of this partition when it is mounted in system.
+            for (const MountItem& mount_item : mount_items) {
+              if (mount_item.path == partition.path) {
+                partition.busy = true;
+                break;
+              }
             }
           }
         }
+        ped_disk_destroy(lp_disk);
+
+      } else {
+        qCritical() << "Failed to get disk object:" << device.path;
       }
     }
 
     devices.append(device);
-    if (lp_disk) {
-      ped_disk_destroy(lp_disk);
-    }
   }
 
   return devices;

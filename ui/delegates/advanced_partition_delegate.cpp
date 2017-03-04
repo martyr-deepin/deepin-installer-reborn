@@ -707,6 +707,7 @@ void AdvancedPartitionDelegate::formatPartition(const Partition& partition,
 }
 
 void AdvancedPartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
+  qDebug() << "device refreshed():" << devices;
   real_devices_ = devices;
   virtual_devices_ = FilterInstallerDevice(real_devices_);
 
