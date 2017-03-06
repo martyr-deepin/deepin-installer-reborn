@@ -38,7 +38,7 @@ void PartitionModel::autoPart() {
 
 void PartitionModel::createPartitionTable(const QString& device_path) {
   // TODO(xushaohua): Umount any lvm physical partitions on |device_path|.
-
+  // TODO(xushaohua): Check whether any partitions in |device_path| is busy.
   if (IsEfiEnabled()) {
     emit partition_manager_->createPartitionTable(device_path,
                                                   PartitionTableType::GPT);

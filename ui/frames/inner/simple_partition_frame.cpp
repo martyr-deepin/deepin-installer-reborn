@@ -101,11 +101,11 @@ void SimplePartitionFrame::appendOperations() {
   // Reset simple operations.
   delegate_->resetOperations();
 
-  bool efi_is_set = false;
+  bool found_efi = false;
   for (const Device& device : delegate_->virtual_devices()) {
     for (const Partition& partition : device.partitions) {
       if (partition.fs == FsType::EFI) {
-        efi_is_set = true;
+        found_efi = true;
       }
     }
   }
@@ -119,7 +119,7 @@ void SimplePartitionFrame::appendOperations() {
   }
 
   Partition partition = button->partition();
-  if (IsEfiEnabled() && !efi_is_set) {
+  if (!delegate_->isMBRPreferred() && !found_efi) {
     if (partition.type == PartitionType::Normal) {
       // Delete normal partition first.
       partition = delegate_->deletePartition(partition);

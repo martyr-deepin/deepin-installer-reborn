@@ -167,7 +167,7 @@ void AdvancedPartitionFrame::initUI() {
   bottom_layout->setContentsMargins(15, 10, 15, 10);
   bottom_layout->setSpacing(0);
   // Show bootloader button only if EFI mode is off.
-  if (IsEfiEnabled()) {
+  if (!delegate_->isMBRPreferred()) {
     bootloader_tip_button_->hide();
     bootloader_button_->hide();
   } else {

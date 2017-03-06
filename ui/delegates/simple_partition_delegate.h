@@ -41,6 +41,10 @@ class SimplePartitionDelegate : public QObject {
   // Get human readable operation descriptions.
   QStringList getOptDescriptions() const;
 
+  // Returns true if current boot mode is mbr or any system is found on disks
+  // with msdos partition table.
+  bool isMBRPreferred() const;
+
   // Check whether device at |device_path| is appropriate for current system.
   bool isPartitionTableMatch(const QString& device_path) const;
 

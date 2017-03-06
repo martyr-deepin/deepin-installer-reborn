@@ -192,6 +192,10 @@ Partition AdvancedPartitionDelegate::getRealPartition(
   return Partition();
 }
 
+bool AdvancedPartitionDelegate::isMBRPreferred() const {
+  return IsMBRPreferred(real_devices_);
+}
+
 bool AdvancedPartitionDelegate::isPartitionTableMatch(
     const QString& device_path) const {
   return IsPartitionTableMatch(real_devices_, device_path);
@@ -759,7 +763,7 @@ void AdvancedPartitionDelegate::onManualPartDone() {
     }
   }
 
-  if (IsEfiEnabled()) {
+  if (!IsMBRPreferred(real_devices_)) {
     // Enable EFI mode. First check newly created EFI partition. If not found,
     // check existing EFI partition.
     WriteUEFI(true);

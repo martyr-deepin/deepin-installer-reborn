@@ -57,8 +57,16 @@ QString GetPartitionUsage(const Partition& partition);
 // Get partition usage percentage (0-100).
 int GetPartitionUsageValue(const Partition& partition);
 
+// If target disk has msdos partition table, but system boots up in UEFI mode,
+// ignore this UEFI mode if any systems is found in that disk.
+bool IgnoreUEFI(const DeviceList& devices);
+
 // Check if EFI feature is enabled in this machine.
 bool IsEfiEnabled();
+
+// Returns true if current boot mode is mbr or any system is found on disks
+// with msdos partition table.
+bool IsMBRPreferred(const DeviceList& devices);
 
 // Check whether specific fs type can be mounted by user.
 // linux-swap and efi are mounted at fixed position and thus returns false.1
