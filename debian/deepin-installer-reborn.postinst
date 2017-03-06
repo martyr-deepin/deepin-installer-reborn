@@ -57,6 +57,9 @@ case "$1" in
   configure)
     #generate_locale
     generate_background_image
+
+    # Update initramfs to include current boot scripts.
+    update-initramfs -u
     ;;
 esac
 
