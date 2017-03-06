@@ -42,7 +42,7 @@ void NewTableWarningFrame::changeEvent(QEvent* event) {
     title_label_->setText(tr("Disk Format Warning"));
     comment_label_->setText(
         tr("Continuous installation will format the whole disk, please "
-           "back up all your data to avoid data loss"));
+           "make a backup of all your data to avoid data loss"));
     cancel_button_->setText(tr("Cancel"));
     confirm_button_->setText(tr("Continue"));
   } else {
@@ -80,7 +80,7 @@ void NewTableWarningFrame::initUI() {
 
   comment_label_ = new CommentLabel(
       tr("Continuous installation will format the whole disk, please "
-         "back up all your data to avoid data loss"));
+         "make a backup of all your data to avoid data loss"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);

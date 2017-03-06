@@ -17,7 +17,6 @@
 #include "ui/models/keyboard_layout_variant_model.h"
 #include "ui/utils/widget_util.h"
 #include "ui/views/frameless_list_view.h"
-#include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 
@@ -75,7 +74,6 @@ void SystemInfoKeyboardFrame::writeConf() {
 void SystemInfoKeyboardFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Select keyboard layout"));
-    comment_label_->setText(tr("Select keyboard layout"));
     test_edit_->setPlaceholderText(tr("Test area"));
     back_button_->setText(tr("Back"));
   } else {
@@ -95,7 +93,6 @@ void SystemInfoKeyboardFrame::initConnections() {
 
 void SystemInfoKeyboardFrame::initUI() {
   title_label_ = new TitleLabel(tr("Select keyboard layout"));
-  comment_label_ = new CommentLabel(tr("Select keyboard layout"));
 
   layout_view_ = new FramelessListView();
   layout_view_->setObjectName("layout_view");
@@ -140,14 +137,11 @@ void SystemInfoKeyboardFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
-  layout->addStretch();
+  layout->addSpacing(kMainLayoutSpacing + 30);
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
-  layout->addSpacing(kMainLayoutSpacing);
-  layout->addWidget(comment_label_, 0, Qt::AlignCenter);
-  layout->addStretch();
   layout->addSpacing(kMainLayoutSpacing + 30);
   layout->addWidget(keyboard_wrapper, 0, Qt::AlignHCenter);
-  layout->addSpacing(8);
+  layout->addSpacing(7);
   layout->addWidget(test_edit_, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addSpacing(kMainLayoutSpacing + 30);

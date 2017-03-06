@@ -178,7 +178,7 @@ QString Operation::description() const {
             .arg(new_partition.path)
             .arg(GetFsTypeName(new_partition.fs));
       } else {
-        desc = QObject::tr("Create new partition %1 as %2(mountpoint), "
+        desc = QObject::tr("Create new partition %1 as %2 (mountpoint), "
                            "type is %3")
             .arg(new_partition.path)
             .arg(new_partition.mount_point)
@@ -196,7 +196,7 @@ QString Operation::description() const {
             .arg(new_partition.path)
             .arg(GetFsTypeName(new_partition.fs));
       } else {
-        desc = QObject::tr("Format %1 partition as %2(mountpoint), type is %3")
+        desc = QObject::tr("Format %1 partition as %2 (mountpoint), type is %3")
             .arg(new_partition.path)
             .arg(new_partition.mount_point)
             .arg( GetFsTypeName(new_partition.fs));
@@ -204,7 +204,7 @@ QString Operation::description() const {
       break;
     }
     case OperationType::MountPoint: {
-      desc = QObject::tr("Use %1 partition as %2(mountpoint)")
+      desc = QObject::tr("Use %1 partition as %2 (mountpoint)")
           .arg(new_partition.path)
           .arg(new_partition.mount_point);
       break;

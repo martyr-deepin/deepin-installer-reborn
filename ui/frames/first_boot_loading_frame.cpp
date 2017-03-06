@@ -23,7 +23,8 @@ FirstBootLoadingFrame::FirstBootLoadingFrame(QWidget* parent) : QFrame(parent) {
 void FirstBootLoadingFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Tuning system"));
-    comment_label_->setText(tr("Applying changes to your system, please wait..."));
+    comment_label_->setText(
+        tr("Applying changes to your system, please wait..."));
   } else {
     QFrame::changeEvent(event);
   }

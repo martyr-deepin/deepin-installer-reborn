@@ -41,9 +41,8 @@
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
         <source>It takes at lease %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>安装deepin至少需要 %1GB 磁盘空间, 为了更好的使用体验, 建议分配 %2GB 以上</translation>
+        <translation type="vanished">安装deepin至少需要 %1GB 磁盘空间, 为了更好的使用体验, 建议分配 %2GB 以上</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="173"/>
@@ -57,7 +56,17 @@
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="181"/>
-        <source>Create new partition %1 as %2(mountpoint), type is %3</source>
+        <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="199"/>
+        <source>Format %1 partition as %2 (mountpoint), type is %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="207"/>
+        <source>Use %1 partition as %2 (mountpoint)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -68,16 +77,6 @@
     <message>
         <location filename="../partman/operation.cpp" line="195"/>
         <source>Format %1 partition, type is %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../partman/operation.cpp" line="199"/>
-        <source>Format %1 partition as %2(mountpoint), type is %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../partman/operation.cpp" line="207"/>
-        <source>Use %1 partition as %2(mountpoint)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -117,6 +116,11 @@
     <message>
         <source>Resize partition %1</source>
         <translation type="vanished">调整  %1 的分区大小</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
+        <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -295,10 +299,14 @@
         <translation>编辑磁盘</translation>
     </message>
     <message>
+        <source>Please make sure you have backed up important data, then select the disk  to install</source>
+        <translation type="vanished">请确定您已备份好重要数据，然后选择要安装的磁盘</translation>
+    </message>
+    <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="113"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="168"/>
-        <source>Please make sure you have backed up important data, then select the disk  to install</source>
-        <translation>请确定您已备份好重要数据，然后选择要安装的磁盘</translation>
+        <source>Please make sure important data were made a backup, then select the disk to install</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="115"/>
@@ -335,13 +343,13 @@
     <name>installer::FirstBootLoadingFrame</name>
     <message>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="25"/>
-        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="47"/>
+        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="48"/>
         <source>Tuning system</source>
         <translation>优化系统配置</translation>
     </message>
     <message>
-        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="26"/>
-        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="49"/>
+        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="27"/>
+        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="50"/>
         <source>Applying changes to your system, please wait...</source>
         <translation>正在更新系统设置, 请稍候...</translation>
     </message>
@@ -357,7 +365,7 @@
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="83"/>
-        <source>Sorry for the inconvenience, you can photo or scan the 2D code to send error log, so we can better solve the issue.</source>
+        <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -382,8 +390,12 @@
     <message>
         <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
+        <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>You will be experiencing the incredible pleasant of deepin after the time for just a cup of coffee</source>
-        <translation>只需一杯咖啡的时间, 你就可以体验deepin给您带来的畅快感</translation>
+        <translation type="vanished">只需一杯咖啡的时间, 你就可以体验deepin给您带来的畅快感</translation>
     </message>
 </context>
 <context>
@@ -536,7 +548,7 @@
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
-        <source>Continuous installation will format the whole disk, please back up all your data to avoid data loss</source>
+        <source>Continuous installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -713,13 +725,13 @@
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
-        <source>Please back up all your data to avoid data loss</source>
+        <source>Please make a backup of all your data to avoid data loss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
-        <source>Please double check if you have backed up all the data, and reboot to enter this interface</source>
+        <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -786,24 +798,24 @@
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="73"/>
-        <source>Please back up important data and confirm the following operations</source>
+        <source>Please make a backup of important data and confirm the following operations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="54"/>
-        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="80"/>
+        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="81"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
         <translation>将要执行以下操作，请确认后继续，以免丢失数据</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="56"/>
-        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="93"/>
+        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>Back</source>
         <translation>返回</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="57"/>
-        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="94"/>
+        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="95"/>
         <source>Continue</source>
         <translation>继续安装</translation>
     </message>
@@ -1101,22 +1113,20 @@
 <context>
     <name>installer::SystemInfoKeyboardFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="97"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="98"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="76"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="95"/>
         <source>Select keyboard layout</source>
         <translation>选项键盘布局</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="79"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="133"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="130"/>
         <source>Test area</source>
         <translation>在这里测试</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="80"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="138"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="135"/>
         <source>Back</source>
         <translation>返回</translation>
     </message>

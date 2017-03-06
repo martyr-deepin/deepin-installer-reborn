@@ -47,8 +47,8 @@ void PartitionTableWarningFrame::changeEvent(QEvent* event) {
             .arg(tr("Exit BIOS, and enter deepin to install")));
     list_item2_->setText(
         QString("1.%1\n2.%2")
-            .arg(tr("Please back up all your data to avoid data loss"))
-            .arg(tr("Please double check if you have backed up all the data, "
+            .arg(tr("Please make a backup of all your data to avoid data loss"))
+            .arg(tr("Please double check if all the data were made a backup, "
                     "and reboot to enter this interface")));
     list_title3_->setText(tr("Continue"));
     list_item3_->setText(
@@ -109,9 +109,9 @@ void PartitionTableWarningFrame::initUI() {
   list_title2_->setObjectName("list_title2");
   list_item2_ = new QLabel(
       QString("1.%1\n2.%2")
-          .arg(tr("Please back up all your data to avoid data loss"))
-          .arg(tr("Please double check if you have backed up all the data, "
-               "and reboot to enter this interface")),
+          .arg(tr("Please make a backup of all your data to avoid data loss"))
+          .arg(tr("Please double check if all the data were made a backup, "
+                  "and reboot to enter this interface")),
       this);
   list_item2_->setObjectName("list_item2");
   list_item2_->setWordWrap(true);

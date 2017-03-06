@@ -25,11 +25,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
-        <source>It takes at lease %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../partman/operation.cpp" line="173"/>
         <source>Create extended partition %1</source>
         <translation type="unfinished"></translation>
@@ -41,7 +36,17 @@
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="181"/>
-        <source>Create new partition %1 as %2(mountpoint), type is %3</source>
+        <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="199"/>
+        <source>Format %1 partition as %2 (mountpoint), type is %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../partman/operation.cpp" line="207"/>
+        <source>Use %1 partition as %2 (mountpoint)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -55,16 +60,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="199"/>
-        <source>Format %1 partition as %2(mountpoint), type is %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../partman/operation.cpp" line="207"/>
-        <source>Use %1 partition as %2(mountpoint)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../partman/operation.cpp" line="213"/>
         <source>Create new partition table %1 for %2</source>
         <translation type="unfinished"></translation>
@@ -72,6 +67,11 @@
     <message>
         <location filename="../partman/operation.cpp" line="219"/>
         <source>Adjust the size of %1 partition</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
+        <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -206,7 +206,7 @@
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="113"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="168"/>
-        <source>Please make sure you have backed up important data, then select the disk  to install</source>
+        <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -244,13 +244,13 @@
     <name>installer::FirstBootLoadingFrame</name>
     <message>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="25"/>
-        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="47"/>
+        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="48"/>
         <source>Tuning system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="26"/>
-        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="49"/>
+        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="27"/>
+        <location filename="../ui/frames/first_boot_loading_frame.cpp" line="50"/>
         <source>Applying changes to your system, please wait...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -266,7 +266,7 @@
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="83"/>
-        <source>Sorry for the inconvenience, you can photo or scan the 2D code to send error log, so we can better solve the issue.</source>
+        <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -287,7 +287,7 @@
     <message>
         <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
-        <source>You will be experiencing the incredible pleasant of deepin after the time for just a cup of coffee</source>
+        <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -409,7 +409,7 @@
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
-        <source>Continuous installation will format the whole disk, please back up all your data to avoid data loss</source>
+        <source>Continuous installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -516,6 +516,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
+        <source>Please make a backup of all your data to avoid data loss</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
+        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
+        <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="133"/>
@@ -539,18 +551,6 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="47"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="104"/>
         <source>Exit BIOS, and enter deepin to install</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
-        <source>Please back up all your data to avoid data loss</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
-        <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
-        <source>Please double check if you have backed up all the data, and reboot to enter this interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -613,24 +613,24 @@
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="73"/>
-        <source>Please back up important data and confirm the following operations</source>
+        <source>Please make a backup of important data and confirm the following operations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="54"/>
-        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="80"/>
+        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="81"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="56"/>
-        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="93"/>
+        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="57"/>
-        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="94"/>
+        <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="95"/>
         <source>Continue</source>
         <translation type="unfinished"></translation>
     </message>
@@ -808,22 +808,20 @@
 <context>
     <name>installer::SystemInfoKeyboardFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="97"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="98"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="76"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="95"/>
         <source>Select keyboard layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="79"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="133"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="130"/>
         <source>Test area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="80"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="138"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="135"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>

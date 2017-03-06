@@ -10,7 +10,6 @@ class QLineEdit;
 
 namespace installer {
 
-class CommentLabel;
 class FramelessListView;
 class KeyboardLayoutModel;
 class KeyboardLayoutVariantModel;
@@ -46,7 +45,6 @@ class SystemInfoKeyboardFrame : public QFrame {
   void initUI();
 
   TitleLabel* title_label_ = nullptr;
-  CommentLabel* comment_label_ = nullptr;
   FramelessListView* layout_view_ = nullptr;
   KeyboardLayoutModel* layout_model_ = nullptr;
   FramelessListView* variant_view_ = nullptr;
