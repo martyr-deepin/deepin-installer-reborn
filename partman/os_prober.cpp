@@ -5,14 +5,36 @@
 #include "partman/os_prober.h"
 
 #include "base/command.h"
+#include "base/file_util.h"
 
 namespace installer {
+
+namespace {
+
+// Cache output of `os-prober` command.
+QString ReadOsProberOutput() {
+  const QString cache_path("/tmp/deepin-installer-os-prober.conf");
+  if (QFile::exists(cache_path)) {
+    return ReadFile(cache_path);
+  } else {
+    QString output;
+    if (SpawnCmd("os-prober", {}, output)) {
+      WriteTextFile(cache_path, output);
+      return output;
+    } else {
+      qCritical() << "os-prober failed";
+      return QString();
+    }
+  }
+}
+
+}  // namespace
 
 OsTypeItems GetOsTypeItems() {
   OsTypeItems result;
 
-  QString output;
-  if (SpawnCmd("os-prober", {}, output)) {
+  const QString output = ReadOsProberOutput();
+  if (!output.isEmpty()) {
     for (const QString& line : output.split('\n')) {
       if (line.isEmpty()) {
         continue;
