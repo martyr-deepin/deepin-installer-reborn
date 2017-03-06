@@ -11,7 +11,6 @@
 #include <QScrollArea>
 
 #include "base/file_util.h"
-#include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "ui/delegates/partition_util.h"

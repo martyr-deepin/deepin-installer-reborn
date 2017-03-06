@@ -8,9 +8,9 @@
 
 #include "base/thread_util.h"
 #include "partman/partition_manager.h"
-#include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "ui/delegates/partition_util.h"
 
 namespace installer {
 

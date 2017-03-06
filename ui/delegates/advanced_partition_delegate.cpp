@@ -4,7 +4,6 @@
 
 #include "ui/delegates/advanced_partition_delegate.h"
 
-#include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "ui/delegates/partition_util.h"

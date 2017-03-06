@@ -8,16 +8,11 @@
 #include <string.h>
 #include <QDebug>
 #include <QDir>
-#include <QString>
 
 #include "partman/structs.h"
 #include "sysinfo/proc_partitions.h"
 
 namespace installer {
-
-bool IsEfiEnabled() {
-  return QDir("/sys/firmware/efi").exists();
-}
 
 qint64 GetMaximumDeviceSize() {
   const PartitionItemList list = ParsePartitionItems();

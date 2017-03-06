@@ -57,6 +57,9 @@ QString GetPartitionUsage(const Partition& partition);
 // Get partition usage percentage (0-100).
 int GetPartitionUsageValue(const Partition& partition);
 
+// Check if EFI feature is enabled in this machine.
+bool IsEfiEnabled();
+
 // Check whether specific fs type can be mounted by user.
 // linux-swap and efi are mounted at fixed position and thus returns false.1
 bool IsMountPointSupported(FsType fs_type);

@@ -239,6 +239,10 @@ int GetPartitionUsageValue(const Partition& partition) {
   }
 }
 
+bool IsEfiEnabled() {
+  return QDir("/sys/firmware/efi").exists();
+}
+
 // Returns true if |fs_type| may be mounted to system with customized
 // mount point.
 bool IsMountPointSupported(FsType fs_type) {
