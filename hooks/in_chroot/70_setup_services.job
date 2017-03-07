@@ -26,3 +26,5 @@ if [ -n "${DISABLED_SERVICES}" ]; then
     fi
   done
 fi
+
+return 0

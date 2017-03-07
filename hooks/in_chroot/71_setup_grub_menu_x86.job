@@ -55,3 +55,5 @@ fi
 if [ x${GRUB_NEED_UPDATE} = "xtrue" ]; then
   update-grub
 fi
+
+return 0
