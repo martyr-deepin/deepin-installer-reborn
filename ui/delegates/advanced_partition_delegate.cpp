@@ -272,7 +272,7 @@ AdvancedValidateStates AdvancedPartitionDelegate::validate() const {
     states.append(AdvancedValidateState::RootMissing);
   }
 
-  if (IsEfiEnabled()) {
+  if (!this->isMBRPreferred()) {
     if (!found_efi) {
       states.append(AdvancedValidateState::EfiMissing);
     }
