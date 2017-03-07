@@ -67,6 +67,9 @@ class NewPartitionFrame : public QFrame {
   PartitionTypeModel* type_model_ = nullptr;
   Partition partition_;
 
+  // To memorize slider value.
+  qint64 last_slider_value_;
+
  private slots:
   // Append operations to |delegate| when create_button_ is clicked.
   void onCreateButtonClicked();
@@ -76,6 +79,9 @@ class NewPartitionFrame : public QFrame {
 
   // Change value of size-slider when mount point is special.
   void onMountPointChanged(int index);
+
+  // Update last_slider_value_ when it is updated.
+  void onSizeSliderValueChanged(qint64 size);
 };
 
 }  // namespace installer
