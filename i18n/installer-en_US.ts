@@ -331,68 +331,68 @@
 <context>
     <name>installer::NewPartitionFrame</name>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="91"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="123"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="94"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="129"/>
         <source>New Partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="93"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="125"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="96"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="131"/>
         <source>Create a new partition and define the type and size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="94"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="131"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="97"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="137"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="95"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="137"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="98"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="143"/>
         <source>Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="96"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="142"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="99"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="148"/>
         <source>Filesystem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="97"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="148"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="100"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="154"/>
         <source>Mount point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="98"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="155"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="101"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="161"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="100"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="140"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="100"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="140"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="101"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="185"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="104"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="191"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="102"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="186"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="105"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="192"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
@@ -564,7 +564,7 @@
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="137"/>
-        <source>Please make sure you have backed up all the data, then continue</source>
+        <source>Please make sure all data were made a backup, then continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
