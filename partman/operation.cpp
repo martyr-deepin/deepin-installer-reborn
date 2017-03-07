@@ -272,9 +272,9 @@ QString Operation::description() const {
       break;
     }
     case OperationType::NewPartTable: {
-      desc = QObject::tr("Create new partition table %1 for %2")
-          .arg(GetPartTableName(device.table))
-          .arg(device.path);
+      desc = QObject::tr("Format %1 and create %2 new partition table")
+          .arg(device.path)
+          .arg(GetPartTableName(device.table));
       break;
     }
     case OperationType::Resize: {

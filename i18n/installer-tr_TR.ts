@@ -50,6 +50,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../partman/operation.cpp" line="213"/>
+        <source>Format %1 and create %2 new partition table</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../partman/operation.cpp" line="190"/>
         <source>Delete %1 partition</source>
         <translation type="unfinished"></translation>
@@ -57,11 +62,6 @@
     <message>
         <location filename="../partman/operation.cpp" line="195"/>
         <source>Format %1 partition, type is %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../partman/operation.cpp" line="213"/>
-        <source>Create new partition table %1 for %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
