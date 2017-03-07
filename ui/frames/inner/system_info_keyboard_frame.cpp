@@ -137,11 +137,11 @@ void SystemInfoKeyboardFrame::initUI() {
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(0);
-  layout->addSpacing(kMainLayoutSpacing + 30);
+  layout->addSpacing(kMainLayoutSpacing + 40);
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addSpacing(kMainLayoutSpacing + 30);
   layout->addWidget(keyboard_wrapper, 0, Qt::AlignHCenter);
-  layout->addSpacing(7);
+  layout->addSpacing(10);
   layout->addWidget(test_edit_, 0, Qt::AlignHCenter);
   layout->addStretch();
   layout->addSpacing(kMainLayoutSpacing + 30);

@@ -106,6 +106,7 @@ void SelectLanguageFrame::initUI() {
   layout->addWidget(subtitle2_label, 0, Qt::AlignCenter);
   layout->addSpacing(20);
   layout->addWidget(language_view_, 0, Qt::AlignHCenter);
+  layout->addSpacing(20);
   layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
