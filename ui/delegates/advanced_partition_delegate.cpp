@@ -183,7 +183,8 @@ Partition AdvancedPartitionDelegate::getRealPartition(
   }
 
   for (const Partition& partition : real_devices_.at(index).partitions) {
-    if (partition == virtual_partition) {
+    if ((partition.start_sector <= virtual_partition.start_sector) &&
+        (partition.end_sector >= virtual_partition.end_sector)) {
       return partition;
     }
   }
@@ -680,6 +681,8 @@ void AdvancedPartitionDelegate::deletePartition(const Partition& partition) {
       }
     }
   }
+
+  // TODO(xushaohua): Update partition number.
 }
 
 void AdvancedPartitionDelegate::formatPartition(const Partition& partition,
@@ -688,6 +691,21 @@ void AdvancedPartitionDelegate::formatPartition(const Partition& partition,
   qDebug() << "formatPartition()" << partition << mount_point;
 
   this->resetOperationMountPoint(mount_point);
+
+  // Update partition of old operation, instead of adding a new one.
+  // TODO(xushaohua): Move to operation.h
+  if (partition.status == PartitionStatus::New ||
+      partition.status == PartitionStatus::Format) {
+    for (int index = operations_.length() - 1; index >= 0; --index) {
+      Operation& operation = operations_[index];
+      if ((operation.new_partition.path == partition.path) &&
+          (operation.type == OperationType::Format ||
+           operation.type == OperationType::Create)) {
+        operation.new_partition.fs = fs_type;
+        return;
+      }
+    }
+  }
 
   Partition new_partition;
   new_partition.sector_size = partition.sector_size;
@@ -698,23 +716,7 @@ void AdvancedPartitionDelegate::formatPartition(const Partition& partition,
   new_partition.fs = fs_type;
   new_partition.type = partition.type;
   new_partition.mount_point = mount_point;
-  if (partition.status == PartitionStatus::Real) {
-    new_partition.status = PartitionStatus::Format;
-  } else if (partition.status == PartitionStatus::New ||
-             partition.status == PartitionStatus::Format) {
-    // Update partition of old operation, instead of adding a new one.
-    // TODO(xushaohua): Move to operation.h
-    new_partition.status = partition.status;
-    for (int index = operations_.length() - 1; index >= 0; --index) {
-      Operation& operation = operations_[index];
-      if ((operation.new_partition.path == partition.path) &&
-          (operation.type == OperationType::Format ||
-           operation.type == OperationType::Create)) {
-        operation.new_partition = new_partition;
-        return;
-      }
-    }
-  }
+  new_partition.status = PartitionStatus::Format;
 
   Operation operation(OperationType::Format, partition, new_partition);
   operations_.append(operation);
