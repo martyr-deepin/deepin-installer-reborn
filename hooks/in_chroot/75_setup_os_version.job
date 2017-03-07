@@ -3,6 +3,18 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+# Update system version information.
+
 # Update /etc/deepin-version.
-# TODO(xushaohua): Read version from settings file.
+NEW_VERSION=$(installer-get "system_info_deepin_version")
+if [ -n "${NEW_VERSION}" ]; then
+  echo "${NEW_VERSION}" > /etc/deepin-version
+fi
+
+# Update /etc/lsb-release
+NEW_RELEASE=$(installer-get "system_info_lsb_release")
+if [ -n "${NEW_RELEASE}" ]; then
+  echo "${NEW_RELEASE}" > /etc/lsb-release
+fi
+
 return 0
