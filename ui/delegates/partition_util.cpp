@@ -52,7 +52,7 @@ int AllocPrimaryPartitionNumber(const Device& device) {
   for (int num = 1; num <= device.max_prims; num++) {
     bool in_use = false;
     for (const Partition& partition : device.partitions) {
-      if (partition.partition_number == num) {
+      if (num == partition.partition_number) {
         in_use = true;
         break;
       }

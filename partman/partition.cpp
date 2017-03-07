@@ -123,7 +123,6 @@ qint64 Partition::getSectorLength() const {
 QDebug& operator<<(QDebug& debug, const Partition& partition) {
   debug << "Partition: {"
         << "path:" << partition.path
-        << "device path:" << partition.device_path
         << "number:" << partition.partition_number
         << "fs:" << partition.fs
         << "type:" << partition.type
@@ -135,9 +134,6 @@ QDebug& operator<<(QDebug& debug, const Partition& partition) {
         << "start:" << partition.start_sector
         << "end:" << partition.end_sector
         << "sector size:" << partition.sector_size
-        << "length:" << partition.length
-        << "freespace:" << partition.freespace
-        << "byte length:" << partition.getByteLength()
         << "flags:" << partition.flags
         << "}";
   return debug;
