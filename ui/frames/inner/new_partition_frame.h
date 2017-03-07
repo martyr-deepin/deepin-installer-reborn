@@ -42,6 +42,9 @@ class NewPartitionFrame : public QFrame {
   void initConnections();
   void initUI();
 
+  // Update current slider size based on mount point and filesystem type.
+  void updateSlideSize();
+
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
   QLabel* type_label_ = nullptr;

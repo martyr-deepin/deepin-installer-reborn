@@ -204,6 +204,44 @@ void NewPartitionFrame::initUI() {
   this->setStyleSheet(ReadFile(":/styles/new_partition_frame.css"));
 }
 
+void NewPartitionFrame::updateSlideSize() {
+  const int fs_index = fs_box_->currentIndex();
+  const FsType fs_type = fs_model_->getFs(fs_index);
+  const int mp_index = mount_point_box_->currentIndex();
+  const QString mount_point = mount_point_model_->getMountPoint(mp_index);
+
+  // If fs_type is special, no need to display mount-point box.
+  const bool visible = IsMountPointSupported(fs_type);
+  mount_point_label_->setVisible(visible);
+  mount_point_box_->setVisible(visible);
+
+  if (fs_type == FsType::EFI) {
+    // Set default size of EFI partition.
+    // NOTE(xushaohua): partition size might be less than |default_size|.
+    // Its value will also be checked in AdvancedPartitionFrame.
+    const qint64 default_size = GetSettingsInt(kPartitionDefaultEFISpace) *
+                                kMebiByte;
+    const qint64 real_size = qMin(default_size, partition_.getByteLength());
+    size_slider_->setMinimum(real_size);
+    size_slider_->setValue(real_size);
+  } else if (mount_point == kMountPointBoot) {
+    // Set default size for /boot.
+    // NOTE(xushaohua): partition size might be less than |default_size|.
+    // Its value will also be checked in AdvancedPartitionFrame.
+    const qint64 default_size = GetSettingsInt(kPartitionDefaultBootSpace) *
+                                kMebiByte;
+    const qint64 real_size = qMin(default_size, partition_.getByteLength());
+    size_slider_->setMinimum(real_size);
+    size_slider_->setValue(real_size);
+  } else {
+    // Reset minimum value of size_slider_.
+    size_slider_->setMinimum(kMinimumPartitionSize);
+
+    // And set current value to maximum value.
+    size_slider_->setValue(size_slider_->maximum());
+  }
+}
+
 void NewPartitionFrame::onCreateButtonClicked() {
   const bool is_primary = type_model_->isPrimary(type_box_->currentIndex());
   const bool is_logical = type_model_->isLogical(type_box_->currentIndex());
@@ -233,50 +271,13 @@ void NewPartitionFrame::onCreateButtonClicked() {
 }
 
 void NewPartitionFrame::onFsChanged(int index) {
-  const FsType fs_type = fs_model_->getFs(index);
-
-  // If fs_type is special, no need to display mount-point box.
-  const bool visible = IsMountPointSupported(fs_type);
-  mount_point_label_->setVisible(visible);
-  mount_point_box_->setVisible(visible);
-
-  if (fs_type == FsType::EFI) {
-    // Set default size of EFI partition.
-    // NOTE(xushaohua): partition size might be less than |default_size|.
-    // Its value will also be checked in AdvancedPartitionFrame.
-    const qint64 default_size = GetSettingsInt(kPartitionDefaultEFISpace) *
-                                kMebiByte;
-    const qint64 real_size = qMin(default_size, partition_.getByteLength());
-    size_slider_->setMinimum(real_size);
-    size_slider_->setValue(real_size);
-  } else {
-    // Reset minimum value of size_slider_.
-    size_slider_->setMinimum(kMinimumPartitionSize);
-
-    // And set current value to maximum value.
-    size_slider_->setValue(size_slider_->maximum());
-  }
+  Q_UNUSED(index);
+  this->updateSlideSize();
 }
 
 void NewPartitionFrame::onMountPointChanged(int index) {
-  const QString mount_point = mount_point_model_->getMountPoint(index);
-
-  if (mount_point == kMountPointBoot) {
-    // Set default size for /boot.
-    // NOTE(xushaohua): partition size might be less than |default_size|.
-    // Its value will also be checked in AdvancedPartitionFrame.
-    const qint64 default_size = GetSettingsInt(kPartitionDefaultBootSpace) *
-                                kMebiByte;
-    const qint64 real_size = qMin(default_size, partition_.getByteLength());
-    size_slider_->setMinimum(real_size);
-    size_slider_->setValue(real_size);
-  } else {
-    // Reset minimum value of size_slider_.
-    size_slider_->setMinimum(kMinimumPartitionSize);
-
-    // And set current value to maximum value.
-    size_slider_->setValue(size_slider_->maximum());
-  }
+  Q_UNUSED(index);
+  this->updateSlideSize();
 }
 
 }  // namespace installer
