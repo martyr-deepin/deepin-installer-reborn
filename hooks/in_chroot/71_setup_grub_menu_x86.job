@@ -28,14 +28,13 @@ fi
 
 GRUB_BLOCK_WINDOWS=$(installer_get "grub_block_windows")
 if [ x"${GRUB_BLOCK_WINDOWS}" = "xtrue" ]; then
-  # Remove windows menu item from boot menu by disable os-prober and
-  # uefi_firmware scanning.
-  if [ -f "/etc/grub.d/30_os-prober" ]; then
-    > /etc/grub.d/30_os-prober
-  fi
-  if [ -f "/etc/grub.d/30_uefi-firmware" ]; then
-    > /etc/grub.d/30_uefi-firmware
-  fi
+  # Remove windows menu item from boot menu by disable os-prober from finding
+  # Windows partitions.
+  # Remove windows probes from os-prober script list.
+  [ -f /usr/lib/os-probes/mounted/20microsoft ] && \
+    rm /usr/lib/os-probes/mounted/20microsoft
+  [ -f /usr/lib/os-probes/mounted/efi/20microsoft ] && \
+    rm /usr/lib/os-probes/mounted/efi/20microsoft
   GRUB_NEED_UPDATE=true
 fi
 
