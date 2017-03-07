@@ -39,7 +39,8 @@ NewPartitionFrame::NewPartitionFrame(AdvancedPartitionDelegate* delegate,
                                      QWidget* parent)
     : QFrame(parent),
       delegate_(delegate),
-      partition_() {
+      partition_(),
+      last_slider_value_(0) {
   this->setObjectName("new_partition_frame");
 
   this->initUI();
@@ -82,7 +83,9 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
   mount_point_box_->setCurrentIndex(mount_point_index);
 
   // Set value range of size_slider_
-  size_slider_->setMaximum(partition.getByteLength());
+  last_slider_value_ = partition.getByteLength();
+  size_slider_->setMaximum(last_slider_value_);
+  size_slider_->setValue(last_slider_value_);
   size_slider_->setMinimum(kMinimumPartitionSize);
 }
 
@@ -112,6 +115,9 @@ void NewPartitionFrame::initConnections() {
   connect(mount_point_box_,
           static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
           this, &NewPartitionFrame::onMountPointChanged);
+
+  connect(size_slider_, &PartitionSizeSlider::valueChanged,
+          this, &NewPartitionFrame::onSizeSliderValueChanged);
 
   connect(cancel_button_, &QPushButton::clicked,
           this, &NewPartitionFrame::finished);
@@ -223,7 +229,11 @@ void NewPartitionFrame::updateSlideSize() {
                                 kMebiByte;
     const qint64 real_size = qMin(default_size, partition_.getByteLength());
     size_slider_->setMinimum(real_size);
+
+    // Block size_slider_ from emitting signals.
+    size_slider_->blockSignals(true);
     size_slider_->setValue(real_size);
+    size_slider_->blockSignals(false);
   } else if (mount_point == kMountPointBoot) {
     // Set default size for /boot.
     // NOTE(xushaohua): partition size might be less than |default_size|.
@@ -232,13 +242,15 @@ void NewPartitionFrame::updateSlideSize() {
                                 kMebiByte;
     const qint64 real_size = qMin(default_size, partition_.getByteLength());
     size_slider_->setMinimum(real_size);
+    size_slider_->blockSignals(true);
     size_slider_->setValue(real_size);
+    size_slider_->blockSignals(false);
   } else {
     // Reset minimum value of size_slider_.
     size_slider_->setMinimum(kMinimumPartitionSize);
 
-    // And set current value to maximum value.
-    size_slider_->setValue(size_slider_->maximum());
+    // And set current value to last value specified by user.
+    size_slider_->setValue(last_slider_value_);
   }
 }
 
@@ -278,6 +290,11 @@ void NewPartitionFrame::onFsChanged(int index) {
 void NewPartitionFrame::onMountPointChanged(int index) {
   Q_UNUSED(index);
   this->updateSlideSize();
+}
+
+void NewPartitionFrame::onSizeSliderValueChanged(qint64 size) {
+  // Memorize new value setup by user.
+  last_slider_value_ = size;
 }
 
 }  // namespace installer

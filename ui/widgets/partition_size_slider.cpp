@@ -111,11 +111,17 @@ void PartitionSizeSlider::onEditorTextChanged(const QString& text) {
     slider_->blockSignals(true);
     slider_->setValue(value);
     slider_->blockSignals(false);
+
+    // Also emit valueChanged() signal.
+    emit this->valueChanged(value * kMebiByte);
   }
 }
 
 void PartitionSizeSlider::onSliderValueChanged(int value) {
   editor_->setText(QString::number(value));
+
+  // Emit valueChanged() signal.
+  emit this->valueChanged(value * kMebiByte);
 }
 
 }  // namespace installer
