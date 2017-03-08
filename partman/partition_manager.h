@@ -43,6 +43,9 @@ class PartitionManager : public QObject {
  private:
   void initConnections();
 
+  // Stores result of doRefreshDevices();
+  DeviceList real_devices_;
+
   bool enable_os_prober_;
 
  private slots:
