@@ -34,7 +34,8 @@ class PartitionModel : public QObject {
   void deviceRefreshed(const DeviceList& devices);
 
   // Emitted when manual partitioning job is done.
-  void manualPartDone(bool ok);
+  // See PartitionManager about |real_operations|.
+  void manualPartDone(bool ok, const OperationList& real_operations);
 
  public slots:
   // Notify PartitionManager to do auto-part

@@ -97,7 +97,7 @@ class AdvancedPartitionDelegate : public QObject {
   void onDeviceRefreshed(const DeviceList& devices);
 
   // Write partitioning settings to file.
-  void onManualPartDone();
+  void onManualPartDone(const OperationList& real_operations);
 
   // Refresh virtual device list based on current operations.
   void refreshVisual();

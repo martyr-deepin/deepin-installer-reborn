@@ -8,6 +8,7 @@
 #include <QFrame>
 class QStackedLayout;
 
+#include "partman/operation.h"
 #include "partman/partition.h"
 
 namespace installer {
@@ -95,7 +96,8 @@ class PartitionFrame : public QFrame {
   void onAdvancedFrameButtonToggled();
   void onNextButtonClicked();
 
-  void onManualPartDone(bool ok);
+  // Write partitioning settings to conf file and emit manualPartDone() signal.
+  void onManualPartDone(bool ok, const OperationList& real_operations);
 
   // Notify delegate to do manual part.
   void onPrepareInstallFrameFinished();

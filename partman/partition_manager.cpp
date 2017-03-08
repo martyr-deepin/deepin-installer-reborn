@@ -136,7 +136,6 @@ bool UnmountDevices() {
 
 PartitionManager::PartitionManager(QObject* parent)
     : QObject(parent),
-      real_devices_(),
       enable_os_prober_(true) {
   this->setObjectName("partition_manager");
 
@@ -180,8 +179,8 @@ void PartitionManager::doRefreshDevices(bool umount, bool enable_os_prober) {
   }
 
   enable_os_prober_ = enable_os_prober;
-  real_devices_ = ScanDevices(enable_os_prober);
-  emit this->devicesRefreshed(real_devices_);
+  const DeviceList devices = ScanDevices(enable_os_prober);
+  emit this->devicesRefreshed(devices);
 }
 
 void PartitionManager::doAutoPart(const QString& script_path) {
@@ -203,9 +202,7 @@ void PartitionManager::doManualPart(const OperationList& operations) {
     ok = operation.applyToDisk();
   }
 
-  // TODO(xushaohua): Update device list.
-
-  emit this->manualPartDone(ok);
+  emit this->manualPartDone(ok, real_operations);
 }
 
 DeviceList ScanDevices(bool enable_os_prober) {
