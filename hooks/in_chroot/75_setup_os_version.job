@@ -8,13 +8,13 @@
 # Update /etc/deepin-version.
 NEW_VERSION=$(installer-get "system_info_deepin_version")
 if [ -n "${NEW_VERSION}" ]; then
-  echo "${NEW_VERSION}" > /etc/deepin-version
+  echo "${NEW_VERSION}" | base64 -d > /etc/deepin-version
 fi
 
 # Update /etc/lsb-release
 NEW_RELEASE=$(installer-get "system_info_lsb_release")
 if [ -n "${NEW_RELEASE}" ]; then
-  echo "${NEW_RELEASE}" > /etc/lsb-release
+  echo "${NEW_RELEASE}" | base64 -d > /etc/lsb-release
 fi
 
 return 0
