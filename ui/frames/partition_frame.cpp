@@ -300,13 +300,14 @@ void PartitionFrame::onNextButtonClicked() {
   main_layout_->setCurrentWidget(prepare_install_frame_);
 }
 
-void PartitionFrame::onManualPartDone(bool ok) {
+void PartitionFrame::onManualPartDone(bool ok,
+                                      const OperationList& real_operations) {
   if (ok) {
     // Write settings to file.
     if (this->isSimpleMode()) {
-      simple_delegate_->onManualPartDone();
+      simple_delegate_->onManualPartDone(real_operations);
     } else {
-      advanced_delegate_->onManualPartDone();
+      advanced_delegate_->onManualPartDone(real_operations);
     }
   }
 

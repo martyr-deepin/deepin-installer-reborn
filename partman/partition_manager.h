@@ -38,13 +38,15 @@ class PartitionManager : public QObject {
   void autoPartDone(bool ok);
 
   void manualPart(const OperationList& operations);
-  void manualPartDone(bool ok);
+
+  // Emitted when manualPart() is done.
+  // |ok| is true when all operations in operation list are done successfully,
+  // and |real_operations| contains updated operation information.
+  // Partition delegates shall update their operation list to |real_operations|.
+  void manualPartDone(bool ok, const OperationList& real_operations);
 
  private:
   void initConnections();
-
-  // Stores result of doRefreshDevices();
-  DeviceList real_devices_;
 
   bool enable_os_prober_;
 

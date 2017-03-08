@@ -544,11 +544,24 @@ void SimplePartitionDelegate::formatPartition(const Partition& partition,
 
 void SimplePartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
   real_devices_ = devices;
+  operations_.clear();
   virtual_devices_ = FilterInstallerDevice(real_devices_);
   emit this->deviceRefreshed(virtual_devices_);
 }
 
-void SimplePartitionDelegate::onManualPartDone() {
+void SimplePartitionDelegate::onManualPartDone(
+    const OperationList& real_operations) {
+  // Update operation list and virtual device list.
+  operations_ = real_operations;
+  virtual_devices_ = real_devices_;
+  for (Device& device : virtual_devices_) {
+    for (Operation& operation : operations_) {
+      if (operation.orig_partition.device_path == device.path) {
+        operation.applyToVisual(device);
+      }
+    }
+  }
+
   QString root_disk;
   QString root_path;
   QStringList mount_points;
