@@ -67,66 +67,114 @@ bool Operation::applyToDisk() const {
   bool ok;
   switch (type) {
     case OperationType::Create: {
+      // Filters filesystem type.
+      if (new_partition.fs == FsType::Unknown) {
+        qCritical() << "create unknown fs" << new_partition;
+        ok = false;
+        break;
+      }
+
       // TODO(xushaohua): Update partition number.
+      // Create new partition in disk partition table.
       ok = CreatePartition(new_partition);
-      qDebug() << "applyToDisk() create partition:" << ok;
-      // Ignores extended partition.
-      // TODO(xushaohua): Check new_partition.fs
-      if (ok && new_partition.type != PartitionType::Extended) {
-        ok = Mkfs(new_partition);
-        qDebug() << "applyToDisk() mkfs:" << ok;
+      if (ok) {
+        // Ignores extended partition. And check filesystem type.
+        if ((new_partition.type != PartitionType::Extended) &&
+            (new_partition.fs != FsType::Empty)) {
+          // Create new filesystem on new_partition.
+          ok = Mkfs(new_partition);
+          if (ok) {
+            // Set flags of new_partition.
+            ok = SetPartitionFlags(new_partition);
+            if (!ok) {
+              qCritical() << "SetPartitionFlags() failed:" << new_partition;
+            }
+          } else {
+            qCritical() << "Mkfs() failed:" << new_partition;
+          }
+        } else {
+          qCritical() << "CreatePartition() failed" << new_partition;
+        }
       }
       break;
     }
 
     case OperationType::Delete: {
+      // Delete partition from disk partition table.
       ok = DeletePartition(orig_partition);
-      qDebug() << "applyToDisk() delete partition" << ok;
+      if (!ok) {
+        qCritical() << "DeletePartition() failed:" << orig_partition;
+      }
       break;
     }
 
     case OperationType::Format: {
+      // Filters filesystem type.
+      if (new_partition.fs == FsType::Unknown) {
+        qCritical() << "create unknown fs" << new_partition;
+        ok = false;
+        break;
+      }
+
+      // TODO(xushaohua): Update partition number.
+      // Update filesystem type in partition table.
       ok = SetPartitionType(new_partition);
-      qDebug() << "applyToDisk() format set partition type:" << ok;
       if (ok) {
-        ok = Mkfs(new_partition);
-        qDebug() << "applyToDisk() format mkfs():" << ok;
+        if (new_partition.fs != FsType::Empty) {
+          // Create new filesystem.
+          ok = Mkfs(new_partition);
+          if (ok) {
+            // Set flags of new_partition.
+            ok = SetPartitionFlags(new_partition);
+            if (!ok) {
+              qCritical() << "SetPartitionFlags() failed:" << new_partition;
+            }
+          } else {
+            qCritical() << "Format Mkfs() failed:" << new_partition;
+          }
+        }
+      } else {
+        qCritical() << "SetPartitionType() failed;" << new_partition;
       }
       break;
     }
 
     case OperationType::Invalid: {
       qCritical() << "Invalid operation!";
-      return false;
+      ok = false;
+      break;
     }
 
     case OperationType::MountPoint: {
-      // Do nothing if only mount-point of partition is updated.
-      return true;
+      // Update flags of new_partition.
+      ok = SetPartitionFlags(new_partition);
+      if (!ok) {
+        qCritical() << "SetPartitionFlags() failed:" << new_partition;
+      }
+      break;
     }
 
     case OperationType::NewPartTable: {
       ok = CreatePartitionTable(device.path, device.table);
-      qDebug() << "CreatePartitionTable():" << device << ok;
+      if (!ok) {
+        qCritical() << "CreatePartitionTable() failed:" << device;
+      }
       break;
     }
 
     case OperationType::Resize: {
+      // Resize extended partition.
       ok = ResizeMovePartition(new_partition);
-      qDebug() << "applyToDisk() resize partition:" << ok;
+      if (!ok) {
+        qCritical() << "ResizeMovePartition() failed:" << new_partition;
+      }
       break;
     }
 
     default: {
-      qCritical() << "TODO(xushaohua): Handles other type of operation" << type;
+      qCritical() << "Handles other type of operation" << type;
       return false;
     }
-  }
-
-  // Set flags of new_partition.
-  if (ok) {
-    ok = SetPartitionFlags(new_partition);
-    qDebug() << "Set partition flags:" << new_partition.path << ok;
   }
 
   return ok;
