@@ -50,7 +50,7 @@ bool ResizeMovePartition(const Partition& partition);
 
 // Set/unset |flag| of |partition|.
 bool SetPartitionFlag(const Partition& partition,
-                      PedPartitionFlag& flag,
+                      PedPartitionFlag flag,
                       bool is_set);
 // Set/unset flags of |partition|
 bool SetPartitionFlags(const Partition& partition);
@@ -67,6 +67,11 @@ bool SetPartitionType(const Partition& partition);
 // for all hardware devices, thus ensuring that any device nodes
 // have been created successfully before proceeding.
 void SettleDevice(int timeout);
+
+// Update partition number and path based on start_sector and end_secotr in
+// |partition|.
+// This partition number and path is read from real device.
+bool UpdatePartitionNumber(Partition& partition);
 
 }  // namespace installer
 

@@ -365,4 +365,33 @@ void SettleDevice(int timeout) {
   SpawnCmd("udevadm", {"settle", QString("--timeout=%1").arg(timeout)});
 }
 
+bool UpdatePartitionNumber(Partition& partition) {
+  bool ok = false;
+  PedDevice* lp_device = nullptr;
+  PedDisk* lp_disk = nullptr;
+  if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
+    PedPartition* lp_partition = nullptr;
+    if (partition.type == PartitionType::Extended) {
+      lp_partition = ped_disk_extended_partition(lp_disk);
+    } else {
+      lp_partition = ped_disk_get_partition_by_sector(lp_disk,
+                                                      partition.getSector());
+    }
+    if (lp_partition) {
+      partition.partition_number = lp_partition->num;
+      partition.path = GetPartitionPath(lp_partition);
+      ok = true;
+    } else {
+      qCritical() << "UpdatePartitionNumber() lp_partition is nullptr";
+    }
+
+    DestroyDeviceAndDisk(lp_device, lp_disk);
+  } else {
+    qCritical() << "UpdatePartitionNumber() failed to get lp disk object"
+                << partition;
+  }
+
+  return ok;
+}
+
 }  // namespace installer
