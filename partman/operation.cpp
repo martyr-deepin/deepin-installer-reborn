@@ -63,121 +63,135 @@ Operation::Operation(OperationType type,
 Operation::~Operation() {
 }
 
-bool Operation::applyToDisk() const {
-  bool ok;
+bool Operation::applyToDisk() {
   switch (type) {
     case OperationType::Create: {
       // Filters filesystem type.
       if (new_partition.fs == FsType::Unknown) {
-        qCritical() << "create unknown fs" << new_partition;
-        ok = false;
-        break;
+        qCritical() << "OperationCreate unknown fs" << new_partition;
+        return false;
       }
 
-      // TODO(xushaohua): Update partition number.
       // Create new partition in disk partition table.
-      ok = CreatePartition(new_partition);
-      if (ok) {
-        // Ignores extended partition. And check filesystem type.
-        if ((new_partition.type != PartitionType::Extended) &&
-            (new_partition.fs != FsType::Empty)) {
-          // Create new filesystem on new_partition.
-          ok = Mkfs(new_partition);
-          if (ok) {
-            // Set flags of new_partition.
-            ok = SetPartitionFlags(new_partition);
-            if (!ok) {
-              qCritical() << "SetPartitionFlags() failed:" << new_partition;
-            }
-          } else {
-            qCritical() << "Mkfs() failed:" << new_partition;
-          }
-        } else {
-          qCritical() << "CreatePartition() failed" << new_partition;
+      if (!CreatePartition(new_partition)) {
+        qCritical() << "CreatePartition() failed" << new_partition;
+        return false;
+      }
+
+      // Update partition number and path.
+      if (!UpdatePartitionNumber(new_partition)) {
+        qCritical() << "OperationCreate UpdatePartitionNumber() failed:"
+                    << new_partition;
+        return false;
+      }
+
+      // Ignores extended partition. And check filesystem type.
+      if ((new_partition.type != PartitionType::Extended) &&
+          (new_partition.fs != FsType::Empty)) {
+        // Create new filesystem on new_partition.
+        if (!Mkfs(new_partition)) {
+          qCritical() << "OperationCreate Mkfs() failed:" << new_partition;
+          return false;
+        }
+
+        // Set flags on new_partition.
+        if (!SetPartitionFlags(new_partition)) {
+          qCritical() << "OperationCreate SetPartitionFlags() failed:"
+                      << new_partition;
+          return false;
         }
       }
-      break;
+      return true;
     }
 
     case OperationType::Delete: {
       // Delete partition from disk partition table.
-      ok = DeletePartition(orig_partition);
-      if (!ok) {
+      if (!DeletePartition(orig_partition)) {
         qCritical() << "DeletePartition() failed:" << orig_partition;
+        return false;
+      } else {
+        return true;
       }
-      break;
     }
 
     case OperationType::Format: {
       // Filters filesystem type.
       if (new_partition.fs == FsType::Unknown) {
-        qCritical() << "create unknown fs" << new_partition;
-        ok = false;
-        break;
+        qCritical() << "OperationFormat unknown fs" << new_partition;
+        return false;
       }
 
-      // TODO(xushaohua): Update partition number.
       // Update filesystem type in partition table.
-      ok = SetPartitionType(new_partition);
-      if (ok) {
-        if (new_partition.fs != FsType::Empty) {
-          // Create new filesystem.
-          ok = Mkfs(new_partition);
-          if (ok) {
-            // Set flags of new_partition.
-            ok = SetPartitionFlags(new_partition);
-            if (!ok) {
-              qCritical() << "SetPartitionFlags() failed:" << new_partition;
-            }
-          } else {
-            qCritical() << "Format Mkfs() failed:" << new_partition;
-          }
-        }
-      } else {
-        qCritical() << "SetPartitionType() failed;" << new_partition;
+      if (!SetPartitionType(new_partition)) {
+        qCritical() << "OperationFormat SetPartitionType() failed:"
+                    << new_partition;
+        return false;
       }
-      break;
+
+      // Update partition number and path.
+      if (!UpdatePartitionNumber(new_partition)) {
+        qCritical() << "OperationFormat UpdatePartitionNumber() failed:"
+                    << new_partition;
+        return false;
+      }
+
+      if (new_partition.fs != FsType::Empty) {
+        // Create new filesystem.
+        if (!Mkfs(new_partition)) {
+          qCritical() << "OperationFormat Mkfs() failed:" << new_partition;
+          return false;
+        }
+
+        // Set flags of new_partition.
+        if (!SetPartitionFlags(new_partition)) {
+          qCritical() << "OperationFormat SetPartitionFlags() failed:"
+                      << new_partition;
+          return false;
+        }
+      }
+
+      return true;
     }
 
     case OperationType::Invalid: {
       qCritical() << "Invalid operation!";
-      ok = false;
-      break;
+      return false;
     }
 
     case OperationType::MountPoint: {
       // Update flags of new_partition.
-      ok = SetPartitionFlags(new_partition);
-      if (!ok) {
+      if (!SetPartitionFlags(new_partition)) {
         qCritical() << "SetPartitionFlags() failed:" << new_partition;
+        return false;
+      } else {
+        return true;
       }
-      break;
     }
 
     case OperationType::NewPartTable: {
-      ok = CreatePartitionTable(device.path, device.table);
-      if (!ok) {
+      if (!CreatePartitionTable(device.path, device.table)) {
         qCritical() << "CreatePartitionTable() failed:" << device;
+        return false;
+      } else {
+        return true;
       }
-      break;
     }
 
     case OperationType::Resize: {
       // Resize extended partition.
-      ok = ResizeMovePartition(new_partition);
-      if (!ok) {
+      if (!ResizeMovePartition(new_partition)) {
         qCritical() << "ResizeMovePartition() failed:" << new_partition;
+        return false;
+      } else {
+        return true;
       }
-      break;
     }
 
     default: {
-      qCritical() << "Handles other type of operation" << type;
+      qCritical() << "Unknown type of operation:" << type;
       return false;
     }
   }
-
-  return ok;
 }
 
 void Operation::applyToVisual(Device& device) const {

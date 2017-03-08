@@ -47,7 +47,7 @@ class Operation {
 
   // Apply changes to disk. Returns operation status.
   // Note that this method shall be called in the background thread.
-  bool applyToDisk() const;
+  bool applyToDisk();
 
   // Apply operation by updating device properties.
   void applyToVisual(Device& device) const;
