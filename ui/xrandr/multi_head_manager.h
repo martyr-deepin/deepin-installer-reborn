@@ -42,7 +42,6 @@ class MultiHeadManager : public QObject {
   QList<WallpaperItem*> wallpaper_items_;
   QThread* multi_head_thread_ = nullptr;
   MultiHeadWorker* multi_head_worker_ = nullptr;
-  QString xrandr_output_;
 
   // Number of monitors defined in last xrandr output.
   // This values changes when a new monitor is connected to or an existing

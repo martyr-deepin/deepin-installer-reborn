@@ -524,7 +524,14 @@ add_executable(deepin-installer-xrandr-switchy
                ui/xrandr/xrandr_wrapper.cpp
                ui/xrandr/xrandr_wrapper.h
                )
-target_link_libraries(deepin-installer-xrandr-switchy ${QtCore_LIBS})
+target_link_libraries(deepin-installer-xrandr-switchy
+                      ${QtCore_LIBS}
+
+                      ${X11_LIBRARIES}
+                      ${X11EXT_LIBRARIES}
+                      ${X11TST_LIBRARIES}
+                      ${X11RandR_LIBRARIES}
+                      )
 
 
 # Unsquashfs progress
