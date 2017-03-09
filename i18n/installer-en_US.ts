@@ -25,47 +25,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="173"/>
+        <location filename="../partman/operation.cpp" line="235"/>
         <source>Create extended partition %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="177"/>
+        <location filename="../partman/operation.cpp" line="239"/>
         <source>Create new partition %1, type is %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="181"/>
+        <location filename="../partman/operation.cpp" line="243"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="199"/>
+        <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="207"/>
+        <location filename="../partman/operation.cpp" line="269"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="213"/>
+        <location filename="../partman/operation.cpp" line="275"/>
         <source>Format %1 and create %2 new partition table</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="190"/>
+        <location filename="../partman/operation.cpp" line="252"/>
         <source>Delete %1 partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="195"/>
+        <location filename="../partman/operation.cpp" line="257"/>
         <source>Format %1 partition, type is %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="219"/>
+        <location filename="../partman/operation.cpp" line="281"/>
         <source>Adjust the size of %1 partition</source>
         <translation type="unfinished"></translation>
     </message>
@@ -417,7 +417,7 @@
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
-        <source>Continuous installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
+        <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
