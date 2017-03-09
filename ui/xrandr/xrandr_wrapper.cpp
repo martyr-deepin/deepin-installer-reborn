@@ -441,6 +441,9 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
     return true;
   }
 
+  fprintf(stdout, "connected: %d, primary: %d\n",
+          connected_outputs, primary_index);
+
   // If primary output is the last connected output, go to mirror mode.
   if ((connected_outputs > 1) &&
       (primary_index > -1) &&
@@ -497,12 +500,13 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
         crtc->changed = true;
         crtc->x = x;
         crtc->y = y;
+        fprintf(stdout, "crtc: %dx%d\n", crtc->x, crtc->y);
         if (crtc->mode != prefer->id) {
           crtc->mode = prefer->id;
           crtc->width = prefer->width;
           crtc->height = prefer->height;
-          x = crtc->width + x;
         }
+        x = crtc->width + x;
       }
     }
   }
