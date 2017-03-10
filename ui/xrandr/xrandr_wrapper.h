@@ -5,10 +5,21 @@
 #ifndef INSTALLER_UI_XRANDR_XRANDR_WRAPPER_H
 #define INSTALLER_UI_XRANDR_XRANDR_WRAPPER_H
 
-#include <QDebug>
-#include <QList>
+#include <QVector>
 
 namespace installer {
+
+struct ConnectedOutput {
+  int x = 0;
+  int y = 0;
+  int width = 0;
+  int height = 0;
+  bool primary = false;  // true if current output is primary one.
+};
+typedef QVector<ConnectedOutput> ConnectedOutputs;
+
+// Get connected |outputs|, returns false if failed.
+bool GetConnectedOutputs(ConnectedOutputs& outputs);
 
 // Switch between display modes.
 // If only one output is found, use preferred mode;

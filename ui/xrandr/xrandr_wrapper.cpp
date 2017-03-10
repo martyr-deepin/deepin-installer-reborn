@@ -192,7 +192,9 @@ bool GetRRResources(Display** dpy, int& screen, Window& root_window,
     fprintf(stderr, "RandR extension missing\n");
     return false;
   }
+#ifndef N_DEBUG
   fprintf(stdout, "RandR version %d.%d\n", major, minor);
+#endif
 
   *resources = XRRGetScreenResources(*dpy, root_window);
   if (*resources == NULL) {
@@ -519,6 +521,47 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
 }
 
 }  // namespace
+
+bool GetConnectedOutputs(ConnectedOutputs& outputs) {
+  Display* dpy = NULL;
+  int screen = 0;
+  Window root_window;
+  XRRScreenResources* resources = NULL;
+  if (!GetRRResources(&dpy, screen, root_window, &resources)) {
+    return false;
+  }
+
+  outputs.clear();
+  // Get primary output.
+  const RROutput primary = XRRGetOutputPrimary(dpy, root_window);
+  for (int i = 0; i < resources->noutput; ++i) {
+    const RROutput output_id = resources->outputs[i];
+    XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output_id);
+    if (output_info == NULL || output_info->connection != RR_Connected) {
+      continue;
+    }
+    ConnectedOutput output_obj = {};
+    if (output_id == primary) {
+      output_obj.primary = true;
+    }
+
+    // Update connected output properties.
+    const RRCrtc crtc = output_info->crtc;
+    XRRCrtcInfo* crtc_info = XRRGetCrtcInfo(dpy, resources, crtc);
+    if (crtc_info == NULL) {
+      continue;
+    }
+    output_obj.x = crtc_info->x;
+    output_obj.y = crtc_info->y;
+    output_obj.width = crtc_info->width;
+    output_obj.height = crtc_info->height;
+    outputs.append(output_obj);
+  }
+
+  XRRFreeScreenResources(resources);
+  XCloseDisplay(dpy);
+  return true;
+}
 
 bool SwitchMode() {
   fprintf(stdout, "SwitchMode()\n");

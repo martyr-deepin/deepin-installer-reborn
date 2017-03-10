@@ -6,7 +6,9 @@
 #define INSTALLER_UI_XRANDR_WALLPAPER_MANAGER_H
 
 #include <QObject>
-#include <QList>
+#include <QRect>
+#include <QVector>
+
 class QThread;
 
 namespace installer {
@@ -39,7 +41,7 @@ class MultiHeadManager : public QObject {
  private:
   void initConnections();
 
-  QList<WallpaperItem*> wallpaper_items_;
+  QVector<WallpaperItem*> wallpaper_items_;
   QThread* multi_head_thread_ = nullptr;
   MultiHeadWorker* multi_head_worker_ = nullptr;
 
@@ -47,7 +49,10 @@ class MultiHeadManager : public QObject {
   // This values changes when a new monitor is connected to or an existing
   // monitor is disconnected from system.
   // If so, switch to mirror mode if possible.
-  int connected_monitors_;
+  int last_connected_monitors_;
+
+  // Geometry of primary output used at last.
+  QRect last_primary_geometry_;
 
  private slots:
   // Repaint background when output added, changed or removed.

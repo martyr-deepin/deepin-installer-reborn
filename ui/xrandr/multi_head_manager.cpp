@@ -18,7 +18,8 @@ MultiHeadManager::MultiHeadManager(QObject* parent)
       wallpaper_items_(),
       multi_head_thread_(new QThread(this)),
       multi_head_worker_(new MultiHeadWorker()),
-      connected_monitors_(1) {
+      last_connected_monitors_(1),
+      last_primary_geometry_() {
   this->setObjectName("wallpaper_manager");
 
   multi_head_worker_->moveToThread(multi_head_thread_);
@@ -41,37 +42,48 @@ void MultiHeadManager::switchXRandRMode() {
 
 void MultiHeadManager::updateWallpaper() {
   qDebug() << "MultiHeadManager::updateWallpaper()";
-  // Clear old wallpaper items
-  for (WallpaperItem* item : wallpaper_items_) {
-    delete item;
-    item = nullptr;
+
+  ConnectedOutputs outputs;
+  if (GetConnectedOutputs(outputs) && !outputs.isEmpty()) {
+    // Clear old wallpaper items
+    for (WallpaperItem* item : wallpaper_items_) {
+      delete item;
+      item = nullptr;
+    }
+    wallpaper_items_.clear();
+
+    int primary_index = -1;
+    for (int i = 0; i < outputs.length(); ++i) {
+      const ConnectedOutput& output = outputs.at(i);
+      const QRect geometry(output.x, output.y, output.width, output.height);
+      WallpaperItem* item = new WallpaperItem(geometry);
+      wallpaper_items_.append(item);
+      item->show();
+      if (output.primary) {
+        primary_index = i;
+      }
+    }
+
+    // Notify main window to change geometry
+    if (primary_index == -1) {
+      primary_index = 0;
+    }
+    const ConnectedOutput& primary_output = outputs.at(primary_index);
+    const QRect primary_geometry(primary_output.x, primary_output.y,
+                                 primary_output.width, primary_output.height);
+    if (primary_geometry != last_primary_geometry_) {
+      last_primary_geometry_ = primary_geometry;
+      emit this->primaryScreenChanged(primary_geometry);
+    }
+
+    // Number of monitors changed.
+    if (outputs.length() != last_connected_monitors_) {
+      last_connected_monitors_ = outputs.length();
+      emit this->switchToMirrorMode();
+    }
+  } else {
+    qCritical() << "Failed to get connected outputs";
   }
-  wallpaper_items_.clear();
-
-//  if () {
-//    int connected_monitors = 0;
-//    for (const Output& output : xrandr.outputs) {
-//      if (output.is_connected) {
-//        connected_monitors ++;
-//        const QRect geometry(output.x, output.y, output.width, output.height);
-//        WallpaperItem* item = new WallpaperItem(geometry);
-//        wallpaper_items_.append(item);
-//        item->show();
-//
-//        // Notify main window to change geometry
-//        if (output.is_primary) {
-//          emit this->primaryScreenChanged(geometry);
-//        }
-//      }
-//    }
-
-//    if (connected_monitors != connected_monitors_) {
-//      connected_monitors_ = connected_monitors;
-//      emit this->switchToMirrorMode();
-//    }
-//  } else {
-//    qCritical() << "updateWallpaper() parse xrandr failed!";
-//  }
 }
 
 void MultiHeadManager::initConnections() {
