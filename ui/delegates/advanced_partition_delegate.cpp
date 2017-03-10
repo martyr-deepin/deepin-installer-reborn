@@ -701,6 +701,7 @@ void AdvancedPartitionDelegate::formatPartition(const Partition& partition,
       if ((operation.new_partition.path == partition.path) &&
           (operation.type == OperationType::Format ||
            operation.type == OperationType::Create)) {
+        operation.new_partition.mount_point = mount_point;
         operation.new_partition.fs = fs_type;
         return;
       }
