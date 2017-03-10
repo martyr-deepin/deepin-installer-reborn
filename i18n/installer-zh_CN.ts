@@ -155,27 +155,37 @@
         <translation type="vanished">需要创建EFI分区</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="304"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="310"/>
         <source>Add a Root partition to continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="309"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="315"/>
         <source>At least %1 GB is required for Root partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="296"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="302"/>
         <source>Add an EFI partition to continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="300"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="289"/>
+        <source>The partition filesystem type of /boot directory can only be %1 </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="293"/>
+        <source>The partition of /boot directory should be the first partition on hard disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="306"/>
         <source>At least %1 MB is required for EFI partition</source>
         <translation>EFI分区至少需要 %1 MB 的空间</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="292"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="298"/>
         <source>At least %1 MB is required for /boot partition</source>
         <translation>/boot 分区至少需要 %1 MB 的空间</translation>
     </message>
@@ -201,14 +211,14 @@
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="66"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="339"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="345"/>
         <source>Done</source>
         <translation>完成</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="68"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="160"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="341"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="347"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
@@ -294,7 +304,7 @@
     <name>installer::EditPartitionFrame</name>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="111"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="166"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="171"/>
         <source>Edit Disk</source>
         <translation>编辑磁盘</translation>
     </message>
@@ -304,37 +314,37 @@
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="113"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="168"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="173"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="115"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="201"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="206"/>
         <source>Filesystem</source>
         <translation>文件系统</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="116"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="203"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="208"/>
         <source>Mount point</source>
         <translation>挂载点</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="117"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="205"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="210"/>
         <source>Format the partition</source>
         <translation>格式化分区</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="118"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="248"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="253"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="119"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="249"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="254"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
