@@ -280,12 +280,18 @@ void AdvancedPartitionFrame::showErrorMessages() {
 QString AdvancedPartitionFrame::validateStateToText(AdvancedValidateState state) {
   switch (state) {
     case AdvancedValidateState::BootFsInvalid: {
-      // TODO(xushaohua): add message here.
-      return "filesystem for /boot is invalid, only ext4/ext3/ext3 satisfied.";
+      const FsTypeList boot_fs_list = delegate_->getBootFsTypeList();
+      QStringList fs_name_list;
+      for (const FsType& fs_type : boot_fs_list) {
+        fs_name_list.append(GetFsTypeName(fs_type));
+      }
+      const QString fs_name(fs_name_list.join("/"));
+      return tr("The partition filesystem type of /boot directory "
+                "can only be %1 ").arg(fs_name);
     }
     case AdvancedValidateState::BootPartNumberInvalid: {
-      // TODO(xushaohua): add message.
-      return "/boot should be located at the first partition of disk.";
+      return tr("The partition of /boot directory should be "
+                "the first partition on hard disk");
     }
     case AdvancedValidateState::BootTooSmall: {
       const int boot_recommended = GetSettingsInt(kPartitionDefaultBootSpace);
