@@ -361,7 +361,6 @@ void GetPrimaryOutputIndex(Display* dpy, XRRScreenResources* resources,
     XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources,
                                                   resources->outputs[i]);
     if (output_info == NULL || output_info->connection != RR_Connected) {
-      fprintf(stdout, "IsMirrorMode() output_info is null\n");
       continue;
     }
     if (primary_output == resources->outputs[i]) {
@@ -369,6 +368,55 @@ void GetPrimaryOutputIndex(Display* dpy, XRRScreenResources* resources,
     }
     (*connected_outputs) ++;
   }
+}
+
+// Update screen size based on current crtc.
+bool UpdateScreenSize(Display* dpy, Window root_window,
+                      XRRScreenResources* resources,
+                      crtc_t* crtcs, int num_crtcs) {
+  Q_ASSERT(dpy != NULL);
+  Q_ASSERT(resources != NULL);
+  Q_ASSERT(crtcs != NULL);
+
+  int fb_width = 0;
+  int fb_height = 0;
+
+  for (int i = 0; i < num_crtcs; ++i) {
+    crtc_t* crtc = crtcs + i;
+    if (crtc->noutput == 0) {
+      continue;
+    }
+    // Extended horizontally.
+    fb_width = fb_width + crtc->width;
+    fb_height = qMax(fb_height, crtc->height);
+  }
+
+  // Get default screen.
+  int screen = DefaultScreen(dpy);
+  if (screen < 0 || screen >= ScreenCount(dpy)) {
+    fprintf(stderr, "Invalid screen: %d (display has %d)\n",
+            screen, ScreenCount(dpy));
+    return false;
+  }
+
+  // Compute physical screen size.
+  if (fb_width == DisplayWidth(dpy, screen) &&
+      fb_height == DisplayHeight(dpy, screen)) {
+    return true;
+  }
+  const double delta = 25.4;
+  double dpi = (delta * DisplayHeight (dpy, screen)) /
+               DisplayHeightMM(dpy, screen);
+  const int fb_width_mm = int((delta * fb_width) / dpi);
+  const int fb_height_mm = int((delta * fb_height) / dpi);
+
+  fprintf(stdout, "Set screen size: %d, %d, %d, %d\n",
+          fb_width, fb_height, fb_width_mm, fb_height_mm);
+
+  XRRSetScreenSize(dpy, root_window, fb_width, fb_height,
+                   fb_width_mm, fb_height_mm);
+
+  return true;
 }
 
 // Switch to mirror mode.
@@ -427,6 +475,9 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
   // Set primary output.
   fprintf(stdout, "ToMirrorMode() set primary output: %ld\n", primary_output);
   XRRSetOutputPrimary(dpy, root_window, primary_output);
+
+  // Update screen size.
+  UpdateScreenSize(dpy, root_window, resources, crtcs, num_crtcs);
 
   return ApplyCrtcs(dpy, resources, crtcs, num_crtcs);
 }
@@ -530,6 +581,9 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
   fprintf(stdout, "connected outputs: %d, outputs2: %d\n",
           connected_outputs, connected_outputs2);
   Q_ASSERT(connected_outputs == connected_outputs2);
+
+  // Update screen size.
+  UpdateScreenSize(dpy, root_window, resources, crtcs, num_crtcs);
 
   return ApplyCrtcs(dpy, resources, crtcs, num_crtcs);
 }
