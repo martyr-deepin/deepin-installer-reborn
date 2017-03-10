@@ -131,7 +131,12 @@ void EditPartitionFrame::updateFormatBoxState() {
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
   const Partition real_partition(delegate_->getRealPartition(partition_));
   const int mp_index = mount_point_box_->currentIndex();
-  const QString mount_point = mount_point_model_->getMountPoint(mp_index);
+  QString mount_point;
+
+  // Read mount point only if current filesystem supports mount-point.
+  if (IsMountPointSupported(fs_type)) {
+    mount_point = mount_point_model_->getMountPoint(mp_index);
+  }
 
   // Format this partition compulsively if its fs type changed.
   bool format = (fs_type != FsType::Empty && fs_type != real_partition.fs);
@@ -309,8 +314,9 @@ void EditPartitionFrame::onMountPointChanged(int index) {
 void EditPartitionFrame::onOkButtonClicked() {
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
   QString mount_point;
+
+  // Read mount point only if current filesystem supports mount-point.
   if (IsMountPointSupported(fs_type)) {
-    // Set mount_point only if mount_point_box_ is visible.
     const int index = mount_point_box_->currentIndex();
     mount_point = mount_point_model_->getMountPoint(index);
   }
