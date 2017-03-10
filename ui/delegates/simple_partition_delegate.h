@@ -57,6 +57,11 @@ class SimplePartitionDelegate : public QObject {
   // using it.
   void selectPartition(const Partition& partition);
 
+  // Set boot flag of root partition. Call this before operations() and after
+  // validate().
+  // Returns false if no appropriate partition can be set as bootable.
+  bool setBootFlag();
+
   // Validate whether selected partition is appropriate.
   SimpleValidateState validate() const;
 

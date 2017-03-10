@@ -136,6 +136,40 @@ void SimplePartitionDelegate::selectPartition(const Partition& partition) {
   selected_partition_ = partition;
 }
 
+bool SimplePartitionDelegate::setBootFlag() {
+  bool found_boot = false;
+
+  // First check new EFI partition.
+  for (Operation& operation : operations_) {
+    if (operation.new_partition.fs == FsType::EFI) {
+      operation.new_partition.flags.append(PartitionFlag::Boot);
+      operation.new_partition.flags.append(PartitionFlag::ESP);
+      found_boot = true;
+    }
+  }
+
+  // Check /boot partition.
+  if (!found_boot) {
+    for (Operation& operation : operations_) {
+      if (operation.new_partition.mount_point == kMountPointBoot) {
+        operation.new_partition.flags.append(PartitionFlag::Boot);
+        found_boot = true;
+      }
+    }
+  }
+
+  // At last, check / partition.
+  if (!found_boot) {
+    for (Operation& operation : operations_) {
+      if (operation.new_partition.mount_point == kMountPointRoot) {
+        operation.new_partition.flags.append(PartitionFlag::Boot);
+        found_boot = true;
+      }
+    }
+  }
+  return found_boot;
+}
+
 SimpleValidateState SimplePartitionDelegate::validate() const {
   // Policy:
   // * Returns ok if partition table of selected partition is empty.

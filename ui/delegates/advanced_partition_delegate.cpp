@@ -202,6 +202,40 @@ bool AdvancedPartitionDelegate::isPartitionTableMatch(
   return IsPartitionTableMatch(real_devices_, device_path);
 }
 
+bool AdvancedPartitionDelegate::setBootFlag() {
+  bool found_boot = false;
+
+  // First check new EFI partition.
+  for (Operation& operation : operations_) {
+    if (operation.new_partition.fs == FsType::EFI) {
+      operation.new_partition.flags.append(PartitionFlag::Boot);
+      operation.new_partition.flags.append(PartitionFlag::ESP);
+      found_boot = true;
+    }
+  }
+
+  // Check /boot partition.
+  if (!found_boot) {
+    for (Operation& operation : operations_) {
+      if (operation.new_partition.mount_point == kMountPointBoot) {
+        operation.new_partition.flags.append(PartitionFlag::Boot);
+        found_boot = true;
+      }
+    }
+  }
+
+  // At last, check / partition.
+  if (!found_boot) {
+    for (Operation& operation : operations_) {
+      if (operation.new_partition.mount_point == kMountPointRoot) {
+        operation.new_partition.flags.append(PartitionFlag::Boot);
+        found_boot = true;
+      }
+    }
+  }
+  return found_boot;
+}
+
 AdvancedValidateStates AdvancedPartitionDelegate::validate() const {
   AdvancedValidateStates states;
   bool found_efi = false;

@@ -316,6 +316,20 @@ void PartitionFrame::onManualPartDone(bool ok,
 
 void PartitionFrame::onPrepareInstallFrameFinished() {
   const bool is_simple_mode = this->isSimpleMode();
+
+  // First, update boot flag.
+  bool found_boot = false;
+  if (is_simple_mode) {
+    found_boot = simple_delegate_->setBootFlag();
+  } else {
+    found_boot = advanced_delegate_->setBootFlag();
+  }
+  if (!found_boot) {
+    qCritical() << "No boot partition found, we shall never reach here!";
+    return;
+  }
+
+  // Get operation list.
   OperationList operations;
   if (is_simple_mode) {
     operations = simple_delegate_->operations();

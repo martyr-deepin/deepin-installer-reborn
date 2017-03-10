@@ -61,6 +61,11 @@ class AdvancedPartitionDelegate : public QObject {
 
   const OperationList& operations() const { return operations_; };
 
+  // Set boot flag of root partition. Call this before operations() and after
+  // validate().
+  // Returns false if no appropriate partition can be set as bootable.
+  bool setBootFlag();
+
   // Check whether partition operations are appropriate.
   //  * / partition is set and large enough;
   //  * An EFI partition exists if EFI mode is on;
