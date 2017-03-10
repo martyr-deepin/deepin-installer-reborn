@@ -26,8 +26,10 @@ Homepage: http://www.deepin.org
 Package: deepin-installer-reborn
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
+    btrfs-progs,
     dosfstools,
     e2fsprogs,
+    jfsutils,
     mtools,
     ntfs-3g,
     os-prober,
@@ -37,6 +39,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
     udev,
     util-linux,
     x11-xserver-utils,
+    xfsprogs,
     xkb-data,
 Description: Reborn version of deepin installer
  New version of deepin-installer, rewritten with Qt5.

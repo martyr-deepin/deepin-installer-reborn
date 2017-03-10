@@ -23,8 +23,10 @@ sudo aptitude install \
     qtbase5-dev \
     qttools5-dev-tools \
     zlib1g-dev \
+    btrfs-progs \
     dosfstools \
     e2fsprogs \
+    jfsutils \
     mtools \
     ntfs-3g \
     os-prober \
@@ -34,4 +36,5 @@ sudo aptitude install \
     udev \
     util-linux \
     x11-xserver-utils \
+    xfsprogs \
     xkb-data
