@@ -182,7 +182,7 @@ bool SystemInfoFormFrame::validateUsername(QString& msg) {
     }
     case ValidateUsernameState::EmptyError:  // fall through
     case ValidateUsernameState::InvalidCharError: {
-      msg = tr("Username must contains English letters (case-sensitive), "
+      msg = tr("Username must contain English letters (case-sensitive), "
                "numbers or special symbols(_-)");
       return false;
     }
