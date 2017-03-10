@@ -271,7 +271,7 @@ void SimplePartitionFrame::repaintDevices() {
   int row = 0, column = 0;
   for (const Device& device : delegate_->virtual_devices()) {
     DeviceModelLabel* device_model_label = new DeviceModelLabel();
-    device_model_label->setText(GetDeviceModelAndCap(device));
+    device_model_label->setText(GetDeviceModelCapAndPath(device));
     device_model_label->setFixedSize(kWindowWidth, 20);
 
     // Make sure that widgets in grid are left-aligned.

@@ -213,7 +213,7 @@ void AdvancedPartitionFrame::repaintDevices() {
   for (const Device& device : delegate_->virtual_devices()) {
     QLabel* model_label = new QLabel();
     model_label->setObjectName("model_label");
-    model_label->setText(GetDeviceModelAndCap(device));
+    model_label->setText(GetDeviceModelCapAndPath(device));
     model_label->setContentsMargins(15, 10, 0, 5);
     partition_layout_->addWidget(model_label, 0, Qt::AlignLeft);
     for (const Partition& partition : device.partitions) {
