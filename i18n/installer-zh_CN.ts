@@ -950,7 +950,7 @@
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="185"/>
-        <source>Username must contains English letters (case-sensitive), numbers or special symbols(_-)</source>
+        <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

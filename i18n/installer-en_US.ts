@@ -761,11 +761,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="185"/>
-        <source>Username must contains English letters (case-sensitive), numbers or special symbols(_-)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="191"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation type="unfinished"></translation>
@@ -805,6 +800,11 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="58"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="146"/>
         <source>Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="185"/>
+        <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
