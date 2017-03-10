@@ -273,12 +273,14 @@ AdvancedValidateStates AdvancedPartitionDelegate::validate() const {
     states.append(AdvancedValidateState::RootMissing);
   }
 
+  // Check whether efi filesystem exists.
   if (!this->isMBRPreferred()) {
-    if (!found_efi) {
+    if (found_efi) {
+      if (!efi_large_enough) {
+        states.append(AdvancedValidateState::EfiTooSmall);
+      }
+    } else {
       states.append(AdvancedValidateState::EfiMissing);
-    }
-    if (!efi_large_enough) {
-      states.append(AdvancedValidateState::EfiTooSmall);
     }
   }
 
