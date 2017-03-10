@@ -5,6 +5,7 @@
 #ifndef INSTALLER_UI_XRANDR_XRANDR_WRAPPER_H
 #define INSTALLER_UI_XRANDR_XRANDR_WRAPPER_H
 
+#include <QDebug>
 #include <QVector>
 
 namespace installer {
@@ -16,6 +17,7 @@ struct ConnectedOutput {
   int height = 0;
   bool primary = false;  // true if current output is primary one.
 };
+QDebug& operator<<(QDebug& debug, const ConnectedOutput& output);
 typedef QVector<ConnectedOutput> ConnectedOutputs;
 
 // Get connected |outputs|, returns false if failed.

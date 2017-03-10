@@ -40,9 +40,7 @@ void InitCrtc(crtc_t* crtc) {
 
 // Release memories used by crtc->outputs.
 void DestroyCrtc(crtc_t* crtc) {
-  fprintf(stdout, "DestroyCrtc: %p\n", crtc);
   if (crtc && crtc->noutput > 0) {
-    fprintf(stdout, "free crtc->output: %p\n", crtc->outputs);
     free(crtc->outputs);
     crtc->outputs = NULL;
     crtc->noutput = 0;
@@ -51,9 +49,7 @@ void DestroyCrtc(crtc_t* crtc) {
 
 // Destroy crtc_t objects created in GetCrtcs() method.
 void DestroyCrtcs(crtc_t** crtcs, int& num_crtcs) {
-  fprintf(stdout, "DestroyCrtcs(), %p, %d\n", *crtcs, num_crtcs);
   if (*crtcs == NULL) {
-    fprintf(stdout, "DestroyCrtcs() crtcs is null\n");
     return;
   }
 
@@ -125,7 +121,6 @@ bool GetCrtcs(Display* dpy, XRRScreenResources* resources,
 // Apply changed defined in crtc list.
 bool ApplyCrtcs(Display* dpy, XRRScreenResources* resources,
                 crtc_t* crtcs, int num_crtcs) {
-  fprintf(stdout, "ApplyCrtc()\n");
   Q_ASSERT(dpy != NULL);
   Q_ASSERT(resources != NULL);
   Q_ASSERT(crtcs != NULL);
@@ -379,7 +374,7 @@ void GetPrimaryOutputIndex(Display* dpy, XRRScreenResources* resources,
 // Switch to mirror mode.
 // Checkout number of connected outputs before calling this method.
 bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
-                  crtc_t* crtcs, int num_crtcs) {
+                  Window root_window, crtc_t* crtcs, int num_crtcs) {
   fprintf(stdout, "ToMirrorMode()\n");
   Q_ASSERT(dpy != NULL);
   Q_ASSERT(resources != NULL);
@@ -401,11 +396,24 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
     return false;
   }
 
+  RROutput primary_output = None;
+
   // Update crtcs.
   for (int i = 0; i < num_crtcs; ++i) {
     crtc_t* crtc = crtcs + i;
     if (crtc->noutput <= 0) {
       continue;
+    }
+
+    // Select primary output.
+    for (int j = 0; primary_output == None && j < crtc->noutput; ++j) {
+      RROutput output = crtc->outputs[j];
+      const XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources,
+                                                          output);
+      if (output_info != NULL && output_info->connection == RR_Connected) {
+        fprintf(stdout, "Select %s as primary output\n", output_info->name);
+        primary_output = output;
+      }
     }
 
     crtc->mode = best_mode;
@@ -415,6 +423,10 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
     crtc->width = best_mode_info->width;
     crtc->height = best_mode_info->height;
   }
+
+  // Set primary output.
+  fprintf(stdout, "ToMirrorMode() set primary output: %ld\n", primary_output);
+  XRRSetOutputPrimary(dpy, root_window, primary_output);
 
   return ApplyCrtcs(dpy, resources, crtcs, num_crtcs);
 }
@@ -446,14 +458,15 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
   fprintf(stdout, "connected: %d, primary: %d\n",
           connected_outputs, primary_index);
 
-  // If primary output is the last connected output, go to mirror mode.
+  // If primary output is the last connected output, and there are multiple
+  // connected outputs, go to mirror mode.
   if ((connected_outputs > 1) &&
       (primary_index > -1) &&
       (primary_index + 1 == connected_outputs) &&
       (!IsMirrorMode(dpy, resources))) {
     fprintf(stdout, "Switch to mirror mode, %d, %d\n",
             primary_index, connected_outputs);
-    return ToMirrorMode(dpy, resources, crtcs, num_crtcs);
+    return ToMirrorMode(dpy, resources, root_window, crtcs, num_crtcs);
   }
 
   // Index of output in connected output list to be set as primary one.
@@ -487,6 +500,7 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
 
     // Set primary.
     if (connected_outputs2 == next_primary_index) {
+      fprintf(stdout, "Set primary: %s\n", output_info->name);
       XRRSetOutputPrimary(dpy, root_window, output);
     }
     connected_outputs2 ++;
@@ -521,6 +535,17 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
 }
 
 }  // namespace
+
+QDebug& operator<<(QDebug& debug, const ConnectedOutput& output) {
+  debug << "Output: {"
+        << "x:" << output.x
+        << "y:" << output.y
+        << "width:" << output.width
+        << "height:" << output.height
+        << "primary:" << output.primary
+        << "}";
+  return debug;
+}
 
 bool GetConnectedOutputs(ConnectedOutputs& outputs) {
   Display* dpy = NULL;
@@ -634,7 +659,7 @@ bool SwitchToMirrorMode() {
     return false;
   }
 
-  if (!ToMirrorMode(dpy, resources, crtcs, num_crtcs)) {
+  if (!ToMirrorMode(dpy, resources, root_window, crtcs, num_crtcs)) {
     fprintf(stderr, "ToMirrorMode() failed\n");
   }
 

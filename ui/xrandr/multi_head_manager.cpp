@@ -37,6 +37,7 @@ MultiHeadManager::~MultiHeadManager() {
 }
 
 void MultiHeadManager::switchXRandRMode() {
+  qDebug() << "MultiHeadManager switchXRandRMode()";
   SwitchMode();
 }
 
@@ -52,13 +53,16 @@ void MultiHeadManager::updateWallpaper() {
     }
     wallpaper_items_.clear();
 
+    qDebug() << "connected outputs:" << outputs;
+
     int primary_index = -1;
     for (int i = 0; i < outputs.length(); ++i) {
       const ConnectedOutput& output = outputs.at(i);
       const QRect geometry(output.x, output.y, output.width, output.height);
-      WallpaperItem* item = new WallpaperItem(geometry);
-      wallpaper_items_.append(item);
-      item->show();
+      qDebug() << "wallpaper item:" << geometry;
+//      WallpaperItem* item = new WallpaperItem(geometry);
+//      wallpaper_items_.append(item);
+//      item->show();
       if (output.primary) {
         primary_index = i;
       }
