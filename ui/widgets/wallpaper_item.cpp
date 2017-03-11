@@ -35,7 +35,6 @@ void WallpaperItem::initUI() {
   const QPixmap pixmap = orig_pixmap.scaled(window_size,
                                             Qt::KeepAspectRatioByExpanding);
   this->setPixmap(pixmap);
-  qDebug() << "move wallpaper to:" << background_geometry_;
 }
 
 }  // namespace installer
