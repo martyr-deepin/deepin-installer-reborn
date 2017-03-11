@@ -153,7 +153,7 @@ bool ApplyCrtcs(Display* dpy, XRRScreenResources* resources,
 // A helper function to get x11 display and randr resources.
 // Returns false if any of these objects are not initialized successfully.
 // Remember to release |resources| and close |dpy| after using them.
-bool GetRRResources(Display** dpy, int& screen, Window& root_window,
+bool GetRRResources(Display** dpy, Window& root_window,
                     XRRScreenResources** resources) {
   fprintf(stdout, "GetRRResources()\n");
   Q_ASSERT(dpy != NULL);
@@ -167,7 +167,7 @@ bool GetRRResources(Display** dpy, int& screen, Window& root_window,
   }
 
   // Get default screen.
-  screen = DefaultScreen(*dpy);
+  const int screen = DefaultScreen(*dpy);
   if (screen < 0 || screen >= ScreenCount(*dpy)) {
     XCloseDisplay(*dpy);
 
@@ -265,7 +265,6 @@ bool IsMirrorMode(Display* dpy, XRRScreenResources* resources) {
       height = crtc_info->height;
       x = crtc_info->x;
       y = crtc_info->y;
-      XRRFreeCrtcInfo(crtc_info);
     } else {
       if (width != crtc_info->width ||
           height != crtc_info->height ||
@@ -275,6 +274,8 @@ bool IsMirrorMode(Display* dpy, XRRScreenResources* resources) {
         return false;
       }
     }
+
+    XRRFreeCrtcInfo(crtc_info);
   }
 
   return true;
@@ -293,6 +294,43 @@ XRRModeInfo* GetModeInfoById(Display* dpy, XRRScreenResources* resources,
     }
   }
   return NULL;
+}
+
+// Get preferred mode for |output_info|.
+XRRModeInfo* GetPreferModeInfo(Display* dpy, XRRScreenResources* resources,
+                               XRROutputInfo* output_info) {
+  Q_ASSERT(dpy != NULL);
+  Q_ASSERT(resources != NULL);
+  Q_ASSERT(output_info != NULL);
+
+  XRRModeInfo* best = NULL;
+  int bestDist = 0;
+  int screen = 0;
+
+  for (int m = 0; m < output_info->nmode; m++) {
+    XRRModeInfo* mode_info = GetModeInfoById(dpy, resources,
+                                             output_info->modes[m]);
+    int dist = 0;
+
+    if (m < output_info->npreferred) {
+      dist = 0;
+    } else if (output_info->mm_height) {
+      dist = int(1000 * DisplayHeight(dpy, screen) / DisplayHeightMM(dpy, screen) -
+              1000 * mode_info->height / output_info->mm_height);
+    } else {
+      dist = DisplayHeight(dpy, screen) - mode_info->height;
+    }
+
+    if (dist < 0) {
+      dist = -dist;
+    }
+    if (!best || dist < bestDist) {
+      best = mode_info;
+      bestDist = dist;
+    }
+  }
+
+  return best;
 }
 
 // Walk through connected outputs to get best same mode supported by all the
@@ -404,8 +442,8 @@ bool UpdateScreenSize(Display* dpy, Window root_window,
       continue;
     }
     // Extended horizontally.
-    fb_width = fb_width + crtc->width;
-    fb_height = qMax(fb_height, crtc->height);
+    fb_width = qMax(fb_width, crtc->x + crtc->width);
+    fb_height = qMax(fb_height, crtc->y + crtc->height);
   }
 
   // Get default screen.
@@ -430,8 +468,9 @@ bool UpdateScreenSize(Display* dpy, Window root_window,
   fprintf(stdout, "Set screen size: %d, %d, %d, %d\n",
           fb_width, fb_height, fb_width_mm, fb_height_mm);
 
-  XRRSetScreenSize(dpy, root_window, fb_width, fb_height,
-                   fb_width_mm, fb_height_mm);
+//  XRRSetScreenSize(dpy, root_window, fb_width, fb_height,
+//                   fb_width_mm, fb_height_mm);
+  Q_UNUSED(root_window);
 
   return true;
 }
@@ -574,9 +613,10 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
     }
     connected_outputs2 ++;
 
-    XRRModeInfo* prefer = resources->modes + output_info->npreferred - 1;
-    fprintf(stdout, "preferred mode: %s, id: %ld\n", prefer->name,
-            prefer->id);
+    XRRModeInfo* prefer = GetPreferModeInfo(dpy, resources, output_info);
+    Q_ASSERT(prefer != NULL);
+    fprintf(stdout, "preferred mode: %s, id: %d\n",
+            prefer->name, output_info->npreferred);
 
     // Use preferred mode.
     for (int crtc_index = 0; crtc_index < num_crtcs; ++crtc_index) {
@@ -624,10 +664,9 @@ QDebug& operator<<(QDebug& debug, const ConnectedOutput& output) {
 
 bool GetConnectedOutputs(ConnectedOutputs& outputs) {
   Display* dpy = NULL;
-  int screen = 0;
   Window root_window;
   XRRScreenResources* resources = NULL;
-  if (!GetRRResources(&dpy, screen, root_window, &resources)) {
+  if (!GetRRResources(&dpy, root_window, &resources)) {
     return false;
   }
 
@@ -670,10 +709,9 @@ bool GetConnectedOutputs(ConnectedOutputs& outputs) {
 bool SwitchMode() {
   fprintf(stdout, "SwitchMode()\n");
   Display* dpy = NULL;
-  int screen = 0;
   Window root_window;
   XRRScreenResources* resources = NULL;
-  if (!GetRRResources(&dpy, screen, root_window, &resources)) {
+  if (!GetRRResources(&dpy, root_window, &resources)) {
     return false;
   }
 
@@ -702,18 +740,18 @@ bool SwitchMode() {
 bool SwitchToMirrorMode() {
   fprintf(stdout, "SwitchToMirrorMode()\n");
   Display* dpy = NULL;
-  int screen = 0;
   Window root_window;
   XRRScreenResources* resources = NULL;
-  if (!GetRRResources(&dpy, screen, root_window, &resources)) {
+  if (!GetRRResources(&dpy, root_window, &resources)) {
     return false;
   }
 
   // Check number of outputs.
   if (IsOnlyOneOutput(dpy, resources)) {
-    fprintf(stdout, "only one output\n");
     XRRFreeScreenResources(resources);
     XCloseDisplay(dpy);
+
+    fprintf(stdout, "only one output\n");
     return true;
   }
 
