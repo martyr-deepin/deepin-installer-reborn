@@ -97,6 +97,12 @@ bool GetCrtcs(Display* dpy, XRRScreenResources* resources,
     crtc->height = rr_crtc_info->height;
     crtc->mode = rr_crtc_info->mode;
 
+    // Print output list.
+    fprintf(stdout, "GetCrtcs() output list\n");
+    for (int k = 0; k < rr_crtc_info->noutput; ++k) {
+      fprintf(stdout, "  i: %d, %ld\n", k, rr_crtc_info->outputs[k]);
+    }
+
     crtc->noutput = rr_crtc_info->noutput;
 
     if (crtc->noutput > 0) {
@@ -111,7 +117,8 @@ bool GetCrtcs(Display* dpy, XRRScreenResources* resources,
       }
 
       // Copy output list.
-      memcpy(crtc->outputs, rr_crtc_info->outputs, (size_t)crtc->noutput);
+      memcpy(crtc->outputs, rr_crtc_info->outputs,
+             sizeof(RROutput) * crtc->noutput);
     }
     XRRFreeCrtcInfo(rr_crtc_info);
   }
@@ -122,6 +129,7 @@ bool GetCrtcs(Display* dpy, XRRScreenResources* resources,
 // Apply changed defined in crtc list.
 bool ApplyCrtcs(Display* dpy, XRRScreenResources* resources,
                 crtc_t* crtcs, int num_crtcs) {
+  fprintf(stdout, "ApplyCrtcs()\n");
   Q_ASSERT(dpy != NULL);
   Q_ASSERT(resources != NULL);
   Q_ASSERT(crtcs != NULL);
@@ -134,6 +142,8 @@ bool ApplyCrtcs(Display* dpy, XRRScreenResources* resources,
     }
     XGrabServer(dpy);
 
+    fprintf(stdout, "set crtc config(), i: %d, id: %ld, outputs: %d \n",
+            i, crtc->id, crtc->noutput);
     Status status = XRRSetCrtcConfig(dpy, resources, crtc->id,
                                      CurrentTime, crtc->x, crtc->y,
                                      crtc->mode, crtc->rotation,
@@ -488,6 +498,43 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
   // Update crtcs.
   // Apply crtcs.
 
+  // Print output list.
+  fprintf(stdout, "resources output list\n");
+  for (int i = 0; i < resources->noutput; ++i) {
+    RROutput output = resources->outputs[i];
+    fprintf(stdout, "output id: %ld  ", output);
+    XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
+    if (output_info) {
+      fprintf(stdout, " %s, %s",
+              output_info->name,
+              (output_info->connection == RR_Connected) ?
+              "connected" : "disconnected");
+    }
+    fprintf(stdout, "\n");
+    XRRFreeOutputInfo(output_info);
+  }
+
+  fprintf(stdout, "crtc output list\n");
+  for (int i = 0; i < num_crtcs; ++i) {
+    crtc_t* crtc = crtcs + i;
+    if (crtc == NULL) {
+      fprintf(stderr, "crtc at %d is null\n", i);
+      continue;
+    }
+    for (int j = 0; j < crtc->noutput; ++j) {
+      RROutput output = crtc->outputs[j];
+      fprintf(stdout, "output id: %ld\n", output);
+//      XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
+//      if (output_info) {
+//        fprintf(stdout, "output: %s, %s\n",
+//                output_info->name,
+//                (output_info->connection == RR_Connected) ?
+//                "connected" : "disconnected");
+//      }
+//      XRRFreeOutputInfo(output_info);
+    }
+  }
+
   RRMode best_mode = GetBestSameRRMode(dpy, resources);
   if (best_mode == None) {
     fprintf(stderr, "Failed to get same mode for outputs, do nothing.\n");
@@ -499,6 +546,7 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
     fprintf(stderr, "failed to get best mode info\n");
     return false;
   }
+  fprintf(stdout, "best mode info: %s\n", best_mode_info->name);
 
   RROutput primary_output = None;
 
@@ -512,7 +560,9 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
     // Select primary output.
     for (int j = 0; primary_output == None && j < crtc->noutput; ++j) {
       RROutput output = crtc->outputs[j];
+      fprintf(stdout, "output: %ld, j: %d\n", output, j);
       XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
+      fprintf(stdout, "output info: %p\n", output_info);
       if (output_info != NULL && output_info->connection == RR_Connected) {
         fprintf(stdout, "Select %s as primary output\n", output_info->name);
         primary_output = output;
