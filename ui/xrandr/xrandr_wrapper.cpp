@@ -214,6 +214,7 @@ bool IsOnlyOneOutput(Display* dpy, XRRScreenResources* resources) {
     if (output_info && (output_info->connection == RR_Connected)) {
       connected_outputs ++;
     }
+    XRRFreeOutputInfo(output_info);
   }
   return connected_outputs <= 1;
 }
@@ -236,6 +237,7 @@ bool IsMirrorMode(Display* dpy, XRRScreenResources* resources) {
     XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources,
                                                   resources->outputs[i]);
     if (output_info == NULL || output_info->connection != RR_Connected) {
+      XRRFreeOutputInfo(output_info);
       continue;
     }
 
@@ -250,6 +252,7 @@ bool IsMirrorMode(Display* dpy, XRRScreenResources* resources) {
     fprintf(stdout, "\n");
 
     XRRCrtcInfo* crtc_info = XRRGetCrtcInfo(dpy, resources, output_info->crtc);
+    XRRFreeOutputInfo(output_info);
     if (crtc_info == NULL) {
       fprintf(stderr, "crtc_info is null\n");
       continue;
@@ -300,12 +303,15 @@ RRMode GetBestSameRRMode(Display* dpy, XRRScreenResources* resources) {
                                                     resources->outputs[i]);
     if (output_info_i == NULL || output_info_i->connection != RR_Connected) {
       // Ignores disconnected outputs.
+      XRRFreeOutputInfo(output_info_i);
       continue;
     }
+
     for (int j = i + 1; j < resources->noutput; ++j) {
       XRROutputInfo* output_info_j = XRRGetOutputInfo(dpy, resources,
                                                       resources->outputs[j]);
       if (output_info_j == NULL || output_info_j->connection != RR_Connected) {
+        XRRFreeOutputInfo(output_info_j);
         // Ignores disconnected outputs.
         continue;
       }
@@ -336,11 +342,17 @@ RRMode GetBestSameRRMode(Display* dpy, XRRScreenResources* resources) {
                     mode_info->id, mode_info->name,
                     mode_info->width, mode_info->height);
 
+            // Release all output_info.
+            XRRFreeOutputInfo(output_info_i);
+            XRRFreeOutputInfo(output_info_j);
+
             return mode_info->id;
           }
         }
       }
     }
+
+    XRRFreeOutputInfo(output_info_i);
   }
 
   return None;
@@ -360,13 +372,15 @@ void GetPrimaryOutputIndex(Display* dpy, XRRScreenResources* resources,
   for (int i = 0; i < resources->noutput; ++i) {
     XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources,
                                                   resources->outputs[i]);
-    if (output_info == NULL || output_info->connection != RR_Connected) {
-      continue;
+    if (output_info != NULL && output_info->connection == RR_Connected) {
+      // Check primary output.
+      if (primary_output == resources->outputs[i]) {
+        *primary_index = *connected_outputs;
+      }
+
+      (*connected_outputs) ++;
     }
-    if (primary_output == resources->outputs[i]) {
-      *primary_index = *connected_outputs;
-    }
-    (*connected_outputs) ++;
+    XRRFreeOutputInfo(output_info);
   }
 }
 
@@ -456,12 +470,12 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
     // Select primary output.
     for (int j = 0; primary_output == None && j < crtc->noutput; ++j) {
       RROutput output = crtc->outputs[j];
-      const XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources,
-                                                          output);
+      XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
       if (output_info != NULL && output_info->connection == RR_Connected) {
         fprintf(stdout, "Select %s as primary output\n", output_info->name);
         primary_output = output;
       }
+      XRRFreeOutputInfo(output_info);
     }
 
     crtc->mode = best_mode;
@@ -546,6 +560,7 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
     const RROutput output = resources->outputs[output_index];
     XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
     if (output_info == NULL || output_info->connection != RR_Connected) {
+      XRRFreeOutputInfo(output_info);
       continue;
     }
 
@@ -576,6 +591,9 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
         x = crtc->width + x;
       }
     }
+
+    // Release output_info.
+    XRRFreeOutputInfo(output_info);
   }
 
   fprintf(stdout, "connected outputs: %d, outputs2: %d\n",
@@ -617,6 +635,7 @@ bool GetConnectedOutputs(ConnectedOutputs& outputs) {
     const RROutput output_id = resources->outputs[i];
     XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output_id);
     if (output_info == NULL || output_info->connection != RR_Connected) {
+      XRRFreeOutputInfo(output_info);
       continue;
     }
     ConnectedOutput output_obj = {};
@@ -626,6 +645,8 @@ bool GetConnectedOutputs(ConnectedOutputs& outputs) {
 
     // Update connected output properties.
     const RRCrtc crtc = output_info->crtc;
+    // Release output_info.
+    XRRFreeOutputInfo(output_info);
     XRRCrtcInfo* crtc_info = XRRGetCrtcInfo(dpy, resources, crtc);
     if (crtc_info == NULL) {
       continue;
