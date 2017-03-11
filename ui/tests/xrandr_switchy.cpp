@@ -7,6 +7,6 @@
 // XRandR Switchy
 
 int main(void) {
-  return (installer::SwitchToMirrorMode() ? 0 : 1);
-//  return (installer::SwitchMode() ? 0 : 1);
+//  return (installer::SwitchToMirrorMode() ? 0 : 1);
+  return (installer::SwitchMode() ? 0 : 1);
 }

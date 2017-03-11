@@ -142,8 +142,8 @@ bool ApplyCrtcs(Display* dpy, XRRScreenResources* resources,
     }
     XGrabServer(dpy);
 
-    fprintf(stdout, "set crtc config(), i: %d, id: %ld, outputs: %d \n",
-            i, crtc->id, crtc->noutput);
+    fprintf(stdout, "set crtc config(), %d*%d+%d+%d\n",
+            crtc->x, crtc->y, crtc->width, crtc->height);
     Status status = XRRSetCrtcConfig(dpy, resources, crtc->id,
                                      CurrentTime, crtc->x, crtc->y,
                                      crtc->mode, crtc->rotation,
@@ -157,6 +157,7 @@ bool ApplyCrtcs(Display* dpy, XRRScreenResources* resources,
     XUngrabServer(dpy);
   }
 
+  fprintf(stdout, "ApplyCrtcs() result: %d\n", ok);
   return ok;
 }
 
@@ -439,6 +440,7 @@ void GetPrimaryOutputIndex(Display* dpy, XRRScreenResources* resources,
 bool UpdateScreenSize(Display* dpy, Window root_window,
                       XRRScreenResources* resources,
                       crtc_t* crtcs, int num_crtcs) {
+  fprintf(stdout, "UpdateScreenSize()\n");
   Q_ASSERT(dpy != NULL);
   Q_ASSERT(resources != NULL);
   Q_ASSERT(crtcs != NULL);
@@ -467,20 +469,27 @@ bool UpdateScreenSize(Display* dpy, Window root_window,
   // Compute physical screen size.
   if (fb_width == DisplayWidth(dpy, screen) &&
       fb_height == DisplayHeight(dpy, screen)) {
+    fprintf(stdout, "No need to update screen size\n");
     return true;
   }
-  const double delta = 25.4;
-  double dpi = (delta * DisplayHeight (dpy, screen)) /
-               DisplayHeightMM(dpy, screen);
-  const int fb_width_mm = int((delta * fb_width) / dpi);
-  const int fb_height_mm = int((delta * fb_height) / dpi);
+//  const double delta = 25.4;
+//  double dpi = (delta * DisplayHeight (dpy, screen)) /
+//               DisplayHeightMM(dpy, screen);
+//  const int fb_width_mm = int((delta * fb_width) / dpi);
+//  const int fb_height_mm = int((delta * fb_height) / dpi);
+  // From xfce4-display.
+  // The 'physical size' of an X screen is meaningless if that screen
+  // can consist of many monitors. So just pick a size that make the
+  // dpi 96.
+  // Firefox and Evince apparently believe what X tells them.
+  const int fb_width_mm = int(fb_width / 96.0 * 25.4 + 0.5);
+  const int fb_height_mm = int(fb_height / 96.0 * 25.4 + 0.5);
 
   fprintf(stdout, "Set screen size: %d, %d, %d, %d\n",
           fb_width, fb_height, fb_width_mm, fb_height_mm);
 
-//  XRRSetScreenSize(dpy, root_window, fb_width, fb_height,
-//                   fb_width_mm, fb_height_mm);
-  Q_UNUSED(root_window);
+  XRRSetScreenSize(dpy, root_window, fb_width, fb_height,
+                   fb_width_mm, fb_height_mm);
 
   return true;
 }
@@ -497,43 +506,6 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
   // Get mode with same size of connected outputs.
   // Update crtcs.
   // Apply crtcs.
-
-  // Print output list.
-  fprintf(stdout, "resources output list\n");
-  for (int i = 0; i < resources->noutput; ++i) {
-    RROutput output = resources->outputs[i];
-    fprintf(stdout, "output id: %ld  ", output);
-    XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
-    if (output_info) {
-      fprintf(stdout, " %s, %s",
-              output_info->name,
-              (output_info->connection == RR_Connected) ?
-              "connected" : "disconnected");
-    }
-    fprintf(stdout, "\n");
-    XRRFreeOutputInfo(output_info);
-  }
-
-  fprintf(stdout, "crtc output list\n");
-  for (int i = 0; i < num_crtcs; ++i) {
-    crtc_t* crtc = crtcs + i;
-    if (crtc == NULL) {
-      fprintf(stderr, "crtc at %d is null\n", i);
-      continue;
-    }
-    for (int j = 0; j < crtc->noutput; ++j) {
-      RROutput output = crtc->outputs[j];
-      fprintf(stdout, "output id: %ld\n", output);
-//      XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
-//      if (output_info) {
-//        fprintf(stdout, "output: %s, %s\n",
-//                output_info->name,
-//                (output_info->connection == RR_Connected) ?
-//                "connected" : "disconnected");
-//      }
-//      XRRFreeOutputInfo(output_info);
-    }
-  }
 
   RRMode best_mode = GetBestSameRRMode(dpy, resources);
   if (best_mode == None) {
@@ -582,10 +554,13 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
   fprintf(stdout, "ToMirrorMode() set primary output: %ld\n", primary_output);
   XRRSetOutputPrimary(dpy, root_window, primary_output);
 
-  // Update screen size.
-  UpdateScreenSize(dpy, root_window, resources, crtcs, num_crtcs);
+  // Update crtc first.
+  if (!ApplyCrtcs(dpy, resources, crtcs, num_crtcs)) {
+    return false;
+  }
 
-  return ApplyCrtcs(dpy, resources, crtcs, num_crtcs);
+  // Update screen size.
+  return UpdateScreenSize(dpy, root_window, resources, crtcs, num_crtcs);
 }
 
 // Switch to next mode.
@@ -693,10 +668,13 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
           connected_outputs, connected_outputs2);
   Q_ASSERT(connected_outputs == connected_outputs2);
 
-  // Update screen size.
-  UpdateScreenSize(dpy, root_window, resources, crtcs, num_crtcs);
+  // Update crtc first.
+  if (!ApplyCrtcs(dpy, resources, crtcs, num_crtcs)) {
+    return false;
+  }
 
-  return ApplyCrtcs(dpy, resources, crtcs, num_crtcs);
+  // Update screen size.
+  return UpdateScreenSize(dpy, root_window, resources, crtcs, num_crtcs);
 }
 
 }  // namespace
