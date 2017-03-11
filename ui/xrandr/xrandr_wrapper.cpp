@@ -113,6 +113,7 @@ bool GetCrtcs(Display* dpy, XRRScreenResources* resources,
       // Copy output list.
       memcpy(crtc->outputs, rr_crtc_info->outputs, (size_t)crtc->noutput);
     }
+    XRRFreeCrtcInfo(rr_crtc_info);
   }
 
   return true;
@@ -264,11 +265,13 @@ bool IsMirrorMode(Display* dpy, XRRScreenResources* resources) {
       height = crtc_info->height;
       x = crtc_info->x;
       y = crtc_info->y;
+      XRRFreeCrtcInfo(crtc_info);
     } else {
       if (width != crtc_info->width ||
           height != crtc_info->height ||
           x != crtc_info->x ||
           y != crtc_info->y) {
+        XRRFreeCrtcInfo(crtc_info);
         return false;
       }
     }
@@ -656,6 +659,7 @@ bool GetConnectedOutputs(ConnectedOutputs& outputs) {
     output_obj.width = crtc_info->width;
     output_obj.height = crtc_info->height;
     outputs.append(output_obj);
+    XRRFreeCrtcInfo(crtc_info);
   }
 
   XRRFreeScreenResources(resources);
