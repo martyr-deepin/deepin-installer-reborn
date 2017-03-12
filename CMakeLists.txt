@@ -489,24 +489,12 @@ add_executable(deepin-installer-oem
                app/deepin_installer_oem.cpp
 
                service/settings_name.h
-               service/system_language.cpp
-               service/system_language.h
 
-               ui/oem/language_list_model.cpp
-               ui/oem/language_list_model.h
                ui/oem/oem_window.cpp
                ui/oem/oem_window.h
-               ui/oem/settings_model.cpp
-               ui/oem/settings_model.h
-               ui/widgets/section_label.cpp
-               ui/widgets/section_label.h
 
                ${BASE_FILES}
                ${SYSINFO_FILES}
-               service/system_language.cpp
-               service/system_language.h
-
-               ui/styles/styles.qrc
                )
 target_link_libraries(deepin-installer-oem ${Qt_LIBS})
 

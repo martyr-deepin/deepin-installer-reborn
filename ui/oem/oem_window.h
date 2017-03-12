@@ -6,20 +6,8 @@
 #define INSTALLER_UI_OEM_OEM_WINDOW_H
 
 #include <QFrame>
-class QCheckBox;
-class QComboBox;
-class QLabel;
-class QLineEdit;
-class QListView;
-class QPushButton;
-class QScrollArea;
-class QSlider;
-class QStringListModel;
 
 namespace installer {
-
-class LanguageListModel;
-class SettingsModel;
 
 // Main window of deepin-installer-oem tool.
 class OemWindow : public QFrame {
@@ -31,19 +19,6 @@ class OemWindow : public QFrame {
  private:
   void initConnections();
   void initUI();
-
-  // Language selection
-  QComboBox* default_locale_combo_ = nullptr;
-  LanguageListModel* language_model_ = nullptr;
-
-  // Partition
-  QComboBox* default_fs_combo_ = nullptr;
-
-  QListView* category_view_ = nullptr;
-  QStringListModel* category_model_ = nullptr;
-  QScrollArea* right_scroll_area_ = nullptr;
-
-  SettingsModel* settings_model_ = nullptr;
 
  private slots:
   // Update tooltip of default_locale_combo_ when another language is selected.

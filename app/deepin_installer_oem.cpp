@@ -11,7 +11,7 @@
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
-  app.setApplicationDisplayName("Deepin Installer Oem");
+  app.setApplicationDisplayName("Deepin Installer Oem Tool");
   app.setApplicationName("deepin-installer-oem");
   app.setApplicationVersion(installer::kAppVersion);
   app.setOrganizationDomain(installer::kOrganizationDomain);
