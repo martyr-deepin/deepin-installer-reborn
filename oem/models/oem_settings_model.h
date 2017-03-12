@@ -11,6 +11,7 @@
 
 namespace installer {
 
+// Read and write oem settings.
 class OemSettingsModel : public QAbstractListModel {
   Q_OBJECT
  public:
@@ -21,6 +22,9 @@ class OemSettingsModel : public QAbstractListModel {
 
   // Write current settings to disk.
   bool dump();
+
+  // Get oem item at |index|.
+  OemSettingsItem getItem(const QModelIndex& index) const;
 
   // Load default settings from system, and then load settings in
   // $HOME/oem folder if exists.

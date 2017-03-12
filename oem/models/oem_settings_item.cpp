@@ -32,37 +32,37 @@ const char kMaximumField[] = "maximum";
 
 }  // namespace
 
-QDebug& operator<<(QDebug& debug, const OemSettingsType& type) {
+QString OemSettingsTypeToString(OemSettingsType type) {
   switch (type) {
     case OemSettingsType::Boolean: {
-      debug << kBooleanValue;
-      break;
+      return kBooleanValue;
     }
     case OemSettingsType::Enumeration: {
-      debug << kEnumValue;
-      break;
+      return kEnumValue;
     }
     case OemSettingsType::Folder: {
-      debug << kFolderValue;
-      break;
+      return kFolderValue;
     }
     case OemSettingsType::ImageFile: {
-      debug << kImageFileValue;
-      break;
+      return kImageFileValue;
     }
     case OemSettingsType::Integer: {
-      debug << kIntegerValue;
-      break;
+      return kIntegerValue;
     }
     case OemSettingsType::StringArray: {
-      debug << kStringArrayValue;
-      break;
+      return kStringArrayValue;
     }
     case OemSettingsType::String: {
-      debug << kStringValue;
-      break;
+      return kStringValue;
+    }
+    default: {
+      return "";
     }
   }
+}
+
+QDebug& operator<<(QDebug& debug, const OemSettingsType& type) {
+  debug << OemSettingsTypeToString(type);
   return debug;
 }
 

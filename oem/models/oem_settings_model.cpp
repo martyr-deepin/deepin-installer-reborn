@@ -57,6 +57,14 @@ bool OemSettingsModel::dump() {
   return DumpSettingsItems(items_, oem_json_file, settings_file);
 }
 
+OemSettingsItem OemSettingsModel::getItem(const QModelIndex& index) const {
+  if (index.isValid()) {
+    return items_.at(index.row());
+  } else {
+    return OemSettingsItem();
+  }
+}
+
 bool OemSettingsModel::load() {
   const QDir oem_dir(GetOemFolder());
   const QString oem_json_file = oem_dir.absoluteFilePath(kOemJsonFile);

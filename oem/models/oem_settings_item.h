@@ -25,6 +25,7 @@ enum class OemSettingsType {
   String,
   StringArray,
 };
+QString OemSettingsTypeToString(OemSettingsType type);
 QDebug& operator<<(QDebug& debug, const OemSettingsType& type);
 
 // A struct to represent each oem settings item.

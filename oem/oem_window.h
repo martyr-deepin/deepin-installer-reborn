@@ -10,6 +10,7 @@ class QListView;
 
 namespace installer {
 
+class OemSettingsItemView;
 class OemSettingsModel;
 
 // Main window of deepin-installer-oem tool.
@@ -25,10 +26,12 @@ class OemWindow : public QFrame {
 
   OemSettingsModel* model_ = nullptr;
   QListView* name_list_view_ = nullptr;
+  OemSettingsItemView* item_view_ = nullptr;
 
  private slots:
-  // Update tooltip of default_locale_combo_ when another language is selected.
-  void onDefaultLocaleIndexChanged(int index);
+  // Update item in item viewer when it is selected.
+  void onNameListViewSelected(const QModelIndex& current,
+                              const QModelIndex& previous);
 };
 
 }  // namespace installer

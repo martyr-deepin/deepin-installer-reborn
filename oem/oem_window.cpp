@@ -11,6 +11,7 @@
 #include <QSplitter>
 
 #include "oem/models/oem_settings_model.h"
+#include "oem/views/oem_settings_item_view.h"
 
 namespace installer {
 
@@ -27,17 +28,22 @@ OemWindow::OemWindow(QWidget* parent) : QFrame(parent) {
 }
 
 void OemWindow::initConnections() {
+  connect(name_list_view_->selectionModel(),
+          &QItemSelectionModel::currentChanged,
+          this, &OemWindow::onNameListViewSelected);
 }
 
 void OemWindow::initUI() {
-
   model_ = new OemSettingsModel(this);
   name_list_view_ = new QListView(this);
   name_list_view_->setModel(model_);
 
+  item_view_ = new OemSettingsItemView();
+
   QSplitter* splitter = new QSplitter(this);
   splitter->setContentsMargins(0, 0, 0, 0);
   splitter->addWidget(name_list_view_);
+  splitter->addWidget(item_view_);
 
   QHBoxLayout* layout = new QHBoxLayout(this);
   layout->setContentsMargins(0, 0, 0, 0);
@@ -49,8 +55,11 @@ void OemWindow::initUI() {
   this->resize(640, 480);
 }
 
-void OemWindow::onDefaultLocaleIndexChanged(int index) {
-  Q_UNUSED(index);
+void OemWindow::onNameListViewSelected(const QModelIndex& current,
+                                       const QModelIndex& previous) {
+  Q_UNUSED(previous);
+  const OemSettingsItem item = model_->getItem(current);
+  item_view_->updateItem(item);
 }
 
 }  // namespace installer

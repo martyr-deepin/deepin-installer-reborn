@@ -108,10 +108,13 @@ set(BASE_FILES
 
 set(OEM_FILES
 
+    oem/models/oem_settings_item.cpp
+    oem/models/oem_settings_item.h
     oem/models/oem_settings_model.cpp
     oem/models/oem_settings_model.h
-    oem/models/oem_settings_item.cpp
-    oem/models/oem_settings_item.h)
+    oem/views/oem_settings_item_view.cpp
+    oem/views/oem_settings_item_view.h
+    )
 
 set(PARTMAN_FILES
     partman/device.cpp
