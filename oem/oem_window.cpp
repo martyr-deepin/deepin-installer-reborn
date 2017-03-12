@@ -18,27 +18,29 @@
 #include <QStringListModel>
 #include <QVBoxLayout>
 
-#include "service/settings_name.h"
+#include "oem/models/oem_settings_model.h"
 
 namespace installer {
-
-namespace {
-// Add 20px between sections
-const int kSectionSpace = 20;
-
-}  // namespace
 
 OemWindow::OemWindow(QWidget* parent) : QFrame(parent) {
   this->setObjectName("oem_window");
 
   this->initUI();
   this->initConnections();
+
+  // TODO(xushaohua): catch exceptions.
+  if (!model_->load()) {
+    qCritical() << "model->load() failed";
+  }
 }
 
 void OemWindow::initConnections() {
 }
 
 void OemWindow::initUI() {
+
+  model_ = new OemSettingsModel();
+
   QSplitter* splitter = new QSplitter(this);
   splitter->setContentsMargins(0, 0, 0, 0);
 

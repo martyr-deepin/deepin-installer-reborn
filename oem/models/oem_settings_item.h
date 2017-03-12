@@ -74,19 +74,23 @@ struct OemSettingsItem {
 };
 QDebug& operator<<(QDebug& debug, const OemSettingsItem& item);
 typedef QVector<OemSettingsItem> OemSettingsItems;
+QDebug& operator<<(QDebug& debug, const OemSettingsItems& items);
 
-// Dump oem setting |items| to |oem_json_file|, and then save key-value pair
-// into |settings_ini_file|.
+// Dump oem setting |items| to disk.
+// |oem_json_file| is path to user customized oem file (value).
+// |settings_ini_file| is path to user customized settings file (value).
 bool DumpSettingsItems(const OemSettingsItems& items,
                        const QString& oem_json_file,
                        const QString& settings_ini_file);
 
-// Read oem settings item from |oem_json_file|. |oem_json_file| shall be
-// an absolute path to a json file.
-// |default_settings_ini_file| is absolute path to default value file used by
-// installer main program.
-OemSettingsItems LoadSettingsItems(const QString& oem_json_file,
-                                   const QString& default_settings_ini_file);
+// Read oem settings and update to |items|.
+// |default_oem_json_file| is path to system oem json file.
+// |oem_json_file| is path to user customized oem json file.
+// |default_settings_ini_file| is path to system settings ini file.
+bool LoadSettingsItems(OemSettingsItems& items,
+                       const QString& default_oem_json_file,
+                       const QString& oem_json_file,
+                       const QString& default_settings_ini_file);
 
 }  // namespace installer
 

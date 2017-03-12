@@ -9,6 +9,8 @@
 
 namespace installer {
 
+class OemSettingsModel;
+
 // Main window of deepin-installer-oem tool.
 class OemWindow : public QFrame {
   Q_OBJECT
@@ -19,6 +21,8 @@ class OemWindow : public QFrame {
  private:
   void initConnections();
   void initUI();
+
+  OemSettingsModel* model_ = nullptr;
 
  private slots:
   // Update tooltip of default_locale_combo_ when another language is selected.

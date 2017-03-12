@@ -5,17 +5,29 @@
 #ifndef INSTALLER_OEM_MODELS_OEM_SETTINGS_MODEL_H
 #define INSTALLER_OEM_MODELS_OEM_SETTINGS_MODEL_H
 
-#include <QAbstractItemModel>
+#include <QAbstractListModel>
+
+#include "oem/models/oem_settings_item.h"
 
 namespace installer {
 
-class OemSettingsModel : public QAbstractItemModel {
+class OemSettingsModel : public QAbstractListModel {
   Q_OBJECT
  public:
   explicit OemSettingsModel(QObject* parent = nullptr);
 
-  void load();
-  void save();
+  virtual QVariant data(const QModelIndex& index, int role) const override;
+  virtual int rowCount(const QModelIndex& parent) const override;
+
+  // Write current settings to disk.
+  bool dump();
+
+  // Load default settings from system, and then load settings in
+  // $HOME/oem folder if exists.
+  bool load();
+
+ private:
+  OemSettingsItems items_;
 };
 
 }  // namespace installer
