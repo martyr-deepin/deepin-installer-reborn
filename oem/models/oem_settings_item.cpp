@@ -4,7 +4,12 @@
 
 #include "oem/models/oem_settings_item.h"
 
-#include <QDebug>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QSettings>
+
+#include "base/file_util.h"
 
 namespace installer {
 
@@ -20,15 +25,47 @@ const char kStringValue[] = "String";
 
 }  // namespace
 
+QDebug& operator<<(QDebug& debug, const OemSettingsType& type) {
+  switch (type) {
+    case OemSettingsType::Boolean: {
+      debug << kBooleanValue;
+      break;
+    }
+    case OemSettingsType::Enumeration: {
+      debug << kEnumValue;
+      break;
+    }
+    case OemSettingsType::Folder: {
+      debug << kFolderValue;
+      break;
+    }
+    case OemSettingsType::ImageFile: {
+      debug << kImageFileValue;
+      break;
+    }
+    case OemSettingsType::Integer: {
+      debug << kIntegerValue;
+      break;
+    }
+    case OemSettingsType::StringArray: {
+      debug << kStringArrayValue;
+      break;
+    }
+    case OemSettingsType::String: {
+      debug << kStringValue;
+      break;
+    }
+  }
+  return debug;
+}
+
 OemSettingsItem::OemSettingsItem()
     : name_(),
       description_(),
       value_type_(OemSettingsType::String),
       default_value_(),
       value_(),
-      has_minimum_(false),
       minimum_(0),
-      has_maximum_(false),
       maximum_(0) {
 }
 
@@ -77,7 +114,7 @@ const QVariant& OemSettingsItem::default_value() const {
   return default_value_;
 }
 
-void OemSettingsItem::setDefaultValue(const QString& default_value) {
+void OemSettingsItem::setDefaultValue(const QVariant& default_value) {
   default_value_ = default_value;
 }
 
@@ -85,34 +122,86 @@ const QVariant& OemSettingsItem::value() const {
   return value_;
 }
 
-void OemSettingsItem::setValue(const QString& value) {
+void OemSettingsItem::setValue(const QVariant& value) {
   value_ = value;
-}
-
-bool OemSettingsItem::hasMinimum() const {
-  return has_minimum_;
 }
 
 qint64 OemSettingsItem::minimum() const {
   return minimum_;
 }
 
-void OemSettingsItem::setMinimum(const QString& minimum) {
-  has_minimum_ = true;
+void OemSettingsItem::setMinimum(const QVariant& minimum) {
   minimum_ = minimum.toLongLong();
-}
-
-bool OemSettingsItem::hasMaximum() const {
-  return has_maximum_;
 }
 
 qint64 OemSettingsItem::maximum() const {
   return maximum_;
 }
 
-void OemSettingsItem::setMaximum(const QString& maximum) {
-  has_maximum_ = true;
+void OemSettingsItem::setMaximum(const QVariant& maximum) {
   maximum_ = maximum.toLongLong();
+}
+
+QDebug& operator<<(QDebug& debug, const OemSettingsItem& item) {
+  debug << "OemItem {"
+        << "name:" << item.name()
+        << "description:" << item.description()
+        << "type:" << item.value_type()
+        << "default:" << item.default_value()
+        << "value:" << item.value()
+        << "minimum:" << item.minimum()
+        << "maximum:" << item.maximum()
+        << "}";
+  return debug;
+}
+
+bool DumpSettingsItems(const OemSettingsItems& items,
+                       const QString& oem_json_file,
+                       const QString& settings_ini_file) {
+  Q_UNUSED(items);
+  Q_UNUSED(oem_json_file);
+  Q_UNUSED(settings_ini_file);
+  return false;
+}
+
+OemSettingsItems LoadSettingsItems(const QString& oem_json_file,
+                                   const QString& default_settings_ini_file) {
+  Q_UNUSED(oem_json_file);
+
+  OemSettingsItems items;
+
+  const QString content(ReadFile(oem_json_file));
+  if (content.isEmpty()) {
+    qCritical() << "Failed to read oem item file:" << oem_json_file;
+    return items;
+  }
+
+  if (!QFile::exists(default_settings_ini_file)) {
+    qCritical() << "Failed to open default settings file:"
+                << default_settings_ini_file;
+    return items;
+  }
+
+  QSettings settings(default_settings_ini_file, QSettings::IniFormat);
+
+  const QJsonDocument doc = QJsonDocument::fromJson(content.toUtf8());
+  for (const QJsonValue json_item : doc.array()) {
+    const QJsonObject obj_item = json_item.toObject();
+    OemSettingsItem item;
+    item.setName(obj_item.value("name").toString());
+    item.setDescription(obj_item.value("description").toString());
+    item.setValueType(obj_item.value("type").toString());
+
+    // Read default value to ini file.
+    item.setDefaultValue(settings.value(item.name()));
+
+    item.setValue(obj_item.value("value"));
+    item.setMinimum(obj_item.value("minimum"));
+    item.setMaximum(obj_item.value("maximum"));
+    items.append(item);
+  }
+
+  return items;
 }
 
 }  // namespace installer
