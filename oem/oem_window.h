@@ -6,6 +6,7 @@
 #define INSTALLER_OEM_OEM_WINDOW_H
 
 #include <QFrame>
+class QListView;
 
 namespace installer {
 
@@ -23,6 +24,7 @@ class OemWindow : public QFrame {
   void initUI();
 
   OemSettingsModel* model_ = nullptr;
+  QListView* name_list_view_ = nullptr;
 
  private slots:
   // Update tooltip of default_locale_combo_ when another language is selected.

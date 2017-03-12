@@ -4,19 +4,11 @@
 
 #include "oem/oem_window.h"
 
-#include <QCheckBox>
-#include <QComboBox>
 #include <QDebug>
 #include <QHBoxLayout>
-#include <QLabel>
 #include <QLineEdit>
 #include <QListView>
-#include <QPushButton>
-#include <QScrollArea>
-#include <QSpinBox>
 #include <QSplitter>
-#include <QStringListModel>
-#include <QVBoxLayout>
 
 #include "oem/models/oem_settings_model.h"
 
@@ -39,10 +31,13 @@ void OemWindow::initConnections() {
 
 void OemWindow::initUI() {
 
-  model_ = new OemSettingsModel();
+  model_ = new OemSettingsModel(this);
+  name_list_view_ = new QListView(this);
+  name_list_view_->setModel(model_);
 
   QSplitter* splitter = new QSplitter(this);
   splitter->setContentsMargins(0, 0, 0, 0);
+  splitter->addWidget(name_list_view_);
 
   QHBoxLayout* layout = new QHBoxLayout(this);
   layout->setContentsMargins(0, 0, 0, 0);

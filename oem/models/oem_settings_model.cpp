@@ -30,14 +30,24 @@ OemSettingsModel::OemSettingsModel(QObject* parent)
 }
 
 QVariant OemSettingsModel::data(const QModelIndex& index, int role) const {
-  Q_UNUSED(index);
-  Q_UNUSED(role);
-  return QVariant();
+  if (role != Qt::DisplayRole) {
+    return QVariant();
+  }
+
+  if (!index.isValid()) {
+    return QVariant();
+  }
+  const int row = index.row();
+  if (row < 0 || row >= items_.length()) {
+    return QVariant();
+  } else {
+    return items_.at(row).name();
+  }
 }
 
 int OemSettingsModel::rowCount(const QModelIndex& parent) const {
   Q_UNUSED(parent);
-  return 0;
+  return items_.length();
 }
 
 bool OemSettingsModel::dump() {
