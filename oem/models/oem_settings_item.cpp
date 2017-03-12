@@ -213,16 +213,20 @@ bool LoadSettingsItems(OemSettingsItems& items,
     item.setValueType(obj_item.value(kTypeField).toString());
 
     // Read default value to ini file.
-    item.setDefaultValue(settings.value(item.name()));
+    const QVariant value(settings.value(item.name()));
+    item.setDefaultValue(value);
+    item.setValue(value);
 
     item.setMinimum(obj_item.value(kMinimumField));
     item.setMaximum(obj_item.value(kMaximumField));
     items.append(item);
   }
 
-  qDebug() << "items:" << items;
-
   // Now, update item values.
+  if (!QFile::exists(oem_json_file)) {
+    qDebug() << "items:" << items;
+    return true;
+  }
   const QString oem_content(ReadFile(oem_json_file));
   if (oem_content.isEmpty()) {
     return true;
