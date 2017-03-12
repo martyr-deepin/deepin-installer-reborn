@@ -1,0 +1,51 @@
+[
+	{
+		"name": "skip_disk_space_insufficient_page",
+		"description": "",
+		"type": "Boolean"
+	}, {
+		"name": "skip_virtual_machine_page",
+		"description": "",
+		"type": "Boolean"
+	}, {
+		"name": "skip_select_language_page",
+		"description": "",
+		"type": "Boolean"
+	}, {
+		"name": "skip_system_info_page",
+		"description": "",
+		"type": "Boolean"
+	}, {
+		"name": "skip_partition_page",
+		"description": "",
+		"type": "Boolean"
+	}, {
+		"name": "select_language_default_locale",
+		"description": "",
+		"type": "Enumeration"
+	}, {
+		"name": "system_info_deepin_version",
+		"description": "",
+		"type": "String"
+	}, {
+		"name": "system_info_lsb_release",
+		"description": "",
+		"type": "String"
+	}, {
+		"name": "system_info_vendor_name",
+		"description": "",
+		"type": "String"
+	}, {
+		"name": "system_info_setup_after_reboot",
+		"description": "",
+		"type": "Boolean"
+	}, {
+		"name": "system_info_default_username",
+		"description": "",
+		"type": "String"
+	}, {
+		"name": "system_info_lock_username",
+		"description": "",
+		"type": "Boolean"
+	}
+]
