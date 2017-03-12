@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_UI_OEM_OEM_WINDOW_H
-#define INSTALLER_UI_OEM_OEM_WINDOW_H
+#ifndef INSTALLER_OEM_OEM_WINDOW_H
+#define INSTALLER_OEM_OEM_WINDOW_H
 
 #include <QFrame>
 
@@ -27,4 +27,4 @@ class OemWindow : public QFrame {
 
 }  // namespace installer
 
-#endif  // INSTALLER_UI_OEM_OEM_WINDOW_H
+#endif  // INSTALLER_OEM_OEM_WINDOW_H

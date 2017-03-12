@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/oem/oem_window.h"
+#include "oem/oem_window.h"
 
 #include <QCheckBox>
 #include <QComboBox>

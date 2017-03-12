@@ -106,6 +106,13 @@ set(BASE_FILES
     base/thread_util.h
     )
 
+set(OEM_FILES
+
+    oem/models/oem_settings_model.cpp
+    oem/models/oem_settings_model.h
+    oem/models/oem_settings_item.cpp
+    oem/models/oem_settings_item.h)
+
 set(PARTMAN_FILES
     partman/device.cpp
     partman/device.h
@@ -487,13 +494,13 @@ target_link_libraries(deepin-installer-first-boot
 # deepin-installer-oem
 add_executable(deepin-installer-oem
                app/deepin_installer_oem.cpp
+               oem/oem_window.cpp
+               oem/oem_window.h
 
                service/settings_name.h
 
-               ui/oem/oem_window.cpp
-               ui/oem/oem_window.h
-
                ${BASE_FILES}
+               ${OEM_FILES}
                ${SYSINFO_FILES}
                )
 target_link_libraries(deepin-installer-oem ${Qt_LIBS})

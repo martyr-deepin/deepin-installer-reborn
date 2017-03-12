@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/oem/settings_base_frame.h"
+#include "settings_base_frame.h"
 
 namespace installer {
 
