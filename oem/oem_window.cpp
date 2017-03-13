@@ -42,8 +42,12 @@ void OemWindow::initUI() {
 
   QSplitter* splitter = new QSplitter(this);
   splitter->setContentsMargins(0, 0, 0, 0);
+  splitter->setOpaqueResize(false);
   splitter->addWidget(name_list_view_);
   splitter->addWidget(item_view_);
+  // Update stretch factor so that item_view_ can be resized dynamically.
+  splitter->setStretchFactor(0, 0);
+  splitter->setStretchFactor(1, 1);
 
   QHBoxLayout* layout = new QHBoxLayout(this);
   layout->setContentsMargins(0, 0, 0, 0);
@@ -52,7 +56,6 @@ void OemWindow::initUI() {
 
   this->setContentsMargins(0, 0, 0, 0);
   this->setLayout(layout);
-  this->resize(640, 480);
 }
 
 void OemWindow::onNameListViewSelected(const QModelIndex& current,
