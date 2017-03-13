@@ -45,7 +45,7 @@ void SelectLanguageFrame::readConf() {
 }
 
 void SelectLanguageFrame::writeConf() {
-  WriteLocale(lang_.lc_all);
+  WriteLocale(lang_.locale);
 }
 
 void SelectLanguageFrame::changeEvent(QEvent* event) {
