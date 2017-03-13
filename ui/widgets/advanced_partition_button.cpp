@@ -86,7 +86,7 @@ void AdvancedPartitionButton::initUI() {
   // tip
   QLabel* tip_label = new QLabel();
   tip_label->setObjectName("tip_label");
-  tip_label->setFixedWidth(96);
+  tip_label->setFixedWidth(112);
   if (partition_.mount_point == kMountPointRoot) {
     tip_label->setText(tr("Install here"));
   } else if (partition_.status == PartitionStatus::Format ||
