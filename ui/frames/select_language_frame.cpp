@@ -120,13 +120,12 @@ void SelectLanguageFrame::updateTranslator(const QString& locale) {
     qApp->removeTranslator(current_translator_);
   }
   const QString locale_file(GetLocalePath(locale));
-  if (!current_translator_->load(locale_file)) {
+  if (current_translator_->load(locale_file)) {
+    if (!qApp->installTranslator(current_translator_)) {
+      qWarning() << "Failed to update ui language at:" << locale_file;
+    }
+  } else {
     qWarning() << "Failed to load locale file:" << locale_file;
-    // Reset to English.
-    current_translator_->load(GetDefaultLocalePath());
-  }
-  if (!qApp->installTranslator(current_translator_)) {
-    qWarning() << "Failed to update ui language at:" << locale_file;
   }
 }
 

@@ -39,11 +39,7 @@ int main(int argc, char* argv[]) {
   // Set language.
   QTranslator translator;
   const QString locale(installer::ReadLocale());
-  if (locale.isEmpty()) {
-    translator.load(installer::GetDefaultLocalePath());
-  } else {
-    translator.load(installer::GetLocalePath(locale));
-  }
+  translator.load(installer::GetLocalePath(locale));
   app.installTranslator(&translator);
 
   installer::FirstBootSetupWindow window;

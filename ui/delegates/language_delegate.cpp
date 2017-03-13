@@ -4,21 +4,32 @@
 
 #include "ui/delegates/language_delegate.h"
 
+#include <QDebug>
+#include <QFile>
+
 namespace installer {
 
 namespace {
 
-const char kDefaultLanguageFile[] = I18N_DIR "/en_US.qm";
+const char kDefaultLanguageFile[] = I18N_DIR "/installer-en_US.qm";
 const char kLanguageFileTpl[] = I18N_DIR "/installer-%1.qm";
 
 }  // namespace
 
-QString GetDefaultLocalePath() {
-  return kDefaultLanguageFile;
-}
-
 QString GetLocalePath(const QString& locale) {
-  return QString(kLanguageFileTpl).arg(locale);
+  QString filepath = QString(kLanguageFileTpl).arg(locale);
+  if (QFile::exists(filepath)) {
+    return filepath;
+  }
+
+  // Get language region only. e.g. ru_RU => ru
+  const int underscore_index = locale.indexOf('_');
+  filepath = QString(kLanguageFileTpl).arg(locale.left(underscore_index));
+  if (QFile::exists(filepath)) {
+    return filepath;
+  }
+
+  return kDefaultLanguageFile;
 }
 
 }  // namespace installer

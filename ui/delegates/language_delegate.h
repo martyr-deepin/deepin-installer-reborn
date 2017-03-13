@@ -9,9 +9,6 @@
 
 namespace installer {
 
-// Get filepath of default locale.
-QString GetDefaultLocalePath();
-
 // Get filepath of |locale|.
 QString GetLocalePath(const QString& locale);
 
