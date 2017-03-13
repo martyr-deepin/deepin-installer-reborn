@@ -413,7 +413,7 @@
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
-        <source>Disk Format Warning</source>
+        <source>Full Disk Format Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -546,14 +546,18 @@
         <translation type="vanished">硬盘上的所有数据都将被擦除!</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
-        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
         <source>Disk Format Warning</source>
-        <translation>磁盘格式化警告</translation>
+        <translation type="vanished">磁盘格式化警告</translation>
     </message>
     <message>
         <source>Continue install will format the whole disk, please backup all your data to avoid data lost</source>
         <translation type="vanished">继续安装将格式化整个磁盘，请全盘备份您的数据，以免丢失数据</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
+        <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
+        <source>Full Disk Format Warning</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>

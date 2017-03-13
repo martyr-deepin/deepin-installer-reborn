@@ -39,7 +39,7 @@ void NewTableWarningFrame::setDevicePath(const QString& device_path,
 
 void NewTableWarningFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    title_label_->setText(tr("Disk Format Warning"));
+    title_label_->setText(tr("Full Disk Format Warning"));
     comment_label_->setText(
         tr("Continuing with installation will format the whole disk, "
            "please make a backup of all your data to avoid data loss"));
@@ -61,7 +61,7 @@ void NewTableWarningFrame::initUI() {
   QLabel* warning_label = new QLabel();
   QPixmap warning_pixmap(":/images/warning.png");
   warning_label->setPixmap(warning_pixmap);
-  title_label_ = new TitleLabel(tr("Disk Format Warning"));
+  title_label_ = new TitleLabel(tr("Full Disk Format Warning"));
   title_label_->setObjectName("title_label");
 
   QLabel* disk_label = new QLabel();
