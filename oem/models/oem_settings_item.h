@@ -35,6 +35,9 @@ struct OemSettingsItem {
   OemSettingsItem();
   // TODO(xushaohua): Add other constructors.
 
+  const QString title() const;
+  void setTitle(const QString& title);
+
   const QString& name() const;
   void setName(const QString& name);
 
@@ -65,6 +68,7 @@ struct OemSettingsItem {
   void setMaximum(const QVariant& maximum);
 
  private:
+  QString title_;
   QString name_;
   QString description_;
   OemSettingsType value_type_;

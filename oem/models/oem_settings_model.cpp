@@ -41,7 +41,7 @@ QVariant OemSettingsModel::data(const QModelIndex& index, int role) const {
   if (row < 0 || row >= items_.length()) {
     return QVariant();
   } else {
-    return items_.at(row).name();
+    return items_.at(row).title();
   }
 }
 

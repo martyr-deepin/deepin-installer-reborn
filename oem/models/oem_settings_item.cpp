@@ -23,6 +23,8 @@ const char kIntegerValue[] = "Integer";
 const char kStringArrayValue[] = "StringArray";
 const char kStringValue[] = "String";
 
+// Field name defined in oem json file.
+const char kTitleField[] = "title";
 const char kNameField[] = "name";
 const char kDescField[] = "description";
 const char kTypeField[] = "type";
@@ -67,13 +69,22 @@ QDebug& operator<<(QDebug& debug, const OemSettingsType& type) {
 }
 
 OemSettingsItem::OemSettingsItem()
-    : name_(),
+    : title_(),
+      name_(),
       description_(),
       value_type_(OemSettingsType::String),
       default_value_(),
       value_(),
       minimum_(0),
       maximum_(0) {
+}
+
+const QString OemSettingsItem::title() const {
+  return title_;
+}
+
+void OemSettingsItem::setTitle(const QString& title) {
+  title_ = title;
 }
 
 const QString& OemSettingsItem::name() const {
@@ -151,7 +162,8 @@ void OemSettingsItem::setMaximum(const QVariant& maximum) {
 
 QDebug& operator<<(QDebug& debug, const OemSettingsItem& item) {
   debug << "OemItem {"
-        << "name:" << item.name()
+        << "title:" << item.title()
+        << ", name:" << item.name()
         << ", description:" << item.description()
         << ", type:" << item.value_type()
         << ", default:" << item.default_value()
@@ -208,6 +220,7 @@ bool LoadSettingsItems(OemSettingsItems& items,
   for (const QJsonValue json_item : default_oem_doc.array()) {
     const QJsonObject obj_item = json_item.toObject();
     OemSettingsItem item;
+    item.setTitle(obj_item.value(kTitleField).toString());
     item.setName(obj_item.value(kNameField).toString());
     item.setDescription(obj_item.value(kDescField).toString());
     item.setValueType(obj_item.value(kTypeField).toString());

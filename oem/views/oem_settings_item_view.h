@@ -24,6 +24,7 @@ class OemSettingsItemView : public QFrame {
   void initConnections();
   void initUI();
 
+  QLabel* title_ = nullptr;
   QLabel* name_ = nullptr;
   QLabel* desc_ = nullptr;
   QLabel* type_ = nullptr;
