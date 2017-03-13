@@ -14,8 +14,8 @@ namespace installer {
 
 struct OsProberItem {
   QString path;  // Partition path, like "/dev/sda1".
-  QString distro_name;  // Distribution name, like "Debian".
   QString description;  // Description name, like "Debian sid",
+  QString distro_name;  // Distribution name, like "Debian".
   OsType type;  // Os type, like linux.
 };
 
