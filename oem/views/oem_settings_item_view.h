@@ -7,6 +7,7 @@
 
 #include <QFrame>
 class QLabel;
+class QPushButton;
 
 #include "oem/models/oem_settings_item.h"
 
@@ -30,6 +31,8 @@ class OemSettingsItemView : public QFrame {
   QLabel* type_ = nullptr;
   QLabel* default_value_ = nullptr;
   QLabel* value_ = nullptr;
+  QPushButton* use_default_value_btn_ = nullptr;
+  QLabel* custom_value_ = nullptr;
 };
 
 }  // namespace installer
