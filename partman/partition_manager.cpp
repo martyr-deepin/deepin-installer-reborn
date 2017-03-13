@@ -218,9 +218,9 @@ DeviceList ScanDevices(bool enable_os_prober) {
   const LabelItems label_items = ParseLabelDir();
   const MountItemList mount_items = ParseMountItems();
 
-  OsTypeItems os_type_items;
+  OsProberItems os_prober_items;
   if (enable_os_prober) {
-    os_type_items = GetOsTypeItems();
+    os_prober_items = GetOsTypeItems();
   }
 
   // Walk through all devices.
@@ -282,7 +282,12 @@ DeviceList ScanDevices(bool enable_os_prober) {
             // Read partition label and os.
             const QString empty_str;
             partition.label = label_items.value(partition.path, empty_str);
-            partition.os = os_type_items.value(partition.path, OsType::Empty);
+            for (const OsProberItem& item : os_prober_items) {
+              if (item.path == partition.path) {
+                partition.os = item.type;
+                break;
+              }
+            }
 
             // Mark busy flag of this partition when it is mounted in system.
             for (const MountItem& mount_item : mount_items) {
