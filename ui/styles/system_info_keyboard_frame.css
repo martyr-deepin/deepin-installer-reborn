@@ -17,7 +17,7 @@ QListView#variant_view {
 }
 
 QLineEdit#test_edit {
-  border: 1px transparent;
+  border: 1px solid transparent;
   border-radius: 4px;
   padding: 0px 5px 0px 5px;
   background-color: rgba(255, 255, 255, 0.1);
