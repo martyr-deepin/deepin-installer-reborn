@@ -5,17 +5,24 @@
 #ifndef INSTALLER_PARTMAN_OS_PROBER_H
 #define INSTALLER_PARTMAN_OS_PROBER_H
 
-#include <QHash>
 #include <QString>
+#include <QVector>
 
 #include "partman/structs.h"
 
 namespace installer {
 
-typedef QHash<QString, OsType> OsTypeItems;
+struct OsProberItem {
+  QString path;  // Partition path, like "/dev/sda1".
+  QString distro_name;  // Distribution name, like "Debian".
+  QString description;  // Description name, like "Debian sid",
+  OsType type;  // Os type, like linux.
+};
+
+typedef QVector<OsProberItem> OsProberItems;
 
 // Scan system wide os information with `os-prober`.
-OsTypeItems GetOsTypeItems();
+OsProberItems GetOsTypeItems();
 
 }  // namespace installer
 

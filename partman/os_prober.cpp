@@ -30,8 +30,8 @@ QString ReadOsProberOutput() {
 
 }  // namespace
 
-OsTypeItems GetOsTypeItems() {
-  OsTypeItems result;
+OsProberItems GetOsTypeItems() {
+  OsProberItems result;
 
   const QString output = ReadOsProberOutput();
   if (!output.isEmpty()) {
@@ -45,6 +45,9 @@ OsTypeItems GetOsTypeItems() {
       if (items.length() != 4) {
         continue;
       }
+
+      const QString description = items.at(1);
+      const QString distro_name = items.at(2);
 
       OsType type;
       if (line.contains("linux", Qt::CaseInsensitive)) {
@@ -62,7 +65,9 @@ OsTypeItems GetOsTypeItems() {
       const QString dev_path = items[0];
       const int index = dev_path.indexOf('@');
       const QString path = (index == -1) ? dev_path : dev_path.left(index);
-      result.insert(path, type);
+
+      const OsProberItem prober_item = {path, description, distro_name, type};
+      result.append(prober_item);
     }
   }
 
