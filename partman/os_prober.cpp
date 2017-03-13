@@ -30,7 +30,7 @@ QString ReadOsProberOutput() {
 
 }  // namespace
 
-OsProberItems GetOsTypeItems() {
+OsProberItems GetOsProberItems() {
   OsProberItems result;
 
   const QString output = ReadOsProberOutput();
