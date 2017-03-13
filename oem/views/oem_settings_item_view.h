@@ -9,6 +9,7 @@
 class QLabel;
 class QLineEdit;
 class QPushButton;
+class QSpinBox;
 class QTextEdit;
 
 #include "oem/models/oem_settings_item.h"
@@ -39,6 +40,7 @@ class OemSettingsItemView : public QFrame {
   QPushButton* use_default_value_btn_ = nullptr;
   QPushButton* custom_bool_ = nullptr;
   QLineEdit* custom_line_edit_ = nullptr;
+  QSpinBox* custom_spin_box_ = nullptr;
   QTextEdit* custom_text_edit_ = nullptr;
 
   OemSettingsItem item_;

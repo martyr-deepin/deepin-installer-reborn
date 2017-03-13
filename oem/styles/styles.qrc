@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="/styles">
+    <file>oem_settings_item_view.css</file>
+    <file>oem_window.css</file>
+  </qresource>
+</RCC>

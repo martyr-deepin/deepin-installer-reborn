@@ -10,6 +10,7 @@
 #include <QListView>
 #include <QSplitter>
 
+#include "base/file_util.h"
 #include "oem/models/oem_settings_model.h"
 #include "oem/views/oem_settings_item_view.h"
 

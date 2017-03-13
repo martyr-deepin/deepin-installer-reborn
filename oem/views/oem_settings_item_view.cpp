@@ -8,7 +8,10 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QSpinBox>
 #include <QTextEdit>
+
+#include "base/file_util.h"
 
 namespace installer {
 
@@ -38,7 +41,7 @@ void OemSettingsItemView::updateItem(const OemSettingsItem& item) {
     use_default_value_btn_->setChecked(false);
   }
 
-  this->enableCustomValue(use_default_value);
+  this->enableCustomValue(!use_default_value);
 }
 
 void OemSettingsItemView::initConnections() {
@@ -67,6 +70,7 @@ void OemSettingsItemView::initUI() {
   custom_bool_ = new QPushButton();
   custom_bool_->setCheckable(true);
   custom_line_edit_ = new QLineEdit();
+  custom_spin_box_ = new QSpinBox();
   custom_text_edit_ = new QTextEdit();
 
   QVBoxLayout* custom_layout = new QVBoxLayout();
@@ -74,6 +78,7 @@ void OemSettingsItemView::initUI() {
   custom_layout->setSpacing(0);
   custom_layout->addWidget(custom_bool_, Qt::AlignLeft);
   custom_layout->addWidget(custom_line_edit_, Qt::AlignLeft);
+  custom_layout->addWidget(custom_spin_box_, Qt::AlignLeft);
   custom_layout->addWidget(custom_text_edit_, Qt::AlignLeft);
 
   QGridLayout* grid = new QGridLayout();
@@ -109,27 +114,39 @@ void OemSettingsItemView::initUI() {
 
   this->setContentsMargins(10, 15, 5, 5);
   this->setLayout(layout);
+  this->setStyleSheet(ReadFile(":/styles/oem_settings_item_view.css"));
 }
 
 void OemSettingsItemView::enableCustomValue(bool enable) {
   custom_bool_->setVisible(false);
   custom_line_edit_->setVisible(false);
+  custom_spin_box_->setVisible(false);
   custom_text_edit_->setVisible(false);
 
   switch (item_.value_type()) {
     case OemSettingsType::Boolean: {
       custom_bool_->setVisible(true);
       custom_bool_->setEnabled(enable);
+      custom_bool_->setChecked(item_.value().toBool());
+      break;
+    }
+    case OemSettingsType::Integer: {
+      custom_spin_box_->setVisible(true);
+      custom_spin_box_->setEnabled(enable);
+      custom_spin_box_->setValue(item_.value().toInt());
+      custom_spin_box_->setRange(item_.minimum(), item_.maximum());
       break;
     }
     case OemSettingsType::StringArray: {
       custom_text_edit_->setVisible(true);
       custom_text_edit_->setEnabled(enable);
+      custom_text_edit_->setText(item_.value().toString());
       break;
     }
     case OemSettingsType::String: {
       custom_line_edit_->setVisible(true);
       custom_line_edit_->setEnabled(enable);
+      custom_line_edit_->setText(item_.value().toString());
       break;
     }
     default: {
@@ -138,7 +155,8 @@ void OemSettingsItemView::enableCustomValue(bool enable) {
 }
 
 void OemSettingsItemView::onUseDefaultValueButtonToggled(bool checked) {
-  this->enableCustomValue(checked);
+  this->enableCustomValue(!checked);
+  // TODO(xushaohua): Update value_ content.
 }
 
 }  // namespace installer

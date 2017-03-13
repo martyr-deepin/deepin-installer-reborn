@@ -62,9 +62,9 @@ struct OemSettingsItem {
   // Get/set/check minimum and maximum property.
   // These properties are optional, and it only makes sense only if
   // value_type_ is Integer.
-  qint64 minimum() const;
+  int minimum() const;
   void setMinimum(const QVariant& minimum);
-  qint64 maximum() const;
+  int maximum() const;
   void setMaximum(const QVariant& maximum);
 
  private:
@@ -74,8 +74,8 @@ struct OemSettingsItem {
   OemSettingsType value_type_;
   QVariant default_value_;
   QVariant value_;
-  qint64 minimum_;
-  qint64 maximum_;
+  int minimum_;
+  int maximum_;
 };
 QDebug& operator<<(QDebug& debug, const OemSettingsItem& item);
 typedef QVector<OemSettingsItem> OemSettingsItems;
