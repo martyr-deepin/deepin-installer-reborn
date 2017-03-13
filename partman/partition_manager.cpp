@@ -220,7 +220,7 @@ DeviceList ScanDevices(bool enable_os_prober) {
 
   OsProberItems os_prober_items;
   if (enable_os_prober) {
-    os_prober_items = GetOsTypeItems();
+    os_prober_items = GetOsProberItems();
   }
 
   // Walk through all devices.

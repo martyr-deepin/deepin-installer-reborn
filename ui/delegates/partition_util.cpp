@@ -7,6 +7,7 @@
 #include <math.h>
 #include <QFileInfo>
 
+#include "partman/os_prober.h"
 #include "partman/utils.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
@@ -23,6 +24,17 @@ const int kLabelMaxLen = 12;
 // Mount points of live system in use currently.
 const char kCasperMountPoint[] = "/cdrom";
 const char kLiveMountPoint[] = "/lib/live/mount/medium";
+
+// Get distribution descriptioin at partition |path| if it contains an OS.
+QString GetOsDescription(const QString& path) {
+  const OsProberItems items = GetOsProberItems();
+  for (const OsProberItem& item : items) {
+    if (item.path == path) {
+      return item.description;
+    }
+  }
+  return "";
+}
 
 }  // namespace
 
@@ -164,6 +176,11 @@ QString GetPartitionLabel(const Partition& partition) {
     }
     case PartitionType::Normal:  // pass through
     case PartitionType::Logical: {
+      const QString os_description = GetOsDescription(partition.path);
+      if (!os_description.isEmpty()) {
+        return TrimText(os_description, kLabelMaxLen);
+      }
+
       if (!partition.name.isEmpty()) {
         return TrimText(partition.name, kLabelMaxLen);
       } else if (!partition.label.isEmpty()) {
@@ -185,6 +202,11 @@ QString GetPartitionLabelAndPath(const Partition& partition) {
     }
     case PartitionType::Normal:  // pass through
     case PartitionType::Logical: {
+      const QString os_description = GetOsDescription(partition.path);
+      if (!os_description.isEmpty()) {
+        return TrimText(os_description, kLabelMaxLen);
+      }
+
       const QString name = GetPartitionName(partition.path);
       if (!partition.name.isEmpty()) {
         const QString label = TrimText(partition.name, kLabelMaxLen);

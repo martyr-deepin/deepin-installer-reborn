@@ -22,7 +22,7 @@ struct OsProberItem {
 typedef QVector<OsProberItem> OsProberItems;
 
 // Scan system wide os information with `os-prober`.
-OsProberItems GetOsTypeItems();
+OsProberItems GetOsProberItems();
 
 }  // namespace installer
 

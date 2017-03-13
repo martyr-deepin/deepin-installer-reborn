@@ -28,7 +28,7 @@ const char kDefaultTimezone[] = "Etc/UTC";
 
 // Check if any Windows partition is found on disk.
 bool HasWindowsPartition() {
-  const OsProberItems os_items = GetOsTypeItems();
+  const OsProberItems os_items = GetOsProberItems();
   for (const OsProberItem& item : os_items) {
     if (item.type == OsType::Windows) {
       return true;
