@@ -144,20 +144,20 @@ void OemSettingsItem::setValue(const QVariant& value) {
   value_ = value;
 }
 
-qint64 OemSettingsItem::minimum() const {
+int OemSettingsItem::minimum() const {
   return minimum_;
 }
 
 void OemSettingsItem::setMinimum(const QVariant& minimum) {
-  minimum_ = minimum.toLongLong();
+  minimum_ = minimum.toInt();
 }
 
-qint64 OemSettingsItem::maximum() const {
+int OemSettingsItem::maximum() const {
   return maximum_;
 }
 
 void OemSettingsItem::setMaximum(const QVariant& maximum) {
-  maximum_ = maximum.toLongLong();
+  maximum_ = maximum.toInt();
 }
 
 QDebug& operator<<(QDebug& debug, const OemSettingsItem& item) {

@@ -114,6 +114,8 @@ set(OEM_FILES
     oem/models/oem_settings_model.h
     oem/views/oem_settings_item_view.cpp
     oem/views/oem_settings_item_view.h
+
+    oem/styles/styles.qrc
     )
 
 set(PARTMAN_FILES
