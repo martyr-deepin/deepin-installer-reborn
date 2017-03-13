@@ -30,18 +30,18 @@ OemSettingsModel::OemSettingsModel(QObject* parent)
 }
 
 QVariant OemSettingsModel::data(const QModelIndex& index, int role) const {
-  if (role != Qt::DisplayRole) {
+  const int row = index.row();
+
+  if (!index.isValid() || row < 0 || row >= items_.length()) {
     return QVariant();
   }
 
-  if (!index.isValid()) {
-    return QVariant();
-  }
-  const int row = index.row();
-  if (row < 0 || row >= items_.length()) {
-    return QVariant();
-  } else {
+  if (role == Qt::DisplayRole) {
     return items_.at(row).title();
+  } else if (role == Qt::ToolTipRole) {
+    return items_.at(row).description();
+  } else {
+    return QVariant();
   }
 }
 

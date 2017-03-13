@@ -2,7 +2,7 @@
   {
     "title": "跳过硬盘容量不足时的提醒页面",
     "name": "skip_disk_space_insufficient_page",
-    "description": "",
+    "description": "Do not display warning message when no enough disk space is available",
     "type": "Boolean"
   }, {
     "title": "跳过虚拟机提醒页面",
