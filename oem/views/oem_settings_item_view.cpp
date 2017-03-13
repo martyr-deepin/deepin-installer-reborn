@@ -6,24 +6,22 @@
 
 #include <QGridLayout>
 #include <QLabel>
+#include <QLineEdit>
 #include <QPushButton>
+#include <QTextEdit>
 
 namespace installer {
 
-namespace {
-
-const int kValueMaximumWidth = 420;
-
-}  // namespace
-
 OemSettingsItemView::OemSettingsItemView(QWidget* parent)
-    : QFrame(parent) {
+    : QFrame(parent),
+      item_() {
   this->setObjectName("oem_settings_item_view");
   this->initUI();
   this->initConnections();
 }
 
 void OemSettingsItemView::updateItem(const OemSettingsItem& item) {
+  item_ = item;
   title_->setText(item.title());
   name_->setText(item.name());
   desc_->setText(item.description());
@@ -31,19 +29,21 @@ void OemSettingsItemView::updateItem(const OemSettingsItem& item) {
   const QString default_value = item.default_value().toString();
   const QString value = item.value().toString();
   default_value_->setText(default_value);
-  if (default_value == value) {
+  const bool use_default_value = (default_value == value);
+  if (use_default_value) {
     value_->setText(tr("Default value"));
     use_default_value_btn_->setChecked(true);
-    custom_value_->setEnabled(false);
   } else {
     value_->setText(value);
     use_default_value_btn_->setChecked(false);
-    custom_value_->setEnabled(true);
   }
+
+  this->enableCustomValue(use_default_value);
 }
 
 void OemSettingsItemView::initConnections() {
-
+  connect(use_default_value_btn_, &QPushButton::toggled,
+          this, &OemSettingsItemView::onUseDefaultValueButtonToggled);
 }
 
 void OemSettingsItemView::initUI() {
@@ -64,7 +64,17 @@ void OemSettingsItemView::initUI() {
   use_default_value_btn_ = new QPushButton();
   use_default_value_btn_->setCheckable(true);
   QLabel* custom_value_label = new QLabel(tr("Custom value"));
-  custom_value_ = new QLabel();
+  custom_bool_ = new QPushButton();
+  custom_bool_->setCheckable(true);
+  custom_line_edit_ = new QLineEdit();
+  custom_text_edit_ = new QTextEdit();
+
+  QVBoxLayout* custom_layout = new QVBoxLayout();
+  custom_layout->setContentsMargins(0, 0, 0, 0);
+  custom_layout->setSpacing(0);
+  custom_layout->addWidget(custom_bool_, Qt::AlignLeft);
+  custom_layout->addWidget(custom_line_edit_, Qt::AlignLeft);
+  custom_layout->addWidget(custom_text_edit_, Qt::AlignLeft);
 
   QGridLayout* grid = new QGridLayout();
   grid->setContentsMargins(0, 0, 0, 0);
@@ -89,7 +99,7 @@ void OemSettingsItemView::initUI() {
   grid->addWidget(use_default_value_label, 6, 0, Qt::AlignRight | Qt::AlignTop);
   grid->addWidget(use_default_value_btn_, 6, 1, Qt::AlignLeft);
   grid->addWidget(custom_value_label, 7, 0, Qt::AlignRight | Qt::AlignTop);
-  grid->addWidget(custom_value_, 7, 1);
+  grid->addLayout(custom_layout, 7, 1, Qt::AlignLeft);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
@@ -99,6 +109,36 @@ void OemSettingsItemView::initUI() {
 
   this->setContentsMargins(10, 15, 5, 5);
   this->setLayout(layout);
+}
+
+void OemSettingsItemView::enableCustomValue(bool enable) {
+  custom_bool_->setVisible(false);
+  custom_line_edit_->setVisible(false);
+  custom_text_edit_->setVisible(false);
+
+  switch (item_.value_type()) {
+    case OemSettingsType::Boolean: {
+      custom_bool_->setVisible(true);
+      custom_bool_->setEnabled(enable);
+      break;
+    }
+    case OemSettingsType::StringArray: {
+      custom_text_edit_->setVisible(true);
+      custom_text_edit_->setEnabled(enable);
+      break;
+    }
+    case OemSettingsType::String: {
+      custom_line_edit_->setVisible(true);
+      custom_line_edit_->setEnabled(enable);
+      break;
+    }
+    default: {
+    }
+  }
+}
+
+void OemSettingsItemView::onUseDefaultValueButtonToggled(bool checked) {
+  this->enableCustomValue(checked);
 }
 
 }  // namespace installer
