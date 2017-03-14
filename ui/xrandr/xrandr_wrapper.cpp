@@ -122,6 +122,9 @@ bool GetCrtcs(Display* dpy, XRRScreenResources* resources,
 // Apply changed defined in crtc list.
 bool ApplyCrtcs(Display* dpy, XRRScreenResources* resources,
                 crtc_t* crtcs, int num_crtcs) {
+#ifndef N_DEBUG
+  fprintf(stdout, "ApplyCrtcs() crts: %d\n", num_crtcs);
+#endif
   Q_ASSERT(dpy != NULL);
   Q_ASSERT(resources != NULL);
   Q_ASSERT(crtcs != NULL);
@@ -130,10 +133,24 @@ bool ApplyCrtcs(Display* dpy, XRRScreenResources* resources,
   for (int i = 0; i < num_crtcs; ++i) {
     crtc_t* crtc = crtcs + i;
     if (crtc == NULL || crtc->noutput <= 0 || !crtc->changed) {
+#ifndef N_DEBUG
+      fprintf(stdout, "ignores crtcs[%d]\n", i);
+      if (crtc == NULL) {
+        fprintf(stdout, "crtcs[%d] is null\n", i);
+      } else if (crtc->noutput <= 0) {
+        fprintf(stdout, "crtcs[%d] output list is empty\n", i);
+      } else {
+        fprintf(stdout, "crtcs[%d] not changed\n", i);
+      }
+#endif
       continue;
     }
     XGrabServer(dpy);
 
+#ifndef N_DEBUG
+    fprintf(stdout, "XRRSetCrtcConfig() %dx%d+%d+%d, %d\n",
+            crtc->x, crtc->y, crtc->width, crtc->height, crtc->noutput);
+#endif
     Status status = XRRSetCrtcConfig(dpy, resources, crtc->id,
                                      CurrentTime, crtc->x, crtc->y,
                                      crtc->mode, crtc->rotation,
@@ -146,6 +163,30 @@ bool ApplyCrtcs(Display* dpy, XRRScreenResources* resources,
   }
 
   return ok;
+}
+
+// Add |output| to |crtcs| crtc list.
+bool AddOutputToCrtcs(crtc_t* crtcs, int num_crtc, RROutput output) {
+  for (int i = 0; i < num_crtc; ++i) {
+    crtc_t* crtc = crtcs + i;
+    if (crtc->noutput == 0) {
+      // Release old outputs if found.
+      Q_ASSERT(crtc->outputs == NULL);
+      if (crtc->outputs != NULL) {
+        free(crtc->outputs);
+      }
+      // Allocate memory for |output|.
+      crtc->outputs = static_cast<RROutput*>(calloc(1, sizeof(RROutput)));
+      if (crtc->outputs == NULL) {
+        return false;
+      }
+      // Save output value.
+      *crtc->outputs = output;
+      crtc->noutput = 1;
+      return true;
+    }
+  }
+  return false;
 }
 
 // A helper function to get x11 display and randr resources.
@@ -501,6 +542,41 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
 
   RROutput primary_output = None;
 
+  for (int i = 0; i < resources->noutput; ++i) {
+    const RROutput output = resources->outputs[i];
+    XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
+    if (output_info == NULL || output_info->connection != RR_Connected) {
+      XRRFreeOutputInfo(output_info);
+      continue;
+    }
+
+    bool found_output = false;
+    for (int j = 0; j < num_crtcs; ++j) {
+      crtc_t* crtc = crtcs + j;
+      for (int k = 0; k < crtc->noutput; ++k) {
+        if (output == crtc->outputs[k]) {
+          found_output = true;
+          break;
+        }
+      }
+    }
+
+    // Add Output into crtc list if not found.
+    if (!found_output) {
+#ifndef N_DEBUG
+      fprintf(stdout, "Add output to crtc list: %s\n", output_info->name);
+#endif
+      if (!AddOutputToCrtcs(crtcs, num_crtcs, output)) {
+        fprintf(stderr, "Failed to add output to crtc list: %s\n",
+                output_info->name);
+        XRRFreeOutputInfo(output_info);
+        return false;
+      }
+    }
+
+    XRRFreeOutputInfo(output_info);
+  }
+
   // Update crtcs.
   for (int i = 0; i < num_crtcs; ++i) {
     crtc_t* crtc = crtcs + i;
@@ -534,6 +610,7 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
 
   // Update crtc first.
   if (!ApplyCrtcs(dpy, resources, crtcs, num_crtcs)) {
+    fprintf(stderr, "Apply crtcs failed\n");
     return false;
   }
 
@@ -624,7 +701,6 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
         crtc->changed = true;
         crtc->x = x;
         crtc->y = y;
-        fprintf(stdout, "crtc: %dx%d\n", crtc->x, crtc->y);
         if (crtc->mode != prefer->id) {
           crtc->mode = prefer->id;
           crtc->width = prefer->width;
@@ -687,16 +763,21 @@ bool GetConnectedOutputs(ConnectedOutputs& outputs) {
 
     // Update connected output properties.
     const RRCrtc crtc = output_info->crtc;
-    // Release output_info.
-    XRRFreeOutputInfo(output_info);
     XRRCrtcInfo* crtc_info = XRRGetCrtcInfo(dpy, resources, crtc);
     if (crtc_info == NULL) {
-      continue;
+      fprintf(stderr, "crtc_info of %s is null\n", output_info->name);
+      output_obj.x = 0;
+      output_obj.y = 0;
+      output_obj.width = 0;
+      output_obj.height = 0;
+    } else {
+      output_obj.x = crtc_info->x;
+      output_obj.y = crtc_info->y;
+      output_obj.width = crtc_info->width;
+      output_obj.height = crtc_info->height;
     }
-    output_obj.x = crtc_info->x;
-    output_obj.y = crtc_info->y;
-    output_obj.width = crtc_info->width;
-    output_obj.height = crtc_info->height;
+    // Release output_info.
+    XRRFreeOutputInfo(output_info);
     outputs.append(output_obj);
     XRRFreeCrtcInfo(crtc_info);
   }
@@ -737,10 +818,14 @@ bool SwitchMode() {
 }
 
 bool SwitchToMirrorMode() {
+#ifndef N_DEBUG
+  fprintf(stdout, "SwitchToMirrorMode()\n");
+#endif
   Display* dpy = NULL;
   Window root_window;
   XRRScreenResources* resources = NULL;
   if (!GetRRResources(&dpy, root_window, &resources)) {
+    fprintf(stderr, "Failed to get rr resources\n");
     return false;
   }
 
@@ -749,21 +834,19 @@ bool SwitchToMirrorMode() {
     XRRFreeScreenResources(resources);
     XCloseDisplay(dpy);
 
-#ifndef N_DEBUG
-    fprintf(stdout, "only one output\n");
-#endif
+    fprintf(stdout, "only one output, do nothing.\n");
     return true;
   }
 
-  if (IsMirrorMode(dpy, resources)) {
-    XRRFreeScreenResources(resources);
-    XCloseDisplay(dpy);
-
-#ifndef N_DEBUG
-    fprintf(stdout, "is mirror mode\n");
-#endif
-    return true;
-  }
+//  if (IsMirrorMode(dpy, resources)) {
+//    XRRFreeScreenResources(resources);
+//    XCloseDisplay(dpy);
+//
+//#ifndef N_DEBUG
+//    fprintf(stdout, "is mirror mode\n");
+//#endif
+//    return true;
+//  }
 
   crtc_t* crtcs = NULL;
   int num_crtcs = 0;
