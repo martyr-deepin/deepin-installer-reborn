@@ -126,11 +126,9 @@ QString GetTimezoneName(const QString& timezone) {
 
 QString GetLocalTimezoneName(const QString& timezone, const QString& locale) {
   // Set locale first.
-  qDebug() << "GetLocalTimezoneName()" << timezone << locale;
   (void) setlocale(LC_ALL, locale.toLocal8Bit().constData());
   const QString local_name(dgettext(kTimezoneDomain,
                                     timezone.toLocal8Bit().constData()));
-  qDebug() << "local name:" << local_name;
   int index = local_name.lastIndexOf('/');
   if (index == -1) {
     // Some translations of locale name contains non-standard char.

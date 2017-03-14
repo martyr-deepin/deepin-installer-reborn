@@ -186,8 +186,6 @@ void SystemInfoFrame::showTimezonePage() {
     last_page_ = stacked_layout_->currentIndex();
     stacked_layout_->setCurrentWidget(timezone_frame_);
     this->updateHeadBar();
-    // Remark last timezone.
-    timezone_frame_->remarkTimezone();
   }
 }
 
