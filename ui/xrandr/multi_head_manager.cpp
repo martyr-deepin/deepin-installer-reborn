@@ -85,11 +85,14 @@ void MultiHeadManager::updateWallpaper() {
     }
 
     // Number of monitors changed.
-    if (outputs.length() != last_connected_monitors_) {
+    if (outputs.length() == 1) {
+      // Switch to prefer mode.
+      SwitchToPreferMode();
+    } else if (outputs.length() != last_connected_monitors_) {
       qDebug() << "emit switchToMirrorMode() signal";
-      last_connected_monitors_ = outputs.length();
       emit this->switchToMirrorMode();
     }
+    last_connected_monitors_ = outputs.length();
   } else {
     qCritical() << "Failed to get connected outputs";
   }

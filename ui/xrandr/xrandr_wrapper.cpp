@@ -10,9 +10,13 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/Xrandr.h>
 
+#include "base/command.h"
+
 namespace installer {
 
 namespace {
+
+const char kRandRCmd[] = "xrandr";
 
 struct _crtc_t {
   RRCrtc id;
@@ -183,6 +187,7 @@ bool AddOutputToCrtcs(crtc_t* crtcs, int num_crtc, RROutput output) {
       // Save output value.
       *crtc->outputs = output;
       crtc->noutput = 1;
+      crtc->changed = true;
       return true;
     }
   }
@@ -307,6 +312,7 @@ bool IsMirrorMode(Display* dpy, XRRScreenResources* resources) {
 }
 
 // Get mode info with |mode_id|.
+// Do not free returned XRRModeInfo object.
 XRRModeInfo* GetModeInfoById(Display* dpy, XRRScreenResources* resources,
                              RRMode mode_id) {
   Q_ASSERT(dpy != NULL);
@@ -360,68 +366,126 @@ XRRModeInfo* GetPreferModeInfo(Display* dpy, XRRScreenResources* resources,
 
 // Walk through connected outputs to get best same mode supported by all the
 // connected outputs.
-RRMode GetBestSameRRMode(Display* dpy, XRRScreenResources* resources) {
-  Q_ASSERT(dpy != NULL);
-  Q_ASSERT(resources != NULL);
+bool GetBestSameRRMode(Display* dpy, XRRScreenResources* resources,
+                       unsigned int* best_width, unsigned int* best_height) {
+  for (int mode_idx = 0; mode_idx < resources->nmode; ++mode_idx) {
+    Q_ASSERT(dpy != NULL);
+    Q_ASSERT(resources != NULL);
 
-  for (int i = 0; i < resources->noutput; ++i) {
-    XRROutputInfo* output_info_i = XRRGetOutputInfo(dpy, resources,
-                                                    resources->outputs[i]);
-    if (output_info_i == NULL || output_info_i->connection != RR_Connected) {
-      // Ignores disconnected outputs.
-      XRRFreeOutputInfo(output_info_i);
-      continue;
-    }
+    // Walk through global mode list.
+    XRRModeInfo* global_mode_info = resources->modes + mode_idx;
+    bool global_found_same_mode = true;
+    for (int output_idx = 0; output_idx < resources->noutput; ++output_idx) {
+      bool local_found_same_mode = false;
 
-    for (int j = i + 1; j < resources->noutput; ++j) {
-      XRROutputInfo* output_info_j = XRRGetOutputInfo(dpy, resources,
-                                                      resources->outputs[j]);
-      if (output_info_j == NULL || output_info_j->connection != RR_Connected) {
-        XRRFreeOutputInfo(output_info_j);
-        // Ignores disconnected outputs.
+      RROutput output = resources->outputs[output_idx];
+      XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
+      if (output_info == NULL || output_info->connection != RR_Connected) {
+        XRRFreeOutputInfo(output_info);
         continue;
       }
 
-      for (int mode_index = 0; mode_index < resources->nmode; ++mode_index) {
-        XRRModeInfo* mode_info = resources->modes + mode_index;
-        if (mode_info == NULL) {
+      for (int k = 0; k < output_info->nmode; ++k) {
+        RRMode local_mode = output_info->modes[k];
+        XRRModeInfo* local_mode_info = GetModeInfoById(dpy, resources,
+                                                       local_mode);
+
+        if (local_mode_info == NULL) {
           continue;
         }
 
-        for (int mode_index_i = 0; mode_index_i < output_info_i->nmode;
-             ++mode_index_i) {
-          RRMode mode_i = output_info_i->modes[mode_index_i];
-          if (mode_info->id != mode_i) {
-            continue;
-          }
-
-          for (int mode_index_j = 0; mode_index_j < output_info_j->nmode;
-               ++mode_index_j) {
-            RRMode mode_j = output_info_j->modes[mode_index_j];
-            if (mode_info->id != mode_j) {
-              continue;
-            }
-#ifndef N_DEBUG
-            fprintf(stdout, "Same mode: %ld %s, %dx%d\n",
-                    mode_info->id, mode_info->name,
-                    mode_info->width, mode_info->height);
-#endif
-
-            // Release all output_info.
-            XRRFreeOutputInfo(output_info_i);
-            XRRFreeOutputInfo(output_info_j);
-
-            return mode_info->id;
-          }
+        if (local_mode_info->width == global_mode_info->width &&
+            local_mode_info->height == global_mode_info->height) {
+          local_found_same_mode = true;
+          break;
         }
       }
+
+      // global_mode_info does not match any mode in current output.
+      if (!local_found_same_mode) {
+        global_found_same_mode = false;
+        XRRFreeOutputInfo(output_info);
+        break;
+      }
+
+      XRRFreeOutputInfo(output_info);
     }
 
-    XRRFreeOutputInfo(output_info_i);
+    // Found best matched mode for all connected outputs.
+    if (global_found_same_mode) {
+      *best_width = global_mode_info->width;
+      *best_height = global_mode_info->height;
+      return true;
+    }
   }
 
-  return None;
+  return false;
 }
+
+// Walk through connected outputs to get best same mode supported by all the
+// connected outputs.
+//RRMode GetBestSameRRMode(Display* dpy, XRRScreenResources* resources) {
+//  Q_ASSERT(dpy != NULL);
+//  Q_ASSERT(resources != NULL);
+//
+//  for (int i = 0; i < resources->noutput; ++i) {
+//    XRROutputInfo* output_info_i = XRRGetOutputInfo(dpy, resources,
+//                                                    resources->outputs[i]);
+//    if (output_info_i == NULL || output_info_i->connection != RR_Connected) {
+//      // Ignores disconnected outputs.
+//      XRRFreeOutputInfo(output_info_i);
+//      continue;
+//    }
+//
+//    for (int j = i + 1; j < resources->noutput; ++j) {
+//      XRROutputInfo* output_info_j = XRRGetOutputInfo(dpy, resources,
+//                                                      resources->outputs[j]);
+//      if (output_info_j == NULL || output_info_j->connection != RR_Connected) {
+//        XRRFreeOutputInfo(output_info_j);
+//        // Ignores disconnected outputs.
+//        continue;
+//      }
+//
+//      for (int mode_index = 0; mode_index < resources->nmode; ++mode_index) {
+//        XRRModeInfo* mode_info = resources->modes + mode_index;
+//        if (mode_info == NULL) {
+//          continue;
+//        }
+//
+//        for (int mode_index_i = 0; mode_index_i < output_info_i->nmode;
+//             ++mode_index_i) {
+//          RRMode mode_i = output_info_i->modes[mode_index_i];
+//          if (mode_info->id != mode_i) {
+//            continue;
+//          }
+//
+//          for (int mode_index_j = 0; mode_index_j < output_info_j->nmode;
+//               ++mode_index_j) {
+//            RRMode mode_j = output_info_j->modes[mode_index_j];
+//            if (mode_info->id != mode_j) {
+//              continue;
+//            }
+//#ifndef N_DEBUG
+//            fprintf(stdout, "Same mode: %ld %s, %dx%d\n",
+//                    mode_info->id, mode_info->name,
+//                    mode_info->width, mode_info->height);
+//#endif
+//
+//            // Release all output_info.
+//            XRRFreeOutputInfo(output_info_i);
+//            XRRFreeOutputInfo(output_info_j);
+//
+//            return mode_info->id;
+//          }
+//        }
+//      }
+//    }
+//
+//    XRRFreeOutputInfo(output_info_i);
+//  }
+//
+//  return None;
+//}
 
 // Get index of primary output in connected output list.
 void GetPrimaryOutputIndex(Display* dpy, XRRScreenResources* resources,
@@ -519,28 +583,12 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
 #endif
   Q_ASSERT(dpy != NULL);
   Q_ASSERT(resources != NULL);
+  Q_UNUSED(root_window);
   Q_ASSERT(crtcs != NULL);
   Q_ASSERT(num_crtcs > 0);
   // Get mode with same size of connected outputs.
   // Update crtcs.
   // Apply crtcs.
-
-  RRMode best_mode = GetBestSameRRMode(dpy, resources);
-  if (best_mode == None) {
-    fprintf(stderr, "Failed to get same mode for outputs, do nothing.\n");
-    return false;
-  }
-
-  XRRModeInfo* best_mode_info = GetModeInfoById(dpy, resources, best_mode);
-  if (best_mode_info == NULL) {
-    fprintf(stderr, "failed to get best mode info\n");
-    return false;
-  }
-#ifndef N_DEBUG
-  fprintf(stdout, "best mode info: %s\n", best_mode_info->name);
-#endif
-
-  RROutput primary_output = None;
 
   for (int i = 0; i < resources->noutput; ++i) {
     const RROutput output = resources->outputs[i];
@@ -577,45 +625,132 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
     XRRFreeOutputInfo(output_info);
   }
 
-  // Update crtcs.
-  for (int i = 0; i < num_crtcs; ++i) {
-    crtc_t* crtc = crtcs + i;
-    if (crtc->noutput <= 0) {
+  unsigned int best_width = 0;
+  unsigned int best_height = 0;
+  const bool found_best_mode = GetBestSameRRMode(dpy, resources,
+                                                 &best_width, &best_height);
+  fprintf(stdout, "best mode: %d, w: %d, h:%d\n",
+          found_best_mode, best_width, best_height);
+
+  QStringList args;
+
+  for (int i = 0; i < resources->noutput; ++i) {
+    RROutput output = resources->outputs[i];
+    XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
+    if (output_info == NULL || output_info->connection != RR_Connected) {
+      XRRFreeOutputInfo(output_info);
       continue;
     }
 
-    // Select primary output.
-    for (int j = 0; primary_output == None && j < crtc->noutput; ++j) {
-      RROutput output = crtc->outputs[j];
-      XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
-      if (output_info != NULL && output_info->connection == RR_Connected) {
-#ifndef N_DEBUG
-        fprintf(stdout, "Select %s as primary output\n", output_info->name);
-#endif
-        primary_output = output;
+    XRRModeInfo* best_mode_info = NULL;
+    for (int k = 0; k < output_info->nmode; ++k) {
+      const RRMode mode = output_info->modes[k];
+      XRRModeInfo* mode_info = GetModeInfoById(dpy, resources, mode);
+      if (mode_info == NULL) {
+        continue;
       }
-      XRRFreeOutputInfo(output_info);
+
+      // Returns the first available mode if no best matched mode is found.
+      if (!found_best_mode) {
+        best_mode_info = mode_info;
+        break;
+      }
+
+      fprintf(stdout, "i: %d, mode info: %dx%d\n",
+              k, mode_info->width, mode_info->height);
+
+      if ((mode_info->width == best_width) &&
+          (mode_info->height == best_height)) {
+        best_mode_info = mode_info;
+        break;
+      }
     }
 
-    crtc->mode = best_mode;
-    crtc->changed = true;
-    crtc->x = 0;
-    crtc->y = 0;
-    crtc->width = best_mode_info->width;
-    crtc->height = best_mode_info->height;
+    args << "--output" << output_info->name << "--pos" << "0x0"
+         << "--mode" << best_mode_info->name;
+
+    XRRFreeOutputInfo(output_info);
   }
 
-  // Set primary output.
-  XRRSetOutputPrimary(dpy, root_window, primary_output);
+  qDebug() << "args:" << args;
 
-  // Update crtc first.
-  if (!ApplyCrtcs(dpy, resources, crtcs, num_crtcs)) {
-    fprintf(stderr, "Apply crtcs failed\n");
-    return false;
-  }
+  return SpawnCmd(kRandRCmd, args);
 
-  // Update screen size.
-  return UpdateScreenSize(dpy, root_window, resources, crtcs, num_crtcs);
+//  RROutput primary_output = None;
+//
+//  // Update crtcs.
+//  for (int i = 0; i < num_crtcs; ++i) {
+//    crtc_t* crtc = crtcs + i;
+//    if (crtc->noutput <= 0) {
+//      fprintf(stdout, "ToMirroMode() ignored crtc: %ld\n", crtc->id);
+//      continue;
+//    }
+//
+//    // Select the first connected output as primary one.
+//    for (int j = 0; j < crtc->noutput; ++j) {
+//      fprintf(stdout, "output: %d\n", j);
+//      RROutput output = crtc->outputs[j];
+//      XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
+//      if (output_info != NULL && output_info->connection == RR_Connected) {
+//#ifndef N_DEBUG
+//        fprintf(stdout, "Select %s as primary output\n", output_info->name);
+//#endif
+//        if (primary_output == None) {
+//          primary_output = output;
+//        }
+//      }
+//
+//      RRMode best_mode = None;
+//      XRRModeInfo* best_mode_info = NULL;
+//      for (int k = 0; k < output_info->nmode; ++k) {
+//        const RRMode mode = output_info->modes[k];
+//        XRRModeInfo* mode_info = GetModeInfoById(dpy, resources, mode);
+//        if (mode_info == NULL) {
+//          continue;
+//        }
+//
+//        // Returns the first available mode if no best matched mode is found.
+//        if (!found_best_mode) {
+//          best_mode = mode;
+//          best_mode_info = mode_info;
+//          break;
+//        }
+//
+//        fprintf(stdout, "i: %d, mode info: %dx%d\n",
+//                k, mode_info->width, mode_info->height);
+//
+//        if ((mode_info->width == best_width) &&
+//            (mode_info->height == best_height)) {
+//          best_mode = mode;
+//          best_mode_info = mode_info;
+//          break;
+//        }
+//      }
+//
+//      crtc->mode = best_mode;
+//      crtc->changed = true;
+//      crtc->x = 0;
+//      crtc->y = 0;
+//      crtc->width = best_mode_info->width;
+//      crtc->height = best_mode_info->height;
+//      fprintf(stdout, "update crtc info, mode: %ld, w: %d, h: %d\n",
+//              best_mode, crtc->width, crtc->height);
+//
+//      XRRFreeOutputInfo(output_info);
+//    }
+//  }
+//
+//  // Set primary output.
+//  XRRSetOutputPrimary(dpy, root_window, primary_output);
+//
+//  // Update crtc first.
+//  if (!ApplyCrtcs(dpy, resources, crtcs, num_crtcs)) {
+//    fprintf(stderr, "Apply crtcs failed\n");
+//    return false;
+//  }
+//
+//  // Update screen size.
+//  return UpdateScreenSize(dpy, root_window, resources, crtcs, num_crtcs);
 }
 
 // Switch to next mode.
@@ -723,6 +858,35 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
 
   // Update screen size.
   return UpdateScreenSize(dpy, root_window, resources, crtcs, num_crtcs);
+}
+
+// Set all connected output as prefer mode.
+bool ToPreferMode(Display* dpy, XRRScreenResources* resources,
+                  Window root_window, crtc_t* crtcs, int num_crtcs) {
+  Q_ASSERT(dpy != NULL);
+  Q_ASSERT(resources != NULL);
+  Q_ASSERT(crtcs != NULL);
+  Q_ASSERT(num_crtcs > 0);
+  Q_UNUSED(crtcs);
+  Q_UNUSED(num_crtcs);
+  Q_UNUSED(root_window);
+
+  QStringList args;
+  for (int i = 0; i < resources->noutput; ++i) {
+    RROutput output = resources->outputs[i];
+    XRROutputInfo* output_info = XRRGetOutputInfo(dpy, resources, output);
+    if (output_info == NULL || output_info->connection != RR_Connected) {
+      XRRFreeOutputInfo(output_info);
+      continue;
+    }
+
+    args << "--output" << output_info->name << "--preferred";
+
+    XRRFreeOutputInfo(output_info);
+  }
+  qDebug() << "args:" << args;
+
+  return SpawnCmd(kRandRCmd, args);
 }
 
 }  // namespace
@@ -861,6 +1025,36 @@ bool SwitchToMirrorMode() {
 
   if (!ToMirrorMode(dpy, resources, root_window, crtcs, num_crtcs)) {
     fprintf(stderr, "ToMirrorMode() failed\n");
+  }
+
+  DestroyCrtcs(&crtcs, num_crtcs);
+  XRRFreeScreenResources(resources);
+  XCloseDisplay(dpy);
+
+  return true;
+}
+
+bool SwitchToPreferMode() {
+  Display* dpy = NULL;
+  Window root_window;
+  XRRScreenResources* resources = NULL;
+  if (!GetRRResources(&dpy, root_window, &resources)) {
+    return false;
+  }
+
+  crtc_t* crtcs = NULL;
+  int num_crtcs = 0;
+  if (!GetCrtcs(dpy, resources, &crtcs, num_crtcs)) {
+    // Release resources.
+    XRRFreeScreenResources(resources);
+    XCloseDisplay(dpy);
+
+    fprintf(stderr, "Failed to get crtc_t objects\n");
+    return false;
+  }
+
+  if (!ToPreferMode(dpy, resources, root_window, crtcs, num_crtcs)) {
+    fprintf(stderr, "ToNextMode() failed\n");
   }
 
   DestroyCrtcs(&crtcs, num_crtcs);
