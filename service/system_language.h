@@ -12,8 +12,8 @@ namespace installer {
 
 struct LanguageItem {
   QString name;  // English name.
-  QString locale;  // Locale name, like en_US.
-  QString lc_all;  // LC_ALL/LANG name, like en_US.utf8.
+  QString locale;  // Language name, like en_US.
+  QString lc_all;  // LC_ALL/LANG/locale name, like en_US.utf8.
   QString local_name;  // Localized name.
 };
 

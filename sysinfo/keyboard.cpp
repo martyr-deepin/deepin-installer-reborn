@@ -27,7 +27,7 @@ const char kXkbExtraRule[] = "/usr/share/X11/xkb/rules/base.extras.xml";
 
 // Get localized |description|.
 QString GetLocalDesc(const QString& description) {
-  return QString(dgettext(kXkbDomain, description.toStdString().c_str()));
+  return QString(dgettext(kXkbDomain, description.toLocal8Bit().constData()));
 }
 
 // Read modelList node.
@@ -160,7 +160,7 @@ bool ReadConfig(const QString& filepath, XkbConfig& config) {
 
 XkbConfig GetXkbConfig(const QString& locale) {
   // Set locale first.
-  (void) setlocale(LC_ALL, locale.toStdString().c_str());
+  (void) setlocale(LC_ALL, locale.toLocal8Bit().constData());
 
   XkbConfig config;
   if (!ReadConfig(kXkbBaseRule, config)) {

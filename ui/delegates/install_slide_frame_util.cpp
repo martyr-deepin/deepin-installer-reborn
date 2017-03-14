@@ -60,18 +60,18 @@ bool ParseImagesJson(const QString& images_json_file, ImagesJson& images_json) {
 
 }  // namespace
 
-QString GetSlideDir(const QString& locale) {
+QString GetSlideDir(const QString& language_name) {
   QDir installer_dir(kSlideFolder);
   Q_ASSERT(installer_dir.exists());
   QDir oem_dir(GetOemDir());
 
   // Check existence of folders one by one.
-  QFileInfo file_info(oem_dir.absoluteFilePath(locale));
+  QFileInfo file_info(oem_dir.absoluteFilePath(language_name));
   if (file_info.isDir() && file_info.exists()) {
     return file_info.absoluteFilePath();
   }
 
-  file_info.setFile(installer_dir.absoluteFilePath(locale));
+  file_info.setFile(installer_dir.absoluteFilePath(language_name));
   if (file_info.isDir() && file_info.exists()) {
     return file_info.absoluteFilePath();
   }
@@ -84,11 +84,11 @@ QString GetSlideDir(const QString& locale) {
   return installer_dir.absoluteFilePath(kDefaultSlide);
 }
 
-// Get slide image file list with specific |locale|.
-QStringList GetSlideFiles(const QString& locale) {
+// Get slide image file list with specific |language_name|.
+QStringList GetSlideFiles(const QString& language_name) {
   QStringList slide_files;
 
-  QDir slide_dir(GetSlideDir(locale));
+  QDir slide_dir(GetSlideDir(language_name));
   Q_ASSERT(slide_dir.exists());
 
   const QString image_json_file = slide_dir.absoluteFilePath(kImagesJson);

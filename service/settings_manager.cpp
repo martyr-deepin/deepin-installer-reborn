@@ -273,6 +273,13 @@ QString ReadLocale() {
   return kDefaultLocale;
 }
 
+QString ReadLanguageName() {
+  const QString locale = ReadLocale();
+  // locale name is like en_US.UTF-8, so extract language from it.
+  const int dot_index = locale.indexOf('.');
+  return (dot_index > -1) ? locale.left(dot_index) : locale;
+}
+
 void WriteAvatar(const QString& avatar) {
   AppendToConfigFile("DI_AVATAR", avatar);
 }
