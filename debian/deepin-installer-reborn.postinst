@@ -33,21 +33,28 @@ generate_locale() {
   locale-gen
 }
 
+# Bluring image from $1 to $2
+blur_image() {
+  local SRC=$1
+  local DST=$2
+  local TMP=/TMP/installer-$(date +%s)-$(basename "${SRC}")
+  convert "${SRC}" -resize 25% -brightness-contrast -10 \
+    -modulate 100,120,100 -blur 0x16 -resize 400% "${TMP}" && \
+    mv -f "${TMP}" "${DST}"
+}
+
 # Generate new background image.
 generate_background_image() {
   local SRC="/usr/share/backgrounds/default_background.jpg"
-  local TMP_SRC="/tmp/default_background.jpg"
+  local TMP_SRC="/tmp/installer_default_background.jpg"
   local DST="${SHARE_DIR}/resources/default_wallpaper.jpg"
-  local TMP_DST="/tmp/blur_default_background.jpg"
 
   if [ -f "${TMP_SRC}" ]; then
     # Copy pre-generated background image.
     cp -f "${TMP_SRC}" "${DST}"
   elif [ -f "${SRC}" ]; then
     echo "Generate default wallpaper.."
-    convert "${SRC}" -resize 25% -brightness-contrast -10 \
-      -modulate 100,120,100 -blur 0x16 -resize 400% "${TMP_DST}" && \
-    cp -f "${TMP_DST}" "${DST}"
+    blur_image "${SRC}" "${DST}"
   fi
 
   return 0
