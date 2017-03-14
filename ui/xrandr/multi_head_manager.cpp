@@ -18,7 +18,7 @@ MultiHeadManager::MultiHeadManager(QObject* parent)
       wallpaper_items_(),
       multi_head_thread_(new QThread(this)),
       multi_head_worker_(new MultiHeadWorker()),
-      last_connected_monitors_(1),
+      last_connected_monitors_(-1),
       last_primary_geometry_() {
   this->setObjectName("wallpaper_manager");
 
@@ -46,6 +46,7 @@ void MultiHeadManager::updateWallpaper() {
 
   ConnectedOutputs outputs;
   if (GetConnectedOutputs(outputs) && !outputs.isEmpty()) {
+    qDebug() << "connected outputs:" << outputs;
     // Clear old wallpaper items
     for (WallpaperItem* item : wallpaper_items_) {
       item->hide();
@@ -85,6 +86,7 @@ void MultiHeadManager::updateWallpaper() {
 
     // Number of monitors changed.
     if (outputs.length() != last_connected_monitors_) {
+      qDebug() << "emit switchToMirrorMode() signal";
       last_connected_monitors_ = outputs.length();
       emit this->switchToMirrorMode();
     }
@@ -106,7 +108,9 @@ void MultiHeadManager::onMonitorsChanged() {
 
 void MultiHeadManager::doSwitchToMirrorMode() {
   qDebug() << "Switch to mirror mode";
-  SwitchToMirrorMode();
+  if (!SwitchToMirrorMode()) {
+    qCritical() << "Failed to switch to mirror mode!";
+  }
 }
 
 }  // namespace installer
