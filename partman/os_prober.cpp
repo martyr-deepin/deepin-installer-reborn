@@ -50,7 +50,7 @@ OsProberItems GetOsProberItems() {
       QString description = items.at(1);
       const int left_bracket_index = description.indexOf('(');
       if (left_bracket_index > -1) {
-        description = description.left(left_bracket_index);
+        description = description.left(left_bracket_index).trimmed();
       }
       const QString distro_name = items.at(2);
 

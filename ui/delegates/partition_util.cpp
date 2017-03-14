@@ -19,7 +19,7 @@ namespace installer {
 namespace {
 
 // Maximum length of partition label.
-const int kLabelMaxLen = 12;
+const int kLabelMaxLen = 25;
 
 // Mount points of live system in use currently.
 const char kCasperMountPoint[] = "/cdrom";
