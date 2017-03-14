@@ -37,6 +37,9 @@ bool SwitchMode();
 // Switch to mirror mode if multiple monitors are connected.
 bool SwitchToMirrorMode();
 
+// Set output mode to prefer mode.
+bool SwitchToPreferMode();
+
 }  // namespace installer
 
 #endif  // INSTALLER_UI_XRANDR_XRANDR_WRAPPER_H
