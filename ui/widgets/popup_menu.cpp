@@ -107,7 +107,6 @@ void PopupMenu::keyPressEvent(QKeyEvent* event) {
 }
 
 void PopupMenu::paintEvent(QPaintEvent* event) {
-  qDebug() << "paintEvent()";
   Q_UNUSED(event);
 
   QPainter painter(this);
@@ -173,11 +172,6 @@ void PopupMenu::initUI() {
   menu_view_->setStyleSheet(ReadFile(":/styles/popup_menu.css"));
 
   this->setContentsMargins(0, 0, 0, 0);
-  this->setAttribute(Qt::WA_TranslucentBackground, true);
-  this->setFocusPolicy(Qt::StrongFocus);
-
-  this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint |
-                       Qt::WindowStaysOnTopHint | Qt::ToolTip);
 }
 
 void PopupMenu::onMenuViewActivated(const QModelIndex& index) {

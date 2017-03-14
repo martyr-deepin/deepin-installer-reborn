@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QEvent>
 #include <QHBoxLayout>
+#include <QTimer>
 #include <QVBoxLayout>
 
 #include "partman/os_prober.h"
@@ -94,10 +95,6 @@ void SystemInfoTimezoneFrame::readConf() {
   emit this->timezoneUpdated(timezone_);
 }
 
-void SystemInfoTimezoneFrame::remarkTimezone() {
-  timezone_map_->setTimezone(timezone_map_->getTimezone());
-}
-
 void SystemInfoTimezoneFrame::writeConf() {
   // Validate timezone before writing to settings file.
   if (IsValidTimezone(timezone_)) {
@@ -122,6 +119,15 @@ void SystemInfoTimezoneFrame::changeEvent(QEvent* event) {
   } else {
     QFrame::changeEvent(event);
   }
+}
+
+void SystemInfoTimezoneFrame::showEvent(QShowEvent* event) {
+  QFrame::showEvent(event);
+
+  // NOTE(xushaohua): Add a delay to wait for paint event of timezone map.
+  QTimer::singleShot(0, [&]() {
+    timezone_map_->setTimezone(timezone_map_->getTimezone());
+  });
 }
 
 void SystemInfoTimezoneFrame::initConnections() {

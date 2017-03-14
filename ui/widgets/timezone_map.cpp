@@ -21,7 +21,6 @@ namespace installer {
 
 namespace {
 
-const int kDotVerticalMargin = 2;
 const int kZonePinHeight = 30;
 const int kZonePinMinimumWidth = 60;
 
@@ -135,7 +134,7 @@ void TimezoneMap::initUI() {
   zone_pin_->setAttribute(Qt::WA_TransparentForMouseEvents, true);
   zone_pin_->hide();
 
-  popup_window_ = new PopupMenu();
+  popup_window_ = new PopupMenu(this->parentWidget());
   popup_window_->hide();
 
   this->setContentsMargins(0, 0, 0, 0);
@@ -157,13 +156,18 @@ void TimezoneMap::popupZoneWindow(const QPoint& pos) {
 
   // Show popup window above dot
   popup_window_->setStringList(zone_names);
-  const int dy = pos.y() - dot_->height() - kDotVerticalMargin;
-  const QPoint popup_window_pos = this->mapToGlobal(QPoint(pos.x(), dy));
-  popup_window_->popup(popup_window_pos);
 
-  const QPoint dot_relative_pos(pos.x() - dot_->width() / 2,
-                                pos.y() - dot_->height() / 2);
-  const QPoint dot_pos(this->mapToParent(dot_relative_pos));
+  const int half_width = dot_->width() / 2;
+  const int half_height = dot_->height() / 2;
+  // Position relative to parent.
+  const QPoint parent_pos(this->mapToParent(pos));
+
+  // Add 8px margin.
+  const QPoint popup_pos(parent_pos.x(), parent_pos.y() - half_height - 8);
+  popup_window_->popup(popup_pos);
+
+  const QPoint dot_pos(parent_pos.x() - half_width,
+                       parent_pos.y() - half_height);
   dot_->move(dot_pos);
   dot_->show();
 }
@@ -188,14 +192,17 @@ void TimezoneMap::remark() {
     // Show zone pin at current marked zone.
     const QPoint zone_pos = ZoneInfoToPosition(current_zone_, map_width,
                                                map_height);
-    const int zone_dy = zone_pos.y() - dot_->height() / 2 - kDotVerticalMargin;
-    const QPoint zone_pin_relative_pos(zone_pos.x(), zone_dy);
-    const QPoint zone_pin_pos(this->mapToParent(zone_pin_relative_pos));
+
+    const int half_width = dot_->width() / 2;
+    const int half_height = dot_->height() / 2;
+    const QPoint parent_pos(this->mapToParent(zone_pos));
+
+    // Add 2px margin.
+    const QPoint zone_pin_pos(parent_pos.x(), parent_pos.y() - half_height - 2);
     zone_pin_->popup(zone_pin_pos);
 
-    const QPoint dot_relative_pos(zone_pos.x() - dot_->width() / 2,
-                                  zone_pos.y() - dot_->height() / 2);
-    const QPoint dot_pos(this->mapToParent(dot_relative_pos));
+    const QPoint dot_pos(parent_pos.x() - half_width,
+                         parent_pos.y() - half_height);
     dot_->move(dot_pos);
     dot_->show();
   }
