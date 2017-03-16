@@ -5,7 +5,7 @@
 
 # Fix program file capacity flags caused by squashfs filesystem.
 
-for pkg in libgstreamer1.0-0 systemd iputils-ping netselect; do
+for pkg in libgstreamer1.0-0 systemd iputils-ping netselect foxitreader; do
   dpkg -l | grep -q -e  "^ii\ \ ${pkg}\ " && \
     dpkg-reconfigure --frontend noninteractive ${pkg} || true
 done
