@@ -106,12 +106,12 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="289"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation type="unfinished"/>
+        <translation>A partíció, ahol a /boot könyvtár van, csak %1 lehet</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="293"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation type="unfinished"/>
+        <translation>A merevlemez első partíciójában kell lennie a /boot könyvtárnak</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="306"/>
@@ -412,7 +412,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
         <source>Full Disk Format Warning</source>
-        <translation type="unfinished"/>
+        <translation>Teljes lemez formattálás figyelmeztetés</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>

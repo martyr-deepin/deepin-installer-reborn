@@ -411,7 +411,7 @@ msgstr "Amerika/Atikokan"
 #. comment for time zone America/Atikokan
 #: system-config-date-timezones.h:113
 msgid "Eastern Standard Time - Atikokan, Ontario and Southampton I, Nunavut"
-msgstr ""
+msgstr "Eastern Standard Time - Atikokan, Ontario and Southampton I, Nunavut"
 
 #: system-config-date-timezones.h:114
 msgid "America/Atka"
@@ -433,7 +433,7 @@ msgstr "Amerika/Bahia_Banderas"
 #. comment for time zone America/Bahia_Banderas
 #: system-config-date-timezones.h:120
 msgid "Mexican Central Time - Bahia de Banderas"
-msgstr ""
+msgstr "Mexican Central Time - Bahia de Banderas"
 
 #: system-config-date-timezones.h:121
 msgid "America/Barbados"
@@ -459,7 +459,7 @@ msgstr "Amerika/Blanc-Sablon"
 #. comment for time zone America/Blanc-Sablon
 #: system-config-date-timezones.h:128
 msgid "Atlantic Standard Time - Quebec - Lower North Shore"
-msgstr ""
+msgstr "Atlantic Standard Time - Quebec - Lower North Shore"
 
 #: system-config-date-timezones.h:129
 msgid "America/Boa_Vista"
@@ -481,7 +481,7 @@ msgstr "Amerika/Boise"
 #. comment for time zone America/Boise
 #: system-config-date-timezones.h:135
 msgid "Mountain Time - south Idaho & east Oregon"
-msgstr ""
+msgstr "Mountain Time - south Idaho & east Oregon"
 
 #: system-config-date-timezones.h:136
 msgid "America/Buenos_Aires"
@@ -494,7 +494,7 @@ msgstr "Amerika/Cambridge_Bay"
 #. comment for time zone America/Cambridge_Bay
 #: system-config-date-timezones.h:139
 msgid "Mountain Time - west Nunavut"
-msgstr ""
+msgstr "Mountain Time - west Nunavut"
 
 #: system-config-date-timezones.h:140
 msgid "America/Campo_Grande"
@@ -512,7 +512,7 @@ msgstr "Amerika/Cancun"
 #. comment for time zone America/Cancun
 #: system-config-date-timezones.h:145
 msgid "Central Time - Quintana Roo"
-msgstr ""
+msgstr "Central Time - Quintana Roo"
 
 #: system-config-date-timezones.h:146
 msgid "America/Caracas"
@@ -537,7 +537,7 @@ msgstr "Amerika/Chicago"
 #. comment for time zone America/Chicago
 #: system-config-date-timezones.h:152
 msgid "Central Time"
-msgstr ""
+msgstr "Central Time"
 
 #: system-config-date-timezones.h:153
 msgid "America/Chihuahua"
@@ -546,7 +546,7 @@ msgstr "Amerika/Chihuahua"
 #. comment for time zone America/Chihuahua
 #: system-config-date-timezones.h:155
 msgid "Mexican Mountain Time - Chihuahua away from US border"
-msgstr ""
+msgstr "Mexican Mountain Time - Chihuahua away from US border"
 
 #: system-config-date-timezones.h:156
 msgid "America/Coral_Harbour"
@@ -567,7 +567,7 @@ msgstr "Amerika/Creston"
 #. comment for time zone America/Creston
 #: system-config-date-timezones.h:161
 msgid "Mountain Standard Time - Creston, British Columbia"
-msgstr ""
+msgstr "Mountain Standard Time - Creston, British Columbia"
 
 #: system-config-date-timezones.h:162
 msgid "America/Cuiaba"
@@ -589,7 +589,7 @@ msgstr "Amerika/Danmarkshavn"
 #. comment for time zone America/Danmarkshavn
 #: system-config-date-timezones.h:168
 msgid "east coast, north of Scoresbysund"
-msgstr ""
+msgstr "east coast, north of Scoresbysund"
 
 #: system-config-date-timezones.h:169
 msgid "America/Dawson"
@@ -598,7 +598,7 @@ msgstr "Amerika/Dawson"
 #. comment for time zone America/Dawson
 #: system-config-date-timezones.h:171
 msgid "Pacific Time - north Yukon"
-msgstr ""
+msgstr "Pacific Time - north Yukon"
 
 #: system-config-date-timezones.h:172
 msgid "America/Dawson_Creek"
@@ -609,6 +609,7 @@ msgstr "Amerika/Dawson_Creek"
 msgid ""
 "Mountain Standard Time - Dawson Creek & Fort Saint John, British Columbia"
 msgstr ""
+"Mountain Standard Time - Dawson Creek & Fort Saint John, British Columbia"
 
 #: system-config-date-timezones.h:175
 msgid "America/Denver"
@@ -617,7 +618,7 @@ msgstr "Amerika/Denver"
 #. comment for time zone America/Denver
 #: system-config-date-timezones.h:177
 msgid "Mountain Time"
-msgstr ""
+msgstr "Mountain Time"
 
 #: system-config-date-timezones.h:178
 msgid "America/Detroit"
@@ -626,7 +627,7 @@ msgstr "Amerika/Detroit"
 #. comment for time zone America/Detroit
 #: system-config-date-timezones.h:180
 msgid "Eastern Time - Michigan - most locations"
-msgstr ""
+msgstr "Eastern Time - Michigan - most locations"
 
 #: system-config-date-timezones.h:181
 msgid "America/Dominica"
@@ -639,7 +640,7 @@ msgstr "Amerika/Edmonton"
 #. comment for time zone America/Edmonton
 #: system-config-date-timezones.h:184
 msgid "Mountain Time - Alberta, east British Columbia & west Saskatchewan"
-msgstr ""
+msgstr "Mountain Time - Alberta, east British Columbia & west Saskatchewan"
 
 #: system-config-date-timezones.h:185
 msgid "America/Eirunepe"
@@ -680,6 +681,7 @@ msgstr "Amerika/Glace_Bay"
 msgid ""
 "Atlantic Time - Nova Scotia - places that did not observe DST 1966-1971"
 msgstr ""
+"Atlantic Time - Nova Scotia - places that did not observe DST 1966-1971"
 
 #: system-config-date-timezones.h:197
 msgid "America/Godthab"
@@ -706,7 +708,7 @@ msgstr "Amerika/Goose_Bay"
 #. comment for time zone America/Goose_Bay
 #: system-config-date-timezones.h:202
 msgid "Atlantic Time - Labrador - most locations"
-msgstr ""
+msgstr "Atlantic Time - Labrador - most locations"
 
 #: system-config-date-timezones.h:203
 msgid "America/Grand_Turk"
@@ -734,7 +736,7 @@ msgstr "Amerika/Guayaquil"
 #: system-config-date-timezones.h:209 system-config-date-timezones.h:777
 #: system-config-date-timezones.h:783
 msgid "mainland"
-msgstr ""
+msgstr "mainland"
 
 #: system-config-date-timezones.h:210
 msgid "America/Guyana"
@@ -747,7 +749,7 @@ msgstr "Amerika/Halifax"
 #. comment for time zone America/Halifax
 #: system-config-date-timezones.h:213
 msgid "Atlantic Time - Nova Scotia (most places), PEI"
-msgstr ""
+msgstr "Atlantic Time - Nova Scotia (most places), PEI"
 
 #: system-config-date-timezones.h:214
 msgid "America/Havana"
@@ -760,7 +762,7 @@ msgstr "Amerika/Hermosillo"
 #. comment for time zone America/Hermosillo
 #: system-config-date-timezones.h:217
 msgid "Mountain Standard Time - Sonora"
-msgstr ""
+msgstr "Mountain Standard Time - Sonora"
 
 #: system-config-date-timezones.h:218
 msgid "America/Indiana/Indianapolis"
@@ -769,7 +771,7 @@ msgstr "Amerika/Indiana/Indianapolis"
 #. comment for time zone America/Indiana/Indianapolis
 #: system-config-date-timezones.h:220
 msgid "Eastern Time - Indiana - most locations"
-msgstr ""
+msgstr "Eastern Time - Indiana - most locations"
 
 #: system-config-date-timezones.h:221
 msgid "America/Indiana/Knox"
@@ -778,7 +780,7 @@ msgstr "Amerika/Indiana/Knox"
 #. comment for time zone America/Indiana/Knox
 #: system-config-date-timezones.h:223
 msgid "Central Time - Indiana - Starke County"
-msgstr ""
+msgstr "Central Time - Indiana - Starke County"
 
 #: system-config-date-timezones.h:224
 msgid "America/Indiana/Marengo"
@@ -787,7 +789,7 @@ msgstr "Amerika/Indiana/Marengo"
 #. comment for time zone America/Indiana/Marengo
 #: system-config-date-timezones.h:226
 msgid "Eastern Time - Indiana - Crawford County"
-msgstr ""
+msgstr "Eastern Time - Indiana - Crawford County"
 
 #: system-config-date-timezones.h:227
 msgid "America/Indiana/Petersburg"
@@ -796,7 +798,7 @@ msgstr "Amerika/Indiana/Petersburg"
 #. comment for time zone America/Indiana/Petersburg
 #: system-config-date-timezones.h:229
 msgid "Eastern Time - Indiana - Pike County"
-msgstr ""
+msgstr "Eastern Time - Indiana - Pike County"
 
 #: system-config-date-timezones.h:230
 msgid "America/Indianapolis"
@@ -809,7 +811,7 @@ msgstr "Amerika/Indiana/Tell_City"
 #. comment for time zone America/Indiana/Tell_City
 #: system-config-date-timezones.h:233
 msgid "Central Time - Indiana - Perry County"
-msgstr ""
+msgstr "Central Time - Indiana - Perry County"
 
 #: system-config-date-timezones.h:234
 msgid "America/Indiana/Vevay"
@@ -818,7 +820,7 @@ msgstr "Amerika/Indiana/Vevay"
 #. comment for time zone America/Indiana/Vevay
 #: system-config-date-timezones.h:236
 msgid "Eastern Time - Indiana - Switzerland County"
-msgstr ""
+msgstr "Eastern Time - Indiana - Switzerland County"
 
 #: system-config-date-timezones.h:237
 msgid "America/Indiana/Vincennes"
@@ -827,7 +829,7 @@ msgstr "Amerika/Indiana/Vincennes"
 #. comment for time zone America/Indiana/Vincennes
 #: system-config-date-timezones.h:239
 msgid "Eastern Time - Indiana - Daviess, Dubois, Knox & Martin Counties"
-msgstr ""
+msgstr "Eastern Time - Indiana - Daviess, Dubois, Knox & Martin Counties"
 
 #: system-config-date-timezones.h:240
 msgid "America/Indiana/Winamac"
@@ -836,7 +838,7 @@ msgstr "Amerika/Indiana/Winamac"
 #. comment for time zone America/Indiana/Winamac
 #: system-config-date-timezones.h:242
 msgid "Eastern Time - Indiana - Pulaski County"
-msgstr ""
+msgstr "Eastern Time - Indiana - Pulaski County"
 
 #: system-config-date-timezones.h:243
 msgid "America/Inuvik"
@@ -845,7 +847,7 @@ msgstr "Amerika/Inuvik"
 #. comment for time zone America/Inuvik
 #: system-config-date-timezones.h:245
 msgid "Mountain Time - west Northwest Territories"
-msgstr ""
+msgstr "Mountain Time - west Northwest Territories"
 
 #: system-config-date-timezones.h:246
 msgid "America/Iqaluit"
@@ -854,7 +856,7 @@ msgstr "Amerika/Iqaluit"
 #. comment for time zone America/Iqaluit
 #: system-config-date-timezones.h:248
 msgid "Eastern Time - east Nunavut - most locations"
-msgstr ""
+msgstr "Eastern Time - east Nunavut - most locations"
 
 #: system-config-date-timezones.h:249
 msgid "America/Jamaica"
@@ -871,7 +873,7 @@ msgstr "Amerika/Juneau"
 #. comment for time zone America/Juneau
 #: system-config-date-timezones.h:253
 msgid "Alaska Time - Alaska panhandle"
-msgstr ""
+msgstr "Alaska Time - Alaska panhandle"
 
 #: system-config-date-timezones.h:254
 msgid "America/Kentucky/Louisville"
@@ -880,7 +882,7 @@ msgstr "Amerika/Kentucky/Louisville"
 #. comment for time zone America/Kentucky/Louisville
 #: system-config-date-timezones.h:256
 msgid "Eastern Time - Kentucky - Louisville area"
-msgstr ""
+msgstr "Eastern Time - Kentucky - Louisville area"
 
 #: system-config-date-timezones.h:257
 msgid "America/Kentucky/Monticello"
@@ -889,7 +891,7 @@ msgstr "Amerika/Kentucky/Monticello"
 #. comment for time zone America/Kentucky/Monticello
 #: system-config-date-timezones.h:259
 msgid "Eastern Time - Kentucky - Wayne County"
-msgstr ""
+msgstr "Eastern Time - Kentucky - Wayne County"
 
 #: system-config-date-timezones.h:260
 msgid "America/Knox_IN"
@@ -914,7 +916,7 @@ msgstr "Amerika/Los_Angeles"
 #. comment for time zone America/Los_Angeles
 #: system-config-date-timezones.h:266
 msgid "Pacific Time"
-msgstr ""
+msgstr "Pacific Time"
 
 #: system-config-date-timezones.h:267
 msgid "America/Louisville"
@@ -963,6 +965,7 @@ msgstr "Amerika/Matamoros"
 msgid ""
 "US Central Time - Coahuila, Durango, Nuevo Leon, Tamaulipas near US border"
 msgstr ""
+"US Central Time - Coahuila, Durango, Nuevo Leon, Tamaulipas near US border"
 
 #: system-config-date-timezones.h:281
 msgid "America/Mazatlan"
@@ -971,7 +974,7 @@ msgstr "Amerika/Mazatlan"
 #. comment for time zone America/Mazatlan
 #: system-config-date-timezones.h:283
 msgid "Mountain Time - S Baja, Nayarit, Sinaloa"
-msgstr ""
+msgstr "Mountain Time - S Baja, Nayarit, Sinaloa"
 
 #: system-config-date-timezones.h:284
 msgid "America/Mendoza"
@@ -986,6 +989,7 @@ msgstr "Amerika/Menominee"
 msgid ""
 "Central Time - Michigan - Dickinson, Gogebic, Iron & Menominee Counties"
 msgstr ""
+"Central Time - Michigan - Dickinson, Gogebic, Iron & Menominee Counties"
 
 #: system-config-date-timezones.h:288
 msgid "America/Merida"
@@ -994,7 +998,7 @@ msgstr "Amerika/Merida"
 #. comment for time zone America/Merida
 #: system-config-date-timezones.h:290
 msgid "Central Time - Campeche, Yucatan"
-msgstr ""
+msgstr "Central Time - Campeche, Yucatan"
 
 #: system-config-date-timezones.h:291
 msgid "America/Metlakatla"
@@ -1003,7 +1007,7 @@ msgstr "Amerika/Metlakatla"
 #. comment for time zone America/Metlakatla
 #: system-config-date-timezones.h:293
 msgid "Metlakatla Time - Annette Island"
-msgstr ""
+msgstr "Metlakatla Time - Annette Island"
 
 #: system-config-date-timezones.h:294
 msgid "America/Mexico_City"
@@ -1012,7 +1016,7 @@ msgstr "Amerika/Mexico_City"
 #. comment for time zone America/Mexico_City
 #: system-config-date-timezones.h:296
 msgid "Central Time - most locations"
-msgstr ""
+msgstr "Central Time - most locations"
 
 #: system-config-date-timezones.h:297
 msgid "America/Miquelon"
@@ -1025,7 +1029,7 @@ msgstr "Amerika/Moncton"
 #. comment for time zone America/Moncton
 #: system-config-date-timezones.h:300
 msgid "Atlantic Time - New Brunswick"
-msgstr ""
+msgstr "Atlantic Time - New Brunswick"
 
 #: system-config-date-timezones.h:301
 msgid "America/Monterrey"
@@ -1037,6 +1041,8 @@ msgid ""
 "Mexican Central Time - Coahuila, Durango, Nuevo Leon, Tamaulipas away from "
 "US border"
 msgstr ""
+"Mexican Central Time - Coahuila, Durango, Nuevo Leon, Tamaulipas away from "
+"US border"
 
 #: system-config-date-timezones.h:304
 msgid "America/Montevideo"
@@ -1049,7 +1055,7 @@ msgstr "Amerika/Montreal"
 #. comment for time zone America/Montreal
 #: system-config-date-timezones.h:307
 msgid "Eastern Time - Quebec - most locations"
-msgstr ""
+msgstr "Eastern Time - Quebec - most locations"
 
 #: system-config-date-timezones.h:308
 msgid "America/Montserrat"
@@ -1066,7 +1072,7 @@ msgstr "Amerika/New_York"
 #. comment for time zone America/New_York
 #: system-config-date-timezones.h:312
 msgid "Eastern Time"
-msgstr ""
+msgstr "Eastern Time"
 
 #: system-config-date-timezones.h:313
 msgid "America/Nipigon"
@@ -1077,6 +1083,7 @@ msgstr "Amerika/Nipigon"
 msgid ""
 "Eastern Time - Ontario & Quebec - places that did not observe DST 1967-1973"
 msgstr ""
+"Eastern Time - Ontario & Quebec - places that did not observe DST 1967-1973"
 
 #: system-config-date-timezones.h:316
 msgid "America/Nome"
@@ -1085,7 +1092,7 @@ msgstr "Amerika/Nome"
 #. comment for time zone America/Nome
 #: system-config-date-timezones.h:318
 msgid "Alaska Time - west Alaska"
-msgstr ""
+msgstr "Alaska Time - west Alaska"
 
 #: system-config-date-timezones.h:319
 msgid "America/Noronha"
@@ -1103,7 +1110,7 @@ msgstr "Amerika/North_Dakota/Beulah"
 #. comment for time zone America/North_Dakota/Beulah
 #: system-config-date-timezones.h:324
 msgid "Central Time - North Dakota - Mercer County"
-msgstr ""
+msgstr "Central Time - North Dakota - Mercer County"
 
 #: system-config-date-timezones.h:325
 msgid "America/North_Dakota/Center"
@@ -1112,7 +1119,7 @@ msgstr "Amerika/North_Dakota/Center"
 #. comment for time zone America/North_Dakota/Center
 #: system-config-date-timezones.h:327
 msgid "Central Time - North Dakota - Oliver County"
-msgstr ""
+msgstr "Central Time - North Dakota - Oliver County"
 
 #: system-config-date-timezones.h:328
 msgid "America/North_Dakota/New_Salem"
@@ -1121,7 +1128,7 @@ msgstr "Amerika/North_Dakota/New_Salem"
 #. comment for time zone America/North_Dakota/New_Salem
 #: system-config-date-timezones.h:330
 msgid "Central Time - North Dakota - Morton County (except Mandan area)"
-msgstr ""
+msgstr "Central Time - North Dakota - Morton County (except Mandan area)"
 
 #: system-config-date-timezones.h:331
 msgid "America/Ojinaga"
@@ -1130,7 +1137,7 @@ msgstr "Amerika/Ojinaga"
 #. comment for time zone America/Ojinaga
 #: system-config-date-timezones.h:333
 msgid "US Mountain Time - Chihuahua near US border"
-msgstr ""
+msgstr "US Mountain Time - Chihuahua near US border"
 
 #: system-config-date-timezones.h:334
 msgid "America/Panama"
@@ -1143,7 +1150,7 @@ msgstr "Amerika/Pangnirtung"
 #. comment for time zone America/Pangnirtung
 #: system-config-date-timezones.h:337
 msgid "Eastern Time - Pangnirtung, Nunavut"
-msgstr ""
+msgstr "Eastern Time - Pangnirtung, Nunavut"
 
 #: system-config-date-timezones.h:338
 msgid "America/Paramaribo"
@@ -1156,7 +1163,7 @@ msgstr "Amerika/Phoenix"
 #. comment for time zone America/Phoenix
 #: system-config-date-timezones.h:341
 msgid "Mountain Standard Time - Arizona"
-msgstr ""
+msgstr "Mountain Standard Time - Arizona"
 
 #: system-config-date-timezones.h:342
 msgid "America/Port-au-Prince"
@@ -1190,7 +1197,7 @@ msgstr "Amerika/Rainy_River"
 #. comment for time zone America/Rainy_River
 #: system-config-date-timezones.h:351
 msgid "Central Time - Rainy River & Fort Frances, Ontario"
-msgstr ""
+msgstr "Central Time - Rainy River & Fort Frances, Ontario"
 
 #: system-config-date-timezones.h:352
 msgid "America/Rankin_Inlet"
@@ -1199,7 +1206,7 @@ msgstr "Amerika/Rankin_Inlet"
 #. comment for time zone America/Rankin_Inlet
 #: system-config-date-timezones.h:354
 msgid "Central Time - central Nunavut"
-msgstr ""
+msgstr "Central Time - central Nunavut"
 
 #: system-config-date-timezones.h:355
 msgid "America/Recife"
@@ -1217,7 +1224,7 @@ msgstr "Amerika/Regina"
 #. comment for time zone America/Regina
 #: system-config-date-timezones.h:360
 msgid "Central Standard Time - Saskatchewan - most locations"
-msgstr ""
+msgstr "Central Standard Time - Saskatchewan - most locations"
 
 #: system-config-date-timezones.h:361
 msgid "America/Resolute"
@@ -1226,7 +1233,7 @@ msgstr "Amerika/Resolute"
 #. comment for time zone America/Resolute
 #: system-config-date-timezones.h:363
 msgid "Central Standard Time - Resolute, Nunavut"
-msgstr ""
+msgstr "Central Standard Time - Resolute, Nunavut"
 
 #: system-config-date-timezones.h:364
 msgid "America/Rio_Branco"
@@ -1248,7 +1255,7 @@ msgstr "Amerika/Santa_Isabel"
 #. comment for time zone America/Santa_Isabel
 #: system-config-date-timezones.h:370
 msgid "Mexican Pacific Time - Baja California away from US border"
-msgstr ""
+msgstr "Mexican Pacific Time - Baja California away from US border"
 
 #: system-config-date-timezones.h:371
 msgid "America/Santarem"
@@ -1292,7 +1299,7 @@ msgstr "Amerika/Shiprock"
 #. comment for time zone America/Shiprock
 #: system-config-date-timezones.h:386
 msgid "Mountain Time - Navajo"
-msgstr ""
+msgstr "Mountain Time - Navajo"
 
 #: system-config-date-timezones.h:387
 msgid "America/Sitka"
@@ -1301,7 +1308,7 @@ msgstr "Amerika/Sitka"
 #. comment for time zone America/Sitka
 #: system-config-date-timezones.h:389
 msgid "Alaska Time - southeast Alaska panhandle"
-msgstr ""
+msgstr "Alaska Time - southeast Alaska panhandle"
 
 #: system-config-date-timezones.h:390
 msgid "America/St_Barthelemy"
@@ -1314,7 +1321,7 @@ msgstr "Amerika/St_Johns"
 #. comment for time zone America/St_Johns
 #: system-config-date-timezones.h:393
 msgid "Newfoundland Time, including SE Labrador"
-msgstr ""
+msgstr "Newfoundland Time, including SE Labrador"
 
 #: system-config-date-timezones.h:394
 msgid "America/St_Kitts"
@@ -1339,7 +1346,7 @@ msgstr "Amerika/Swift_Current"
 #. comment for time zone America/Swift_Current
 #: system-config-date-timezones.h:400
 msgid "Central Standard Time - Saskatchewan - midwest"
-msgstr ""
+msgstr "Central Standard Time - Saskatchewan - midwest"
 
 #: system-config-date-timezones.h:401
 msgid "America/Tegucigalpa"
@@ -1361,7 +1368,7 @@ msgstr "Amerika/Thunder_Bay"
 #. comment for time zone America/Thunder_Bay
 #: system-config-date-timezones.h:407
 msgid "Eastern Time - Thunder Bay, Ontario"
-msgstr ""
+msgstr "Eastern Time - Thunder Bay, Ontario"
 
 #: system-config-date-timezones.h:408
 msgid "America/Tijuana"
@@ -1370,7 +1377,7 @@ msgstr "Amerika/Tijuana"
 #. comment for time zone America/Tijuana
 #: system-config-date-timezones.h:410
 msgid "US Pacific Time - Baja California near US border"
-msgstr ""
+msgstr "US Pacific Time - Baja California near US border"
 
 #: system-config-date-timezones.h:411
 msgid "America/Toronto"
@@ -1379,7 +1386,7 @@ msgstr "Amerika/Toronto"
 #. comment for time zone America/Toronto
 #: system-config-date-timezones.h:413
 msgid "Eastern Time - Ontario - most locations"
-msgstr ""
+msgstr "Eastern Time - Ontario - most locations"
 
 #: system-config-date-timezones.h:414
 msgid "America/Tortola"
@@ -1392,7 +1399,7 @@ msgstr "Amerika/Vancouver"
 #. comment for time zone America/Vancouver
 #: system-config-date-timezones.h:417
 msgid "Pacific Time - west British Columbia"
-msgstr ""
+msgstr "Pacific Time - west British Columbia"
 
 #: system-config-date-timezones.h:418
 msgid "America/Virgin"
@@ -1405,7 +1412,7 @@ msgstr "Amerika/Whitehorse"
 #. comment for time zone America/Whitehorse
 #: system-config-date-timezones.h:421
 msgid "Pacific Time - south Yukon"
-msgstr ""
+msgstr "Pacific Time - south Yukon"
 
 #: system-config-date-timezones.h:422
 msgid "America/Winnipeg"
@@ -1414,7 +1421,7 @@ msgstr "Amerika/Winnipeg"
 #. comment for time zone America/Winnipeg
 #: system-config-date-timezones.h:424
 msgid "Central Time - Manitoba & west Ontario"
-msgstr ""
+msgstr "Central Time - Manitoba & west Ontario"
 
 #: system-config-date-timezones.h:425
 msgid "America/Yakutat"
@@ -1423,7 +1430,7 @@ msgstr "Amerika/Yakutat"
 #. comment for time zone America/Yakutat
 #: system-config-date-timezones.h:427
 msgid "Alaska Time - Alaska panhandle neck"
-msgstr ""
+msgstr "Alaska Time - Alaska panhandle neck"
 
 #: system-config-date-timezones.h:428
 msgid "America/Yellowknife"
@@ -1432,7 +1439,7 @@ msgstr "Amerika/Yellowknife"
 #. comment for time zone America/Yellowknife
 #: system-config-date-timezones.h:430
 msgid "Mountain Time - central Northwest Territories"
-msgstr ""
+msgstr "Mountain Time - central Northwest Territories"
 
 #: system-config-date-timezones.h:431
 msgid "Antarctica/Casey"

@@ -35,22 +35,22 @@
     <message>
         <location filename="../partman/operation.cpp" line="243"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation type="unfinished"/>
+        <translation>Créer une nouvelle partition %1 comme %2 (point de montage), en %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation type="unfinished"/>
+        <translation>Formater la partition %1 comme %2 (point de montage), en %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="269"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
-        <translation type="unfinished"/>
+        <translation>Utiliser la partition %1 comme %2 (point de montage)</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="275"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation type="unfinished"/>
+        <translation>Formater % 1 et créer % 2 nouvelle table de partition</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="252"/>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
         <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation type="unfinished"/>
+        <translation>Il faut au moins %1GB d&apos;espace disque pour installer Deepin, pour de meilleures performances, %2GB et plus est recommandé</translation>
     </message>
 </context>
 <context>
@@ -275,7 +275,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="83"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation type="unfinished"/>
+        <translation>Désolé pour le désagrément, vous pouvez prendre une photo ou scanner le code QR pour nous l&apos;envoyer via le journal d&apos;erreurs, afin que nous puissions résoudre le problème.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="65"/>
@@ -296,7 +296,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation type="unfinished"/>
+        <translation>Le temps de prendre une tasse de café et votre expérience Deepin sera prête à commencer</translation>
     </message>
 </context>
 <context>
@@ -439,7 +439,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="58"/>
         <location filename="../ui/frames/partition_frame.cpp" line="163"/>
         <source>Select Installation Location</source>
-        <translation>Sélectionnez l&apos;emplacement de l&apos;installation</translation>
+        <translation>Sélectionnez l&apos;emplacement </translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="60"/>
@@ -533,7 +533,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation type="unfinished"/>
+        <translation>Assurez-vous d&apos;avoir sauvegardé vos données importantes, ensuite redémarrez pour entrer dans cette interface</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
@@ -628,7 +628,7 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="81"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
-        <translation>Les opérations suivantes seront exécutées, veuillez confirmer et continuer pour éviter la perte de données</translation>
+        <translation>Les opérations suivantes seront exécutées</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="56"/>
@@ -649,7 +649,7 @@
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="29"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="52"/>
         <source>Select location for boot loader</source>
-        <translation>Sélectionnez l&apos;emplacement pour le chargeur de démarrage</translation>
+        <translation>Emplacement du chargeur de démarrage</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="31"/>
@@ -718,7 +718,7 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="52"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="112"/>
         <source>Create User Account</source>
-        <translation>Créer un nom d&apos;utilisateur</translation>
+        <translation>Créer un compte d&apos;utilisateur</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="53"/>
@@ -840,13 +840,13 @@
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="108"/>
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="137"/>
         <source>Select Time Zone</source>
-        <translation>Sélection du fuseau horaire</translation>
+        <translation>Fuseau horaire</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="109"/>
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="138"/>
         <source>Mark your zone on the map</source>
-        <translation>Sélectionnez votre zone horaire</translation>
+        <translation>Veuillez l&apos;indiquer ci-dessous</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
