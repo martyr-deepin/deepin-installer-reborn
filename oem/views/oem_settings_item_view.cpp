@@ -12,6 +12,7 @@
 #include <QTextEdit>
 
 #include "base/file_util.h"
+#include "base/string_util.h"
 
 namespace installer {
 
@@ -24,6 +25,7 @@ OemSettingsItemView::OemSettingsItemView(QWidget* parent)
 }
 
 void OemSettingsItemView::updateItem(const OemSettingsItem& item) {
+  // Display content of |item|.
   item_ = item;
   title_->setText(item.title());
   name_->setText(item.name());
@@ -118,12 +120,21 @@ void OemSettingsItemView::initUI() {
 }
 
 void OemSettingsItemView::enableCustomValue(bool enable) {
+  // Update custom value area.
   custom_bool_->setVisible(false);
   custom_line_edit_->setVisible(false);
   custom_spin_box_->setVisible(false);
   custom_text_edit_->setVisible(false);
 
   switch (item_.value_type()) {
+    case OemSettingsType::Base64String: {
+      custom_text_edit_->setVisible(true);
+      custom_text_edit_->setEnabled(enable);
+      const QString content = item_.value().toString();
+      const QString orig_content = Base64Decode(content);
+      custom_text_edit_->setText(orig_content);
+      break;
+    }
     case OemSettingsType::Boolean: {
       custom_bool_->setVisible(true);
       custom_bool_->setEnabled(enable);

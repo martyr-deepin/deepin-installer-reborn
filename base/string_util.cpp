@@ -8,6 +8,14 @@
 
 namespace installer {
 
+QString Base64Decode(const QString& content) {
+  return QByteArray::fromBase64(content.toLocal8Bit());
+}
+
+QString Base64Encode(const QString& content) {
+  return content.toLocal8Bit().toBase64();
+}
+
 QString RegexpLabel(const QString& pattern, const QString& str) {
   QRegularExpression reg(pattern, QRegularExpression::MultilineOption);
   QRegularExpressionMatch match = reg.match(str);

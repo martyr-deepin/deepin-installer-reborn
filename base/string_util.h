@@ -9,6 +9,14 @@
 
 namespace installer {
 
+// Decode base64-encoded |content| and returns its original message.
+// If fails, returns an empty string.
+QString Base64Decode(const QString& content);
+
+// Encode |content| with base64.
+// If fails, returns an empty string.
+QString Base64Encode(const QString& content);
+
 // Parse a pattern |pattern| from string |str| and returns matched substring
 // or an empty string.
 // Note that a match group shall be specified in |pattern|.

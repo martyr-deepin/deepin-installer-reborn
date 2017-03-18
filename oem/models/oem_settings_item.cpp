@@ -15,6 +15,7 @@ namespace installer {
 
 namespace {
 
+const char kBase64StringValue[] = "Base64String";
 const char kBooleanValue[] = "Boolean";
 const char kEnumValue[] = "Enumeration";
 const char kFolderValue[] = "Folder";
@@ -36,6 +37,9 @@ const char kMaximumField[] = "maximum";
 
 QString OemSettingsTypeToString(OemSettingsType type) {
   switch (type) {
+    case OemSettingsType::Base64String: {
+      return kBase64StringValue;
+    }
     case OemSettingsType::Boolean: {
       return kBooleanValue;
     }
@@ -108,7 +112,9 @@ OemSettingsType OemSettingsItem::value_type() const {
 }
 
 void OemSettingsItem::setValueType(const QString& value_type) {
-  if (value_type == kBooleanValue) {
+  if (value_type == kBase64StringValue) {
+    value_type_ = OemSettingsType::Base64String;
+  } else if (value_type == kBooleanValue) {
     value_type_ = OemSettingsType::Boolean;
   } else if (value_type == kEnumValue) {
     value_type_ = OemSettingsType::Enumeration;

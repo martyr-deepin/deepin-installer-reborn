@@ -48,12 +48,12 @@
     "title": "Deepin 版本",
     "name": "system_info_deepin_version",
     "description": "",
-    "type": "String"
+    "type": "Base64String"
   }, {
     "title": "LSB 版本",
     "name": "system_info_lsb_release",
     "description": "",
-    "type": "String"
+    "type": "Base64String"
   },
   {
     "title": "系统服务提供商",

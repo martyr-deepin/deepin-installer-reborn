@@ -15,7 +15,7 @@ namespace installer {
 
 // Value type in each oem settings item.
 enum class OemSettingsType {
-  // TODO(xushaohua): Added Base64String
+  Base64String,
   Boolean,
   Enumeration,
   Folder,
