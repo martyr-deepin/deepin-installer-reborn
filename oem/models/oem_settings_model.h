@@ -20,15 +20,16 @@ class OemSettingsModel : public QAbstractListModel {
   virtual QVariant data(const QModelIndex& index, int role) const override;
   virtual int rowCount(const QModelIndex& parent) const override;
 
-  // Write current settings to disk.
-  bool dump();
-
   // Get oem item at |index|.
   OemSettingsItem getItem(const QModelIndex& index) const;
 
   // Load default settings from system, and then load settings in
   // $HOME/oem folder if exists.
   bool load();
+
+ public slots:
+  // Update |item| in |items_| list and save its value to file if needed.
+  void dumpItem(const OemSettingsItem& item);
 
  private:
   OemSettingsItems items_;

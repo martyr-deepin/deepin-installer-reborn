@@ -189,11 +189,23 @@ QDebug& operator<<(QDebug& debug, const OemSettingsItems& items) {
   return debug;
 }
 
-bool DumpSettingsItems(const OemSettingsItems& items,
-                       const QString& settings_ini_file) {
-  Q_UNUSED(items);
-  Q_UNUSED(settings_ini_file);
-  return false;
+void DumpSettingsItem(const OemSettingsItem& item,
+                      const QString& settings_ini_file) {
+  qDebug() << "DumpItem:" << item << settings_ini_file;
+  CreateParentDirs(settings_ini_file);
+
+  QSettings settings(settings_ini_file, QSettings::IniFormat);
+  const QString& item_name = item.name();
+
+  if (item.value() != item.default_value()) {
+    qDebug() << "Set value:" << item;
+    settings.setValue(item_name, item.value());
+  } else {
+    if (settings.contains(item_name)) {
+      // Remove item from settings if its value equals to default value.
+      settings.remove(item_name);
+    }
+  }
 }
 
 bool LoadSettingsItems(OemSettingsItems& items,
@@ -244,8 +256,6 @@ bool LoadSettingsItems(OemSettingsItems& items,
     item.setMaximum(obj_item.value(kMaximumField));
     items.append(item);
   }
-
-  qDebug() << "items:" << items;
 
   return true;
 }

@@ -24,12 +24,19 @@ class OemSettingsItemView : public QFrame {
 
   void updateItem(const OemSettingsItem& item);
 
+ signals:
+  // Emitted when value in |item| is changed.
+  void itemChanged(const OemSettingsItem& item);
+
  private:
   void initConnections();
   void initUI();
 
   // Enable/disable custom value area.
   void enableCustomValue(bool enable);
+
+  // Get value in custom area.
+  QVariant getCustomValue();
 
   // Update value in custom area to current value of item.
   void updateCustomValue();
@@ -51,6 +58,9 @@ class OemSettingsItemView : public QFrame {
  private slots:
   // Enable or disable custom value area when use_default_value_btn_ is toggled.
   void onUseDefaultValueButtonToggled(bool checked);
+
+  // Handles toggle signal of custom_bool_ button.
+  void onCustomBoolToggled();
 };
 
 }  // namespace installer

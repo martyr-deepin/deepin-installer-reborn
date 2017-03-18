@@ -50,12 +50,6 @@ int OemSettingsModel::rowCount(const QModelIndex& parent) const {
   return items_.length();
 }
 
-bool OemSettingsModel::dump() {
-  const QDir oem_dir(GetOemFolder());
-  const QString settings_file = oem_dir.absoluteFilePath(kSettingsName);
-  return DumpSettingsItems(items_, settings_file);
-}
-
 OemSettingsItem OemSettingsModel::getItem(const QModelIndex& index) const {
   if (index.isValid()) {
     return items_.at(index.row());
@@ -71,6 +65,33 @@ bool OemSettingsModel::load() {
                            kDefaultOemJsonFile,
                            kDefaultSettingsFile,
                            settings_file);
+}
+
+void OemSettingsModel::dumpItem(const OemSettingsItem& item) {
+  // Do nothing if item list is empty.
+  if (items_.isEmpty()) {
+    qWarning() << "item list is empty";
+    return;
+  }
+
+  int item_index = -1;
+  for (item_index = 0; item_index < items_.length(); ++item_index) {
+    if (item.name() == items_.at(item_index).name()) {
+      break;
+    }
+  }
+  if (item_index >= items_.length() || item_index < 0) {
+    qCritical() << "dumpItem() item not found" << item;
+    return;
+  }
+
+  this->beginResetModel();
+  items_[item_index].setValue(item.value());
+  this->endResetModel();
+
+  const QDir oem_dir(GetOemFolder());
+  const QString settings_file = oem_dir.absoluteFilePath(kSettingsName);
+  DumpSettingsItem(item, settings_file);
 }
 
 }  // namespace installer

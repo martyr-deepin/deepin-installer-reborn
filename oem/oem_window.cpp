@@ -32,6 +32,8 @@ void OemWindow::initConnections() {
   connect(name_list_view_->selectionModel(),
           &QItemSelectionModel::currentChanged,
           this, &OemWindow::onNameListViewSelected);
+  connect(item_view_, &OemSettingsItemView::itemChanged,
+          model_, &OemSettingsModel::dumpItem);
 }
 
 void OemWindow::initUI() {

@@ -50,6 +50,9 @@ void OemSettingsItemView::updateItem(const OemSettingsItem& item) {
 void OemSettingsItemView::initConnections() {
   connect(use_default_value_btn_, &QPushButton::toggled,
           this, &OemSettingsItemView::onUseDefaultValueButtonToggled);
+
+  connect(custom_bool_, &QPushButton::toggled,
+          this, &OemSettingsItemView::onCustomBoolToggled);
 }
 
 void OemSettingsItemView::initUI() {
@@ -158,6 +161,33 @@ void OemSettingsItemView::enableCustomValue(bool enable) {
   }
 }
 
+QVariant OemSettingsItemView::getCustomValue() {
+  switch (item_.value_type()) {
+    case OemSettingsType::Base64String: {
+      const QString content = custom_text_edit_->document()->toPlainText();
+      return Base64Encode(content);
+    }
+    case OemSettingsType::Boolean: {
+      return custom_bool_->isChecked();
+    }
+    case OemSettingsType::Integer: {
+      return custom_spin_box_->value();
+    }
+    case OemSettingsType::StringArray: {
+      // TODO(xushaohua): merge string array.
+      const QString content = custom_text_edit_->document()->toPlainText();
+      return content;
+    }
+    case OemSettingsType::String: {
+      return custom_line_edit_->text();
+    }
+    default: {
+      // Returns an empty string if this type is not supported.
+      return "";
+    }
+  }
+}
+
 void OemSettingsItemView::updateCustomValue() {
   switch (item_.value_type()) {
     case OemSettingsType::Base64String: {
@@ -195,10 +225,17 @@ void OemSettingsItemView::onUseDefaultValueButtonToggled(bool checked) {
     item_.setValue(item_.default_value());
   } else {
     // Update its value to custom value.
-    // TODO(xushaohua):
+    item_.setValue(this->getCustomValue());
   }
 
-  // TODO(xushaohua):Dump changes.
+  emit this->itemChanged(item_);
+}
+
+void OemSettingsItemView::onCustomBoolToggled() {
+  if (!use_default_value_btn_->isChecked()) {
+    item_.setValue(this->getCustomValue());
+    emit this->itemChanged(item_);
+  }
 }
 
 }  // namespace installer
