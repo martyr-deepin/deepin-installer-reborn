@@ -4,32 +4,47 @@
     "name": "skip_disk_space_insufficient_page",
     "description": "Do not display warning message when no enough disk space is available",
     "type": "Boolean"
-  }, {
+  },
+  {
+    "title": "安装时需要的最小硬盘容量",
+    "name": "partition_minimum_disk_space_required",
+    "description": "",
+    "type": "Integer"
+  },
+  {
+    "title": "安装时推荐的硬盘容量",
+    "name": "partition_recommended_disk_space",
+    "description": "",
+    "type": "Integer"
+  },
+
+  {
     "title": "跳过虚拟机提醒页面",
     "name": "skip_virtual_machine_page",
     "description": "",
     "type": "Boolean"
-  }, {
+  },
+
+  {
     "title": "跳过语言选择页面",
     "name": "skip_select_language_page",
     "description": "",
     "type": "Boolean"
-  }, {
-    "title": "跳过用户名设置页面",
-    "name": "skip_system_info_page",
-    "description": "",
-    "type": "Boolean"
-  }, {
-    "title": "跳过分区页面",
-    "name": "skip_partition_page",
-    "description": "",
-    "type": "Boolean"
-  }, {
+  },
+  {
     "title": "默认语言",
     "name": "select_language_default_locale",
     "description": "",
     "type": "Enumeration"
-  }, {
+  },
+
+  {
+    "title": "跳过用户名设置页面",
+    "name": "skip_system_info_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
     "title": "Deepin 版本",
     "name": "system_info_deepin_version",
     "description": "",
@@ -39,25 +54,311 @@
     "name": "system_info_lsb_release",
     "description": "",
     "type": "String"
-  }, {
+  },
+  {
     "title": "系统服务提供商",
     "name": "system_info_vendor_name",
     "description": "",
     "type": "String"
-  }, {
+  },
+  {
     "title": "重启后再设置用户名密码",
     "name": "system_info_setup_after_reboot",
     "description": "",
     "type": "Boolean"
-  }, {
+  },
+  {
     "title": "默认用户名",
     "name": "system_info_default_username",
     "description": "",
     "type": "String"
-  }, {
+  },
+  {
     "title": "锁定用户名",
     "name": "system_info_lock_username",
     "description": "",
     "type": "Boolean"
+  },
+  {
+    "title": "默认计算机名",
+    "name": "system_info_default_hostname",
+    "description": "",
+    "type": "String"
+  },
+  {
+    "title": "锁定计算机名",
+    "name": "system_info_lock_hostname",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "计算机名称后缀",
+    "name": "system_info_hostname_auto_suffix",
+    "description": "",
+    "type": "String"
+  },
+  {
+    "title": "保留的计算机名",
+    "name": "system_info_hostname_reserved",
+    "description": "",
+    "type": "StringList"
+  },
+  {
+    "title": "默认密码",
+    "name": "system_info_default_password",
+    "description": "",
+    "type": "String"
+  },
+  {
+    "title": "锁定密码",
+    "name": "system_info_lock_password",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "密码最小长度",
+    "name": "system_info_password_min_len",
+    "description": "",
+    "type": "Integer"
+  },
+  {
+    "title": "密码最大长度",
+    "name": "",
+    "description": "system_info_password_max_len",
+    "type": "Integer"
+  },
+  {
+    "title": "密码要包含数字",
+    "name": "system_info_password_require_number",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "密码要包含小写字母",
+    "name": "system_info_password_require_lower_case",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "密码要包含大写字母",
+    "name": "system_info_password_require_upper_case",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "密码要包含特殊字符",
+    "name": "system_info_password_require_special_char",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "禁止用户选择头像",
+    "name": "system_info_disable_avatar_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "禁止用户修改键盘布局",
+    "name": "system_info_disable_keyboard_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "禁止用户修改时区",
+    "name": "system_info_disable_timezone_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "默认时区",
+    "name": "system_info_default_timezone",
+    "description": "",
+    "type": "String"
+  },
+  {
+    "title": "与 Windows 系统时间保待一致",
+    "name": "system_info_use_windows_time",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "发现 Windows 系统后禁用时区页面",
+    "name": "system_info_windows_disable_timezone_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "使用公网 IP 来猜测当前时区",
+    "name": "system_info_timezone_use_geoip",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "使用附近热点信号来猜测当前时区",
+    "name": "system_info_timezone_use_regdomain",
+    "description": "",
+    "type": "Boolean"
+  },
+
+  {
+    "title": "跳过分区页面",
+    "name": "skip_partition_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "禁用简单分区页面",
+    "name": "partition_skip_simple_partition_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "禁用高级分区页面",
+    "name": "partition_skip_advanced_partition_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "内存太小时自动创建 swapfile",
+    "name": "partition_memory_threshold_for_swap_area",
+    "description": "",
+    "type": "Integer"
+  },
+  {
+    "title": "swapfile 大小",
+    "name": "partition_swap_file_size",
+    "description": "",
+    "type": "Integer"
+  },
+  {
+    "title": "swapfile 路径",
+    "name": "partition_swap_file_path",
+    "description": "",
+    "type": "String"
+  },
+  {
+    "title": "/boot 分区的默认大小",
+    "name": "partition_default_boot_space",
+    "description": "",
+    "type": "Integer"
+  },
+  {
+    "title": "EFI 分区的默认大小",
+    "name": "partition_default_efi_space",
+    "description": "",
+    "type": "Integer"
+  },
+  {
+    "title": "支持的文件系统",
+    "name": "partition_supported_fs",
+    "description": "",
+    "type": "StringList"
+  },
+  {
+    "title": "默认文件系统",
+    "name": "partition_default_fs",
+    "description": "",
+    "type": "String"
+  },
+  {
+    "title": "支持的挂载点",
+    "name": "partition_mount_points",
+    "description": "",
+    "type": "StringList"
+  },
+  {
+    "title": "强制格式化的挂载点",
+    "name": "partition_formatted_mount_points",
+    "description": "",
+    "type": "StringList"
+  },
+  {
+    "title": "/boot 目录所在的分区位于第一个分区",
+    "name": "partition_boot_on_first_partition",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "/boot 目录所在的分区支持的文件系统",
+    "name": "partition_boot_partition_fs",
+    "description": "",
+    "type": "StringList"
+  },
+  {
+    "title": "os prober",
+    "name": "partition_enable_os_prober",
+    "description": "",
+    "type": "Boolean"
+  },
+
+  {
+    "title": "自动分区",
+    "name": "partition_do_auto_part",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "mbr 模式时的自动分区策略",
+    "name": "partition_auto_part_legacy_policy",
+    "description": "",
+    "type": "StringList"
+  },
+  {
+    "title": "UEFI 模式时的自动分区策略",
+    "name": "partition_auto_part_uefi_policy",
+    "description": "",
+    "type": "StringList"
+  },
+
+  {
+    "title": "安装进度页面禁用幻灯片",
+    "name": "install_progress_page_disable_slide",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "安装进度页面禁用幻灯片动画",
+    "name": "install_progress_page_disable_slide_animation",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "安装进度页面幻灯片切换间隔",
+    "name": "install_progress_page_animation_duration",
+    "description": "",
+    "type": "Integer"
+  },
+
+  {
+    "title": "要卸载的软件包",
+    "name": "package_uninstalled_packages",
+    "description": "",
+    "type": "StringList"
+  },
+
+  {
+    "title": "Grub 启动菜单超时时间",
+    "name": "grub_timeout",
+    "description": "",
+    "type": "Integer"
+  },
+  {
+    "title": "Grub 启动菜单中屏蔽 Windows",
+    "name": "grub_block_windows",
+    "description": "",
+    "type": "Boolean"
+  },
+
+  {
+    "title": "启用的系统服务",
+    "name": "service_enabled_services",
+    "description": "",
+    "type": "StringList"
+  },
+  {
+    "title": "禁用的系统服务",
+    "name": "service_disabled_services",
+    "description": "",
+    "type": "StringList"
   }
 ]
