@@ -31,6 +31,9 @@ class OemSettingsItemView : public QFrame {
   // Enable/disable custom value area.
   void enableCustomValue(bool enable);
 
+  // Update value in custom area to current value of item.
+  void updateCustomValue();
+
   QLabel* title_ = nullptr;
   QLabel* name_ = nullptr;
   QLabel* desc_ = nullptr;

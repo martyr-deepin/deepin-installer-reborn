@@ -44,6 +44,7 @@ void OemSettingsItemView::updateItem(const OemSettingsItem& item) {
   }
 
   this->enableCustomValue(!use_default_value);
+  this->updateCustomValue();
 }
 
 void OemSettingsItemView::initConnections() {
@@ -61,7 +62,7 @@ void OemSettingsItemView::initUI() {
   desc_->setWordWrap(true);
   QLabel* type_label = new QLabel(tr("Type"));
   type_ = new QLabel();
-  QLabel* default_value_label = new QLabel(tr("value"));
+  QLabel* default_value_label = new QLabel(tr("Default value"));
   default_value_ = new QLabel();
   QLabel* value_label = new QLabel(tr("Current value"));
   value_ = new QLabel();
@@ -130,33 +131,55 @@ void OemSettingsItemView::enableCustomValue(bool enable) {
     case OemSettingsType::Base64String: {
       custom_text_edit_->setVisible(true);
       custom_text_edit_->setEnabled(enable);
+      break;
+    }
+    case OemSettingsType::Boolean: {
+      custom_bool_->setVisible(true);
+      custom_bool_->setEnabled(enable);
+      break;
+    }
+    case OemSettingsType::Integer: {
+      custom_spin_box_->setVisible(true);
+      custom_spin_box_->setEnabled(enable);
+      break;
+    }
+    case OemSettingsType::StringArray: {
+      custom_text_edit_->setVisible(true);
+      custom_text_edit_->setEnabled(enable);
+      break;
+    }
+    case OemSettingsType::String: {
+      custom_line_edit_->setVisible(true);
+      custom_line_edit_->setEnabled(enable);
+      break;
+    }
+    default: {
+    }
+  }
+}
+
+void OemSettingsItemView::updateCustomValue() {
+  switch (item_.value_type()) {
+    case OemSettingsType::Base64String: {
       const QString content = item_.value().toString();
       const QString orig_content = Base64Decode(content);
       custom_text_edit_->setText(orig_content);
       break;
     }
     case OemSettingsType::Boolean: {
-      custom_bool_->setVisible(true);
-      custom_bool_->setEnabled(enable);
       custom_bool_->setChecked(item_.value().toBool());
       break;
     }
     case OemSettingsType::Integer: {
-      custom_spin_box_->setVisible(true);
-      custom_spin_box_->setEnabled(enable);
       custom_spin_box_->setValue(item_.value().toInt());
       custom_spin_box_->setRange(item_.minimum(), item_.maximum());
       break;
     }
     case OemSettingsType::StringArray: {
-      custom_text_edit_->setVisible(true);
-      custom_text_edit_->setEnabled(enable);
       custom_text_edit_->setText(item_.value().toString());
       break;
     }
     case OemSettingsType::String: {
-      custom_line_edit_->setVisible(true);
-      custom_line_edit_->setEnabled(enable);
       custom_line_edit_->setText(item_.value().toString());
       break;
     }
@@ -167,7 +190,15 @@ void OemSettingsItemView::enableCustomValue(bool enable) {
 
 void OemSettingsItemView::onUseDefaultValueButtonToggled(bool checked) {
   this->enableCustomValue(!checked);
-  // TODO(xushaohua): Update value_ content.
+  if (checked) {
+    // Restore to default value.
+    item_.setValue(item_.default_value());
+  } else {
+    // Update its value to custom value.
+    // TODO(xushaohua):
+  }
+
+  // TODO(xushaohua):Dump changes.
 }
 
 }  // namespace installer

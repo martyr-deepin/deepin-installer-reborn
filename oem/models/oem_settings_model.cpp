@@ -52,9 +52,8 @@ int OemSettingsModel::rowCount(const QModelIndex& parent) const {
 
 bool OemSettingsModel::dump() {
   const QDir oem_dir(GetOemFolder());
-  const QString oem_json_file = oem_dir.absoluteFilePath(kOemJsonFile);
   const QString settings_file = oem_dir.absoluteFilePath(kSettingsName);
-  return DumpSettingsItems(items_, oem_json_file, settings_file);
+  return DumpSettingsItems(items_, settings_file);
 }
 
 OemSettingsItem OemSettingsModel::getItem(const QModelIndex& index) const {
@@ -67,11 +66,11 @@ OemSettingsItem OemSettingsModel::getItem(const QModelIndex& index) const {
 
 bool OemSettingsModel::load() {
   const QDir oem_dir(GetOemFolder());
-  const QString oem_json_file = oem_dir.absoluteFilePath(kOemJsonFile);
+  const QString settings_file = oem_dir.absoluteFilePath(kSettingsName);
   return LoadSettingsItems(items_,
                            kDefaultOemJsonFile,
-                           oem_json_file,
-                           kDefaultSettingsFile);
+                           kDefaultSettingsFile,
+                           settings_file);
 }
 
 }  // namespace installer

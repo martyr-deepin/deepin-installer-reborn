@@ -190,23 +190,19 @@ QDebug& operator<<(QDebug& debug, const OemSettingsItems& items) {
 }
 
 bool DumpSettingsItems(const OemSettingsItems& items,
-                       const QString& oem_json_file,
                        const QString& settings_ini_file) {
   Q_UNUSED(items);
-  Q_UNUSED(oem_json_file);
   Q_UNUSED(settings_ini_file);
   return false;
 }
 
 bool LoadSettingsItems(OemSettingsItems& items,
                        const QString& default_oem_json_file,
-                       const QString& oem_json_file,
-                       const QString& default_settings_ini_file) {
-  qDebug() << "LoadSettingsItems()" << default_oem_json_file << oem_json_file;
-
+                       const QString& default_settings_ini_file,
+                       const QString& settings_ini_file) {
   const QString default_oem_content(ReadFile(default_oem_json_file));
   if (default_oem_content.isEmpty()) {
-    qCritical() << "Failed to read oem item file:" << oem_json_file;
+    qCritical() << "Failed to read oem item file:" << default_oem_json_file;
     return false;
   }
 
@@ -220,47 +216,33 @@ bool LoadSettingsItems(OemSettingsItems& items,
   items.clear();
 
   // First read item name, description, type and default value.
-  QSettings settings(default_settings_ini_file, QSettings::IniFormat);
+  QSettings default_settings(default_settings_ini_file, QSettings::IniFormat);
+  QSettings settings(settings_ini_file, QSettings::IniFormat);
   const QJsonDocument default_oem_doc =
       QJsonDocument::fromJson(default_oem_content.toUtf8());
   for (const QJsonValue json_item : default_oem_doc.array()) {
     const QJsonObject obj_item = json_item.toObject();
     OemSettingsItem item;
     item.setTitle(obj_item.value(kTitleField).toString());
-    item.setName(obj_item.value(kNameField).toString());
+    const QString item_name = obj_item.value(kNameField).toString();
+    item.setName(item_name);
     item.setDescription(obj_item.value(kDescField).toString());
     item.setValueType(obj_item.value(kTypeField).toString());
 
-    // Read default value to ini file.
-    const QVariant value(settings.value(item.name()));
-    item.setDefaultValue(value);
-    item.setValue(value);
+    // Read default value to default settings ini file.
+    const QVariant default_value(default_settings.value(item_name));
+    item.setDefaultValue(default_value);
+
+    // Read customized value from settings ini file if found.
+    if (settings.contains(item_name)) {
+      item.setValue(settings.value(item_name));
+    } else {
+      item.setValue(default_value);
+    }
 
     item.setMinimum(obj_item.value(kMinimumField));
     item.setMaximum(obj_item.value(kMaximumField));
     items.append(item);
-  }
-
-  // Now, update item values.
-  if (!QFile::exists(oem_json_file)) {
-    qDebug() << "items:" << items;
-    return true;
-  }
-  const QString oem_content(ReadFile(oem_json_file));
-  if (oem_content.isEmpty()) {
-    return true;
-  }
-
-  const QJsonDocument oem_doc = QJsonDocument::fromJson(oem_content.toUtf8());
-  for (const QJsonValue& json_item : oem_doc.array()) {
-    const QJsonObject obj_item = json_item.toObject();
-    const QString name(obj_item.value(kNameField).toString());
-    for (OemSettingsItem& item : items) {
-      if (item.name() == name) {
-        item.setValue(obj_item.value(kValueField));
-        break;
-      }
-    }
   }
 
   qDebug() << "items:" << items;

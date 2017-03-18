@@ -82,20 +82,18 @@ typedef QVector<OemSettingsItem> OemSettingsItems;
 QDebug& operator<<(QDebug& debug, const OemSettingsItems& items);
 
 // Dump oem setting |items| to disk.
-// |oem_json_file| is path to user customized oem file (value).
 // |settings_ini_file| is path to user customized settings file (value).
 bool DumpSettingsItems(const OemSettingsItems& items,
-                       const QString& oem_json_file,
                        const QString& settings_ini_file);
 
 // Read oem settings and update to |items|.
 // |default_oem_json_file| is path to system oem json file.
-// |oem_json_file| is path to user customized oem json file.
 // |default_settings_ini_file| is path to system settings ini file.
+// |settings_ini_file| is path to user customized settings file (value).
 bool LoadSettingsItems(OemSettingsItems& items,
                        const QString& default_oem_json_file,
-                       const QString& oem_json_file,
-                       const QString& default_settings_ini_file);
+                       const QString& default_settings_ini_file,
+                       const QString& settings_ini_file);
 
 }  // namespace installer
 
