@@ -105,7 +105,7 @@
     "title": "保留的计算机名",
     "name": "system_info_hostname_reserved",
     "description": "",
-    "type": "StringList"
+    "type": "StringArray"
   },
   {
     "title": "默认密码",
@@ -127,8 +127,8 @@
   },
   {
     "title": "密码最大长度",
-    "name": "",
-    "description": "system_info_password_max_len",
+    "name": "system_info_password_max_len",
+    "description": "",
     "type": "Integer"
   },
   {
@@ -256,7 +256,7 @@
     "title": "支持的文件系统",
     "name": "partition_supported_fs",
     "description": "",
-    "type": "StringList"
+    "type": "StringArray"
   },
   {
     "title": "默认文件系统",
@@ -268,13 +268,13 @@
     "title": "支持的挂载点",
     "name": "partition_mount_points",
     "description": "",
-    "type": "StringList"
+    "type": "StringArray"
   },
   {
     "title": "强制格式化的挂载点",
     "name": "partition_formatted_mount_points",
     "description": "",
-    "type": "StringList"
+    "type": "StringArray"
   },
   {
     "title": "/boot 目录所在的分区位于第一个分区",
@@ -286,7 +286,7 @@
     "title": "/boot 目录所在的分区支持的文件系统",
     "name": "partition_boot_partition_fs",
     "description": "",
-    "type": "StringList"
+    "type": "StringArray"
   },
   {
     "title": "os prober",
@@ -305,13 +305,13 @@
     "title": "mbr 模式时的自动分区策略",
     "name": "partition_auto_part_legacy_policy",
     "description": "",
-    "type": "StringList"
+    "type": "StringArray"
   },
   {
     "title": "UEFI 模式时的自动分区策略",
     "name": "partition_auto_part_uefi_policy",
     "description": "",
-    "type": "StringList"
+    "type": "StringArray"
   },
 
   {
@@ -337,7 +337,7 @@
     "title": "要卸载的软件包",
     "name": "package_uninstalled_packages",
     "description": "",
-    "type": "StringList"
+    "type": "StringArray"
   },
 
   {
@@ -357,12 +357,12 @@
     "title": "启用的系统服务",
     "name": "service_enabled_services",
     "description": "",
-    "type": "StringList"
+    "type": "StringArray"
   },
   {
     "title": "禁用的系统服务",
     "name": "service_disabled_services",
     "description": "",
-    "type": "StringList"
+    "type": "StringArray"
   }
 ]

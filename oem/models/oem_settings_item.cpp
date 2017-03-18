@@ -240,6 +240,9 @@ bool LoadSettingsItems(OemSettingsItems& items,
     item.setValueType(obj_item.value(kTypeField).toString());
 
     // Read default value to default settings ini file.
+    if (!default_settings.contains(item_name)) {
+      qWarning() << "Invalid key:" << item_name;
+    }
     const QVariant default_value(default_settings.value(item_name));
     item.setDefaultValue(default_value);
 
