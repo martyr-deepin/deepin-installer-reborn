@@ -110,7 +110,6 @@ void MultiHeadManager::onMonitorsChanged() {
 }
 
 void MultiHeadManager::doSwitchToMirrorMode() {
-  qDebug() << "Switch to mirror mode";
   if (!SwitchToMirrorMode()) {
     qCritical() << "Failed to switch to mirror mode!";
   }

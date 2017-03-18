@@ -671,7 +671,6 @@ bool ToMirrorMode(Display* dpy, XRRScreenResources* resources,
 
     XRRFreeOutputInfo(output_info);
   }
-
   qDebug() << "args:" << args;
 
   return SpawnCmd(kRandRCmd, args);
@@ -861,15 +860,9 @@ bool ToNextMode(Display* dpy, XRRScreenResources* resources,
 }
 
 // Set all connected output as prefer mode.
-bool ToPreferMode(Display* dpy, XRRScreenResources* resources,
-                  Window root_window, crtc_t* crtcs, int num_crtcs) {
+bool ToPreferMode(Display* dpy, XRRScreenResources* resources) {
   Q_ASSERT(dpy != NULL);
   Q_ASSERT(resources != NULL);
-  Q_ASSERT(crtcs != NULL);
-  Q_ASSERT(num_crtcs > 0);
-  Q_UNUSED(crtcs);
-  Q_UNUSED(num_crtcs);
-  Q_UNUSED(root_window);
 
   QStringList args;
   for (int i = 0; i < resources->noutput; ++i) {
@@ -1002,16 +995,6 @@ bool SwitchToMirrorMode() {
     return true;
   }
 
-//  if (IsMirrorMode(dpy, resources)) {
-//    XRRFreeScreenResources(resources);
-//    XCloseDisplay(dpy);
-//
-//#ifndef N_DEBUG
-//    fprintf(stdout, "is mirror mode\n");
-//#endif
-//    return true;
-//  }
-
   crtc_t* crtcs = NULL;
   int num_crtcs = 0;
   if (!GetCrtcs(dpy, resources, &crtcs, num_crtcs)) {
@@ -1041,23 +1024,12 @@ bool SwitchToPreferMode() {
   if (!GetRRResources(&dpy, root_window, &resources)) {
     return false;
   }
+  Q_UNUSED(root_window);
 
-  crtc_t* crtcs = NULL;
-  int num_crtcs = 0;
-  if (!GetCrtcs(dpy, resources, &crtcs, num_crtcs)) {
-    // Release resources.
-    XRRFreeScreenResources(resources);
-    XCloseDisplay(dpy);
-
-    fprintf(stderr, "Failed to get crtc_t objects\n");
-    return false;
-  }
-
-  if (!ToPreferMode(dpy, resources, root_window, crtcs, num_crtcs)) {
+  if (!ToPreferMode(dpy, resources)) {
     fprintf(stderr, "ToNextMode() failed\n");
   }
 
-  DestroyCrtcs(&crtcs, num_crtcs);
   XRRFreeScreenResources(resources);
   XCloseDisplay(dpy);
 
