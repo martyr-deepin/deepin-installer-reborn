@@ -59,8 +59,8 @@ class OemSettingsItemView : public QFrame {
   // Enable or disable custom value area when use_default_value_btn_ is toggled.
   void onUseDefaultValueButtonToggled(bool checked);
 
-  // Handles toggle signal of custom_bool_ button.
-  void onCustomBoolToggled();
+  // Handles changed events in custom area.
+  void onCustomWidgetValueChanged();
 };
 
 }  // namespace installer

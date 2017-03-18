@@ -4,6 +4,7 @@
 
 #include "oem/oem_window.h"
 
+#include <QApplication>
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QLineEdit>
@@ -33,7 +34,11 @@ void OemWindow::initConnections() {
           &QItemSelectionModel::currentChanged,
           this, &OemWindow::onNameListViewSelected);
   connect(item_view_, &OemSettingsItemView::itemChanged,
-          model_, &OemSettingsModel::dumpItem);
+          model_, &OemSettingsModel::updateItem);
+
+  // Dump items before program exits.
+  connect(qApp, &QApplication::aboutToQuit,
+          model_, &OemSettingsModel::dumpItems);
 }
 
 void OemWindow::initUI() {

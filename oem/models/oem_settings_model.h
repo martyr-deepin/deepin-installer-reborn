@@ -28,8 +28,12 @@ class OemSettingsModel : public QAbstractListModel {
   bool load();
 
  public slots:
-  // Update |item| in |items_| list and save its value to file if needed.
-  void dumpItem(const OemSettingsItem& item);
+  // Dump all items in item list to file.
+  // Call this slot before program exits.
+  void dumpItems();
+
+  // Update |item| in item list
+  void updateItem(const OemSettingsItem& item);
 
  private:
   OemSettingsItems items_;

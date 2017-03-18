@@ -189,19 +189,17 @@ QDebug& operator<<(QDebug& debug, const OemSettingsItems& items) {
   return debug;
 }
 
-void DumpSettingsItem(const OemSettingsItem& item,
-                      const QString& settings_ini_file) {
-  qDebug() << "DumpItem:" << item << settings_ini_file;
+void DumpSettingsItems(const OemSettingsItems& items,
+                       const QString& settings_ini_file) {
+  qDebug() << "DumpItems:" << settings_ini_file;
   CreateParentDirs(settings_ini_file);
 
   QSettings settings(settings_ini_file, QSettings::IniFormat);
-  const QString& item_name = item.name();
-
-  if (item.value() != item.default_value()) {
-    qDebug() << "Set value:" << item;
-    settings.setValue(item_name, item.value());
-  } else {
-    if (settings.contains(item_name)) {
+  for (const OemSettingsItem& item : items) {
+    const QString& item_name = item.name();
+    if (item.value() != item.default_value()) {
+      settings.setValue(item_name, item.value());
+    } else if (settings.contains(item_name)) {
       // Remove item from settings if its value equals to default value.
       settings.remove(item_name);
     }

@@ -81,10 +81,10 @@ QDebug& operator<<(QDebug& debug, const OemSettingsItem& item);
 typedef QVector<OemSettingsItem> OemSettingsItems;
 QDebug& operator<<(QDebug& debug, const OemSettingsItems& items);
 
-// Dump oem setting |item| to disk.
+// Dump oem setting |items| to disk.
 // |settings_ini_file| is path to user customized settings file (value).
-void DumpSettingsItem(const OemSettingsItem& item,
-                      const QString& settings_ini_file);
+void DumpSettingsItems(const OemSettingsItems& items,
+                       const QString& settings_ini_file);
 
 // Read oem settings and update to |items|.
 // |default_oem_json_file| is path to system oem json file.

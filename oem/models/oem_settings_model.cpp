@@ -67,7 +67,13 @@ bool OemSettingsModel::load() {
                            settings_file);
 }
 
-void OemSettingsModel::dumpItem(const OemSettingsItem& item) {
+void OemSettingsModel::dumpItems() {
+  const QDir oem_dir(GetOemFolder());
+  const QString settings_file = oem_dir.absoluteFilePath(kSettingsName);
+  DumpSettingsItems(items_, settings_file);
+}
+
+void OemSettingsModel::updateItem(const OemSettingsItem& item) {
   // Do nothing if item list is empty.
   if (items_.isEmpty()) {
     qWarning() << "item list is empty";
@@ -81,17 +87,14 @@ void OemSettingsModel::dumpItem(const OemSettingsItem& item) {
     }
   }
   if (item_index >= items_.length() || item_index < 0) {
-    qCritical() << "dumpItem() item not found" << item;
+    qCritical() << "updateItem() item not found" << item;
     return;
   }
 
-  this->beginResetModel();
+  // No need to reset model.
+//  this->beginResetModel();
   items_[item_index].setValue(item.value());
-  this->endResetModel();
-
-  const QDir oem_dir(GetOemFolder());
-  const QString settings_file = oem_dir.absoluteFilePath(kSettingsName);
-  DumpSettingsItem(item, settings_file);
+//  this->endResetModel();
 }
 
 }  // namespace installer

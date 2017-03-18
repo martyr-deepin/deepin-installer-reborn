@@ -52,7 +52,14 @@ void OemSettingsItemView::initConnections() {
           this, &OemSettingsItemView::onUseDefaultValueButtonToggled);
 
   connect(custom_bool_, &QPushButton::toggled,
-          this, &OemSettingsItemView::onCustomBoolToggled);
+          this, &OemSettingsItemView::onCustomWidgetValueChanged);
+  connect(custom_spin_box_,
+          static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged),
+          this, &OemSettingsItemView::onCustomWidgetValueChanged);
+  connect(custom_line_edit_, &QLineEdit::editingFinished,
+          this, &OemSettingsItemView::onCustomWidgetValueChanged);
+  connect(custom_text_edit_, &QTextEdit::textChanged,
+          this, &OemSettingsItemView::onCustomWidgetValueChanged);
 }
 
 void OemSettingsItemView::initUI() {
@@ -231,7 +238,7 @@ void OemSettingsItemView::onUseDefaultValueButtonToggled(bool checked) {
   emit this->itemChanged(item_);
 }
 
-void OemSettingsItemView::onCustomBoolToggled() {
+void OemSettingsItemView::onCustomWidgetValueChanged() {
   if (!use_default_value_btn_->isChecked()) {
     item_.setValue(this->getCustomValue());
     emit this->itemChanged(item_);
