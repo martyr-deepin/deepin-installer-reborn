@@ -39,7 +39,7 @@ void OemSettingsItemView::updateItem(const OemSettingsItem& item) {
     value_->setText(tr("Default value"));
     use_default_value_btn_->setChecked(true);
   } else {
-    value_->setText(value);
+    this->updateCurrentValue();
     use_default_value_btn_->setChecked(false);
   }
 
@@ -195,6 +195,16 @@ QVariant OemSettingsItemView::getCustomValue() {
   }
 }
 
+void OemSettingsItemView::updateCurrentValue() {
+  const QString value = item_.value().toString();
+  if (item_.value_type() == OemSettingsType::Base64String) {
+    // Read decoded string.
+    value_->setText(Base64Decode(value));
+  } else {
+    value_->setText(value);
+  }
+}
+
 void OemSettingsItemView::updateCustomValue() {
   switch (item_.value_type()) {
     case OemSettingsType::Base64String: {
@@ -230,9 +240,11 @@ void OemSettingsItemView::onUseDefaultValueButtonToggled(bool checked) {
   if (checked) {
     // Restore to default value.
     item_.setValue(item_.default_value());
+    this->updateCurrentValue();
   } else {
     // Update its value to custom value.
     item_.setValue(this->getCustomValue());
+    this->updateCurrentValue();
   }
 
   emit this->itemChanged(item_);
@@ -241,6 +253,11 @@ void OemSettingsItemView::onUseDefaultValueButtonToggled(bool checked) {
 void OemSettingsItemView::onCustomWidgetValueChanged() {
   if (!use_default_value_btn_->isChecked()) {
     item_.setValue(this->getCustomValue());
+
+    // Update text of value_ label.
+    this->updateCurrentValue();
+
+    // And emit itemChanged() signal.
     emit this->itemChanged(item_);
   }
 }

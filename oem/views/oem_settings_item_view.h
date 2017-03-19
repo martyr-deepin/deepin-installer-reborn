@@ -38,6 +38,9 @@ class OemSettingsItemView : public QFrame {
   // Get value in custom area.
   QVariant getCustomValue();
 
+  // Update text in value_ label.
+  void updateCurrentValue();
+
   // Update value in custom area to current value of item.
   void updateCustomValue();
 
