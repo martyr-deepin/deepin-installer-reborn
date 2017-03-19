@@ -35,14 +35,8 @@ void OemSettingsItemView::updateItem(const OemSettingsItem& item) {
   const QString value = item.value().toString();
   default_value_->setText(default_value);
   const bool use_default_value = (default_value == value);
-  if (use_default_value) {
-    value_->setText(tr("Default value"));
-    use_default_value_btn_->setChecked(true);
-  } else {
-    this->updateCurrentValue();
-    use_default_value_btn_->setChecked(false);
-  }
-
+  this->updateCurrentValue();
+  use_default_value_btn_->setChecked(use_default_value);
   this->enableCustomValue(!use_default_value);
   this->updateCustomValue();
 }
@@ -196,12 +190,17 @@ QVariant OemSettingsItemView::getCustomValue() {
 }
 
 void OemSettingsItemView::updateCurrentValue() {
+  const QString default_value = item_.default_value().toString();
   const QString value = item_.value().toString();
-  if (item_.value_type() == OemSettingsType::Base64String) {
-    // Read decoded string.
-    value_->setText(Base64Decode(value));
+  if (default_value == value) {
+    value_->setText(tr("Default value"));
   } else {
-    value_->setText(value);
+    if (item_.value_type() == OemSettingsType::Base64String) {
+      // Read decoded string.
+      value_->setText(Base64Decode(value));
+    } else {
+      value_->setText(value);
+    }
   }
 }
 
