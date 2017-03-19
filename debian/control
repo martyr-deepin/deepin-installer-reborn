@@ -25,7 +25,8 @@ Homepage: http://www.deepin.org
 
 Package: deepin-installer-reborn
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends},
+    ${misc:Depends}
     btrfs-progs,
     dosfstools,
     e2fsprogs,
@@ -46,5 +47,7 @@ Description: Reborn version of deepin installer
 
 Package: deepin-installer-oem
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends},
+    ${misc:Depends},
+    deepin-installer-reborn
 Description: OEM tool for deepin-installer-reborn
