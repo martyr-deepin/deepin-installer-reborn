@@ -23,14 +23,18 @@ class OemSettingsModel : public QAbstractListModel {
   // Get oem item at |index|.
   OemSettingsItem getItem(const QModelIndex& index) const;
 
-  // Load default settings from system, and then load settings in
-  // $HOME/oem folder if exists.
-  bool load();
-
  public slots:
+  // Create $HOME/oem folder and sub-folders.
+  // Returns false if failed to create folders.
+  bool createOemFolders();
+
   // Dump all items in item list to file.
   // Call this slot before program exits.
   void dumpItems();
+
+  // Load default settings from system, and then load settings in
+  // $HOME/oem folder if exists.
+  bool load();
 
   // Update |item| in item list
   void updateItem(const OemSettingsItem& item);

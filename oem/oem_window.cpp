@@ -7,6 +7,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QHBoxLayout>
+#include <QMessageBox>
 #include <QLineEdit>
 #include <QListView>
 #include <QSplitter>
@@ -22,11 +23,26 @@ OemWindow::OemWindow(QWidget* parent) : QFrame(parent) {
 
   this->initUI();
   this->initConnections();
+}
 
-  // TODO(xushaohua): catch exceptions.
-  if (!model_->load()) {
-    qCritical() << "model->load() failed";
+bool OemWindow::init() {
+  if (!model_->createOemFolders()) {
+    // Show warning dialog.
+    QMessageBox box;
+    box.setText(tr("Failed to create $HOME/oem folder or sub-folders"));
+    box.exec();
+    return false;
   }
+
+  if (!model_->load()) {
+    // Show warning dialog.
+    QMessageBox box;
+    box.setText(tr("Failed to load model data"));
+    box.exec();
+    return false;
+  }
+
+  return true;
 }
 
 void OemWindow::initConnections() {

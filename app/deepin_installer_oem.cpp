@@ -17,6 +17,9 @@ int main(int argc, char* argv[]) {
   app.setOrganizationDomain(installer::kOrganizationDomain);
 
   installer::OemWindow oem_window;
+  if (!oem_window.init()) {
+    return 1;
+  }
   oem_window.resize(860, 640);
   oem_window.show();
 

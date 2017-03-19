@@ -11,7 +11,10 @@ namespace installer {
 
 namespace {
 
-const char kOemJsonFile[] = "oem_settings.json";
+const char kBeforeChroot[] = "before_chroot";
+const char kInChroot[] = "in_chroot";
+const char kAfterChroot[] = "after_chroot";
+
 const char kSettingsName[] = "settings.ini";
 const char kDefaultSettingsFile[] = RESOURCES_DIR "/default_settings.ini";
 const char kDefaultOemJsonFile[] = RESOURCES_DIR "/oem_settings.json";
@@ -58,19 +61,56 @@ OemSettingsItem OemSettingsModel::getItem(const QModelIndex& index) const {
   }
 }
 
-bool OemSettingsModel::load() {
-  const QDir oem_dir(GetOemFolder());
-  const QString settings_file = oem_dir.absoluteFilePath(kSettingsName);
-  return LoadSettingsItems(items_,
-                           kDefaultOemJsonFile,
-                           kDefaultSettingsFile,
-                           settings_file);
+bool OemSettingsModel::createOemFolders() {
+  QDir oem_dir(GetOemFolder());
+  if (!oem_dir.mkpath(".")) {
+    qCritical() << "Failed to create $HOME/oem folder";
+    return false;
+  }
+  if (!oem_dir.mkpath("deb")) {
+    qCritical() << "Failed to create $HOME/oem/deb folder";
+    return false;
+  }
+  QDir hooks_dir(oem_dir.absoluteFilePath("hooks"));
+  if (!hooks_dir.mkpath(".")) {
+    qCritical() << "Failed to create $HOME/oem/hooks folder";
+    return false;
+  }
+  if (!hooks_dir.mkpath(kBeforeChroot)) {
+    qCritical() << "Failed to create " << kBeforeChroot;
+    return false;
+  }
+  if (!hooks_dir.mkpath(kInChroot)) {
+    qCritical() << "Failed to create" << kInChroot;
+    return false;
+  }
+  if (!hooks_dir.mkpath(kAfterChroot)) {
+    qCritical() << "Failed to create" << kAfterChroot;
+    return false;
+  }
+  return true;
 }
 
 void OemSettingsModel::dumpItems() {
+  // If items_ is empty, do nothing.
+  if (items_.isEmpty()) {
+    return;
+  }
   const QDir oem_dir(GetOemFolder());
   const QString settings_file = oem_dir.absoluteFilePath(kSettingsName);
   DumpSettingsItems(items_, settings_file);
+}
+
+bool OemSettingsModel::load() {
+  const QDir oem_dir(GetOemFolder());
+  const QString settings_file = oem_dir.absoluteFilePath(kSettingsName);
+  this->beginResetModel();
+  const bool ok = LoadSettingsItems(items_,
+                                    kDefaultOemJsonFile,
+                                    kDefaultSettingsFile,
+                                    settings_file);
+  this->endResetModel();
+  return ok;
 }
 
 void OemSettingsModel::updateItem(const OemSettingsItem& item) {

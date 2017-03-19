@@ -20,6 +20,9 @@ class OemWindow : public QFrame {
  public:
   explicit OemWindow(QWidget* parent = nullptr);
 
+  // Initialize internal data.
+  bool init();
+
  private:
   void initConnections();
   void initUI();
