@@ -217,8 +217,8 @@ void OemSettingsItemView::updateCustomValue() {
       break;
     }
     case OemSettingsType::Integer: {
-      custom_spin_box_->setValue(item_.value().toInt());
       custom_spin_box_->setRange(item_.minimum(), item_.maximum());
+      custom_spin_box_->setValue(item_.value().toInt());
       break;
     }
     case OemSettingsType::StringArray: {
