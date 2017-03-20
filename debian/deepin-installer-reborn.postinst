@@ -37,7 +37,7 @@ generate_locale() {
 blur_image() {
   local SRC=$1
   local DST=$2
-  local TMP=/TMP/installer-$(date +%s)-$(basename "${SRC}")
+  local TMP=/tmp/installer-$(date +%s)-$(basename "${SRC}")
   convert "${SRC}" -resize 25% -brightness-contrast -10 \
     -modulate 100,120,100 -blur 0x16 -resize 400% "${TMP}" && \
     mv -f "${TMP}" "${DST}"
