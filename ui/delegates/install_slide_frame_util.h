@@ -11,10 +11,10 @@ namespace installer {
 
 // Get absolute path to slide folder, based on |locale|.
 // |locale| might be empty or like "zh_CN" or "en_US".
-QString GetSlideDir(const QString& language_name);
+QString GetSlideDir(const QString& locale);
 
 // Get slide image file list with specific |locale|.
-QStringList GetSlideFiles(const QString& language_name);
+QStringList GetSlideFiles(const QString& locale);
 
 }  // namespace installer
 

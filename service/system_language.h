@@ -13,7 +13,6 @@ namespace installer {
 struct LanguageItem {
   QString name;  // English name.
   QString locale;  // Language name, like en_US.
-  QString lc_all;  // LC_ALL/LANG/locale name, like en_US.utf8.
   QString local_name;  // Localized name.
 };
 
@@ -21,10 +20,10 @@ typedef QList<LanguageItem> LanguageList;
 
 LanguageList GetLanguageList();
 
-// Generate locale based on |lc_all|.
+// Generate locale based on |locale|.
 // Call `locale-gen` to update system locales, or else setlocale() will fail
 // in future.
-void GenerateLocale(const QString& lc_all);
+void GenerateLocale(const QString& locale);
 
 }  // namespace installer
 

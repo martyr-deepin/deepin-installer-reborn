@@ -16,10 +16,10 @@
 #include "ui/main_window.h"
 
 int main(int argc, char* argv[]) {
-  // Reset locale to en_US.
+  // Reset LC_ALL to en_US.UTF-8.
   // NOTE(xushaohua): "LANG" might not set in some live environment.
-  qputenv("LC_ALL", installer::kDefaultLocale);
-  qputenv("LANG", installer::kDefaultLocale);
+  qputenv("LC_ALL", installer::kDefaultLang);
+  qputenv("LANG", installer::kDefaultLang);
 
   QApplication app(argc, argv);
   app.setApplicationDisplayName("Deepin Installer Reborn");

@@ -10,7 +10,8 @@ namespace installer {
 const char kAppVersion[] = "0.1.3";
 
 // Default locale used in program.
-const char kDefaultLocale[] = "en_US.UTF-8";
+const char kDefaultLocale[] = "en_US";
+const char kDefaultLang[] = "en_US.UTF-8";
 
 const char kOrganizationDomain[] = "deepin.org";
 

@@ -160,13 +160,13 @@ bool ReadConfig(const QString& filepath, XkbConfig& config) {
 
 XkbConfig GetXkbConfig(const QString& locale) {
   // Set locale first.
-  (void) setlocale(LC_ALL, locale.toLocal8Bit().constData());
+  (void) setlocale(LC_ALL, (locale + ".UTF-8").toLocal8Bit().constData());
 
   XkbConfig config;
   if (!ReadConfig(kXkbBaseRule, config)) {
     qWarning() << "Failed to read xkb config file" << kXkbBaseRule;
     // Reset locale.
-    (void) setlocale(LC_ALL, kDefaultLocale);
+    (void) setlocale(LC_ALL, kDefaultLang);
     return config;
   }
 
@@ -175,7 +175,7 @@ XkbConfig GetXkbConfig(const QString& locale) {
 //    qWarning() << "Failed to read xkb config file" << kXkbExtraRule;
 //  }
 
-  (void) setlocale(LC_ALL, kDefaultLocale);
+  (void) setlocale(LC_ALL, kDefaultLang);
 
   return config;
 }

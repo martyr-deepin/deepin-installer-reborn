@@ -14,13 +14,6 @@
 
 namespace installer {
 
-namespace {
-
-// Absolute path to locale.gen
-const char kLocaleGenFile[] = "/etc/locale.gen";
-
-}  // namespace
-
 LanguageList GetLanguageList() {
   LanguageList list;
 
@@ -32,7 +25,6 @@ LanguageList GetLanguageList() {
     LanguageItem item;
     item.name = obj.value("name").toString();
     item.locale = obj.value("locale").toString();
-    item.lc_all = obj.value("lc_all").toString();
     item.local_name = obj.value("local_name").toString();
     list.append(item);
   }
@@ -40,12 +32,14 @@ LanguageList GetLanguageList() {
   return list;
 }
 
-void GenerateLocale(const QString& lc_all) {
+void GenerateLocale(const QString& locale) {
+  // Absolute path to locale.gen
+  const char kLocaleGenFile[] = "/etc/locale.gen";
   const QString content = ReadFile(kLocaleGenFile);
   QStringList lines = content.split('\n');
   for (QString& line : lines) {
     // Match locale name with case-insensitive.
-    if (line.contains(lc_all, Qt::CaseInsensitive)) {
+    if (line.contains(locale, Qt::CaseInsensitive)) {
       line = line.remove('#').trimmed();
       break;
     }
@@ -62,7 +56,7 @@ void GenerateLocale(const QString& lc_all) {
   }
 
   // Update default locale.
-  const QString default_locale = QString("LANG=%1").arg(lc_all);
+  const QString default_locale = QString("LANG=%1").arg(locale);
   if (!WriteTextFile("/etc/default/locale", default_locale)) {
     qCritical() << "Failed to update default locale";
   }
