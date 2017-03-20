@@ -35,7 +35,7 @@ struct OemSettingsItem {
   OemSettingsItem();
   // TODO(xushaohua): Add other constructors.
 
-  const QString title() const;
+  const QString& title() const;
   void setTitle(const QString& title);
 
   const QString& name() const;
@@ -59,7 +59,12 @@ struct OemSettingsItem {
   const QVariant& value() const;
   void setValue(const QVariant& value);
 
-  // Get/set/check minimum and maximum property.
+  // Set/get option list. This property only make sense only if value_type_ is
+  // Enumeration.
+  const QStringList& options() const;
+  void setOptions(const QStringList& options);
+
+  // Get/set minimum and maximum property.
   // These properties are optional, and it only makes sense only if
   // value_type_ is Integer.
   int minimum() const;
@@ -74,6 +79,7 @@ struct OemSettingsItem {
   OemSettingsType value_type_;
   QVariant default_value_;
   QVariant value_;
+  QStringList options_;
   int minimum_;
   int maximum_;
 };

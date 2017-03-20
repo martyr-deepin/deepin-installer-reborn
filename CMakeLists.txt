@@ -503,6 +503,8 @@ add_executable(deepin-installer-oem
                oem/oem_window.h
 
                service/settings_name.h
+               service/system_language.cpp
+               service/system_language.h
 
                ${BASE_FILES}
                ${OEM_FILES}

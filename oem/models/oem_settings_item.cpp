@@ -10,6 +10,7 @@
 #include <QSettings>
 
 #include "base/file_util.h"
+#include "service/system_language.h"
 
 namespace installer {
 
@@ -29,9 +30,33 @@ const char kTitleField[] = "title";
 const char kNameField[] = "name";
 const char kDescField[] = "description";
 const char kTypeField[] = "type";
-const char kValueField[] = "value";
 const char kMinimumField[] = "minimum";
 const char kMaximumField[] = "maximum";
+
+// Update language list options_ in |items|.
+void UpdateLanguageListOptions(OemSettingsItems& items) {
+  const char kLanguageItemName[] = "select_language_default_locale";
+  int index = -1;
+  for (index = 0; index < items.length(); ++index) {
+    if (items.at(index).name() == kLanguageItemName) {
+      break;
+    }
+  }
+
+  if (index == items.length()) {
+    qWarning() << "Failed to find language item:" << kLanguageItemName;
+    return;
+  }
+
+  const LanguageList languages = GetLanguageList();
+  QStringList locales;
+  for (const LanguageItem& language : languages) {
+    locales.append(language.locale);
+  }
+
+  // Update options.
+  items[index].setOptions(locales);
+}
 
 }  // namespace
 
@@ -83,7 +108,7 @@ OemSettingsItem::OemSettingsItem()
       maximum_(0) {
 }
 
-const QString OemSettingsItem::title() const {
+const QString& OemSettingsItem::title() const {
   return title_;
 }
 
@@ -150,6 +175,14 @@ void OemSettingsItem::setValue(const QVariant& value) {
   value_ = value;
 }
 
+const QStringList& OemSettingsItem::options() const {
+  return options_;
+}
+
+void OemSettingsItem::setOptions(const QStringList& options) {
+  options_ = options;
+}
+
 int OemSettingsItem::minimum() const {
   return minimum_;
 }
@@ -174,6 +207,7 @@ QDebug& operator<<(QDebug& debug, const OemSettingsItem& item) {
         << ", type:" << item.value_type()
         << ", default:" << item.default_value()
         << ", value:" << item.value()
+        << ", options:" << item.options()
         << ", minimum:" << item.minimum()
         << ", maximum:" << item.maximum()
         << "}";
@@ -257,6 +291,9 @@ bool LoadSettingsItems(OemSettingsItems& items,
     item.setMaximum(obj_item.value(kMaximumField));
     items.append(item);
   }
+
+  // Load language list.
+  UpdateLanguageListOptions(items);
 
   return true;
 }
