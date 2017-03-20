@@ -6,10 +6,12 @@
 #define INSTALLER_OEM_VIEWS_OEM_SETTINGS_ITEM_VIEW_H
 
 #include <QFrame>
+class QComboBox;
 class QLabel;
 class QLineEdit;
 class QPushButton;
 class QSpinBox;
+class QStringListModel;
 class QTextEdit;
 
 #include "oem/models/oem_settings_item.h"
@@ -52,11 +54,13 @@ class OemSettingsItemView : public QFrame {
   QLabel* value_ = nullptr;
   QPushButton* use_default_value_btn_ = nullptr;
   QPushButton* custom_bool_ = nullptr;
+  QComboBox* custom_combo_ = nullptr;
   QLineEdit* custom_line_edit_ = nullptr;
   QSpinBox* custom_spin_box_ = nullptr;
   QTextEdit* custom_text_edit_ = nullptr;
 
   OemSettingsItem item_;
+  QStringListModel* custom_list_model_ = nullptr;
 
  private slots:
   // Enable or disable custom value area when use_default_value_btn_ is toggled.

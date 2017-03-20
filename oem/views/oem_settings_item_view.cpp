@@ -4,11 +4,13 @@
 
 #include "oem/views/oem_settings_item_view.h"
 
+#include <QComboBox>
 #include <QGridLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QSpinBox>
+#include <QStringListModel>
 #include <QTextEdit>
 
 #include "base/file_util.h"
@@ -36,7 +38,11 @@ void OemSettingsItemView::updateItem(const OemSettingsItem& item) {
   default_value_->setText(default_value);
   const bool use_default_value = (default_value == value);
   this->updateCurrentValue();
+
+  use_default_value_btn_->blockSignals(true);
   use_default_value_btn_->setChecked(use_default_value);
+  use_default_value_btn_->blockSignals(false);
+
   this->enableCustomValue(!use_default_value);
   this->updateCustomValue();
 }
@@ -46,6 +52,9 @@ void OemSettingsItemView::initConnections() {
           this, &OemSettingsItemView::onUseDefaultValueButtonToggled);
 
   connect(custom_bool_, &QPushButton::toggled,
+          this, &OemSettingsItemView::onCustomWidgetValueChanged);
+  connect(custom_combo_,
+          static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
           this, &OemSettingsItemView::onCustomWidgetValueChanged);
   connect(custom_spin_box_,
           static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged),
@@ -76,6 +85,9 @@ void OemSettingsItemView::initUI() {
   QLabel* custom_value_label = new QLabel(tr("Custom value"));
   custom_bool_ = new QPushButton();
   custom_bool_->setCheckable(true);
+  custom_combo_ = new QComboBox();
+  custom_list_model_ = new QStringListModel(this);
+  custom_combo_->setModel(custom_list_model_);
   custom_line_edit_ = new QLineEdit();
   custom_spin_box_ = new QSpinBox();
   custom_text_edit_ = new QTextEdit();
@@ -84,6 +96,7 @@ void OemSettingsItemView::initUI() {
   custom_layout->setContentsMargins(0, 0, 0, 0);
   custom_layout->setSpacing(0);
   custom_layout->addWidget(custom_bool_, Qt::AlignLeft);
+  custom_layout->addWidget(custom_combo_, Qt::AlignLeft);
   custom_layout->addWidget(custom_line_edit_, Qt::AlignLeft);
   custom_layout->addWidget(custom_spin_box_, Qt::AlignLeft);
   custom_layout->addWidget(custom_text_edit_, Qt::AlignLeft);
@@ -127,6 +140,7 @@ void OemSettingsItemView::initUI() {
 void OemSettingsItemView::enableCustomValue(bool enable) {
   // Update custom value area.
   custom_bool_->setVisible(false);
+  custom_combo_->setVisible(false);
   custom_line_edit_->setVisible(false);
   custom_spin_box_->setVisible(false);
   custom_text_edit_->setVisible(false);
@@ -140,6 +154,11 @@ void OemSettingsItemView::enableCustomValue(bool enable) {
     case OemSettingsType::Boolean: {
       custom_bool_->setVisible(true);
       custom_bool_->setEnabled(enable);
+      break;
+    }
+    case OemSettingsType::Enumeration: {
+      custom_combo_->setVisible(true);
+      custom_combo_->setEnabled(enable);
       break;
     }
     case OemSettingsType::Integer: {
@@ -170,6 +189,9 @@ QVariant OemSettingsItemView::getCustomValue() {
     }
     case OemSettingsType::Boolean: {
       return custom_bool_->isChecked();
+    }
+    case OemSettingsType::Enumeration: {
+      return custom_combo_->currentText();
     }
     case OemSettingsType::Integer: {
       return custom_spin_box_->value();
@@ -209,24 +231,45 @@ void OemSettingsItemView::updateCustomValue() {
     case OemSettingsType::Base64String: {
       const QString content = item_.value().toString();
       const QString orig_content = Base64Decode(content);
+      custom_text_edit_->blockSignals(true);
       custom_text_edit_->setText(orig_content);
+      custom_text_edit_->blockSignals(false);
       break;
     }
     case OemSettingsType::Boolean: {
+      custom_bool_->blockSignals(true);
       custom_bool_->setChecked(item_.value().toBool());
+      custom_bool_->blockSignals(false);
+      break;
+    }
+    case OemSettingsType::Enumeration: {
+      custom_combo_->blockSignals(true);
+      custom_list_model_->setStringList(item_.options());
+      const QString locale = item_.value().toString();
+      const int index = item_.options().indexOf(locale);
+      if (index > -1) {
+        custom_combo_->setCurrentIndex(index);
+      }
+      custom_combo_->blockSignals(false);
       break;
     }
     case OemSettingsType::Integer: {
+      custom_spin_box_->blockSignals(true);
       custom_spin_box_->setRange(item_.minimum(), item_.maximum());
       custom_spin_box_->setValue(item_.value().toInt());
+      custom_spin_box_->blockSignals(false);
       break;
     }
     case OemSettingsType::StringArray: {
+      custom_text_edit_->blockSignals(true);
       custom_text_edit_->setText(item_.value().toString());
+      custom_text_edit_->blockSignals(false);
       break;
     }
     case OemSettingsType::String: {
+      custom_line_edit_->blockSignals(true);
       custom_line_edit_->setText(item_.value().toString());
+      custom_line_edit_->blockSignals(false);
       break;
     }
     default: {

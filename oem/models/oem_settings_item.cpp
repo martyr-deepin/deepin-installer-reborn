@@ -33,9 +33,10 @@ const char kTypeField[] = "type";
 const char kMinimumField[] = "minimum";
 const char kMaximumField[] = "maximum";
 
+const char kLanguageItemName[] = "select_language_default_locale";
+
 // Update language list options_ in |items|.
 void UpdateLanguageListOptions(OemSettingsItems& items) {
-  const char kLanguageItemName[] = "select_language_default_locale";
   int index = -1;
   for (index = 0; index < items.length(); ++index) {
     if (items.at(index).name() == kLanguageItemName) {
@@ -287,8 +288,10 @@ bool LoadSettingsItems(OemSettingsItems& items,
       item.setValue(default_value);
     }
 
-    item.setMinimum(obj_item.value(kMinimumField));
-    item.setMaximum(obj_item.value(kMaximumField));
+    if (item.value_type() == OemSettingsType::Integer) {
+      item.setMinimum(obj_item.value(kMinimumField));
+      item.setMaximum(obj_item.value(kMaximumField));
+    }
     items.append(item);
   }
 
