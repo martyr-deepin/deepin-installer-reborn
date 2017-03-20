@@ -176,6 +176,11 @@ QString GetPartitionLabel(const Partition& partition) {
     }
     case PartitionType::Normal:  // pass through
     case PartitionType::Logical: {
+      // If partition is created, returns its path name only.
+      if (partition.status == PartitionStatus::New) {
+        return GetPartitionName(partition.path);
+      }
+
       const QString os_description = GetOsDescription(partition.path);
       if (!os_description.isEmpty()) {
         return TrimText(os_description, kLabelMaxLen);
@@ -202,6 +207,11 @@ QString GetPartitionLabelAndPath(const Partition& partition) {
     }
     case PartitionType::Normal:  // pass through
     case PartitionType::Logical: {
+      // If partition is created, returns its path name only.
+      if (partition.status == PartitionStatus::New) {
+        return GetPartitionName(partition.path);
+      }
+
       const QString os_description = GetOsDescription(partition.path);
       if (!os_description.isEmpty()) {
         return TrimText(os_description, kLabelMaxLen);
