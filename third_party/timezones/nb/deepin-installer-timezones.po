@@ -1,17 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Kjartan Maraas <kmaraas@gnome.org>, 2011,2013
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: system-config-date\n"
-"Report-Msgid-Bugs-To: http://fedorahosted.org/system-config-date\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-10 17:18+0100\n"
-"PO-Revision-Date: 2013-04-28 09:09+0000\n"
-"Last-Translator: Dimitris Glezos <glezos@transifex.com>\n"
-"Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Andreas Dreyer Hysing <andreashysing@gmail.com>, 2017\n"
+"Language-Team: Norwegian Bokmål (https://www.transifex.com/linuxdeepin/teams/3976/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,153 +20,153 @@ msgstr ""
 
 #: system-config-date-timezones.h:1
 msgid "Africa/Abidjan"
-msgstr ""
+msgstr "Afrika/Abidjan"
 
 #: system-config-date-timezones.h:2
 msgid "Africa/Accra"
-msgstr ""
+msgstr "Afrika/Accra"
 
 #: system-config-date-timezones.h:3
 msgid "Africa/Addis_Ababa"
-msgstr ""
+msgstr "Afrika/Addis_Ababa"
 
 #: system-config-date-timezones.h:4
 msgid "Africa/Algiers"
-msgstr ""
+msgstr "Afrika/Algerie"
 
 #: system-config-date-timezones.h:5
 msgid "Africa/Asmara"
-msgstr ""
+msgstr "Afrika/Asamara"
 
 #: system-config-date-timezones.h:6
 msgid "Africa/Asmera"
-msgstr ""
+msgstr "Afrika/Asmera"
 
 #: system-config-date-timezones.h:7
 msgid "Africa/Bamako"
-msgstr ""
+msgstr "Afrika/Bamako"
 
 #: system-config-date-timezones.h:8
 msgid "Africa/Bangui"
-msgstr ""
+msgstr "Afrika/Bangui"
 
 #: system-config-date-timezones.h:9
 msgid "Africa/Banjul"
-msgstr ""
+msgstr "Afrika/Banjul"
 
 #: system-config-date-timezones.h:10
 msgid "Africa/Bissau"
-msgstr ""
+msgstr "Afrika/Bissau"
 
 #: system-config-date-timezones.h:11
 msgid "Africa/Blantyre"
-msgstr ""
+msgstr "Afrika/Blantyre"
 
 #: system-config-date-timezones.h:12
 msgid "Africa/Brazzaville"
-msgstr ""
+msgstr "Afrika/Brazzaville"
 
 #: system-config-date-timezones.h:13
 msgid "Africa/Bujumbura"
-msgstr ""
+msgstr "Afrika/Bujumbura"
 
 #: system-config-date-timezones.h:14
 msgid "Africa/Cairo"
-msgstr ""
+msgstr "Afrika/Kairo"
 
 #: system-config-date-timezones.h:15
 msgid "Africa/Casablanca"
-msgstr ""
+msgstr "Afrika/Casablanca"
 
 #: system-config-date-timezones.h:16
 msgid "Africa/Ceuta"
-msgstr ""
+msgstr "Afrika/Ceuta"
 
 #. comment for time zone Africa/Ceuta
 #: system-config-date-timezones.h:18
 msgid "Ceuta & Melilla"
-msgstr ""
+msgstr "Ceuta & Melilla"
 
 #: system-config-date-timezones.h:19
 msgid "Africa/Conakry"
-msgstr ""
+msgstr "Afrika/Conakry"
 
 #: system-config-date-timezones.h:20
 msgid "Africa/Dakar"
-msgstr ""
+msgstr "Afrika/Dakar"
 
 #: system-config-date-timezones.h:21
 msgid "Africa/Dar_es_Salaam"
-msgstr ""
+msgstr "Afrika/Dar_es_Salaam"
 
 #: system-config-date-timezones.h:22
 msgid "Africa/Djibouti"
-msgstr ""
+msgstr "Afrika/Djibouti"
 
 #: system-config-date-timezones.h:23
 msgid "Africa/Douala"
-msgstr ""
+msgstr "Afrika/Douala"
 
 #: system-config-date-timezones.h:24
 msgid "Africa/El_Aaiun"
-msgstr ""
+msgstr "Afrika/El_Aaiu"
 
 #: system-config-date-timezones.h:25
 msgid "Africa/Freetown"
-msgstr ""
+msgstr "Afrika/Freetown"
 
 #: system-config-date-timezones.h:26
 msgid "Africa/Gaborone"
-msgstr ""
+msgstr "Africa/Gaborone"
 
 #: system-config-date-timezones.h:27
 msgid "Africa/Harare"
-msgstr ""
+msgstr "Afrika/Harare"
 
 #: system-config-date-timezones.h:28
 msgid "Africa/Johannesburg"
-msgstr ""
+msgstr "Afrika/Johannesburg"
 
 #: system-config-date-timezones.h:29
 msgid "Africa/Juba"
-msgstr ""
+msgstr "Afrika/Jub"
 
 #: system-config-date-timezones.h:30
 msgid "Africa/Kampala"
-msgstr ""
+msgstr "Afrika/Kampala"
 
 #: system-config-date-timezones.h:31
 msgid "Africa/Khartoum"
-msgstr ""
+msgstr "Afrika/Khartoum"
 
 #: system-config-date-timezones.h:32
 msgid "Africa/Kigali"
-msgstr ""
+msgstr "Afrika/Kigali"
 
 #: system-config-date-timezones.h:33
 msgid "Africa/Kinshasa"
-msgstr ""
+msgstr "Afrika/Kinshasa"
 
 #. comment for time zone Africa/Kinshasa
 #: system-config-date-timezones.h:35
 msgid "west Dem. Rep. of Congo"
-msgstr ""
+msgstr "Vestlig Demokratiske Republikken Kongo"
 
 #: system-config-date-timezones.h:36
 msgid "Africa/Lagos"
-msgstr ""
+msgstr "Afrika/Lagos"
 
 #: system-config-date-timezones.h:37
 msgid "Africa/Libreville"
-msgstr ""
+msgstr "Afrika/Libreville"
 
 #: system-config-date-timezones.h:38
 msgid "Africa/Lome"
-msgstr ""
+msgstr "Afrika/Lome"
 
 #: system-config-date-timezones.h:39
 msgid "Africa/Luanda"
-msgstr ""
+msgstr "Afrika/Luanda"
 
 #: system-config-date-timezones.h:40
 msgid "Africa/Lubumbashi"
@@ -175,7 +175,7 @@ msgstr ""
 #. comment for time zone Africa/Lubumbashi
 #: system-config-date-timezones.h:42
 msgid "east Dem. Rep. of Congo"
-msgstr ""
+msgstr "Østlige Demokratiske Republikken Kongo"
 
 #: system-config-date-timezones.h:43
 msgid "Africa/Lusaka"
@@ -199,19 +199,19 @@ msgstr ""
 
 #: system-config-date-timezones.h:48
 msgid "Africa/Mogadishu"
-msgstr ""
+msgstr "Afrika/Mogadishu"
 
 #: system-config-date-timezones.h:49
 msgid "Africa/Monrovia"
-msgstr ""
+msgstr "Afrika/Monrovia"
 
 #: system-config-date-timezones.h:50
 msgid "Africa/Nairobi"
-msgstr ""
+msgstr "Afrika/Nairob"
 
 #: system-config-date-timezones.h:51
 msgid "Africa/Ndjamena"
-msgstr ""
+msgstr "Afrika/Ndjamena"
 
 #: system-config-date-timezones.h:52
 msgid "Africa/Niamey"

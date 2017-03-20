@@ -1,18 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Bahadir Yagan <bahadir.yagan@mentorsystem.com>, 2004
-# Egemen Metin Turan <mturan@aegee-ankara.org>, 2006-2007
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: system-config-date\n"
-"Report-Msgid-Bugs-To: http://fedorahosted.org/system-config-date\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-10 17:18+0100\n"
-"PO-Revision-Date: 2013-04-28 09:09+0000\n"
-"Last-Translator: Dimitris Glezos <glezos@transifex.com>\n"
-"Language-Team: Turkish (http://www.transifex.com/projects/p/fedora/language/tr/)\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: yakup <mutouk@yandex.ru>, 2017\n"
+"Language-Team: Turkish (https://www.transifex.com/linuxdeepin/teams/3976/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2788,27 +2787,27 @@ msgstr ""
 
 #: system-config-date-timezones.h:828
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: system-config-date-timezones.h:829
 msgid "GB-Eire"
-msgstr ""
+msgstr "GB-Eire"
 
 #: system-config-date-timezones.h:830
 msgid "GMT"
-msgstr ""
+msgstr "GMT"
 
 #: system-config-date-timezones.h:831
 msgid "GMT0"
-msgstr ""
+msgstr "GMT0"
 
 #: system-config-date-timezones.h:832
 msgid "GMT-0"
-msgstr ""
+msgstr "GMT-0"
 
 #: system-config-date-timezones.h:833
 msgid "GMT+0"
-msgstr ""
+msgstr "GMT+0"
 
 #: system-config-date-timezones.h:834
 msgid "Greenwich"
@@ -2929,372 +2928,372 @@ msgstr ""
 
 #: system-config-date-timezones.h:863
 msgid "MST7MDT"
-msgstr ""
+msgstr "MST7MDT"
 
 #: system-config-date-timezones.h:864
 msgid "Navajo"
-msgstr ""
+msgstr "Navajo"
 
 #: system-config-date-timezones.h:865
 msgid "NZ"
-msgstr ""
+msgstr "NZ"
 
 #: system-config-date-timezones.h:866
 msgid "NZ-CHAT"
-msgstr ""
+msgstr "NZ-CHAT"
 
 #: system-config-date-timezones.h:867
 msgid "Pacific/Apia"
-msgstr ""
+msgstr "Pacific/Apia"
 
 #: system-config-date-timezones.h:868
 msgid "Pacific/Auckland"
-msgstr ""
+msgstr "Pacific/Auckland"
 
 #: system-config-date-timezones.h:871
 msgid "Pacific/Chatham"
-msgstr ""
+msgstr "Pacific/Chatham"
 
 #. comment for time zone Pacific/Chatham
 #: system-config-date-timezones.h:873
 msgid "Chatham Islands"
-msgstr ""
+msgstr "Chatham Islands"
 
 #: system-config-date-timezones.h:874
 msgid "Pacific/Chuuk"
-msgstr ""
+msgstr "Pacific/Chuuk"
 
 #. comment for time zone Pacific/Chuuk
 #: system-config-date-timezones.h:876
 msgid "Chuuk (Truk) and Yap"
-msgstr ""
+msgstr "Chuuk (Truk) and Yap"
 
 #: system-config-date-timezones.h:877
 msgid "Pacific/Easter"
-msgstr ""
+msgstr "Pacific/Easter"
 
 #. comment for time zone Pacific/Easter
 #: system-config-date-timezones.h:879
 msgid "Easter Island & Sala y Gomez"
-msgstr ""
+msgstr "Easter Island & Sala y Gomez"
 
 #: system-config-date-timezones.h:880
 msgid "Pacific/Efate"
-msgstr ""
+msgstr "Pacific/Efate"
 
 #: system-config-date-timezones.h:881
 msgid "Pacific/Enderbury"
-msgstr ""
+msgstr "Pacific/Enderbury"
 
 #. comment for time zone Pacific/Enderbury
 #: system-config-date-timezones.h:883
 msgid "Phoenix Islands"
-msgstr ""
+msgstr "Phoenix Islands"
 
 #: system-config-date-timezones.h:884
 msgid "Pacific/Fakaofo"
-msgstr ""
+msgstr "Pacific/Fakaofo"
 
 #: system-config-date-timezones.h:885
 msgid "Pacific/Fiji"
-msgstr ""
+msgstr "Pacific/Fiji"
 
 #: system-config-date-timezones.h:886
 msgid "Pacific/Funafuti"
-msgstr ""
+msgstr "Pacific/Funafuti"
 
 #: system-config-date-timezones.h:887
 msgid "Pacific/Galapagos"
-msgstr ""
+msgstr "Pacific/Galapagos"
 
 #. comment for time zone Pacific/Galapagos
 #: system-config-date-timezones.h:889
 msgid "Galapagos Islands"
-msgstr ""
+msgstr "Galapagos Islands"
 
 #: system-config-date-timezones.h:890
 msgid "Pacific/Gambier"
-msgstr ""
+msgstr "Pacific/Gambier"
 
 #. comment for time zone Pacific/Gambier
 #: system-config-date-timezones.h:892
 msgid "Gambier Islands"
-msgstr ""
+msgstr "Gambier Islands"
 
 #: system-config-date-timezones.h:893
 msgid "Pacific/Guadalcanal"
-msgstr ""
+msgstr "Pacific/Guadalcanal"
 
 #: system-config-date-timezones.h:894
 msgid "Pacific/Guam"
-msgstr ""
+msgstr "Pacific/Guam"
 
 #: system-config-date-timezones.h:895
 msgid "Pacific/Honolulu"
-msgstr ""
+msgstr "Pacific/Honolulu"
 
 #. comment for time zone Pacific/Honolulu
 #: system-config-date-timezones.h:897
 msgid "Hawaii"
-msgstr ""
+msgstr "Hawaii"
 
 #: system-config-date-timezones.h:898
 msgid "Pacific/Johnston"
-msgstr ""
+msgstr "Pacific/Johnston"
 
 #. comment for time zone Pacific/Johnston
 #: system-config-date-timezones.h:900
 msgid "Johnston Atoll"
-msgstr ""
+msgstr "Johnston Atoll"
 
 #: system-config-date-timezones.h:901
 msgid "Pacific/Kiritimati"
-msgstr ""
+msgstr "Pacific/Kiritimati"
 
 #. comment for time zone Pacific/Kiritimati
 #: system-config-date-timezones.h:903
 msgid "Line Islands"
-msgstr ""
+msgstr "Line Islands"
 
 #: system-config-date-timezones.h:904
 msgid "Pacific/Kosrae"
-msgstr ""
+msgstr "Pacific/Kosrae"
 
 #. comment for time zone Pacific/Kosrae
 #: system-config-date-timezones.h:906
 msgid "Kosrae"
-msgstr ""
+msgstr "Kosrae"
 
 #: system-config-date-timezones.h:907
 msgid "Pacific/Kwajalein"
-msgstr ""
+msgstr "Pacific/Kwajalein"
 
 #: system-config-date-timezones.h:910
 msgid "Pacific/Majuro"
-msgstr ""
+msgstr "Pacific/Majuro"
 
 #: system-config-date-timezones.h:913
 msgid "Pacific/Marquesas"
-msgstr ""
+msgstr "Pacific/Marquesas"
 
 #. comment for time zone Pacific/Marquesas
 #: system-config-date-timezones.h:915
 msgid "Marquesas Islands"
-msgstr ""
+msgstr "Marquesas Islands"
 
 #: system-config-date-timezones.h:916
 msgid "Pacific/Midway"
-msgstr ""
+msgstr "Pacific/Midway"
 
 #. comment for time zone Pacific/Midway
 #: system-config-date-timezones.h:918
 msgid "Midway Islands"
-msgstr ""
+msgstr "Midway Islands"
 
 #: system-config-date-timezones.h:919
 msgid "Pacific/Nauru"
-msgstr ""
+msgstr "Pacific/Nauru"
 
 #: system-config-date-timezones.h:920
 msgid "Pacific/Niue"
-msgstr ""
+msgstr "Pacific/Niue"
 
 #: system-config-date-timezones.h:921
 msgid "Pacific/Norfolk"
-msgstr ""
+msgstr "Pacific/Norfolk"
 
 #: system-config-date-timezones.h:922
 msgid "Pacific/Noumea"
-msgstr ""
+msgstr "Pacific/Noumea"
 
 #: system-config-date-timezones.h:923
 msgid "Pacific/Pago_Pago"
-msgstr ""
+msgstr "Pacific/Pago_Pago"
 
 #: system-config-date-timezones.h:924
 msgid "Pacific/Palau"
-msgstr ""
+msgstr "Pacific/Palau"
 
 #: system-config-date-timezones.h:925
 msgid "Pacific/Pitcairn"
-msgstr ""
+msgstr "Pacific/Pitcairn"
 
 #: system-config-date-timezones.h:926
 msgid "Pacific/Pohnpei"
-msgstr ""
+msgstr "Pacific/Pohnpei"
 
 #. comment for time zone Pacific/Pohnpei
 #: system-config-date-timezones.h:928
 msgid "Pohnpei (Ponape)"
-msgstr ""
+msgstr "Pohnpei (Ponape)"
 
 #: system-config-date-timezones.h:929
 msgid "Pacific/Ponape"
-msgstr ""
+msgstr "Pacific/Ponape"
 
 #: system-config-date-timezones.h:930
 msgid "Pacific/Port_Moresby"
-msgstr ""
+msgstr "Pacific/Port_Moresby"
 
 #: system-config-date-timezones.h:931
 msgid "Pacific/Rarotonga"
-msgstr ""
+msgstr "Pacific/Rarotonga"
 
 #: system-config-date-timezones.h:932
 msgid "Pacific/Saipan"
-msgstr ""
+msgstr "Pacific/Saipan"
 
 #: system-config-date-timezones.h:933
 msgid "Pacific/Samoa"
-msgstr ""
+msgstr "Pacific/Samoa"
 
 #: system-config-date-timezones.h:934
 msgid "Pacific/Tahiti"
-msgstr ""
+msgstr "Pacific/Tahiti"
 
 #. comment for time zone Pacific/Tahiti
 #: system-config-date-timezones.h:936
 msgid "Society Islands"
-msgstr ""
+msgstr "Society Islands"
 
 #: system-config-date-timezones.h:937
 msgid "Pacific/Tarawa"
-msgstr ""
+msgstr "Pacific/Tarawa"
 
 #. comment for time zone Pacific/Tarawa
 #: system-config-date-timezones.h:939
 msgid "Gilbert Islands"
-msgstr ""
+msgstr "Gilbert Islands"
 
 #: system-config-date-timezones.h:940
 msgid "Pacific/Tongatapu"
-msgstr ""
+msgstr "Pacific/Tongatapu"
 
 #: system-config-date-timezones.h:941
 msgid "Pacific/Truk"
-msgstr ""
+msgstr "Pacific/Truk"
 
 #: system-config-date-timezones.h:942
 msgid "Pacific/Wake"
-msgstr ""
+msgstr "Pacific/Wake"
 
 #. comment for time zone Pacific/Wake
 #: system-config-date-timezones.h:944
 msgid "Wake Island"
-msgstr ""
+msgstr "Wake Island"
 
 #: system-config-date-timezones.h:945
 msgid "Pacific/Wallis"
-msgstr ""
+msgstr "Pacific/Wallis"
 
 #: system-config-date-timezones.h:946
 msgid "Pacific/Yap"
-msgstr ""
+msgstr "Pacific/Yap"
 
 #: system-config-date-timezones.h:947
 msgid "Poland"
-msgstr ""
+msgstr "Polonya"
 
 #: system-config-date-timezones.h:948
 msgid "Portugal"
-msgstr ""
+msgstr "Portekiz"
 
 #: system-config-date-timezones.h:949
 msgid "PRC"
-msgstr ""
+msgstr "PRC"
 
 #: system-config-date-timezones.h:950
 msgid "PST8PDT"
-msgstr ""
+msgstr "PST8PDT"
 
 #: system-config-date-timezones.h:951
 msgid "ROC"
-msgstr ""
+msgstr "ROC"
 
 #: system-config-date-timezones.h:952
 msgid "ROK"
-msgstr ""
+msgstr "ROK"
 
 #: system-config-date-timezones.h:953
 msgid "Singapore"
-msgstr ""
+msgstr "Singapur"
 
 #: system-config-date-timezones.h:954
 msgid "Turkey"
-msgstr ""
+msgstr "Türkiye"
 
 #: system-config-date-timezones.h:955
 msgid "UCT"
-msgstr ""
+msgstr "UCT"
 
 #: system-config-date-timezones.h:956
 msgid "Universal"
-msgstr ""
+msgstr "Evrensel"
 
 #: system-config-date-timezones.h:957
 msgid "US/Alaska"
-msgstr ""
+msgstr "US/Alaska"
 
 #: system-config-date-timezones.h:958
 msgid "US/Aleutian"
-msgstr ""
+msgstr "US/Aleutian"
 
 #: system-config-date-timezones.h:959
 msgid "US/Arizona"
-msgstr ""
+msgstr "US/Arizona"
 
 #: system-config-date-timezones.h:960
 msgid "US/Central"
-msgstr ""
+msgstr "US/Central"
 
 #: system-config-date-timezones.h:961
 msgid "US/Eastern"
-msgstr ""
+msgstr "US/Eastern"
 
 #: system-config-date-timezones.h:962
 msgid "US/East-Indiana"
-msgstr ""
+msgstr "US/East-Indiana"
 
 #: system-config-date-timezones.h:963
 msgid "US/Hawaii"
-msgstr ""
+msgstr "US/Hawaii"
 
 #: system-config-date-timezones.h:964
 msgid "US/Indiana-Starke"
-msgstr ""
+msgstr "US/Indiana-Starke"
 
 #: system-config-date-timezones.h:965
 msgid "US/Michigan"
-msgstr ""
+msgstr "US/Michigan"
 
 #: system-config-date-timezones.h:966
 msgid "US/Mountain"
-msgstr ""
+msgstr "US/Mountain"
 
 #: system-config-date-timezones.h:967
 msgid "US/Pacific"
-msgstr ""
+msgstr "US/Pacific"
 
 #: system-config-date-timezones.h:968
 msgid "US/Pacific-New"
-msgstr ""
+msgstr "US/Pacific-New"
 
 #: system-config-date-timezones.h:969
 msgid "US/Samoa"
-msgstr ""
+msgstr "US/Samoa"
 
 #: system-config-date-timezones.h:970
 msgid "UTC"
-msgstr ""
+msgstr "UTC"
 
 #: system-config-date-timezones.h:971
 msgid "WET"
-msgstr ""
+msgstr "WET"
 
 #: system-config-date-timezones.h:972
 msgid "W-SU"
-msgstr ""
+msgstr "W-SU"
 
 #: system-config-date-timezones.h:973
 msgid "Zulu"
-msgstr ""
+msgstr "Zulu"

@@ -1,17 +1,17 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Roman Maurer <roman@lugos.si>, 2001
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: system-config-date\n"
-"Report-Msgid-Bugs-To: http://fedorahosted.org/system-config-date\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-12-10 17:18+0100\n"
-"PO-Revision-Date: 2013-04-28 09:09+0000\n"
-"Last-Translator: Dimitris Glezos <glezos@transifex.com>\n"
-"Language-Team: Slovenian (http://www.transifex.com/projects/p/fedora/language/sl/)\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Gorzy Gorup <gorupgorazd@gmail.com>, 2017\n"
+"Language-Team: Slovenian (https://www.transifex.com/linuxdeepin/teams/3976/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,446 +20,446 @@ msgstr ""
 
 #: system-config-date-timezones.h:1
 msgid "Africa/Abidjan"
-msgstr ""
+msgstr "Afrika/Abidžan"
 
 #: system-config-date-timezones.h:2
 msgid "Africa/Accra"
-msgstr ""
+msgstr "Afrika/Akra"
 
 #: system-config-date-timezones.h:3
 msgid "Africa/Addis_Ababa"
-msgstr ""
+msgstr "Afrika/Adis_Abeba"
 
 #: system-config-date-timezones.h:4
 msgid "Africa/Algiers"
-msgstr ""
+msgstr "Afrika/Alžir"
 
 #: system-config-date-timezones.h:5
 msgid "Africa/Asmara"
-msgstr ""
+msgstr "Afrika/Asmara"
 
 #: system-config-date-timezones.h:6
 msgid "Africa/Asmera"
-msgstr ""
+msgstr "Afrika/Asmara"
 
 #: system-config-date-timezones.h:7
 msgid "Africa/Bamako"
-msgstr ""
+msgstr "Afrika/Bamako"
 
 #: system-config-date-timezones.h:8
 msgid "Africa/Bangui"
-msgstr ""
+msgstr "Afrika/Bangui"
 
 #: system-config-date-timezones.h:9
 msgid "Africa/Banjul"
-msgstr ""
+msgstr "Afrika/Banjul"
 
 #: system-config-date-timezones.h:10
 msgid "Africa/Bissau"
-msgstr ""
+msgstr "Afrika/Bissau"
 
 #: system-config-date-timezones.h:11
 msgid "Africa/Blantyre"
-msgstr ""
+msgstr "Afrika/Blantyre"
 
 #: system-config-date-timezones.h:12
 msgid "Africa/Brazzaville"
-msgstr ""
+msgstr "Afrika/Brazzaville"
 
 #: system-config-date-timezones.h:13
 msgid "Africa/Bujumbura"
-msgstr ""
+msgstr "Afrika/Bujumbura"
 
 #: system-config-date-timezones.h:14
 msgid "Africa/Cairo"
-msgstr ""
+msgstr "Afrika/Kairo"
 
 #: system-config-date-timezones.h:15
 msgid "Africa/Casablanca"
-msgstr ""
+msgstr "Afrika/Casablanca"
 
 #: system-config-date-timezones.h:16
 msgid "Africa/Ceuta"
-msgstr ""
+msgstr "Afrika/Ceuta"
 
 #. comment for time zone Africa/Ceuta
 #: system-config-date-timezones.h:18
 msgid "Ceuta & Melilla"
-msgstr ""
+msgstr "Ceuta in Melilla"
 
 #: system-config-date-timezones.h:19
 msgid "Africa/Conakry"
-msgstr ""
+msgstr "Afrika/Conakry"
 
 #: system-config-date-timezones.h:20
 msgid "Africa/Dakar"
-msgstr ""
+msgstr "Afrika/Dakar"
 
 #: system-config-date-timezones.h:21
 msgid "Africa/Dar_es_Salaam"
-msgstr ""
+msgstr "Afrika/Dar_es_Salaam"
 
 #: system-config-date-timezones.h:22
 msgid "Africa/Djibouti"
-msgstr ""
+msgstr "Afrika/Džibuti"
 
 #: system-config-date-timezones.h:23
 msgid "Africa/Douala"
-msgstr ""
+msgstr "Afrika/Douala"
 
 #: system-config-date-timezones.h:24
 msgid "Africa/El_Aaiun"
-msgstr ""
+msgstr "Afrika/Laayoune"
 
 #: system-config-date-timezones.h:25
 msgid "Africa/Freetown"
-msgstr ""
+msgstr "Afrika/Freetown"
 
 #: system-config-date-timezones.h:26
 msgid "Africa/Gaborone"
-msgstr ""
+msgstr "Afrika/Gaborone"
 
 #: system-config-date-timezones.h:27
 msgid "Africa/Harare"
-msgstr ""
+msgstr "Afrika/Harare"
 
 #: system-config-date-timezones.h:28
 msgid "Africa/Johannesburg"
-msgstr ""
+msgstr "Afrika/Johannesburg"
 
 #: system-config-date-timezones.h:29
 msgid "Africa/Juba"
-msgstr ""
+msgstr "Afrika/Džuba"
 
 #: system-config-date-timezones.h:30
 msgid "Africa/Kampala"
-msgstr ""
+msgstr "Afrika/Kampala"
 
 #: system-config-date-timezones.h:31
 msgid "Africa/Khartoum"
-msgstr ""
+msgstr "Afrika/Kartum"
 
 #: system-config-date-timezones.h:32
 msgid "Africa/Kigali"
-msgstr ""
+msgstr "Afrika/Kigali"
 
 #: system-config-date-timezones.h:33
 msgid "Africa/Kinshasa"
-msgstr ""
+msgstr "Afrika/Kinšasa"
 
 #. comment for time zone Africa/Kinshasa
 #: system-config-date-timezones.h:35
 msgid "west Dem. Rep. of Congo"
-msgstr ""
+msgstr "Zahodni Kongo"
 
 #: system-config-date-timezones.h:36
 msgid "Africa/Lagos"
-msgstr ""
+msgstr "Afrika/Lagos"
 
 #: system-config-date-timezones.h:37
 msgid "Africa/Libreville"
-msgstr ""
+msgstr "Afrika/Libreville"
 
 #: system-config-date-timezones.h:38
 msgid "Africa/Lome"
-msgstr ""
+msgstr "Afrika/Lomé"
 
 #: system-config-date-timezones.h:39
 msgid "Africa/Luanda"
-msgstr ""
+msgstr "Afrika/Luanda"
 
 #: system-config-date-timezones.h:40
 msgid "Africa/Lubumbashi"
-msgstr ""
+msgstr "Afrika/Lubumbashi"
 
 #. comment for time zone Africa/Lubumbashi
 #: system-config-date-timezones.h:42
 msgid "east Dem. Rep. of Congo"
-msgstr ""
+msgstr "Vzhodni Kongo"
 
 #: system-config-date-timezones.h:43
 msgid "Africa/Lusaka"
-msgstr ""
+msgstr "Afrika/Lusaka"
 
 #: system-config-date-timezones.h:44
 msgid "Africa/Malabo"
-msgstr ""
+msgstr "Afrika/Malabo"
 
 #: system-config-date-timezones.h:45
 msgid "Africa/Maputo"
-msgstr ""
+msgstr "Afrika/Maputo"
 
 #: system-config-date-timezones.h:46
 msgid "Africa/Maseru"
-msgstr ""
+msgstr "Afrika/Maseru"
 
 #: system-config-date-timezones.h:47
 msgid "Africa/Mbabane"
-msgstr ""
+msgstr "Afrika/Mbabane"
 
 #: system-config-date-timezones.h:48
 msgid "Africa/Mogadishu"
-msgstr ""
+msgstr "Afrika/Mogadiš"
 
 #: system-config-date-timezones.h:49
 msgid "Africa/Monrovia"
-msgstr ""
+msgstr "Afrika/Monrovija"
 
 #: system-config-date-timezones.h:50
 msgid "Africa/Nairobi"
-msgstr ""
+msgstr "Afrika/Nairobi"
 
 #: system-config-date-timezones.h:51
 msgid "Africa/Ndjamena"
-msgstr ""
+msgstr "Afrika/N'Djamena"
 
 #: system-config-date-timezones.h:52
 msgid "Africa/Niamey"
-msgstr ""
+msgstr "Afrika/Niamey"
 
 #: system-config-date-timezones.h:53
 msgid "Africa/Nouakchott"
-msgstr ""
+msgstr "Afrika/Nouakchott"
 
 #: system-config-date-timezones.h:54
 msgid "Africa/Ouagadougou"
-msgstr ""
+msgstr "Afrika/Ouagadougou"
 
 #: system-config-date-timezones.h:55
 msgid "Africa/Porto-Novo"
-msgstr ""
+msgstr "Afrika/Porto-Novo"
 
 #: system-config-date-timezones.h:56
 msgid "Africa/Sao_Tome"
-msgstr ""
+msgstr "Afrika/São_Tomé"
 
 #: system-config-date-timezones.h:57
 msgid "Africa/Timbuktu"
-msgstr ""
+msgstr "Afrika/Timbuktu"
 
 #: system-config-date-timezones.h:58
 msgid "Africa/Tripoli"
-msgstr ""
+msgstr "Afrika/Tripoli"
 
 #: system-config-date-timezones.h:59
 msgid "Africa/Tunis"
-msgstr ""
+msgstr "Afrika/Tunis"
 
 #: system-config-date-timezones.h:60
 msgid "Africa/Windhoek"
-msgstr ""
+msgstr "Afrika/Windhoek"
 
 #: system-config-date-timezones.h:61
 msgid "America/Adak"
-msgstr ""
+msgstr "Amerika/Adak"
 
 #. comment for time zone America/Adak
 #: system-config-date-timezones.h:63
 msgid "Aleutian Islands"
-msgstr ""
+msgstr "Aleuti"
 
 #: system-config-date-timezones.h:64
 msgid "America/Anchorage"
-msgstr ""
+msgstr "Amerika/Anchorage"
 
 #. comment for time zone America/Anchorage
 #: system-config-date-timezones.h:66
 msgid "Alaska Time"
-msgstr ""
+msgstr "Čas v Aljaski"
 
 #: system-config-date-timezones.h:67
 msgid "America/Anguilla"
-msgstr ""
+msgstr "Amerika/Angvila"
 
 #: system-config-date-timezones.h:68
 msgid "America/Antigua"
-msgstr ""
+msgstr "Amerika/Antigua"
 
 #: system-config-date-timezones.h:69
 msgid "America/Araguaina"
-msgstr ""
+msgstr "Amerika/Araguaína"
 
 #. comment for time zone America/Araguaina
 #: system-config-date-timezones.h:71
 msgid "Tocantins"
-msgstr ""
+msgstr "Tocantins"
 
 #: system-config-date-timezones.h:72
 msgid "America/Argentina/Buenos_Aires"
-msgstr ""
+msgstr "Amerika/Argentina/Buenos_Aires"
 
 #. comment for time zone America/Argentina/Buenos_Aires
 #: system-config-date-timezones.h:74
 msgid "Buenos Aires (BA, CF)"
-msgstr ""
+msgstr "Buenos Aires (BA, CF)"
 
 #: system-config-date-timezones.h:75
 msgid "America/Argentina/Catamarca"
-msgstr ""
+msgstr "Amerika/Argentina/Catamarca"
 
 #. comment for time zone America/Argentina/Catamarca
 #: system-config-date-timezones.h:77
 msgid "Catamarca (CT), Chubut (CH)"
-msgstr ""
+msgstr "Catamarca (CT), Chubut (CH)"
 
 #: system-config-date-timezones.h:78
 msgid "America/Argentina/ComodRivadavia"
-msgstr ""
+msgstr "Amerika/Argentina/Comodoro_Rivadavia"
 
 #: system-config-date-timezones.h:79
 msgid "America/Argentina/Cordoba"
-msgstr ""
+msgstr "Amerika/Argentina/Córdoba"
 
 #. comment for time zone America/Argentina/Cordoba
 #: system-config-date-timezones.h:81
 msgid "most locations (CB, CC, CN, ER, FM, MN, SE, SF)"
-msgstr ""
+msgstr "večina lokacij (CB, CC, CN, ER, FM, MN, SE, SF)"
 
 #: system-config-date-timezones.h:82
 msgid "America/Argentina/Jujuy"
-msgstr ""
+msgstr "Amerika/Argentina/Jujuy"
 
 #. comment for time zone America/Argentina/Jujuy
 #: system-config-date-timezones.h:84
 msgid "Jujuy (JY)"
-msgstr ""
+msgstr "Jujuy (JY)"
 
 #: system-config-date-timezones.h:85
 msgid "America/Argentina/La_Rioja"
-msgstr ""
+msgstr "Amerika/Argentina/La_Rioja"
 
 #. comment for time zone America/Argentina/La_Rioja
 #: system-config-date-timezones.h:87
 msgid "La Rioja (LR)"
-msgstr ""
+msgstr "La Rioja (LR)"
 
 #: system-config-date-timezones.h:88
 msgid "America/Argentina/Mendoza"
-msgstr ""
+msgstr "Amerika/Argentina/Mendoza"
 
 #. comment for time zone America/Argentina/Mendoza
 #: system-config-date-timezones.h:90
 msgid "Mendoza (MZ)"
-msgstr ""
+msgstr "Mendoza (MZ)"
 
 #: system-config-date-timezones.h:91
 msgid "America/Argentina/Rio_Gallegos"
-msgstr ""
+msgstr "Amerika/Argentina/Río_Gallegos"
 
 #. comment for time zone America/Argentina/Rio_Gallegos
 #: system-config-date-timezones.h:93
 msgid "Santa Cruz (SC)"
-msgstr ""
+msgstr "Santa Cruz (SC)"
 
 #: system-config-date-timezones.h:94
 msgid "America/Argentina/Salta"
-msgstr ""
+msgstr "Amerika/Argentina/Salta"
 
 #. comment for time zone America/Argentina/Salta
 #: system-config-date-timezones.h:96
 msgid "(SA, LP, NQ, RN)"
-msgstr ""
+msgstr "(SA, LP, NQ, RN)"
 
 #: system-config-date-timezones.h:97
 msgid "America/Argentina/San_Juan"
-msgstr ""
+msgstr "Amerika/Argentina/San_Juan"
 
 #. comment for time zone America/Argentina/San_Juan
 #: system-config-date-timezones.h:99
 msgid "San Juan (SJ)"
-msgstr ""
+msgstr "San Juan (SJ)"
 
 #: system-config-date-timezones.h:100
 msgid "America/Argentina/San_Luis"
-msgstr ""
+msgstr "Amerika/Argentina/San_Luis"
 
 #. comment for time zone America/Argentina/San_Luis
 #: system-config-date-timezones.h:102
 msgid "San Luis (SL)"
-msgstr ""
+msgstr "San Luis (SL)"
 
 #: system-config-date-timezones.h:103
 msgid "America/Argentina/Tucuman"
-msgstr ""
+msgstr "America/Argentina/San_Miguel_de_Tucumán"
 
 #. comment for time zone America/Argentina/Tucuman
 #: system-config-date-timezones.h:105
 msgid "Tucuman (TM)"
-msgstr ""
+msgstr "San Miguel de Tucumán (TM)"
 
 #: system-config-date-timezones.h:106
 msgid "America/Argentina/Ushuaia"
-msgstr ""
+msgstr "Amerika/Argentina/Ushuaia"
 
 #. comment for time zone America/Argentina/Ushuaia
 #: system-config-date-timezones.h:108
 msgid "Tierra del Fuego (TF)"
-msgstr ""
+msgstr "Tierra del Fuego (TF)"
 
 #: system-config-date-timezones.h:109
 msgid "America/Aruba"
-msgstr ""
+msgstr "Amerika/Aruba"
 
 #: system-config-date-timezones.h:110
 msgid "America/Asuncion"
-msgstr ""
+msgstr "Amerika/Asunción"
 
 #: system-config-date-timezones.h:111
 msgid "America/Atikokan"
-msgstr ""
+msgstr "Amerika/Atikokan"
 
 #. comment for time zone America/Atikokan
 #: system-config-date-timezones.h:113
 msgid "Eastern Standard Time - Atikokan, Ontario and Southampton I, Nunavut"
-msgstr ""
+msgstr "Vzhodni standardni čas - Atikokan, Ontario in Southampton I, Nunavut"
 
 #: system-config-date-timezones.h:114
 msgid "America/Atka"
-msgstr ""
+msgstr "Amerika/Atka"
 
 #: system-config-date-timezones.h:115
 msgid "America/Bahia"
-msgstr ""
+msgstr "Amerika/Bahia"
 
 #. comment for time zone America/Bahia
 #: system-config-date-timezones.h:117
 msgid "Bahia"
-msgstr ""
+msgstr "Bahia"
 
 #: system-config-date-timezones.h:118
 msgid "America/Bahia_Banderas"
-msgstr ""
+msgstr "America/Bahía_de_Banderas"
 
 #. comment for time zone America/Bahia_Banderas
 #: system-config-date-timezones.h:120
 msgid "Mexican Central Time - Bahia de Banderas"
-msgstr ""
+msgstr "Mehiški centralni čas - Bahía de Banderas"
 
 #: system-config-date-timezones.h:121
 msgid "America/Barbados"
-msgstr ""
+msgstr "Amerika/Barbados"
 
 #: system-config-date-timezones.h:122
 msgid "America/Belem"
-msgstr ""
+msgstr "Amerika/Belem"
 
 #. comment for time zone America/Belem
 #: system-config-date-timezones.h:124
 msgid "Amapa, E Para"
-msgstr ""
+msgstr "Amapá, E Para"
 
 #: system-config-date-timezones.h:125
 msgid "America/Belize"
-msgstr ""
+msgstr "Amerika/Belize"
 
 #: system-config-date-timezones.h:126
 msgid "America/Blanc-Sablon"
-msgstr ""
+msgstr "Amerika/Blanc-Sablon"
 
 #. comment for time zone America/Blanc-Sablon
 #: system-config-date-timezones.h:128
 msgid "Atlantic Standard Time - Quebec - Lower North Shore"
-msgstr ""
+msgstr "Atlantski standardni čas - Quebec City - Spodnja severna obala"
 
 #: system-config-date-timezones.h:129
 msgid "America/Boa_Vista"
