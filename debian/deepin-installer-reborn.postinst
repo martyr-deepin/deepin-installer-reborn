@@ -18,6 +18,8 @@
 SHARE_DIR=/usr/share/deepin-installer-reborn
 
 # Update /etc/locale.gen and generate new locale cache.
+# Or else neither timezone page nor keyboard layout page work well with
+# gettext.
 generate_locale() {
   local JSON="${SHARE_DIR}/resources/languages.json"
   local LOCALES
@@ -62,7 +64,7 @@ generate_background_image() {
 
 case "$1" in
   configure)
-    #generate_locale
+    generate_locale
     generate_background_image
 
     # Update initramfs to include current boot scripts.
