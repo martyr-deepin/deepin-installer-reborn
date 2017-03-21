@@ -4,6 +4,7 @@
 
 #include "ui/frames/install_progress_frame.h"
 
+#include <math.h>
 #include <QDebug>
 #include <QEvent>
 #include <QPropertyAnimation>
@@ -195,10 +196,12 @@ void InstallProgressFrame::initUI() {
 }
 
 void InstallProgressFrame::updateProgressBar(int progress) {
+  Q_ASSERT(progress_bar_->maximum() != 0);
   progress_bar_->setValue(progress);
+  const double percentage = progress * 1.0 / progress_bar_->maximum();
 
   // Calculate percentage of progress.
-  const int real_progress = progress * 100 / progress_bar_->maximum();
+  const int real_progress = int(floor(percentage * 100.0));
   tooltip_label_->setText(QString("%1%").arg(real_progress));
   int x;
   if (progress == progress_bar_->minimum()) {
@@ -206,8 +209,7 @@ void InstallProgressFrame::updateProgressBar(int progress) {
     x = kTooltipLabelMargin;
   } else {
     // Add right margin.
-    x = kProgressBarWidth * progress_bar_->value() / progress_bar_->maximum()
-        - kTooltipLabelMargin;
+    x = int(kProgressBarWidth * percentage - kTooltipLabelMargin);
   }
   const int y = tooltip_label_->y();
   tooltip_label_->move(x, y);
@@ -235,7 +237,9 @@ void InstallProgressFrame::onHooksFinished() {
 }
 
 void InstallProgressFrame::onProgressUpdate(int progress) {
-  progress_animation_->setEndValue(progress);
+  // Multiple progress value by 10 to fit progress_bar_ range.
+  const int virtual_progress = progress * 10;
+  progress_animation_->setEndValue(virtual_progress);
   progress_animation_->start();
 }
 
@@ -245,8 +249,9 @@ void InstallProgressFrame::onRetainingTimerTimeout() {
 }
 
 void InstallProgressFrame::onSimulationTimerTimeout() {
-  const int progress = progress_bar_->value() +
-      int(0.01 * progress_bar_->maximum());
+  // Increase 5% each time.
+  const int progress = (progress_bar_->value() + 10) * 100
+                       / progress_bar_->maximum();
   if (progress > progress_bar_->maximum()) {
     simulation_timer_->stop();
   } else {
