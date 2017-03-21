@@ -55,7 +55,7 @@ update_background() {
   local DEST_FILE=/usr/share/backgrounds/lightdm.png
 
   if [ -f "${SRC_FILE}" ]; then
-    install -m644 "${SRC_FILE}" "${DEST_FILE}" || \
+    install -m644 -v "${SRC_FILE}" "${DEST_FILE}" || \
       warn "Failed to copy lightdm background"
 
     # Update lightdm background path in config file.
@@ -65,6 +65,8 @@ update_background() {
     if [ -f "${DEST_FILE}" ]; then
       deepin-installer-settings set "${USER_CONF}" "Users" "GreeterBackground" \
         "${DEST_FILE}"
+    else
+      warn "Failed to update lightdm background for ${DI_USERNAME}"
     fi
   fi
 }

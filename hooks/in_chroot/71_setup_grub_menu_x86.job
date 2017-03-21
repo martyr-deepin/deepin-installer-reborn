@@ -43,9 +43,10 @@ GRUB_BACKGROUND=/boot/grub/themes/deepin/background.png
 GRUB_BACKGROUND_THUMB=/boot/grub/themes/deepin/background_thumb.png
 if [ -f "${OEM_GRUB_BACKGROUND}" ]; then
   # Update background of boot menu by overwriting old background image.
-  cp -f "${OEM_GRUB_BACKGROUND}" "${GRUB_BACKGROUND}"
+  install -m644 -v "${OEM_GRUB_BACKGROUND}" "${GRUB_BACKGROUND}"
 
   # Generate thumbnail file.
+  # FIXME(xushaohua): Skip convert on loongson/sw platforms
   convert "${OEM_GRUB_BACKGROUND}" -scale 300x250 "${GRUB_BACKGROUND_THUMB}"
 
   GRUB_NEED_UPDATE=true
