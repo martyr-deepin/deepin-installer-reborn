@@ -34,7 +34,7 @@ void RoundedProgressBar::paintEvent(QPaintEvent* event) {
   painter.fillPath(base_path, base_color);
 
   QPainterPath chunk_path;
-  const int chunk_width = this->value() * width / 100;
+  const int chunk_width = this->value() * width / this->maximum();
   // chunk_color == "#2ca7f8"
   const QColor chunk_color(44, 167, 248);
   chunk_path.addRoundedRect(0, 0, chunk_width, height, radius, radius);

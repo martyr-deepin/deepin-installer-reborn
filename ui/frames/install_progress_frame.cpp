@@ -105,7 +105,7 @@ void InstallProgressFrame::runHooks(bool ok) {
 
 void InstallProgressFrame::setProgress(int progress) {
   progress_ = progress;
-  updateProgressBar(progress);
+  this->updateProgressBar(progress);
 }
 
 void InstallProgressFrame::changeEvent(QEvent* event) {
@@ -239,7 +239,8 @@ void InstallProgressFrame::onRetainingTimerTimeout() {
 }
 
 void InstallProgressFrame::onSimulationTimerTimeout() {
-  const int progress = progress_bar_->value() + 5;
+  const int progress = progress_bar_->value() +
+      int(0.01 * progress_bar_->maximum());
   if (progress > progress_bar_->maximum()) {
     simulation_timer_->stop();
   } else {
