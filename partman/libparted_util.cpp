@@ -32,12 +32,9 @@ QString GetPedFsName(FsType fs) {
 }  // namespace
 
 bool Commit(PedDisk* lp_disk) {
-  bool success = static_cast<bool>(ped_disk_commit_to_dev(lp_disk));
-  if (success) {
-    success = static_cast<bool>(ped_disk_commit_to_os(lp_disk));
-  }
+  const bool success = (bool)ped_disk_commit(lp_disk);
 
-  SettleDevice(3);
+  SettleDevice(5);
   return success;
 }
 
@@ -71,7 +68,8 @@ bool CreatePartition(const Partition& partition) {
     PedFileSystemType* fs_type = nullptr;
     if (partition.type != PartitionType::Extended) {
       const QString fs_name = GetPedFsName(partition.fs);
-      fs_type = ped_file_system_type_get(fs_name.toStdString().c_str());
+      fs_type = ped_file_system_type_get(fs_name.toLocal8Bit().constData());
+      qDebug() << "fs_name:" << fs_name << "fs_type:" << fs_type->name;
     }
 
     PedPartition* lp_partition = ped_partition_new(lp_disk,
