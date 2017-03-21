@@ -164,7 +164,9 @@ void InstallProgressFrame::initUI() {
   progress_bar_->setObjectName("progress_bar");
   progress_bar_->setFixedSize(kProgressBarWidth, 8);
   progress_bar_->setTextVisible(false);
-  progress_bar_->setRange(0, 100);
+  // Set progress range to [0, 1000] so that progress bar can be painted
+  // more smoothly.
+  progress_bar_->setRange(0, 1000);
   progress_bar_->setOrientation(Qt::Horizontal);
   progress_bar_->setValue(0);
 
@@ -193,18 +195,22 @@ void InstallProgressFrame::initUI() {
 }
 
 void InstallProgressFrame::updateProgressBar(int progress) {
-  tooltip_label_->setText(QString("%1%").arg(progress));
+  progress_bar_->setValue(progress);
+
+  // Calculate percentage of progress.
+  const int real_progress = progress * 100 / progress_bar_->maximum();
+  tooltip_label_->setText(QString("%1%").arg(real_progress));
   int x;
   if (progress == progress_bar_->minimum()) {
     // Add left margin.
     x = kTooltipLabelMargin;
   } else {
     // Add right margin.
-    x = kProgressBarWidth * progress / 100 - kTooltipLabelMargin;
+    x = kProgressBarWidth * progress_bar_->value() / progress_bar_->maximum()
+        - kTooltipLabelMargin;
   }
   const int y = tooltip_label_->y();
   tooltip_label_->move(x, y);
-  progress_bar_->setValue(progress);
 
   // Force QProgressBar to repaint.
   this->style()->unpolish(progress_bar_);
