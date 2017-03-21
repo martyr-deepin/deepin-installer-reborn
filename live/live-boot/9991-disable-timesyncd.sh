@@ -6,7 +6,11 @@
 # Disable timesyncd service on live system startup.
 # Or else it may write real time to BIOS.
 
-readonly TIME_SERVICE=/etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
-if [ -f "${TIME_SERVICE}" ]; then
-  rm "${TIME_SERVICE}"
-fi
+[ -f /usr/lib/systemd/systemd-timesyncd ] && \
+  rm -f /usr/lib/systemd/systemd-timesyncd
+
+[ -f /usr/lib/systemd/system/systemd-timesyncd.service ] && \
+  rm -f /usr/lib/systemd/system/systemd-timesyncd.service
+
+[ -f /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service ] && \
+  rm -f /etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
