@@ -56,6 +56,7 @@ endif ()
 install(
     FILES ${CMAKE_CURRENT_SOURCE_DIR}/disable-timesyncd-with-installer.conf
     DESTINATION /lib/systemd/system/systemd-timesyncd.service.d
+    PERMISSIONS OWNER_READ GROUP_READ WORLD_READ
 )
 
 add_subdirectory(slide)

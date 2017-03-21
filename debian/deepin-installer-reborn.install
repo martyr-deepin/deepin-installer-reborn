@@ -1,6 +1,5 @@
 etc/live/config.conf.d/deepin-installer.conf
-lib/live/boot/*
-lib/live/config/*
+lib/*
 usr/bin/deepin-installer-adjtime
 usr/bin/deepin-installer-first-boot
 usr/bin/deepin-installer-first-boot-pkexec
