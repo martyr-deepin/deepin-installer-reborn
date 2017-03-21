@@ -52,4 +52,10 @@ else()
   message(FATAL_ERROR "Not supportted architecture: ${INSTALLER_BUILD_ARCH}")
 endif ()
 
+
+install(
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/disable-timesyncd-with-installer.conf
+    DESTINATION /lib/systemd/system/systemd-timesyncd.service.d
+)
+
 add_subdirectory(slide)
