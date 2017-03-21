@@ -1,7 +1,5 @@
 # Install resources/ folder, excluding desktop file and icons.
 
-add_subdirectory(slide)
-
 install(
     FILES ${CMAKE_CURRENT_SOURCE_DIR}/default_wallpaper.jpg
     ${CMAKE_CURRENT_SOURCE_DIR}/languages.json
@@ -53,3 +51,5 @@ elseif(${INSTALLER_BUILD_ARCH} MATCHES "mips")
 else()
   message(FATAL_ERROR "Not supportted architecture: ${INSTALLER_BUILD_ARCH}")
 endif ()
+
+add_subdirectory(slide)
