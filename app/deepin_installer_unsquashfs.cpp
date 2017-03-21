@@ -114,7 +114,7 @@ bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
   return ok;
 }
 
-bool CopySymLink(const char* src_file, const char* dest_file) {
+bool CopySymLink(const char* src_file, const char* link_path) {
   char buf[PATH_MAX];
   ssize_t link_len = readlink(src_file, buf, PATH_MAX);
   if (link_len <= 0) {
@@ -124,13 +124,13 @@ bool CopySymLink(const char* src_file, const char* dest_file) {
   }
 
   char target[link_len + 1];
-  strncpy(target, buf, link_len);
+  strncpy(target, buf, (size_t)link_len);
   target[link_len] = '\0';
-  if (symlink(target, dest_file) != 0) {
-    fprintf(stderr, "CopySymLink() symlink() failed: %s -> %s\n",
-            dest_file, target);
-    perror("symlink() error");
-    return false;
+  if (symlink(target, link_path) != 0) {
+    fprintf(stderr, "CopySymLink() symlink() failed, %s (%s -> %s)\n",
+            strerror(errno), link_path, target);
+    // Ignores EEXIST.
+    return (errno == EEXIST);
   } else {
     return true;
   }
@@ -206,6 +206,12 @@ int CopyItem(const char* fpath, const struct stat* sb,
   // Get file mode.
   const mode_t mode = st.st_mode & S_IMODE;
   bool ok = true;
+
+  // Remove dest_file if it exists.
+  struct stat dest_stat;
+  if (stat(dest_file, &dest_stat)) {
+    unlink(dest_file);
+  }
 
   if (S_ISLNK(st.st_mode)) {
     // Symbolic link
