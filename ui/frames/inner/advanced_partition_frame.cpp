@@ -254,6 +254,9 @@ void AdvancedPartitionFrame::repaintDevices() {
 void AdvancedPartitionFrame::showErrorMessages() {
   ClearLayout(msg_layout_);
 
+  hovered_error_label_ = nullptr;
+  hovered_part_button_ = nullptr;
+
   for (int i = 0; i < validate_states_.length(); i++) {
     AdvancedPartitionErrorLabel* error_label =
         new AdvancedPartitionErrorLabel();

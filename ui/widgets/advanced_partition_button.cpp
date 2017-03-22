@@ -37,15 +37,12 @@ AdvancedPartitionButton::AdvancedPartitionButton(const Partition& partition,
 
 void AdvancedPartitionButton::resetAlpha() {
   alpha_ = kDefaultAlpha;
-  // TODO(xushaohua): Tuning
-  const QString background = QString(kBackgroundAlphaTmp).arg(alpha_);
-  AppendStyleSheet(this, background);
+  this->updateStyle();
 }
 
 void AdvancedPartitionButton::setAlpha(double alpha) {
   alpha_ = alpha;
-  const QString background = QString(kBackgroundAlphaTmp).arg(alpha_);
-  AppendStyleSheet(this, background);
+  this->updateStyle();
 }
 
 void AdvancedPartitionButton::setEditable(bool editable) {
@@ -163,6 +160,14 @@ void AdvancedPartitionButton::initUI() {
   this->setChecked(false);
   this->setFlat(true);
   this->setStyleSheet(ReadFile(":/styles/advanced_partition_button.css"));
+}
+
+void AdvancedPartitionButton::updateStyle() {
+  // TODO(xushaohua): Tuning
+  QString content = ReadFile(":/styles/advanced_partition_button.css");
+  const QString background = QString(kBackgroundAlphaTmp).arg(alpha_);
+  this->setStyleSheet(content + background);
+  this->ensurePolished();
 }
 
 void AdvancedPartitionButton::updateStatus() {

@@ -48,6 +48,9 @@ class AdvancedPartitionButton : public PointerButton {
   void initConnections();
   void initUI();
 
+  // Update stylesheet to set background alpha value.
+  void updateStyle();
+
   const Partition& partition_;
 
   // Switch status between new-partition, edit-partition and delete-partition.
