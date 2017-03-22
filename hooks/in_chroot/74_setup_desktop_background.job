@@ -5,13 +5,17 @@
 
 # Copy desktop wallpaper to system folder
 
-OEM_WALLPAPER="$OEM_DIR/background.jpg"
-SYS_WALLPAPER=/usr/share/backgrounds/desktop.jpg
+readonly OEM_BACKGROUND="$OEM_DIR/background.jpg"
+SYS_BACKGROUND=/usr/share/backgrounds/desktop.jpg
 
-if [ -f "${OEM_WALLPAPER}" ]; then
-  install -m644 -v "${OEM_WALLPAPER}" "${SYS_WALLPAPER}" || \
+# Get real path to desktop image file.
+if [ -L "${SYS_BACKGROUND}" ]; then
+  SYS_BACKGROUND=$(realpath "${SYS_BACKGROUND}")
+fi
+
+if [ -f "${OEM_BACKGROUND}" ]; then
+  install -m644 -v "${OEM_BACKGROUND}" "${SYS_BACKGROUND}" || \
     warn_exit "Failed to copy wallpaper to system"
-  chmod a+r "${SYS_WALLPAPER}"
 fi
 
 return 0
