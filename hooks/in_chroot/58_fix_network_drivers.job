@@ -87,7 +87,7 @@ fix_asus_x450jn() {
 }
 
 fix_asus_x450jf() {
-  if is_productname_exitsts "X450JF"; then
+  if is_productname_exists "X450JF"; then
     msg "fix asus x450jf"
     echo "blacklist acer_wmi" | tee -a /etc/modprobe.d/blacklist_acerwmi.conf
   fi
