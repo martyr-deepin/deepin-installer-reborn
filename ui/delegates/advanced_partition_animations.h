@@ -12,6 +12,8 @@ class QPropertyAnimation;
 
 namespace installer {
 
+class AdvancedPartitionButton;
+
 // All animations of AdvancedPartitionFrame are defined and implemented in
 // this class.
 class AdvancedPartitionAnimations : public QObject {
@@ -33,6 +35,9 @@ class AdvancedPartitionAnimations : public QObject {
   //  * height: 100% -> 80%
   void hideWidget(QWidget* widget);
 
+  // Set opacity of partition |button| to 20%.
+  void highlightPartitionButton(AdvancedPartitionButton* button);
+
  private:
   void initAnimations();
 
@@ -40,6 +45,8 @@ class AdvancedPartitionAnimations : public QObject {
   QGraphicsOpacityEffect* opacity_effect_ = nullptr;
   QPropertyAnimation* opacity_animation_ = nullptr;
   QPropertyAnimation* height_animation_ = nullptr;
+
+  QPropertyAnimation* alpha_animation_ = nullptr;
 };
 
 }  // namespace installer

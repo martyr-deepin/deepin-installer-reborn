@@ -9,19 +9,43 @@
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_util.h"
+#include "ui/utils/widget_util.h"
 #include "ui/widgets/rounded_progress_bar.h"
 
 namespace installer {
+
+namespace {
+
+const double kDefaultAlpha = 0.1;
+
+const char kBackgroundAlphaTmp[] =
+    "#advanced_partition_button { background: rgba(255, 255, 255, %1); }";
+
+}  // namespace
 
 AdvancedPartitionButton::AdvancedPartitionButton(const Partition& partition,
                                                  QWidget* parent)
     : PointerButton(parent),
       partition_(partition),
-      editable_(false) {
+      editable_(false),
+      alpha_(kDefaultAlpha) {
   this->setObjectName("advanced_partition_button");
 
   this->initUI();
   this->initConnections();
+}
+
+void AdvancedPartitionButton::resetAlpha() {
+  alpha_ = kDefaultAlpha;
+  // TODO(xushaohua): Tuning
+  const QString background = QString(kBackgroundAlphaTmp).arg(alpha_);
+  AppendStyleSheet(this, background);
+}
+
+void AdvancedPartitionButton::setAlpha(double alpha) {
+  alpha_ = alpha;
+  const QString background = QString(kBackgroundAlphaTmp).arg(alpha_);
+  AppendStyleSheet(this, background);
 }
 
 void AdvancedPartitionButton::setEditable(bool editable) {

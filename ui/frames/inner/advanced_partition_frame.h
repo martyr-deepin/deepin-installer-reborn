@@ -18,6 +18,7 @@ class QVBoxLayout;
 namespace installer {
 
 class AdvancedPartitionAnimations;
+class AdvancedPartitonErrorLabel;
 
 // Advanced partition mode
 class AdvancedPartitionFrame : public QFrame {
@@ -81,6 +82,8 @@ class AdvancedPartitionFrame : public QFrame {
 
   AdvancedPartitionAnimations* animations_ = nullptr;
 
+  AdvancedPartitonErrorLabel* hovered_error_label_ = nullptr;
+
  private slots:
   // Clear error message list and hide message container.
   void clearErrorMessages();
@@ -91,6 +94,9 @@ class AdvancedPartitionFrame : public QFrame {
 
   // Handles editPartitionTriggered() signal from advanced partition button.
   void onEditPartitionTriggered(const Partition& partition);
+
+  // Update hovered_error_label_.
+  void onErrorLabelHovered();
 
   // Handles newPartitionTriggered() signal from advanced partition button.
   void onNewPartitionTriggered(const Partition& partition);

@@ -17,6 +17,7 @@
 #include "ui/delegates/advanced_partition_animations.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/advanced_partition_button.h"
+#include "ui/widgets/advanced_partition_error_label.h"
 #include "ui/utils/widget_util.h"
 
 namespace installer {
@@ -254,7 +255,8 @@ void AdvancedPartitionFrame::showErrorMessages() {
   ClearLayout(msg_layout_);
 
   for (int i = 0; i < validate_states_.length(); i++) {
-    QLabel* error_label = new QLabel();
+    AdvancedPartitionErrorLabel* error_label =
+        new AdvancedPartitionErrorLabel();
     if (i == validate_states_.length() - 1) {
       error_label->setObjectName("err_msg_bottom_label");
     } else {
@@ -265,6 +267,8 @@ void AdvancedPartitionFrame::showErrorMessages() {
     error_label->setText(text);
     msg_layout_->addWidget(error_label);
     error_label->show();
+    connect(error_label, &AdvancedPartitionErrorLabel::hovered,
+            this, &AdvancedPartitionFrame::onErrorLabelHovered);
   }
 
   const int err_count = validate_states_.length();
@@ -365,6 +369,20 @@ void AdvancedPartitionFrame::onEditPartitionTriggered(
     emit this->requestNewTable(device_path);
   } else {
     emit this->requestEditPartitionFrame(partition);
+  }
+}
+
+void AdvancedPartitionFrame::onErrorLabelHovered() {
+  QList<QAbstractButton*> buttons = partition_button_group_->buttons();
+  for (QAbstractButton* button: buttons) {
+    if (button) {
+      AdvancedPartitionButton* part_button =
+          dynamic_cast<AdvancedPartitionButton*>(button);
+      if (part_button) {
+        animations_->highlightPartitionButton(part_button);
+      }
+      break;
+    }
   }
 }
 
