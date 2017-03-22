@@ -259,18 +259,19 @@ QString ReadLocale() {
 
   // Get user-selected locale.
   locale = settings.value(kLocaleKey).toString();
-  if (!locale.isEmpty()) {
-    return locale;
+  if (locale.isEmpty()) {
+    // Get default locale in settings.ini.
+    locale = settings.value(kSelectLanguageDefaultLocale).toString();
+
+    if (locale.isEmpty()) {
+      // Get fallback locale.
+      locale = kDefaultLang;
+    }
   }
 
-  // Get default locale in settings.ini.
-  locale = settings.value(kSelectLanguageDefaultLocale).toString();
-  if (!locale.isEmpty()) {
-    return locale;
-  }
-
-  // Get fallback locale.
-  return kDefaultLocale;
+  // Remove codec name from locale.
+  const int dot_index = locale.indexOf('.');
+  return (dot_index == -1) ? locale : locale.left(dot_index);
 }
 
 void WriteAvatar(const QString& avatar) {
