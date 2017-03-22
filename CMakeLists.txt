@@ -209,6 +209,7 @@ set(UI_FILES
     ui/delegates/advanced_partition_animations.h
     ui/delegates/advanced_partition_delegate.cpp
     ui/delegates/advanced_partition_delegate.h
+    ui/delegates/advanced_validate_state.h
     ui/delegates/avatar_list_delegate.cpp
     ui/delegates/avatar_list_delegate.h
     ui/delegates/frameless_list_delegate.cpp
@@ -320,6 +321,8 @@ set(UI_FILES
 
     ui/widgets/advanced_partition_button.cpp
     ui/widgets/advanced_partition_button.h
+    ui/widgets/advanced_partition_error_label.cpp
+    ui/widgets/advanced_partition_error_label.h
     ui/widgets/avatar_button.cpp
     ui/widgets/avatar_button.h
     ui/widgets/comment_label.cpp
@@ -332,7 +335,6 @@ set(UI_FILES
     ui/widgets/flat_button.h
     ui/widgets/icon_button.cpp
     ui/widgets/icon_button.h
-
     ui/widgets/line_edit.cpp
     ui/widgets/line_edit.h
     ui/widgets/nav_button.cpp

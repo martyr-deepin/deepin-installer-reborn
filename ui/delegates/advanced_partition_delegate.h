@@ -9,19 +9,9 @@
 #include <partman/operation.h>
 
 #include "partman/device.h"
+#include "ui/delegates/advanced_validate_state.h"
 
 namespace installer {
-
-enum class AdvancedValidateState {
-  BootFsInvalid,  // Filesystem used for /boot is not in supported fs list.
-  BootPartNumberInvalid,  // Partition for /boot is not the first partition.
-  BootTooSmall,
-  EfiMissing,
-  EfiTooSmall,
-  RootMissing,
-  RootTooSmall,
-};
-typedef QList<AdvancedValidateState> AdvancedValidateStates;
 
 // Partition delegate used in AdvancedPartitionFrame and other sub frame pages.
 class AdvancedPartitionDelegate : public QObject {
