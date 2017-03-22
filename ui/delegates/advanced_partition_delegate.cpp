@@ -323,10 +323,12 @@ AdvancedValidateStates AdvancedPartitionDelegate::validate() const {
   }
 
   // Check filesystem type is suitable for /boot folder.
-  const FsType boot_root_fs = found_boot ? boot_fs : root_fs;
-  const FsTypeList boot_fs_list = this->getBootFsTypeList();
-  if (!boot_fs_list.contains(boot_root_fs)) {
-    states.append(AdvancedValidateState::BootFsInvalid);
+  if (found_boot || found_root) {
+    const FsType boot_root_fs = found_boot ? boot_fs : root_fs;
+    const FsTypeList boot_fs_list = this->getBootFsTypeList();
+    if (!boot_fs_list.contains(boot_root_fs)) {
+      states.append(AdvancedValidateState::BootFsInvalid);
+    }
   }
 
   // If /boot folder is required to be the first partition, validate it.
