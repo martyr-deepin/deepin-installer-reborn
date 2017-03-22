@@ -85,6 +85,10 @@ bool Operation::applyToDisk() {
         return false;
       }
 
+      if (!CommitUdevEvent(new_partition.path)) {
+        qCritical() << "No device found:" << new_partition.path;
+      }
+
       // Ignores extended partition. And check filesystem type.
       if ((new_partition.type != PartitionType::Extended) &&
           (new_partition.fs != FsType::Empty)) {

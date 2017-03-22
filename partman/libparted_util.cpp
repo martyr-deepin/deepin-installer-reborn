@@ -5,6 +5,7 @@
 #include "partman/libparted_util.h"
 
 #include <QDebug>
+#include <QFileInfo>
 
 #include "base/command.h"
 
@@ -36,6 +37,17 @@ bool Commit(PedDisk* lp_disk) {
 
   SettleDevice(5);
   return success;
+}
+
+bool CommitUdevEvent(const QString& dev_path) {
+  SettleDevice(5);
+  for (int i = 0; !QFileInfo::exists(dev_path) && i < 50; ++i) {
+    // Wait for 10ms.
+    struct timespec rqtp = { 0, 10 * 1000 * 1000 };
+    (void) nanosleep(&rqtp, NULL);
+  }
+
+  return QFileInfo::exists(dev_path);
 }
 
 bool CreatePartition(const Partition& partition) {

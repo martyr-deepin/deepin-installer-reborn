@@ -15,6 +15,9 @@ namespace installer {
 // Commit changes to disk.
 bool Commit(PedDisk* lp_disk);
 
+// Commit kernel udev event queue and wait for |dev_path| exists.
+bool CommitUdevEvent(const QString& dev_path);
+
 // Create a new partition defined in |partition|.
 bool CreatePartition(const Partition& partition);
 
