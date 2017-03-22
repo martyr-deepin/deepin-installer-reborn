@@ -14,6 +14,7 @@
 #include "base/file_util.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "ui/delegates/advanced_partition_animations.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/advanced_partition_button.h"
 #include "ui/utils/widget_util.h"
@@ -38,6 +39,8 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(
 
   this->initUI();
   this->initConnections();
+
+  animations_ = new AdvancedPartitionAnimations(this);
 
   // Hide error message container by default.
   msg_container_frame_->hide();
@@ -277,9 +280,10 @@ void AdvancedPartitionFrame::showErrorMessages() {
   }
 
   // Show msg container if it is invisible.
-  if (msg_container_frame_->isHidden()) {
-    msg_container_frame_->show();
-  }
+  msg_container_frame_->show();
+
+  // With animation.
+  animations_->showWidget(msg_container_frame_);
 }
 
 QString AdvancedPartitionFrame::validateStateToText(AdvancedValidateState state) {

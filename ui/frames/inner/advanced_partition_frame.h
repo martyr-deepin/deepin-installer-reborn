@@ -17,6 +17,8 @@ class QVBoxLayout;
 
 namespace installer {
 
+class AdvancedPartitionAnimations;
+
 // Advanced partition mode
 class AdvancedPartitionFrame : public QFrame {
   Q_OBJECT
@@ -76,6 +78,8 @@ class AdvancedPartitionFrame : public QFrame {
 
   // TODO(xushaohua): Remove this property.
   AdvancedValidateStates validate_states_;
+
+  AdvancedPartitionAnimations* animations_ = nullptr;
 
  private slots:
   // Clear error message list and hide message container.

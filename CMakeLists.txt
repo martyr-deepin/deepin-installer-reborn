@@ -205,6 +205,8 @@ set(SYSINFO_FILES
 
 set(UI_FILES
 
+    ui/delegates/advanced_partition_animations.cpp
+    ui/delegates/advanced_partition_animations.h
     ui/delegates/advanced_partition_delegate.cpp
     ui/delegates/advanced_partition_delegate.h
     ui/delegates/avatar_list_delegate.cpp
