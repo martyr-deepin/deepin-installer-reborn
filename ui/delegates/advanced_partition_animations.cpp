@@ -33,15 +33,21 @@ AdvancedPartitionAnimations::AdvancedPartitionAnimations(QObject* parent)
 
 void AdvancedPartitionAnimations::showWidget(QWidget* widget) {
   Q_ASSERT(widget != nullptr);
-  widget->setGraphicsEffect(opacity_effect_);
+
+  // widget takes ownership of opacity_effect.
+  QGraphicsOpacityEffect* opacity_effect = new QGraphicsOpacityEffect(widget);
+  widget->setGraphicsEffect(opacity_effect);
+
+  opacity_animation_->setTargetObject(opacity_effect);
+  opacity_animation_->setPropertyName("opacity");
   opacity_animation_->setStartValue(0.0);
   opacity_animation_->setEndValue(1.0);
   opacity_animation_->setEasingCurve(QEasingCurve::InOutCubic);
   opacity_animation_->setDuration(kAnimationInterval);
 
   height_animation_->setTargetObject(widget);
-  height_animation_->setPropertyName("maximumHeight");
   // Only change maxHeight property of |widget|.
+  height_animation_->setPropertyName("maximumHeight");
   const int current_height = widget->height();
   const int start_height = int(floor(current_height * 0.8));
   height_animation_->setStartValue(start_height);
@@ -49,9 +55,6 @@ void AdvancedPartitionAnimations::showWidget(QWidget* widget) {
   height_animation_->setEasingCurve(QEasingCurve::InOutCubic);
   height_animation_->setDuration(kAnimationInterval);
 
-  animation_group_->clear();
-  animation_group_->addAnimation(opacity_animation_);
-  animation_group_->addAnimation(height_animation_);
   animation_group_->start();
 }
 
@@ -73,10 +76,10 @@ void AdvancedPartitionAnimations::highlightPartitionButton(
 
 void AdvancedPartitionAnimations::initAnimations() {
   animation_group_ = new QParallelAnimationGroup(this);
-  opacity_effect_ = new QGraphicsOpacityEffect(this);
-  opacity_animation_ = new QPropertyAnimation(opacity_effect_, "opacity", this);
-
+  opacity_animation_ = new QPropertyAnimation(this);
   height_animation_ = new QPropertyAnimation(this);
+  animation_group_->addAnimation(opacity_animation_);
+  animation_group_->addAnimation(height_animation_);
 
   alpha_animation_ = new QPropertyAnimation(this);
   alpha_animation_->setPropertyName("alpha");

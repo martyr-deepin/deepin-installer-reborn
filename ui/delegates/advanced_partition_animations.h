@@ -6,7 +6,6 @@
 #define INSTALLER_UI_DELEGATES_ADVANCED_PARTITION_ANIMATIONS_H
 
 #include <QObject>
-class QGraphicsOpacityEffect;
 class QParallelAnimationGroup;
 class QPropertyAnimation;
 
@@ -42,7 +41,6 @@ class AdvancedPartitionAnimations : public QObject {
   void initAnimations();
 
   QParallelAnimationGroup* animation_group_ = nullptr;
-  QGraphicsOpacityEffect* opacity_effect_ = nullptr;
   QPropertyAnimation* opacity_animation_ = nullptr;
   QPropertyAnimation* height_animation_ = nullptr;
 
