@@ -64,7 +64,7 @@ void AdvancedPartitionAnimations::highlightPartitionButton(
   Q_ASSERT(button != nullptr);
 
   alpha_animation_->setTargetObject(button);
-  alpha_animation_->setStartValue(0.1);
+  alpha_animation_->setStartValue(0.0);
   alpha_animation_->setEndValue(0.3);
   alpha_animation_->setEasingCurve(QEasingCurve::InOutCubic);
   alpha_animation_->setDuration(kButtonAnimationInterval);

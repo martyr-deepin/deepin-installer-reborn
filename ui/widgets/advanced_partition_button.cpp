@@ -16,7 +16,7 @@ namespace installer {
 
 namespace {
 
-const double kDefaultAlpha = 0.1;
+const double kDefaultAlpha = 0.0;
 
 const char kBackgroundAlphaTmp[] =
     "#advanced_partition_button { background: rgba(255, 255, 255, %1); }";

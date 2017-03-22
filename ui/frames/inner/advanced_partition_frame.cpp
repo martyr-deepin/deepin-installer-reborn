@@ -267,8 +267,10 @@ void AdvancedPartitionFrame::showErrorMessages() {
     error_label->setText(text);
     msg_layout_->addWidget(error_label);
     error_label->show();
-    connect(error_label, &AdvancedPartitionErrorLabel::hovered,
-            this, &AdvancedPartitionFrame::onErrorLabelHovered);
+    connect(error_label, &AdvancedPartitionErrorLabel::entered,
+            this, &AdvancedPartitionFrame::onErrorLabelEntered);
+    connect(error_label, &AdvancedPartitionErrorLabel::leaved,
+            this, &AdvancedPartitionFrame::onErrorLabelLeaved);
   }
 
   const int err_count = validate_states_.length();
@@ -372,17 +374,25 @@ void AdvancedPartitionFrame::onEditPartitionTriggered(
   }
 }
 
-void AdvancedPartitionFrame::onErrorLabelHovered() {
+void AdvancedPartitionFrame::onErrorLabelEntered() {
   QList<QAbstractButton*> buttons = partition_button_group_->buttons();
-  for (QAbstractButton* button: buttons) {
+  if (!buttons.isEmpty()) {
+    QAbstractButton* button = buttons.first();
     if (button) {
       AdvancedPartitionButton* part_button =
           dynamic_cast<AdvancedPartitionButton*>(button);
       if (part_button) {
+        hovered_part_button_ = part_button;
         animations_->highlightPartitionButton(part_button);
       }
-      break;
     }
+  }
+}
+
+void AdvancedPartitionFrame::onErrorLabelLeaved() {
+  if (hovered_part_button_) {
+    hovered_part_button_->resetAlpha();
+    hovered_part_button_ = nullptr;
   }
 }
 

@@ -23,11 +23,15 @@ class AdvancedPartitionErrorLabel : public QLabel {
   AdvancedValidateState state() const { return state_; }
 
  signals:
-  // Emitted when mouse moved hover.
-  void hovered();
+  // Emitted when mouse moved enter widget area.
+  void entered();
+
+  // Emitted when mouse moved out of widget area.
+  void leaved();
 
  protected:
   void enterEvent(QEvent* event) override;
+  void leaveEvent(QEvent* event) override;
 
  private:
   AdvancedValidateState state_;

@@ -12,7 +12,12 @@ AdvancedPartitionErrorLabel::AdvancedPartitionErrorLabel(QWidget* parent)
 
 void AdvancedPartitionErrorLabel::enterEvent(QEvent* event) {
   QLabel::enterEvent(event);
-  emit this->hovered();
+  emit this->entered();
+}
+
+void AdvancedPartitionErrorLabel::leaveEvent(QEvent* event) {
+  QLabel::leaveEvent(event);
+  emit this->leaved();
 }
 
 }  // namespace installer
