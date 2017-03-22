@@ -9,6 +9,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QScrollArea>
+#include <QScrollBar>
 
 #include "base/file_util.h"
 #include "service/settings_manager.h"
@@ -51,6 +52,10 @@ bool AdvancedPartitionFrame::validate() {
     return true;
   } else {
     this->showErrorMessages();
+
+    // Also, scroll main content area to top.
+    scroll_area_->verticalScrollBar()->setValue(0);
+
     return false;
   }
 }
@@ -136,19 +141,19 @@ void AdvancedPartitionFrame::initUI() {
   scroll_frame->setContentsMargins(0, 0, 0, 0);
   scroll_frame->setLayout(scroll_layout);
 
-  QScrollArea* scroll_area = new QScrollArea();
-  scroll_area->setObjectName("scroll_area");
-  scroll_area->setContentsMargins(0, 0, 0, 0);
+  scroll_area_ = new QScrollArea();
+  scroll_area_->setObjectName("scroll_area");
+  scroll_area_->setContentsMargins(0, 0, 0, 0);
   QSizePolicy scroll_area_size_policy(QSizePolicy::Fixed,
                                       QSizePolicy::MinimumExpanding);
   scroll_area_size_policy.setHorizontalStretch(10);
   scroll_area_size_policy.setVerticalStretch(10);
-  scroll_area->setSizePolicy(scroll_area_size_policy);
-  scroll_area->setWidget(scroll_frame);
-  scroll_area->setWidgetResizable(true);
-  scroll_area->setFixedWidth(kWindowWidth);
-  scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-  scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  scroll_area_->setSizePolicy(scroll_area_size_policy);
+  scroll_area_->setWidget(scroll_frame);
+  scroll_area_->setWidgetResizable(true);
+  scroll_area_->setFixedWidth(kWindowWidth);
+  scroll_area_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  scroll_area_->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
   bootloader_tip_button_ = new PointerButton(tr("Change boot loader"), this);
   bootloader_tip_button_->setObjectName("bootloader_tip_button");
@@ -186,7 +191,7 @@ void AdvancedPartitionFrame::initUI() {
   QVBoxLayout* main_layout = new QVBoxLayout();
   main_layout->setContentsMargins(0, 0, 0, 0);
   main_layout->setSpacing(0);
-  main_layout->addWidget(scroll_area, 1, Qt::AlignHCenter);
+  main_layout->addWidget(scroll_area_, 1, Qt::AlignHCenter);
   main_layout->addSpacing(2);
   main_layout->addWidget(bottom_frame, 0, Qt::AlignHCenter);
   main_layout->addSpacing(8);

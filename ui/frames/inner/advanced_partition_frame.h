@@ -9,6 +9,7 @@
 class QButtonGroup;
 class QLabel;
 class QPushButton;
+class QScrollArea;
 class QVBoxLayout;
 
 #include "partman/partition.h"
@@ -68,6 +69,7 @@ class AdvancedPartitionFrame : public QFrame {
   QPushButton* bootloader_button_ = nullptr;
   QPushButton* editing_button_ = nullptr;
 
+  QScrollArea* scroll_area_ = nullptr;
   QFrame* msg_container_frame_ = nullptr;
   QVBoxLayout* msg_layout_ = nullptr;
   QLabel* msg_head_label_ = nullptr;
