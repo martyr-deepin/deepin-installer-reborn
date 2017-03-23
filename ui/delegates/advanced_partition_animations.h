@@ -6,8 +6,6 @@
 #define INSTALLER_UI_DELEGATES_ADVANCED_PARTITION_ANIMATIONS_H
 
 #include <QObject>
-class QParallelAnimationGroup;
-class QPropertyAnimation;
 
 namespace installer {
 
@@ -36,15 +34,6 @@ class AdvancedPartitionAnimations : public QObject {
 
   // Set opacity of partition |button| to 20%.
   void highlightPartitionButton(AdvancedPartitionButton* button);
-
- private:
-  void initAnimations();
-
-  QParallelAnimationGroup* animation_group_ = nullptr;
-  QPropertyAnimation* opacity_animation_ = nullptr;
-  QPropertyAnimation* height_animation_ = nullptr;
-
-  QPropertyAnimation* alpha_animation_ = nullptr;
 };
 
 }  // namespace installer

@@ -27,62 +27,107 @@ const int kButtonAnimationInterval = 200;
 AdvancedPartitionAnimations::AdvancedPartitionAnimations(QObject* parent)
     : QObject(parent) {
   this->setObjectName("advanced_partition_animations");
-
-  this->initAnimations();
 }
 
 void AdvancedPartitionAnimations::showWidget(QWidget* widget) {
+  qDebug() << "showWidget():" << widget;
   Q_ASSERT(widget != nullptr);
+  if (widget == nullptr) {
+    return;
+  }
 
   // widget takes ownership of opacity_effect.
-  QGraphicsOpacityEffect* opacity_effect = new QGraphicsOpacityEffect(widget);
+  QGraphicsOpacityEffect* opacity_effect = new QGraphicsOpacityEffect(this);
   widget->setGraphicsEffect(opacity_effect);
 
-  opacity_animation_->setTargetObject(opacity_effect);
-  opacity_animation_->setPropertyName("opacity");
-  opacity_animation_->setStartValue(0.0);
-  opacity_animation_->setEndValue(1.0);
-  opacity_animation_->setEasingCurve(QEasingCurve::InOutCubic);
-  opacity_animation_->setDuration(kAnimationInterval);
+  QPropertyAnimation* opacity_animation = new QPropertyAnimation(this);
+  opacity_animation->setTargetObject(opacity_effect);
+  opacity_animation->setPropertyName("opacity");
+  opacity_animation->setStartValue(0.0);
+  opacity_animation->setEndValue(1.0);
+  opacity_animation->setEasingCurve(QEasingCurve::InOutCubic);
+  opacity_animation->setDuration(kAnimationInterval);
 
-  height_animation_->setTargetObject(widget);
+  QPropertyAnimation* height_animation = new QPropertyAnimation(this);
+  height_animation->setTargetObject(widget);
   // Only change maxHeight property of |widget|.
-  height_animation_->setPropertyName("maximumHeight");
+  height_animation->setPropertyName("maximumHeight");
   const int current_height = widget->height();
   const int start_height = int(floor(current_height * 0.8));
-  height_animation_->setStartValue(start_height);
-  height_animation_->setEndValue(current_height);
-  height_animation_->setEasingCurve(QEasingCurve::InOutCubic);
-  height_animation_->setDuration(kAnimationInterval);
+  height_animation->setStartValue(start_height);
+  height_animation->setEndValue(current_height);
+  height_animation->setEasingCurve(QEasingCurve::InOutCubic);
+  height_animation->setDuration(kAnimationInterval);
 
-  animation_group_->start();
+  QParallelAnimationGroup* animation_group = new QParallelAnimationGroup(this);
+  animation_group->addAnimation(opacity_animation);
+  animation_group->addAnimation(height_animation);
+
+  connect(animation_group, &QAnimationGroup::finished, [=]() {
+    opacity_animation->deleteLater();
+    height_animation->deleteLater();
+    animation_group->deleteLater();
+  });
+
+  animation_group->start();
 }
 
 void AdvancedPartitionAnimations::hideWidget(QWidget* widget) {
+  qDebug() << "hideWidget:" << widget;
   Q_ASSERT(widget != nullptr);
+
+  // widget takes ownership of opacity_effect.
+  QGraphicsOpacityEffect* opacity_effect = new QGraphicsOpacityEffect(this);
+  widget->setGraphicsEffect(opacity_effect);
+
+  QParallelAnimationGroup* animation_group =
+      new QParallelAnimationGroup(this);
+  QPropertyAnimation* opacity_animation = new QPropertyAnimation(this);
+  QPropertyAnimation* height_animation = new QPropertyAnimation(this);
+  animation_group->addAnimation(opacity_animation);
+  animation_group->addAnimation(height_animation);
+
+  opacity_animation->setTargetObject(opacity_effect);
+  opacity_animation->setPropertyName("opacity");
+  opacity_animation->setStartValue(1.0);
+  opacity_animation->setEndValue(0.0);
+  opacity_animation->setEasingCurve(QEasingCurve::InOutCubic);
+  opacity_animation->setDuration(kAnimationInterval);
+
+  height_animation->setTargetObject(widget);
+  // Only change maxHeight property of |widget|.
+  height_animation->setPropertyName("maximumHeight");
+  const int current_height = widget->height();
+  const int end_height = int(floor(current_height * 0.8));
+  height_animation->setStartValue(current_height);
+  height_animation->setEndValue(end_height);
+  height_animation->setEasingCurve(QEasingCurve::InOutCubic);
+  height_animation->setDuration(kAnimationInterval);
+
+  connect(animation_group, &QAnimationGroup::finished, [=]() {
+    opacity_animation->deleteLater();
+    height_animation->deleteLater();
+    animation_group->deleteLater();
+    widget->hide();
+    widget->setMaximumWidth(current_height);
+  });
+  animation_group->start();
 }
 
 void AdvancedPartitionAnimations::highlightPartitionButton(
     AdvancedPartitionButton* button) {
   Q_ASSERT(button != nullptr);
 
-  alpha_animation_->setTargetObject(button);
-  alpha_animation_->setStartValue(0.0);
-  alpha_animation_->setEndValue(0.3);
-  alpha_animation_->setEasingCurve(QEasingCurve::InOutCubic);
-  alpha_animation_->setDuration(kButtonAnimationInterval);
-  alpha_animation_->start();
-}
-
-void AdvancedPartitionAnimations::initAnimations() {
-  animation_group_ = new QParallelAnimationGroup(this);
-  opacity_animation_ = new QPropertyAnimation(this);
-  height_animation_ = new QPropertyAnimation(this);
-  animation_group_->addAnimation(opacity_animation_);
-  animation_group_->addAnimation(height_animation_);
-
-  alpha_animation_ = new QPropertyAnimation(this);
-  alpha_animation_->setPropertyName("alpha");
+  QPropertyAnimation* alpha_animation = new QPropertyAnimation(this);
+  alpha_animation->setPropertyName("alpha");
+  alpha_animation->setTargetObject(button);
+  alpha_animation->setStartValue(0.0);
+  alpha_animation->setEndValue(0.3);
+  alpha_animation->setEasingCurve(QEasingCurve::InOutCubic);
+  alpha_animation->setDuration(kButtonAnimationInterval);
+  connect(alpha_animation, &QPropertyAnimation::finished,
+          alpha_animation, &QPropertyAnimation::deleteLater);
+  alpha_animation->start();
 }
 
 }  // namespace installer

@@ -10,6 +10,7 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <QScrollBar>
+#include <QTimer>
 
 #include "base/file_util.h"
 #include "service/settings_manager.h"
@@ -29,13 +30,17 @@ const int kWindowWidth = 960;
 // Vertical spacing between error message labels.
 const int kMsgLabelSpacing = 2;
 
+const char kErrMsgLabel[] = "err_msg_label";
+const char kLastErrMsgLabel[] = "last_err_msg_label";
+
 }  // namespace
 
 AdvancedPartitionFrame::AdvancedPartitionFrame(
     AdvancedPartitionDelegate* delegate_, QWidget* parent)
     : QFrame(parent),
       delegate_(delegate_),
-      validate_states_() {
+      validate_states_(),
+      error_labels_() {
   this->setObjectName("advanced_partition_frame");
 
   this->initUI();
@@ -58,10 +63,18 @@ bool AdvancedPartitionFrame::validate() {
     this->showErrorMessages();
 
     // Also, scroll main content area to top.
-    scroll_area_->verticalScrollBar()->setValue(0);
+    this->scrollContentToTop();
 
     return false;
   }
+}
+
+void AdvancedPartitionFrame::onEditPartitionFrameFinished() {
+  this->updateValidateStates();
+}
+
+void AdvancedPartitionFrame::onNewPartitionFrameFinished() {
+  this->updateValidateStates();
 }
 
 void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
@@ -90,13 +103,6 @@ void AdvancedPartitionFrame::initConnections() {
           this, &AdvancedPartitionFrame::requestSelectBootloaderFrame);
   connect(editing_button_, &QPushButton::toggled,
           this, &AdvancedPartitionFrame::onEditButtonToggled);
-
-  // Clear content in msg_label when NewPartitionFrame or EditPartitionFrame is
-  // raised.
-  connect(this, &AdvancedPartitionFrame::requestEditPartitionFrame,
-          this, &AdvancedPartitionFrame::clearErrorMessages);
-  connect(this, &AdvancedPartitionFrame::requestNewPartitionFrame,
-          this, &AdvancedPartitionFrame::clearErrorMessages);
 }
 
 void AdvancedPartitionFrame::initUI() {
@@ -251,48 +257,113 @@ void AdvancedPartitionFrame::repaintDevices() {
   partition_layout_->addStretch();
 }
 
-void AdvancedPartitionFrame::showErrorMessages() {
-  ClearLayout(msg_layout_);
+void AdvancedPartitionFrame::scrollContentToTop() {
+  scroll_area_->verticalScrollBar()->setValue(0);
+}
 
-  hovered_error_label_ = nullptr;
-  hovered_part_button_ = nullptr;
-
-  for (int i = 0; i < validate_states_.length(); i++) {
-    AdvancedPartitionErrorLabel* error_label =
-        new AdvancedPartitionErrorLabel();
-    if (i == validate_states_.length() - 1) {
-      error_label->setObjectName("err_msg_bottom_label");
-    } else {
-      error_label->setObjectName("err_msg_label");
+void AdvancedPartitionFrame::hideErrorMessage(AdvancedValidateState state) {
+  qDebug() << "hide error message:" << int(state);
+  for (int i = 0; i < error_labels_.length(); ++i) {
+    AdvancedPartitionErrorLabel* label = error_labels_.at(i);
+    if (label->state() == state) {
+      error_labels_.removeAt(i);
+      label->hide();
+//      animations_->hideWidget(label);
+//      msg_layout_->removeWidget(label);
+      break;
     }
+  }
+}
 
-    const QString text = this->validateStateToText(validate_states_.at(i));
-    error_label->setText(text);
-    msg_layout_->addWidget(error_label);
-    error_label->show();
-    connect(error_label, &AdvancedPartitionErrorLabel::entered,
-            this, &AdvancedPartitionFrame::onErrorLabelEntered);
-    connect(error_label, &AdvancedPartitionErrorLabel::leaved,
-            this, &AdvancedPartitionFrame::onErrorLabelLeaved);
+void AdvancedPartitionFrame::hideErrorMessages() {
+  qDebug() << "hide error messages";
+  animations_->hideWidget(msg_container_frame_);
+}
+
+void AdvancedPartitionFrame::showErrorMessage(AdvancedValidateState state,
+                                              bool enable_animation) {
+  qDebug() << "show error message:" << int(state);
+  AdvancedPartitionErrorLabel* error_label =
+      new AdvancedPartitionErrorLabel();
+  // TODO(xushaohua): Update label object name.
+  error_label->setObjectName(kLastErrMsgLabel);
+  // TODO(xushaohua): Update sibling label.
+
+  error_labels_.append(error_label);
+
+  error_label->setValidateState(state);
+  const QString text = this->validateStateToText(state);
+  error_label->setText(text);
+  msg_layout_->addWidget(error_label);
+  error_label->show();
+  connect(error_label, &AdvancedPartitionErrorLabel::entered,
+          this, &AdvancedPartitionFrame::onErrorLabelEntered);
+  connect(error_label, &AdvancedPartitionErrorLabel::leaved,
+          this, &AdvancedPartitionFrame::onErrorLabelLeaved);
+
+  if (enable_animation) {
+    animations_->showWidget(error_label);
+  }
+}
+
+void AdvancedPartitionFrame::showErrorMessages() {
+  qDebug() << "show error messages()";
+  for (AdvancedValidateState state: validate_states_) {
+    this->showErrorMessage(state, false);
   }
 
-  const int err_count = validate_states_.length();
-  // NOTE(xushaohua): Transifex does not ts plural format.
-  if (err_count <= 1) {
-    msg_head_label_->setText(
-        tr("%1 error found, fix to continue installation or "
-           "switch to simple mode").arg(err_count));
-  } else {
-    msg_head_label_->setText(
-        tr("%1 errors found, fix to continue installation or "
-           "switch to simple mode").arg(err_count));
-  }
+  this->updateErrorMessageHeader();
 
   // Show msg container if it is invisible.
   msg_container_frame_->show();
 
   // With animation.
   animations_->showWidget(msg_container_frame_);
+}
+
+void AdvancedPartitionFrame::updateErrorMessageHeader() {
+  // Update error message header.
+  const int err_count = validate_states_.length();
+  // NOTE(xushaohua): Transifex does not ts plural format.
+  if (err_count <= 1) {
+    msg_head_label_->setText(
+        tr("%1 error found, fix to continue installation or "
+               "switch to simple mode").arg(err_count));
+  } else {
+    msg_head_label_->setText(
+        tr("%1 errors found, fix to continue installation or "
+               "switch to simple mode").arg(err_count));
+  }
+}
+
+void AdvancedPartitionFrame::updateValidateStates() {
+// If last validate states is empty, do nothing.
+  if (validate_states_.isEmpty()) {
+    return;
+  }
+
+  const AdvancedValidateStates new_states = delegate_->validate();
+  if (new_states.isEmpty()) {
+    this->hideErrorMessages();
+  } else {
+    for (AdvancedValidateState state : validate_states_) {
+      if (!new_states.contains(state)) {
+        // Hide fixed error label.
+        this->hideErrorMessage(state);
+      }
+    }
+
+    for (AdvancedValidateState state : new_states) {
+      if (!validate_states_.contains(state)) {
+        // Show new error label.
+        this->showErrorMessage(state, false);
+      }
+    }
+  }
+
+  // Update state list.
+  validate_states_ = new_states;
+  this->updateErrorMessageHeader();
 }
 
 QString AdvancedPartitionFrame::validateStateToText(AdvancedValidateState state) {
@@ -342,7 +413,11 @@ QString AdvancedPartitionFrame::validateStateToText(AdvancedValidateState state)
 
 void AdvancedPartitionFrame::clearErrorMessages() {
   validate_states_.clear();
+  error_labels_.clear();
   ClearLayout(msg_layout_);
+
+  hovered_error_label_ = nullptr;
+  hovered_part_button_ = nullptr;
 
   // Also hide msg container.
   msg_container_frame_->hide();

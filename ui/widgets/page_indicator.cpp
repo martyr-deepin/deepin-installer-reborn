@@ -47,9 +47,9 @@ void PageIndicator::initUI() {
 
 void PageIndicator::updateIndicators() {
   for (int i = 0; i < pages_; i++) {
-    QLabel* label = static_cast<QLabel*>(layout_->itemAt(i)->widget());
+    QLabel* label = qobject_cast<QLabel*>(layout_->itemAt(i)->widget());
     Q_ASSERT(label);
-    if (label) {
+    if (label != nullptr) {
       if (i == current_page_) {
         label->setPixmap(indicator_active_);
       } else {

@@ -6,6 +6,9 @@
 #define INSTALLER_UI_FRAMES_INNER_ADVANCED_PARTITION_FRAME_H
 
 #include <QFrame>
+#include <QVector>
+#include <ui/widgets/advanced_partition_error_label.h>
+
 class QButtonGroup;
 class QLabel;
 class QPushButton;
@@ -48,6 +51,12 @@ class AdvancedPartitionFrame : public QFrame {
   void requestSelectBootloaderFrame();
 
  public slots:
+  // Update states when EditPartitionFrame returns.
+  void onEditPartitionFrameFinished();
+
+  // Update states when NewPartitionFrame returns.
+  void onNewPartitionFrameFinished();
+
   // Update bootloader path in button.
   // This slots is connected to SelectBootloaderFrame.
   void setBootloaderPath(const QString& bootloader_path);
@@ -60,8 +69,21 @@ class AdvancedPartitionFrame : public QFrame {
   void initUI();
   void repaintDevices();
 
+  // Scroll to top of content area.
+  void scrollContentToTop();
+
+  void hideErrorMessage(AdvancedValidateState state);
+  void hideErrorMessages();
+  void showErrorMessage(AdvancedValidateState state, bool enable_animation);
   // Show error message container.
   void showErrorMessages();
+
+  // Update header text based on current states.
+  void updateErrorMessageHeader();
+
+  // Update error messages and validate states.
+  void updateValidateStates();
+
   // Returns error message related to this |state|.
   QString validateStateToText(AdvancedValidateState state);
 
@@ -85,6 +107,9 @@ class AdvancedPartitionFrame : public QFrame {
 
   AdvancedPartitonErrorLabel* hovered_error_label_ = nullptr;
   AdvancedPartitionButton* hovered_part_button_ = nullptr;
+
+  // To hold all error labels.
+  QVector<AdvancedPartitionErrorLabel*> error_labels_;
 
  private slots:
   // Clear error message list and hide message container.

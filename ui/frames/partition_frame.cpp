@@ -100,8 +100,14 @@ void PartitionFrame::initConnections() {
 
   connect(edit_partition_frame_, &EditPartitionFrame::finished,
           this, &PartitionFrame::showMainFrame);
+  connect(edit_partition_frame_, &EditPartitionFrame::finished,
+          advanced_partition_frame_,
+          &AdvancedPartitionFrame::onEditPartitionFrameFinished);
   connect(new_partition_frame_, &NewPartitionFrame::finished,
           this, &PartitionFrame::showMainFrame);
+  connect(new_partition_frame_, &NewPartitionFrame::finished,
+          advanced_partition_frame_,
+          &AdvancedPartitionFrame::onNewPartitionFrameFinished);
 
   connect(new_table_warning_frame_, &NewTableWarningFrame::canceled,
           this, &PartitionFrame::showMainFrame);
