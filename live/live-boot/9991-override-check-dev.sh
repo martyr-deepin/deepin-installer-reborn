@@ -127,6 +127,9 @@ check_dev () {
 				if [ "${RWFLAG}" = "rw" ];then
 					if [ "${fstype}" = "ntfs" ];then
 						modprobe fuse
+                        # Remove windows hibernatioin files, or else ntfs-3g
+                        # will mount volume with read-only permission.
+						#mount.ntfs-3g -o remove_hiberfile,rw "${devname}" /live/findiso
 						mount.ntfs-3g -o rw "${devname}" /live/findiso
 					else
 						mount -t ${fstype} -o rw,noatime "${devname}" /live/findiso
