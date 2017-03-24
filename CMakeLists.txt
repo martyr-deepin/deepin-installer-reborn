@@ -483,24 +483,6 @@ add_executable(deepin-installer-settings
 
 target_link_libraries(deepin-installer-settings ${QtCore_LIBS})
 
-set(Animation_FILES
-    ui/tests/animations/animation.cpp
-
-    ui/tests/animations/animations_main_window.cpp
-    ui/tests/animations/animations_main_window.h
-    )
-
-add_executable(animations
-               ${Animation_FILES}
-               ${BASE_FILES}
-
-               ui/utils/widget_util.cpp
-               ui/utils/widget_util.h
-
-               ui/tests/animations/styles.qrc
-               )
-target_link_libraries(animations ${Qt_LIBS})
-
 
 # Reboot setup
 add_executable(deepin-installer-first-boot
