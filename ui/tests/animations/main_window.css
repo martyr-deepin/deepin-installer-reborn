@@ -1,0 +1,16 @@
+
+#main_window {
+  background: transparent;
+}
+
+#msg_container_frame{
+  background: red;
+}
+
+#partitions_frame {
+  background: blue;
+}
+
+#scroll_frame {
+  background: green;
+}

@@ -30,7 +30,7 @@ class AdvancedPartitionAnimations : public QObject {
   // QVBoxLayout.
   //  * opacity: 100% -> 0%
   //  * height: 100% -> 80%
-  void hideWidget(QWidget* widget);
+  void hideWidget(QWidget* widget, bool delete_widget);
 
   // Set opacity of partition |button| to 20%.
   void highlightPartitionButton(AdvancedPartitionButton* button);

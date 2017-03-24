@@ -7,7 +7,6 @@
 
 #include <QFrame>
 #include <QVector>
-#include <ui/widgets/advanced_partition_error_label.h>
 
 class QButtonGroup;
 class QLabel;
@@ -17,12 +16,12 @@ class QVBoxLayout;
 
 #include "partman/partition.h"
 #include "ui/delegates/advanced_partition_delegate.h"
+#include "ui/widgets/advanced_partition_error_label.h"
 
 namespace installer {
 
 class AdvancedPartitionAnimations;
 class AdvancedPartitionButton;
-class AdvancedPartitonErrorLabel;
 
 // Advanced partition mode
 class AdvancedPartitionFrame : public QFrame {
@@ -51,12 +50,6 @@ class AdvancedPartitionFrame : public QFrame {
   void requestSelectBootloaderFrame();
 
  public slots:
-  // Update states when EditPartitionFrame returns.
-  void onEditPartitionFrameFinished();
-
-  // Update states when NewPartitionFrame returns.
-  void onNewPartitionFrameFinished();
-
   // Update bootloader path in button.
   // This slots is connected to SelectBootloaderFrame.
   void setBootloaderPath(const QString& bootloader_path);
@@ -72,7 +65,7 @@ class AdvancedPartitionFrame : public QFrame {
   // Scroll to top of content area.
   void scrollContentToTop();
 
-  void hideErrorMessage(AdvancedValidateState state);
+  void hideErrorMessage(AdvancedValidateState state, bool enable_animation);
   void hideErrorMessages();
   void showErrorMessage(AdvancedValidateState state, bool enable_animation);
   // Show error message container.
@@ -105,7 +98,7 @@ class AdvancedPartitionFrame : public QFrame {
 
   AdvancedPartitionAnimations* animations_ = nullptr;
 
-  AdvancedPartitonErrorLabel* hovered_error_label_ = nullptr;
+  AdvancedPartitionErrorLabel* hovered_error_label_ = nullptr;
   AdvancedPartitionButton* hovered_part_button_ = nullptr;
 
   // To hold all error labels.
