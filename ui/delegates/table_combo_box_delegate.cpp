@@ -59,7 +59,8 @@ void TableComboBoxDelegate::paint(QPainter* painter,
 
   // Draw text
   QColor text_color(0, 0, 0, 255);
-  if (option.state & QStyle::State_MouseOver) {
+  if ((option.state & QStyle::State_MouseOver) ||
+      (option.state & QStyle::State_Selected)) {
     text_color = Qt::white;
   }
   painter->setPen(QPen(text_color));
