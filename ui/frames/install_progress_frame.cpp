@@ -203,13 +203,11 @@ void InstallProgressFrame::updateProgressBar(int progress) {
   // Calculate percentage of progress.
   const int real_progress = int(floor(percentage * 100.0));
   tooltip_label_->setText(QString("%1%").arg(real_progress));
-  int x;
-  if (progress == progress_bar_->minimum()) {
+  // Add right margin.
+  int x = int(kProgressBarWidth * percentage - kTooltipLabelMargin);
+  if (x < kTooltipLabelMargin) {
     // Add left margin.
     x = kTooltipLabelMargin;
-  } else {
-    // Add right margin.
-    x = int(kProgressBarWidth * percentage - kTooltipLabelMargin);
   }
   const int y = tooltip_label_->y();
   tooltip_label_->move(x, y);
