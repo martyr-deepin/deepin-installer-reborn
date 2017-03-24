@@ -26,8 +26,8 @@ extract_overlay_filesystem() {
 
   if [ -f ${MODULE} ]; then
     for file in $(cat ${MODULE}); do
-      unsquashfs -f -d /target ${CDROM}/overlay/${file} || \
-        error "unsquashfs failed" ${CDROM}/overlay/${file}
+      deepin-installer-unsquashfs --dest /target ${CDROM}/overlay/${file} \
+        1>/dev/null || error "unsquashfs failed: ${CDROM}/overlay/${file}"
     done
   fi
 }
