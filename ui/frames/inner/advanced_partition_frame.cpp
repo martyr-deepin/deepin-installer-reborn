@@ -18,7 +18,6 @@
 #include "ui/delegates/advanced_partition_animations.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/advanced_partition_button.h"
-#include "ui/widgets/advanced_partition_error_label.h"
 #include "ui/utils/widget_util.h"
 
 namespace installer {
@@ -67,14 +66,6 @@ bool AdvancedPartitionFrame::validate() {
 
     return false;
   }
-}
-
-void AdvancedPartitionFrame::onEditPartitionFrameFinished() {
-  this->updateValidateStates();
-}
-
-void AdvancedPartitionFrame::onNewPartitionFrameFinished() {
-  this->updateValidateStates();
 }
 
 void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
@@ -255,47 +246,53 @@ void AdvancedPartitionFrame::repaintDevices() {
 
   // Add stretch to expand vertically
   partition_layout_->addStretch();
+
+  // If device list is refreshed, and validate_states_ is not empty,
+  // Either NewPartitionFrame or EditPartitionFrame was presented.
+  // So we need to validate new states.
+//  this->updateValidateStates();
+  QTimer::singleShot(1000, this, &AdvancedPartitionFrame::updateValidateStates);
 }
 
 void AdvancedPartitionFrame::scrollContentToTop() {
   scroll_area_->verticalScrollBar()->setValue(0);
 }
 
-void AdvancedPartitionFrame::hideErrorMessage(AdvancedValidateState state) {
-  qDebug() << "hide error message:" << int(state);
+void AdvancedPartitionFrame::hideErrorMessage(AdvancedValidateState state,
+                                              bool enable_animation) {
   for (int i = 0; i < error_labels_.length(); ++i) {
     AdvancedPartitionErrorLabel* label = error_labels_.at(i);
     if (label->state() == state) {
       error_labels_.removeAt(i);
       label->hide();
-//      animations_->hideWidget(label);
-//      msg_layout_->removeWidget(label);
+      if (enable_animation) {
+        animations_->hideWidget(label, true);
+      }
+      msg_layout_->removeWidget(label);
       break;
     }
   }
 }
 
 void AdvancedPartitionFrame::hideErrorMessages() {
-  qDebug() << "hide error messages";
-  animations_->hideWidget(msg_container_frame_);
+  animations_->hideWidget(msg_container_frame_, false);
 }
 
 void AdvancedPartitionFrame::showErrorMessage(AdvancedValidateState state,
                                               bool enable_animation) {
-  qDebug() << "show error message:" << int(state);
   AdvancedPartitionErrorLabel* error_label =
       new AdvancedPartitionErrorLabel();
-  // TODO(xushaohua): Update label object name.
   error_label->setObjectName(kLastErrMsgLabel);
-  // TODO(xushaohua): Update sibling label.
 
   error_labels_.append(error_label);
 
   error_label->setValidateState(state);
   const QString text = this->validateStateToText(state);
   error_label->setText(text);
-  msg_layout_->addWidget(error_label);
+  qDebug() << "new error label:" << text;
   error_label->show();
+  msg_layout_->addWidget(error_label);
+
   connect(error_label, &AdvancedPartitionErrorLabel::entered,
           this, &AdvancedPartitionFrame::onErrorLabelEntered);
   connect(error_label, &AdvancedPartitionErrorLabel::leaved,
@@ -328,16 +325,16 @@ void AdvancedPartitionFrame::updateErrorMessageHeader() {
   if (err_count <= 1) {
     msg_head_label_->setText(
         tr("%1 error found, fix to continue installation or "
-               "switch to simple mode").arg(err_count));
+           "switch to simple mode").arg(err_count));
   } else {
     msg_head_label_->setText(
         tr("%1 errors found, fix to continue installation or "
-               "switch to simple mode").arg(err_count));
+           "switch to simple mode").arg(err_count));
   }
 }
 
 void AdvancedPartitionFrame::updateValidateStates() {
-// If last validate states is empty, do nothing.
+  // If last validate states is empty, do nothing.
   if (validate_states_.isEmpty()) {
     return;
   }
@@ -349,14 +346,13 @@ void AdvancedPartitionFrame::updateValidateStates() {
     for (AdvancedValidateState state : validate_states_) {
       if (!new_states.contains(state)) {
         // Hide fixed error label.
-        this->hideErrorMessage(state);
+        this->hideErrorMessage(state, false);
       }
     }
 
     for (AdvancedValidateState state : new_states) {
       if (!validate_states_.contains(state)) {
-        // Show new error label.
-        this->showErrorMessage(state, false);
+        this->showErrorMessage(state, true);
       }
     }
   }
