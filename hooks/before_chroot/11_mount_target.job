@@ -7,8 +7,8 @@
 
 target="/target"
 mkdir -pv ${target}
-#Try to fix wrong permission (owned by 1001)
 chown -v root:root ${target}
+chmod -v 0755 ${target}
 
 DI_LUPIN=$(installer_get "DI_LUPIN")
 DI_LUPIN_ROOT=$(installer_get "DI_LUPIN_ROOT")
