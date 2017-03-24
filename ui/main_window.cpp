@@ -69,6 +69,7 @@ void MainWindow::fullscreen() {
 
   multi_head_manager_->updateWallpaper();
   ShowFullscreen(this);
+  current_page_ = PageId::SystemInfoId;
   this->goNextPage();
 
   if (auto_install_) {

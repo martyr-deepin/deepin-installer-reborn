@@ -20,7 +20,6 @@ class QVBoxLayout;
 
 namespace installer {
 
-class AdvancedPartitionAnimations;
 class AdvancedPartitionButton;
 
 // Advanced partition mode
@@ -65,9 +64,9 @@ class AdvancedPartitionFrame : public QFrame {
   // Scroll to top of content area.
   void scrollContentToTop();
 
-  void hideErrorMessage(AdvancedValidateState state, bool enable_animation);
+  void hideErrorMessage(AdvancedValidateState state);
   void hideErrorMessages();
-  void showErrorMessage(AdvancedValidateState state, bool enable_animation);
+  void showErrorMessage(AdvancedValidateState state);
   // Show error message container.
   void showErrorMessages();
 
@@ -93,10 +92,7 @@ class AdvancedPartitionFrame : public QFrame {
   QVBoxLayout* msg_layout_ = nullptr;
   QLabel* msg_head_label_ = nullptr;
 
-  // TODO(xushaohua): Remove this property.
   AdvancedValidateStates validate_states_;
-
-  AdvancedPartitionAnimations* animations_ = nullptr;
 
   AdvancedPartitionErrorLabel* hovered_error_label_ = nullptr;
   AdvancedPartitionButton* hovered_part_button_ = nullptr;

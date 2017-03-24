@@ -45,8 +45,6 @@ AdvancedPartitionFrame::AdvancedPartitionFrame(
   this->initUI();
   this->initConnections();
 
-  animations_ = new AdvancedPartitionAnimations(this);
-
   // Hide error message container by default.
   msg_container_frame_->hide();
 }
@@ -250,36 +248,31 @@ void AdvancedPartitionFrame::repaintDevices() {
   // If device list is refreshed, and validate_states_ is not empty,
   // Either NewPartitionFrame or EditPartitionFrame was presented.
   // So we need to validate new states.
-//  this->updateValidateStates();
-  QTimer::singleShot(1000, this, &AdvancedPartitionFrame::updateValidateStates);
+  this->updateValidateStates();
 }
 
 void AdvancedPartitionFrame::scrollContentToTop() {
   scroll_area_->verticalScrollBar()->setValue(0);
 }
 
-void AdvancedPartitionFrame::hideErrorMessage(AdvancedValidateState state,
-                                              bool enable_animation) {
+void AdvancedPartitionFrame::hideErrorMessage(AdvancedValidateState state) {
   for (int i = 0; i < error_labels_.length(); ++i) {
     AdvancedPartitionErrorLabel* label = error_labels_.at(i);
     if (label->state() == state) {
       error_labels_.removeAt(i);
       label->hide();
-      if (enable_animation) {
-        animations_->hideWidget(label, true);
-      }
       msg_layout_->removeWidget(label);
+      label->deleteLater();
       break;
     }
   }
 }
 
 void AdvancedPartitionFrame::hideErrorMessages() {
-  animations_->hideWidget(msg_container_frame_, false);
+  AnimationHideWidget(msg_container_frame_);
 }
 
-void AdvancedPartitionFrame::showErrorMessage(AdvancedValidateState state,
-                                              bool enable_animation) {
+void AdvancedPartitionFrame::showErrorMessage(AdvancedValidateState state) {
   AdvancedPartitionErrorLabel* error_label =
       new AdvancedPartitionErrorLabel();
   error_label->setObjectName(kLastErrMsgLabel);
@@ -289,33 +282,31 @@ void AdvancedPartitionFrame::showErrorMessage(AdvancedValidateState state,
   error_label->setValidateState(state);
   const QString text = this->validateStateToText(state);
   error_label->setText(text);
-  qDebug() << "new error label:" << text;
   error_label->show();
   msg_layout_->addWidget(error_label);
+  error_label->setFixedHeight(error_label->maximumHeight());
 
   connect(error_label, &AdvancedPartitionErrorLabel::entered,
           this, &AdvancedPartitionFrame::onErrorLabelEntered);
   connect(error_label, &AdvancedPartitionErrorLabel::leaved,
           this, &AdvancedPartitionFrame::onErrorLabelLeaved);
-
-  if (enable_animation) {
-    animations_->showWidget(error_label);
-  }
 }
 
 void AdvancedPartitionFrame::showErrorMessages() {
-  qDebug() << "show error messages()";
   for (AdvancedValidateState state: validate_states_) {
-    this->showErrorMessage(state, false);
+    this->showErrorMessage(state);
   }
 
   this->updateErrorMessageHeader();
+
+  // Reset "maximumHeight" property of msg_container_frame_.
+  msg_container_frame_->setMaximumHeight(QWIDGETSIZE_MAX);
 
   // Show msg container if it is invisible.
   msg_container_frame_->show();
 
   // With animation.
-  animations_->showWidget(msg_container_frame_);
+  AnimationShowWidget(msg_container_frame_);
 }
 
 void AdvancedPartitionFrame::updateErrorMessageHeader() {
@@ -346,13 +337,13 @@ void AdvancedPartitionFrame::updateValidateStates() {
     for (AdvancedValidateState state : validate_states_) {
       if (!new_states.contains(state)) {
         // Hide fixed error label.
-        this->hideErrorMessage(state, false);
+        this->hideErrorMessage(state);
       }
     }
 
     for (AdvancedValidateState state : new_states) {
       if (!validate_states_.contains(state)) {
-        this->showErrorMessage(state, true);
+        this->showErrorMessage(state);
       }
     }
   }
@@ -457,7 +448,7 @@ void AdvancedPartitionFrame::onErrorLabelEntered() {
           dynamic_cast<AdvancedPartitionButton*>(button);
       if (part_button) {
         hovered_part_button_ = part_button;
-        animations_->highlightPartitionButton(part_button);
+        AnimationHighlightPartitionButton(part_button);
       }
     }
   }
