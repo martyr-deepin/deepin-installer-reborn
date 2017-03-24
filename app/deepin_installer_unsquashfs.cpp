@@ -2,6 +2,14 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
+// Extract squash filesystem. Works with low memory machine.
+//  * First mount squashfs to system
+//  * Then copy each file in that folder to target, including file permissions.
+// If extraction progress is required, use --progress option.
+// Known issues:
+//  * Selected squashfs file can be mounted to one mount-point each time.
+//    Or else `mount` command raise device-busy error.
+
 #define _XOPEN_SOURCE 500  // Required by nftw().
 #include <fcntl.h>
 #include <ftw.h>
@@ -17,6 +25,7 @@
 #include <QCoreApplication>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
+#include <QDateTime>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -41,7 +50,7 @@ const char kAppVersion[] = "0.0.1";
 const char kDefaultDest[] = "squashfs-root";
 
 // Absolute folder path to mount filesystem to.
-const char kMountPoint[] = "/dev/shm/installer-unsquashfs";
+const char kMountPointTmp[] = "/dev/shm/installer-unsquashfs-%1";
 
 const int kExitOk = 0;
 const int kExitErr = 1;
@@ -412,7 +421,8 @@ int main(int argc, char* argv[]) {
     parser.showHelp(kExitErr);
   }
 
-  const QString mount_point(kMountPoint);
+  const qint64 timestamp = QDateTime::currentMSecsSinceEpoch();
+  const QString mount_point(QString(kMountPointTmp).arg(timestamp));
 
   const QString dest_dir = parser.value(dest_option);
   const QString progress_file = parser.value(progress_option);
