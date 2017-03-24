@@ -23,6 +23,8 @@ class AdvancedPartitionButton : public PointerButton {
 
   double alpha() const { return alpha_; }
 
+  // Get partition struct binding to current button.
+  const Partition& partition() const;
 
  signals:
   // Emitted when delete partition button is clicked.

@@ -35,6 +35,10 @@ AdvancedPartitionButton::AdvancedPartitionButton(const Partition& partition,
   this->initConnections();
 }
 
+const Partition& AdvancedPartitionButton::partition() const {
+  return partition_;
+}
+
 void AdvancedPartitionButton::resetAlpha() {
   alpha_ = kDefaultAlpha;
   this->updateStyle();

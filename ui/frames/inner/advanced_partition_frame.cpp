@@ -204,6 +204,98 @@ void AdvancedPartitionFrame::initUI() {
   this->setStyleSheet(ReadFile(":/styles/advanced_partition_frame.css"));
 }
 
+AdvancedPartitionButton* AdvancedPartitionFrame::getAppropriateButtonForState(
+    AdvancedValidateState state) const {
+
+  const int efi_minimum = GetSettingsInt(kPartitionEFIMinimumSpace);
+  const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+
+  for (QAbstractButton* button : partition_button_group_->buttons()) {
+    AdvancedPartitionButton* part_button =
+        qobject_cast<AdvancedPartitionButton*>(button);
+    if (part_button == nullptr) {
+      continue;
+    }
+
+    const Partition& partition(part_button->partition());
+
+    switch (state) {
+      case AdvancedValidateState::BootFsInvalid: {
+        if (partition.mount_point == kMountPointRoot) {
+          return part_button;
+        }
+        break;
+      }
+      case AdvancedValidateState::BootPartNumberInvalid: {
+        if (partition.mount_point == kMountPointBoot ||
+            partition.mount_point == kMountPointRoot) {
+          return part_button;
+        }
+        break;
+      }
+      case AdvancedValidateState::BootTooSmall: {
+        if (partition.mount_point == kMountPointBoot) {
+          return part_button;
+        }
+        break;
+      }
+      case AdvancedValidateState::EfiMissing: {
+        if ((partition.fs != FsType::LinuxSwap) &&
+            (partition.fs != FsType::EFI) &&
+            partition.mount_point.isEmpty() &&
+            partition.getByteLength() > efi_minimum) {
+          return part_button;
+        }
+        break;
+      }
+      case AdvancedValidateState::EfiTooSmall: {
+        if (partition.fs == FsType::EFI) {
+          return part_button;
+        }
+        break;
+      }
+      case AdvancedValidateState::RootMissing: {
+        if ((partition.fs != FsType::LinuxSwap) &&
+            (partition.fs != FsType::EFI) &&
+            partition.mount_point.isEmpty() &&
+            partition.getByteLength() > root_required) {
+          return part_button;
+        }
+        break;
+      }
+      case AdvancedValidateState::RootTooSmall: {
+        if (partition.mount_point == kMountPointRoot) {
+          return part_button;
+        }
+        break;
+      }
+      default: {
+        // pass
+        break;
+      }
+    }
+  }
+
+  return nullptr;
+}
+
+void AdvancedPartitionFrame::hideErrorMessage(AdvancedValidateState state) {
+  for (int i = 0; i < error_labels_.length(); ++i) {
+    AdvancedPartitionErrorLabel* label = error_labels_.at(i);
+    if (label->state() == state) {
+      error_labels_.removeAt(i);
+      label->hide();
+      msg_layout_->removeWidget(label);
+      label->deleteLater();
+      break;
+    }
+  }
+}
+
+void AdvancedPartitionFrame::hideErrorMessages() {
+  AnimationHideWidget(msg_container_frame_);
+}
+
 void AdvancedPartitionFrame::repaintDevices() {
   qDebug() << "AdvancedPartitionFrame::repaintDevices()";
   // Clear children in button group.
@@ -253,23 +345,6 @@ void AdvancedPartitionFrame::repaintDevices() {
 
 void AdvancedPartitionFrame::scrollContentToTop() {
   scroll_area_->verticalScrollBar()->setValue(0);
-}
-
-void AdvancedPartitionFrame::hideErrorMessage(AdvancedValidateState state) {
-  for (int i = 0; i < error_labels_.length(); ++i) {
-    AdvancedPartitionErrorLabel* label = error_labels_.at(i);
-    if (label->state() == state) {
-      error_labels_.removeAt(i);
-      label->hide();
-      msg_layout_->removeWidget(label);
-      label->deleteLater();
-      break;
-    }
-  }
-}
-
-void AdvancedPartitionFrame::hideErrorMessages() {
-  AnimationHideWidget(msg_container_frame_);
 }
 
 void AdvancedPartitionFrame::showErrorMessage(AdvancedValidateState state) {
@@ -403,7 +478,6 @@ void AdvancedPartitionFrame::clearErrorMessages() {
   error_labels_.clear();
   ClearLayout(msg_layout_);
 
-  hovered_error_label_ = nullptr;
   hovered_part_button_ = nullptr;
 
   // Also hide msg container.
@@ -440,17 +514,18 @@ void AdvancedPartitionFrame::onEditPartitionTriggered(
 }
 
 void AdvancedPartitionFrame::onErrorLabelEntered() {
-  QList<QAbstractButton*> buttons = partition_button_group_->buttons();
-  if (!buttons.isEmpty()) {
-    QAbstractButton* button = buttons.first();
-    if (button) {
-      AdvancedPartitionButton* part_button =
-          dynamic_cast<AdvancedPartitionButton*>(button);
-      if (part_button) {
-        hovered_part_button_ = part_button;
-        AnimationHighlightPartitionButton(part_button);
-      }
-    }
+  hovered_part_button_ = nullptr;
+
+  QObject* obj = this->sender();
+  AdvancedPartitionErrorLabel* label =
+      qobject_cast<AdvancedPartitionErrorLabel*>(obj);
+  if (label == nullptr) {
+    return;
+  }
+  hovered_part_button_ = this->getAppropriateButtonForState(label->state());
+
+  if (hovered_part_button_) {
+    AnimationHighlightPartitionButton(hovered_part_button_);
   }
 }
 
