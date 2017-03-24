@@ -20,7 +20,4 @@ done
 
 sync
 
-# Eject any cd drivers
-eject
-
 return 0
