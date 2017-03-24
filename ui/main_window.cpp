@@ -11,6 +11,7 @@
 #include <QResizeEvent>
 #include <QShortcut>
 #include <QStackedLayout>
+#include <QTranslator>
 
 #include "base/file_util.h"
 #include "service/power_manager.h"
@@ -19,6 +20,7 @@
 #include "sysinfo/users.h"
 #include "sysinfo/virtual_machine.h"
 #include "third_party/global_shortcut/global_shortcut.h"
+#include "ui/delegates/language_delegate.h"
 #include "ui/delegates/main_window_util.h"
 #include "ui/frames/confirm_quit_frame.h"
 #include "ui/frames/control_panel_frame.h"
@@ -57,6 +59,12 @@ void MainWindow::fullscreen() {
   if (auto_install_) {
     // Read default locale from settings.ini and go to InstallProgressFrame.
     current_page_ = PageId::PartitionId;
+
+    // Set language.
+    QTranslator* translator = new QTranslator(this);
+    const QString locale(ReadLocale());
+    translator->load(GetLocalePath(locale));
+    qApp->installTranslator(translator);
   }
 
   multi_head_manager_->updateWallpaper();
