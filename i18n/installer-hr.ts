@@ -50,7 +50,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="275"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation type="unfinished"/>
+        <translation>Formatiraj %1 i napravi %2 novu particijsku tablicu</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="252"/>
@@ -106,12 +106,12 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="289"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation type="unfinished"/>
+        <translation>Particijski datotečni sustav /boot direktorija može biti samo %1</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="293"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation type="unfinished"/>
+        <translation>Particija /boot direktorija trebala bi biti prva particija na tvrdom disku</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="306"/>
@@ -412,13 +412,13 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
         <source>Full Disk Format Warning</source>
-        <translation type="unfinished"/>
+        <translation>Upozorenje formatiranja cijelog diska</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Nastavav instalacije će formatirati cijeli disk, molim napravite sigurnosnu kopiju svih podataka da biste izbjegli gubitak podataka</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="46"/>
@@ -445,7 +445,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="60"/>
         <location filename="../ui/frames/partition_frame.cpp" line="165"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Molimo vas da se uvjerite da postoji sigurnosna kopija važnih odataka, nakon toga izaberite disk za instalaciju</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="62"/>
@@ -472,13 +472,13 @@
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="24"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="32"/>
         <source>Scan disks</source>
-        <translation type="unfinished"/>
+        <translation>Skenirajte diskove</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="33"/>
         <source>Scanning disks, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Skeniran diskove, molim pričekajte...</translation>
     </message>
 </context>
 <context>
@@ -527,7 +527,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Molim napravite sigurnosnu kopiju svih podataka da biste izbjegli gubitak podataka</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
@@ -553,19 +553,19 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="103"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
-        <translation type="unfinished"/>
+        <translation>Ponovno podigni sustav, uđi u BIOS i onemogući UEFI</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="47"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="104"/>
         <source>Exit BIOS, and enter deepin to install</source>
-        <translation type="unfinished"/>
+        <translation>Izađi iz BIOS-a i uđi u deepin za instalaciju</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="137"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation type="unfinished"/>
+        <translation>Molimo vas da se uvjerite da postoji sigurnosna kopija svih podataka, zatim nastavite </translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
@@ -622,7 +622,7 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="73"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation type="unfinished"/>
+        <translation>Molim napravite sigurnosnu kopiju svih važnih podataka i potvrdite slijedeće operacije</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="54"/>
@@ -805,7 +805,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="185"/>
         <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
-        <translation type="unfinished"/>
+        <translation>Korisničko ime mora sadržavati engleska slova (osjetljiva na malo i veliko slovo), brojeve i posebne simbole(_-)</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="218"/>
@@ -867,7 +867,7 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="29"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="47"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation type="unfinished"/>
+        <translation>Sustav je otkrio da koristite virtualni stro, što će utjecati na performanse, preporučuje se deepin instalacija u okruženje stvarnog stroja</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="33"/>

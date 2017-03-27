@@ -9,7 +9,7 @@
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="120"/>
         <source>Swap partition</source>
-        <translation>Byt partion</translation>
+        <translation>Swap-partition</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="163"/>
@@ -30,17 +30,17 @@
     <message>
         <location filename="../partman/operation.cpp" line="239"/>
         <source>Create new partition %1, type is %2</source>
-        <translation>Opret udvidet partition %1, type er %2</translation>
+        <translation>Opret udvidet partition %1, typen er %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="243"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation>Opret udvidet partition %1 som %2 (monteringspunkt), type er %3</translation>
+        <translation>Opret udvidet partition %1 som %2 (monteringspunkt), typen er %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation>Formatér %1 partition som %2 (monteringspunkt), type er %3</translation>
+        <translation>Formatér %1 partition som %2 (monteringspunkt), typen er %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="269"/>
@@ -60,7 +60,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="257"/>
         <source>Format %1 partition, type is %2</source>
-        <translation>Formatér %1 partition, type er %2</translation>
+        <translation>Formatér %1 partition, typen er %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="281"/>
@@ -91,7 +91,7 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="310"/>
         <source>Add a Root partition to continue</source>
-        <translation>Tilføj en rodpartion for at fortsætte</translation>
+        <translation>Tilføj en rodpartition for at fortsætte</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="315"/>
@@ -296,7 +296,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Du kan opleve den udsøgte fornøjelse som deepin er, efter tiden det taget at drikke en kop mokka</translation>
+        <translation>Du kan opleve den udsøgte fornøjelse som deepin er, efter tiden det tager at drikke en kop mokka</translation>
     </message>
 </context>
 <context>
@@ -418,7 +418,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Hvis installationen fortsættes vil hele disken blive formateret. Sørg venligst for at lave en sikkerhedskopi af alle dine data, for at undgå tab af data</translation>
+        <translation>Hvis installationen fortsættes vil hele disken blive formateret. Sørg venligst for at oprette en sikkerhedskopi af alle dine data, for at undgå tab af data</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="46"/>
@@ -533,7 +533,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation>Dobbelttjek venligst at der blev lavet sikkerhedskopi af alle dataene, og genstart for at komme ind i denne brugerflade</translation>
+        <translation>Dobbelttjek venligst at der blev oprettet en sikkerhedskopi af alle dataene, og genstart for at komme ind i denne brugerflade</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
@@ -565,7 +565,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="137"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation>Sørg venligst for at der er lavet sikkerhedskopi af alle data. Fortsæt så</translation>
+        <translation>Sørg venligst for at der er oprettet en sikkerhedskopi af alle data. Fortsæt så</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
@@ -622,7 +622,7 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="73"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation>Lav venligst en sikkerhedskopi af vigtige data og bekræft følgende handlinger</translation>
+        <translation>Opret venligst en sikkerhedskopi af vigtige data og bekræft følgende handlinger</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="54"/>
@@ -867,7 +867,7 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="29"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="47"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation>Systemet har registreret at du bruger en virtuel maskine, hvilket vil påvirke systemydelsen og brugsoplevelsen. Det anbefales at installere deepin i et ægte maskinemiljø, for at få en god oplevelse.</translation>
+        <translation>Systemet har registreret at du bruger en virtuel maskine, hvilket vil påvirke systemydelsen og brugsoplevelsen. Det anbefales at installere deepin i et ægte maskinemiljø, for at få en god oplevelse</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="33"/>

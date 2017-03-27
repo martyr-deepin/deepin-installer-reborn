@@ -50,7 +50,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="275"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation>Formatar ℅1 e criar nova tabela de partições ℅2</translation>
+        <translation>Formatar %1 e criar nova tabela de partições %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="252"/>
@@ -296,7 +296,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Vai desfrutar de uma experiência incrivelmente agradável com o deepin e o tempo que isto demorará, será o tempo de preparação de um café</translation>
+        <translation>Vai desfrutar de uma experiência incrivelmente agradável com o deepin. Veja como é fácil, pois esta instalação finalizar-se-á num ápice</translation>
     </message>
 </context>
 <context>
@@ -311,7 +311,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="29"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="47"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>Reinicie para desfrutar uma nova experiência com deepin, espermos que goste!</translation>
+        <translation>Reinicie para desfrutar de uma nova experiência com deepin, esperemos que goste!</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="31"/>
@@ -352,7 +352,7 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="98"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="143"/>
         <source>Location</source>
-        <translation>Licalização</translation>
+        <translation>Localização</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="99"/>
@@ -628,7 +628,7 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="81"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
-        <translation>As operações seguintes vão ser executadas, por favor confirme para prevenir perda de dados</translation>
+        <translation>As operações seguintes vão ser executadas, por favor confirme para prevenir a perda de dados</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="56"/>
@@ -724,13 +724,13 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="53"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="113"/>
         <source>Input username and password</source>
-        <translation>Insira o nome de utilizador e palavra-passe</translation>
+        <translation>Insira um nome de utilizador e uma palavra-passe</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="122"/>
         <source>Username</source>
-        <translation>Utilizador</translation>
+        <translation>Nome de Utilizador</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="55"/>

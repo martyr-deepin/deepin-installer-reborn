@@ -428,7 +428,7 @@ msgstr "Amerika/El_Salvador"
 
 #: system-config-date-timezones.h:103
 msgid "America/Fort_Nelson"
-msgstr ""
+msgstr "Amerika/Fort_Nelson"
 
 #: system-config-date-timezones.h:104
 msgid "America/Fortaleza"
@@ -692,7 +692,7 @@ msgstr "Amerika/Puerto_Rico"
 
 #: system-config-date-timezones.h:169
 msgid "America/Punta_Arenas"
-msgstr ""
+msgstr "Amerika/Punta_Arenas"
 
 #: system-config-date-timezones.h:170
 msgid "America/Rainy_River"
@@ -852,7 +852,7 @@ msgstr "Antarctica/Syowa"
 
 #: system-config-date-timezones.h:209
 msgid "Antarctica/Troll"
-msgstr ""
+msgstr "Antarctica/Troll"
 
 #: system-config-date-timezones.h:210
 msgid "Antarctica/Vostok"
@@ -892,7 +892,7 @@ msgstr "Azië/Ashgabat"
 
 #: system-config-date-timezones.h:219
 msgid "Asia/Atyrau"
-msgstr ""
+msgstr "Azië/Atıraw"
 
 #: system-config-date-timezones.h:220
 msgid "Asia/Baghdad"
@@ -912,7 +912,7 @@ msgstr "Azië/Bangkok"
 
 #: system-config-date-timezones.h:224
 msgid "Asia/Barnaul"
-msgstr ""
+msgstr "Azië/Barnaoel"
 
 #: system-config-date-timezones.h:225
 msgid "Asia/Beirut"
@@ -928,7 +928,7 @@ msgstr "Azië/Brunei"
 
 #: system-config-date-timezones.h:228
 msgid "Asia/Chita"
-msgstr ""
+msgstr "Azië/Chita"
 
 #: system-config-date-timezones.h:229
 msgid "Asia/Choibalsan"
@@ -960,7 +960,7 @@ msgstr "Azië/Dushanbe"
 
 #: system-config-date-timezones.h:236
 msgid "Asia/Famagusta"
-msgstr ""
+msgstr "Azië/Famagusta"
 
 #: system-config-date-timezones.h:237
 msgid "Asia/Gaza"
@@ -1016,7 +1016,7 @@ msgstr "Azië/Kathmandu"
 
 #: system-config-date-timezones.h:250
 msgid "Asia/Khandyga"
-msgstr ""
+msgstr "Azië/Khandyga"
 
 #: system-config-date-timezones.h:251
 msgid "Asia/Kolkata"
@@ -1124,7 +1124,7 @@ msgstr "Azië/Singapore"
 
 #: system-config-date-timezones.h:277
 msgid "Asia/Srednekolymsk"
-msgstr ""
+msgstr "Azië/Srednekolymsk"
 
 #: system-config-date-timezones.h:278
 msgid "Asia/Taipei"
@@ -1152,7 +1152,7 @@ msgstr "Azië/Tokyo"
 
 #: system-config-date-timezones.h:284
 msgid "Asia/Tomsk"
-msgstr ""
+msgstr "Azië/Tomsk"
 
 #: system-config-date-timezones.h:285
 msgid "Asia/Ulaanbaatar"
@@ -1164,7 +1164,7 @@ msgstr "Azië/Urumqi"
 
 #: system-config-date-timezones.h:287
 msgid "Asia/Ust-Nera"
-msgstr ""
+msgstr "Azië/Ust-Nera"
 
 #: system-config-date-timezones.h:288
 msgid "Asia/Vientiane"
@@ -1180,7 +1180,7 @@ msgstr "Azië/Yakoetsk"
 
 #: system-config-date-timezones.h:291
 msgid "Asia/Yangon"
-msgstr ""
+msgstr "Azië/Rangoon"
 
 #: system-config-date-timezones.h:292
 msgid "Asia/Yekaterinburg"
@@ -1288,7 +1288,7 @@ msgstr "Europa/Andorra_la_Vella"
 
 #: system-config-date-timezones.h:318
 msgid "Europe/Astrakhan"
-msgstr ""
+msgstr "Europa/Astrachan"
 
 #: system-config-date-timezones.h:319
 msgid "Europe/Athens"
@@ -1320,7 +1320,7 @@ msgstr "Europa/Boedapest"
 
 #: system-config-date-timezones.h:326
 msgid "Europe/Busingen"
-msgstr ""
+msgstr "Europa/Büsingen"
 
 #: system-config-date-timezones.h:327
 msgid "Europe/Chisinau"
@@ -1368,7 +1368,7 @@ msgstr "Europa/Kiev"
 
 #: system-config-date-timezones.h:338
 msgid "Europe/Kirov"
-msgstr ""
+msgstr "Europa/Kirov"
 
 #: system-config-date-timezones.h:339
 msgid "Europe/Lisbon"
@@ -1448,7 +1448,7 @@ msgstr "Europa/Sarajevo"
 
 #: system-config-date-timezones.h:358
 msgid "Europe/Saratov"
-msgstr ""
+msgstr "Europa/Saratov"
 
 #: system-config-date-timezones.h:359
 msgid "Europe/Simferopol"
@@ -1476,7 +1476,7 @@ msgstr "Europa/Tirana"
 
 #: system-config-date-timezones.h:365
 msgid "Europe/Ulyanovsk"
-msgstr ""
+msgstr "Europa/Oeljanovsk"
 
 #: system-config-date-timezones.h:366
 msgid "Europe/Uzhgorod"
@@ -1572,7 +1572,7 @@ msgstr "Pacifische Oceaan/Auckland"
 
 #: system-config-date-timezones.h:389
 msgid "Pacific/Bougainville"
-msgstr ""
+msgstr "Pacifische Oceaan/Bougainville"
 
 #: system-config-date-timezones.h:390
 msgid "Pacific/Chatham"

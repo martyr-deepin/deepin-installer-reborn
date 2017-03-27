@@ -275,7 +275,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="83"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation type="unfinished"/>
+        <translation>Entschuldigen Sie die Unannehmlichkeiten. Sie können den QR-Coe fotografieren oder mit einem QR-Scanner erfassen, um den Fehlerbericht an uns zu senden. Dadurch ist es uns möglich Deepin zu verbessern und Fehler zu beheben,</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="65"/>
@@ -296,7 +296,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation type="unfinished"/>
+        <translation>Genehmigen Sie sich einen Kaffee, Wenn Sie Ihren Kaffee ausgetrunken haben, können sie in die wunderschöne und unglaubliche Welt von Deepin eintauchen.</translation>
     </message>
 </context>
 <context>
@@ -412,7 +412,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
         <source>Full Disk Format Warning</source>
-        <translation type="unfinished"/>
+        <translation>Warnung: Die gesamte Festplatte wird gelöscht.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
@@ -533,7 +533,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation type="unfinished"/>
+        <translation>Bitte stellen Sie sicher dass alle Daten gesichert wurden und starten Sie dem Rechner nach Abschluss der Sicherung neu, um die Benutzeroberfläche des Installers neu aufzurufen.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
