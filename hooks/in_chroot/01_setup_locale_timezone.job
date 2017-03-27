@@ -3,6 +3,16 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+# Update configuration for systemd to enable locale time
+enable_local_rtc() {
+  msg "Enable local rtc"
+  cat > /etc/adjtimie << EOF
+
+0
+LOCAL
+EOF
+}
+
 # Setup locale and timezone.
 # This function used in hook_manager.sh and first_boot_setup.sh
 setup_locale_timezone() {
@@ -50,10 +60,10 @@ EOF
   local DI_IS_LOCAL_TIME
   DI_IS_LOCAL_TIME=$(installer_get "DI_IS_LOCAL_TIME")
   local readonly TIME_SERVICE=/etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service
-  # TODO(xushaohua): Enable system bus in chroot environment.
   if [ x"${DI_IS_LOCAL_TIME}" = xtrue ]; then
     # Use RTC time, "timedatectl set-local-rtc 1"
-    deepin-installer-adjtime 1
+    enable_local_rtc
+
     # Disable timesyncd service, "timedatectl set-ntp 0"
     [ -f "${TIME_SERVICE}" ] && rm -f "${TIME_SERVICE}"
   else
