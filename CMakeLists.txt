@@ -469,13 +469,6 @@ add_executable(deepin-installer-reborn
 target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
 add_dependencies(deepin-installer-reborn installer-qm-update)
 
-add_executable(deepin-installer-adjtime
-               app/deepin_installer_adjtime.cpp
-
-               base/file_util.cpp
-               base/file_util.h
-               )
-target_link_libraries(deepin-installer-adjtime ${QtCore_LIBS})
 
 # Set/get ini files.
 add_executable(deepin-installer-settings
@@ -763,7 +756,6 @@ target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 ## Installation
 install(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-first-boot-pkexec
         ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-reborn-pkexec
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-adjtime
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
