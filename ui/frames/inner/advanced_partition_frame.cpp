@@ -255,9 +255,8 @@ AdvancedPartitionButton* AdvancedPartitionFrame::getAppropriateButtonForState(
         break;
       }
       case AdvancedValidateState::RootMissing: {
-        if ((partition.fs != FsType::LinuxSwap) &&
-            (partition.fs != FsType::EFI) &&
-            partition.mount_point.isEmpty() &&
+        // First check freespace.
+        if (partition.type == PartitionType::Unallocated &&
             partition.getByteLength() > root_required) {
           return part_button;
         }
@@ -265,6 +264,33 @@ AdvancedPartitionButton* AdvancedPartitionFrame::getAppropriateButtonForState(
       }
       case AdvancedValidateState::RootTooSmall: {
         if (partition.mount_point == kMountPointRoot) {
+          return part_button;
+        }
+        break;
+      }
+      default: {
+        // pass
+        break;
+      }
+    }
+  }
+
+  for (QAbstractButton* button : partition_button_group_->buttons()) {
+    AdvancedPartitionButton* part_button =
+        qobject_cast<AdvancedPartitionButton*>(button);
+    if (part_button == nullptr) {
+      continue;
+    }
+
+    const Partition& partition(part_button->partition());
+
+    switch (state) {
+      case AdvancedValidateState::RootMissing: {
+        // Then check non-empty partitions.
+        if ((partition.fs != FsType::LinuxSwap) &&
+            (partition.fs != FsType::EFI) &&
+            partition.mount_point.isEmpty() &&
+            partition.getByteLength() > root_required) {
           return part_button;
         }
         break;
