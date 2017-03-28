@@ -214,6 +214,15 @@ bool AdvancedPartitionDelegate::setBootFlag() {
     }
   }
 
+  // Check existing EFI partition.
+  for (const Device& device : virtual_devices_) {
+    for (const Partition& partition : device.partitions) {
+      if (partition.fs == FsType::EFI) {
+        return true;
+      }
+    }
+  }
+
   // Check /boot partition.
   if (!found_boot) {
     for (Operation& operation : operations_) {
