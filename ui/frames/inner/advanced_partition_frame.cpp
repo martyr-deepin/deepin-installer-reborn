@@ -220,19 +220,8 @@ AdvancedPartitionButton* AdvancedPartitionFrame::getAppropriateButtonForState(
     const Partition& partition(part_button->partition());
 
     switch (state) {
-      case AdvancedValidateState::BootFsInvalid: {
-        if (partition.mount_point == kMountPointRoot) {
-          return part_button;
-        }
-        break;
-      }
-      case AdvancedValidateState::BootPartNumberInvalid: {
-        if (partition.mount_point == kMountPointBoot ||
-            partition.mount_point == kMountPointRoot) {
-          return part_button;
-        }
-        break;
-      }
+      case AdvancedValidateState::BootFsInvalid:  // Fall through
+      case AdvancedValidateState::BootPartNumberInvalid:  // Fall through
       case AdvancedValidateState::BootTooSmall: {
         if (partition.mount_point == kMountPointBoot) {
           return part_button;
@@ -285,6 +274,13 @@ AdvancedPartitionButton* AdvancedPartitionFrame::getAppropriateButtonForState(
     const Partition& partition(part_button->partition());
 
     switch (state) {
+      case AdvancedValidateState::BootFsInvalid:  // Fall through
+      case AdvancedValidateState::BootPartNumberInvalid: {
+        if (partition.mount_point == kMountPointRoot) {
+          return part_button;
+        }
+        break;
+      }
       case AdvancedValidateState::RootMissing: {
         // Then check non-empty partitions.
         if ((partition.fs != FsType::LinuxSwap) &&
@@ -452,6 +448,9 @@ void AdvancedPartitionFrame::updateValidateStates() {
   // Update state list.
   validate_states_ = new_states;
   this->updateErrorMessageHeader();
+
+  // Reset "maximumHeight" property of msg_container_frame_.
+  msg_container_frame_->setMaximumHeight(QWIDGETSIZE_MAX);
 }
 
 QString AdvancedPartitionFrame::validateStateToText(AdvancedValidateState state) {
