@@ -132,6 +132,14 @@ fix_pci_bcm4350() {
   fi
 }
 
+# bcm4356 [17aa:0777] wl is not usable
+fix_pci_bcm4356() {
+  if is_pci_exists "17aa:0777"; then
+    msg "fix bcm4356"
+    apt-get purge -y -f bcmwl-kernel-source
+  fi
+}
+
 # bcm4322 [14e4:432b] wl is not usable
 fix_pci_bcm4322() {
   if is_pci_exists "14e4:432b"; then
@@ -188,6 +196,7 @@ fix_pci_rtl8723ae_fwlps() {
 
 fix_pci_bcm4313 || true
 fix_pci_bcm4350 || true
+fix_pci_bcm4356 || true
 #fix_pci_bcm4322 || true
 fix_pci_rtl8723be_fwlps || true
 #fix_usb_rtl8723au || true
