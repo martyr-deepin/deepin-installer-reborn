@@ -340,7 +340,7 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="96"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="131"/>
         <source>Create a new partition and define the type and size</source>
-        <translation>Создать новый раздел и определите тип и размер</translation>
+        <translation>Создать новый раздел и определить тип и размер</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="97"/>
@@ -376,13 +376,13 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>Start</source>
-        <translation>Начать</translation>
+        <translation>Начало</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>End</source>
-        <translation>Завершить</translation>
+        <translation>Конец</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="104"/>
@@ -430,7 +430,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="47"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="90"/>
         <source>Continue</source>
-        <translation>Пролжить</translation>
+        <translation>Продолжить</translation>
     </message>
 </context>
 <context>

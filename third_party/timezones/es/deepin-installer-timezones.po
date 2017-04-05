@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-21 10:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: alvarosamudio <alvarosamudio1@gmail.com>, 2017\n"
+"Last-Translator: Chema Ramirez <josemrf1996@gmail.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/linuxdeepin/teams/3976/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -428,7 +428,7 @@ msgstr "América/El_Salvador"
 
 #: system-config-date-timezones.h:103
 msgid "America/Fort_Nelson"
-msgstr ""
+msgstr "América/Fort_Nelson"
 
 #: system-config-date-timezones.h:104
 msgid "America/Fortaleza"
@@ -692,7 +692,7 @@ msgstr "América/Puerto_Rico"
 
 #: system-config-date-timezones.h:169
 msgid "America/Punta_Arenas"
-msgstr ""
+msgstr "América/Punta_Arenas"
 
 #: system-config-date-timezones.h:170
 msgid "America/Rainy_River"
@@ -852,7 +852,7 @@ msgstr "Antártida / Syowa"
 
 #: system-config-date-timezones.h:209
 msgid "Antarctica/Troll"
-msgstr ""
+msgstr "Antártida/Troll"
 
 #: system-config-date-timezones.h:210
 msgid "Antarctica/Vostok"
@@ -892,7 +892,7 @@ msgstr "Asia/Ashgabat"
 
 #: system-config-date-timezones.h:219
 msgid "Asia/Atyrau"
-msgstr ""
+msgstr "Asia/Atyrau"
 
 #: system-config-date-timezones.h:220
 msgid "Asia/Baghdad"
@@ -912,7 +912,7 @@ msgstr "Asia/Bangkok"
 
 #: system-config-date-timezones.h:224
 msgid "Asia/Barnaul"
-msgstr ""
+msgstr "Asia/Barnaul"
 
 #: system-config-date-timezones.h:225
 msgid "Asia/Beirut"
@@ -928,7 +928,7 @@ msgstr "Asia/Brunei"
 
 #: system-config-date-timezones.h:228
 msgid "Asia/Chita"
-msgstr ""
+msgstr "Asia/Chita"
 
 #: system-config-date-timezones.h:229
 msgid "Asia/Choibalsan"
@@ -960,7 +960,7 @@ msgstr "Asia/Dushanbe"
 
 #: system-config-date-timezones.h:236
 msgid "Asia/Famagusta"
-msgstr ""
+msgstr "Asia/Famagusta"
 
 #: system-config-date-timezones.h:237
 msgid "Asia/Gaza"
@@ -1016,7 +1016,7 @@ msgstr "Asia/Kathmandu"
 
 #: system-config-date-timezones.h:250
 msgid "Asia/Khandyga"
-msgstr ""
+msgstr "Asia/Khandyga"
 
 #: system-config-date-timezones.h:251
 msgid "Asia/Kolkata"
@@ -1124,7 +1124,7 @@ msgstr "Asia/Singapore"
 
 #: system-config-date-timezones.h:277
 msgid "Asia/Srednekolymsk"
-msgstr ""
+msgstr "Asia/Srednekolymsk"
 
 #: system-config-date-timezones.h:278
 msgid "Asia/Taipei"
@@ -1152,7 +1152,7 @@ msgstr "Asia/Tokyo "
 
 #: system-config-date-timezones.h:284
 msgid "Asia/Tomsk"
-msgstr ""
+msgstr "Asia/Tomsk"
 
 #: system-config-date-timezones.h:285
 msgid "Asia/Ulaanbaatar"
@@ -1164,7 +1164,7 @@ msgstr "Asia/Urumqi"
 
 #: system-config-date-timezones.h:287
 msgid "Asia/Ust-Nera"
-msgstr ""
+msgstr "Asia/Ust-Nera"
 
 #: system-config-date-timezones.h:288
 msgid "Asia/Vientiane"
@@ -1180,7 +1180,7 @@ msgstr "Asia/Yakutsk"
 
 #: system-config-date-timezones.h:291
 msgid "Asia/Yangon"
-msgstr ""
+msgstr "Asia/Yangon"
 
 #: system-config-date-timezones.h:292
 msgid "Asia/Yekaterinburg"
@@ -1288,7 +1288,7 @@ msgstr "Europa/Andorra"
 
 #: system-config-date-timezones.h:318
 msgid "Europe/Astrakhan"
-msgstr ""
+msgstr "Europa/Astrakhan"
 
 #: system-config-date-timezones.h:319
 msgid "Europe/Athens"
@@ -1320,7 +1320,7 @@ msgstr "Europa/Budapest"
 
 #: system-config-date-timezones.h:326
 msgid "Europe/Busingen"
-msgstr ""
+msgstr "Europa/Busingen"
 
 #: system-config-date-timezones.h:327
 msgid "Europe/Chisinau"
@@ -1368,7 +1368,7 @@ msgstr "Europa/Kiev"
 
 #: system-config-date-timezones.h:338
 msgid "Europe/Kirov"
-msgstr ""
+msgstr "Europa/Kirov"
 
 #: system-config-date-timezones.h:339
 msgid "Europe/Lisbon"
@@ -1448,7 +1448,7 @@ msgstr "Europa/Sarajevo"
 
 #: system-config-date-timezones.h:358
 msgid "Europe/Saratov"
-msgstr ""
+msgstr "Europa/Saratov"
 
 #: system-config-date-timezones.h:359
 msgid "Europe/Simferopol"
@@ -1476,7 +1476,7 @@ msgstr "Europa/Tirane"
 
 #: system-config-date-timezones.h:365
 msgid "Europe/Ulyanovsk"
-msgstr ""
+msgstr "Europa/Ulyanovsk"
 
 #: system-config-date-timezones.h:366
 msgid "Europe/Uzhgorod"
@@ -1572,7 +1572,7 @@ msgstr "Pacífico / Auckland"
 
 #: system-config-date-timezones.h:389
 msgid "Pacific/Bougainville"
-msgstr ""
+msgstr "Pacifico/Bougainville"
 
 #: system-config-date-timezones.h:390
 msgid "Pacific/Chatham"
