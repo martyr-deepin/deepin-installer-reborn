@@ -82,9 +82,11 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
     case PartitionStatus::Format: {
       // Compare between real filesystem type and current one.
       const Partition real_partition(delegate_->getRealPartition(partition_));
-      // If filesystem changed, force format this partition.
-      format_check_box_->setEnabled(real_partition.fs == partition_.fs);
-      format_check_box_->setChecked(true);
+      if (!real_partition.path.isEmpty()) {
+        // If filesystem changed, force format this partition.
+        format_check_box_->setEnabled(real_partition.fs == partition_.fs);
+        format_check_box_->setChecked(true);
+      }
       break;
     }
     case PartitionStatus::New: {
@@ -99,11 +101,18 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
       break;
     }
     default: {
+      this->forceFormat(false);
       break;
     }
   }
 
-  this->updateFormatBoxState();
+  FsType fs_type = partition_.fs;
+  // If it is linux-swap, empty or known, hide format box.
+  bool invisible = (fs_type == FsType::LinuxSwap ||
+      fs_type == FsType::Empty ||
+      fs_type == FsType::Unknown);
+  format_label_->setVisible(!invisible);
+  format_check_box_->setVisible(!invisible);
 }
 
 void EditPartitionFrame::changeEvent(QEvent* event) {
@@ -139,7 +148,10 @@ void EditPartitionFrame::updateFormatBoxState() {
   }
 
   // Format this partition compulsively if its fs type changed.
-  bool format = (fs_type != FsType::Empty && fs_type != real_partition.fs);
+  bool format = false;
+  if ((fs_type != FsType::Empty) && (!real_partition.path.isEmpty())) {
+    format = (fs_type != real_partition.fs);
+  }
   // Format this partition if mount-point is in formatted-mount-point list.
   format |= IsInFormattedMountPointList(mount_point);
   this->forceFormat(format);

@@ -183,6 +183,10 @@ Partition AdvancedPartitionDelegate::getRealPartition(
   }
 
   for (const Partition& partition : real_devices_.at(index).partitions) {
+    // Ignores extended partition.
+    if (partition.type == PartitionType::Extended) {
+      continue;
+    }
     if ((partition.start_sector <= virtual_partition.start_sector) &&
         (partition.end_sector >= virtual_partition.end_sector)) {
       return partition;
