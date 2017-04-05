@@ -7,7 +7,11 @@
 add_user_to_existed_group() {
   local USER=$1
   local GROUP=$2
-  grep -q "^${GROUP}:" /etc/group 2>/dev/null && gpasswd -a "${USER}" "${GROUP}"
+  if grep -q "^${GROUP}:" /etc/group 2>/dev/null; then
+    gpasswd -a "${USER}" "${GROUP}"
+  else
+    warn "No group found ${GROUP}"
+  fi
 }
 
 # Setup username, password and hostname.
@@ -35,6 +39,7 @@ setup_username_password() {
   add_user_to_existed_group "${DI_USERNAME}" lpadmin
   add_user_to_existed_group "${DI_USERNAME}" netdev
   add_user_to_existed_group "${DI_USERNAME}" network
+  add_user_to_existed_group "${DI_USERNAME}" sambashare
   add_user_to_existed_group "${DI_USERNAME}" scanner
   add_user_to_existed_group "${DI_USERNAME}" storage
   add_user_to_existed_group "${DI_USERNAME}" sudo
