@@ -9,9 +9,10 @@
 # work any more in chroot environment.
 # So, always put this script to last step of in_chroot stage.
 
-# TODO(xushaohua): It take too much time to uninstall packages in loongson.
-# So skip this step temporarily.
 if ! is_x86; then
+  # Only uninstall installer if not in x86 platform
+  apt-get -y purge deepin-installer-reborn
+  apt-get -y autoremove --purge
   return 0
 fi
 
