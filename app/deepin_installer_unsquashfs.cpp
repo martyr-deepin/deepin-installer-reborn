@@ -32,6 +32,7 @@
 #include <QtMath>
 
 #include "base/command.h"
+#include "base/consts.h"
 #include "base/file_util.h"
 
 #define S_IMODE 07777
@@ -57,7 +58,7 @@ const int kExitErr = 1;
 
 // Maximum number of opened file descriptors.
 // See /proc/self/limits for more information.
-const int kMaxOpenFd = 256;
+const int kMaxOpenFd = 512;
 
 // File descriptor of progress file.
 FILE* g_progress_fd = NULL;
@@ -199,7 +200,8 @@ int CopyItem(const char* fpath, const struct stat* sb,
     return 1;
   }
 
-  QString relative_path = QString(fpath).remove(g_src_dir);
+  QString relative_path(fpath);
+  relative_path.remove(g_src_dir);
   if (relative_path.startsWith('/')) {
     relative_path = relative_path.mid(1);
   }
@@ -376,6 +378,13 @@ int main(int argc, char* argv[]) {
   // Mount squashfs file
   // Copy files to target
   // Unmount from mount-point
+
+  // NOTE(xushaohua): "LANG" might not set in some live environment.
+  // Set locale to en_US.UTF-8, or else, mounted squashfs will display invalid
+  // character code.
+  qputenv("LC_ALL", installer::kDefaultLang);
+  qputenv("LANG", installer::kDefaultLang);
+  (void) setlocale(LC_ALL, installer::kDefaultLang);
 
   QCoreApplication app(argc, argv);
   app.setApplicationName(kAppName);
