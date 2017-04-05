@@ -4,12 +4,12 @@
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="113"/>
         <source>Do not use this partition</source>
-        <translation>不使用的分割區</translation>
+        <translation>不使用分割區</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="120"/>
         <source>Swap partition</source>
-        <translation>Swap 分割區</translation>
+        <translation>Swap</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="163"/>
@@ -20,57 +20,57 @@
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="122"/>
         <source>Unknown</source>
-        <translation>未知</translation>
+        <translation>未知類型</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="235"/>
         <source>Create extended partition %1</source>
-        <translation type="unfinished"/>
+        <translation>建立延伸分割區 %1</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="239"/>
         <source>Create new partition %1, type is %2</source>
-        <translation type="unfinished"/>
+        <translation>建立新分割區 %1，類型為 %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="243"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation type="unfinished"/>
+        <translation>建立新分割區 %1 作為 %2（掛載點），類型為 %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation type="unfinished"/>
+        <translation>格式化分割區 %1 作為 %2（掛載點），類型為 %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="269"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
-        <translation type="unfinished"/>
+        <translation>使用 %1 分割區作為 %2（掛載點）</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="275"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation type="unfinished"/>
+        <translation>格式化 %1 並建立新的 %2 分割表</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="252"/>
         <source>Delete %1 partition</source>
-        <translation type="unfinished"/>
+        <translation>刪除 %1 分割區</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="257"/>
         <source>Format %1 partition, type is %2</source>
-        <translation type="unfinished"/>
+        <translation>格式化 %1 分割區，類型為 %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="281"/>
         <source>Adjust the size of %1 partition</source>
-        <translation type="unfinished"/>
+        <translation>調整 %1 分割區大小</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
         <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation type="unfinished"/>
+        <translation>安裝 Deepin 至少要 %1 GB 的磁碟機空間，建議 %2 GB 以上效果更好</translation>
     </message>
 </context>
 <context>
@@ -78,12 +78,12 @@
     <message>
         <location filename="../ui/widgets/advanced_partition_button.cpp" line="91"/>
         <source>Install here</source>
-        <translation>在此安裝</translation>
+        <translation>安裝於此</translation>
     </message>
     <message>
         <location filename="../ui/widgets/advanced_partition_button.cpp" line="94"/>
         <source>To be formatted</source>
-        <translation type="unfinished"/>
+        <translation>將被格式化</translation>
     </message>
 </context>
 <context>
@@ -91,66 +91,66 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="310"/>
         <source>Add a Root partition to continue</source>
-        <translation>新增 Root 分割區得以繼續</translation>
+        <translation>需設定 Root 分割區</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="315"/>
         <source>At least %1 GB is required for Root partition</source>
-        <translation type="unfinished"/>
+        <translation>Root 分割區至少要 %1 GB</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="302"/>
         <source>Add an EFI partition to continue</source>
-        <translation>新增 EFI 分割區得以繼續</translation>
+        <translation>需設定 EFI 分割區</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="289"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation type="unfinished"/>
+        <translation>/boot 分割區的檔案系統只能是 %1</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="293"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation type="unfinished"/>
+        <translation>/boot 分割區應為硬碟中第一個分割區</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="306"/>
         <source>At least %1 MB is required for EFI partition</source>
-        <translation type="unfinished"/>
+        <translation>EFI 分割區至少要 %1 MB</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="298"/>
         <source>At least %1 MB is required for /boot partition</source>
-        <translation type="unfinished"/>
+        <translation>/boot 分割區至少要 %1 MB</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="153"/>
         <source>Change boot loader</source>
-        <translation>更改開機啟動程式</translation>
+        <translation>更改啟動程式</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="266"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>發現 %1 個錯誤，修復以繼續安裝或是切換至簡易模式</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="270"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>發現 %1 個錯誤，修復以繼續安裝或是切換至簡易模式</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="66"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="345"/>
         <source>Done</source>
-        <translation type="unfinished"/>
+        <translation>完成</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="68"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="160"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="347"/>
         <source>Delete</source>
-        <translation>删除</translation>
+        <translation>刪除</translation>
     </message>
 </context>
 <context>
@@ -158,7 +158,7 @@
     <message>
         <location filename="../ui/models/bootloader_list_model.cpp" line="29"/>
         <source>%1 %2 (recommended)</source>
-        <translation type="unfinished"/>
+        <translation>%1 %2（建議）</translation>
     </message>
 </context>
 <context>
@@ -167,25 +167,25 @@
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="26"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="45"/>
         <source>Abort Installation</source>
-        <translation>安裝失敗</translation>
+        <translation>取消安裝</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="28"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="47"/>
         <source>Relevant operations you made in the installation process will not take effect, abort or continue installation?</source>
-        <translation type="unfinished"/>
+        <translation>安裝過程中的動作均不會套用，取消還是要繼續安裝？</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="30"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="54"/>
         <source>Continue</source>
-        <translation>下一步</translation>
+        <translation>繼續安裝</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="31"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="55"/>
         <source>Abort</source>
-        <translation type="unfinished"/>
+        <translation>取消安裝</translation>
     </message>
 </context>
 <context>
@@ -194,7 +194,7 @@
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="45"/>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="59"/>
         <source>Insufficient Disk Space</source>
-        <translation type="unfinished"/>
+        <translation>磁碟機空間不足</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="47"/>
@@ -209,13 +209,13 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="111"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="171"/>
         <source>Edit Disk</source>
-        <translation type="unfinished"/>
+        <translation>編輯磁碟機</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="113"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="173"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>請確保重要資料已備份，接著選擇磁碟機安裝</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="115"/>
@@ -254,13 +254,13 @@
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="48"/>
         <source>Tuning system</source>
-        <translation type="unfinished"/>
+        <translation>正在調整系統</translation>
     </message>
     <message>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="27"/>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="50"/>
         <source>Applying changes to your system, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>正在套用變更至你的系統，請稍候…</translation>
     </message>
 </context>
 <context>
@@ -269,13 +269,13 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="61"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="81"/>
         <source>Installation Failed</source>
-        <translation type="unfinished"/>
+        <translation>安裝失敗</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="83"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation type="unfinished"/>
+        <translation>造成不便很抱歉，你可以拍照或掃描 QR 條碼將錯誤紀錄傳送給我們，我們能更好地解決問題。</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="65"/>
@@ -290,13 +290,13 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="113"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="138"/>
         <source>Installing</source>
-        <translation>安裝中</translation>
+        <translation>正在安裝</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation type="unfinished"/>
+        <translation>只需一杯咖啡的時間，方能體會到 Deepin 難以置信的樂趣</translation>
     </message>
 </context>
 <context>
@@ -311,7 +311,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="29"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="47"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation type="unfinished"/>
+        <translation>重新啟動後即可享受 Deepin 帶來的全新體驗，希望你喜歡！</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="31"/>
@@ -325,7 +325,7 @@
     <message>
         <location filename="../ui/models/mount_point_model.cpp" line="24"/>
         <source>Do not use</source>
-        <translation type="unfinished"/>
+        <translation>不使用分割區</translation>
     </message>
 </context>
 <context>
@@ -340,25 +340,25 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="96"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="131"/>
         <source>Create a new partition and define the type and size</source>
-        <translation type="unfinished"/>
+        <translation>建立新分割區並設定類型與大小</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="97"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="137"/>
         <source>Type</source>
-        <translation type="unfinished"/>
+        <translation>類型</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="98"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="143"/>
         <source>Location</source>
-        <translation type="unfinished"/>
+        <translation>位置</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="99"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="148"/>
         <source>Filesystem</source>
-        <translation type="unfinished"/>
+        <translation>檔案系統</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="100"/>
@@ -370,19 +370,19 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="101"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="161"/>
         <source>Size</source>
-        <translation type="unfinished"/>
+        <translation>大小</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>開始位置</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>End</source>
-        <translation type="unfinished"/>
+        <translation>結束位置</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="104"/>
@@ -403,7 +403,7 @@
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="24"/>
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="41"/>
         <source>Formatting...</source>
-        <translation>格式化中…</translation>
+        <translation>正在格式化…</translation>
     </message>
 </context>
 <context>
@@ -412,13 +412,13 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
         <source>Full Disk Format Warning</source>
-        <translation type="unfinished"/>
+        <translation>磁碟機格式化警告</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>繼續安裝會格式化整個磁碟機，請備份所有資料避免遺失</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="46"/>
@@ -430,7 +430,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="47"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="90"/>
         <source>Continue</source>
-        <translation>下一步</translation>
+        <translation>繼續</translation>
     </message>
 </context>
 <context>
@@ -445,7 +445,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="60"/>
         <location filename="../ui/frames/partition_frame.cpp" line="165"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>請確保重要資料已備份，接著選擇磁碟機安裝</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="62"/>
@@ -478,7 +478,7 @@
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="33"/>
         <source>Scanning disks, please wait...</source>
-        <translation>掃描磁碟機，請稍後…</translation>
+        <translation>正在掃描磁碟機，請稍候…</translation>
     </message>
 </context>
 <context>
@@ -487,32 +487,32 @@
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="63"/>
         <source>Cannot create new partitions</source>
-        <translation>無法新增分割區</translation>
+        <translation>無法建立新分割區</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="28"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="65"/>
         <source>You need to delete a primary partition to create a new primary partition</source>
-        <translation type="unfinished"/>
+        <translation>需刪除一主要分割區才能建立新的主要分割區</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="31"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="68"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
-        <translation type="unfinished"/>
+        <translation>新的邏輯分割區需鄰近現有的邏輯分割區</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="36"/>
         <source>You need to delete a primary partition to create the new partition</source>
-        <translation type="unfinished"/>
+        <translation>需刪除一主要分割區才能建立新分割區</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="70"/>
         <source>Back</source>
-        <translation>上一步</translation>
+        <translation>返回</translation>
     </message>
 </context>
 <context>
@@ -521,19 +521,19 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="39"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="80"/>
         <source>Warning</source>
-        <translation type="unfinished"/>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>請備份所有資料避免遺失</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation type="unfinished"/>
+        <translation>請再次確認是否備份所有資料，重新啟動後再次進入此界面</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
@@ -541,37 +541,37 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="133"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="155"/>
         <source>Continue</source>
-        <translation>下一步</translation>
+        <translation>繼續安裝</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="41"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="91"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation>由於無法直接安裝在 EFI 主機板的開機啟動程式並且偵測到 MBR 磁碟機，請選擇一個解決方案。</translation>
+        <translation>由於偵測到 MBR 磁碟機，Deepin 無法直接安裝於 EFI 主機板上，請選擇一個解決方案。</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="103"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
-        <translation>重新啟動，進入 BIOS，並關閉 UEFI</translation>
+        <translation>重新啟動至 BIOS 並關閉 UEFI</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="47"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="104"/>
         <source>Exit BIOS, and enter deepin to install</source>
-        <translation type="unfinished"/>
+        <translation>離開 BIOS 並重新進入 Deepin 安裝</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="137"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation type="unfinished"/>
+        <translation>請確保所有資料已備份，接著繼續</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="139"/>
         <source>Continue installation will format your disk</source>
-        <translation type="unfinished"/>
+        <translation>繼續安裝將格式化磁碟機</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="59"/>
@@ -583,12 +583,12 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="156"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>返回</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="99"/>
         <source>Disable UEFI</source>
-        <translation>不使用 UEFI</translation>
+        <translation>關閉 UEFI</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="108"/>
@@ -602,12 +602,12 @@
         <location filename="../ui/models/partition_type_model.cpp" line="28"/>
         <location filename="../ui/models/partition_type_model.cpp" line="34"/>
         <source>Logical Partition</source>
-        <translation type="unfinished"/>
+        <translation>邏輯分割區</translation>
     </message>
     <message>
         <location filename="../ui/models/partition_type_model.cpp" line="32"/>
         <source>Primary Partition</source>
-        <translation type="unfinished"/>
+        <translation>主要分割區</translation>
     </message>
 </context>
 <context>
@@ -622,25 +622,25 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="73"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation type="unfinished"/>
+        <translation>請備份重要資料及確認以下動作</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="81"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>將執行以下動作，請確認後再繼續避免資料遺失</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>Back</source>
-        <translation>上一步</translation>
+        <translation>返回</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="95"/>
         <source>Continue</source>
-        <translation>下一步</translation>
+        <translation>繼續</translation>
     </message>
 </context>
 <context>
@@ -649,19 +649,19 @@
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="29"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="52"/>
         <source>Select location for boot loader</source>
-        <translation type="unfinished"/>
+        <translation>選擇啟動程式位置</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="31"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="54"/>
         <source>If you do not understand the detailed settings, please select default settings</source>
-        <translation type="unfinished"/>
+        <translation>如不瞭解設定細節，請選擇預設設定</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="33"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="66"/>
         <source>Back</source>
-        <translation>上一步</translation>
+        <translation>返回</translation>
     </message>
 </context>
 <context>
@@ -678,23 +678,23 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="61"/>
         <source>Please select one of the partitions to install!</source>
-        <translation>請選擇一個分割區安裝！</translation>
+        <translation>請選擇一個安裝分割區！</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="55"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation type="unfinished"/>
+        <translation>無法建立新分割區，請選擇一個現有的分割區！</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation>Root 分割區至少需要 %1 GB</translation>
+        <translation>Root 分割區至少要 %1 GB</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="79"/>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="198"/>
         <source>Install here</source>
-        <translation>在此安裝</translation>
+        <translation>安裝於此</translation>
     </message>
 </context>
 <context>
@@ -703,13 +703,13 @@
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="63"/>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="79"/>
         <source>User Avatar</source>
-        <translation>使用者頭貼</translation>
+        <translation>使用者頭像</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="80"/>
         <source>Select an avatar for your account</source>
-        <translation>為帳號選擇頭貼</translation>
+        <translation>為帳戶選擇頭像</translation>
     </message>
 </context>
 <context>
@@ -718,7 +718,7 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="52"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="112"/>
         <source>Create User Account</source>
-        <translation>建立使用者帳號</translation>
+        <translation>建立使用者帳戶</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="53"/>
@@ -758,12 +758,12 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="180"/>
         <source>The first letter must be in lowercase</source>
-        <translation type="unfinished"/>
+        <translation>首字母需為小寫</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="191"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>請至少輸入 %1 但不長於 %2 個字元的使用者名稱</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="214"/>
@@ -773,28 +773,28 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="222"/>
         <source>Computer name already exists, please input another one</source>
-        <translation>電腦名稱已存在，請用別的</translation>
+        <translation>電腦名稱已存在，請輸入其他名稱</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="227"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>請至少輸入 %1 但不長於 %2 個字元的電腦名稱</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="251"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>請至少輸入 %1 但不長於 %2 個字元的密碼</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="259"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation type="unfinished"/>
+        <translation>密碼需包含英文字母（區分大小寫），數字或是特殊符號（~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;）</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
         <source>The two passwords don&apos;t match</source>
-        <translation>兩個密碼不相同</translation>
+        <translation>兩次輸入的密碼不相同</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="58"/>
@@ -805,7 +805,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="185"/>
         <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
-        <translation type="unfinished"/>
+        <translation>使用者名稱需包含英文字母（區分大小寫），數字或是特殊符號（_-）</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="218"/>
@@ -825,13 +825,13 @@
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="130"/>
         <source>Test area</source>
-        <translation>測試區</translation>
+        <translation>鍵盤測試區</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="135"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>返回</translation>
     </message>
 </context>
 <context>
@@ -846,13 +846,13 @@
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="109"/>
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="138"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>在地圖上標記你的時區</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="140"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>返回</translation>
     </message>
 </context>
 <context>
@@ -861,19 +861,19 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="27"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="45"/>
         <source>Friendly Reminder</source>
-        <translation type="unfinished"/>
+        <translation>友善提醒</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="29"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="47"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation type="unfinished"/>
+        <translation>系統偵測到你正在使用虛擬機器，這會影響系統效能與使用體驗，為了流暢的體驗，建議你在實體機器環境安裝 Deepin</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="33"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="56"/>
         <source>Continue</source>
-        <translation>下一步</translation>
+        <translation>繼續安裝</translation>
     </message>
 </context>
 </TS>

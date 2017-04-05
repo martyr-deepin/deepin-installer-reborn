@@ -50,7 +50,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="275"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation>Formater % 1 et créer % 2 nouvelle table de partition</translation>
+        <translation>Formater %1 et créer %2 nouvelle table de partition </translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="252"/>
@@ -311,7 +311,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="29"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="47"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>Redémarrez pour profiter de votre nouvelle expérience avec Deepin, nous espérons que vous l&apos;aimerez!</translation>
+        <translation>Redémarrez pour profiter d&apos;une nouvelle expérience avec Deepin, nous espérons que vous l&apos;aimerez!</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="31"/>
@@ -724,7 +724,7 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="53"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="113"/>
         <source>Input username and password</source>
-        <translation>Saisissez un nom d&apos;utilisateur et un mot de passe</translation>
+        <translation>Saisissez un nom et un mot de passe</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="54"/>

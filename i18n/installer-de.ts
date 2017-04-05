@@ -275,7 +275,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="83"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>Entschuldigen Sie die Unannehmlichkeiten. Sie können den QR-Coe fotografieren oder mit einem QR-Scanner erfassen, um den Fehlerbericht an uns zu senden. Dadurch ist es uns möglich Deepin zu verbessern und Fehler zu beheben,</translation>
+        <translation>Entschuldigen Sie die Unannehmlichkeiten. Sie können den QR-Coe fotografieren oder mit einem QR-Scanner erfassen, um den Fehlerbericht an uns zu senden. Dadurch ist es uns möglich Deepin zu verbessern und Fehler zu beheben.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="65"/>
