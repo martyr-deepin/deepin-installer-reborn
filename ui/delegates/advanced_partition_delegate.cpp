@@ -36,9 +36,10 @@ bool AdvancedPartitionDelegate::canAddLogical(
   }
   const Device& device = virtual_devices_.at(index);
 
-  // If partition table is empty, always returns true.
+  // If partition table is empty, always returns false.
+  // Thus, at least one primary partition shall be created.
   if (device.table == PartitionTableType::Empty) {
-    return true;
+    return false;
   }
 
   // Ignores gpt table.
@@ -377,7 +378,6 @@ bool AdvancedPartitionDelegate::createPartition(const Partition& partition,
   if (device.table == PartitionTableType::Empty) {
     // Add NewPartTable operation.
     Device new_device = device;
-    new_device.partitions.clear();
     new_device.table = IsEfiEnabled() ?
                        PartitionTableType::GPT :
                        PartitionTableType::MsDos;
