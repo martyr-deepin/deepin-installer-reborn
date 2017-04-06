@@ -357,7 +357,7 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
 
 void Operation::applyNewTableVisual(Device& device) const {
   device.table = this->device.table;
-  device.partitions.clear();
+  device.partitions = this->device.partitions;
 
   // Update max primary partition number.
   if (device.table == PartitionTableType::MsDos) {
