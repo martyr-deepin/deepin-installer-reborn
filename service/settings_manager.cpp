@@ -19,7 +19,6 @@
 #include <QSettings>
 
 #include "base/consts.h"
-#include "sysinfo/machine.h"
 #include "service/settings_name.h"
 
 namespace installer {
@@ -150,15 +149,11 @@ QVariant GetSettingsValue(const QString& key) {
 }
 
 QString GetAutoPartFile() {
-  const QString arch_spec_file =
-      QString(kAutoPartArchSpecFile).arg(GetMachineArchName());
   QDir oem_dir = GetOemDir();
   QDir builtin_dir(BUILTIN_HOOKS_DIR);
 
   // First check existence of architecture specific file.
   const QStringList script_files = {
-      oem_dir.absoluteFilePath(arch_spec_file),
-      builtin_dir.absoluteFilePath(arch_spec_file),
       oem_dir.absoluteFilePath(kAutoPartFile),
       builtin_dir.absoluteFilePath(kAutoPartFile),
   };
