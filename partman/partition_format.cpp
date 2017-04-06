@@ -7,6 +7,7 @@
 #include <QDebug>
 
 #include "base/command.h"
+#include "sysinfo/machine.h"
 
 namespace installer {
 namespace {
@@ -67,13 +68,27 @@ bool FormatExt4(const QString& path, const QString& label) {
   QString output;
   QString err;
   bool ok;
-  if (label.isEmpty()) {
-    ok = SpawnCmd("mkfs.ext4", {"-F", path}, output, err);
+  const MachineArch arch = GetMachineArch();
+  if (arch == MachineArch::LOONGSON) {
+    // Disable 64bit support on loongson platform.
+    if (label.isEmpty()) {
+      ok = SpawnCmd("mkfs.ext4", {"-O ^64bit", "-F", path}, output, err);
+    } else {
+      const QString real_label = label.left(16);
+      const QString label_opt(QString("-L%1").arg(real_label));
+      ok = SpawnCmd("mkfs.ext4", {"-O ^64bit", "-F", label_opt, path},
+                    output, err);
+    }
   } else {
-    const QString real_label = label.left(16);
-    ok = SpawnCmd("mkfs.ext4", {"-F", QString("-L%1").arg(real_label), path},
-                  output, err);
+    if (label.isEmpty()) {
+      ok = SpawnCmd("mkfs.ext4", {"-F", path}, output, err);
+    } else {
+      const QString real_label = label.left(16);
+      ok = SpawnCmd("mkfs.ext4", {"-F", QString("-L%1").arg(real_label), path},
+                    output, err);
+    }
   }
+
   if (!ok) {
     qCritical() << "FormatExt4() err:" << err;
   }
