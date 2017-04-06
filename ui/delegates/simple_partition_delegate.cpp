@@ -29,9 +29,10 @@ bool SimplePartitionDelegate::canAddLogical(const Partition& partition) const {
   }
   const Device& device = virtual_devices_.at(index);
 
-  // If partition table is empty, always returns true.
+  // If partition table is empty, always returns false.
+  // Thus, at least one primary partition shall be created.
   if (device.table == PartitionTableType::Empty) {
-    return true;
+    return false;
   }
 
   // Ignores gpt table.
