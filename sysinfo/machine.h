@@ -9,18 +9,12 @@
 
 namespace installer {
 
+// Does not distinguish 32bit and 64bit architecture.
 enum class MachineArch {
-  Alpha,
-  Alpha64,
   ARM,
-  ARM64,
-  MIPS,
-  MIPS64,
+  LOONGSON,
   SW,
-  SW64,
   X86,
-  X86_64,
-
   Unknown,
 };
 

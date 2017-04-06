@@ -9,12 +9,6 @@
 
 namespace installer {
 
-namespace {
-
-const char kUnknownArch[] = "unknown";
-
-}  // namespace
-
 MachineArch GetMachineArch() {
   struct utsname uts;
 
@@ -23,44 +17,40 @@ MachineArch GetMachineArch() {
   }
 
   const QString machine(uts.machine);
-  if (machine == "x86") {
-    return MachineArch::X86;
-  }
-  if (machine == "x86_64") {
-    return MachineArch::X86_64;
-  }
-  if (machine == "mips") {
-    return MachineArch::MIPS;
-  }
-  if (machine == "mips64") {
-    return MachineArch::MIPS64;
-  }
-  if (machine == "alpha") {
-    return MachineArch::Alpha;
-  }
-  if (machine == "alpha64") {
-    return MachineArch::Alpha64;
-  }
-  if (machine == "arm") {
+  if (machine.startsWith("arm", Qt::CaseInsensitive)) {
     return MachineArch::ARM;
   }
-  if (machine == "arm64") {
-    return MachineArch::ARM64;
+  if (machine.startsWith("mips", Qt::CaseInsensitive)) {
+    // Remap MIPS as Loongson.
+    return MachineArch::LOONGSON;
   }
-
-  // TODO(xushaohua): Check other architectures.
-
+  if (machine.startsWith("sw", Qt::CaseInsensitive)) {
+    return MachineArch::SW;
+  }
+  if (machine.startsWith("x86", Qt::CaseInsensitive)) {
+    return MachineArch::X86;
+  }
   return MachineArch::Unknown;
 }
 
 QString GetMachineArchName() {
-  struct utsname uts;
-
-  if (uname(&uts) != 0) {
-    return kUnknownArch;
+  switch (GetMachineArch()) {
+    case MachineArch::ARM: {
+      return "arm";
+    }
+    case MachineArch::LOONGSON: {
+      return "loongson";
+    }
+    case MachineArch::SW: {
+      return "sw";
+    }
+    case MachineArch::X86: {
+      return "x86";
+    }
+    default: {
+      return "unknown";
+    }
   }
-
-  return uts.machine;
 }
 
 }  // namespace installer
