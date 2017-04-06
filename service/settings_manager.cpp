@@ -58,7 +58,7 @@ void AppendToConfigFile(const QString& key, const QVariant& value) {
   settings.setValue(key, value);
 }
 
-QStringList ListImageFiles(const QString& dir_name) {
+QStringList ListAvatarFiles(const QString& dir_name) {
   QStringList result;
   QDir dir(dir_name);
   if (!dir.exists()) {
@@ -69,7 +69,10 @@ QStringList ListImageFiles(const QString& dir_name) {
   const QFileInfoList info_list =
       dir.entryInfoList(name_filters, QDir::NoDotAndDotDot | QDir::Files);
   for (const QFileInfo& info : info_list) {
-    if (info.size() > 0) {
+    // Ignores "default.png" and "guest.png".
+    if (info.size() > 0 &&
+        (!info.fileName().startsWith("default")) &&
+        (!info.fileName().startsWith("guest"))) {
       result.append(info.absoluteFilePath());
     }
   }
@@ -172,13 +175,13 @@ QString GetAutoPartFile() {
 QStringList GetAvatars() {
   // First, check oem/ dir.
   const QString oem_avatar(GetOemDir().absoluteFilePath("avatar"));
-  QStringList avatars = ListImageFiles(oem_avatar);
+  QStringList avatars = ListAvatarFiles(oem_avatar);
   if (!avatars.isEmpty()) {
     return avatars;
   }
 
   // Then, check dde-account-faces dir.
-  return ListImageFiles(GetSettingsString(kSystemInfoDdeAvatarDir));
+  return ListAvatarFiles(GetSettingsString(kSystemInfoDdeAvatarDir));
 }
 
 QString GetDefaultAvatar() {
