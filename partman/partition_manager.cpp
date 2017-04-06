@@ -257,6 +257,8 @@ DeviceList ScanDevices(bool enable_os_prober) {
     if (device.table == PartitionTableType::Empty) {
       Partition free_partition;
       free_partition.device_path = device.path;
+      free_partition.path = "";
+      free_partition.partition_number = -1;
       free_partition.start_sector = 1;
       free_partition.end_sector = device.length;
       free_partition.sector_size = device.sector_size;
