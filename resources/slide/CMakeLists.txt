@@ -13,9 +13,6 @@ elseif(${INSTALLER_BUILD_ARCH} MATCHES "sw")
       PATTERN "zh_CN/16-wps-youdao-dict.png" EXCLUDE
       PATTERN "zh_CN/17-tencent-qq.png" EXCLUDE
       PATTERN "zh_CN/18-netease-cloud-music.png" EXCLUDE
-      PATTERN "zh_TW/16-wps-youdao-dict.png" EXCLUDE
-      PATTERN "zh_TW/17-tencent-qq.png" EXCLUDE
-      PATTERN "zh_TW/18-netease-cloud-music.png" EXCLUDE
       PATTERN "CMakeLists.txt" EXCLUDE
   )
 elseif(${INSTALLER_BUILD_ARCH} MATCHES "mips")
@@ -25,9 +22,6 @@ elseif(${INSTALLER_BUILD_ARCH} MATCHES "mips")
       PATTERN "zh_CN/16-wps-youdao-dict.png" EXCLUDE
       PATTERN "zh_CN/17-tencent-qq.png" EXCLUDE
       PATTERN "zh_CN/18-netease-cloud-music.png" EXCLUDE
-      PATTERN "zh_TW/16-wps-youdao-dict.png" EXCLUDE
-      PATTERN "zh_TW/17-tencent-qq.png" EXCLUDE
-      PATTERN "zh_TW/18-netease-cloud-music.png" EXCLUDE
       PATTERN "CMakeLists.txt" EXCLUDE
   )
 else()
