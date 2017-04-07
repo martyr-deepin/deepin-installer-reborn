@@ -12,5 +12,4 @@ usr/share/deepin-installer-reborn/i18n/*
 usr/share/deepin-installer-reborn/resources/*
 usr/share/deepin-installer-reborn/tools/*
 usr/share/icons/hicolor/scalable/apps/deepin-installer-reborn.svg
-usr/share/locale/*
 usr/share/polkit-1/actions/*

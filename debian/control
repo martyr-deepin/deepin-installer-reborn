@@ -23,11 +23,18 @@ Build-Depends: debhelper (>=9),
 Standards-Version: 3.9.6
 Homepage: http://www.deepin.org
 
+Package: deepin-installer-timezones
+Architecture: any
+Depends: ${shlibs:Depends},
+    ${misc:Depends},
+Description: Language package for timezone names
+
 Package: deepin-installer-reborn
 Architecture: any
 Depends: ${shlibs:Depends},
     ${misc:Depends}
     btrfs-progs,
+    deepin-installer-timezones,
     dosfstools,
     e2fsprogs,
     jfsutils,
