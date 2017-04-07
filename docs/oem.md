@@ -3,10 +3,10 @@
 ## 关于
 这篇文档记录了安装器重制版支持的自定义功能.
 
-在不修改源码的情况下, 所有的自定义文件, 都应该放在 oem 目录. 分发时， oem 目录应该放在ISO的
-根目录， ISO应该挂载于 /lib/live/mount/medium/ 或者 /cdrom . 测试时, 为了方便, 可以将
-oem 目录放在 /tmp 目录里. 它们的优先级从高到低依次是, /tmp/oem, /cdrom/oem,
-/lib/live/mount/medium/oem
+在不修改源码的情况下, 所有的自定义文件, 都应该放在 oem 目录. 分发时， oem 目录应该
+放在ISO的根目录， ISO应该挂载于 /lib/live/mount/medium/ 或者 /cdrom . 测试时,
+为了方便, 可以将 oem 目录放在 /tmp 目录里. 它们的优先级从高到低依次是, /tmp/oem,
+/cdrom/oem, /lib/live/mount/medium/oem
 
 ## 自定义功能
 安装器默认的配置信息集成到了程序里面, 在 `resources/default_settings.ini`,
@@ -14,18 +14,19 @@ oem 目录放在 /tmp 目录里. 它们的优先级从高到低依次是, /tmp/o
 所有可用的配置选项都在 `default_settings.ini` 里面有说明.
 
 ### 各类图片
-* 安装器背景. 放到 `oem/installer-background.jpg`. 如果需要模糊效果的话, 可以用
-  `convert input.jpg -blur 0x32 installer-background.jpg`
- 命令来生成模糊图片. 如果 ISO中 集成的系统默认壁纸发生了变化, 也需要在这里更新安装器的背景图.
+* 安装器背景. 放到 `oem/installer-background.jpg`. 如果需要模糊效果的话,
+ 可以用 `convert input.jpg -blur 0x32 installer-background.jpg`
+ 命令来生成模糊图片. 如果 ISO中 集成的系统默认壁纸发生了变化, 也需要在这里更新
+ 安装器的背景图.
 * 桌面背景. 放到 `oem/background.jpg`.
-* Logo. 在语言选择页面的正上方, 会显示系统 logo, 默认是 deepin 的官方logo, 如果需要
- 自定义, 可以放到 `oem/logo.png`.
+* Logo. 在语言选择页面的正上方, 会显示系统 logo, 默认是 deepin 的官方logo,
+ 如果需要自定义, 可以放到 `oem/logo.png`.
 * 应用图标. `oem/icons/` 目录用于存放应用图标, 其目录结构应与
  `/usr/share/icons/hicolor` 相同.
 * GRUB引导画面背景. 可以把图片放到 `oem/grub.png`.
 * 登录界面背景. 可以放到 `oem/lightdm.png`
-* plymouth 开机动画是一系统图片组成的, 放到 `oem/plymouth-theme/deepin-logo/` 目录中.
- 可以参考 `plymouth-theme-deepin-logo` 这个deb包的结构.
+* plymouth 开机动画是一系统图片组成的, 放到 `oem/plymouth-theme/deepin-logo/`
+ 目录中. 可以参考 `plymouth-theme-deepin-logo` 这个deb包的结构.
 * deepin 控制中心和桌面登录界面中用到的logo, 目前还不支持被定制.
 * 光盘启动动画. 待补充.
 
@@ -38,14 +39,15 @@ oem 目录放在 /tmp 目录里. 它们的优先级从高到低依次是, /tmp/o
 自动分区脚本, 把需要分区的操作写到 `oem/auto_part.sh` 这个脚本文件里.
 分区操作使用 `parted` 命令, 同时, 记得把分区结果写入到 `/etc/deepin-installer.conf`
 这个配置文件里.
-针对特定架构的自动分区脚本, 要这样命名 `auto_part_ARCH.sh`, 其中 `ARCH` 是架构名称, 比如
-x86, mips64, 区分32位与64位.
+针对特定架构的自动分区脚本, 要这样命名 `auto_part_ARCH.sh`, 其中 `ARCH` 
+是架构名称, 比如 x86, mips64, 区分32位与64位.
 
 
 ### 安装进程的动画
 * `install_progress_page_disable_slide`, 是否禁用幻灯片.
 * `install_progress_page_disable_slide_animation`, 是否禁用幻灯片的切换动画.
-* `install_progress_page_animation_duration`, 设定每张幻灯片显示的时间, 默认是 8 秒.
+* `install_progress_page_animation_duration`, 设定每张幻灯片显示的时间,
+ 默认是 8 秒.
 
 ### hooks
 根据安装阶段的不同, 分为 `before_chroot`, `in_chroot` 以及 `after_chroot`.
@@ -69,10 +71,11 @@ x86, mips64, 区分32位与64位.
 
 
 ### 系统基本信息
-* `system_info_deepin_version` 这一项保存了 `/etc/deepin-version` 的内容, 系统更新时,
- 应该先读取这个项的值, 再写入到 `/etc/deepin-version` 中. 它的值是经过 base64 编码的.
-* `system_info_lsb_release` 这一项保存了 `/etc/lsb-release` 的内容, 系统更新时, 应该
- 先读取这个项的值, 再写入到 `/etc/lsb-release` 中. 它的值是经过 base64 编码的.
+* `system_info_deepin_version` 这一项保存了 `/etc/deepin-version` 的内容,
+ 系统更新时, 应该先读取这个项的值, 再写入到 `/etc/deepin-version` 中. 它的值
+ 是经过 base64 编码的. * `system_info_lsb_release` 这一项保存了
+ `/etc/lsb-release` 的内容, 系统更新时, 应该先读取这个项的值,
+ 再写入到 `/etc/lsb-release` 中. 它的值是经过 base64 编码的.
 * `system_info_vendor_name` 用于设定组织名称.
 * `system_info_default_username` 设定默认用户名.
 * `system_info_default_hostname` 默认主机名.
@@ -84,8 +87,12 @@ x86, mips64, 区分32位与64位.
  `system_info_password_require_lower_case`,
  `system_info_password_require_upper_case` 以及
  `system_info_password_require_special_char` 用于设定密码策略.
- `system_info_use_windows_time` 当开启了这个选项时, 如果硬盘上已经有 windows 分区了, 就
- 不在使用UTC时间, 而使用本地时间. 这个选项用于解决windows系统时间相差8小时的问题.
+ `system_info_use_windows_time` 当开启了这个选项时, 如果硬盘上已经有 windows
+ 分区了, 就 不在使用UTC时间, 而使用本地时间. 这个选项用于解决windows系统时间相差
+ 8小时的问题.
+* 自定义保留的用户名. 被保留的用户名, 在 `resources/reserved_usernames` 中定义,
+ 也可以创建 `oem/reserved_usernames` 来自定义要保留的用户名. 被保留的用户名, 
+ 指的是系统中已经存在或者极可能会被某些包创建的用户名.
  
 ### 桌面环境相关的
 * `dde_dock_app_list` 在dock中显示哪些应用图标.
