@@ -25,8 +25,9 @@ enum class ValidateUsernameState {
 //   * |username| can only contain lower letters(a-z), numbers(0-9), dash(-)
 //     and underscore(_);
 //   * First character of |username| must be a letter;
-//   * |username| cannot be used by system (uid < 1000).
+//   * |username| cannot be in |reserved_username_file|.
 ValidateUsernameState ValidateUsername(const QString& username,
+                                       const QString& reserved_username_file,
                                        int min_len,
                                        int max_len);
 

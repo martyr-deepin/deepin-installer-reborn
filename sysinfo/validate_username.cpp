@@ -4,13 +4,41 @@
 
 #include "sysinfo/validate_username.h"
 
+#include <QDebug>
 #include <QRegExp>
 
-#include "sysinfo/users.h"
+#include "base/file_util.h"
 
 namespace installer {
 
+namespace {
+
+// Check whether |username| is in reserved username list.
+bool IsReservedUsername(const QString& username,
+                        const QString& reserved_username_file) {
+  const QString content = ReadFile(reserved_username_file);
+  if (content.isEmpty()) {
+    qWarning() << "Reserved username list is empty";
+    return false;
+  }
+
+  const QStringList lines = content.split('\n');
+  for (const QString& line : lines) {
+    if (line.isEmpty() || line.startsWith('#')) {
+      continue;
+    }
+    if (line == username) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+}  // namespace
+
 ValidateUsernameState ValidateUsername(const QString& username,
+                                       const QString& reserved_username_file,
                                        int min_len,
                                        int max_len) {
   if (username.isEmpty() && (min_len > 0)) {
@@ -34,7 +62,7 @@ ValidateUsernameState ValidateUsername(const QString& username,
   }
 
   // TODO(xushaohua): Add reserved username list to settings.ini
-  if (GetSystemUsers().contains(username)) {
+  if (IsReservedUsername(username, reserved_username_file)) {
     return ValidateUsernameState::ReservedError;
   }
 

@@ -166,9 +166,11 @@ void SystemInfoFormFrame::initUI() {
 }
 
 bool SystemInfoFormFrame::validateUsername(QString& msg) {
+  const QString reserved_username_file = GetReservedUsernameFile();
   const int min_len = GetSettingsInt(kSystemInfoUsernameMinLen);
   const int max_len = GetSettingsInt(kSystemInfoUsernameMaxLen);
   const ValidateUsernameState state = ValidateUsername(username_edit_->text(),
+                                                       reserved_username_file,
                                                        min_len,
                                                        max_len);
   switch (state) {
