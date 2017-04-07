@@ -49,6 +49,9 @@ QString GetDefaultAvatar();
 // Get absolute path to oem hooks folder.
 QString GetOemHooksDir();
 
+// Returns absolute path to reserved_usernames file.
+QString GetReservedUsernameFile();
+
 // Get vendor logo.
 QString GetVendorLogo();
 

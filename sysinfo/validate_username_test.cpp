@@ -10,19 +10,21 @@ namespace installer {
 namespace {
 
 TEST(ValidateUsernameTest, ValidateUsername) {
-  EXPECT_EQ(ValidateUsername("root", 1, 10),
+  const QString reserved_username_file = RESOURCES_DIR "/reserved_usernames";
+  EXPECT_EQ(ValidateUsername("root", reserved_username_file, 1, 10),
             ValidateUsernameState::ReservedError);
-  EXPECT_EQ(ValidateUsername("", 1, 10),
+  EXPECT_EQ(ValidateUsername("", reserved_username_file, 1, 10),
             ValidateUsernameState::EmptyError);
-  EXPECT_EQ(ValidateUsername("AbcUser", 1, 10),
+  EXPECT_EQ(ValidateUsername("AbcUser", reserved_username_file, 1, 10),
             ValidateUsernameState::FirstCharError);
-  EXPECT_EQ(ValidateUsername("a:invalid", 1, 10),
+  EXPECT_EQ(ValidateUsername("a:invalid", reserved_username_file, 1, 10),
             ValidateUsernameState::InvalidCharError);
-  EXPECT_EQ(ValidateUsername("hello_world", 1, 5),
+  EXPECT_EQ(ValidateUsername("hello_world", reserved_username_file, 1, 5),
             ValidateUsernameState::TooLongError);
-  EXPECT_EQ(ValidateUsername("hello", 6, 10),
+  EXPECT_EQ(ValidateUsername("hello", reserved_username_file, 6, 10),
             ValidateUsernameState::TooShortError);
-  EXPECT_EQ(ValidateUsername("not-used-username", 1, 24),
+  EXPECT_EQ(ValidateUsername("not-used-username", reserved_username_file,
+                             1, 24),
             ValidateUsernameState::Ok);
 }
 
