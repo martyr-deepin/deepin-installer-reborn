@@ -6,7 +6,7 @@
 # Update configuration for systemd to enable locale time
 enable_local_rtc() {
   msg "Enable local rtc"
-  cat > /etc/adjtimie << EOF
+  cat > /etc/adjtime << EOF
 
 0
 LOCAL
