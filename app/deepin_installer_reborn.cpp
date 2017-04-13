@@ -50,6 +50,8 @@ int main(int argc, char* argv[]) {
   installer::DeleteConfigFile();
   installer::AddConfigFile();
 
+  qDebug() << "Version:" << installer::kAppVersion;
+
   const QString conf_file(args_parser.getConfFile());
   // Append customized configurations.
   if (!conf_file.isEmpty()) {
