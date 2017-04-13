@@ -1488,7 +1488,7 @@ msgstr "Europe/Vaduz"
 
 #: system-config-date-timezones.h:368
 msgid "Europe/Vatican"
-msgstr "Europe/Vaticano"
+msgstr "Europa/Vaticano"
 
 #: system-config-date-timezones.h:369
 msgid "Europe/Vienna"

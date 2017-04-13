@@ -296,7 +296,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Genehmigen Sie sich einen Kaffee, Wenn Sie Ihren Kaffee ausgetrunken haben, können sie in die wunderschöne und unglaubliche Welt von Deepin eintauchen.</translation>
+        <translation>Genehmigen Sie sich einen Kaffee. Wenn Sie Ihren Kaffee ausgetrunken haben, können sie in die wunderschöne und unglaubliche Welt von Deepin eintauchen.</translation>
     </message>
 </context>
 <context>
@@ -547,7 +547,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="41"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="91"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation type="unfinished"/>
+        <translation>Kann nicht direkt installiert werden, da ein UEFI-Motherboard-Bootloader und ein MBR-Laufwerk erkannt wurden, bitte wählen Sie eine der untenstehenden Lösungen aus, um fortzufahren.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="46"/>

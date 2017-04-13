@@ -296,7 +296,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Megtapasztalhatul a hihetetlen élményt amit a Deepin nyújt az telepítési idő után csak egy kávé áráért</translation>
+        <translation>Megtapasztalhatja a hihetetlen élményt amit a Deepin nyújt az telepítési idő után csak egy kávé áráért</translation>
     </message>
 </context>
 <context>
