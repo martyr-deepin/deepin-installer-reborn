@@ -1,152 +1,157 @@
 [
   {
     "name": "English",
-    "locale": "en_US",
-    "local_name": "English"
+    "local_name": "English",
+    "locale": "en_US"
   },
   {
-    "name": "Simplified Chinese",
-    "locale": "zh_CN",
-    "local_name": "简体中文"
+    "name": "Chinese (China)",
+    "local_name": "简体中文",
+    "locale": "zh_CN"
   },
   {
-    "name": "Traditional Chinese",
-    "locale": "zh_TW",
-    "local_name": "繁體中文"
+    "name": "Chinese (Taiwan)",
+    "local_name": "正體中文",
+    "locale": "zh_TW"
   },
   {
-    "name": "French",
-    "locale": "fr_FR",
-    "local_name": "Français"
-  },
-  {
-    "name": "German",
-    "locale": "de_DE",
-    "local_name": "Deutsch"
-  },
-  {
-    "name": "Russian",
-    "locale": "ru_RU",
-    "local_name": "Русский"
-  },
-  {
-    "name": "Spanish",
-    "locale": "es_ES",
-    "local_name": "Español"
+    "name": "Chinese (Hong Kong)",
+    "local_name": "繁體中文（香港）",
+    "locale": "zh_HK"
   },
   {
     "name": "Indonesian",
-    "locale": "id_ID",
-    "local_name": "Bahasa Indonesia"
-  },
-  {
-    "name": "Italian",
-    "locale": "it_IT",
-    "local_name": "Italiano"
-  },
-  {
-    "name": "Turkish",
-    "locale": "tr_TR",
-    "local_name": "Türkçe"
-  },
-  {
-    "name": "Portuguese (Brazil)",
-    "locale": "pt_BR",
-    "local_name": "Português (Brasil)"
-  },
-  {
-    "name": "Portuguese",
-    "locale": "pt_PT",
-    "local_name": "Português"
-  },
-  {
-    "name": "Polish",
-    "locale": "pl_PL",
-    "local_name": "Polski"
-  },
-  {
-    "name": "Romanian",
-    "locale": "ro_RO",
-    "local_name": "Română"
-  },
-  {
-    "name": "Dutch",
-    "locale": "nl_NL",
-    "local_name": "Nederlands"
-  },
-  {
-    "name": "Hungarian",
-    "locale": "hu_HU",
-    "local_name": "Magyar"
-  },
-  {
-    "name": "Czech",
-    "locale": "cs_CZ",
-    "local_name": "Čeština"
-  },
-  {
-    "name": "Greek",
-    "locale": "el_GR",
-    "local_name": "Ελληνικά"
-  },
-  {
-    "name": "Danish",
-    "locale": "da_DK",
-    "local_name": "Dansk"
-  },
-  {
-    "name": "Slovak",
-    "locale": "sk_SK",
-    "local_name": "Slovenčina"
+    "local_name": "Bahasa Indonesia",
+    "locale": "id_ID"
   },
   {
     "name": "Malay",
-    "locale": "ms_MY",
-    "local_name": "Bahasa Melayu"
+    "local_name": "Bahasa Melayu",
+    "locale": "ms_MY"
   },
   {
-    "name": "Bulgarian",
-    "locale": "bg_BG",
-    "local_name": "български"
+    "name": "Czech",
+    "local_name": "Čeština",
+    "locale": "cs_CZ"
   },
   {
-    "name": "Swedish",
-    "locale": "sv_SE",
-    "local_name": "Svenska"
+    "name": "Danish",
+    "local_name": "Dansk",
+    "locale": "da_DK"
+  },
+  {
+    "name": "German",
+    "local_name": "Deutsch",
+    "locale": "de_DE"
+  },
+  {
+    "name": "Greek",
+    "local_name": "Ελληνικά",
+    "locale": "el_GR"
+  },
+  {
+    "name": "Spanish",
+    "local_name": "Español",
+    "locale": "es_ES"
+  },
+  {
+    "name": "French",
+    "local_name": "Français",
+    "locale": "fr_FR"
   },
   {
     "name": "Croatian",
-    "locale": "hr_HR",
-    "local_name": "Hrvatski"
+    "local_name": "Hrvatski",
+    "locale": "hr_HR"
   },
   {
-    "name": "Japanese",
-    "locale": "ja_JP",
-    "local_name": "日本語"
+    "name": "Italian",
+    "local_name": "Italiano",
+    "locale": "it_IT"
   },
   {
-    "name": "Korean",
-    "locale": "ko_KR",
-    "local_name": "한국어"
+    "name": "Hungarian",
+    "local_name": "Magyar",
+    "locale": "hu_HU"
+  },
+  {
+    "name": "Dutch",
+    "local_name": "Nederlands",
+    "locale": "nl_NL"
+  },
+  {
+    "name": "Polish",
+    "local_name": "Polski",
+    "locale": "pl_PL"
+  },
+  {
+    "name": "Portuguese",
+    "local_name": "Português",
+    "locale": "pt_PT"
+  },
+  {
+    "name": "Portuguese (Brazil)",
+    "local_name": "Português (Brasil)",
+    "locale": "pt_BR"
+  },
+  {
+    "name": "Russian",
+    "local_name": "Русский",
+    "locale": "ru_RU"
+  },
+  {
+    "name": "Romanian",
+    "local_name": "Română",
+    "locale": "ro_RO"
+  },
+  {
+    "name": "Slovak",
+    "local_name": "Slovenčina",
+    "locale": "sk_SK"
   },
   {
     "name": "Finnish",
-    "locale": "fi_FI",
-    "local_name": "Suomi"
+    "local_name": "Suomi",
+    "locale": "fi_FI"
   },
   {
-    "name": "Spanish (Latin America)",
-    "locale": "es_AR",
-    "local_name": "Español (América Latina)"
+    "name": "Swedish",
+    "local_name": "Svenska",
+    "locale": "sv_SE"
   },
   {
-    "name": "Hindi(India)",
-    "locale": "hi_IN",
-    "local_name": "हिंदी"
+    "name": "Turkish",
+    "local_name": "Türkçe",
+    "locale": "tr_TR"
   },
   {
     "name": "Ukrainian",
-    "locale": "uk_UA",
-    "local_name": "Українська"
+    "local_name": "Українська",
+    "locale": "uk_UA"
+  },
+  {
+    "name": "Bulgarian",
+    "local_name": "български",
+    "locale": "bg_BG"
+  },
+  {
+    "name": "Japanese",
+    "local_name": "日本語",
+    "locale": "ja_JP"
+  },
+  {
+    "name": "Korean",
+    "local_name": "한국어",
+    "locale": "ko_KR"
+  },
+  {
+    "name": "Hindi(India)",
+    "local_name": "हिंदी(इंडिया)",
+    "locale": "hi_IN"
+  },
+  {
+    "name": "Amharic(Ethiopia)",
+    "local_name": "አማርኛ(ኢትዮጵያ)",
+    "locale": "am_ET"
   }
 ]
