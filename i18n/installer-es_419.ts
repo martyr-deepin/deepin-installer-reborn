@@ -296,7 +296,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Puede experimentar el increíble placer de Deepin, puede ir por sólo una taza de café</translation>
+        <translation>Puede experimentar el increíble placer de deepin en el tiempo que tarda en tomar una taza de café</translation>
     </message>
 </context>
 <context>
@@ -311,7 +311,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="29"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="47"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>Reinicie para disfrutar su nueva experiencia con el sistema Deepin ¡Esperamos que le agrade!</translation>
+        <translation>Reinicie para disfrutar su nueva experiencia con el sistema deepin ¡Esperamos que le agrade!</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="31"/>

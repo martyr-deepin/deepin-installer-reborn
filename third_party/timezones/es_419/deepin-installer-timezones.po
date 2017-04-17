@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-21 10:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: alvarosamudio <alvarosamudio1@gmail.com>, 2017\n"
+"Last-Translator: Jhoel Gómez <jhalo@protonmail.com>, 2017\n"
 "Language-Team: Spanish (Latin America) (https://www.transifex.com/linuxdeepin/teams/3976/es_419/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -352,7 +352,7 @@ msgstr "América/Campo_Grande"
 
 #: system-config-date-timezones.h:84
 msgid "America/Cancun"
-msgstr "América/Cancun"
+msgstr "América/Cancún"
 
 #: system-config-date-timezones.h:85
 msgid "America/Caracas"
@@ -360,11 +360,11 @@ msgstr "América/Caracas"
 
 #: system-config-date-timezones.h:86
 msgid "America/Cayenne"
-msgstr "América/Cayenne"
+msgstr "América/Cayena"
 
 #: system-config-date-timezones.h:87
 msgid "America/Cayman"
-msgstr "América/Cayman"
+msgstr "América/Islas_Caimán"
 
 #: system-config-date-timezones.h:88
 msgid "America/Chicago"
@@ -452,11 +452,11 @@ msgstr "América/Grand_Turk"
 
 #: system-config-date-timezones.h:109
 msgid "America/Grenada"
-msgstr "América/Grenada"
+msgstr "América/Granada"
 
 #: system-config-date-timezones.h:110
 msgid "America/Guadeloupe"
-msgstr "América/Guadeloupe"
+msgstr "América/Guadalupe"
 
 #: system-config-date-timezones.h:111
 msgid "America/Guatemala"
@@ -568,7 +568,7 @@ msgstr "América/Managua"
 
 #: system-config-date-timezones.h:138
 msgid "America/Manaus"
-msgstr "América/Manaus"
+msgstr "América/Manaos"
 
 #: system-config-date-timezones.h:139
 msgid "America/Marigot"
@@ -940,7 +940,7 @@ msgstr "Asia/Colombo"
 
 #: system-config-date-timezones.h:231
 msgid "Asia/Damascus"
-msgstr "Asia/Damascus"
+msgstr "Asia/Damasco"
 
 #: system-config-date-timezones.h:232
 msgid "Asia/Dhaka"
@@ -988,7 +988,7 @@ msgstr "Asia/Irkutsk"
 
 #: system-config-date-timezones.h:243
 msgid "Asia/Jakarta"
-msgstr "Asia / Yakarta"
+msgstr "Asia/Yakarta"
 
 #: system-config-date-timezones.h:244
 msgid "Asia/Jayapura"
@@ -996,7 +996,7 @@ msgstr "Asia/Jayapura"
 
 #: system-config-date-timezones.h:245
 msgid "Asia/Jerusalem"
-msgstr "Asia / Jerusalén"
+msgstr "Asia/Jerusalén"
 
 #: system-config-date-timezones.h:246
 msgid "Asia/Kabul"
@@ -1112,23 +1112,23 @@ msgstr "Asia/Samarkand"
 
 #: system-config-date-timezones.h:274
 msgid "Asia/Seoul"
-msgstr "Asia/Seoul"
+msgstr "Asia/Seúl"
 
 #: system-config-date-timezones.h:275
 msgid "Asia/Shanghai"
-msgstr "Asia/Shanghai"
+msgstr "Asia/Shanghái"
 
 #: system-config-date-timezones.h:276
 msgid "Asia/Singapore"
-msgstr "Asia/Singapore"
+msgstr "Asia/Singapur"
 
 #: system-config-date-timezones.h:277
 msgid "Asia/Srednekolymsk"
-msgstr "Asia/Srednekolymsk"
+msgstr "Asia/Srednekolimsk"
 
 #: system-config-date-timezones.h:278
 msgid "Asia/Taipei"
-msgstr "Asia/Taipei"
+msgstr "Asia/Taipéi"
 
 #: system-config-date-timezones.h:279
 msgid "Asia/Tashkent"
@@ -1148,7 +1148,7 @@ msgstr "Asia/Thimphu"
 
 #: system-config-date-timezones.h:283
 msgid "Asia/Tokyo"
-msgstr "Asia/Tokyo "
+msgstr "Asia/Tokio"
 
 #: system-config-date-timezones.h:284
 msgid "Asia/Tomsk"
@@ -1156,11 +1156,11 @@ msgstr "Asia/Tomsk"
 
 #: system-config-date-timezones.h:285
 msgid "Asia/Ulaanbaatar"
-msgstr "Asia/Ulaanbaatar "
+msgstr "Asia/Ulán Bator"
 
 #: system-config-date-timezones.h:286
 msgid "Asia/Urumqi"
-msgstr "Asia/Urumqi"
+msgstr "Asia/Urumchi"
 
 #: system-config-date-timezones.h:287
 msgid "Asia/Ust-Nera"
@@ -1168,7 +1168,7 @@ msgstr "Asia/Ust-Nera"
 
 #: system-config-date-timezones.h:288
 msgid "Asia/Vientiane"
-msgstr "Asia/Vientiane"
+msgstr "Asia/Vientián"
 
 #: system-config-date-timezones.h:289
 msgid "Asia/Vladivostok"
@@ -1188,7 +1188,7 @@ msgstr "Asia/Yekaterinburg"
 
 #: system-config-date-timezones.h:293
 msgid "Asia/Yerevan"
-msgstr "Asia / Ereván"
+msgstr "Asia/Ereván"
 
 #: system-config-date-timezones.h:294
 msgid "Atlantic/Azores"
@@ -1208,7 +1208,7 @@ msgstr "Atlántico/Cabo_Verde"
 
 #: system-config-date-timezones.h:298
 msgid "Atlantic/Faroe"
-msgstr "Atlántico/Faroe"
+msgstr "Atlántico/Islas_Faroe"
 
 #: system-config-date-timezones.h:299
 msgid "Atlantic/Madeira"
@@ -1280,7 +1280,7 @@ msgstr "Australia/Sydney"
 
 #: system-config-date-timezones.h:316
 msgid "Europe/Amsterdam"
-msgstr "Europa/Amsterdam"
+msgstr "Europa/Ámsterdam"
 
 #: system-config-date-timezones.h:317
 msgid "Europe/Andorra"
@@ -1296,11 +1296,11 @@ msgstr "Europa/Atenas"
 
 #: system-config-date-timezones.h:320
 msgid "Europe/Belgrade"
-msgstr "Europa/Belgrade"
+msgstr "Europa/Belgrado"
 
 #: system-config-date-timezones.h:321
 msgid "Europe/Berlin"
-msgstr "Europa/Berlin"
+msgstr "Europa/Berlín"
 
 #: system-config-date-timezones.h:322
 msgid "Europe/Bratislava"
@@ -1492,11 +1492,11 @@ msgstr "Europa/Vaticano"
 
 #: system-config-date-timezones.h:369
 msgid "Europe/Vienna"
-msgstr "Europa/Vienna"
+msgstr "Europa/Viena"
 
 #: system-config-date-timezones.h:370
 msgid "Europe/Vilnius"
-msgstr "Europa/Vilnius"
+msgstr "Europa/Vilna"
 
 #: system-config-date-timezones.h:371
 msgid "Europe/Volgograd"
@@ -1512,7 +1512,7 @@ msgstr "Europa/Zagreb"
 
 #: system-config-date-timezones.h:374
 msgid "Europe/Zaporozhye"
-msgstr "Europa/Zaporozhye"
+msgstr "Europa/Zaporiyia"
 
 #: system-config-date-timezones.h:375
 msgid "Europe/Zurich"
@@ -1680,7 +1680,7 @@ msgstr "Pacífico / Pitcairn"
 
 #: system-config-date-timezones.h:416
 msgid "Pacific/Pohnpei"
-msgstr "Pacífico / Pohnpei"
+msgstr "Pacífico/Ponapé"
 
 #: system-config-date-timezones.h:417
 msgid "Pacific/Port_Moresby"
@@ -1704,11 +1704,11 @@ msgstr "Pacífico / Tarawa"
 
 #: system-config-date-timezones.h:422
 msgid "Pacific/Tongatapu"
-msgstr "Pacífico / Tongatapu"
+msgstr "Pacífico/Tongatapu"
 
 #: system-config-date-timezones.h:423
 msgid "Pacific/Wake"
-msgstr "Pacífico / Estela"
+msgstr "Pacífico/Estela"
 
 #: system-config-date-timezones.h:424
 msgid "Pacific/Wallis"
