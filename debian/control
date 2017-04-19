@@ -24,10 +24,11 @@ Standards-Version: 3.9.6
 Homepage: http://www.deepin.org
 
 Package: deepin-installer-timezones
-Architecture: any
+Architecture: all
 Depends: ${shlibs:Depends},
     ${misc:Depends},
 Description: Language package for timezone names
+ Installer language package for timezone names
 
 Package: deepin-installer-reborn
 Architecture: any
@@ -58,3 +59,4 @@ Depends: ${shlibs:Depends},
     ${misc:Depends},
     deepin-installer-reborn
 Description: OEM tool for deepin-installer-reborn
+ OEM tool for deepin-installer-reborn
