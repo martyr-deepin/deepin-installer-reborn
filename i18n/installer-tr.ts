@@ -4,23 +4,23 @@
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="113"/>
         <source>Do not use this partition</source>
-        <translation type="unfinished"/>
+        <translation>Bölümü kullanma</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="120"/>
         <source>Swap partition</source>
-        <translation type="unfinished"/>
+        <translation>Takas Bölümü</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="163"/>
         <location filename="../ui/delegates/partition_util.cpp" line="184"/>
         <source>Freespace</source>
-        <translation type="unfinished"/>
+        <translation>Boş alan</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="122"/>
         <source>Unknown</source>
-        <translation type="unfinished"/>
+        <translation>Bilinmeyen</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="235"/>
@@ -55,7 +55,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="252"/>
         <source>Delete %1 partition</source>
-        <translation type="unfinished"/>
+        <translation>Bölümü %1 sil</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="257"/>
@@ -78,12 +78,12 @@
     <message>
         <location filename="../ui/widgets/advanced_partition_button.cpp" line="91"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Buraya kur</translation>
     </message>
     <message>
         <location filename="../ui/widgets/advanced_partition_button.cpp" line="94"/>
         <source>To be formatted</source>
-        <translation type="unfinished"/>
+        <translation>Biçimlendirilecek</translation>
     </message>
 </context>
 <context>
@@ -127,7 +127,7 @@
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="153"/>
         <source>Change boot loader</source>
-        <translation type="unfinished"/>
+        <translation>Önyükleyiciyi değiştir</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="266"/>
@@ -143,14 +143,14 @@
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="66"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="345"/>
         <source>Done</source>
-        <translation type="unfinished"/>
+        <translation>Bitti</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="68"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="160"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="347"/>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>Sil</translation>
     </message>
 </context>
 <context>
@@ -158,7 +158,7 @@
     <message>
         <location filename="../ui/models/bootloader_list_model.cpp" line="29"/>
         <source>%1 %2 (recommended)</source>
-        <translation type="unfinished"/>
+        <translation>%1 %2 (önerilen)</translation>
     </message>
 </context>
 <context>
@@ -167,7 +167,7 @@
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="26"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="45"/>
         <source>Abort Installation</source>
-        <translation type="unfinished"/>
+        <translation>Kurulumu Kes</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="28"/>
@@ -179,13 +179,13 @@
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="30"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="54"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Devam et</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="31"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="55"/>
         <source>Abort</source>
-        <translation type="unfinished"/>
+        <translation>Vazgeç</translation>
     </message>
 </context>
 <context>
@@ -194,7 +194,7 @@
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="45"/>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="59"/>
         <source>Insufficient Disk Space</source>
-        <translation type="unfinished"/>
+        <translation>Yetersiz Disk Alanı</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="47"/>
@@ -221,19 +221,19 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="115"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="206"/>
         <source>Filesystem</source>
-        <translation type="unfinished"/>
+        <translation>Dosya sistemi</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="116"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="208"/>
         <source>Mount point</source>
-        <translation type="unfinished"/>
+        <translation>Bağlama noktası</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="117"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="210"/>
         <source>Format the partition</source>
-        <translation type="unfinished"/>
+        <translation>Bölümü biçimle</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="118"/>
@@ -254,7 +254,7 @@
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="48"/>
         <source>Tuning system</source>
-        <translation type="unfinished"/>
+        <translation>Tuning sistemi</translation>
     </message>
     <message>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="27"/>
@@ -281,7 +281,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="65"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="112"/>
         <source>Exit installation</source>
-        <translation type="unfinished"/>
+        <translation>Kurulumdan Çık</translation>
     </message>
 </context>
 <context>
@@ -305,7 +305,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="27"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <source>Successfully Installed</source>
-        <translation type="unfinished"/>
+        <translation>Başarıyla Yüklendi</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="29"/>
@@ -317,7 +317,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="31"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="53"/>
         <source>Experience now</source>
-        <translation type="unfinished"/>
+        <translation>Şimdi Deneyin</translation>
     </message>
 </context>
 <context>
@@ -325,7 +325,7 @@
     <message>
         <location filename="../ui/models/mount_point_model.cpp" line="24"/>
         <source>Do not use</source>
-        <translation type="unfinished"/>
+        <translation>Kullanma</translation>
     </message>
 </context>
 <context>
@@ -334,7 +334,7 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="94"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="129"/>
         <source>New Partition</source>
-        <translation type="unfinished"/>
+        <translation>Yeni Bölüm</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="96"/>
@@ -358,31 +358,31 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="99"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="148"/>
         <source>Filesystem</source>
-        <translation type="unfinished"/>
+        <translation>Dosya sistemi</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="100"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="154"/>
         <source>Mount point</source>
-        <translation type="unfinished"/>
+        <translation>Bağlama noktası</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="101"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="161"/>
         <source>Size</source>
-        <translation type="unfinished"/>
+        <translation>Boyut</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Başla</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>End</source>
-        <translation type="unfinished"/>
+        <translation>Son</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="104"/>
@@ -412,7 +412,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
         <source>Full Disk Format Warning</source>
-        <translation type="unfinished"/>
+        <translation>Tam Disk Biçimi Uyarısı</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
@@ -439,7 +439,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="58"/>
         <location filename="../ui/frames/partition_frame.cpp" line="163"/>
         <source>Select Installation Location</source>
-        <translation type="unfinished"/>
+        <translation>Yükleme Konumu Seçiniz</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="60"/>
@@ -451,13 +451,13 @@
         <location filename="../ui/frames/partition_frame.cpp" line="62"/>
         <location filename="../ui/frames/partition_frame.cpp" line="173"/>
         <source>Simple</source>
-        <translation type="unfinished"/>
+        <translation>Basit</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="63"/>
         <location filename="../ui/frames/partition_frame.cpp" line="179"/>
         <source>Advanced</source>
-        <translation type="unfinished"/>
+        <translation>Gelişmiş</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="64"/>
@@ -487,7 +487,7 @@
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="63"/>
         <source>Cannot create new partitions</source>
-        <translation type="unfinished"/>
+        <translation>Yeni bölümler oluşturamadı</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="28"/>
@@ -512,7 +512,7 @@
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="70"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Geri</translation>
     </message>
 </context>
 <context>
@@ -577,23 +577,23 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
         <source>Reboot</source>
-        <translation type="unfinished"/>
+        <translation>Yeniden Başlat</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="156"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Geri</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="99"/>
         <source>Disable UEFI</source>
-        <translation type="unfinished"/>
+        <translation>UEFI devredışı</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="108"/>
         <source>Format the disk</source>
-        <translation type="unfinished"/>
+        <translation>Diski biçimle</translation>
     </message>
 </context>
 <context>
@@ -602,12 +602,12 @@
         <location filename="../ui/models/partition_type_model.cpp" line="28"/>
         <location filename="../ui/models/partition_type_model.cpp" line="34"/>
         <source>Logical Partition</source>
-        <translation type="unfinished"/>
+        <translation>Mantksal Bölüm</translation>
     </message>
     <message>
         <location filename="../ui/models/partition_type_model.cpp" line="32"/>
         <source>Primary Partition</source>
-        <translation type="unfinished"/>
+        <translation>Birincil Bölüm</translation>
     </message>
 </context>
 <context>
@@ -616,7 +616,7 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="49"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="71"/>
         <source>Prepare for Installation</source>
-        <translation type="unfinished"/>
+        <translation>Yükleme için hazırlanıyor</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="51"/>
@@ -649,7 +649,7 @@
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="29"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="52"/>
         <source>Select location for boot loader</source>
-        <translation type="unfinished"/>
+        <translation>Önyükleyici konumu seçin</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="31"/>
@@ -670,7 +670,7 @@
         <location filename="../ui/frames/select_language_frame.cpp" line="53"/>
         <location filename="../ui/frames/select_language_frame.cpp" line="97"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Sonraki</translation>
     </message>
 </context>
 <context>
@@ -703,13 +703,13 @@
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="63"/>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="79"/>
         <source>User Avatar</source>
-        <translation type="unfinished"/>
+        <translation>Kullanıcı Avatarı</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="80"/>
         <source>Select an avatar for your account</source>
-        <translation type="unfinished"/>
+        <translation>Hesabın için bir avatar seç</translation>
     </message>
 </context>
 <context>
@@ -718,7 +718,7 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="52"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="112"/>
         <source>Create User Account</source>
-        <translation type="unfinished"/>
+        <translation>Kullanıcı Hesabı Hluştur</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="53"/>
@@ -748,7 +748,7 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="138"/>
         <source>Confirm password</source>
-        <translation type="unfinished"/>
+        <translation>Şifre doğrulama</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="176"/>
@@ -768,7 +768,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="214"/>
         <source>Please input computer name</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen bilgisayar adı giriniz</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="222"/>
@@ -794,13 +794,13 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
         <source>The two passwords don&apos;t match</source>
-        <translation type="unfinished"/>
+        <translation>2 şifre eşlemiyor</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="58"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="146"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Sonraki</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="185"/>
@@ -846,7 +846,7 @@
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="109"/>
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="138"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>Bölgenizi haritada işaretleyin</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
@@ -861,7 +861,7 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="27"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="45"/>
         <source>Friendly Reminder</source>
-        <translation type="unfinished"/>
+        <translation>Arkadaşça bir uyarı</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="29"/>

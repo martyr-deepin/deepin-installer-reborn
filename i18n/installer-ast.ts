@@ -4,12 +4,12 @@
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="113"/>
         <source>Do not use this partition</source>
-        <translation type="unfinished"/>
+        <translation>Nun usar esta partición</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="120"/>
         <source>Swap partition</source>
-        <translation type="unfinished"/>
+        <translation>Partición d&apos;intercambéu</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="163"/>
@@ -143,14 +143,14 @@
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="66"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="345"/>
         <source>Done</source>
-        <translation type="unfinished"/>
+        <translation>Fecho</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="68"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="160"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="347"/>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>Desaniciar</translation>
     </message>
 </context>
 <context>
@@ -239,13 +239,13 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="118"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="253"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Encaboxar</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="119"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="254"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>Aceutar</translation>
     </message>
 </context>
 <context>
@@ -269,7 +269,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="61"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="81"/>
         <source>Installation Failed</source>
-        <translation type="unfinished"/>
+        <translation>Falló la instalación</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
@@ -281,7 +281,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="65"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="112"/>
         <source>Exit installation</source>
-        <translation type="unfinished"/>
+        <translation>Colar de la instalación</translation>
     </message>
 </context>
 <context>
@@ -290,7 +290,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="113"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="138"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>Instalando</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
@@ -325,7 +325,7 @@
     <message>
         <location filename="../ui/models/mount_point_model.cpp" line="24"/>
         <source>Do not use</source>
-        <translation type="unfinished"/>
+        <translation>Nun usar</translation>
     </message>
 </context>
 <context>
@@ -334,7 +334,7 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="94"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="129"/>
         <source>New Partition</source>
-        <translation type="unfinished"/>
+        <translation>Partición nueva</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="96"/>
@@ -346,55 +346,55 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="97"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="137"/>
         <source>Type</source>
-        <translation type="unfinished"/>
+        <translation>Triba</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="98"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="143"/>
         <source>Location</source>
-        <translation type="unfinished"/>
+        <translation>Allugamientu</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="99"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="148"/>
         <source>Filesystem</source>
-        <translation type="unfinished"/>
+        <translation>Sistema de ficheros</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="100"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="154"/>
         <source>Mount point</source>
-        <translation type="unfinished"/>
+        <translation>Puntu de montaxe</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="101"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="161"/>
         <source>Size</source>
-        <translation type="unfinished"/>
+        <translation>Tamañu</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Entamu</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>End</source>
-        <translation type="unfinished"/>
+        <translation>Fin</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="104"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="191"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Encaboxar</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="105"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="192"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>Aceutar</translation>
     </message>
 </context>
 <context>
@@ -403,7 +403,7 @@
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="24"/>
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="41"/>
         <source>Formatting...</source>
-        <translation type="unfinished"/>
+        <translation>Formatiando...</translation>
     </message>
 </context>
 <context>
@@ -424,13 +424,13 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="89"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Encaboxar</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="47"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="90"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Siguir</translation>
     </message>
 </context>
 <context>
@@ -602,12 +602,12 @@
         <location filename="../ui/models/partition_type_model.cpp" line="28"/>
         <location filename="../ui/models/partition_type_model.cpp" line="34"/>
         <source>Logical Partition</source>
-        <translation type="unfinished"/>
+        <translation>Partición llóxica</translation>
     </message>
     <message>
         <location filename="../ui/models/partition_type_model.cpp" line="32"/>
         <source>Primary Partition</source>
-        <translation type="unfinished"/>
+        <translation>Partición primaria</translation>
     </message>
 </context>
 <context>
@@ -661,7 +661,7 @@
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="33"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="66"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Atrás</translation>
     </message>
 </context>
 <context>
@@ -670,7 +670,7 @@
         <location filename="../ui/frames/select_language_frame.cpp" line="53"/>
         <location filename="../ui/frames/select_language_frame.cpp" line="97"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Siguiente</translation>
     </message>
 </context>
 <context>
@@ -688,13 +688,13 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation type="unfinished"/>
+        <translation>Ríquense polo menos %1 GB pa la partición raigañu</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="79"/>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="198"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Instalar equí</translation>
     </message>
 </context>
 <context>
@@ -703,13 +703,13 @@
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="63"/>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="79"/>
         <source>User Avatar</source>
-        <translation type="unfinished"/>
+        <translation>Avatar d&apos;usuariu</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="80"/>
         <source>Select an avatar for your account</source>
-        <translation type="unfinished"/>
+        <translation>Esbilla un avatar pa la to cuenta</translation>
     </message>
 </context>
 <context>
@@ -718,7 +718,7 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="52"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="112"/>
         <source>Create User Account</source>
-        <translation type="unfinished"/>
+        <translation>Crear cuenta d&apos;usuariu</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="53"/>
@@ -730,35 +730,35 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="122"/>
         <source>Username</source>
-        <translation type="unfinished"/>
+        <translation>Nome d&apos;usuariu</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="55"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="127"/>
         <source>Computer name</source>
-        <translation type="unfinished"/>
+        <translation>Nome del ordenador</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="132"/>
         <source>Password</source>
-        <translation type="unfinished"/>
+        <translation>Contraseña</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="138"/>
         <source>Confirm password</source>
-        <translation type="unfinished"/>
+        <translation>Confirmar contraseña</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="176"/>
         <source>This username already exists</source>
-        <translation type="unfinished"/>
+        <translation>Esti nome d&apos;usuariu yá esiste</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="180"/>
         <source>The first letter must be in lowercase</source>
-        <translation type="unfinished"/>
+        <translation>La primer lletra ha ser minúscula</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="191"/>
@@ -794,13 +794,13 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
         <source>The two passwords don&apos;t match</source>
-        <translation type="unfinished"/>
+        <translation>Les dos contraseñes nun concasen</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="58"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="146"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Siguiente</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="185"/>
@@ -810,7 +810,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="218"/>
         <source>Computer name is invalid</source>
-        <translation type="unfinished"/>
+        <translation>Nome non válidu d&apos;ordenador</translation>
     </message>
 </context>
 <context>
@@ -873,7 +873,7 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="33"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="56"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Siguir</translation>
     </message>
 </context>
 </TS>
