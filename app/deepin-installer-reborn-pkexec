@@ -15,4 +15,5 @@ deepin-installer-settings set \
 # Kill docker process.
 pkill -f dde-dock
 
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 pkexec "/usr/bin/deepin-installer-reborn" "$@"
