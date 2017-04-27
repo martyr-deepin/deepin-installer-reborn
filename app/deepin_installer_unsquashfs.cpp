@@ -125,17 +125,15 @@ bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
     const size_t kBufSize = 32 * 1024;  // 32k
     char buf[kBufSize];
     ssize_t num_read;
-    while (true) {
-      num_read = read(src_fd, buf, kBufSize);
-      if (num_read < 0) {
-        ok = false;
-        break;
-      }
+    while ((num_read = read(src_fd, buf, kBufSize)) > 0) {
       // TODO(xushaohua): write() may write less buf.
       if (write(dest_fd, buf, (size_t)num_read) != num_read) {
         ok = false;
         break;
       }
+    }
+    if (num_read < 0) {
+      ok = false;
     }
   }
 
@@ -458,7 +456,7 @@ int main(int argc, char* argv[]) {
   } else {
     g_use_sendfile = false;
   }
-  fprintf(stdout, "use_senfile: %s\n", g_use_sendfile ? "yes" : "no");
+  fprintf(stdout, "use_sendfile: %s\n", g_use_sendfile ? "yes" : "no");
 
   const qint64 timestamp = QDateTime::currentMSecsSinceEpoch();
   const QString mount_point(QString(kMountPointTmp).arg(timestamp));
