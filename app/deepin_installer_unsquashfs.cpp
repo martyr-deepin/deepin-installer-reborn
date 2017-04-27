@@ -15,10 +15,10 @@
 #include <ftw.h>
 #include <limits.h>
 #include <stdlib.h>
-// TODO(xushaohua): Replace sendfile() with splice().
 #include <sys/sendfile.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/utsname.h>
 #include <sys/xattr.h>
 #include <unistd.h>
 
@@ -72,6 +72,9 @@ int g_total_files = 0;
 // Number of files has been copied.
 int g_current_files = 0;
 
+// Use sendfile() system call or not.
+bool g_use_sendfile = true;
+
 // Write progress value to file.
 void WriteProgress(int progress) {
   if (g_progress_fd) {
@@ -101,21 +104,39 @@ bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
     return 1;
   }
 
-  size_t num_to_read = size_t(file_size);
   bool ok = true;
-  while (num_to_read > 0) {
-    const ssize_t num_sent = sendfile(dest_fd, src_fd, NULL, num_to_read);
-    if (num_sent <= 0) {
-      fprintf(stderr, "sendfile() error: %s\nSkip %s\n",
-              strerror(errno), src_file);
-      // NOTE(xushaohua): Skip sendfile() error.
-      // xz uncompress error, Input/output error.
-      // squashfs file might have some defects.
+  if (g_use_sendfile) {
+    size_t num_to_read = size_t(file_size);
+    while (num_to_read > 0) {
+      const ssize_t num_sent = sendfile(dest_fd, src_fd, NULL, num_to_read);
+      if (num_sent <= 0) {
+        fprintf(stderr, "sendfile() error: %s\nSkip %s\n",
+                strerror(errno), src_file);
+        // NOTE(xushaohua): Skip sendfile() error.
+        // xz uncompress error, Input/output error.
+        // squashfs file might have some defects.
 //      ok = false;
-      ok = true;
-      break;
+        ok = true;
+        break;
+      }
+      num_to_read -= num_sent;
     }
-    num_to_read -= num_sent;
+  } else {
+    const size_t kBufSize = 32 * 1024;  // 32k
+    char buf[kBufSize];
+    ssize_t num_read;
+    while (true) {
+      num_read = read(src_fd, buf, kBufSize);
+      if (num_read < 0) {
+        ok = false;
+        break;
+      }
+      // TODO(xushaohua): write() may write less buf.
+      if (write(dest_fd, buf, (size_t)num_read) != num_read) {
+        ok = false;
+        break;
+      }
+    }
   }
 
   close(src_fd);
@@ -429,6 +450,15 @@ int main(int argc, char* argv[]) {
     fprintf(stderr, "Filesystem is empty: %s\n", src.toLocal8Bit().constData());
     parser.showHelp(kExitErr);
   }
+
+  struct utsname uname_buf;
+  if (uname(&uname_buf) == 0) {
+    // Do not use sendfile() on "sw" platform, as do_sendfile() always crashes!
+    g_use_sendfile = (strncmp(uname_buf.machine, "sw", 2) != 0);
+  } else {
+    g_use_sendfile = false;
+  }
+  fprintf(stdout, "use_senfile: %s\n", g_use_sendfile ? "yes" : "no");
 
   const qint64 timestamp = QDateTime::currentMSecsSinceEpoch();
   const QString mount_point(QString(kMountPointTmp).arg(timestamp));
