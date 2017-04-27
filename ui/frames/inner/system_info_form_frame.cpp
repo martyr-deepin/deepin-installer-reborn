@@ -251,7 +251,7 @@ bool SystemInfoFormFrame::validatePassword(QString& msg) {
   switch (state) {
     case ValidatePasswordState::EmptyError: {
       msg = tr("Please input password longer than %1 characters and "
-               "shorter than %2 characters").arg(max_len).arg(max_len);
+               "shorter than %2 characters").arg(min_len).arg(max_len);
       return false;
     }
     case ValidatePasswordState::NoLowerCharError:  // fall through
