@@ -100,6 +100,12 @@ fix_asus_u82u() {
   fi
 }
 
+fix_lenovo_80t9() {
+  if is_productname_exists "80T9"; then
+    msg "fix lenovo 80t9"
+    echo "blacklist ideapad_laptop" | tee -a /etc/modprobe.d/blacklist-ideapad-laptop.conf
+  fi
+}
 # bcm4313 [14e4:4727] wireless driver
 fix_pci_bcm4313() {
   if is_pci_exists "14e4:4727"; then
@@ -168,6 +174,22 @@ fix_pci_rtl8723be_fwlps() {
   fi
 }
 
+# rtl8188ce [10ec:8176] wireless driver
+fix_pci_rtl8188ce() {
+  if is_pci_exists "10ec:8176"; then
+    msg "fix rtl8188ce"
+    echo "options rtl8192ce fwlps=0 ips=0" | tee -a /etc/modprobe.d/rtl8192ce.conf
+  fi
+}
+
+# rt3290 [1814:3290] wireless driver
+fix_pci_rt3290() {
+  if is_pci_exists "1814:3290"; then
+    msg "fix rt3290"
+    echo "options rt2800pci nohwcrypt=1" | tee -a /etc/modprobe.d/rt2800pci.conf
+  fi
+}
+
 # rtl8723au [0bda:1724] wireless driver
 # TODO: no need any more after updating kernel to 3.15
 fix_usb_rtl8723au() {
@@ -201,6 +223,8 @@ fix_pci_bcm4356 || true
 fix_pci_rtl8723be_fwlps || true
 #fix_usb_rtl8723au || true
 fix_pci_rtl8723ae_fwlps || true
+fix_pci_rtl8188ce || true
+fix_pci_rt3290 || true
 fix_productname_x550vc || true
 fix_productname_n551zu || true
 fix_xiaomi_notebook_133 || true
@@ -209,5 +233,6 @@ fix_asus_x450jb || true
 fix_asus_x450jn || true
 fix_asus_x450jf || true
 fix_asus_u82u || true
+fix_lenovo_80t9 ||true
 
 return 0
