@@ -535,6 +535,14 @@ target_link_libraries(deepin-installer-xrandr-switchy
                       )
 
 
+# standalone deepin-installer-reborn
+add_executable(deepin-installer-reborn-standalone
+
+               app/deepin_installer_reborn_standalone.c
+               )
+target_link_libraries(deepin-installer-reborn-standalone
+                      ${X11_LIBRARIES}
+                      )
 # Unsquashfs progress
 #add_executable(deepin-installer-unsquashfs-progress
 #
@@ -758,6 +766,7 @@ install(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-first-boot-pke
         ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-reborn-pkexec
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn-standalone
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
