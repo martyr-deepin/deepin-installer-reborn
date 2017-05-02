@@ -3,6 +3,7 @@ lib/*
 usr/bin/deepin-installer-first-boot
 usr/bin/deepin-installer-first-boot-pkexec
 usr/bin/deepin-installer-reborn
+usr/bin/deepin-installer-reborn-standalone
 usr/bin/deepin-installer-reborn-pkexec
 usr/bin/deepin-installer-settings
 usr/bin/deepin-installer-unsquashfs
