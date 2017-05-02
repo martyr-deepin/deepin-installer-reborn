@@ -2,9 +2,10 @@ Source: deepin-installer-reborn
 Section: utils
 Priority: extra
 Maintainer: Deepin Packages Builder <packages@deepin.com>
-Build-Depends: debhelper (>=9),
-    dh-systemd,
+Build-Depends:
     cmake (>=3.1),
+    debhelper (>=9),
+    dh-systemd,
     g++,
     gettext,
     libattr1-dev,
@@ -20,20 +21,22 @@ Build-Depends: debhelper (>=9),
     qt5-default,
     qtbase5-dev,
     qttools5-dev-tools,
-    zlib1g-dev,
+    zlib1g-dev
 Standards-Version: 3.9.6
 Homepage: http://www.deepin.org
 
 Package: deepin-installer-timezones
 Architecture: all
-Depends: ${shlibs:Depends},
-    ${misc:Depends},
+Depends:
+    ${shlibs:Depends},
+    ${misc:Depends}
 Description: Language package for timezone names
  Installer language package for timezone names
 
 Package: deepin-installer-reborn
 Architecture: any
-Depends: ${shlibs:Depends},
+Depends:
+    ${shlibs:Depends},
     ${misc:Depends}
     btrfs-progs,
     deepin-installer-timezones,
@@ -50,13 +53,14 @@ Depends: ${shlibs:Depends},
     util-linux,
     x11-xserver-utils,
     xfsprogs,
-    xkb-data,
+    xkb-data
 Description: Reborn version of deepin installer
  New version of deepin-installer, rewritten with Qt5.
 
 Package: deepin-installer-oem
 Architecture: any
-Depends: ${shlibs:Depends},
+Depends:
+    ${shlibs:Depends},
     ${misc:Depends},
     deepin-installer-reborn
 Description: OEM tool for deepin-installer-reborn

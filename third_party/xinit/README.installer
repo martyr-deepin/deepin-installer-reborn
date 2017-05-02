@@ -1,0 +1,7 @@
+Name: xinit
+Author: The Open Group
+License: X/MIT License
+Home: http://xfree86.org
+Description: The xinit program is used to start the X Window System server
+  and a first client program on systems that are not using a display manager
+  such as xdm.

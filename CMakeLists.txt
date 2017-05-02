@@ -539,6 +539,8 @@ target_link_libraries(deepin-installer-xrandr-switchy
 add_executable(deepin-installer-reborn-standalone
 
                app/deepin_installer_reborn_standalone.c
+               third_party/xinit/xinit.c
+               third_party/xinit/xinit.h
                )
 target_link_libraries(deepin-installer-reborn-standalone
                       ${X11_LIBRARIES}
