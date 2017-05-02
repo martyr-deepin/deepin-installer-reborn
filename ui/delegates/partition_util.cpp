@@ -128,7 +128,13 @@ QString GetLocalFsTypeName(FsType fs_type) {
     case FsType::Ext4: return "ext4";
     case FsType::Fat16: return "fat16";
     case FsType::Fat32: return "fat32";
+    case FsType::Hfs: return "hfs";
+    case FsType::HfsPlus: return "hfs+";
     case FsType::Jfs: return "jfs";
+    case FsType::Nilfs2: return "nilfs2";
+    case FsType::NTFS: return "ntfs";
+    case FsType::Reiser4: return "reiser4";
+    case FsType::Reiserfs: return "reiserfs";
     case FsType::LinuxSwap: return QObject::tr("Swap partition");
     case FsType::Xfs: return "xfs";
     default: return QObject::tr("Unknown");

@@ -30,6 +30,22 @@ QString GetPedFsName(FsType fs) {
   return fs_name;
 }
 
+// Get ped file system type pointer which is used by |partition|.
+PedFileSystemType* GetPedFsType(const Partition& partition) {
+  if (partition.type != PartitionType::Extended) {
+    PedFileSystemType* fs_type = nullptr;
+    const QString fs_name = GetPedFsName(partition.fs);
+    fs_type = ped_file_system_type_get(fs_name.toLocal8Bit().constData());
+    if (fs_type == NULL) {
+      // Fallback to default filesystem type.
+      fs_type = ped_file_system_type_get("ext2");
+    }
+    return fs_type;
+  } else {
+    return NULL;
+  }
+}
+
 }  // namespace
 
 bool Commit(PedDisk* lp_disk) {
@@ -77,13 +93,7 @@ bool CreatePartition(const Partition& partition) {
       }
     }
 
-    PedFileSystemType* fs_type = nullptr;
-    if (partition.type != PartitionType::Extended) {
-      const QString fs_name = GetPedFsName(partition.fs);
-      fs_type = ped_file_system_type_get(fs_name.toLocal8Bit().constData());
-      qDebug() << "fs_name:" << fs_name << "fs_type:" << fs_type->name;
-    }
-
+    PedFileSystemType* fs_type = GetPedFsType(partition);
     PedPartition* lp_partition = ped_partition_new(lp_disk,
                                                    type,
                                                    fs_type,
@@ -343,9 +353,7 @@ bool SetPartitionType(const Partition& partition) {
   if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
     const QString fs_name = GetPedFsName(partition.fs);
 
-    PedFileSystemType* fs_type =
-        ped_file_system_type_get(fs_name.toStdString().c_str());
-
+    PedFileSystemType* fs_type = GetPedFsType(partition);
     PedPartition* lp_partition =
         ped_disk_get_partition_by_sector(lp_disk, partition.getSector());
 
