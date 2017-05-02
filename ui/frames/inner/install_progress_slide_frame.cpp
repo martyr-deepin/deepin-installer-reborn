@@ -32,7 +32,6 @@ void InstallProgressSlideFrame::startSlide(bool disable_slide,
   qDebug() << "startSlide()" << disable_slide << disable_animation << duration;
   const QString locale = ReadLocale();
   slide_files_ = GetSlideFiles(locale);
-  qDebug() << "slide files:" << slide_files_ << locale;
 
   if (slide_files_.isEmpty()) {
     qCritical() << "startSlide() no slide files found!";
