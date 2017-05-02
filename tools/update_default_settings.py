@@ -13,28 +13,38 @@ import sys
 
 SEC_NAME = "General"
 def update_loongson_policy(settings_file):
+    settings = (
+        ("skip_virtual_machine_page", "true"),
+        ("system_info_default_timezone", "Asia/Shanghai"),
+        ("system_info_timezone_use_regdomain", "false"),
+        ("partition_skip_simple_partition_page", "true"),
+        ("partition_formatted_mount_points", "/;/tmp;/usr;/var"),
+        ("partition_enable_os_prober", "false"),
+        ("partition_boot_on_first_partition", "true"),
+        ("partition_supported_fs", "ext4;ext3;ext2;efi;linux-swap"),
+    )
     parser = configparser.ConfigParser()
     parser.read(settings_file)
-    parser.set(SEC_NAME, "skip_virtual_machine_page", "true")
-    parser.set(SEC_NAME, "system_info_default_timezone", "Asia/Shanghai")
-    parser.set(SEC_NAME, "system_info_timezone_use_regdomain", "false")
-    parser.set(SEC_NAME, "partition_skip_simple_partition_page", "true")
-    parser.set(SEC_NAME, "partition_formatted_mount_points", "/;/tmp;/usr;/var")
-    parser.set(SEC_NAME, "partition_enable_os_prober", "false")
-    parser.set(SEC_NAME, "partition_boot_on_first_partition", "true")
+    for key, value in settings:
+        parser.set(SEC_NAME, key, value)
     with open(settings_file, "w") as fh:
         parser.write(fh)
 
 def update_sw_policy(settings_file):
+    settings = (
+        ("skip_virtual_machine_page", "true"),
+        ("system_info_default_timezone", "Asia/Shanghai"),
+        ("system_info_timezone_use_regdomain", "false"),
+        ("partition_skip_simple_partition_page", "true"),
+        ("partition_formatted_mount_points", "/;/tmp;/usr;/var"),
+        ("partition_enable_os_prober", "false"),
+        ("partition_boot_on_first_partition", "true"),
+        ("partition_supported_fs", "ext4;ext3;ext2;efi;linux-swap"),
+    )
     parser = configparser.ConfigParser()
     parser.read(settings_file)
-    parser.set(SEC_NAME, "skip_virtual_machine_page", "true")
-    parser.set(SEC_NAME, "system_info_default_timezone", "Asia/Shanghai")
-    parser.set(SEC_NAME, "system_info_timezone_use_regdomain", "false")
-    parser.set(SEC_NAME, "partition_skip_simple_partition_page", "true")
-    parser.set(SEC_NAME, "partition_formatted_mount_points", "/;/tmp;/usr;/var")
-    parser.set(SEC_NAME, "partition_enable_os_prober", "false")
-    parser.set(SEC_NAME, "partition_boot_on_first_partition", "true")
+    for key, value in settings:
+        parser.set(SEC_NAME, key, value)
     with open(settings_file, "w") as fh:
         parser.write(fh)
 
