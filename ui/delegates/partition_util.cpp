@@ -25,7 +25,7 @@ const int kLabelMaxLen = 25;
 const char kCasperMountPoint[] = "/cdrom";
 const char kLiveMountPoint[] = "/lib/live/mount/medium";
 
-// Get distribution descriptioin at partition |path| if it contains an OS.
+// Get distribution description at partition |path| if it contains an OS.
 QString GetOsDescription(const QString& path) {
   const OsProberItems items = GetOsProberItems();
   for (const OsProberItem& item : items) {
