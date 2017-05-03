@@ -223,6 +223,12 @@
     "type": "Boolean"
   },
   {
+    "title": "允许创建 swpafile",
+    "name": "partition_enable_swap_file",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
     "title": "内存太小时自动创建 swapfile",
     "name": "partition_memory_threshold_for_swap_area",
     "description": "",

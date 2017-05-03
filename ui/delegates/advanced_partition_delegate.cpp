@@ -876,11 +876,15 @@ void AdvancedPartitionDelegate::onManualPartDone(
 
   // Create swap file if physical memory is less than 4Gib and
   // swap partition is not found.
-  if (IsSwapAreaNeeded()) {
-    WriteRequiringSwapFile(!found_swap);
+  bool use_swap_file;
+  if (found_swap) {
+    use_swap_file = false;
+  } else if (!GetSettingsBool(kPartitionEnableSwapFile)) {
+    use_swap_file = false;
   } else {
-    WriteRequiringSwapFile(false);
+    use_swap_file = IsSwapAreaNeeded();
   }
+  WriteRequiringSwapFile(use_swap_file);
 }
 
 void AdvancedPartitionDelegate::refreshVisual() {
