@@ -370,6 +370,12 @@ void SimplePartitionFrame::onPartitionButtonClicked() {
     // Show install-tip at bottom of current checked button.
     this->showInstallTip(button);
 
+    // If selected partitions contains windows system, show another message.
+    if (button->partition().os == OsType::Windows) {
+      msg_label_->setText(tr("Windows will not boot if install deepin on "
+                             "Windows disk, please confirm to continue"));
+    }
+
     this->appendOperations();
   }
 }
