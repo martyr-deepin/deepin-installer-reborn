@@ -59,16 +59,8 @@ def main():
         print("Run script in parent folder of `i18n`")
         sys.exit(1)
     
-    lang_list = get_language_list()
-    if lang_list:
-        for lang in lang_list:
-            ts_path = "i18n/installer-%s.ts" % lang
-            generate_ts(ts_path, True)
-        default_installer_ts = "i18n/installer.ts"
-        generate_ts(default_installer_ts, True)
-    else:
-        print("Failed to parse language list")
-        sys.exit(1)
+    default_installer_ts = "i18n/installer.ts"
+    generate_ts(default_installer_ts, True)
 
     # Then, generate ts files for oem project.
     oem_ts = "i18n/oem-zh_CN.ts"
