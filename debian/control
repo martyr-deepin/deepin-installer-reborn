@@ -38,21 +38,22 @@ Architecture: any
 Depends:
     ${shlibs:Depends},
     ${misc:Depends}
-    btrfs-progs,
+    btrfs-progs [i386 amd64],
     deepin-installer-timezones,
     dosfstools,
     e2fsprogs,
-    jfsutils,
+    jfsutils [i386 amd64],
     mtools,
     ntfs-3g,
     os-prober,
     parted,
+    reiserfsprogs [i386 amd64],
     squashfs-tools,
-    tshark [i386 amd64 mips mipsel mips64],
+    tshark [i386 amd64],
     udev,
     util-linux,
     x11-xserver-utils,
-    xfsprogs,
+    xfsprogs [i386 amd64],
     xkb-data
 Description: Reborn version of deepin installer
  New version of deepin-installer, rewritten with Qt5.

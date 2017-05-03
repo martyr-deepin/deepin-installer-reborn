@@ -31,6 +31,7 @@ sudo aptitude install \
     ntfs-3g \
     os-prober \
     parted \
+    reiserfsprogs \
     squashfs-tools \
     tshark \
     udev \
