@@ -410,12 +410,27 @@ void AdvancedPartitionFrame::updateErrorMessageHeader() {
   // Update error message header.
   const int err_count = validate_states_.length();
   // NOTE(xushaohua): Transifex does not ts plural format.
-  if (err_count <= 1) {
-    msg_head_label_->setText(
-        tr("%1 error found, continue to install after fixed").arg(err_count));
+  if (!GetSettingsBool(kPartitionSkipSimplePartitionPage) ||
+      GetSettingsBool(kPartitionEnableSimpleDiskPage)) {
+    if (err_count <= 1) {
+      msg_head_label_->setText(
+          tr("%1 error found, fix to continue installation or "
+             "switch to simple mode").arg(err_count));
+    } else {
+      msg_head_label_->setText(
+          tr("%1 errors found, fix to continue installation or "
+             "switch to simple mode").arg(err_count));
+    }
   } else {
-    msg_head_label_->setText(
-        tr("%1 errors found, continue to install after fixed").arg(err_count));
+    if (err_count <= 1) {
+      msg_head_label_->setText(
+          tr("%1 error found, continue to install after fixed")
+              .arg(err_count));
+    } else {
+      msg_head_label_->setText(
+          tr("%1 errors found, continue to install after fixed")
+              .arg(err_count));
+    }
   }
 }
 
