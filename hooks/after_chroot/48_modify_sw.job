@@ -7,43 +7,52 @@ if ! is_sw; then
   return 0
 fi
 
-SYSTEM_NAME=$(cat /proc/cpuinfo |grep "system type" |awk '{print $4}')
-echo "CPUTYPE=$SYSTEM_NAME"
+SYSTEM_NAME=$(cat /proc/cpuinfo | grep "system type" | awk '{print $4}')
+msg "CPUTYPE=$SYSTEM_NAME"
 
 SRCPATH=/lib/live/mount/medium/live/platform/$SYSTEM_NAME
 
 [ -d /target/boot/ ] && rm -rf /target/boot/*
 [ -d /target/lib/modules ] && rm -rf /target/lib/modules/*
-[ -d /lib/live/mount/medium/live/boot ] && cp -rf /lib/live/mount/medium/live/boot/* /target/boot/
+[ -d /lib/live/mount/medium/live/boot ] && \
+  cp -rf /lib/live/mount/medium/live/boot/* /target/boot/
 
 [ -f $SRCPATH/xorg.conf ] && cp -rf $SRCPATH/xorg.conf /target/etc/X11/
 
 # Replace kernel image and modules.
 [ -d $SRCPATH/modules ] && cp -rf $SRCPATH/modules /target/lib/
-[ -f $SRCPATH/vmlinux1.$SYSTEM_NAME ] && cp -rf $SRCPATH/vmlinux1.$SYSTEM_NAME /target/boot/
-[ -f $SRCPATH/vmlinux2.$SYSTEM_NAME ] && cp -rf $SRCPATH/vmlinux2.$SYSTEM_NAME /target/boot/
-[ -f $SRCPATH/initrd1.$SYSTEM_NAME ] && cp -rf $SRCPATH/initrd1.$SYSTEM_NAME /target/boot/
-[ -f $SRCPATH/initrd2.$SYSTEM_NAME ] && cp -rf $SRCPATH/initrd2.$SYSTEM_NAME /target/boot/
+[ -f $SRCPATH/vmlinux1.$SYSTEM_NAME ] && \
+  cp -rf $SRCPATH/vmlinux1.$SYSTEM_NAME /target/boot/
+[ -f $SRCPATH/vmlinux2.$SYSTEM_NAME ] \
+  && cp -rf $SRCPATH/vmlinux2.$SYSTEM_NAME /target/boot/
+[ -f $SRCPATH/initrd1.$SYSTEM_NAME ] && \
+  cp -rf $SRCPATH/initrd1.$SYSTEM_NAME /target/boot/
+[ -f $SRCPATH/initrd2.$SYSTEM_NAME ] && \
+  cp -rf $SRCPATH/initrd2.$SYSTEM_NAME /target/boot/
 [ -f $SRCPATH/grub.cfg ] && cp -rf $SRCPATH/grub.cfg /target/boot/grub/
-#cd /target/boot && mkdir -p /target/boot/boot &&  cp ./*.$SYSTEM_NAME  /target/boot/boot/ 
-cd /target/boot && mkdir -p /target/boot/boot &&  [ -d /target/boot/boot ] && rsync -av --exclude=boot  /target/boot/* /target/boot/boot/
+cd /target/boot && \
+  mkdir -p /target/boot/boot && \
+  [ -d /target/boot/boot ] && \
+  rsync -av --exclude=boot  /target/boot/* /target/boot/boot/
 
 sed -i "/overlayfs/d" /target/etc/fstab
-#LOCALUUID=$(grep -i "relatime" /target/etc/fstab | awk '{print $1}' | cut -d = -f 2 )
 
-while read wOne wTwo wThree wFour wFive wSix                                    
-do                                                                              
-    	[ -z $wSix ] && continue                                                    
-	if [ $wSix = 1 ] ;then                                                      
-		LOCALUUID=$wOne
-	fi                                                                          
-done < /target/etc/fstab                                                                  
+while read wOne wTwo wThree wFour wFive wSix; do
+  [ -z $wSix ] && continue
+  if [ $wSix = 1 ]; then
+    LOCALUUID=$wOne
+  fi
+done < /target/etc/fstab
 
-echo "$LOCALUUID" 
+msg "LOCALUUID: $LOCALUUID"
 
-[ -f /target/etc/lightdm/lightdm.conf ] && sed -i -e "s|autologin-user=deepin|#autologin-user=deepin|g" /target/etc/lightdm/lightdm.conf
+[ -f /target/etc/lightdm/lightdm.conf ] && \
+  sed -i -e "s|autologin-user=deepin|#autologin-user=deepin|g" \
+  /target/etc/lightdm/lightdm.conf
 [ -f /target/etc/sudoers ] && sed -i -e "s|deepin.*||g" /target/etc/sudoers
-[ -f /target/boot/grub/grub.cfg ] && sed -i -e "s|root=|root=$LOCALUUID|g" /target/boot/grub/grub.cfg
-[ -f /target/boot/boot/grub/grub.cfg ] && sed -i -e "s|root=|root=$LOCALUUID|g" /target/boot/boot/grub/grub.cfg
+[ -f /target/boot/grub/grub.cfg ] && \
+  sed -i -e "s|root=|root=$LOCALUUID|g" /target/boot/grub/grub.cfg
+[ -f /target/boot/boot/grub/grub.cfg ] && \
+  sed -i -e "s|root=|root=$LOCALUUID|g" /target/boot/boot/grub/grub.cfg
 
 return 0
