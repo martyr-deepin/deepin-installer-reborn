@@ -31,6 +31,9 @@ class SimpleDiskFrame : public QFrame {
   void repaintDevices();
 
   // Show install_tip at bottom of |button|.
+  void showInstallTip(QAbstractButton* button);
+
+  // Show install_tip at bottom of |button|.
 //  void showInstallTip(QAbstractButton* button);
 
   SimplePartitionDelegate* delegate_ = nullptr;
@@ -43,7 +46,8 @@ class SimpleDiskFrame : public QFrame {
  private slots:
   void onDeviceRefreshed();
   void onPartitionButtonClicked();
-  void onPartitionButtonToggled();
+  void onPartitionButtonToggled(QAbstractButton* button,
+                                bool checked);
 };
 
 }  // namespace installer

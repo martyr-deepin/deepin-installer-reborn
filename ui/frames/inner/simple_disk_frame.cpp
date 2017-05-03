@@ -149,16 +149,64 @@ void SimpleDiskFrame::repaintDevices() {
   grid_wrapper_->adjustSize();
 }
 
+void SimpleDiskFrame::showInstallTip(QAbstractButton* button) {
+  // Move install_tip to bottom of button
+  const QPoint pos = button->pos();
+  install_tip_->move(pos.x(), pos.y() - 10);
+  install_tip_->show();
+}
+
 void SimpleDiskFrame::onDeviceRefreshed() {
   this->repaintDevices();
 }
 
-void SimpleDiskFrame::onPartitionButtonToggled() {
+void SimpleDiskFrame::onPartitionButtonToggled(QAbstractButton* button,
+                                               bool checked) {
+  SimpleDiskButton* part_button =
+      dynamic_cast<SimpleDiskButton*>(button);
+  if (!part_button) {
+    qCritical() << "no disk button is selected";
+    return;
+  }
 
+  if (!checked) {
+    // Deselect previous button.
+    part_button->setSelected(false);
+    return;
+  }
 }
 
 void SimpleDiskFrame::onPartitionButtonClicked() {
+  // Clear warning message first.
+//  msg_label_->clear();
 
+  // Hide tooltip.
+  install_tip_->hide();
+
+  SimpleDiskButton* button =
+      dynamic_cast<SimpleDiskButton*>(this->sender());
+  Q_ASSERT(button);
+  if (!button) {
+    qCritical() << "no disk button is selected";
+    return;
+  }
+
+  // Check partition table type.
+//  const QString device_path = button->partition().device_path;
+//  if (!delegate_->isPartitionTableMatch(device_path)) {
+//    emit this->requestNewTable(device_path);
+//    return;
+//  }
+
+  // Update selected partition.
+//  delegate_->selectPartition(button->partition());
+
+  button->setSelected(true);
+
+  // Show install-tip at bottom of current checked button.
+  this->showInstallTip(button);
+
+//  this->appendOperations();
 }
 
 }  // namespace installer
