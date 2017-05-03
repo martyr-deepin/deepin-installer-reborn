@@ -1,0 +1,30 @@
+/** Used in SimpleDiskButton class **/
+
+QPushButton[flat="true"] {
+  border: none;
+  outline: none;
+  color: #eaeaea;
+}
+
+QPushButton {
+  background-color: transparent;
+  border-radius: 0;
+}
+
+QPushButton::checked {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+}
+
+QLabel#path_label {
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+}
+
+QLabel#model_label,
+QLabel#size_label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  text-align: center;
+}

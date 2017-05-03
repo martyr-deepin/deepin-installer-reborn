@@ -71,6 +71,8 @@ const char kSystemInfoTimezoneUseRegdomain[] =
 // Partition
 const char kPartitionSkipSimplePartitionPage[] =
     "partition_skip_simple_partition_page";
+const char kPartitionEnableSimpleDiskPage[] =
+    "partition_enable_simple_disk_page";
 const char kPartitionSkipAdvancedPartitionPage[] =
     "partition_skip_advanced_partition_page";
 const char kPartitionEnableSwapFile[] = "partition_enable_swap_file";

@@ -1,0 +1,29 @@
+/** Used in SimpleDiskFrame class **/
+
+QScrollArea#scroll_area,
+QFrame#grid_wrapper {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+QLabel#tip_label {
+  color: #ff8000;
+  font-size: 12px;
+}
+
+QLabel#device_model {
+  color: #e1e1e1;
+  font-size: 14px;
+}
+
+QScrollArea, QFrame#grid_wrapper {
+  background: transparent;
+}
+
+#msg_label {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+}

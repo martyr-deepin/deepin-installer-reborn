@@ -27,7 +27,7 @@ namespace installer {
 namespace {
 
 // 4 partitions are displays at each row.
-const int kPartitionColumns = 4;
+const int kDiskColumns = 4;
 
 const int kWindowWidth = 960;
 
@@ -220,7 +220,7 @@ void SimplePartitionFrame::initUI() {
   grid_layout_->setContentsMargins(0, 0, 0, 0);
   grid_layout_->setHorizontalSpacing(20);
   grid_layout_->setVerticalSpacing(20);
-  grid_layout_->setColumnStretch(kPartitionColumns, 1);
+  grid_layout_->setColumnStretch(kDiskColumns, 1);
 
   grid_wrapper_ = new QFrame();
   grid_wrapper_->setObjectName("grid_wrapper");
@@ -276,7 +276,7 @@ void SimplePartitionFrame::repaintDevices() {
 
     // Make sure that widgets in grid are left-aligned.
     grid_layout_->addWidget(device_model_label, row, 0,
-                            1, kPartitionColumns, Qt::AlignLeft);
+                            1, kDiskColumns, Qt::AlignLeft);
     row += 1;
 
     for (const Partition& partition : device.partitions) {
@@ -306,7 +306,7 @@ void SimplePartitionFrame::repaintDevices() {
 
       column += 1;
       // Add rows.
-      if (column >= kPartitionColumns) {
+      if (column >= kDiskColumns) {
         column = 0;
         row += 1 ;
       }
@@ -322,7 +322,7 @@ void SimplePartitionFrame::repaintDevices() {
   place_holder_label->setObjectName("place_holder_label");
   place_holder_label->setFixedSize(kWindowWidth, 30);
   grid_layout_->addWidget(place_holder_label, row, 0,
-                          1, kPartitionColumns, Qt::AlignHCenter);
+                          1, kDiskColumns, Qt::AlignHCenter);
 
   // Resize grid_wrapper explicitly.
   grid_wrapper_->adjustSize();

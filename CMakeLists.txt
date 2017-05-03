@@ -256,6 +256,8 @@ set(UI_FILES
     ui/frames/inner/prepare_install_frame.h
     ui/frames/inner/select_bootloader_frame.cpp
     ui/frames/inner/select_bootloader_frame.h
+    ui/frames/inner/simple_disk_frame.cpp
+    ui/frames/inner/simple_disk_frame.h
     ui/frames/inner/simple_partition_frame.cpp
     ui/frames/inner/simple_partition_frame.h
     ui/frames/inner/system_info_avatar_frame.cpp
@@ -351,6 +353,8 @@ set(UI_FILES
     ui/widgets/qr_widget.h
     ui/widgets/rounded_progress_bar.cpp
     ui/widgets/rounded_progress_bar.h
+    ui/widgets/simple_disk_button.cpp
+    ui/widgets/simple_disk_button.h
     ui/widgets/simple_partition_button.cpp
     ui/widgets/simple_partition_button.h
     ui/widgets/spinner_label.cpp
