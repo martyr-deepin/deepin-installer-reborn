@@ -7,7 +7,7 @@
 
 namespace installer {
 
-const char kAppVersion[] = "0.2.3";
+const char kAppVersion[] = "0.2.4";
 
 // Default locale used in program.
 const char kDefaultLang[] = "en_US.UTF-8";
