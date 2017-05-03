@@ -91,37 +91,47 @@
 <context>
     <name>installer::AdvancedPartitionFrame</name>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="486"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="484"/>
         <source>Add a Root partition to continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="489"/>
         <source>At least %1 GB is required for Root partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="478"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="476"/>
         <source>Add an EFI partition to continue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="465"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="415"/>
+        <source>%1 error found, continue to install after fixed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="418"/>
+        <source>%1 errors found, continue to install after fixed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="463"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="469"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="467"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="482"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="480"/>
         <source>At least %1 MB is required for EFI partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="474"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="472"/>
         <source>At least %1 MB is required for /boot partition</source>
         <translation type="unfinished"></translation>
     </message>
@@ -132,25 +142,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="415"/>
-        <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="419"/>
-        <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="77"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="524"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="522"/>
         <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="79"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="164"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="526"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="524"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -438,32 +438,32 @@
 <context>
     <name>installer::PartitionFrame</name>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="58"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="163"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="60"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="175"/>
         <source>Select Installation Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="60"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="165"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="62"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="177"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="62"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="173"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="64"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="185"/>
         <source>Simple</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="63"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="179"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="65"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="191"/>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="64"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="220"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="66"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="238"/>
         <source>Start installation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -672,6 +672,14 @@
         <location filename="../ui/frames/select_language_frame.cpp" line="53"/>
         <location filename="../ui/frames/select_language_frame.cpp" line="97"/>
         <source>Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>installer::SimpleDiskFrame</name>
+    <message>
+        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="54"/>
+        <source>Install here</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

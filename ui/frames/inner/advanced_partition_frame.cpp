@@ -412,12 +412,10 @@ void AdvancedPartitionFrame::updateErrorMessageHeader() {
   // NOTE(xushaohua): Transifex does not ts plural format.
   if (err_count <= 1) {
     msg_head_label_->setText(
-        tr("%1 error found, fix to continue installation or "
-           "switch to simple mode").arg(err_count));
+        tr("%1 error found, continue to install after fixed").arg(err_count));
   } else {
     msg_head_label_->setText(
-        tr("%1 errors found, fix to continue installation or "
-           "switch to simple mode").arg(err_count));
+        tr("%1 errors found, continue to install after fixed").arg(err_count));
   }
 }
 
