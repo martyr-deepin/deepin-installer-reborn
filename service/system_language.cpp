@@ -26,6 +26,7 @@ LanguageList GetLanguageList() {
     item.name = obj.value("name").toString();
     item.locale = obj.value("locale").toString();
     item.local_name = obj.value("local_name").toString();
+    item.timezone = obj.value("timezone").toString();
     list.append(item);
   }
 

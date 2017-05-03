@@ -14,6 +14,7 @@ struct LanguageItem {
   QString name;  // English name.
   QString locale;  // Language name, like en_US.
   QString local_name;  // Localized name.
+  QString timezone;  // Default timezone, might be empty.
 };
 
 typedef QList<LanguageItem> LanguageList;

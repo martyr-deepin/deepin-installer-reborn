@@ -95,6 +95,23 @@ void SystemInfoTimezoneFrame::readConf() {
   emit this->timezoneUpdated(timezone_);
 }
 
+void SystemInfoTimezoneFrame::timezoneUpdatedByLanguage(
+    const QString& timezone) {
+  // Check priority.
+  if (timezone_source_ == TimezoneSource::Local ||
+      timezone_source_ == TimezoneSource::User ||
+      timezone_source_ == TimezoneSource::Conf) {
+    qDebug() << "Ignores language default timezone:" << timezone;
+    return;
+  }
+
+  if (IsValidTimezone(timezone)) {
+    timezone_source_ = TimezoneSource::Language;
+    timezone_ = timezone;
+    emit this->timezoneUpdated(timezone_);
+  }
+}
+
 void SystemInfoTimezoneFrame::writeConf() {
   // Validate timezone before writing to settings file.
   if (IsValidTimezone(timezone_)) {
@@ -181,6 +198,7 @@ void SystemInfoTimezoneFrame::onBackButtonClicked() {
 
 void SystemInfoTimezoneFrame::onTimezoneManagerUpdated(
     const QString& timezone) {
+  // Check priority.
   if (timezone_source_ == TimezoneSource::NotSet ||
       timezone_source_ == TimezoneSource::Scan) {
     // Update timezone only if it is not set.

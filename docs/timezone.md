@@ -18,3 +18,8 @@ windows 系统的时间, SystemInfoFrame 中的时区按钮是显示出来的, �
 
 当 "system_info_timezone_use_regdomain" 选项开启时, 如果机接上存在无线网卡时, 会尝试
 使用它监听附近的无线热点发送的广播信号, 根据里面的 country code 来确定相应的时区.
+
+## 根据用户选择的语言设置时区
+在 resources/languages.json 文件里面, 还定义了一种语言相对应的默认时区.
+如果用户选定了这种语言, 也会在时区页面, 选中相应的时区名.
+而且它的优先级要比自动检测的时区高.

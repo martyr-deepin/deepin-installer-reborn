@@ -38,6 +38,9 @@ class SystemInfoTimezoneFrame : public QFrame {
   // Read default timezone and emit timezoneUpdated() signal.
   void readConf();
 
+  // Emitted when new language is selected.
+  void timezoneUpdatedByLanguage(const QString& timezone);
+
   // Validate timezone and write to conf file.
   void writeConf();
 
@@ -70,6 +73,7 @@ class SystemInfoTimezoneFrame : public QFrame {
     User,  // Timezone is setup by user.
     Local,  // Timezone is based on local time.
     Conf,  // Timezone is read from conf file
+    Language,  // Timezone is setup based on current selected language.
     Scan  // Timezone is updated based on geoip or regdomain
   };
   TimezoneSource timezone_source_;

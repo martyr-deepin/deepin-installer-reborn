@@ -29,6 +29,9 @@ class SystemInfoFrame : public QFrame {
   // Emitted when form is validated.
   void finished();
 
+  // Called when timezone is updated in SelectLanguageFrame.
+  void timezoneUpdated(const QString& timezone);
+
  public slots:
   // Read default conf from settings.
   void readConf();
