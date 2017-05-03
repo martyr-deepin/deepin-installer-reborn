@@ -33,6 +33,9 @@ class SelectLanguageFrame : public QFrame {
  signals:
   void finished();
 
+  // Emitted when new language item is selected.
+  void timezoneUpdated(const QString& timezone);
+
  protected:
   // Update text of next_button_
   void changeEvent(QEvent* event) override;

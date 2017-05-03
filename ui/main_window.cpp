@@ -149,7 +149,8 @@ void MainWindow::initConnections() {
 
   connect(select_language_frame_, &SelectLanguageFrame::finished,
           this, &MainWindow::goNextPage);
-
+  connect(select_language_frame_, &SelectLanguageFrame::timezoneUpdated,
+          system_info_frame_, &SystemInfoFrame::timezoneUpdated);
   connect(system_info_frame_, &SystemInfoFrame::finished,
           this, &MainWindow::goNextPage);
 

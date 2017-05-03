@@ -140,6 +140,7 @@ void SelectLanguageFrame::onLanguageListSelected(const QModelIndex& current,
     this->updateTranslator(language_item.locale);
     lang_ = language_item;
     this->writeConf();
+    emit this->timezoneUpdated(language_item.timezone);
   }
 }
 

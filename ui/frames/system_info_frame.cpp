@@ -63,6 +63,9 @@ void SystemInfoFrame::writeConf() {
 }
 
 void SystemInfoFrame::initConnections() {
+  connect(this, &SystemInfoFrame::timezoneUpdated,
+          timezone_frame_, &SystemInfoTimezoneFrame::timezoneUpdatedByLanguage);
+
   connect(avatar_frame_, &SystemInfoAvatarFrame::finished,
           this, &SystemInfoFrame::showFormPage);
   connect(avatar_frame_, &SystemInfoAvatarFrame::avatarUpdated,
