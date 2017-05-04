@@ -10,9 +10,12 @@ elseif(${INSTALLER_BUILD_ARCH} MATCHES "sw")
   install(
       DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
       DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn/resources/slide
+      PATTERN "default/02-deepin-app-store.png" EXCLUDE
+      PATTERN "zh_CN/02-deepin-app-store.png" EXCLUDE
       PATTERN "zh_CN/16-wps-youdao-dict.png" EXCLUDE
       PATTERN "zh_CN/17-tencent-qq.png" EXCLUDE
       PATTERN "zh_CN/18-netease-cloud-music.png" EXCLUDE
+      PATTERN "zh_TW/02-deepin-app-store.png" EXCLUDE
       PATTERN "CMakeLists.txt" EXCLUDE
   )
 elseif(${INSTALLER_BUILD_ARCH} MATCHES "mips")
