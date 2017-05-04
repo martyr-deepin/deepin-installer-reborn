@@ -247,6 +247,12 @@
     "type": "Integer"
   },
   {
+    "title": "swap 分区大小",
+    "name": "partition_swap_partition_size",
+    "description": "",
+    "type": "Integer"
+  },
+  {
     "title": "swapfile 路径",
     "name": "partition_swap_file_path",
     "description": "",
