@@ -217,6 +217,12 @@
     "type": "Boolean"
   },
   {
+    "title": "启用全盘分区页面",
+    "name": "partition_enable_simple_disk_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
     "title": "禁用高级分区页面",
     "name": "partition_skip_advanced_partition_page",
     "description": "",
@@ -304,6 +310,12 @@
   {
     "title": "自动分区",
     "name": "partition_do_auto_part",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "优先使用逻辑分区",
+    "name": "partition_prefer_logical_partition",
     "description": "",
     "type": "Boolean"
   },

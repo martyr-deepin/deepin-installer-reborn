@@ -63,11 +63,20 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
 
   type_model_->setPrimaryVisible(primary_ok);
   type_model_->setLogicalVisible(logical_ok);
-  // Select logical partition first is available.
-  if (logical_ok) {
-    type_box_->setCurrentIndex(type_model_->getLogicalIndex());
+  if (GetSettingsBool(kPartitionPreferLogicalPartition)) {
+    // Select logical partition first if available.
+    if (logical_ok) {
+      type_box_->setCurrentIndex(type_model_->getLogicalIndex());
+    } else {
+      type_box_->setCurrentIndex(type_model_->getPrimaryIndex());
+    }
   } else {
-    type_box_->setCurrentIndex(type_model_->getPrimaryIndex());
+    // Select primary partition first.
+    if (primary_ok) {
+      type_box_->setCurrentIndex(type_model_->getPrimaryIndex());
+    } else {
+      type_box_->setCurrentIndex(type_model_->getLogicalIndex());
+    }
   }
 
   // Select align-start.

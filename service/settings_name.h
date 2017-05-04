@@ -93,6 +93,8 @@ const char kPartitionFormattedMountPoints[] =
     "partition_formatted_mount_points";
 const char kPartitionBootOnFirstPartition[] =
     "partition_boot_on_first_partition";
+const char kPartitionPreferLogicalPartition[] =
+    "partition_prefer_logical_partition";
 const char kPartitionBootPartitionFs[] = "partition_boot_partition_fs";
 const char kPartitionEnableOsProber[] = "partition_enable_os_prober";
 

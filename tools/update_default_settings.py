@@ -23,6 +23,7 @@ def update_loongson_policy(settings_file):
         ("partition_enable_os_prober", "false"),
         ("partition_boot_on_first_partition", "true"),
         ("partition_supported_fs", "ext4;ext3;ext2;efi;linux-swap"),
+        ("partition_prefer_logical_partition", "false"),
     )
     parser = configparser.ConfigParser()
     parser.read(settings_file)
@@ -42,6 +43,7 @@ def update_sw_policy(settings_file):
         ("partition_enable_os_prober", "false"),
         ("partition_boot_on_first_partition", "true"),
         ("partition_supported_fs", "ext4;ext3;ext2;efi;linux-swap"),
+        ("partition_prefer_logical_partition", "false"),
     )
     parser = configparser.ConfigParser()
     parser.read(settings_file)
