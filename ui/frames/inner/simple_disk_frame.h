@@ -23,6 +23,8 @@ class SimpleDiskFrame : public QFrame {
  public:
   SimpleDiskFrame(SimplePartitionDelegate* delegate, QWidget* parent = nullptr);
 
+  bool validate() const;
+
  private:
   void initConnections();
   void initUI();

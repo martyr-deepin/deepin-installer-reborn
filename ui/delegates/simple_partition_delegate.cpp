@@ -592,9 +592,8 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
   // Policy:
   //  * Create new partition table (msdos);
   //  * Create /boot with ext4, 500MiB;
-  //  * Create EFI if needed, with 300MiB;
   //  * Create swap partition with 4GiB;
-  //  * Create / with ext4, remaining space;
+  //  * Create / with ext4, remaining space (at most 300GiB);
 
   const int device_index = DeviceIndex(virtual_devices_, device_path);
   if (device_index == -1) {
@@ -614,6 +613,84 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
   operation.applyToVisual(device);
 
   qDebug() << "new partition table of device:" << device;
+  qDebug() << "operations:" << operations_;
+  if (device.partitions.length() == 0) {
+    qCritical() << "partition is empty" << device;
+    return false;
+  }
+
+  Partition& unallocated = device.partitions.last();
+
+  // Create /boot partition.
+  const int boot_space = GetSettingsInt(kPartitionDefaultBootSpace);
+  const qint64 boot_sectors = boot_space * kMebiByte / unallocated.sector_size;
+  bool ok = createPrimaryPartition(unallocated,
+                                   PartitionType::Normal,
+                                   true,
+                                   FsType::Ext4,
+                                   kMountPointBoot,
+                                   boot_sectors);
+  if (!ok) {
+    qCritical() << "Failed to create /boot partition on" << unallocated;
+    return false;
+  }
+  Operation& boot_operation = operations_.last();
+  boot_operation.applyToVisual(device);
+
+  if (device.partitions.length() != 2) {
+    qCritical() << "partitions mismatch, expected 2:" << device;
+    return false;
+  }
+
+  qDebug() << "with /boot partition:" << device.partitions;
+  qDebug() << "operations:" << operations_;
+
+  unallocated = device.partitions.last();
+  qDebug() << "Unallocated partition for swap:" << unallocated;
+  // Create swap partition.
+  const int swap_space = GetSettingsInt(kPartitionSwapPartitionSize);
+  const qint64 swap_sectors = swap_space * kMebiByte / unallocated.sector_size;
+  ok = createPrimaryPartition(unallocated,
+                              PartitionType::Normal,
+                              true,
+                              FsType::LinuxSwap,
+                              "",
+                              swap_sectors);
+  if (!ok) {
+    qCritical() << "Failed to created swap partition:" << device;
+    return false;
+  }
+  Operation& swap_operation = operations_.last();
+  swap_operation.applyToVisual(device);
+
+  qDebug() << "with swap partition:" << device.partitions;
+  qDebug() << "operations:" << operations_;
+
+  if (device.partitions.length() != 3) {
+    qCritical() << "partitions mismatch, expected 3: " << device.partitions;
+    return false;
+  }
+
+  const qint64 kRootMaximumSize = 300 * kGibiByte;
+  const qint64 device_size = device.getByteLength();
+  const qint64 root_size = (device_size > kRootMaximumSize) ?
+                           kRootMaximumSize :
+                           device_size;
+  const qint64 root_sectors = root_size / device.sector_size;
+
+  unallocated = device.partitions.last();
+  ok = createPrimaryPartition(unallocated,
+                              PartitionType::Normal,
+                              true,
+                              FsType::Ext4,
+                              kMountPointRoot,
+                              root_sectors);
+  if (!ok) {
+    qCritical() << "Failed to create / partition:" << device;
+    return false;
+  }
+  qDebug() << "with root partition:" << device.partitions;
+  qDebug() << "operations:" << operations_;
 
   return true;
 }

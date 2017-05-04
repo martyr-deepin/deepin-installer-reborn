@@ -299,7 +299,7 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
   // * Create unallocated partition if orig_partition is larger than
   //   new_partition
 
-  qDebug() << "applyCreateVisual():" << partitions
+  qDebug() << "applyCreateVisual(), partitions:" << partitions
            << "orig partition:" << orig_partition
            << ", new_partition:" << new_partition;
   int index = PartitionIndex(partitions, orig_partition);

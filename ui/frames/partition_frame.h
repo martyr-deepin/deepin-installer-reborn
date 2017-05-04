@@ -64,8 +64,9 @@ class PartitionFrame : public QFrame {
   void initConnections();
   void initUI();
 
-  // Check current partition mode is simple mode or advanced mode.
-  bool isSimpleMode();
+  // Check current partition mode is simple mode or not.
+  bool isSimplePartitionMode();
+  bool isSimpleDiskMode();
 
   AdvancedPartitionFrame* advanced_partition_frame_ = nullptr;
   EditPartitionFrame* edit_partition_frame_ = nullptr;
@@ -77,7 +78,7 @@ class PartitionFrame : public QFrame {
   PartitionTableWarningFrame* partition_table_warning_frame_ = nullptr;
   PrepareInstallFrame* prepare_install_frame_ = nullptr;
   SelectBootloaderFrame* select_bootloader_frame_ = nullptr;
-  SimpleDiskFrame* simple_disk_partition_frame_ = nullptr;
+  SimpleDiskFrame* simple_disk_frame_ = nullptr;
   SimplePartitionFrame* simple_partition_frame_ = nullptr;
 
   TitleLabel* title_label_ = nullptr;
@@ -91,7 +92,7 @@ class PartitionFrame : public QFrame {
 
   PartitionModel* partition_model_ = nullptr;
   AdvancedPartitionDelegate* advanced_delegate_ = nullptr;
-  SimplePartitionDelegate* simple_delegate_ = nullptr;
+  SimplePartitionDelegate* simple_partition_delegate_ = nullptr;
   SimplePartitionDelegate* simple_disk_delegate_ = nullptr;
 
  private slots:

@@ -36,7 +36,9 @@ SimpleDiskFrame::SimpleDiskFrame(
   this->initConnections();
 }
 
-
+bool SimpleDiskFrame::validate() const {
+  return (button_group_->checkedButton() != nullptr);
+}
 
 void SimpleDiskFrame::initConnections() {
   // Repaint layout only when real device list is updated.
