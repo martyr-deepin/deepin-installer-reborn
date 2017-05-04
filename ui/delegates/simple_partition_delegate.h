@@ -91,6 +91,12 @@ class SimplePartitionDelegate : public QObject {
                        FsType fs_type,
                        const QString& mount_point);
 
+  // Create and append operations to whole device at |device_path|:
+  //  * A /boot partition;
+  //  * A linux-swap partition;
+  //  * A root partition;
+  bool formatWholeDevice(const QString& device_path, PartitionTableType type);
+
   // Save real device list when it is refreshed.
   void onDeviceRefreshed(const DeviceList& devices);
 

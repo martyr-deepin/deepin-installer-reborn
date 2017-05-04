@@ -586,6 +586,39 @@ void SimplePartitionDelegate::formatPartition(const Partition& partition,
   operations_.append(operation);
 }
 
+bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
+                                                PartitionTableType type) {
+
+  // Policy:
+  //  * Create new partition table (msdos);
+  //  * Create /boot with ext4, 500MiB;
+  //  * Create EFI if needed, with 300MiB;
+  //  * Create swap partition with 4GiB;
+  //  * Create / with ext4, remaining space;
+
+  const int device_index = DeviceIndex(virtual_devices_, device_path);
+  if (device_index == -1) {
+    qCritical() << "formatWholeDevice() device index out of range:"
+                << device_path;
+    return false;
+  }
+  Device& device = virtual_devices_[device_index];
+
+  // Add NewPartTable operation.
+  Device new_device = device;
+  new_device.partitions.clear();
+  new_device.table = type;
+  const Operation operation(new_device);
+  operations_.append(operation);
+  // Update virtual device property at the same time.
+  operation.applyToVisual(device);
+
+  qDebug() << "new partition table of device:" << device;
+
+  return true;
+}
+
+
 void SimplePartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
   real_devices_ = devices;
   operations_.clear();

@@ -36,6 +36,8 @@ SimpleDiskFrame::SimpleDiskFrame(
   this->initConnections();
 }
 
+
+
 void SimpleDiskFrame::initConnections() {
   // Repaint layout only when real device list is updated.
   connect(delegate_, &SimplePartitionDelegate::deviceRefreshed,
@@ -121,6 +123,17 @@ void SimpleDiskFrame::repaintDevices() {
   // Draw partitions.
   int row = 0, column = 0;
   for (const Device& device : delegate_->virtual_devices()) {
+    bool partition_busy = false;
+    for (const Partition& partition : device.partitions) {
+      if (partition.busy) {
+        partition_busy = true;
+        break;
+      }
+    }
+    if (partition_busy) {
+      qWarning() << "Partition on device is busy!" << device.path;
+      continue;
+    }
     SimpleDiskButton* button = new SimpleDiskButton(device);
 
     button_group_->addButton(button);
@@ -191,22 +204,16 @@ void SimpleDiskFrame::onPartitionButtonClicked() {
     return;
   }
 
-  // Check partition table type.
-//  const QString device_path = button->partition().device_path;
-//  if (!delegate_->isPartitionTableMatch(device_path)) {
-//    emit this->requestNewTable(device_path);
-//    return;
-//  }
-
-  // Update selected partition.
-//  delegate_->selectPartition(button->partition());
-
   button->setSelected(true);
 
   // Show install-tip at bottom of current checked button.
   this->showInstallTip(button);
 
-//  this->appendOperations();
+  // Reset simple operations.
+  delegate_->resetOperations();
+
+  delegate_->formatWholeDevice(button->device().path,
+                               PartitionTableType::MsDos);
 }
 
 }  // namespace installer

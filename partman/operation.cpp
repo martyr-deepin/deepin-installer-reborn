@@ -357,7 +357,16 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
 
 void Operation::applyNewTableVisual(Device& device) const {
   device.table = this->device.table;
-  device.partitions = this->device.partitions;
+  device.partitions.clear();
+  Partition free_partition;
+  free_partition.device_path = device.path;
+  free_partition.path = "";
+  free_partition.partition_number = -1;
+  free_partition.start_sector = 1;
+  free_partition.end_sector = device.length;
+  free_partition.sector_size = device.sector_size;
+  free_partition.type = PartitionType::Unallocated;
+  device.partitions.append(free_partition);
 
   // Update max primary partition number.
   if (device.table == PartitionTableType::MsDos) {

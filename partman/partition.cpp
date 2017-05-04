@@ -128,6 +128,7 @@ QDebug& operator<<(QDebug& debug, const Partition& partition) {
         << "type:" << partition.type
         << "status:" << partition.status
         << "os:" << partition.os
+        << "busy:" << partition.busy
         << "label:" << partition.label
         << "name:" << partition.name
         << "mount point:" << partition.mount_point
