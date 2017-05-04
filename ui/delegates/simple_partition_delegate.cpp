@@ -612,8 +612,6 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
   // Update virtual device property at the same time.
   operation.applyToVisual(device);
 
-  qDebug() << "new partition table of device:" << device;
-  qDebug() << "operations:" << operations_;
   if (device.partitions.length() == 0) {
     qCritical() << "partition is empty" << device;
     return false;
@@ -637,16 +635,7 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
   Operation& boot_operation = operations_.last();
   boot_operation.applyToVisual(device);
 
-  if (device.partitions.length() != 2) {
-    qCritical() << "partitions mismatch, expected 2:" << device;
-    return false;
-  }
-
-  qDebug() << "with /boot partition:" << device.partitions;
-  qDebug() << "operations:" << operations_;
-
   unallocated = device.partitions.last();
-  qDebug() << "Unallocated partition for swap:" << unallocated;
   // Create swap partition.
   const int swap_space = GetSettingsInt(kPartitionSwapPartitionSize);
   const qint64 swap_sectors = swap_space * kMebiByte / unallocated.sector_size;
@@ -662,14 +651,6 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
   }
   Operation& swap_operation = operations_.last();
   swap_operation.applyToVisual(device);
-
-  qDebug() << "with swap partition:" << device.partitions;
-  qDebug() << "operations:" << operations_;
-
-  if (device.partitions.length() != 3) {
-    qCritical() << "partitions mismatch, expected 3: " << device.partitions;
-    return false;
-  }
 
   const qint64 kRootMaximumSize = 300 * kGibiByte;
   const qint64 device_size = device.getByteLength();
@@ -689,8 +670,8 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
     qCritical() << "Failed to create / partition:" << device;
     return false;
   }
-  qDebug() << "with root partition:" << device.partitions;
-  qDebug() << "operations:" << operations_;
+
+  qDebug() << "operations for simple disk mode:" << operations_;
 
   return true;
 }
