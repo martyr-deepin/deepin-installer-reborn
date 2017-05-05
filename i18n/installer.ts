@@ -343,68 +343,68 @@
 <context>
     <name>installer::NewPartitionFrame</name>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="94"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="129"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="138"/>
         <source>New Partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="96"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="131"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="105"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="140"/>
         <source>Create a new partition and define the type and size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="97"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="137"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="106"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="98"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="143"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="107"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="152"/>
         <source>Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="99"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="148"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="108"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="157"/>
         <source>Filesystem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="100"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="154"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="109"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="163"/>
         <source>Mount point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="101"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="161"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="110"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="170"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="112"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="155"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="112"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="155"/>
         <source>End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="104"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="191"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="113"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="200"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="105"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="192"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="114"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="201"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
@@ -688,7 +688,7 @@
 <context>
     <name>installer::SimpleDiskFrame</name>
     <message>
-        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="54"/>
+        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="58"/>
         <source>Install here</source>
         <translation type="unfinished"></translation>
     </message>
@@ -862,20 +862,20 @@
 <context>
     <name>installer::SystemInfoTimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="148"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="125"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="163"/>
         <source>Select Time Zone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="111"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="149"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="126"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="164"/>
         <source>Mark your zone on the map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="112"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="151"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="127"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="166"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
