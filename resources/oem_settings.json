@@ -111,7 +111,7 @@
     "title": "默认密码",
     "name": "system_info_default_password",
     "description": "",
-    "type": "String"
+    "type": "Base64String"
   },
   {
     "title": "锁定密码",
