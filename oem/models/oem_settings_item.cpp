@@ -10,6 +10,7 @@
 #include <QSettings>
 
 #include "base/file_util.h"
+#include "base/string_util.h"
 #include "service/system_language.h"
 
 namespace installer {
@@ -233,7 +234,12 @@ void DumpSettingsItems(const OemSettingsItems& items,
   for (const OemSettingsItem& item : items) {
     const QString& item_name = item.name();
     if (item.value() != item.default_value()) {
-      settings.setValue(item_name, item.value());
+      if (item.value_type() == OemSettingsType::Base64String) {
+        const QString value_str = Base64Encode(item.value().toString());
+        settings.setValue(item_name, value_str);
+      } else {
+        settings.setValue(item_name, item.value());
+      }
     } else if (settings.contains(item_name)) {
       // Remove item from settings if its value equals to default value.
       settings.remove(item_name);
@@ -278,14 +284,30 @@ bool LoadSettingsItems(OemSettingsItems& items,
     if (!default_settings.contains(item_name)) {
       qWarning() << "Invalid key:" << item_name;
     }
-    const QVariant default_value(default_settings.value(item_name));
-    item.setDefaultValue(default_value);
 
-    // Read customized value from settings ini file if found.
-    if (settings.contains(item_name)) {
-      item.setValue(settings.value(item_name));
+    if (item.value_type() == OemSettingsType::Base64String) {
+      const QVariant default_value(default_settings.value(item_name));
+      const QString default_value_str = Base64Decode(default_value.toString());
+      item.setDefaultValue(default_value_str);
+
+      // Read customized value from settings ini file if found.
+      if (settings.contains(item_name)) {
+        const QVariant value = settings.value(item_name);
+        const QString value_str = Base64Decode(value.toString());
+        item.setValue(value_str);
+      } else {
+        item.setValue(default_value_str);
+      }
     } else {
-      item.setValue(default_value);
+      const QVariant default_value(default_settings.value(item_name));
+      item.setDefaultValue(default_value);
+
+      // Read customized value from settings ini file if found.
+      if (settings.contains(item_name)) {
+        item.setValue(settings.value(item_name));
+      } else {
+        item.setValue(default_value);
+      }
     }
 
     if (item.value_type() == OemSettingsType::Integer) {

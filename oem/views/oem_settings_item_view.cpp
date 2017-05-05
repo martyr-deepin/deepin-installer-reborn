@@ -14,7 +14,6 @@
 #include <QTextEdit>
 
 #include "base/file_util.h"
-#include "base/string_util.h"
 
 namespace installer {
 
@@ -184,8 +183,7 @@ void OemSettingsItemView::enableCustomValue(bool enable) {
 QVariant OemSettingsItemView::getCustomValue() {
   switch (item_.value_type()) {
     case OemSettingsType::Base64String: {
-      const QString content = custom_text_edit_->document()->toPlainText();
-      return Base64Encode(content);
+      return custom_text_edit_->document()->toPlainText();
     }
     case OemSettingsType::Boolean: {
       return custom_bool_->isChecked();
@@ -219,7 +217,7 @@ void OemSettingsItemView::updateCurrentValue() {
   } else {
     if (item_.value_type() == OemSettingsType::Base64String) {
       // Read decoded string.
-      value_->setText(Base64Decode(value));
+      value_->setText(value);
     } else {
       value_->setText(value);
     }
@@ -230,9 +228,8 @@ void OemSettingsItemView::updateCustomValue() {
   switch (item_.value_type()) {
     case OemSettingsType::Base64String: {
       const QString content = item_.value().toString();
-      const QString orig_content = Base64Decode(content);
       custom_text_edit_->blockSignals(true);
-      custom_text_edit_->setText(orig_content);
+      custom_text_edit_->setText(content);
       custom_text_edit_->blockSignals(false);
       break;
     }
