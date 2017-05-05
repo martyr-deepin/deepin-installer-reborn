@@ -16,6 +16,7 @@ def update_loongson_policy(settings_file):
     settings = (
         ("skip_virtual_machine_page", "true"),
         ("skip_select_language_page", "true"),
+        ("select_language_default_locale", "zh_CN"),
         ("system_info_disable_keyboard_page", "true"),
         ("system_info_disable_timezone_page", "true"),
         ("system_info_default_timezone", '"Asia/Shanghai"'),
@@ -41,6 +42,7 @@ def update_sw_policy(settings_file):
     settings = (
         ("skip_virtual_machine_page", "true"),
         ("skip_select_language_page", "true"),
+        ("select_language_default_locale", "zh_CN"),
         ("system_info_disable_keyboard_page", "true"),
         ("system_info_disable_timezone_page", "true"),
         ("system_info_default_timezone", '"Asia/Shanghai"'),
