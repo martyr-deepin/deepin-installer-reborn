@@ -9,6 +9,7 @@ ConditionKernelCommandLine=livecd-installer
 Type=oneshot
 RemainAfterExit=yes
 ExecStart=/usr/bin/deepin-installer-reborn-standalone
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
