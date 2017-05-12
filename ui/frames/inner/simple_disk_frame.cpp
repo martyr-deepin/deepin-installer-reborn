@@ -206,6 +206,7 @@ void SimpleDiskFrame::onPartitionButtonClicked() {
     return;
   }
 
+  const QString path = button->device().path;
   button->setSelected(true);
 
   // Show install-tip at bottom of current checked button.
@@ -214,7 +215,7 @@ void SimpleDiskFrame::onPartitionButtonClicked() {
   // Reset simple operations.
   delegate_->resetOperations();
 
-  delegate_->formatWholeDevice(button->device().path,
+  delegate_->formatWholeDevice(path,
                                PartitionTableType::MsDos);
 }
 

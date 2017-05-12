@@ -594,6 +594,7 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
   //  * Create /boot with ext4, 500MiB;
   //  * Create swap partition with 4GiB;
   //  * Create / with ext4, remaining space (at most 300GiB);
+  qDebug() << "formatWholeDevice()" << device_path;
 
   const int device_index = DeviceIndex(virtual_devices_, device_path);
   if (device_index == -1) {
@@ -602,6 +603,7 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
     return false;
   }
   Device& device = virtual_devices_[device_index];
+  qDebug() << "device selected to format:" << device;
 
   // Add NewPartTable operation.
   Device new_device = device;
