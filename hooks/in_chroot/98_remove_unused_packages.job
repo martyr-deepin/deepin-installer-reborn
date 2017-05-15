@@ -9,28 +9,6 @@
 # work any more in chroot environment.
 # So, always put this script to last step of in_chroot stage.
 
-if ! is_x86; then
-  # Only uninstall installer if not in x86 platform
-  apt-get -y purge deepin-installer-reborn
-  apt-get -y autoremove --purge
-  return 0
-fi
-
-declare -a UNUSED_PKGS
-
-DI_LUPIN=$(installer_get "DI_LUPIN")
-DI_LOCALE=$(installer_get "DI_LOCALE")
-LANG=${DI_LOCALE%.*}
-
-case ${LANG} in
-  zh_*|en_*)
-    UNUSED_PKGS+=(evince-common)
-  ;;
-  *)
-    UNUSED_PKGS+=(foxitreader)
-  ;;
-esac
-
 # Check whether btrfs filesystem is used in machine.
 detect_btrfs() {
   for i in $(lsblk -o FSTYPE | sed '/^$/d' | uniq); do
@@ -47,6 +25,7 @@ detect_vbox() {
   return 1
 }
 
+declare -a UNUSED_PKGS
 # Uninstall "deepin-installer-reborn" only if reboot_setup is false.
 if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
   UNUSED_PKGS+=(deepin-installer-reborn)
@@ -62,6 +41,21 @@ fi
 detect_btrfs || UNUSED_PKGS+=("btrfs-tools")
 [ x${DI_LUPIN} = "xtrue" ] || UNUSED_PKGS+=("lupin-support")
 detect_vbox || UNUSED_PKGS+=("virtualbox-guest-*")
+
+
+DI_LUPIN=$(installer_get "DI_LUPIN")
+DI_LOCALE=$(installer_get "DI_LOCALE")
+LANG=${DI_LOCALE%.*}
+
+case ${LANG} in
+  zh_*|en_*)
+    UNUSED_PKGS+=(evince-common)
+  ;;
+  *)
+    UNUSED_PKGS+=(foxitreader)
+  ;;
+esac
+
 
 # Check package existence.
 declare -a EXISTING_UNUSED_PKGS

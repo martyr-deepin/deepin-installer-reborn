@@ -1,0 +1,60 @@
+#!/bin/bash
+
+if ! is_sw;then
+    return 0
+fi
+
+if [ ! -d /media/cdrom/live/platform ];then
+    msg "/media/cdrom/live/platform is not exists!"
+    # failed when the directory is not exists
+    return 1
+fi
+
+SYSTEM_NAME=$(cat /proc/cpuinfo | grep "system type" | awk '{print $4}')
+msg "CPUTYPE=$SYSTEM_NAME"
+
+SRCPATH=/media/cdrom/live/platform/$SYSTEM_NAME
+rm -rf /boot/*
+rm -rf /lib/modules/*
+[ -d /media/cdrom/live/boot ] && cp -rf /media/cdrom/live/boot/* /boot/
+
+[ -f $SRCPATH/xorg.conf ] && install -Dm644 $SRCPATH/xorg.conf /etc/X11/xorg.conf
+
+# Replace kernel image and modules.
+BOOT=/boot
+if cat /proc/mounts | grep -e '/boot\s';then
+    BOOT=/boot/boot
+fi
+
+[ -d $SRCPATH/modules ] && cp -rf $SRCPATH/modules/* /lib/modules
+
+for _FILE in $(ls ${SRCPATH} | grep vmlinux | grep ${SYSTEM_NAME});do
+    install -Dm755 ${SRCPATH}/${_FILE} ${BOOT}/${_FILE}
+done
+
+for _KERVER in $(ls /lib/modules);do
+    if [ -d /lib/modules/${_KERVER} ];then
+        /usr/sbin/update-initramfs -c -k ${_KERVER} || true
+    fi
+done
+
+sed -i "/overlayfs/d" /etc/fstab
+
+DI_ROOT_PARTITION=$(installer_get "DI_ROOT_PARTITION")
+LOCALUUID=$(blkid -s UUID -o value ${DI_ROOT_PARTITION})
+
+mkdir -p ${BOOT}/grub
+
+msg "LOCALUUID: $LOCALUUID"
+if [ -f ${SRCPATH}/grub.cfg ];then 
+    KERVER=$(uname -r)
+    sed -e "s|root=|root=UUID=$LOCALUUID|g"  -e "s|@KERNEL_VERSION@|${KERVER}|g" ${SRCPATH}/grub.cfg > ${BOOT}/grub/grub.cfg
+elif [ -f ${SRCPATH}/grub.cfg.head ];then
+    cat ${SRCPATH}/grub.cfg.head > ${BOOT}/grub/grub.cfg
+    for _KERVER in $(ls /lib/modules);do
+        [ -d /lib/modules/${_KERVER} ] && \
+        sed -e "s|root=|root=UUID=$LOCALUUID|g"  -e "s|@KERNEL_VERSION@|${_KERVER}|g" ${SRCPATH}/grub.cfg.menu >> ${BOOT}/grub/grub.cfg
+    done
+fi
+
+return 0
