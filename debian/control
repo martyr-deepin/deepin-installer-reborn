@@ -37,7 +37,7 @@ Package: deepin-installer-reborn
 Architecture: any
 Depends:
     ${shlibs:Depends},
-    ${misc:Depends}
+    ${misc:Depends},
     btrfs-progs [i386 amd64],
     deepin-installer-timezones,
     dosfstools,
