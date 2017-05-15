@@ -47,7 +47,6 @@ class SimpleDiskFrame : public QFrame {
 
  private slots:
   void onDeviceRefreshed();
-  void onPartitionButtonClicked();
   void onPartitionButtonToggled(QAbstractButton* button,
                                 bool checked);
 };

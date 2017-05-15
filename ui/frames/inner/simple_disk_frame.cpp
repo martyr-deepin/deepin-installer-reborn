@@ -141,9 +141,6 @@ void SimpleDiskFrame::repaintDevices() {
     button_group_->addButton(button);
     grid_layout_->addWidget(button, row, column, Qt::AlignHCenter);
 
-    connect(button, &QPushButton::clicked,
-            this, &SimpleDiskFrame::onPartitionButtonClicked);
-
     column += 1;
     // Add rows.
     if (column >= kDiskColumns) {
@@ -177,8 +174,7 @@ void SimpleDiskFrame::onDeviceRefreshed() {
 
 void SimpleDiskFrame::onPartitionButtonToggled(QAbstractButton* button,
                                                bool checked) {
-  SimpleDiskButton* part_button =
-      dynamic_cast<SimpleDiskButton*>(button);
+  SimpleDiskButton* part_button = dynamic_cast<SimpleDiskButton*>(button);
   if (!part_button) {
     qCritical() << "no disk button is selected";
     return;
@@ -187,36 +183,22 @@ void SimpleDiskFrame::onPartitionButtonToggled(QAbstractButton* button,
   if (!checked) {
     // Deselect previous button.
     part_button->setSelected(false);
-    return;
+  } else {
+    // Hide tooltip.
+    install_tip_->hide();
+
+    const QString path = part_button->device().path;
+    qDebug() << "selected device path:" << path;
+    part_button->setSelected(true);
+
+    // Show install-tip at bottom of current checked button.
+    this->showInstallTip(part_button);
+
+    // Reset simple operations.
+    delegate_->resetOperations();
+
+    delegate_->formatWholeDevice(path, PartitionTableType::MsDos);
   }
-}
-
-void SimpleDiskFrame::onPartitionButtonClicked() {
-  // Clear warning message first.
-//  msg_label_->clear();
-
-  // Hide tooltip.
-  install_tip_->hide();
-
-  SimpleDiskButton* button =
-      dynamic_cast<SimpleDiskButton*>(this->sender());
-  Q_ASSERT(button);
-  if (!button) {
-    qCritical() << "no disk button is selected";
-    return;
-  }
-
-  const QString path = button->device().path;
-  button->setSelected(true);
-
-  // Show install-tip at bottom of current checked button.
-  this->showInstallTip(button);
-
-  // Reset simple operations.
-  delegate_->resetOperations();
-
-  delegate_->formatWholeDevice(path,
-                               PartitionTableType::MsDos);
 }
 
 }  // namespace installer
