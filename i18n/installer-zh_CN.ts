@@ -2,68 +2,68 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="113"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="125"/>
         <source>Do not use this partition</source>
         <translation>不使用此分区</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="120"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="138"/>
         <source>Swap partition</source>
         <translation>交换分区</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="163"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="184"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="181"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="212"/>
         <source>Freespace</source>
         <translation>可用空间</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="122"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="140"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="235"/>
+        <location filename="../partman/operation.cpp" line="239"/>
         <source>Create extended partition %1</source>
         <translation>新建扩展分区 %1</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="239"/>
+        <location filename="../partman/operation.cpp" line="243"/>
         <source>Create new partition %1, type is %2</source>
         <translation>新建%1分区，类型为%2</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="243"/>
+        <location filename="../partman/operation.cpp" line="247"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation>新建%1分区作为%2（挂载点）， 类型为%3</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="261"/>
+        <location filename="../partman/operation.cpp" line="265"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
         <translation>格式化%1分区作为%2（挂载点），类型为%3</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="269"/>
+        <location filename="../partman/operation.cpp" line="273"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
         <translation>使用%1分区作为%2（挂载点）</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="275"/>
+        <location filename="../partman/operation.cpp" line="279"/>
         <source>Format %1 and create %2 new partition table</source>
         <translation>全盘格式化 %1 并创建新的 %2 格式的分区表</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="252"/>
+        <location filename="../partman/operation.cpp" line="256"/>
         <source>Delete %1 partition</source>
         <translation>删除%1分区</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="257"/>
+        <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition, type is %2</source>
         <translation>格式化%1分区， 类型 为%2</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="281"/>
+        <location filename="../partman/operation.cpp" line="285"/>
         <source>Adjust the size of %1 partition</source>
         <translation>调整分区%1的大小</translation>
     </message>
@@ -76,12 +76,12 @@
 <context>
     <name>installer::AdvancedPartitionButton</name>
     <message>
-        <location filename="../ui/widgets/advanced_partition_button.cpp" line="91"/>
+        <location filename="../ui/widgets/advanced_partition_button.cpp" line="116"/>
         <source>Install here</source>
         <translation>安装到此</translation>
     </message>
     <message>
-        <location filename="../ui/widgets/advanced_partition_button.cpp" line="94"/>
+        <location filename="../ui/widgets/advanced_partition_button.cpp" line="119"/>
         <source>To be formatted</source>
         <translation>将被格式化</translation>
     </message>
@@ -89,66 +89,76 @@
 <context>
     <name>installer::AdvancedPartitionFrame</name>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="310"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
         <source>Add a Root partition to continue</source>
         <translation>需要添加一个Root分区才能继续安装</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="315"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>At least %1 GB is required for Root partition</source>
         <translation>根分区至少需要%1 GB磁盘空间</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="302"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
         <source>Add an EFI partition to continue</source>
         <translation>需要添加一个EFI分区才能继续安装</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="289"/>
-        <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>/boot 目录所在分区的文件系统类型只可以是 %1</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="293"/>
-        <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation>/boot 目录所在的分区应为硬盘的第一个分区</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="306"/>
-        <source>At least %1 MB is required for EFI partition</source>
-        <translation>EFI分区至少需要%1 MB磁盘空间</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="298"/>
-        <source>At least %1 MB is required for /boot partition</source>
-        <translation>/boot分区至少需要%1 MB磁盘空间</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="64"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="153"/>
-        <source>Change boot loader</source>
-        <translation>修改引导器</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="266"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="417"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
         <translation>发现%1处错误，修复后即可继续安装或切换到简单模式</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="270"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="421"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
         <translation>发现%1处错误，修复后即可继续安装或切换到简单模式</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="66"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="345"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="427"/>
+        <source>%1 error found, continue to install after fixed</source>
+        <translation>　发现％1错误，修复后即可继续安装</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="431"/>
+        <source>%1 errors found, continue to install after fixed</source>
+        <translation>　发现％1错误，修复后即可继续安装</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="478"/>
+        <source>The partition filesystem type of /boot directory can only be %1 </source>
+        <translation>/boot 目录所在分区的文件系统类型只可以是 %1</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="482"/>
+        <source>The partition of /boot directory should be the first partition on hard disk</source>
+        <translation>/boot 目录所在的分区应为硬盘的第一个分区</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
+        <source>At least %1 MB is required for EFI partition</source>
+        <translation>EFI分区至少需要%1 MB磁盘空间</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="487"/>
+        <source>At least %1 MB is required for /boot partition</source>
+        <translation>/boot分区至少需要%1 MB磁盘空间</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="75"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="157"/>
+        <source>Change boot loader</source>
+        <translation>修改引导器</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="77"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="537"/>
         <source>Done</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="68"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="160"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="347"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="79"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="164"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="539"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
@@ -206,44 +216,44 @@
 <context>
     <name>installer::EditPartitionFrame</name>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="111"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="171"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="120"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="183"/>
         <source>Edit Disk</source>
         <translation>磁盘编辑</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="113"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="173"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="122"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="185"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>请确定您已备份好重要数据，然后选择要安装的磁盘</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="115"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="206"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="124"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="218"/>
         <source>Filesystem</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="116"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="208"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="125"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="220"/>
         <source>Mount point</source>
         <translation>挂载点</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="117"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="210"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="126"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="222"/>
         <source>Format the partition</source>
         <translation>格式化该分区</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="118"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="253"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="127"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="265"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="119"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="254"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="128"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="266"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
@@ -287,14 +297,14 @@
 <context>
     <name>installer::InstallProgressFrame</name>
     <message>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="113"/>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="138"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="114"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="139"/>
         <source>Installing</source>
         <translation>正在安装</translation>
     </message>
     <message>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="116"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="141"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
         <translation>只需一杯咖啡的时间，您就可以体验deepin给您带来的畅快感</translation>
     </message>
@@ -436,32 +446,32 @@
 <context>
     <name>installer::PartitionFrame</name>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="58"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="163"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="60"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="175"/>
         <source>Select Installation Location</source>
         <translation>选择安装位置</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="60"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="165"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="62"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="177"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>请确定您已备份好重要数据，然后选择要安装的磁盘</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="62"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="173"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="64"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="185"/>
         <source>Simple</source>
         <translation>简单</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="63"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="179"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="65"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="191"/>
         <source>Advanced</source>
         <translation>高级</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="64"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="220"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="66"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="238"/>
         <source>Start installation</source>
         <translation>开始安装</translation>
     </message>
@@ -674,6 +684,14 @@
     </message>
 </context>
 <context>
+    <name>installer::SimpleDiskFrame</name>
+    <message>
+        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="54"/>
+        <source>Install here</source>
+        <translation>安装到此</translation>
+    </message>
+</context>
+<context>
     <name>installer::SimplePartitionFrame</name>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="61"/>
@@ -695,6 +713,11 @@
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="198"/>
         <source>Install here</source>
         <translation>安装到此</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="375"/>
+        <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
+        <translation>当前选择的是windows盘，安装deepin到此会导致windows系统无法启动，请确认后开始安装</translation>
     </message>
 </context>
 <context>
@@ -751,48 +774,48 @@
         <translation>重复密码</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="176"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="178"/>
         <source>This username already exists</source>
         <translation>此用户名存在</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="180"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="182"/>
         <source>The first letter must be in lowercase</source>
         <translation>首字母必须为小写</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="191"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="193"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>请输入长度大于%1，小于%2位用户名</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="214"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Please input computer name</source>
         <translation>请输入计算机名</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="222"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="224"/>
         <source>Computer name already exists, please input another one</source>
         <translation>计算机名被占用，请重新输入</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="227"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>请输入长度大于%1，小于%2位计算机名</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="251"/>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="267"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>请输入长度大于%1，小于%2位密码</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="259"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>密码必须包含英文（区分大小写）、数字或特殊符号（~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;）</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
         <source>The two passwords don&apos;t match</source>
         <translation>两次输入的密码不一致</translation>
     </message>
@@ -803,12 +826,12 @@
         <translation>下一步</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="185"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
         <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
         <translation>用户名必须包含英文（区分大小写）、数字或特殊符号（_-）</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="218"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
         <source>Computer name is invalid</source>
         <translation>计算机名无效</translation>
     </message>
@@ -837,20 +860,20 @@
 <context>
     <name>installer::SystemInfoTimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="108"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="137"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="148"/>
         <source>Select Time Zone</source>
         <translation>选择时区</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="109"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="138"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="111"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="149"/>
         <source>Mark your zone on the map</source>
         <translation>请在地图上标注您所在的区域</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="140"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="112"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="151"/>
         <source>Back</source>
         <translation>返回</translation>
     </message>

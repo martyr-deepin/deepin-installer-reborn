@@ -2,68 +2,68 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="113"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="125"/>
         <source>Do not use this partition</source>
         <translation>Jangan guna sekatan ini</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="120"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="138"/>
         <source>Swap partition</source>
         <translation>Silih sekatan</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="163"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="184"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="181"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="212"/>
         <source>Freespace</source>
         <translation>Ruang bebas</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="122"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="140"/>
         <source>Unknown</source>
         <translation>Tidak diketahui</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="235"/>
+        <location filename="../partman/operation.cpp" line="239"/>
         <source>Create extended partition %1</source>
         <translation>Cipta sekatan tambahan %1</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="239"/>
+        <location filename="../partman/operation.cpp" line="243"/>
         <source>Create new partition %1, type is %2</source>
         <translation>Cipta sekatan baharu %1, jenis ialah %2</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="243"/>
+        <location filename="../partman/operation.cpp" line="247"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation>Cipta sekatan baharu %1 sebagai %2 (titik lekap), jenis ialah %3</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="261"/>
+        <location filename="../partman/operation.cpp" line="265"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
         <translation>Format sekatan %1 sebagai %2 (titik lekap), jenis ialah %3</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="269"/>
+        <location filename="../partman/operation.cpp" line="273"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
         <translation>Guna sekatan %1 sebagai %2 (titik lekap)</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="275"/>
+        <location filename="../partman/operation.cpp" line="279"/>
         <source>Format %1 and create %2 new partition table</source>
         <translation>Format %1 dan cipta jadual sekatan baharu %2</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="252"/>
+        <location filename="../partman/operation.cpp" line="256"/>
         <source>Delete %1 partition</source>
         <translation>Padam sekatan %1</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="257"/>
+        <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition, type is %2</source>
         <translation>Format sekatan %1, jenis ialah %2</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="281"/>
+        <location filename="../partman/operation.cpp" line="285"/>
         <source>Adjust the size of %1 partition</source>
         <translation>Laras saiz bagi sekatan %1</translation>
     </message>
@@ -76,12 +76,12 @@
 <context>
     <name>installer::AdvancedPartitionButton</name>
     <message>
-        <location filename="../ui/widgets/advanced_partition_button.cpp" line="91"/>
+        <location filename="../ui/widgets/advanced_partition_button.cpp" line="116"/>
         <source>Install here</source>
         <translation>Pasang di sini</translation>
     </message>
     <message>
-        <location filename="../ui/widgets/advanced_partition_button.cpp" line="94"/>
+        <location filename="../ui/widgets/advanced_partition_button.cpp" line="119"/>
         <source>To be formatted</source>
         <translation>Akan diformat</translation>
     </message>
@@ -89,66 +89,76 @@
 <context>
     <name>installer::AdvancedPartitionFrame</name>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="310"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
         <source>Add a Root partition to continue</source>
         <translation>Tambah satu sekatan Root untuk teruskan</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="315"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>At least %1 GB is required for Root partition</source>
         <translation>Sekurang-kurangnya %1 GB diperlukan untuk sekatan Root</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="302"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
         <source>Add an EFI partition to continue</source>
         <translation>Tambah satu sekatan EFI untuk teruskan</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="289"/>
-        <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>Jenis sistem fail sekatan bagi direktori /boot hanya boleh jadi %1</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="293"/>
-        <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation>Sekatan bagi direktori /boot patut merupakan sekatan pertama pada cakera keras</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="306"/>
-        <source>At least %1 MB is required for EFI partition</source>
-        <translation>Sekurang-kurangnya %1 MB diperlukan untuk sekatan EFI</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="298"/>
-        <source>At least %1 MB is required for /boot partition</source>
-        <translation>Sekurang-kurangnya %1 MB diperlukan untuk sekatan /boot</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="64"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="153"/>
-        <source>Change boot loader</source>
-        <translation>Ubah pemuat but</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="266"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="417"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
         <translation>%1 ralat ditemui, baiki untuk teruskan pemasangan atau beralih ke mod ringkas</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="270"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="421"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
         <translation>%1 ralat ditemui, baiki untuk teruskan pemasangan atau beralih ke mod ringkas</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="66"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="345"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="427"/>
+        <source>%1 error found, continue to install after fixed</source>
+        <translation>%1 ralat ditemui, teruskan pemasangan selepas dibaiki</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="431"/>
+        <source>%1 errors found, continue to install after fixed</source>
+        <translation>%1 ralat ditemui, teruskan pemasangan selepas dibaiki</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="478"/>
+        <source>The partition filesystem type of /boot directory can only be %1 </source>
+        <translation>Jenis sistem fail sekatan bagi direktori /boot hanya boleh jadi %1</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="482"/>
+        <source>The partition of /boot directory should be the first partition on hard disk</source>
+        <translation>Sekatan bagi direktori /boot patut merupakan sekatan pertama pada cakera keras</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
+        <source>At least %1 MB is required for EFI partition</source>
+        <translation>Sekurang-kurangnya %1 MB diperlukan untuk sekatan EFI</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="487"/>
+        <source>At least %1 MB is required for /boot partition</source>
+        <translation>Sekurang-kurangnya %1 MB diperlukan untuk sekatan /boot</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="75"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="157"/>
+        <source>Change boot loader</source>
+        <translation>Ubah pemuat but</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="77"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="537"/>
         <source>Done</source>
         <translation>Selesai</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="68"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="160"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="347"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="79"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="164"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="539"/>
         <source>Delete</source>
         <translation>Padam</translation>
     </message>
@@ -206,44 +216,44 @@
 <context>
     <name>installer::EditPartitionFrame</name>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="111"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="171"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="120"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="183"/>
         <source>Edit Disk</source>
         <translation>Sunting Cakera</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="113"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="173"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="122"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="185"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Sila pastikan data penting telah disandar, kemudian pilih cakera yang hendak dipasangkan</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="115"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="206"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="124"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="218"/>
         <source>Filesystem</source>
         <translation>Sistem fail</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="116"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="208"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="125"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="220"/>
         <source>Mount point</source>
         <translation>Titik lekap</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="117"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="210"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="126"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="222"/>
         <source>Format the partition</source>
         <translation>Format sekatan</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="118"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="253"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="127"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="265"/>
         <source>Cancel</source>
         <translation>Batal</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="119"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="254"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="128"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="266"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -287,14 +297,14 @@
 <context>
     <name>installer::InstallProgressFrame</name>
     <message>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="113"/>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="138"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="114"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="139"/>
         <source>Installing</source>
         <translation>Memasang</translation>
     </message>
     <message>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="116"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="141"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
         <translation>Anda boleh mengalami keseronokan menggunakan deepin selepas menikmati secawan kopi</translation>
     </message>
@@ -436,32 +446,32 @@
 <context>
     <name>installer::PartitionFrame</name>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="58"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="163"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="60"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="175"/>
         <source>Select Installation Location</source>
         <translation>Pilih Lokasi Pemasangan</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="60"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="165"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="62"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="177"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Sila pastikan data penting telah disandar, kemudian pilih cakera yang hendak dipasangkan</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="62"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="173"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="64"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="185"/>
         <source>Simple</source>
         <translation>Ringkas</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="63"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="179"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="65"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="191"/>
         <source>Advanced</source>
         <translation>Lanjutan</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="64"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="220"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="66"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="238"/>
         <source>Start installation</source>
         <translation>Mulakan pemasangan</translation>
     </message>
@@ -674,6 +684,14 @@
     </message>
 </context>
 <context>
+    <name>installer::SimpleDiskFrame</name>
+    <message>
+        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="54"/>
+        <source>Install here</source>
+        <translation>Pasang di sini</translation>
+    </message>
+</context>
+<context>
     <name>installer::SimplePartitionFrame</name>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="61"/>
@@ -695,6 +713,11 @@
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="198"/>
         <source>Install here</source>
         <translation>Pasang di sini</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="375"/>
+        <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
+        <translation>Windows tidak akan membut jika memasang deepin dalam cakera Windows, sila sahkan untuk teruskan</translation>
     </message>
 </context>
 <context>
@@ -751,48 +774,48 @@
         <translation>Sahkan kata laluan</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="176"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="178"/>
         <source>This username already exists</source>
         <translation>Nama pengguna ini telah wujud</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="180"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="182"/>
         <source>The first letter must be in lowercase</source>
         <translation>Abjad pertama mesti dalam huruf kecil</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="191"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="193"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>Sila masukkan nama pengguna lebih dari %1 aksara dan kurang dari %2 aksara</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="214"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Please input computer name</source>
         <translation>Sila masukkan nama komputer</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="222"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="224"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Nama komputer sudah wujud, sila masukkan yang lain</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="227"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Sila masukkan nama komputer lebih dari %1 aksara dan kurang dari %2 aksara</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="251"/>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="267"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Sila masukkan kata laluan lebih dari %1 aksara dan kurang dari %2 aksara</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="259"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Kata laluan mesti mengandungi abjad bahasa Inggeris (sensitif-kata), nombor atau simbol khas (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Kedua-dua kata laluan tidak sepadan</translation>
     </message>
@@ -803,12 +826,12 @@
         <translation>Berikutnya</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="185"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
         <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
         <translation>Nama pengguna mesti mengandungi abjad bahasa Inggeris (sensitif-kata), nombor atau simbol khas (_-)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="218"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
         <source>Computer name is invalid</source>
         <translation>Nama komputer tidak sah</translation>
     </message>
@@ -837,20 +860,20 @@
 <context>
     <name>installer::SystemInfoTimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="108"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="137"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="148"/>
         <source>Select Time Zone</source>
         <translation>Pilih Zon Waktu</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="109"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="138"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="111"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="149"/>
         <source>Mark your zone on the map</source>
         <translation>Tandakan zon anda di atas peta</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="140"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="112"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="151"/>
         <source>Back</source>
         <translation>Undur</translation>
     </message>

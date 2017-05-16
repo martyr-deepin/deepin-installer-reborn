@@ -2,68 +2,68 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="113"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="125"/>
         <source>Do not use this partition</source>
         <translation>Nepoužívať tento oddiel</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="120"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="138"/>
         <source>Swap partition</source>
         <translation>Swapovací oddiel</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="163"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="184"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="181"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="212"/>
         <source>Freespace</source>
         <translation>Voľný priestor</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="122"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="140"/>
         <source>Unknown</source>
         <translation>Neznámy</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="235"/>
+        <location filename="../partman/operation.cpp" line="239"/>
         <source>Create extended partition %1</source>
         <translation>Vytvoriť rozšírený oddiel %1</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="239"/>
+        <location filename="../partman/operation.cpp" line="243"/>
         <source>Create new partition %1, type is %2</source>
         <translation>Vytvoriť nový oddiel %1, typ %2</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="243"/>
+        <location filename="../partman/operation.cpp" line="247"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation>Vytvoriť nový oddiel %1 ako %2 (prípojný bod), typ %3</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="261"/>
+        <location filename="../partman/operation.cpp" line="265"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
         <translation>Formátovať %1 oddiel ako %2 (prípojný bod), typ %3</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="269"/>
+        <location filename="../partman/operation.cpp" line="273"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
         <translation>Použiť %1 oddiel ako %2 (prípojný bod)</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="275"/>
+        <location filename="../partman/operation.cpp" line="279"/>
         <source>Format %1 and create %2 new partition table</source>
         <translation>Formátovať %1 a vytvoriť %2 novú tabuľku oddielu</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="252"/>
+        <location filename="../partman/operation.cpp" line="256"/>
         <source>Delete %1 partition</source>
         <translation>Odstrániť %1 oddiel</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="257"/>
+        <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition, type is %2</source>
         <translation>Formátovať %1 oddiel, typ %2</translation>
     </message>
     <message>
-        <location filename="../partman/operation.cpp" line="281"/>
+        <location filename="../partman/operation.cpp" line="285"/>
         <source>Adjust the size of %1 partition</source>
         <translation>Nastaviť veľkosť %1 oddielu</translation>
     </message>
@@ -76,12 +76,12 @@
 <context>
     <name>installer::AdvancedPartitionButton</name>
     <message>
-        <location filename="../ui/widgets/advanced_partition_button.cpp" line="91"/>
+        <location filename="../ui/widgets/advanced_partition_button.cpp" line="116"/>
         <source>Install here</source>
         <translation>Tu inštalovať</translation>
     </message>
     <message>
-        <location filename="../ui/widgets/advanced_partition_button.cpp" line="94"/>
+        <location filename="../ui/widgets/advanced_partition_button.cpp" line="119"/>
         <source>To be formatted</source>
         <translation>Formátovaný</translation>
     </message>
@@ -89,66 +89,76 @@
 <context>
     <name>installer::AdvancedPartitionFrame</name>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="310"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
         <source>Add a Root partition to continue</source>
         <translation>Pridať root oddiel a pokračovať</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="315"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>At least %1 GB is required for Root partition</source>
         <translation>Aspoň %1 GB je vyžadovaných pre root oddiel</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="302"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
         <source>Add an EFI partition to continue</source>
         <translation>Pridať EFI oddiel a pokračovať</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="289"/>
-        <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>Typ oddielu súborového systému /boot môže byť len %1</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="293"/>
-        <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation>Oddiel /boot adresára by mal byť prvý oddiel na pevnom disku</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="306"/>
-        <source>At least %1 MB is required for EFI partition</source>
-        <translation>Aspoň %1 MB je vyžadovaných pre EFI oddiel</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="298"/>
-        <source>At least %1 MB is required for /boot partition</source>
-        <translation>Aspoň %1 MB je vyžadovaných pre /boot oddiel</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="64"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="153"/>
-        <source>Change boot loader</source>
-        <translation>Zmeniť zavádzač</translation>
-    </message>
-    <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="266"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="417"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
         <translation>%1 zistená chyba, opravte ich a pokračujte v inštalácii alebo sa prepnite do jednoduchého režimu</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="270"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="421"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
         <translation>%1 zistených chýb, opravte ich a pokračujte v inštalácii alebo sa prepnite do jednoduchého režimu</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="66"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="345"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="427"/>
+        <source>%1 error found, continue to install after fixed</source>
+        <translation>%1 zistená chyba, pokračujte v inštalácii po oprave</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="431"/>
+        <source>%1 errors found, continue to install after fixed</source>
+        <translation>%1 zistených chýb, pokračujte v inštalácii po oprave</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="478"/>
+        <source>The partition filesystem type of /boot directory can only be %1 </source>
+        <translation>Typ oddielu súborového systému /boot môže byť len %1</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="482"/>
+        <source>The partition of /boot directory should be the first partition on hard disk</source>
+        <translation>Oddiel /boot adresára by mal byť prvý oddiel na pevnom disku</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
+        <source>At least %1 MB is required for EFI partition</source>
+        <translation>Aspoň %1 MB je vyžadovaných pre EFI oddiel</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="487"/>
+        <source>At least %1 MB is required for /boot partition</source>
+        <translation>Aspoň %1 MB je vyžadovaných pre /boot oddiel</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="75"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="157"/>
+        <source>Change boot loader</source>
+        <translation>Zmeniť zavádzač</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="77"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="537"/>
         <source>Done</source>
         <translation>Hotovo</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="68"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="160"/>
-        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="347"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="79"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="164"/>
+        <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="539"/>
         <source>Delete</source>
         <translation>Odstrániť</translation>
     </message>
@@ -206,44 +216,44 @@
 <context>
     <name>installer::EditPartitionFrame</name>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="111"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="171"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="120"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="183"/>
         <source>Edit Disk</source>
         <translation>Upraviť disk</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="113"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="173"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="122"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="185"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Prosím uistite sa, že všetky dôležité dáta ste si zazálohovali, potom vyberte disk pre inštaláciu</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="115"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="206"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="124"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="218"/>
         <source>Filesystem</source>
         <translation>Systém súborov</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="116"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="208"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="125"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="220"/>
         <source>Mount point</source>
         <translation>Prípojný bod</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="117"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="210"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="126"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="222"/>
         <source>Format the partition</source>
         <translation>Naformátovať oddiel</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="118"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="253"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="127"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="265"/>
         <source>Cancel</source>
         <translation>Zrušiť</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="119"/>
-        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="254"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="128"/>
+        <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="266"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -287,14 +297,14 @@
 <context>
     <name>installer::InstallProgressFrame</name>
     <message>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="113"/>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="138"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="114"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="139"/>
         <source>Installing</source>
         <translation>Inštalujem</translation>
     </message>
     <message>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="115"/>
-        <location filename="../ui/frames/install_progress_frame.cpp" line="140"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="116"/>
+        <location filename="../ui/frames/install_progress_frame.cpp" line="141"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
         <translation>Zažite neuveriteľnú radosť zo systému deepin, už len po jednej šálke kávy</translation>
     </message>
@@ -436,32 +446,32 @@
 <context>
     <name>installer::PartitionFrame</name>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="58"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="163"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="60"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="175"/>
         <source>Select Installation Location</source>
         <translation>Výber umiestnenia inštalácie</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="60"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="165"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="62"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="177"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Prosím uistite sa, že všetky dôležité dáta ste si zazálohovali, potom vyberte disk pre inštaláciu</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="62"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="173"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="64"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="185"/>
         <source>Simple</source>
         <translation>Jednoduché</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="63"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="179"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="65"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="191"/>
         <source>Advanced</source>
         <translation>Pokročilé</translation>
     </message>
     <message>
-        <location filename="../ui/frames/partition_frame.cpp" line="64"/>
-        <location filename="../ui/frames/partition_frame.cpp" line="220"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="66"/>
+        <location filename="../ui/frames/partition_frame.cpp" line="238"/>
         <source>Start installation</source>
         <translation>Začať inštaláciu</translation>
     </message>
@@ -674,6 +684,14 @@
     </message>
 </context>
 <context>
+    <name>installer::SimpleDiskFrame</name>
+    <message>
+        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="54"/>
+        <source>Install here</source>
+        <translation>Tu inštalovať</translation>
+    </message>
+</context>
+<context>
     <name>installer::SimplePartitionFrame</name>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="61"/>
@@ -695,6 +713,11 @@
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="198"/>
         <source>Install here</source>
         <translation>Tu inštalovať</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="375"/>
+        <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
+        <translation>Windows sa nespustí, ak sa na disk Windows nainštaluje deepin, potvrďte pokračovanie</translation>
     </message>
 </context>
 <context>
@@ -751,48 +774,48 @@
         <translation>Potvrdiť heslo</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="176"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="178"/>
         <source>This username already exists</source>
         <translation>Toto meno používateľa už existuje</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="180"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="182"/>
         <source>The first letter must be in lowercase</source>
         <translation>Prvé písmeno musí byť malými písmenami</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="191"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="193"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>Zadajte prosím meno používateľa dlhšie ako %1 znakov a kratšie ako %2 znaky</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="214"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Please input computer name</source>
         <translation>Prosím vložte názov počítača</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="222"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="224"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Názov počítača už existuje, prosím zadajte iný</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="227"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Zadajte prosím názov počítača dlhší ako %1 znakov a kratší ako %2 znaky</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="251"/>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="267"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Prosím zadajte heslo dlhšie ako %1 znakov a kratšie ako %2 znaky</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="259"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Meno používateľa musí obsahovať anglické písmená (veľké a malé písmená), číslice alebo špeciálne znaky (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Tieto dve heslá sa nezhodujú</translation>
     </message>
@@ -803,12 +826,12 @@
         <translation>Ďalej</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="185"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
         <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
         <translation>Meno používateľa musí obsahovať anglické písmená (veľké a malé písmená), číslice alebo špeciálne znaky (_-)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="218"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
         <source>Computer name is invalid</source>
         <translation>Názov počítača je neplatný</translation>
     </message>
@@ -837,20 +860,20 @@
 <context>
     <name>installer::SystemInfoTimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="108"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="137"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="148"/>
         <source>Select Time Zone</source>
         <translation>Výber časového pásma</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="109"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="138"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="111"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="149"/>
         <source>Mark your zone on the map</source>
         <translation>Označte váš región na mape</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="140"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="112"/>
+        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="151"/>
         <source>Back</source>
         <translation>Späť</translation>
     </message>
