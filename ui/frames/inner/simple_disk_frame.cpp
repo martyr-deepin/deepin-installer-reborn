@@ -5,6 +5,7 @@
 #include "ui/frames/inner/simple_disk_frame.h"
 
 #include <QButtonGroup>
+#include <QEvent>
 #include <QGridLayout>
 #include <QLabel>
 #include <QScrollArea>
@@ -38,6 +39,14 @@ SimpleDiskFrame::SimpleDiskFrame(
 
 bool SimpleDiskFrame::validate() const {
   return (button_group_->checkedButton() != nullptr);
+}
+
+void SimpleDiskFrame::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::LanguageChange) {
+    tip_label_->setText(tr("Install here"));
+  } else {
+    QFrame::changeEvent(event);
+  }
 }
 
 void SimpleDiskFrame::initConnections() {

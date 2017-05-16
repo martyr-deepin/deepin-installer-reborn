@@ -25,6 +25,9 @@ class SimpleDiskFrame : public QFrame {
 
   bool validate() const;
 
+ protected:
+  void changeEvent(QEvent* event) override;
+
  private:
   void initConnections();
   void initUI();
