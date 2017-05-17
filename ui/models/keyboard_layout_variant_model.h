@@ -25,7 +25,8 @@ class KeyboardLayoutVariantModel : public QAbstractListModel {
   int rowCount(const QModelIndex& parent) const override;
 
   // Set variant list and emit dataChanged() signal.
-  void setVariantList(const XKbLayoutVariantList& variant_list);
+  void setVariantList(const XKbLayoutVariantList& variant_list,
+                      const QString& locale);
 
   // Get description at |index|.
   QString getVariantDescription(const QModelIndex& index) const;

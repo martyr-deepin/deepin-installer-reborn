@@ -29,7 +29,8 @@ const int kLayoutWidth = 860;
 }  // namespace
 
 SystemInfoKeyboardFrame::SystemInfoKeyboardFrame(QWidget* parent)
-    : QFrame(parent) {
+    : QFrame(parent),
+      current_locale_() {
   this->setObjectName("system_info_keyboard_frame");
 
   this->initUI();
@@ -38,8 +39,8 @@ SystemInfoKeyboardFrame::SystemInfoKeyboardFrame(QWidget* parent)
 
 void SystemInfoKeyboardFrame::readConf() {
   // Load xkb config first.
-  const QString locale = ReadLocale();
-  layout_model_->initLayout(locale);
+  current_locale_ = ReadLocale();
+  layout_model_->initLayout(current_locale_);
 
   const QString layout = GetSettingsString(kSystemInfoDefaultKeyboardLayout);
   if (layout.isEmpty()) {
@@ -163,7 +164,8 @@ void SystemInfoKeyboardFrame::onLayoutViewSelectionChanged(
   test_edit_->clear();
 
   // Update variant list.
-  variant_model_->setVariantList(layout_model_->getVariantList(current));
+  variant_model_->setVariantList(layout_model_->getVariantList(current),
+                                 current_locale_);
 
   // Scroll to top of variant view.
   variant_view_->scrollToTop();

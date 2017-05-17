@@ -35,19 +35,22 @@ int KeyboardLayoutVariantModel::rowCount(const QModelIndex& parent) const {
 }
 
 void KeyboardLayoutVariantModel::setVariantList(
-    const XKbLayoutVariantList& variant_list) {
+    const XKbLayoutVariantList& variant_list, const QString& locale) {
+  Q_UNUSED(locale);
   this->beginResetModel();
 
   variant_list_ = variant_list;
-
-  // Sort variant list by description.
-  const QCollator collator(QLocale(qgetenv("LC_ALL")));
 
   if (variant_list_.isEmpty()) {
     qCritical() << "VariantList is empty! We shall never reach here!";
     this->endResetModel();
     return;
   }
+
+  // Sort variant list by description.
+  const QLocale curr_locale(locale);
+  QCollator collator(curr_locale);
+  collator.setCaseSensitivity(Qt::CaseInsensitive);
 
   // Sorting variant list by description, skipping the first item.
   std::sort(variant_list_.begin() + 1, variant_list_.end(),

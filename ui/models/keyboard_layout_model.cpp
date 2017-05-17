@@ -89,7 +89,8 @@ void KeyboardLayoutModel::initLayout(const QString& locale) {
   // Sort layout list by description.
   // Perform localized comparison.
   const QLocale curr_locale(locale);
-  const QCollator collator(curr_locale);
+  QCollator collator(curr_locale);
+  collator.setCaseSensitivity(Qt::CaseInsensitive);
   std::sort(layout_list_.begin(), layout_list_.end(),
             [&](const XkbLayout& a, const XkbLayout& b) -> bool {
               return collator.compare(a.description, b.description) < 0;

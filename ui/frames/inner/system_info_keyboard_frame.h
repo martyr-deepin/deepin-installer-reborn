@@ -51,6 +51,7 @@ class SystemInfoKeyboardFrame : public QFrame {
   KeyboardLayoutVariantModel* variant_model_ = nullptr;
   QLineEdit* test_edit_ = nullptr;
   NavButton* back_button_ = nullptr;
+  QString current_locale_;
 
  private slots:
   // Update variant list when new keyboard layout is selected.
