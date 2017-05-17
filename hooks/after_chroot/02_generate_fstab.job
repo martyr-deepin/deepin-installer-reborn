@@ -26,9 +26,8 @@ umount -v /target/media/cdrom
 if is_sw;then
     if cat /proc/mounts | grep -q /target/boot ;then
         cat >> /target/etc/fstab << EOF
-# Bind mount /boot
+# Bind mount /boot to make rootfs likes normal
 /boot/boot /boot none rw,bind  0 0
-EOF
 EOF
     fi
 fi
