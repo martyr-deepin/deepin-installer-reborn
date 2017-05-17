@@ -7,30 +7,71 @@
 # Enable all locales defined in language list.
 
 # NOTE(xushaohua): This script is used to speed up installer program.
-# Also it is ok to generate blur-image when installer program is startup,
-# it takes some seconds to minutes to do this job.
-# Call service/system_language.h::GenerateLocale() in SystemLanguageFrame
+# Also it is ok to generate blur-image when installer program starts up,
+# it takes some seconds to minutes to finish this job.
+# Call service/system_language::GenerateLocale() in SystemLanguageFrame
 # may also update system locale based on using settings, it is not so fluent
 # before switching to SystemInfoFrame.
-
 
 # Absolute path to installer misc folder.
 SHARE_DIR=/usr/share/deepin-installer-reborn
 
+# Check whether current platform is loongson or not.
+is_loongson() {
+  case $(uname -m) in
+    loongson | mips*)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+# Check whether current platform is sw or not.
+is_sw() {
+  case $(uname -m) in
+    sw*)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+# Check whether current platform is x86/x86_64 or not.
+is_x86() {
+  case $(uname -m) in
+    i386 | amd64 | x86 | x86_64)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 # Update /etc/locale.gen and generate new locale cache.
 # Or else neither timezone page nor keyboard layout page work well with
 # gettext.
+# Only enable en_US and zh_CN on sw platform.
 generate_locale() {
   local JSON="${SHARE_DIR}/resources/languages.json"
   local LOCALES
-  LOCALES=$(grep 'locale' "${JSON}" | awk '{ print $2 }' | \
-            sed 's/"//g'  | sed 's/,//g')
+  if is_sw; then
+    sed -i "s/# \(en_US\.UTF-8.*$\)/\1/g" /etc/locale.gen
+    sed -i "s/# \(zn_CN\.UTF-8.*$\)/\1/g" /etc/locale.gen
+  else
+    LOCALES=$(grep 'locale' "${JSON}" | awk '{ print $2 }' | \
+              sed 's/"//g'  | sed 's/,//g')
 
-  echo "locales: ${LOCALES}"
-  for LOCALE_NAME in $(echo "${LOCALES}"); do
-    echo "${LOCALE_NAME}"
-    sed -i "s/# \(${LOCALE_NAME}\.UTF-8.*$\)/\1/g" /etc/locale.gen
-  done
+    echo "locales: ${LOCALES}"
+    for LOCALE_NAME in $(echo "${LOCALES}"); do
+      echo "${LOCALE_NAME}"
+      sed -i "s/# \(${LOCALE_NAME}\.UTF-8.*$\)/\1/g" /etc/locale.gen
+    done
+  fi
 
   locale-gen
 }
