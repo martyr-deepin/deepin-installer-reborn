@@ -8,7 +8,7 @@
 # Also handles chroot environment.
 
 # Folder path of hooks.
-HOOKS_DIR=/tmp/installer-reborn
+HOOKS_DIR=/tmp/installer
 
 . "${HOOKS_DIR}/basic_utils.sh"
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(deepin-installer-reborn C CXX)
+project(deepin-installer C CXX)
 
 #set(CMAKE_C_COMPILER  /usr/bin/clang)
 #set(CMAKE_CXX_COMPILER  /usr/bin/clang++)
@@ -39,7 +39,7 @@ endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set(INSTALLER_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn)
+set(INSTALLER_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/deepin-installer)
 
 # Defines path to resource directories
 if (CMAKE_BUILD_TYPE MATCHES Debug)
@@ -454,8 +454,8 @@ set_source_files_properties(${INSTALLER_TRANSLATION_TS}
 qt5_add_translation(INSTALLER_TRANSLATION_QM ${INSTALLER_TRANSLATION_TS})
 add_custom_target(installer-qm-update DEPENDS ${INSTALLER_TRANSLATION_QM})
 
-add_executable(deepin-installer-reborn
-               app/deepin_installer_reborn.cpp
+add_executable(deepin-installer
+               app/deepin_installer.cpp
                ui/main_window.cpp
                ui/main_window.h
 
@@ -470,13 +470,13 @@ add_executable(deepin-installer-reborn
                third_party/qtermwidget/lib/kb-layouts/kb-layouts.qrc
                )
 
-target_link_libraries(deepin-installer-reborn ${LINK_LIBS})
-add_dependencies(deepin-installer-reborn installer-qm-update)
+target_link_libraries(deepin-installer ${LINK_LIBS})
+add_dependencies(deepin-installer installer-qm-update)
 
 
 # Set/get ini files.
 add_executable(deepin-installer-settings
-               app/deepin_installer_reborn_settings.cpp)
+               app/deepin_installer_settings.cpp)
 
 target_link_libraries(deepin-installer-settings ${QtCore_LIBS})
 
@@ -539,14 +539,14 @@ target_link_libraries(deepin-installer-xrandr-switchy
                       )
 
 
-# standalone deepin-installer-reborn
-add_executable(deepin-installer-reborn-standalone
+# standalone deepin-installer
+add_executable(deepin-installer-standalone
 
-               app/deepin_installer_reborn_standalone.c
+               app/deepin_installer_standalone.c
                third_party/xinit/xinit.c
                third_party/xinit/xinit.h
                )
-target_link_libraries(deepin-installer-reborn-standalone
+target_link_libraries(deepin-installer-standalone
                       ${X11_LIBRARIES}
                       )
 # Unsquashfs progress
@@ -714,7 +714,7 @@ add_executable(timezone-frame-test
 target_link_libraries(timezone-frame-test ${Qt_LIBS})
 
 # Unittest
-add_executable(deepin-installer-reborn-tests
+add_executable(deepin-installer-tests
                app/unittest_main.cpp
 
                ${BASE_FILES}
@@ -732,13 +732,13 @@ add_executable(deepin-installer-reborn-tests
                ui/delegates/timezone_map_util.cpp
                ui/delegates/timezone_map_util.h
                )
-target_link_libraries(deepin-installer-reborn-tests
+target_link_libraries(deepin-installer-tests
                       ${LINK_LIBS}
                       gtest
                       )
 
 # Unittest with root privilege
-add_executable(deepin-installer-reborn-root-tests
+add_executable(deepin-installer-root-tests
                app/root_unittest_main.cpp
 
                ${BASE_FILES}
@@ -746,7 +746,7 @@ add_executable(deepin-installer-reborn-root-tests
                ${SYSINFO_FILES}
                ${ROOT_UNITTEST_FILES}
                )
-target_link_libraries(deepin-installer-reborn-root-tests
+target_link_libraries(deepin-installer-root-tests
                       ${LINK_LIBS}
                       gtest
                       )
@@ -769,10 +769,10 @@ target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 
 ## Installation
 install(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-first-boot-pkexec
-        ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-reborn-pkexec
+        ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-pkexec
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reborn-standalone
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-standalone
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs

@@ -33,7 +33,7 @@ Depends:
 Description: Language package for timezone names
  Installer language package for timezone names
 
-Package: deepin-installer-reborn
+Package: deepin-installer
 Architecture: any
 Depends:
     ${shlibs:Depends},
@@ -56,7 +56,7 @@ Depends:
     x11-xserver-utils,
     xfsprogs [i386 amd64],
     xkb-data
-Description: Reborn version of deepin installer
+Description: Release version of deepin installer
  New version of deepin-installer, rewritten with Qt5.
 
 Package: deepin-installer-oem
@@ -64,6 +64,6 @@ Architecture: any
 Depends:
     ${shlibs:Depends},
     ${misc:Depends},
-    deepin-installer-reborn
-Description: OEM tool for deepin-installer-reborn
- OEM tool for deepin-installer-reborn
+    deepin-installer
+Description: OEM tool for deepin-installer
+ OEM tool for deepin-installer

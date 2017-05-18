@@ -1,7 +1,7 @@
 if (${INSTALLER_BUILD_ARCH} MATCHES "x86")
   install(
       DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
-      DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn/resources/slide
+      DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources/slide
       PATTERN "zh_CN/20-wps.png" EXCLUDE
       PATTERN "zh_CN/21-youdao-dict.png" EXCLUDE
       PATTERN "CMakeLists.txt" EXCLUDE
@@ -9,7 +9,7 @@ if (${INSTALLER_BUILD_ARCH} MATCHES "x86")
 elseif(${INSTALLER_BUILD_ARCH} MATCHES "sw")
   install(
       DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
-      DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn/resources/slide
+      DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources/slide
       PATTERN "default/02-deepin-app-store.png" EXCLUDE
       PATTERN "default/10-deepin-remote-assistance.png" EXCLUDE
       PATTERN "default/17-skype.png" EXCLUDE
@@ -27,7 +27,7 @@ elseif(${INSTALLER_BUILD_ARCH} MATCHES "sw")
 elseif(${INSTALLER_BUILD_ARCH} MATCHES "mips")
   install(
       DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
-      DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn/resources/slide
+      DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources/slide
       PATTERN "default/10-deepin-remote-assistance.png" EXCLUDE
       PATTERN "default/17-skype.png" EXCLUDE
       PATTERN "zh_CN/10-deepin-remote-assistance.png" EXCLUDE

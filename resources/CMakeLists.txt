@@ -6,7 +6,7 @@ install(
     ${CMAKE_CURRENT_SOURCE_DIR}/oem_settings.json
     ${CMAKE_CURRENT_SOURCE_DIR}/reserved_usernames
     ${CMAKE_CURRENT_SOURCE_DIR}/timezone_alias
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn/resources
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
 )
 
 # Install PolicyKit file.
@@ -18,13 +18,13 @@ install(
 
 install(
     FILES ${CMAKE_CURRENT_SOURCE_DIR}/deepin-installer-oem.desktop
-    ${CMAKE_CURRENT_SOURCE_DIR}/deepin-installer-reborn.desktop
+    ${CMAKE_CURRENT_SOURCE_DIR}/deepin-installer.desktop
     DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications
 )
 
 install(
     FILES ${CMAKE_CURRENT_SOURCE_DIR}/deepin-installer-oem.svg
-    ${CMAKE_CURRENT_SOURCE_DIR}/deepin-installer-reborn.svg
+    ${CMAKE_CURRENT_SOURCE_DIR}/deepin-installer.svg
     DESTINATION ${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps
 )
 
@@ -37,16 +37,16 @@ message(${INSTALLER_BUILD_ARCH})
 
 if (${INSTALLER_BUILD_ARCH} MATCHES "x86")
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/default_settings.ini
-          DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn/resources
+          DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
           )
 elseif(${INSTALLER_BUILD_ARCH} MATCHES "sw")
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/sw_default_settings.ini
-          DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn/resources
+          DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
           RENAME default_settings.ini
           )
 elseif(${INSTALLER_BUILD_ARCH} MATCHES "mips")
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/loongson_default_settings.ini
-          DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer-reborn/resources
+          DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
           RENAME default_settings.ini
           )
 else()

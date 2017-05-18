@@ -24,7 +24,7 @@ blur_image() {
 readonly ARGS_NUM=$#
 if [ "${ARGS_NUM}" -eq 0 ]; then
   blur_image /usr/share/backgrounds/default_background.jpg \
-    /usr/share/deepin-installer-reborn/resources/default_wallpaper.jpg
+    /usr/share/deepin-installer/resources/default_wallpaper.jpg
 elif [ "${ARGS_NUM}" -eq 2 ]; then
   blur_image "$1" "$2"
 else

@@ -14,7 +14,7 @@
 # before switching to SystemInfoFrame.
 
 # Absolute path to installer misc folder.
-SHARE_DIR=/usr/share/deepin-installer-reborn
+SHARE_DIR=/usr/share/deepin-installer
 
 # Check whether current platform is loongson or not.
 is_loongson() {

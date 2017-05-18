@@ -35,7 +35,7 @@ generate_installer_helper() {
   cat > "${HELPER_FILE}" <<EOF
 #!/bin/sh
 gconftool-2 --set --type=bool /apps/gksu/display-no-pass-info false || true
-gksudo -- /usr/bin/deepin-installer-reborn --conf "${CONF_FILE}" --log "${LOG_FILE}" --auto-install
+gksudo -- /usr/bin/deepin-installer --conf "${CONF_FILE}" --log "${LOG_FILE}" --auto-install
 EOF
 }
 

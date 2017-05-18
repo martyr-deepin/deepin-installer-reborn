@@ -16,4 +16,4 @@ deepin-installer-settings set \
 pkill -f dde-dock
 
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-pkexec "/usr/bin/deepin-installer-reborn" "$@"
+pkexec "/usr/bin/deepin-installer" "$@"

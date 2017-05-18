@@ -51,7 +51,7 @@ in this Software without prior written authorization from The Open Group.
 static char *displayNum = ":0";
 static char *default_server[] = {"X", "-nolisten", "tcp", "-noreset", "-br", ":0", NULL};
 
-static char *default_client[] = {"deepin-installer-reborn", NULL};
+static char *default_client[] = {"deepin-installer", NULL};
 static Display *xd = NULL;            /* server connection */
 int status;
 pid_t serverpid = -1;

@@ -9,7 +9,7 @@
 
 namespace installer {
 
-// Parse argument list for deepin-installer-reborn.
+// Parse argument list for deepin-installer.
 // Do not use it in first-boot-setup.
 class InstallerArgsParser {
  public:

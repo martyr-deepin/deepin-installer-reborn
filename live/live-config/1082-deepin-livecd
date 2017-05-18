@@ -10,7 +10,7 @@ generate_lightdm_conf() {
   local CONF_FILE="$1"
   cat > "${CONF_FILE}" <<EOF
 [Seat:*]
-greeter-setup-script=/usr/bin/deepin-installer-reborn-pkexec
+greeter-setup-script=/usr/bin/deepin-installer-pkexec
 EOF
 }
 

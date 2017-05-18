@@ -4,7 +4,7 @@
 # in the LICENSE file.
 
 # Remove unused packages
-# If `deepin-installer-reborn` is uninstalled, deepin-installer-settings
+# If `deepin-installer` is uninstalled, deepin-installer-settings
 # will be removed too. Both "installer_get" and "installer_set" will not
 # work any more in chroot environment.
 # So, always put this script to last step of in_chroot stage.
@@ -26,9 +26,9 @@ detect_vbox() {
 }
 
 declare -a UNUSED_PKGS
-# Uninstall "deepin-installer-reborn" only if reboot_setup is false.
+# Uninstall "deepin-installer" only if reboot_setup is false.
 if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
-  UNUSED_PKGS+=(deepin-installer-reborn)
+  UNUSED_PKGS+=(deepin-installer)
 fi
 
 if grep -q boot=casper /proc/cmdline; then

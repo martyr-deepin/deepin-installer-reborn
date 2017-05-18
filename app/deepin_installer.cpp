@@ -23,10 +23,10 @@ int main(int argc, char* argv[]) {
 
   QApplication app(argc, argv);
   app.setApplicationDisplayName("Deepin Installer Reborn");
-  app.setApplicationName("deepin-installer-reborn");
+  app.setApplicationName("deepin-installer");
   app.setApplicationVersion(installer::kAppVersion);
   app.setOrganizationDomain(installer::kOrganizationDomain);
-  app.setWindowIcon(QIcon(":/images/deepin_installer_reborn.svg"));
+  app.setWindowIcon(QIcon(":/images/deepin_installer.svg"));
 
   // Parse argument list.
   installer::InstallerArgsParser args_parser;
@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
   }
 
   // Initialize log service.
-  const char kLogFileName[] = "deepin-installer-reborn.log";
+  const char kLogFileName[] = "deepin-installer.log";
   QString log_file;
   if (!installer::HasRootPrivilege()) {
     qCritical() << "Root privilege is required!";

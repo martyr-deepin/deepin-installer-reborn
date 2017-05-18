@@ -9,7 +9,7 @@
 
 ## 权限
 需要 root 权限才可以执行这个程序, 不然无法正常进行硬盘分区及挂载操作.
-可以通过运行 deepin-installer-reborn-pkexec 这个脚本来取得 root 权限.
+可以通过运行 deepin-installer-pkexec 这个脚本来取得 root 权限.
 
 ## 选项
 * --log LOG_FILE, 将日志备份到 LOG_FILE.

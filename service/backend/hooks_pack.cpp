@@ -19,8 +19,8 @@ const char kBeforeChrootDir[] = "before_chroot";
 const char kInChrootDir[] = "in_chroot";
 const char kAfterChrootDir[] = "after_chroot";
 
-const char kTargetHooksDir[] = "/tmp/installer-reborn";
-const char kChrootTargetHooksDir[] = "/target/tmp/installer-reborn";
+const char kTargetHooksDir[] = "/tmp/installer";
+const char kChrootTargetHooksDir[] = "/target/tmp/installer";
 
 bool AddExecutable(const QString& path, bool recursive) {
   if (recursive) {

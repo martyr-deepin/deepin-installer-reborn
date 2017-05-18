@@ -29,6 +29,6 @@
 slide 目录的结果应该与 resources/slide 目录相同.
 比如, 简体中文界面, 幻灯片的查找顺序依次是:
 * ISO_ROOT/oem/slide/zh_CN
-* /usr/share/deepin-installer-reborn/resources/slide/zh_CN
+* /usr/share/deepin-installer/resources/slide/zh_CN
 * ISO_ROOT/oem/slide/default
-* /usr/share/deepin-installer-reborn/resources/slide/default
+* /usr/share/deepin-installer/resources/slide/default

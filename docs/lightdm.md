@@ -23,7 +23,7 @@ EOF
 [Desktop Entry]
 Name=LightDM GTK+ Greeter
 Comment=This runs the GTK+ greeter, it should only be run from LightDM
-Exec=deepin-installer-reborn
+Exec=deepin-installer
 Type=Application
 X-Ubuntu-Gettext-Domain=lightdm
 EOF
@@ -33,7 +33,7 @@ EOF
 只需要生成 lightdm.conf
 ```shell
 # cat > /etc/lightdm/lightdm.conf << EOF
-greeter-setup-script=/usr/bin/deepin-installer-reborn
+greeter-setup-script=/usr/bin/deepin-installer
 EOF
 ```
 因为 lightdm 会以 root 的身份运行 greeter-setup-script 指向的脚本.

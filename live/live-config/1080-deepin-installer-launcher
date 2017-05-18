@@ -19,7 +19,7 @@ Cmdline () {
 
 # Copy installer launcher file to Desktop.
 Config () {
-  local file=/usr/share/applications/deepin-installer-reborn.desktop
+  local file=/usr/share/applications/deepin-installer.desktop
   if [ -f "$file" ]; then
     install -d -o $LIVE_USERNAME -g $LIVE_USERNAME /home/$LIVE_USERNAME/Desktop
     install -D -o $LIVE_USERNAME -g $LIVE_USERNAME $file /home/$LIVE_USERNAME/Desktop/$(basename "$file")

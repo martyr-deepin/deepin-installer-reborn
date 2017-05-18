@@ -21,7 +21,7 @@ CONF_FILE=/etc/deepin-installer.conf
 
 # Purge installer package
 uninstall_installer() {
-  apt-get -y purge deepin-installer-reborn
+  apt-get -y purge deepin-installer
   apt-get -y autoremove --purge
 }
 

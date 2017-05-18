@@ -1,5 +1,5 @@
 # About
-Deepin Installer, reborn version.
+Deepin Installer, release version.
 
 # Dependencies
 * Qt 5.5+
@@ -22,7 +22,7 @@ Deepin Installer, reborn version.
 * No cut/copy/paste operations
 
 # Unit test
-Run `deepin-installer-reborn-tests`
+Run `deepin-installer-tests`
 
 # OEM tools
 Run `deepin-installer-oem`

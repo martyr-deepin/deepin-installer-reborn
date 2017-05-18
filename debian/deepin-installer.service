@@ -8,7 +8,7 @@ ConditionKernelCommandLine=livecd-installer
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/bin/deepin-installer-reborn-standalone
+ExecStart=/usr/bin/deepin-installer-standalone
 
 [Install]
 WantedBy=multi-user.target

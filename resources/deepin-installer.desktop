@@ -1,8 +1,8 @@
 [Desktop Entry]
 Categories=Settings;
 Comment=Installer for Linux Deepin
-Exec=deepin-installer-reborn-pkexec
-Icon=deepin-installer-reborn
+Exec=deepin-installer-pkexec
+Icon=deepin-installer
 Name=Install Deepin
 StartupNotify=false
 Terminal=false
