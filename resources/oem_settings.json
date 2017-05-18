@@ -235,6 +235,12 @@
     "type": "Boolean"
   },
   {
+    "title": "允许在高级分区页面创建 swpafile",
+    "name": "partition_enable_swap_file_in_advanced_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
     "title": "内存太小时自动创建 swapfile",
     "name": "partition_memory_threshold_for_swap_area",
     "description": "",

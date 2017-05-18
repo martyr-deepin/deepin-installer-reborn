@@ -881,6 +881,8 @@ void AdvancedPartitionDelegate::onManualPartDone(
     use_swap_file = false;
   } else if (!GetSettingsBool(kPartitionEnableSwapFile)) {
     use_swap_file = false;
+  } else if (!GetSettingsBool(kPartitionEnableSwapFileInAdvancedPage)) {
+    use_swap_file = false;
   } else {
     use_swap_file = IsSwapAreaNeeded();
   }
