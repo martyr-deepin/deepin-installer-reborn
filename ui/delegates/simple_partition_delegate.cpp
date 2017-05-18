@@ -781,6 +781,8 @@ void SimplePartitionDelegate::onManualPartDone(
     use_swap_file = false;
   } else if (!GetSettingsBool(kPartitionEnableSwapFile)) {
     use_swap_file = false;
+  } else if (GetSettingsBool(kPartitionForceSwapFileInSimplePage)) {
+    use_swap_file = true;
   } else {
     use_swap_file = IsSwapAreaNeeded();
   }

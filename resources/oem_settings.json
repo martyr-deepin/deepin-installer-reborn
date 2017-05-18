@@ -241,6 +241,12 @@
     "type": "Boolean"
   },
   {
+    "title": "强制在简单分区创建 swpafile",
+    "name": "partition_force_swap_file_in_simple_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
     "title": "内存太小时自动创建 swapfile",
     "name": "partition_memory_threshold_for_swap_area",
     "description": "",
