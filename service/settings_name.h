@@ -76,6 +76,8 @@ const char kPartitionEnableSimpleDiskPage[] =
 const char kPartitionSkipAdvancedPartitionPage[] =
     "partition_skip_advanced_partition_page";
 const char kPartitionEnableSwapFile[] = "partition_enable_swap_file";
+const char kPartitionEnableSwapFileInAdvancedPage[] =
+    "partition_enable_swap_file_in_advanced_page";
 const char kPartitionMemoryThresholdForSwapArea[] =
     "partition_memory_threshold_for_swap_area";
 const char kPartitionSwapPartitionSize[] = "partition_swap_partition_size";
