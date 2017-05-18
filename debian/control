@@ -47,6 +47,7 @@ Depends:
     ntfs-3g,
     os-prober,
     parted,
+    pciutils,
     reiserfsprogs [i386 amd64],
     squashfs-tools,
     tshark [i386 amd64],
