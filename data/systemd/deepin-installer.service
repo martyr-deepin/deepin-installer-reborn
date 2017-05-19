@@ -1,0 +1,12 @@
+[Unit]
+Description=live installer
+Wants=deepin-installer.target
+After=deepin-installer.target
+Conflits=plymouth-quit.service getty@tty1.service
+
+[Service]
+ExecStart=/usr/bin/deepin-installer-standalone
+Restart=always
+
+[Install]
+WantedBy=deepin-installer.target

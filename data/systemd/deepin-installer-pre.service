@@ -1,0 +1,15 @@
+[Unit]
+Description=deepin installer pre
+DefaultDependencies=no
+ConditionKernelCommandLine=livecd-installer
+Conflicts=shutdown.target
+Wants=systemd-udevd.service systemd-udev-trigger.service
+After=basic.target
+
+[Service]
+Type=oneshot
+ExecStart=-/bin/systemctl isolate deepin-installer.target
+RemainAfterExit=yes
+
+[Install]
+WantedBy=basic.target

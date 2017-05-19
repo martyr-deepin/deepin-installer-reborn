@@ -89,7 +89,7 @@ add_subdirectory(third_party/zlib_wrapper)
 # Import resource folders
 add_subdirectory(docs)
 add_subdirectory(hooks)
-add_subdirectory(live)
+add_subdirectory(data)
 add_subdirectory(resources)
 add_subdirectory(tools)
 
