@@ -25,15 +25,11 @@ rm -rf /lib/modules/*
   install -Dm644 $SRCPATH/xorg.conf /etc/X11/xorg.conf
 
 # Replace kernel image and modules.
-BOOT=/boot
-if cat /proc/mounts | grep -e '/boot\s'; then
-  BOOT=/boot/boot
-fi
 
 [ -d $SRCPATH/modules ] && cp -rf $SRCPATH/modules/* /lib/modules
 
 for _FILE in $(ls ${SRCPATH} | grep vmlinux | grep ${SYSTEM_NAME}); do
-  install -Dm755 ${SRCPATH}/${_FILE} ${BOOT}/${_FILE}
+  install -Dm755 ${SRCPATH}/${_FILE} /boot/${_FILE}
 done
 
 for _KERVER in $(ls /lib/modules); do
@@ -44,24 +40,28 @@ done
 
 sed -i "/overlayfs/d" /etc/fstab
 
-DI_ROOT_PARTITION=$(installer_get "DI_ROOT_PARTITION")
+DI_ROOT_PARTITION=$(cat /deepinhost/etc/deepin-installer.conf | grep ^DI_ROOT_PARTITION= | awk -F'=' '{print $2}')
 LOCALUUID=$(blkid -s UUID -o value ${DI_ROOT_PARTITION})
 
-mkdir -p ${BOOT}/grub
+mkdir -p /boot/grub
 
 msg "LOCALUUID: $LOCALUUID"
 if [ -f ${SRCPATH}/grub.cfg ]; then
   KERVER=$(uname -r)
   sed -e "s|root=|root=UUID=$LOCALUUID|g" -e "s|@KERNEL_VERSION@|${KERVER}|g" \
-    ${SRCPATH}/grub.cfg > ${BOOT}/grub/grub.cfg
+    ${SRCPATH}/grub.cfg > /boot/grub/grub.cfg
 elif [ -f ${SRCPATH}/grub.cfg.head ]; then
-  cat ${SRCPATH}/grub.cfg.head > ${BOOT}/grub/grub.cfg
+  cat ${SRCPATH}/grub.cfg.head > /boot/grub/grub.cfg
   for _KERVER in $(ls /lib/modules); do
-    [ -d /lib/modules/${_KERVER} ] && \
-      sed -e "s|root=|root=UUID=$LOCALUUID|g" \
-        -e "s|@KERNEL_VERSION@|${_KERVER}|g" \
-        ${SRCPATH}/grub.cfg.menu >> ${BOOT}/grub/grub.cfg
+    if [ -d /lib/modules/${_KERVER} ];then
+	  sed -e "s|root=|root=UUID=$LOCALUUID|g" -e "s|@KERNEL_VERSION@|${_KERVER}|g" ${SRCPATH}/grub.cfg.menu >> /boot/grub/grub.cfg
+    fi
   done
+fi
+
+if cat /deepinhost/etc/deepin-installer.conf | grep DI_MOUNTPOINTS | grep -q \=/boot ;then
+    mkdir -p /boot/boot
+    mv /boot/* /boot/boot/
 fi
 
 return 0
