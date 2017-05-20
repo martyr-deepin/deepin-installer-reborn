@@ -40,7 +40,8 @@ done
 
 sed -i "/overlayfs/d" /etc/fstab
 
-DI_ROOT_PARTITION=$(cat /deepinhost/etc/deepin-installer.conf | grep "^DI_ROOT_PARTITION=" | awk -F'=' '{print $2}')
+DI_ROOT_PARTITION=$(cat /deepinhost/etc/deepin-installer.conf | \
+  grep "^DI_ROOT_PARTITION=" | awk -F'=' '{print $2}')
 LOCALUUID=$(blkid -s UUID -o value ${DI_ROOT_PARTITION})
 
 mkdir -p /boot/grub
@@ -53,13 +54,16 @@ if [ -f ${SRCPATH}/grub.cfg ]; then
 elif [ -f ${SRCPATH}/grub.cfg.head ]; then
   cat ${SRCPATH}/grub.cfg.head > /boot/grub/grub.cfg
   for _KERVER in $(ls /lib/modules); do
-    if [ -d /lib/modules/${_KERVER} ];then
-	  sed -e "s|root=|root=UUID=$LOCALUUID|g" -e "s|@KERNEL_VERSION@|${_KERVER}|g" ${SRCPATH}/grub.cfg.menu >> /boot/grub/grub.cfg
+    if [ -d /lib/modules/${_KERVER} ]; then
+	  sed -e "s|root=|root=UUID=$LOCALUUID|g" \
+        -e "s|@KERNEL_VERSION@|${_KERVER}|g" \
+        ${SRCPATH}/grub.cfg.menu >> /boot/grub/grub.cfg
     fi
   done
 fi
 
-if cat /deepinhost/etc/deepin-installer.conf | grep DI_MOUNTPOINTS | grep -q -e "=/boot;" -e "=/boot$";then
+if cat /deepinhost/etc/deepin-installer.conf | grep DI_MOUNTPOINTS | \
+  grep -q -e "=/boot;" -e "=/boot$"; then
     msg "/boot split detected"
     mkdir -p /boot/boot
     mv /boot/* /boot/boot/

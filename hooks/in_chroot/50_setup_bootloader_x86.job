@@ -43,7 +43,7 @@ fi
 
 case ${BOOT} in
   "legacy")
-    if [ -e /etc/deepin-version ];then
+    if [ -e /etc/deepin-version ]; then
       _version=$(grep '^Version=' /etc/deepin-version | cut -d '=' -f2)
       _type=$(grep '^Type=' /etc/deepin-version | cut -d '=' -f2)
       BOOTLOADER_ID="Deepin ${_type} ${_version}"

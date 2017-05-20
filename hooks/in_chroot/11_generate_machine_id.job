@@ -6,8 +6,8 @@
 # try to fix systemd machine-id config at first boot
 
 oldMachineID="/deepinhost/var/cache/machine-id"
-if [ -f "${oldMachineID}" ] ;then
-  cp $oldMachineID /etc/
+if [ -f "${oldMachineID}" ]; then
+  install -m644 $oldMachineID /etc/
 else
   systemd-machine-id-setup
 fi

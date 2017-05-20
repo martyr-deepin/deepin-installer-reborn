@@ -17,7 +17,7 @@ DI_LOOP_ROOT_FILE=$(installer_get "DI_LOOP_ROOT_FILE")
 DI_MOUNTPOINTS=$(installer_get "DI_MOUNTPOINTS")
 
 # Mount for lupin
-if [ x${DI_LUPIN} = xtrue ];then
+if [ x${DI_LUPIN} = xtrue ]; then
   hostdev=`df ${DI_LUPIN_ROOT} | tail -1 | awk '{printf $1}'`
   installer_set "DI_HOST_DEV" "${hostdev}"
   mkdir -v /host
@@ -48,7 +48,7 @@ get_fstype() {
 find_target() {
   local target="$1"
   for p in $(cat /proc/mounts | awk '{print $2}'); do
-    if [ ${p} = "${target}" ];then
+    if [ ${p} = "${target}" ]; then
       echo "${target}"
       return 0
     fi
@@ -74,7 +74,7 @@ while [ "$n" -lt 10 ]; do
   n="$(($n + 1))"
 done
 
-if [ -z ${result} ];then
+if [ -z ${result} ]; then
   error "Failed to mount ${target}!"
 fi
 

@@ -24,7 +24,7 @@ mount -vt sysfs sysfs /target/sys || error "Failed to bind sysfs"
 mkdir -p /target/media/cdrom
 mount --bind ${CDROM} /target/media/cdrom || error "Failed to bind ${CDROM}"
 
-if [ x"${DI_UEFI}" = xtrue ];then
+if [ x"${DI_UEFI}" = xtrue ]; then
   mkdir -p /target/boot/efi
   mount ${DI_BOOTLOADER} /target/boot/efi || \
     error "Failed to mount bootloader ${DI_BOOTLOADER}"

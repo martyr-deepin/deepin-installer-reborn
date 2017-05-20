@@ -39,7 +39,7 @@ case ${_HOOK_FILE} in
       # Already in chroot env.
       # Host device is mounted at /target/deepinhost
       CONF_FILE="/deepinhost${CONF_FILE}"
-      if [ ! -f "${CONF_FILE}" ];then
+      if [ ! -f "${CONF_FILE}" ]; then
         error "Config file ${CONF_FILE} does not exists."
       fi
       . "${_HOOK_FILE}"
@@ -52,7 +52,7 @@ case ${_HOOK_FILE} in
     ;;
   *)
     # Run normal hooks.
-    if [ ! -f "${CONF_FILE}" ];then
+    if [ ! -f "${CONF_FILE}" ]; then
       error "Config file ${CONF_FILE} does not exists."
     fi
     . "${_HOOK_FILE}"

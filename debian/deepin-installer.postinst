@@ -26,7 +26,7 @@ generate_locale() {
   case $(dpkg --print-architecture) in
     amd64 | i386)
       LOCALES=$(grep 'locale' "${JSON}" | awk '{ print $2 }' | \
-              sed 's/"//g'  | sed 's/,//g')
+                sed 's/"//g'  | sed 's/,//g')
       echo "locales: ${LOCALES}"
       for LOCALE_NAME in $(echo "${LOCALES}"); do
         sed -i "s/# \(${LOCALE_NAME}\.UTF-8.*$\)/\1/g" /etc/locale.gen
@@ -48,11 +48,11 @@ blur_image() {
   local DST=$2
   local TMP=/tmp/installer-$(date +%s)-$(basename "${SRC}")
 
-  if which image-worsener >/dev/null;then
+  if which image-worsener >/dev/null; then
     image-worsener -crop -x1/4 ${SRC} ${TMP} && \
-    image-worsener -blur 40 -filter gaussian ${TMP} ${TMP} && \
-    image-worsener -crop -x4/1${TMP} ${TMP} 
-  elif which convert >/dev/null;then
+      image-worsener -blur 40 -filter gaussian ${TMP} ${TMP} && \
+      image-worsener -crop -x4/1${TMP} ${TMP}
+  elif which convert >/dev/null; then
     convert "${SRC}" -resize 25% -brightness-contrast -10 \
         -modulate 100,120,100 -blur 0x16 -resize 400% "${TMP}" 
   else

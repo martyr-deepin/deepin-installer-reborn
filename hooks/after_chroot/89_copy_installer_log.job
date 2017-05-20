@@ -4,8 +4,9 @@
 # in the LICENSE file.
 # Backup log to disk.
 
-if [ -f /var/log/deepin-installer.log ];then
-    install -Dm644 /var/log/deepin-installer.log /target/var/log/deepin-installer.log
+if [ -f /var/log/deepin-installer.log ]; then
+  install -Dm644 /var/log/deepin-installer.log \
+    /target/var/log/deepin-installer.log
 fi
 
 return 0

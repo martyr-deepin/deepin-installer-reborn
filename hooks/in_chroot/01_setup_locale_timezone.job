@@ -73,7 +73,7 @@ EOF
   fi
 
   # Check locale
-  if ls /usr/share/i18n/locales | grep -q "\<${LOCALE}\>";then
+  if ls /usr/share/i18n/locales | grep -q "\<${LOCALE}\>"; then
     msg "${LOCALE} is available"
   else
     msg "${LOCALE} is not available, Fallback to en_US"
