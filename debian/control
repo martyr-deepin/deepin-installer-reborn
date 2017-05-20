@@ -51,6 +51,7 @@ Depends:
     reiserfsprogs [i386 amd64],
     squashfs-tools,
     tshark [i386 amd64],
+    imageworsener [!i386 !amd64],
     udev,
     util-linux,
     x11-xserver-utils,
