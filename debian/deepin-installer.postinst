@@ -51,7 +51,7 @@ blur_image() {
   if which image-worsener >/dev/null; then
     image-worsener -crop -x1/4 ${SRC} ${TMP} && \
       image-worsener -blur 40 -filter gaussian ${TMP} ${TMP} && \
-      image-worsener -crop -x4/1${TMP} ${TMP}
+      image-worsener -crop -x4/1 ${TMP} ${TMP}
   elif which convert >/dev/null; then
     convert "${SRC}" -resize 25% -brightness-contrast -10 \
         -modulate 100,120,100 -blur 0x16 -resize 400% "${TMP}" 
