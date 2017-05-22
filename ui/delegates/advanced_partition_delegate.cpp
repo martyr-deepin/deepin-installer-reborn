@@ -785,6 +785,7 @@ void AdvancedPartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
 
 void AdvancedPartitionDelegate::onManualPartDone(
     const OperationList& real_operations) {
+  qDebug() << "onManualPartDone()" << real_operations;
   // Update operation list and virtual device list.
   operations_ = real_operations;
   virtual_devices_ = real_devices_;

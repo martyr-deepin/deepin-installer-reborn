@@ -54,7 +54,7 @@ blur_image() {
       image-worsener -crop -x4/1 ${TMP} ${TMP}
   elif which convert >/dev/null; then
     convert "${SRC}" -resize 25% -brightness-contrast -10 \
-        -modulate 100,120,100 -blur 0x16 -resize 400% "${TMP}" 
+        -modulate 100,120,100 -blur 0x16 -resize 400% "${TMP}"
   else
       echo "Please install imagemaic or image-worsener to blur image" >&2
   fi

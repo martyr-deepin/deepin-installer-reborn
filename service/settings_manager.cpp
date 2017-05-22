@@ -322,6 +322,11 @@ void WritePartitionInfo(const QString& root_disk,
                         const QString& root_partition,
                         const QString& boot_partition,
                         const QString& mount_points) {
+  qDebug() << "WritePartitionInfo()"
+           << " root_disk:" << root_disk
+           << ", root_partition:" << root_partition
+           << ", boot_partition:" << boot_partition
+           << ", mount_points:" << mount_points;
   QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
   settings.setValue("DI_ROOT_DISK", root_disk);
   settings.setValue("DI_ROOT_PARTITION", root_partition);

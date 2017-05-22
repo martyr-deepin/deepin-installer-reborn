@@ -309,6 +309,7 @@ bool FormatXfs(const QString& path, const QString& label) {
 
 // Make filesystem on |partition| based on its fs type.
 bool Mkfs(const Partition& partition) {
+  qDebug() << "Mkfs()" << partition;
   switch (partition.fs) {
     case FsType::Btrfs: {
       return FormatBtrfs(partition.path, partition.label);
