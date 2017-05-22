@@ -101,7 +101,7 @@ class PartitionFrame : public QFrame {
   void onNextButtonClicked();
 
   // Write partitioning settings to conf file and emit manualPartDone() signal.
-  void onManualPartDone(bool ok, const OperationList& real_operations);
+  void onManualPartDone(bool ok, const DeviceList& devices);
 
   // Notify delegate to do manual part.
   void onPrepareInstallFrameFinished();

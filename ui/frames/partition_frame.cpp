@@ -338,16 +338,15 @@ void PartitionFrame::onNextButtonClicked() {
   main_layout_->setCurrentWidget(prepare_install_frame_);
 }
 
-void PartitionFrame::onManualPartDone(bool ok,
-                                      const OperationList& real_operations) {
+void PartitionFrame::onManualPartDone(bool ok, const DeviceList& devices) {
   if (ok) {
     // Write settings to file.
     if (this->isSimplePartitionMode()) {
-      simple_partition_delegate_->onManualPartDone(real_operations);
+      simple_partition_delegate_->onManualPartDone(devices);
     } else if (this->isSimpleDiskMode()) {
-      simple_disk_delegate_->onManualPartDone(real_operations);
+      simple_disk_delegate_->onManualPartDone(devices);
     } else {
-      advanced_delegate_->onManualPartDone(real_operations);
+      advanced_delegate_->onManualPartDone(devices);
     }
   }
 

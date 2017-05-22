@@ -783,45 +783,29 @@ void AdvancedPartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
   emit this->deviceRefreshed(virtual_devices_);
 }
 
-void AdvancedPartitionDelegate::onManualPartDone(
-    const OperationList& real_operations) {
-  qDebug() << "onManualPartDone()" << real_operations;
-  // Update operation list and virtual device list.
-  operations_ = real_operations;
-  virtual_devices_ = real_devices_;
-  for (Device& device : virtual_devices_) {
-    for (Operation& operation : operations_) {
-      if (operation.orig_partition.device_path == device.path) {
-        operation.applyToVisual(device);
-      }
-    }
-  }
-  qDebug() << "AdvancedPartitionDelegate: onManualPartDone():"
-           << operations_ << virtual_devices_;
+void AdvancedPartitionDelegate::onManualPartDone(const DeviceList& devices) {
+  qDebug() << "onManualPartDone()" << devices;
 
   QString root_disk;
   QString root_path;
   QStringList mount_points;
   bool found_swap = false;
+  QString esp_path;
 
   // Check use-specified partitions with mount point.
-  for (const Operation& operation : operations_) {
-    const Partition& new_partition = operation.new_partition;
-    if (!new_partition.mount_point.isEmpty()) {
-      // Add used partitions to mount_point list.
-      const QString record(QString("%1=%2").arg(new_partition.path)
-                               .arg(new_partition.mount_point));
-      mount_points.append(record);
-      if (new_partition.mount_point == kMountPointRoot) {
-        root_disk = new_partition.device_path;
-        root_path = new_partition.path;
-      }
-    }
-  }
-
-  // Check linux-swap.
-  for (const Device& device : virtual_devices_) {
+  for (const Device& device : devices) {
     for (const Partition& partition : device.partitions) {
+      if (!partition.mount_point.isEmpty()) {
+        // Add used partitions to mount_point list.
+        const QString record(QString("%1=%2").arg(partition.path)
+                                 .arg(partition.mount_point));
+        mount_points.append(record);
+        if (partition.mount_point == kMountPointRoot) {
+          root_disk = partition.device_path;
+          root_path = partition.path;
+        }
+      }
+
       if (partition.fs == FsType::LinuxSwap) {
         found_swap = true;
 
@@ -829,40 +813,18 @@ void AdvancedPartitionDelegate::onManualPartDone(
         // NOTE(xushaohua): Multiple swap partitions may be set.
         const QString record(QString("%1=swap").arg(partition.path));
         mount_points.append(record);
+      } else if (partition.fs == FsType::EFI) {
+        // NOTE(xushaohua): There shall be only one EFI partition.
+        esp_path = partition.path;
+        break;
       }
     }
   }
 
-  if (!IsMBRPreferred(real_devices_)) {
+  if (!IsMBRPreferred(devices)) {
     // Enable EFI mode. First check newly created EFI partition. If not found,
     // check existing EFI partition.
     WriteUEFI(true);
-    QString esp_path;
-    for (const Operation& operation : operations_) {
-      if (operation.new_partition.fs == FsType::EFI) {
-        // NOTE(xushaohua): There shall be only one EFI partition.
-        esp_path = operation.new_partition.path;
-        break;
-      }
-    }
-
-    // If no new EFI partition is created, search in device list.
-    bool found_efi = false;
-    if (esp_path.isEmpty()) {
-      for (const Device& device : virtual_devices_) {
-        for (const Partition& partition : device.partitions) {
-          if (partition.fs == FsType::EFI) {
-            esp_path = partition.path;
-            found_efi = true;
-            break;
-          }
-        }
-
-        if (found_efi) {
-          break;
-        }
-      }
-    }
 
     if (esp_path.isEmpty()) {
       // We shall never reach here.
@@ -870,6 +832,7 @@ void AdvancedPartitionDelegate::onManualPartDone(
     }
     WritePartitionInfo(root_disk, root_path, esp_path, mount_points.join(';'));
   } else {
+    WriteUEFI(false);
     // In legacy mode.
     WritePartitionInfo(root_disk, root_path, bootloader_path_,
                        mount_points.join(';'));

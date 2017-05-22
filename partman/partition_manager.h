@@ -41,9 +41,8 @@ class PartitionManager : public QObject {
 
   // Emitted when manualPart() is done.
   // |ok| is true when all operations in operation list are done successfully,
-  // and |real_operations| contains updated operation information.
-  // Partition delegates shall update their operation list to |real_operations|.
-  void manualPartDone(bool ok, const OperationList& real_operations);
+  // and |devices| contains real device list with mount-point.
+  void manualPartDone(bool ok, const DeviceList& devices);
 
  private:
   void initConnections();

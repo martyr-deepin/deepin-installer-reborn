@@ -202,7 +202,22 @@ void PartitionManager::doManualPart(const OperationList& operations) {
     ok = operation.applyToDisk();
   }
 
-  emit this->manualPartDone(ok, real_operations);
+  DeviceList devices;
+  if (ok) {
+    devices = ScanDevices(false);
+    // Update mount point of real partitions.
+    for (Device& device : devices) {
+      for (Partition& partition : device.partitions) {
+        for (const Operation& operation : operations) {
+          if (operation.new_partition.path == partition.path) {
+            partition.mount_point = operation.new_partition.mount_point;
+          }
+        }
+      }
+    }
+  }
+
+  emit this->manualPartDone(ok, devices);
 }
 
 DeviceList ScanDevices(bool enable_os_prober) {
