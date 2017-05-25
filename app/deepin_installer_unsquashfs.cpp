@@ -178,8 +178,8 @@ bool CopyXAttr(const char* src_file, const char* dest_file) {
       // Target filesystem does not support extended attributes.
       ok = true;
     } else {
-      fprintf(stderr, "CopyXAttr() llistxattr() failed: %s\n", src_file);
-      perror("llistxattr() error");
+      fprintf(stdout, "CopyXAttr() llistxattr() failed: %s, %s\n", src_file,
+              strerror(errno));
       ok = false;
     }
   } else {
@@ -187,14 +187,12 @@ bool CopyXAttr(const char* src_file, const char* dest_file) {
     for (int ns = 0; ns < xlist_len; ns += strlen(&list[ns] + 1)) {
       value_len = lgetxattr(src_file, &list[ns], value, XATTR_NAME_MAX);
       if (value_len == -1) {
-        // FIXME(xushaohua):
-        fprintf(stderr, "CopyXAttr() could not get value: %s\n", src_file);
+        fprintf(stdout, "CopyXAttr() could not get value: %s\n", src_file);
         break;
       } else {
         if (lsetxattr(dest_file, &list[ns], value, size_t(value_len), 0) != 0) {
-          fprintf(stderr, "CopyXAttr() setxattr() failed: %s, %s, %s\n",
-                  dest_file, &list[ns], value);
-          perror("setxattr() error");
+          fprintf(stdout, "CopyXAttr() setxattr() failed: %s, %s, %s, %s\n",
+                  dest_file, &list[ns], value, strerror(errno));
           ok = false;
           break;
         }
