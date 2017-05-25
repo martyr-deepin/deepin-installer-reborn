@@ -7,3 +7,6 @@ export QT_SELECT=qt5
 
 override_dh_auto_configure:
 	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+
+override_dh_systemd_start:
+	dh_systemd_start --no-start
