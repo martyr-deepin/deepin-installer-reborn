@@ -3,14 +3,15 @@
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
+# Copy boot folder to loongson system.
+
 if ! is_loongson; then
   return 0
 fi
 
-TARGET=/target/boot/*
-# Copy boot folder to loongson system.
+TARGET=/target/boot
 
-rm -rf "${TARGET}" || error "Failed to remove boot"
+rm -rf ${TARGET}/* || error "Failed to remove boot"
 
 # Remove overlay filesystem item.
 sed -i "/overlay/d" /target/etc/fstab
