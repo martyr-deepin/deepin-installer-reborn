@@ -13,31 +13,6 @@ setup_default_dm() {
 EOF
 }
 
-# If reboot-setup is enabled, backup lightdm.conf and modify it to execute
-# deepin-installer-first-boot.
-prepare_lightdm_for_reboot_setup_mode() {
-  local CONF_FILE=/etc/lightdm/lightdm.conf
-  local TEMP_CONF_FILE=/etc/lightdm/lightdm.conf.real
-  if [ -f "${CONF_FILE}" ]; then
-    install -m644 "${CONF_FILE}" "${TEMP_CONF_FILE}"
-  fi
-
-  # Override lightdm.conf
-  cat > "${CONF_FILE}" <<EOF
-[Seat:*]
-greeter-setup-script=/usr/bin/deepin-installer-first-boot
-EOF
-}
-
-# Replace lightdm.conf with lightdm.conf.real.
-cleanup_reboot_setup_mode() {
-  local CONF_FILE=/etc/lightdm/lightdm.conf
-  local TEMP_CONF_FILE=/etc/lightdm/lightdm.conf.real
-  if [ -f "${TEMP_CONF_FILE}" ]; then
-    mv -f "${TEMP_CONF_FILE}" "${CONF_FILE}"
-  fi
-}
-
 enable_deepin_lightdm_greeter() {
   local CONF_FILE=/etc/lightdm/lightdm.conf
   if [ -f "${CONF_FILE}" ]; then
@@ -74,15 +49,7 @@ update_background() {
 main() {
   setup_default_dm
   update_background
-
-  # Do no replace greeter if reboot_setup is enabled during installation
-  # process.
-  # Instead, call this function in first_boot_setup.sh.
-  if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
-    enable_deepin_lightdm_greeter
-  else
-    prepare_lightdm_for_reboot_setup_mode
-  fi
+  enable_deepin_lightdm_greeter
 }
 
 main

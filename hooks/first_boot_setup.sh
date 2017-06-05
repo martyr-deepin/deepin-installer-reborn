@@ -17,7 +17,6 @@ CONF_FILE=/etc/deepin-installer.conf
 . ./in_chroot/03_configure_users.job
 . ./in_chroot/04_setup_keyboard.job
 . ./in_chroot/05_setup_avatar.job
-. ./in_chroot/57_configure_lightdm.job
 
 # Purge installer package
 uninstall_installer() {
@@ -25,17 +24,18 @@ uninstall_installer() {
   apt-get -y autoremove --purge
 }
 
+cleanup_first_boot() {
+  local FILE=/etc/deepin-installer-first-boot
+  [ -f "${FILE}" ] && rm -f "${FILE}"
+}
+
 main() {
-  setup_avatar && \
-  setup_keyboard && \
-  setup_locale_timezone && \
+  setup_avatar
+  setup_keyboard
+  setup_locale_timezone
   setup_username_password
 
-  # Restore lightdm.conf
-  cleanup_reboot_setup_mode
-
-  # Replace default lightdm greeter.
-  enable_deepin_lightdm_greeter
+  cleanup_first_boot
 
   uninstall_installer
 }

@@ -482,8 +482,8 @@ target_link_libraries(deepin-installer-settings ${QtCore_LIBS})
 
 
 # Reboot setup
-add_executable(deepin-installer-reboot-setup
-               app/deepin_installer_reboot_setup.cpp
+add_executable(deepin-installer-first-boot
+               app/deepin_installer_first_boot.cpp
                ui/first_boot_setup_window.cpp
                ui/first_boot_setup_window.h
 
@@ -493,7 +493,7 @@ add_executable(deepin-installer-reboot-setup
                ${SYSINFO_FILES}
                ${UI_FILES}
                )
-target_link_libraries(deepin-installer-reboot-setup
+target_link_libraries(deepin-installer-first-boot
                       ${LINK_LIBS}
                       global_shortcut
                       )
@@ -759,11 +759,11 @@ target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 
 ## Installation
 install(PROGRAMS
+        ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-first-boot-pkexec
         ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-pkexec
-        ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-reboot-setup-pkexec
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reboot-setup
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
