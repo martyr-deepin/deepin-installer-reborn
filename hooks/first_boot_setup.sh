@@ -27,6 +27,8 @@ uninstall_installer() {
 cleanup_first_boot() {
   local FILE=/etc/deepin-installer-first-boot
   [ -f "${FILE}" ] && rm -f "${FILE}"
+
+  systemctl set-default -f default.target
 }
 
 main() {
