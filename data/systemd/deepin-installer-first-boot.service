@@ -2,11 +2,11 @@
 Description=live installer
 Wants=deepin-installer.target
 After=deepin-installer.target
-ConditionPathExists=!/etc/deepin-installer-first-boot
+ConditionPathExists=/etc/deepin-installer-first-boot
 Conflicts=plymouth-quit.service getty@tty1.service
 
 [Service]
-ExecStart=/usr/bin/xinit /usr/bin/deepin-installer
+ExecStart=/usr/bin/xinit /usr/bin/deepin-installer-first-boot
 Restart=always
 
 [Install]

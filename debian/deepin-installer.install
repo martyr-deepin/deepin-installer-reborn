@@ -1,10 +1,9 @@
 etc/live/config.conf.d/deepin-installer.conf
 lib/*
-usr/bin/deepin-installer-first-boot
-usr/bin/deepin-installer-first-boot-pkexec
 usr/bin/deepin-installer
-usr/bin/deepin-installer-standalone
 usr/bin/deepin-installer-pkexec
+usr/bin/deepin-installer-reboot-setup
+usr/bin/deepin-installer-reboot-setup-pkexec
 usr/bin/deepin-installer-settings
 usr/bin/deepin-installer-unsquashfs
 usr/share/applications/deepin-installer.desktop

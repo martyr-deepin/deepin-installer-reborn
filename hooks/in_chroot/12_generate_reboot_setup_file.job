@@ -1,0 +1,10 @@
+#!/bin/sh
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# Generate /etc/deepin-installer-first-boot placeholder file if needed.
+
+if [ x$(installer_get "system_info_setup_after_reboot") != "xtrue" ]; then
+  touch /etc/deepin-installer-first-boot
+fi

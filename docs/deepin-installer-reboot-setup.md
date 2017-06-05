@@ -12,5 +12,5 @@
 目前设置完成之后需要重启系统, 以后可以考虑使用 systemd-firstboot 来处理.
 
 ## 权限
-需要 root 权限才可以执行, 可以通过运行 deepin-installer-first-boot-pkexec
+需要 root 权限才可以执行, 可以通过运行 deepin-installer-reboot-setup-pkexec
 这个脚本来取得 root 权限.

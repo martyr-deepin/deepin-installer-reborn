@@ -482,8 +482,8 @@ target_link_libraries(deepin-installer-settings ${QtCore_LIBS})
 
 
 # Reboot setup
-add_executable(deepin-installer-first-boot
-               app/deepin_installer_first_boot.cpp
+add_executable(deepin-installer-reboot-setup
+               app/deepin_installer_reboot_setup.cpp
                ui/first_boot_setup_window.cpp
                ui/first_boot_setup_window.h
 
@@ -493,7 +493,7 @@ add_executable(deepin-installer-first-boot
                ${SYSINFO_FILES}
                ${UI_FILES}
                )
-target_link_libraries(deepin-installer-first-boot
+target_link_libraries(deepin-installer-reboot-setup
                       ${LINK_LIBS}
                       global_shortcut
                       )
@@ -539,16 +539,6 @@ target_link_libraries(deepin-installer-xrandr-switchy
                       )
 
 
-# standalone deepin-installer
-add_executable(deepin-installer-standalone
-
-               app/deepin_installer_standalone.c
-               third_party/xinit/xinit.c
-               third_party/xinit/xinit.h
-               )
-target_link_libraries(deepin-installer-standalone
-                      ${X11_LIBRARIES}
-                      )
 # Unsquashfs progress
 #add_executable(deepin-installer-unsquashfs-progress
 #
@@ -768,12 +758,12 @@ target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 
 
 ## Installation
-install(PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-first-boot-pkexec
+install(PROGRAMS
         ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-pkexec
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
+        ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-reboot-setup-pkexec
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-standalone
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-reboot-setup
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)

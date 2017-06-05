@@ -56,6 +56,7 @@ Depends:
     util-linux,
     x11-xserver-utils,
     xfsprogs [i386 amd64],
+    xinit,
     xkb-data
 Description: Release version of deepin installer
  New version of deepin-installer, rewritten with Qt5.
