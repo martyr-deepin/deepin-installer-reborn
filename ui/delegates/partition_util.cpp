@@ -190,9 +190,7 @@ QString GetPartitionLabel(const Partition& partition) {
       const QString os_description = GetOsDescription(partition.path);
       if (!os_description.isEmpty()) {
         return TrimText(os_description, kLabelMaxLen);
-      }
-
-      if (!partition.name.isEmpty()) {
+      } else if (!partition.name.isEmpty()) {
         return TrimText(partition.name, kLabelMaxLen);
       } else if (!partition.label.isEmpty()) {
         return TrimText(partition.label, kLabelMaxLen);
@@ -219,12 +217,11 @@ QString GetPartitionLabelAndPath(const Partition& partition) {
       }
 
       const QString os_description = GetOsDescription(partition.path);
-      if (!os_description.isEmpty()) {
-        return TrimText(os_description, kLabelMaxLen);
-      }
-
       const QString name = GetPartitionName(partition.path);
-      if (!partition.name.isEmpty()) {
+      if (!os_description.isEmpty()) {
+        const QString label = TrimText(os_description, kLabelMaxLen);
+        return QString("%1(%2)").arg(label).arg(name);
+      } else if (!partition.name.isEmpty()) {
         const QString label = TrimText(partition.name, kLabelMaxLen);
         return QString("%1(%2)").arg(label).arg(name);
       } else if (!partition.label.isEmpty()) {
