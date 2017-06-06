@@ -1,6 +1,7 @@
 etc/live/config.conf.d/deepin-installer.conf
 lib/*
 usr/bin/deepin-installer
+usr/bin/deepin-installer-auto-install
 usr/bin/deepin-installer-first-boot
 usr/bin/deepin-installer-first-boot-pkexec
 usr/bin/deepin-installer-pkexec
