@@ -1,8 +1,6 @@
 [Unit]
 Description=Launch installer in normal mode
 ConditionKernelCommandLine=!auto-deepin-install
-Wants=deepin-installer.target
-After=deepin-installer.target
 ConditionPathExists=!/etc/deepin-installer-first-boot
 Conflicts=plymouth-quit.service getty@tty1.service
 
