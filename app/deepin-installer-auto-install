@@ -1,0 +1,48 @@
+#!/bin/sh
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# Start installer in auto-install mode
+
+auto_install_mode=0
+install_path=''
+locale=''
+
+parse_kernel_cmdline() {
+  for item in $(cat /proc/cmdline); do
+    case $item in
+      auto-deepin-install)
+        auto_install_mode=1
+        ;;
+      install-path=*)
+        install_path="${x#install-path=}"
+        ;;
+      deepin-installer/locale=*)
+        locale=${x#deepin-installer/locale=}
+        ;;
+    esac
+  done
+}
+
+main() {
+  parse_kernel_cmdline
+
+  if [ $auto_install_mode ]; then
+    #fix install_path
+    #if use boot config, iso mount on /lib/live/mount/findiso
+    local iso_root=/lib/live/mount/findiso
+    install_path=$iso_root/$install_path
+
+    local lang
+    lang=$(echo $locale | awk -F '.' '{print $1}')
+    # TODO(xushaohua): Append $lang to conf file.
+    local installer_conf=$install_path/install/deepin-installer.conf
+    local installer_log=$install_path/install/deepin-installer.log
+
+    xinit /usr/bin/deepin-installer --conf ${installer_conf} \
+      --log ${installer_log} --auto-install
+  fi
+}
+
+main

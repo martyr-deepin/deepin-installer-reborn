@@ -759,6 +759,7 @@ target_link_libraries(unsquashfs_gui ${Qt_LIBS})
 
 ## Installation
 install(PROGRAMS
+        ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-auto-install
         ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-first-boot-pkexec
         ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-pkexec
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer
