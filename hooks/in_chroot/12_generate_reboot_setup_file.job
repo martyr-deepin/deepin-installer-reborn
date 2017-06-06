@@ -5,7 +5,7 @@
 
 # Generate /etc/deepin-installer-first-boot placeholder file if needed.
 
-if [ x$(installer_get "system_info_setup_after_reboot") != "xtrue" ]; then
+if [ x$(installer_get "system_info_setup_after_reboot") = "xtrue" ]; then
   touch /etc/deepin-installer-first-boot
 
   systemctl set-default -f deepin-installer.target
