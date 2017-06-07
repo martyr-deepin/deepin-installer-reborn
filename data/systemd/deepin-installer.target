@@ -12,7 +12,6 @@ Requires=basic.target
 Conflicts=rescue.service rescue.target
 After=basic.target rescue.service rescue.target
 Wants=getty.target
-Wants=plymouth-quit-wait.service plymouth-quit.service
 Wants=systemd-logind.service
 Wants=systemd-user-sessions.service
 Wants=NetworkManager.service
