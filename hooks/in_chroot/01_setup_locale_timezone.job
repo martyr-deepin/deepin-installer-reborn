@@ -33,6 +33,14 @@ setup_locale_timezone() {
 
   # generate user selected locale.
   sed -i "s/# \(${LOCALE}\.UTF-8.*$\)/\1/g" /etc/locale.gen
+
+  # For non-x86 platform, also enables non-UTF8 charset.
+  if ! is_x86 && test x${LOCALE} = xzh_CN; then
+    sed -i "s/# \(${LOCALE}\.GBK.*$\)/\1/g" /etc/locale.gen
+    sed -i "s/# \(${LOCALE}\.GB18030.*$\)/\1/g" /etc/locale.gen
+    sed -i "s/# \(${LOCALE}\.GB2312.*$\)/\1/g" /etc/locale.gen
+  fi
+
   cat > /etc/default/locale << EOF
 LANG=${LOCALE}.UTF-8
 LANGUAGE=${LOCALE}
