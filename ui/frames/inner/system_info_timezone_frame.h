@@ -71,12 +71,12 @@ class SystemInfoTimezoneFrame : public QFrame {
   enum class TimezoneSource {
     NotSet,  // Timezone not set.
     User,  // Timezone is setup by user.
-    Local,  // Timezone is based on local time.
     Conf,  // Timezone is read from conf file
     Scan,  // Timezone is updated based on geoip or regdomain
     Language,  // Timezone is setup based on current selected language.
   };
   TimezoneSource timezone_source_;
+  bool is_local_time_;
 
  private slots:
   void onBackButtonClicked();
