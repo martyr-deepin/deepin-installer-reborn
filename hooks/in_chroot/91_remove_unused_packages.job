@@ -38,7 +38,12 @@ if grep -q boot=live /proc/cmdline; then
   UNUSED_PKGS+=("live-boot*" "live-config*")
 fi
 
-detect_btrfs || UNUSED_PKGS+=("btrfs-tools")
+# installer depends on btrfs, so remove btrfs-tools only if reboot-setup mode
+# is off.
+if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
+  detect_btrfs || UNUSED_PKGS+=("btrfs-tools")
+fi
+
 [ x${DI_LUPIN} = "xtrue" ] || UNUSED_PKGS+=("lupin-support")
 detect_vbox || UNUSED_PKGS+=("virtualbox-guest-*")
 

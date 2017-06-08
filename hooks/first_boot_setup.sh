@@ -18,8 +18,17 @@ CONF_FILE=/etc/deepin-installer.conf
 . ./in_chroot/04_setup_keyboard.job
 . ./in_chroot/05_setup_avatar.job
 
+# Check whether btrfs filesystem is used in machine.
+detect_btrfs() {
+  for i in $(lsblk -o FSTYPE | sed '/^$/d' | uniq); do
+    [ "${i}" = "btrfs" ] && return 0
+  done
+  return 1
+}
+
 # Purge installer package
 uninstall_installer() {
+  detect_btrfs || apt-get -y btrfs-tools
   apt-get -y purge deepin-installer
   apt-get -y autoremove --purge
 }
