@@ -28,7 +28,8 @@ cleanup_first_boot() {
   local FILE=/etc/deepin-installer-first-boot
   [ -f "${FILE}" ] && rm -f "${FILE}"
 
-  systemctl set-default -f default.target
+  # Restore default target of systemd
+  systemctl set-default -f graphical.target
 }
 
 main() {
