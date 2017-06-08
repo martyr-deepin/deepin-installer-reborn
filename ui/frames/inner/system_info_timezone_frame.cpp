@@ -45,7 +45,8 @@ SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
       timezone_(),
       alias_map_(GetTimezoneAliasMap()),
       timezone_manager_(new TimezoneManager(this)),
-      timezone_source_(TimezoneSource::NotSet) {
+      timezone_source_(TimezoneSource::NotSet),
+      is_local_time_(false) {
   this->setObjectName("system_info_timezone_frame");
 
   this->initUI();
@@ -69,28 +70,27 @@ void SystemInfoTimezoneFrame::readConf() {
       HasWindowsPartition()) {
     // If local time is used, set timezone to Etc/UTC.
     timezone_ = kDefaultTimezone;
-    timezone_source_ = TimezoneSource::Local;
+    is_local_time_ = true;
     if (GetSettingsBool(kSystemInfoWindowsDisableTimezonePage)) {
       // Send hide-timezone signal.
       emit this->hideTimezone();
       // Do not send timezoneUpdated() signal.
       return;
     }
-  } else {
-    // Read timezone from settings.
-    timezone_ = GetSettingsString(kSystemInfoDefaultTimezone);
-    timezone_ = this->parseTimezoneAlias(timezone_);
-    if (IsValidTimezone(timezone_)) {
-      timezone_source_ = TimezoneSource::Conf;
-    } else {
-      const bool use_geoip = GetSettingsBool(kSystemInfoTimezoneUseGeoIp);
-      const bool use_regdomain =
-          GetSettingsBool(kSystemInfoTimezoneUseRegdomain);
-      timezone_manager_->update(use_geoip, use_regdomain);
+  }
 
-      // Use default timezone.
-      timezone_ = kDefaultTimezone;
-    }
+  // Read timezone from settings.
+  timezone_ = GetSettingsString(kSystemInfoDefaultTimezone);
+  timezone_ = this->parseTimezoneAlias(timezone_);
+  if (IsValidTimezone(timezone_)) {
+    timezone_source_ = TimezoneSource::Conf;
+  } else {
+    const bool use_geoip = GetSettingsBool(kSystemInfoTimezoneUseGeoIp);
+    const bool use_regdomain = GetSettingsBool(kSystemInfoTimezoneUseRegdomain);
+    timezone_manager_->update(use_geoip, use_regdomain);
+
+    // Use default timezone.
+    timezone_ = kDefaultTimezone;
   }
   emit this->timezoneUpdated(timezone_);
 }
@@ -112,12 +112,11 @@ void SystemInfoTimezoneFrame::timezoneUpdatedByLanguage(
 
 void SystemInfoTimezoneFrame::writeConf() {
   // Validate timezone before writing to settings file.
-  if (IsValidTimezone(timezone_)) {
-    const bool is_local_time = (timezone_source_ == TimezoneSource::Local);
-    WriteTimezone(timezone_, is_local_time);
-  } else {
+  if (!IsValidTimezone(timezone_)) {
     qWarning() << "Invalid timezone:" << timezone_;
+    timezone_ = kDefaultTimezone;
   }
+  WriteTimezone(timezone_, is_local_time_);
 }
 
 void SystemInfoTimezoneFrame::changeEvent(QEvent* event) {
