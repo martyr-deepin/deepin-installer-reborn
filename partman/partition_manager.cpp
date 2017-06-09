@@ -196,11 +196,13 @@ void PartitionManager::doAutoPart(const QString& script_path) {
 void PartitionManager::doManualPart(const OperationList& operations) {
   qDebug() << "operations:" << operations;
   bool ok = true;
+  // Copy operation list, as partition path will be updated in applyToDisk().
   OperationList real_operations(operations);
   for (int i = 0; ok && i < real_operations.length(); ++i) {
     Operation& operation = real_operations[i];
     ok = operation.applyToDisk();
   }
+  qDebug() << "real operations:" << real_operations;
 
   DeviceList devices;
   if (ok) {
@@ -208,7 +210,7 @@ void PartitionManager::doManualPart(const OperationList& operations) {
     // Update mount point of real partitions.
     for (Device& device : devices) {
       for (Partition& partition : device.partitions) {
-        for (const Operation& operation : operations) {
+        for (const Operation& operation : real_operations) {
           if (operation.new_partition.path == partition.path) {
             partition.mount_point = operation.new_partition.mount_point;
           }
