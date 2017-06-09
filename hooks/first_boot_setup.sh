@@ -28,8 +28,11 @@ detect_btrfs() {
 
 # Purge installer package
 uninstall_installer() {
-  detect_btrfs || apt-get -y btrfs-tools
-  apt-get -y purge deepin-installer
+  if detect_btrfs; then
+    apt-get -y purge deepin-installer
+  else
+    apt-get -y purge deepin-installer btrfs-tools
+  fi
   apt-get -y autoremove --purge
 }
 
@@ -42,6 +45,9 @@ cleanup_first_boot() {
 }
 
 main() {
+  [ -f "${CONF_FILE}" ] || error "deepin-installer.conf not found"
+  cat "${CONF_FILE}"
+
   setup_avatar
   setup_keyboard
   setup_locale_timezone
