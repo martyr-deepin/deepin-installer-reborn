@@ -17,6 +17,7 @@ CONF_FILE=/etc/deepin-installer.conf
 . ./in_chroot/03_configure_users.job
 . ./in_chroot/04_setup_keyboard.job
 . ./in_chroot/05_setup_avatar.job
+. ./in_chroot/11_generate_machine_id.job
 
 # Check whether btrfs filesystem is used in machine.
 detect_btrfs() {
@@ -52,6 +53,7 @@ main() {
   setup_keyboard
   setup_locale_timezone
   setup_username_password
+  generate_machine_id
 
   cleanup_first_boot
 

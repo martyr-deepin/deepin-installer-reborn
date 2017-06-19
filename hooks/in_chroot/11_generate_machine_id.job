@@ -5,13 +5,19 @@
 
 # try to fix systemd machine-id config at first boot
 
-oldMachineID="/deepinhost/var/cache/machine-id"
-if [ -f "${oldMachineID}" ]; then
-  install -m644 $oldMachineID /etc/
-else
-  systemd-machine-id-setup
-fi
+generate_machine_id() {
+  oldMachineID="/deepinhost/var/cache/machine-id"
+  if [ -f "${oldMachineID}" ]; then
+    install -m644 $oldMachineID /etc/
+  else
+    systemd-machine-id-setup
+  fi
 
-chmod 644 /etc/machine-id
+  chmod 644 /etc/machine-id
+}
+
+if [ x$(installer_get "system_info_setup_after_reboot") != "xtrue" ]; then
+  generate_machine_id
+fi
 
 return 0
