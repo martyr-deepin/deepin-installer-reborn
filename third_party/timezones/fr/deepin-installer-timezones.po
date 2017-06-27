@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-21 10:31+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: clement leclerc <clement.leclerc@free.fr>, 2017\n"
+"Last-Translator: Sami G.-D. <samgd14@live.ca>, 2017\n"
 "Language-Team: French (https://www.transifex.com/linuxdeepin/teams/3976/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -436,159 +436,159 @@ msgstr "Amérique/Fortaleza"
 
 #: system-config-date-timezones.h:105
 msgid "America/Glace_Bay"
-msgstr ""
+msgstr "Amérique/Glace_Bay"
 
 #: system-config-date-timezones.h:106
 msgid "America/Godthab"
-msgstr ""
+msgstr "Amérique/Nuuk"
 
 #: system-config-date-timezones.h:107
 msgid "America/Goose_Bay"
-msgstr ""
+msgstr "Amérique/Goose_Bay"
 
 #: system-config-date-timezones.h:108
 msgid "America/Grand_Turk"
-msgstr ""
+msgstr "Amérique/Grand_Turk"
 
 #: system-config-date-timezones.h:109
 msgid "America/Grenada"
-msgstr ""
+msgstr "Amérique/Grenade"
 
 #: system-config-date-timezones.h:110
 msgid "America/Guadeloupe"
-msgstr ""
+msgstr "Amérique/Guadeloupe"
 
 #: system-config-date-timezones.h:111
 msgid "America/Guatemala"
-msgstr ""
+msgstr "Amérique/Guatemala"
 
 #: system-config-date-timezones.h:112
 msgid "America/Guayaquil"
-msgstr ""
+msgstr "Amérique/Guayaquil"
 
 #: system-config-date-timezones.h:113
 msgid "America/Guyana"
-msgstr ""
+msgstr "Amérique/Guyana"
 
 #: system-config-date-timezones.h:114
 msgid "America/Halifax"
-msgstr ""
+msgstr "Amérique/Halifax"
 
 #: system-config-date-timezones.h:115
 msgid "America/Havana"
-msgstr ""
+msgstr "Amérique/La Havane"
 
 #: system-config-date-timezones.h:116
 msgid "America/Hermosillo"
-msgstr ""
+msgstr "Amérique/Hermosillo"
 
 #: system-config-date-timezones.h:117
 msgid "America/Indiana/Indianapolis"
-msgstr ""
+msgstr "Amérique/Indiana/Indianapolis"
 
 #: system-config-date-timezones.h:118
 msgid "America/Indiana/Knox"
-msgstr ""
+msgstr "Amérique/Indiana/Knox"
 
 #: system-config-date-timezones.h:119
 msgid "America/Indiana/Marengo"
-msgstr ""
+msgstr "Amérique/Indiana/Marengo"
 
 #: system-config-date-timezones.h:120
 msgid "America/Indiana/Petersburg"
-msgstr ""
+msgstr "Amérique/Indiana/Petersburg"
 
 #: system-config-date-timezones.h:121
 msgid "America/Indiana/Tell_City"
-msgstr ""
+msgstr "Amérique/Indiana/Tell_City"
 
 #: system-config-date-timezones.h:122
 msgid "America/Indiana/Vevay"
-msgstr ""
+msgstr "Amérique/Indiana/Vevay"
 
 #: system-config-date-timezones.h:123
 msgid "America/Indiana/Vincennes"
-msgstr ""
+msgstr "Amérique/Indiana/Vincennes"
 
 #: system-config-date-timezones.h:124
 msgid "America/Indiana/Winamac"
-msgstr ""
+msgstr "Amérique/Indiana/Winamac"
 
 #: system-config-date-timezones.h:125
 msgid "America/Inuvik"
-msgstr ""
+msgstr "Amérique/Inuvik"
 
 #: system-config-date-timezones.h:126
 msgid "America/Iqaluit"
-msgstr ""
+msgstr "Amérique/Iqaluit"
 
 #: system-config-date-timezones.h:127
 msgid "America/Jamaica"
-msgstr ""
+msgstr "Amérique/Jamaïque"
 
 #: system-config-date-timezones.h:128
 msgid "America/Juneau"
-msgstr ""
+msgstr "Amérique/Juneau"
 
 #: system-config-date-timezones.h:129
 msgid "America/Kentucky/Louisville"
-msgstr ""
+msgstr "Amérique/Kentucky/Louisville"
 
 #: system-config-date-timezones.h:130
 msgid "America/Kentucky/Monticello"
-msgstr ""
+msgstr "Amérique/Kentucky/Monticello"
 
 #: system-config-date-timezones.h:131
 msgid "America/Kralendijk"
-msgstr ""
+msgstr "Amérique/Kralendijk"
 
 #: system-config-date-timezones.h:132
 msgid "America/La_Paz"
-msgstr ""
+msgstr "Amérique/La_Paz"
 
 #: system-config-date-timezones.h:133
 msgid "America/Lima"
-msgstr ""
+msgstr "Amérique/Lima"
 
 #: system-config-date-timezones.h:134
 msgid "America/Los_Angeles"
-msgstr ""
+msgstr "Amérique/Los_Angeles"
 
 #: system-config-date-timezones.h:135
 msgid "America/Lower_Princes"
-msgstr ""
+msgstr "Amérique/Lower_Princes"
 
 #: system-config-date-timezones.h:136
 msgid "America/Maceio"
-msgstr ""
+msgstr "Amérique/Maceió"
 
 #: system-config-date-timezones.h:137
 msgid "America/Managua"
-msgstr ""
+msgstr "Amérique/Managua"
 
 #: system-config-date-timezones.h:138
 msgid "America/Manaus"
-msgstr ""
+msgstr "Amérique/Manaus"
 
 #: system-config-date-timezones.h:139
 msgid "America/Marigot"
-msgstr ""
+msgstr "Amérique/Marigot"
 
 #: system-config-date-timezones.h:140
 msgid "America/Martinique"
-msgstr ""
+msgstr "Amérique/Martinique"
 
 #: system-config-date-timezones.h:141
 msgid "America/Matamoros"
-msgstr ""
+msgstr "Amérique/Matamoros"
 
 #: system-config-date-timezones.h:142
 msgid "America/Mazatlan"
-msgstr ""
+msgstr "Amérique/Mazatlán"
 
 #: system-config-date-timezones.h:143
 msgid "America/Menominee"
-msgstr ""
+msgstr "Amérique/Menominee"
 
 #: system-config-date-timezones.h:144
 msgid "America/Merida"
@@ -596,223 +596,223 @@ msgstr ""
 
 #: system-config-date-timezones.h:145
 msgid "America/Metlakatla"
-msgstr ""
+msgstr "Amérique/Metlakatla"
 
 #: system-config-date-timezones.h:146
 msgid "America/Mexico_City"
-msgstr ""
+msgstr "Amérique/Mexico"
 
 #: system-config-date-timezones.h:147
 msgid "America/Miquelon"
-msgstr ""
+msgstr "Amérique/Miquelon"
 
 #: system-config-date-timezones.h:148
 msgid "America/Moncton"
-msgstr ""
+msgstr "Amérique/Moncton"
 
 #: system-config-date-timezones.h:149
 msgid "America/Monterrey"
-msgstr ""
+msgstr "Amérique/Monterrey"
 
 #: system-config-date-timezones.h:150
 msgid "America/Montevideo"
-msgstr ""
+msgstr "Amérique/Montevideo"
 
 #: system-config-date-timezones.h:151
 msgid "America/Montserrat"
-msgstr ""
+msgstr "Amérique/Montserrat"
 
 #: system-config-date-timezones.h:152
 msgid "America/Nassau"
-msgstr ""
+msgstr "Amérique/Nassau"
 
 #: system-config-date-timezones.h:153
 msgid "America/New_York"
-msgstr ""
+msgstr "Amérique/New_York"
 
 #: system-config-date-timezones.h:154
 msgid "America/Nipigon"
-msgstr ""
+msgstr "Amérique/Nipigon"
 
 #: system-config-date-timezones.h:155
 msgid "America/Nome"
-msgstr ""
+msgstr "Amérique/Nome"
 
 #: system-config-date-timezones.h:156
 msgid "America/Noronha"
-msgstr ""
+msgstr "Amérique/Noronha"
 
 #: system-config-date-timezones.h:157
 msgid "America/North_Dakota/Beulah"
-msgstr ""
+msgstr "Amérique/Dakota_du_Nord/Beulah"
 
 #: system-config-date-timezones.h:158
 msgid "America/North_Dakota/Center"
-msgstr ""
+msgstr "Amérique/Dakota_du_Nord/Centre"
 
 #: system-config-date-timezones.h:159
 msgid "America/North_Dakota/New_Salem"
-msgstr ""
+msgstr "Amérique/Dakota_du_Nord/New_Salem"
 
 #: system-config-date-timezones.h:160
 msgid "America/Ojinaga"
-msgstr ""
+msgstr "Amérique/Ojinaga"
 
 #: system-config-date-timezones.h:161
 msgid "America/Panama"
-msgstr ""
+msgstr "Amérique/Panama"
 
 #: system-config-date-timezones.h:162
 msgid "America/Pangnirtung"
-msgstr ""
+msgstr "Amérique/Pangnirtung"
 
 #: system-config-date-timezones.h:163
 msgid "America/Paramaribo"
-msgstr ""
+msgstr "Amérique/Paramaribo"
 
 #: system-config-date-timezones.h:164
 msgid "America/Phoenix"
-msgstr ""
+msgstr "Amérique/Phoenix"
 
 #: system-config-date-timezones.h:165
 msgid "America/Port-au-Prince"
-msgstr ""
+msgstr "Amérique/Port-au-Prince"
 
 #: system-config-date-timezones.h:166
 msgid "America/Port_of_Spain"
-msgstr ""
+msgstr "Amérique/Port-d'Espagne"
 
 #: system-config-date-timezones.h:167
 msgid "America/Porto_Velho"
-msgstr ""
+msgstr "Amérique/Porto_Velho"
 
 #: system-config-date-timezones.h:168
 msgid "America/Puerto_Rico"
-msgstr ""
+msgstr "Amérique/Puerto_Rico"
 
 #: system-config-date-timezones.h:169
 msgid "America/Punta_Arenas"
-msgstr ""
+msgstr "Amérique/Punta_Arenas"
 
 #: system-config-date-timezones.h:170
 msgid "America/Rainy_River"
-msgstr ""
+msgstr "America/Rainy_River"
 
 #: system-config-date-timezones.h:171
 msgid "America/Rankin_Inlet"
-msgstr ""
+msgstr "Amérique/Rankin_Inlet"
 
 #: system-config-date-timezones.h:172
 msgid "America/Recife"
-msgstr ""
+msgstr "Amérique/Recife"
 
 #: system-config-date-timezones.h:173
 msgid "America/Regina"
-msgstr ""
+msgstr "Amérique/Regina"
 
 #: system-config-date-timezones.h:174
 msgid "America/Resolute"
-msgstr ""
+msgstr "Amérique/Resolute"
 
 #: system-config-date-timezones.h:175
 msgid "America/Rio_Branco"
-msgstr ""
+msgstr "Amérique/Rio_Branco"
 
 #: system-config-date-timezones.h:176
 msgid "America/Santarem"
-msgstr ""
+msgstr "Amérique/Santarem"
 
 #: system-config-date-timezones.h:177
 msgid "America/Santiago"
-msgstr ""
+msgstr "Amérique/Santiago"
 
 #: system-config-date-timezones.h:178
 msgid "America/Santo_Domingo"
-msgstr ""
+msgstr "Amérique/Santo_Domingo"
 
 #: system-config-date-timezones.h:179
 msgid "America/Sao_Paulo"
-msgstr ""
+msgstr "Amérique/Sao_Paulo"
 
 #: system-config-date-timezones.h:180
 msgid "America/Scoresbysund"
-msgstr ""
+msgstr "Amérique/Illoqortormiut"
 
 #: system-config-date-timezones.h:181
 msgid "America/Sitka"
-msgstr ""
+msgstr "Amérique/Sitka"
 
 #: system-config-date-timezones.h:182
 msgid "America/St_Barthelemy"
-msgstr ""
+msgstr "Amérique/Saint-Barthélémy"
 
 #: system-config-date-timezones.h:183
 msgid "America/St_Johns"
-msgstr ""
+msgstr "Amérique/Saint_Johns"
 
 #: system-config-date-timezones.h:184
 msgid "America/St_Kitts"
-msgstr ""
+msgstr "America/Saint-Christophe"
 
 #: system-config-date-timezones.h:185
 msgid "America/St_Lucia"
-msgstr ""
+msgstr "Amérique/Sainte-Lucie"
 
 #: system-config-date-timezones.h:186
 msgid "America/St_Thomas"
-msgstr ""
+msgstr "Amérique/St._Thomas"
 
 #: system-config-date-timezones.h:187
 msgid "America/St_Vincent"
-msgstr ""
+msgstr "Amérique/Saint-Vincent"
 
 #: system-config-date-timezones.h:188
 msgid "America/Swift_Current"
-msgstr ""
+msgstr "Amérique/Swift_Current"
 
 #: system-config-date-timezones.h:189
 msgid "America/Tegucigalpa"
-msgstr ""
+msgstr "Amérique/Tegucigalpa"
 
 #: system-config-date-timezones.h:190
 msgid "America/Thule"
-msgstr ""
+msgstr "Amérique/Thule"
 
 #: system-config-date-timezones.h:191
 msgid "America/Thunder_Bay"
-msgstr ""
+msgstr "Amérique/Thunder_Bay"
 
 #: system-config-date-timezones.h:192
 msgid "America/Tijuana"
-msgstr ""
+msgstr "Amérique/Tijuana"
 
 #: system-config-date-timezones.h:193
 msgid "America/Toronto"
-msgstr ""
+msgstr "Amérique/Toronto"
 
 #: system-config-date-timezones.h:194
 msgid "America/Tortola"
-msgstr ""
+msgstr "Amérique/Tortola"
 
 #: system-config-date-timezones.h:195
 msgid "America/Vancouver"
-msgstr ""
+msgstr "Amérique/Vancouver"
 
 #: system-config-date-timezones.h:196
 msgid "America/Whitehorse"
-msgstr ""
+msgstr "Amérique/Whitehorse"
 
 #: system-config-date-timezones.h:197
 msgid "America/Winnipeg"
-msgstr ""
+msgstr "Amérique/Winnipeg"
 
 #: system-config-date-timezones.h:198
 msgid "America/Yakutat"
-msgstr ""
+msgstr "Amérique/Yakutat"
 
 #: system-config-date-timezones.h:199
 msgid "America/Yellowknife"
-msgstr ""
+msgstr "Amérique/Yellowknife"
 
 #: system-config-date-timezones.h:200
 msgid "Antarctica/Casey"
@@ -824,55 +824,55 @@ msgstr "Antarctique/Davis"
 
 #: system-config-date-timezones.h:202
 msgid "Antarctica/DumontDUrville"
-msgstr ""
+msgstr "Antarctique/DumontDUrville"
 
 #: system-config-date-timezones.h:203
 msgid "Antarctica/Macquarie"
-msgstr ""
+msgstr "Antarctique/Macquarie"
 
 #: system-config-date-timezones.h:204
 msgid "Antarctica/Mawson"
-msgstr ""
+msgstr "Antarctique/Mawson"
 
 #: system-config-date-timezones.h:205
 msgid "Antarctica/McMurdo"
-msgstr ""
+msgstr "Antarctique/McMurdo"
 
 #: system-config-date-timezones.h:206
 msgid "Antarctica/Palmer"
-msgstr ""
+msgstr "Antarctique/Palmer"
 
 #: system-config-date-timezones.h:207
 msgid "Antarctica/Rothera"
-msgstr ""
+msgstr "Antarctique/Rothera"
 
 #: system-config-date-timezones.h:208
 msgid "Antarctica/Syowa"
-msgstr ""
+msgstr "Antarctique/Syowa"
 
 #: system-config-date-timezones.h:209
 msgid "Antarctica/Troll"
-msgstr ""
+msgstr "Antarctique/Troll"
 
 #: system-config-date-timezones.h:210
 msgid "Antarctica/Vostok"
-msgstr ""
+msgstr "Antarctique/Vostok"
 
 #: system-config-date-timezones.h:211
 msgid "Arctic/Longyearbyen"
-msgstr ""
+msgstr "Arctique/Longyearbyen"
 
 #: system-config-date-timezones.h:212
 msgid "Asia/Aden"
-msgstr ""
+msgstr "Asie/Aden"
 
 #: system-config-date-timezones.h:213
 msgid "Asia/Almaty"
-msgstr ""
+msgstr "Asie/Almaty"
 
 #: system-config-date-timezones.h:214
 msgid "Asia/Amman"
-msgstr ""
+msgstr "Asie/Amman"
 
 #: system-config-date-timezones.h:215
 msgid "Asia/Anadyr"
