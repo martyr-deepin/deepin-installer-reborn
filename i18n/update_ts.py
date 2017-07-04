@@ -42,8 +42,8 @@ def generate_ts(ts_path, is_installer):
             "ui/widgets",
         )
     else:
-        # Only include ui/oem folder.
-        paths = ["ui/oem"]
+        # Only include oem folder.
+        paths = ["oem"]
 
     # Add -I. option to solve namespace error
     cmd = " ".join((

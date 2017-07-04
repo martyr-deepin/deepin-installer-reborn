@@ -15,7 +15,7 @@
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="181"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="212"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="210"/>
         <source>Freespace</source>
         <translation type="unfinished"></translation>
     </message>
@@ -688,7 +688,8 @@
 <context>
     <name>installer::SimpleDiskFrame</name>
     <message>
-        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="58"/>
+        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="46"/>
+        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="67"/>
         <source>Install here</source>
         <translation type="unfinished"></translation>
     </message>
@@ -841,42 +842,42 @@
 <context>
     <name>installer::SystemInfoKeyboardFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="76"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="95"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="96"/>
         <source>Select keyboard layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="130"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="131"/>
         <source>Test area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="135"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="79"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="136"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>installer::SystemInfoTimezoneFrame</name>
+    <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="125"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="163"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="126"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="164"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="127"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="166"/>
-        <source>Back</source>
+        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
+        <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
