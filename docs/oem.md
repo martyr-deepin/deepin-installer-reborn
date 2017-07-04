@@ -39,8 +39,6 @@
 自动分区脚本, 把需要分区的操作写到 `oem/auto_part.sh` 这个脚本文件里.
 分区操作使用 `parted` 命令, 同时, 记得把分区结果写入到 `/etc/deepin-installer.conf`
 这个配置文件里.
-针对特定架构的自动分区脚本, 要这样命名 `auto_part_ARCH.sh`, 其中 `ARCH` 
-是架构名称, 比如 x86, mips64, 区分32位与64位.
 
 
 ### 安装进程的动画
