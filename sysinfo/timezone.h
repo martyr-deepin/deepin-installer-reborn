@@ -49,7 +49,11 @@ QString GetLocalTimezoneName(const QString& timezone, const QString& locale);
 typedef QHash<QString, QString> TimezoneAliasMap;
 TimezoneAliasMap GetTimezoneAliasMap();
 
+// Returns true if |timezone| is in /usr/share/zoneinfo/zone.tab
+bool IsTimezoneInTab(const QString& timezone);
+
 // Validate |timezone|.
+// Returns true if timezone is placed in /usr/share/zoneinfo.
 bool IsValidTimezone(const QString& timezone);
 
 struct TimezoneOffset {

@@ -158,6 +158,12 @@ TimezoneAliasMap GetTimezoneAliasMap() {
   return map;
 }
 
+bool IsTimezoneInTab(const QString& timezone) {
+  const ZoneInfoList info_list = GetZoneInfoList();
+  const int index = GetZoneInfoByZone(info_list, timezone);
+  return (index > -1);
+}
+
 bool IsValidTimezone(const QString& timezone) {
   // Ignores empty timezone.
   if (timezone.isEmpty()) {
