@@ -266,8 +266,8 @@ set(UI_FILES
     ui/frames/inner/system_info_form_frame.h
     ui/frames/inner/system_info_keyboard_frame.cpp
     ui/frames/inner/system_info_keyboard_frame.h
-    ui/frames/inner/system_info_timezone_frame.cpp
-    ui/frames/inner/system_info_timezone_frame.h
+    ui/frames/timezone_frame.cpp
+    ui/frames/timezone_frame.h
 
     ui/frames/confirm_quit_frame.cpp
     ui/frames/confirm_quit_frame.h
@@ -679,8 +679,8 @@ add_executable(timezone-frame-test
                ui/delegates/timezone_map_util.cpp
                ui/delegates/timezone_map_util.h
                ui/frames/consts.h
-               ui/frames/inner/system_info_timezone_frame.cpp
-               ui/frames/inner/system_info_timezone_frame.h
+               ui/frames/timezone_frame.cpp
+               ui/frames/timezone_frame.h
                ui/widgets/comment_label.cpp
                ui/widgets/comment_label.h
                ui/widgets/flat_button.cpp

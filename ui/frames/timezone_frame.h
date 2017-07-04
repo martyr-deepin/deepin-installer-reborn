@@ -2,8 +2,8 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#ifndef INSTALLER_UI_FRAMES_INNER_SYSTEM_INFO_TIMEZONE_FRAME_H
-#define INSTALLER_UI_FRAMES_INNER_SYSTEM_INFO_TIMEZONE_FRAME_H
+#ifndef INSTALLER_UI_FRAMES_TIMEZONE_FRAME_H
+#define INSTALLER_UI_FRAMES_TIMEZONE_FRAME_H
 
 #include <QFrame>
 
@@ -18,11 +18,11 @@ class TimezoneMap;
 class TitleLabel;
 
 // Displays a world map to let user select timezone.
-class SystemInfoTimezoneFrame : public QFrame {
+class TimezoneFrame : public QFrame {
   Q_OBJECT
 
  public:
-  explicit SystemInfoTimezoneFrame(QWidget* parent = nullptr);
+  explicit TimezoneFrame(QWidget* parent = nullptr);
 
  signals:
   // Emitted when back button is clicked.
@@ -38,8 +38,8 @@ class SystemInfoTimezoneFrame : public QFrame {
   // Read default timezone and emit timezoneUpdated() signal.
   void readConf();
 
-  // Emitted when new language is selected.
-  void timezoneUpdatedByLanguage(const QString& timezone);
+  // Update timezone when new language is selected.
+  void updateTimezoneBasedOnLanguage(const QString& timezone);
 
   // Validate timezone and write to conf file.
   void writeConf();
@@ -65,7 +65,7 @@ class SystemInfoTimezoneFrame : public QFrame {
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
   TimezoneMap* timezone_map_ = nullptr;
-  NavButton* back_button_ = nullptr;
+  NavButton* next_button_ = nullptr;
 
   // Priority of timezone: User > Conf > Scan
   enum class TimezoneSource {
@@ -79,7 +79,7 @@ class SystemInfoTimezoneFrame : public QFrame {
   bool is_local_time_;
 
  private slots:
-  void onBackButtonClicked();
+  void onNextButtonClicked();
 
   // Update timezone after receiving signals from timezone manager.
   void onTimezoneManagerUpdated(const QString& timezone);
@@ -90,4 +90,4 @@ class SystemInfoTimezoneFrame : public QFrame {
 
 }  // namespace installer
 
-#endif  // INSTALLER_UI_FRAMES_INNER_SYSTEM_INFO_TIMEZONE_FRAME_H
+#endif  // INSTALLER_UI_FRAMES_TIMEZONE_FRAME_H

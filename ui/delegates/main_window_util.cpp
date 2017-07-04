@@ -52,6 +52,9 @@ int GetVisiblePages() {
   if (!GetSettingsBool(kSkipSystemInfoPage)) {
     pages += 1;
   }
+  if (!GetSettingsBool(kSkipTimezonePage)) {
+    pages += 1;
+  }
   if (!GetSettingsBool(kSkipPartitionPage)) {
     pages += 1;
   }

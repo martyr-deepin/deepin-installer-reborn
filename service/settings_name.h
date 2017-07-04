@@ -15,6 +15,7 @@ const char kSkipDiskSpaceInsufficientPage[] =
 const char kSkipVirtualMachinePage[] = "skip_virtual_machine_page";
 const char kSkipSelectLanguagePage[] = "skip_select_language_page";
 const char kSkipSystemInfoPage[] = "skip_system_info_page";
+const char kSkipTimezonePage[] = "skip_timezone_page";
 const char kSkipPartitionPage[] = "skip_partition_page";
 
 // System Language List
@@ -58,15 +59,11 @@ const char kSystemInfoDefaultKeyboardLayoutVariant[] =
 const char kSystemInfoDisableKeyboardPage[] =
     "system_info_disable_keyboard_page";
 
-const char kSystemInfoDefaultTimezone[] = "system_info_default_timezone";
-const char kSystemInfoUseWindowsTime[] = "system_info_use_windows_time";
-const char kSystemInfoDisableTimezonePage[] =
-    "system_info_disable_timezone_page";
-const char kSystemInfoWindowsDisableTimezonePage[] =
-    "system_info_windows_disable_timezone_page";
-const char kSystemInfoTimezoneUseGeoIp[] = "system_info_timezone_use_geoip";
-const char kSystemInfoTimezoneUseRegdomain[] =
-    "system_info_timezone_use_regdomain";
+// Timezone
+const char kTimezoneDefault[] = "timezone_default";
+const char kTimezoneUseWindowsTime[] = "timezone_use_windows_time";
+const char kTimezoneUseGeoIp[] = "timezone_use_geoip";
+const char kTimezoneUseRegdomain[] = "timezone_use_regdomain";
 
 // Partition
 const char kPartitionSkipSimplePartitionPage[] =
@@ -115,24 +112,6 @@ const char kInstallProgressPageAnimationDuration[] =
 const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";
 const char kInstallFailedQRErrMsgLen[] = "install_failed_qr_err_msg_len";
 const char kInstallFailedErrMsgLen[] = "install_failed_err_msg_len";
-
-// Packages
-const char kPackageUninstalledPackages[] = "package_uninstalled_packages";
-
-// Grub
-const char kGrubTimeout[] = "grub_timeout";
-const char kGrubBlockWindows[] = "grub_block_windows";
-
-// Desktop
-const char kDdeDockAppList[] = "dde_dock_app_list";
-const char kDdeLauncherAppList[] = "dde_launcher_app_list";
-const char kDdeLauncherHoldPackages[] = "dde_launcher_hold_packages";
-const char kDdeDesktopDesktopContent[] = "dde_desktop_desktop_content";
-const char kDdeSoundEffectSwitches[] = "dde_sound_effect_switches";
-
-// Service
-const char kServiceEnabledServices[] = "service_enabled_services";
-const char kServiceDisabledServices[] = "service_disabled_services";
 
 }  // namespace installer
 

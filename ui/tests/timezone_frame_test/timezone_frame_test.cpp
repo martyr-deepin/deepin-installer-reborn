@@ -4,16 +4,16 @@
 
 #include <QApplication>
 
-#include "ui/frames/inner/system_info_timezone_frame.h"
+#include "ui/frames/timezone_frame.h"
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
 
-  installer::SystemInfoTimezoneFrame frame;
+  installer::TimezoneFrame frame;
   frame.setAttribute(Qt::WA_TranslucentBackground, true);
 //  frame.setWindowFlags(Qt::FramelessWindowHint);
   frame.show();
-  QObject::connect(&frame, &installer::SystemInfoTimezoneFrame::finished,
+  QObject::connect(&frame, &installer::TimezoneFrame::finished,
                    &app, &QApplication::quit);
 
   return app.exec();

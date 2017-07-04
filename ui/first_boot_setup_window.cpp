@@ -18,6 +18,7 @@
 #include "third_party/global_shortcut/global_shortcut.h"
 #include "ui/frames/first_boot_loading_frame.h"
 #include "ui/frames/system_info_frame.h"
+#include "ui/frames/timezone_frame.h"
 #include "ui/utils/widget_util.h"
 #include "ui/xrandr/multi_head_manager.h"
 
@@ -38,7 +39,7 @@ FirstBootSetupWindow::FirstBootSetupWindow(QWidget *parent)
 
   // Read default settings.
   system_info_frame_->readConf();
-  system_info_frame_->scanTimezone();
+  timezone_frame_->readConf();
 }
 
 FirstBootSetupWindow::~FirstBootSetupWindow() {
@@ -57,7 +58,8 @@ void FirstBootSetupWindow::resizeEvent(QResizeEvent *event) {
 void FirstBootSetupWindow::initConnections() {
   connect(system_info_frame_, &SystemInfoFrame::finished,
           this, &FirstBootSetupWindow::onSystemInfoFinished);
-
+  connect(timezone_frame_, &TimezoneFrame::finished,
+          this, &FirstBootSetupWindow::onTimezoneFinished);
   connect(hook_worker_, &FirstBootHookWorker::hookFinished,
           this, &FirstBootSetupWindow::onHookFinished);
 
@@ -71,12 +73,14 @@ void FirstBootSetupWindow::initUI() {
   background_label_ = new QLabel(this);
 
   system_info_frame_ = new SystemInfoFrame(this);
+  timezone_frame_ = new TimezoneFrame(this);
   loading_frame_ = new FirstBootLoadingFrame(this);
 
   stacked_layout_ = new QStackedLayout(this);
   stacked_layout_->setContentsMargins(0, 0, 0, 0);
   stacked_layout_->setSpacing(0);
   stacked_layout_->addWidget(system_info_frame_);
+  stacked_layout_->addWidget(timezone_frame_);
   stacked_layout_->addWidget(loading_frame_);
 
   this->setLayout(stacked_layout_);
@@ -84,10 +88,17 @@ void FirstBootSetupWindow::initUI() {
 }
 
 void FirstBootSetupWindow::registerShortcut() {
-//  monitor_mode_shortcut_ = new GlobalShortcut(QKeySequence("Meta+P"), this);
-  monitor_mode_shortcut_ = new GlobalShortcut(QKeySequence("Ctrl+Alt+P"), this);
+  // Note(xushaohua): Super key is named Meta key in Qt namespace.
+  monitor_mode_shortcut_ = new GlobalShortcut(QKeySequence("Meta+P"), this);
   if (!monitor_mode_shortcut_->registerNow()) {
-    qWarning() << "Failed to register global shortcut of Meta+P";
+    qWarning() << "Failed to register global shortcut of Meta+P"
+               << "Fallback to Ctrl+Alt+P";
+    delete monitor_mode_shortcut_;
+    monitor_mode_shortcut_ = new GlobalShortcut(QKeySequence("Ctrl+Alt+P"),
+                                                this);
+    if (!monitor_mode_shortcut_->registerNow()) {
+      qWarning() << "Failed to register global shortcut of Ctrl+Alt+P";
+    }
   }
 
   multi_head_manager_ = new MultiHeadManager(this);
@@ -125,6 +136,10 @@ void FirstBootSetupWindow::onPrimaryScreenChanged(const QRect& geometry) {
 }
 
 void FirstBootSetupWindow::onSystemInfoFinished() {
+  stacked_layout_->setCurrentWidget(timezone_frame_);
+}
+
+void FirstBootSetupWindow::onTimezoneFinished() {
   // Display loading frame.
   stacked_layout_->setCurrentWidget(loading_frame_);
 

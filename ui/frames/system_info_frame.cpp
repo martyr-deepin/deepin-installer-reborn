@@ -13,7 +13,7 @@
 #include "ui/frames/inner/system_info_avatar_frame.h"
 #include "ui/frames/inner/system_info_form_frame.h"
 #include "ui/frames/inner/system_info_keyboard_frame.h"
-#include "ui/frames/inner/system_info_timezone_frame.h"
+#include "timezone_frame.h"
 #include "ui/widgets/pointer_button.h"
 
 namespace installer {
@@ -23,16 +23,13 @@ namespace {
 const int kInvalidPageId = -1;
 const int kAvatarPageId = 0;
 const int kFormPageId = 1;
-//const int kKeyboardPageId = 2;
-//const int kTimezonePageId = 3;
 
 }  // namespace
 
 SystemInfoFrame::SystemInfoFrame(QWidget* parent)
     : QFrame(parent),
       last_page_(kInvalidPageId),
-      disable_keyboard_(GetSettingsBool(kSystemInfoDisableKeyboardPage)),
-      disable_timezone_(GetSettingsBool(kSystemInfoDisableTimezonePage)) {
+      disable_keyboard_(GetSettingsBool(kSystemInfoDisableKeyboardPage)) {
   this->setObjectName("system_info_frame");
 
   this->initUI();
@@ -49,23 +46,14 @@ void SystemInfoFrame::readConf() {
   keyboard_frame_->readConf();
 }
 
-void SystemInfoFrame::scanTimezone() {
-  // Notify SystemInfoTimezoneFrame to read timezone based on current settings.
-  timezone_frame_->readConf();
-}
-
 void SystemInfoFrame::writeConf() {
   // Notify sub-pages to save settings.
   avatar_frame_->writeConf();
   form_frame_->writeConf();
   keyboard_frame_->writeConf();
-  timezone_frame_->writeConf();
 }
 
 void SystemInfoFrame::initConnections() {
-  connect(this, &SystemInfoFrame::timezoneUpdated,
-          timezone_frame_, &SystemInfoTimezoneFrame::timezoneUpdatedByLanguage);
-
   connect(avatar_frame_, &SystemInfoAvatarFrame::finished,
           this, &SystemInfoFrame::showFormPage);
   connect(avatar_frame_, &SystemInfoAvatarFrame::avatarUpdated,
@@ -84,26 +72,11 @@ void SystemInfoFrame::initConnections() {
   connect(keyboard_frame_, &SystemInfoKeyboardFrame::layoutUpdated,
           this, &SystemInfoFrame::updateLayout);
 
-  connect(timezone_frame_, &SystemInfoTimezoneFrame::finished,
-          this, &SystemInfoFrame::restoreLastPage);
-  // Update timezone label when current timezone is updated.
-  connect(timezone_frame_, &SystemInfoTimezoneFrame::hideTimezone,
-          this, &SystemInfoFrame::hideTimezone);
-  connect(timezone_frame_, &SystemInfoTimezoneFrame::timezoneUpdated,
-          this, &SystemInfoFrame::updateTimezone);
-
-  connect(timezone_button_, &QPushButton::clicked,
-          this, &SystemInfoFrame::showTimezonePage);
   connect(keyboard_button_, &QPushButton::clicked,
           this, &SystemInfoFrame::showKeyboardPage);
 }
 
 void SystemInfoFrame::initUI() {
-  timezone_button_ = new PointerButton();
-  timezone_button_->setObjectName("timezone_button");
-  timezone_button_->setFlat(true);
-  timezone_button_->setFixedHeight(23);
-
   keyboard_button_ = new PointerButton();
   keyboard_button_->setObjectName("keyboard_button");
   keyboard_button_->setFlat(true);
@@ -112,14 +85,12 @@ void SystemInfoFrame::initUI() {
   head_layout_ = new QHBoxLayout();
   head_layout_->setContentsMargins(30, 0, 0, 0);
   head_layout_->setSpacing(30);
-  head_layout_->addWidget(timezone_button_);
   head_layout_->addWidget(keyboard_button_);
   head_layout_->addStretch();
 
   avatar_frame_ = new SystemInfoAvatarFrame();
   form_frame_ = new SystemInfoFormFrame();
   keyboard_frame_ = new SystemInfoKeyboardFrame();
-  timezone_frame_ = new SystemInfoTimezoneFrame();
 
   stacked_layout_ = new QStackedLayout();
   stacked_layout_->setContentsMargins(0, 0, 0, 0);
@@ -127,7 +98,6 @@ void SystemInfoFrame::initUI() {
   stacked_layout_->addWidget(avatar_frame_);
   stacked_layout_->addWidget(form_frame_);
   stacked_layout_->addWidget(keyboard_frame_);
-  stacked_layout_->addWidget(timezone_frame_);
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
@@ -147,9 +117,7 @@ void SystemInfoFrame::updateHeadBar() {
   // Only show header bar in avatar page and form page.
   if (page == kAvatarPageId || page == kFormPageId) {
     keyboard_button_->setVisible(!disable_keyboard_);
-    timezone_button_->setVisible(!disable_timezone_);
   } else {
-    timezone_button_->hide();
     keyboard_button_->hide();
   }
 }
@@ -184,39 +152,8 @@ void SystemInfoFrame::showKeyboardPage() {
   }
 }
 
-void SystemInfoFrame::showTimezonePage() {
-  if (!disable_timezone_) {
-    last_page_ = stacked_layout_->currentIndex();
-    stacked_layout_->setCurrentWidget(timezone_frame_);
-    this->updateHeadBar();
-  }
-}
-
-void SystemInfoFrame::hideTimezone() {
-  disable_timezone_ = true;
-  timezone_button_->hide();
-}
-
 void SystemInfoFrame::updateLayout(const QString& layout) {
   keyboard_button_->setText(layout);
-}
-
-void SystemInfoFrame::updateTimezone(const QString& timezone) {
-  // Displays timezone description, like Shanghai (CST+08)
-  const QString locale = ReadLocale();
-  const QString name = GetLocalTimezoneName(timezone, locale);
-  const TimezoneOffset offset = GetTimezoneOffset(timezone);
-  // Hours offset.
-  const int hour_offset = static_cast<int>(offset.seconds / 3600);
-  // Minutes offset.
-  const int min_offset = static_cast<int>(offset.seconds % 3600 / 60);
-  // Format of offset description is like, GMT +08:00
-  const QString offset_description = QString::asprintf("GMT %+03d:%02d",
-                                                       hour_offset,
-                                                       min_offset);
-  const QString zone_description = QString("%1 (%2)").arg(name)
-                                                     .arg(offset_description);
-  timezone_button_->setText(zone_description);
 }
 
 }  // namespace installer

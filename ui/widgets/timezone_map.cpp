@@ -118,7 +118,7 @@ void TimezoneMap::initUI() {
   background_label->setPixmap(timezone_pixmap);
 
   Q_ASSERT(this->parentWidget());
-  // Set parent widget of dot_ to SystemInfoTimezoneFrame.
+  // Set parent widget of dot_ to TimezoneFrame.
   dot_ = new QLabel(this->parentWidget());
   const QPixmap dot_pixmap(kDotFile);
   Q_ASSERT(!dot_pixmap.isNull());
@@ -126,7 +126,7 @@ void TimezoneMap::initUI() {
   dot_->setFixedSize(dot_pixmap.size());
   dot_->hide();
 
-  // Set parent widget of zone_pin_ to SystemInfoTimezoneFrame.
+  // Set parent widget of zone_pin_ to TimezoneFrame.
   zone_pin_ = new TooltipPin(this->parentWidget());
   zone_pin_->setFixedHeight(kZonePinHeight);
   zone_pin_->setMinimumWidth(kZonePinMinimumWidth);

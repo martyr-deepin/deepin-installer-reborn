@@ -30,6 +30,7 @@ class PartitionTableWarningFrame;
 class PrivilegeErrorFrame;
 class SelectLanguageFrame;
 class SystemInfoFrame;
+class TimezoneFrame;
 class VirtualMachineFrame;
 
 // MainWindow is a fullscreen window of deepin-installer.
@@ -75,6 +76,7 @@ class MainWindow : public QWidget {
     PrivilegeErrorId,
     SelectLanguageId,
     SystemInfoId,
+    TimezoneId,
     VirtualMachineId,
   };
 
@@ -108,6 +110,7 @@ class MainWindow : public QWidget {
   PrivilegeErrorFrame* privilege_error_frame_ = nullptr;
   SelectLanguageFrame* select_language_frame_ = nullptr;
   SystemInfoFrame* system_info_frame_ = nullptr;
+  TimezoneFrame* timezone_frame_ = nullptr;
   VirtualMachineFrame* virtual_machine_frame_ = nullptr;
   MultiHeadManager* multi_head_manager_ = nullptr;
 

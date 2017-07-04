@@ -2,7 +2,7 @@
 // Use of this source is governed by General Public License that can be found
 // in the LICENSE file.
 
-#include "ui/frames/inner/system_info_timezone_frame.h"
+#include "ui/frames/timezone_frame.h"
 
 #include <QDebug>
 #include <QEvent>
@@ -40,7 +40,7 @@ bool HasWindowsPartition() {
 
 }  // namespace
 
-SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
+TimezoneFrame::TimezoneFrame(QWidget* parent)
     : QFrame(parent),
       timezone_(),
       alias_map_(GetTimezoneAliasMap()),
@@ -53,12 +53,10 @@ SystemInfoTimezoneFrame::SystemInfoTimezoneFrame(QWidget* parent)
   this->initConnections();
 }
 
-void SystemInfoTimezoneFrame::readConf() {
+void TimezoneFrame::readConf() {
   // Policy:
   //  * Call `os-prober` if both "partition_enable_os_prober" and
   //    "system_info_use_windows_time" are enabled.
-  //  * Hide timezone-page and timezone-button if
-  //    "system_info_windows_disable_timezone_page" if enabled.
   //  * If no windows partition found, then:
   //    * Read default timezone from settings.
   //    * Scan wifi spot.
@@ -66,27 +64,21 @@ void SystemInfoTimezoneFrame::readConf() {
   //    * Or wait for user to choose timezone on map.
 
   if (GetSettingsBool(kPartitionEnableOsProber) &&
-      GetSettingsBool(kSystemInfoUseWindowsTime) &&
+      GetSettingsBool(kTimezoneUseWindowsTime) &&
       HasWindowsPartition()) {
     // If local time is used, set timezone to Etc/UTC.
     timezone_ = kDefaultTimezone;
     is_local_time_ = true;
-    if (GetSettingsBool(kSystemInfoWindowsDisableTimezonePage)) {
-      // Send hide-timezone signal.
-      emit this->hideTimezone();
-      // Do not send timezoneUpdated() signal.
-      return;
-    }
   }
 
   // Read timezone from settings.
-  timezone_ = GetSettingsString(kSystemInfoDefaultTimezone);
+  timezone_ = GetSettingsString(kTimezoneDefault);
   timezone_ = this->parseTimezoneAlias(timezone_);
   if (IsValidTimezone(timezone_)) {
     timezone_source_ = TimezoneSource::Conf;
   } else {
-    const bool use_geoip = GetSettingsBool(kSystemInfoTimezoneUseGeoIp);
-    const bool use_regdomain = GetSettingsBool(kSystemInfoTimezoneUseRegdomain);
+    const bool use_geoip = GetSettingsBool(kTimezoneUseGeoIp);
+    const bool use_regdomain = GetSettingsBool(kTimezoneUseRegdomain);
     timezone_manager_->update(use_geoip, use_regdomain);
 
     // Use default timezone.
@@ -95,8 +87,7 @@ void SystemInfoTimezoneFrame::readConf() {
   emit this->timezoneUpdated(timezone_);
 }
 
-void SystemInfoTimezoneFrame::timezoneUpdatedByLanguage(
-    const QString& timezone) {
+void TimezoneFrame::updateTimezoneBasedOnLanguage(const QString& timezone) {
   // Check priority.
   if (timezone_source_ == TimezoneSource::NotSet ||
       timezone_source_ == TimezoneSource::Language) {
@@ -110,7 +101,7 @@ void SystemInfoTimezoneFrame::timezoneUpdatedByLanguage(
   }
 }
 
-void SystemInfoTimezoneFrame::writeConf() {
+void TimezoneFrame::writeConf() {
   // Validate timezone before writing to settings file.
   if (!IsValidTimezone(timezone_)) {
     qWarning() << "Invalid timezone:" << timezone_;
@@ -119,11 +110,11 @@ void SystemInfoTimezoneFrame::writeConf() {
   WriteTimezone(timezone_, is_local_time_);
 }
 
-void SystemInfoTimezoneFrame::changeEvent(QEvent* event) {
+void TimezoneFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Select Time Zone"));
     comment_label_->setText(tr("Mark your zone on the map"));
-    back_button_->setText(tr("Back"));
+    next_button_->setText(tr("Next"));
 
     // Also update timezone.
     if (!timezone_.isEmpty()) {
@@ -135,7 +126,7 @@ void SystemInfoTimezoneFrame::changeEvent(QEvent* event) {
   }
 }
 
-void SystemInfoTimezoneFrame::showEvent(QShowEvent* event) {
+void TimezoneFrame::showEvent(QShowEvent* event) {
   QFrame::showEvent(event);
 
   // NOTE(xushaohua): Add a delay to wait for paint event of timezone map.
@@ -144,25 +135,25 @@ void SystemInfoTimezoneFrame::showEvent(QShowEvent* event) {
   });
 }
 
-void SystemInfoTimezoneFrame::initConnections() {
-  connect(back_button_, &QPushButton::clicked,
-          this, &SystemInfoTimezoneFrame::onBackButtonClicked);
+void TimezoneFrame::initConnections() {
+  connect(next_button_, &QPushButton::clicked,
+          this, &TimezoneFrame::onNextButtonClicked);
 
   connect(timezone_manager_, &TimezoneManager::timezoneUpdated,
-          this, &SystemInfoTimezoneFrame::onTimezoneManagerUpdated);
+          this, &TimezoneFrame::onTimezoneManagerUpdated);
   connect(timezone_map_, &TimezoneMap::timezoneUpdated,
-          this, &SystemInfoTimezoneFrame::onTimezoneMapUpdated);
+          this, &TimezoneFrame::onTimezoneMapUpdated);
 
   // Remark timezone on map when it is updated.
-  connect(this, &SystemInfoTimezoneFrame::timezoneUpdated,
+  connect(this, &TimezoneFrame::timezoneUpdated,
           timezone_map_, &TimezoneMap::setTimezone);
 }
 
-void SystemInfoTimezoneFrame::initUI() {
+void TimezoneFrame::initUI() {
   title_label_ = new TitleLabel(tr("Select Time Zone"));
   comment_label_ = new CommentLabel(tr("Mark your zone on the map"));
   timezone_map_ = new TimezoneMap(this);
-  back_button_ = new NavButton(tr("Back"));
+  next_button_ = new NavButton(tr("Next"));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
@@ -173,27 +164,28 @@ void SystemInfoTimezoneFrame::initUI() {
   layout->addStretch();
   layout->addWidget(timezone_map_, 0, Qt::AlignHCenter);
   layout->addStretch();
-  layout->addWidget(back_button_, 0, Qt::AlignCenter);
+  layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
   this->setContentsMargins(0, 0, 0, 0);
 }
 
-QString SystemInfoTimezoneFrame::parseTimezoneAlias(const QString& timezone) {
+QString TimezoneFrame::parseTimezoneAlias(const QString& timezone) {
   // If |timezone| not in alias map, returns itself.
   return alias_map_.value(timezone, timezone);
 }
 
-void SystemInfoTimezoneFrame::onBackButtonClicked() {
+void TimezoneFrame::onNextButtonClicked() {
   if (IsValidTimezone(timezone_)) {
     emit this->timezoneUpdated(timezone_);
+    // Emit finished() signal only if a valid timezone is specified.
+    emit this->finished();
   } else {
     qWarning() << "Invalid timezone:" << timezone_;
   }
-  emit this->finished();
 }
 
-void SystemInfoTimezoneFrame::onTimezoneManagerUpdated(
+void TimezoneFrame::onTimezoneManagerUpdated(
     const QString& timezone) {
   // Check priority.
   if (timezone_source_ == TimezoneSource::NotSet ||
@@ -208,7 +200,7 @@ void SystemInfoTimezoneFrame::onTimezoneManagerUpdated(
   }
 }
 
-void SystemInfoTimezoneFrame::onTimezoneMapUpdated(const QString& timezone) {
+void TimezoneFrame::onTimezoneMapUpdated(const QString& timezone) {
   timezone_source_ = TimezoneSource::User;
   // No need to convert timezone alias.
   timezone_ = timezone;

@@ -32,6 +32,7 @@
 #include "ui/frames/privilege_error_frame.h"
 #include "ui/frames/select_language_frame.h"
 #include "ui/frames/system_info_frame.h"
+#include "ui/frames/timezone_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
 #include "ui/utils/widget_util.h"
 #include "ui/widgets/page_indicator.h"
@@ -84,10 +85,10 @@ void MainWindow::scanDevicesAndTimezone() {
     return;
   }
 
-  // If system_info_frame_ is not omitted, scan wireless hot spot and update
+  // If timezone page is not skipped, scan wireless hot spot and update
   // timezone in background.
-  if (!GetSettingsBool(kSkipSystemInfoPage)) {
-    system_info_frame_->scanTimezone();
+  if (!GetSettingsBool(kSkipTimezonePage)) {
+    timezone_frame_->readConf();
   }
 
   if (!GetSettingsBool(kSkipPartitionPage) &&
@@ -149,9 +150,12 @@ void MainWindow::initConnections() {
 
   connect(select_language_frame_, &SelectLanguageFrame::finished,
           this, &MainWindow::goNextPage);
-  connect(select_language_frame_, &SelectLanguageFrame::timezoneUpdated,
-          system_info_frame_, &SystemInfoFrame::timezoneUpdated);
   connect(system_info_frame_, &SystemInfoFrame::finished,
+          this, &MainWindow::goNextPage);
+
+  connect(select_language_frame_, &SelectLanguageFrame::timezoneUpdated,
+          timezone_frame_, &TimezoneFrame::updateTimezoneBasedOnLanguage);
+  connect(timezone_frame_, &TimezoneFrame::finished,
           this, &MainWindow::goNextPage);
 
   connect(virtual_machine_frame_, &VirtualMachineFrame::finished,
@@ -210,6 +214,10 @@ void MainWindow::initPages() {
   system_info_frame_ = new SystemInfoFrame(this);
   pages_.insert(PageId::SystemInfoId,
                 stacked_layout_->addWidget(system_info_frame_));
+
+  timezone_frame_ = new TimezoneFrame(this);
+  pages_.insert(PageId::TimezoneId,
+                stacked_layout_->addWidget(timezone_frame_));
 
   virtual_machine_frame_ = new VirtualMachineFrame(this);
   pages_.insert(PageId::VirtualMachineId,
@@ -355,10 +363,12 @@ void MainWindow::goNextPage() {
   //   * disk space insufficient page;
   //   * virtual machine page;
   //   * system info page;
+  //   * timezone page;
   //   * partition page;
   //   * install progress page;
   //   * install success page or install failed page;
-  // And confirm quit page can be displayed at any moment.
+  // And confirm-quit-page can be triggered at any moment except in
+  // install progress page.
   switch (current_page_) {
     case PageId::ConfirmQuitId: {
       // Go previous page.
@@ -433,6 +443,18 @@ void MainWindow::goNextPage() {
     }
 
     case PageId::SystemInfoId: {
+      if (GetSettingsBool(kSkipTimezonePage)) {
+        prev_page_ = current_page_;
+        current_page_ = PageId::TimezoneId;
+        this->goNextPage();
+      } else {
+        page_indicator_->goNextPage();
+        this->setCurrentPage(PageId::TimezoneId);
+      }
+      break;
+    }
+
+    case PageId::TimezoneId: {
       // Check whether to show PartitionPage.
       if (GetSettingsBool(kSkipPartitionPage)) {
         if (GetSettingsBool(kPartitionDoAutoPart)) {
