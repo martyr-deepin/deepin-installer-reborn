@@ -41,10 +41,15 @@
     "description": "",
     "type": "Enumeration"
   },
-
   {
     "title": "跳过用户名设置页面",
     "name": "skip_system_info_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "跳过时区选择页面",
+    "name": "skip_timezone_page",
     "description": "",
     "type": "Boolean"
   },
@@ -167,39 +172,28 @@
     "description": "",
     "type": "Boolean"
   },
-  {
-    "title": "禁止用户修改时区",
-    "name": "system_info_disable_timezone_page",
-    "description": "",
-    "type": "Boolean"
-  },
+
   {
     "title": "默认时区",
-    "name": "system_info_default_timezone",
+    "name": "timezone_default",
     "description": "",
     "type": "String"
   },
   {
     "title": "与 Windows 系统时间保待一致",
-    "name": "system_info_use_windows_time",
-    "description": "",
-    "type": "Boolean"
-  },
-  {
-    "title": "发现 Windows 系统后禁用时区页面",
-    "name": "system_info_windows_disable_timezone_page",
+    "name": "timezone_use_windows_time",
     "description": "",
     "type": "Boolean"
   },
   {
     "title": "使用公网 IP 来猜测当前时区",
-    "name": "system_info_timezone_use_geoip",
+    "name": "timezone_use_geoip",
     "description": "",
     "type": "Boolean"
   },
   {
     "title": "使用附近热点信号来猜测当前时区",
-    "name": "system_info_timezone_use_regdomain",
+    "name": "timezone_use_regdomain",
     "description": "",
     "type": "Boolean"
   },
