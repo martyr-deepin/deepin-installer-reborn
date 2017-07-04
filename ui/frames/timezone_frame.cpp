@@ -74,7 +74,7 @@ void TimezoneFrame::readConf() {
   // Read timezone from settings.
   timezone_ = GetSettingsString(kTimezoneDefault);
   timezone_ = this->parseTimezoneAlias(timezone_);
-  if (IsValidTimezone(timezone_)) {
+  if (IsTimezoneInTab(timezone_)) {
     timezone_source_ = TimezoneSource::Conf;
   } else {
     const bool use_geoip = GetSettingsBool(kTimezoneUseGeoIp);
@@ -91,7 +91,7 @@ void TimezoneFrame::updateTimezoneBasedOnLanguage(const QString& timezone) {
   // Check priority.
   if (timezone_source_ == TimezoneSource::NotSet ||
       timezone_source_ == TimezoneSource::Language) {
-    if (IsValidTimezone(timezone)) {
+    if (IsTimezoneInTab(timezone)) {
       timezone_source_ = TimezoneSource::Language;
       timezone_ = timezone;
       emit this->timezoneUpdated(timezone_);
@@ -103,7 +103,7 @@ void TimezoneFrame::updateTimezoneBasedOnLanguage(const QString& timezone) {
 
 void TimezoneFrame::writeConf() {
   // Validate timezone before writing to settings file.
-  if (!IsValidTimezone(timezone_)) {
+  if (!IsTimezoneInTab(timezone_)) {
     qWarning() << "Invalid timezone:" << timezone_;
     timezone_ = kDefaultTimezone;
   }
@@ -176,7 +176,7 @@ QString TimezoneFrame::parseTimezoneAlias(const QString& timezone) {
 }
 
 void TimezoneFrame::onNextButtonClicked() {
-  if (IsValidTimezone(timezone_)) {
+  if (IsTimezoneInTab(timezone_)) {
     emit this->timezoneUpdated(timezone_);
     // Emit finished() signal only if a valid timezone is specified.
     emit this->finished();
@@ -185,8 +185,7 @@ void TimezoneFrame::onNextButtonClicked() {
   }
 }
 
-void TimezoneFrame::onTimezoneManagerUpdated(
-    const QString& timezone) {
+void TimezoneFrame::onTimezoneManagerUpdated(const QString& timezone) {
   // Check priority.
   if (timezone_source_ == TimezoneSource::NotSet ||
       timezone_source_ == TimezoneSource::Language ||
