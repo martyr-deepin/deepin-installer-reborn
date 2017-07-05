@@ -13,7 +13,7 @@
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="181"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="212"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="210"/>
         <source>Freespace</source>
         <translation>可用空间</translation>
     </message>
@@ -341,68 +341,68 @@
 <context>
     <name>installer::NewPartitionFrame</name>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="94"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="129"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="138"/>
         <source>New Partition</source>
         <translation>新建分区</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="96"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="131"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="105"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="140"/>
         <source>Create a new partition and define the type and size</source>
         <translation>请根据您的需要创建相应的分区类型和大小</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="97"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="137"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="106"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="98"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="143"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="107"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="152"/>
         <source>Location</source>
         <translation>位置</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="99"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="148"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="108"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="157"/>
         <source>Filesystem</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="100"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="154"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="109"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="163"/>
         <source>Mount point</source>
         <translation>挂载点</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="101"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="161"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="110"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="170"/>
         <source>Size</source>
         <translation>大小</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="112"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="155"/>
         <source>Start</source>
         <translation>起点</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="112"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="155"/>
         <source>End</source>
         <translation>终点</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="104"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="191"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="113"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="200"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="105"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="192"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="114"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="201"/>
         <source>OK</source>
         <translation>新建</translation>
     </message>
@@ -686,7 +686,8 @@
 <context>
     <name>installer::SimpleDiskFrame</name>
     <message>
-        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="54"/>
+        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="46"/>
+        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="67"/>
         <source>Install here</source>
         <translation>安装到此</translation>
     </message>
@@ -839,43 +840,43 @@
 <context>
     <name>installer::SystemInfoKeyboardFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="76"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="95"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="96"/>
         <source>Select keyboard layout</source>
         <translation>选择键盘布局</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="130"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="131"/>
         <source>Test area</source>
         <translation>测试区域</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="135"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="79"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="136"/>
         <source>Back</source>
         <translation>返回</translation>
     </message>
 </context>
 <context>
-    <name>installer::SystemInfoTimezoneFrame</name>
+    <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="148"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
         <translation>选择时区</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="111"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="149"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
         <translation>请在地图上标注您所在的区域</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="112"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="151"/>
-        <source>Back</source>
-        <translation>返回</translation>
+        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
+        <source>Next</source>
+        <translation>下一步</translation>
     </message>
 </context>
 <context>

@@ -83,7 +83,7 @@
     <message>
         <location filename="../ui/widgets/advanced_partition_button.cpp" line="119"/>
         <source>To be formatted</source>
-        <translation>Bude formátovaný</translation>
+        <translation>Formátovaný</translation>
     </message>
 </context>
 <context>
@@ -321,7 +321,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="29"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="47"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>Reštartujte teraz zariadenie a užite si nový systém deepin. Dúfame, že sa vám bude páčiť!</translation>
+        <translation>Reštartujte teraz zariadenie a užite si nový systém deepin. Dúfam, že sa vám bude páčiť!</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="31"/>
@@ -428,7 +428,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Pokračovaním inštalácie bude sformátovaný celý disk, vykonajte zálohu všetkých dát tak, aby nedošlo k ich strate</translation>
+        <translation>Pokračovaním inštalácie bude sformátovaný celý disk, vykonajte zálohu všetkých dát tak, aby nedošlo k  ich strate</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="46"/>
@@ -497,7 +497,7 @@
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="63"/>
         <source>Cannot create new partitions</source>
-        <translation>Nemôžem vytvoriť nové oddiely</translation>
+        <translation>Nemožem vytvoriť nové oddiely</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="28"/>
@@ -864,19 +864,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
-        <translation>Výber časového pásma</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
-        <translation>Označte váš región na mape</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
         <source>Next</source>
-        <translation>Ďalej</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -891,7 +891,7 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="29"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="47"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation>Systém zistil, že používate virtuálny stroj, ktorý bude mať vplyv na výkon, prevádzku systému a zážitok. Pre plynulý zážitok, sa odporúča inštalovať deepin na skutočnom stroji</translation>
+        <translation>Systém zistil, že používate virtuálny stroj, ktorý bude mať vplyv na výkon, prevádzku systému a zážitok. Pre plynulý zážitok, sa odporúča inštalovať deepin na reálnom stroji</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="33"/>

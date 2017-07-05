@@ -25,52 +25,52 @@
     <message>
         <location filename="../partman/operation.cpp" line="239"/>
         <source>Create extended partition %1</source>
-        <translation>Crear una partición extendida %1 </translation>
+        <translation>Crear una partición extendida %1</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="243"/>
         <source>Create new partition %1, type is %2</source>
-        <translation>Crear nueva partición %1, de tipo %2 </translation>
+        <translation>Crear nueva partición %1, de tipo %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="247"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation>Crear nueva partición %1 como %2 (punto de montaje), el tipo es %3 </translation>
+        <translation>Crear nueva partición %1 como %2 (punto de montaje), el tipo es %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="265"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation>Formato %1 partición como %2 (punto de montaje), el tipo es %3 </translation>
+        <translation>Formato %1 partición como %2 (punto de montaje), el tipo es %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="273"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
-        <translation>Utilizar la partición %1 como %2 (punto de montaje) </translation>
+        <translation>Utilice la partición %1 como %2 (punto de montaje)</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="279"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation>Formatear %1 y crear %2 nueva tabla de particiones</translation>
+        <translation>Formato %1 y crear %2 nueva tabla de particiones</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="256"/>
         <source>Delete %1 partition</source>
-        <translation>Eliminar partición %1 </translation>
+        <translation>Eliminar partición %1</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition, type is %2</source>
-        <translation>Formatear partición %1, de tipo %2</translation>
+        <translation>Formatear  partición %1, de tipo %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="285"/>
         <source>Adjust the size of %1 partition</source>
-        <translation>Ajustar el tamaño de la partición %1 </translation>
+        <translation>Ajustar el tamaño de la partición %1</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
         <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>Se necesita al menos %1GB de espacio en disco para instalar deepin, para un mejor rendimiento, %2GB y se recomienda más espacio </translation>
+        <translation>Se necesita al menos %1GB de espacio en disco para instalar deepin, para un mejor rendimiento, %2GB y se recomienda más espacio</translation>
     </message>
 </context>
 <context>
@@ -91,12 +91,12 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
         <source>Add a Root partition to continue</source>
-        <translation>Agregue una partición Raíz para continuar</translation>
+        <translation>Agregue una partición raíz para continuar</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>At least %1 GB is required for Root partition</source>
-        <translation>Se requiere al menos %1 GB para la partición Raíz </translation>
+        <translation>Se requiere al menos %1 GB para la partición raíz</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
@@ -111,37 +111,37 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="421"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 errores encontrados, debe solucionarlos para continuar con la instalación o bien cambiar al modo simple </translation>
+        <translation>%1 errores encontrados, debe solucionarlos para continuar con la instalación o bien cambiar al modo simple</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="427"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation>%1 error encontrado, continúe con la instalación después de arreglarlo</translation>
+        <translation>%1 error encontrado, continúe instalando después de</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="431"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation>%1 errores encontrados, continúe con la instalación después de arreglarlos</translation>
+        <translation>%1 errores encontrados, continúe instalando después de</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="478"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>El tipo de sistema de partición del directorio /boot sólo puede ser %1 </translation>
+        <translation>El tipo de sistema de partición /Directorio de arranque sólo puede ser %1</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="482"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation>La partición del directorio /boot debe ser la primera partición en el disco duro </translation>
+        <translation>La partición de /Directorio de arranque debe ser la primera partición en el disco duro</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
         <source>At least %1 MB is required for EFI partition</source>
-        <translation>Se requiere al menos %1 MB para la partición EFI </translation>
+        <translation>Se requiere al menos %1 MB para la partición EFI</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="487"/>
         <source>At least %1 MB is required for /boot partition</source>
-        <translation>Se requiere al menos %1 MB para la partición /boot </translation>
+        <translation>Se requiere al menos %1 MB para la partición /boot</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="75"/>
@@ -168,7 +168,7 @@
     <message>
         <location filename="../ui/models/bootloader_list_model.cpp" line="29"/>
         <source>%1 %2 (recommended)</source>
-        <translation>%1 %2 (recomendado) </translation>
+        <translation>%1 %2 (recomendado)</translation>
     </message>
 </context>
 <context>
@@ -177,7 +177,7 @@
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="26"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="45"/>
         <source>Abort Installation</source>
-        <translation>Abortar la instalación</translation>
+        <translation>Abandonar la instalación</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="28"/>
@@ -195,7 +195,7 @@
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="31"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="55"/>
         <source>Abort</source>
-        <translation>Abortar</translation>
+        <translation>Abandonar</translation>
     </message>
 </context>
 <context>
@@ -225,7 +225,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="122"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="185"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Por favor asegúrese de haber respaldado la información importante, luego seleccione la unidad para instalar</translation>
+        <translation>Por favor, asegúrese de que los datos importantes se hicieron una copia de seguridad, a continuación, seleccione el disco para instalar</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="124"/>
@@ -285,7 +285,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="83"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>Disculpe los inconvenientes, puede fotografiar o escanear el código QR para enviar el registro de errores, para que podamos resolver mejor el problema. </translation>
+        <translation>Disculpe las molestias, puede fotografiar o escanear el código QR para enviar el registro de errores, para que podamos resolver mejor el problema.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="65"/>
@@ -321,7 +321,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="29"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="47"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>Reinicie para disfrutar su nueva experiencia con deepin ¡Esperamos que le agrade!</translation>
+        <translation>Reinicie para disfrutar su nueva experiencia con el sistema deepin ¡Esperamos que le agrade!</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="31"/>
@@ -422,7 +422,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
         <source>Full Disk Format Warning</source>
-        <translation>Advertencia de formateo de disco completo</translation>
+        <translation>Advertencia de formato de disco completo</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
@@ -461,13 +461,13 @@
         <location filename="../ui/frames/partition_frame.cpp" line="64"/>
         <location filename="../ui/frames/partition_frame.cpp" line="185"/>
         <source>Simple</source>
-        <translation>Sencillo</translation>
+        <translation>Mínima</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="65"/>
         <location filename="../ui/frames/partition_frame.cpp" line="191"/>
         <source>Advanced</source>
-        <translation>Avanzado</translation>
+        <translation>Avanzada</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="66"/>
@@ -488,7 +488,7 @@
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="33"/>
         <source>Scanning disks, please wait...</source>
-        <translation>Analizando discos, por favor espere...</translation>
+        <translation>Analizando discos, por favor, espere...</translation>
     </message>
 </context>
 <context>
@@ -537,13 +537,13 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation>Realice una copia de seguridad de todos sus datos para evitar la pérdida de los mismos</translation>
+        <translation>Realice una copia de seguridad de todos sus datos para evitar la pérdida de datos</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation>Por favor, compruebe si se hicieron una copia de seguridad de todos los datos, y reinicie para entrar con esta interfaz</translation>
+        <translation>Por favor, compruebe si todos los datos se hicieron una copia de seguridad, y reiniciar para entrar en esta interfaz</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
@@ -563,19 +563,19 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="103"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
-        <translation>Reinicie, ingrese al BIOS, y deshabilite el modo de aranque UEFI</translation>
+        <translation>Reiniciar, ingresar al BIOS, y deshabilitar el modo de aranque UEFI, en favor de Legacy/CSM</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="47"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="104"/>
         <source>Exit BIOS, and enter deepin to install</source>
-        <translation>Salir del BIOS, e ingrese a deepin para instalar</translation>
+        <translation>Salir del BIOS, e iniciar instalador deepin</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="137"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation>Por favor, asegúrese de que se hizo una copia de seguridad de todos los datos, luego continúe</translation>
+        <translation>Por favor, asegúrese de que todos los datos se hicieron una copia de seguridad, a continuación, continuar</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
@@ -593,7 +593,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="156"/>
         <source>Back</source>
-        <translation>Volver</translation>
+        <translation>Regresar</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="99"/>
@@ -612,12 +612,12 @@
         <location filename="../ui/models/partition_type_model.cpp" line="28"/>
         <location filename="../ui/models/partition_type_model.cpp" line="34"/>
         <source>Logical Partition</source>
-        <translation>Partición Lógica</translation>
+        <translation>Partición Logica</translation>
     </message>
     <message>
         <location filename="../ui/models/partition_type_model.cpp" line="32"/>
         <source>Primary Partition</source>
-        <translation>Partición Primaria</translation>
+        <translation>Particion Primaria</translation>
     </message>
 </context>
 <context>
@@ -644,7 +644,7 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>Back</source>
-        <translation>Volver</translation>
+        <translation>Regresar</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="57"/>
@@ -671,7 +671,7 @@
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="33"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="66"/>
         <source>Back</source>
-        <translation>Volver</translation>
+        <translation>Regresar</translation>
     </message>
 </context>
 <context>
@@ -680,7 +680,7 @@
         <location filename="../ui/frames/select_language_frame.cpp" line="53"/>
         <location filename="../ui/frames/select_language_frame.cpp" line="97"/>
         <source>Next</source>
-        <translation>Siguiente</translation>
+        <translation>Continuar</translation>
     </message>
 </context>
 <context>
@@ -697,7 +697,7 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="61"/>
         <source>Please select one of the partitions to install!</source>
-        <translation>¡Por favor seleccione una de las particiones a instalar!</translation>
+        <translation>Seleccione una de las particiones que desea instalar.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="55"/>
@@ -792,7 +792,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Please input computer name</source>
-        <translation>Por favor introduzca el nombre del equipo</translation>
+        <translation>Introduzca el nombre del equipo</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="224"/>
@@ -802,18 +802,18 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation>Por favor ingrese un nombre de usuario mayor de %1 caracteres y menor de %2 caracteres</translation>
+        <translation>Ingrese nombre de equipo con más de %1 caracteres y menos de %2 caracteres</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="267"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation>Por favor introduzca una contraseña de más de %1 caracteres y menos de %2 caracteres</translation>
+        <translation>Introduzca una contraseña de más de %1 caracteres y menos de %2 caracteres</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation>La contraseña debe contener letras en Inglés (con distinción entre mayúsculas y minúsculas), números o símbolos especiales (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
+        <translation>La contraseña debe contener letras en espanol (con distinción entre mayúsculas y minúsculas), números o símbolos especiales (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
@@ -855,7 +855,7 @@
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="79"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="136"/>
         <source>Back</source>
-        <translation>Volver</translation>
+        <translation>Regresar</translation>
     </message>
 </context>
 <context>
@@ -864,19 +864,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
-        <translation>Selecciona la zona horaria</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
-        <translation>Marca tu zona en el mapa</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
         <source>Next</source>
-        <translation>Siguiente</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
