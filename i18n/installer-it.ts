@@ -13,7 +13,7 @@
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="181"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="212"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="210"/>
         <source>Freespace</source>
         <translation>Spazio libero</translation>
     </message>
@@ -40,7 +40,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="265"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation>Formatta partizione %1 come %2 (Punto di Mount), di tipo %3</translation>
+        <translation>Formatta la partizione %1 come %2 (Punto di Mount), di tipo %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="273"/>
@@ -55,17 +55,17 @@
     <message>
         <location filename="../partman/operation.cpp" line="256"/>
         <source>Delete %1 partition</source>
-        <translation>Elimina partizione %1</translation>
+        <translation>Elimina la partizione %1</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition, type is %2</source>
-        <translation>Formatta partizione %1, di tipo %2</translation>
+        <translation>Formatta la partizione %1 , di tipo %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="285"/>
         <source>Adjust the size of %1 partition</source>
-        <translation>Sistema dimensioni partizione %1</translation>
+        <translation>Modifica le dimensioni della partizione %1</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
@@ -126,7 +126,7 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="478"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>Il filesystem della partizione /boot puó solo essere %1</translation>
+        <translation>Il filesystem della partizione /boot può solo essere %1</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="482"/>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="487"/>
         <source>At least %1 MB is required for /boot partition</source>
-        <translation>La partizione /boot richiede almeno %1 MB</translation>
+        <translation>La partizione /boot deve esser di almeno %1 MB</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="75"/>
@@ -168,7 +168,7 @@
     <message>
         <location filename="../ui/models/bootloader_list_model.cpp" line="29"/>
         <source>%1 %2 (recommended)</source>
-        <translation>%1 %2 (raccommandato)</translation>
+        <translation>%1 %2 (raccomandato)</translation>
     </message>
 </context>
 <context>
@@ -225,7 +225,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="122"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="185"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Assicurati di aver effettuato un backup, dopodiche&apos; seleziona un disco per installare Deepin</translation>
+        <translation>Assicurati di aver effettuato un backup, dopodiché seleziona un disco per installare Deepin</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="124"/>
@@ -249,7 +249,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="127"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="265"/>
         <source>Cancel</source>
-        <translation>Cancella</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="128"/>
@@ -264,7 +264,7 @@
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="48"/>
         <source>Tuning system</source>
-        <translation>Preprazione sistema</translation>
+        <translation>Preparazione del sistema</translation>
     </message>
     <message>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="27"/>
@@ -306,7 +306,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="116"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="141"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Potrai goderti Deepin a breve, giusto il tempo di prepararti una tazza di caffé</translation>
+        <translation>Potrai goderti Deepin a breve, giusto il tempo di preparare il tuo PC</translation>
     </message>
 </context>
 <context>
@@ -341,68 +341,68 @@
 <context>
     <name>installer::NewPartitionFrame</name>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="94"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="129"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="138"/>
         <source>New Partition</source>
         <translation>Nuova Partizione</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="96"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="131"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="105"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="140"/>
         <source>Create a new partition and define the type and size</source>
         <translation>Crea una nuova partizione definendo il tipo e la grandezza</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="97"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="137"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="106"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>Type</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="98"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="143"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="107"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="152"/>
         <source>Location</source>
         <translation>Locazione</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="99"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="148"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="108"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="157"/>
         <source>Filesystem</source>
         <translation>Filesystem</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="100"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="154"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="109"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="163"/>
         <source>Mount point</source>
         <translation>Punto di Mount</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="101"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="161"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="110"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="170"/>
         <source>Size</source>
         <translation>Dimensione</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="112"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="155"/>
         <source>Start</source>
         <translation>Inizio</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="112"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="155"/>
         <source>End</source>
         <translation>Fine</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="104"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="191"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="113"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="200"/>
         <source>Cancel</source>
         <translation>Cancella</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="105"/>
-        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="192"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="114"/>
+        <location filename="../ui/frames/inner/new_partition_frame.cpp" line="201"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -422,7 +422,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
         <source>Full Disk Format Warning</source>
-        <translation>Attenzione formattazione dell&apos;intero disco</translation>
+        <translation>Occhio alla formattazione dell&apos;intero disco</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
@@ -434,7 +434,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="89"/>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation>Cancella</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="47"/>
@@ -455,7 +455,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="62"/>
         <location filename="../ui/frames/partition_frame.cpp" line="177"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Assicurati di aver effettuato un backup, dopodiché seleziona un disco per installare Deepin</translation>
+        <translation>Assicurati di aver effettuato un backup, dopodiche&apos; seleziona un disco per installare Deepin</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="64"/>
@@ -488,7 +488,7 @@
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="33"/>
         <source>Scanning disks, please wait...</source>
-        <translation>Scansione dischi, attendere...</translation>
+        <translation>Analisi dei dischi, attendere...</translation>
     </message>
 </context>
 <context>
@@ -537,7 +537,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation>Effettua un backup per prevenire la perdita di dati</translation>
+        <translation>Effettua un backup per evitare la perdita di dati</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
@@ -557,7 +557,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="41"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="91"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation>Impossibile installare direttamente per via dell&apos;EFI e della tabella disco MBR, seleziona una delle soluzioni sottostanti per continuare.</translation>
+        <translation>Impossibile installare direttamente per via dell&apos;EFI e della tabella partizioni MBR, seleziona una delle soluzioni sottostanti per continuare.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="46"/>
@@ -626,7 +626,7 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="49"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="71"/>
         <source>Prepare for Installation</source>
-        <translation>Preparazione installazione</translation>
+        <translation>Preparazione dell&apos;installazione</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="51"/>
@@ -686,7 +686,8 @@
 <context>
     <name>installer::SimpleDiskFrame</name>
     <message>
-        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="54"/>
+        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="46"/>
+        <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="67"/>
         <source>Install here</source>
         <translation>Installa qui</translation>
     </message>
@@ -706,7 +707,7 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation>La partizione Root deve essere di almeno %1 GB</translation>
+        <translation>La partizione Root richiede almeno %1 GB</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="79"/>
@@ -839,43 +840,43 @@
 <context>
     <name>installer::SystemInfoKeyboardFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="76"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="95"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="96"/>
         <source>Select keyboard layout</source>
         <translation>Seleziona il layout della tastiera</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="130"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="131"/>
         <source>Test area</source>
         <translation>Area test</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
-        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="135"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="79"/>
+        <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="136"/>
         <source>Back</source>
         <translation>Indietro</translation>
     </message>
 </context>
 <context>
-    <name>installer::SystemInfoTimezoneFrame</name>
+    <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="110"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="148"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
         <translation>Seleziona fuso orario</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="111"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="149"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
         <translation>Seleziona la tua zona sulla mappa</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="112"/>
-        <location filename="../ui/frames/inner/system_info_timezone_frame.cpp" line="151"/>
-        <source>Back</source>
-        <translation>Indietro</translation>
+        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
+        <source>Next</source>
+        <translation>Avanti</translation>
     </message>
 </context>
 <context>
