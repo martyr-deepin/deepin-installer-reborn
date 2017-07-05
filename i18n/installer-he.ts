@@ -35,7 +35,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="247"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation>יצירת מחיצה חדשה %1 בתור %2 (נקודת עגינה), הסוג הוא %3</translation>
+        <translation>יצירת מחיצה חדשה %1, הסוג הוא %2 (נקודת עגינה), הסוג הוא %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="265"/>
@@ -45,12 +45,12 @@
     <message>
         <location filename="../partman/operation.cpp" line="273"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
-        <translation>שימוש במחיצת %1 בתור %2 (נקודת עגינה)</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="279"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation>אתחול %1 ויצירת טבלת מחיצות חדשה מסוג %2</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="256"/>
@@ -60,12 +60,12 @@
     <message>
         <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition, type is %2</source>
-        <translation>אתחול מחיצת %1, הסוג הוא %2</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="285"/>
         <source>Adjust the size of %1 partition</source>
-        <translation>התאמת הגודל של המחיצה %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
@@ -106,27 +106,27 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="417"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation>נמצאה שגיאה %1, נא לתקן כדי להמשיך את ההתקנה או לעבור למצב התקנה פשוט</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="421"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation>נמצאו %1 שגיאות, נא לתקן כדי להמשיך את ההתקנה או לעבור למצב התקנה פשוט</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="427"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation>נמצאה שגיאה %1, ניתן להמשיך בהתקנה לאחר תיקונה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="431"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation>נמצאו %1 שגיאות, ניתן להמשיך בהתקנה לאחר תיקונה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="478"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>סוג מערכת הקבצים של תיקיית ה־/boot יכולה להיות רק %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="482"/>
@@ -147,20 +147,20 @@
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="75"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="157"/>
         <source>Change boot loader</source>
-        <translation>החלפת טוען המערכות</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="77"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="537"/>
         <source>Done</source>
-        <translation>בוצע</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="79"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="164"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="539"/>
         <source>Delete</source>
-        <translation>מחיקה</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -168,7 +168,7 @@
     <message>
         <location filename="../ui/models/bootloader_list_model.cpp" line="29"/>
         <source>%1 %2 (recommended)</source>
-        <translation>%1 ‏%2 (מומלץ)</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -177,7 +177,7 @@
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="26"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="45"/>
         <source>Abort Installation</source>
-        <translation>ביטול ההתקנה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="28"/>
@@ -189,13 +189,13 @@
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="30"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="54"/>
         <source>Continue</source>
-        <translation>המשך</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="31"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="55"/>
         <source>Abort</source>
-        <translation>ביטול</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -204,13 +204,13 @@
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="45"/>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="59"/>
         <source>Insufficient Disk Space</source>
-        <translation>אין די מקום פנוי</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="47"/>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="66"/>
         <source>Exit installation</source>
-        <translation>יציאה מההתקנה</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -219,43 +219,43 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="120"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="183"/>
         <source>Edit Disk</source>
-        <translation>עריכת הכונן</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="122"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="185"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>נא לוודא שנערך גיבוי של הנתונים החשובים שלך ואז לבחור את הכונן להתקנה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="124"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="218"/>
         <source>Filesystem</source>
-        <translation>מערכת קבצים</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="125"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="220"/>
         <source>Mount point</source>
-        <translation>נקודת עגינה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="126"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="222"/>
         <source>Format the partition</source>
-        <translation>אתחול המחיצה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="127"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="265"/>
         <source>Cancel</source>
-        <translation>ביטול</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="128"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="266"/>
         <source>OK</source>
-        <translation>אישור</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -279,7 +279,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="61"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="81"/>
         <source>Installation Failed</source>
-        <translation>ההתקנה נכשלה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
@@ -291,7 +291,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="65"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="112"/>
         <source>Exit installation</source>
-        <translation>יציאה מההתקנה</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -300,13 +300,13 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="114"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="139"/>
         <source>Installing</source>
-        <translation>מתבצעת התקנה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/install_progress_frame.cpp" line="116"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="141"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>ניתן לחוות את ההנאה המדהימה עם deepin לאחר המתנה עם כוס תה או קפה</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -315,19 +315,19 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="27"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <source>Successfully Installed</source>
-        <translation>ההתקנה הושלמה בהצלחה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="29"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="47"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>יש להפעיל את המחשב מחדש כדי ליהנות מהחוויה החדשה עם deepin, מקווים שתישא חן בעיניך!</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="31"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="53"/>
         <source>Experience now</source>
-        <translation>לחוות כעת</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -335,7 +335,7 @@
     <message>
         <location filename="../ui/models/mount_point_model.cpp" line="24"/>
         <source>Do not use</source>
-        <translation>לא להשתמש</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -344,67 +344,67 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="138"/>
         <source>New Partition</source>
-        <translation>מחיצה חדשה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="105"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="140"/>
         <source>Create a new partition and define the type and size</source>
-        <translation>יצירת מחיצה חדשה לצד הגדרת הסוג והגודל</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="106"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="146"/>
         <source>Type</source>
-        <translation>סוג</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="107"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="152"/>
         <source>Location</source>
-        <translation>מיקום</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="108"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="157"/>
         <source>Filesystem</source>
-        <translation>מערכת קבצים</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="109"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="163"/>
         <source>Mount point</source>
-        <translation>נקודת עגינה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="110"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="170"/>
         <source>Size</source>
-        <translation>גודל</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="112"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="155"/>
         <source>Start</source>
-        <translation>התחלה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="112"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="155"/>
         <source>End</source>
-        <translation>סיום</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="113"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="200"/>
         <source>Cancel</source>
-        <translation>ביטול</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="114"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="201"/>
         <source>OK</source>
-        <translation>אישור</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -413,7 +413,7 @@
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="24"/>
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="41"/>
         <source>Formatting...</source>
-        <translation>הכונן מאותחל…</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -422,25 +422,25 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
         <source>Full Disk Format Warning</source>
-        <translation>אזהרת אתחול כונן מלא</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>המשך בתהליך ההתקנה יוביל לאתחול הכונן כולו, נא לגבות את כל הנתונים שלך כדי למנוע אובדן מידע.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="89"/>
         <source>Cancel</source>
-        <translation>ביטול</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="47"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="90"/>
         <source>Continue</source>
-        <translation>המשך</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -449,31 +449,31 @@
         <location filename="../ui/frames/partition_frame.cpp" line="60"/>
         <location filename="../ui/frames/partition_frame.cpp" line="175"/>
         <source>Select Installation Location</source>
-        <translation>בחירת מיקום להתקנה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="62"/>
         <location filename="../ui/frames/partition_frame.cpp" line="177"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>נא לוודא שנערך גיבוי של הנתונים החשובים שלך ואז לבחור את הכונן להתקנה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="64"/>
         <location filename="../ui/frames/partition_frame.cpp" line="185"/>
         <source>Simple</source>
-        <translation>פשוט</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="65"/>
         <location filename="../ui/frames/partition_frame.cpp" line="191"/>
         <source>Advanced</source>
-        <translation>מתקדם</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="66"/>
         <location filename="../ui/frames/partition_frame.cpp" line="238"/>
         <source>Start installation</source>
-        <translation>התחלה בהתקנה</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -482,13 +482,13 @@
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="24"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="32"/>
         <source>Scan disks</source>
-        <translation>סריקת הכוננים</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="33"/>
         <source>Scanning disks, please wait...</source>
-        <translation>הכוננים נסרקים, נא להמתין…</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -497,32 +497,32 @@
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="63"/>
         <source>Cannot create new partitions</source>
-        <translation>לא ניתן ליצור מחיצות חדשות</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="28"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="65"/>
         <source>You need to delete a primary partition to create a new primary partition</source>
-        <translation>עליך למחוק מחיצה עיקרית כדי ליצור מחיצה עיקרית חדשה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="31"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="68"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
-        <translation>ניתן ליצור מחיצות לוגיות חדשות רק לצד מחיצות לוגיות קיימות</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="36"/>
         <source>You need to delete a primary partition to create the new partition</source>
-        <translation>עליך למחוק מחיצה עיקרית כדי ליצור את המחיצה החדשה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="70"/>
         <source>Back</source>
-        <translation>חזרה</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -531,13 +531,13 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="39"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="80"/>
         <source>Warning</source>
-        <translation>אזהרה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation>נא לגבות את כל הנתונים שלך כדי להימנע מאובדן מידע</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
@@ -551,7 +551,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="133"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="155"/>
         <source>Continue</source>
-        <translation>המשך</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="41"/>
@@ -575,35 +575,35 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="137"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation>נא לוודא שנערך גיבוי של כל הנתונים שלך ואז להמשיך</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="139"/>
         <source>Continue installation will format your disk</source>
-        <translation>המשך בתהליך ההתקנה יאתחל את הכונן שלך</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
         <source>Reboot</source>
-        <translation>הפעלה מחדש</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="156"/>
         <source>Back</source>
-        <translation>חזרה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="99"/>
         <source>Disable UEFI</source>
-        <translation>השבתת ה־UEFI</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="108"/>
         <source>Format the disk</source>
-        <translation>אתחול הכונן</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -612,12 +612,12 @@
         <location filename="../ui/models/partition_type_model.cpp" line="28"/>
         <location filename="../ui/models/partition_type_model.cpp" line="34"/>
         <source>Logical Partition</source>
-        <translation>מחיצה לוגית</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/models/partition_type_model.cpp" line="32"/>
         <source>Primary Partition</source>
-        <translation>מחיצה עיקרית</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -626,13 +626,13 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="49"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="71"/>
         <source>Prepare for Installation</source>
-        <translation>הכנה להתקנה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="51"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="73"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation>נא לערוך גיבוי של נתונים חשובים ולאמת את הפעולות הבאות</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="54"/>
@@ -671,7 +671,7 @@
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="33"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="66"/>
         <source>Back</source>
-        <translation>חזרה</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -680,7 +680,7 @@
         <location filename="../ui/frames/select_language_frame.cpp" line="53"/>
         <location filename="../ui/frames/select_language_frame.cpp" line="97"/>
         <source>Next</source>
-        <translation>הבא</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -689,7 +689,7 @@
         <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="67"/>
         <source>Install here</source>
-        <translation>להתקין לכאן</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -697,12 +697,12 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="61"/>
         <source>Please select one of the partitions to install!</source>
-        <translation>נא לבחור את אחת המחיצות להתקנה!</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="55"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation>לא ניתן ליצור מחיצה חדשה, נא לבחור אחת מהמחיצות הקיימות!</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="68"/>
@@ -742,47 +742,47 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="52"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="112"/>
         <source>Create User Account</source>
-        <translation>יצירת חשבון משתמש</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="53"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="113"/>
         <source>Input username and password</source>
-        <translation>הזנת שם משתמש וססמה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="122"/>
         <source>Username</source>
-        <translation>שם משתמש</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="55"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="127"/>
         <source>Computer name</source>
-        <translation>שם המחשב</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="132"/>
         <source>Password</source>
-        <translation>ססמה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="138"/>
         <source>Confirm password</source>
-        <translation>אימות הססמה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="178"/>
         <source>This username already exists</source>
-        <translation>שם המשתמש הזה כבר קיים</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="182"/>
         <source>The first letter must be in lowercase</source>
-        <translation>האות הראשונה חייבת להיות קטנה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="193"/>
@@ -792,12 +792,12 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Please input computer name</source>
-        <translation>נא להקליד את שם המחשב</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="224"/>
         <source>Computer name already exists, please input another one</source>
-        <translation>שם המחשב כבר קיים, נא להקליד שם אחר</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
@@ -818,13 +818,13 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
         <source>The two passwords don&apos;t match</source>
-        <translation>שתי הססמאות אינן תואמות</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="58"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="146"/>
         <source>Next</source>
-        <translation>הבא</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
@@ -834,7 +834,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
         <source>Computer name is invalid</source>
-        <translation>שם המחשב שגוי</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -843,19 +843,19 @@
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="77"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="96"/>
         <source>Select keyboard layout</source>
-        <translation>בחירת פריסת מקלדת</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="78"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="131"/>
         <source>Test area</source>
-        <translation>אזור בדיקה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="79"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="136"/>
         <source>Back</source>
-        <translation>חזרה</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -864,19 +864,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
-        <translation>בחירת אזור זמן</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
-        <translation>סימון אזור הזמן שלך על המפה</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
         <source>Next</source>
-        <translation>הבא</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -885,7 +885,7 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="27"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="45"/>
         <source>Friendly Reminder</source>
-        <translation>תזכורת ידידותית</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="29"/>
@@ -897,7 +897,7 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="33"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="56"/>
         <source>Continue</source>
-        <translation>המשך</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

@@ -864,19 +864,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
-        <translation>Vælg tidszone</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
-        <translation>Markér din zone på kortet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
         <source>Next</source>
-        <translation>Næste</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

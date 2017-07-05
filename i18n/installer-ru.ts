@@ -15,7 +15,7 @@
         <location filename="../ui/delegates/partition_util.cpp" line="181"/>
         <location filename="../ui/delegates/partition_util.cpp" line="210"/>
         <source>Freespace</source>
-        <translation>Свободное пространство</translation>
+        <translation>Свободное место</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="140"/>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
         <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>Для установки deepin требуется не менее %1GB места на диске, для повышения производительности рекомендуется использовать %2GB и больше</translation>
+        <translation>Для установки deepin требуется не менее %1ГБ места на диске, для повышения производительности рекомендуется использовать %2ГБ и больше</translation>
     </message>
 </context>
 <context>
@@ -96,7 +96,7 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>At least %1 GB is required for Root partition</source>
-        <translation>Для Корневого раздела требуется по-меньшей мере %1 GB</translation>
+        <translation>Для Корневого раздела требуется по-меньшей мере %1 Gb</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
@@ -136,7 +136,7 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
         <source>At least %1 MB is required for EFI partition</source>
-        <translation>Для раздела EFI требуется по-крайней мере %1 MB</translation>
+        <translation>Для EFI раздела требуется по-крайней мере %1 MB</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="487"/>
@@ -225,7 +225,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="122"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="185"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Пожалуйста, убедитесь, что важные данные были сохранены, затем выберите диск для установки</translation>
+        <translation>Пожалуйста, убедитесь, что Вы сделали резервные копии важных данных, затем выберите диск для установки</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="124"/>
@@ -249,7 +249,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="127"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="265"/>
         <source>Cancel</source>
-        <translation>Отмена</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="128"/>
@@ -279,13 +279,13 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="61"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="81"/>
         <source>Installation Failed</source>
-        <translation>Установка Завершилась Неудачей</translation>
+        <translation>Установка завершилась неудачей</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="83"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>Приносим извинения за неудобства, сделайте фото или отсканируйте QR-код и отправьте нам журнал ошибок для того, чтобы мы решили эту проблему</translation>
+        <translation>Приносим извинения за неудобства, Вы можете отправить или просмотреть QR-код для отправки журнала ошибок, чтобы мы могли лучше решить проблему.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="65"/>
@@ -315,7 +315,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="27"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <source>Successfully Installed</source>
-        <translation>Успешно Установлено</translation>
+        <translation>Установка успешно завершена</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="29"/>
@@ -428,7 +428,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Продолжение установки приведет к форматированию всего диска, пожалуйста, сделайте резервную копию всех ваших данных, чтобы избежать их потери</translation>
+        <translation>Продолжая установку, вы отформатируете весь диск, сделайте резервную копию всех своих данных, чтобы избежать их потери</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="46"/>
@@ -449,7 +449,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="60"/>
         <location filename="../ui/frames/partition_frame.cpp" line="175"/>
         <source>Select Installation Location</source>
-        <translation>Выберите Местоположение для Установки</translation>
+        <translation>Выберите местоположение для установки</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="62"/>
@@ -473,7 +473,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="66"/>
         <location filename="../ui/frames/partition_frame.cpp" line="238"/>
         <source>Start installation</source>
-        <translation>Начать установку</translation>
+        <translation>Начало установки</translation>
     </message>
 </context>
 <context>
@@ -482,7 +482,7 @@
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="24"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="32"/>
         <source>Scan disks</source>
-        <translation>Сканировать диски</translation>
+        <translation>Сканирование дисков</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="25"/>
@@ -537,7 +537,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation>Пожалуйста, сделайте резервную копию своих данных, чтобы избежать их потери.</translation>
+        <translation>Пожалуйста, сделайте резервную копию всех своих данных, чтобы избежать их потери.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
@@ -581,13 +581,13 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="139"/>
         <source>Continue installation will format your disk</source>
-        <translation>При продолжение установки ваш диск будет отформатирован</translation>
+        <translation>Продолжение установки отформатирует ваш диск</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
         <source>Reboot</source>
-        <translation>Перезагрузить</translation>
+        <translation>Перезагрузка</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
@@ -707,7 +707,7 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation>Для корневого раздела требуется по-меньшей мере %1 ГБ</translation>
+        <translation>Для корневого раздела требуется по-крайней мере %1 GB</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="79"/>
@@ -787,7 +787,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="193"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
-        <translation>Пожалуйста, введите имя пользователя длиннее %1 символов и короче %2 символов</translation>
+        <translation>Пожалуйста, введите имя пользователя длиннее чем %1 символов и короче чем %2 символов</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
@@ -802,13 +802,13 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation>Пожалуйста, введите имя компьютера длиннее %1 символов и короче %2 символов</translation>
+        <translation>Пожалуйста введите имя компьютера длиннее чем %1 символов и короче чем %2 символов</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="267"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation>Пожалуйста, введите пароль длиннее %1 символов и короче %2 символов</translation>
+        <translation>Пожалуйста введите пароль длиннее чем %1 символов и короче чем %2 символов</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
@@ -818,7 +818,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
         <source>The two passwords don&apos;t match</source>
-        <translation>Пароли не совпадают</translation>
+        <translation>Пара паролей не совпадает</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="58"/>
@@ -834,7 +834,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
         <source>Computer name is invalid</source>
-        <translation>Такое имя компьютера недопустимо</translation>
+        <translation>Такое Имя компьютера недопустимо</translation>
     </message>
 </context>
 <context>
@@ -864,19 +864,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
-        <translation>Выберите Часовой Пояс</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
-        <translation>Отметьте ваше место на карте</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
         <source>Next</source>
-        <translation>Далее</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -885,13 +885,13 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="27"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="45"/>
         <source>Friendly Reminder</source>
-        <translation>Дружественное Напоминание</translation>
+        <translation>Дружеское Напоминание</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="29"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="47"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation>Система обнаружила, что вы используете виртуальную машину, которая будет влиять на производительность и работоспособность системы, для наилучшего результата рекомендуется установить Deepin на реально работающий компьютер</translation>
+        <translation>Система обнаружила, что вы используете виртуальную машину, которая будет влиять на производительность и работоспособность системы, для наилучшего результата, рекомендуется установить Deepin на реально работающий компьютер</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="33"/>

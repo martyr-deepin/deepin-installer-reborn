@@ -60,12 +60,12 @@
     <message>
         <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition, type is %2</source>
-        <translation>Partition %1 vom Typ %2 formatieren</translation>
+        <translation>Partition %1 vom Typ %2 löschen</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="285"/>
         <source>Adjust the size of %1 partition</source>
-        <translation>Die Größe von Partition %1 anpassen</translation>
+        <translation>Die größe von Partition %1 anpassen</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
@@ -136,12 +136,12 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
         <source>At least %1 MB is required for EFI partition</source>
-        <translation>Mindestens %1 MB werden für eine EFI-Partition benötigt.</translation>
+        <translation>Mindestens %1 MB ist für eine EFI-Partition erforderlich</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="487"/>
         <source>At least %1 MB is required for /boot partition</source>
-        <translation>Mindestens %1 MB werden für eine /boot-Partition benötigt.</translation>
+        <translation>Mindestens %1 MB ist für eine /boot-Partition erforderlich</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="75"/>
@@ -189,7 +189,7 @@
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="30"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="54"/>
         <source>Continue</source>
-        <translation>Fortfahren</translation>
+        <translation>Fortsetzen</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="31"/>
@@ -225,7 +225,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="122"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="185"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Stellen Sie sicher dass wichtige Daten gesichert wurden und wählen Sie anschließend eine Festplatte zur Installation aus</translation>
+        <translation>Bitte vergewissern Sie sich, dass ausreichend Backups Ihrer Daten vorhanden sind. Wählen Sie anschließend eine Festplatte zur Instalation</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="124"/>
@@ -255,7 +255,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="128"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="266"/>
         <source>OK</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -285,7 +285,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="63"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="83"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>Entschuldigen Sie die Unannehmlichkeiten. Sie können den QR-Code fotografieren oder mit einem QR-Scanner erfassen, um den Fehlerbericht an uns zu senden. Dadurch ist es uns möglich Deepin zu verbessern und Fehler zu beheben.</translation>
+        <translation>Entschuldigen Sie die Unannehmlichkeiten. Sie können den QR-Coe fotografieren oder mit einem QR-Scanner erfassen, um den Fehlerbericht an uns zu senden. Dadurch ist es uns möglich Deepin zu verbessern und Fehler zu beheben.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="65"/>
@@ -321,7 +321,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="29"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="47"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>Starten Sie Ihren Computer neu um Deepin zu erleben. Wir hoffen, es wird Ihnen gefallen.</translation>
+        <translation>Starten Sie Ihren Computer neu um deepin zu erleben. Wir hoffen, es wird Ihnen gefallen.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="31"/>
@@ -398,13 +398,13 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="113"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="200"/>
         <source>Cancel</source>
-        <translation>Abbrechen </translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="114"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="201"/>
         <source>OK</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -440,7 +440,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="47"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="90"/>
         <source>Continue</source>
-        <translation>Fortfahren</translation>
+        <translation>Fortsetzen</translation>
     </message>
 </context>
 <context>
@@ -482,13 +482,13 @@
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="24"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="32"/>
         <source>Scan disks</source>
-        <translation>Festplatten prüfen</translation>
+        <translation>Festplatten scannen</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="33"/>
         <source>Scanning disks, please wait...</source>
-        <translation>Festplatten werden geprüft. Bitte warten...</translation>
+        <translation>Festplatten werden durchsucht, bitte warten...</translation>
     </message>
 </context>
 <context>
@@ -581,7 +581,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="139"/>
         <source>Continue installation will format your disk</source>
-        <translation>Fortsetzen der Installation wird Ihre Festplatte löschen</translation>
+        <translation>Fortfahren der Installation wird Ihre Festplatte löschen</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="59"/>
@@ -659,7 +659,7 @@
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="29"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="52"/>
         <source>Select location for boot loader</source>
-        <translation>Wählen Sie einen Ort für den Bootloader.</translation>
+        <translation>Speicherort für Boot-Loader auswählen</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="31"/>
@@ -707,7 +707,7 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation>Mindestens %1 GB ist für eine root-Partition erforderlich</translation>
+        <translation>Mindestens %1 GB werden für eine root-Partition benötigt. </translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="79"/>
@@ -829,7 +829,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
         <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
-        <translation>Der Benutzername muss Buchstaben(Groß-/Kleinschreibung beachten), Nummern oder Symbole(_-) beinhalten</translation>
+        <translation>Der Benutzername muss Buchsaben(Groß-/Kleinschreibung beachten), Nummern oder Symbole(_-) beinhalten</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
@@ -864,19 +864,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
-        <translation>Zeitzone wählen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
-        <translation>Markieren Sie Ihre Zeitzone auf der Karte.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
         <source>Next</source>
-        <translation>Weiter</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -891,13 +891,13 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="29"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="47"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation>Das System hat festgestellt, dass es in einer virtualisierten Umgebung installiert werden soll, was sich auf die Systemleistung auswirken wird. Für die beste Benutzererfahrung empfehlen wir Ihnen, Deepin auf einem echten Computer zu installieren.</translation>
+        <translation>Das System hat festgestellt, dass es in einer virtualisierten Umgebung installiert werden soll, was sich auf die Systemleistung auswirken wird. Für die beste Benutzererfahrung empfehlen wir Ihnen, deepin auf einem echten Computer zu installieren.</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="33"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="56"/>
         <source>Continue</source>
-        <translation>Fortfahren</translation>
+        <translation>Fortsetzen</translation>
     </message>
 </context>
 </TS>

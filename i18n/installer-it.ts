@@ -40,7 +40,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="265"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation>Formatta la partizione %1 come %2 (Punto di Mount), di tipo %3</translation>
+        <translation>Formatta partizione %1 come %2 (Punto di Mount), di tipo %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="273"/>
@@ -55,17 +55,17 @@
     <message>
         <location filename="../partman/operation.cpp" line="256"/>
         <source>Delete %1 partition</source>
-        <translation>Elimina la partizione %1</translation>
+        <translation>Elimina partizione %1</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition, type is %2</source>
-        <translation>Formatta la partizione %1 , di tipo %2</translation>
+        <translation>Formatta partizione %1, di tipo %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="285"/>
         <source>Adjust the size of %1 partition</source>
-        <translation>Modifica le dimensioni della partizione %1</translation>
+        <translation>Sistema dimensioni partizione %1</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
@@ -126,7 +126,7 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="478"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>Il filesystem della partizione /boot può solo essere %1</translation>
+        <translation>Il filesystem della partizione /boot puó solo essere %1</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="482"/>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="487"/>
         <source>At least %1 MB is required for /boot partition</source>
-        <translation>La partizione /boot deve esser di almeno %1 MB</translation>
+        <translation>La partizione /boot richiede almeno %1 MB</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="75"/>
@@ -225,7 +225,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="122"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="185"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Assicurati di aver effettuato un backup, dopodiché seleziona un disco per installare Deepin</translation>
+        <translation>Assicurati di aver effettuato un backup, dopodiche&apos; seleziona un disco per installare Deepin</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="124"/>
@@ -249,7 +249,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="127"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="265"/>
         <source>Cancel</source>
-        <translation>Annulla</translation>
+        <translation>Cancella</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="128"/>
@@ -264,7 +264,7 @@
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="48"/>
         <source>Tuning system</source>
-        <translation>Preparazione del sistema</translation>
+        <translation>Preprazione sistema</translation>
     </message>
     <message>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="27"/>
@@ -306,7 +306,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="116"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="141"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Potrai goderti Deepin a breve, giusto il tempo di preparare il tuo PC</translation>
+        <translation>Potrai goderti Deepin a breve, giusto il tempo di prepararti una tazza di caffé</translation>
     </message>
 </context>
 <context>
@@ -422,7 +422,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="64"/>
         <source>Full Disk Format Warning</source>
-        <translation>Occhio alla formattazione dell&apos;intero disco</translation>
+        <translation>Attenzione formattazione dell&apos;intero disco</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
@@ -434,7 +434,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="89"/>
         <source>Cancel</source>
-        <translation>Cancella</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="47"/>
@@ -455,7 +455,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="62"/>
         <location filename="../ui/frames/partition_frame.cpp" line="177"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Assicurati di aver effettuato un backup, dopodiche&apos; seleziona un disco per installare Deepin</translation>
+        <translation>Assicurati di aver effettuato un backup, dopodiché seleziona un disco per installare Deepin</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="64"/>
@@ -488,7 +488,7 @@
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="33"/>
         <source>Scanning disks, please wait...</source>
-        <translation>Analisi dei dischi, attendere...</translation>
+        <translation>Scansione dischi, attendere...</translation>
     </message>
 </context>
 <context>
@@ -537,7 +537,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation>Effettua un backup per evitare la perdita di dati</translation>
+        <translation>Effettua un backup per prevenire la perdita di dati</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
@@ -557,7 +557,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="41"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="91"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation>Impossibile installare direttamente per via dell&apos;EFI e della tabella partizioni MBR, seleziona una delle soluzioni sottostanti per continuare.</translation>
+        <translation>Impossibile installare direttamente per via dell&apos;EFI e della tabella disco MBR, seleziona una delle soluzioni sottostanti per continuare.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="46"/>
@@ -626,7 +626,7 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="49"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="71"/>
         <source>Prepare for Installation</source>
-        <translation>Preparazione dell&apos;installazione</translation>
+        <translation>Preparazione installazione</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="51"/>
@@ -707,7 +707,7 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation>La partizione Root richiede almeno %1 GB</translation>
+        <translation>La partizione Root deve essere di almeno %1 GB</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="79"/>
@@ -864,19 +864,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
-        <translation>Seleziona fuso orario</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
-        <translation>Seleziona la tua zona sulla mappa</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
         <source>Next</source>
-        <translation>Avanti</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
