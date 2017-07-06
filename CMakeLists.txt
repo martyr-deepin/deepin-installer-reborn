@@ -83,6 +83,7 @@ add_subdirectory(third_party/global_shortcut)
 add_subdirectory(third_party/googletest)
 add_subdirectory(third_party/qrencode)
 add_subdirectory(third_party/qtermwidget)
+add_subdirectory(third_party/simpleini)
 add_subdirectory(third_party/timezones)
 add_subdirectory(third_party/zlib_wrapper)
 
@@ -478,7 +479,9 @@ add_dependencies(deepin-installer installer-qm-update)
 add_executable(deepin-installer-settings
                app/deepin_installer_settings.cpp)
 
-target_link_libraries(deepin-installer-settings ${QtCore_LIBS})
+target_link_libraries(deepin-installer-settings
+                      ${QtCore_LIBS}
+                      simpleini)
 
 
 # Reboot setup

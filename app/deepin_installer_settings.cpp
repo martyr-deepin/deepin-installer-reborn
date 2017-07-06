@@ -16,7 +16,8 @@
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QFile>
-#include <QSettings>
+
+#include "third_party/simpleini/SimpleIni.h"
 
 namespace {
 
@@ -32,6 +33,7 @@ const char kCommandSet[] = "set";
 enum class CommandType {
   Get,
   Set,
+  Invalid,
 };
 
 }  // namespace
@@ -63,7 +65,7 @@ int main(int argc, char* argv[]) {
     parser.showHelp(kExitErr);
   }
 
-  CommandType command;
+  CommandType command = CommandType::Invalid;
   if (pos_args.at(0) == kCommandGet) {
     command = CommandType::Get;
   } else if (pos_args.at(0) == kCommandSet) {
@@ -104,26 +106,32 @@ int main(int argc, char* argv[]) {
     }
   }
 
-  QSettings settings(ini_file, QSettings::IniFormat);
+  CSimpleIniA settings;
+  settings.SetUnicode();
+  settings.LoadFile(ini_file.toStdString().c_str());
   if (command == CommandType::Get) {
+    const char* val;
     if (section.isEmpty()) {
-      value = settings.value(key).toString();
+      val = settings.GetValue("", key.toStdString().c_str(), NULL);
     } else {
-      settings.beginGroup(section);
-      value = settings.value(key).toString();
-      settings.endGroup();
+      val = settings.GetValue(section.toStdString().c_str(),
+                              key.toStdString().c_str(),
+                              NULL);
     }
     // Print value to stdout.
-    fprintf(stdout, "%s", value.toStdString().c_str());
+    fprintf(stdout, "%s", val);
 
   } else if (command == CommandType::Set) {
     if (section.isEmpty()) {
-      settings.setValue(key, value);
+      settings.SetValue("",
+                        key.toStdString().c_str(),
+                        value.toStdString().c_str());
     } else {
-      settings.beginGroup(section);
-      settings.setValue(key, value);
-      settings.endGroup();
+      settings.SetValue(section.toStdString().c_str(),
+                        key.toStdString().c_str(),
+                        value.toStdString().c_str());
     }
+    settings.SaveFile(ini_file.toStdString().c_str());
   }
 
   return kExitOk;
