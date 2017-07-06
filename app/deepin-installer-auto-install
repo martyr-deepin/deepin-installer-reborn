@@ -12,14 +12,14 @@ locale=''
 parse_kernel_cmdline() {
   for item in $(cat /proc/cmdline); do
     case $item in
-      auto-deepin-install)
+      auto-deepin-installer)
         auto_install_mode=1
         ;;
       install-path=*)
-        install_path="${x#install-path=}"
+        install_path="${item##*=}"
         ;;
       deepin-installer/locale=*)
-        locale=${x#deepin-installer/locale=}
+        locale="${item##*=}"
         ;;
     esac
   done
