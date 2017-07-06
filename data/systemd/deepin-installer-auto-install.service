@@ -1,6 +1,6 @@
 [Unit]
 Description=Launch installer in auto-install mode
-ConditionKernelCommandLine=auto-deepin-install
+ConditionKernelCommandLine=auto-deepin-installer
 ConditionPathExists=!/etc/deepin-installer-first-boot
 Conflicts=plymouth-quit.service getty@tty1.service
 
