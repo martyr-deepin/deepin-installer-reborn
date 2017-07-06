@@ -19,25 +19,22 @@ enum class ValidateHostnameState {
   TooShortError,
 };
 
+const int kHostnameMinLen = 1;
+const int kHostnameMaxLen = 253;
+
 // Check hostname (machine name) based on the following rules:
 //   * Only letters(a-z, A-Z) and numbers(0-9) can be used as prefix/suffix;
 //   * Dot(.) is used to separate domain and sub-domain;
 //   * Underscore(_) and dash(-) are used to concat letters and numbers.
 // Parameter list:
 //  * |hostname|, hostname to be validated.
-//  * |min_len|, minimum characters allowed in |hostname|.
-//  * |max_len|, maximum characters allowed in |hostname|.
 //  * |reserved|, a list of hostname reserved by system, normally it only
 //    contains "localhost".
+// For more information about hostname, please visit:
+//  * https://en.wikipedia.org/wiki/Hostname
+//  * https://tools.ietf.org/html/rfc1123#page-13
 ValidateHostnameState ValidateHostname(const QString& hostname,
-                                       int min_len,
-                                       int max_len,
                                        const QStringList& reserved);
-
-// Validate part of hostname.
-// Use this function when |hostname| is being edited.
-// DEPRECATED
-bool ValidateHostnameTemp(const QString& hostname);
 
 }  // namespace installer
 

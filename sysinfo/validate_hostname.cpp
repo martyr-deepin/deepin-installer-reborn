@@ -9,38 +9,35 @@
 namespace installer {
 
 ValidateHostnameState ValidateHostname(const QString& hostname,
-                                       int min_len,
-                                       int max_len,
                                        const QStringList& reserved) {
-  Q_ASSERT(min_len >= 0);
-  Q_ASSERT(max_len >= min_len);
-
-  if (hostname.isEmpty() && min_len > 0) {
+  if (hostname.isEmpty()) {
     return ValidateHostnameState::EmptyError;
   }
-  if (hostname.length() < min_len) {
+  if (hostname.length() < kHostnameMinLen) {
     return ValidateHostnameState::TooShortError;
   }
-  if (hostname.length() > max_len) {
+  if (hostname.length() > kHostnameMaxLen) {
     return ValidateHostnameState::TooLongError;
   }
   if (reserved.contains(hostname)) {
     return ValidateHostnameState::ReservedError;
   }
 
-  const QRegExp reg("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]).)*"
-                    "([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9])$");
-  if (!reg.exactMatch(hostname)) {
+  const QRegExp reg("[a-z0-9-]{1,63}", Qt::CaseInsensitive);
+  const QStringList parts = hostname.split('.');
+  if (parts.isEmpty()) {
     return ValidateHostnameState::InvalidChar;
   }
 
-  return ValidateHostnameState::Ok;
-}
+  for (const QString& part : parts) {
+    if (part.startsWith('-') ||
+        part.endsWith('-') ||
+        !reg.exactMatch(part)) {
+      return ValidateHostnameState::InvalidChar;
+    }
+  }
 
-bool ValidateHostnameTemp(const QString& hostname) {
-  const QRegExp reg("^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*"
-                    "[a-zA-Z0-9-.])*$");
-  return reg.exactMatch(hostname);
+  return ValidateHostnameState::Ok;
 }
 
 }  // namespace installer

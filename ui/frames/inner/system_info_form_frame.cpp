@@ -203,13 +203,9 @@ bool SystemInfoFormFrame::validateUsername(QString& msg) {
 }
 
 bool SystemInfoFormFrame::validateHostname(QString& msg) {
-  const int min_len = GetSettingsInt(kSystemInfoHostnameMinLen);
-  const int max_len = GetSettingsInt(kSystemInfoHostnameMaxLen);
   const QStringList reserved =
       GetSettingsStringList(kSystemInfoHostnameReserved);
   const ValidateHostnameState state = ValidateHostname(hostname_edit_->text(),
-                                                       min_len,
-                                                       max_len,
                                                        reserved);
   switch (state) {
     case ValidateHostnameState::EmptyError: {
@@ -227,7 +223,9 @@ bool SystemInfoFormFrame::validateHostname(QString& msg) {
     case ValidateHostnameState::TooLongError:  // fall through
     case ValidateHostnameState::TooShortError: {
       msg = tr("Please input computer name longer than %1 characters and "
-               "shorter than %2 characters").arg(min_len).arg(max_len);
+               "shorter than %2 characters")
+          .arg(kHostnameMinLen)
+          .arg(kHostnameMaxLen);
       return false;
     }
     case ValidateHostnameState::Ok: {

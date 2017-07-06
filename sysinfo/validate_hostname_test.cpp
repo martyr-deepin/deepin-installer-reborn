@@ -10,26 +10,17 @@ namespace installer {
 namespace {
 
 TEST(ValidateHostnameTest, ValidateHostname) {
-  EXPECT_EQ(ValidateHostname("", 2, 10, {}), ValidateHostnameState::EmptyError);
-  EXPECT_EQ(ValidateHostname("domain", 8, 10, {}),
-            ValidateHostnameState::TooShortError);
-  EXPECT_EQ(ValidateHostname("sub.domain", 2, 6, {}),
-            ValidateHostnameState::TooLongError);
-  EXPECT_EQ(ValidateHostname("localhost", 2, 10, {"localhost", "loop"}),
-            ValidateHostnameState::ReservedError);
-  EXPECT_EQ(ValidateHostname("sub-domain", 2, 10, {}),
-            ValidateHostnameState::Ok);
-  EXPECT_EQ(ValidateHostname("&:2domain", 2, 10, {}),
+  EXPECT_EQ(ValidateHostname("", {}), ValidateHostnameState::EmptyError);
+  EXPECT_EQ(ValidateHostname("-domain", {}),
             ValidateHostnameState::InvalidChar);
-}
-
-TEST(ValidateHostnameTest, ValidateHostnameTemp) {
-  EXPECT_TRUE(ValidateHostnameTemp(""));
-  EXPECT_TRUE(ValidateHostnameTemp("domain"));
-  EXPECT_TRUE(ValidateHostnameTemp("sub.domain"));
-  EXPECT_TRUE(ValidateHostnameTemp("sub-domain."));
-  EXPECT_FALSE(ValidateHostnameTemp(".sub.domain"));
-  EXPECT_FALSE(ValidateHostnameTemp("&:2domain"));
+  EXPECT_EQ(ValidateHostname("sub.domain", {}),
+            ValidateHostnameState::Ok);
+  EXPECT_EQ(ValidateHostname("localhost", {"localhost", "loop"}),
+            ValidateHostnameState::ReservedError);
+  EXPECT_EQ(ValidateHostname("sub-domain", {}),
+            ValidateHostnameState::Ok);
+  EXPECT_EQ(ValidateHostname("&:2domain", {}),
+            ValidateHostnameState::InvalidChar);
 }
 
 }  // namespace
