@@ -6,16 +6,17 @@
 # Copy desktop wallpaper to system folder
 
 readonly OEM_BACKGROUND="$OEM_DIR/background.jpg"
-SYS_BACKGROUND=/usr/share/backgrounds/desktop.jpg
+readonly SYS_BACKGROUND=/usr/share/backgrounds/oem-background.jpg
 
-# Get real path to desktop image file.
-if [ -L "${SYS_BACKGROUND}" ]; then
-  SYS_BACKGROUND=$(realpath "${SYS_BACKGROUND}")
-fi
+[ -f "${OEM_BACKGROUND}" ] || \
+  warn_exit "oem background not found at ${OEM_BACKGROUND}"
 
-if [ -f "${OEM_BACKGROUND}" ]; then
-  install -m644 -v "${OEM_BACKGROUND}" "${SYS_BACKGROUND}" || \
-    warn_exit "Failed to copy wallpaper to system"
-fi
+install -Dm644 -v "${OEM_BACKGROUND}" "${SYS_BACKGROUND}" || \
+  warn_exit "Failed to copy wallpaper to system"
+
+USERNAME=$(installer_get "DI_USERNAME")
+readonly USER_CONF="/var/lib/AccountsService/users/${USERNAME}"
+deepin-installer-settings set "${USER_CONF}" \
+  "User" "Background" "file://${SYS_BACKGROUND}"
 
 return 0

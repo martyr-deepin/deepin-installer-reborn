@@ -25,12 +25,11 @@ enable_deepin_lightdm_greeter() {
 
 # Customize lightdm background.
 update_background() {
-  local SRC_FILE
-  SRC_FILE="${OEM_DIR}/lightdm.png"
-  local DEST_FILE=/usr/share/backgrounds/lightdm.png
+  local SRC_FILE="${OEM_DIR}/lightdm.png"
+  local DEST_FILE=/usr/share/backgrounds/oem-lightdm.png
 
   if [ -f "${SRC_FILE}" ]; then
-    install -m644 -v "${SRC_FILE}" "${DEST_FILE}" || \
+    install -Dm644 -v "${SRC_FILE}" "${DEST_FILE}" || \
       warn "Failed to copy lightdm background"
 
     # Update lightdm background path in config file.
