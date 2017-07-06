@@ -1,7 +1,8 @@
 [Unit]
 Description=deepin installer pre
 DefaultDependencies=no
-ConditionKernelCommandLine=livecd-installer
+ConditionKernelCommandLine=|livecd-installer
+ConditionKernelCommandLine=|auto-deepin-installer
 Conflicts=shutdown.target
 Wants=systemd-udevd.service systemd-udev-trigger.service
 After=basic.target
