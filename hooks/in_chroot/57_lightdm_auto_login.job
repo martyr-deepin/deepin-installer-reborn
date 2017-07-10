@@ -13,7 +13,7 @@ setup_lightdm_auto_login() {
   local USERNAME
   USERNAME=$(installer_get "DI_USERNAME")
   [ -f /etc/lightdm/lightdm.conf ] || warn_exit "lightdm.conf not found!"
-  deepin-installer-settings set /etc/lightdm/lightdm.conf \
+  deepin-installer-simpleini set /etc/lightdm/lightdm.conf \
     "Seat:*" "autologin-user" "${USERNAME}"
 }
 

@@ -480,7 +480,12 @@ add_dependencies(deepin-installer installer-qm-update)
 add_executable(deepin-installer-settings
                app/deepin_installer_settings.cpp)
 
-target_link_libraries(deepin-installer-settings
+target_link_libraries(deepin-installer-settings ${QtCore_LIBS})
+
+add_executable(deepin-installer-simpleini
+               app/deepin_installer_simpleini.cpp)
+
+target_link_libraries(deepin-installer-simpleini
                       ${QtCore_LIBS}
                       simpleini)
 
@@ -770,6 +775,7 @@ install(PROGRAMS
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-simpleini
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 
