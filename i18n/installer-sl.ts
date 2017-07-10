@@ -69,8 +69,8 @@
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
-        <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>Namestitev deepina zahteva vsaj %1GB prostora, vendar je za večjo učinkovitost potrebno več kot %2GB</translation>
+        <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -790,33 +790,33 @@
         <translation>Prosim, uporabniško ime naj bo daljše od %1 znakov in krajše od %2 znakov</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="212"/>
         <source>Please input computer name</source>
         <translation>Prosim, vnesite ime računalnika</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="224"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Ime računalnika že obstaja, vnesite drugega.</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Prosim, računalniško ime naj bo daljše od %1 znakov in krajše od %2 znakov</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="267"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="251"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Prosim, geslo naj bo daljše od %1 znakov in krajše od %2 znakov</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="259"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Geslo mora vsebovati angleške črke (male in velike), številke ali posebne simbole (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Gesli se ne ujemata</translation>
     </message>
@@ -832,7 +832,7 @@
         <translation>Uporabniško ime mora vsebovati angleške črke (velike in male), številke ali posebne simbole(_-)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Computer name is invalid</source>
         <translation>Ime računalnika ni veljavno</translation>
     </message>

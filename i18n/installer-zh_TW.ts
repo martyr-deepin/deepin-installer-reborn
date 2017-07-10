@@ -69,8 +69,8 @@
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
-        <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>安裝 deepin 至少要 %1 GB 的磁碟機空間，建議 %2 GB 以上效果更好</translation>
+        <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -790,33 +790,33 @@
         <translation>請輸入 %1 到 %2 個字元的使用者名稱</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="212"/>
         <source>Please input computer name</source>
         <translation>請輸入電腦名稱</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="224"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
         <source>Computer name already exists, please input another one</source>
         <translation>電腦名稱已存在，請輸入其他名稱</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>請輸入 %1 到 %2 個字元的電腦名稱</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="267"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="251"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>請輸入 %1 到 %2 個字元的密碼</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="259"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>密碼需包含英文字母（區分大小寫），數字或是特殊符號（~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;）</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
         <source>The two passwords don&apos;t match</source>
         <translation>兩次輸入的密碼不相同</translation>
     </message>
@@ -832,7 +832,7 @@
         <translation>使用者名稱需包含英文字母（區分大小寫），數字或是特殊符號（_-）</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Computer name is invalid</source>
         <translation>電腦名稱無法使用</translation>
     </message>

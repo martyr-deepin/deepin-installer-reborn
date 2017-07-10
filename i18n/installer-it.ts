@@ -69,8 +69,8 @@
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
-        <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>Richiede almeno %1GB di spazio per installare Depin, per migliori performance si raccomandano almeno %2GB</translation>
+        <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -790,33 +790,33 @@
         <translation>Inserisci un Username più lungo di %1 caratteri ma minore di %2 caratteri</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="212"/>
         <source>Please input computer name</source>
         <translation>Inserisci il nome computer</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="224"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Nome computer esistente, inseriscine un altro</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Inserisci un nome computer più lungo di %1 caratteri ma minore di %2 caratteri</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="267"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="251"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Inserisci una password più lunga di %1 caratteri ma minore di %2 caratteri</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="259"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>La password deve contenere caratteri Italiani (case-sensitive), numeri o simboli speciali (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Le due password non corrispondono</translation>
     </message>
@@ -832,7 +832,7 @@
         <translation>L&apos;Username deve contenere lettere Italiane (case sensitive), numeri o simboli speciali (_-)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Computer name is invalid</source>
         <translation>Il nome computer non è valido</translation>
     </message>
@@ -864,19 +864,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
-        <translation type="unfinished"/>
+        <translation>Seleziona fuso orario</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>Seleziona la tua zona sulla mappa</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Avanti</translation>
     </message>
 </context>
 <context>

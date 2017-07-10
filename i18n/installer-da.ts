@@ -69,8 +69,8 @@
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
-        <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>Der kræves mindst %1GB diskplads for at installere deepin. For at få en bedre ydelse anbefales %2GB plads eller mere</translation>
+        <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -790,33 +790,33 @@
         <translation>Indtast venligst brugernavn på over %1 tegn og under %2 tegn</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="212"/>
         <source>Please input computer name</source>
         <translation>Indtast venligst computernavn</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="224"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Computernavn findes allerede, indtast venligst et andet</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Indtast venligst computernavn på over %1 tegn og under %2 tegn</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="267"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="251"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Indtast venligst adgangskode på over %1 tegn og under %2 tegn</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="259"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Adgangskoden skal indeholde engelske bogstaver (forskel på store og små bogstaver), tal og specialtegn (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
         <source>The two passwords don&apos;t match</source>
         <translation>De to adgangskoder er ikke ens</translation>
     </message>
@@ -832,7 +832,7 @@
         <translation>Brugernavn skal indeholde engelske bogstaver (forskel på store og små bogstaver), tal og specialtegn (_-)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Computer name is invalid</source>
         <translation>Computernavn er ugyldigt</translation>
     </message>
@@ -864,19 +864,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
-        <translation type="unfinished"/>
+        <translation>Vælg tidszone</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>Markér din zone på kortet</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Næste</translation>
     </message>
 </context>
 <context>

@@ -69,8 +69,8 @@
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
-        <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>Požaduje sa minimálne %1GB miesta na disku pre inštaláciu deepin, pre lepší výkon %2GB je odporúčané viac miesta</translation>
+        <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -790,33 +790,33 @@
         <translation>Zadajte prosím meno používateľa dlhšie ako %1 znakov a kratšie ako %2 znaky</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="212"/>
         <source>Please input computer name</source>
         <translation>Prosím vložte názov počítača</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="224"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Názov počítača už existuje, prosím zadajte iný</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Zadajte prosím názov počítača dlhší ako %1 znakov a kratší ako %2 znaky</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="267"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="251"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Prosím zadajte heslo dlhšie ako %1 znakov a kratšie ako %2 znaky</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="259"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Meno používateľa musí obsahovať anglické písmená (veľké a malé písmená), číslice alebo špeciálne znaky (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Tieto dve heslá sa nezhodujú</translation>
     </message>
@@ -832,7 +832,7 @@
         <translation>Meno používateľa musí obsahovať anglické písmená (veľké a malé písmená), číslice alebo špeciálne znaky (_-)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Computer name is invalid</source>
         <translation>Názov počítača je neplatný</translation>
     </message>
@@ -864,19 +864,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
-        <translation type="unfinished"/>
+        <translation>Výber časového pásma</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>Označte váš región na mape</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Ďalej</translation>
     </message>
 </context>
 <context>

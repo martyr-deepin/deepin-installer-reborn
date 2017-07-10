@@ -9,7 +9,7 @@
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="138"/>
         <source>Swap partition</source>
-        <translation>Separe la partición</translation>
+        <translation>Partición Swap</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="181"/>
@@ -69,8 +69,8 @@
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
-        <source>It takes at least %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>Se necesita al menos %1 GB de espacio en disco para instalar deepin. Para un mejor rendimiento, se recomienda %2 GB o más espacio.</translation>
+        <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
+        <translation>Necesita más de 10 GB de espacio en disco para instalar deepin, para un mejor rendimiento, Se recomienda 20 GB  de espacio libre.</translation>
     </message>
 </context>
 <context>
@@ -101,7 +101,7 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
         <source>Add an EFI partition to continue</source>
-        <translation>Para continuar, añada una partición EFI.</translation>
+        <translation>Para continuar, añada una partición EFI</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="417"/>
@@ -116,12 +116,12 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="427"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation>%1 error encontrado, continúe instalando después de</translation>
+        <translation>%1 error encontrado, continúe instalando después de corregirse</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="431"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation>%1 errores encontrados, continúe instalando después de</translation>
+        <translation>%1 errores encontrados, continúe instalando después de corregirlos</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="478"/>
@@ -790,33 +790,33 @@
         <translation>Por favor ingrese un nombre de usuario mayor de %1 caracteres y menor de %2 caracteres</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="212"/>
         <source>Please input computer name</source>
         <translation>Introduzca nombre del equipo</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="224"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Este nombre ya existe, introduzca otro</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Ingrese nombre de equipo con más de %1 caracteres y menos de %2 caracteres</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="253"/>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="267"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="251"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="265"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Introduzca una contraseña de más de %1 caracteres y menos de %2 caracteres</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="261"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="259"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>La contraseña debe contener letras en inglés (con distinción entre mayúsculas y minúsculas), números o símbolos especiales (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="281"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="279"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Las dos contraseñas no coinciden</translation>
     </message>
@@ -832,7 +832,7 @@
         <translation>El nombre de usuario debe contener letras en inglés (con distinción entre mayúsculas y minúsculas), números o símbolos especiales (_-)</translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="220"/>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Computer name is invalid</source>
         <translation>El nombre de equipo es inválido</translation>
     </message>
@@ -864,19 +864,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
         <source>Select Time Zone</source>
-        <translation type="unfinished"/>
+        <translation>Selecciona franja horaria</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>Marca tu zona en el mapa</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Siguiente</translation>
     </message>
 </context>
 <context>
