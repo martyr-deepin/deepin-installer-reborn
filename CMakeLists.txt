@@ -190,6 +190,8 @@ set(SYSINFO_FILES
     sysinfo/proc_partitions.h
     sysinfo/proc_swaps.cpp
     sysinfo/proc_swaps.h
+    sysinfo/release_version.cpp
+    sysinfo/release_version.h
     sysinfo/timezone.cpp
     sysinfo/timezone.h
     sysinfo/users.cpp
@@ -201,8 +203,7 @@ set(SYSINFO_FILES
     sysinfo/validate_username.cpp
     sysinfo/validate_username.h
     sysinfo/virtual_machine.cpp
-    sysinfo/virtual_machine.h
-    )
+    sysinfo/virtual_machine.h)
 
 set(UI_FILES
 

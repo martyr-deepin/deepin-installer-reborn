@@ -4,12 +4,14 @@
 
 #include "ui/delegates/main_window_util.h"
 
+#include "base/consts.h"
 #include "base/file_util.h"
 #include "partman/partition.h"
 #include "partman/utils.h"
 #include "service/log_manager.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
+#include "sysinfo/release_version.h"
 #include "third_party/zlib_wrapper/zip_util.h"
 #include "ui/delegates/partition_util.h"
 
@@ -76,7 +78,14 @@ bool ReadErrorMsg(QString& msg, QString& encoded_msg) {
     return false;
   }
 
-  msg = raw_msg.right(GetSettingsInt(kInstallFailedErrMsgLen));
+  const QString stripped_msg =
+      raw_msg.right(GetSettingsInt(kInstallFailedErrMsgLen));
+  const ReleaseVersion version = GetReleaseVersioin();
+  msg = QString("%1\n%2, %3, %4")
+      .arg(stripped_msg)
+      .arg(kAppVersion)
+      .arg(version.version)
+      .arg(version.type);
   const int qr_max_len = GetSettingsInt(kInstallFailedQRErrMsgLen);
   encoded_msg = EncodeErrorMsg(raw_msg.right(qr_max_len));
   return true;
