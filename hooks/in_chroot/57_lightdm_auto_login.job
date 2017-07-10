@@ -1,0 +1,24 @@
+#!/bin/bash
+# Copyright (c) 2017 LiuLang. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# Setup auto-login user for lightdm
+
+setup_lightdm_auto_login() {
+  if [ x$(installer_get "lightdm_enable_auto_login") != "xtrue" ]; then
+    return 0
+  fi
+
+  local USERNAME
+  USERNAME=$(installer_get "DI_USERNAME")
+  [ -f /etc/lightdm/lightdm.conf ] || warn_exit "lightdm.conf not found!"
+  deepin-installer-settings set /etc/lightdm/lightdm.conf \
+    "Seat:*" "autologin-user" "${USERNAME}"
+}
+
+if [ x$(installer_get "system_info_setup_after_reboot") != "xtrue" ]; then
+  setup_lightdm_auto_login
+fi
+
+return 0

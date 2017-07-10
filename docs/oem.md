@@ -98,3 +98,7 @@
 * `dde_launcher_hold_packages` 在launcher中禁止卸载这些应用.
 * `dde_desktop_desktop_content` 在桌面显示哪些图标或应用.
 * `dde_sound_effect_switches` 用来控制桌面音效开关.
+
+
+### Lightdm
+* `lightdm_enable_auto_login` 允许用户自动登录
