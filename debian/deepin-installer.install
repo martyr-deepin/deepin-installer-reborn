@@ -6,6 +6,7 @@ usr/bin/deepin-installer-first-boot
 usr/bin/deepin-installer-first-boot-pkexec
 usr/bin/deepin-installer-pkexec
 usr/bin/deepin-installer-settings
+usr/bin/deepin-installer-simpleini
 usr/bin/deepin-installer-unsquashfs
 usr/share/applications/deepin-installer.desktop
 usr/share/deepin-installer/hooks/*
