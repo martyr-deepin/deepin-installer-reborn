@@ -29,6 +29,7 @@ const int kExitOk = 0;
 
 const char kCommandGet[] = "get";
 const char kCommandSet[] = "set";
+const char kDefaultSection[] = "General";
 
 enum class CommandType {
   Get,
@@ -112,7 +113,7 @@ int main(int argc, char* argv[]) {
   if (command == CommandType::Get) {
     const char* val;
     if (section.isEmpty()) {
-      val = settings.GetValue("", key.toStdString().c_str(), NULL);
+      val = settings.GetValue(kDefaultSection, key.toStdString().c_str(), NULL);
     } else {
       val = settings.GetValue(section.toStdString().c_str(),
                               key.toStdString().c_str(),
@@ -123,7 +124,7 @@ int main(int argc, char* argv[]) {
 
   } else if (command == CommandType::Set) {
     if (section.isEmpty()) {
-      settings.SetValue("",
+      settings.SetValue(kDefaultSection,
                         key.toStdString().c_str(),
                         value.toStdString().c_str());
     } else {
