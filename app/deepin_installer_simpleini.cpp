@@ -108,7 +108,7 @@ int main(int argc, char* argv[]) {
   }
 
   CSimpleIniA settings;
-  settings.SetUnicode();
+  settings.SetUnicode(false);
   settings.LoadFile(ini_file.toStdString().c_str());
   if (command == CommandType::Get) {
     const char* val;
