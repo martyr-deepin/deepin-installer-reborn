@@ -784,7 +784,7 @@ void AdvancedPartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
 }
 
 void AdvancedPartitionDelegate::onManualPartDone(const DeviceList& devices) {
-  qDebug() << "onManualPartDone()" << devices;
+  qDebug() << "AdvancedPartitionDelegate::onManualPartDone()" << devices;
 
   QString root_disk;
   QString root_path;
@@ -813,10 +813,9 @@ void AdvancedPartitionDelegate::onManualPartDone(const DeviceList& devices) {
         // NOTE(xushaohua): Multiple swap partitions may be set.
         const QString record(QString("%1=swap").arg(partition.path));
         mount_points.append(record);
-      } else if (partition.fs == FsType::EFI) {
+      } else if (partition.fs == FsType::EFI && esp_path.isEmpty()) {
         // NOTE(xushaohua): There shall be only one EFI partition.
         esp_path = partition.path;
-        break;
       }
     }
   }

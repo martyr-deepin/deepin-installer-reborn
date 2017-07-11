@@ -687,7 +687,7 @@ void SimplePartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
 }
 
 void SimplePartitionDelegate::onManualPartDone(const DeviceList& devices) {
-  qDebug() << "onManualPartDone()" << devices;
+  qDebug() << "SimplePartitionDelegate::onManualPartDone()" << devices;
   QString root_disk;
   QString root_path;
   QStringList mount_points;
