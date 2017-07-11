@@ -44,6 +44,7 @@ if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
   detect_btrfs || UNUSED_PKGS+=("btrfs-tools")
 fi
 
+DI_LUPIN=$(installer_get "DI_LUPIN")
 [ x${DI_LUPIN} = "xtrue" ] || UNUSED_PKGS+=("lupin-support")
 detect_vbox || UNUSED_PKGS+=("virtualbox-guest-*")
 
@@ -52,7 +53,6 @@ UNUSED_PKGS+=("tshark")
 UNUSED_PKGS+=("wireshark-common")
 
 
-DI_LUPIN=$(installer_get "DI_LUPIN")
 DI_LOCALE=$(installer_get "DI_LOCALE")
 LANG=${DI_LOCALE%.*}
 
