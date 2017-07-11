@@ -177,6 +177,7 @@ QString TimezoneFrame::parseTimezoneAlias(const QString& timezone) {
 
 void TimezoneFrame::onNextButtonClicked() {
   if (IsTimezoneInTab(timezone_)) {
+    this->writeConf();
     emit this->timezoneUpdated(timezone_);
     // Emit finished() signal only if a valid timezone is specified.
     emit this->finished();
