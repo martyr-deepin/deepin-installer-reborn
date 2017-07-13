@@ -13,12 +13,12 @@ CONF_FILE=/etc/deepin-installer.conf
 
 . ./basic_utils.sh
 
-. ./in_chroot/01_setup_locale_timezone.job
-. ./in_chroot/03_configure_users.job
-. ./in_chroot/04_setup_keyboard.job
-. ./in_chroot/05_setup_avatar.job
-. ./in_chroot/11_generate_machine_id.job
-. ./in_chroot/57_lightdm_auto_login.job
+. ./in_chroot/09_generate_machine_id.job
+. ./in_chroot/33_lightdm_auto_login.job
+. ./in_chroot/51_setup_keyboard.job
+. ./in_chroot/52_setup_locale_timezone.job
+. ./in_chroot/53_setup_user.job
+. ./in_chroot/55_cutomize_user.job
 
 # Check whether btrfs filesystem is used in machine.
 detect_btrfs() {
@@ -50,12 +50,12 @@ main() {
   [ -f "${CONF_FILE}" ] || error "deepin-installer.conf not found"
   cat "${CONF_FILE}"
 
-  setup_avatar
+  generate_machine_id
+  setup_lightdm_auto_login
   setup_keyboard
   setup_locale_timezone
   setup_username_password
-  generate_machine_id
-  setup_lightdm_auto_login
+  customize_user
 
   cleanup_first_boot
 

@@ -1,0 +1,41 @@
+#!/bin/bash
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# Override default settings for user.
+
+customize_user() {
+  local DI_USERNAME USER_CONF
+  DI_USERNAME=$(installer_get "DI_USERNAME")
+  USER_CONF="/var/lib/AccountsService/users/${DI_USERNAME}"
+
+  # Disable fallback mode
+  deepin-installer-settings set "${USER_CONF}" \
+    "User", "XSession" "deepin"
+  deepin-installer-settings set "${USER_CONF}" \
+    "User", "SystemAccount" "false"
+
+  local DI_AVATAR
+  DI_AVATAR=$(installer_get "DI_AVATAR")
+  if [ -f "${DI_AVATAR}" ]; then
+    deepin-installer-settings set "${USER_CONF}" \
+      "User" "Icon" "file://${DI_AVATAR}"
+  fi
+
+  local SYS_LIGHTDM_BACKGROUND=/usr/share/backgrounds/oem-lightdm.png
+  if [ -f "${SYS_LIGHTDM_BACKGROUND}" ]; then
+    deepin-installer-settings set "${USER_CONF}" \
+      "User" "GreeterBackground" "file://${DEST_FILE}"
+  fi
+
+  local SYS_DESK_BACKGROUND=/usr/share/backgrounds/oem-background.jpg
+  if [ -f "${SYS_DESK_BACKGROUND}" ]; then
+    deepin-installer-settings set "${USER_CONF}" \
+      "User" "Background" "file://${SYS_BACKGROUND}"
+  fi
+}
+
+if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
+  customize_user
+fi

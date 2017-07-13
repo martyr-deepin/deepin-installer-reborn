@@ -1,0 +1,22 @@
+#!/bin/bash
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# Copy files from oem/ to system.
+# Run this job before "customize_user.job"
+
+OEM_DESK_BACKGROUND="$OEM_DIR/background.jpg"
+SYS_DESK_BACKGROUND=/usr/share/backgrounds/oem-background.jpg
+if [ -f "${OEM_DESK_BACKGROUND}" ]; then
+  install -Dm644 -v "${OEM_DESK_BACKGROUND}" "${SYS_DESK_BACKGROUND}" || \
+    warn "Failed to copy wallpaper to system"
+fi
+
+OEM_LIGHTDM_BACKGROUND="${OEM_DIR}/lightdm.png"
+SYS_LIGHTDM_BACKGROUND=/usr/share/backgrounds/oem-lightdm.png
+if [ -f "${SRC_FILE}" ]; then
+  install -Dm644 -v "${OEM_LIGHTDM_BACKGROUND}" "${SYS_LIGHTDM_BACKGROUND}" || \
+    warn "Failed to copy lightdm background to system"
+
+return 0
