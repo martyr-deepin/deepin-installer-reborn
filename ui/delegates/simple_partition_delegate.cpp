@@ -723,7 +723,7 @@ void SimplePartitionDelegate::onManualPartDone(const DeviceList& devices) {
     }
   }
 
-  if (!IsMBRPreferred(devices)) {
+  if (!IsMBRPreferred(real_devices_)) {
     // Enable EFI mode. First check newly created EFI partition. If not found,
     // check existing EFI partition.
     WriteUEFI(true);

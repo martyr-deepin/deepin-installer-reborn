@@ -112,11 +112,8 @@ class SimplePartitionDelegate : public QObject {
  private:
   DeviceList real_devices_;
   DeviceList virtual_devices_;
-
   QString bootloader_path_;
-
   OperationList operations_;
-
   Partition selected_partition_;
 };
 
