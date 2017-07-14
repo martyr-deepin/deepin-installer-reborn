@@ -38,12 +38,26 @@ uninstall_installer() {
   apt-get -y autoremove --purge
 }
 
+# Replace lightdm.conf with lightdm.conf.real.
+cleanup_lightdm_deepin_installer() {
+  local CONF_FILE=/etc/lightdm/lightdm.conf
+  local TEMP_CONF_FILE=/etc/lightdm/lightdm.conf.real
+  if [ -f "${TEMP_CONF_FILE}" ]; then
+    mv -f "${TEMP_CONF_FILE}" "${CONF_FILE}"
+  fi
+}
+
 cleanup_first_boot() {
   local FILE=/etc/deepin-installer-first-boot
   [ -f "${FILE}" ] && rm -f "${FILE}"
 
-  # Restore default target of systemd
-  systemctl set-default -f graphical.target
+  if [ -f /lib/systemd/system/deepin-installer.target ]; then
+    # Restore default target of systemd
+    systemctl set-default -f graphical.target
+  else
+    # See in_chroot/generate_reboot_setup_file.job for more info.
+    cleanup_lightdm_deepin_installer
+  fi
 }
 
 main() {

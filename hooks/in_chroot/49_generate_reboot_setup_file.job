@@ -5,8 +5,30 @@
 
 # Generate /etc/deepin-installer-first-boot placeholder file if needed.
 
+# If reboot-setup is enabled, backup lightdm.conf and modify it to execute
+# deepin-installer-first-boot.
+prepare_lightdm_deepin_installer_mode() {
+  local CONF_FILE=/etc/lightdm/lightdm.conf
+  local TEMP_CONF_FILE=/etc/lightdm/lightdm.conf.real
+  if [ -f "${CONF_FILE}" ]; then
+    install -m644 "${CONF_FILE}" "${TEMP_CONF_FILE}"
+  fi
+
+  cat > "${CONF_FILE}" <<EOF
+[Seat:*]
+greeter-setup-script=/usr/bin/deepin-installer-first-boot
+EOF
+}
+
 if [ x$(installer_get "system_info_setup_after_reboot") = "xtrue" ]; then
   touch /etc/deepin-installer-first-boot
 
-  systemctl set-default -f deepin-installer.target
+  # See "setup_lightdm.job" for more info.
+  if [ -f /lib/systemd/system/deepin-installer.target ]; then
+    systemctl set-default -f deepin-installer.target
+  else
+    prepare_lightdm_deepin_installer_mode
+  fi
 fi
+
+return 0
