@@ -17,6 +17,14 @@ QString ReadOsProberOutput() {
   if (QFile::exists(cache_path)) {
     return ReadFile(cache_path);
   } else {
+    // Create ignore_uefi file to make os-prober scan windows systems
+    // in UEFI mode.
+    const QString partman_flag = "/var/lib/partman/ignore_uefi";
+    if (!CreateParentDirs(partman_flag)) {
+      qWarning() << "Failed to create parent folder of: " << partman_flag;
+    }
+    WriteTextFile(partman_flag, "deepin-installer");
+
     QString output;
     if (SpawnCmd("os-prober", {}, output)) {
       WriteTextFile(cache_path, output);
