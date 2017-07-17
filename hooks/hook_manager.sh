@@ -25,10 +25,17 @@ _IN_CHROOT=$2
 
 # Defines absolute path to oem folder.
 # /tmp/oem is reserved for debug.
-OEM_DIR=/media/cdrom/oem
-if [ -d "/tmp/oem" ]; then
+if [ -d /tmp/oem ]; then
+  # Debug mode
   OEM_DIR=/tmp/oem
+elif [ -d /cdrom/oem ]; then
+  # Casper mode
+  OEM_DIR=/cdrom/oem
+else
+  # Default mode
+  OEM_DIR=/lib/live/mount/medium/oem
 fi
+
 # Mark $OEM_DIR as readonly constant.
 readonly OEM_DIR
 
