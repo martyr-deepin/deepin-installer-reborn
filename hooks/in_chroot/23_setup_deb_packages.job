@@ -7,8 +7,9 @@
 # Uninstall packages defined in settings file.
 
 OEM_DEB="${OEM_DIR}/deb"
-if [ $(ls "${OEM_DEB}/*.deb" 2>/dev/null) ]; then
-  dpkg -i "${OEM_DEB}"/*.deb || warn "Failed to install oem deb packages"
+if [[ $(ls "${OEM_DEB}"/*.deb 2>/dev/null) ]]; then
+  ls "${OEM_DEB}"
+  dpkg -i "${OEM_DEB}/"*.deb || warn "Failed to install oem deb packages"
   # TODO(xushaohua): Call apt-get -f install
 fi
 

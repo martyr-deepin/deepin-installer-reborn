@@ -28,12 +28,9 @@ _IN_CHROOT=$2
 if [ -d /tmp/oem ]; then
   # Debug mode
   OEM_DIR=/tmp/oem
-elif [ -d /cdrom/oem ]; then
-  # Casper mode
-  OEM_DIR=/cdrom/oem
-else
-  # Default mode
-  OEM_DIR=/lib/live/mount/medium/oem
+elif [ -d /media/cdrom/oem ]; then
+  # chroot mode
+  OEM_DIR=/media/cdrom/oem
 fi
 
 # Mark $OEM_DIR as readonly constant.
