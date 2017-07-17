@@ -190,9 +190,9 @@ esac
 
 # Remove partman/ignore_uefi if that file is created by installer.
 # See partman/os_prober.cpp for more info.
-IGNORE_UEFI=/var/lib/partman/ignore_uefi
-if [ -f $IGNORE_UEFI ] && [ x$(cat $IGNORE_UEFI) = 'xdeepin-installer' ]; then
-  rm -f $IGNORE_UEFI
-fi
+#IGNORE_UEFI=/var/lib/partman/ignore_uefi
+#if [ -f $IGNORE_UEFI ] && [ x$(cat $IGNORE_UEFI) = 'xdeepin-installer' ]; then
+#  rm -f $IGNORE_UEFI
+#fi
 
 /usr/sbin/update-grub
