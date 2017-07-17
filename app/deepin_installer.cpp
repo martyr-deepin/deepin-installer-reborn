@@ -5,6 +5,7 @@
 // Main program of installer.
 
 #include <QApplication>
+#include <QDateTime>
 #include <QDebug>
 #include <QIcon>
 
@@ -51,6 +52,7 @@ int main(int argc, char* argv[]) {
   installer::AddConfigFile();
 
   qDebug() << "Version:" << installer::kAppVersion;
+  qDebug() << "timestamp:" << QDateTime::currentDateTime().toString();
 
   const QString conf_file(args_parser.getConfFile());
   // Append customized configurations.
@@ -61,10 +63,10 @@ int main(int argc, char* argv[]) {
   }
 
   installer::MainWindow main_window;
-  main_window.setEnableAutoInstall(args_parser.isAutoInstallSet());
+  //main_window.setEnableAutoInstall(args_parser.isAutoInstallSet());
   main_window.setLogFile(args_parser.getLogFile());
   // Notify background thread to scan device info.
-  main_window.scanDevicesAndTimezone();
+  //main_window.scanDevicesAndTimezone();
   main_window.fullscreen();
 
   return app.exec();
