@@ -211,7 +211,7 @@ QString GetReservedUsernameFile() {
 }
 
 QString GetVendorLogo() {
-  const QString oem_file = GetOemDir().absoluteFilePath("logo.png");
+  const QString oem_file = GetOemDir().absoluteFilePath("vendor.png");
   if (QFile::exists(oem_file)) {
     return oem_file;
   }

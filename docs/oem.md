@@ -20,7 +20,7 @@
  安装器的背景图.
 * 桌面背景. 放到 `oem/background.jpg`.
 * Logo. 在语言选择页面的正上方, 会显示系统 logo, 默认是 deepin 的官方logo,
- 如果需要自定义, 可以放到 `oem/logo.png`.
+ 如果需要自定义, 可以放到 `oem/vendor.png`.
 * 应用图标. `oem/icons/` 目录用于存放应用图标, 其目录结构应与
  `/usr/share/icons/hicolor` 相同.
 * GRUB引导画面背景. 可以把图片放到 `oem/grub.png`.

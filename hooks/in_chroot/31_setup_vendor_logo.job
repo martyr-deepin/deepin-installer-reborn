@@ -1,10 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright (c) 2016 Deepin Ltd. All rights reserved.
 # Use of this source is governed by General Public License that can be found
 # in the LICENSE file.
 
-# Update logo used in lightdm greeter.
-# Update logo used in about-page of dde-control-center.
-# NOTE(xushaohua): dde-control-center and lightdm-deepin-greeter do not support
-# reading logo image from system currently.
+# Update vendor logo used in dde-lightdm-greeter and dde-control-center.
+
+readonly SRC_PATH="${OEM_DIR}"/vendor.png
+DST_PATH=$(installer_get "system_info_vendor_logo")
+if [ -f "${SRC_PATH}" ]; then
+  msg "Copy vendor logo to ${DST_PATH}"
+  install -Dm644 "${SRC_PATH}" "${DST_PATH}"
+fi
+
 return 0
