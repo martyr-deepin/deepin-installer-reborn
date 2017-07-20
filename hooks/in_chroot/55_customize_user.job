@@ -34,21 +34,6 @@ customize_user() {
     deepin-installer-settings set "${USER_CONF}" \
       "User" "Background" "file://${SYS_DESK_BACKGROUND}"
   fi
-
-  # Copy desktop files
-  local DESK_APPS=$(installer_get "dde_desktop_app_list")
-  if [ -n ${DESK_APPS} ]; then
-    local DESK_APPS_ARR=$(echo ${DESK_APPS//,/ })
-    for DESK_APP_ITEM in $(echo ${DESK_APPS_ARR}); do
-      msg "Copy app icon to desktop: ${DESK_APP_ITEM}"
-      if [ -f /usr/share/applications/${DESK_APP_ITEM}.desktop ]; then
-        install -v -Dm644 /usr/share/applications/${DESK_APP_ITEM}.desktop \
-          /etc/skel/Desktop/
-      else
-        warn "Desktop file not found: ${DESK_APP_ITEM}"
-      fi
-    done
-  fi
 }
 
 if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
