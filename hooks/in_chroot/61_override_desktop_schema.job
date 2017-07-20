@@ -10,24 +10,28 @@ LAUNCHER_HOLD_PKGS=$(installer_get "dde_launcher_hold_packages")
 LAUNCHER_APPS=$(installer_get "dde_launcher_app_list")
 if [ -n "${LAUNCHER_APPS}" ]; then
   echo "[com.deepin.dde.launcher]" >> "${SCHEMA_FILE}"
-  echo "apps-order=[${LAUNCHER_APPS}]" >> "${SCHEMA_FILE}"
-  echo "apps-order-zh-cn=[${LAUNCHER_APPS}]" >> "${SCHEMA_FILE}"
-  echo "apps-order-zh-tw=[${LAUNCHER_APPS}]" >> "${SCHEMA_FILE}"
+  REAL_LAUNCHER_APPS=$(echo ${LAUNCHER_APPS} | sed "s/ //g" | \
+    sed "s/,/','/g" | sed "s/^/'/" | sed "s/$/'/")
+  echo "apps-order = [${REAL_LAUNCHER_APPS}]" >> "${SCHEMA_FILE}"
+  echo "apps-order-zh-cn = [${REAL_LAUNCHER_APPS}]" >> "${SCHEMA_FILE}"
+  echo "apps-order-zh-tw = [${REAL_LAUNCHER_APPS}]" >> "${SCHEMA_FILE}"
 fi
 
 DOCK_APPS=$(installer_get "dde_dock_app_list")
 if [ -n "${DOCK_APPS}" ]; then
   echo "[com.deepin.dde.dock]" >> "${SCHEMA_FILE}"
-  echo "docked-apps=[${DOCK_APPS}]" >> "${SCHEMA_FILE}"
+  REAL_DOCK_APPS=$(echo ${DOCK_APPS} | sed "s/ //g" | \
+    sed "s/,/','/g" | sed "s/^/'/" | sed "s/$/'/")
+  echo "docked-apps = [${REAL_DOCK_APPS}]" >> "${SCHEMA_FILE}"
 fi
 
 SOUND_EFFECT=$(installer_get "dde_sound_effect_switches")
 if [ -n "${SOUND_EFFECT}" ]; then
   echo "[com.deepin.dde.sound-effect]" >> "${SCHEMA_FILE}"
-  SOUND_EFFECT_ARR=$(echo ${SOUND_EFFECT//;/ })
+  SOUND_EFFECT_ARR=$(echo ${SOUND_EFFECT} | sed "s/ //g" | sed "s/,/ /")
   for SOUND_EFFECT_ITEM in $(echo "${SOUND_EFFECT_ARR}"); do
     msg "sound effect: ${SOUND_EFFECT_ITEM}"
-    echo "${SOUND_EFFECT_ITEM}" >> "${SCHEMA_FILE}"
+    echo "${SOUND_EFFECT_ITEM}" | sed "s/=/ = /" >> "${SCHEMA_FILE}"
   done
 fi
 
