@@ -15,7 +15,7 @@ fi
 
 OEM_LIGHTDM_BACKGROUND="${OEM_DIR}/lightdm.png"
 SYS_LIGHTDM_BACKGROUND=/usr/share/backgrounds/oem-lightdm.png
-if [ -f "${SRC_FILE}" ]; then
+if [ -f "${OEM_LIGHTDM_BACKGROUND}" ]; then
   install -Dm644 -v "${OEM_LIGHTDM_BACKGROUND}" "${SYS_LIGHTDM_BACKGROUND}" || \
     warn "Failed to copy lightdm background to system"
 fi

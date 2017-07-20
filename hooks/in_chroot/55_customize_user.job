@@ -26,13 +26,13 @@ customize_user() {
   local SYS_LIGHTDM_BACKGROUND=/usr/share/backgrounds/oem-lightdm.png
   if [ -f "${SYS_LIGHTDM_BACKGROUND}" ]; then
     deepin-installer-settings set "${USER_CONF}" \
-      "User" "GreeterBackground" "file://${DEST_FILE}"
+      "User" "GreeterBackground" "file://${SYS_LIGHTDM_BACKGROUND}"
   fi
 
   local SYS_DESK_BACKGROUND=/usr/share/backgrounds/oem-background.jpg
   if [ -f "${SYS_DESK_BACKGROUND}" ]; then
     deepin-installer-settings set "${USER_CONF}" \
-      "User" "Background" "file://${SYS_BACKGROUND}"
+      "User" "Background" "file://${SYS_DESK_BACKGROUND}"
   fi
 
   # Copy desktop files
@@ -54,3 +54,5 @@ customize_user() {
 if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
   customize_user
 fi
+
+return 0
