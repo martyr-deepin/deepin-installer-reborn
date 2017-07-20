@@ -30,10 +30,12 @@ detect_btrfs() {
 
 # Purge installer package
 uninstall_installer() {
+  # NOTE(xushaohua): Remove dependencies of installer by hand.
+  # Until state of packages are correctly marked in ISO.
   if detect_btrfs; then
-    apt-get -y purge deepin-installer
+    apt-get -y purge deepin-installer tshark wireshark-common
   else
-    apt-get -y purge deepin-installer btrfs-tools
+    apt-get -y purge deepin-installer btrfs-tools tshark wireshark-common
   fi
   apt-get -y autoremove --purge
 }

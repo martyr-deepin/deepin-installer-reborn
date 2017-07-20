@@ -28,7 +28,9 @@ detect_vbox() {
 declare -a UNUSED_PKGS
 # Uninstall "deepin-installer" only if reboot_setup is false.
 if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
-  UNUSED_PKGS+=(deepin-installer)
+  UNUSED_PKGS+=("deepin-installer")
+  UNUSED_PKGS+=("tshark")
+  UNUSED_PKGS+=("wireshark-common")
 fi
 
 if grep -q boot=casper /proc/cmdline; then
@@ -47,11 +49,6 @@ fi
 DI_LUPIN=$(installer_get "DI_LUPIN")
 [ x${DI_LUPIN} = "xtrue" ] || UNUSED_PKGS+=("lupin-support")
 detect_vbox || UNUSED_PKGS+=("virtualbox-guest-*")
-
-# Remove tshark package by hand
-UNUSED_PKGS+=("tshark")
-UNUSED_PKGS+=("wireshark-common")
-
 
 DI_LOCALE=$(installer_get "DI_LOCALE")
 LANG=${DI_LOCALE%.*}
