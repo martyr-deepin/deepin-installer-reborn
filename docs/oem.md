@@ -27,7 +27,7 @@
 * 登录界面背景. 可以放到 `oem/lightdm.png`
 * plymouth 开机动画是一系统图片组成的, 放到 `oem/plymouth-theme/deepin-logo/`
  目录中. 可以参考 `plymouth-theme-deepin-logo` 这个deb包的结构.
-* deepin 控制中心和桌面登录界面中用到的logo, 目前还不支持被定制.
+* deepin 控制中心和桌面登录界面中用到的logo, 可以放到 oem/vendor.png
 * 光盘启动动画. 待补充.
 
 ### 任务栏默认图标和顺序
@@ -96,7 +96,7 @@
 * `dde_dock_app_list` 在dock中显示哪些应用图标.
 * `dde_launcher_app_list` 在launcher中显示的哪些应用图标.
 * `dde_launcher_hold_packages` 在launcher中禁止卸载这些应用.
-* `dde_desktop_desktop_content` 在桌面显示哪些图标或应用.
+* `dde_desktop_app_list` 在桌面显示哪些图标或应用.
 * `dde_sound_effect_switches` 用来控制桌面音效开关.
 
 
