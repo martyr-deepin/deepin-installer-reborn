@@ -17,14 +17,14 @@ fi
 
 DOCK_APPS=$(installer_get "dde_dock_app_list")
 if [ -n "${DOCK_APPS}" ]; then
-  echo "\n[com.deepin.dde.dock]" >> "${SCHEMA_FILE}"
+  echo "[com.deepin.dde.dock]" >> "${SCHEMA_FILE}"
   echo "docked-apps=[${DOCK_APPS}]" >> "${SCHEMA_FILE}"
 fi
 
 SOUND_EFFECT=$(installer_get "dde_sound_effect_switches")
 if [ -n "${SOUND_EFFECT}" ]; then
-  echo "\n[com.deepin.dde.sound-effect]" >> "${SCHEMA_FILE}"
-  SOUND_EFFECT_ARR=(${SOUND_EFFECT//;/ })
+  echo "[com.deepin.dde.sound-effect]" >> "${SCHEMA_FILE}"
+  SOUND_EFFECT_ARR=$(echo ${SOUND_EFFECT//;/ })
   for SOUND_EFFECT_ITEM in $(echo "${SOUND_EFFECT_ARR}"); do
     msg "sound effect: ${SOUND_EFFECT_ITEM}"
     echo "${SOUND_EFFECT_ITEM}" >> "${SCHEMA_FILE}"
