@@ -15,7 +15,7 @@ fi
 
 UNINSTALLED_PKGS=$(installer_get "package_uninstalled_packages" | sed "s/;/ /g")
 if [ -n "${UNINSTALLED_PKGS}" ]; then
-  apt-get -y purge "${UNINSTALLED_PKGS}" || \
+  apt-get -y purge ${UNINSTALLED_PKGS} || \
     warn_exit "Failed to install packages: ${UNINSTALLED_PKGS}"
 fi
 
