@@ -12,9 +12,9 @@ customize_user() {
 
   # Disable fallback mode
   deepin-installer-settings set "${USER_CONF}" \
-    "User", "XSession" "deepin"
+    "User" "XSession" "deepin"
   deepin-installer-settings set "${USER_CONF}" \
-    "User", "SystemAccount" "false"
+    "User" "SystemAccount" "false"
 
   local DI_AVATAR
   DI_AVATAR=$(installer_get "DI_AVATAR")
