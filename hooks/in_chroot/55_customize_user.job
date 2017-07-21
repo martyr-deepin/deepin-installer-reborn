@@ -4,7 +4,6 @@
 # in the LICENSE file.
 
 # Override default settings for user.
-
 customize_user() {
   local DI_USERNAME USER_CONF
   DI_USERNAME=$(installer_get "DI_USERNAME")
@@ -30,9 +29,14 @@ customize_user() {
   fi
 
   local SYS_DESK_BACKGROUND=/usr/share/backgrounds/oem-background.jpg
+  local SCHEMA_FILE=/usr/share/glib-2.0/schemas/99_deepin_installer_settings.gschema.override
   if [ -f "${SYS_DESK_BACKGROUND}" ]; then
+    # Update user config file
     deepin-installer-settings set "${USER_CONF}" \
       "User" "Background" "file://${SYS_DESK_BACKGROUND}"
+    # Update gsettings
+    echo "[com.deepin.wrap.gnome.desktop.background]" >> "${SCHEMA_FILE}"
+    echo "picture-uri = 'file://${SYS_DESK_BACKGROUND}'" >> "${SCHEMA_FILE}"
   fi
 }
 
