@@ -27,17 +27,6 @@ customize_user() {
     deepin-installer-settings set "${USER_CONF}" \
       "User" "GreeterBackground" "file://${SYS_LIGHTDM_BACKGROUND}"
   fi
-
-  local SYS_DESK_BACKGROUND=/usr/share/backgrounds/oem-background.jpg
-  local SCHEMA_FILE=/usr/share/glib-2.0/schemas/99_deepin_installer_settings.gschema.override
-  if [ -f "${SYS_DESK_BACKGROUND}" ]; then
-    # Update user config file
-    deepin-installer-settings set "${USER_CONF}" \
-      "User" "Background" "file://${SYS_DESK_BACKGROUND}"
-    # Update gsettings
-    echo "[com.deepin.wrap.gnome.desktop.background]" >> "${SCHEMA_FILE}"
-    echo "picture-uri = 'file://${SYS_DESK_BACKGROUND}'" >> "${SCHEMA_FILE}"
-  fi
 }
 
 if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then

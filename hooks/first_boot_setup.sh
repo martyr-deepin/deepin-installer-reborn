@@ -73,9 +73,10 @@ main() {
   setup_username_password
   customize_user
 
+  sync
   cleanup_first_boot
-
   uninstall_installer
+  sync
 }
 
 main

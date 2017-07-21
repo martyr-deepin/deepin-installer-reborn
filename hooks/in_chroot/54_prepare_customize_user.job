@@ -7,7 +7,7 @@
 # Run this job before "customize_user.job"
 
 OEM_DESK_BACKGROUND="$OEM_DIR/background.jpg"
-SYS_DESK_BACKGROUND=/usr/share/backgrounds/oem-background.jpg
+SYS_DESK_BACKGROUND=/usr/share/backgrounds/default_background.jpg
 if [ -f "${OEM_DESK_BACKGROUND}" ]; then
   install -Dm644 -v "${OEM_DESK_BACKGROUND}" "${SYS_DESK_BACKGROUND}" || \
     warn "Failed to copy wallpaper to system"
