@@ -444,6 +444,7 @@ void MainWindow::goNextPage() {
 
     case PageId::SystemInfoId: {
       if (GetSettingsBool(kSkipTimezonePage)) {
+        timezone_frame_->writeConf();
         prev_page_ = current_page_;
         current_page_ = PageId::TimezoneId;
         this->goNextPage();

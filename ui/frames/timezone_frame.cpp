@@ -75,6 +75,7 @@ void TimezoneFrame::readConf() {
   timezone_ = GetSettingsString(kTimezoneDefault);
   timezone_ = this->parseTimezoneAlias(timezone_);
   if (IsTimezoneInTab(timezone_)) {
+    qDebug() << "timezone updated from settings";
     timezone_source_ = TimezoneSource::Conf;
   } else {
     const bool use_geoip = GetSettingsBool(kTimezoneUseGeoIp);
