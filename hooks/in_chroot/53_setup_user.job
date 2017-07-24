@@ -26,6 +26,7 @@ setup_username_password() {
   DI_HOSTNAME="${DI_HOSTNAME:-deepin}"
 
   # Reset password in settings file
+  installer_set "system_info_default_password" ""
   installer_set "DI_PASSWORD" ""
 
   # Update password.
