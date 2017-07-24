@@ -9,11 +9,6 @@ source_file = i18n/installer.ts
 source_lang = en
 type = QT
 
-[deepin-installer-reborn.deepin-installer-oem]
-source_file = resources/deepin-installer-oem.desktop
-source_lang = en
-type = DESKTOP
-
 [deepin-installer-reborn.deepin-installer-timezones]
 file_filter = third_party/timezones/<lang>/deepin-installer-timezones.po
 source_file = third_party/timezones/system-config-date-timezones.pot
