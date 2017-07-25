@@ -94,7 +94,7 @@ is_sw() {
 # Check whether current platform is x86/x86_64 or not.
 is_x86() {
   case $(uname -m) in
-    i386 | amd64 | x86 | x86_64)
+    i386 | i686 | amd64 | x86 | x86_64)
       return 0
       ;;
     *)
