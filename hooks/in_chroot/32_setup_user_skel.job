@@ -5,9 +5,9 @@
 
 # Copy desktop files to user skeleton folder.
 # Do this before creating any users.
-local DESK_APPS=$(installer_get "dde_desktop_app_list")
+DESK_APPS=$(installer_get "dde_desktop_app_list")
 if [ -n ${DESK_APPS} ]; then
-  local DESK_APPS_ARR=$(echo ${DESK_APPS//,/ })
+  DESK_APPS_ARR=$(echo ${DESK_APPS//,/ })
   for DESK_APP_ITEM in $(echo ${DESK_APPS_ARR}); do
     msg "Copy app icon to desktop: ${DESK_APP_ITEM}"
     if [ -f /usr/share/applications/${DESK_APP_ITEM}.desktop ]; then
