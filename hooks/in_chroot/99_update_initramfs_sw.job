@@ -14,6 +14,15 @@ if [ ! -d /media/cdrom/live/platform ]; then
 fi
 
 SYSTEM_NAME=$(cat /proc/cpuinfo | grep "system type" | awk '{print $4}')
+case `uname -r` in
+  *-tembin-s41)
+    SYSTEM_NAME=${SYSTEM_NAME}-s41
+      ;;
+  *-tembin-s40)
+    SYSTEM_NAME=${SYSTEM_NAME}-s40
+      ;;
+esac
+
 msg "CPUTYPE=$SYSTEM_NAME"
 
 SRCPATH=/media/cdrom/live/platform/$SYSTEM_NAME
