@@ -34,7 +34,7 @@ rm -rf /lib/modules/*
   install -Dm644 $SRCPATH/xorg.conf /etc/X11/xorg.conf
 
 # Replace kernel image and modules.
-
+mkdir -pv /lib/modules
 [ -d $SRCPATH/modules ] && cp -rf $SRCPATH/modules/* /lib/modules
 
 for _FILE in $(ls ${SRCPATH} | grep "^vmlinux"); do
