@@ -190,13 +190,15 @@ QString GetPartitionLabel(const Partition& partition) {
       const QString os_description = GetOsDescription(partition.path);
       if (!os_description.isEmpty()) {
         return TrimText(os_description, kLabelMaxLen);
-      } else if (!partition.name.isEmpty()) {
-        return TrimText(partition.name, kLabelMaxLen);
-      } else if (!partition.label.isEmpty()) {
-        return TrimText(partition.label, kLabelMaxLen);
-      } else {
-        return GetPartitionName(partition.path);
       }
+      // Check partition label before partition name.
+      if (!partition.label.isEmpty()) {
+        return TrimText(partition.label, kLabelMaxLen);
+      }
+      if (!partition.name.isEmpty()) {
+        return TrimText(partition.name, kLabelMaxLen);
+      }
+      return GetPartitionName(partition.path);
     }
     default: {
       return QString();
@@ -221,15 +223,16 @@ QString GetPartitionLabelAndPath(const Partition& partition) {
       if (!os_description.isEmpty()) {
         const QString label = TrimText(os_description, kLabelMaxLen);
         return QString("%1(%2)").arg(label).arg(name);
-      } else if (!partition.name.isEmpty()) {
-        const QString label = TrimText(partition.name, kLabelMaxLen);
-        return QString("%1(%2)").arg(label).arg(name);
-      } else if (!partition.label.isEmpty()) {
+      }
+      if (!partition.label.isEmpty()) {
         const QString label = TrimText(partition.label, kLabelMaxLen);
         return QString("%1(%2)").arg(label).arg(name);
-      } else {
-        return name;
       }
+      if (!partition.name.isEmpty()) {
+        const QString label = TrimText(partition.name, kLabelMaxLen);
+        return QString("%1(%2)").arg(label).arg(name);
+      }
+      return name;
     }
     default: {
       return QString();
