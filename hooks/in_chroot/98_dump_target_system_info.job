@@ -1,0 +1,28 @@
+#!/bin/bash
+# Copyright (c) 2017 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# Dump system information to log file. Including:
+#  * hotname
+#  * apt source list
+#  * system version
+#  * package list and version
+
+msg "========== Dump of target system information ========="
+
+msg "Hostname: "
+cat /etc/hostname
+
+msg "\n\nAPT source list: "
+cat /etc/apt/sources.list
+
+msg "\n\nSystem version: "
+cat /etc/deepin-version
+
+msg "\n\nInstalled packages: "
+dpkg -l
+
+msg "========== End of target system information ========="
+
+return 0
