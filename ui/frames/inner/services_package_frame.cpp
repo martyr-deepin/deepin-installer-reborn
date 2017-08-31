@@ -69,17 +69,19 @@ void ServicesPackageFrame::initUI() {
   next_button_ = new NavButton(tr("Next"));
 
   QVBoxLayout* layout = new QVBoxLayout();
+  layout->setContentsMargins(0, 0, 0, 0);
   layout->setSpacing(kMainLayoutSpacing);
-  layout->addStretch();
+  layout->addSpacing(30);
   layout->addWidget(title_label_, 0, Qt::AlignHCenter);
-  layout->addStretch();
+  layout->addSpacing(20);
   layout->addWidget(package_view_, 0, Qt::AlignHCenter);
-  layout->addStretch();
+  layout->addSpacing(20);
   layout->addWidget(previous_button_, 0, Qt::AlignHCenter);
-  layout->addSpacing(15);
+  layout->addSpacing(kNavButtonVerticalSpacing);
   layout->addWidget(next_button_, 0, Qt::AlignHCenter);
 
   this->setLayout(layout);
+  this->setContentsMargins(0, 0, 0, 0);
 }
 
 void ServicesPackageFrame::onPackageViewSelectionChanged(
