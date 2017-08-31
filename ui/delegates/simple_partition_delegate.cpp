@@ -621,8 +621,8 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
 
   Partition& unallocated = device.partitions.last();
 
-  // Create /boot partition.
-  const int boot_space = GetSettingsInt(kPartitionDefaultBootSpace);
+  // Create /boot partition, 20GiB.
+  const int boot_space = 20 * 1024;
   const qint64 boot_sectors = boot_space * kMebiByte / unallocated.sector_size;
   bool ok = createPrimaryPartition(unallocated,
                                    PartitionType::Normal,
@@ -638,8 +638,8 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
   boot_operation.applyToVisual(device);
 
   unallocated = device.partitions.last();
-  // Create swap partition.
-  const int swap_space = GetSettingsInt(kPartitionSwapPartitionSize);
+  // Create swap partition, 16GiB.
+  const int swap_space = 16 * 1024;
   const qint64 swap_sectors = swap_space * kMebiByte / unallocated.sector_size;
   ok = createPrimaryPartition(unallocated,
                               PartitionType::Normal,
