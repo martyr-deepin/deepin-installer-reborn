@@ -1,14 +1,14 @@
 {
     "items": [
-        "Linfa机型",
-	"Lionrock机型",
-        "Tembin机型",
-	"Jztec机型"
+     "Linfa机型",
+     "Lionrock机型",
+     "Tembin机型",
+     "Jztec机型"
     ], 
     "selected": 1, 
     "title_name": "机型选择",
     "linfa机型":["abc","efs"] ,
     "lionrock机型":["abc","efs"] ,
-    "jztec机型":["name","jz"]
+    "jztec机型":["name","jz"],
     "tembin机型":["123","456"]
 }
