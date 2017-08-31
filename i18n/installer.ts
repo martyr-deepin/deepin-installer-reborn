@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.0">
 <context>
     <name>QObject</name>
     <message>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="181"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="210"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="212"/>
         <source>Freespace</source>
         <translation type="unfinished"></translation>
     </message>
@@ -677,10 +677,34 @@
     </message>
 </context>
 <context>
+    <name>installer::SelectKernelFrame</name>
+    <message>
+        <location filename="../ui/frames/inner/select_kernel_frame.cpp" line="28"/>
+        <location filename="../ui/frames/inner/select_kernel_frame.cpp" line="57"/>
+        <source>Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>installer::SelectLanguageFrame</name>
     <message>
         <location filename="../ui/frames/select_language_frame.cpp" line="53"/>
         <location filename="../ui/frames/select_language_frame.cpp" line="97"/>
+        <source>Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>installer::ServicesPackageFrame</name>
+    <message>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="28"/>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="68"/>
+        <source>Previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="29"/>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="69"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
@@ -863,20 +887,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Select Time Zone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="155"/>
         <source>Mark your zone on the map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="118"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="157"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>

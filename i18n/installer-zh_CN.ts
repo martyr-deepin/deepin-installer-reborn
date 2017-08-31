@@ -214,6 +214,15 @@
     </message>
 </context>
 <context>
+    <name>installer::SelectKernelFrame</name>
+    <message>
+        <location filename="../ui/frames/inner/select_kernel_frame.cpp" line="28"/>
+        <location filename="../ui/frames/inner/select_kernel_frame.cpp" line="57"/>
+        <source>Next</source>
+        <translation>下一步</translation>
+    </message>
+</context>
+<context>
     <name>installer::EditPartitionFrame</name>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="120"/>
@@ -875,6 +884,21 @@
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
+        <source>Next</source>
+        <translation>下一步</translation>
+    </message>
+</context>
+<context>
+    <name>installer::ServicesPackageFrame</name>
+    <message>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="28"/>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="68"/>
+        <source>Previous</source>
+        <translation >上一步</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="29"/>
+        <location filename="../ui/frames/inner/services_package_frame.cpp" line="69"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
