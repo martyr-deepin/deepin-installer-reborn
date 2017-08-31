@@ -24,6 +24,7 @@ class InstallFailedFrame;
 class InstallProgressFrame;
 class InstallSuccessFrame;
 class MultiHeadManager;
+class PackageListFrame;
 class PageIndicator;
 class PartitionFrame;
 class PartitionTableWarningFrame;
@@ -72,6 +73,7 @@ class MainWindow : public QWidget {
     InstallFailedId,
     InstallProgressId,
     InstallSuccessId,
+    PackageListId,
     PartitionId,
     PrivilegeErrorId,
     SelectLanguageId,
@@ -106,6 +108,7 @@ class MainWindow : public QWidget {
   InstallFailedFrame* install_failed_frame_ = nullptr;
   InstallProgressFrame* install_progress_frame_ = nullptr;
   InstallSuccessFrame* install_success_frame_ = nullptr;
+  PackageListFrame* package_list_frame_ = nullptr;
   PartitionFrame* partition_frame_ = nullptr;
   PrivilegeErrorFrame* privilege_error_frame_ = nullptr;
   SelectLanguageFrame* select_language_frame_ = nullptr;

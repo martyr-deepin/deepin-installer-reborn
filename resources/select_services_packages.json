@@ -1,0 +1,16 @@
+{
+    "title_name": "服务选择",
+    "items":["Apache服务", "Nginx服务", "FTP服务", "SSH服务", "MySQL数据库服务","Postfix邮件服务","常用工具","基础开发环境","Java开发环境","Qt开发环境"],
+    "selected": [2 ,3 ,7],
+    "apache服务":["apache2"],
+    "nginx服务":["nginx","nginx-full"],
+    "ftp服务":["vsftpd"],
+    "ssh服务":["openssh-server"],
+    "mysql数据库服务":["mysql-server"],
+    "postfix邮件服务":["postfix"],
+    "常用工具":["filezilla","remmina","gparted","system-config-firewall","system-config-printer"],
+    "基础开发环境":["build-essential","devscripts","emacs","vim-gtk","libboost1.58-all-dev","git","gitk","gdb","autoconf","automake","cmake","unixodbc","unixodbc-dev", "libyaml-0-2"],
+    "java开发环境":["eclipse","sw-java7-jdk"],
+    "qt开发环境":["qtcreator","qt5-qmake","pyqt5-dev","python-pyqt5","python3-pyqt5"]
+    
+}

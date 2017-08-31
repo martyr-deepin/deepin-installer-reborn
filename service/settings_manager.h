@@ -97,6 +97,10 @@ void WritePartitionInfo(const QString& root_disk,
 // Whether swap file is required. Swap file is created in before_chroot/.
 void WriteRequiringSwapFile(bool is_required);
 
+// Write kernel name and package list.
+void WriteKernelVersion(const QString& kernel_version);
+void WritePackageList(const QStringList& packages);
+
 // Save current settings to /etc/deepin-installer.conf
 // Other settings will be updated later.
 void AddConfigFile();

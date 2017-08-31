@@ -15,16 +15,16 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -Werror -Wextra")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -Wextra")
   # -fno-rtti, Disable real-time type information
   # -fno-exceptions Disable exceptions
   # -fsanitize=address Enable memory sanitize plugin
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Werror -Wextra -fno-exceptions")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall  -Wextra -fno-exceptions")
   # -fsanitize=address, Enable memory address sanitizer.
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
   # -fsanitize=leak, Enable memory leak sanitizer.
-  # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=leak")
-  # -fsanitize=memory, Enable detecting uninitited memory sanitizer.
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=leak")
+  # -fsanitize=memory, Enable detecting uninitited memory salsnitizer.
   #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=memory "
   #    "-fsanitize-memory-track-origins -fPIC -pie -fno-omit-frame-pointer")
   
@@ -158,10 +158,14 @@ set(SERVICE_FILES
 
     service/first_boot_hook_worker.cpp
     service/first_boot_hook_worker.h
+    service/kernel_list.cpp
+    service/kernel_list.h
     service/hooks_manager.cpp
     service/hooks_manager.h
     service/log_manager.cpp
     service/log_manager.h
+    service/package_list.cpp
+    service/package_list.h
     service/power_manager.cpp
     service/power_manager.h
     service/settings_manager.cpp
@@ -258,10 +262,14 @@ set(UI_FILES
     ui/frames/inner/prepare_install_frame.h
     ui/frames/inner/select_bootloader_frame.cpp
     ui/frames/inner/select_bootloader_frame.h
+    ui/frames/inner/select_kernel_frame.cpp
+    ui/frames/inner/select_kernel_frame.h
     ui/frames/inner/simple_disk_frame.cpp
     ui/frames/inner/simple_disk_frame.h
     ui/frames/inner/simple_partition_frame.cpp
     ui/frames/inner/simple_partition_frame.h
+    ui/frames/inner/services_package_frame.cpp
+    ui/frames/inner/services_package_frame.h
     ui/frames/inner/system_info_avatar_frame.cpp
     ui/frames/inner/system_info_avatar_frame.h
     ui/frames/inner/system_info_form_frame.cpp
@@ -285,6 +293,8 @@ set(UI_FILES
     ui/frames/install_progress_frame.h
     ui/frames/install_success_frame.cpp
     ui/frames/install_success_frame.h
+    ui/frames/package_list_frame.cpp
+    ui/frames/package_list_frame.h
     ui/frames/partition_frame.cpp
     ui/frames/partition_frame.h
     ui/frames/privilege_error_frame.cpp
@@ -300,6 +310,8 @@ set(UI_FILES
     ui/models/bootloader_list_model.h
     ui/models/fs_model.cpp
     ui/models/fs_model.h
+    ui/models/kernel_list_model.cpp
+    ui/models/kernel_list_model.h
     ui/models/keyboard_layout_model.cpp
     ui/models/keyboard_layout_model.h
     ui/models/keyboard_layout_variant_model.cpp
@@ -308,6 +320,8 @@ set(UI_FILES
     ui/models/language_list_model.h
     ui/models/mount_point_model.cpp
     ui/models/mount_point_model.h
+    ui/models/package_list_model.cpp
+    ui/models/package_list_model.h
     ui/models/partition_model.cpp
     ui/models/partition_model.h
     ui/models/partition_type_model.cpp
@@ -403,6 +417,9 @@ set(UNITTEST_FILES
 
     partman/operation_test.cpp
     partman/partition_test.cpp
+
+    service/kernel_list_test.cpp
+    service/package_list_test.cpp
 
     sysinfo/dev_disk_test.cpp
     sysinfo/iso3166_test.cpp

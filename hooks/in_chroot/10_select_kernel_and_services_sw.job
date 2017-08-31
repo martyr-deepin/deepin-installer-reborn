@@ -1,0 +1,24 @@
+#!/bin/sh
+# Copyright (c) 2016 Deepin Ltd. All rights reserved.
+# Use of this source is governed by General Public License that can be found
+# in the LICENSE file.
+
+# sw64 server version, select dialog call method
+if ! is_sw; then
+  return 0
+fi
+
+SW_RS_RUN="/usr/share/deepin-installer/resources/sw_gui2sh.py"
+
+SMK_SELECT_RS=$(installer_get "SELECTED_MACHINE_KERNEL")
+SSP_SELECT_RS=$(installer_get "SELECTED_SERVICES_PACKAGES")
+
+[ -z "${SMK_SELECT_RS}" ] && error "SMK_SELECT_RS is empty"
+
+/usr/bin/python ${SW_RS_RUN} smk ${SMK_SELECT_RS}
+
+if [[ -n "${SMK_SELECT_RS}" ]] ; then
+
+   /usr/bin/python ${SW_RS_RUN} ssp ${SSP_SELECT_RS}
+
+fi

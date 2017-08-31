@@ -338,6 +338,15 @@ void WriteRequiringSwapFile(bool is_required) {
   AppendToConfigFile("DI_SWAP_FILE_REQUIRED", is_required);
 }
 
+void WriteKernelVersion(const QString& kernel_version) {
+  AppendToConfigFile("SELECTED_MACHINE_KERNEL", kernel_version);
+}
+
+void WritePackageList(const QStringList& packages) {
+  // Join package list with semicolons.
+  AppendToConfigFile("SELECTED_SERVICES_PACKAGES", packages.join(";"));
+}
+
 void AddConfigFile() {
   QSettings target_settings(kInstallerConfigFile, QSettings::IniFormat);
 
