@@ -1,5 +1,6 @@
 [Desktop Entry]
-Categories=Settings;
+Categories=System;Core;Settings;
+#Categories=Settings;
 Comment=Installer for Linux Deepin
 Exec=deepin-installer-pkexec
 Icon=deepin-installer

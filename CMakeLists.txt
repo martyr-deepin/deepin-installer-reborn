@@ -402,43 +402,43 @@ set(UI_FILES
     ui/widgets/spinner/spinner.qrc
     )
 
-set(ROOT_UNITTEST_FILES
+#set(ROOT_UNITTEST_FILES
     #    partman/operation_test.cpp
     #    partman/partition_usage_test.cpp
     #    partman/os_prober_test.cpp
     #    partman/partition_manager_test.cpp
-    partman/libparted_util_test.cpp
-    )
+    #	 partman/libparted_util_test.cpp
+#    )
 
-set(UNITTEST_FILES
-    base/command_test.cpp
-    base/file_util_test.cpp
-    base/string_util_test.cpp
+#set(UNITTEST_FILES
+#    base/command_test.cpp
+#    base/file_util_test.cpp
+#    base/string_util_test.cpp
 
-    partman/operation_test.cpp
-    partman/partition_test.cpp
+#    partman/operation_test.cpp
+#    partman/partition_test.cpp
 
-    service/kernel_list_test.cpp
-    service/package_list_test.cpp
+#    service/kernel_list_test.cpp
+#    service/package_list_test.cpp
 
-    sysinfo/dev_disk_test.cpp
-    sysinfo/iso3166_test.cpp
-    sysinfo/keyboard_test.cpp
-    sysinfo/proc_meminfo_test.cpp
-    sysinfo/proc_mounts_test.cpp
-    sysinfo/proc_partitions_test.cpp
-    sysinfo/proc_swaps_test.cpp
-    sysinfo/timezone_test.cpp
-    sysinfo/users_test.cpp
-    sysinfo/validate_hostname_test.cpp
-    sysinfo/validate_password_test.cpp
-    sysinfo/validate_username_test.cpp
-
-    ui/delegates/installer_args_parser_test.cpp
-    ui/delegates/install_slide_frame_util_test.cpp
-    ui/delegates/timezone_map_util_test.cpp
-    )
-
+#    sysinfo/dev_disk_test.cpp
+#    sysinfo/iso3166_test.cpp
+#    sysinfo/keyboard_test.cpp
+#    sysinfo/proc_meminfo_test.cpp
+#    sysinfo/proc_mounts_test.cpp
+#    sysinfo/proc_partitions_test.cpp
+#    sysinfo/proc_swaps_test.cpp
+#    sysinfo/timezone_test.cpp
+#    sysinfo/users_test.cpp
+#    sysinfo/validate_hostname_test.cpp
+#    sysinfo/validate_password_test.cpp
+#    sysinfo/validate_username_test.cpp
+#
+#    ui/delegates/installer_args_parser_test.cpp
+#    ui/delegates/install_slide_frame_util_test.cpp
+#    ui/delegates/timezone_map_util_test.cpp
+#    )
+#
 
 set(QtCore_LIBS Qt5::Core)
 set(Qt_LIBS
