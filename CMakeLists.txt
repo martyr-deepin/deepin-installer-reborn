@@ -402,43 +402,46 @@ set(UI_FILES
     ui/widgets/spinner/spinner.qrc
     )
 
-#set(ROOT_UNITTEST_FILES
-    #    partman/operation_test.cpp
-    #    partman/partition_usage_test.cpp
-    #    partman/os_prober_test.cpp
-    #    partman/partition_manager_test.cpp
-    #	 partman/libparted_util_test.cpp
-#    )
+set(ROOT_UNITTEST_FILES
+    #partman/operation_test.cpp
+    #partman/partition_usage_test.cpp
+    #partman/os_prober_test.cpp
+    #partman/partition_manager_test.cpp
+    partman/libparted_util_test.cpp
+    )
 
-#set(UNITTEST_FILES
-#    base/command_test.cpp
-#    base/file_util_test.cpp
-#    base/string_util_test.cpp
+set(UNITTEST_FILES
+    base/command_test.cpp
+    base/file_util_test.cpp
+    base/string_util_test.cpp
 
-#    partman/operation_test.cpp
-#    partman/partition_test.cpp
+    partman/operation_test.cpp
+    partman/partition_test.cpp
 
-#    service/kernel_list_test.cpp
-#    service/package_list_test.cpp
+    service/kernel_list.cpp
+    service/kernel_list.h
+    service/kernel_list_test.cpp
+    service/package_list.cpp
+    service/package_list.h
+    service/package_list_test.cpp
 
-#    sysinfo/dev_disk_test.cpp
-#    sysinfo/iso3166_test.cpp
-#    sysinfo/keyboard_test.cpp
-#    sysinfo/proc_meminfo_test.cpp
-#    sysinfo/proc_mounts_test.cpp
-#    sysinfo/proc_partitions_test.cpp
-#    sysinfo/proc_swaps_test.cpp
-#    sysinfo/timezone_test.cpp
-#    sysinfo/users_test.cpp
-#    sysinfo/validate_hostname_test.cpp
-#    sysinfo/validate_password_test.cpp
-#    sysinfo/validate_username_test.cpp
-#
-#    ui/delegates/installer_args_parser_test.cpp
-#    ui/delegates/install_slide_frame_util_test.cpp
-#    ui/delegates/timezone_map_util_test.cpp
-#    )
-#
+    sysinfo/dev_disk_test.cpp
+    sysinfo/iso3166_test.cpp
+    sysinfo/keyboard_test.cpp
+    sysinfo/proc_meminfo_test.cpp
+    sysinfo/proc_mounts_test.cpp
+    sysinfo/proc_partitions_test.cpp
+    sysinfo/proc_swaps_test.cpp
+    sysinfo/timezone_test.cpp
+    sysinfo/users_test.cpp
+    sysinfo/validate_hostname_test.cpp
+    sysinfo/validate_password_test.cpp
+    sysinfo/validate_username_test.cpp
+
+    ui/delegates/installer_args_parser_test.cpp
+    ui/delegates/install_slide_frame_util_test.cpp
+    ui/delegates/timezone_map_util_test.cpp
+    )
 
 set(QtCore_LIBS Qt5::Core)
 set(Qt_LIBS
@@ -577,7 +580,7 @@ target_link_libraries(deepin-installer-xrandr-switchy
 # test reboot system
 add_executable(reboot-system
                app/reboot_system.cpp
-               
+
                ${BASE_FILES}
                service/power_manager.cpp
                service/power_manager.h
@@ -587,7 +590,7 @@ target_link_libraries(reboot-system ${QtCore_LIBS})
 # Combobox test
 add_executable(combobox-test
                ui/tests/combobox_test.cpp
-               
+
                ${BASE_FILES}
                ui/delegates/table_combo_box_delegate.cpp
                ui/delegates/table_combo_box_delegate.h
@@ -605,16 +608,16 @@ target_link_libraries(combobox-test ${Qt_LIBS})
 # locale manager test
 add_executable(locale-manager-test
                service/timezone_manager_test.cpp
-               
+
                ${BASE_FILES}
-               
+
                service/backend/wifi_inspect_worker.cpp
                service/backend/wifi_inspect_worker.h
                service/backend/geoip_request_worker.cpp
                service/backend/geoip_request_worker.h
                service/timezone_manager.cpp
                service/timezone_manager.h
-               
+
                ${SYSINFO_FILES}
                )
 target_link_libraries(locale-manager-test ${Qt_LIBS})

@@ -44,13 +44,12 @@ elseif(${INSTALLER_BUILD_ARCH} MATCHES "sw_64")
           DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
           RENAME default_settings.ini
           )
-install(
-    FILES ${CMAKE_CURRENT_SOURCE_DIR}/sw_cpu_select.py
-  	  ${CMAKE_CURRENT_SOURCE_DIR}/sw_gui2sh.py
-  	  ${CMAKE_CURRENT_SOURCE_DIR}/select_machine_kernel.json
-  	  ${CMAKE_CURRENT_SOURCE_DIR}/select_services_packages.json
-    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
-)
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/select_machine_kernel.json
+          ${CMAKE_CURRENT_SOURCE_DIR}/select_services_packages.json
+          ${CMAKE_CURRENT_SOURCE_DIR}/sw_cpu_select.py
+          ${CMAKE_CURRENT_SOURCE_DIR}/sw_gui2sh.py
+          DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
+          )
 elseif(${INSTALLER_BUILD_ARCH} MATCHES "mips")
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/loongson_default_settings.ini
           DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
