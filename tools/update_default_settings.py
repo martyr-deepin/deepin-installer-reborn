@@ -56,6 +56,7 @@ def update_sw_policy(settings_file):
         ("partition_boot_on_first_partition", "true"),
         ("partition_supported_fs", '"ext4;ext3;ext2;efi;linux-swap"'),
         ("partition_prefer_logical_partition", "false"),
+        ("install_progress_page_disable_slide", "true"),
     )
     parser = configparser.ConfigParser()
     parser.read(settings_file)
