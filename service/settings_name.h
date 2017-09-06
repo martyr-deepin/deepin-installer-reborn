@@ -97,6 +97,8 @@ const char kPartitionPreferLogicalPartition[] =
     "partition_prefer_logical_partition";
 const char kPartitionBootPartitionFs[] = "partition_boot_partition_fs";
 const char kPartitionEnableOsProber[] = "partition_enable_os_prober";
+const char kPartitionHideInstallationDevice[] =
+    "partition_hide_installation_device";
 
 // Install progress page
 const char kInstallProgressPageDisableSlide[] =
