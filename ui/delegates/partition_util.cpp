@@ -77,7 +77,12 @@ int AllocPrimaryPartitionNumber(const Device& device) {
   return -1;
 }
 
+// Filter installation device from device list.
 DeviceList FilterInstallerDevice(const DeviceList& devices) {
+  if (!GetSettingsBool(kPartitionHideInstallationDevice)) {
+    return devices;
+  }
+
   DeviceList filtered_devices;
   const QString installer_device_path(GetInstallerDevicePath());
   for (const Device& device : devices) {
