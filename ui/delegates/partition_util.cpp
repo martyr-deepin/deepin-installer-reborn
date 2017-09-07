@@ -88,6 +88,8 @@ DeviceList FilterInstallerDevice(const DeviceList& devices) {
   for (const Device& device : devices) {
     if (!installer_device_path.startsWith(device.path)) {
       filtered_devices.append(device);
+    } else {
+      qDebug() << "Filtered device:" << device;
     }
   }
 
@@ -113,8 +115,20 @@ QString GetDeviceModelCapAndPath(const Device& device) {
 QString GetInstallerDevicePath() {
   const MountItemList list(ParseMountItems());
 
+  // Parse symbolic link to mount point.
+  QString casper_path(kCasperMountPoint);
+  QFileInfo casper_info(kCasperMountPoint);
+  if (casper_info.exists()) {
+    casper_path = casper_info.canonicalFilePath();
+  }
+  QString live_path(kLiveMountPoint);
+  QFileInfo live_info(kLiveMountPoint);
+  if (live_info.exists()) {
+    live_path = live_info.canonicalFilePath();
+  }
+
   for (const MountItem& item : list) {
-    if (item.mount == kCasperMountPoint || item.mount == kLiveMountPoint) {
+    if (item.mount == casper_path || item.mount == live_path) {
       return item.path;
     }
   }
