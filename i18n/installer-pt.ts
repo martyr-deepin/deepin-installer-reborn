@@ -1,24 +1,24 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt" version="2.0">
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="125"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="144"/>
         <source>Do not use this partition</source>
         <translation>Não usar esta partição</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="138"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="157"/>
         <source>Swap partition</source>
         <translation>Partição de Swap</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="181"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="210"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="200"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="231"/>
         <source>Freespace</source>
         <translation>Espaço livre</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="140"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="159"/>
         <source>Unknown</source>
         <translation>Desconhecido</translation>
     </message>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
         <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation type="unfinished"/>
+        <translation>É necessário pelo menos %1GB de espaço em disco para instalar o deepin, para melhor desempenho, é recomendado %2GB ou mais de espaço</translation>
     </message>
 </context>
 <context>
@@ -306,7 +306,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="116"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="141"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Vai desfrutar de uma experiência incrivelmente agradável com o deepin. Veja como é fácil, pois esta instalação finalizar-se-á num ápice</translation>
+        <translation>Irá desfrutar de uma experiência incrivelmente agradável com o deepin. Veja como é fácil, pois esta instalação finalizar-se-á num ápice</translation>
     </message>
 </context>
 <context>
@@ -828,8 +828,8 @@
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
-        <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
-        <translation>O nome de utilizador tem que conter caracteres alfa-numéricos (maiúsculos/minúsculos), números ou caracteres especiais(_-)</translation>
+        <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
@@ -861,22 +861,22 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
-        <source>Select Time Zone</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
-        <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <source>Select Time Zone</source>
+        <translation>Selecione o Fuso Horário</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="155"/>
+        <source>Mark your zone on the map</source>
+        <translation>Marque a sua localização no mapa</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/timezone_frame.cpp" line="118"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="157"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Seguinte</translation>
     </message>
 </context>
 <context>

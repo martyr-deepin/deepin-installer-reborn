@@ -1,24 +1,24 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt_BR" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="pt_BR" version="2.0">
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="125"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="144"/>
         <source>Do not use this partition</source>
         <translation>Não usar essa partição</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="138"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="157"/>
         <source>Swap partition</source>
-        <translation>Partição Swap</translation>
+        <translation>Partição swap</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="181"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="210"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="200"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="231"/>
         <source>Freespace</source>
         <translation>Espaço livre</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="140"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="159"/>
         <source>Unknown</source>
         <translation>Desconhecido</translation>
     </message>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
         <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation type="unfinished"/>
+        <translation>É preciso no mínimo %1GB de espaço em disco para instalar o deepin, para um melhor desempenho, é recomendável %2GB ou mais</translation>
     </message>
 </context>
 <context>
@@ -91,7 +91,7 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
         <source>Add a Root partition to continue</source>
-        <translation>Adicione um partição Root para continuar</translation>
+        <translation>Adicione um partição root para continuar</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
@@ -106,12 +106,12 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="417"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 erro encontrado, resolva para continuar a instalação ou troque para o modo simples</translation>
+        <translation>%1 erro encontrado, resolva-o para continuar a instalação ou troque para o modo simples</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="421"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 erros encontrados, resolva para continuar a instalação ou troque para o modo simples</translation>
+        <translation>%1 erros encontrados, resolva-os para continuar a instalação ou troque para o modo simples</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="427"/>
@@ -126,12 +126,12 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="478"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>A partição do sistema de arquivos do tipo /boot diretório somente pode ser %1</translation>
+        <translation>A partição do sistema de arquivos do tipo /boot somente pode ser %1</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="482"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation>A partição /boot diretório deve ser a primeira partição no disco rígido</translation>
+        <translation>A partição /boot deve ser a primeira partição no disco rígido</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
@@ -219,7 +219,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="120"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="183"/>
         <source>Edit Disk</source>
-        <translation>Editar Disco</translation>
+        <translation>Editar disco</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="122"/>
@@ -231,7 +231,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="124"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="218"/>
         <source>Filesystem</source>
-        <translation>Sistema de Arquivos</translation>
+        <translation>Sistema de arquivos</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="125"/>
@@ -344,7 +344,7 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="103"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="138"/>
         <source>New Partition</source>
-        <translation>Nova Partição</translation>
+        <translation>Nova partição</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="105"/>
@@ -368,7 +368,7 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="108"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="157"/>
         <source>Filesystem</source>
-        <translation>Sistema de Arquivos</translation>
+        <translation>Sistema de arquivos</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="109"/>
@@ -617,7 +617,7 @@
     <message>
         <location filename="../ui/models/partition_type_model.cpp" line="32"/>
         <source>Primary Partition</source>
-        <translation>Partição Primária</translation>
+        <translation>Partição primária</translation>
     </message>
 </context>
 <context>
@@ -680,7 +680,7 @@
         <location filename="../ui/frames/select_language_frame.cpp" line="53"/>
         <location filename="../ui/frames/select_language_frame.cpp" line="97"/>
         <source>Next</source>
-        <translation>Prosseguir</translation>
+        <translation>Próximo</translation>
     </message>
 </context>
 <context>
@@ -718,7 +718,7 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="375"/>
         <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
-        <translation>O Windows não irá iniciar se o deepin for instalado no disco do mesmo, confirme para continuar</translation>
+        <translation>O Windows não irá iniciar se o deepin for instalado no mesmo disco, confirme para continuar</translation>
     </message>
 </context>
 <context>
@@ -742,13 +742,13 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="52"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="112"/>
         <source>Create User Account</source>
-        <translation>Criar Conta de Usuário</translation>
+        <translation>Criar conta do usuário</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="53"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="113"/>
         <source>Input username and password</source>
-        <translation>Insira login e senha</translation>
+        <translation>Digite o login e senha para acessar o deepin</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="54"/>
@@ -777,7 +777,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="178"/>
         <source>This username already exists</source>
-        <translation>Esse nome de usuário já existe</translation>
+        <translation>Nome do usuário já existe</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="182"/>
@@ -824,12 +824,12 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="58"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="146"/>
         <source>Next</source>
-        <translation>Prosseguir</translation>
+        <translation>Próximo</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
-        <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
-        <translation>O nome do usuário deve conter letras em português (com diferenciação de maiúsculas / minúsculas), números ou símbolos especiais (_-)</translation>
+        <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
@@ -861,20 +861,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
-        <source>Select Time Zone</source>
-        <translation>Selecione o Fuso Horário</translation>
-    </message>
-    <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
+        <source>Select Time Zone</source>
+        <translation>Selecione o fuso horário</translation>
+    </message>
+    <message>
+        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="155"/>
         <source>Mark your zone on the map</source>
         <translation>Selecione sua região no mapa</translation>
     </message>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="118"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="157"/>
         <source>Next</source>
         <translation>Próximo</translation>
     </message>
@@ -885,7 +885,7 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="27"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="45"/>
         <source>Friendly Reminder</source>
-        <translation>Lembrete Amigável</translation>
+        <translation>Lembrete amigável</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="29"/>

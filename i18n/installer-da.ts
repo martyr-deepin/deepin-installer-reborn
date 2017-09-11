@@ -1,24 +1,24 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="da" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="da" version="2.0">
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="125"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="144"/>
         <source>Do not use this partition</source>
         <translation>Brug ikke denne partition</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="138"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="157"/>
         <source>Swap partition</source>
         <translation>Swap-partition</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="181"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="210"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="200"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="231"/>
         <source>Freespace</source>
         <translation>Ledig plads</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="140"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="159"/>
         <source>Unknown</source>
         <translation>Ukendt</translation>
     </message>
@@ -40,12 +40,12 @@
     <message>
         <location filename="../partman/operation.cpp" line="265"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation>Formatér %1 partition som %2 (monteringspunkt), typen er %3</translation>
+        <translation>Formatér %1-partition som %2 (monteringspunkt), typen er %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="273"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
-        <translation>Brug %1 partition som %2 (monteringspunkt)</translation>
+        <translation>Brug %1-partition som %2 (monteringspunkt)</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="279"/>
@@ -60,17 +60,17 @@
     <message>
         <location filename="../partman/operation.cpp" line="261"/>
         <source>Format %1 partition, type is %2</source>
-        <translation>Formatér %1 partition, typen er %2</translation>
+        <translation>Formatér %1-partition, typen er %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="285"/>
         <source>Adjust the size of %1 partition</source>
-        <translation>Juster størrelsen af %1 partition</translation>
+        <translation>Juster størrelsen af %1-partition</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="27"/>
         <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation type="unfinished"/>
+        <translation>Den har brug for mere end %1 GB diskplads for at installere deepin. For at få bedre ydelse anbefales %2 GB plads eller mere</translation>
     </message>
 </context>
 <context>
@@ -225,7 +225,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="122"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="185"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Sørg venligst for at vigtige data er blevet sikkerhedskopieret, og vælg så den disk der skal installeres på</translation>
+        <translation>Sørg venligst for at oprette en sikkerhedskopi af vigtige data, og vælg så den disk der skal installeres på</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="124"/>
@@ -306,7 +306,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="116"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="141"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Du kan opleve den udsøgte fornøjelse som deepin er, efter tiden det tager at drikke en kop mokka</translation>
+        <translation>Du kan opleve den udsøgte fornøjelse som deepin er, efter den tid det tager at drikke en kop kaffe</translation>
     </message>
 </context>
 <context>
@@ -315,7 +315,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="27"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <source>Successfully Installed</source>
-        <translation>Installation lykkedes</translation>
+        <translation>Installationen lykkedes</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="29"/>
@@ -428,7 +428,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="82"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Hvis installationen fortsættes vil hele disken blive formateret. Sørg venligst for at oprette en sikkerhedskopi af alle dine data, for at undgå tab af data</translation>
+        <translation>Hvis installationen fortsættes vil hele disken blive formateret. Opret venligst en sikkerhedskopi af alle dine data, for at undgå tab af data</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="46"/>
@@ -455,7 +455,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="62"/>
         <location filename="../ui/frames/partition_frame.cpp" line="177"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Sørg venligst for at vigtige data er blevet sikkerhedskopieret, og vælg så den disk der skal installeres på</translation>
+        <translation>Sørg venligst for at oprette en sikkerhedskopi af vigtige data, og vælg så den disk der skal installeres på</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="64"/>
@@ -537,7 +537,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation>Sørg venligst for at foretage sikkerhedskoping af alle dine data, for at undgå tab af data</translation>
+        <translation>Opret venligst en sikkerhedskopi af alle dine data, for at undgå tab af data</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="51"/>
@@ -575,7 +575,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="137"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation>Sørg venligst for at der er oprettet en sikkerhedskopi af alle data. Fortsæt så</translation>
+        <translation>Opret venligst en sikkerhedskopi af alle data, og fortsæt herefter</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
@@ -828,8 +828,8 @@
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
-        <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
-        <translation>Brugernavn skal indeholde engelske bogstaver (forskel på store og små bogstaver), tal og specialtegn (_-)</translation>
+        <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
@@ -861,20 +861,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Select Time Zone</source>
         <translation>Vælg tidszone</translation>
     </message>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="155"/>
         <source>Mark your zone on the map</source>
         <translation>Markér din zone på kortet</translation>
     </message>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="118"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="157"/>
         <source>Next</source>
         <translation>Næste</translation>
     </message>

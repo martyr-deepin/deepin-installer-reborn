@@ -1328,7 +1328,7 @@ msgstr "Europa/Chisinau"
 
 #: system-config-date-timezones.h:328
 msgid "Europe/Copenhagen"
-msgstr "Europa/Copenhagen"
+msgstr "Europa/København"
 
 #: system-config-date-timezones.h:329
 msgid "Europe/Dublin"

@@ -1,24 +1,24 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.0">
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="125"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="144"/>
         <source>Do not use this partition</source>
         <translation>No use esta partición</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="138"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="157"/>
         <source>Swap partition</source>
         <translation>Partición Swap</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="181"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="210"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="200"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="231"/>
         <source>Freespace</source>
         <translation>Espacio libre</translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="140"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="159"/>
         <source>Unknown</source>
         <translation>Desconocido</translation>
     </message>
@@ -83,7 +83,7 @@
     <message>
         <location filename="../ui/widgets/advanced_partition_button.cpp" line="119"/>
         <source>To be formatted</source>
-        <translation>Ha de ser formateada</translation>
+        <translation>Para ser formateada</translation>
     </message>
 </context>
 <context>
@@ -106,12 +106,12 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="417"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 error encontrado. Resuélvalo para continuar la instalación o pase al modo simple.</translation>
+        <translation>%1 error encontrado. Resuélvalo para continuar la instalación o pase al modo simple</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="421"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 errores encontrados. Resuélvalos para continuar la instalación o pase al modo simple.</translation>
+        <translation>%1 errores encontrados. Resuélvalos para continuar la instalación o pase al modo simple</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="427"/>
@@ -126,12 +126,12 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="478"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>El tipo de sistema de partición /Directorio de arranque sólo puede ser %1</translation>
+        <translation>El tipo de sistema de partición del directorio /boot sólo puede ser %1</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="482"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation>La partición de /Directorio de arranque debe ser la primera partición en el disco duro</translation>
+        <translation>El tipo de sistema de partición del directorio /boot debe ser la primera partición en el disco duro</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
@@ -306,7 +306,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="116"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="141"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Exerimentar el increíble placer de usar deepin solo le llevará el tiempo que tarda en tomar un café.</translation>
+        <translation>Experimentar el increíble placer de usar deepin solo le llevará el tiempo que tarda en tomar un café.</translation>
     </message>
 </context>
 <context>
@@ -449,7 +449,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="60"/>
         <location filename="../ui/frames/partition_frame.cpp" line="175"/>
         <source>Select Installation Location</source>
-        <translation>Seleccionar la localización de la instalación</translation>
+        <translation>Selecciona la localización de la instalación</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="62"/>
@@ -488,7 +488,7 @@
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="25"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="33"/>
         <source>Scanning disks, please wait...</source>
-        <translation>Escaneando discos, por favor espere...</translation>
+        <translation>Escaneando discos, espere por favor...</translation>
     </message>
 </context>
 <context>
@@ -531,7 +531,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="39"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="80"/>
         <source>Warning</source>
-        <translation>Peligro</translation>
+        <translation>Advertencia</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="50"/>
@@ -760,13 +760,13 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="55"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="127"/>
         <source>Computer name</source>
-        <translation>Nombre equipo</translation>
+        <translation>Nombre del equipo</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="56"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="132"/>
         <source>Password</source>
-        <translation>contraseña</translation>
+        <translation>Contraseña</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="57"/>
@@ -828,13 +828,13 @@
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
-        <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
-        <translation>El nombre de usuario debe contener letras en inglés (con distinción entre mayúsculas y minúsculas), números o símbolos especiales (_-)</translation>
+        <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Computer name is invalid</source>
-        <translation>El nombre de equipo es inválido</translation>
+        <translation>El nombre de equipo no es válido</translation>
     </message>
 </context>
 <context>
@@ -861,20 +861,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Select Time Zone</source>
         <translation>Selecciona franja horaria</translation>
     </message>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="155"/>
         <source>Mark your zone on the map</source>
         <translation>Marca tu zona en el mapa</translation>
     </message>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="118"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="157"/>
         <source>Next</source>
         <translation>Siguiente</translation>
     </message>
@@ -891,7 +891,7 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="29"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="47"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation>El sistema ha detectado que está utilizando una máquina virtual, lo que afectará el rendimiento del sistema y la experiencia de operación. Para una experiencia sin problemas, se recomienda instalar deepin en el entorno de la máquina real.</translation>
+        <translation>Se ha detectado que está utilizando una máquina virtual, lo que afectará el rendimiento del sistema y la experiencia de uso. Para una experiencia sin problemas, se recomienda instalar deepin en el entorno de la máquina real.</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="33"/>
