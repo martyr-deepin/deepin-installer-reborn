@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.0">
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="125"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="144"/>
         <source>Do not use this partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="138"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="157"/>
         <source>Swap partition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="181"/>
-        <location filename="../ui/delegates/partition_util.cpp" line="210"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="200"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="231"/>
         <source>Freespace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/delegates/partition_util.cpp" line="140"/>
+        <location filename="../ui/delegates/partition_util.cpp" line="159"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -787,6 +787,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
+        <source>Username must contain English letters (lowercase), numbers or special symbols(_-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="193"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation type="unfinished"></translation>
@@ -829,11 +834,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="187"/>
-        <source>Username must contain English letters (case-sensitive), numbers or special symbols(_-)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>Computer name is invalid</source>
         <translation type="unfinished"></translation>
@@ -863,20 +863,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="115"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="153"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
         <source>Select Time Zone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="116"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="154"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="155"/>
         <source>Mark your zone on the map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/frames/timezone_frame.cpp" line="117"/>
-        <location filename="../ui/frames/timezone_frame.cpp" line="156"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="118"/>
+        <location filename="../ui/frames/timezone_frame.cpp" line="157"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
