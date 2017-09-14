@@ -6,33 +6,10 @@
 if ! is_sw; then
   return 0
 fi
-declare -A BOOT_INDEX_LIST=(
-    ['linfa']=0
-    ['lionrock']=1
-    ['jztec']=2
 
-)
-SYSTEM_NAME=$(cat /proc/cpuinfo |grep "system type" |awk '{print $4}')
-CPU_SYS_TYPE=${SYSTEM_NAME,,}
-echo "CPUTYPE=$SYSTEM_NAME"
-BOOT_INDEX=${BOOT_INDEX_LIST[${CPU_SYS_TYPE}]}
-SRCPATH=/lib/live/mount/medium/live/platform/$SYSTEM_NAME
-
-[ -d /target/boot/ ] && rm -rf /target/boot/*
-# [ -d /target/lib/modules ] && rm -rf /target/lib/modules/*
-[ -d /lib/live/mount/medium/boot ] && cp -rf /lib/live/mount/medium/boot/* /target/boot/
-
-#[ -f $SRCPATH/xorg.conf ] && cp -rf $SRCPATH/xorg.conf /target/etc/X11/
-
-# Replace kernel image and modules.
-# [ -d $SRCPATH/modules ] && cp -rf $SRCPATH/modules /target/lib/
-# [ -f $SRCPATH/grub.cfg ] && cp -rf $SRCPATH/grub.cfg /target/boot/grub/
-# copy everything else to boot
-#cp -rf $SRCPATH/[^mg]* /target/boot/ 2>/dev/null | true
 cd /target/boot && ln -sf . boot
 
 sed -i "/overlayfs/d" /target/etc/fstab
-#LOCALUUID=$(grep -i "relatime" /target/etc/fstab | awk '{print $1}' | cut -d = -f 2 )
 
 while read wOne wTwo wThree wFour wFive wSix                                    
 do                                                                              
@@ -56,7 +33,5 @@ if [[ -f ${TARGET_GRUB_CFG} ]] ; then
     #fix root uuid
     sed -i -e "s|boot=live|root=$LOCALUUID|g" ${TARGET_GRUB_CFG}
     sed -i -e "s|1024x768|1280x1024|g" ${TARGET_GRUB_CFG}
-    #set default index
-    sed -i -e "s|default=0|default=$BOOT_INDEX|g" ${TARGET_GRUB_CFG}
 fi
 return 0
