@@ -48,6 +48,8 @@ def update_sw_policy(settings_file):
         ("system_info_default_keyboard_layout", '"us"'),
         ("timezone_default", '"Asia/Shanghai"'),
         ("timezone_use_regdomain", "false"),
+        ("partition_enable_swap_file", "false"),
+        ("partition_swap_partition_size", "8192"),
         ("partition_skip_simple_partition_page", "true"),
         ("partition_enable_simple_disk_page", "true"),
         ("partition_enable_swap_file", "false"),
