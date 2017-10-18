@@ -61,8 +61,23 @@ setup_username_password() {
   add_user_to_existed_group "${DI_USERNAME}" wheel
   set -e
 
-  msg "Fix Home directory permission to ${DI_USERNAME}."
-  chown -hR "${DI_USERNAME}:${DI_USERNAME}" /home/${DI_USERNAME}
+  # Chown owner and group to current user if uid mismatch.
+  USER_HOME=/home/${DI_USERNAME}
+  if [[ -d "${USER_HOME}" ]]; then
+    USER_ID=$(id -u "${DI_USERNAME}")
+    GROUP_ID=$(id -g "${DI_USERNAME}")
+    FOLDER_UID=$(stat -c "%u" "${USER_HOME}")
+    FOLDER_GID=$(stat -c "%g" "${USER_HOME}")
+    msg "${USER_HOME}: ${USER_ID}:${GROUP_ID}:${FOLDER_UID}:${FOLDER_GID}"
+
+    if [ "${USER_ID}" -ne "${FOLDER_UID}" -o \
+      "${GROUP_ID}" -ne "${FOLDER_GID}" ]; then
+      msg "Fix HOME directory permission at ${DI_USERNAME}."
+      chown -hR "${DI_USERNAME}:${DI_USERNAME}" "${USER_HOME}"
+    fi
+  else
+    warn "${USER_HOME} does not exist"
+  fi
 
   # Setup hostname.
   msg "Set Hostname to ${DI_HOSTNAME}"
