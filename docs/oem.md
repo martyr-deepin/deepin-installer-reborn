@@ -102,3 +102,7 @@
 
 ### Lightdm
 * `lightdm_enable_auto_login` 允许用户自动登录
+
+### 服务器版自动激活
+可以把生成的 license.key 放到 oem/ 目录里, 在安装时就会使用这个 key 文件激活
+服务器版的系统.

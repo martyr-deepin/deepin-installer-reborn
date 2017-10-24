@@ -18,10 +18,28 @@
 
 # Install deepin-license-activator in Professional version
 
-if [ -f /etc/deepin-version ] && grep -qr "Professional" /etc/lsb-release; then
+install_activator() {
   msg "install deepin-license-activator"
   apt-get install --no-install-recommends -y --force-yes \
     --allow-unauthenticated  deepin-license-activator
-fi
+}
+
+install_activation_key() {
+  readonly SRC_KEY=${OEM_DIR}/license.key
+  readonly DST_KEY=/var/deepin/license.key
+  if [ -f "${SRC_KEY}" ]; then
+    msg "Install activation key to ${$DST_KEY}"
+    install -m644 "${SRC_KEY}" "${DST_KEY}"
+  fi
+}
+
+main() {
+  if grep -qr "Professional" /etc/deepin-version 2>/dev/null; then
+    install_activator
+    install_activation_key
+  fi
+}
+
+main
 
 return 0
