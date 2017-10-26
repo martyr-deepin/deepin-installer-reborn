@@ -497,6 +497,7 @@ void MainWindow::goNextPage() {
         install_failed_frame_->updateMessage();
         this->setCurrentPage(PageId::InstallFailedId);
       } else {
+        install_success_frame_->setEjectLabelVisible(!auto_install_);
         this->setCurrentPage(PageId::InstallSuccessId);
       }
       break;

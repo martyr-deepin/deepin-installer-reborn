@@ -36,6 +36,9 @@ class InstallSuccessFrame : public QFrame {
   // Emitted when reboot button is clicked.
   void finished();
 
+ public slots:
+  void setEjectLabelVisible(bool visible);
+
  protected:
   void changeEvent(QEvent* event) override;
 
@@ -46,6 +49,7 @@ class InstallSuccessFrame : public QFrame {
   CommentLabel* comment_label_ = nullptr;
   NavButton* reboot_button_ = nullptr;
   TitleLabel* title_label_ = nullptr;
+  CommentLabel* eject_label_ = nullptr;
 };
 
 }  // namespace installer

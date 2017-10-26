@@ -41,6 +41,8 @@ void InstallSuccessFrame::changeEvent(QEvent* event) {
     comment_label_->setText(
         tr("Reboot to enjoy the new experience with deepin, "
            "hope you like it!"));
+    eject_label_->setText(
+        tr("Please remove the installation media before reboot"));
     reboot_button_->setText(tr("Experience now"));
   } else {
     QFrame::changeEvent(event);
@@ -63,6 +65,8 @@ void InstallSuccessFrame::initUI() {
   comment_layout->setSpacing(0);
   comment_layout->addWidget(comment_label_);
 
+  eject_label_ = new CommentLabel(
+      tr("Please remove the installation media before reboot"));
   reboot_button_ = new NavButton(tr("Experience now"));
 
   QVBoxLayout* layout = new QVBoxLayout();
@@ -73,10 +77,15 @@ void InstallSuccessFrame::initUI() {
   layout->addWidget(title_label_, 0, Qt::AlignCenter);
   layout->addLayout(comment_layout);
   layout->addStretch();
+  layout->addWidget(eject_label_, 0, Qt::AlignCenter);
   layout->addWidget(reboot_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
   this->setContentsMargins(0, 0, 0, 0);
+}
+
+void InstallSuccessFrame::setEjectLabelVisible(bool visible) {
+  eject_label_->setVisible(visible);
 }
 
 }  // namespace installer
