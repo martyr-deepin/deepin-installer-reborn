@@ -42,6 +42,7 @@ Depends:
     deepin-installer-timezones,
     dosfstools,
     e2fsprogs,
+    imagemagick [i386 amd64],
     imageworsener [!i386 !amd64],
     jfsutils [i386 amd64],
     mtools,
