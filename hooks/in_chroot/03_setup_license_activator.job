@@ -27,6 +27,7 @@ install_activator() {
 install_activation_key() {
   readonly SRC_KEY=${OEM_DIR}/license.key
   readonly DST_KEY=/var/deepin/license.key
+  mkdir -pv /var/deepin
   if [ -f "${SRC_KEY}" ]; then
     msg "Install activation key to ${DST_KEY}"
     install -v -m644 "${SRC_KEY}" "${DST_KEY}"
