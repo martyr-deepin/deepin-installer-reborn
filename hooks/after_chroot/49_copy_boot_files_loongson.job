@@ -34,12 +34,12 @@ rootuuid=${rootuuidline%%/*}
 
 # Copy boot folder and follow symbolic link.
 if [ -d /cdrom/casper/boot ]; then
-  cp -rP /cdrom/casper/boot/* /target/boot/ && \
-    cp -rP /cdrom/casper/boot /target/boot/boot || \
+  cp -rvP /cdrom/casper/boot/* /target/boot/ && \
+    cp -rvP /cdrom/casper/boot /target/boot/boot || \
     error "Failed to copy boot/"
 elif [ -d /lib/live/mount/medium/live/boot ]; then
-  cp -rP /lib/live/mount/medium/live/boot/* /target/boot/ && \
-    cp -rP /lib/live/mount/medium/live/boot /target/boot/boot || \
+  cp -rvP /lib/live/mount/medium/live/boot/* /target/boot/ && \
+    cp -rvP /lib/live/mount/medium/live/boot /target/boot/boot || \
     error "Failed to copy boot/"
 else
   error "Not boot folder found!"

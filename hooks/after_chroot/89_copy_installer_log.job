@@ -18,7 +18,7 @@
 # Backup log to disk.
 
 if [ -f /var/log/deepin-installer.log ]; then
-  install -Dm644 /var/log/deepin-installer.log \
+  install -v -Dm644 /var/log/deepin-installer.log \
     /target/var/log/deepin-installer.log
 fi
 

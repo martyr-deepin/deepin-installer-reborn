@@ -41,17 +41,17 @@ msg "CPUTYPE=$SYSTEM_NAME"
 SRCPATH=/media/cdrom/live/platform/$SYSTEM_NAME
 rm -rf /boot/*
 rm -rf /lib/modules/*
-[ -d /media/cdrom/live/boot ] && cp -rf /media/cdrom/live/boot/* /boot/
+[ -d /media/cdrom/live/boot ] && cp -rvf /media/cdrom/live/boot/* /boot/
 
 [ -f $SRCPATH/xorg.conf ] && \
-  install -Dm644 $SRCPATH/xorg.conf /etc/X11/xorg.conf
+  install -v -Dm644 $SRCPATH/xorg.conf /etc/X11/xorg.conf
 
 # Replace kernel image and modules.
 mkdir -pv /lib/modules
 [ -d $SRCPATH/modules ] && cp -rf $SRCPATH/modules/* /lib/modules
 
 for _FILE in $(ls ${SRCPATH} | grep "^vmlinux"); do
-  install -Dm755 ${SRCPATH}/${_FILE} /boot/${_FILE}
+  install -v -Dm755 ${SRCPATH}/${_FILE} /boot/${_FILE}
 done
 
 for _KERVER in $(ls /lib/modules); do

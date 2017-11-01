@@ -19,5 +19,5 @@
 # Copy /tmp/oem folder to /target. This folder is used for oem settings.
 # Used in debug mode.
 if [ -d /tmp/oem ]; then
-  cp -rf /tmp/oem /target/tmp/oem || error "Failed to copy /tmp/oem to /target"
+  cp -rvf /tmp/oem /target/tmp/oem || error "Failed to copy /tmp/oem to /target"
 fi

@@ -21,7 +21,7 @@
 generate_machine_id() {
   oldMachineID="/deepinhost/var/cache/machine-id"
   if [ -f "${oldMachineID}" ]; then
-    install -m644 $oldMachineID /etc/
+    install -v -m644 $oldMachineID /etc/
   else
     systemd-machine-id-setup
   fi

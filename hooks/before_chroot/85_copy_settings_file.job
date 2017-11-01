@@ -19,7 +19,7 @@
 # Copy /etc/deepin-installer.conf to /target
 
 if [ -f "${CONF_FILE}" ]; then
-  cp -f "${CONF_FILE}"  "/target/${CONF_FILE}" || \
+  install -v -m644 "${CONF_FILE}"  "/target/${CONF_FILE}" || \
     warn_exit "Failed to copy ${CONF_FILE}"
 fi
 

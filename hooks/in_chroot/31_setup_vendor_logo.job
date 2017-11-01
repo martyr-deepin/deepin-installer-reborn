@@ -22,7 +22,7 @@ readonly SRC_PATH="${OEM_DIR}"/vendor.png
 DST_PATH=$(installer_get "system_info_vendor_logo")
 if [ -f "${SRC_PATH}" ]; then
   msg "Copy vendor logo to ${DST_PATH}"
-  install -Dm644 "${SRC_PATH}" "${DST_PATH}"
+  install -v -Dm644 "${SRC_PATH}" "${DST_PATH}"
 fi
 
 return 0
