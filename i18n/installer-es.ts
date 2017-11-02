@@ -9,7 +9,7 @@
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="170"/>
         <source>Swap partition</source>
-        <translation>Partición Swap</translation>
+        <translation>Partición de intercambio</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="213"/>
@@ -327,7 +327,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation type="unfinished"/>
+        <translation>Por favor, retire los medios de instalación antes de reiniciar</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="46"/>
