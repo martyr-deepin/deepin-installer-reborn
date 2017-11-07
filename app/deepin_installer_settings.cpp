@@ -45,6 +45,7 @@ const char kCommandSet[] = "set";
 enum class CommandType {
   Get,
   Set,
+  Invalid,
 };
 
 }  // namespace
@@ -76,7 +77,7 @@ int main(int argc, char* argv[]) {
     parser.showHelp(kExitErr);
   }
 
-  CommandType command;
+  CommandType command = CommandType::Invalid;
   if (pos_args.at(0) == kCommandGet) {
     command = CommandType::Get;
   } else if (pos_args.at(0) == kCommandSet) {
@@ -134,7 +135,12 @@ int main(int argc, char* argv[]) {
       settings.setValue(key, value);
     } else {
       settings.beginGroup(section);
-      settings.setValue(key, value);
+      if (value.contains(',')) {
+        const QStringList list = value.split(',');
+        settings.setValue(key, list);
+      } else {
+        settings.setValue(key, value);
+      }
       settings.endGroup();
     }
   }
