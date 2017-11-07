@@ -131,17 +131,14 @@ int main(int argc, char* argv[]) {
     fprintf(stdout, "%s", value.toStdString().c_str());
 
   } else if (command == CommandType::Set) {
-    if (section.isEmpty()) {
-      settings.setValue(key, value);
-    } else {
+    if (!section.isEmpty()) {
       settings.beginGroup(section);
-      if (value.contains(',')) {
-        const QStringList list = value.split(',');
-        settings.setValue(key, list);
-      } else {
-        settings.setValue(key, value);
-      }
-      settings.endGroup();
+    }
+    if (value.contains(',')) {
+      const QStringList list = value.split(',');
+      settings.setValue(key, list);
+    } else {
+      settings.setValue(key, value);
     }
   }
 
