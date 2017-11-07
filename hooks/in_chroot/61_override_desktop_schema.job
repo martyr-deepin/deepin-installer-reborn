@@ -20,6 +20,13 @@
 readonly SCHEMA_FILE=/usr/share/glib-2.0/schemas/99_deepin_installer_settings.gschema.override
 
 LAUNCHER_HOLD_PKGS=$(installer_get "dde_launcher_hold_packages")
+if [ -n "${LAUNCHER_HOLD_PKGS}" ]; then
+  # Remove any quotes around value.
+  # Or else QSettings::value()::toStringList() will fail in dde-launcher.
+  msg "LAUNCHER_HOLD_PKGS :${LAUNCHER_HOLD_PKGS}:"
+  installer_set "dde_launcher_hold_packages" "${LAUNCHER_HOLD_PKGS}"
+fi
+
 LAUNCHER_APPS=$(installer_get "dde_launcher_app_list")
 if [ -n "${LAUNCHER_APPS}" ]; then
   echo "[com.deepin.dde.launcher]" >> "${SCHEMA_FILE}"
