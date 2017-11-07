@@ -1,3 +1,7 @@
+2017-11-07 2.2.7 xushaohua<xushaohua@deepin.com>
+	* installer-setting 支持保存 StringList
+	* 过滤 dde_launcher_hold_packages
+
 2017-11-07 2.2.6 xushaohua<xushaohua@deepin.com>
 	* 更新翻译
 	* 支持批量激活
