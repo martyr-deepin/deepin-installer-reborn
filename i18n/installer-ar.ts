@@ -327,7 +327,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation type="unfinished"/>
+        <translation>يرجى إزالة وسيط التثبيت قبل إعادة التشغيل</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="46"/>

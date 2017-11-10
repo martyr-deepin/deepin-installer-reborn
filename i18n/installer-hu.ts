@@ -327,7 +327,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation type="unfinished"/>
+        <translation>Újraindítás előtt távolítsa el az eszközt, amiről telepítette a rendszert.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="46"/>
@@ -724,7 +724,7 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="388"/>
         <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
-        <translation>A Windows nem fog elindulni, ha a Deepin-t a Windows lemezre telepíti. Erősítse ezt meg a folytatáshoz</translation>
+        <translation>A Windows nem fog elindulni, ha a Deepin-t a Windows rendszerlemezére telepíti. Kérem, erősítse ezt meg, ha folytatni szeretné a telepítést.</translation>
     </message>
 </context>
 <context>
@@ -835,7 +835,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="200"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
-        <translation type="unfinished"/>
+        <translation>A felhasználónév csak angol kisbetűket (tehát nem ékezetes betűket), számokat vagy különleges szimbólumokat  ( aláhúzás vagy kötőjel ) tartalmazhat.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
@@ -876,7 +876,7 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="130"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="168"/>
         <source>Mark your zone on the map</source>
-        <translation>Jelöld meg az időzónád a térképen</translation>
+        <translation>Jelöld meg az időzónádat a térképen</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="131"/>

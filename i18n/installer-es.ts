@@ -4,7 +4,7 @@
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="157"/>
         <source>Do not use this partition</source>
-        <translation>No use esta partición</translation>
+        <translation>No usar esta partición</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="170"/>
@@ -50,7 +50,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="292"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation>Formato %1 y crear %2 nueva tabla de particiones</translation>
+        <translation>Formatear %1 y crear %2 nueva tabla de partición</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="269"/>
@@ -60,7 +60,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="274"/>
         <source>Format %1 partition, type is %2</source>
-        <translation>Formato %1 partición, el tipo es %2</translation>
+        <translation>Formatear %1 partición, el tipo es %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="298"/>
@@ -70,7 +70,7 @@
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
         <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>Necesita más de 10 GB de espacio en disco para instalar deepin, para un mejor rendimiento, Se recomienda 20 GB  de espacio libre.</translation>
+        <translation>Necesita más de 10 GB de espacio en disco para instalar deepin; para un mejor rendimiento, se recomienda 20 GB de espacio libre.</translation>
     </message>
 </context>
 <context>
@@ -106,12 +106,12 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="430"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 error encontrado. Resuélvalo para continuar la instalación o pase al modo simple</translation>
+        <translation>%1 error encontrado. Resuélvalo para continuar la instalación o pase al modo sencillo</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="434"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 errores encontrados. Resuélvalos para continuar la instalación o pase al modo simple</translation>
+        <translation>%1 errores encontrados. Resuélvalos para continuar la instalación o pase al modo sencillo</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="440"/>
@@ -255,7 +255,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="141"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="279"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Aceptar</translation>
     </message>
 </context>
 <context>
@@ -285,7 +285,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="76"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>Sentimos las molestias. Para que podamos resolver mejor el problema, puede tomar una foto del código QR o escanearlo para enviarnos un registro del error.</translation>
+        <translation>Sentimos las molestias. Para que podamos resolver mejor el problema, puede tomar una foto del código QR o escanearlo para conseguir el registro del errores.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="78"/>
@@ -306,7 +306,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Experimentar el increíble placer de usar deepin solo le llevará el tiempo que tarda en tomar un café.</translation>
+        <translation>Sentir la increíble experiencia de usar deepin tardará segundos después de tomar un café.</translation>
     </message>
 </context>
 <context>
@@ -315,7 +315,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="40"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="60"/>
         <source>Successfully Installed</source>
-        <translation>Instalación satisfactoria</translation>
+        <translation>Instalación exitosa</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="42"/>
@@ -410,7 +410,7 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="127"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="214"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Aceptar</translation>
     </message>
 </context>
 <context>
@@ -434,7 +434,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="95"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Continuando con la instalación formateará el disco completo, realice una copia de seguridad de todos sus datos para evitar la pérdida de datos</translation>
+        <translation>Al continuar, el disco duro se formateará; realice un respaldo de toda su información para prevenir pérdidas</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
@@ -461,7 +461,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="75"/>
         <location filename="../ui/frames/partition_frame.cpp" line="190"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Asegúrese de haber hecho una copia de seguridad de los datos importantes y, después, seleccione el disco para la instalación.</translation>
+        <translation>Asegúrese de haber respaldado información importante y, después, seleccione el disco para instalar</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="77"/>
@@ -703,12 +703,12 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="74"/>
         <source>Please select one of the partitions to install!</source>
-        <translation>Seleccione una de las particiones que desea instalar.</translation>
+        <translation>¡Seleccione una de las particiones que desea instalar!</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation>¡No se puede crear una nueva partición, por favor seleccione una de las particiones existentes!</translation>
+        <translation>¡No se puede crear una nueva partición, por favor seleccione una de las ya existentes!</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="81"/>

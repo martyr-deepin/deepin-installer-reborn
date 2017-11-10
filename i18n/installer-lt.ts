@@ -65,7 +65,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="298"/>
         <source>Adjust the size of %1 partition</source>
-        <translation type="unfinished"/>
+        <translation>Reguliuoti %1 skaidinio dydį</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
@@ -126,12 +126,12 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation type="unfinished"/>
+        <translation>Katalogo /boot skaidinio failų sistemos tipas gali būti tik %1 </translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation type="unfinished"/>
+        <translation>/boot katalogo skaidinys turėtų būti pats pirmas skaidinys standžiajame diske</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
