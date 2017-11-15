@@ -116,7 +116,7 @@ msgstr "África/Harare"
 
 #: system-config-date-timezones.h:25
 msgid "Africa/Johannesburg"
-msgstr "África/Johannesburg"
+msgstr "África/Johannesburgo"
 
 #: system-config-date-timezones.h:26
 msgid "Africa/Juba"
@@ -312,7 +312,7 @@ msgstr "América/Bahía"
 
 #: system-config-date-timezones.h:74
 msgid "America/Bahia_Banderas"
-msgstr "América//Bahia_Banderas"
+msgstr "América/Bahía_Banderas"
 
 #: system-config-date-timezones.h:75
 msgid "America/Barbados"
@@ -320,7 +320,7 @@ msgstr "América/Barbados"
 
 #: system-config-date-timezones.h:76
 msgid "America/Belem"
-msgstr "América//Belem"
+msgstr "América/Belém"
 
 #: system-config-date-timezones.h:77
 msgid "America/Belize"
