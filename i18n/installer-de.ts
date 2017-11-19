@@ -65,7 +65,7 @@
     <message>
         <location filename="../partman/operation.cpp" line="298"/>
         <source>Adjust the size of %1 partition</source>
-        <translation>Die größe von Partition %1 anpassen</translation>
+        <translation>Die Größe von Partition %1 anpassen</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
@@ -91,7 +91,7 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="512"/>
         <source>Add a Root partition to continue</source>
-        <translation>Fügen Sie eine Root-Partition hinzu um fortzufahren</translation>
+        <translation>Fügen Sie eine Root-Partition hinzu, um fortzufahren</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="517"/>
@@ -225,7 +225,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Bitte vergewissern Sie sich, dass ausreichend Backups Ihrer Daten vorhanden sind. Wählen Sie anschließend eine Festplatte zur Instalation</translation>
+        <translation>Bitte vergewissern Sie sich, dass Sie Ihre Daten ausreichend gesichert haben, bevor Sie ein Laufwerk zu Installation auswählen.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="137"/>
@@ -306,7 +306,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Genehmigen Sie sich einen Kaffee. Wenn Sie Ihren Kaffee ausgetrunken haben, können sie in die wunderschöne und unglaubliche Welt von Deepin eintauchen.</translation>
+        <translation>Genehmigen Sie sich einen Kaffee oder Tee. Wenn Sie Ihr Getränk ausgetrunken haben, können Sie in die wunderschöne und unglaubliche Welt von Deepin eintauchen.</translation>
     </message>
 </context>
 <context>
@@ -321,19 +321,20 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="42"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="62"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>Starten Sie Ihren Computer neu um deepin zu erleben. Wir hoffen, es wird Ihnen gefallen.</translation>
+        <translation>Starten Sie Ihren Computer neu, um Deepin zu starten. 
+Wir wünschen viel Spaß!</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation>Bitte Installation-Stick/DVD entfernen</translation>
+        <translation>Bitte Installation-Medium vor dem Neustart entfernen</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="46"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="70"/>
         <source>Experience now</source>
-        <translation>Jetzt entdecken</translation>
+        <translation>Jetzt neustarten</translation>
     </message>
 </context>
 <context>
@@ -434,7 +435,7 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="95"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Fortsetzen der Installation wird die gesamte Festplatte formatieren. Erstellen Sie ein Backup all Ihrer Daten um Datenverlust zu vermeiden</translation>
+        <translation>Das Fortsetzen der Installation wird die gesamte Festplatte formatieren. Erstellen Sie eine Sicherung all Ihrer Daten um Datenverlust zu vermeiden.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
@@ -461,7 +462,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="75"/>
         <location filename="../ui/frames/partition_frame.cpp" line="190"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Stellen Sie sicher dass wichtige Daten gesichert wurden und wählen Sie anschließend eine Festplatte zur Installation aus</translation>
+        <translation>Stellen Sie sicher, dass ggf. wichtige Daten gesichert wurden bevor Sie ein Laufwerk zur Installation auswählen.</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="77"/>
@@ -543,7 +544,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="125"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation>Bitte erstellen Sie ein Backup Ihrer Daten um Datenverlust zu vermeiden</translation>
+        <translation>Bitte erstellen Sie ein Sicherung Ihrer Daten um Datenverlust zu vermeiden</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="64"/>
@@ -638,13 +639,13 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="86"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation>Bitte erstellen Sie ein Backup von wichtigen Daten und bestätigen Sie die folgenden Aktionen</translation>
+        <translation>Bitte sichern Sie alle wichtigen Daten und bestätigen dann die folgenden Aktionen</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="67"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
-        <translation>Die folgenden Aktionen werden ausgeführt. Bitte bestätigen Sie dies und fahren Sie erst danach fort, um Datenverlust zu vermeiden.</translation>
+        <translation>Bitte lesen und bestätigen Sie die folgenden Aktionen, um unbeabsichtigten Datenverlust zu vermeiden</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="69"/>
