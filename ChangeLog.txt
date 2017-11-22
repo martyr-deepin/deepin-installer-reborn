@@ -1,3 +1,6 @@
+2017-11-22 2.2.9 xushaohua<xushaohua@deepin.com>
+	* Remove target character file before calling mknod()
+
 2017-11-20 2.2.8 xushaohua<xushaohua@deepin.com>
 	* 更新翻译
 	* 修改自动分区时, boot 分区最小容量为 500M
