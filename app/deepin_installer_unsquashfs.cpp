@@ -74,7 +74,7 @@ const int kExitErr = 1;
 const int kMaxOpenFd = 512;
 
 // File descriptor of progress file.
-FILE* g_progress_fd = NULL;
+FILE* g_progress_fd = nullptr;
 
 // Global references to src_dir and dest_dir.
 QString g_src_dir;
@@ -106,7 +106,7 @@ bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
   if (src_fd == -1) {
     fprintf(stderr, "SendFile() Failed to open src file: %s\n", src_file);
     perror("Open src file failed!");
-    return 1;
+    return false;
   }
 
   // TODO(xushaohua): handles umask
@@ -114,14 +114,14 @@ bool SendFile(const char* src_file, const char* dest_file, ssize_t file_size) {
   if (dest_fd == -1) {
     fprintf(stderr, "SendFile() Failed to open dest file: %s\n", dest_file);
     perror("Open dest file failed!");
-    return 1;
+    return false;
   }
 
   bool ok = true;
   if (g_use_sendfile) {
     size_t num_to_read = size_t(file_size);
     while (num_to_read > 0) {
-      const ssize_t num_sent = sendfile(dest_fd, src_fd, NULL, num_to_read);
+      const ssize_t num_sent = sendfile(dest_fd, src_fd, nullptr, num_to_read);
       if (num_sent <= 0) {
         fprintf(stderr, "sendfile() error: %s\nSkip %s\n",
                 strerror(errno), src_file);
@@ -343,7 +343,7 @@ bool CopyFiles(const QString& src_dir, const QString& dest_dir,
   if (!progress_file.isEmpty()) {
     // Set progress file descriptor.
     g_progress_fd = fopen(progress_file.toStdString().c_str(), "w");
-    if (g_progress_fd == NULL) {
+    if (g_progress_fd == nullptr) {
       perror("fopen() Failed to open progress file");
     }
   }
