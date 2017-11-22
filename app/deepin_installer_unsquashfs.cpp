@@ -250,8 +250,10 @@ int CopyItem(const char* fpath, const struct stat* sb,
 
   // Remove dest_file if it exists.
   struct stat dest_stat;
-  if (stat(dest_file, &dest_stat)) {
-    unlink(dest_file);
+  if (stat(dest_file, &dest_stat) == 0) {
+    if (!S_ISDIR(dest_stat.st_mode)) {
+      unlink(dest_file);
+    }
   }
 
   if (S_ISLNK(st.st_mode)) {
