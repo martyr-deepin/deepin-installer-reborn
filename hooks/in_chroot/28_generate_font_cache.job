@@ -20,5 +20,10 @@
 
 fc-cache
 
+#make 32bit cache for deepin-wine
+if [ -f /opt/deepinwine/tools/fontconfig ]; then
+  /opt/deepinwine/tools/fontconfig
+fi
+
 return 0
 
