@@ -1,3 +1,9 @@
+deepin-installer-reborn (2.2.10) stable; urgency=medium
+
+  * Generate font cache for wine QQ
+
+ -- Liu Lang <liulang@liulang-PC>  Mon, 27 Nov 2017 14:58:43 +0800
+
 deepin-installer-reborn (2.2.9) stable; urgency=medium
 
   * Remove target character file before calling mknod()

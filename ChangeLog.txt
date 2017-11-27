@@ -1,3 +1,6 @@
+2017-11-22 2.2.10 xushaohua<xushaohua@deepin.com>
+	* Generate font cache for wine QQ
+
 2017-11-22 2.2.9 xushaohua<xushaohua@deepin.com>
 	* Remove target character file before calling mknod()
 
