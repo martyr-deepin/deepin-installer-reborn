@@ -60,7 +60,11 @@ if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
 fi
 
 DI_LUPIN=$(installer_get "DI_LUPIN")
-[ x${DI_LUPIN} = "xtrue" ] || UNUSED_PKGS+=("lupin-support" "live-filesystem")
+if [ x${DI_LUPIN} = "xtrue" ]; then
+  UNUSED_PKGS+=("live-filesystem")
+else
+  UNUSED_PKGS+=("lupin-support")
+fi
 detect_vbox || UNUSED_PKGS+=("virtualbox-guest-*")
 
 DI_LOCALE=$(installer_get "DI_LOCALE")
