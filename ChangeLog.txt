@@ -1,3 +1,6 @@
+2017-11-29 2.2.12 xushaohua<xushaohua@deepin.com>
+	* Uninstall live-filesystem in lupin mode
+
 2017-11-28 2.2.11 xushaohua<xushaohua@deepin.com>
 	* Remove live-filesystem package for lupin
 

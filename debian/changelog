@@ -1,20 +1,26 @@
+deepin-installer-reborn (2.2.12) stable; urgency=medium
+
+  * Uninstall live-filesystem in lupin mode
+
+ -- Liu Lang <liulang@deepin.com>  Wed, 29 Nov 2017 09:41:52 +0800
+
 deepin-installer-reborn (2.2.11) stable; urgency=medium
 
   * Remove live-filesystem package for lupin
 
- -- Liu Lang <liulang@liulang-PC>  Tue, 28 Nov 2017 14:04:17 +0800
+ -- Liu Lang <liulang@deepin.com>  Tue, 28 Nov 2017 14:04:17 +0800
 
 deepin-installer-reborn (2.2.10) stable; urgency=medium
 
   * Generate font cache for wine QQ
 
- -- Liu Lang <liulang@liulang-PC>  Mon, 27 Nov 2017 14:58:43 +0800
+ -- Liu Lang <liulang@deepin.com>  Mon, 27 Nov 2017 14:58:43 +0800
 
 deepin-installer-reborn (2.2.9) stable; urgency=medium
 
   * Remove target character file before calling mknod()
 
- -- Liu Lang <liulang@liulang-PC>  Wed, 22 Nov 2017 13:48:46 +0800
+ -- Liu Lang <liulang@deepin.com>  Wed, 22 Nov 2017 13:48:46 +0800
 
 deepin-installer-reborn (2.2.8) stable; urgency=medium
 
@@ -22,7 +28,7 @@ deepin-installer-reborn (2.2.8) stable; urgency=medium
   * Update minimum size of /boot to 500Mib
   * Update file mode of /home only if necessary
 
- -- Liu Lang <liulang@liulang-PC>  Mon, 20 Nov 2017 09:12:43 +0800
+ -- Liu Lang <liulang@deepin.com>  Mon, 20 Nov 2017 09:12:43 +0800
 
 deepin-installer-reborn (0.0.1) unstable; urgency=medium
 
