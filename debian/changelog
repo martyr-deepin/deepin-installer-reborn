@@ -1,3 +1,9 @@
+deepin-installer-reborn (2.2.13) stable; urgency=medium
+
+  * Update grub based on current locale
+
+ -- Liu Lang <liulang@deepin.com>  Wed, 29 Nov 2017 15:19:43 +0800
+
 deepin-installer-reborn (2.2.12) stable; urgency=medium
 
   * Uninstall live-filesystem in lupin mode

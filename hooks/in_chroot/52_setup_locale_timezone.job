@@ -97,6 +97,9 @@ EOF
     msg "${LOCALE} is not available, Fallback to en_US"
     unset LOCALE
   fi
+
+  # Update grub based on current locale
+  update-grub || true
 }
 
 if [ x$(installer_get "system_info_setup_after_reboot") != "xtrue" ]; then
