@@ -38,6 +38,13 @@ detect_vbox() {
   return 1
 }
 
+# Check whether current machine is vmware.
+detect_vmware() {
+  if dmidecode | grep -q "Product Name: VMware"; then
+    return 0
+  fi
+  return 1
+}
 declare -a UNUSED_PKGS
 # Uninstall "deepin-installer" only if reboot_setup is false.
 if [ x$(installer_get "system_info_setup_after_reboot") != xtrue ]; then
@@ -66,6 +73,7 @@ else
   UNUSED_PKGS+=("lupin-support")
 fi
 detect_vbox || UNUSED_PKGS+=("virtualbox-guest-*")
+detect_vmware || UNUSED_PKGS+=("open-vm-tools*")
 
 DI_LOCALE=$(installer_get "DI_LOCALE")
 LANG=${DI_LOCALE%.*}
