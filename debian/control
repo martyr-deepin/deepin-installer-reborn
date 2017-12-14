@@ -6,7 +6,7 @@ Build-Depends:
     cmake (>=3.1),
     debhelper (>=9),
     dh-systemd,
-    g++,
+    g++ (>=6.3.0),
     gettext,
     libattr1-dev,
     libparted-dev,
@@ -18,11 +18,10 @@ Build-Depends:
     libxtst-dev,
     pkg-config,
     qt5-qmake,
-    qt5-default,
     qtbase5-dev,
     qttools5-dev-tools,
     zlib1g-dev
-Standards-Version: 3.9.6
+Standards-Version: 3.9.8
 Homepage: http://www.deepin.org
 
 Package: deepin-installer-timezones
@@ -41,7 +40,6 @@ Depends:
     btrfs-progs [i386 amd64],
     deepin-installer-timezones,
     dosfstools,
-    e2fsprogs,
     imagemagick [i386 amd64],
     imageworsener [!i386 !amd64],
     jfsutils [i386 amd64],
@@ -54,7 +52,6 @@ Depends:
     squashfs-tools,
     tshark [i386 amd64],
     udev,
-    util-linux,
     x11-xserver-utils,
     xfsprogs [i386 amd64],
     xinit,
@@ -68,5 +65,5 @@ Depends:
     ${shlibs:Depends},
     ${misc:Depends},
     deepin-installer
-Description: OEM tool for deepin-installer
+Description: OEM tool
  OEM tool for deepin-installer

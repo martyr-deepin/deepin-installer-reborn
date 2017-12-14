@@ -1,4 +1,4 @@
-deepin-installer-reborn (2.2.13) stable; urgency=medium
+deepin-installer-reborn (2.2.13-1) stable; urgency=medium
 
   * Update grub based on current locale
 

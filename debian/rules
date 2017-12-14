@@ -10,3 +10,10 @@ override_dh_auto_configure:
 
 override_dh_systemd_start:
 	dh_systemd_start --no-start
+
+override_dh_fixperms:
+	dh_fixperms
+	find debian -name '*.job' -exec chmod 755 {} \;
+	find debian -name '*.sh' -exec chmod 755 {} \;
+	find debian -name 'genfstab' -exec chmod 755 {} \;
+
