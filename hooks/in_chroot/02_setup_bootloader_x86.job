@@ -195,11 +195,26 @@ case ${BOOT} in
     ;;
 esac
 
-[ -x /usr/lib/deepin-daemon/grub2 ] && \
-  /usr/lib/deepin-daemon/grub2 --setup --gfxmode="$DI_CUR_RESOLUTION"
-[ -e /etc/default/grub ] && \
+# Generate theme background.
+readonly GRUB_SRC_BG=/boot/grub/themes/deepin/background_source
+readonly GRUB_DST_BG=/boot/grub/themes/deepin/background.png
+if [ -f "${GRUB_SRC_BG}" ]; then
+  if which image-worsener >/dev/null; then
+    image-worsener -w ${DI_CUR_RESOLUTION%x*} -h ${DI_CUR_RESOLUTION##*x} \
+      ${GRUB_SRC_BG} ${GRUB_DST_BG}
+  elif which convert >/dev/null; then
+    convert "${GRUB_SRC_BG}" -scale ${DI_CUR_RESOLUTION} "${GRUB_DST_BG}"
+  else
+      echo "Please install imagemaic or image-worsener to blur image" >&2
+  fi
+fi
+
+if [ -e /etc/default/grub ]; then
   sed -i 's|^\(GRUB_CMDLINE_LINUX_DEFAULT\)=.*|\1="splash quiet"|g' \
     /etc/default/grub
+  sed -i "s|\(GRUB_GFXMODE\)=.*|\1=${DI_CUR_RESOLUTION}|g" \
+    /etc/default/grub
+fi
 
 # Remove partman/ignore_uefi if that file is created by installer.
 # See partman/os_prober.cpp for more info.
