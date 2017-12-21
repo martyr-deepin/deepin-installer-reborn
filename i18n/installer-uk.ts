@@ -1,76 +1,76 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="da" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="uk" version="2.1">
 <context>
     <name>QObject</name>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="157"/>
         <source>Do not use this partition</source>
-        <translation>Brug ikke denne partition</translation>
+        <translation>Не використовуйте цей розділ</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="170"/>
         <source>Swap partition</source>
-        <translation>Swap-partition</translation>
+        <translation>Swap розділ</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="213"/>
         <location filename="../ui/delegates/partition_util.cpp" line="244"/>
         <source>Freespace</source>
-        <translation>Ledig plads</translation>
+        <translation>Вільний простір</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="172"/>
         <source>Unknown</source>
-        <translation>Ukendt</translation>
+        <translation>Невідомий</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="252"/>
         <source>Create extended partition %1</source>
-        <translation>Opret udvidet partition %1</translation>
+        <translation>Створити розширений розділ %1</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="256"/>
         <source>Create new partition %1, type is %2</source>
-        <translation>Opret udvidet partition %1, typen er %2</translation>
+        <translation>Створіть новий розділ %1, тип %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="260"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation>Opret udvidet partition %1 som %2 (monteringspunkt), typen er %3</translation>
+        <translation>Створіть новий розділ %1 як %2 (точка монтування), тип %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="278"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation>Formatér %1-partition som %2 (monteringspunkt), typen er %3</translation>
+        <translation>Форматувати %1 розділ як %2 (точка монтування), тип %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="286"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
-        <translation>Brug %1-partition som %2 (monteringspunkt)</translation>
+        <translation>Використовуйте розділ %1 як %2 (точку монтування)</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="292"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation>Formatér %1 og opret %2 ny partitionstabel</translation>
+        <translation>Форматувати %1 і створити нову таблицю розділів %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="269"/>
         <source>Delete %1 partition</source>
-        <translation>Slet %1 partition</translation>
+        <translation>Видалити %1 розділ</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="274"/>
         <source>Format %1 partition, type is %2</source>
-        <translation>Formatér %1-partition, typen er %2</translation>
+        <translation>Форматувати %1 розділ, тип %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="298"/>
         <source>Adjust the size of %1 partition</source>
-        <translation>Juster størrelsen af %1-partition</translation>
+        <translation>Налаштуйте розмір розділу %1</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
         <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>Den har brug for mere end %1 GB diskplads for at installere deepin. For at få bedre ydelse anbefales %2 GB plads eller mere</translation>
+        <translation>Для встановлення deepin потрібно більше ніж %1ГБ дискового простору для підвищення продуктивності, рекомендується використовувати %2ГБ і більше місця</translation>
     </message>
 </context>
 <context>
@@ -78,12 +78,12 @@
     <message>
         <location filename="../ui/widgets/advanced_partition_button.cpp" line="129"/>
         <source>Install here</source>
-        <translation>Installer her</translation>
+        <translation>Встановити тут</translation>
     </message>
     <message>
         <location filename="../ui/widgets/advanced_partition_button.cpp" line="132"/>
         <source>To be formatted</source>
-        <translation>Skal formateres</translation>
+        <translation>Щоб відформатувати</translation>
     </message>
 </context>
 <context>
@@ -91,76 +91,76 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="512"/>
         <source>Add a Root partition to continue</source>
-        <translation>Tilføj en rodpartition for at fortsætte</translation>
+        <translation>Додайте розділ Root для продовження</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="517"/>
         <source>At least %1 GB is required for Root partition</source>
-        <translation>Mindst %1 GB er krævet til rodpartitino</translation>
+        <translation>Необхідно принаймні %1 Гб для Root розділу</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>Add an EFI partition to continue</source>
-        <translation>Tilføj en EFI-partition for at fortsætte</translation>
+        <translation>Додайте розділ EFI, щоб продовжити</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="430"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 fejl fundet, ret det for at fortsætte installationen eller skift til simpeltilstand</translation>
+        <translation>%1 виявлена помилка, виправити, продовжити встановлення або переключитися в простий режим</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="434"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 fejl fundet, ret det for at fortsætte installationen eller skift til simpeltilstand</translation>
+        <translation>%1 виявлені помилки, виправити, продовжити встановлення або переключитися в простий режим</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="440"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation>%1 fejl fundet, fortsæt med at installere efter rettelse</translation>
+        <translation>%1 виявлено помилку, продовжити встановлення після виправлення</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="444"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation>%1 fejl fundet, fortsæt med at installere efter rettelse</translation>
+        <translation>%1 виявлені помилки, продовжити встановлення після виправлення</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>Partitionsfilsystemstypen af /boot-mappen kan kun være %1 </translation>
+        <translation>Тип файлової системи розділу /boot-директорії може бути тільки %1 </translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation>Partitionen af /boot-mappen bør være den første partition på harddisken</translation>
+        <translation>Розділ /boot-директорії  повинен бути першим розділом на жорсткому диску</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
         <source>At least %1 MB is required for EFI partition</source>
-        <translation>Mindst %1 MB er krævet til EFI-partition</translation>
+        <translation>Для розділу EFI потрібно щонайменше %1 Мб</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="500"/>
         <source>At least %1 MB is required for /boot partition</source>
-        <translation>Mindst %1 MB er krævet til /boot-partition</translation>
+        <translation>Необхідно принаймні %1 MB для розділу /boot</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
         <source>Change boot loader</source>
-        <translation>Skift bootloader</translation>
+        <translation>Змінити завантажувач</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="550"/>
         <source>Done</source>
-        <translation>Færdig</translation>
+        <translation>Готово</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="92"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="177"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="552"/>
         <source>Delete</source>
-        <translation>Slet</translation>
+        <translation>Видалити</translation>
     </message>
 </context>
 <context>
@@ -168,7 +168,7 @@
     <message>
         <location filename="../ui/models/bootloader_list_model.cpp" line="42"/>
         <source>%1 %2 (recommended)</source>
-        <translation>%1 %2 (anbefalet)</translation>
+        <translation>%1 %2 (рекомендовано)</translation>
     </message>
 </context>
 <context>
@@ -177,25 +177,25 @@
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="39"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="58"/>
         <source>Abort Installation</source>
-        <translation>Afbryd installation</translation>
+        <translation>Скасувати встановлення</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="41"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="60"/>
         <source>Relevant operations you made in the installation process will not take effect, abort or continue installation?</source>
-        <translation>Relevante handlinger du har foretaget i installationsprocessen vil ikke træde i kraft, afbryd eller fortsæt installationen?</translation>
+        <translation>Відповідні операції, виконані вами в процесі інсталяції, не вступлять в силу, не будуть скасовані або продовжено інсталяцію?</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="43"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="67"/>
         <source>Continue</source>
-        <translation>Fortsæt</translation>
+        <translation>Продовжити</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="44"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="68"/>
         <source>Abort</source>
-        <translation>Afbryd</translation>
+        <translation>Скасувати</translation>
     </message>
 </context>
 <context>
@@ -204,13 +204,13 @@
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="58"/>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="72"/>
         <source>Insufficient Disk Space</source>
-        <translation>Utilstrækkelig diskplads</translation>
+        <translation>Недостатньо місця на диску</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="60"/>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="79"/>
         <source>Exit installation</source>
-        <translation>Forlad installation</translation>
+        <translation>Вийти з установки</translation>
     </message>
 </context>
 <context>
@@ -219,37 +219,37 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="133"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="196"/>
         <source>Edit Disk</source>
-        <translation>Rediger disk</translation>
+        <translation>Редагувати диск</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Sørg venligst for at oprette en sikkerhedskopi af vigtige data, og vælg så den disk der skal installeres på</translation>
+        <translation>Будь ласка, переконайтеся, що для важливих даних було зроблено резервну копію, а потім виберіть диск для встановлення</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="137"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="231"/>
         <source>Filesystem</source>
-        <translation>Filsystem</translation>
+        <translation>Файлова система</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="138"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="233"/>
         <source>Mount point</source>
-        <translation>Monteringspunkt</translation>
+        <translation>Точка монтування</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="139"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="235"/>
         <source>Format the partition</source>
-        <translation>Formatér partitionen</translation>
+        <translation>Форматувати розділ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="140"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="278"/>
         <source>Cancel</source>
-        <translation>Annuller</translation>
+        <translation>Скасувати</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="141"/>
@@ -264,13 +264,13 @@
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="38"/>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="61"/>
         <source>Tuning system</source>
-        <translation>Finjusterer system</translation>
+        <translation>Тюнінг системи</translation>
     </message>
     <message>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="40"/>
         <location filename="../ui/frames/first_boot_loading_frame.cpp" line="63"/>
         <source>Applying changes to your system, please wait...</source>
-        <translation>Anvender ændringer på dit system, vent venligst...</translation>
+        <translation>Застосовую зміни у вашій системі, зачекайте...</translation>
     </message>
 </context>
 <context>
@@ -279,19 +279,19 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="74"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="94"/>
         <source>Installation Failed</source>
-        <translation>Installation fejlede</translation>
+        <translation>Не вдалося встановити</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="76"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>Beklager ulejligheden, du kan tage billede af eller skanne QR-koden for at indsende fejllog, så vi bedre kan løse problemet.</translation>
+        <translation>Вибачте за незручності, ви можете переглянути чи сканувати QR-код, щоб надсилати журнал помилок, щоб ми могли краще вирішити цю проблему.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="78"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="125"/>
         <source>Exit installation</source>
-        <translation>Forlad installation</translation>
+        <translation>Вийти з установки</translation>
     </message>
 </context>
 <context>
@@ -300,13 +300,13 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="127"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="152"/>
         <source>Installing</source>
-        <translation>Installerer</translation>
+        <translation>Встановлення</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Du kan opleve den udsøgte fornøjelse som deepin er, efter den tid det tager at drikke en kop kaffe</translation>
+        <translation>Ви можете пережити неймовірне задоволення від deepin проводячи час за чашкою кави або чаю</translation>
     </message>
 </context>
 <context>
@@ -315,25 +315,25 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="40"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="60"/>
         <source>Successfully Installed</source>
-        <translation>Installationen lykkedes</translation>
+        <translation>Успішно встановлено</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="42"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="62"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>Genstart for at nyde den nye oplevelse med deepin, håber du kan lide det!</translation>
+        <translation>Перезавантажте, щоб насолодитися новим досвідом з deepin, сподіваюся, вам сподобається!</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation>Fjern venligst installationsmediet inden genstart</translation>
+        <translation>Перед перезавантаженням зніміть інсталяційний носій</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="46"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="70"/>
         <source>Experience now</source>
-        <translation>Oplev nu</translation>
+        <translation>Спробувати зараз</translation>
     </message>
 </context>
 <context>
@@ -341,7 +341,7 @@
     <message>
         <location filename="../ui/models/mount_point_model.cpp" line="37"/>
         <source>Do not use</source>
-        <translation>Brug ikke</translation>
+        <translation>Не використовувати</translation>
     </message>
 </context>
 <context>
@@ -350,61 +350,61 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="116"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="151"/>
         <source>New Partition</source>
-        <translation>Ny partition</translation>
+        <translation>Новий розділ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="118"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="153"/>
         <source>Create a new partition and define the type and size</source>
-        <translation>Opret en ny partition og definér typen og størrelsen</translation>
+        <translation>Створіть новий розділ і визначте тип і розмір</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="119"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="159"/>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="120"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="165"/>
         <source>Location</source>
-        <translation>Placering</translation>
+        <translation>Місцезнаходження</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="121"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="170"/>
         <source>Filesystem</source>
-        <translation>Filsystem</translation>
+        <translation>Файлова система</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="122"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="176"/>
         <source>Mount point</source>
-        <translation>Monteringspunkt</translation>
+        <translation>Точка монтування</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="123"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="183"/>
         <source>Size</source>
-        <translation>Størrelse</translation>
+        <translation>Розмір</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="125"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="168"/>
         <source>Start</source>
-        <translation>Begyndelse</translation>
+        <translation>Почати</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="125"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="168"/>
         <source>End</source>
-        <translation>Slutning</translation>
+        <translation>Кінець</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="126"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="213"/>
         <source>Cancel</source>
-        <translation>Annuller</translation>
+        <translation>Скасувати</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="127"/>
@@ -419,7 +419,7 @@
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="37"/>
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="54"/>
         <source>Formatting...</source>
-        <translation>Formaterer...</translation>
+        <translation>Форматування...</translation>
     </message>
 </context>
 <context>
@@ -428,25 +428,25 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="77"/>
         <source>Full Disk Format Warning</source>
-        <translation>Advarsel om formating af fuld disk</translation>
+        <translation>Попередження про повне форматування диску</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="95"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Hvis installationen fortsættes vil hele disken blive formateret. Opret venligst en sikkerhedskopi af alle dine data, for at undgå tab af data</translation>
+        <translation>Продовжуючи встановлення, буде форматований весь диск, будь ласка, створіть резервну копію всіх ваших даних, щоб уникнути втрати даних</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="102"/>
         <source>Cancel</source>
-        <translation>Annuller</translation>
+        <translation>Скасувати</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="60"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="103"/>
         <source>Continue</source>
-        <translation>Fortsæt</translation>
+        <translation>Продовжити</translation>
     </message>
 </context>
 <context>
@@ -455,31 +455,31 @@
         <location filename="../ui/frames/partition_frame.cpp" line="73"/>
         <location filename="../ui/frames/partition_frame.cpp" line="188"/>
         <source>Select Installation Location</source>
-        <translation>Vælg installationsplacering</translation>
+        <translation>Виберіть місце встановлення</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="75"/>
         <location filename="../ui/frames/partition_frame.cpp" line="190"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Sørg venligst for at oprette en sikkerhedskopi af vigtige data, og vælg så den disk der skal installeres på</translation>
+        <translation>Будь ласка, переконайтеся, що для важливих даних було зроблено резервну копію, а потім виберіть диск для встановлення</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="77"/>
         <location filename="../ui/frames/partition_frame.cpp" line="198"/>
         <source>Simple</source>
-        <translation>Simpel</translation>
+        <translation>Простий</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="78"/>
         <location filename="../ui/frames/partition_frame.cpp" line="204"/>
         <source>Advanced</source>
-        <translation>Avanceret</translation>
+        <translation>Розширений</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="79"/>
         <location filename="../ui/frames/partition_frame.cpp" line="251"/>
         <source>Start installation</source>
-        <translation>Start installation</translation>
+        <translation>Почніть встановлення</translation>
     </message>
 </context>
 <context>
@@ -488,13 +488,13 @@
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="37"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="45"/>
         <source>Scan disks</source>
-        <translation>Skan diske</translation>
+        <translation>Сканування дисків</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="38"/>
         <location filename="../ui/frames/inner/partition_loading_frame.cpp" line="46"/>
         <source>Scanning disks, please wait...</source>
-        <translation>Skanner diske, vent venglist...</translation>
+        <translation>Сканування дисків, будь ласка, зачекайте...</translation>
     </message>
 </context>
 <context>
@@ -503,32 +503,32 @@
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="76"/>
         <source>Cannot create new partitions</source>
-        <translation>Kan ikke oprette nye partitioner</translation>
+        <translation>Не вдається створити нові розділи</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="41"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="78"/>
         <source>You need to delete a primary partition to create a new primary partition</source>
-        <translation>Du skal slette en primær partition, før en ny primær partition kan oprettes</translation>
+        <translation>Вам потрібно видалити основний розділ, щоб створити новий основний розділ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="62"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="81"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
-        <translation>Nye logiske partitioner kan kun oprettes når eksisterende logiske partitioner</translation>
+        <translation>Нові логічні розділи можуть бути створені лише біля існуючих логічних розділів</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
         <source>You need to delete a primary partition to create the new partition</source>
-        <translation>Du skal slette en primær partition, før en ny partition kan oprettes</translation>
+        <translation>Щоб створити новий розділ, потрібно видалити основний розділ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="83"/>
         <source>Back</source>
-        <translation>Tilbage</translation>
+        <translation>Назад</translation>
     </message>
 </context>
 <context>
@@ -537,19 +537,19 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="52"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="93"/>
         <source>Warning</source>
-        <translation>Advarsel</translation>
+        <translation>УВАГА</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="125"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation>Opret venligst en sikkerhedskopi af alle dine data, for at undgå tab af data</translation>
+        <translation>Зробіть резервну копію всіх ваших даних, щоб уникнути втрати даних</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="126"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation>Dobbelttjek venligst at der blev oprettet en sikkerhedskopi af alle dataene, og genstart for at komme ind i denne brugerflade</translation>
+        <translation>Будь ласка, двічі перевірте, чи було зроблено резервну копію всіх даних, і перезавантажте, щоб увійти в цей інтерфейс</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
@@ -557,59 +557,59 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="146"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="168"/>
         <source>Continue</source>
-        <translation>Fortsæt</translation>
+        <translation>Продовжити</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="104"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation>Kan ikke installere direkte på grund af at EFI-bundkort-bootloader og MBR-disk er blevet registreret. Vælg venligt en af løsningerne nedenfor for at fortsætte.</translation>
+        <translation>Неможливо встановити безпосередньо через завантажувач материнської плати EFI та виявлений диск MBR, будь ласка, виберіть одне з наведених нижче рішень, щоб продовжити.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="116"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
-        <translation>Genstart, gå ind i BIOS og deaktivér UEFI</translation>
+        <translation>Перезавантажитеся, увійдіть в BIOS і вимкніть UEFI</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="117"/>
         <source>Exit BIOS, and enter deepin to install</source>
-        <translation>Forlad BIOS og gå ind i deepin for at installere</translation>
+        <translation>Вийдіть з BIOS і увійдіть в deepin для установки.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="150"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation>Opret venligst en sikkerhedskopi af alle data, og fortsæt herefter</translation>
+        <translation>Будь ласка, переконайтеся, що для всіх даних було зроблено резервну копію, а потім продовжуйте</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="71"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
         <source>Continue installation will format your disk</source>
-        <translation>Hvis installationen fortsættes vil din disk blive formateret</translation>
+        <translation>Продовжити встановлення буде відформатовано ваш диск</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="167"/>
         <source>Reboot</source>
-        <translation>Genstart</translation>
+        <translation>Перезавантажити</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
         <source>Back</source>
-        <translation>Tilbage</translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
         <source>Disable UEFI</source>
-        <translation>Deaktivér UEFI</translation>
+        <translation>Вимкнути UEFI</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="121"/>
         <source>Format the disk</source>
-        <translation>Formatér disken</translation>
+        <translation>Форматувати диск</translation>
     </message>
 </context>
 <context>
@@ -618,12 +618,12 @@
         <location filename="../ui/models/partition_type_model.cpp" line="41"/>
         <location filename="../ui/models/partition_type_model.cpp" line="47"/>
         <source>Logical Partition</source>
-        <translation>Logisk partition</translation>
+        <translation>Логічний розділ</translation>
     </message>
     <message>
         <location filename="../ui/models/partition_type_model.cpp" line="45"/>
         <source>Primary Partition</source>
-        <translation>Primær partition</translation>
+        <translation>Основний розділ</translation>
     </message>
 </context>
 <context>
@@ -632,31 +632,31 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="62"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="84"/>
         <source>Prepare for Installation</source>
-        <translation>Gør klar til installation</translation>
+        <translation>Підготовка до встановлення</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="86"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation>Opret venligst en sikkerhedskopi af vigtige data og bekræft følgende handlinger</translation>
+        <translation>Зробіть резервну копію важливих даних та підтвердьте наступні операції</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="67"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
-        <translation>Følgende handlinger vil blive udført. Bekræft venligst og fortsæt, for at undgå tab af data</translation>
+        <translation>Будуть виконані наступні операції, будь ласка, підтвердьте та продовжуйте уникати втрати даних</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="69"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="107"/>
         <source>Back</source>
-        <translation>Tilbage</translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="70"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="108"/>
         <source>Continue</source>
-        <translation>Fortsæt</translation>
+        <translation>Продовжити</translation>
     </message>
 </context>
 <context>
@@ -665,19 +665,19 @@
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="65"/>
         <source>Select location for boot loader</source>
-        <translation>Vælg placering til bootloader</translation>
+        <translation>Виберіть місце для завантажувача</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="67"/>
         <source>If you do not understand the detailed settings, please select default settings</source>
-        <translation>Hvis du ikke forstår de detaljerede indstillinger, så vælg venligst standardindstillinger</translation>
+        <translation>Якщо ви не розумієте детальні налаштування, виберіть налаштування за замовчуванням</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="79"/>
         <source>Back</source>
-        <translation>Tilbage</translation>
+        <translation>Назад</translation>
     </message>
 </context>
 <context>
@@ -686,7 +686,7 @@
         <location filename="../ui/frames/select_language_frame.cpp" line="66"/>
         <location filename="../ui/frames/select_language_frame.cpp" line="110"/>
         <source>Next</source>
-        <translation>Næste</translation>
+        <translation>Далі</translation>
     </message>
 </context>
 <context>
@@ -695,7 +695,7 @@
         <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="80"/>
         <source>Install here</source>
-        <translation>Installer her</translation>
+        <translation>Встановити тут</translation>
     </message>
 </context>
 <context>
@@ -703,28 +703,28 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="74"/>
         <source>Please select one of the partitions to install!</source>
-        <translation>Vælg venligst en af partitionerne for at installere!</translation>
+        <translation>Будь ласка, виберіть один з розділів для встановлення!</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation>Kunne ikke oprette ny partition. Vælg venligst en af de eksisterende partitioner!</translation>
+        <translation>Неможливо створити новий розділ, будь ласка, виберіть один з існуючих розділів!</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="81"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation>Mindst %1 GB er krævet til rodpartition</translation>
+        <translation>Для Root розділу потрібно принаймні %1 Гб</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="92"/>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="211"/>
         <source>Install here</source>
-        <translation>Installer her</translation>
+        <translation>Встановити тут</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="388"/>
         <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
-        <translation>Windows vil ikke boote hvis deepin installeres på Windows-disk, bekræft venligst for at fortsætte</translation>
+        <translation>Windows не завантажиться, якщо встановити deepin на диску Windows, будь ласка, підтвердьте, щоб продовжити</translation>
     </message>
 </context>
 <context>
@@ -733,13 +733,13 @@
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="76"/>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="92"/>
         <source>User Avatar</source>
-        <translation>Brug avatar</translation>
+        <translation>Аватар користувача</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="77"/>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="93"/>
         <source>Select an avatar for your account</source>
-        <translation>Vælg en avatar til din konto</translation>
+        <translation>Виберіть аватар для свого облікового запису</translation>
     </message>
 </context>
 <context>
@@ -748,99 +748,99 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="65"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="125"/>
         <source>Create User Account</source>
-        <translation>Opret brugerkonto</translation>
+        <translation>Створити обліковий запис користувача</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="66"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="126"/>
         <source>Input username and password</source>
-        <translation>Indtast brugernavn og adgangskode</translation>
+        <translation>Введіть ім&apos;я користувача та пароль</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="67"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="135"/>
         <source>Username</source>
-        <translation>Brugernavn</translation>
+        <translation>Ім&apos;я користувача</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="68"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="140"/>
         <source>Computer name</source>
-        <translation>Computernavn</translation>
+        <translation>Ім&apos;я комп&apos;ютера</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="69"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="145"/>
         <source>Password</source>
-        <translation>Adgangskode</translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="70"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="151"/>
         <source>Confirm password</source>
-        <translation>Bekræft adgangskode</translation>
+        <translation>Підтвердити пароль</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="191"/>
         <source>This username already exists</source>
-        <translation>Dette brugernavn findes allerede</translation>
+        <translation>Це ім&apos;я користувача вже існує</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="195"/>
         <source>The first letter must be in lowercase</source>
-        <translation>Det første bogstav skal være med småt</translation>
+        <translation>Перша літера повинна бути в нижньому регістрі</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="206"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
-        <translation>Indtast venligst brugernavn på over %1 tegn og under %2 tegn</translation>
+        <translation>Будь ласка, введіть ім&apos;я користувача довше ніж %1 символів і менше, ніж %2 символів</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name</source>
-        <translation>Indtast venligst computernavn</translation>
+        <translation>Будь ласка, введіть ім&apos;я комп&apos;ютера</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="233"/>
         <source>Computer name already exists, please input another one</source>
-        <translation>Computernavn findes allerede, indtast venligst et andet</translation>
+        <translation>Ім&apos;я комп&apos;ютера вже існує, будь ласка, введіть інше</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="238"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation>Indtast venligst computernavn på over %1 tegn og under %2 tegn</translation>
+        <translation>Будь ласка, введіть назву комп&apos;ютера довше ніж %1 символів і менше, ніж %2 символів</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="264"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="278"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation>Indtast venligst adgangskode på over %1 tegn og under %2 tegn</translation>
+        <translation>Будь ласка, введіть пароль довше, ніж %1 символів і менше, ніж %2 символів</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="272"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation>Adgangskoden skal indeholde engelske bogstaver (forskel på store og små bogstaver), tal og specialtegn (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
+        <translation>Пароль повинен містити англійські літери (чутливі до регістру), цифри або спеціальні символи (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="292"/>
         <source>The two passwords don&apos;t match</source>
-        <translation>De to adgangskoder er ikke ens</translation>
+        <translation>Ці два пароля не збігаються</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="71"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Next</source>
-        <translation>Næste</translation>
+        <translation>Далі</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="200"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
-        <translation>Brugernavn skal indeholde danske bogstaver (små bogstaver), tal eller specielle symboler (_-)</translation>
+        <translation>Ім&apos;я користувача повинно містити англійські літери (малі літери), цифри або спеціальні символи (_-)</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>Computer name is invalid</source>
-        <translation>Computernavn er ugyldigt</translation>
+        <translation>Ім&apos;я комп&apos;ютера недійсне</translation>
     </message>
 </context>
 <context>
@@ -849,19 +849,19 @@
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="90"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="109"/>
         <source>Select keyboard layout</source>
-        <translation>Vælg tastaturlayout</translation>
+        <translation>Виберіть розкладку клавіатури</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="91"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="144"/>
         <source>Test area</source>
-        <translation>Testområde</translation>
+        <translation>Область випробувань</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="92"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="149"/>
         <source>Back</source>
-        <translation>Tilbage</translation>
+        <translation>Назад</translation>
     </message>
 </context>
 <context>
@@ -870,19 +870,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="129"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="167"/>
         <source>Select Time Zone</source>
-        <translation>Vælg tidszone</translation>
+        <translation>Виберіть часовий пояс</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="130"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="168"/>
         <source>Mark your zone on the map</source>
-        <translation>Vælg din zone på kortet</translation>
+        <translation>Позначте свою зону на карті</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="131"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="170"/>
         <source>Next</source>
-        <translation>Næste</translation>
+        <translation>Далі</translation>
     </message>
 </context>
 <context>
@@ -891,19 +891,19 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="40"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="58"/>
         <source>Friendly Reminder</source>
-        <translation>Venlig påmindelse</translation>
+        <translation>Дружнє нагадування</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="42"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="60"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation>Systemet har registreret at du bruger en virtuel maskine, hvilket vil påvirke systemydelsen og brugsoplevelsen. Det anbefales at installere deepin i et ægte maskinmiljø, for at få en god oplevelse</translation>
+        <translation>Система виявила, що ви використовуєте віртуальну машину, яка вплине на продуктивність системи та досвід роботи, для забезпечення безперебійної роботи, рекомендується встановити deepin в середовищі реального комп&apos;ютера</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="46"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="69"/>
         <source>Continue</source>
-        <translation>Fortsæt</translation>
+        <translation>Продовжити</translation>
     </message>
 </context>
 </TS>

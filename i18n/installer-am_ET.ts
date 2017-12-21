@@ -4,12 +4,12 @@
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="157"/>
         <source>Do not use this partition</source>
-        <translation type="unfinished"/>
+        <translation>ይህን ክፍልፋይ አይጠቀሙ</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="170"/>
         <source>Swap partition</source>
-        <translation type="unfinished"/>
+        <translation>Swap ክፍልፋይ</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="213"/>
@@ -30,47 +30,47 @@
     <message>
         <location filename="../partman/operation.cpp" line="256"/>
         <source>Create new partition %1, type is %2</source>
-        <translation type="unfinished"/>
+        <translation>አዲስ ክፍልፋይ መፍጠሪያ %1, አይነት ነው %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="260"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation type="unfinished"/>
+        <translation>አዲስ ክፍልፋይ መፍጠሪያ %1 እንደ %2 (መጫኛ ነጥብ), አይነት ነው %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="278"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation type="unfinished"/>
+        <translation>አቀራረብ %1 ክፍልፋይ እንደ %2 (መጫኛ ነጥብ), አይነት ነው %3</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="286"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
-        <translation type="unfinished"/>
+        <translation>ይጠቀሙ %1 ክፍልፋይ እንደ %2 (መጫኛ ነጥብ)</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="292"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation type="unfinished"/>
+        <translation>አቀራረብ ማሰናጃ %1 እና መፍጠሪያ %2 አዲስ የ ክፍልፋይ ሰንጠረዥ</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="269"/>
         <source>Delete %1 partition</source>
-        <translation type="unfinished"/>
+        <translation>ክፍልፋይ %1 ማጥፊያ</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="274"/>
         <source>Format %1 partition, type is %2</source>
-        <translation type="unfinished"/>
+        <translation>አቀራረብ %1 ክፍልፋይ: አይነት ነው %2</translation>
     </message>
     <message>
         <location filename="../partman/operation.cpp" line="298"/>
         <source>Adjust the size of %1 partition</source>
-        <translation type="unfinished"/>
+        <translation>መጠን ማስተካከያ ለ %1 ክፍልፋይ</translation>
     </message>
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
         <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation type="unfinished"/>
+        <translation>ቢያንስ %1 ጌባ የ ዲስክ ቦታ ያስፈልጋል: ዲፕኢን ለ መግጠም: ለ በለጠ አፈጻጸም : %2 ጌባ እና ተጨማሪ ቦታ እንመክራለን</translation>
     </message>
 </context>
 <context>
@@ -83,7 +83,7 @@
     <message>
         <location filename="../ui/widgets/advanced_partition_button.cpp" line="132"/>
         <source>To be formatted</source>
-        <translation type="unfinished"/>
+        <translation>ይህ አቀራረብ ይሰናዳል</translation>
     </message>
 </context>
 <context>
@@ -91,47 +91,47 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="512"/>
         <source>Add a Root partition to continue</source>
-        <translation type="unfinished"/>
+        <translation>የ Root ክፍልፋይ መጨመሪያ ለ መቀጠል</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="517"/>
         <source>At least %1 GB is required for Root partition</source>
-        <translation type="unfinished"/>
+        <translation>ቢያንስ %1 ጌባ ያስፈልጋል ለ Root ክፍልፋይ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>Add an EFI partition to continue</source>
-        <translation type="unfinished"/>
+        <translation>የ EFI  ክፍልፋይ መጨመሪያ ለ መቀጠል</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="430"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>%1 ስህተት ተገኝቷል: ይጠግኑት መግጠሙን ለ መቀጠል ወይንም ወደ ቀላል ዘዴ ይቀይሩ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="434"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>%1 ስህተት ተገኝቷል: ይጠግኑት መግጠሙን ለ መቀጠል ወይንም ወደ ቀላል ዘዴ ይቀይሩ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="440"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation type="unfinished"/>
+        <translation>%1 ስህተት ተገኝቷል: ከ ጠገኑ በኋላ መግጠሙን ይቀጥሉ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="444"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation type="unfinished"/>
+        <translation>%1 ስህተት ተገኝቷል: ከ ጠገኑ በኋላ መግጠሙን ይቀጥሉ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation type="unfinished"/>
+        <translation>የ ክፍልፋይ ፋይል ስርአት ለ /boot ዳይሬክቶሪ መሆን የሚችለው %1 </translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation type="unfinished"/>
+        <translation>ክፍልፋይ ለ /boot ዳይሬክቶሪ  የ መጀመሪያው ክፍልፋይ መሆን አለበት በ ሀርድ ዲስኩ ላይ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
@@ -147,7 +147,7 @@
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
         <source>Change boot loader</source>
-        <translation type="unfinished"/>
+        <translation>የ boot መጫኛ መቀየሪያ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
@@ -189,7 +189,7 @@
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="43"/>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="67"/>
         <source>Continue</source>
-        <translation>ይቀጥሊ</translation>
+        <translation>ይቀጥሉ</translation>
     </message>
     <message>
         <location filename="../ui/frames/confirm_quit_frame.cpp" line="44"/>
@@ -225,7 +225,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን የ እርስዎን አስፈላጊ ሰነዶች ተተኪ ይፍጠሩ: እና ከዛ ዲስክ ይምረጡ ለ መግጠም </translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="137"/>
@@ -285,7 +285,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="76"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation type="unfinished"/>
+        <translation>ስለ ችግሩ እናዝናለን: እርስዎ ፎቶ ማንሳት ወይንም የ QR ኮድ ሊልኩልን ይችላሉ የ ስህተቱን መግቢያ: ለ ችግሩ መፍትሄ እንድንፈልግ</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="78"/>
@@ -306,7 +306,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation type="unfinished"/>
+        <translation>በ ዲፕኢን እንደሚደሰቱ ተስፋ እናደርጋለን</translation>
     </message>
 </context>
 <context>
@@ -327,7 +327,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን የ መግጠሚያውን አካል ያውጡ ከ እንደገና ከ መነሳቱ በፊት</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="46"/>
@@ -341,7 +341,7 @@
     <message>
         <location filename="../ui/models/mount_point_model.cpp" line="37"/>
         <source>Do not use</source>
-        <translation type="unfinished"/>
+        <translation>አይጠቀሙ</translation>
     </message>
 </context>
 <context>
@@ -419,7 +419,7 @@
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="37"/>
         <location filename="../ui/frames/inner/new_table_loading_frame.cpp" line="54"/>
         <source>Formatting...</source>
-        <translation type="unfinished"/>
+        <translation>በ ማሰናዳት ላይ...</translation>
     </message>
 </context>
 <context>
@@ -428,13 +428,13 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="77"/>
         <source>Full Disk Format Warning</source>
-        <translation type="unfinished"/>
+        <translation>ማስጠንቀቂያ: ሙሉ ዲስኩን በ ማሰናዳት ላይ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="95"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>መግጠሙን ከ ቀጠሉ ዲስኩን በ ሙሉ ያጠፋ እና ይያሰናዳል ለ መግጠም:  እባክዎን ለ እርስዎ ዳታ ተተኪ ይፍጠሩ የ እርስዎ ዳታ እንዳይጠፋ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
@@ -461,7 +461,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="75"/>
         <location filename="../ui/frames/partition_frame.cpp" line="190"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን የ እርስዎን አስፈላጊ ሰነዶች ተተኪ ይፍጠሩ: እና ከዛ ዲስክ ይምረጡ ለ መግጠም </translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="77"/>
@@ -503,32 +503,32 @@
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="76"/>
         <source>Cannot create new partitions</source>
-        <translation type="unfinished"/>
+        <translation>አዲስ ክፍልፋይ መፍጠር አልተቻለም</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="41"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="78"/>
         <source>You need to delete a primary partition to create a new primary partition</source>
-        <translation type="unfinished"/>
+        <translation>ቀዳሚ ክፍልፋይ ማጥፋት አለብዎት አዲስ ቀዳሚ ክፍልፋይ ለ መፍጠር</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="62"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="81"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
-        <translation type="unfinished"/>
+        <translation>አዲስ ሎጂካል ክፍልፋይ መፍጠር የሚቻለው ከ ነበረው የ ሎጂካል ክፍልፋይ አጠገብ ነው</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
         <source>You need to delete a primary partition to create the new partition</source>
-        <translation type="unfinished"/>
+        <translation>ቀዳሚ ክፍልፋይ ማጥፋት አለብዎት አዲስ ቀዳሚ ክፍልፋይ ለ መፍጠር</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="83"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>ወደ ኋላ</translation>
     </message>
 </context>
 <context>
@@ -543,13 +543,13 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="125"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን ለ እርስዎ ዳታ ተተኪ ይፍጠሩ የ እርስዎ ዳታ እንዳይጠፋ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="126"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን የ እርስዎን አስፈላጊ ሰነዶች ተተኪ ይፍጠሩ: እና ከዛ እንደገና ያስነሱ መግጠሙን ለ መቀጠል</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
@@ -563,31 +563,31 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="104"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation type="unfinished"/>
+        <translation>በ እርስዎ ኮምፒዩተር ላይ መግጠም አልተቻለም EFI motherboard boot loader እና MBR ዲስክ ተገኝቷል: እባክዎን አንዱን ምርጫ ከ ታች በኩል ይምረጡ ለ መቀጠል</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="116"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
-        <translation type="unfinished"/>
+        <translation>እንደገና ያስነሱ: እና ይግቡ ወደ BIOS, እና ከዛ ያሰናክሉ UEFI</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="117"/>
         <source>Exit BIOS, and enter deepin to install</source>
-        <translation type="unfinished"/>
+        <translation>ከ BIOS, ይውጡ እና ከዛ ይምረጡ የ ዲፕኢን መግጠሚያ ለ መግጠም</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="150"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን የ እርስዎን አስፈላጊ ሰነዶች ተተኪ ይፍጠሩ: እና ከዛ ይቀጥሉ መግጠሙን</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="71"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
         <source>Continue installation will format your disk</source>
-        <translation type="unfinished"/>
+        <translation>ይቀጥሉ መግጠሙን የ እርስዎ ዲስክ አቀራረብ ይጠፋል እና ይሰናዳል</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
@@ -599,17 +599,17 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>ወደ ኋላ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
         <source>Disable UEFI</source>
-        <translation type="unfinished"/>
+        <translation>UEFI ማሰናከያ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="121"/>
         <source>Format the disk</source>
-        <translation type="unfinished"/>
+        <translation>ዲስክ አቀራረብ ይጠፋል እና ይሰናዳል</translation>
     </message>
 </context>
 <context>
@@ -618,7 +618,7 @@
         <location filename="../ui/models/partition_type_model.cpp" line="41"/>
         <location filename="../ui/models/partition_type_model.cpp" line="47"/>
         <source>Logical Partition</source>
-        <translation>Logical ክፍልፋይ</translation>
+        <translation>ሎጂካል ክፍልፋይ</translation>
     </message>
     <message>
         <location filename="../ui/models/partition_type_model.cpp" line="45"/>
@@ -638,7 +638,7 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="86"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን የ እርስዎን አስፈላጊ ሰነዶች ተተኪ ይፍጠሩ: እና ከዛ የሚቀጥለውን ተግባር ያረጋግጡ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="67"/>
@@ -695,7 +695,7 @@
         <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="80"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>እዚህ መግጠሚያ</translation>
     </message>
 </context>
 <context>
@@ -703,12 +703,12 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="74"/>
         <source>Please select one of the partitions to install!</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን አንድ ክፍልፋይ ይምረጡ ለ መግጠም</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation type="unfinished"/>
+        <translation>አዲስ ክፍልፋይ መፍጠር አልተቻለም: እባክዎን ከ ነበረው ክፍልፋይ ውስጥ አንዱን ይምረጡ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="81"/>
@@ -778,53 +778,53 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="70"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="151"/>
         <source>Confirm password</source>
-        <translation type="unfinished"/>
+        <translation>የ መግቢያ ቃል ማረጋገጫ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="191"/>
         <source>This username already exists</source>
-        <translation type="unfinished"/>
+        <translation>ይህ የ ተጠቃሚ ስም ቀደም ብሎ ነበር</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="195"/>
         <source>The first letter must be in lowercase</source>
-        <translation type="unfinished"/>
+        <translation>የ መጀመሪያው ፊደል በ አነስተኛ ፊደል መጻፍ አለበት </translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="206"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን የ ተጠቃሚ ስም ያስገቡ የረዘመ ከ %1 ባህሪዎች እና ያነሰ ከ %2 ባህሪዎች</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን የ ኮምፒዩተር ስም ያስገቡ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="233"/>
         <source>Computer name already exists, please input another one</source>
-        <translation type="unfinished"/>
+        <translation>የ ኮምፒዩተር ስም ቀደም ብሎ ነበር: እባክዎን ሌላ ስም ያስገቡ</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="238"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን የ ኮምፒዩተር ስም ያስገቡ የረዘመ ከ %1 ባህሪዎች እና ያነሰ ከ %2 ባህሪዎች</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="264"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="278"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>እባክዎን የ መግቢያ ቃል ያስገቡ የረዘመ ከ %1 ባህሪዎች እና ያነሰ ከ %2 ባህሪዎች</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="272"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation type="unfinished"/>
+        <translation>የ መግቢያ ቃል መያዝ አለበት (case-sensitive), ቁጥሮች: ወይንም የ ተለዩ ባህሪ ምልክቶች (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="292"/>
         <source>The two passwords don&apos;t match</source>
-        <translation type="unfinished"/>
+        <translation>ሁለቱ የ መግቢያ ቃል አይመሳሰልም</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="71"/>
@@ -835,7 +835,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="200"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
-        <translation type="unfinished"/>
+        <translation>የ ተጠቃሚ ስም በ English ፊደሎች መሆን አለበት (lowercase), ቁጥሮች: ወይንም የ ተለዩ ባህሪ ምልክቶች (_-)</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
@@ -870,19 +870,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="129"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="167"/>
         <source>Select Time Zone</source>
-        <translation type="unfinished"/>
+        <translation>የ ሰአት ክልል ይምረጡ</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="130"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="168"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>የ እርስዎን ክልል በ ካርታው ላይ ይጫኑ</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="131"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="170"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>ይቀጥሉ</translation>
     </message>
 </context>
 <context>
