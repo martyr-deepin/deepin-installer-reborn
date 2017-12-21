@@ -1,4 +1,5 @@
 etc/live/config.conf.d/deepin-installer.conf
+usr/share/xgreeters/
 lib/*
 usr/bin/deepin-installer
 usr/bin/deepin-installer-auto-install
