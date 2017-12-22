@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Deepin Installer Greeter
+Name=deepin-installer greeter for lightdm
+Type=Application
+Exec=deepin-installer-pkexec

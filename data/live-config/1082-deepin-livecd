@@ -23,6 +23,7 @@ generate_lightdm_conf() {
   local CONF_FILE="$1"
   cat > "${CONF_FILE}" <<EOF
 [Seat:*]
+greeter-session=lightdm-installer-greeter
 greeter-setup-script=/usr/bin/deepin-installer-pkexec
 EOF
 }

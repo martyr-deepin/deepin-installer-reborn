@@ -12,6 +12,11 @@ install(
                 WORLD_READ WORLD_EXECUTE
 )
 
+install(
+    FILES ${CMAKE_CURRENT_SOURCE_DIR}/lightdm-installer-greeter.desktop
+    DESTINATION ${CMAKE_INSTALL_PREFIX}/share/xgreeters/
+)
+
 # Startup with `lightdm` on x86 architectures.
 # Startup with `systemd` on non-x86 architectures.
 if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "^x86*")
