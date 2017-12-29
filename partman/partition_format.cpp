@@ -82,8 +82,9 @@ bool FormatExt4(const QString& path, const QString& label) {
   QString err;
   bool ok;
   const MachineArch arch = GetMachineArch();
-  if (arch == MachineArch::LOONGSON) {
-    // Disable 64bit support on loongson platform.
+  if (arch == MachineArch::LOONGSON ||
+      arch == MachineArch::SW) {
+    // Disable 64bit support on loongson and sw platforms.
     if (label.isEmpty()) {
       ok = SpawnCmd("mkfs.ext4", {"-O ^64bit", "-F", path}, output, err);
     } else {
