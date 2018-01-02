@@ -225,8 +225,7 @@ main() {
         installer_set "DI_ROOT_PARTITION" "${PART_PATH}"
         # Set boot flag if /boot is not used in legacy mode.
         if ! is_efi_mode; then
-          if ! grep -q "/boot:" "${POLICY} 2>/dev/null"; then
-            installer_set "DI_BOOTLOADER" "${PART_PATH}"
+          if ! echo "${POLICY}" | grep -q "/boot:"; then
             parted -s "${DEVICE}" set "${PART_NUM}" boot on || \
               error "Failed to set boot flag on ${PART_PATH}"
           fi
@@ -255,4 +254,10 @@ main() {
 
 . ./basic_utils.sh
 
-main
+DI_CUSTOM_PARTITION_SCRIPT=$(installer_get "DI_CUSTOM_PARTITION_SCRIPT")
+if [ -f "${DI_CUSTOM_PARTITION_SCRIPT}" ]; then
+  echo "call custom partition script" ${DI_CUSTOM_PARTITION_SCRIPT}
+  bash ${DI_CUSTOM_PARTITION_SCRIPT}
+else
+  main
+fi

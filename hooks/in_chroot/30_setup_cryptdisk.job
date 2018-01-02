@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# Copyright (C) 2017 ~ 2017 Deepin Technology Co., Ltd.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+# config crypt and save config to /etc/crypttab
+
+DI_CRYPT_ROOT=$(installer_get "DI_CRYPT_ROOT")
+if [ x${DI_CRYPT_ROOT} = xtrue ]; then
+  _CRYPT_PARTITION=$(installer_get "DI_CRYPT_PARTITION")
+  _CRYPT_KEY=$(installer_get "DI_CRYPT_KEY")
+  _CRYPT_SCRIPT=$(installer_get "DI_CRYPT_SCRIPT")
+  _CRYPT_TARGET=$(installer_get "DI_CRYPT_TARGET")
+
+  _CRYPT_OPTIONS="luks"
+  if [ ! -z "${_CRYPT_SCRIPT}" ]; then
+    _CRYPT_OPTIONS="luks,keyscript=${_CRYPT_SCRIPT}"
+    cat > ${_CRYPT_SCRIPT} << EOF
+#!/bin/sh
+cat ${_CRYPT_KEY}
+EOF
+  chmod +x ${_CRYPT_SCRIPT}
+  fi
+
+  _UUID=$(blkid -o value -s UUID "${_CRYPT_PARTITION}")
+  cat >> /etc/crypttab << EOF
+${_CRYPT_TARGET} UUID=${_UUID} none ${_CRYPT_OPTIONS}
+EOF
+fi
