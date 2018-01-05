@@ -25,8 +25,38 @@ import shutil
 import sys
 
 SEC_NAME = "General"
-def update_loongson_policy(settings_file):
-    settings = (
+
+def update_settings(settings_file, settings):
+    src_settings = "resources/default_settings.ini"
+    if not os.path.exists(src_settings):
+        print("Failed to find", src_settings)
+        sys.exit(1)
+    shutil.copy(src_settings, settings_file)
+
+    parser = configparser.ConfigParser()
+    parser.read(settings_file)
+    for key, value in settings:
+        parser.set(SEC_NAME, key, value)
+    with open(settings_file, "w") as fh:
+        parser.write(fh)
+
+    parser = configparser.ConfigParser()
+    parser.read(settings_file)
+    for key, value in settings:
+        parser.set(SEC_NAME, key, value)
+    with open(settings_file, "w") as fh:
+        parser.write(fh)
+
+def main():
+    arm_file = "resources/arm_settings.ini"
+    loongson_file = "resources/loongson_default_settings.ini"
+    sw_file = "resources/sw_default_settings.ini"
+
+    arm_settings = (
+            ("skip_virtual_machine_page", "true"),
+    )
+
+    loongson_settings = (
             ("skip_virtual_machine_page", "true"),
             ("skip_select_language_page", "true"),
             ("skip_timezone_page", "true"),
@@ -44,15 +74,8 @@ def update_loongson_policy(settings_file):
             ("partition_supported_fs", '"ext4;ext3;ext2;efi;linux-swap"'),
             ("partition_prefer_logical_partition", "false"),
     )
-    parser = configparser.ConfigParser()
-    parser.read(settings_file)
-    for key, value in settings:
-        parser.set(SEC_NAME, key, value)
-    with open(settings_file, "w") as fh:
-        parser.write(fh)
 
-def update_sw_policy(settings_file):
-    settings = (
+    sw_settings = (
         ("skip_virtual_machine_page", "true"),
         ("skip_select_language_page", "true"),
         ("skip_timezone_page", "true"),
@@ -72,25 +95,10 @@ def update_sw_policy(settings_file):
         ("partition_supported_fs", '"ext4;ext3;ext2;efi;linux-swap"'),
         ("partition_prefer_logical_partition", "false"),
     )
-    parser = configparser.ConfigParser()
-    parser.read(settings_file)
-    for key, value in settings:
-        parser.set(SEC_NAME, key, value)
-    with open(settings_file, "w") as fh:
-        parser.write(fh)
 
-def main():
-    src_settings = "resources/default_settings.ini"
-    loongson_settings = "resources/loongson_default_settings.ini"
-    sw_settings = "resources/sw_default_settings.ini"
-    if not os.path.exists(src_settings):
-        print("Failed to find", src_settings)
-        sys.exit(1)
-    shutil.copy(src_settings, loongson_settings)
-    shutil.copy(src_settings, sw_settings)
-
-    update_loongson_policy(loongson_settings)
-    update_sw_policy(sw_settings)
+    update_settings(arm_file, arm_settings)
+    update_settings(loongson_file, loongson_settings)
+    update_settings(sw_file, sw_settings)
 
 if __name__ == "__main__":
     main()

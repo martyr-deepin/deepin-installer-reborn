@@ -49,6 +49,10 @@ elseif(${INSTALLER_BUILD_ARCH} MATCHES "mips")
           DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
           RENAME default_settings.ini
           )
+elseif (${INSTALLER_BUILD_ARCH} MATCHES "aarch64")
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/arm_settings.ini
+          DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
+          )
 else()
   message(FATAL_ERROR "Not supportted architecture: ${INSTALLER_BUILD_ARCH}")
 endif ()
