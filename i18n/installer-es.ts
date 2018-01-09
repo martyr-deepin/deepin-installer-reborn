@@ -131,7 +131,7 @@
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation>El tipo de sistema de partición del directorio /boot debe ser la primera partición en el disco duro</translation>
+        <translation>La partición del directorio /boot debe ser la primera partición en el disco duro</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
@@ -225,7 +225,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Asegúrese de haber hecho una copia de seguridad de los datos importantes y, después, seleccione el disco para la instalación.</translation>
+        <translation>Por favor haga una copia de seguridad de los datos importantes y después, seleccione el disco para la instalación.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="137"/>
@@ -285,7 +285,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="76"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>Sentimos las molestias. Para que podamos resolver mejor el problema, puede tomar una foto del código QR o escanearlo para conseguir el registro del errores.</translation>
+        <translation>Sentimos las molestias. Para que podamos resolver mejor el problema, Escanee o tome una foto del código QR  para enviar al registro de errores.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="78"/>
@@ -306,7 +306,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Sentir la increíble experiencia de usar deepin tardará segundos después de tomar un café.</translation>
+        <translation>Experimentar el increíble placer de usar deepin solo le llevará el tiempo que tarda en tomar un café.</translation>
     </message>
 </context>
 <context>
@@ -321,19 +321,19 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="42"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="62"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>Reinicie el sistema para disfrutar de la nueva experiencia que ofrece deepin. ¡Esperamos que le guste!</translation>
+        <translation>Reinicie el sistema para disfrutar de la nueva experiencia que ofrece deepin. ¡Esperamos sea de su agrado!</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation>Por favor, retire los medios de instalación antes de reiniciar</translation>
+        <translation>Por favor, retire el medio de instalación antes de reiniciar</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="46"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="70"/>
         <source>Experience now</source>
-        <translation>Adelante</translation>
+        <translation>Experimentar ahora</translation>
     </message>
 </context>
 <context>
@@ -356,7 +356,7 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="118"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="153"/>
         <source>Create a new partition and define the type and size</source>
-        <translation>Crear una nueva partición y definir el tipo y tamaño</translation>
+        <translation>Crear una nueva partición y definir tipo y tamaño</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="119"/>
@@ -398,7 +398,7 @@
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="125"/>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="168"/>
         <source>End</source>
-        <translation>Acabar</translation>
+        <translation>Finalizar </translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_partition_frame.cpp" line="126"/>
@@ -428,13 +428,13 @@
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="77"/>
         <source>Full Disk Format Warning</source>
-        <translation>Advertencia de formato de disco completo</translation>
+        <translation>Advertencia el disco se formateara por completo</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="95"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Al continuar, el disco duro se formateará; realice un respaldo de toda su información para prevenir pérdidas</translation>
+        <translation>Si continua, el disco se formateará; realice un respaldo de toda su información para prevenir pérdidas</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
@@ -461,13 +461,13 @@
         <location filename="../ui/frames/partition_frame.cpp" line="75"/>
         <location filename="../ui/frames/partition_frame.cpp" line="190"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Asegúrese de haber respaldado información importante y, después, seleccione el disco para instalar</translation>
+        <translation>Asegúrese de hacer respaldado de la información importante , Luego seleccione el disco para instalar</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="77"/>
         <location filename="../ui/frames/partition_frame.cpp" line="198"/>
         <source>Simple</source>
-        <translation>Sencillo</translation>
+        <translation>Simple</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="78"/>
@@ -563,7 +563,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="104"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation>No se puede instalar directamente porque se ha detectado un cargador de arranque de placa base EFI y un disco MBR. Para continuar, elija una de las soluciones siguientes.</translation>
+        <translation>No se puede instalar directamente porque se ha detectado un cargador de arranque  EFI y un disco MBR en su placa base. Para continuar, elija una de las soluciones siguientes.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="59"/>
@@ -581,7 +581,7 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="150"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation>Por favor, asegúrese de que todos los datos se hicieron una copia de seguridad, a continuación, continuar</translation>
+        <translation>Por favor, asegúrese  que hizo copia de seguridad de todos los dato, a continuación, continuar</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="71"/>
@@ -897,7 +897,7 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="42"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="60"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation>Se ha detectado que está utilizando una máquina virtual, lo que afectará el rendimiento del sistema y la experiencia de uso. Para una experiencia sin problemas, se recomienda instalar deepin en el entorno de la máquina real.</translation>
+        <translation>Se ha detectado que está utilizando una máquina virtual, lo que afectará el rendimiento del sistema y la experiencia de uso. Para una experiencia fluida y sin problemas, se recomienda instalar deepin en el entorno real de la máquina.</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="46"/>

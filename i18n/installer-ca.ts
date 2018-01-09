@@ -4,7 +4,7 @@
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="157"/>
         <source>Do not use this partition</source>
-        <translation>No usis aquesta partició</translation>
+        <translation>No usis aquesta partició.</translation>
     </message>
     <message>
         <location filename="../ui/delegates/partition_util.cpp" line="170"/>
@@ -225,7 +225,7 @@
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Si us plau, assegureu-vos que heu fet una còpia de seguretat de les dades importants. Després seleccioneu el disc per a la instal·lació.</translation>
+        <translation>Si us plau, assegureu-vos d&apos;haver fet una còpia de seguretat de les dades importants. Després seleccioneu el disc per a la instal·lació.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/edit_partition_frame.cpp" line="137"/>
@@ -285,7 +285,7 @@
         <location filename="../ui/frames/install_failed_frame.cpp" line="76"/>
         <location filename="../ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation type="unfinished"/>
+        <translation>Perdoneu les molèsties, podeu fotografiar o escanejar el codi QR per enviar-nos el registre de l&apos;error per tal que puguem mirar de resoldre el problema.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_failed_frame.cpp" line="78"/>
@@ -306,7 +306,7 @@
         <location filename="../ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation type="unfinished"/>
+        <translation>Podreu experimentar l&apos;increïble plaer d&apos;usar el Deepin després de l&apos;estona de fer només un cafè.</translation>
     </message>
 </context>
 <context>
@@ -321,19 +321,19 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="42"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="62"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation type="unfinished"/>
+        <translation>Reinicieu per gaudir de la nova experiència amb el Deepin. Esperem que us agradi!</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation type="unfinished"/>
+        <translation>Si us plau, traieu el mitjà d&apos;instal·lació abans de reiniciar.</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="46"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="70"/>
         <source>Experience now</source>
-        <translation type="unfinished"/>
+        <translation>Experimenteu-ho ara</translation>
     </message>
 </context>
 <context>
@@ -461,7 +461,7 @@
         <location filename="../ui/frames/partition_frame.cpp" line="75"/>
         <location filename="../ui/frames/partition_frame.cpp" line="190"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Si us plau, assegureu-vos que heu fet una còpia de seguretat de les dades importants. Després seleccioneu el disc per a la instal·lació.</translation>
+        <translation>Si us plau, assegureu-vos d&apos;haver fet una còpia de seguretat de les dades importants. Després seleccioneu el disc per a la instal·lació.</translation>
     </message>
     <message>
         <location filename="../ui/frames/partition_frame.cpp" line="77"/>
@@ -503,32 +503,32 @@
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="76"/>
         <source>Cannot create new partitions</source>
-        <translation type="unfinished"/>
+        <translation>No es poden crear les particions noves.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="41"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="78"/>
         <source>You need to delete a primary partition to create a new primary partition</source>
-        <translation type="unfinished"/>
+        <translation>Cal que elimineu una partició primària per crear-ne una de nova.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="62"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="81"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
-        <translation type="unfinished"/>
+        <translation>Les particions lògiques només es poden crear a prop de particions lògiques existents.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
         <source>You need to delete a primary partition to create the new partition</source>
-        <translation type="unfinished"/>
+        <translation>Cal que elimineu una partició primària per crear la partició nova.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/partition_number_limitation_frame.cpp" line="83"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Enrere</translation>
     </message>
 </context>
 <context>
@@ -537,19 +537,19 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="52"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="93"/>
         <source>Warning</source>
-        <translation type="unfinished"/>
+        <translation>Avís</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="125"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Si us plau, feu una còpia de seguretat de totes les dades per evitar perdre-les.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="126"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation type="unfinished"/>
+        <translation>Si us plau, assegureu-vos d&apos;haver fet una còpia de seguretat de les dades importants. Després reinicieu per entrar en aquesta interfície.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
@@ -557,59 +557,59 @@
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="146"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="168"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Continua</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="54"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="104"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation type="unfinished"/>
+        <translation>No es pot fer una instal·lació directa perquè s&apos;ha detectat un carregador d&apos;arrencada de la placa base EFI i d&apos;un disc MBR. Si us plau, seleccioneu una de les solucions que hi ha tot seguit per continuar.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="116"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
-        <translation type="unfinished"/>
+        <translation>Reinicieu, entreu al BIOS i inhabiliteu la UEFI.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="117"/>
         <source>Exit BIOS, and enter deepin to install</source>
-        <translation type="unfinished"/>
+        <translation>Sortiu del BIOS i entreu al Deepin per fer-ne la instal·lació.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="150"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation type="unfinished"/>
+        <translation>Si us plau, assegureu-vos d&apos;haver fet una còpia de seguretat de les dades importants abans de continuar.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="71"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
         <source>Continue installation will format your disk</source>
-        <translation type="unfinished"/>
+        <translation>Continuar la instal·lació formatarà el disc.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="167"/>
         <source>Reboot</source>
-        <translation type="unfinished"/>
+        <translation>Reinicia</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Enrere</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
         <source>Disable UEFI</source>
-        <translation type="unfinished"/>
+        <translation>Inhabilita la UEFI</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/partition_table_warning_frame.cpp" line="121"/>
         <source>Format the disk</source>
-        <translation type="unfinished"/>
+        <translation>Formata el disc</translation>
     </message>
 </context>
 <context>
@@ -618,12 +618,12 @@
         <location filename="../ui/models/partition_type_model.cpp" line="41"/>
         <location filename="../ui/models/partition_type_model.cpp" line="47"/>
         <source>Logical Partition</source>
-        <translation type="unfinished"/>
+        <translation>Partició lògica</translation>
     </message>
     <message>
         <location filename="../ui/models/partition_type_model.cpp" line="45"/>
         <source>Primary Partition</source>
-        <translation type="unfinished"/>
+        <translation>Partició primària</translation>
     </message>
 </context>
 <context>
@@ -632,31 +632,31 @@
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="62"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="84"/>
         <source>Prepare for Installation</source>
-        <translation type="unfinished"/>
+        <translation>Preparació de la instal·lació</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="86"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation type="unfinished"/>
+        <translation>Si us plau, feu una còpia de seguretat de les dades importants i confirmeu les operacions següents.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="67"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Es faran les operacions següents. Si us plau, confirmeu-ho per evitar pèrdua de dades i continueu.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="69"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="107"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Enrere</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="70"/>
         <location filename="../ui/frames/inner/prepare_install_frame.cpp" line="108"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Continua</translation>
     </message>
 </context>
 <context>
@@ -665,19 +665,19 @@
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="42"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="65"/>
         <source>Select location for boot loader</source>
-        <translation type="unfinished"/>
+        <translation>Seleccioneu la ubicació del carregador d&apos;arrencada.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="44"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="67"/>
         <source>If you do not understand the detailed settings, please select default settings</source>
-        <translation type="unfinished"/>
+        <translation>Si no enteneu els paràmetres detallats, si us plau, seleccioneu els valors per defecte.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="46"/>
         <location filename="../ui/frames/inner/select_bootloader_frame.cpp" line="79"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Enrere</translation>
     </message>
 </context>
 <context>
@@ -686,7 +686,7 @@
         <location filename="../ui/frames/select_language_frame.cpp" line="66"/>
         <location filename="../ui/frames/select_language_frame.cpp" line="110"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Següent</translation>
     </message>
 </context>
 <context>
@@ -695,7 +695,7 @@
         <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="59"/>
         <location filename="../ui/frames/inner/simple_disk_frame.cpp" line="80"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Instal·la&apos;l aquí</translation>
     </message>
 </context>
 <context>
@@ -703,28 +703,28 @@
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="74"/>
         <source>Please select one of the partitions to install!</source>
-        <translation type="unfinished"/>
+        <translation>Si us plau, seleccioneu una de les particions per a la instal·lació!</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation type="unfinished"/>
+        <translation>No es pot crear la partició nova. Si us plau, seleccioneu una de les particions existents!</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="81"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation type="unfinished"/>
+        <translation>Com a mínim hi ha d&apos;haver %1 GB per a la partició d&apos;arrel.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="92"/>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="211"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Instal·la&apos;l aquí</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/simple_partition_frame.cpp" line="388"/>
         <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
-        <translation type="unfinished"/>
+        <translation>El Windows no arrencarà si instal·leu el Deepin al disc de Windows. Si us plau, confirmeu-ho per continuar.</translation>
     </message>
 </context>
 <context>
@@ -733,13 +733,13 @@
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="76"/>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="92"/>
         <source>User Avatar</source>
-        <translation type="unfinished"/>
+        <translation>Avatar de l&apos;usuari</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="77"/>
         <location filename="../ui/frames/inner/system_info_avatar_frame.cpp" line="93"/>
         <source>Select an avatar for your account</source>
-        <translation type="unfinished"/>
+        <translation>Seleccioneu un avatar per al compte.</translation>
     </message>
 </context>
 <context>
@@ -748,99 +748,99 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="65"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="125"/>
         <source>Create User Account</source>
-        <translation type="unfinished"/>
+        <translation>Crea un compte d&apos;usuari</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="66"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="126"/>
         <source>Input username and password</source>
-        <translation type="unfinished"/>
+        <translation>Escriviu el nom d&apos;usuari i la contrasenya.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="67"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="135"/>
         <source>Username</source>
-        <translation type="unfinished"/>
+        <translation>Nom d&apos;usuari</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="68"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="140"/>
         <source>Computer name</source>
-        <translation type="unfinished"/>
+        <translation>Nom de l&apos;ordinador</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="69"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="145"/>
         <source>Password</source>
-        <translation type="unfinished"/>
+        <translation>Contrasenya</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="70"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="151"/>
         <source>Confirm password</source>
-        <translation type="unfinished"/>
+        <translation>Confirmeu la contrasenya</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="191"/>
         <source>This username already exists</source>
-        <translation type="unfinished"/>
+        <translation>Aquest nom d&apos;usuari ja existeix.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="195"/>
         <source>The first letter must be in lowercase</source>
-        <translation type="unfinished"/>
+        <translation>La primera lletra ha de ser en minúscula.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="206"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Si us plau, escriviu un nom d&apos;usuari de més de %1 caràcters i de menys de %2.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name</source>
-        <translation type="unfinished"/>
+        <translation>Si us plau, escriviu el nom de l&apos;ordinador.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="233"/>
         <source>Computer name already exists, please input another one</source>
-        <translation type="unfinished"/>
+        <translation>El nom de l&apos;ordinador ja existeix, si us plau, escriviu-ne un altre.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="238"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Si us plau, escriviu un nom d&apos;ordinador de més de %1 caràcters i de menys de %2.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="264"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="278"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Si us plau, escriviu una contrasenya de més de %1 caràcters i de menys de %2.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="272"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation type="unfinished"/>
+        <translation>La contrasenya ha de tenir lletres angleses en minúscula o majúscula, números o símbols especials (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;).</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="292"/>
         <source>The two passwords don&apos;t match</source>
-        <translation type="unfinished"/>
+        <translation>Les contrasenyes no coincideixen.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="71"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Següent</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="200"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
-        <translation type="unfinished"/>
+        <translation>El nom d&apos;usuari ha de tenir lletres angleses (en minúscula), números o símbols especials (_-).</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>Computer name is invalid</source>
-        <translation type="unfinished"/>
+        <translation>El nom d&apos;ordinador no és vàlid.</translation>
     </message>
 </context>
 <context>
@@ -849,19 +849,19 @@
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="90"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="109"/>
         <source>Select keyboard layout</source>
-        <translation type="unfinished"/>
+        <translation>Seleccioneu la disposició del teclat.</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="91"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="144"/>
         <source>Test area</source>
-        <translation type="unfinished"/>
+        <translation>Àrea de proves</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="92"/>
         <location filename="../ui/frames/inner/system_info_keyboard_frame.cpp" line="149"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Enrere</translation>
     </message>
 </context>
 <context>
@@ -870,19 +870,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="129"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="167"/>
         <source>Select Time Zone</source>
-        <translation type="unfinished"/>
+        <translation>Seleccioneu la zona horària.</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="130"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="168"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>Marqueu la zona horària al mapa.</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="131"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="170"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Següent</translation>
     </message>
 </context>
 <context>
@@ -891,19 +891,19 @@
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="40"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="58"/>
         <source>Friendly Reminder</source>
-        <translation type="unfinished"/>
+        <translation>Recordatori amistós</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="42"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="60"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation type="unfinished"/>
+        <translation>El sistema ha detectat que useu una màquina virtual, fet que afectarà el rendiment i l&apos;experiència del sistema a l&apos;hora de fer operacions. Per a una experiència millor, és recomanable instal·lar el Deepin en un entorn de màquina real.</translation>
     </message>
     <message>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="46"/>
         <location filename="../ui/frames/virtual_machine_frame.cpp" line="69"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Continua</translation>
     </message>
 </context>
 </TS>
