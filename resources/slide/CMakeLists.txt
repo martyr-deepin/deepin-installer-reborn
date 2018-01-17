@@ -56,6 +56,5 @@ elseif(${INSTALLER_BUILD_ARCH} MATCHES "aarch64")
       PATTERN "CMakeLists.txt" EXCLUDE
   )
 else()
-else()
   message(FATAL_ERROR "Not supportted architecture: ${INSTALLER_BUILD_ARCH}")
 endif ()

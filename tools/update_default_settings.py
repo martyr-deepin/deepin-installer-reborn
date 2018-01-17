@@ -48,7 +48,7 @@ def update_settings(settings_file, settings):
         parser.write(fh)
 
 def main():
-    arm_file = "resources/arm_settings.ini"
+    arm_file = "resources/arm_default_settings.ini"
     loongson_file = "resources/loongson_default_settings.ini"
     sw_file = "resources/sw_default_settings.ini"
 
