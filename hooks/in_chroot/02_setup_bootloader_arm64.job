@@ -1,0 +1,236 @@
+#!/bin/bash
+#
+# Copyright (C) 2017 ~ 2017 Deepin Technology Co., Ltd.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+# Install grub to disk. Only used in arm64 based platforms
+
+if ! is_arm64; then
+  return 0
+fi
+
+config_item() {
+  if [ -f /etc/default/grub ]; then
+    . /etc/default/grub || return
+  fi
+  eval echo "\$$1"
+}
+
+export DEBIAN_FRONTEND="noninteractive"
+
+DI_BOOTLOADER=$(installer_get "DI_BOOTLOADER")
+DI_CUR_RESOLUTION=$(installer_get "DI_CUR_RESOLUTION")
+DI_HOST_DEV=$(installer_get "DI_HOST_DEV")
+DI_LUPIN=$(installer_get "DI_LUPIN")
+DI_UEFI=$(installer_get "DI_UEFI")
+
+# if no DI_BOOTLOADER, treat as not installing bootloader
+[ -z ${DI_BOOTLOADER} ] && \
+  warn_exit "DI_BOOTLOADER not set. Treat as not install bootloader. Skip."
+
+if [ x${DI_UEFI} = xtrue ]; then
+  BOOT="uefi"
+else
+  #BOOT="legacy"
+  # Legacy mode is no supported on arm64
+  exit 1
+fi
+
+# Check SecureBoot option is enabled or not.
+if [ x${BOOT} = xuefi ]; then
+  SB=/sys/firmware/efi/vars/SecureBoot-8be4df61-93ca-11d2-aa0d-00e098032b8c/data
+  value=$(od -An -t u1 "${SB}" 2>/dev/null | sed s/[[:space:]]//g)
+  [ x${value} = x1 ] && echo "uefi-secure-boot detected"
+fi
+
+case ${BOOT} in
+  #"legacy")
+  #  if [ -e /etc/deepin-version ]; then
+  #    _version=$(grep '^Version=' /etc/deepin-version | cut -d '=' -f2)
+  #    _type=$(grep '^Type=' /etc/deepin-version | cut -d '=' -f2)
+  #    BOOTLOADER_ID="Deepin ${_type} ${_version}"
+  #  fi
+  #  ;;
+  "uefi")
+    BOOTLOADER_ID="$(config_item GRUB_DISTRIBUTOR | tr A-Z a-z | cut -d' ' -f1)"
+    ;;
+esac
+
+BOOTLOADER_ID="${BOOTLOADER_ID:-deepin}"
+
+case ${BOOT} in
+  #"legacy")
+  #  echo "INFO: Detected legacy machine, installing grub to ${DI_BOOTLOADER}"
+  #  apt-get -y -o Dpkg::Options::="--force-confdef" \
+  #    -o Dpkg::Options::="--force-confold" --no-install-recommends \
+  #    --allow-unauthenticated install grub-pc
+  #
+  #  if [ x${DI_LUPIN} = xtrue ]; then
+  #    echo "Fix grub install failed in lupin"
+  #    [ -d /boot/grub ] || mkdir /boot/grub
+  #    echo "(hd0) ${DI_BOOTLOADER}" > /boot/grub/device.map
+  #    mkdir /host
+  #    mount ${DI_HOST_DEV} /host
+  #    echo "Mount DI_HOST_DEV: " ${DI_HOST_DEV}
+  #  fi
+  #
+  #  grub-install --no-floppy ${DI_BOOTLOADER} --target=i386-pc --force|| \
+  #    error "grub-install failed! ${DI_BOOTLOADER}"
+  #  ;;
+
+  "uefi")
+    # try to get efi architecture
+    if [ x$(cat /sys/firmware/efi/fw_platform_size 2>/dev/null) = 'x32' ]; then
+      apt-get install --no-install-recommends -y --allow-unauthenticated \
+        grub-efi-arm
+      grub-install --target=arm-efi --efi-directory=/boot/efi \
+        --bootloader-id="${BOOTLOADER_ID}" --recheck || \
+        error "grub-install failed with efi! ${BOOTLOADER_ID}"
+
+      # Copy signed grub efi file.
+      [ -d /boot/efi/EFI/ubuntu ] || mkdir -p /boot/efi/EFI/ubuntu
+      cp -vf /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/ubuntu/
+      [ -d /boot/efi/EFI/boot ] || mkdir -p /boot/efi/EFI/boot
+      cp -vf /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/boot/
+      # Backup fallback efi first.
+      fallback_efi=/boot/efi/EFI/boot/bootaa64.efi
+      fallback_efi_bak="${fallback_efi}-$(date +%s).bak"
+      [ -f "${fallback_efi}" ] && cp "${fallback_efi}" "${fallback_efi_bak}"
+      # Override fallback efi with shim.
+      cp -vf /boot/efi/EFI/${BOOTLOADER_ID}/shim*.efi "${fallback_efi}"
+    else
+      # Clover efi loader cannot use grub.efi correctly,
+      # so we may patch grub or use grub.efi.signed.
+      #apt-get install --no-install-recommends -y --allow-unauthenticated \
+      #  shim-signed grub-efi-amd64-signed efibootmgr
+      apt-get install --no-install-recommends -y --allow-unauthenticated \
+	 efibootmgr grub-efi-arm64 grub-efi-arm64-bin
+
+      # uefi-secure-boot options is enabled by default
+      grub-install --target=arm64-efi --uefi-secure-boot \
+        --efi-directory=/boot/efi --bootloader-id="${BOOTLOADER_ID}" \
+        --recheck || error "grub-install failed with efi64 ${BOOTLOADER_ID}"
+
+      # Copy signed grub efi file.
+      [ -d /boot/efi/EFI/ubuntu ] || mkdir -p /boot/efi/EFI/ubuntu
+      cp -vf /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/ubuntu/
+      [ -d /boot/efi/EFI/boot ] || mkdir -p /boot/efi/EFI/boot
+      cp -vf /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/boot/
+
+      # Backup fallback efi first.
+      fallback_efi=/boot/efi/EFI/boot/bootaa64.efi
+      fallback_efi_bak="${fallback_efi}-$(date +%s).bak"
+      [ -f "${fallback_efi}" ] && cp "${fallback_efi}" "${fallback_efi_bak}"
+      # Override fallback efi with shim.
+      cp -vf /boot/efi/EFI/${BOOTLOADER_ID}/shim*.efi "${fallback_efi}"
+    fi
+
+    ;;
+esac
+
+# Try to avoid kernel update error when create symbol link
+case ${BOOT} in
+  "uefi")
+    echo "# avoid kernel update fails with /boot on FAT32
+do_symlinks = no" | tee /etc/kernel-img.conf
+    ;;
+esac
+
+fix_boot_order(){
+  command -v efibootmgr >/dev/null 2>&1 || \
+    warn "Require efibootmgr installed but not found. Skip"
+  return
+
+  local bootinfo=$(efibootmgr)
+  echo "bootinfo: ${bootinfo}"
+  IFS=$'\n'
+  for line in $bootinfo;do
+    case $line in
+      Boot[0-9A-F][0-9A-F][0-9A-F][0-9A-F]\*\ "${BOOTLOADER_ID}")
+        line="${line%%\**}"
+        default_bootid="${line##Boot}"
+      ;;
+    esac
+  done
+
+  [ -z ${default_bootid} ] && warn_exit "No ${BOOTLOADER_ID} found, exit..."
+
+  declare -a orderids
+  for line in $bootinfo;do
+    case $line in
+      Boot[0-9A-F][0-9A-F][0-9A-F][0-9A-F]\*\ "${BOOTLOADER_ID}")
+        ;;
+
+      Boot[0-9A-F][0-9A-F][0-9A-F][0-9A-F]\*\ ?*)
+        line="${line%%\**}"
+        orderids[${#orderids[@]}]="${line##Boot}"
+        ;;
+    esac
+  done
+
+  local cmdargs=${default_bootid}
+  for arg in ${orderids[@]}; do
+    cmdargs=${cmdargs}","${arg}
+  done
+  efibootmgr -o ${cmdargs}
+}
+
+case ${BOOT} in
+  uefi*)
+    echo "Try to fix efi boot order to deepin first"
+    fix_boot_order
+    ;;
+  legacy)
+    ;;
+  *)
+    ;;
+esac
+
+# Generate theme background.
+readonly GRUB_SRC_BG=/boot/grub/themes/deepin/background_source
+readonly GRUB_DST_BG=/boot/grub/themes/deepin/background.png
+if [ -f "${GRUB_SRC_BG}" ]; then
+  if which image-worsener >/dev/null; then
+    image-worsener -w ${DI_CUR_RESOLUTION%x*} -h ${DI_CUR_RESOLUTION##*x} \
+      ${GRUB_SRC_BG} ${GRUB_DST_BG}
+  elif which convert >/dev/null; then
+    convert "${GRUB_SRC_BG}" -scale ${DI_CUR_RESOLUTION} "${GRUB_DST_BG}"
+  else
+      warn "Please install imagemaic or image-worsener to blur image"
+  fi
+else
+  warn "${GRUB_SRC_BG} not found"
+fi
+
+cat >> /etc/default/grub << EOF
+# Generated by deepin-installer
+GRUB_BACKGROUND="/boot/grub/themes/deepin/background.png"
+GRUB_CMDLINE_LINUX_DEFAULT="splash quiet"
+GRUB_DEFAULT=0
+GRUB_DISTRIBUTOR="`/usr/bin/lsb_release -d -s 2>/dev/null || echo Deepin`"
+GRUB_THEME="/boot/grub/themes/deepin/theme.txt"
+GRUB_TIMEOUT=5
+GRUB_GFXMODE=${DI_CUR_RESOLUTION}
+EOF
+
+# Remove partman/ignore_uefi if that file is created by installer.
+# See partman/os_prober.cpp for more info.
+#IGNORE_UEFI=/var/lib/partman/ignore_uefi
+#if [ -f $IGNORE_UEFI ] && [ x$(cat $IGNORE_UEFI) = 'xdeepin-installer' ]; then
+#  rm -f $IGNORE_UEFI
+#fi
+
+/usr/sbin/update-grub

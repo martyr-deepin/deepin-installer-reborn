@@ -115,3 +115,15 @@ is_x86() {
       ;;
   esac
 }
+
+# Check whether current platform is arm64 or not.
+is_arm64() {
+  case $(uname -m) in
+    arm64 | aarch64)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
