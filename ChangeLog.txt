@@ -1,3 +1,6 @@
+2018-01-25 2.2.14 xushaohua<xushaohua@deepin.com>
+	* Support arm64
+
 2017-11-29 2.2.13 xushaohua<xushaohua@deepin.com>
 	* Update grub based on current locale
 

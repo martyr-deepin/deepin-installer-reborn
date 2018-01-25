@@ -1,3 +1,9 @@
+deepin-installer-reborn (2.2.14-1) stable; urgency=medium
+
+  * Support arm64
+
+ -- Liu Lang <liulang@liulang-PC>  Thu, 25 Jan 2018 14:32:32 +0800
+
 deepin-installer-reborn (2.2.13-1) stable; urgency=medium
 
   * Update grub based on current locale
