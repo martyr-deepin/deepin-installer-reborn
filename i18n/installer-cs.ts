@@ -70,7 +70,7 @@
     <message>
         <location filename="../ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
         <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation type="unfinished"/>
+        <translation>Potřebuje více než %1GB místa na disku pro instalaci deepin, pro lepší výkon se doporučuje %2GB nebo více</translation>
     </message>
 </context>
 <context>
@@ -327,7 +327,7 @@
         <location filename="../ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation type="unfinished"/>
+        <translation>Před restartováním odstraňte instalační médium</translation>
     </message>
     <message>
         <location filename="../ui/frames/install_success_frame.cpp" line="46"/>
@@ -835,7 +835,7 @@
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="200"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
-        <translation type="unfinished"/>
+        <translation>Uživatelské jméno musí obsahovat anglické písmena (malá písmena), čísla nebo speciální symboly (_-) </translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="229"/>
@@ -870,19 +870,19 @@
         <location filename="../ui/frames/timezone_frame.cpp" line="129"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="167"/>
         <source>Select Time Zone</source>
-        <translation type="unfinished"/>
+        <translation>Vyberte Časové pásmo</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="130"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="168"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>Označte svou zónu na mapě</translation>
     </message>
     <message>
         <location filename="../ui/frames/timezone_frame.cpp" line="131"/>
         <location filename="../ui/frames/timezone_frame.cpp" line="170"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Další</translation>
     </message>
 </context>
 <context>
