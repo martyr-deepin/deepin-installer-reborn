@@ -92,7 +92,7 @@ msgstr ""
 
 #: system-config-date-timezones.h:19
 msgid "Africa/Djibouti"
-msgstr ""
+msgstr "África/Xibuti"
 
 #: system-config-date-timezones.h:20
 msgid "Africa/Douala"
