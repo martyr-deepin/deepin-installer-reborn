@@ -1,31 +1,37 @@
-2018-01-25 2.2.14 xushaohua<xushaohua@deepin.com>
+2018-03-15 2.2.15 Xu Shaohua <xushaohua@deepin.com>
+    * Add arm64 source file list
+    * Add settings for professional edition
+    * Fix shell script syntax error
+    * Update i18n
+
+2018-01-25 2.2.14 Xu Shaohua <xushaohua@deepin.com>
 	* Support arm64
 
-2017-11-29 2.2.13 xushaohua<xushaohua@deepin.com>
+2017-11-29 2.2.13 Xu Shaohua <xushaohua@deepin.com>
 	* Update grub based on current locale
 
-2017-11-29 2.2.12 xushaohua<xushaohua@deepin.com>
+2017-11-29 2.2.12 Xu Shaohua <xushaohua@deepin.com>
 	* Uninstall live-filesystem in lupin mode
 
-2017-11-28 2.2.11 xushaohua<xushaohua@deepin.com>
+2017-11-28 2.2.11 Xu Shaohua <xushaohua@deepin.com>
 	* Remove live-filesystem package for lupin
 
-2017-11-22 2.2.10 xushaohua<xushaohua@deepin.com>
+2017-11-22 2.2.10 Xu Shaohua <xushaohua@deepin.com>
 	* Generate font cache for wine QQ
 
-2017-11-22 2.2.9 xushaohua<xushaohua@deepin.com>
+2017-11-22 2.2.9 Xu Shaohua <xushaohua@deepin.com>
 	* Remove target character file before calling mknod()
 
-2017-11-20 2.2.8 xushaohua<xushaohua@deepin.com>
+2017-11-20 2.2.8 Xu Shaohua <xushaohua@deepin.com>
 	* 更新翻译
 	* 修改自动分区时, boot 分区最小容量为 500M
 	* 分区时, 只要在必要时再遍历home目录修改属性
 
-2017-11-07 2.2.7 xushaohua<xushaohua@deepin.com>
+2017-11-07 2.2.7 Xu Shaohua <xushaohua@deepin.com>
 	* installer-setting 支持保存 StringList
 	* 过滤 dde_launcher_hold_packages
 
-2017-11-07 2.2.6 xushaohua<xushaohua@deepin.com>
+2017-11-07 2.2.6 Xu Shaohua <xushaohua@deepin.com>
 	* 更新翻译
 	* 支持批量激活
 	* 修正软件包依赖关系
