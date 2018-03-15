@@ -51,6 +51,7 @@ def main():
     arm_file = "resources/arm_default_settings.ini"
     loongson_file = "resources/loongson_default_settings.ini"
     sw_file = "resources/sw_default_settings.ini"
+    professional_file = "resources/professional_default_settings.ini"
 
     arm_settings = (
             ("skip_virtual_machine_page", "true"),
@@ -96,9 +97,14 @@ def main():
         ("partition_prefer_logical_partition", "false"),
     )
 
+    professinal_settings = (
+        ("timezone_use_local_time_regardless", "true"),
+    )
+
     update_settings(arm_file, arm_settings)
     update_settings(loongson_file, loongson_settings)
     update_settings(sw_file, sw_settings)
+    update_settings(professional_file, professinal_settings)
 
 if __name__ == "__main__":
     main()
