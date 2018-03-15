@@ -80,7 +80,9 @@ EOF
   # Set using local time or not
   local DI_IS_LOCAL_TIME
   DI_IS_LOCAL_TIME=$(installer_get "DI_IS_LOCAL_TIME")
-  if [ x"${DI_IS_LOCAL_TIME}" = xtrue ]; then
+  local timezone_use_local_time_regardless
+  timezone_use_local_time_regardless=$(installer_get "timezone_use_local_time_regardless")
+  if [ x"timezone_use_local_time_regardless" = xtrue -o x"${DI_IS_LOCAL_TIME}" = xtrue ]; then
     # Use RTC time, "timedatectl set-local-rtc 1"
     enable_local_rtc
   fi

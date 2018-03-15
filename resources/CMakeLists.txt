@@ -36,9 +36,19 @@ execute_process(COMMAND uname -m
 message(${INSTALLER_BUILD_ARCH})
 
 if (${INSTALLER_BUILD_ARCH} MATCHES "x86")
-  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/default_settings.ini
-          DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
-          )
+  file(STRINGS "/etc/deepin-version" IS_PROFESSIONAL REGEX "Type *= *Professional")
+  if (IS_PROFESSIONAL)
+    # Install professional settings.
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/professional_default_settings.ini
+            DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
+            RENAME default_settings.ini
+            )
+  else()
+    # Install default settings.
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/default_settings.ini
+            DESTINATION ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
+            )
+  endif()
 elseif(${INSTALLER_BUILD_ARCH} MATCHES "sw")
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/sw_default_settings.ini
           DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources
