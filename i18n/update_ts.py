@@ -43,20 +43,20 @@ def generate_ts(ts_path, is_installer):
     """
     if is_installer:
         paths = (
-            "partman",
-            "ui/delegates",
-            "ui/first_boot_setup_window.cpp",
-            "ui/first_boot_setup_window.h",
-            "ui/frames",
-            "ui/main_window.cpp",
-            "ui/main_window.h",
-            "ui/models",
-            "ui/views",
-            "ui/widgets",
+            "src/partman",
+            "src/ui/delegates",
+            "src/ui/first_boot_setup_window.cpp",
+            "src/ui/first_boot_setup_window.h",
+            "src/ui/frames",
+            "src/ui/main_window.cpp",
+            "src/ui/main_window.h",
+            "src/ui/models",
+            "src/ui/views",
+            "src/ui/widgets",
         )
     else:
         # Only include oem folder.
-        paths = ["oem"]
+        paths = ["src/oem"]
 
     # Add -I. option to solve namespace error
     cmd = " ".join((
