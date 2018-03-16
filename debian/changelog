@@ -1,3 +1,9 @@
+deepin-installer-reborn (2.2.15.1) stable; urgency=medium
+
+  * Set password for live environment
+
+ -- Xu Shaohua <xushaohua@deepin.com>  Fri, 16 Mar 2018 15:24:59 +0800
+
 deepin-installer-reborn (2.2.15) stable; urgency=medium
 
   * Add arm64 source file list

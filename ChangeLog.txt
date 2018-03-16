@@ -1,3 +1,6 @@
+2018-03-16 2.2.15.1 Xu Shaohua <xushaohua@deepin.com>
+    * Set password for live environment
+
 2018-03-15 2.2.15 Xu Shaohua <xushaohua@deepin.com>
     * Add arm64 source file list
     * Add settings for professional edition
