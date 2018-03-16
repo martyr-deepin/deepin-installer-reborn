@@ -1,0 +1,40 @@
+#! /bin/bash
+#
+# Copyright (C) 2017 ~ 2018 Deepin Technology Co., Ltd.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+configure_livefs(){
+	DI_PASSWORD=$(installer_get "DI_PASSWORD")
+	[ -z "${DI_PASSWORD}" ] && error "Variable DI_PASSWORD not set. Abort!"
+	REAL_PASSWORD=$(echo "${DI_PASSWORD}" | base64 -d)
+	echo live-filesystem live/root_password password ${REAL_PASSWORD} | debconf-set-selections
+	echo live-filesystem live/root_password_again password ${REAL_PASSWORD} | debconf-set-selections
+	[ -f /recovery/cryptauth ] && rm -f /recovery/cryptauth
+	dpkg-reconfigure live-filesystem || true
+}
+
+if [ -f /var/lib/dpkg/info/live-filesystem.list ];then
+	msg "configure password for recovery"
+	configure_livefs
+
+	if [ -f /proc/modules ];then
+		msg "save modules list for recovery"
+		install -Dm644 /proc/modules /recovery/modules
+	fi
+
+fi
+
+return 0
