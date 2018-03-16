@@ -500,6 +500,73 @@ target_link_libraries(deepin-installer-first-boot
                       global_shortcut
                       )
 
+add_executable(deepin-installer-user-form
+               app/deepin_installer_user_form.cpp
+               ${BASE_FILES}
+
+               service/settings_manager.cpp
+               service/settings_manager.h
+               service/settings_name.h
+
+               sysinfo/keyboard.cpp
+               sysinfo/keyboard.h
+               sysinfo/users.cpp
+               sysinfo/users.h
+               sysinfo/validate_hostname.cpp
+               sysinfo/validate_hostname.h
+               sysinfo/validate_password.cpp
+               sysinfo/validate_password.h
+               sysinfo/validate_username.cpp
+               sysinfo/validate_username.h
+
+               ui/user_form_window.cpp
+               ui/user_form_window.h
+               ui/delegates/avatar_list_delegate.cpp
+               ui/delegates/avatar_list_delegate.h
+               ui/delegates/frameless_list_delegate.cpp
+               ui/delegates/frameless_list_delegate.h
+               ui/frames/system_info_frame.cpp
+               ui/frames/system_info_frame.h
+               ui/frames/inner/system_info_avatar_frame.cpp
+               ui/frames/inner/system_info_avatar_frame.h
+               ui/frames/inner/system_info_form_frame.cpp
+               ui/frames/inner/system_info_form_frame.h
+               ui/frames/inner/system_info_keyboard_frame.cpp
+               ui/frames/inner/system_info_keyboard_frame.h
+               ui/models/keyboard_layout_model.cpp
+               ui/models/keyboard_layout_model.h
+               ui/models/keyboard_layout_variant_model.cpp
+               ui/models/keyboard_layout_variant_model.h
+               ui/views/frameless_list_view.cpp
+               ui/views/frameless_list_view.h
+               ui/views/pointer_list_view.cpp
+               ui/views/pointer_list_view.h
+               ui/widgets/avatar_button.cpp
+               ui/widgets/avatar_button.h
+               ui/widgets/comment_label.cpp
+               ui/widgets/comment_label.h
+               ui/widgets/flat_button.cpp
+               ui/widgets/flat_button.h
+               ui/widgets/line_edit.cpp
+               ui/widgets/line_edit.h
+               ui/widgets/nav_button.cpp
+               ui/widgets/nav_button.h
+               ui/widgets/pointer_button.cpp
+               ui/widgets/pointer_button.h
+               ui/widgets/system_info_tip.cpp
+               ui/widgets/system_info_tip.h
+               ui/widgets/title_label.cpp
+               ui/widgets/title_label.h
+               ui/utils/widget_util.cpp
+               ui/utils/widget_util.h
+               ui/utils/xutil.cpp
+               ui/utils/xutil.h
+
+               ui/images/images.qrc
+               ui/styles/styles.qrc
+               )
+target_link_libraries(deepin-installer-user-form ${LINK_LIBS})
+
 # deepin-installer-oem
 add_executable(deepin-installer-oem
                app/deepin_installer_oem.cpp
@@ -539,7 +606,6 @@ target_link_libraries(deepin-installer-xrandr-switchy
                       ${X11TST_LIBRARIES}
                       ${X11RandR_LIBRARIES}
                       )
-
 
 # Unsquashfs progress
 #add_executable(deepin-installer-unsquashfs-progress
@@ -769,6 +835,7 @@ install(PROGRAMS
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-simpleini
         ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
+        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-user-form
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
 
 install(
