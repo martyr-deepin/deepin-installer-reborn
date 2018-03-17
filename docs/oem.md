@@ -1,6 +1,4 @@
 # 安装器自定义
-
-## 关于
 这篇文档记录了安装器重制版支持的自定义功能.
 
 在不修改源码的情况下, 所有的自定义文件, 都应该放在 oem 目录. 分发时， oem 目录应该
@@ -8,12 +6,12 @@
 为了方便, 可以将 oem 目录放在 /tmp 目录里. 它们的优先级从高到低依次是, /tmp/oem,
 /cdrom/oem, /lib/live/mount/medium/oem
 
-## 自定义功能
+# 自定义功能
 安装器默认的配置信息集成到了程序里面, 在 `resources/default_settings.ini`,
 自定义的话, 需要创建 `oem/settings.ini` 文件, 然后对选项重新赋值即可.
 所有可用的配置选项都在 `default_settings.ini` 里面有说明.
 
-### 各类图片
+## 各类图片
 * 安装器背景. 放到 `oem/installer-background.jpg`. 如果需要模糊效果的话,
  可以用 `convert input.jpg -blur 0x32 installer-background.jpg`
  命令来生成模糊图片. 如果 ISO中 集成的系统默认壁纸发生了变化, 也需要在这里更新
@@ -30,24 +28,30 @@
 * deepin 控制中心和桌面登录界面中用到的logo, 可以放到 oem/vendor.png
 * 光盘启动动画. 待补充.
 
-### 任务栏默认图标和顺序
+## 安装过程中的幻灯片展示
+* "install_progress_page_disable_slide", 启用/禁用幻灯片切换.
+* "install_progress_page_disable_slide_animation", 启用/禁用幻灯片切换时的过渡动画.
+* "install_progress_page_animation_duration", 定义幻灯片切换时间间隔, 默认是 8000 毫秒.
+
+如果需要定制幻灯片动画, 只需要把 slide 目录, 放置到 ISO_ROOT/oem/ 目录里面就可以了. 其中,
+slide 目录的结果应该与 resources/slide 目录相同.
+比如, 简体中文界面, 幻灯片的查找顺序依次是:
+* ISO_ROOT/oem/slide/zh_CN
+* /usr/share/deepin-installer/resources/slide/zh_CN
+* ISO_ROOT/oem/slide/default
+* /usr/share/deepin-installer/resources/slide/default
+
+## 任务栏默认图标和顺序
 在配置文件里面修改 `launcher_apps_in_launcher` 即可.
 
-### 自动分区
+## 自动分区
 需要把 `skip_partition_page` 设置为`1`, 然后把 `partition_do_auto_part`
 设置为 `1`. 安装器自带的自动分区的脚本位于 `hooks/auto_part.sh`, 也可以自定义
 自动分区脚本, 把需要分区的操作写到 `oem/auto_part.sh` 这个脚本文件里.
 分区操作使用 `parted` 命令, 同时, 记得把分区结果写入到 `/etc/deepin-installer.conf`
 这个配置文件里.
 
-
-### 安装进程的动画
-* `install_progress_page_disable_slide`, 是否禁用幻灯片.
-* `install_progress_page_disable_slide_animation`, 是否禁用幻灯片的切换动画.
-* `install_progress_page_animation_duration`, 设定每张幻灯片显示的时间,
- 默认是 8 秒.
-
-### hooks
+## hooks
 根据安装阶段的不同, 分为 `before_chroot`, `in_chroot` 以及 `after_chroot`.
 在 `oem/hooks/` 目录里, 创建相应的目录, 并写需要的hook脚本即可.
 
@@ -58,17 +62,17 @@
 
 在 `oem/hooks/` 目录里的脚本可以覆盖安装器自带的同名的脚本.
 
-### deb包
+## deb包
 * 需要额外安装的deb包, 都应该放到 `oem/deb/` 目录里, 并且, 它们的依赖关系应该能被
  自动满足, 否则可能无法正常安装.
 * 卸载deb包, 可以在 `package_uninstall_packages` 里面设置.
 
-### Grub
+## Grub
 * 设置 `grub_timeout` 可以设定grub菜单的超时.
 * `grub_block_windows_item` 可以用来屏蔽 windows 启动项.
 
 
-### 系统基本信息
+## 系统基本信息
 * `system_info_deepin_version` 这一项保存了 `/etc/deepin-version` 的内容,
  系统更新时, 应该先读取这个项的值, 再写入到 `/etc/deepin-version` 中. 它的值
  是经过 base64 编码的. * `system_info_lsb_release` 这一项保存了
@@ -92,17 +96,16 @@
  也可以创建 `oem/reserved_usernames` 来自定义要保留的用户名. 被保留的用户名, 
  指的是系统中已经存在或者极可能会被某些包创建的用户名.
  
-### 桌面环境相关的
+## 桌面环境相关的
 * `dde_dock_app_list` 在dock中显示哪些应用图标.
 * `dde_launcher_app_list` 在launcher中显示的哪些应用图标.
 * `dde_launcher_hold_packages` 在launcher中禁止卸载这些应用.
 * `dde_desktop_app_list` 在桌面显示哪些图标或应用.
 * `dde_sound_effect_switches` 用来控制桌面音效开关.
 
-
-### Lightdm
+## Lightdm
 * `lightdm_enable_auto_login` 允许用户自动登录
 
-### 服务器版自动激活
+## 服务器版自动激活
 可以把生成的 license.key 放到 oem/ 目录里, 在安装时就会使用这个 key 文件激活
 服务器版的系统.
