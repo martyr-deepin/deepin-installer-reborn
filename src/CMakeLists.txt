@@ -443,9 +443,9 @@ set(LINK_LIBS
 # Main executable
 # Generate .qm files from .ts files.
 file(GLOB INSTALLER_TRANSLATION_TS
-     ${CMAKE_CURRENT_SOURCE_DIR}/i18n/installer-*.ts)
+     ${CMAKE_SOURCE_DIR}/i18n/installer-*.ts)
 set_source_files_properties(${INSTALLER_TRANSLATION_TS}
-                            PROPERTIES OUTPUT_LOCATION ${CMAKE_CURRENT_BINARY_DIR}/i18n)
+                            PROPERTIES OUTPUT_LOCATION ${CMAKE_BINARY_DIR}/i18n)
 qt5_add_translation(INSTALLER_TRANSLATION_QM ${INSTALLER_TRANSLATION_TS})
 add_custom_target(installer-qm-update DEPENDS ${INSTALLER_TRANSLATION_QM})
 
@@ -829,14 +829,19 @@ install(PROGRAMS
         ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-auto-install
         ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-first-boot-pkexec
         ${CMAKE_CURRENT_SOURCE_DIR}/app/deepin-installer-pkexec
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-first-boot
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-oem
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-settings
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-simpleini
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-unsquashfs
-        ${CMAKE_CURRENT_BINARY_DIR}/deepin-installer-user-form
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
+        )
+
+install(TARGETS
+        deepin-installer
+        deepin-installer-first-boot
+        deepin-installer-oem
+        deepin-installer-settings
+        deepin-installer-simpleini
+        deepin-installer-unsquashfs
+        deepin-installer-user-form
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
+        )
 
 install(
     DIRECTORY ${CMAKE_BINARY_DIR}/i18n

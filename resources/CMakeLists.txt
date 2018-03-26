@@ -33,7 +33,7 @@ install(
 set(INSTALLER_BUILD_ARCH "")
 execute_process(COMMAND uname -m
                 OUTPUT_VARIABLE INSTALLER_BUILD_ARCH)
-message(${INSTALLER_BUILD_ARCH})
+message("build arch: ${INSTALLER_BUILD_ARCH}")
 
 if (${INSTALLER_BUILD_ARCH} MATCHES "x86")
   file(STRINGS "/etc/deepin-version" IS_PROFESSIONAL REGEX "Type *= *Professional")
