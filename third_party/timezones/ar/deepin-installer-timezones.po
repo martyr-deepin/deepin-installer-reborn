@@ -1,0 +1,1715 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-21 10:31+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: MUHAAB SHAAM <muhaab.org@gmail.com>, 2017\n"
+"Language-Team: Arabic (https://www.transifex.com/linuxdeepin/teams/3976/ar/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: system-config-date-timezones.h:1
+msgid "Africa/Abidjan"
+msgstr "أفريقيا/ابيجان"
+
+#: system-config-date-timezones.h:2
+msgid "Africa/Accra"
+msgstr "أفريقيا/أكرا"
+
+#: system-config-date-timezones.h:3
+msgid "Africa/Addis_Ababa"
+msgstr "أفريقيا/أديس أبابا"
+
+#: system-config-date-timezones.h:4
+msgid "Africa/Algiers"
+msgstr "أفريقيا/الجزائر"
+
+#: system-config-date-timezones.h:5
+msgid "Africa/Asmara"
+msgstr "أفريقيا/اسمرة"
+
+#: system-config-date-timezones.h:6
+msgid "Africa/Bamako"
+msgstr "أفريقيا/باماكو"
+
+#: system-config-date-timezones.h:7
+msgid "Africa/Bangui"
+msgstr "أفريقيا/بانغي"
+
+#: system-config-date-timezones.h:8
+msgid "Africa/Banjul"
+msgstr "أفريقيا/بانجول"
+
+#: system-config-date-timezones.h:9
+msgid "Africa/Bissau"
+msgstr "أفريقيا/بيساو"
+
+#: system-config-date-timezones.h:10
+msgid "Africa/Blantyre"
+msgstr "أفريقيا/بلانتاير"
+
+#: system-config-date-timezones.h:11
+msgid "Africa/Brazzaville"
+msgstr "أفريقيا/برازافيل"
+
+#: system-config-date-timezones.h:12
+msgid "Africa/Bujumbura"
+msgstr "أفريقيا/بوجومبورا"
+
+#: system-config-date-timezones.h:13
+msgid "Africa/Cairo"
+msgstr "أفريقيا/القاهرة"
+
+#: system-config-date-timezones.h:14
+msgid "Africa/Casablanca"
+msgstr "أفريقيا/الدار البيضاء"
+
+#: system-config-date-timezones.h:15
+msgid "Africa/Ceuta"
+msgstr "أفريقيا/سبتة"
+
+#: system-config-date-timezones.h:16
+msgid "Africa/Conakry"
+msgstr "أفريقيا/كوناكري"
+
+#: system-config-date-timezones.h:17
+msgid "Africa/Dakar"
+msgstr "أفريقيا/دكار"
+
+#: system-config-date-timezones.h:18
+msgid "Africa/Dar_es_Salaam"
+msgstr "أفريقيا/دار السلام"
+
+#: system-config-date-timezones.h:19
+msgid "Africa/Djibouti"
+msgstr "أفريقيا/جيبوتي"
+
+#: system-config-date-timezones.h:20
+msgid "Africa/Douala"
+msgstr "إفريقيا / دوالا"
+
+#: system-config-date-timezones.h:21
+msgid "Africa/El_Aaiun"
+msgstr "أفريقيا/العيون"
+
+#: system-config-date-timezones.h:22
+msgid "Africa/Freetown"
+msgstr "أفريقيا/فريتاون"
+
+#: system-config-date-timezones.h:23
+msgid "Africa/Gaborone"
+msgstr "إفريقيا / غابورون"
+
+#: system-config-date-timezones.h:24
+msgid "Africa/Harare"
+msgstr "أفريقيا/هراري"
+
+#: system-config-date-timezones.h:25
+msgid "Africa/Johannesburg"
+msgstr "أفريقيا/جوهانزبورغ"
+
+#: system-config-date-timezones.h:26
+msgid "Africa/Juba"
+msgstr "أفريقيا/جوبا"
+
+#: system-config-date-timezones.h:27
+msgid "Africa/Kampala"
+msgstr "أفريقيا/كامبالا"
+
+#: system-config-date-timezones.h:28
+msgid "Africa/Khartoum"
+msgstr "أفريقيا/الخرطوم"
+
+#: system-config-date-timezones.h:29
+msgid "Africa/Kigali"
+msgstr "أفريقيا / كيغالي"
+
+#: system-config-date-timezones.h:30
+msgid "Africa/Kinshasa"
+msgstr "أفريقيا/كينشاسا"
+
+#: system-config-date-timezones.h:31
+msgid "Africa/Lagos"
+msgstr "أفريقيا/لاغوس"
+
+#: system-config-date-timezones.h:32
+msgid "Africa/Libreville"
+msgstr "أفريقيا/ليبرافيل"
+
+#: system-config-date-timezones.h:33
+msgid "Africa/Lome"
+msgstr "إفريقيا / لومي"
+
+#: system-config-date-timezones.h:34
+msgid "Africa/Luanda"
+msgstr "أفريقيا/لواندا"
+
+#: system-config-date-timezones.h:35
+msgid "Africa/Lubumbashi"
+msgstr "إفريقيا / لوبومباشي"
+
+#: system-config-date-timezones.h:36
+msgid "Africa/Lusaka"
+msgstr "أفريقيا/لوساكا"
+
+#: system-config-date-timezones.h:37
+msgid "Africa/Malabo"
+msgstr "أفريقيا/ملابو"
+
+#: system-config-date-timezones.h:38
+msgid "Africa/Maputo"
+msgstr "إفريقيا / مابوتو"
+
+#: system-config-date-timezones.h:39
+msgid "Africa/Maseru"
+msgstr "إفريقيا / ماسيرو"
+
+#: system-config-date-timezones.h:40
+msgid "Africa/Mbabane"
+msgstr "إفريقيا / مباباني"
+
+#: system-config-date-timezones.h:41
+msgid "Africa/Mogadishu"
+msgstr "أفريقيا/مقديشو"
+
+#: system-config-date-timezones.h:42
+msgid "Africa/Monrovia"
+msgstr "إفريقيا / مونروفيا"
+
+#: system-config-date-timezones.h:43
+msgid "Africa/Nairobi"
+msgstr "أفريقيا/نيروبي"
+
+#: system-config-date-timezones.h:44
+msgid "Africa/Ndjamena"
+msgstr "إفريقيا / نجامينا"
+
+#: system-config-date-timezones.h:45
+msgid "Africa/Niamey"
+msgstr "إفريقيا / نيامي"
+
+#: system-config-date-timezones.h:46
+msgid "Africa/Nouakchott"
+msgstr "أفريقيا/نواكشوط"
+
+#: system-config-date-timezones.h:47
+msgid "Africa/Ouagadougou"
+msgstr "أفريقيا/واغادوغو"
+
+#: system-config-date-timezones.h:48
+msgid "Africa/Porto-Novo"
+msgstr "أفريقيا/بورتو-نوفو"
+
+#: system-config-date-timezones.h:49
+msgid "Africa/Sao_Tome"
+msgstr "إفريقيا / ساو تومي"
+
+#: system-config-date-timezones.h:50
+msgid "Africa/Tripoli"
+msgstr "أفريقيا/طرابلس"
+
+#: system-config-date-timezones.h:51
+msgid "Africa/Tunis"
+msgstr "أفريقيا/تونس"
+
+#: system-config-date-timezones.h:52
+msgid "Africa/Windhoek"
+msgstr "إفريقيا / ويندهوك"
+
+#: system-config-date-timezones.h:53
+msgid "America/Adak"
+msgstr "أمريكا/أداك"
+
+#: system-config-date-timezones.h:54
+msgid "America/Anchorage"
+msgstr "أمريكا/مرسى"
+
+#: system-config-date-timezones.h:55
+msgid "America/Anguilla"
+msgstr "أمريكا/أنغيلا"
+
+#: system-config-date-timezones.h:56
+msgid "America/Antigua"
+msgstr "أمريكا/أنتيغوا"
+
+#: system-config-date-timezones.h:57
+msgid "America/Araguaina"
+msgstr "أمريكا/أراغوينا"
+
+#: system-config-date-timezones.h:58
+msgid "America/Argentina/Buenos_Aires"
+msgstr "أمريكا/الأرجنتين/بيونس آيرس"
+
+#: system-config-date-timezones.h:59
+msgid "America/Argentina/Catamarca"
+msgstr "أمريكا/الأرجنتين/كاتاماركا"
+
+#: system-config-date-timezones.h:60
+msgid "America/Argentina/Cordoba"
+msgstr "أمريكا/الأرجنتين/كوردوبا"
+
+#: system-config-date-timezones.h:61
+msgid "America/Argentina/Jujuy"
+msgstr "أمريكا/الأرجنتين/كوردوبا"
+
+#: system-config-date-timezones.h:62
+msgid "America/Argentina/La_Rioja"
+msgstr "أمريكا/الأرجنتين/لاريورجا"
+
+#: system-config-date-timezones.h:63
+msgid "America/Argentina/Mendoza"
+msgstr "أمريكا/الأرجنتين/مندوزا"
+
+#: system-config-date-timezones.h:64
+msgid "America/Argentina/Rio_Gallegos"
+msgstr "أمريكا/الأرجنتين/ريوغلاغوس"
+
+#: system-config-date-timezones.h:65
+msgid "America/Argentina/Salta"
+msgstr "أمريكا/الأرجنتين/سالتا"
+
+#: system-config-date-timezones.h:66
+msgid "America/Argentina/San_Juan"
+msgstr "أمريكا/الأرجنتين/سان جون"
+
+#: system-config-date-timezones.h:67
+msgid "America/Argentina/San_Luis"
+msgstr "أمريكا/الأرجنتين/سان ليوس"
+
+#: system-config-date-timezones.h:68
+msgid "America/Argentina/Tucuman"
+msgstr "أمريكا/الأرجنتين/توكومان"
+
+#: system-config-date-timezones.h:69
+msgid "America/Argentina/Ushuaia"
+msgstr "أمريكا/الأرجنتين/أوشوايا"
+
+#: system-config-date-timezones.h:70
+msgid "America/Aruba"
+msgstr "أمريكا / أروبا"
+
+#: system-config-date-timezones.h:71
+msgid "America/Asuncion"
+msgstr "أمريكا / أسونسيون"
+
+#: system-config-date-timezones.h:72
+msgid "America/Atikokan"
+msgstr "أمريكا/أتيكوكان"
+
+#: system-config-date-timezones.h:73
+msgid "America/Bahia"
+msgstr "أمريكا/باهيا"
+
+#: system-config-date-timezones.h:74
+msgid "America/Bahia_Banderas"
+msgstr "أمريكا/باهيا باندراس"
+
+#: system-config-date-timezones.h:75
+msgid "America/Barbados"
+msgstr "أمريكا/باربادوس"
+
+#: system-config-date-timezones.h:76
+msgid "America/Belem"
+msgstr "أمريكا/بيليم"
+
+#: system-config-date-timezones.h:77
+msgid "America/Belize"
+msgstr "أمريكا/بليز"
+
+#: system-config-date-timezones.h:78
+msgid "America/Blanc-Sablon"
+msgstr "أمريكا / بلون-سابلون"
+
+#: system-config-date-timezones.h:79
+msgid "America/Boa_Vista"
+msgstr "أمريكا/باوفيستا"
+
+#: system-config-date-timezones.h:80
+msgid "America/Bogota"
+msgstr "أمريكا/بوغوتا"
+
+#: system-config-date-timezones.h:81
+msgid "America/Boise"
+msgstr "أمريكا/بيونس"
+
+#: system-config-date-timezones.h:82
+msgid "America/Cambridge_Bay"
+msgstr "أمريكا/خليج كامبريدج"
+
+#: system-config-date-timezones.h:83
+msgid "America/Campo_Grande"
+msgstr "أمريكا / كامبوغراند"
+
+#: system-config-date-timezones.h:84
+msgid "America/Cancun"
+msgstr "أمريكا/كانكون"
+
+#: system-config-date-timezones.h:85
+msgid "America/Caracas"
+msgstr "أمريكا/كراكاس"
+
+#: system-config-date-timezones.h:86
+msgid "America/Cayenne"
+msgstr "أمريكا / كايان"
+
+#: system-config-date-timezones.h:87
+msgid "America/Cayman"
+msgstr "أمريكا / كايمان"
+
+#: system-config-date-timezones.h:88
+msgid "America/Chicago"
+msgstr "امريكا/شيكاغو"
+
+#: system-config-date-timezones.h:89
+msgid "America/Chihuahua"
+msgstr "أمريكا / تشيهواهوا"
+
+#: system-config-date-timezones.h:90
+msgid "America/Costa_Rica"
+msgstr "أمريكا / كوستاريكا"
+
+#: system-config-date-timezones.h:91
+msgid "America/Creston"
+msgstr "أمريكا / كريستون"
+
+#: system-config-date-timezones.h:92
+msgid "America/Cuiaba"
+msgstr "أمريكا / كويابا"
+
+#: system-config-date-timezones.h:93
+msgid "America/Curacao"
+msgstr "أمريكا / كوراكاو"
+
+#: system-config-date-timezones.h:94
+msgid "America/Danmarkshavn"
+msgstr "أمريكا/دنمارك هاربور"
+
+#: system-config-date-timezones.h:95
+msgid "America/Dawson"
+msgstr "أمريكا / داوسون"
+
+#: system-config-date-timezones.h:96
+msgid "America/Dawson_Creek"
+msgstr "أمريكا / داوسن غريك"
+
+#: system-config-date-timezones.h:97
+msgid "America/Denver"
+msgstr "امريكا/دنفر"
+
+#: system-config-date-timezones.h:98
+msgid "America/Detroit"
+msgstr "امريكا/ديترويت"
+
+#: system-config-date-timezones.h:99
+msgid "America/Dominica"
+msgstr "أمريكا / دومينيكا"
+
+#: system-config-date-timezones.h:100
+msgid "America/Edmonton"
+msgstr "أمريكا / أدمنتون"
+
+#: system-config-date-timezones.h:101
+msgid "America/Eirunepe"
+msgstr "أمريكا/أيرونيب"
+
+#: system-config-date-timezones.h:102
+msgid "America/El_Salvador"
+msgstr "امريكا/السلفادور"
+
+#: system-config-date-timezones.h:103
+msgid "America/Fort_Nelson"
+msgstr "أمريكا /فورتنليسون"
+
+#: system-config-date-timezones.h:104
+msgid "America/Fortaleza"
+msgstr "أمريكا / فورتاليزا"
+
+#: system-config-date-timezones.h:105
+msgid "America/Glace_Bay"
+msgstr "أمريكا/خليج جلاس"
+
+#: system-config-date-timezones.h:106
+msgid "America/Godthab"
+msgstr "أمريكا / غودتاب"
+
+#: system-config-date-timezones.h:107
+msgid "America/Goose_Bay"
+msgstr "أمريكا / خليج غوس"
+
+#: system-config-date-timezones.h:108
+msgid "America/Grand_Turk"
+msgstr "أمريكا / غراند ترك"
+
+#: system-config-date-timezones.h:109
+msgid "America/Grenada"
+msgstr "أمريكا / غرينادا"
+
+#: system-config-date-timezones.h:110
+msgid "America/Guadeloupe"
+msgstr "أمريكا / غوادلوب"
+
+#: system-config-date-timezones.h:111
+msgid "America/Guatemala"
+msgstr "امرايكا/غواتيمالا"
+
+#: system-config-date-timezones.h:112
+msgid "America/Guayaquil"
+msgstr "أمريكا / غواياكيل"
+
+#: system-config-date-timezones.h:113
+msgid "America/Guyana"
+msgstr "امريكا/غويانا"
+
+#: system-config-date-timezones.h:114
+msgid "America/Halifax"
+msgstr "أمريكا / هاليفاكس"
+
+#: system-config-date-timezones.h:115
+msgid "America/Havana"
+msgstr "امريكا/هافانا"
+
+#: system-config-date-timezones.h:116
+msgid "America/Hermosillo"
+msgstr "أمريكا / هيرموسيلو"
+
+#: system-config-date-timezones.h:117
+msgid "America/Indiana/Indianapolis"
+msgstr "أمريكا / إنديانا / إنديانابوليس"
+
+#: system-config-date-timezones.h:118
+msgid "America/Indiana/Knox"
+msgstr "أمريكا / إنديانا / نوكس"
+
+#: system-config-date-timezones.h:119
+msgid "America/Indiana/Marengo"
+msgstr "أمريكا / إنديانا / مارينغو"
+
+#: system-config-date-timezones.h:120
+msgid "America/Indiana/Petersburg"
+msgstr "أمريكا / إنديانا / بطرسبرج"
+
+#: system-config-date-timezones.h:121
+msgid "America/Indiana/Tell_City"
+msgstr "أمريكا / إنديانا / تل سيتي"
+
+#: system-config-date-timezones.h:122
+msgid "America/Indiana/Vevay"
+msgstr "أمريكا / إنديانا / فيفاي"
+
+#: system-config-date-timezones.h:123
+msgid "America/Indiana/Vincennes"
+msgstr "أمريكا / إنديانا / فينسين"
+
+#: system-config-date-timezones.h:124
+msgid "America/Indiana/Winamac"
+msgstr "أمريكا / إنديانا / ويناماك"
+
+#: system-config-date-timezones.h:125
+msgid "America/Inuvik"
+msgstr "أمريكا / إنوفيك"
+
+#: system-config-date-timezones.h:126
+msgid "America/Iqaluit"
+msgstr "أمريكا / إكالويت"
+
+#: system-config-date-timezones.h:127
+msgid "America/Jamaica"
+msgstr "أمريكا / جامايكا"
+
+#: system-config-date-timezones.h:128
+msgid "America/Juneau"
+msgstr "أمريكا / جونو"
+
+#: system-config-date-timezones.h:129
+msgid "America/Kentucky/Louisville"
+msgstr "أمريكا / كنتاكي / لويزفيل"
+
+#: system-config-date-timezones.h:130
+msgid "America/Kentucky/Monticello"
+msgstr "أمريكا / كنتاكي / مونتيسيلو"
+
+#: system-config-date-timezones.h:131
+msgid "America/Kralendijk"
+msgstr "أمريكا / كرالينديجك"
+
+#: system-config-date-timezones.h:132
+msgid "America/La_Paz"
+msgstr "أمريكا / لاباز"
+
+#: system-config-date-timezones.h:133
+msgid "America/Lima"
+msgstr "أمريكا / ليما"
+
+#: system-config-date-timezones.h:134
+msgid "America/Los_Angeles"
+msgstr "أمريكا / لوس انجليس"
+
+#: system-config-date-timezones.h:135
+msgid "America/Lower_Princes"
+msgstr "أمريكا / لوريرنس"
+
+#: system-config-date-timezones.h:136
+msgid "America/Maceio"
+msgstr "أمريكا / ماسيو"
+
+#: system-config-date-timezones.h:137
+msgid "America/Managua"
+msgstr "أمريكا / ماناغوا"
+
+#: system-config-date-timezones.h:138
+msgid "America/Manaus"
+msgstr "أمريكا / ماناوس"
+
+#: system-config-date-timezones.h:139
+msgid "America/Marigot"
+msgstr "أمريكا / ماريجوت"
+
+#: system-config-date-timezones.h:140
+msgid "America/Martinique"
+msgstr "أمريكا / مارتينيك"
+
+#: system-config-date-timezones.h:141
+msgid "America/Matamoros"
+msgstr "أمريكا / ماتاموروس"
+
+#: system-config-date-timezones.h:142
+msgid "America/Mazatlan"
+msgstr "أمريكا / مازاتلان"
+
+#: system-config-date-timezones.h:143
+msgid "America/Menominee"
+msgstr "أمريكا / مينوميني"
+
+#: system-config-date-timezones.h:144
+msgid "America/Merida"
+msgstr "أمريكا / ميريدا"
+
+#: system-config-date-timezones.h:145
+msgid "America/Metlakatla"
+msgstr "أمريكا / ميتلاكاتلا"
+
+#: system-config-date-timezones.h:146
+msgid "America/Mexico_City"
+msgstr "امريكا/مدينة_مكسيكو"
+
+#: system-config-date-timezones.h:147
+msgid "America/Miquelon"
+msgstr "أمريكا / ميكلون"
+
+#: system-config-date-timezones.h:148
+msgid "America/Moncton"
+msgstr "أمريكا / مونكتون"
+
+#: system-config-date-timezones.h:149
+msgid "America/Monterrey"
+msgstr "أمريكا / مونتيري"
+
+#: system-config-date-timezones.h:150
+msgid "America/Montevideo"
+msgstr "أمريكا / مونتيفيديو"
+
+#: system-config-date-timezones.h:151
+msgid "America/Montserrat"
+msgstr "أمريكا / مونتسيرات"
+
+#: system-config-date-timezones.h:152
+msgid "America/Nassau"
+msgstr "أمريكا / ناسو"
+
+#: system-config-date-timezones.h:153
+msgid "America/New_York"
+msgstr "امريكا/نيو_يورك"
+
+#: system-config-date-timezones.h:154
+msgid "America/Nipigon"
+msgstr "أمريكا / نيبجون"
+
+#: system-config-date-timezones.h:155
+msgid "America/Nome"
+msgstr "أمريكا / نومي"
+
+#: system-config-date-timezones.h:156
+msgid "America/Noronha"
+msgstr "أمريكا / نورونها"
+
+#: system-config-date-timezones.h:157
+msgid "America/North_Dakota/Beulah"
+msgstr "أمريكا / داكوتا الشمالية / بيولا"
+
+#: system-config-date-timezones.h:158
+msgid "America/North_Dakota/Center"
+msgstr "أمريكا / داكوتا الشمالية / الوسط"
+
+#: system-config-date-timezones.h:159
+msgid "America/North_Dakota/New_Salem"
+msgstr "أمريكا / داكوتا الشمالية / نيو سالم"
+
+#: system-config-date-timezones.h:160
+msgid "America/Ojinaga"
+msgstr "أمريكا / أوجيناغا"
+
+#: system-config-date-timezones.h:161
+msgid "America/Panama"
+msgstr "أمريكا / بنما"
+
+#: system-config-date-timezones.h:162
+msgid "America/Pangnirtung"
+msgstr "أمريكا / بانجنيرتونج"
+
+#: system-config-date-timezones.h:163
+msgid "America/Paramaribo"
+msgstr "أمريكا / باراماريبو"
+
+#: system-config-date-timezones.h:164
+msgid "America/Phoenix"
+msgstr "أمريكا / فينكس"
+
+#: system-config-date-timezones.h:165
+msgid "America/Port-au-Prince"
+msgstr "أمريكا / بورت أو برنس"
+
+#: system-config-date-timezones.h:166
+msgid "America/Port_of_Spain"
+msgstr "أمريكا / بورت اوف سبين"
+
+#: system-config-date-timezones.h:167
+msgid "America/Porto_Velho"
+msgstr "أمريكا / بورتو فيلهو"
+
+#: system-config-date-timezones.h:168
+msgid "America/Puerto_Rico"
+msgstr "أمريكا /بيرتو ريو"
+
+#: system-config-date-timezones.h:169
+msgid "America/Punta_Arenas"
+msgstr "أمريكا / بونتا-أريناس"
+
+#: system-config-date-timezones.h:170
+msgid "America/Rainy_River"
+msgstr "أمريكا / نهر الراني"
+
+#: system-config-date-timezones.h:171
+msgid "America/Rankin_Inlet"
+msgstr "أمريكا / رانكين إنليت"
+
+#: system-config-date-timezones.h:172
+msgid "America/Recife"
+msgstr "أمريكا / ريسيفي"
+
+#: system-config-date-timezones.h:173
+msgid "America/Regina"
+msgstr "أمريكا / ريجينا"
+
+#: system-config-date-timezones.h:174
+msgid "America/Resolute"
+msgstr "أمريكا / رسوليت"
+
+#: system-config-date-timezones.h:175
+msgid "America/Rio_Branco"
+msgstr "أمريكا / ريو - برانكو"
+
+#: system-config-date-timezones.h:176
+msgid "America/Santarem"
+msgstr "أمريكا / سانتاريم"
+
+#: system-config-date-timezones.h:177
+msgid "America/Santiago"
+msgstr "أمريكا / سانتياغو"
+
+#: system-config-date-timezones.h:178
+msgid "America/Santo_Domingo"
+msgstr "أمريكا / سانتو دومينغو"
+
+#: system-config-date-timezones.h:179
+msgid "America/Sao_Paulo"
+msgstr "أمريكا / ساو باولو"
+
+#: system-config-date-timezones.h:180
+msgid "America/Scoresbysund"
+msgstr "أمريكا / سكورسبيسوند"
+
+#: system-config-date-timezones.h:181
+msgid "America/Sitka"
+msgstr "أمريكا / سيتكا"
+
+#: system-config-date-timezones.h:182
+msgid "America/St_Barthelemy"
+msgstr "أمريكا / ست بارثلومي"
+
+#: system-config-date-timezones.h:183
+msgid "America/St_Johns"
+msgstr "أمريكا / سانت جونز"
+
+#: system-config-date-timezones.h:184
+msgid "America/St_Kitts"
+msgstr "أمريكا / سانت  كيت"
+
+#: system-config-date-timezones.h:185
+msgid "America/St_Lucia"
+msgstr "أمريكا / سانت لوسيا"
+
+#: system-config-date-timezones.h:186
+msgid "America/St_Thomas"
+msgstr "أمريكا / سانت توماس"
+
+#: system-config-date-timezones.h:187
+msgid "America/St_Vincent"
+msgstr "أمريكا / سانت فينسيت"
+
+#: system-config-date-timezones.h:188
+msgid "America/Swift_Current"
+msgstr "أمريكا / سويفت كرنت"
+
+#: system-config-date-timezones.h:189
+msgid "America/Tegucigalpa"
+msgstr "أمريكا / تيجوسيغالبا"
+
+#: system-config-date-timezones.h:190
+msgid "America/Thule"
+msgstr "أمريكا / ثول"
+
+#: system-config-date-timezones.h:191
+msgid "America/Thunder_Bay"
+msgstr "أمريكا / خليج ثندر"
+
+#: system-config-date-timezones.h:192
+msgid "America/Tijuana"
+msgstr "أمريكا / تيخوانا"
+
+#: system-config-date-timezones.h:193
+msgid "America/Toronto"
+msgstr "امريكا/تورونتو"
+
+#: system-config-date-timezones.h:194
+msgid "America/Tortola"
+msgstr "أمريكا / تورتولا"
+
+#: system-config-date-timezones.h:195
+msgid "America/Vancouver"
+msgstr "امريكا/فانكوفر"
+
+#: system-config-date-timezones.h:196
+msgid "America/Whitehorse"
+msgstr "أمريكا / وايت هورس"
+
+#: system-config-date-timezones.h:197
+msgid "America/Winnipeg"
+msgstr "أمريكا / وينيبيغ"
+
+#: system-config-date-timezones.h:198
+msgid "America/Yakutat"
+msgstr "أمريكا / وايكويتوت"
+
+#: system-config-date-timezones.h:199
+msgid "America/Yellowknife"
+msgstr "أمريكا / يلونايف"
+
+#: system-config-date-timezones.h:200
+msgid "Antarctica/Casey"
+msgstr "أنتاركتيكا / كاسي"
+
+#: system-config-date-timezones.h:201
+msgid "Antarctica/Davis"
+msgstr "القارة القطبية الجنوبية/ديفيس"
+
+#: system-config-date-timezones.h:202
+msgid "Antarctica/DumontDUrville"
+msgstr "القارة القطبية الجنوبية/دومونت دورفيل"
+
+#: system-config-date-timezones.h:203
+msgid "Antarctica/Macquarie"
+msgstr "القارة القطبية الجنوبية/ماكواري"
+
+#: system-config-date-timezones.h:204
+msgid "Antarctica/Mawson"
+msgstr "القارة القطبية الجنوبية/ماوسون"
+
+#: system-config-date-timezones.h:205
+msgid "Antarctica/McMurdo"
+msgstr "القارة القطبية الجنوبية/ماكموردو"
+
+#: system-config-date-timezones.h:206
+msgid "Antarctica/Palmer"
+msgstr "القارة القطبية الجنوبية/بالمير"
+
+#: system-config-date-timezones.h:207
+msgid "Antarctica/Rothera"
+msgstr "القارة القطبية الجنوبية/روذيرا"
+
+#: system-config-date-timezones.h:208
+msgid "Antarctica/Syowa"
+msgstr "القارة القطبية الجنوبية/سيووا"
+
+#: system-config-date-timezones.h:209
+msgid "Antarctica/Troll"
+msgstr "القارة القطبية الجنوبية/ترول"
+
+#: system-config-date-timezones.h:210
+msgid "Antarctica/Vostok"
+msgstr "القارة القطبية الجنوبية/فوستوك"
+
+#: system-config-date-timezones.h:211
+msgid "Arctic/Longyearbyen"
+msgstr "القطب الشمالي / ونجييربين"
+
+#: system-config-date-timezones.h:212
+msgid "Asia/Aden"
+msgstr "اسيا/عدن"
+
+#: system-config-date-timezones.h:213
+msgid "Asia/Almaty"
+msgstr "آسيا / ألماتي"
+
+#: system-config-date-timezones.h:214
+msgid "Asia/Amman"
+msgstr "اسيا/عمان"
+
+#: system-config-date-timezones.h:215
+msgid "Asia/Anadyr"
+msgstr "آسيا / أنادير"
+
+#: system-config-date-timezones.h:216
+msgid "Asia/Aqtau"
+msgstr "آسيا / أقتاو"
+
+#: system-config-date-timezones.h:217
+msgid "Asia/Aqtobe"
+msgstr "آسيا / أكتوب"
+
+#: system-config-date-timezones.h:218
+msgid "Asia/Ashgabat"
+msgstr "آسيا / عشق أباد"
+
+#: system-config-date-timezones.h:219
+msgid "Asia/Atyrau"
+msgstr "آسيا / أتيراو"
+
+#: system-config-date-timezones.h:220
+msgid "Asia/Baghdad"
+msgstr "اسيا/بغداد"
+
+#: system-config-date-timezones.h:221
+msgid "Asia/Bahrain"
+msgstr "اسيا/البحرين"
+
+#: system-config-date-timezones.h:222
+msgid "Asia/Baku"
+msgstr "آسيا / باكو"
+
+#: system-config-date-timezones.h:223
+msgid "Asia/Bangkok"
+msgstr "آسيا / بانكوك"
+
+#: system-config-date-timezones.h:224
+msgid "Asia/Barnaul"
+msgstr "آسيا / بارناول"
+
+#: system-config-date-timezones.h:225
+msgid "Asia/Beirut"
+msgstr "اسيا/بيروت"
+
+#: system-config-date-timezones.h:226
+msgid "Asia/Bishkek"
+msgstr "آسيا / بيشكيك"
+
+#: system-config-date-timezones.h:227
+msgid "Asia/Brunei"
+msgstr "اسيا/بروناي"
+
+#: system-config-date-timezones.h:228
+msgid "Asia/Chita"
+msgstr "آسيا / تشيتا"
+
+#: system-config-date-timezones.h:229
+msgid "Asia/Choibalsan"
+msgstr "آسيا / شويبالسان"
+
+#: system-config-date-timezones.h:230
+msgid "Asia/Colombo"
+msgstr "آسيا / كولومبو"
+
+#: system-config-date-timezones.h:231
+msgid "Asia/Damascus"
+msgstr "اسيا/دمشق"
+
+#: system-config-date-timezones.h:232
+msgid "Asia/Dhaka"
+msgstr "آسيا / دكا"
+
+#: system-config-date-timezones.h:233
+msgid "Asia/Dili"
+msgstr "آسيا / ديلي"
+
+#: system-config-date-timezones.h:234
+msgid "Asia/Dubai"
+msgstr "اسيا/دبي"
+
+#: system-config-date-timezones.h:235
+msgid "Asia/Dushanbe"
+msgstr "آسيا / دوشانبي"
+
+#: system-config-date-timezones.h:236
+msgid "Asia/Famagusta"
+msgstr "آسيا / فاماغوستا"
+
+#: system-config-date-timezones.h:237
+msgid "Asia/Gaza"
+msgstr "اساي/غزة"
+
+#: system-config-date-timezones.h:238
+msgid "Asia/Hebron"
+msgstr "اسيا/الخليل"
+
+#: system-config-date-timezones.h:239
+msgid "Asia/Ho_Chi_Minh"
+msgstr "آسيا / هوشي منه"
+
+#: system-config-date-timezones.h:240
+msgid "Asia/Hong_Kong"
+msgstr "اسيا/هونغ كونغ"
+
+#: system-config-date-timezones.h:241
+msgid "Asia/Hovd"
+msgstr "آسيا / هوود"
+
+#: system-config-date-timezones.h:242
+msgid "Asia/Irkutsk"
+msgstr "آسيا / إيركوتسك"
+
+#: system-config-date-timezones.h:243
+msgid "Asia/Jakarta"
+msgstr "آسيا / جاكرتا"
+
+#: system-config-date-timezones.h:244
+msgid "Asia/Jayapura"
+msgstr "آسيا / جايابورا"
+
+#: system-config-date-timezones.h:245
+msgid "Asia/Jerusalem"
+msgstr "اسيا/القدس"
+
+#: system-config-date-timezones.h:246
+msgid "Asia/Kabul"
+msgstr "آسيا / كابول"
+
+#: system-config-date-timezones.h:247
+msgid "Asia/Kamchatka"
+msgstr "آسيا / كامتشاتكا"
+
+#: system-config-date-timezones.h:248
+msgid "Asia/Karachi"
+msgstr "آسيا / كراتشي"
+
+#: system-config-date-timezones.h:249
+msgid "Asia/Kathmandu"
+msgstr "آسيا / كاتماندو"
+
+#: system-config-date-timezones.h:250
+msgid "Asia/Khandyga"
+msgstr "آسيا / خانديجا"
+
+#: system-config-date-timezones.h:251
+msgid "Asia/Kolkata"
+msgstr "آسيا / كلكتا"
+
+#: system-config-date-timezones.h:252
+msgid "Asia/Krasnoyarsk"
+msgstr "آسيا / كراسنويارسك"
+
+#: system-config-date-timezones.h:253
+msgid "Asia/Kuala_Lumpur"
+msgstr "آسيا / كوالالمبور"
+
+#: system-config-date-timezones.h:254
+msgid "Asia/Kuching"
+msgstr "آسيا / كوتشينغ"
+
+#: system-config-date-timezones.h:255
+msgid "Asia/Kuwait"
+msgstr "اسيا/الكويت"
+
+#: system-config-date-timezones.h:256
+msgid "Asia/Macau"
+msgstr "آسيا / ماكاو"
+
+#: system-config-date-timezones.h:257
+msgid "Asia/Magadan"
+msgstr "آسيا / ماغادان"
+
+#: system-config-date-timezones.h:258
+msgid "Asia/Makassar"
+msgstr "آسيا / ماكاسار"
+
+#: system-config-date-timezones.h:259
+msgid "Asia/Manila"
+msgstr "اسيا/مانيلا"
+
+#: system-config-date-timezones.h:260
+msgid "Asia/Muscat"
+msgstr "آسيا / مسقط"
+
+#: system-config-date-timezones.h:261
+msgid "Asia/Nicosia"
+msgstr "آسيا / نيقوسيا"
+
+#: system-config-date-timezones.h:262
+msgid "Asia/Novokuznetsk"
+msgstr "آسيا / نوفوكوزنتسك"
+
+#: system-config-date-timezones.h:263
+msgid "Asia/Novosibirsk"
+msgstr "آسيا / نوفوسيبيرسك"
+
+#: system-config-date-timezones.h:264
+msgid "Asia/Omsk"
+msgstr "آسيا / أومسك"
+
+#: system-config-date-timezones.h:265
+msgid "Asia/Oral"
+msgstr "آسيا / أورال"
+
+#: system-config-date-timezones.h:266
+msgid "Asia/Phnom_Penh"
+msgstr "آسيا / فونومبيه"
+
+#: system-config-date-timezones.h:267
+msgid "Asia/Pontianak"
+msgstr "آسيا / بونتياناك"
+
+#: system-config-date-timezones.h:268
+msgid "Asia/Pyongyang"
+msgstr "اسيا/بيونغ يانغ"
+
+#: system-config-date-timezones.h:269
+msgid "Asia/Qatar"
+msgstr "اسيا/قطر"
+
+#: system-config-date-timezones.h:270
+msgid "Asia/Qyzylorda"
+msgstr "آسيا / كيزيلوردا"
+
+#: system-config-date-timezones.h:271
+msgid "Asia/Riyadh"
+msgstr "اسيا/الرياض"
+
+#: system-config-date-timezones.h:272
+msgid "Asia/Sakhalin"
+msgstr "آسيا / ساخالين"
+
+#: system-config-date-timezones.h:273
+msgid "Asia/Samarkand"
+msgstr "اسيا/سمرقند"
+
+#: system-config-date-timezones.h:274
+msgid "Asia/Seoul"
+msgstr "اسيا/سيول"
+
+#: system-config-date-timezones.h:275
+msgid "Asia/Shanghai"
+msgstr "اسيا/شانغهاي"
+
+#: system-config-date-timezones.h:276
+msgid "Asia/Singapore"
+msgstr "اسيا/سنغفورة"
+
+#: system-config-date-timezones.h:277
+msgid "Asia/Srednekolymsk"
+msgstr "آسيا / سريدنيكوليمسك"
+
+#: system-config-date-timezones.h:278
+msgid "Asia/Taipei"
+msgstr "آسيا / تايبيه"
+
+#: system-config-date-timezones.h:279
+msgid "Asia/Tashkent"
+msgstr "آسيا / طشقند"
+
+#: system-config-date-timezones.h:280
+msgid "Asia/Tbilisi"
+msgstr "آسيا / تبليسي"
+
+#: system-config-date-timezones.h:281
+msgid "Asia/Tehran"
+msgstr "اسيا/طهران"
+
+#: system-config-date-timezones.h:282
+msgid "Asia/Thimphu"
+msgstr "آسيا / تيمفو"
+
+#: system-config-date-timezones.h:283
+msgid "Asia/Tokyo"
+msgstr "اسيا/توكيو"
+
+#: system-config-date-timezones.h:284
+msgid "Asia/Tomsk"
+msgstr "آسيا / تومسك"
+
+#: system-config-date-timezones.h:285
+msgid "Asia/Ulaanbaatar"
+msgstr "آسيا / أولان باتور"
+
+#: system-config-date-timezones.h:286
+msgid "Asia/Urumqi"
+msgstr "آسيا / أورومتشي"
+
+#: system-config-date-timezones.h:287
+msgid "Asia/Ust-Nera"
+msgstr "آسيا / أوست-نيرا"
+
+#: system-config-date-timezones.h:288
+msgid "Asia/Vientiane"
+msgstr "آسيا / فينتيان"
+
+#: system-config-date-timezones.h:289
+msgid "Asia/Vladivostok"
+msgstr "آسيا / فلاديفوستوك"
+
+#: system-config-date-timezones.h:290
+msgid "Asia/Yakutsk"
+msgstr "آسيا / ياكوتسك"
+
+#: system-config-date-timezones.h:291
+msgid "Asia/Yangon"
+msgstr "آسيا / يانغون"
+
+#: system-config-date-timezones.h:292
+msgid "Asia/Yekaterinburg"
+msgstr "آسيا / يكاترينبورغ"
+
+#: system-config-date-timezones.h:293
+msgid "Asia/Yerevan"
+msgstr "آسيا / يريفان"
+
+#: system-config-date-timezones.h:294
+msgid "Atlantic/Azores"
+msgstr "الأطلسي / الأزور"
+
+#: system-config-date-timezones.h:295
+msgid "Atlantic/Bermuda"
+msgstr "المحيط الأطلسي / برمودا"
+
+#: system-config-date-timezones.h:296
+msgid "Atlantic/Canary"
+msgstr "المحيط الأطلسي / جزر الكناري"
+
+#: system-config-date-timezones.h:297
+msgid "Atlantic/Cape_Verde"
+msgstr "المحيط الأطلسي / كيب فريد"
+
+#: system-config-date-timezones.h:298
+msgid "Atlantic/Faroe"
+msgstr "المحيط الأطلسي / فارو"
+
+#: system-config-date-timezones.h:299
+msgid "Atlantic/Madeira"
+msgstr "المحيط الأطلسي / ماديرا"
+
+#: system-config-date-timezones.h:300
+msgid "Atlantic/Reykjavik"
+msgstr "المحيط الأطلسي / ريكجيفك"
+
+#: system-config-date-timezones.h:301
+msgid "Atlantic/South_Georgia"
+msgstr "المحيط الأطلسي / جورجيا الجنوبية"
+
+#: system-config-date-timezones.h:302
+msgid "Atlantic/St_Helena"
+msgstr "المحيط الأطلسي / سان هيلينا"
+
+#: system-config-date-timezones.h:303
+msgid "Atlantic/Stanley"
+msgstr "المحيط الأطلسي / ستانلي"
+
+#: system-config-date-timezones.h:304
+msgid "Australia/Adelaide"
+msgstr "أستراليا / أديليد"
+
+#: system-config-date-timezones.h:305
+msgid "Australia/Brisbane"
+msgstr "أستراليا / بريسبان"
+
+#: system-config-date-timezones.h:306
+msgid "Australia/Broken_Hill"
+msgstr "أستراليا / بروكن هيل"
+
+#: system-config-date-timezones.h:307
+msgid "Australia/Currie"
+msgstr "أستراليا / كوري"
+
+#: system-config-date-timezones.h:308
+msgid "Australia/Darwin"
+msgstr "أستراليا / داروين"
+
+#: system-config-date-timezones.h:309
+msgid "Australia/Eucla"
+msgstr "أستراليا / أوكلا"
+
+#: system-config-date-timezones.h:310
+msgid "Australia/Hobart"
+msgstr "أستراليا / هوبارت"
+
+#: system-config-date-timezones.h:311
+msgid "Australia/Lindeman"
+msgstr "أستراليا / ليندمان"
+
+#: system-config-date-timezones.h:312
+msgid "Australia/Lord_Howe"
+msgstr "أستراليا / لورد هو"
+
+#: system-config-date-timezones.h:313
+msgid "Australia/Melbourne"
+msgstr "استراليا / ملبورن"
+
+#: system-config-date-timezones.h:314
+msgid "Australia/Perth"
+msgstr "أستراليا / بيرث"
+
+#: system-config-date-timezones.h:315
+msgid "Australia/Sydney"
+msgstr "أستراليا / سيدني"
+
+#: system-config-date-timezones.h:316
+msgid "Europe/Amsterdam"
+msgstr "اوروبا/امستردام"
+
+#: system-config-date-timezones.h:317
+msgid "Europe/Andorra"
+msgstr "اوروبا/اندورا"
+
+#: system-config-date-timezones.h:318
+msgid "Europe/Astrakhan"
+msgstr "أوروبا / استراخان"
+
+#: system-config-date-timezones.h:319
+msgid "Europe/Athens"
+msgstr "اوروبا/اثينا"
+
+#: system-config-date-timezones.h:320
+msgid "Europe/Belgrade"
+msgstr "اوروبا/بلغراد"
+
+#: system-config-date-timezones.h:321
+msgid "Europe/Berlin"
+msgstr "اوروبا/برلين"
+
+#: system-config-date-timezones.h:322
+msgid "Europe/Bratislava"
+msgstr "أوروبا / براتيسلافا"
+
+#: system-config-date-timezones.h:323
+msgid "Europe/Brussels"
+msgstr "أوروبا / بروكسل"
+
+#: system-config-date-timezones.h:324
+msgid "Europe/Bucharest"
+msgstr "أوروبا / بوخارست"
+
+#: system-config-date-timezones.h:325
+msgid "Europe/Budapest"
+msgstr "أوروبا / بودابست"
+
+#: system-config-date-timezones.h:326
+msgid "Europe/Busingen"
+msgstr "أوروبا/بوسينجيم"
+
+#: system-config-date-timezones.h:327
+msgid "Europe/Chisinau"
+msgstr "أوروبا / كيشيناو"
+
+#: system-config-date-timezones.h:328
+msgid "Europe/Copenhagen"
+msgstr "أوروبا / كوبنهاجن"
+
+#: system-config-date-timezones.h:329
+msgid "Europe/Dublin"
+msgstr "أوروبا / دبلن"
+
+#: system-config-date-timezones.h:330
+msgid "Europe/Gibraltar"
+msgstr "أوروبا / جبل طارق"
+
+#: system-config-date-timezones.h:331
+msgid "Europe/Guernsey"
+msgstr "أوروبا / غيرنسي"
+
+#: system-config-date-timezones.h:332
+msgid "Europe/Helsinki"
+msgstr "أوروبا / هلسنكي"
+
+#: system-config-date-timezones.h:333
+msgid "Europe/Isle_of_Man"
+msgstr "أوروبا / جزيرة آيل أوف مان"
+
+#: system-config-date-timezones.h:334
+msgid "Europe/Istanbul"
+msgstr "أوروبا / اسطنبول"
+
+#: system-config-date-timezones.h:335
+msgid "Europe/Jersey"
+msgstr "أوروبا / جيرسي"
+
+#: system-config-date-timezones.h:336
+msgid "Europe/Kaliningrad"
+msgstr "أوروبا / كالينينغراد"
+
+#: system-config-date-timezones.h:337
+msgid "Europe/Kiev"
+msgstr "أوروبا / كييف"
+
+#: system-config-date-timezones.h:338
+msgid "Europe/Kirov"
+msgstr "أوروبا / كيروف"
+
+#: system-config-date-timezones.h:339
+msgid "Europe/Lisbon"
+msgstr "اوروبا/لشبونة"
+
+#: system-config-date-timezones.h:340
+msgid "Europe/Ljubljana"
+msgstr "أوروبا / ليوبليانا"
+
+#: system-config-date-timezones.h:341
+msgid "Europe/London"
+msgstr "اوروبا/لندن"
+
+#: system-config-date-timezones.h:342
+msgid "Europe/Luxembourg"
+msgstr "اوروبا/لشبونة"
+
+#: system-config-date-timezones.h:343
+msgid "Europe/Madrid"
+msgstr "اوروبا/مدريد"
+
+#: system-config-date-timezones.h:344
+msgid "Europe/Malta"
+msgstr "اوروبا/مالطا"
+
+#: system-config-date-timezones.h:345
+msgid "Europe/Mariehamn"
+msgstr "اوروبا/ماريهامن"
+
+#: system-config-date-timezones.h:346
+msgid "Europe/Minsk"
+msgstr "أوروبا / مينسك"
+
+#: system-config-date-timezones.h:347
+msgid "Europe/Monaco"
+msgstr "أوروبا / موناكو"
+
+#: system-config-date-timezones.h:348
+msgid "Europe/Moscow"
+msgstr "اوروبا/موسكو"
+
+#: system-config-date-timezones.h:349
+msgid "Europe/Oslo"
+msgstr "اوروبا/اوسلو"
+
+#: system-config-date-timezones.h:350
+msgid "Europe/Paris"
+msgstr "اوروبا/باريس"
+
+#: system-config-date-timezones.h:351
+msgid "Europe/Podgorica"
+msgstr "أوروبا / بودغوريتشا"
+
+#: system-config-date-timezones.h:352
+msgid "Europe/Prague"
+msgstr "أوروبا / براغ"
+
+#: system-config-date-timezones.h:353
+msgid "Europe/Riga"
+msgstr "أوروبا / ريغا"
+
+#: system-config-date-timezones.h:354
+msgid "Europe/Rome"
+msgstr "أوروبا / روما"
+
+#: system-config-date-timezones.h:355
+msgid "Europe/Samara"
+msgstr "أوروبا / سمارة"
+
+#: system-config-date-timezones.h:356
+msgid "Europe/San_Marino"
+msgstr "أوروبا / سان مارينو"
+
+#: system-config-date-timezones.h:357
+msgid "Europe/Sarajevo"
+msgstr "أوروبا / سراييفو"
+
+#: system-config-date-timezones.h:358
+msgid "Europe/Saratov"
+msgstr "أوروبا / ساراتوف"
+
+#: system-config-date-timezones.h:359
+msgid "Europe/Simferopol"
+msgstr "أوروبا / سيمفيروبول"
+
+#: system-config-date-timezones.h:360
+msgid "Europe/Skopje"
+msgstr "أوروبا / سكوبي"
+
+#: system-config-date-timezones.h:361
+msgid "Europe/Sofia"
+msgstr "أوروبا / صوفيا"
+
+#: system-config-date-timezones.h:362
+msgid "Europe/Stockholm"
+msgstr "أوروبا / ستوكهولم"
+
+#: system-config-date-timezones.h:363
+msgid "Europe/Tallinn"
+msgstr "أوروبا / تالين"
+
+#: system-config-date-timezones.h:364
+msgid "Europe/Tirane"
+msgstr "أوروبا / تيرانا"
+
+#: system-config-date-timezones.h:365
+msgid "Europe/Ulyanovsk"
+msgstr "أوروبا / أوليانوفسك"
+
+#: system-config-date-timezones.h:366
+msgid "Europe/Uzhgorod"
+msgstr "أوروبا / أوزغورود"
+
+#: system-config-date-timezones.h:367
+msgid "Europe/Vaduz"
+msgstr "أوروبا / فادوز"
+
+#: system-config-date-timezones.h:368
+msgid "Europe/Vatican"
+msgstr "أوروبا / الفاتيكان"
+
+#: system-config-date-timezones.h:369
+msgid "Europe/Vienna"
+msgstr "أوروبا / فيينا"
+
+#: system-config-date-timezones.h:370
+msgid "Europe/Vilnius"
+msgstr "أوروبا / فيلنيوس"
+
+#: system-config-date-timezones.h:371
+msgid "Europe/Volgograd"
+msgstr "أوروبا / فولغوغراد"
+
+#: system-config-date-timezones.h:372
+msgid "Europe/Warsaw"
+msgstr "أوروبا / وارسو"
+
+#: system-config-date-timezones.h:373
+msgid "Europe/Zagreb"
+msgstr "أوروبا / زغرب"
+
+#: system-config-date-timezones.h:374
+msgid "Europe/Zaporozhye"
+msgstr "أوروبا / زابوروجي"
+
+#: system-config-date-timezones.h:375
+msgid "Europe/Zurich"
+msgstr "أوروبا/زيوريخ"
+
+#: system-config-date-timezones.h:376
+msgid "Indian/Antananarivo"
+msgstr "المحيط الهندي / أنتاناناريفو"
+
+#: system-config-date-timezones.h:377
+msgid "Indian/Chagos"
+msgstr "الهندي / تشاغوس"
+
+#: system-config-date-timezones.h:378
+msgid "Indian/Christmas"
+msgstr "المحيط الهندي / كريستماس"
+
+#: system-config-date-timezones.h:379
+msgid "Indian/Cocos"
+msgstr "المحيط الهندي / كوكوس"
+
+#: system-config-date-timezones.h:380
+msgid "Indian/Comoro"
+msgstr "المحيط الهندي / كومورو"
+
+#: system-config-date-timezones.h:381
+msgid "Indian/Kerguelen"
+msgstr "المحيط الهندي / كيرغولن"
+
+#: system-config-date-timezones.h:382
+msgid "Indian/Mahe"
+msgstr "المحيط الهندي / ماهي"
+
+#: system-config-date-timezones.h:383
+msgid "Indian/Maldives"
+msgstr "المحيط الهندي / جزر المالديف"
+
+#: system-config-date-timezones.h:384
+msgid "Indian/Mauritius"
+msgstr "المحيط الهندي / موريشيوس"
+
+#: system-config-date-timezones.h:385
+msgid "Indian/Mayotte"
+msgstr "المحيط الهندي / مايوت"
+
+#: system-config-date-timezones.h:386
+msgid "Indian/Reunion"
+msgstr "المحيط الهندي / رينيون"
+
+#: system-config-date-timezones.h:387
+msgid "Pacific/Apia"
+msgstr "المحيط الهادئ / آبيا"
+
+#: system-config-date-timezones.h:388
+msgid "Pacific/Auckland"
+msgstr "المحيط الهادئ / أوكلاند"
+
+#: system-config-date-timezones.h:389
+msgid "Pacific/Bougainville"
+msgstr "المحيط الهادئ / بوغانفيل"
+
+#: system-config-date-timezones.h:390
+msgid "Pacific/Chatham"
+msgstr "المحيط الهادئ / تشاتام"
+
+#: system-config-date-timezones.h:391
+msgid "Pacific/Chuuk"
+msgstr "المحيط الهادئ / شوك"
+
+#: system-config-date-timezones.h:392
+msgid "Pacific/Easter"
+msgstr "المحيط الهادئ / عيد الفصح"
+
+#: system-config-date-timezones.h:393
+msgid "Pacific/Efate"
+msgstr "المحيط الهادئ / إيفات"
+
+#: system-config-date-timezones.h:394
+msgid "Pacific/Enderbury"
+msgstr "المحيط الهادئ / إندربري"
+
+#: system-config-date-timezones.h:395
+msgid "Pacific/Fakaofo"
+msgstr "المحيط الهادئ / فاكاوفو"
+
+#: system-config-date-timezones.h:396
+msgid "Pacific/Fiji"
+msgstr "المحيط الهادئ / فيجي"
+
+#: system-config-date-timezones.h:397
+msgid "Pacific/Funafuti"
+msgstr "المحيط الهادئ / فونافوتي"
+
+#: system-config-date-timezones.h:398
+msgid "Pacific/Galapagos"
+msgstr "المحيط الهادي / غالاباغوس"
+
+#: system-config-date-timezones.h:399
+msgid "Pacific/Gambier"
+msgstr "المحيط الهادئ / جامبير"
+
+#: system-config-date-timezones.h:400
+msgid "Pacific/Guadalcanal"
+msgstr "المحيط الهادئ / القنال"
+
+#: system-config-date-timezones.h:401
+msgid "Pacific/Guam"
+msgstr "المحيط الهادئ / غوام"
+
+#: system-config-date-timezones.h:402
+msgid "Pacific/Honolulu"
+msgstr "المحيط الهادئ / هونولولو"
+
+#: system-config-date-timezones.h:403
+msgid "Pacific/Kiritimati"
+msgstr "المحيط الهادئ / كيريتيماتي"
+
+#: system-config-date-timezones.h:404
+msgid "Pacific/Kosrae"
+msgstr "المحيط الهادئ / كوسراي"
+
+#: system-config-date-timezones.h:405
+msgid "Pacific/Kwajalein"
+msgstr "المحيط الهادئ / كواجالين"
+
+#: system-config-date-timezones.h:406
+msgid "Pacific/Majuro"
+msgstr "المحيط الهادئ / ماجورو"
+
+#: system-config-date-timezones.h:407
+msgid "Pacific/Marquesas"
+msgstr "المحيط الهادئ / الماركيز"
+
+#: system-config-date-timezones.h:408
+msgid "Pacific/Midway"
+msgstr "المحيط الهادئ / ميدواي"
+
+#: system-config-date-timezones.h:409
+msgid "Pacific/Nauru"
+msgstr "المحيط الهادئ / ناورو"
+
+#: system-config-date-timezones.h:410
+msgid "Pacific/Niue"
+msgstr "المحيط الهادئ / نيوي"
+
+#: system-config-date-timezones.h:411
+msgid "Pacific/Norfolk"
+msgstr "المحيط الهادئ / نورفولك"
+
+#: system-config-date-timezones.h:412
+msgid "Pacific/Noumea"
+msgstr "المحيط الهادئ / نوميا"
+
+#: system-config-date-timezones.h:413
+msgid "Pacific/Pago_Pago"
+msgstr "المحيط الهادئ / باغو باغو"
+
+#: system-config-date-timezones.h:414
+msgid "Pacific/Palau"
+msgstr "المحيط الهادئ / بالاو"
+
+#: system-config-date-timezones.h:415
+msgid "Pacific/Pitcairn"
+msgstr "المحيط الهادئ / بيتكيرن"
+
+#: system-config-date-timezones.h:416
+msgid "Pacific/Pohnpei"
+msgstr "المحيط الهادئ / بوهنباي"
+
+#: system-config-date-timezones.h:417
+msgid "Pacific/Port_Moresby"
+msgstr "المحيط الهادئ / بور مورسبي"
+
+#: system-config-date-timezones.h:418
+msgid "Pacific/Rarotonga"
+msgstr "المحيط الهادئ / راروتونغا"
+
+#: system-config-date-timezones.h:419
+msgid "Pacific/Saipan"
+msgstr "المحيط الهادئ / سايبان"
+
+#: system-config-date-timezones.h:420
+msgid "Pacific/Tahiti"
+msgstr "المحيط الهادئ / تاهيتي"
+
+#: system-config-date-timezones.h:421
+msgid "Pacific/Tarawa"
+msgstr "المحيط الهادئ / تاراوا"
+
+#: system-config-date-timezones.h:422
+msgid "Pacific/Tongatapu"
+msgstr "المحيط الهادئ / تونجاتابو"
+
+#: system-config-date-timezones.h:423
+msgid "Pacific/Wake"
+msgstr "المحيط الهادئ / ويك"
+
+#: system-config-date-timezones.h:424
+msgid "Pacific/Wallis"
+msgstr "المحيط الهادئ / واليس"

@@ -814,12 +814,12 @@
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="264"/>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="278"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation>Молимо Вас да унесете шифру дужу од %1 карактера и краћу од %2 карактера</translation>
+        <translation>Молимо Вас да унесете лозинку дужу од %1 карактера и краћу од %2 карактера</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="272"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation>Шифра може садржати само слова енглеског алфабета (осетљива на велика/мала слова), бројеве или специјалне знаке (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
+        <translation>Лозинка може садржати само слова енглеског алфабета (осетљива на велика/мала слова), бројеве или специјалне знаке (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
         <location filename="../ui/frames/inner/system_info_form_frame.cpp" line="292"/>
