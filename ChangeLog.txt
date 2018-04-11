@@ -1,4 +1,7 @@
-2018-03-16 2.2.15.2 Xu Shaohua <xushaohua@deepin.com>
+2018-03-11 2.2.15.3 Xu Shaohua <xushaohua@deepin.com>
+    * Check existence of /etc/deepin-version
+
+2018-04-10 2.2.15.2 Xu Shaohua <xushaohua@deepin.com>
     * Fix timestamp issue of APT cache packages
     * Add installer user form
     * Add resolution settings for grub on arm64

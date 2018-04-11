@@ -1,3 +1,9 @@
+deepin-installer-reborn (2.2.15.3) stable; urgency=medium
+
+  * Check existence of /etc/deepin-version
+
+ -- Xu Shaohua <xushaohua@deepin.com>  Wed, 11 Apr 2018 16:41:29 +0800
+
 deepin-installer-reborn (2.2.15.2) stable; urgency=medium
 
   * Fix timestamp issue of APT cache packages
