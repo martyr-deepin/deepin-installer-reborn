@@ -36,7 +36,10 @@ execute_process(COMMAND uname -m
 message("build arch: ${INSTALLER_BUILD_ARCH}")
 
 if (${INSTALLER_BUILD_ARCH} MATCHES "x86")
-  file(STRINGS "/etc/deepin-version" IS_PROFESSIONAL REGEX "Type *= *Professional")
+  set(IS_PROFESSIONAL FALSE)
+  if (EXISTS "/etc/deepin-version")
+    file(STRINGS "/etc/deepin-version" IS_PROFESSIONAL REGEX "Type *= *Professional")
+  endif()
   if (IS_PROFESSIONAL)
     # Install professional settings.
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/professional_default_settings.ini
