@@ -1,3 +1,8 @@
+2018-03-16 2.2.15.2 Xu Shaohua <xushaohua@deepin.com>
+    * Fix timestamp issue of APT cache packages
+    * Add installer user form
+    * Add resolution settings for grub on arm64
+
 2018-03-16 2.2.15.1 Xu Shaohua <xushaohua@deepin.com>
     * Set password for live environment
 
