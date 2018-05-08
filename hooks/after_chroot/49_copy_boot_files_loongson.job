@@ -47,11 +47,17 @@ fi
 
 [ -f $TARGET/grub.cfg ] && [ -f $TARGET/boot.cfg ] && echo "boot files copied!"
 
+mkdir -p /target/lib/modules || true
+if [ -d /lib/live/mount/medium/live/modules ]; then
+        cp -r /lib/live/mount/medium/live/modules/* /target/lib/modules/ || error "Failed to copy kernel modules"
+fi
+
 # modify boot.cfg & grub.cfg set boot.cfg args root=UUID=xxx
-sed -i "s/\(args.*\)/\1 root=$rootuuid/g" /target/boot/boot.cfg
-sed -i "s/\(args.*\)/\1 root=$rootuuid/g" /target/boot/boot/boot.cfg
-sed -i "s/\(linux.*\)/\1 root=$rootuuid/g" /target/boot/grub.cfg
-sed -i "s/\(linux.*\)/\1 root=$rootuuid/g" /target/boot/boot/grub.cfg
+#sed -i "s/\(args.*\)/\1 root=$rootuuid/g" /target/boot/boot.cfg
+sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" /target/boot/boot.cfg
+sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" /target/boot/boot/boot.cfg
+sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" /target/boot/grub.cfg
+sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" /target/boot/boot/grub.cfg
 
 # fix boot.cfg
 if grep -wqs $TARGET /proc/mounts ; then

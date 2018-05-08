@@ -78,6 +78,7 @@ elif [ -f ${SRCPATH}/grub.cfg.head ]; then
   for _KERVER in $(ls /lib/modules); do
     if [ -d /lib/modules/${_KERVER} ]; then
 	  sed -e "s|root=|root=UUID=$LOCALUUID|g" \
+	-e "s|live-media=|live-media=UUID=$LOCALUUID|g" \
         -e "s|@KERNEL_VERSION@|${_KERVER}|g" \
         ${SRCPATH}/grub.cfg.menu >> /boot/grub/grub.cfg
     fi
