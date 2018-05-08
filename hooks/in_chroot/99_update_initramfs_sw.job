@@ -89,7 +89,9 @@ if cat /deepinhost/etc/deepin-installer.conf | grep DI_MOUNTPOINTS | \
   grep -q -e "=/boot;" -e "=/boot$"; then
     msg "/boot split detected"
     mkdir -p /boot/boot
-    mv /boot/* /boot/boot/
+    #mv /boot/* /boot/boot/
+    # set links to /boot/boot
+    ln -s /boot/* /boot/boot/
 fi
 
 return 0
