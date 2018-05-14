@@ -1,3 +1,10 @@
+deepin-installer-reborn (2.2.16) stable; urgency=medium
+
+  * Fix live-filesystem config for sw and loongson
+  * Set sw421 sources.list to as4s
+
+ -- Xu Shaohua <xushaohua2016@outlook.com>  Mon, 14 May 2018 11:40:22 +0800
+
 deepin-installer-reborn (2.2.15.3) stable; urgency=medium
 
   * Check existence of /etc/deepin-version

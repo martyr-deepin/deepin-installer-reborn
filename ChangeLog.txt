@@ -1,3 +1,7 @@
+2018-05-14 2.2.16 Xu Shaohua <xushaohua2016@outlook.com>
+    * Fix live-filesystem config for sw and loongson
+    * Set sw421 sources.list to as4s
+
 2018-03-11 2.2.15.3 Xu Shaohua <xushaohua@deepin.com>
     * Check existence of /etc/deepin-version
 
