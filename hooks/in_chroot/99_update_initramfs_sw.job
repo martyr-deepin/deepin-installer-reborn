@@ -91,7 +91,10 @@ if cat /deepinhost/etc/deepin-installer.conf | grep DI_MOUNTPOINTS | \
     mkdir -p /boot/boot
     #mv /boot/* /boot/boot/
     # set links to /boot/boot
-    ln -s /boot/* /boot/boot/
+    cd /boot/boot
+    find .. -maxdepth 1 -type f -exec ln -s {} . \;
+    ln -s ../grub .
+    cd -
 fi
 
 return 0
