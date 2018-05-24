@@ -97,4 +97,9 @@ if cat /deepinhost/etc/deepin-installer.conf | grep DI_MOUNTPOINTS | \
     cd -
 fi
 
+# live-filesystem grub.cfg
+if [ -f /var/lib/dpkg/info/live-filesystem.postinst ];then
+	dpkg-reconfigure live-filesystem
+fi
+
 return 0
