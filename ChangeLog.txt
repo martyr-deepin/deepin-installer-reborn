@@ -1,3 +1,8 @@
+2018-05-28 2.2.16.1 deepinzhangshuang <zhangshuang@deepin.com>
+    * fix /etc/default/grub GRUB_DISTRIBUTOR
+    * Add live-filesystem grub menu on sw
+    * fix symlinks in /boot/boot on sw
+
 2018-05-14 2.2.16 Xu Shaohua <xushaohua2016@outlook.com>
     * Fix live-filesystem config for sw and loongson
     * Set sw421 sources.list to as4s
