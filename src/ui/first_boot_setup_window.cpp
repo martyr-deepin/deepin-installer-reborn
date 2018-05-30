@@ -28,6 +28,7 @@
 #include "service/first_boot_hook_worker.h"
 #include "service/power_manager.h"
 #include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "third_party/global_shortcut/global_shortcut.h"
 #include "ui/frames/first_boot_loading_frame.h"
 #include "ui/frames/system_info_frame.h"
@@ -149,7 +150,11 @@ void FirstBootSetupWindow::onPrimaryScreenChanged(const QRect& geometry) {
 }
 
 void FirstBootSetupWindow::onSystemInfoFinished() {
-  stacked_layout_->setCurrentWidget(timezone_frame_);
+  if (GetSettingsBool(kSkipTimezonePage)) {
+    this->onTimezoneFinished();
+  } else {
+    stacked_layout_->setCurrentWidget(timezone_frame_);
+  }
 }
 
 void FirstBootSetupWindow::onTimezoneFinished() {
