@@ -29,23 +29,32 @@ add_user_to_existed_group() {
 
 # Setup username, password and hostname.
 setup_username_password() {
-  local DI_HOSTNAME DI_PASSWORD DI_USERNAME REAL_PASSWORD
+  local DI_HOSTNAME DI_PASSWORD DI_USERNAME REAL_PASSWORD PASSWORD_MIN_LEN
   DI_HOSTNAME=$(installer_get "DI_HOSTNAME")
   DI_PASSWORD=$(installer_get "DI_PASSWORD")
   DI_USERNAME=$(installer_get "DI_USERNAME")
+  PASSWORD_MIN_LEN=$(installer_get "system_info_password_min_len")
 
   [ -z "${DI_USERNAME}" ] && error "Variable DI_USERNAME not set. Abort!"
-  [ -z "${DI_PASSWORD}" ] && error "Variable DI_PASSWORD not set. Abort!"
+   if [ x"${PASSWORD_MIN_LEN}" != x0 -a -z "${DI_PASSWORD}" ]; then
+    error "Variable DI_PASSWORD not set. Abort!"
+  fi
   DI_HOSTNAME="${DI_HOSTNAME:-deepin}"
 
   # Reset password in settings file
   installer_set "system_info_default_password" ""
   installer_set "DI_PASSWORD" ""
 
-  # Update password.
   useradd -U -m --skel /etc/skel --shell /bin/bash ${DI_USERNAME}
-  REAL_PASSWORD=$(echo "${DI_PASSWORD}" | base64 -d)
-  echo "${DI_USERNAME}:${REAL_PASSWORD}" | chpasswd
+
+  # Update password.
+  if [ -z "${DI_PASSWORD}" ]; then
+      msg "set password to empty"
+      passwd -d "${DI_USERNAME}"
+  else
+    REAL_PASSWORD=$(echo "${DI_PASSWORD}" | base64 -d)
+    echo "${DI_USERNAME}:${REAL_PASSWORD}" | chpasswd
+  fi
 
   # Add user to groups.
   set +e
