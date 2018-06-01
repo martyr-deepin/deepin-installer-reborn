@@ -68,6 +68,11 @@ LOCALUUID=$(blkid -s UUID -o value ${DI_ROOT_PARTITION})
 
 mkdir -p /boot/grub
 
+# live-filesystem grub.cfg
+if [ -f /var/lib/dpkg/info/live-filesystem.postinst ];then
+	dpkg-reconfigure live-filesystem
+fi
+
 msg "LOCALUUID: $LOCALUUID"
 if [ -f ${SRCPATH}/grub.cfg ]; then
   KERVER=$(uname -r)
@@ -95,11 +100,6 @@ if cat /deepinhost/etc/deepin-installer.conf | grep DI_MOUNTPOINTS | \
     find .. -maxdepth 1 -type f -exec ln -s {} . \;
     ln -s ../grub .
     cd -
-fi
-
-# live-filesystem grub.cfg
-if [ -f /var/lib/dpkg/info/live-filesystem.postinst ];then
-	dpkg-reconfigure live-filesystem
 fi
 
 return 0
