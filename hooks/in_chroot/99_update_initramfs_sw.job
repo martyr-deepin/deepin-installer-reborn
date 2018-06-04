@@ -77,11 +77,6 @@ if [ -f ${SRCPATH}/grub.cfg ]; then
 elif [ -f ${SRCPATH}/grub.cfg.head ]; then
   cat ${SRCPATH}/grub.cfg.head > /boot/grub/grub.cfg
   
-  # add live-filesystem grub item
-  if [ -f /var/lib/dpkg/info/live-filesystem.postinst ];then
-	dpkg-reconfigure live-filesystem
-  fi
-  
   for _KERVER in $(ls /lib/modules); do
     if [ -d /lib/modules/${_KERVER} ]; then
 	  sed -e "s|root=|root=UUID=$LOCALUUID|g" \
