@@ -28,6 +28,7 @@ CONF_FILE=/etc/deepin-installer.conf
 
 . ./in_chroot/09_generate_machine_id.job
 . ./in_chroot/33_setup_lightdm_auto_login.job
+. ./in_chroot/34_setup_livefs.job
 . ./in_chroot/51_setup_keyboard.job
 . ./in_chroot/52_setup_locale_timezone.job
 . ./in_chroot/53_setup_user.job
@@ -84,6 +85,7 @@ main() {
   setup_keyboard
   setup_locale_timezone
   setup_username_password
+  setup_livefs
   customize_user
 
   sync
