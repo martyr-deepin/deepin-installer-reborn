@@ -126,6 +126,9 @@ const char kInstallFailedFeedbackServer[] = "install_failed_feedback_server";
 const char kInstallFailedQRErrMsgLen[] = "install_failed_qr_err_msg_len";
 const char kInstallFailedErrMsgLen[] = "install_failed_err_msg_len";
 
+// Misc
+const char kScreenDefaultBrightness[] = "screen_default_brightness";
+
 }  // namespace installer
 
 #endif  // INSTALLER_SERVICE_SETTINGS_NAME_H

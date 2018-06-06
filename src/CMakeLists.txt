@@ -157,6 +157,8 @@ set(SERVICE_FILES
     service/log_manager.h
     service/power_manager.cpp
     service/power_manager.h
+    service/screen_brightness.cpp
+    service/screen_brightness.h
     service/settings_manager.cpp
     service/settings_manager.h
     service/system_language.cpp
