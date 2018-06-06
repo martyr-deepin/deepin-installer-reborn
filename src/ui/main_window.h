@@ -140,6 +140,10 @@ class MainWindow : public QWidget {
   // Shortcut used to switch mirror modes.
   GlobalShortcut* monitor_mode_shortcut_ = nullptr;
 
+  // Shortcut for screen brightness.
+  QShortcut* brightness_increase_shortcut_ = nullptr;
+  QShortcut* brithtness_decrease_shortcut_ = nullptr;
+
   QString log_file_;
   bool auto_install_;
 

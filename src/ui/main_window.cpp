@@ -28,6 +28,7 @@
 
 #include "base/file_util.h"
 #include "service/power_manager.h"
+#include "service/screen_brightness.h"
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "sysinfo/users.h"
@@ -67,6 +68,8 @@ MainWindow::MainWindow()
   this->initPages();
   this->registerShortcut();
   this->initConnections();
+
+  SetBrightness(GetSettingsInt(kScreenDefaultBrightness));
 }
 
 void MainWindow::fullscreen() {
@@ -189,6 +192,10 @@ void MainWindow::initConnections() {
           control_panel_frame_, &ControlPanelFrame::toggleVisible);
   connect(monitor_mode_shortcut_, &GlobalShortcut::activated,
           multi_head_manager_, &MultiHeadManager::switchXRandRMode);
+  connect(brightness_increase_shortcut_, &QShortcut::activated,
+          IncreaseBrightness);
+  connect(brithtness_decrease_shortcut_, &QShortcut::activated,
+          DecreaseBrightness);
 }
 
 void MainWindow::initPages() {
@@ -301,6 +308,9 @@ void MainWindow::registerShortcut() {
       qWarning() << "Failed to register global shortcut of Ctrl+Alt+P";
     }
   }
+
+  brightness_increase_shortcut_ = new QShortcut(QKeySequence("Ctrl+="), this);
+  brithtness_decrease_shortcut_ = new QShortcut(QKeySequence("Ctrl+-"), this);
 }
 
 void MainWindow::saveLogFile() {
