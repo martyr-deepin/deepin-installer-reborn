@@ -1,3 +1,11 @@
+deepin-installer-reborn (2.2.17) stable; urgency=medium
+
+  * Add screen brightness shortcut
+  * Support empty password
+  * Hide timezone page if it is disabled
+
+ -- Xu Shaohua <xushaohua2016@outlook.com>  Thu, 07 Jun 2018 14:42:22 +0800
+
 deepin-installer-reborn (2.2.16) stable; urgency=medium
 
   * Fix live-filesystem config for sw and loongson
