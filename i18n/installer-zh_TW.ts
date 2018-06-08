@@ -1,6 +1,6 @@
 <?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_TW" version="2.1">
 <context>
-    <name>AdvancedPartitionButton</name>
+    <name>installer::AdvancedPartitionButton</name>
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="129"/>
         <source>Install here</source>
@@ -13,7 +13,7 @@
     </message>
 </context>
 <context>
-    <name>AdvancedPartitionFrame</name>
+    <name>installer::AdvancedPartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
@@ -90,7 +90,7 @@
     </message>
 </context>
 <context>
-    <name>BootloaderListModel</name>
+    <name>installer::BootloaderListModel</name>
     <message>
         <location filename="../src/ui/models/bootloader_list_model.cpp" line="42"/>
         <source>%1 %2 (recommended)</source>
@@ -98,7 +98,7 @@
     </message>
 </context>
 <context>
-    <name>ConfirmQuitFrame</name>
+    <name>installer::ConfirmQuitFrame</name>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="39"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="58"/>
@@ -125,7 +125,7 @@
     </message>
 </context>
 <context>
-    <name>DiskSpaceInsufficientFrame</name>
+    <name>installer::DiskSpaceInsufficientFrame</name>
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="58"/>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="72"/>
@@ -140,7 +140,7 @@
     </message>
 </context>
 <context>
-    <name>EditPartitionFrame</name>
+    <name>installer::EditPartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="133"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="196"/>
@@ -185,7 +185,7 @@
     </message>
 </context>
 <context>
-    <name>FirstBootLoadingFrame</name>
+    <name>installer::FirstBootLoadingFrame</name>
     <message>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="38"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="61"/>
@@ -200,7 +200,7 @@
     </message>
 </context>
 <context>
-    <name>InstallFailedFrame</name>
+    <name>installer::InstallFailedFrame</name>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="74"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="94"/>
@@ -221,7 +221,7 @@
     </message>
 </context>
 <context>
-    <name>InstallProgressFrame</name>
+    <name>installer::InstallProgressFrame</name>
     <message>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="152"/>
@@ -236,7 +236,7 @@
     </message>
 </context>
 <context>
-    <name>InstallSuccessFrame</name>
+    <name>installer::InstallSuccessFrame</name>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="60"/>
@@ -263,7 +263,7 @@
     </message>
 </context>
 <context>
-    <name>NewPartitionFrame</name>
+    <name>installer::NewPartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="116"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="151"/>
@@ -332,7 +332,7 @@
     </message>
 </context>
 <context>
-    <name>NewTableLoadingFrame</name>
+    <name>installer::NewTableLoadingFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/new_table_loading_frame.cpp" line="37"/>
         <location filename="../src/ui/frames/inner/new_table_loading_frame.cpp" line="54"/>
@@ -341,7 +341,7 @@
     </message>
 </context>
 <context>
-    <name>NewTableWarningFrame</name>
+    <name>installer::NewTableWarningFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="77"/>
@@ -368,7 +368,7 @@
     </message>
 </context>
 <context>
-    <name>PartitionFrame</name>
+    <name>installer::PartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="73"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="188"/>
@@ -401,7 +401,7 @@
     </message>
 </context>
 <context>
-    <name>PartitionLoadingFrame</name>
+    <name>installer::PartitionLoadingFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="37"/>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="45"/>
@@ -416,7 +416,7 @@
     </message>
 </context>
 <context>
-    <name>PartitionNumberLimitationFrame</name>
+    <name>installer::PartitionNumberLimitationFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
@@ -450,7 +450,7 @@
     </message>
 </context>
 <context>
-    <name>PartitionTypeModel</name>
+    <name>installer::PartitionTypeModel</name>
     <message>
         <location filename="../src/ui/models/partition_type_model.cpp" line="41"/>
         <location filename="../src/ui/models/partition_type_model.cpp" line="47"/>
@@ -464,7 +464,7 @@
     </message>
 </context>
 <context>
-    <name>PrepareInstallFrame</name>
+    <name>installer::PrepareInstallFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="84"/>
@@ -499,27 +499,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="157"/>
-        <source>Do not use this partition</source>
-        <translation>不使用分割區</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="170"/>
-        <source>Swap partition</source>
-        <translation>Swap</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="213"/>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="244"/>
-        <source>Freespace</source>
-        <translation>可用空間</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="172"/>
-        <source>Unknown</source>
-        <translation>未知類型</translation>
-    </message>
-    <message>
         <location filename="../src/partman/operation.cpp" line="252"/>
         <source>Create extended partition %1</source>
         <translation>建立延伸分割區 %1</translation>
@@ -533,6 +512,16 @@
         <location filename="../src/partman/operation.cpp" line="260"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation>建立新分割區 %1 作為 %2（掛載點），類型為 %3</translation>
+    </message>
+    <message>
+        <location filename="../src/partman/operation.cpp" line="269"/>
+        <source>Delete %1 partition</source>
+        <translation>刪除 %1 分割區</translation>
+    </message>
+    <message>
+        <location filename="../src/partman/operation.cpp" line="274"/>
+        <source>Format %1 partition, type is %2</source>
+        <translation>格式化 %1 分割區，類型為 %2</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="278"/>
@@ -550,19 +539,30 @@
         <translation>格式化 %1 並建立新的 %2 分割表</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="269"/>
-        <source>Delete %1 partition</source>
-        <translation>刪除 %1 分割區</translation>
-    </message>
-    <message>
-        <location filename="../src/partman/operation.cpp" line="274"/>
-        <source>Format %1 partition, type is %2</source>
-        <translation>格式化 %1 分割區，類型為 %2</translation>
-    </message>
-    <message>
         <location filename="../src/partman/operation.cpp" line="298"/>
         <source>Adjust the size of %1 partition</source>
         <translation>調整 %1 分割區的大小</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="157"/>
+        <source>Do not use this partition</source>
+        <translation>不使用分割區</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="170"/>
+        <source>Swap partition</source>
+        <translation>Swap</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="172"/>
+        <source>Unknown</source>
+        <translation>未知類型</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="213"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="244"/>
+        <source>Freespace</source>
+        <translation>可用空間</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
@@ -571,7 +571,7 @@
     </message>
 </context>
 <context>
-    <name>SelectBootloaderFrame</name>
+    <name>installer::SelectBootloaderFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="65"/>
@@ -592,7 +592,7 @@
     </message>
 </context>
 <context>
-    <name>SelectLanguageFrame</name>
+    <name>installer::SelectLanguageFrame</name>
     <message>
         <location filename="../src/ui/frames/select_language_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/select_language_frame.cpp" line="110"/>
@@ -601,7 +601,7 @@
     </message>
 </context>
 <context>
-    <name>SimpleDiskFrame</name>
+    <name>installer::SimpleDiskFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="80"/>
@@ -610,7 +610,7 @@
     </message>
 </context>
 <context>
-    <name>SimplePartitionFrame</name>
+    <name>installer::SimplePartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
@@ -639,7 +639,7 @@
     </message>
 </context>
 <context>
-    <name>SystemInfoAvatarFrame</name>
+    <name>installer::SystemInfoAvatarFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="92"/>
@@ -654,7 +654,7 @@
     </message>
 </context>
 <context>
-    <name>SystemInfoFormFrame</name>
+    <name>installer::SystemInfoFormFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="65"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="125"/>
@@ -755,7 +755,7 @@
     </message>
 </context>
 <context>
-    <name>SystemInfoKeyboardFrame</name>
+    <name>installer::SystemInfoKeyboardFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="90"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="109"/>
@@ -776,7 +776,7 @@
     </message>
 </context>
 <context>
-    <name>TimezoneFrame</name>
+    <name>installer::TimezoneFrame</name>
     <message>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="167"/>
@@ -797,7 +797,7 @@
     </message>
 </context>
 <context>
-    <name>VirtualMachineFrame</name>
+    <name>installer::VirtualMachineFrame</name>
     <message>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="58"/>
@@ -829,79 +829,81 @@
     <name>installer::PartitionTableWarningFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="52"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="93"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="95"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="125"/>
-        <source>Please make a backup of all your data to avoid data loss</source>
-        <translation>請備份所有資料避免遺失</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="64"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="126"/>
-        <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation>請再次確認所有資料是否備份，重新啟動後回到此界面</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="146"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="168"/>
-        <source>Continue</source>
-        <translation>繼續安裝</translation>
-    </message>
-    <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="54"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="104"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="106"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
         <translation>無法安裝 deepin 由於偵測到 MBR 磁碟機並且電腦為 EFI 主機板，請嘗試一個解決方案。</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="59"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="116"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="118"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
         <translation>重新啟動至 BIOS 並關閉 UEFI</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="117"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="119"/>
         <source>Exit BIOS, and enter deepin to install</source>
         <translation>離開 BIOS 並重新進入 deepin 安裝</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="150"/>
-        <source>Please make sure all data were made a backup, then continue</source>
-        <translation>請確保所有資料已備份，接著繼續安裝</translation>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="65"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
+        <source>Please make a backup of all your data to avoid data loss</source>
+        <translation>請備份所有資料避免遺失</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="128"/>
+        <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
+        <translation>請再次確認所有資料是否備份，重新啟動後回到此界面</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="68"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="148"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="170"/>
+        <source>Continue</source>
+        <translation>繼續安裝</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="71"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
+        <source>Please make sure all data were made a backup, then continue</source>
+        <translation>請確保所有資料已備份，接著繼續安裝</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
         <source>Continue installation will format your disk</source>
         <translation>繼續安裝將格式化磁碟機</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="167"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
         <source>Reboot</source>
         <translation>重新啟動</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="171"/>
         <source>Back</source>
         <translation>返回</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="112"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="57"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="114"/>
         <source>Disable UEFI</source>
         <translation>關閉 UEFI</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="121"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="62"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="123"/>
         <source>Format the disk</source>
         <translation>格式化磁碟機</translation>
     </message>
