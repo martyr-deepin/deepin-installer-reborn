@@ -54,10 +54,12 @@ void PartitionTableWarningFrame::changeEvent(QEvent* event) {
         tr("Unable to install directly due to EFI motherboard boot loader "
            "and MBR disk detected, please select one of the solutions below "
            "to continue."));
+    list_title1_->setText(QString("A.%1").arg(tr("Disable UEFI")));
     list_item1_->setText(
         QString("1.%1\n2.%2")
             .arg(tr("Reboot, enter BIOS, and disable UEFI"))
             .arg(tr("Exit BIOS, and enter deepin to install")));
+    list_title2_->setText(QString("B.%1").arg(tr("Format the disk")));
     list_item2_->setText(
         QString("1.%1\n2.%2")
             .arg(tr("Please make a backup of all your data to avoid data loss"))

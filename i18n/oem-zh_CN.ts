@@ -2,7 +2,7 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
-    <name>OemSettingsItemView</name>
+    <name>installer::OemSettingsItemView</name>
     <message>
         <location filename="../src/oem/views/oem_settings_item_view.cpp" line="81"/>
         <source>Title</source>
@@ -46,7 +46,7 @@
     </message>
 </context>
 <context>
-    <name>OemWindow</name>
+    <name>installer::OemWindow</name>
     <message>
         <location filename="../src/oem/oem_window.cpp" line="45"/>
         <source>Failed to create $HOME/oem folder or sub-folders</source>
