@@ -4,12 +4,12 @@
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="129"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Buraya kur</translation>
     </message>
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="132"/>
         <source>To be formatted</source>
-        <translation type="unfinished"/>
+        <translation>Biçimlendirilecek</translation>
     </message>
 </context>
 <context>
@@ -18,75 +18,75 @@
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
         <source>Change boot loader</source>
-        <translation type="unfinished"/>
+        <translation>Önyükleyiciyi değiştir</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="550"/>
         <source>Done</source>
-        <translation type="unfinished"/>
+        <translation>Bitti</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="177"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="552"/>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>Sil</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="430"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>%1 hata bulundu, yükleme işlemine devam etmeyi veya basit moda geçerek hatayı düzeltiniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="434"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>%1 hata bulundu, yükleme işlemine devam etmeyi veya basit moda geçerek hatayı düzeltiniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="440"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation type="unfinished"/>
+        <translation>% 1 hata bulundu, hatayı düzelttikten sonra yüklemeye devam edin</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="444"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation type="unfinished"/>
+        <translation>% 1 hata bulundu, hatayı düzelttikten sonra yüklemeye devam ediniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation type="unfinished"/>
+        <translation>/boot dizininin bölüm dosya sistemi türü yalnızca %1 olabilir</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation type="unfinished"/>
+        <translation>/boot dizininin bölümü, sabit diskteki ilk bölüm olmalıdır</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="500"/>
         <source>At least %1 MB is required for /boot partition</source>
-        <translation type="unfinished"/>
+        <translation>/boot bölümü için en az %1 MB gerekiyor</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>Add an EFI partition to continue</source>
-        <translation type="unfinished"/>
+        <translation>Devam etmek için bir EFI bölümü ekle</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
         <source>At least %1 MB is required for EFI partition</source>
-        <translation type="unfinished"/>
+        <translation>/EFI bölümü için en az %1 MB gerekiyor</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="512"/>
         <source>Add a Root partition to continue</source>
-        <translation type="unfinished"/>
+        <translation>Devam etmek için bir Kök bölümü ekleyin</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="517"/>
         <source>At least %1 GB is required for Root partition</source>
-        <translation type="unfinished"/>
+        <translation>Kök bölümleme için en az %1 GB gerekiyor</translation>
     </message>
 </context>
 <context>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../src/ui/models/bootloader_list_model.cpp" line="42"/>
         <source>%1 %2 (recommended)</source>
-        <translation type="unfinished"/>
+        <translation>%1 %2 (önerilen)</translation>
     </message>
 </context>
 <context>
@@ -103,25 +103,25 @@
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="39"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="58"/>
         <source>Abort Installation</source>
-        <translation type="unfinished"/>
+        <translation>Kurulumu Kes</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="60"/>
         <source>Relevant operations you made in the installation process will not take effect, abort or continue installation?</source>
-        <translation type="unfinished"/>
+        <translation>Yükleme işleminde yaptığınız işlemler etkili olmaz, yükleme işlemini iptal veya devam edilsin mi?</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="43"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="67"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Devam et</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="44"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="68"/>
         <source>Abort</source>
-        <translation type="unfinished"/>
+        <translation>Vazgeç</translation>
     </message>
 </context>
 <context>
@@ -130,13 +130,13 @@
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="58"/>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="72"/>
         <source>Insufficient Disk Space</source>
-        <translation type="unfinished"/>
+        <translation>Yetersiz Disk Alanı</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="60"/>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="79"/>
         <source>Exit installation</source>
-        <translation type="unfinished"/>
+        <translation>Kurulumdan Çık</translation>
     </message>
 </context>
 <context>
@@ -145,43 +145,43 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="133"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="196"/>
         <source>Edit Disk</source>
-        <translation type="unfinished"/>
+        <translation>Diski Düzenle</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen önemli verilerin yedeklendiğinden emin olun, daha sonra yüklenecek diski seçin</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="137"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="231"/>
         <source>Filesystem</source>
-        <translation type="unfinished"/>
+        <translation>Dosya sistemi</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="138"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="233"/>
         <source>Mount point</source>
-        <translation type="unfinished"/>
+        <translation>Bağlama noktası</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="139"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="235"/>
         <source>Format the partition</source>
-        <translation type="unfinished"/>
+        <translation>Bölümü biçimle</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="140"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="278"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>İptal et</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="141"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="279"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>Tamam</translation>
     </message>
 </context>
 <context>
@@ -190,13 +190,13 @@
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="38"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="61"/>
         <source>Tuning system</source>
-        <translation type="unfinished"/>
+        <translation>Tuning sistemi</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="63"/>
         <source>Applying changes to your system, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Sisteminize değişiklikler uygulanıyor, lütfen bekleyin ...</translation>
     </message>
 </context>
 <context>
@@ -205,19 +205,19 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="74"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="94"/>
         <source>Installation Failed</source>
-        <translation type="unfinished"/>
+        <translation>Kurulum Başarısız oldu</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation type="unfinished"/>
+        <translation>Bu sorunu daha iyi çözebilmemiz için rahatsızlıktan dolayı özür dileriz, hata günlüğü göndermek için QR kodunu fotoğraflayabilir veya tarayabilirsiniz.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="125"/>
         <source>Exit installation</source>
-        <translation type="unfinished"/>
+        <translation>Kurulumdan Çık</translation>
     </message>
 </context>
 <context>
@@ -226,13 +226,13 @@
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="152"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>Kuruluyor</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation type="unfinished"/>
+        <translation>Sadece bir fincan kahve zamanı kadar sonra deepin inanılmaz keyfini yaşayabilirsiniz.</translation>
     </message>
 </context>
 <context>
@@ -241,25 +241,25 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="60"/>
         <source>Successfully Installed</source>
-        <translation type="unfinished"/>
+        <translation>Başarıyla Yüklendi</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="62"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation type="unfinished"/>
+        <translation>Yeni deneyimlerin tadını çıkarmak için yeniden başlatın, beğeneneceğinizi umuyoruz!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen yeniden başlatmadan önce kurulum ortamını çıkarın</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="70"/>
         <source>Experience now</source>
-        <translation type="unfinished"/>
+        <translation>Şimdi deneyin</translation>
     </message>
 </context>
 <context>
@@ -268,67 +268,67 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="116"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="151"/>
         <source>New Partition</source>
-        <translation type="unfinished"/>
+        <translation>Yeni Bölüm</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="118"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="153"/>
         <source>Create a new partition and define the type and size</source>
-        <translation type="unfinished"/>
+        <translation>Yeni bir bölüm oluştururarak türünü, boyutunu tanımlayın</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="119"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="159"/>
         <source>Type</source>
-        <translation type="unfinished"/>
+        <translation>Tür</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="120"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="165"/>
         <source>Location</source>
-        <translation type="unfinished"/>
+        <translation>Konum</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="121"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="170"/>
         <source>Filesystem</source>
-        <translation type="unfinished"/>
+        <translation>Dosya sistemi</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="122"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="176"/>
         <source>Mount point</source>
-        <translation type="unfinished"/>
+        <translation>Bağlama noktası</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="123"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="183"/>
         <source>Size</source>
-        <translation type="unfinished"/>
+        <translation>Boyut</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="125"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="168"/>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Başla</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="125"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="168"/>
         <source>End</source>
-        <translation type="unfinished"/>
+        <translation>Son</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="126"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="213"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>İptal et</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="214"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>Tamam</translation>
     </message>
 </context>
 <context>
@@ -337,7 +337,7 @@
         <location filename="../src/ui/frames/inner/new_table_loading_frame.cpp" line="37"/>
         <location filename="../src/ui/frames/inner/new_table_loading_frame.cpp" line="54"/>
         <source>Formatting...</source>
-        <translation type="unfinished"/>
+        <translation>Biçimleniyor...</translation>
     </message>
 </context>
 <context>
@@ -346,25 +346,25 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="77"/>
         <source>Full Disk Format Warning</source>
-        <translation type="unfinished"/>
+        <translation>Tam Disk Biçimi Uyarısı</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="95"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Yükleme işlemine devam ederken tüm diski biçimlendirecek, lütfen veri kaybını önlemek için tüm verilerinizin yedeğini alın</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="102"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>İptal et</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="60"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="103"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Devam et</translation>
     </message>
 </context>
 <context>
@@ -373,31 +373,31 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="73"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="188"/>
         <source>Select Installation Location</source>
-        <translation type="unfinished"/>
+        <translation>Yükleme Konumunu Seçiniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="75"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="190"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen önemli verilerin yedeklendiğinden emin olun, daha sonra yüklenecek diski seçin</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="198"/>
         <source>Simple</source>
-        <translation type="unfinished"/>
+        <translation>Basit</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="78"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="204"/>
         <source>Advanced</source>
-        <translation type="unfinished"/>
+        <translation>Gelişmiş</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="79"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="251"/>
         <source>Start installation</source>
-        <translation type="unfinished"/>
+        <translation>Kurulumu Başlat</translation>
     </message>
 </context>
 <context>
@@ -406,13 +406,13 @@
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="37"/>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="45"/>
         <source>Scan disks</source>
-        <translation type="unfinished"/>
+        <translation>Diskleri tara</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="38"/>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="46"/>
         <source>Scanning disks, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Diskler taranıyor, lütfen bekleyin...</translation>
     </message>
 </context>
 <context>
@@ -422,31 +422,31 @@
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="78"/>
         <source>You need to delete a primary partition to create a new primary partition</source>
-        <translation type="unfinished"/>
+        <translation>Yeni birincil bölüm oluşturmak için birincil bölümü silmeniz gerekir</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="81"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
-        <translation type="unfinished"/>
+        <translation>Yeni mantıksal bölümler sadece mevcut mantıksal bölümlerin yakınında oluşturulabilir</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
         <source>You need to delete a primary partition to create the new partition</source>
-        <translation type="unfinished"/>
+        <translation>Yeni bölümü oluşturmak için birincil bölümü silmeniz gerekir</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="76"/>
         <source>Cannot create new partitions</source>
-        <translation type="unfinished"/>
+        <translation>Yeni bölümler oluşturamadı</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="83"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Geri</translation>
     </message>
 </context>
 <context>
@@ -455,12 +455,12 @@
         <location filename="../src/ui/models/partition_type_model.cpp" line="41"/>
         <location filename="../src/ui/models/partition_type_model.cpp" line="47"/>
         <source>Logical Partition</source>
-        <translation type="unfinished"/>
+        <translation>Mantksal Bölüm</translation>
     </message>
     <message>
         <location filename="../src/ui/models/partition_type_model.cpp" line="45"/>
         <source>Primary Partition</source>
-        <translation type="unfinished"/>
+        <translation>Birincil Bölüm</translation>
     </message>
 </context>
 <context>
@@ -469,31 +469,31 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="84"/>
         <source>Prepare for Installation</source>
-        <translation type="unfinished"/>
+        <translation>Yükleme için hazırlanıyor</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="86"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen önemli verilerin yedeğini alın ve aşağıdaki işlemleri doğrulayın</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Aşağıdaki işlemler gerçekleştirilecek, lütfen veri kaybını önlemek için onaylayın ve devam edin</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="107"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Geri</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="70"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="108"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Devam et</translation>
     </message>
 </context>
 <context>
@@ -576,19 +576,19 @@
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="65"/>
         <source>Select location for boot loader</source>
-        <translation type="unfinished"/>
+        <translation>Önyükleyici konumu seçin</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="44"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="67"/>
         <source>If you do not understand the detailed settings, please select default settings</source>
-        <translation type="unfinished"/>
+        <translation>Ayrıntılı ayarları bilmiyorsanız, lütfen varsayılan ayarları seçiniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="79"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Geri</translation>
     </message>
 </context>
 <context>
@@ -597,7 +597,7 @@
         <location filename="../src/ui/frames/select_language_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/select_language_frame.cpp" line="110"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Sonraki</translation>
     </message>
 </context>
 <context>
@@ -606,7 +606,7 @@
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="80"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Buraya kur</translation>
     </message>
 </context>
 <context>
@@ -614,28 +614,28 @@
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation type="unfinished"/>
+        <translation>Yeni bölüm oluşturmak mümkün değil, lütfen mevcut bölümlerden birini seçin!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="74"/>
         <source>Please select one of the partitions to install!</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen yüklenecek bölümlerden birini seçiniz!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="81"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation type="unfinished"/>
+        <translation>Kök bölümleme için en az %1 GB gerekiyor</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="211"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Buraya kur</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="388"/>
         <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
-        <translation type="unfinished"/>
+        <translation>Windows diske deepin yüklerseniz Windows önyükleme yapmaz, lütfen devam etmesini onaylayın</translation>
     </message>
 </context>
 <context>
@@ -644,13 +644,13 @@
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="92"/>
         <source>User Avatar</source>
-        <translation type="unfinished"/>
+        <translation>Kullanıcı Resmi</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="93"/>
         <source>Select an avatar for your account</source>
-        <translation type="unfinished"/>
+        <translation>Hesabın için bir avatar seç</translation>
     </message>
 </context>
 <context>
@@ -659,99 +659,99 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="65"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="125"/>
         <source>Create User Account</source>
-        <translation type="unfinished"/>
+        <translation>Kullanıcı Hesabı oluştur</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="126"/>
         <source>Input username and password</source>
-        <translation type="unfinished"/>
+        <translation>Kullanıcı adı ve şifre giriniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="135"/>
         <source>Username</source>
-        <translation type="unfinished"/>
+        <translation>Kullanıcı adı</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="68"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
         <source>Computer name</source>
-        <translation type="unfinished"/>
+        <translation>Bilgisayar adı</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="69"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
         <source>Password</source>
-        <translation type="unfinished"/>
+        <translation>Şifre</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="70"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="151"/>
         <source>Confirm password</source>
-        <translation type="unfinished"/>
+        <translation>Şifre doğrulama</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Sonraki</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="191"/>
         <source>This username already exists</source>
-        <translation type="unfinished"/>
+        <translation>Bu kullanıcı adı zaten mevcut</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="195"/>
         <source>The first letter must be in lowercase</source>
-        <translation type="unfinished"/>
+        <translation>İlk harf küçük harfle yazılmalıdır.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="200"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
-        <translation type="unfinished"/>
+        <translation>Kullanıcı adında, İngiliz alfabesi harfleri (küçük harfler), rakamlar ya da özel simgeler bulunmalıdır (_-)</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="206"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen %1 karakterden uzun ve %2 karakterden daha kısa kullanıcı adı giriniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen bilgisayar adı giriniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>Computer name is invalid</source>
-        <translation type="unfinished"/>
+        <translation>Bilgisayar adı geçersiz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="233"/>
         <source>Computer name already exists, please input another one</source>
-        <translation type="unfinished"/>
+        <translation>Bu bilgisayar adı mevcut, lütfen başka bir tane giriniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="238"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen bilgisayar adını %1 karakterden uzun ya da %2 karakterden kısa olarak giriniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="264"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="278"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen %1 karakterden uzun ve %2 karakterden kısa şifre giriniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="272"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation type="unfinished"/>
+        <translation>Parola, İngilizce harfler (büyük / küçük harfe duyarlı), sayı veya özel semboller içermelidir (~! @ # $% ^ &amp; * () [] {} \ | /?,. &lt;&gt;)</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="292"/>
         <source>The two passwords don&apos;t match</source>
-        <translation type="unfinished"/>
+        <translation>2 şifre eşlemiyor</translation>
     </message>
 </context>
 <context>
@@ -760,19 +760,19 @@
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="90"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="109"/>
         <source>Select keyboard layout</source>
-        <translation type="unfinished"/>
+        <translation>Klavye düzenini seçiniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="91"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="144"/>
         <source>Test area</source>
-        <translation type="unfinished"/>
+        <translation>Test alanı</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="149"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Geri</translation>
     </message>
 </context>
 <context>
@@ -781,19 +781,19 @@
         <location filename="../src/ui/frames/timezone_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="167"/>
         <source>Select Time Zone</source>
-        <translation type="unfinished"/>
+        <translation>Saat Dilimini Seç</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="130"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="168"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>Bölgenizi haritada işaretleyiniz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="131"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="170"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Sonraki</translation>
     </message>
 </context>
 <context>
@@ -802,19 +802,19 @@
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="58"/>
         <source>Friendly Reminder</source>
-        <translation type="unfinished"/>
+        <translation>Arkadaşça bir uyarı</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="60"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation type="unfinished"/>
+        <translation>Sistem, akıcı bir deneyim için sistem performansını ve çalışma deneyimini etkileyecek sanal makine kullandığınızı tespit etti; gerçek makine ortamında deepin kurulumu önerilir</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="69"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Devam et</translation>
     </message>
 </context>
 <context>

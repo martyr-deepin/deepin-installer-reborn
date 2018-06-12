@@ -4,12 +4,12 @@
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="129"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Instalare aici</translation>
     </message>
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="132"/>
         <source>To be formatted</source>
-        <translation type="unfinished"/>
+        <translation>Se va formata</translation>
     </message>
 </context>
 <context>
@@ -71,7 +71,7 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>Add an EFI partition to continue</source>
-        <translation type="unfinished"/>
+        <translation>Adăugați o partiție EFI pentru a continua</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
@@ -81,12 +81,12 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="512"/>
         <source>Add a Root partition to continue</source>
-        <translation type="unfinished"/>
+        <translation>Adăugați o partiție Root pentru a continua</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="517"/>
         <source>At least %1 GB is required for Root partition</source>
-        <translation type="unfinished"/>
+        <translation>Este nevoie de măcar %1 GB spațiu liber pentru partiția Root</translation>
     </message>
 </context>
 <context>
@@ -606,7 +606,7 @@
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="80"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Instalare aici</translation>
     </message>
 </context>
 <context>
@@ -630,7 +630,7 @@
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="211"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Instalare aici</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="388"/>

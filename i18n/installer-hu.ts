@@ -4,12 +4,12 @@
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="129"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Telepítés ide</translation>
     </message>
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="132"/>
         <source>To be formatted</source>
-        <translation type="unfinished"/>
+        <translation>Formázásra kerül</translation>
     </message>
 </context>
 <context>
@@ -18,75 +18,75 @@
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
         <source>Change boot loader</source>
-        <translation type="unfinished"/>
+        <translation>Rendszerbetöltő csere</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="550"/>
         <source>Done</source>
-        <translation type="unfinished"/>
+        <translation>Kész</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="177"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="552"/>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>Törlés</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="430"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>%1 hiba, javítsuk ki a telepítés folytatásához vagy váltsunk egyszerű módra</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="434"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>%1 hibát találtunk, javítsuk ki a telepítés folytatásához vagy váltsunk egyszerű módra</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="440"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation type="unfinished"/>
+        <translation>% 1 hiba található, a hiba javítás után a telepítés folytatható</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="444"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation type="unfinished"/>
+        <translation>% 1 hiba található, a hibák javítása után a telepítés folytatható</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation type="unfinished"/>
+        <translation>A partíció, ahol a /boot könyvtár van, csak %1 lehet</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation type="unfinished"/>
+        <translation>A merevlemez első partíciójában kell lennie a /boot könyvtárnak</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="500"/>
         <source>At least %1 MB is required for /boot partition</source>
-        <translation type="unfinished"/>
+        <translation>Legalább %1 MB szükséges egy /boot partíció számára</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>Add an EFI partition to continue</source>
-        <translation type="unfinished"/>
+        <translation>A folytatáshoz hozzunk létre EFI partíciót</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
         <source>At least %1 MB is required for EFI partition</source>
-        <translation type="unfinished"/>
+        <translation>Legalább %1 MB szükséges egy EFI partíció számára</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="512"/>
         <source>Add a Root partition to continue</source>
-        <translation type="unfinished"/>
+        <translation>A folytatáshoz hozzunk létre gyökérpartíciót</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="517"/>
         <source>At least %1 GB is required for Root partition</source>
-        <translation type="unfinished"/>
+        <translation>Legalább %1 GB hely szükséges a gyökérpartíciónak</translation>
     </message>
 </context>
 <context>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../src/ui/models/bootloader_list_model.cpp" line="42"/>
         <source>%1 %2 (recommended)</source>
-        <translation type="unfinished"/>
+        <translation>%1 %2 (ajánlott)</translation>
     </message>
 </context>
 <context>
@@ -103,25 +103,25 @@
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="39"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="58"/>
         <source>Abort Installation</source>
-        <translation type="unfinished"/>
+        <translation>Telepítés megszakítása</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="60"/>
         <source>Relevant operations you made in the installation process will not take effect, abort or continue installation?</source>
-        <translation type="unfinished"/>
+        <translation>Az ide vonatkozó műveletek amit a telepítés során kijelöltünk, nem kerülnek végrehajtásra, megszakítás vagy telepítés folytatása?</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="43"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="67"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Folytatás</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="44"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="68"/>
         <source>Abort</source>
-        <translation type="unfinished"/>
+        <translation>Megszakítás</translation>
     </message>
 </context>
 <context>
@@ -130,13 +130,13 @@
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="58"/>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="72"/>
         <source>Insufficient Disk Space</source>
-        <translation type="unfinished"/>
+        <translation>Nincs elegendő lemezterület</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="60"/>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="79"/>
         <source>Exit installation</source>
-        <translation type="unfinished"/>
+        <translation>Kilépés a telepítőből</translation>
     </message>
 </context>
 <context>
@@ -145,43 +145,43 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="133"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="196"/>
         <source>Edit Disk</source>
-        <translation type="unfinished"/>
+        <translation>Lemez szerkesztés</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Bizonyosodjunk meg róla, hogy minden adatról készítettünk biztonsági másolatot, majd válasszunk ki a lemezt a telepítéshez </translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="137"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="231"/>
         <source>Filesystem</source>
-        <translation type="unfinished"/>
+        <translation>Fájlrendszer</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="138"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="233"/>
         <source>Mount point</source>
-        <translation type="unfinished"/>
+        <translation>Csatolási pont</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="139"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="235"/>
         <source>Format the partition</source>
-        <translation type="unfinished"/>
+        <translation>Partíció formázás</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="140"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="278"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Kilépés</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="141"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="279"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -190,13 +190,13 @@
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="38"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="61"/>
         <source>Tuning system</source>
-        <translation type="unfinished"/>
+        <translation>Rendszerhangolás</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="63"/>
         <source>Applying changes to your system, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Változtatások alkalmazása a rendszerhez, várjunk...</translation>
     </message>
 </context>
 <context>
@@ -205,19 +205,19 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="74"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="94"/>
         <source>Installation Failed</source>
-        <translation type="unfinished"/>
+        <translation>Sikertelen telepítés</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation type="unfinished"/>
+        <translation>Elnézést a kellemetlenségért, készíthetünk képet vagy beszkennelhetünk QR kódot a hibajelentés küldéséhez, hogy a fejlesztők minél hamarabb kijavíthassák a hibát.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="125"/>
         <source>Exit installation</source>
-        <translation type="unfinished"/>
+        <translation>Kilépés a telepítőből</translation>
     </message>
 </context>
 <context>
@@ -226,13 +226,13 @@
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="152"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>Telepítés</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation type="unfinished"/>
+        <translation>Megtapasztalhatja a hihetetlen élményt amit a Deepin nyújt az telepítési idő után csak egy kávé áráért</translation>
     </message>
 </context>
 <context>
@@ -241,25 +241,25 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="60"/>
         <source>Successfully Installed</source>
-        <translation type="unfinished"/>
+        <translation>A telepítés sikeresen megtörtént</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="62"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation type="unfinished"/>
+        <translation>Indítsuk újra a számítógépet a Deepin által nyújtott élmény megtapasztalásáért. Reméljük szeretni fogja!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation type="unfinished"/>
+        <translation>Újraindítás előtt távolítsa el az eszközt, amiről telepítette a rendszert.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="70"/>
         <source>Experience now</source>
-        <translation type="unfinished"/>
+        <translation>Kipróbálás most</translation>
     </message>
 </context>
 <context>
@@ -268,67 +268,67 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="116"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="151"/>
         <source>New Partition</source>
-        <translation type="unfinished"/>
+        <translation>Új partíció</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="118"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="153"/>
         <source>Create a new partition and define the type and size</source>
-        <translation type="unfinished"/>
+        <translation>Új partíció létrehozása és típus, méret beállítása</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="119"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="159"/>
         <source>Type</source>
-        <translation type="unfinished"/>
+        <translation>Típus</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="120"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="165"/>
         <source>Location</source>
-        <translation type="unfinished"/>
+        <translation>Elhelyezkedés</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="121"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="170"/>
         <source>Filesystem</source>
-        <translation type="unfinished"/>
+        <translation>Fájlrendszer</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="122"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="176"/>
         <source>Mount point</source>
-        <translation type="unfinished"/>
+        <translation>Csatolási pont</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="123"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="183"/>
         <source>Size</source>
-        <translation type="unfinished"/>
+        <translation>Méret</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="125"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="168"/>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Eleje</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="125"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="168"/>
         <source>End</source>
-        <translation type="unfinished"/>
+        <translation>Vége</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="126"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="213"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Kilépés</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="214"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -337,7 +337,7 @@
         <location filename="../src/ui/frames/inner/new_table_loading_frame.cpp" line="37"/>
         <location filename="../src/ui/frames/inner/new_table_loading_frame.cpp" line="54"/>
         <source>Formatting...</source>
-        <translation type="unfinished"/>
+        <translation>Formázás...</translation>
     </message>
 </context>
 <context>
@@ -346,25 +346,25 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="77"/>
         <source>Full Disk Format Warning</source>
-        <translation type="unfinished"/>
+        <translation>Figyelmeztetés Teljes lemez formázása</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="95"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Ha folytatjuk a telepítést a teljes lemez formázásra kerül, bizonyosodjunk meg róla, hogy készítettünk biztonsági mentést az adatokról. Így elkerülhető az adatvesztés.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="102"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Kilépés</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="60"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="103"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Tovább</translation>
     </message>
 </context>
 <context>
@@ -373,31 +373,31 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="73"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="188"/>
         <source>Select Installation Location</source>
-        <translation type="unfinished"/>
+        <translation>Telepítési hely kiválasztása</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="75"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="190"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Bizonyosodjunk meg róla hogy a fontos adatainkról készítettünk biztonsági mentést, majd válasszuk ki a lemezt a telepítéshez</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="198"/>
         <source>Simple</source>
-        <translation type="unfinished"/>
+        <translation>Egyszerű</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="78"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="204"/>
         <source>Advanced</source>
-        <translation type="unfinished"/>
+        <translation>Kibővített</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="79"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="251"/>
         <source>Start installation</source>
-        <translation type="unfinished"/>
+        <translation>Telepítés elindítása</translation>
     </message>
 </context>
 <context>
@@ -406,13 +406,13 @@
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="37"/>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="45"/>
         <source>Scan disks</source>
-        <translation type="unfinished"/>
+        <translation>Lemezek ellenőrzése</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="38"/>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="46"/>
         <source>Scanning disks, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Lemezek ellenőrzése, várjunk...</translation>
     </message>
 </context>
 <context>
@@ -422,31 +422,31 @@
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="78"/>
         <source>You need to delete a primary partition to create a new primary partition</source>
-        <translation type="unfinished"/>
+        <translation>Először törölni kell az elsődleges partíciót az új elsődleges partíció létrehozásához</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="81"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
-        <translation type="unfinished"/>
+        <translation>Új logikai partíciót csak egy létező logikai partíció mellett lehet létrehozni</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
         <source>You need to delete a primary partition to create the new partition</source>
-        <translation type="unfinished"/>
+        <translation>Először törölni kell az elsődleges partíciót az új elsődleges partíció létrehozásához</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="76"/>
         <source>Cannot create new partitions</source>
-        <translation type="unfinished"/>
+        <translation>Nem lehet létrehozni új partíciót</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="83"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Vissza</translation>
     </message>
 </context>
 <context>
@@ -455,12 +455,12 @@
         <location filename="../src/ui/models/partition_type_model.cpp" line="41"/>
         <location filename="../src/ui/models/partition_type_model.cpp" line="47"/>
         <source>Logical Partition</source>
-        <translation type="unfinished"/>
+        <translation>Logikai partíció</translation>
     </message>
     <message>
         <location filename="../src/ui/models/partition_type_model.cpp" line="45"/>
         <source>Primary Partition</source>
-        <translation type="unfinished"/>
+        <translation>Elsődleges partíció</translation>
     </message>
 </context>
 <context>
@@ -469,31 +469,31 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="84"/>
         <source>Prepare for Installation</source>
-        <translation type="unfinished"/>
+        <translation>Telepítés előkészítése</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="86"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation type="unfinished"/>
+        <translation>Készítsünk biztonsági mentést a fontos adatokról, majd erősítsük meg a következő műveleteket</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>A következő műveletek végre lesznek hajtva, erősítsük meg és folytassuk a telepítést az adatvesztés elkerülése érdekében</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="107"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Vissza</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="70"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="108"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Folytatás</translation>
     </message>
 </context>
 <context>
@@ -576,19 +576,19 @@
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="65"/>
         <source>Select location for boot loader</source>
-        <translation type="unfinished"/>
+        <translation>Telepítési hely kiválasztása a rendszerbetöltőhöz</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="44"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="67"/>
         <source>If you do not understand the detailed settings, please select default settings</source>
-        <translation type="unfinished"/>
+        <translation>Ha nehézségeink vannak a részletes beállításokkal, válasszuk az alap beállításokat</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="79"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Vissza</translation>
     </message>
 </context>
 <context>
@@ -597,7 +597,7 @@
         <location filename="../src/ui/frames/select_language_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/select_language_frame.cpp" line="110"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Következő</translation>
     </message>
 </context>
 <context>
@@ -606,7 +606,7 @@
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="80"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Telepítés helye</translation>
     </message>
 </context>
 <context>
@@ -614,28 +614,28 @@
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation type="unfinished"/>
+        <translation>Új partíciót nem lehet létrehozni. Válasszunk a már létező partíciók közül!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="74"/>
         <source>Please select one of the partitions to install!</source>
-        <translation type="unfinished"/>
+        <translation>Válasszunk ki egy partíciót a telepítéshez</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="81"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation type="unfinished"/>
+        <translation>Legalább %1 GB hely szükséges a gyökér partíciónak</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="211"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Telepítés ide</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="388"/>
         <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
-        <translation type="unfinished"/>
+        <translation>A Windows nem fog elindulni, ha a Deepin-t a Windows rendszerlemezére telepíti. Kérem, erősítse ezt meg, ha folytatni szeretné a telepítést.</translation>
     </message>
 </context>
 <context>
@@ -644,13 +644,13 @@
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="92"/>
         <source>User Avatar</source>
-        <translation type="unfinished"/>
+        <translation>Felhasználói avatar</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="93"/>
         <source>Select an avatar for your account</source>
-        <translation type="unfinished"/>
+        <translation>Válasszunk ki egy avatart</translation>
     </message>
 </context>
 <context>
@@ -659,99 +659,99 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="65"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="125"/>
         <source>Create User Account</source>
-        <translation type="unfinished"/>
+        <translation>Felhasználói fiók létrehozása</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="126"/>
         <source>Input username and password</source>
-        <translation type="unfinished"/>
+        <translation>Adjuk meg a felhasználónevet és a jelszót</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="135"/>
         <source>Username</source>
-        <translation type="unfinished"/>
+        <translation>Felhasználónév</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="68"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
         <source>Computer name</source>
-        <translation type="unfinished"/>
+        <translation>Számítógépnév</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="69"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
         <source>Password</source>
-        <translation type="unfinished"/>
+        <translation>Jelszó</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="70"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="151"/>
         <source>Confirm password</source>
-        <translation type="unfinished"/>
+        <translation>Jelszó megerősítése</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Következő</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="191"/>
         <source>This username already exists</source>
-        <translation type="unfinished"/>
+        <translation>A felhasználónév már létezik</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="195"/>
         <source>The first letter must be in lowercase</source>
-        <translation type="unfinished"/>
+        <translation>Az első betűnek kis betűnek kell lennie</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="200"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
-        <translation type="unfinished"/>
+        <translation>A felhasználónév csak angol kisbetűket (tehát nem ékezetes betűket), számokat vagy különleges szimbólumokat  ( aláhúzás vagy kötőjel ) tartalmazhat.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="206"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Adjunk meg egy felhasználónevet ami hosszabb mint %1 karakter és rövidebb mint %2 karakter</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name</source>
-        <translation type="unfinished"/>
+        <translation>Adjuk meg a számítógép nevét</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>Computer name is invalid</source>
-        <translation type="unfinished"/>
+        <translation>Érvénytelen számítógépnév</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="233"/>
         <source>Computer name already exists, please input another one</source>
-        <translation type="unfinished"/>
+        <translation>A számítógép név már létezik. Adjunk meg egy másikat</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="238"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Adjunk meg egy számítógép nevet ami hosszabb mint %1 karakter és rövidebb mint %2 karakter</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="264"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="278"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Adjunk meg egy jelszót ami hosszabb mint %1 karakter és rövidebb mint %2 karakter</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="272"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation type="unfinished"/>
+        <translation>A jelszónak tartalmaznia kell az angol ábécé betűit (kis-nagy betű érzékeny), arab számokat vagy speciális szimbólumokat (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="292"/>
         <source>The two passwords don&apos;t match</source>
-        <translation type="unfinished"/>
+        <translation>A két jelszó nem egyezik</translation>
     </message>
 </context>
 <context>
@@ -760,19 +760,19 @@
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="90"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="109"/>
         <source>Select keyboard layout</source>
-        <translation type="unfinished"/>
+        <translation>Válasszunk ki egy billentyűzetkiosztást</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="91"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="144"/>
         <source>Test area</source>
-        <translation type="unfinished"/>
+        <translation>Teszt terület</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="149"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Vissza</translation>
     </message>
 </context>
 <context>
@@ -781,19 +781,19 @@
         <location filename="../src/ui/frames/timezone_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="167"/>
         <source>Select Time Zone</source>
-        <translation type="unfinished"/>
+        <translation>Időzóna kiválasztás</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="130"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="168"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>Jelöld meg az időzónádat a térképen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="131"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="170"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Következő</translation>
     </message>
 </context>
 <context>
@@ -802,19 +802,19 @@
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="58"/>
         <source>Friendly Reminder</source>
-        <translation type="unfinished"/>
+        <translation>Baráti emlékeztető</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="60"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation type="unfinished"/>
+        <translation>A rendszer észlelte, hogy virtuális számítógép van használatban ami befolyásolja a teljesítményt és az élményt. Az ideális élmény érdekében ajánlott valódi számítógépre telepíteni a rendszert</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="69"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Tovább</translation>
     </message>
 </context>
 <context>

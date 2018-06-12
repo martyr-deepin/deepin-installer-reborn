@@ -4,12 +4,12 @@
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="129"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Installer her</translation>
     </message>
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="132"/>
         <source>To be formatted</source>
-        <translation type="unfinished"/>
+        <translation>Til formattering</translation>
     </message>
 </context>
 <context>
@@ -18,30 +18,30 @@
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
         <source>Change boot loader</source>
-        <translation type="unfinished"/>
+        <translation>Bytt boot loader</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="550"/>
         <source>Done</source>
-        <translation type="unfinished"/>
+        <translation>Ferdig</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="177"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="552"/>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>Slett</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="430"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>%1 feil funnet, rett denne/disse for å forsette eller bytt til enkel modus</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="434"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>%1 feil funnet, rett denne/disse for å fortsette installaasjonen eller bytt til enkel modus</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="440"/>
@@ -66,27 +66,27 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="500"/>
         <source>At least %1 MB is required for /boot partition</source>
-        <translation type="unfinished"/>
+        <translation>Minst %1 MB kreves for /boot partisjon</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>Add an EFI partition to continue</source>
-        <translation type="unfinished"/>
+        <translation>Legg til en EFI partisjon for å fortsette</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
         <source>At least %1 MB is required for EFI partition</source>
-        <translation type="unfinished"/>
+        <translation>Minst %1 MB kreves for EFI partisjonen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="512"/>
         <source>Add a Root partition to continue</source>
-        <translation type="unfinished"/>
+        <translation>Legg til en Root partisjon for å fortsette</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="517"/>
         <source>At least %1 GB is required for Root partition</source>
-        <translation type="unfinished"/>
+        <translation>Minst %1 GB kreves for Root partisjon</translation>
     </message>
 </context>
 <context>
@@ -94,7 +94,7 @@
     <message>
         <location filename="../src/ui/models/bootloader_list_model.cpp" line="42"/>
         <source>%1 %2 (recommended)</source>
-        <translation type="unfinished"/>
+        <translation>%1 %2 (anbefalt)</translation>
     </message>
 </context>
 <context>
@@ -103,25 +103,25 @@
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="39"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="58"/>
         <source>Abort Installation</source>
-        <translation type="unfinished"/>
+        <translation>Avslutt installasjon</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="60"/>
         <source>Relevant operations you made in the installation process will not take effect, abort or continue installation?</source>
-        <translation type="unfinished"/>
+        <translation>Relevante operassjoner du gjør i installasjonsprosessen vil ikke ta effekt, avbryt for å fortsette installasjonen?</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="43"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="67"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Fortsett</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="44"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="68"/>
         <source>Abort</source>
-        <translation type="unfinished"/>
+        <translation>Avbryt</translation>
     </message>
 </context>
 <context>
@@ -130,13 +130,13 @@
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="58"/>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="72"/>
         <source>Insufficient Disk Space</source>
-        <translation type="unfinished"/>
+        <translation>Utilstrekkelig hard disk plass</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="60"/>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="79"/>
         <source>Exit installation</source>
-        <translation type="unfinished"/>
+        <translation>Avslutt installasjon</translation>
     </message>
 </context>
 <context>
@@ -145,43 +145,43 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="133"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="196"/>
         <source>Edit Disk</source>
-        <translation type="unfinished"/>
+        <translation>Rediger Disk</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Vennligst forsikre deg om at viktige data har en sikkerhetskopi, så velg en hard disk til å installere på</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="137"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="231"/>
         <source>Filesystem</source>
-        <translation type="unfinished"/>
+        <translation>Filsystem</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="138"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="233"/>
         <source>Mount point</source>
-        <translation type="unfinished"/>
+        <translation>Mount punkt</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="139"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="235"/>
         <source>Format the partition</source>
-        <translation type="unfinished"/>
+        <translation>Formater partisjonen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="140"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="278"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="141"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="279"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -190,13 +190,13 @@
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="38"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="61"/>
         <source>Tuning system</source>
-        <translation type="unfinished"/>
+        <translation>Fintilpass system</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="63"/>
         <source>Applying changes to your system, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Påfører endringer til systemet, vennligst vent...</translation>
     </message>
 </context>
 <context>
@@ -205,19 +205,19 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="74"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="94"/>
         <source>Installation Failed</source>
-        <translation type="unfinished"/>
+        <translation>Installasjonen feilet</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation type="unfinished"/>
+        <translation>Beklager ulempen, du kan ta fotografere eller scanne QR-koden for å sende feil loggen, so vi kan bedre løse saken.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="125"/>
         <source>Exit installation</source>
-        <translation type="unfinished"/>
+        <translation>Avslutt installasjon</translation>
     </message>
 </context>
 <context>
@@ -226,13 +226,13 @@
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="152"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>Installerer</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation type="unfinished"/>
+        <translation>Du kan erfare den utrolige nytelsen av deepin kun etter tid for kaffe</translation>
     </message>
 </context>
 <context>
@@ -241,13 +241,13 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="60"/>
         <source>Successfully Installed</source>
-        <translation type="unfinished"/>
+        <translation>Installasjonen var vellykket</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="62"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation type="unfinished"/>
+        <translation>Restart for å sette pris på den nye opplevelsen med deepin, håper du liker det!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="45"/>
@@ -292,13 +292,13 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="121"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="170"/>
         <source>Filesystem</source>
-        <translation type="unfinished"/>
+        <translation>Filsystem</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="122"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="176"/>
         <source>Mount point</source>
-        <translation type="unfinished"/>
+        <translation>Mount punkt</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="123"/>
@@ -322,13 +322,13 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="126"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="213"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="214"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -358,13 +358,13 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="102"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="60"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="103"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Fortsett</translation>
     </message>
 </context>
 <context>
@@ -379,7 +379,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="75"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="190"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Vennligst forsikre deg om at viktige data har en sikkerhetskopi, så velg en hard disk til å installere på</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="77"/>
@@ -493,7 +493,7 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="70"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="108"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Fortsett</translation>
     </message>
 </context>
 <context>
@@ -606,7 +606,7 @@
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="80"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Installer her</translation>
     </message>
 </context>
 <context>
@@ -630,7 +630,7 @@
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="211"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>Installer her</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="388"/>
@@ -814,7 +814,7 @@
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="69"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Fortsett</translation>
     </message>
 </context>
 <context>
@@ -869,7 +869,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="148"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="170"/>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>Fortsett</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="71"/>

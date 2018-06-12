@@ -4,12 +4,12 @@
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="129"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>بۇ يەرگە قاچىلاش</translation>
     </message>
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="132"/>
         <source>To be formatted</source>
-        <translation type="unfinished"/>
+        <translation>فورماتلاش كېرەك</translation>
     </message>
 </context>
 <context>
@@ -31,7 +31,7 @@
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="177"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="552"/>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>ئۆچۈرۈش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="430"/>
@@ -136,7 +136,7 @@
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="60"/>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="79"/>
         <source>Exit installation</source>
-        <translation type="unfinished"/>
+        <translation>قاچىلاشتىن چېكىنىش</translation>
     </message>
 </context>
 <context>
@@ -145,13 +145,13 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="133"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="196"/>
         <source>Edit Disk</source>
-        <translation type="unfinished"/>
+        <translation>دېسكا تەھرىرلەش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>ئۇچۇرلىرىڭىزنى زاپاسلىۋېلىپ، ئاندىن قاچىلايدىغان دېسكىنى تاللاڭ</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="137"/>
@@ -169,19 +169,19 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="139"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="235"/>
         <source>Format the partition</source>
-        <translation type="unfinished"/>
+        <translation>رايوننى فورماتلاش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="140"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="278"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>قالدۇرۇش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="141"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="279"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>ماقۇل</translation>
     </message>
 </context>
 <context>
@@ -205,7 +205,7 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="74"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="94"/>
         <source>Installation Failed</source>
-        <translation type="unfinished"/>
+        <translation>قاچىلاش مەغلۇپ بولدى</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="76"/>
@@ -217,7 +217,7 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="125"/>
         <source>Exit installation</source>
-        <translation type="unfinished"/>
+        <translation>قاچىلاشتىن چېكىنىش</translation>
     </message>
 </context>
 <context>
@@ -226,7 +226,7 @@
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="152"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>قاچىلاش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="129"/>
@@ -241,13 +241,13 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="60"/>
         <source>Successfully Installed</source>
-        <translation type="unfinished"/>
+        <translation>قاچىلاش تامام</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="62"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation type="unfinished"/>
+        <translation>قايتا قوزغۇتۇپ ھوزۇرىنى سۈرۈڭ، بۇنى ياختۇرۇپ قېلىشىزنى ئۈمۈد قىلىمىز!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="45"/>
@@ -268,7 +268,7 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="116"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="151"/>
         <source>New Partition</source>
-        <translation type="unfinished"/>
+        <translation>يېڭى رايون</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="118"/>
@@ -280,13 +280,13 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="119"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="159"/>
         <source>Type</source>
-        <translation type="unfinished"/>
+        <translation>تىپى</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="120"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="165"/>
         <source>Location</source>
-        <translation type="unfinished"/>
+        <translation>ئورۇن</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="121"/>
@@ -304,31 +304,31 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="123"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="183"/>
         <source>Size</source>
-        <translation type="unfinished"/>
+        <translation>چوڭ-كىچىكلىكى</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="125"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="168"/>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>باشلاش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="125"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="168"/>
         <source>End</source>
-        <translation type="unfinished"/>
+        <translation>ئاخىرلىشىش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="126"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="213"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>قالدۇرۇش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="214"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>ماقۇل</translation>
     </message>
 </context>
 <context>
@@ -337,7 +337,7 @@
         <location filename="../src/ui/frames/inner/new_table_loading_frame.cpp" line="37"/>
         <location filename="../src/ui/frames/inner/new_table_loading_frame.cpp" line="54"/>
         <source>Formatting...</source>
-        <translation type="unfinished"/>
+        <translation>فورماتلاۋاتىدۇ...</translation>
     </message>
 </context>
 <context>
@@ -358,7 +358,7 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="102"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>قالدۇرۇش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="60"/>
@@ -373,13 +373,13 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="73"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="188"/>
         <source>Select Installation Location</source>
-        <translation type="unfinished"/>
+        <translation>قاچىلاش ئورنىنى تاللاڭ</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="75"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="190"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>ئۇچۇرلىرىڭىزنى زاپاسلىۋېلىپ، ئاندىن قاچىلايدىغان دېسكىنى تاللاڭ</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="77"/>
@@ -397,7 +397,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="79"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="251"/>
         <source>Start installation</source>
-        <translation type="unfinished"/>
+        <translation>قاچىلاشنى باشلاش</translation>
     </message>
 </context>
 <context>
@@ -406,13 +406,13 @@
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="37"/>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="45"/>
         <source>Scan disks</source>
-        <translation type="unfinished"/>
+        <translation>دېسكىنى ئىزدەش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="38"/>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="46"/>
         <source>Scanning disks, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>دېسكىنى ئىزدە ۋاتىدۇ، سەل ساقلاڭ....</translation>
     </message>
 </context>
 <context>
@@ -422,7 +422,7 @@
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="78"/>
         <source>You need to delete a primary partition to create a new primary partition</source>
-        <translation type="unfinished"/>
+        <translation>باش رايوننى ئۆچۈرۋېتىپ، يېڭى رايۇن قۇرىشىڭىز كېرەك</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
@@ -440,13 +440,13 @@
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="76"/>
         <source>Cannot create new partitions</source>
-        <translation type="unfinished"/>
+        <translation>يېڭى رايون قۇرۇشقا ئامالسىز</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="83"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>قايتىش</translation>
     </message>
 </context>
 <context>
@@ -455,12 +455,12 @@
         <location filename="../src/ui/models/partition_type_model.cpp" line="41"/>
         <location filename="../src/ui/models/partition_type_model.cpp" line="47"/>
         <source>Logical Partition</source>
-        <translation type="unfinished"/>
+        <translation>لوگىكىلق رايون</translation>
     </message>
     <message>
         <location filename="../src/ui/models/partition_type_model.cpp" line="45"/>
         <source>Primary Partition</source>
-        <translation type="unfinished"/>
+        <translation>ئاساسلىق رايون</translation>
     </message>
 </context>
 <context>
@@ -487,7 +487,7 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="107"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>قايتىش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="70"/>
@@ -588,7 +588,7 @@
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="79"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>قايتىش</translation>
     </message>
 </context>
 <context>
@@ -597,7 +597,7 @@
         <location filename="../src/ui/frames/select_language_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/select_language_frame.cpp" line="110"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>كىيىنكى</translation>
     </message>
 </context>
 <context>
@@ -606,7 +606,7 @@
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="80"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>بۇ يەرگە قاچىلاش</translation>
     </message>
 </context>
 <context>
@@ -630,7 +630,7 @@
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="211"/>
         <source>Install here</source>
-        <translation type="unfinished"/>
+        <translation>بۇ يەرگە قاچىلاش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="388"/>
@@ -644,7 +644,7 @@
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="92"/>
         <source>User Avatar</source>
-        <translation type="unfinished"/>
+        <translation>ئابونت باش سۆرىتى</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="77"/>
@@ -659,53 +659,53 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="65"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="125"/>
         <source>Create User Account</source>
-        <translation type="unfinished"/>
+        <translation>ئابونت قۇرۇش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="126"/>
         <source>Input username and password</source>
-        <translation type="unfinished"/>
+        <translation>ئابونت نامى ۋە پارولنى كىرگۈزۈڭ</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="135"/>
         <source>Username</source>
-        <translation type="unfinished"/>
+        <translation>ئابونت نامى</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="68"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
         <source>Computer name</source>
-        <translation type="unfinished"/>
+        <translation>كومپيوتېر نامى</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="69"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
         <source>Password</source>
-        <translation type="unfinished"/>
+        <translation>پارول</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="70"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="151"/>
         <source>Confirm password</source>
-        <translation type="unfinished"/>
+        <translation>پارولنى مۇقۇملاش</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>كىيىنكى</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="191"/>
         <source>This username already exists</source>
-        <translation type="unfinished"/>
+        <translation>بۇ ئابونت نامى بار</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="195"/>
         <source>The first letter must be in lowercase</source>
-        <translation type="unfinished"/>
+        <translation>باش ھەرىپى كىچىك بولىشى كېرەك</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="200"/>
@@ -720,7 +720,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name</source>
-        <translation type="unfinished"/>
+        <translation>كومپيوتېر نامىنى كىرگۈزۈڭ</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
@@ -730,7 +730,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="233"/>
         <source>Computer name already exists, please input another one</source>
-        <translation type="unfinished"/>
+        <translation>بۇ ئىسىم بار،  باشقا بىر نام كىرگۈزۈڭ</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="238"/>
@@ -751,7 +751,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="292"/>
         <source>The two passwords don&apos;t match</source>
-        <translation type="unfinished"/>
+        <translation>ئىككى قېتىملىق پارول ئوخشاش ئەمەس</translation>
     </message>
 </context>
 <context>
@@ -772,7 +772,7 @@
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="149"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>قايتىش</translation>
     </message>
 </context>
 <context>
@@ -781,7 +781,7 @@
         <location filename="../src/ui/frames/timezone_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="167"/>
         <source>Select Time Zone</source>
-        <translation type="unfinished"/>
+        <translation>ۋاقىت رايونىنى تاللاڭ</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="130"/>
@@ -793,7 +793,7 @@
         <location filename="../src/ui/frames/timezone_frame.cpp" line="131"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="170"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>كىيىنكى</translation>
     </message>
 </context>
 <context>
