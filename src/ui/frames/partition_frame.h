@@ -99,6 +99,7 @@ class PartitionFrame : public QFrame {
   QFrame* main_frame_ = nullptr;
   QStackedLayout* partition_stacked_layout_ = nullptr;
   QStackedLayout* main_layout_ = nullptr;
+  PointerButton* full_disk_frame_button_ = nullptr;
   PointerButton* simple_frame_button_ = nullptr;
   PointerButton* advanced_frame_button_ = nullptr;
   NavButton* next_button_ = nullptr;

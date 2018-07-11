@@ -1,6 +1,6 @@
 /** Used by PartitionFrame::main_frame **/
 
-#simple_frame_button, #advanced_frame_button {
+#left_frame_button, #mid_frame_button, #right_frame_button, #solo_frame_button {
   font-size: 12px;
   color: #ffffff;
   text-align: center;
@@ -10,7 +10,7 @@
   padding: 10px;
 }
 
-#simple_frame_button {
+#left_frame_button {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -19,7 +19,14 @@
   border-left: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-#advanced_frame_button {
+#mid_frame_button {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-left-style: none;
+  border-right-style: none;
+}
+
+#right_frame_button {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -28,22 +35,40 @@
   border-left-style: none;
 }
 
+#solo_frame_button {
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 /*#simple_frame_button::active, #advanced_frame_button::active {*/
   /*background-color: rgba(255, 255, 255, 0.1);*/
 /*}*/
 
-#simple_frame_button::checked {
+#left_frame_button::checked {
   background-color: rgba(255, 255, 255, 0.2);
   border-top: 1px solid rgba(255, 255, 255, 0.4);
   border-right-style: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   border-left: 1px solid rgba(255, 255, 255, 0.4);
-
 }
-#advanced_frame_button::checked {
+
+#mid_frame_button::checked {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-right-style: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-left-style: none;
+}
+
+#right_frame_button::checked {
   background-color: rgba(255, 255, 255, 0.2);
   border-top: 1px solid rgba(255, 255, 255, 0.4);
   border-right: 1px solid rgba(255, 255, 255, 0.4);
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   border-left-style: none;
+}
+
+#solo_frame_button::checked {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }

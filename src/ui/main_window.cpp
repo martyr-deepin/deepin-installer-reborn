@@ -70,6 +70,7 @@ MainWindow::MainWindow()
   this->initConnections();
 
   SetBrightness(GetSettingsInt(kScreenDefaultBrightness));
+  this->setCurrentPage(PageId::SystemInfoId);
 }
 
 void MainWindow::fullscreen() {
