@@ -423,8 +423,7 @@ void AdvancedPartitionFrame::updateErrorMessageHeader() {
   // Update error message header.
   const int err_count = validate_states_.length();
   // NOTE(xushaohua): Transifex does not ts plural format.
-  if (!GetSettingsBool(kPartitionSkipSimplePartitionPage) ||
-      GetSettingsBool(kPartitionEnableSimpleDiskPage)) {
+  if (!GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
     if (err_count <= 1) {
       msg_head_label_->setText(
           tr("%1 error found, fix to continue installation or "

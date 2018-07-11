@@ -160,9 +160,9 @@ void PartitionFrame::initConnections() {
   if (!GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
     connect(partition_model_, &PartitionModel::deviceRefreshed,
             simple_partition_delegate_, &SimplePartitionDelegate::onDeviceRefreshed);
-  } else if (GetSettingsBool(kPartitionEnableSimpleDiskPage)) {
-    connect(partition_model_, &PartitionModel::deviceRefreshed,
-            simple_disk_delegate_, &SimplePartitionDelegate::onDeviceRefreshed);
+//  } else if (GetSettingsBool(kPartitionEnableSimpleDiskPage)) {
+//    connect(partition_model_, &PartitionModel::deviceRefreshed,
+//            simple_disk_delegate_, &SimplePartitionDelegate::onDeviceRefreshed);
   }
 
   connect(simple_partition_frame_, &SimplePartitionFrame::requestNewTable,
@@ -225,7 +225,7 @@ void PartitionFrame::initUI() {
     // Hide simple partition frame if it is disabled.
     simple_partition_frame_->hide();
 
-    if (GetSettingsBool(kPartitionEnableSimpleDiskPage)) {
+    if (!GetSettingsBool(kPartitionSkipFullDiskPartitionPage)) {
       partition_stacked_layout_->addWidget(simple_disk_frame_);
     } else {
       simple_disk_frame_->hide();
@@ -261,7 +261,7 @@ void PartitionFrame::initUI() {
   layout->addLayout(comment_layout);
   layout->addSpacing(kMainLayoutSpacing);
   if ((!GetSettingsBool(kPartitionSkipSimplePartitionPage) ||
-       GetSettingsBool(kPartitionEnableSimpleDiskPage)) &&
+       !GetSettingsBool(kPartitionSkipFullDiskPartitionPage)) &&
       !GetSettingsBool(kPartitionSkipAdvancedPartitionPage)) {
     // Add control button groups only if both simple mode and advanced mode
     // are enabled.
@@ -307,8 +307,8 @@ void PartitionFrame::onSimpleFrameButtonToggled() {
   qDebug() << "on simple button toggled";
   if (!GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
     partition_stacked_layout_->setCurrentWidget(simple_partition_frame_);
-  } else if (GetSettingsBool(kPartitionEnableSimpleDiskPage)) {
-    partition_stacked_layout_->setCurrentWidget(simple_disk_frame_);
+//  } else if (GetSettingsBool(kPartitionEnableSimpleDiskPage)) {
+//    partition_stacked_layout_->setCurrentWidget(simple_disk_frame_);
   }
 }
 

@@ -77,10 +77,10 @@ const char kTimezoneUseGeoIp[] = "timezone_use_geoip";
 const char kTimezoneUseRegdomain[] = "timezone_use_regdomain";
 
 // Partition
+const char kPartitionSkipFullDiskPartitionPage[] =
+    "partition_skip_full_disk_partition_page";
 const char kPartitionSkipSimplePartitionPage[] =
     "partition_skip_simple_partition_page";
-const char kPartitionEnableSimpleDiskPage[] =
-    "partition_enable_simple_disk_page";
 const char kPartitionSkipAdvancedPartitionPage[] =
     "partition_skip_advanced_partition_page";
 const char kPartitionEnableSwapFile[] = "partition_enable_swap_file";
@@ -112,6 +112,17 @@ const char kPartitionBootPartitionFs[] = "partition_boot_partition_fs";
 const char kPartitionEnableOsProber[] = "partition_enable_os_prober";
 const char kPartitionHideInstallationDevice[] =
     "partition_hide_installation_device";
+
+const char kPartitionFullDiskLargeDiskThreshold[] =
+    "partition_full_disk_large_disk_threshold";
+const char kPartitionFullDiskSmallLegacyPolicy[] =
+    "partition_full_disk_small_legacy_policy";
+const char kPartitionFullDiskSmallUEFIPolicy[] =
+    "partition_full_disk_small_uefi_policy";
+const char kPartitionFullDiskLargeLegacyPolicy[] =
+    "partition_full_disk_large_legacy_policy";
+const char kPartitionFullDiskLargeUEFIPolicy[] =
+    "partition_full_disk_large_uefi_policy";
 
 // Install progress page
 const char kInstallProgressPageDisableSlide[] =
