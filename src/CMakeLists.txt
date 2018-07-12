@@ -773,6 +773,19 @@ add_executable(timezone-frame-test
                )
 target_link_libraries(timezone-frame-test ${Qt_LIBS})
 
+add_executable(ctl-btn-test
+               ui/tests/ctl_btn_test.cpp
+
+               base/file_util.cpp
+               base/file_util.h
+               ui/widgets/pointer_button.cpp
+               ui/widgets/pointer_button.h
+
+               ui/images/images.qrc
+               ui/styles/styles.qrc
+               )
+target_link_libraries(ctl-btn-test ${Qt_LIBS})
+
 # Unittest
 add_executable(deepin-installer-tests
                app/unittest_main.cpp
