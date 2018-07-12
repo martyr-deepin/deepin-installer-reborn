@@ -158,6 +158,8 @@ set(SERVICE_FILES
     service/log_manager.h
     service/power_manager.cpp
     service/power_manager.h
+    service/process_util.cpp
+    service/process_util.h
     service/screen_brightness.cpp
     service/screen_brightness.h
     service/settings_manager.cpp

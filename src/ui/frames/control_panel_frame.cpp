@@ -28,6 +28,7 @@
 
 #include "base/file_util.h"
 #include "service/log_manager.h"
+#include "service/process_util.h"
 #include "ui/widgets/pointer_button.h"
 #include "ui/widgets/table_combo_box.h"
 #include "third_party/qtermwidget/lib/qtermwidget.h"
@@ -41,6 +42,8 @@ const int kReadLogInterval = 1000;
 
 const int kWindowWidth = 860;
 const int kWindowHeight = 480;
+
+const int kBtnHeight = 40;
 
 const int kSettingsPageId = 2;
 
@@ -124,6 +127,8 @@ void ControlPanelFrame::initConnections() {
           this, &ControlPanelFrame::requestRefreshQR);
   connect(simulate_slide_button_, &QPushButton::clicked,
           this, &ControlPanelFrame::requestSimulateSlide);
+  connect(suicide_button_, &QPushButton::clicked,
+          this, &ControlPanelFrame::onSuicideButtonClicked);
 }
 
 void ControlPanelFrame::initUI() {
@@ -161,24 +166,33 @@ void ControlPanelFrame::initUI() {
   refresh_devices_button_ = new PointerButton();
   refresh_devices_button_->setObjectName("refresh_devices");
   refresh_devices_button_->setText("Refresh Device List");
-  refresh_devices_button_->setFixedHeight(40);
+  refresh_devices_button_->setFixedHeight(kBtnHeight);
 
   refresh_qr_button_ = new PointerButton();
   refresh_qr_button_->setObjectName("refresh_qr");
   refresh_qr_button_->setText("Refresh QR");
-  refresh_qr_button_->setFixedHeight(40);
+  refresh_qr_button_->setFixedHeight(kBtnHeight);
 
   simulate_slide_button_ = new PointerButton();
   simulate_slide_button_->setObjectName("simulate_slide");
   simulate_slide_button_->setText("Start slide");
-  simulate_slide_button_->setFixedHeight(40);
+  simulate_slide_button_->setFixedHeight(kBtnHeight);
+
+  suicide_button_ = new PointerButton();
+  suicide_button_->setObjectName("suicide_button");
+  suicide_button_->setText("Suicide");
+  suicide_button_->setFixedHeight(kBtnHeight);
 
   QHBoxLayout* page_layout = new QHBoxLayout();
-  page_layout->addWidget(page_combo_box_, 0, Qt::AlignLeft | Qt::AlignTop);
+  page_layout->addWidget(page_combo_box_, 0,
+                         Qt::AlignLeft | Qt::AlignTop);
   page_layout->addWidget(refresh_devices_button_, 0,
                          Qt::AlignLeft | Qt::AlignTop);
-  page_layout->addWidget(refresh_qr_button_, 0, Qt::AlignLeft | Qt::AlignTop);
+  page_layout->addWidget(refresh_qr_button_, 0,
+                         Qt::AlignLeft | Qt::AlignTop);
   page_layout->addWidget(simulate_slide_button_, 0,
+                         Qt::AlignLeft | Qt::AlignTop);
+  page_layout->addWidget(suicide_button_, 0,
                          Qt::AlignLeft | Qt::AlignTop);
   page_layout->addStretch();
 
@@ -256,6 +270,10 @@ void ControlPanelFrame::onTimerTimeout() {
   const int pos = log_viewer_->verticalScrollBar()->value();
   log_viewer_->setPlainText(log_content_);
   log_viewer_->verticalScrollBar()->setValue(pos);
+}
+
+void ControlPanelFrame::onSuicideButtonClicked() {
+  Suicide();
 }
 
 }  // namespace installer

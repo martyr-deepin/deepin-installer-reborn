@@ -68,6 +68,7 @@ class ControlPanelFrame : public QFrame {
   QPushButton* refresh_devices_button_ = nullptr;
   QPushButton* refresh_qr_button_ = nullptr;
   QPushButton* simulate_slide_button_ = nullptr;
+  QPushButton* suicide_button_ = nullptr;
 
   QTextEdit* settings_viewer_ = nullptr;
 
@@ -85,6 +86,8 @@ class ControlPanelFrame : public QFrame {
   void onTabBarChanged(int index);
 
   void onTimerTimeout();
+
+  void onSuicideButtonClicked();
 };
 
 }  // namespace installer

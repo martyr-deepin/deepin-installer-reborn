@@ -20,7 +20,8 @@ QTextEdit {
 
 QPushButton#refresh_devices,
 QPushButton#refresh_qr,
-QPushButton#simulate_slide {
+QPushButton#simulate_slide,
+QPushButton#suicide_button {
   border: none;
   padding: 0px 4px;
   margin: 0px;
