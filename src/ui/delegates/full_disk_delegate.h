@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INSTALLER_UI_DELEGATES_FULL_DISK_PARTITION_DELEGATE_H
-#define INSTALLER_UI_DELEGATES_FULL_DISK_PARTITION_DELEGATE_H
+#ifndef INSTALLER_UI_DELEGATES_FULL_DISK_DELEGATE_H
+#define INSTALLER_UI_DELEGATES_FULL_DISK_DELEGATE_H
 
 #include <QObject>
 #include <partman/operation.h>
@@ -32,13 +32,13 @@ enum class FullDiskValidateState {
   RootTooSmall,
 };
 
-// Partition delegate used in FullDiskPartitionFrame.
-class FullDiskPartitionDelegate : public QObject {
+// Partition delegate used in FullDiskFrame.
+class FullDiskDelegate : public QObject {
   Q_OBJECT
  public:
   // Note that this objects of this class does not take ownership of model.
   // Nor does it handle life time of model.
-  explicit FullDiskPartitionDelegate(QObject* parent = nullptr);
+  explicit FullDiskDelegate(QObject* parent = nullptr);
 
   // Get physical device list.
   const DeviceList& real_devices() const { return real_devices_; }
@@ -132,4 +132,4 @@ class FullDiskPartitionDelegate : public QObject {
 
 }  // namespace installer
 
-#endif  // INSTALLER_UI_DELEGATES_FULL_DISK_PARTITION_DELEGATE_H
+#endif  // INSTALLER_UI_DELEGATES_FULL_DISK_DELEGATE_H

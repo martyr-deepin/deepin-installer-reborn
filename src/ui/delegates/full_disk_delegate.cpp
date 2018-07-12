@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ui/delegates/full_disk_partition_delegate.h"
+#include "ui/delegates/full_disk_delegate.h"
 
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
@@ -23,17 +23,17 @@
 
 namespace installer {
 
-FullDiskPartitionDelegate::FullDiskPartitionDelegate(QObject* parent)
+FullDiskDelegate::FullDiskDelegate(QObject* parent)
     : QObject(parent),
       real_devices_(),
       virtual_devices_(),
       bootloader_path_(),
       operations_(),
       selected_partition_() {
-  this->setObjectName("simple_partition_delegate");
+  this->setObjectName("full_disk_delegate");
 }
 
-bool FullDiskPartitionDelegate::canAddLogical(const Partition& partition) const {
+bool FullDiskDelegate::canAddLogical(const Partition& partition) const {
   const int index = DeviceIndex(virtual_devices_, partition.device_path);
   if (index == -1) {
     qCritical() << "getSupportedPartitionType() no device found at:"
@@ -86,7 +86,7 @@ bool FullDiskPartitionDelegate::canAddLogical(const Partition& partition) const 
   return logical_ok;
 }
 
-bool FullDiskPartitionDelegate::canAddPrimary(const Partition& partition) const {
+bool FullDiskDelegate::canAddPrimary(const Partition& partition) const {
   const int index = DeviceIndex(virtual_devices_, partition.device_path);
   if (index == -1) {
     qCritical() << "getSupportedPartitionType() no device found at:"
@@ -128,7 +128,7 @@ bool FullDiskPartitionDelegate::canAddPrimary(const Partition& partition) const 
   return primary_ok;
 }
 
-QStringList FullDiskPartitionDelegate::getOptDescriptions() const {
+QStringList FullDiskDelegate::getOptDescriptions() const {
   QStringList descriptions;
   for (const Operation& operation : operations_) {
     descriptions.append(operation.description());
@@ -137,20 +137,20 @@ QStringList FullDiskPartitionDelegate::getOptDescriptions() const {
   return descriptions;
 }
 
-bool FullDiskPartitionDelegate::isMBRPreferred() const {
+bool FullDiskDelegate::isMBRPreferred() const {
   return IsMBRPreferred(real_devices_);
 }
 
-bool FullDiskPartitionDelegate::isPartitionTableMatch(
+bool FullDiskDelegate::isPartitionTableMatch(
     const QString& device_path) const {
   return IsPartitionTableMatch(real_devices_, device_path);
 }
 
-void FullDiskPartitionDelegate::selectPartition(const Partition& partition) {
+void FullDiskDelegate::selectPartition(const Partition& partition) {
   selected_partition_ = partition;
 }
 
-bool FullDiskPartitionDelegate::setBootFlag() {
+bool FullDiskDelegate::setBootFlag() {
   bool found_boot = false;
 
   // First check new EFI partition.
@@ -193,7 +193,7 @@ bool FullDiskPartitionDelegate::setBootFlag() {
   return found_boot;
 }
 
-FullDiskValidateState FullDiskPartitionDelegate::validate() const {
+FullDiskValidateState FullDiskDelegate::validate() const {
   // Policy:
   // * Returns ok if partition table of selected partition is empty.
   // * Check / partition is set.
@@ -237,13 +237,13 @@ FullDiskValidateState FullDiskPartitionDelegate::validate() const {
   return FullDiskValidateState::Ok;
 }
 
-void FullDiskPartitionDelegate::resetOperations() {
+void FullDiskDelegate::resetOperations() {
   operations_.clear();
 
   virtual_devices_ = real_devices_;
 }
 
-bool FullDiskPartitionDelegate::createPartition(const Partition& partition,
+bool FullDiskDelegate::createPartition(const Partition& partition,
                                               PartitionType partition_type,
                                               bool align_start,
                                               FsType fs_type,
@@ -291,7 +291,7 @@ bool FullDiskPartitionDelegate::createPartition(const Partition& partition,
   }
 }
 
-bool FullDiskPartitionDelegate::createLogicalPartition(const Partition& partition,
+bool FullDiskDelegate::createLogicalPartition(const Partition& partition,
                                                      bool align_start,
                                                      FsType fs_type,
                                                      const QString& mount_point,
@@ -410,7 +410,7 @@ bool FullDiskPartitionDelegate::createLogicalPartition(const Partition& partitio
   return true;
 }
 
-bool FullDiskPartitionDelegate::createPrimaryPartition(const Partition& partition,
+bool FullDiskDelegate::createPrimaryPartition(const Partition& partition,
                                                      PartitionType partition_type,
                                                      bool align_start,
                                                      FsType fs_type,
@@ -554,7 +554,7 @@ bool FullDiskPartitionDelegate::createPrimaryPartition(const Partition& partitio
   return true;
 }
 
-Partition FullDiskPartitionDelegate::deletePartition(const Partition& partition) {
+Partition FullDiskDelegate::deletePartition(const Partition& partition) {
   Partition new_partition;
   new_partition.sector_size = partition.sector_size;
   new_partition.start_sector = partition.start_sector;
@@ -574,7 +574,7 @@ Partition FullDiskPartitionDelegate::deletePartition(const Partition& partition)
   return new_partition;
 }
 
-void FullDiskPartitionDelegate::formatPartition(const Partition& partition,
+void FullDiskDelegate::formatPartition(const Partition& partition,
                                               FsType fs_type,
                                               const QString& mount_point) {
   qDebug() << "formatSimplePartition()" << partition << fs_type << mount_point;
@@ -599,7 +599,7 @@ void FullDiskPartitionDelegate::formatPartition(const Partition& partition,
   operations_.append(operation);
 }
 
-bool FullDiskPartitionDelegate::formatWholeDevice(const QString& device_path,
+bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
                                                 PartitionTableType type) {
 
   // Policy:
@@ -692,15 +692,15 @@ bool FullDiskPartitionDelegate::formatWholeDevice(const QString& device_path,
 }
 
 
-void FullDiskPartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
+void FullDiskDelegate::onDeviceRefreshed(const DeviceList& devices) {
   real_devices_ = devices;
   operations_.clear();
   virtual_devices_ = FilterInstallerDevice(real_devices_);
   emit this->deviceRefreshed(virtual_devices_);
 }
 
-void FullDiskPartitionDelegate::onManualPartDone(const DeviceList& devices) {
-  qDebug() << "FullDiskPartitionDelegate::onManualPartDone()" << devices;
+void FullDiskDelegate::onManualPartDone(const DeviceList& devices) {
+  qDebug() << "FullDiskDelegate::onManualPartDone()" << devices;
   QString root_disk;
   QString root_path;
   QStringList mount_points;
@@ -768,7 +768,7 @@ void FullDiskPartitionDelegate::onManualPartDone(const DeviceList& devices) {
   WriteRequiringSwapFile(use_swap_file);
 }
 
-void FullDiskPartitionDelegate::setBootloaderPath(const QString& path) {
+void FullDiskDelegate::setBootloaderPath(const QString& path) {
   bootloader_path_ = path;
 }
 

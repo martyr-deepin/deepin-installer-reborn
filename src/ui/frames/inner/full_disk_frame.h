@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_PARTITION_FRAME_H
-#define DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_PARTITION_FRAME_H
+#ifndef DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_FRAME_H
+#define DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_FRAME_H
 
 #include <QFrame>
 class QAbstractButton;
@@ -27,14 +27,14 @@ class QShowEvent;
 
 namespace installer {
 
-class FullDiskPartitionDelegate;
+class FullDiskDelegate;
 
 
-class FullDiskPartitionFrame : public QFrame {
+class FullDiskFrame : public QFrame {
  public:
-  explicit FullDiskPartitionFrame(FullDiskPartitionDelegate* delegate,
+  explicit FullDiskFrame(FullDiskDelegate* delegate,
                                   QWidget* parent = nullptr);
-  ~FullDiskPartitionFrame();
+  ~FullDiskFrame();
 
   bool validate() const;
 
@@ -54,7 +54,7 @@ class FullDiskPartitionFrame : public QFrame {
   // Show install_tip at bottom of |button|.
 //  void showInstallTip(QAbstractButton* button);
 
-  FullDiskPartitionDelegate* delegate_ = nullptr;
+  FullDiskDelegate* delegate_ = nullptr;
   QButtonGroup* button_group_ = nullptr;
   QFrame* install_tip_ = nullptr;
   QLabel* tip_label_ = nullptr;
@@ -68,4 +68,4 @@ class FullDiskPartitionFrame : public QFrame {
 
 }  // namespace installer
 
-#endif  // DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_PARTITION_FRAME_H
+#endif  // DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_FRAME_H

@@ -26,13 +26,13 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "ui/delegates/advanced_partition_delegate.h"
-#include "ui/delegates/full_disk_partition_delegate.h"
+#include "ui/delegates/full_disk_delegate.h"
 #include "ui/delegates/simple_partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/frames/consts.h"
 #include "ui/frames/inner/advanced_partition_frame.h"
 #include "ui/frames/inner/edit_partition_frame.h"
-#include "ui/frames/inner/full_disk_partition_frame.h"
+#include "ui/frames/inner/full_disk_frame.h"
 #include "ui/frames/inner/new_partition_frame.h"
 #include "ui/frames/inner/new_table_loading_frame.h"
 #include "ui/frames/inner/new_table_warning_frame.h"
@@ -62,7 +62,7 @@ PartitionFrame::PartitionFrame(QWidget* parent)
     : QFrame(parent),
       partition_model_(new PartitionModel(this)),
       advanced_delegate_(new AdvancedPartitionDelegate(this)),
-      full_disk_delegate_(new FullDiskPartitionDelegate(this)),
+      full_disk_delegate_(new FullDiskDelegate(this)),
       simple_partition_delegate_(new SimplePartitionDelegate(this)) {
   this->setObjectName("partition_frame");
 
@@ -175,7 +175,7 @@ void PartitionFrame::initConnections() {
   }
   if (!GetSettingsBool(kPartitionSkipFullDiskPartitionPage)) {
     connect(partition_model_, &PartitionModel::deviceRefreshed,
-            full_disk_delegate_, &FullDiskPartitionDelegate::onDeviceRefreshed);
+            full_disk_delegate_, &FullDiskDelegate::onDeviceRefreshed);
   }
 
   // TODO(Shaohua): Show warning page both in full-disk frame and
@@ -188,8 +188,7 @@ void PartitionFrame::initUI() {
   advanced_partition_frame_ =
       new AdvancedPartitionFrame(advanced_delegate_, this);
   edit_partition_frame_ = new EditPartitionFrame(advanced_delegate_, this);
-  full_disk_partition_frame_ =
-      new FullDiskPartitionFrame(full_disk_delegate_, this);
+  full_disk_partition_frame_ = new FullDiskFrame(full_disk_delegate_, this);
   new_partition_frame_ = new NewPartitionFrame(advanced_delegate_, this);
   new_table_loading_frame_ = new NewTableLoadingFrame(this);
   new_table_warning_frame_ = new NewTableWarningFrame(this);

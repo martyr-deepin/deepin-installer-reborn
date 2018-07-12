@@ -30,8 +30,8 @@ class AdvancedPartitionDelegate;
 class AdvancedPartitionFrame;
 class CommentLabel;
 class EditPartitionFrame;
-class FullDiskPartitionDelegate;
-class FullDiskPartitionFrame;
+class FullDiskDelegate;
+class FullDiskFrame;
 class NavButton;
 class NewPartitionFrame;
 class NewTableLoadingFrame;
@@ -84,7 +84,7 @@ class PartitionFrame : public QFrame {
 
   AdvancedPartitionFrame* advanced_partition_frame_ = nullptr;
   EditPartitionFrame* edit_partition_frame_ = nullptr;
-  FullDiskPartitionFrame* full_disk_partition_frame_ = nullptr;
+  FullDiskFrame* full_disk_partition_frame_ = nullptr;
   NewPartitionFrame* new_partition_frame_ = nullptr;
   NewTableLoadingFrame* new_table_loading_frame_ = nullptr;
   NewTableWarningFrame* new_table_warning_frame_ = nullptr;
@@ -107,7 +107,7 @@ class PartitionFrame : public QFrame {
 
   PartitionModel* partition_model_ = nullptr;
   AdvancedPartitionDelegate* advanced_delegate_ = nullptr;
-  FullDiskPartitionDelegate* full_disk_delegate_ = nullptr;
+  FullDiskDelegate* full_disk_delegate_ = nullptr;
   SimplePartitionDelegate* simple_partition_delegate_ = nullptr;
 
  private slots:
