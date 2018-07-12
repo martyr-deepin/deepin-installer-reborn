@@ -240,7 +240,9 @@ void PartitionFrame::initUI() {
   partition_stacked_layout_->setSpacing(0);
   if (GetSettingsBool(kPartitionSkipFullDiskPartitionPage)) {
     full_disk_frame_button_->hide();
+    full_disk_frame_button_->setChecked(false);
     simple_frame_button_->setObjectName(kLeftBtn);
+    simple_frame_button_->setChecked(true);
     full_disk_partition_frame_->hide();
   } else {
     full_disk_frame_button_->setChecked(true);
@@ -251,9 +253,9 @@ void PartitionFrame::initUI() {
 
   if (GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
     simple_frame_button_->hide();
+    simple_frame_button_->setChecked(false);
     simple_partition_frame_->hide();
   } else {
-    simple_frame_button_->setChecked(true);
     partition_stacked_layout_->addWidget(simple_partition_frame_);
   }
 
