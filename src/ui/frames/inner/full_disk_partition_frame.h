@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 ~ 2018 Deepin Technology Co., Ltd.
+ * Copyright (C) 2018 Deepin Technology Co., Ltd.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef INSTALLER_UI_FRAMES_INNER_SIMPLE_DISK_FRAME_H
-#define INSTALLER_UI_FRAMES_INNER_SIMPLE_DISK_FRAME_H
+#ifndef DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_PARTITION_FRAME_H
+#define DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_PARTITION_FRAME_H
 
 #include <QFrame>
 class QAbstractButton;
@@ -29,12 +29,12 @@ namespace installer {
 
 class SimplePartitionDelegate;
 
-// Only displays device disks.
-class SimpleDiskFrame : public QFrame {
-  Q_OBJECT
 
+class FullDiskPartitionFrame : public QFrame {
  public:
-  SimpleDiskFrame(SimplePartitionDelegate* delegate, QWidget* parent = nullptr);
+  explicit FullDiskPartitionFrame(SimplePartitionDelegate* delegate,
+                                  QWidget* parent = nullptr);
+  ~FullDiskPartitionFrame();
 
   bool validate() const;
 
@@ -61,12 +61,11 @@ class SimpleDiskFrame : public QFrame {
   QGridLayout* grid_layout_ = nullptr;
   QFrame* grid_wrapper_ = nullptr;
 
- private slots:
+ public slots:
   void onDeviceRefreshed();
-  void onPartitionButtonToggled(QAbstractButton* button,
-                                bool checked);
+  void onPartitionButtonToggled(QAbstractButton* button, bool checked);
 };
 
 }  // namespace installer
 
-#endif  // INSTALLER_UI_FRAMES_INNER_SIMPLE_DISK_FRAME_H
+#endif  // DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_PARTITION_FRAME_H

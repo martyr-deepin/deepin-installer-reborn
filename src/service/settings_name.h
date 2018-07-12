@@ -81,8 +81,6 @@ const char kPartitionSkipFullDiskPartitionPage[] =
     "partition_skip_full_disk_partition_page";
 const char kPartitionSkipSimplePartitionPage[] =
     "partition_skip_simple_partition_page";
-const char kPartitionSkipAdvancedPartitionPage[] =
-    "partition_skip_advanced_partition_page";
 const char kPartitionEnableSwapFile[] = "partition_enable_swap_file";
 const char kPartitionEnableSwapFileInAdvancedPage[] =
     "partition_enable_swap_file_in_advanced_page";
@@ -123,6 +121,8 @@ const char kPartitionFullDiskLargeLegacyPolicy[] =
     "partition_full_disk_large_legacy_policy";
 const char kPartitionFullDiskLargeUEFIPolicy[] =
     "partition_full_disk_large_uefi_policy";
+const char kPartitionFullDiskLargeRootPartRange[] =
+    "partition_full_disk_large_root_part_range";
 
 // Install progress page
 const char kInstallProgressPageDisableSlide[] =

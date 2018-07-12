@@ -31,6 +31,7 @@
 #include "ui/frames/consts.h"
 #include "ui/frames/inner/advanced_partition_frame.h"
 #include "ui/frames/inner/edit_partition_frame.h"
+#include "ui/frames/inner/full_disk_partition_frame.h"
 #include "ui/frames/inner/new_partition_frame.h"
 #include "ui/frames/inner/new_table_loading_frame.h"
 #include "ui/frames/inner/new_table_warning_frame.h"
@@ -39,7 +40,6 @@
 #include "ui/frames/inner/partition_table_warning_frame.h"
 #include "ui/frames/inner/prepare_install_frame.h"
 #include "ui/frames/inner/select_bootloader_frame.h"
-#include "ui/frames/inner/simple_disk_frame.h"
 #include "ui/frames/inner/simple_partition_frame.h"
 #include "ui/models/partition_model.h"
 #include "ui/widgets/comment_label.h"
@@ -48,12 +48,21 @@
 
 namespace installer {
 
+namespace {
+
+const char kLeftBtn[] = "left_frame_button";
+const char kMidBtn[] = "mid_frame_button";
+const char kRightBtn[] = "right_frame_button";
+const char kSoloBtn[] = "solo_frame_button";
+
+}  // namespace
+
 PartitionFrame::PartitionFrame(QWidget* parent)
     : QFrame(parent),
       partition_model_(new PartitionModel(this)),
       advanced_delegate_(new AdvancedPartitionDelegate(this)),
-      simple_partition_delegate_(new SimplePartitionDelegate(this)),
-      simple_disk_delegate_(new SimplePartitionDelegate(this)) {
+      full_disk_delegate_(new SimplePartitionDelegate(this)),
+      simple_partition_delegate_(new SimplePartitionDelegate(this)) {
   this->setObjectName("partition_frame");
 
   this->initUI();
@@ -83,6 +92,8 @@ void PartitionFrame::changeEvent(QEvent* event) {
 }
 
 void PartitionFrame::initConnections() {
+  connect(full_disk_frame_button_, &QPushButton::toggled,
+          this, &PartitionFrame::onFullDiskFrameButtonToggled);
   connect(simple_frame_button_, &QPushButton::toggled,
           this, &PartitionFrame::onSimpleFrameButtonToggled);
   connect(advanced_frame_button_, &QPushButton::toggled,
@@ -152,27 +163,32 @@ void PartitionFrame::initConnections() {
   connect(advanced_delegate_, &AdvancedPartitionDelegate::deviceRefreshed,
           select_bootloader_frame_, &SelectBootloaderFrame::deviceRefreshed);
 
-  if (!GetSettingsBool(kPartitionSkipAdvancedPartitionPage)) {
-    connect(partition_model_, &PartitionModel::deviceRefreshed,
-            advanced_delegate_, &AdvancedPartitionDelegate::onDeviceRefreshed);
-  }
+  connect(partition_model_, &PartitionModel::deviceRefreshed,
+          advanced_delegate_, &AdvancedPartitionDelegate::onDeviceRefreshed);
 
   if (!GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
     connect(partition_model_, &PartitionModel::deviceRefreshed,
-            simple_partition_delegate_, &SimplePartitionDelegate::onDeviceRefreshed);
-//  } else if (GetSettingsBool(kPartitionEnableSimpleDiskPage)) {
-//    connect(partition_model_, &PartitionModel::deviceRefreshed,
-//            simple_disk_delegate_, &SimplePartitionDelegate::onDeviceRefreshed);
+            simple_partition_delegate_,
+            &SimplePartitionDelegate::onDeviceRefreshed);
+
+  }
+  if (!GetSettingsBool(kPartitionSkipFullDiskPartitionPage)) {
+    connect(partition_model_, &PartitionModel::deviceRefreshed,
+            full_disk_delegate_, &SimplePartitionDelegate::onDeviceRefreshed);
   }
 
+  // TODO(Shaohua): Show warning page both in full-disk frame and
+  // simple-partition frame.
   connect(simple_partition_frame_, &SimplePartitionFrame::requestNewTable,
           this, &PartitionFrame::showPartitionTableWarningFrame);
 }
 
 void PartitionFrame::initUI() {
-  advanced_partition_frame_ = new AdvancedPartitionFrame(advanced_delegate_,
-                                                         this);
+  advanced_partition_frame_ =
+      new AdvancedPartitionFrame(advanced_delegate_, this);
   edit_partition_frame_ = new EditPartitionFrame(advanced_delegate_, this);
+  full_disk_partition_frame_ =
+      new FullDiskPartitionFrame(full_disk_delegate_, this);
   new_partition_frame_ = new NewPartitionFrame(advanced_delegate_, this);
   new_table_loading_frame_ = new NewTableLoadingFrame(this);
   new_table_warning_frame_ = new NewTableWarningFrame(this);
@@ -181,9 +197,8 @@ void PartitionFrame::initUI() {
   partition_table_warning_frame_ = new PartitionTableWarningFrame(this);
   prepare_install_frame_ = new PrepareInstallFrame(this);
   select_bootloader_frame_ = new SelectBootloaderFrame(this);
-  simple_disk_frame_ =
-      new SimpleDiskFrame(simple_disk_delegate_, this);
-  simple_partition_frame_ = new SimplePartitionFrame(simple_partition_delegate_, this);
+  simple_partition_frame_ =
+      new SimplePartitionFrame(simple_partition_delegate_, this);
 
   title_label_ = new TitleLabel(tr("Select Installation Location"));
   comment_label_ = new CommentLabel(
@@ -196,22 +211,18 @@ void PartitionFrame::initUI() {
 
   QButtonGroup* button_group = new QButtonGroup(this);
   full_disk_frame_button_ = new PointerButton(tr("Full Disk"));
-  full_disk_frame_button_->setObjectName("left_frame_button");
   full_disk_frame_button_->setCheckable(true);
-  full_disk_frame_button_->setChecked(true);
   full_disk_frame_button_->setFlat(true);
   full_disk_frame_button_->setMinimumWidth(86);
   simple_frame_button_ = new PointerButton(tr("Simple"));
-  simple_frame_button_->setObjectName("mid_frame_button");
   simple_frame_button_->setCheckable(true);
-  simple_frame_button_->setChecked(true);
   simple_frame_button_->setFlat(true);
   simple_frame_button_->setMinimumWidth(86);
   advanced_frame_button_ = new PointerButton(tr("Advanced"));
-  advanced_frame_button_->setObjectName("right_frame_button");
   advanced_frame_button_->setCheckable(true);
   advanced_frame_button_->setMinimumWidth(86);
   advanced_frame_button_->setFlat(true);
+
   button_group->addButton(full_disk_frame_button_);
   button_group->addButton(simple_frame_button_);
   button_group->addButton(advanced_frame_button_);
@@ -227,26 +238,33 @@ void PartitionFrame::initUI() {
   partition_stacked_layout_ = new QStackedLayout();
   partition_stacked_layout_->setContentsMargins(0, 0, 0, 0);
   partition_stacked_layout_->setSpacing(0);
-  if (!GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
-    partition_stacked_layout_->addWidget(simple_partition_frame_);
+  if (GetSettingsBool(kPartitionSkipFullDiskPartitionPage)) {
+    full_disk_frame_button_->hide();
+    simple_frame_button_->setObjectName(kLeftBtn);
+    full_disk_partition_frame_->hide();
   } else {
-    // Hide simple partition frame if it is disabled.
+    full_disk_frame_button_->setChecked(true);
+    full_disk_frame_button_->setObjectName(kLeftBtn);
+    simple_frame_button_->setObjectName(kMidBtn);
+    partition_stacked_layout_->addWidget(full_disk_partition_frame_);
+  }
+
+  if (GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
+    simple_frame_button_->hide();
     simple_partition_frame_->hide();
-
-    if (!GetSettingsBool(kPartitionSkipFullDiskPartitionPage)) {
-      partition_stacked_layout_->addWidget(simple_disk_frame_);
-    } else {
-      simple_disk_frame_->hide();
-    }
-  }
-  if (GetSettingsBool(kPartitionSkipAdvancedPartitionPage)) {
-    // Hide advanced partition frame if it is disabled.
-    advanced_partition_frame_->hide();
   } else {
-    partition_stacked_layout_->addWidget(advanced_partition_frame_);
+    simple_frame_button_->setChecked(true);
+    partition_stacked_layout_->addWidget(simple_partition_frame_);
   }
 
-  // TODO(xushaohua): Remove this layout.
+  if (GetSettingsBool(kPartitionSkipFullDiskPartitionPage) &&
+      GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
+    advanced_frame_button_->setObjectName(kSoloBtn);
+  } else {
+    advanced_frame_button_->setObjectName(kRightBtn);
+  }
+  partition_stacked_layout_->addWidget(advanced_partition_frame_);
+
   QHBoxLayout* partition_stacked_wrapper_layout = new QHBoxLayout();
   partition_stacked_wrapper_layout->setContentsMargins(0, 0, 0, 0);
   partition_stacked_wrapper_layout->setSpacing(0);
@@ -254,7 +272,6 @@ void PartitionFrame::initUI() {
   partition_stacked_wrapper_layout->addLayout(partition_stacked_layout_);
   partition_stacked_wrapper_layout->addStretch();
 
-  // TODO(xushaohua): Move this button to simple partition
   // and advanced partition page.
   next_button_ = new NavButton(tr("Start installation"));
   QHBoxLayout* next_layout = new QHBoxLayout();
@@ -269,8 +286,7 @@ void PartitionFrame::initUI() {
   layout->addLayout(comment_layout);
   layout->addSpacing(kMainLayoutSpacing);
   if ((!GetSettingsBool(kPartitionSkipSimplePartitionPage) ||
-       !GetSettingsBool(kPartitionSkipFullDiskPartitionPage)) &&
-      !GetSettingsBool(kPartitionSkipAdvancedPartitionPage)) {
+       !GetSettingsBool(kPartitionSkipFullDiskPartitionPage))) {
     // Add control button groups only if both simple mode and advanced mode
     // are enabled.
     layout->addLayout(button_layout);
@@ -301,9 +317,9 @@ void PartitionFrame::initUI() {
   this->setContentsMargins(0, 0, 0, 0);
 }
 
-bool PartitionFrame::isSimpleDiskMode() {
+bool PartitionFrame::isFullDiskPartitionMode() {
   QWidget* current_widget = partition_stacked_layout_->currentWidget();
-  return current_widget == simple_disk_frame_;
+  return current_widget == full_disk_partition_frame_;
 }
 
 bool PartitionFrame::isSimplePartitionMode() {
@@ -311,13 +327,12 @@ bool PartitionFrame::isSimplePartitionMode() {
   return current_widget == simple_partition_frame_;
 }
 
+void PartitionFrame::onFullDiskFrameButtonToggled() {
+  partition_stacked_layout_->setCurrentWidget(full_disk_partition_frame_);
+}
+
 void PartitionFrame::onSimpleFrameButtonToggled() {
-  qDebug() << "on simple button toggled";
-  if (!GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
-    partition_stacked_layout_->setCurrentWidget(simple_partition_frame_);
-//  } else if (GetSettingsBool(kPartitionEnableSimpleDiskPage)) {
-//    partition_stacked_layout_->setCurrentWidget(simple_disk_frame_);
-  }
+  partition_stacked_layout_->setCurrentWidget(simple_partition_frame_);
 }
 
 void PartitionFrame::onAdvancedFrameButtonToggled() {
@@ -330,13 +345,12 @@ void PartitionFrame::onAdvancedFrameButtonToggled() {
 
 void PartitionFrame::onNextButtonClicked() {
   if (this->isSimplePartitionMode()) {
-    // TODO(xushaohua): Move validate() to delegate.
     // Validate simple partition frame.
     if (!simple_partition_frame_->validate()) {
       return;
     }
-  } else if (this->isSimpleDiskMode()) {
-    if (!simple_disk_frame_->validate()) {
+  } else if (this->isFullDiskPartitionMode()) {
+    if (!full_disk_partition_frame_->validate()) {
       return;
     }
   } else {
@@ -349,8 +363,8 @@ void PartitionFrame::onNextButtonClicked() {
   QStringList descriptions;
   if (this->isSimplePartitionMode()) {
     descriptions = simple_partition_delegate_->getOptDescriptions();
-  } else if (this->isSimpleDiskMode()) {
-    descriptions = simple_disk_delegate_->getOptDescriptions();
+  } else if (this->isFullDiskPartitionMode()) {
+    descriptions = full_disk_delegate_->getOptDescriptions();
   } else {
     descriptions = advanced_delegate_->getOptDescriptions();
   }
@@ -364,8 +378,8 @@ void PartitionFrame::onManualPartDone(bool ok, const DeviceList& devices) {
     // Write settings to file.
     if (this->isSimplePartitionMode()) {
       simple_partition_delegate_->onManualPartDone(devices);
-    } else if (this->isSimpleDiskMode()) {
-      simple_disk_delegate_->onManualPartDone(devices);
+    } else if (this->isFullDiskPartitionMode()) {
+      full_disk_delegate_->onManualPartDone(devices);
     } else {
       advanced_delegate_->onManualPartDone(devices);
     }
@@ -379,8 +393,8 @@ void PartitionFrame::onPrepareInstallFrameFinished() {
   bool found_boot;
   if (this->isSimplePartitionMode()) {
     found_boot = simple_partition_delegate_->setBootFlag();
-  } else if (this->isSimpleDiskMode()) {
-    found_boot = simple_disk_delegate_->setBootFlag();
+  } else if (this->isFullDiskPartitionMode()) {
+    found_boot = full_disk_delegate_->setBootFlag();
   } else {
     found_boot = advanced_delegate_->setBootFlag();
   }
@@ -394,8 +408,8 @@ void PartitionFrame::onPrepareInstallFrameFinished() {
   OperationList operations;
   if (this->isSimplePartitionMode()) {
     operations = simple_partition_delegate_->operations();
-  } else if (this->isSimpleDiskMode()) {
-    operations = simple_disk_delegate_->operations();
+  } else if (this->isFullDiskPartitionMode()) {
+    operations = full_disk_delegate_->operations();
   } else {
     operations = advanced_delegate_->operations();
   }
@@ -432,7 +446,7 @@ void PartitionFrame::showNewTableWarningFrame(const QString& device_path) {
   DeviceList devices;
   if (this->isSimplePartitionMode()) {
     devices = simple_partition_delegate_->real_devices();
-  } else if (this->isSimpleDiskMode()) {
+  } else if (this->isFullDiskPartitionMode()) {
     qCritical() << "Never show new table warning frame for simple disk frame";
     return;
   } else {

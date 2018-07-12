@@ -30,6 +30,7 @@ class AdvancedPartitionDelegate;
 class AdvancedPartitionFrame;
 class CommentLabel;
 class EditPartitionFrame;
+class FullDiskPartitionFrame;
 class NavButton;
 class NewPartitionFrame;
 class NewTableLoadingFrame;
@@ -41,7 +42,6 @@ class PartitionTableWarningFrame;
 class PointerButton;
 class PrepareInstallFrame;
 class SelectBootloaderFrame;
-class SimpleDiskFrame;
 class SimplePartitionDelegate;
 class SimplePartitionFrame;
 class TitleLabel;
@@ -79,10 +79,11 @@ class PartitionFrame : public QFrame {
 
   // Check current partition mode is simple mode or not.
   bool isSimplePartitionMode();
-  bool isSimpleDiskMode();
+  bool isFullDiskPartitionMode();
 
   AdvancedPartitionFrame* advanced_partition_frame_ = nullptr;
   EditPartitionFrame* edit_partition_frame_ = nullptr;
+  FullDiskPartitionFrame* full_disk_partition_frame_ = nullptr;
   NewPartitionFrame* new_partition_frame_ = nullptr;
   NewTableLoadingFrame* new_table_loading_frame_ = nullptr;
   NewTableWarningFrame* new_table_warning_frame_ = nullptr;
@@ -91,7 +92,6 @@ class PartitionFrame : public QFrame {
   PartitionTableWarningFrame* partition_table_warning_frame_ = nullptr;
   PrepareInstallFrame* prepare_install_frame_ = nullptr;
   SelectBootloaderFrame* select_bootloader_frame_ = nullptr;
-  SimpleDiskFrame* simple_disk_frame_ = nullptr;
   SimplePartitionFrame* simple_partition_frame_ = nullptr;
 
   TitleLabel* title_label_ = nullptr;
@@ -106,10 +106,11 @@ class PartitionFrame : public QFrame {
 
   PartitionModel* partition_model_ = nullptr;
   AdvancedPartitionDelegate* advanced_delegate_ = nullptr;
+  SimplePartitionDelegate* full_disk_delegate_ = nullptr;
   SimplePartitionDelegate* simple_partition_delegate_ = nullptr;
-  SimplePartitionDelegate* simple_disk_delegate_ = nullptr;
 
  private slots:
+  void onFullDiskFrameButtonToggled();
   void onSimpleFrameButtonToggled();
   void onAdvancedFrameButtonToggled();
   void onNextButtonClicked();

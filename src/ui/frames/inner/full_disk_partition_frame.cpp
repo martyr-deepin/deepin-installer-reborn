@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 ~ 2018 Deepin Technology Co., Ltd.
+ * Copyright (C) 2018 Deepin Technology Co., Ltd.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ui/frames/inner/simple_disk_frame.h"
+#include "ui/frames/inner/full_disk_partition_frame.h"
 
 #include <QButtonGroup>
 #include <QEvent>
@@ -39,7 +39,7 @@ const int kWindowWidth = 960;
 
 }  // namespace
 
-SimpleDiskFrame::SimpleDiskFrame(
+FullDiskPartitionFrame::FullDiskPartitionFrame(
     SimplePartitionDelegate* delegate,
     QWidget* parent)
     : QFrame(parent),
@@ -50,11 +50,15 @@ SimpleDiskFrame::SimpleDiskFrame(
   this->initConnections();
 }
 
-bool SimpleDiskFrame::validate() const {
+FullDiskPartitionFrame::~FullDiskPartitionFrame() {
+
+}
+
+bool FullDiskPartitionFrame::validate() const {
   return (button_group_->checkedButton() != nullptr);
 }
 
-void SimpleDiskFrame::changeEvent(QEvent* event) {
+void FullDiskPartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     tip_label_->setText(tr("Install here"));
   } else {
@@ -62,17 +66,17 @@ void SimpleDiskFrame::changeEvent(QEvent* event) {
   }
 }
 
-void SimpleDiskFrame::initConnections() {
+void FullDiskPartitionFrame::initConnections() {
   // Repaint layout only when real device list is updated.
   connect(delegate_, &SimplePartitionDelegate::deviceRefreshed,
-          this, &SimpleDiskFrame::onDeviceRefreshed);
+          this, &FullDiskPartitionFrame::onDeviceRefreshed);
   connect(button_group_,
           static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>
           (&QButtonGroup::buttonToggled),
-          this, &SimpleDiskFrame::onPartitionButtonToggled);
+          this, &FullDiskPartitionFrame::onPartitionButtonToggled);
 }
 
-void SimpleDiskFrame::initUI() {
+void FullDiskPartitionFrame::initUI() {
   button_group_ = new QButtonGroup(this);
 
   QLabel* tip_icon = new QLabel();
@@ -132,7 +136,7 @@ void SimpleDiskFrame::initUI() {
   this->setStyleSheet(ReadFile(":/styles/simple_disk_frame.css"));
 }
 
-void SimpleDiskFrame::repaintDevices() {
+void FullDiskPartitionFrame::repaintDevices() {
   // Clear grid layout.
   ClearLayout(grid_layout_);
 
@@ -183,19 +187,19 @@ void SimpleDiskFrame::repaintDevices() {
   grid_wrapper_->adjustSize();
 }
 
-void SimpleDiskFrame::showInstallTip(QAbstractButton* button) {
+void FullDiskPartitionFrame::showInstallTip(QAbstractButton* button) {
   // Move install_tip to bottom of button
   const QPoint pos = button->pos();
   install_tip_->move(pos.x(), pos.y() - 10);
   install_tip_->show();
 }
 
-void SimpleDiskFrame::onDeviceRefreshed() {
+void FullDiskPartitionFrame::onDeviceRefreshed() {
   this->repaintDevices();
 }
 
-void SimpleDiskFrame::onPartitionButtonToggled(QAbstractButton* button,
-                                               bool checked) {
+void FullDiskPartitionFrame::onPartitionButtonToggled(QAbstractButton* button,
+                                                      bool checked) {
   SimpleDiskButton* part_button = dynamic_cast<SimpleDiskButton*>(button);
   if (!part_button) {
     qCritical() << "no disk button is selected";
