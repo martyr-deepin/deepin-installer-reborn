@@ -214,6 +214,8 @@ set(UI_FILES
     ui/delegates/avatar_list_delegate.h
     ui/delegates/frameless_list_delegate.cpp
     ui/delegates/frameless_list_delegate.h
+    ui/delegates/full_disk_partition_delegate.cpp
+    ui/delegates/full_disk_partition_delegate.h
     ui/delegates/installer_args_parser.cpp
     ui/delegates/installer_args_parser.h
     ui/delegates/install_slide_frame_util.cpp

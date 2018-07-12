@@ -24,7 +24,7 @@
 #include <QScrollArea>
 
 #include "base/file_util.h"
-#include "ui/delegates/simple_partition_delegate.h"
+#include "ui/delegates/full_disk_partition_delegate.h"
 #include "ui/widgets/simple_disk_button.h"
 #include "ui/utils/widget_util.h"
 
@@ -40,7 +40,7 @@ const int kWindowWidth = 960;
 }  // namespace
 
 FullDiskPartitionFrame::FullDiskPartitionFrame(
-    SimplePartitionDelegate* delegate,
+    FullDiskPartitionDelegate* delegate,
     QWidget* parent)
     : QFrame(parent),
       delegate_(delegate) {
@@ -68,7 +68,7 @@ void FullDiskPartitionFrame::changeEvent(QEvent* event) {
 
 void FullDiskPartitionFrame::initConnections() {
   // Repaint layout only when real device list is updated.
-  connect(delegate_, &SimplePartitionDelegate::deviceRefreshed,
+  connect(delegate_, &FullDiskPartitionDelegate::deviceRefreshed,
           this, &FullDiskPartitionFrame::onDeviceRefreshed);
   connect(button_group_,
           static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>

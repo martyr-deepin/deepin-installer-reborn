@@ -30,6 +30,7 @@ class AdvancedPartitionDelegate;
 class AdvancedPartitionFrame;
 class CommentLabel;
 class EditPartitionFrame;
+class FullDiskPartitionDelegate;
 class FullDiskPartitionFrame;
 class NavButton;
 class NewPartitionFrame;
@@ -106,7 +107,7 @@ class PartitionFrame : public QFrame {
 
   PartitionModel* partition_model_ = nullptr;
   AdvancedPartitionDelegate* advanced_delegate_ = nullptr;
-  SimplePartitionDelegate* full_disk_delegate_ = nullptr;
+  FullDiskPartitionDelegate* full_disk_delegate_ = nullptr;
   SimplePartitionDelegate* simple_partition_delegate_ = nullptr;
 
  private slots:

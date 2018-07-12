@@ -26,6 +26,7 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "ui/delegates/advanced_partition_delegate.h"
+#include "ui/delegates/full_disk_partition_delegate.h"
 #include "ui/delegates/simple_partition_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/frames/consts.h"
@@ -61,7 +62,7 @@ PartitionFrame::PartitionFrame(QWidget* parent)
     : QFrame(parent),
       partition_model_(new PartitionModel(this)),
       advanced_delegate_(new AdvancedPartitionDelegate(this)),
-      full_disk_delegate_(new SimplePartitionDelegate(this)),
+      full_disk_delegate_(new FullDiskPartitionDelegate(this)),
       simple_partition_delegate_(new SimplePartitionDelegate(this)) {
   this->setObjectName("partition_frame");
 
@@ -174,7 +175,7 @@ void PartitionFrame::initConnections() {
   }
   if (!GetSettingsBool(kPartitionSkipFullDiskPartitionPage)) {
     connect(partition_model_, &PartitionModel::deviceRefreshed,
-            full_disk_delegate_, &SimplePartitionDelegate::onDeviceRefreshed);
+            full_disk_delegate_, &FullDiskPartitionDelegate::onDeviceRefreshed);
   }
 
   // TODO(Shaohua): Show warning page both in full-disk frame and

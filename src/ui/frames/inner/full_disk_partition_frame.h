@@ -27,12 +27,12 @@ class QShowEvent;
 
 namespace installer {
 
-class SimplePartitionDelegate;
+class FullDiskPartitionDelegate;
 
 
 class FullDiskPartitionFrame : public QFrame {
  public:
-  explicit FullDiskPartitionFrame(SimplePartitionDelegate* delegate,
+  explicit FullDiskPartitionFrame(FullDiskPartitionDelegate* delegate,
                                   QWidget* parent = nullptr);
   ~FullDiskPartitionFrame();
 
@@ -54,7 +54,7 @@ class FullDiskPartitionFrame : public QFrame {
   // Show install_tip at bottom of |button|.
 //  void showInstallTip(QAbstractButton* button);
 
-  SimplePartitionDelegate* delegate_ = nullptr;
+  FullDiskPartitionDelegate* delegate_ = nullptr;
   QButtonGroup* button_group_ = nullptr;
   QFrame* install_tip_ = nullptr;
   QLabel* tip_label_ = nullptr;
