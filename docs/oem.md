@@ -51,6 +51,17 @@ slide 目录的结果应该与 resources/slide 目录相同.
 分区操作使用 `parted` 命令, 同时, 记得把分区结果写入到 `/etc/deepin-installer.conf`
 这个配置文件里.
 
+## 全盘分区
+使用全盘分区时, 可以设定相应的分区策略:
+* `partition_full_disk_large_disk_threshold`, 单位是Gib, 当选中的硬盘大小小于这个值时,
+就认为它是小硬盘, 使用小硬盘的策略. 否则就使用大硬盘策略. 默认是 64Gib
+* `partition_full_disk_small_legacy_policy`, 以 legacy 模式启动, 小硬盘策略
+* `partition_full_disk_small_uefi_policy`, 以 EFI 方式启动, 小硬盘策略
+* `partition_full_disk_large_legacy_policy`, 以 legacy 方式启动, 大硬盘策略
+* `partition_full_disk_large_uefi_policy`, 以 EFI 方式启动, 大硬盘策略
+* `partition_full_disk_large_root_part_range`, 大硬盘模式下, 根分区的大小需要在这个
+范围之内, 单位是 Gib, 默认是 "20:150", 即 20Gib 到 150 Gib.
+
 ## hooks
 根据安装阶段的不同, 分为 `before_chroot`, `in_chroot` 以及 `after_chroot`.
 在 `oem/hooks/` 目录里, 创建相应的目录, 并写需要的hook脚本即可.
