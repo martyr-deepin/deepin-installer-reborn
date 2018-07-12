@@ -23,6 +23,12 @@
 
 namespace installer {
 
+namespace {
+
+const char kLinuxSwapMountPoint[] = "linux-swap";
+
+}  // namespace
+
 FullDiskDelegate::FullDiskDelegate(QObject* parent)
     : QObject(parent),
       real_devices_(),
@@ -244,11 +250,11 @@ void FullDiskDelegate::resetOperations() {
 }
 
 bool FullDiskDelegate::createPartition(const Partition& partition,
-                                              PartitionType partition_type,
-                                              bool align_start,
-                                              FsType fs_type,
-                                              const QString& mount_point,
-                                              qint64 total_sectors) {
+                                       PartitionType partition_type,
+                                       bool align_start,
+                                       FsType fs_type,
+                                       const QString& mount_point,
+                                       qint64 total_sectors) {
   // Policy:
   // * If partition table is empty, create a new one.
   const int device_index = DeviceIndex(virtual_devices_, partition.device_path);
@@ -292,10 +298,10 @@ bool FullDiskDelegate::createPartition(const Partition& partition,
 }
 
 bool FullDiskDelegate::createLogicalPartition(const Partition& partition,
-                                                     bool align_start,
-                                                     FsType fs_type,
-                                                     const QString& mount_point,
-                                                     qint64 total_sectors) {
+                                              bool align_start,
+                                              FsType fs_type,
+                                              const QString& mount_point,
+                                              qint64 total_sectors) {
   // Policy:
   // * Create extended partition if not found;
   // * If new logical partition is not contained in or is intersected with
@@ -411,11 +417,11 @@ bool FullDiskDelegate::createLogicalPartition(const Partition& partition,
 }
 
 bool FullDiskDelegate::createPrimaryPartition(const Partition& partition,
-                                                     PartitionType partition_type,
-                                                     bool align_start,
-                                                     FsType fs_type,
-                                                     const QString& mount_point,
-                                                     qint64 total_sectors) {
+                                              PartitionType partition_type,
+                                              bool align_start,
+                                              FsType fs_type,
+                                              const QString& mount_point,
+                                              qint64 total_sectors) {
   // Policy:
   // * If new primary partition is contained in or intersected with
   //   extended partition, shrink extended partition or delete it if no other
@@ -575,8 +581,8 @@ Partition FullDiskDelegate::deletePartition(const Partition& partition) {
 }
 
 void FullDiskDelegate::formatPartition(const Partition& partition,
-                                              FsType fs_type,
-                                              const QString& mount_point) {
+                                       FsType fs_type,
+                                       const QString& mount_point) {
   qDebug() << "formatSimplePartition()" << partition << fs_type << mount_point;
 
   Partition new_partition;
@@ -600,13 +606,10 @@ void FullDiskDelegate::formatPartition(const Partition& partition,
 }
 
 bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
-                                                PartitionTableType type) {
-
-  // Policy:
-  //  * Create new partition table (msdos);
-  //  * Create /boot with ext4, 500MiB;
-  //  * Create swap partition with 4GiB;
-  //  * Create / with ext4, remaining space (at most 300GiB);
+                                         PartitionTableType type) {
+  // * First clear any existing operations
+  // * Then parse policy based on settings, partition table type and disk.
+  // * At last create operations based on policy.
   qDebug() << "formatWholeDevice()" << device_path;
 
   const int device_index = DeviceIndex(virtual_devices_, device_path);
@@ -634,56 +637,64 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
 
   Partition& unallocated = device.partitions.last();
 
-  // Create /boot partition.
-  const int boot_space = GetSettingsInt(kPartitionDefaultBootSpace);
-  const qint64 boot_sectors = boot_space * kMebiByte / unallocated.sector_size;
-  bool ok = createPrimaryPartition(unallocated,
-                                   PartitionType::Normal,
-                                   true,
-                                   FsType::Ext4,
-                                   kMountPointBoot,
-                                   boot_sectors);
-  if (!ok) {
-    qCritical() << "Failed to create /boot partition on" << unallocated;
-    return false;
+  // Read policy
+  QString part_policy;
+  const qint64 large_disk_threshold =
+      GetSettingsInt(kPartitionFullDiskLargeDiskThreshold) * kGibiByte;
+  if (type == PartitionTableType::GPT) {
+    if (device.length < large_disk_threshold) {
+      part_policy = GetSettingsString(kPartitionFullDiskSmallUEFIPolicy);
+    } else {
+      part_policy = GetSettingsString(kPartitionFullDiskLargeUEFIPolicy);
+    }
+  } else {
+    if (device.length < large_disk_threshold) {
+      part_policy = GetSettingsString(kPartitionFullDiskSmallLegacyPolicy);
+    } else {
+      part_policy = GetSettingsString(kPartitionFullDiskLargeLegacyPolicy);
+    }
   }
-  Operation& boot_operation = operations_.last();
-  boot_operation.applyToVisual(device);
 
-  unallocated = device.partitions.last();
-  // Create swap partition.
-  const int swap_space = GetSettingsInt(kPartitionSwapPartitionSize);
-  const qint64 swap_sectors = swap_space * kMebiByte / unallocated.sector_size;
-  ok = createPrimaryPartition(unallocated,
-                              PartitionType::Normal,
-                              true,
-                              FsType::LinuxSwap,
-                              "",
-                              swap_sectors);
-  if (!ok) {
-    qCritical() << "Failed to created swap partition:" << device;
-    return false;
-  }
-  Operation& swap_operation = operations_.last();
-  swap_operation.applyToVisual(device);
+  const QStringList part_rules = part_policy.split(';');
+  for (int rule_idx = 0; rule_idx < part_rules.length(); ++rule_idx) {
+    const QStringList rule_parts = part_rules.at(rule_idx).split(':');
+    if (rule_parts.length() != 4) {
+      qCritical() << "Invalid policy:" << part_policy;
+      return false;
+    }
+    QString mount_point = rule_parts.at(0);
+    const QString& fs_type_name = rule_parts.at(1);
+    const QString& start = rule_parts.at(2);
+    const QString& end = rule_parts.at(3);
 
-  const qint64 kRootMaximumSize = 300 * kGibiByte;
-  const qint64 device_size = device.getByteLength();
-  const qint64 root_size = (device_size > kRootMaximumSize) ?
-                           kRootMaximumSize :
-                           device_size;
-  const qint64 root_sectors = root_size / device.sector_size;
+    if (mount_point == kLinuxSwapMountPoint) {
+      mount_point = "";
+    }
+    const FsType fs_type = GetFsTypeByName(fs_type_name);
 
-  unallocated = device.partitions.last();
-  ok = createPrimaryPartition(unallocated,
-                              PartitionType::Normal,
-                              true,
-                              FsType::Ext4,
-                              kMountPointRoot,
-                              root_sectors);
-  if (!ok) {
-    qCritical() << "Failed to create / partition:" << device;
-    return false;
+    const qint64 start_size = ParsePartitionSize(start, device.length);
+    const qint64 end_size = ParsePartitionSize(end, device.length);
+    if (start_size == -1 || end_size == -1) {
+      qCritical() << "Failed to parse partition size:" << rule_parts;
+      return false;
+    }
+    const qint64 sectors = (end_size - start_size) / unallocated.sector_size;
+
+    const bool ok = createPrimaryPartition(unallocated,
+                                           PartitionType::Normal,
+                                           true,
+                                           fs_type,
+                                           mount_point,
+                                           sectors);
+    if (!ok) {
+      qCritical() << "Failed to create partition on " << unallocated;
+      return false;
+    }
+
+    Operation& last_operation = operations_.last();
+    last_operation.applyToVisual(device);
+
+    unallocated = device.partitions.last();
   }
 
   qDebug() << "operations for simple disk mode:" << operations_;

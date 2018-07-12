@@ -104,6 +104,14 @@ int ToMebiByte(qint64 size);
 // Trim |text| length to |max_len|.
 QString TrimText(const QString& text, int max_len);
 
+/**
+ * Parse partition size from string.
+ * @param size like used in parted, e.g., 100Mib, 2Gib, 10%
+ * @param device_length Size of device in which this partition is located.
+ * @return actual size of partition, in bytes. Returns -1 on error.
+ */
+qint64 ParsePartitionSize(const QString& size, qint64 device_length);
+
 }  // namespace installer
 
 #endif  // INSTALLER_UI_DELEGATES_PARTITION_UTIL_H

@@ -25,6 +25,7 @@
 
 #include "base/file_util.h"
 #include "ui/delegates/full_disk_delegate.h"
+#include "ui/delegates/partition_util.h"
 #include "ui/widgets/simple_disk_button.h"
 #include "ui/utils/widget_util.h"
 
@@ -221,7 +222,10 @@ void FullDiskFrame::onPartitionButtonToggled(QAbstractButton* button,
     // Reset simple operations.
     delegate_->resetOperations();
 
-    delegate_->formatWholeDevice(path, PartitionTableType::MsDos);
+    PartitionTableType table = IsEfiEnabled() ?
+                               PartitionTableType::GPT :
+                               PartitionTableType::MsDos;
+    delegate_->formatWholeDevice(path, table);
   }
 }
 

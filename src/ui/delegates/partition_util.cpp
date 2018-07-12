@@ -18,7 +18,9 @@
 #include "ui/delegates/partition_util.h"
 
 #include <math.h>
+
 #include <QFileInfo>
+#include <QRegularExpression>
 
 #include "partman/os_prober.h"
 #include "partman/utils.h"
@@ -398,6 +400,33 @@ QString TrimText(const QString& text, int max_len) {
   } else {
     return text;
   }
+}
+
+qint64 ParsePartitionSize(const QString& size, qint64 device_length) {
+  QRegularExpression pattern("(\\d+)(mib|gib|%)",
+                             QRegularExpression::CaseInsensitiveOption);
+  const QRegularExpressionMatch match = pattern.match(size);
+  if (match.hasMatch()) {
+    bool ok;
+    const int num = match.captured(1).toInt(&ok, 10);
+    if (!ok || num < 0) {
+      qCritical() << "Invalid size:" << num;
+      return -1;
+    }
+
+    const QString unit = match.captured(2).toLower();
+    if (unit == "mib") {
+      return num * kMebiByte;
+    } else if (unit == "gib") {
+      return num * kGibiByte;
+    } else if (unit == "%") {
+      return num * device_length;
+    } else {
+      qCritical() << Q_FUNC_INFO << "Invalid unit found:" << num;
+      return -1;
+    }
+  }
+  return -1;
 }
 
 }  // namespace installer

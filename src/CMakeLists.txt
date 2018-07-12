@@ -790,6 +790,11 @@ add_executable(ctl-btn-test
                )
 target_link_libraries(ctl-btn-test ${Qt_LIBS})
 
+add_executable(partition-util-test
+               ui/tests/partition_util_test.cpp
+               )
+target_link_libraries(partition-util-test ${Qt_LIBS})
+
 # Unittest
 add_executable(deepin-installer-tests
                app/unittest_main.cpp
