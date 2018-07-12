@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>partition_new_press</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="partition_new_press" fill="#2CA7F8">
+            <path d="M17,17 L17,13 L18,13 L18,17 L22,17 L22,18 L18,18 L18,22 L17,22 L17,18 L13,18 L13,17 L17,17 Z M19.9870679,11 L11,11 L11,19.9870679 C10.8344194,19.9956538 10.6677173,20 10.5,20 C5.25329488,20 1,15.7467051 1,10.5 C1,5.25329488 5.25329488,1 10.5,1 C15.7467051,1 20,5.25329488 20,10.5 C20,10.6677173 19.9956538,10.8344194 19.9870679,11 Z" id="Combined-Shape"></path>
+        </g>
+    </g>
+</svg>

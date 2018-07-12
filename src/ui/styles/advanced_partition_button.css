@@ -46,3 +46,39 @@
   outline: none;
   background: transparent;
 }
+
+#control_button[ctlState="delete"] {
+  border-image: url(":/images/partition_delete_normal.svg");
+}
+
+#control_button[ctlState="delete"]:hover {
+  border-image: url(":/images/partition_delete_hover.svg");
+}
+
+#control_button[ctlState="delete"]:press {
+  border-image: url(":/images/partition_delete_press.svg");
+}
+
+#control_button[ctlState="edit"] {
+  border-image: url(":/images/edit_normal.svg");
+}
+
+#control_button[ctlState="edit"]:hover {
+  border-image: url(":/images/edit_hover.svg");
+}
+
+#control_button[ctlState="edit"]:press {
+  border-image: url(":/images/edit_press.svg");
+}
+
+#control_button[ctlState="new"] {
+  border-image: url(":/images/partition_new_normal.svg");
+}
+
+#control_button[ctlState="new"]:hover {
+  border-image: url(":/images/partition_new_hover.svg");
+}
+
+#control_button[ctlState="new"]:press {
+  border-image: url(":/images/partition_new_press.svg");
+}

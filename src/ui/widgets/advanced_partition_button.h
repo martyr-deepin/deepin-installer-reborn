@@ -28,13 +28,9 @@ namespace installer {
 class AdvancedPartitionButton : public PointerButton {
   Q_OBJECT
 
-  Q_PROPERTY(double alpha READ alpha WRITE setAlpha)
-
  public:
-  AdvancedPartitionButton(const Partition& partition,
-                          QWidget* parent = nullptr);
-
-  double alpha() const { return alpha_; }
+  explicit AdvancedPartitionButton(const Partition& partition,
+                                   QWidget* parent = nullptr);
 
   // Get partition struct binding to current button.
   const Partition& partition() const;
@@ -51,20 +47,11 @@ class AdvancedPartitionButton : public PointerButton {
   void newPartitionTriggered(const Partition& partition);
 
  public slots:
-  // Reset background alpha value of button to default.
-  void resetAlpha();
-
-  // Update background alpha value of button.
-  void setAlpha(double alpha);
-
   void setEditable(bool editable);
 
  private:
   void initConnections();
   void initUI();
-
-  // Update stylesheet to set background alpha value.
-  void updateStyle();
 
   const Partition& partition_;
 
@@ -79,8 +66,6 @@ class AdvancedPartitionButton : public PointerButton {
   ControlStatus control_status_;
   bool editable_;
   void updateStatus();
-
-  double alpha_;
 
  private slots:
   void onControlButtonClicked();

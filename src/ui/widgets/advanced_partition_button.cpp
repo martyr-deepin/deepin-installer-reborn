@@ -19,6 +19,7 @@
 
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QStyle>
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_util.h"
@@ -29,10 +30,15 @@ namespace installer {
 
 namespace {
 
-const double kDefaultAlpha = 0.0;
+const int kBtnSize = 24;
 
-const char kBackgroundAlphaTmp[] =
-    "#advanced_partition_button { background: rgba(255, 255, 255, %1); }";
+const char kStyleFile[] = ":/styles/advanced_partition_button.css";
+
+const char kCtlBtnState[] = "ctlState";
+const char kCtlBtnStateDelete[] = "delete";
+const char kCtlBtnStateEdit[] = "edit";
+const char kCtlBtnStateNew[] = "new";
+const char kCtlBtnStateHide[] = "hide";
 
 }  // namespace
 
@@ -40,8 +46,7 @@ AdvancedPartitionButton::AdvancedPartitionButton(const Partition& partition,
                                                  QWidget* parent)
     : PointerButton(parent),
       partition_(partition),
-      editable_(false),
-      alpha_(kDefaultAlpha) {
+      editable_(false) {
   this->setObjectName("advanced_partition_button");
 
   this->initUI();
@@ -50,16 +55,6 @@ AdvancedPartitionButton::AdvancedPartitionButton(const Partition& partition,
 
 const Partition& AdvancedPartitionButton::partition() const {
   return partition_;
-}
-
-void AdvancedPartitionButton::resetAlpha() {
-  alpha_ = kDefaultAlpha;
-  this->updateStyle();
-}
-
-void AdvancedPartitionButton::setAlpha(double alpha) {
-  alpha_ = alpha;
-  this->updateStyle();
 }
 
 void AdvancedPartitionButton::setEditable(bool editable) {
@@ -144,13 +139,13 @@ void AdvancedPartitionButton::initUI() {
   QFrame* control_button_wrapper = new QFrame();
   control_button_wrapper->setObjectName("control_button_wrapper");
   control_button_wrapper->setContentsMargins(0, 0, 0, 0);
-  control_button_wrapper->setFixedSize(18, 18);
+  control_button_wrapper->setFixedSize(kBtnSize, kBtnSize);
 
   control_button_ = new PointerButton(control_button_wrapper);
   control_button_->setObjectName("control_button");
   control_button_->setFlat(true);
-  control_button_->setFixedSize(18, 18);
-  control_button_->hide();
+  control_button_->setFixedSize(kBtnSize, kBtnSize);
+  control_button_->setProperty(kCtlBtnState, kCtlBtnStateHide);
 
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);
@@ -176,15 +171,7 @@ void AdvancedPartitionButton::initUI() {
   this->setCheckable(true);
   this->setChecked(false);
   this->setFlat(true);
-  this->setStyleSheet(ReadFile(":/styles/advanced_partition_button.css"));
-}
-
-void AdvancedPartitionButton::updateStyle() {
-  // TODO(xushaohua): Tuning
-  QString content = ReadFile(":/styles/advanced_partition_button.css");
-  const QString background = QString(kBackgroundAlphaTmp).arg(alpha_);
-  this->setStyleSheet(content + background);
-  this->ensurePolished();
+  this->setStyleSheet(ReadFile(kStyleFile));
 }
 
 void AdvancedPartitionButton::updateStatus() {
@@ -194,20 +181,25 @@ void AdvancedPartitionButton::updateStatus() {
     if (partition_.type == PartitionType::Normal ||
         partition_.type == PartitionType::Logical) {
       control_status_ = ControlStatus::Delete;
-      control_button_->setIcon(QIcon(":/images/delete_partition.png"));
+      control_button_->setProperty(kCtlBtnState, kCtlBtnStateDelete);
     }
   } else if (this->isChecked()) {
     if (partition_.type == PartitionType::Normal ||
         partition_.type == PartitionType::Logical) {
       control_status_ = ControlStatus::Edit;
-      control_button_->setIcon(QIcon(":/images/edit_partition.png"));
+      control_button_->setProperty(kCtlBtnState, kCtlBtnStateEdit);
     } else if (partition_.type == PartitionType::Unallocated) {
       control_status_ = ControlStatus::New;
-      control_button_->setIcon(QIcon(":/images/new_partition.png"));
+      control_button_->setProperty(kCtlBtnState, kCtlBtnStateNew);
     }
+  } else {
+    control_button_->setProperty(kCtlBtnState, kCtlBtnStateHide);
   }
 
   control_button_->setVisible(control_status_ != ControlStatus::Hide);
+  control_button_->style()->unpolish(control_button_);
+  control_button_->style()->polish(control_button_);
+  control_button_->update();
 }
 
 void AdvancedPartitionButton::onControlButtonClicked() {

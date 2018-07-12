@@ -581,7 +581,7 @@ void AdvancedPartitionFrame::onErrorLabelEntered() {
 
 void AdvancedPartitionFrame::onErrorLabelLeaved() {
   if (hovered_part_button_) {
-    hovered_part_button_->resetAlpha();
+//    hovered_part_button_->resetAlpha();
     hovered_part_button_ = nullptr;
   }
 }
