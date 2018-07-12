@@ -24,6 +24,8 @@
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
+  app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+  app.setAttribute(Qt::AA_EnableHighDpiScaling);
   app.setApplicationDisplayName("Deepin Installer Oem Tool");
   app.setApplicationName("deepin-installer-oem");
   app.setApplicationVersion(installer::kAppVersion);
