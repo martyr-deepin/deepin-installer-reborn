@@ -699,6 +699,9 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
 
   qDebug() << "operations for simple disk mode:" << operations_;
 
+  // Update bootloader path.
+  this->setBootloaderPath(device.path);
+
   return true;
 }
 
