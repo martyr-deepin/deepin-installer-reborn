@@ -84,8 +84,10 @@ main() {
   setup_lightdm_auto_login
   setup_keyboard
   setup_locale_timezone
-  setup_username_password
   setup_livefs
+
+  # setup_username_password() will clear value of DI_PASSWORD
+  setup_username_password
   customize_user
 
   sync
