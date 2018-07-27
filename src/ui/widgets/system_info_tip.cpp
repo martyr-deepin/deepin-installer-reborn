@@ -125,7 +125,7 @@ void SystemInfoTip::paintEvent(QPaintEvent* event) {
 void SystemInfoTip::initUI() {
   label_ = new QLabel();
   label_->setObjectName("tooltip_label");
-  label_->setWordWrap(false);
+  label_->setWordWrap(true);
   label_->setMaximumWidth(kMaximumLabelWidth);
 
   QHBoxLayout* layout = new QHBoxLayout();
