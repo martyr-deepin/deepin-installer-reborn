@@ -75,21 +75,6 @@ fi
 detect_vbox || UNUSED_PKGS+=("virtualbox-guest-*")
 detect_vmware || UNUSED_PKGS+=("open-vm-tools*")
 
-DI_LOCALE=$(installer_get "DI_LOCALE")
-LANG=${DI_LOCALE%.*}
-
-if is_x86; then
-  case ${LANG} in
-    zh_*|en_*)
-      UNUSED_PKGS+=(evince-common)
-    ;;
-    *)
-      UNUSED_PKGS+=(foxitreader)
-    ;;
-  esac
-fi
-
-
 # Check package existence.
 declare -a EXISTING_UNUSED_PKGS
 for pkg in ${UNUSED_PKGS[@]}; do
