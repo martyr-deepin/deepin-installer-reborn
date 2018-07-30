@@ -21,6 +21,9 @@
 #include "service/settings_name.h"
 #include "ui/delegates/partition_util.h"
 
+#include <sys/sysinfo.h>
+#include <math.h>
+
 namespace installer {
 
 namespace {
@@ -642,59 +645,126 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
   const qint64 large_disk_threshold =
       GetSettingsInt(kPartitionFullDiskLargeDiskThreshold) * kGibiByte;
   if (type == PartitionTableType::GPT) {
-    if (device.length < large_disk_threshold) {
+    if (device.length * device.sector_size < large_disk_threshold) {
       part_policy = GetSettingsString(kPartitionFullDiskSmallUEFIPolicy);
     } else {
       part_policy = GetSettingsString(kPartitionFullDiskLargeUEFIPolicy);
     }
   } else {
-    if (device.length < large_disk_threshold) {
+    if (device.length * device.sector_size < large_disk_threshold) {
       part_policy = GetSettingsString(kPartitionFullDiskSmallLegacyPolicy);
     } else {
       part_policy = GetSettingsString(kPartitionFullDiskLargeLegacyPolicy);
     }
   }
 
+  const QString part_root_range_policy { GetSettingsString(kPartitionFullDiskLargeRootPartRange) };
+  const std::pair<QString, QString> root_range {
+      part_root_range_policy.split(":").at(0),
+      part_root_range_policy.split(":").at(1)
+  };
+  const uint swapSize { getSwapSize() };
+  qint64 deviceLength { device.length };
+  qint64 shift { 0 };
+  qint64 last_deviceLenght { device.length };
+
   const QStringList part_rules = part_policy.split(';');
   for (int rule_idx = 0; rule_idx < part_rules.length(); ++rule_idx) {
-    const QStringList rule_parts = part_rules.at(rule_idx).split(':');
-    if (rule_parts.length() != 4) {
-      qCritical() << "Invalid policy:" << part_policy;
-      return false;
-    }
-    QString mount_point = rule_parts.at(0);
-    const QString& fs_type_name = rule_parts.at(1);
-    const QString& start = rule_parts.at(2);
-    const QString& end = rule_parts.at(3);
+      const QStringList rule_parts { part_rules.at(rule_idx).split(':') };
+      QString mount_point { rule_parts.at(0) };
+      const QString& fs_type_name { rule_parts.at(1) };
+      const FsType fs_type { GetFsTypeByName(fs_type_name) };
+      QString start;
+      QString end;
+      qint64 start_size { 0 };
+      qint64 end_size { 0 };
 
-    if (mount_point == kLinuxSwapMountPoint) {
-      mount_point = "";
-    }
-    const FsType fs_type = GetFsTypeByName(fs_type_name);
+      // When the number is 3
+      // the usage is the remaining
+      // both start_size and end_size need to recalculate shift
+      if (rule_parts.size() == 3) {
+          const QString &use_range { rule_parts.at(2) };
+          shift = (device.length - last_deviceLenght) * device.sector_size;
 
-    const qint64 start_size = ParsePartitionSize(start, device.length);
-    const qint64 end_size = ParsePartitionSize(end, device.length);
-    if (start_size == -1 || end_size == -1) {
-      qCritical() << "Failed to parse partition size:" << rule_parts;
-      return false;
-    }
-    const qint64 sectors = (end_size - start_size) / unallocated.sector_size;
+          start_size += shift;
+          start_size += 1;
+          end_size += shift;
 
-    const bool ok = createPrimaryPartition(unallocated,
-                                           PartitionType::Normal,
-                                           true,
-                                           fs_type,
-                                           mount_point,
-                                           sectors);
-    if (!ok) {
-      qCritical() << "Failed to create partition on " << unallocated;
-      return false;
-    }
+          // Special handle, root has a range of processing
+          if (mount_point == "/") {
+              const qint64 endSize = ParsePartitionSize(use_range, last_deviceLenght * device.sector_size);
+              const uint end_size_use { static_cast<uint>((endSize / kKibiByte / kKibiByte / kKibiByte)) };
+              if (end_size_use < root_range.first.toUInt()) {
+                  end_size += ParsePartitionSize(QString("%1Gib").arg(root_range.first), last_deviceLenght * device.sector_size);
+              } else if (end_size_use > root_range.second.toUInt()) {
+                  end_size += ParsePartitionSize(QString("%1Gib").arg(root_range.second), last_deviceLenght * device.sector_size);
+              }
+          }
+          else {
+              end_size += ParsePartitionSize(use_range, last_deviceLenght * device.sector_size);
+          }
+      }
 
-    Operation& last_operation = operations_.last();
-    last_operation.applyToVisual(device);
+      if (rule_parts.size() == 4) {
+          start = rule_parts.at(2);
+          end = rule_parts.at(3);
+          const bool isSwapEnd = end == "linux-swap-end";
 
-    unallocated = device.partitions.last();
+          if (isSwapEnd) {
+              shift += ParsePartitionSize(QString::number(swapSize) + "Gib", device.length * device.sector_size) +
+                      ParsePartitionSize(start, device.length * device.sector_size);
+              deviceLength -= shift / device.sector_size;
+              end = QString::number(swapSize) + "Gib";
+              end_size = ParsePartitionSize(start, device.length * device.sector_size);
+          }
+          else {
+              start_size += shift;
+              end_size += shift;
+          }
+
+          if (mount_point == kLinuxSwapMountPoint) {
+              mount_point = "";
+          }
+
+          start_size += ParsePartitionSize(start, (isSwapEnd ? device.length : deviceLength) * device.sector_size);
+          end_size += ParsePartitionSize(end, (isSwapEnd ? device.length : deviceLength) * device.sector_size);
+      }
+
+      if (start_size == -1 || end_size == -1) {
+          qCritical() << "Failed to parse partition size:" << rule_parts;
+          return false;
+      }
+
+      last_deviceLenght -= (end_size - start_size) / device.sector_size;
+
+      const qint64 sectors = (end_size - start_size) / unallocated.sector_size;
+      bool ok = false;
+
+      if (rule_idx < device.max_prims || device.table == PartitionTableType::GPT) {
+          ok = createPrimaryPartition(unallocated,
+                                      PartitionType::Normal,
+                                      true,
+                                      fs_type,
+                                      mount_point,
+                                      sectors);
+      } else {
+          // create extend partition
+          ok = createLogicalPartition(unallocated,
+                                      true,
+                                      fs_type,
+                                      mount_point,
+                                      sectors);
+      }
+
+      if (!ok) {
+          qCritical() << "Failed to create partition on " << unallocated;
+          return false;
+      }
+
+      Operation& last_operation = operations_.last();
+      last_operation.applyToVisual(device);
+
+      unallocated = device.partitions.last();
   }
 
   qDebug() << "operations for simple disk mode:" << operations_;
@@ -704,7 +774,6 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
 
   return true;
 }
-
 
 void FullDiskDelegate::onDeviceRefreshed(const DeviceList& devices) {
   real_devices_ = devices;
@@ -783,7 +852,24 @@ void FullDiskDelegate::onManualPartDone(const DeviceList& devices) {
 }
 
 void FullDiskDelegate::setBootloaderPath(const QString& path) {
-  bootloader_path_ = path;
+    bootloader_path_ = path;
+}
+
+uint FullDiskDelegate::getSwapSize()
+{
+    // get system memory
+    struct sysinfo myinfo;
+    unsigned long total_bytes;
+
+    sysinfo(&myinfo);
+
+    total_bytes = myinfo.mem_unit * myinfo.totalram;
+
+    double by = total_bytes / kKibiByte / kKibiByte / kKibiByte;
+
+    qDebug() << "system memory is: " << total_bytes << by;
+
+    return qRound(sqrt(by)) + qRound(by);
 }
 
 }  // namespace installer

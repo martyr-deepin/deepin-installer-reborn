@@ -102,7 +102,7 @@ mount_points=$(echo ${DI_MOUNTPOINTS//;/ })
 for i in $(echo "${mount_points}"); do
   mountpoint=$(echo $i | cut -d'=' -f1)
   mountpath=$(echo $i | cut -d'=' -f2)
-  if [ $mountpath != "/" ] && [ $mountpath != "swap" ]; then
+  if [ $mountpath != "/" ] && [ $mountpath != "swap" ] && [ $mountpath != "/boot/efi" ]; then
     msg "mount ${mountpoint} -> ${mountpath}"
     mkdir -pv ${target}${mountpath}
     mount $mountpoint ${target}${mountpath} || \

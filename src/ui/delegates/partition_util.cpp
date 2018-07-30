@@ -420,7 +420,7 @@ qint64 ParsePartitionSize(const QString& size, qint64 device_length) {
     } else if (unit == "gib") {
       return num * kGibiByte;
     } else if (unit == "%") {
-      return num * device_length;
+      return num / 100.0 * device_length;
     } else {
       qCritical() << Q_FUNC_INFO << "Invalid unit found:" << num;
       return -1;

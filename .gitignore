@@ -16,3 +16,6 @@ debian/files
 debian/tmp/
 i18n/*.qm
 obj-*/
+
+*.user
+.vscode
