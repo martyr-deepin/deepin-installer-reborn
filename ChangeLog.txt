@@ -1,3 +1,17 @@
+2018-07-31 2.2.18 haruyukilxz <lxz@ilxz.me>
+#### Bug Fixes
+
+*   no grub item of live-filesystem on sw ([707fa0b9](707fa0b9))
+*   missing live-fileysystem uuid on sw ([8c014f8e](8c014f8e))
+*   Adapt lintian ([7f04a6c2](7f04a6c2))
+* **tip:**  wrong hints are not newline ([81384c5d](81384c5d))
+
+#### Features
+
+*   set default password for livefs. ([235be0cc](235be0cc))
+*   add arm64-efi support ([097258d4](097258d4))
+*   add cryptroot support ([ec8d136e](ec8d136e))
+
 2018-06-07 2.2.17 Xu Shaohua <xushaohua2016@outlook.com>
     * Add screen brightness shortcut
     * Support empty password
