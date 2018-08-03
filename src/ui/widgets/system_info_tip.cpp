@@ -43,7 +43,7 @@ const int kTriangleHalfWidth = kTriangleWidth / 2;
 const int kTriangleLeftMargin = 36;
 
 // Same width as line edit.
-const int kMaximumWindowWidth = 550;
+const int kMaximumWindowWidth = 310;
 const int kMinimumWindowHeight = 32;
 const int kWindowMarginLeft = 8;
 const int kWindowMarginTop = 10;
@@ -72,7 +72,7 @@ void SystemInfoTip::setText(const QString& text) {
     label_->setFixedWidth(content_width);
   } else {
     label_->setWordWrap(true);
-    label_->setFixedWidth(kMaximumWindowWidth);
+    label_->setFixedWidth(kMaximumLabelWidth);
   }
 
   // Also resize container to fit size of label.
