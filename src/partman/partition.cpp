@@ -195,7 +195,8 @@ int PartitionIndex(const PartitionList& partitions,
   for (int i = 0; i < partitions.length(); ++i) {
     if (partition.type == partitions[i].type &&
         partition.start_sector >= partitions[i].start_sector &&
-        partition.end_sector <= partitions[i].end_sector) {
+        partition.end_sector -1 <= partitions[i].end_sector) {
+        // partition.end_sector boundary problems here.
       return i;
     }
   }
