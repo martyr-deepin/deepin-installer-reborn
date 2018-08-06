@@ -210,10 +210,6 @@ void PartitionFrame::initUI() {
   comment_layout->addWidget(comment_label_);
 
   QButtonGroup* button_group = new QButtonGroup(this);
-  full_disk_frame_button_ = new PointerButton(tr("Full Disk"));
-  full_disk_frame_button_->setCheckable(true);
-  full_disk_frame_button_->setFlat(true);
-  full_disk_frame_button_->setMinimumWidth(86);
   simple_frame_button_ = new PointerButton(tr("Simple"));
   simple_frame_button_->setCheckable(true);
   simple_frame_button_->setFlat(true);
@@ -222,17 +218,21 @@ void PartitionFrame::initUI() {
   advanced_frame_button_->setCheckable(true);
   advanced_frame_button_->setMinimumWidth(86);
   advanced_frame_button_->setFlat(true);
+  full_disk_frame_button_ = new PointerButton(tr("Full Disk"));
+  full_disk_frame_button_->setCheckable(true);
+  full_disk_frame_button_->setFlat(true);
+  full_disk_frame_button_->setMinimumWidth(86);
 
-  button_group->addButton(full_disk_frame_button_);
   button_group->addButton(simple_frame_button_);
   button_group->addButton(advanced_frame_button_);
+  button_group->addButton(full_disk_frame_button_);
   QHBoxLayout* button_layout = new QHBoxLayout();
   button_layout->setContentsMargins(0, 0, 0, 0);
   button_layout->setSpacing(0);
   button_layout->addStretch();
-  button_layout->addWidget(full_disk_frame_button_, 0, Qt::AlignRight);
   button_layout->addWidget(simple_frame_button_, 0, Qt::AlignRight);
-  button_layout->addWidget(advanced_frame_button_, 0, Qt::AlignLeft);
+  button_layout->addWidget(advanced_frame_button_, 0, Qt::AlignCenter);
+  button_layout->addWidget(full_disk_frame_button_, 0, Qt::AlignLeft);
   button_layout->addStretch();
 
   partition_stacked_layout_ = new QStackedLayout();
@@ -246,8 +246,9 @@ void PartitionFrame::initUI() {
     full_disk_partition_frame_->hide();
   } else {
     full_disk_frame_button_->setChecked(true);
-    full_disk_frame_button_->setObjectName(kLeftBtn);
-    simple_frame_button_->setObjectName(kMidBtn);
+    full_disk_frame_button_->setObjectName(kRightBtn);
+    simple_frame_button_->setObjectName(kLeftBtn);
+    advanced_frame_button_->setObjectName(kMidBtn);
     partition_stacked_layout_->addWidget(full_disk_partition_frame_);
   }
 
@@ -263,7 +264,7 @@ void PartitionFrame::initUI() {
       GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
     advanced_frame_button_->setObjectName(kSoloBtn);
   } else {
-    advanced_frame_button_->setObjectName(kRightBtn);
+    advanced_frame_button_->setObjectName(kMidBtn);
   }
   partition_stacked_layout_->addWidget(advanced_partition_frame_);
 
