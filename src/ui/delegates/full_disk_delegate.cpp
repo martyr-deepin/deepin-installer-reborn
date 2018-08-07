@@ -865,7 +865,10 @@ uint FullDiskDelegate::getSwapSize()
 
     total_bytes = myinfo.mem_unit * myinfo.totalram;
 
-    double by = total_bytes / kKibiByte / kKibiByte / kKibiByte;
+    const double by = static_cast<double>(total_bytes) /
+            static_cast<double>(kKibiByte) /
+            static_cast<double>(kKibiByte) /
+            static_cast<double>(kKibiByte);
 
     qDebug() << "system memory is: " << total_bytes << by;
 
