@@ -124,6 +124,15 @@ const char kPartitionFullDiskLargeUEFIPolicy[] =
 const char kPartitionFullDiskLargeRootPartRange[] =
     "partition_full_disk_large_root_part_range";
 
+const char kPartitionFullDiskSmallLegacyLabel[] =
+    "partition_full_disk_small_legacy_label";
+const char kPartitionFullDiskSmallUEFILabel[] =
+    "partition_full_disk_small_uefi_label";
+const char kPartitionFullDiskLargeLegacyLabel[] =
+    "partition_full_disk_large_legacy_label";
+const char kPartitionFullDiskLargeUEFILabel[] =
+    "partition_full_disk_large_uefi_label";
+
 // Install progress page
 const char kInstallProgressPageDisableSlide[] =
     "install_progress_page_disable_slide";

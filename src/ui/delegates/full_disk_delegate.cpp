@@ -498,6 +498,7 @@ bool FullDiskDelegate::createPrimaryPartition(const Partition& partition,
   new_partition.type = partition_type;
   new_partition.fs = fs_type;
   new_partition.mount_point = mount_point;
+  new_partition.label = partition.label;
 
   int partition_number;
   // In simple mode, operations has never been applied to partition list.
@@ -642,19 +643,24 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
 
   // Read policy
   QString part_policy;
+  QString part_labels;
   const qint64 large_disk_threshold =
       GetSettingsInt(kPartitionFullDiskLargeDiskThreshold) * kGibiByte;
   if (type == PartitionTableType::GPT) {
     if (device.length * device.sector_size < large_disk_threshold) {
       part_policy = GetSettingsString(kPartitionFullDiskSmallUEFIPolicy);
+      part_labels = GetSettingsString(kPartitionFullDiskSmallUEFILabel);
     } else {
       part_policy = GetSettingsString(kPartitionFullDiskLargeUEFIPolicy);
+      part_labels = GetSettingsString(kPartitionFullDiskLargeUEFILabel);
     }
   } else {
     if (device.length * device.sector_size < large_disk_threshold) {
       part_policy = GetSettingsString(kPartitionFullDiskSmallLegacyPolicy);
+      part_labels = GetSettingsString(kPartitionFullDiskSmallLegacyLabel);
     } else {
       part_policy = GetSettingsString(kPartitionFullDiskLargeLegacyPolicy);
+      part_labels = GetSettingsString(kPartitionFullDiskLargeLegacyLabel);
     }
   }
 
@@ -669,6 +675,7 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
   qint64 last_deviceLenght { device.length };
 
   const QStringList part_rules = part_policy.split(';');
+  const QStringList labels = part_labels.split(";");
   for (int rule_idx = 0; rule_idx < part_rules.length(); ++rule_idx) {
       const QStringList rule_parts { part_rules.at(rule_idx).split(':') };
       QString mount_point { rule_parts.at(0) };
@@ -678,6 +685,7 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
       QString end;
       qint64 start_size { 0 };
       qint64 end_size { 0 };
+      unallocated.label = labels[rule_idx];
 
       // When the number is 3
       // the usage is the remaining
