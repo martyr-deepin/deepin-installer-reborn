@@ -68,7 +68,7 @@ msgstr "Afrika/Bujumbura"
 
 #: system-config-date-timezones.h:13
 msgid "Africa/Cairo"
-msgstr "Afrika/Cairo"
+msgstr "Afrika/Caïro"
 
 #: system-config-date-timezones.h:14
 msgid "Africa/Casablanca"
@@ -600,7 +600,7 @@ msgstr "Amerika/Metlakatia"
 
 #: system-config-date-timezones.h:146
 msgid "America/Mexico_City"
-msgstr "Amerika/Mexico_City"
+msgstr "Amerika/Mexico_Stad"
 
 #: system-config-date-timezones.h:147
 msgid "America/Miquelon"
@@ -896,7 +896,7 @@ msgstr "Azië/Atıraw"
 
 #: system-config-date-timezones.h:220
 msgid "Asia/Baghdad"
-msgstr "Azië/Baghdad"
+msgstr "Azië/Bagdad"
 
 #: system-config-date-timezones.h:221
 msgid "Asia/Bahrain"
@@ -976,7 +976,7 @@ msgstr "Azië/Ho_Chi_Minh"
 
 #: system-config-date-timezones.h:240
 msgid "Asia/Hong_Kong"
-msgstr "Azië/Hong_Kong"
+msgstr "Azië/Hongkong"
 
 #: system-config-date-timezones.h:241
 msgid "Asia/Hovd"
@@ -1112,7 +1112,7 @@ msgstr "Azië/Samarkand"
 
 #: system-config-date-timezones.h:274
 msgid "Asia/Seoul"
-msgstr "Azië/Seoul"
+msgstr "Azië/Seoel"
 
 #: system-config-date-timezones.h:275
 msgid "Asia/Shanghai"
@@ -1148,7 +1148,7 @@ msgstr "Azië/Thimphu"
 
 #: system-config-date-timezones.h:283
 msgid "Asia/Tokyo"
-msgstr "Azië/Tokyo"
+msgstr "Azië/Tokio"
 
 #: system-config-date-timezones.h:284
 msgid "Asia/Tomsk"
@@ -1208,7 +1208,7 @@ msgstr "Atlantische Oceaan/Kaapverdië"
 
 #: system-config-date-timezones.h:298
 msgid "Atlantic/Faroe"
-msgstr "Atlantische Oceaan/Faroer"
+msgstr "Atlantische Oceaan/Faeröer"
 
 #: system-config-date-timezones.h:299
 msgid "Atlantic/Madeira"
@@ -1224,7 +1224,7 @@ msgstr "Atlantische Oceaan/Zuid_Georgia"
 
 #: system-config-date-timezones.h:302
 msgid "Atlantic/St_Helena"
-msgstr "Atlantische Oceaan/St_Helena"
+msgstr "Atlantische Oceaan/Sint_Helena"
 
 #: system-config-date-timezones.h:303
 msgid "Atlantic/Stanley"
@@ -1348,7 +1348,7 @@ msgstr "Europa/Helsinki"
 
 #: system-config-date-timezones.h:333
 msgid "Europe/Isle_of_Man"
-msgstr "Europe/Eiland_Man"
+msgstr "Europe/Man"
 
 #: system-config-date-timezones.h:334
 msgid "Europe/Istanbul"
@@ -1516,7 +1516,7 @@ msgstr "Europa/Zaporozhye"
 
 #: system-config-date-timezones.h:375
 msgid "Europe/Zurich"
-msgstr "Europa/Zurich"
+msgstr "Europa/Zürich"
 
 #: system-config-date-timezones.h:376
 msgid "Indian/Antananarivo"
@@ -1528,7 +1528,7 @@ msgstr "Indische Oceaan/Chagos"
 
 #: system-config-date-timezones.h:378
 msgid "Indian/Christmas"
-msgstr "Indische Oceaan/Christmas"
+msgstr "Indische Oceaan/Kersteiland"
 
 #: system-config-date-timezones.h:379
 msgid "Indian/Cocos"

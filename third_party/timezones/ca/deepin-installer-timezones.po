@@ -68,7 +68,7 @@ msgstr "Àfrica/Bujumbura"
 
 #: system-config-date-timezones.h:13
 msgid "Africa/Cairo"
-msgstr "Àfrica/El_Caire"
+msgstr "Àfrica/El Caire"
 
 #: system-config-date-timezones.h:14
 msgid "Africa/Casablanca"

@@ -2,12 +2,12 @@
 <context>
     <name>installer::AdvancedPartitionButton</name>
     <message>
-        <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="129"/>
+        <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="124"/>
         <source>Install here</source>
         <translation>Įdiegti čia</translation>
     </message>
     <message>
-        <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="132"/>
+        <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="127"/>
         <source>To be formatted</source>
         <translation>Bus formatuojamas</translation>
     </message>
@@ -22,69 +22,69 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="550"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="549"/>
         <source>Done</source>
         <translation>Atlikti</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="177"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="552"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="551"/>
         <source>Delete</source>
         <translation>Ištrinti</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="430"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="429"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="434"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="433"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="440"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="439"/>
         <source>%1 error found, continue to install after fixed</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="444"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="443"/>
         <source>%1 errors found, continue to install after fixed</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="490"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
         <translation>Katalogo /boot skaidinio failų sistemos tipas gali būti tik %1 </translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="494"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
         <translation>/boot katalogo skaidinys turėtų būti pats pirmas skaidinys standžiajame diske</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="500"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
         <source>At least %1 MB is required for /boot partition</source>
         <translation>/boot skaidiniui reikia bent %1 MB</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="503"/>
         <source>Add an EFI partition to continue</source>
         <translation>Norėdami tęsti, pridėkite EFI skaidinį</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="507"/>
         <source>At least %1 MB is required for EFI partition</source>
         <translation>EFI skaidiniui reikia bent %1 MB</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="512"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="511"/>
         <source>Add a Root partition to continue</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="517"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="516"/>
         <source>At least %1 GB is required for Root partition</source>
         <translation type="unfinished"/>
     </message>
@@ -200,6 +200,15 @@
     </message>
 </context>
 <context>
+    <name>installer::FullDiskFrame</name>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="62"/>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="83"/>
+        <source>Install here</source>
+        <translation>Įdiegti čia</translation>
+    </message>
+</context>
+<context>
     <name>installer::InstallFailedFrame</name>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="74"/>
@@ -253,7 +262,7 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation type="unfinished"/>
+        <translation>Prieš paleisdami iš naujo, išimkite diegimo laikmeną</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="46"/>
@@ -346,13 +355,13 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="77"/>
         <source>Full Disk Format Warning</source>
-        <translation type="unfinished"/>
+        <translation>Viso disko formatavimo įspėjimas</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="95"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Tęsiant įdiegimą bus formatuotas visas diskas, norėdami neprarasti duomenų pasidarykite visų savo duomenų atsarginę kopiją</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
@@ -370,34 +379,39 @@
 <context>
     <name>installer::PartitionFrame</name>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="73"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="188"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="83"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="203"/>
         <source>Select Installation Location</source>
         <translation>Pasirinkite įdiegimo vietą</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="75"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="190"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="85"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="205"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Įsitikinkite, kad esate padarę visų savo svarbių duomenų atsarginę kopiją, o tuomet pasirinkite diską, kuriame įdiegti</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="77"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="198"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="213"/>
         <source>Simple</source>
         <translation>Paprasta</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="78"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="204"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="217"/>
         <source>Advanced</source>
         <translation>Išplėstinė</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="79"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="251"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="279"/>
         <source>Start installation</source>
         <translation>Pradėti įdiegimą</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="221"/>
+        <source>Full Disk</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -544,23 +558,23 @@
         <translation>Reguliuoti %1 skaidinio dydį</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="157"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="159"/>
         <source>Do not use this partition</source>
         <translation>Nenaudoti šio skaidinio</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="170"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="172"/>
         <source>Swap partition</source>
         <translation>Sukeitimų skaidinys</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="172"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="174"/>
         <source>Unknown</source>
         <translation>Nežinoma</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="213"/>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="244"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="215"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="246"/>
         <source>Freespace</source>
         <translation>Laisva vieta</translation>
     </message>
@@ -601,15 +615,6 @@
     </message>
 </context>
 <context>
-    <name>installer::SimpleDiskFrame</name>
-    <message>
-        <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="59"/>
-        <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="80"/>
-        <source>Install here</source>
-        <translation>Įdiegti čia</translation>
-    </message>
-</context>
-<context>
     <name>installer::SimplePartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="68"/>
@@ -624,7 +629,7 @@
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="81"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation type="unfinished"/>
+        <translation>Šaknies skaidiniui reikia bent %1 GB</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="92"/>
@@ -635,7 +640,7 @@
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="388"/>
         <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
-        <translation type="unfinished"/>
+        <translation>Jeigu Windows diske įdiegsite deepin, tuomet Windows daugiau nebepasileis, norėdami tęsti, patvirtinkite</translation>
     </message>
 </context>
 <context>
@@ -710,7 +715,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="200"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
-        <translation type="unfinished"/>
+        <translation>Naudotojo varde privalo būti anglų kalbos raidės (mažosios), skaičiai ar specialūs simboliai (_-)</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="206"/>
@@ -855,7 +860,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="65"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Norėdami išvengti duomenų praradimo, pasidarykite visų savo duomenų atsarginę kopiją</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
@@ -875,13 +880,13 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="71"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation type="unfinished"/>
+        <translation>Įsitikinkite, kad pasidarėte visų duomenų atsarginę kopiją, o tuomet tęskite</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
         <source>Continue installation will format your disk</source>
-        <translation type="unfinished"/>
+        <translation>Tęsiant įdiegimą, bus suformatuotas jūsų diskas</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>

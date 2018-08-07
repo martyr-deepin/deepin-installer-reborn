@@ -488,7 +488,7 @@ msgstr "América/Indiana/Indianápolis"
 
 #: system-config-date-timezones.h:118
 msgid "America/Indiana/Knox"
-msgstr ""
+msgstr "América/Indiana/Knox"
 
 #: system-config-date-timezones.h:119
 msgid "America/Indiana/Marengo"

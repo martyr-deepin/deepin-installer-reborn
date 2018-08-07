@@ -2,12 +2,12 @@
 <context>
     <name>installer::AdvancedPartitionButton</name>
     <message>
-        <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="129"/>
+        <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="124"/>
         <source>Install here</source>
-        <translation>Installeer hier</translation>
+        <translation>Hier installeren</translation>
     </message>
     <message>
-        <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="132"/>
+        <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="127"/>
         <source>To be formatted</source>
         <translation>Zal geformatteerd worden</translation>
     </message>
@@ -18,75 +18,75 @@
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
         <source>Change boot loader</source>
-        <translation>Verander de bootloader </translation>
+        <translation>Opstartlader wijzigen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="550"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="549"/>
         <source>Done</source>
         <translation>Klaar</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="177"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="552"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="551"/>
         <source>Delete</source>
-        <translation>Verwijder</translation>
+        <translation>Verwijderen</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="430"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="429"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 fout gevonden, herstel deze om verder te gaan met de installatie of gebruik de eenvoudige modus</translation>
+        <translation>%1 fout gevonden. Herstel deze om door te gaan met de installatie of gebruik de eenvoudige modus.</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="434"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="433"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 fouten gevonden, herstel deze om verder te gaan met de installatie of gebruik de eenvoudige modus</translation>
+        <translation>%1 fouten gevonden. Herstel deze om door te gaan met de installatie of gebruik de eenvoudige modus.</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="440"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="439"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation>%1 fout gevonden, ga verder met installeren als dit opgelost is</translation>
+        <translation>%1 fout gevonden. Ga verder met installeren als dit opgelost is.</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="444"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="443"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation>1% fouten gevonden, ga verder met installeren als dit opgelost is</translation>
+        <translation>1% fouten gevonden. Ga verder met installeren als dit opgelost is.</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="491"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="490"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>Voor /boot is een partitie met %1 bestandsindeling vereist</translation>
+        <translation>Voor /boot is een partitie met het bestandssysteem %1 vereist</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="494"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation>De partitie waar /boot wordt aangemaakt moet de eerste partitie op de harde schijf zijn</translation>
+        <translation>De partitie waar /boot wordt gecreëerd moet de eerste partitie op de harde schijf zijn</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="500"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
         <source>At least %1 MB is required for /boot partition</source>
-        <translation>Er is minstens %1 MB vereist voor de /boot partitie</translation>
+        <translation>Er is minstens %1 MB vereist voor de /boot-partitie</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="503"/>
         <source>Add an EFI partition to continue</source>
-        <translation>Voeg een EFI partitie toe om verder te gaan</translation>
+        <translation>Voeg een EFI-partitie toe om door te gaan</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="507"/>
         <source>At least %1 MB is required for EFI partition</source>
-        <translation>Er is minstens %1 MB vereist voor de EFI partitie</translation>
+        <translation>Er is minstens %1 MB vereist voor de EFI-partitie</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="512"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="511"/>
         <source>Add a Root partition to continue</source>
-        <translation>Voeg een root partitie toe om verder te gaan</translation>
+        <translation>Voeg een root-partitie toe om door te gaan</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="517"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="516"/>
         <source>At least %1 GB is required for Root partition</source>
-        <translation>Er is minstens %1 GB nodig voor de root partitie</translation>
+        <translation>Er is minstens %1 GB nodig voor de root-partitie</translation>
     </message>
 </context>
 <context>
@@ -103,13 +103,13 @@
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="39"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="58"/>
         <source>Abort Installation</source>
-        <translation>Annuleer Installatie</translation>
+        <translation>Installatie afbreken</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="60"/>
         <source>Relevant operations you made in the installation process will not take effect, abort or continue installation?</source>
-        <translation>Wijzigingen die je maakte in het installatieproces zullen geen effect hebben. Installatie annuleren of verdergaan?</translation>
+        <translation>Wijzigingen die je tijdens het installatieproces hebt gemaakt zullen geen effect hebben. Installatie annuleren of doorgaan?</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="43"/>
@@ -136,7 +136,7 @@
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="60"/>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="79"/>
         <source>Exit installation</source>
-        <translation>Verlaat installatie</translation>
+        <translation>Installatie afsluiten</translation>
     </message>
 </context>
 <context>
@@ -145,13 +145,13 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="133"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="196"/>
         <source>Edit Disk</source>
-        <translation>Pas schijf aan</translation>
+        <translation>Schijf aanpassen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Verzeker u ervan dat u een reservekopie heeft van belangrijke data, selecteer dan de schijf voor installatie</translation>
+        <translation>Zorg ervoor dat je een back-up hebt gemaakt belangrijke gegevens en selecteer daarna de installatieschijf</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="137"/>
@@ -175,13 +175,13 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="140"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="278"/>
         <source>Cancel</source>
-        <translation>Annuleer</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="141"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="279"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Oké</translation>
     </message>
 </context>
 <context>
@@ -190,13 +190,22 @@
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="38"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="61"/>
         <source>Tuning system</source>
-        <translation>Systeem aan het afstellen</translation>
+        <translation>Bezig met afstellen van systeem</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="63"/>
         <source>Applying changes to your system, please wait...</source>
-        <translation>Wijzigingen worden toegepast op uw systeem, even geduld a.u.b.</translation>
+        <translation>Bezig met toepassen van wijzigingen; even geduld...</translation>
+    </message>
+</context>
+<context>
+    <name>installer::FullDiskFrame</name>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="62"/>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="83"/>
+        <source>Install here</source>
+        <translation>Hier installeren</translation>
     </message>
 </context>
 <context>
@@ -205,19 +214,19 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="74"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="94"/>
         <source>Installation Failed</source>
-        <translation>Installatie Mislukt</translation>
+        <translation>Installatie mislukt</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>Excuses voor het ongemak. U kan de QR-code fotograferen of scannen om een foutenrapport te verzenden, zodat we het probleem kunnen oplossen.</translation>
+        <translation>Excuses voor het ongemak. Je kunt de QR-code fotograferen of scannen om een foutrapport te versturen, zodat we het probleem kunnen oplossen.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="125"/>
         <source>Exit installation</source>
-        <translation>Verlaat installatie</translation>
+        <translation>Installatie afsluiten</translation>
     </message>
 </context>
 <context>
@@ -226,13 +235,13 @@
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="152"/>
         <source>Installing</source>
-        <translation>Installeren...</translation>
+        <translation>Bezig met installeren...</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>U heeft nog net tijd voor een kopje koffie. Daarna staat uw deepin voor u klaar!</translation>
+        <translation>Je hebt nog net tijd voor een kopje koffie, daarna staat je deepin-systeem klaar!</translation>
     </message>
 </context>
 <context>
@@ -247,19 +256,19 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="62"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>Herstart om van je kersverse deepin te genieten. We hopen dat je &apos;m leuk vindt!</translation>
+        <translation>Herstart om te genieten van je kersverse deepin. We hopen dat je het leuk vindt!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="45"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="69"/>
         <source>Please remove the installation media before reboot</source>
-        <translation>Verwijder de installatiemedia voordat u opnieuw opstart</translation>
+        <translation>Verwijder het installatiemedium voordat je opnieuw opstart</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="70"/>
         <source>Experience now</source>
-        <translation>Ervaar nu</translation>
+        <translation>Ervaar het nu</translation>
     </message>
 </context>
 <context>
@@ -274,7 +283,7 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="118"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="153"/>
         <source>Create a new partition and define the type and size</source>
-        <translation>Maak een nieuwe partitie aan, en geef type en grootte op</translation>
+        <translation>Creëer een nieuwe partitie en geef het type en de grootte op</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="119"/>
@@ -322,13 +331,13 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="126"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="213"/>
         <source>Cancel</source>
-        <translation>Annuleer</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="214"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Oké</translation>
     </message>
 </context>
 <context>
@@ -337,7 +346,7 @@
         <location filename="../src/ui/frames/inner/new_table_loading_frame.cpp" line="37"/>
         <location filename="../src/ui/frames/inner/new_table_loading_frame.cpp" line="54"/>
         <source>Formatting...</source>
-        <translation>Formatteren...</translation>
+        <translation>Bezig met formatteren...</translation>
     </message>
 </context>
 <context>
@@ -346,19 +355,19 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="77"/>
         <source>Full Disk Format Warning</source>
-        <translation>Waarschuwing Volle Schijf Formatteren</translation>
+        <translation>Waarschuwing - Volle schijf formatteren</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="95"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>De installatie verderzetten zal de hele schijf formatteren. Maak dus eerst een reservekopie van uw gegevens.</translation>
+        <translation>Doorgaan met de installatie betekent dat de gehele schijf wordt geformatteerd. Maak een back-up van al je gegevens om gegevensverlies te voorkomen.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="102"/>
         <source>Cancel</source>
-        <translation>Annuleer</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="60"/>
@@ -370,34 +379,39 @@
 <context>
     <name>installer::PartitionFrame</name>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="73"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="188"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="83"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="203"/>
         <source>Select Installation Location</source>
-        <translation>Kies locatie voor installatie</translation>
+        <translation>Kies de installatielocatie</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="75"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="190"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="85"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="205"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Verzeker u ervan dat u een reservekopie heeft van belangrijke data, selecteer dan de schijf voor installatie</translation>
+        <translation>Zorg ervoor dat je een back-up hebt gemaakt belangrijke gegevens en selecteer daarna de installatieschijf</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="77"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="198"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="213"/>
         <source>Simple</source>
         <translation>Eenvoudig</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="78"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="204"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="217"/>
         <source>Advanced</source>
         <translation>Gevorderd</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="79"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="251"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="279"/>
         <source>Start installation</source>
-        <translation>Begin installatie</translation>
+        <translation>Installatie starten</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="221"/>
+        <source>Full Disk</source>
+        <translation>Volledige schijf</translation>
     </message>
 </context>
 <context>
@@ -406,13 +420,13 @@
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="37"/>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="45"/>
         <source>Scan disks</source>
-        <translation>Scan schijf</translation>
+        <translation>Schijven scannen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="38"/>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="46"/>
         <source>Scanning disks, please wait...</source>
-        <translation>Schijven scannen, even geduld...</translation>
+        <translation>Bezig met scannen van schijven; even geduld...</translation>
     </message>
 </context>
 <context>
@@ -422,25 +436,25 @@
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="78"/>
         <source>You need to delete a primary partition to create a new primary partition</source>
-        <translation>U moet een primaire partitie verwijderen vooraleer u een nieuwe primaire partitie kan aanmaken</translation>
+        <translation>Je moet een primaire partitie verwijderen voordat je een nieuwe primaire partitie kunt creëren</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="81"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
-        <translation>Nieuwe logische partities kunnen enkel worden aangemaakt bij bestaande logische partities</translation>
+        <translation>Nieuwe logische partities kunnen enkel worden gecreëerd bij bestaande logische partities</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
         <source>You need to delete a primary partition to create the new partition</source>
-        <translation>U moet een primaire partitie verwijderen om de nieuwe partitie te kunnen aanmaken</translation>
+        <translation>Je moet een primaire partitie verwijderen om de nieuwe partitie te kunnen creëren</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="76"/>
         <source>Cannot create new partitions</source>
-        <translation>Kan geen nieuwe partities aanmaken</translation>
+        <translation>Kan geen nieuwe partities creëren</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="64"/>
@@ -469,19 +483,19 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="84"/>
         <source>Prepare for Installation</source>
-        <translation>Bereid je voor op de Installatie</translation>
+        <translation>Bereid je voor op de installatie</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="86"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation>Maak een reservekopie van belangrijke data en bevestig volgende operaties</translation>
+        <translation>Maak een back-up van belangrijke gegevens en bevestig de volgende handelingen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
-        <translation>Volgende acties worden uitgevoerd. Bevestig en ga verder om dataverlies te voorkomen.</translation>
+        <translation>De volgende acties worden uitgevoerd. Bevestig en ga door om gegevensverlies te voorkomen.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
@@ -501,73 +515,73 @@
     <message>
         <location filename="../src/partman/operation.cpp" line="252"/>
         <source>Create extended partition %1</source>
-        <translation>Maak uitgebreide partitie %1 aan</translation>
+        <translation>Uitgebreide partitie %1 creëren</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="256"/>
         <source>Create new partition %1, type is %2</source>
-        <translation>Nieuwe partitie %1 aanmaken, type is %2</translation>
+        <translation>Nieuwe partitie %1 creëren; type is %2</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="260"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation>Nieuwe partitie %1 aanmaken als %2 (aankoppelpunt), type is %3</translation>
+        <translation>Nieuwe partitie %1 creëren als %2 (aankoppelpunt); type is %3</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="269"/>
         <source>Delete %1 partition</source>
-        <translation>Verwijder %1 partitie</translation>
+        <translation>Partitie %1 verwijderen</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="274"/>
         <source>Format %1 partition, type is %2</source>
-        <translation>Formatteer %1 partitie, type is %2</translation>
+        <translation>%1 partitie formatteren; type is %2</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="278"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation>Formatteer %1 partitie als %2 (aankoppelpunt), type is %3</translation>
+        <translation>%1 partitie formatteren als %2 (aankoppelpunt); type is %3</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="286"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
-        <translation>Gebruik %1 partitie als %2 (aankoppelpunt)</translation>
+        <translation>%1 partitie gebruiken als %2 (aankoppelpunt)</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="292"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation>Formatteer %1 en creëer %2 nieuwe partitietabel</translation>
+        <translation>%1 formatteren en %2 nieuwe partitietabel creëren</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="298"/>
         <source>Adjust the size of %1 partition</source>
-        <translation>Wijzig de grootte van %1 partitie</translation>
+        <translation>Partitiegrootte van %1 wijzigen</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="157"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="159"/>
         <source>Do not use this partition</source>
-        <translation>Gebruik deze partitie niet</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="170"/>
-        <source>Swap partition</source>
-        <translation>Swap partitie</translation>
+        <translation>Partitie niet gebruiken</translation>
     </message>
     <message>
         <location filename="../src/ui/delegates/partition_util.cpp" line="172"/>
+        <source>Swap partition</source>
+        <translation>Swap-partitie</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="174"/>
         <source>Unknown</source>
         <translation>Onbekend</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="213"/>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="244"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="215"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="246"/>
         <source>Freespace</source>
         <translation>Vrije ruimte</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
         <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation>Het heeft meer dan %1GB schijfruimte nodig om deepin te installeren, voor betere prestaties, wordt een ruimte van %2GB of meer aanbevolen</translation>
+        <translation>Het heeft meer dan %1GB schijfruimte nodig om deepin te installeren. Voor betere prestaties raden wij een ruimte van %2GB of meer aan.</translation>
     </message>
 </context>
 <context>
@@ -576,13 +590,13 @@
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="65"/>
         <source>Select location for boot loader</source>
-        <translation>Kies locatie voor bootloader</translation>
+        <translation>Kies locatie voor opstartlader</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="44"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="67"/>
         <source>If you do not understand the detailed settings, please select default settings</source>
-        <translation>Als je de gedetailleerde instellingen niet echt begrijpt, kies dan de standaard instellingen.</translation>
+        <translation>Als je de gedetailleerde instellingen niet begrijpt, kies dan voor de standaard instellingen.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="46"/>
@@ -601,41 +615,32 @@
     </message>
 </context>
 <context>
-    <name>installer::SimpleDiskFrame</name>
-    <message>
-        <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="59"/>
-        <location filename="../src/ui/frames/inner/simple_disk_frame.cpp" line="80"/>
-        <source>Install here</source>
-        <translation>Installeer hier</translation>
-    </message>
-</context>
-<context>
     <name>installer::SimplePartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="68"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation>Een nieuwe partitie aanmaken lijkt niet te lukken, selecteer één van de bestaande partities a.u.b.</translation>
+        <translation>Creëren van nieuwe partitie mislukt. Selecteer één van de bestaande partities!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="74"/>
         <source>Please select one of the partitions to install!</source>
-        <translation>Selecteer één van de partities om te installeren a.u.b.</translation>
+        <translation>Selecteer één van de partities om te installeren!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="81"/>
         <source>At least %1 GB is required for root partition</source>
-        <translation>Er is minstens %1 GB vereist voor de root partitie</translation>
+        <translation>Er is minstens %1 GB vereist voor de root-partitie</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="211"/>
         <source>Install here</source>
-        <translation>Installeer hier</translation>
+        <translation>Hier installeren</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="388"/>
         <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
-        <translation>Windows zal niet meer opstarten als u deepin op de Windowsschijf installeert. Bevestig a.u.b. om verder te gaan</translation>
+        <translation>Als je deepin installeert op de Windows-schijf, dan zal Windows niet meer opstarten. Bevestig om door te gaan.</translation>
     </message>
 </context>
 <context>
@@ -644,13 +649,13 @@
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="92"/>
         <source>User Avatar</source>
-        <translation>Gebruikersavatar</translation>
+        <translation>Gebruikersafbeelding</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="93"/>
         <source>Select an avatar for your account</source>
-        <translation>Kies een avatar voor je account</translation>
+        <translation>Kies een gebruikersafbeelding voor je account</translation>
     </message>
 </context>
 <context>
@@ -659,13 +664,13 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="65"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="125"/>
         <source>Create User Account</source>
-        <translation>Maak gebruikersaccount aan</translation>
+        <translation>Gebruikersaccount creëren</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="126"/>
         <source>Input username and password</source>
-        <translation>Voer gebruikersnaam en paswoord in</translation>
+        <translation>Voer een gebruikersnaam en wachtwoord in</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="67"/>
@@ -689,7 +694,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="70"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="151"/>
         <source>Confirm password</source>
-        <translation>Bevestig wachtwoord</translation>
+        <translation>Wachtwoord bevestigen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
@@ -710,17 +715,17 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="200"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
-        <translation>Gebruikersnaam moet Engelse letters (kleine letters), cijfers of speciale tekens (_-) bevatten</translation>
+        <translation>De gebruikersnaam moet bestaan uit Nederlandse letters (kleine letters), cijfers of speciale tekens (_-)</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="206"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
-        <translation>Voer a.u.b. een gebruikersnaam in die langer is dan %1 tekens en korter dan %2 tekens</translation>
+        <translation>Voer een gebruikersnaam in die langer is dan %1 tekens en korter dan %2 tekens</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>Please input computer name</source>
-        <translation>Voer a.u.b. een naam in voor uw computer</translation>
+        <translation>Voer een computernaam in</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
@@ -730,23 +735,23 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="233"/>
         <source>Computer name already exists, please input another one</source>
-        <translation>Deze computernaam bestaat al, voer a.u.b. een andere in</translation>
+        <translation>Deze computernaam bestaat al; voer een andere in.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="238"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation>Voer a.u.b. een computernaam in langer dan %1 tekens en korter dan %2 tekens</translation>
+        <translation>Voer een computernaam in die langer is dan %1 tekens en korter dan %2 tekens</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="264"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="278"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation>Voer a.u.b. een wachtwoord in dat langer is dan %1 tekens en korter dan %2 tekens</translation>
+        <translation>Voer een wachtwoord in dat langer is dan %1 tekens en korter dan %2 tekens</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="272"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation>Het wachtwoord moet Nederlandse lettertekens (hoofdlettergevoelig), cijfers of speciale symbolen (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;) bevatten</translation>
+        <translation>Het wachtwoord moet bestaan uit Nederlandse letters (hoofdlettergevoelig), cijfers of speciale symbolen (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="292"/>
@@ -760,7 +765,7 @@
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="90"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="109"/>
         <source>Select keyboard layout</source>
-        <translation>Kies toetsenbordindeling</translation>
+        <translation>Kies een toetsenbordindeling</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="91"/>
@@ -781,13 +786,13 @@
         <location filename="../src/ui/frames/timezone_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="167"/>
         <source>Select Time Zone</source>
-        <translation>Selecteer Tijdzone</translation>
+        <translation>Selecteer een tijdzone</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="130"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="168"/>
         <source>Mark your zone on the map</source>
-        <translation>Markeer uw zone op de kaart</translation>
+        <translation>Markeer je zone op de kaart</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="131"/>
@@ -808,7 +813,7 @@
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="60"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation>Het systeem heeft gedetecteerd dat je een virtuele machine gebruikt. Dit zal de systeemprestaties en je gebruikerservaring beïnvloeden. Voor de beste ervaring wordt een standaardinstallatie aanbevolen.</translation>
+        <translation>Het systeem heeft gedetecteerd dat je een virtuele machine gebruikt. Dit zal de systeemprestaties en je gebruikerservaring beïnvloeden. Voor de beste ervaring wordt een computerinstallatie aanbevolen.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="46"/>
@@ -837,31 +842,31 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="54"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="106"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation>Direct installeren is niet mogelijk omdat een EFI moederbord en een schijf met MBR indeling werden gedetecteerd. Kies één van onderstaande oplossingen om verder te gaan.</translation>
+        <translation>Direct installeren is niet mogelijk omdat een EFI-moederbord en een schijf met MBR-indeling zijn aangetroffen. Kies één van de onderstaande oplossingen om door te gaan.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="118"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
-        <translation>Herstart, open BIOS en schakel UEFI uit</translation>
+        <translation>Herstart, open het BIOS en schakel UEFI uit</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="119"/>
         <source>Exit BIOS, and enter deepin to install</source>
-        <translation>Verlaat BIOS, en start deepin om te installeren</translation>
+        <translation>Verlaat het BIOS en start deepin om te installeren</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="65"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation>Maak een reservekopie van al uw gegevens om dataverlies te voorkomen</translation>
+        <translation>Maak een back-up van je bestanden om gegevensverlies te voorkomen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="128"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation>Als u zeker weet dat u een reservekopie gemaakt heeft, herstart u de computer om deze dialoog terug te starten</translation>
+        <translation>Als je zeker weet dat je een back-up hebt gemaakt, herstart dan de computer om terug te keren naar dit dialoog</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="68"/>
@@ -869,25 +874,25 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="148"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="170"/>
         <source>Continue</source>
-        <translation>Verdergaan</translation>
+        <translation>Doorgaan</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="71"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation>Wees er zeker van dat u een reservekopie heeft van al uw gegevens, en ga dan verder</translation>
+        <translation>Zorg ervoor dat je een back-up hebt gemaakt van je gegevens en ga dan door</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
         <source>Continue installation will format your disk</source>
-        <translation>Installatie verderzetten zal uw schijf formatteren</translation>
+        <translation>Als je doorgaat met de installatie, dan wordt je schijf geformatteerd</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
         <source>Reboot</source>
-        <translation>Herstart</translation>
+        <translation>Herstarten</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="76"/>
@@ -899,7 +904,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="114"/>
         <source>Disable UEFI</source>
-        <translation>Schakel UEFI uit</translation>
+        <translation>UEFI uitschakelen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="62"/>
