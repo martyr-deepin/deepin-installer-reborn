@@ -1,3 +1,21 @@
+<a name="2.2.19"></a>
+### 2.2.19 (2018-08-07)
+
+
+#### Bug Fixes
+
+*   precision problem when calculating swap ([c4fded0f](https://github.com/linuxdeepin/deepin-install-reborn/commit/c4fded0ff4d2a2ba0177590d67ce51928fd8a07b))
+*   wrong tip width ([1bc3da24](https://github.com/linuxdeepin/deepin-install-reborn/commit/1bc3da2484840137ee37993e37f3eb0cd9eb9071))
+*   unable to display partition number correctly ([ed501c90](https://github.com/linuxdeepin/deepin-install-reborn/commit/ed501c90ebc089bf86d7e20ac0e32649d67bc8ab))
+
+#### Features
+
+*   support disk label for full disk install mode ([5def6bad](https://github.com/linuxdeepin/deepin-install-reborn/commit/5def6bad9a021eeb795dbeb803c57e02bb885a32))
+*   support auto swap ([b48f4b8b](https://github.com/linuxdeepin/deepin-install-reborn/commit/b48f4b8bcdae27f17cc72eb9fbbd6cf1740a3e53))
+*   modify the order of installation ([f4b549da](https://github.com/linuxdeepin/deepin-install-reborn/commit/f4b549da49eec1a78607f95874933b82f903b46e))
+* **disk:**  change simple mode to first ([a0e9689f](https://github.com/linuxdeepin/deepin-install-reborn/commit/a0e9689fc7d8a545adde4c975c267fa0b8ef9530))
+
+
 2018-07-31 2.2.18 haruyukilxz <lxz@ilxz.me>
 #### Bug Fixes
 
