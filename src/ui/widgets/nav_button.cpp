@@ -21,6 +21,12 @@
 
 namespace installer {
 
+NavButton::NavButton(QWidget *parent)
+    : NavButton("", parent)
+{
+
+}
+
 NavButton::NavButton(const QString& text, QWidget* parent)
   : FlatButton(text, parent) {
   this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);

@@ -270,6 +270,8 @@ set(UI_FILES
     ui/frames/inner/system_info_keyboard_frame.h
     ui/frames/timezone_frame.cpp
     ui/frames/timezone_frame.h
+    ui/frames/user_agreement_frame.h
+    ui/frames/user_agreement_frame.cpp
 
     ui/frames/confirm_quit_frame.cpp
     ui/frames/confirm_quit_frame.h
@@ -383,6 +385,7 @@ set(UI_FILES
 
     ui/images/images.qrc
     ui/styles/styles.qrc
+    license/license.qrc
 
     # Required by SpinnerLabel.
     ui/widgets/spinner/spinner.qrc
@@ -421,7 +424,6 @@ set(UNITTEST_FILES
     ui/delegates/install_slide_frame_util_test.cpp
     ui/delegates/timezone_map_util_test.cpp
     )
-
 
 set(QtCore_LIBS Qt5::Core)
 set(Qt_LIBS
@@ -571,6 +573,7 @@ add_executable(deepin-installer-user-form
 
                ui/images/images.qrc
                ui/styles/styles.qrc
+               license/license.qrc
                )
 target_link_libraries(deepin-installer-user-form ${LINK_LIBS})
 
@@ -647,6 +650,7 @@ add_executable(combobox-test
 
                ui/images/images.qrc
                ui/styles/styles.qrc
+               license/license.qrc
                )
 target_link_libraries(combobox-test ${Qt_LIBS})
 
@@ -717,6 +721,7 @@ add_executable(system_info_tip_test
                ${BASE_FILES}
                ui/images/images.qrc
                ui/styles/styles.qrc
+               license/license.qrc
                )
 target_link_libraries(system_info_tip_test ${Qt_LIBS})
 
@@ -774,6 +779,7 @@ add_executable(timezone-frame-test
 
                ui/images/images.qrc
                ui/styles/styles.qrc
+               license/license.qrc
                )
 target_link_libraries(timezone-frame-test ${Qt_LIBS})
 
@@ -787,6 +793,7 @@ add_executable(ctl-btn-test
 
                ui/images/images.qrc
                ui/styles/styles.qrc
+               license/license.qrc
                )
 target_link_libraries(ctl-btn-test ${Qt_LIBS})
 

@@ -35,6 +35,7 @@
 #include "ui/frames/timezone_frame.h"
 #include "ui/utils/widget_util.h"
 #include "ui/xrandr/multi_head_manager.h"
+#include "ui/frames/user_agreement_frame.h"
 
 namespace installer {
 
@@ -70,22 +71,25 @@ void FirstBootSetupWindow::resizeEvent(QResizeEvent *event) {
 }
 
 void FirstBootSetupWindow::initConnections() {
-  connect(system_info_frame_, &SystemInfoFrame::finished,
-          this, &FirstBootSetupWindow::onSystemInfoFinished);
-  connect(timezone_frame_, &TimezoneFrame::finished,
-          this, &FirstBootSetupWindow::onTimezoneFinished);
-  connect(hook_worker_, &FirstBootHookWorker::hookFinished,
-          this, &FirstBootSetupWindow::onHookFinished);
+    connect(user_agreement_frame, &UserAgreementFrame::finished,
+            this, &FirstBootSetupWindow::onUserAgreementFinished);
+    connect(system_info_frame_, &SystemInfoFrame::finished,
+            this, &FirstBootSetupWindow::onSystemInfoFinished);
+    connect(timezone_frame_, &TimezoneFrame::finished,
+            this, &FirstBootSetupWindow::onTimezoneFinished);
+    connect(hook_worker_, &FirstBootHookWorker::hookFinished,
+            this, &FirstBootSetupWindow::onHookFinished);
 
-  connect(monitor_mode_shortcut_, &GlobalShortcut::activated,
-          multi_head_manager_, &MultiHeadManager::switchXRandRMode);
-  connect(multi_head_manager_, &MultiHeadManager::primaryScreenChanged,
-          this, &FirstBootSetupWindow::onPrimaryScreenChanged);
+    connect(monitor_mode_shortcut_, &GlobalShortcut::activated,
+            multi_head_manager_, &MultiHeadManager::switchXRandRMode);
+    connect(multi_head_manager_, &MultiHeadManager::primaryScreenChanged,
+            this, &FirstBootSetupWindow::onPrimaryScreenChanged);
 }
 
 void FirstBootSetupWindow::initUI() {
   background_label_ = new QLabel(this);
 
+  user_agreement_frame = new UserAgreementFrame(this);
   system_info_frame_ = new SystemInfoFrame(this);
   timezone_frame_ = new TimezoneFrame(this);
   loading_frame_ = new FirstBootLoadingFrame(this);
@@ -93,9 +97,12 @@ void FirstBootSetupWindow::initUI() {
   stacked_layout_ = new QStackedLayout(this);
   stacked_layout_->setContentsMargins(0, 0, 0, 0);
   stacked_layout_->setSpacing(0);
+  stacked_layout_->addWidget(user_agreement_frame);
   stacked_layout_->addWidget(system_info_frame_);
   stacked_layout_->addWidget(timezone_frame_);
   stacked_layout_->addWidget(loading_frame_);
+
+  stacked_layout_->setCurrentWidget(user_agreement_frame);
 
   this->setLayout(stacked_layout_);
   this->setContentsMargins(0, 36, 0, 36);
@@ -147,6 +154,11 @@ void FirstBootSetupWindow::onPrimaryScreenChanged(const QRect& geometry) {
   qDebug() << "on primary screen changed" << geometry;
   this->move(geometry.topLeft());
   this->setFixedSize(geometry.size());
+}
+
+void FirstBootSetupWindow::onUserAgreementFinished()
+{
+    stacked_layout_->setCurrentWidget(system_info_frame_);
 }
 
 void FirstBootSetupWindow::onSystemInfoFinished() {

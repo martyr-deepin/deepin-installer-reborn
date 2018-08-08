@@ -170,8 +170,7 @@ QString ReadFile(const QString& path) {
       qWarning() << "ReadFile() failed to open" << path;
       return "";
     }
-    QTextStream text_stream(&file);
-    QString str = text_stream.readAll();
+    const QString &str = QString::fromUtf8(file.readAll());
     file.close();
     return str;
   } else {

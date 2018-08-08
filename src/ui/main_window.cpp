@@ -48,6 +48,8 @@
 #include "ui/frames/system_info_frame.h"
 #include "ui/frames/timezone_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
+#include "ui/frames/user_agreement_frame.h"
+
 #include "ui/utils/widget_util.h"
 #include "ui/widgets/page_indicator.h"
 #include "ui/widgets/pointer_button.h"
@@ -177,6 +179,9 @@ void MainWindow::initConnections() {
   connect(virtual_machine_frame_, &VirtualMachineFrame::finished,
           this, &MainWindow::goNextPage);
 
+  connect(user_agreement_frame, &UserAgreementFrame::finished, this, &MainWindow::goNextPage);
+  connect(user_agreement_frame, &UserAgreementFrame::cancel, this, &MainWindow::onCloseButtonClicked);
+
   // Notify InstallProgressFrame that partition job has finished.
   connect(partition_frame_, &PartitionFrame::autoPartDone,
           install_progress_frame_, &InstallProgressFrame::runHooks);
@@ -206,6 +211,10 @@ void MainWindow::initPages() {
   select_language_frame_ = new SelectLanguageFrame(this);
   pages_.insert(PageId::SelectLanguageId,
                 stacked_layout_->addWidget(select_language_frame_));
+
+  user_agreement_frame = new UserAgreementFrame(this);
+  pages_.insert(PageId::UserAgreementId,
+                stacked_layout_->addWidget(user_agreement_frame));
 
   disk_space_insufficient_frame_ = new DiskSpaceInsufficientFrame(this);
   pages_.insert(PageId::DiskSpaceInsufficientId,
@@ -380,145 +389,157 @@ void MainWindow::onPrimaryScreenChanged(const QRect& geometry) {
 }
 
 void MainWindow::goNextPage() {
-  // Page order:
-  //   * privilege error frame;
-  //   * select language frame;
-  //   * disk space insufficient page;
-  //   * virtual machine page;
-  //   * system info page;
-  //   * timezone page;
-  //   * partition page;
-  //   * install progress page;
-  //   * install success page or install failed page;
-  // And confirm-quit-page can be triggered at any moment except in
-  // install progress page.
-  switch (current_page_) {
+    // Page order:
+    //   * privilege error frame;
+    //   * select language frame;
+    //   * disk space insufficient page;
+    //   * virtual machine page;
+    //   * system info page;
+    //   * timezone page;
+    //   * partition page;
+    //   * install progress page;
+    //   * install success page or install failed page;
+    // And confirm-quit-page can be triggered at any moment except in
+    // install progress page.
+    switch (current_page_) {
     case PageId::ConfirmQuitId: {
-      // Go previous page.
-      this->setCurrentPage(prev_page_);
-      break;
+        // Go previous page.
+        this->setCurrentPage(prev_page_);
+        break;
     }
 
     case PageId::NullId: {
-      if (HasRootPrivilege()) {
-        current_page_ = PageId::PrivilegeErrorId;
-        this->goNextPage();
-      } else {
-        this->setCurrentPage(PageId::PrivilegeErrorId);
-      }
-      break;
+        if (HasRootPrivilege()) {
+            current_page_ = PageId::PrivilegeErrorId;
+            this->goNextPage();
+        } else {
+            this->setCurrentPage(PageId::PrivilegeErrorId);
+        }
+        break;
     }
 
     case PageId::PrivilegeErrorId: {
-      select_language_frame_->readConf();
-      if (GetSettingsBool(kSkipSelectLanguagePage)) {
-        select_language_frame_->writeConf();
-        prev_page_ = current_page_;
-        current_page_ = PageId::SelectLanguageId;
-        this->goNextPage();
-      } else {
-        page_indicator_->goNextPage();
-        this->setCurrentPage(PageId::SelectLanguageId);
-      }
-      break;
+        select_language_frame_->readConf();
+        if (GetSettingsBool(kSkipSelectLanguagePage)) {
+            select_language_frame_->writeConf();
+            prev_page_ = current_page_;
+            current_page_ = PageId::SelectLanguageId;
+            this->goNextPage();
+        } else {
+            page_indicator_->goNextPage();
+            this->setCurrentPage(PageId::SelectLanguageId);
+        }
+        break;
     }
 
     case PageId::SelectLanguageId: {
-      // Displays the first page.
-      // Check whether to show DiskSpaceInsufficientPage.
-      if (!GetSettingsBool(kSkipDiskSpaceInsufficientPage) &&
-          IsDiskSpaceInsufficient()) {
-        this->setCurrentPage(PageId::DiskSpaceInsufficientId);
-      } else {
-        prev_page_ = current_page_;
-        current_page_ = PageId::DiskSpaceInsufficientId;
-        this->goNextPage();
-      }
-      break;
+        // Displays the first page.
+        if (!GetSettingsBool(kSystemInfoSetupAfterReboot)) {
+            setCurrentPage(PageId::UserAgreementId);
+        }
+        else {
+            prev_page_ = current_page_;
+            current_page_ = PageId::UserAgreementId;
+            goNextPage();
+        }
+        break;
+    }
+
+    case PageId::UserAgreementId: {
+        // Check whether to show DiskSpaceInsufficientPage.
+        if (!GetSettingsBool(kSkipDiskSpaceInsufficientPage) &&
+                IsDiskSpaceInsufficient()) {
+            this->setCurrentPage(PageId::DiskSpaceInsufficientId);
+        }
+        else {
+            prev_page_ = current_page_;
+            current_page_ = PageId::DiskSpaceInsufficientId;
+            goNextPage();
+        }
     }
 
     case PageId::DiskSpaceInsufficientId: {
-      // Check whether to show VirtualMachinePage.
-      if (!GetSettingsBool(kSkipVirtualMachinePage) &&
-          IsVirtualMachine()) {
-        this->setCurrentPage(PageId::VirtualMachineId);
-      } else {
-        prev_page_ = current_page_;
-        current_page_ = PageId::VirtualMachineId;
-        this->goNextPage();
-      }
-      break;
+        // Check whether to show VirtualMachinePage.
+        if (!GetSettingsBool(kSkipVirtualMachinePage) &&
+                IsVirtualMachine()) {
+            this->setCurrentPage(PageId::VirtualMachineId);
+        } else {
+            prev_page_ = current_page_;
+            current_page_ = PageId::VirtualMachineId;
+            this->goNextPage();
+        }
+        break;
     }
 
     case PageId::VirtualMachineId: {
-      // Check whether to show SystemInfoPage.
-      system_info_frame_->readConf();
-      if (GetSettingsBool(kSkipSystemInfoPage)) {
-        system_info_frame_->writeConf();
-        prev_page_ = current_page_;
-        current_page_ = PageId::SystemInfoId;
-        this->goNextPage();
-      } else {
-        page_indicator_->goNextPage();
-        this->setCurrentPage(PageId::SystemInfoId);
-      }
-      break;
+        // Check whether to show SystemInfoPage.
+        system_info_frame_->readConf();
+        if (GetSettingsBool(kSkipSystemInfoPage)) {
+            system_info_frame_->writeConf();
+            prev_page_ = current_page_;
+            current_page_ = PageId::SystemInfoId;
+            this->goNextPage();
+        } else {
+            page_indicator_->goNextPage();
+            this->setCurrentPage(PageId::SystemInfoId);
+        }
+        break;
     }
 
     case PageId::SystemInfoId: {
-      if (GetSettingsBool(kSkipTimezonePage)) {
-        timezone_frame_->writeConf();
-        prev_page_ = current_page_;
-        current_page_ = PageId::TimezoneId;
-        this->goNextPage();
-      } else {
-        page_indicator_->goNextPage();
-        this->setCurrentPage(PageId::TimezoneId);
-      }
-      break;
+        if (GetSettingsBool(kSkipTimezonePage)) {
+            timezone_frame_->writeConf();
+            prev_page_ = current_page_;
+            current_page_ = PageId::TimezoneId;
+            this->goNextPage();
+        } else {
+            page_indicator_->goNextPage();
+            this->setCurrentPage(PageId::TimezoneId);
+        }
+        break;
     }
 
     case PageId::TimezoneId: {
-      // Check whether to show PartitionPage.
-      if (GetSettingsBool(kSkipPartitionPage)) {
-        if (GetSettingsBool(kPartitionDoAutoPart)) {
-          partition_frame_->autoPart();
+        // Check whether to show PartitionPage.
+        if (GetSettingsBool(kSkipPartitionPage)) {
+            if (GetSettingsBool(kPartitionDoAutoPart)) {
+                partition_frame_->autoPart();
+            }
+            prev_page_ = current_page_;
+            current_page_ = PageId::PartitionId;
+            this->goNextPage();
+        } else {
+            page_indicator_->goNextPage();
+            this->setCurrentPage(PageId::PartitionId);
         }
-        prev_page_ = current_page_;
-        current_page_ = PageId::PartitionId;
-        this->goNextPage();
-      } else {
-        page_indicator_->goNextPage();
-        this->setCurrentPage(PageId::PartitionId);
-      }
-      break;
+        break;
     }
 
     case PageId::PartitionId: {
-      // Show InstallProgressFrame.
-      page_indicator_->goNextPage();
-      install_progress_frame_->startSlide();
-      this->setCurrentPage(PageId::InstallProgressId);
-      break;
+        // Show InstallProgressFrame.
+        page_indicator_->goNextPage();
+        install_progress_frame_->startSlide();
+        this->setCurrentPage(PageId::InstallProgressId);
+        break;
     }
 
     case PageId::InstallProgressId: {
-      if (install_progress_frame_->failed()) {
-        install_failed_frame_->updateMessage();
-        this->setCurrentPage(PageId::InstallFailedId);
-      } else {
-        install_success_frame_->setEjectLabelVisible(!auto_install_);
-        this->setCurrentPage(PageId::InstallSuccessId);
-      }
-      break;
+        if (install_progress_frame_->failed()) {
+            install_failed_frame_->updateMessage();
+            this->setCurrentPage(PageId::InstallFailedId);
+        } else {
+            install_success_frame_->setEjectLabelVisible(!auto_install_);
+            this->setCurrentPage(PageId::InstallSuccessId);
+        }
+        break;
     }
 
     default: {
-      qWarning() << "[MainWindow]::goNextPage() We shall never reach here"
-                 << static_cast<int>(current_page_) << this->sender();
-      break;
+        qWarning() << "[MainWindow]::goNextPage() We shall never reach here"
+                   << static_cast<int>(current_page_) << this->sender();
+        break;
     }
-  }
+    }
 }
 
 void MainWindow::rebootSystem() {

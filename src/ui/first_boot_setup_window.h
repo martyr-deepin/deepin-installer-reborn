@@ -33,6 +33,7 @@ class FirstBootHookWorker;
 class MultiHeadManager;
 class SystemInfoFrame;
 class TimezoneFrame;
+class UserAgreementFrame;
 
 // Main window of deepin_installer_first_boot.
 class FirstBootSetupWindow : public QFrame {
@@ -59,6 +60,7 @@ class FirstBootSetupWindow : public QFrame {
   SystemInfoFrame* system_info_frame_ = nullptr;
   TimezoneFrame* timezone_frame_ = nullptr;
   FirstBootLoadingFrame* loading_frame_ = nullptr;
+  UserAgreementFrame* user_agreement_frame = nullptr;
   QStackedLayout* stacked_layout_ = nullptr;
 
   QThread* hook_worker_thread_ = nullptr;
@@ -74,6 +76,7 @@ class FirstBootSetupWindow : public QFrame {
 
   void onPrimaryScreenChanged(const QRect& geometry);
 
+  void onUserAgreementFinished();
   void onSystemInfoFinished();
 
   // Run "first_boot_setup.sh" after system_info_frame_ is finished.

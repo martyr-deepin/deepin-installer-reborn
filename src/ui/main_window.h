@@ -45,6 +45,7 @@ class SelectLanguageFrame;
 class SystemInfoFrame;
 class TimezoneFrame;
 class VirtualMachineFrame;
+class UserAgreementFrame;
 
 // MainWindow is a fullscreen window of deepin-installer.
 // All of ui frames are placed in MainWindow.
@@ -76,21 +77,22 @@ class MainWindow : public QWidget {
   // Move close button to appropriate position when window is resized.
   void resizeEvent(QResizeEvent* event) override;
 
- private:
+private:
   enum PageId {
-    NullId,  // page not set.
+      NullId,  // page not set.
 
-    ConfirmQuitId,
-    DiskSpaceInsufficientId,
-    InstallFailedId,
-    InstallProgressId,
-    InstallSuccessId,
-    PartitionId,
-    PrivilegeErrorId,
-    SelectLanguageId,
-    SystemInfoId,
-    TimezoneId,
-    VirtualMachineId,
+      ConfirmQuitId,
+      DiskSpaceInsufficientId,
+      InstallFailedId,
+      InstallProgressId,
+      InstallSuccessId,
+      PartitionId,
+      PrivilegeErrorId,
+      SelectLanguageId,
+      SystemInfoId,
+      TimezoneId,
+      VirtualMachineId,
+      UserAgreementId,
   };
 
   void initConnections();
@@ -126,6 +128,7 @@ class MainWindow : public QWidget {
   TimezoneFrame* timezone_frame_ = nullptr;
   VirtualMachineFrame* virtual_machine_frame_ = nullptr;
   MultiHeadManager* multi_head_manager_ = nullptr;
+  UserAgreementFrame *user_agreement_frame = nullptr;
 
   // To store frame pages, page_name => page_id.
   QHash<PageId, int> pages_;

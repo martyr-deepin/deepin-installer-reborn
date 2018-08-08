@@ -25,10 +25,11 @@ namespace installer {
 // NavButton is used to switch pages.
 // Almost always displays at bottom of frame page.
 class NavButton : public FlatButton {
-  Q_OBJECT
+    Q_OBJECT
 
- public:
-  NavButton(const QString& text, QWidget* parent = nullptr);
+public:
+    NavButton(QWidget *parent = nullptr);
+    NavButton(const QString& text, QWidget* parent = nullptr);
 };
 
 }  // namespace installer

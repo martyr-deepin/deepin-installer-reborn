@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/license">
+        <file>deepin-end-user-license-agreement_zh_CN.txt</file>
+    </qresource>
+</RCC>
