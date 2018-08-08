@@ -86,6 +86,7 @@ void PartitionFrame::changeEvent(QEvent* event) {
            "then select the disk to install"));
     simple_frame_button_->setText(tr("Simple"));
     advanced_frame_button_->setText(tr("Advanced"));
+    full_disk_frame_button_->setText(tr("Full Disk"));
     next_button_->setText(tr("Start installation"));
   } else {
     QFrame::changeEvent(event);
@@ -230,9 +231,9 @@ void PartitionFrame::initUI() {
   button_layout->setContentsMargins(0, 0, 0, 0);
   button_layout->setSpacing(0);
   button_layout->addStretch();
-  button_layout->addWidget(simple_frame_button_, 0, Qt::AlignRight);
+  button_layout->addWidget(simple_frame_button_, 0, Qt::AlignCenter);
   button_layout->addWidget(advanced_frame_button_, 0, Qt::AlignCenter);
-  button_layout->addWidget(full_disk_frame_button_, 0, Qt::AlignLeft);
+  button_layout->addWidget(full_disk_frame_button_, 0, Qt::AlignCenter);
   button_layout->addStretch();
 
   partition_stacked_layout_ = new QStackedLayout();
@@ -251,7 +252,9 @@ void PartitionFrame::initUI() {
           GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
       advanced_frame_button_->setObjectName(kSoloBtn);
   } else {
+      simple_frame_button_->setObjectName(kLeftBtn);
       advanced_frame_button_->setObjectName(kMidBtn);
+      full_disk_frame_button_->setObjectName(kRightBtn);
   }
   partition_stacked_layout_->addWidget(advanced_partition_frame_);
 
@@ -259,6 +262,7 @@ void PartitionFrame::initUI() {
       full_disk_frame_button_->hide();
       full_disk_frame_button_->setChecked(false);
       simple_frame_button_->setObjectName(kLeftBtn);
+      advanced_frame_button_->setObjectName(kRightBtn);
       simple_frame_button_->setChecked(true);
       full_disk_partition_frame_->hide();
   } else {

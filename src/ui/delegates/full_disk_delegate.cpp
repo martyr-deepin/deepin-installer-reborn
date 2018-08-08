@@ -704,8 +704,12 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
               const uint end_size_use { static_cast<uint>((endSize / kKibiByte / kKibiByte / kKibiByte)) };
               if (end_size_use < root_range.first.toUInt()) {
                   end_size += ParsePartitionSize(QString("%1Gib").arg(root_range.first), last_deviceLenght * device.sector_size);
-              } else if (end_size_use > root_range.second.toUInt()) {
+              }
+              else if (end_size_use > root_range.second.toUInt()) {
                   end_size += ParsePartitionSize(QString("%1Gib").arg(root_range.second), last_deviceLenght * device.sector_size);
+              }
+              else {
+                  end_size += ParsePartitionSize(use_range, last_deviceLenght * device.sector_size);
               }
           }
           else {
@@ -744,6 +748,12 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
       }
 
       last_deviceLenght -= (end_size - start_size) / device.sector_size;
+
+      qDebug() << QString("start size: %1, end size: %2, last_deviceLenght: %3, shift: %4")
+                  .arg(start_size)
+                  .arg(end_size)
+                  .arg(last_deviceLenght)
+                  .arg(shift);
 
       const qint64 sectors = (end_size - start_size) / unallocated.sector_size;
       bool ok = false;
