@@ -1,3 +1,13 @@
+<a name=""></a>
+##  2.3.0 (2018-08-08)
+
+
+#### Bug Fixes
+
+* **FullInstall:**  root partition offset error ([69bf3462](https://github.com/linuxdeepin/deepin-install-reborn/commit/69bf3462172fcd8efff481213352717410aab6cf))
+
+
+
 <a name="2.2.19"></a>
 ### 2.2.19 (2018-08-07)
 
