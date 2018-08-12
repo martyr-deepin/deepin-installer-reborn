@@ -411,7 +411,7 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="221"/>
         <source>Full Disk</source>
-        <translation type="unfinished"/>
+        <translation>Disc ple</translation>
     </message>
 </context>
 <context>

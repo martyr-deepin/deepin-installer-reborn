@@ -81,7 +81,7 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="511"/>
         <source>Add a Root partition to continue</source>
-        <translation>需要添加一个Root分区才能继续安装</translation>
+        <translation>需要添加一个根分区才能继续安装</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="516"/>

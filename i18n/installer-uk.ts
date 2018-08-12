@@ -181,7 +181,7 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="141"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="279"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Гаразд</translation>
     </message>
 </context>
 <context>
@@ -337,7 +337,7 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="127"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="214"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Гаразд</translation>
     </message>
 </context>
 <context>
@@ -411,7 +411,7 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="221"/>
         <source>Full Disk</source>
-        <translation type="unfinished"/>
+        <translation>Диск заповнено</translation>
     </message>
 </context>
 <context>

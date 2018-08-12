@@ -36,22 +36,22 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="429"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 грешка пронађена, поправите да наставите инсталацију или пребаците на једноставни режим</translation>
+        <translation>%1 грешка пронађена, поправите да наставите инсталацију или пребаците на једноставан режим</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="433"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 грешке/и пронађене/о, поправите да наставите инсталацију или пребаците на једноставни режим</translation>
+        <translation>%1 грешке/и пронађене/о, поправите да наставите инсталацију или пребаците на једноставан режим</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="439"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation>%1 грешка пронађена, наставите инсталацију после исправке</translation>
+        <translation>%1 грешка пронађена, наставите инсталацију након исправке</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="443"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation>%1 грешке/и пронађене/о, наставите инсталацију после исправке</translation>
+        <translation>%1 грешке/и пронађене/о, наставите инсталацију након исправке</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="490"/>
@@ -109,7 +109,7 @@
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="60"/>
         <source>Relevant operations you made in the installation process will not take effect, abort or continue installation?</source>
-        <translation>Релевантне операције које сте направили у процесу инсталације неће ступити на снагу, прекинути или наставити инсталацију?</translation>
+        <translation>Важне поставке које сте направили у процесу инсталације неће ступити на снагу, прекините или наставите инсталацију?</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="43"/>
@@ -220,7 +220,7 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>Жао нам је због непријатности, можете сликати или скенирати QR код да пошаљете белешке грешка да бисмо могли боље решити проблем</translation>
+        <translation>Жао нам је због непријатности, можете сликати или скенирати QR код да пошаљете белешке грешка како бисмо могли боље решити проблем.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
@@ -241,7 +241,7 @@
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Можете искусити невероватно задовољство које пружа Дипин након времена за једну шољицу кафе</translation>
+        <translation>Можете искусити невероватно задовољство које пружа Дипин након времена за само једну шољицу кафе</translation>
     </message>
 </context>
 <context>
@@ -355,7 +355,7 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="77"/>
         <source>Full Disk Format Warning</source>
-        <translation>Упозорење Форматирање Целог Диска</translation>
+        <translation>Упозорење Форматирања Целог Диска</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
@@ -720,7 +720,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="206"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
-        <translation>Молимо Вас да унесете корисничко име дуже од %1 карактера и краће од %2 карактера</translation>
+        <translation>Молимо унесите корисничко име дуже од %1 карактера и краће од %2 карактера</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
@@ -740,18 +740,18 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="238"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation>Молимо Вас да унесете име рачунара дуже од %1 карактера и краће од %2 карактера</translation>
+        <translation>Молимо унесите име рачунара дуже од %1 карактера и краће од %2 карактера</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="264"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="278"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation>Молимо Вас да унесете лозинку дужу од %1 карактера и краћу од %2 карактера</translation>
+        <translation>Молимо унесите лозинку дужу од %1 карактера и краћу од %2 карактера</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="272"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation>Лозинка може садржати само слова енглеског алфабета (осетљива на велика/мала слова), бројеве или специјалне знаке (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
+        <translation>Лозинка може садржати само слова енглеског алфабета (осетљива на велика/мала слова), бројеве или специјалне симболе (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="292"/>
@@ -842,7 +842,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="54"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="106"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation>Не могу инсталирати директно због EFI подизача система и детектованог MBR диска, изаберите једно од понуђених решења испод за наставак</translation>
+        <translation>Немогуће инсталирати директно због EFI покретача система и пронађеног MBR диска, изаберите једно од понуђених решења испод за наставак.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
@@ -866,7 +866,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="128"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation>Молимо Вас да добро проверите је ли направљена резервна копија за све податке те поново покрените како бисте добили ово сучеље</translation>
+        <translation>Молимо добро проверите да ли је направљена резерва свих података и поново покрените да приступите овом сучељу</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="68"/>

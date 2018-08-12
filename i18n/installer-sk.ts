@@ -205,7 +205,7 @@
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="83"/>
         <source>Install here</source>
-        <translation>Tu inštalovať</translation>
+        <translation>Tu nainštalovať</translation>
     </message>
 </context>
 <context>
@@ -411,7 +411,7 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="221"/>
         <source>Full Disk</source>
-        <translation type="unfinished"/>
+        <translation>Plný disk</translation>
     </message>
 </context>
 <context>
