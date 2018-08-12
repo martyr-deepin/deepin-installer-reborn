@@ -474,7 +474,7 @@ void MainWindow::goNextPage() {
     case PageId::VirtualMachineId: {
         // Check whether to show SystemInfoPage.
         system_info_frame_->readConf();
-        if (GetSettingsBool(kSkipSystemInfoPage)) {
+        if (GetSettingsBool(kSystemInfoSetupAfterReboot) || GetSettingsBool(kSkipSystemInfoPage)) {
             system_info_frame_->writeConf();
             prev_page_ = current_page_;
             current_page_ = PageId::SystemInfoId;
