@@ -380,38 +380,39 @@
     <name>installer::PartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="83"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="203"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="204"/>
         <source>Select Installation Location</source>
         <translation>Виберіть місце встановлення</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="85"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="205"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="206"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Будь ласка, переконайтеся, що для важливих даних було зроблено резервну копію, а потім виберіть диск для встановлення</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="213"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="214"/>
         <source>Simple</source>
         <translation>Простий</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="217"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="218"/>
         <source>Advanced</source>
         <translation>Розширений</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="279"/>
-        <source>Start installation</source>
-        <translation>Почніть встановлення</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="221"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="222"/>
         <source>Full Disk</source>
         <translation>Диск заповнено</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="284"/>
+        <source>Start installation</source>
+        <translation>Почніть встановлення</translation>
     </message>
 </context>
 <context>
@@ -911,6 +912,24 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="123"/>
         <source>Format the disk</source>
         <translation>Форматувати диск</translation>
+    </message>
+</context>
+<context>
+    <name>installer::UserAgreementFrame</name>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="100"/>
+        <source>End User License Agreement</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="116"/>
+        <source>Accept</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="117"/>
+        <source>Cancel</source>
+        <translation>Скасувати</translation>
     </message>
 </context>
 </TS>

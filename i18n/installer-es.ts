@@ -380,38 +380,39 @@
     <name>installer::PartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="83"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="203"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="204"/>
         <source>Select Installation Location</source>
         <translation>Seleccionar la ubicación de instalación</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="85"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="205"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="206"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Asegúrese de respaldar los datos importantes. Luego seleccione el disco para instalar</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="213"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="214"/>
         <source>Simple</source>
         <translation>Simple</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="217"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="218"/>
         <source>Advanced</source>
         <translation>Avanzado</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="279"/>
-        <source>Start installation</source>
-        <translation>Iniciar instalación</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="221"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="222"/>
         <source>Full Disk</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="284"/>
+        <source>Start installation</source>
+        <translation>Iniciar instalación</translation>
     </message>
 </context>
 <context>
@@ -911,6 +912,24 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="123"/>
         <source>Format the disk</source>
         <translation>Formatear el disco</translation>
+    </message>
+</context>
+<context>
+    <name>installer::UserAgreementFrame</name>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="100"/>
+        <source>End User License Agreement</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="116"/>
+        <source>Accept</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="117"/>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
     </message>
 </context>
 </TS>
