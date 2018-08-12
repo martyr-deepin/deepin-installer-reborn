@@ -97,7 +97,7 @@ void UserAgreementFrame::initConnect()
 
 void UserAgreementFrame::updateText()
 {
-    m_subTitle->setText(tr("End-user license agreement"));
+    m_subTitle->setText(tr("End User License Agreement"));
 
     const QString &locale { installer::ReadLocale() };
 

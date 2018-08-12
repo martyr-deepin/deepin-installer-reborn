@@ -920,7 +920,7 @@
     <name>installer::UserAgreementFrame</name>
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="100"/>
-        <source>End-user license agreement</source>
+        <source>End User License Agreement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
