@@ -487,7 +487,7 @@ void MainWindow::goNextPage() {
     }
 
     case PageId::SystemInfoId: {
-        if (GetSettingsBool(kSkipTimezonePage)) {
+        if (GetSettingsBool(kSystemInfoSetupAfterReboot) || GetSettingsBool(kSkipTimezonePage)) {
             timezone_frame_->writeConf();
             prev_page_ = current_page_;
             current_page_ = PageId::TimezoneId;
@@ -501,7 +501,7 @@ void MainWindow::goNextPage() {
 
     case PageId::TimezoneId: {
         // Check whether to show PartitionPage.
-        if (GetSettingsBool(kSystemInfoSetupAfterReboot) || GetSettingsBool(kSkipPartitionPage)) {
+        if (GetSettingsBool(kSkipPartitionPage)) {
             if (GetSettingsBool(kPartitionDoAutoPart)) {
                 partition_frame_->autoPart();
             }
