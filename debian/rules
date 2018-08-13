@@ -5,11 +5,11 @@ export QT_SELECT=qt5
 # Startup with `systemd` on x86 architectures.
 # Startup with `systemd` on non-x86 architectures.
 ifneq (,$(filter i386 amd64,$(DEB_HOST_ARCH_CPU)))
-use_systemd := on
+use_systemd := off
 else ifneq (,$(filter mipsel mips64el arm arm64,$(DEB_HOST_ARCH_CPU)))
-use_systemd := on
+use_systemd := off
 else
-use_systemd = on
+use_systemd = off
 endif
 
 %:

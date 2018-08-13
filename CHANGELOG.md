@@ -1,3 +1,21 @@
+<a name="2.3.1"></a>
+### 2.3.1 (2018-08-13)
+
+
+#### Features
+
+*   add user license ([089cac4f](https://github.com/linuxdeepin/deepin-install-reborn/commit/089cac4fdcc7ecbb065b13d3efc03e9534e78378))
+*   skip timezone when open after_reboot_config ([4a0d32f5](https://github.com/linuxdeepin/deepin-install-reborn/commit/4a0d32f558f82827db4198834c005df078bec200))
+*   add end-user license agreement ([a42ded6a](https://github.com/linuxdeepin/deepin-install-reborn/commit/a42ded6a2963f0e309c5780f191f9281db73134b))
+
+#### Bug Fixes
+
+*   error skip disk page ([4938987e](https://github.com/linuxdeepin/deepin-install-reborn/commit/4938987eccaf638a7b1a19b0b3922e04c92ace28))
+*   not skip system info when open after_reboot_config ([468d73e9](https://github.com/linuxdeepin/deepin-install-reborn/commit/468d73e96226a3af1dbc8e520f2c8ea3e5b545c7))
+*   start prematurely ([25423875](https://github.com/linuxdeepin/deepin-install-reborn/commit/2542387550d142e2506da11536debc685c108456))
+
+
+
 <a name=""></a>
 ##  2.3.0 (2018-08-08)
 
