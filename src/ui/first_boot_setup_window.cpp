@@ -73,6 +73,8 @@ void FirstBootSetupWindow::resizeEvent(QResizeEvent *event) {
 void FirstBootSetupWindow::initConnections() {
     connect(user_agreement_frame, &UserAgreementFrame::finished,
             this, &FirstBootSetupWindow::onUserAgreementFinished);
+    connect(user_agreement_frame, &UserAgreementFrame::cancel,
+            this, &installer::ShutdownSystem);
     connect(system_info_frame_, &SystemInfoFrame::finished,
             this, &FirstBootSetupWindow::onSystemInfoFinished);
     connect(timezone_frame_, &TimezoneFrame::finished,
