@@ -31,6 +31,7 @@ class FullDiskDelegate;
 
 
 class FullDiskFrame : public QFrame {
+    Q_OBJECT
  public:
   explicit FullDiskFrame(FullDiskDelegate* delegate,
                                   QWidget* parent = nullptr);

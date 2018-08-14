@@ -34,7 +34,7 @@ bool FormatBtrfs(const QString& path, const QString& label) {
   } else {
     // Truncate label size.
     const QString real_label = label.left(255);
-    ok = SpawnCmd("mkfs.btrfs", {"-f", QString("-L%1").arg(real_label), path},
+    ok = SpawnCmd("mkfs.btrfs", {"-f", "-L", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -51,7 +51,7 @@ bool FormatExt2(const QString& path, const QString& label) {
     ok = SpawnCmd("mkfs.ext2", {"-F", path}, output, err);
   } else {
     const QString real_label = label.left(16);
-    ok = SpawnCmd("mkfs.ext2", {"-F", QString("-L%1").arg(real_label), path},
+    ok = SpawnCmd("mkfs.ext2", {"-F", "-L", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -68,7 +68,7 @@ bool FormatExt3(const QString& path, const QString& label) {
     ok = SpawnCmd("mkfs.ext3", {"-F", path}, output, err);
   } else {
     const QString real_label = label.left(16);
-    ok = SpawnCmd("mkfs.ext3", {"-F", QString("-L%1").arg(real_label), path},
+    ok = SpawnCmd("mkfs.ext3", {"-F", "-L", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -89,8 +89,7 @@ bool FormatExt4(const QString& path, const QString& label) {
       ok = SpawnCmd("mkfs.ext4", {"-O ^64bit", "-F", path}, output, err);
     } else {
       const QString real_label = label.left(16);
-      const QString label_opt(QString("-L%1").arg(real_label));
-      ok = SpawnCmd("mkfs.ext4", {"-O ^64bit", "-F", label_opt, path},
+      ok = SpawnCmd("mkfs.ext4", {"-O ^64bit", "-F", "-L", real_label, path},
                     output, err);
     }
   } else {
@@ -98,7 +97,7 @@ bool FormatExt4(const QString& path, const QString& label) {
       ok = SpawnCmd("mkfs.ext4", {"-F", path}, output, err);
     } else {
       const QString real_label = label.left(16);
-      ok = SpawnCmd("mkfs.ext4", {"-F", QString("-L%1").arg(real_label), path},
+      ok = SpawnCmd("mkfs.ext4", {"-F", "-L", real_label, path},
                     output, err);
     }
   }
@@ -117,7 +116,7 @@ bool FormatF2fs(const QString& path, const QString& label) {
     ok = SpawnCmd("mkfs.f2fs", {path}, output, err);
   } else {
     const QString real_label = label.left(19);
-    ok = SpawnCmd("mkfs.f2fs", {QString("-l%1").arg(real_label), path},
+    ok = SpawnCmd("mkfs.f2fs", {"-l", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -135,7 +134,7 @@ bool FormatFat16(const QString& path, const QString& label) {
   } else {
     const QString real_label = label.left(11);
     ok = SpawnCmd("mkfs.msdos",
-                  {"-F16", "-v", "-I", QString("-n%1").arg(real_label), path},
+                  {"-F16", "-v", "-I", "-n", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -153,7 +152,7 @@ bool FormatFat32(const QString& path, const QString& label) {
   } else {
     const QString real_label = label.left(11);
     ok = SpawnCmd("mkfs.msdos",
-                  {"-F32", "-v", "-I", QString("-n%1").arg(real_label), path},
+                  {"-F32", "-v", "-I", "-n", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -170,7 +169,7 @@ bool FormatHfs(const QString& path, const QString& label) {
     ok = SpawnCmd("hformat", {path}, output, err);
   } else {
     const QString real_label = label.left(27);
-    ok = SpawnCmd("hformat", {QString("-l%1").arg(real_label), path},
+    ok = SpawnCmd("hformat", {"-l", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -187,7 +186,7 @@ bool FormatHfsPlus(const QString& path, const QString& label) {
     ok = SpawnCmd("mkfs.hfsplus", {path}, output, err);
   } else {
     const QString real_label = label.left(63);
-    ok = SpawnCmd("mkfs.hfsplus", {QString("-v%1").arg(real_label), path},
+    ok = SpawnCmd("mkfs.hfsplus", {"-v", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -204,7 +203,7 @@ bool FormatJfs(const QString& path, const QString& label) {
     ok = SpawnCmd("mkfs.jfs", {"-q", path}, output, err);
   } else {
     const QString real_label = label.left(11);
-    ok = SpawnCmd("mkfs.jfs", {"-q", QString("-L%1").arg(real_label), path},
+    ok = SpawnCmd("mkfs.jfs", {"-q", "-L", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -221,7 +220,7 @@ bool FormatLinuxSwap(const QString& path, const QString& label) {
     ok = SpawnCmd("mkswap", {path}, output, err);
   } else {
     const QString real_label = label.left(15);
-    ok = SpawnCmd("mkswap", {QString("-L%1").arg(real_label), path},
+    ok = SpawnCmd("mkswap", {"-L", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -238,7 +237,7 @@ bool FormatNilfs2(const QString& path, const QString& label) {
     ok = SpawnCmd("mkfs.nilfs2", {path}, output, err);
   } else {
     const QString real_label = label.left(1);
-    ok = SpawnCmd("mkfs.nilfs2", {QString("-L%1").arg(real_label), path},
+    ok = SpawnCmd("mkfs.nilfs2", {"-L", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -256,7 +255,7 @@ bool FormatNTFS(const QString& path, const QString& label) {
   } else {
     const QString real_label = label.left(128);
     ok = SpawnCmd("mkntfs",
-                  {"-Q", "-v", "-F", QString("-L%1").arg(real_label), path},
+                  {"-Q", "-v", "-F", "-L", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -275,7 +274,9 @@ bool FormatReiser4(const QString& path, const QString& label) {
     const QString real_label = label.left(16);
     ok = SpawnCmd("mkfs.reiser4",
                  {"--force", "--yes",
-                  QString("--label%1").arg(real_label), path},
+                  "--label",
+                  real_label,
+                  path},
                  output, err);
   }
   if (!ok) {
@@ -293,7 +294,7 @@ bool FormatReiserfs(const QString& path, const QString& label) {
   } else {
     const QString real_label = label.left(16);
     ok = SpawnCmd("mkreiserfs",
-                  {"-f", "-f", QString("--label%1").arg(real_label), path},
+                  {"-f", "-f", "--label", real_label, path},
                   output, err);
   }
   if (!ok) {
@@ -310,7 +311,7 @@ bool FormatXfs(const QString& path, const QString& label) {
     ok = SpawnCmd("mkfs.xfs", {"-f", path}, output, err);
   } else {
     const QString real_label = label.left(12);
-    ok = SpawnCmd("mkfs.xfs", {"-f", QString("-L%1").arg(real_label), path},
+    ok = SpawnCmd("mkfs.xfs", {"-f", "-L", real_label, path},
                   output, err);
   }
   if (!ok) {
