@@ -1,3 +1,13 @@
+<a name="2.3.2"></a>
+### 2.3.2 (2018-08-14)
+
+
+#### Bug Fixes
+
+*   set label error ([db33a14b](https://github.com/linuxdeepin/deepin-install-reborn/commit/db33a14b1465658dbe91d1b42af8eb14094140aa))
+
+
+
 <a name="2.3.1"></a>
 ### 2.3.1 (2018-08-13)
 
