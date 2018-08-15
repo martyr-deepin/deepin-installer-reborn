@@ -1,3 +1,18 @@
+<a name="2.3.3"></a>
+### 2.3.3 (2018-08-15)
+
+
+#### Features
+
+*   just shutdown in oem mode ([f674d881](https://github.com/linuxdeepin/deepin-install-reborn/commit/f674d881be9de3df35a1ee763418d6fab149fae3))
+*   only professional version have user license ([0d43022f](https://github.com/linuxdeepin/deepin-install-reborn/commit/0d43022f3a6a070f7effeabc439642aebaec65b6))
+
+#### Bug Fixes
+
+*   indicator size error ([34f7594d](https://github.com/linuxdeepin/deepin-install-reborn/commit/34f7594d6c517d56e099be1495c1002dd8d59b67))
+
+
+
 <a name="2.3.2"></a>
 ### 2.3.2 (2018-08-14)
 
