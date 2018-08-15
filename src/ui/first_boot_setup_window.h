@@ -60,7 +60,9 @@ class FirstBootSetupWindow : public QFrame {
   SystemInfoFrame* system_info_frame_ = nullptr;
   TimezoneFrame* timezone_frame_ = nullptr;
   FirstBootLoadingFrame* loading_frame_ = nullptr;
+#ifdef PROFESSIONAL
   UserAgreementFrame* user_agreement_frame = nullptr;
+#endif
   QStackedLayout* stacked_layout_ = nullptr;
 
   QThread* hook_worker_thread_ = nullptr;
@@ -76,7 +78,9 @@ class FirstBootSetupWindow : public QFrame {
 
   void onPrimaryScreenChanged(const QRect& geometry);
 
+#ifdef PROFESSIONAL
   void onUserAgreementFinished();
+#endif
   void onSystemInfoFinished();
 
   // Run "first_boot_setup.sh" after system_info_frame_ is finished.

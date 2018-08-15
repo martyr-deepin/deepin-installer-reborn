@@ -38,6 +38,22 @@ else()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O2 -Wl,-O1 -Wl,--gc-sections -Wno-unused-result")
 endif()
 
+# Install default_settings.ini based on current architecture.
+set(INSTALLER_BUILD_ARCH "")
+execute_process(COMMAND uname -m
+                OUTPUT_VARIABLE INSTALLER_BUILD_ARCH)
+message("build arch: ${INSTALLER_BUILD_ARCH}")
+
+if (${INSTALLER_BUILD_ARCH} MATCHES "x86")
+  set(IS_PROFESSIONAL FALSE)
+  if (EXISTS "/etc/deepin-version")
+    file(STRINGS "/etc/deepin-version" IS_PROFESSIONAL REGEX "Type *= *Professional")
+    if(IS_PROFESSIONAL)
+        add_definitions("-DPROFESSIONAL")
+    endif()
+  endif()
+endif()
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(INSTALLER_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/deepin-installer)
