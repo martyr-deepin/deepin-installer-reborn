@@ -685,7 +685,9 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
       QString end;
       qint64 start_size { 0 };
       qint64 end_size { 0 };
-      unallocated.label = labels[rule_idx];
+      if (labels.size() > 1) {
+          unallocated.label = labels[rule_idx];
+      }
 
       // When the number is 3
       // the usage is the remaining
