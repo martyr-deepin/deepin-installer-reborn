@@ -21,6 +21,7 @@
 #include <QFrame>
 #include <QPixmap>
 class QHBoxLayout;
+class QLabel;
 
 namespace installer {
 
@@ -35,6 +36,7 @@ class PageIndicator : public QFrame {
   void goNextPage();
   void setCurrentPage(int page);
   int currentPage() const { return current_page_; };
+  void updatePages(int pages);
 
  private:
   void initUI();
@@ -47,6 +49,7 @@ class PageIndicator : public QFrame {
   QHBoxLayout* layout_ = nullptr;
   QPixmap indicator_active_;
   QPixmap indicator_inactive_;
+  QList<QLabel*> m_indicators;
 };
 
 }  // namespace installer

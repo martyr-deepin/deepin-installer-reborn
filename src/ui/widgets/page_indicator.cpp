@@ -32,7 +32,6 @@ PageIndicator::PageIndicator(int pages, QWidget* parent)
   this->setObjectName("page_indicator");
 
   this->initUI();
-  this->updateIndicators();
 }
 
 void PageIndicator::goNextPage() {
@@ -45,32 +44,42 @@ void PageIndicator::setCurrentPage(int page) {
   this->updateIndicators();
 }
 
+void PageIndicator::updatePages(int pages)
+{
+    pages_ = pages;
+
+    for (QLabel *w : m_indicators) {
+        layout_->removeWidget(w);
+        w->deleteLater();
+    }
+
+    m_indicators.clear();
+
+    for (int i = 0; i != pages; ++i) {
+        QLabel* label = new QLabel;
+        label->setFixedSize(13, 13);
+        label->setPixmap(indicator_inactive_);
+        layout_->addWidget(label);
+        m_indicators << label;
+    }
+
+    updateIndicators();
+}
+
 void PageIndicator::initUI() {
   layout_ = new QHBoxLayout();
   layout_->setAlignment(Qt::AlignCenter);
 
-  for (int i = 0; i < pages_; i++) {
-    QLabel* label = new QLabel();
-    label->setFixedSize(13, 13);
-    layout_->addWidget(label);
-  }
+  updatePages(pages_);
 
   this->setLayout(layout_);
 }
 
 void PageIndicator::updateIndicators() {
-  for (int i = 0; i < pages_; i++) {
-    QLabel* label = qobject_cast<QLabel*>(layout_->itemAt(i)->widget());
-    Q_ASSERT(label);
-    if (label != nullptr) {
-      if (i == current_page_) {
-        label->setPixmap(indicator_active_);
-      } else {
-        label->setPixmap(indicator_inactive_);
-      }
+    for (int i = 0; i < pages_; i++) {
+        QLabel* label = m_indicators[i];
+        label->setPixmap(i == current_page_ ? indicator_active_ : indicator_inactive_);
     }
-  }
 }
-
 
 }  // namespace installer

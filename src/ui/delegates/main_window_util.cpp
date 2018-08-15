@@ -64,10 +64,14 @@ int GetVisiblePages() {
   if (!GetSettingsBool(kSkipSelectLanguagePage)) {
     pages += 1;
   }
-  if (!GetSettingsBool(kSkipSystemInfoPage)) {
+
+  // For user end-license page
+  pages += 1;
+
+  if (!GetSettingsBool(kSystemInfoSetupAfterReboot) || !GetSettingsBool(kSkipSystemInfoPage)) {
     pages += 1;
   }
-  if (!GetSettingsBool(kSkipTimezonePage)) {
+  if (!GetSettingsBool(kSystemInfoSetupAfterReboot) || !GetSettingsBool(kSkipTimezonePage)) {
     pages += 1;
   }
   if (!GetSettingsBool(kSkipPartitionPage)) {

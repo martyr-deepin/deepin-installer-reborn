@@ -71,6 +71,8 @@ MainWindow::MainWindow()
   this->registerShortcut();
   this->initConnections();
 
+    page_indicator_->updatePages(GetVisiblePages());
+
   SetBrightness(GetSettingsInt(kScreenDefaultBrightness));
 }
 
@@ -435,6 +437,7 @@ void MainWindow::goNextPage() {
     case PageId::SelectLanguageId: {
         // Displays the first page.
         if (!GetSettingsBool(kSystemInfoSetupAfterReboot)) {
+            page_indicator_->goNextPage();
             setCurrentPage(PageId::UserAgreementId);
         }
         else {
@@ -449,6 +452,7 @@ void MainWindow::goNextPage() {
         // Check whether to show DiskSpaceInsufficientPage.
         if (!GetSettingsBool(kSkipDiskSpaceInsufficientPage) &&
                 IsDiskSpaceInsufficient()) {
+            page_indicator_->goNextPage();
             this->setCurrentPage(PageId::DiskSpaceInsufficientId);
         }
         else {

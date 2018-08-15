@@ -38,17 +38,16 @@ void UserAgreementFrame::initUI()
     m_subTitle->setObjectName("user_agreement_subtitle");
     m_sourceLbl = new QLabel(this);
     m_sourceLbl->setObjectName("user_agreement_sourceLbl");
-    m_sourceLbl->setFixedWidth(468);
     m_sourceLbl->setWordWrap(true);
-    m_sourceLbl->setContentsMargins(10, 10, 10,10);
 
     QWidget *sourceWidget = new QWidget;
     sourceWidget->setObjectName("sourceWidget");
     QHBoxLayout *sourceLayout = new QHBoxLayout;
     sourceLayout->setMargin(0);
     sourceLayout->setSpacing(0);
-    sourceLayout->addWidget(m_sourceLbl, 0, Qt::AlignTop);
+    sourceLayout->addWidget(m_sourceLbl, 0, Qt::AlignTop | Qt::AlignHCenter);
     sourceLayout->addStretch();
+    sourceLayout->setContentsMargins(10, 10, 5, 10);
     sourceWidget->setLayout(sourceLayout);
 
     m_sourceScrollArea = new QScrollArea(this);
@@ -58,9 +57,10 @@ void UserAgreementFrame::initUI()
     m_sourceScrollArea->setFocusPolicy(Qt::NoFocus);
     m_sourceScrollArea->setFrameStyle(QFrame::NoFrame);
     m_sourceScrollArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
-    m_sourceScrollArea->setContentsMargins(0, 0, 10, 0);
+    m_sourceScrollArea->setContentsMargins(0, 0, 0, 0);
     m_sourceScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    m_sourceScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    m_sourceScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    m_sourceScrollArea->setFixedWidth(468);
 
     m_accept = new NavButton(this);
     m_cancel = new NavButton(this);
