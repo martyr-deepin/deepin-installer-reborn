@@ -160,13 +160,13 @@ void MainWindow::initConnections() {
   connect(install_progress_frame_, &InstallProgressFrame::finished,
           this, &MainWindow::goNextPage);
 
-#ifdef PROFESSIONAL
-  connect(install_success_frame_, &InstallSuccessFrame::finished,
-          this, &MainWindow::shutdownSystem);
-#else
-  connect(install_success_frame_, &InstallSuccessFrame::finished,
-          this, &MainWindow::rebootSystem);
-#endif
+  if (GetSettingsBool(kSystemInfoSetupAfterReboot)) {
+      connect(install_success_frame_, &InstallSuccessFrame::finished,
+              this, &MainWindow::shutdownSystem);
+  } else {
+      connect(install_success_frame_, &InstallSuccessFrame::finished,
+              this, &MainWindow::rebootSystem);
+  }
 
   connect(partition_frame_, &PartitionFrame::reboot,
           this, &MainWindow::rebootSystem);
