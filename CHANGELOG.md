@@ -1,3 +1,14 @@
+<a name="2.3.4"></a>
+### 2.3.4 (2018-08-16)
+
+
+#### Bug Fixes
+
+*   update professional default setting ([b61ffc42](https://github.com/linuxdeepin/deepin-install-reborn/commit/b61ffc4291c58459461eee5c9fca982452c12bf4))
+*   check label exist ([4ffe5e3d](https://github.com/linuxdeepin/deepin-install-reborn/commit/4ffe5e3dce345007cb2e7ec652c81ab4c1f5b986))
+
+
+
 <a name="2.3.3"></a>
 ### 2.3.3 (2018-08-15)
 
