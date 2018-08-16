@@ -1,3 +1,13 @@
+<a name="2.3.5"></a>
+### 2.3.5 (2018-08-16)
+
+
+#### Bug Fixes
+
+*   error skip page ([b666f5f1](https://github.com/linuxdeepin/deepin-install-reborn/commit/b666f5f1bf6e3724309cb7ad135ee7a68335cf48))
+
+
+
 <a name="2.3.4"></a>
 ### 2.3.4 (2018-08-16)
 
