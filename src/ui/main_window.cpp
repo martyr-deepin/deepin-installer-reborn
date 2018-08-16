@@ -448,6 +448,8 @@ void MainWindow::goNextPage() {
 
     case PageId::SelectLanguageId: {
         // Displays the first page.
+
+#ifdef PROFESSIONAL
         if (!GetSettingsBool(kSystemInfoSetupAfterReboot)) {
             page_indicator_->goNextPage();
             setCurrentPage(PageId::UserAgreementId);
@@ -457,12 +459,16 @@ void MainWindow::goNextPage() {
             current_page_ = PageId::UserAgreementId;
             goNextPage();
         }
+#else
+        prev_page_ = current_page_;
+        current_page_ = PageId::UserAgreementId;
+        goNextPage();
+#endif
         break;
     }
 
     case PageId::UserAgreementId: {
         // Check whether to show DiskSpaceInsufficientPage.
-#ifdef PROFESSIONAL
         if (!GetSettingsBool(kSkipDiskSpaceInsufficientPage) &&
                 IsDiskSpaceInsufficient()) {
             page_indicator_->goNextPage();
@@ -473,11 +479,6 @@ void MainWindow::goNextPage() {
             current_page_ = PageId::DiskSpaceInsufficientId;
             goNextPage();
         }
-#else
-        prev_page_ = current_page_;
-        current_page_ = PageId::DiskSpaceInsufficientId;
-        goNextPage();
-#endif
     }
 
     case PageId::DiskSpaceInsufficientId: {
