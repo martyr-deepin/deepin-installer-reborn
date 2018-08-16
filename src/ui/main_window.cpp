@@ -425,11 +425,10 @@ void MainWindow::goNextPage() {
     case PageId::NullId: {
         if (HasRootPrivilege()) {
             current_page_ = PageId::PrivilegeErrorId;
-            this->goNextPage();
         } else {
             this->setCurrentPage(PageId::PrivilegeErrorId);
+            break;
         }
-        break;
     }
 
     case PageId::PrivilegeErrorId: {
@@ -438,12 +437,11 @@ void MainWindow::goNextPage() {
             select_language_frame_->writeConf();
             prev_page_ = current_page_;
             current_page_ = PageId::SelectLanguageId;
-            this->goNextPage();
         } else {
             page_indicator_->goNextPage();
             this->setCurrentPage(PageId::SelectLanguageId);
+            break;
         }
-        break;
     }
 
     case PageId::SelectLanguageId: {
@@ -453,18 +451,16 @@ void MainWindow::goNextPage() {
         if (!GetSettingsBool(kSystemInfoSetupAfterReboot)) {
             page_indicator_->goNextPage();
             setCurrentPage(PageId::UserAgreementId);
+            break;
         }
         else {
             prev_page_ = current_page_;
             current_page_ = PageId::UserAgreementId;
-            goNextPage();
         }
 #else
         prev_page_ = current_page_;
         current_page_ = PageId::UserAgreementId;
-        goNextPage();
 #endif
-        break;
     }
 
     case PageId::UserAgreementId: {
@@ -473,11 +469,11 @@ void MainWindow::goNextPage() {
                 IsDiskSpaceInsufficient()) {
             page_indicator_->goNextPage();
             this->setCurrentPage(PageId::DiskSpaceInsufficientId);
+            break;
         }
         else {
             prev_page_ = current_page_;
             current_page_ = PageId::DiskSpaceInsufficientId;
-            goNextPage();
         }
     }
 
@@ -486,12 +482,11 @@ void MainWindow::goNextPage() {
         if (!GetSettingsBool(kSkipVirtualMachinePage) &&
                 IsVirtualMachine()) {
             this->setCurrentPage(PageId::VirtualMachineId);
+            break;
         } else {
             prev_page_ = current_page_;
             current_page_ = PageId::VirtualMachineId;
-            this->goNextPage();
         }
-        break;
     }
 
     case PageId::VirtualMachineId: {
@@ -501,12 +496,11 @@ void MainWindow::goNextPage() {
             system_info_frame_->writeConf();
             prev_page_ = current_page_;
             current_page_ = PageId::SystemInfoId;
-            this->goNextPage();
         } else {
             page_indicator_->goNextPage();
             this->setCurrentPage(PageId::SystemInfoId);
+            break;
         }
-        break;
     }
 
     case PageId::SystemInfoId: {
@@ -514,12 +508,11 @@ void MainWindow::goNextPage() {
             timezone_frame_->writeConf();
             prev_page_ = current_page_;
             current_page_ = PageId::TimezoneId;
-            this->goNextPage();
         } else {
             page_indicator_->goNextPage();
             this->setCurrentPage(PageId::TimezoneId);
+            break;
         }
-        break;
     }
 
     case PageId::TimezoneId: {
@@ -530,12 +523,11 @@ void MainWindow::goNextPage() {
             }
             prev_page_ = current_page_;
             current_page_ = PageId::PartitionId;
-            this->goNextPage();
         } else {
             page_indicator_->goNextPage();
             this->setCurrentPage(PageId::PartitionId);
+            break;
         }
-        break;
     }
 
     case PageId::PartitionId: {
