@@ -202,29 +202,39 @@
 <context>
     <name>installer::FullDiskFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="62"/>
-        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="83"/>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="71"/>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="94"/>
         <source>Install here</source>
         <translation>Встановити тут</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="72"/>
+        <source>Encrypt This Disk</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="102"/>
+        <source>Encrypt Full Disk</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>installer::InstallFailedFrame</name>
     <message>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="74"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="94"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="95"/>
         <source>Installation Failed</source>
         <translation>Не вдалося встановити</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="76"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="96"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="77"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="97"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
         <translation>Вибачте за незручності, ви можете переглянути чи сканувати QR-код, щоб надсилати журнал помилок, щоб ми могли краще вирішити цю проблему.</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="125"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="79"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="126"/>
         <source>Exit installation</source>
         <translation>Вийти з установки</translation>
     </message>
@@ -247,26 +257,26 @@
 <context>
     <name>installer::InstallSuccessFrame</name>
     <message>
-        <location filename="../src/ui/frames/install_success_frame.cpp" line="40"/>
-        <location filename="../src/ui/frames/install_success_frame.cpp" line="60"/>
+        <location filename="../src/ui/frames/install_success_frame.cpp" line="41"/>
+        <location filename="../src/ui/frames/install_success_frame.cpp" line="61"/>
         <source>Successfully Installed</source>
         <translation>Успішно встановлено</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/install_success_frame.cpp" line="42"/>
-        <location filename="../src/ui/frames/install_success_frame.cpp" line="62"/>
+        <location filename="../src/ui/frames/install_success_frame.cpp" line="43"/>
+        <location filename="../src/ui/frames/install_success_frame.cpp" line="63"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
         <translation>Перезавантажте, щоб насолодитися новим досвідом з deepin, сподіваюся, вам сподобається!</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/install_success_frame.cpp" line="45"/>
-        <location filename="../src/ui/frames/install_success_frame.cpp" line="69"/>
+        <location filename="../src/ui/frames/install_success_frame.cpp" line="46"/>
+        <location filename="../src/ui/frames/install_success_frame.cpp" line="70"/>
         <source>Please remove the installation media before reboot</source>
         <translation>Перед перезавантаженням зніміть інсталяційний носій</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/install_success_frame.cpp" line="46"/>
-        <location filename="../src/ui/frames/install_success_frame.cpp" line="70"/>
+        <location filename="../src/ui/frames/install_success_frame.cpp" line="47"/>
+        <location filename="../src/ui/frames/install_success_frame.cpp" line="71"/>
         <source>Experience now</source>
         <translation>Спробувати зараз</translation>
     </message>
@@ -353,25 +363,25 @@
     <name>installer::NewTableWarningFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="77"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="76"/>
         <source>Full Disk Format Warning</source>
         <translation>Попередження про повне форматування диску</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="95"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="94"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
         <translation>Продовжуючи встановлення, буде форматований весь диск, будь ласка, створіть резервну копію всіх ваших даних, щоб уникнути втрати даних</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="102"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="101"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="60"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="103"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="102"/>
         <source>Continue</source>
         <translation>Продовжити</translation>
     </message>
@@ -379,40 +389,46 @@
 <context>
     <name>installer::PartitionFrame</name>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="83"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="204"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="84"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="227"/>
         <source>Select Installation Location</source>
         <translation>Виберіть місце встановлення</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="85"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="206"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="229"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Будь ласка, переконайтеся, що для важливих даних було зроблено резервну копію, а потім виберіть диск для встановлення</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="214"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="237"/>
         <source>Simple</source>
         <translation>Простий</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="218"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="241"/>
         <source>Advanced</source>
         <translation>Розширений</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="222"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="245"/>
         <source>Full Disk</source>
         <translation>Диск заповнено</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="284"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="306"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="409"/>
         <source>Start installation</source>
         <translation>Почніть встановлення</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="409"/>
+        <source>Next</source>
+        <translation>Далі</translation>
     </message>
 </context>
 <context>
@@ -609,8 +625,8 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/select_language_frame.cpp" line="66"/>
-        <location filename="../src/ui/frames/select_language_frame.cpp" line="110"/>
+        <location filename="../src/ui/frames/select_language_frame.cpp" line="67"/>
+        <location filename="../src/ui/frames/select_language_frame.cpp" line="111"/>
         <source>Next</source>
         <translation>Далі</translation>
     </message>
@@ -824,6 +840,54 @@
     </message>
 </context>
 <context>
+    <name>installer::Full_Disk_Encrypt_frame</name>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="141"/>
+        <source>Please input password</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="146"/>
+        <source>The two passwords don&apos;t match</source>
+        <translation>Ці два пароля не збігаються</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="172"/>
+        <source>Full Disk Encryption</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="173"/>
+        <source>Please make sure important data were made a backup, then select the disk to install</source>
+        <translation>Будь ласка, переконайтеся, що для важливих даних було зроблено резервну копію, а потім виберіть диск для встановлення</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="174"/>
+        <source>Encrypt This Disk</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="175"/>
+        <source>Password</source>
+        <translation>Пароль</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="176"/>
+        <source>Repeat Password</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
+        <source>Previous</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
+        <source>Start Installation</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>installer::MountPointModel</name>
     <message>
         <location filename="../src/ui/models/mount_point_model.cpp" line="37"/>
@@ -834,81 +898,81 @@
 <context>
     <name>installer::PartitionTableWarningFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="52"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="95"/>
         <source>Warning</source>
         <translation>УВАГА</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="54"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="106"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
         <translation>Неможливо встановити безпосередньо через завантажувач материнської плати EFI та виявлений диск MBR, будь ласка, виберіть одне з наведених нижче рішень, щоб продовжити.</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="60"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="118"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
         <translation>Перезавантажитеся, увійдіть в BIOS і вимкніть UEFI</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="119"/>
         <source>Exit BIOS, and enter deepin to install</source>
         <translation>Вийдіть з BIOS і увійдіть в deepin для установки.</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="65"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
         <source>Please make a backup of all your data to avoid data loss</source>
         <translation>Зробіть резервну копію всіх ваших даних, щоб уникнути втрати даних</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="128"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
         <translation>Будь ласка, двічі перевірте, чи було зроблено резервну копію всіх даних, і перезавантажте, щоб увійти в цей інтерфейс</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="68"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="148"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="170"/>
         <source>Continue</source>
         <translation>Продовжити</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="71"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
         <source>Please make sure all data were made a backup, then continue</source>
         <translation>Будь ласка, переконайтеся, що для всіх даних було зроблено резервну копію, а потім продовжуйте</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
         <source>Continue installation will format your disk</source>
         <translation>Продовжити встановлення буде відформатовано ваш диск</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="75"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
         <source>Reboot</source>
         <translation>Перезавантажити</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="171"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="57"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="114"/>
         <source>Disable UEFI</source>
         <translation>Вимкнути UEFI</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="62"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="123"/>
         <source>Format the disk</source>
         <translation>Форматувати диск</translation>
