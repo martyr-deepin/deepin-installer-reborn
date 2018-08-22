@@ -44,6 +44,9 @@ if [ -d /tmp/oem ]; then
 elif [ -d /media/cdrom/oem ]; then
   # chroot mode
   OEM_DIR=/media/cdrom/oem
+elif [ -d /lib/live/mount/medium/oem ]; then
+  # chroot mode
+  OEM_DIR=/lib/live/mount/medium/oem
 fi
 
 # Mark $OEM_DIR as readonly constant.
