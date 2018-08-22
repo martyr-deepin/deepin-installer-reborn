@@ -47,6 +47,12 @@ elif [ -d /media/cdrom/oem ]; then
 elif [ -d /lib/live/mount/medium/oem ]; then
   # chroot mode
   OEM_DIR=/lib/live/mount/medium/oem
+elif [ -d /media/apt/oem ]; then
+  # chroot mode
+  # FIXME: maybe apt will change mount point
+  # /media/cdrom => /media/apt
+  # hook script invalid
+  OEM_DIR=/media/apt/oem
 fi
 
 # Mark $OEM_DIR as readonly constant.
