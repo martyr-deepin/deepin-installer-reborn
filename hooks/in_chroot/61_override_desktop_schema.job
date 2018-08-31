@@ -58,4 +58,7 @@ fi
 msg "installer override schema file:"
 [ -f "${SCHEMA_FILE}" ] && cat "${SCHEMA_FILE}"
 
+# need refresh all gsettings schemas
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
 return 0
