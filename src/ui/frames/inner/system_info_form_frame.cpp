@@ -131,23 +131,23 @@ void SystemInfoFormFrame::initUI() {
 
   avatar_button_ = new AvatarButton();
 
-  username_edit_ = new LineEdit(":/images/username_12.png");
+  username_edit_ = new LineEdit(":/images/username_12.svg");
   username_edit_->setPlaceholderText(tr("Username"));
   username_edit_->setText(GetSettingsString(kSystemInfoDefaultUsername));
   username_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockUsername));
 
-  hostname_edit_ = new LineEdit(":/images/hostname_12.png");
+  hostname_edit_ = new LineEdit(":/images/hostname_12.svg");
   hostname_edit_->setPlaceholderText(tr("Computer name"));
   hostname_edit_->setText(GetSettingsString(kSystemInfoDefaultHostname));
   hostname_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockHostname));
 
-  password_edit_ = new LineEdit(":/images/password_12.png");
+  password_edit_ = new LineEdit(":/images/password_12.svg");
   password_edit_->setPlaceholderText(tr("Password"));
   password_edit_->setEchoMode(QLineEdit::Password);
   password_edit_->setText(GetSettingsString(kSystemInfoDefaultPassword));
   password_edit_->setReadOnly(GetSettingsBool(kSystemInfoLockPassword));
 
-  password2_edit_ = new LineEdit(":/images/password_12.png");
+  password2_edit_ = new LineEdit(":/images/password_12.svg");
   password2_edit_->setPlaceholderText(tr("Confirm password"));
   password2_edit_->setEchoMode(QLineEdit::Password);
   password2_edit_->setText(password_edit_->text());

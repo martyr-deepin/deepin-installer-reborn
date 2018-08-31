@@ -24,6 +24,9 @@
 #include <QLayout>
 #include <QLayoutItem>
 #include <QMenu>
+#include <QImageReader>
+#include <QApplication>
+#include <QPixmap>
 
 namespace installer {
 
@@ -102,6 +105,23 @@ void SetQMenuTransparent(QMenu* menu) {
 
 void WidgetTreeWalk(QWidget* root) {
   WidgetTreeWalk(root, 0);
+}
+
+const QPixmap renderPixmap(const QString &path) {
+    QImageReader reader;
+    QPixmap pixmap;
+    reader.setFileName(path);
+    if (reader.canRead()) {
+        const qreal ratio = qApp->devicePixelRatio();
+        reader.setScaledSize(reader.size() * ratio);
+        pixmap = QPixmap::fromImage(reader.read());
+        pixmap.setDevicePixelRatio(ratio);
+    }
+    else {
+        pixmap.load(path);
+    }
+
+    return pixmap;
 }
 
 }  // namespace installer

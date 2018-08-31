@@ -72,8 +72,7 @@ void NewTableWarningFrame::initConnections() {
 
 void NewTableWarningFrame::initUI() {
   QLabel* warning_label = new QLabel();
-  QPixmap warning_pixmap(":/images/warning.png");
-  warning_label->setPixmap(warning_pixmap);
+  warning_label->setPixmap(installer::renderPixmap(":/images/warning.svg"));
   title_label_ = new TitleLabel(tr("Full Disk Format Warning"));
   title_label_->setObjectName("title_label");
 

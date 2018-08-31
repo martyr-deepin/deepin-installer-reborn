@@ -27,12 +27,15 @@
 #include "sysinfo/users.h"
 #include "ui/delegates/installer_args_parser.h"
 #include "ui/main_window.h"
+#include "base/auto_screen_scale.h"
 
 int main(int argc, char* argv[]) {
   // Reset LC_ALL to en_US.UTF-8.
   // NOTE(xushaohua): "LANG" might not set in some live environment.
   qputenv("LC_ALL", installer::kDefaultLang);
   qputenv("LANG", installer::kDefaultLang);
+
+  Utils::AutoScreenScale();
 
   QApplication app(argc, argv);
   app.setAttribute(Qt::AA_UseHighDpiPixmaps);

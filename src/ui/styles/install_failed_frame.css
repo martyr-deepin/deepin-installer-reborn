@@ -25,13 +25,13 @@ QFrame#content_frame {
   background-repeat: no-repeat;
   background-position: center center;
 
-  background-image: url(:/images/qr_normal.png);
+  background-image: url(:/images/QR_normal.svg);
 }
 
 #control_button:hover {
-  background-image: url(:/images/qr_hover.png);
+  background-image: url(:/images/QR_hover.svg);
 }
 
 #control_button:pressed {
-  background-image: url(:/images/qr_press.png);
+  background-image: url(:/images/QR_press.svg);
 }

@@ -23,6 +23,7 @@
 #include "base/file_util.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/rounded_progress_bar.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -49,7 +50,7 @@ SimplePartitionButton::SimplePartitionButton(const Partition& partition,
 void SimplePartitionButton::setSelected(bool selected) {
   selected_ = selected;
   if (selected) {
-    const QPixmap pixmap(":/images/driver_install_128.png");
+    const QPixmap pixmap = std::move(installer::renderPixmap(":/images/driver_install_128.svg"));
     os_label_->setPixmap(pixmap);
   } else {
     QPixmap pixmap(GetOsTypeLargeIcon(partition_.os));

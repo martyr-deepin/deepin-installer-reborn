@@ -30,7 +30,12 @@
 #include "ui/delegates/language_delegate.h"
 #include "ui/first_boot_setup_window.h"
 
-int main(int argc, char* argv[]) {
+#include <cstdlib>
+#include "base/auto_screen_scale.h"
+
+int main(int argc, char *argv[])
+{
+  Utils::AutoScreenScale();
   QApplication app(argc, argv);
   app.setAttribute(Qt::AA_UseHighDpiPixmaps);
   app.setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -42,10 +47,13 @@ int main(int argc, char* argv[]) {
 
   const char kLogFileName[] = "deepin-installer-first-boot.log";
   QString log_file;
-  if (!installer::HasRootPrivilege()) {
+  if (!installer::HasRootPrivilege())
+  {
     qCritical() << "Root privilege is required!";
     log_file = QString("/tmp/%1").arg(kLogFileName);
-  } else {
+  }
+  else
+  {
     log_file = QString("/var/log/%1").arg(kLogFileName);
   }
   // Initialize log service.

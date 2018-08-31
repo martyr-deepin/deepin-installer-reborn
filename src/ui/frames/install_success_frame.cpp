@@ -25,6 +25,7 @@
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/title_label.h"
 #include "ui/frames/consts.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -56,7 +57,7 @@ void InstallSuccessFrame::initConnections() {
 
 void InstallSuccessFrame::initUI() {
   QLabel* status_label = new QLabel();
-  status_label->setPixmap(QPixmap(":/images/succeed.png"));
+  status_label->setPixmap(installer::renderPixmap(":/images/success.svg"));
   title_label_ = new TitleLabel(tr("Successfully Installed"));
   comment_label_ = new CommentLabel(
       tr("Reboot to enjoy the new experience with deepin, hope you like it!"));

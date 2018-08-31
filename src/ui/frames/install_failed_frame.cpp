@@ -28,6 +28,7 @@
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/qr_widget.h"
 #include "ui/widgets/title_label.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -90,7 +91,7 @@ void InstallFailedFrame::initConnections() {
 
 void InstallFailedFrame::initUI() {
   QLabel* status_label = new QLabel();
-  status_label->setPixmap(QPixmap(":/images/failed.png"));
+  status_label->setPixmap(installer::renderPixmap(":/images/fail.svg"));
   title_label_ = new TitleLabel(tr("Installation Failed"));
   comment_label_ = new CommentLabel(
       tr("Sorry for the inconvenience, you can photo or scan the QR code "

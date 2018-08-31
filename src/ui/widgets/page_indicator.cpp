@@ -16,6 +16,7 @@
  */
 
 #include "ui/widgets/page_indicator.h"
+#include "ui/utils/widget_util.h"
 
 #include <QHBoxLayout>
 #include <QLabel>
@@ -26,8 +27,8 @@ PageIndicator::PageIndicator(int pages, QWidget* parent)
   : QFrame(parent),
     pages_(pages),
     current_page_(-1),
-    indicator_active_(":/images/indicator_active.svg"),
-    indicator_inactive_(":/images/indicator_inactive.svg") {
+    indicator_active_(installer::renderPixmap(":/images/indicator_active.svg")),
+    indicator_inactive_(installer::renderPixmap(":/images/indicator_inactive.svg")) {
   Q_ASSERT(pages > 0);
   this->setObjectName("page_indicator");
 

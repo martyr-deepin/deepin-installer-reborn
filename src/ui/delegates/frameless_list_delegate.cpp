@@ -17,9 +17,12 @@
 
 #include "ui/delegates/frameless_list_delegate.h"
 
+#include "ui/utils/widget_util.h"
+
 #include <QDebug>
 #include <QPainter>
 #include <QStyle>
+#include <QApplication>
 
 namespace installer {
 
@@ -51,11 +54,12 @@ void FramelessItemDelegate::paint(QPainter* painter,
                               rect.height() - kBorderBottom);
   if (option.state & QStyle::State_Selected) {
     // Draw background image of selected item.
-    const QPixmap pixmap(":/images/list_view_selected.png");
-    const int x = rect.x() + rect.width() - pixmap.width() -
+    const QPixmap pixmap = installer::renderPixmap(":/images/select.svg");
+    const qreal ratio = qApp->devicePixelRatio();
+    const int x = rect.x() + rect.width() - pixmap.width() / ratio -
         kSelectedRightMargin;
-    const int y = rect.y() + (rect.height() - pixmap.height()) / 2;
-    const QRect pixmap_rect(x, y, pixmap.width(), pixmap.height());
+    const int y = rect.y() + (rect.height() - pixmap.height() / ratio) / 2;
+    const QRect pixmap_rect(x, y, pixmap.width() / ratio, pixmap.height() / ratio);
     painter->drawPixmap(pixmap_rect, pixmap);
 
     // Draw background color of selected item, no matter it is active or not.

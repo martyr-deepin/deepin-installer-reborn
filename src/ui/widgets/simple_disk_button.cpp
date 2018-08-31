@@ -22,6 +22,7 @@
 
 #include "base/file_util.h"
 #include "ui/delegates/partition_util.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -32,8 +33,8 @@ const int kButtonHeight = 220;
 const int kOsIconWidth = 120;
 const int kOsIconHeight = 120;
 
-const char kDriverIcon[] = ":/images/driver_128.png";
-const char kDriverInstallIcon[] = ":/images/driver_install_128.png";
+const QString kDriverIcon = ":/images/driver_128.svg";
+const QString kDriverInstallIcon = ":/images/driver_install_128.svg";
 
 }  // namespace
 
@@ -48,21 +49,15 @@ SimpleDiskButton::SimpleDiskButton(const Device& device, QWidget* parent)
 }
 
 void SimpleDiskButton::setSelected(bool selected) {
-  selected_ = selected;
-  if (selected) {
-    const QPixmap pixmap(kDriverInstallIcon);
-    os_label_->setPixmap(pixmap);
-  } else {
-    QPixmap pixmap(kDriverIcon);
-    os_label_->setPixmap(pixmap);
-  }
+    selected_ = selected;
+    os_label_->setPixmap(installer::renderPixmap(selected ? kDriverInstallIcon : kDriverIcon));
 }
 
 void SimpleDiskButton::initUI() {
   os_label_ = new QLabel();
   os_label_->setObjectName("fs_label");
   os_label_->setFixedSize(kOsIconWidth, kOsIconHeight);
-  os_label_->setPixmap(QPixmap(kDriverIcon));
+  os_label_->setPixmap(installer::renderPixmap(kDriverIcon));
 
   QLabel* path_label = new QLabel();
   path_label->setObjectName("path_label");

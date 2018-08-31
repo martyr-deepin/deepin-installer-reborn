@@ -29,11 +29,11 @@ QPushButton[flat="true"] {
 }
 
 #keyboard_button {
-  background-image: url(:/images/keyboard_normal.png);
+  background-image: url(:/images/keyboard_normal.svg);
 }
 #keyboard_button:hover {
-  background-image: url(:/images/keyboard_hover.png);
+  background-image: url(:/images/keyboard_hover.svg);
 }
 #keyboard_button:pressed {
-  background-image: url(:/images/keyboard_press.png);
+  background-image: url(:/images/keyboard_press.svg);
 }

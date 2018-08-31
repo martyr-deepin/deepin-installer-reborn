@@ -27,6 +27,7 @@
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/expanded_nav_button.h"
 #include "ui/widgets/title_label.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -90,8 +91,7 @@ void PartitionTableWarningFrame::initConnections() {
 
 void PartitionTableWarningFrame::initUI() {
   QLabel* warning_label = new QLabel();
-  QPixmap warning_pixmap(":/images/warning.png");
-  warning_label->setPixmap(warning_pixmap);
+  warning_label->setPixmap(installer::renderPixmap(":/images/warning.svg"));
   title_label_ = new TitleLabel(tr("Warning"));
   QHBoxLayout* title_layout = new QHBoxLayout();
   title_layout->setContentsMargins(0, 0, 0, 0);

@@ -26,6 +26,7 @@
 
 #include "service/settings_manager.h"
 #include "ui/delegates/install_slide_frame_util.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -112,8 +113,7 @@ void InstallProgressSlideFrame::updateSlideImage() {
   Q_ASSERT(slide_index_ < slide_files_.length());
   const QString filepath(slide_files_.at(slide_index_));
   if (QFile::exists(filepath)) {
-    const QPixmap pixmap(filepath);
-    container_label_->setPixmap(pixmap);
+    container_label_->setPixmap(installer::renderPixmap(filepath));
   } else {
     qWarning() << "slide file not found:" << filepath;
   }

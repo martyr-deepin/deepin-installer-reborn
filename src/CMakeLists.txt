@@ -17,8 +17,8 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
   # -fno-rtti, Disable real-time type information
   # -fno-exceptions Disable exceptions
   # -fsanitize=address Enable memory sanitize plugin
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Werror -Wextra -fno-exceptions")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-implicit-fallthrough")
+#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Werror -Wextra -fno-exceptions")
+#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-implicit-fallthrough")
   # -fsanitize=address, Enable memory address sanitizer.
 #  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
   # -fsanitize=leak, Enable memory leak sanitizer.
@@ -80,6 +80,7 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5X11Extras REQUIRED)
 find_package(Qt5Xml REQUIRED)
 find_package(Qt5LinguistTools)
+find_package(Qt5Svg REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -448,6 +449,7 @@ set(Qt_LIBS
     Qt5::Widgets
     Qt5::X11Extras
     Qt5::Xml
+    Qt5::Svg
     )
 
 set(LINK_LIBS
@@ -768,6 +770,9 @@ add_executable(timezone-frame-test
                sysinfo/timezone.h
                sysinfo/users.cpp
                sysinfo/users.h
+
+               ui/utils/widget_util.h
+               ui/utils/widget_util.cpp
 
                ui/delegates/popup_menu_delegate.cpp
                ui/delegates/popup_menu_delegate.h

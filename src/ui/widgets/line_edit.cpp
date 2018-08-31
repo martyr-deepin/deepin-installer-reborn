@@ -22,6 +22,7 @@
 #include <QResizeEvent>
 
 #include "base/file_util.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -36,7 +37,7 @@ LineEdit::LineEdit(const QString& icon, QWidget* parent) : QLineEdit(parent) {
   this->setContextMenuPolicy(Qt::NoContextMenu);
 
   image_label_ = new QLabel(this);
-  image_label_->setPixmap(QPixmap(icon));
+  image_label_->setPixmap(installer::renderPixmap(icon));
   image_label_->setFixedSize(12, 12);
   image_label_->move(12, 12);
 }

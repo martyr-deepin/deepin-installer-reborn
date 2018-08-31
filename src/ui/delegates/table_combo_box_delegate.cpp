@@ -16,6 +16,7 @@
  */
 
 #include "ui/delegates/table_combo_box_delegate.h"
+#include "ui/utils/widget_util.h"
 
 #include <QDebug>
 #include <QPainter>
@@ -51,7 +52,7 @@ void TableComboBoxDelegate::paint(QPainter* painter,
                               rect.height() - kBorderBottom);
   if (option.state & QStyle::State_Selected) {
     // Draw background image of selected item.
-    const QPixmap pixmap(":/images/list_view_selected.png");
+    const QPixmap pixmap = std::move(installer::renderPixmap(":/images/select.svg"));
     const int x = rect.x() + rect.width() - pixmap.width() -
                   kSelectedRightMargin;
     const int y = rect.y() + (rect.height() - pixmap.height()) / 2;

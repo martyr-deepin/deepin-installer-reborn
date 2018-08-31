@@ -72,7 +72,7 @@ void AdvancedPartitionButton::initConnections() {
 void AdvancedPartitionButton::initUI() {
   QLabel* os_label = new QLabel();
   os_label->setObjectName("os_label");
-  os_label->setPixmap(GetOsTypeIcon(partition_.os));
+  os_label->setPixmap(installer::renderPixmap(GetOsTypeIcon(partition_.os)));
 
   // partition label name
   QLabel* name_label = new QLabel();

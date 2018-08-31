@@ -230,7 +230,7 @@ QString GetVendorLogo() {
   }
 
   // Returns builtin logo.
-  return ":/images/logo.png";
+  return ":/images/logo.svg";
 }
 
 QString GetWindowBackground() {

@@ -79,7 +79,7 @@ void FullDiskFrame::initUI() {
   button_group_ = new QButtonGroup(this);
 
   QLabel* tip_icon = new QLabel();
-  tip_icon->setPixmap(QPixmap(":/images/install_icon.png"));
+  tip_icon->setPixmap(installer::renderPixmap(":/images/install_icon.svg"));
   tip_label_ = new QLabel(tr("Install here"));
   tip_label_->setObjectName("tip_label");
   tip_label_->setFixedHeight(18);

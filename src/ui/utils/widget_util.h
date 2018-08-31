@@ -50,6 +50,8 @@ void SetQMenuTransparent(QMenu* menu);
 // Print type info about |root| and its children.
 void WidgetTreeWalk(QWidget* root);
 
+const QPixmap renderPixmap(const QString &path);
+
 }  // namespace installer
 
 #endif  // INSTALLER_UI_UTILS_WIDGET_UTIL_H

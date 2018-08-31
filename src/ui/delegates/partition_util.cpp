@@ -178,16 +178,16 @@ QString GetLocalFsTypeName(FsType fs_type) {
 QString GetOsTypeIcon(OsType os_type) {
   switch (os_type) {
     case OsType::Linux: {
-      return ":/images/driver_linux_32.png";
+      return ":/images/driver_linux_32.svg";
     }
     case OsType::Mac: {
-      return ":/images/driver_mac_32.png";
+      return ":/images/driver_mac_32.svg";
     }
     case OsType::Windows: {
-      return ":/images/driver_windows_32.png";
+      return ":/images/driver_windows_32.svg";
     }
     default: {
-      return ":/images/driver_32.png";
+      return ":/images/driver_32.svg";
     }
   }
 }
@@ -195,16 +195,16 @@ QString GetOsTypeIcon(OsType os_type) {
 QString GetOsTypeLargeIcon(OsType os_type) {
   switch (os_type) {
     case OsType::Linux: {
-      return ":/images/driver_linux_128.png";
+      return ":/images/driver_linux_128.svg";
     }
     case OsType::Mac: {
-      return ":/images/driver_mac_128.png";
+      return ":/images/driver_mac_128.svg";
     }
     case OsType::Windows: {
-      return ":/images/driver_windows_128.png";
+      return ":/images/driver_windows_128.svg";
     }
     default: {
-      return ":/images/driver_128.png";
+      return ":/images/driver_128.svg";
     }
   }
 }

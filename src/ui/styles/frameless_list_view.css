@@ -41,6 +41,6 @@ QListView::item:focus {
 QListView::item:selected {
   outline: none;
   border: none;
-  background: rgba(255, 255, 255, 0.3) url(":/images/list_view_selected.png")
+  background: rgba(255, 255, 255, 0.3) url(":/images/select.svg")
               no-repeat right center;
 }

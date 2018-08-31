@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>install_icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="install_icon" stroke="#FF8000">
+            <g id="Group-2" transform="translate(1.000000, 1.000000)">
+                <circle id="Oval-13" cx="6.5" cy="6.5" r="6.5"></circle>
+                <path d="M6.5,3.5 L6.5,8.5" id="Line" stroke-linecap="round"></path>
+                <polyline id="Rectangle-131" stroke-linecap="round" points="8.57842712 7.28921356 6.46491251 9.53921356 4.07842712 7.28921356"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

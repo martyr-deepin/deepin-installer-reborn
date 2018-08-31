@@ -32,6 +32,7 @@
 #include "ui/models/language_list_model.h"
 #include "ui/views/frameless_list_view.h"
 #include "ui/widgets/nav_button.h"
+#include "ui/utils/widget_util.h"
 
 namespace installer {
 
@@ -92,7 +93,7 @@ void SelectLanguageFrame::initConnections() {
 
 void SelectLanguageFrame::initUI() {
   QLabel* logo_label = new QLabel();
-  logo_label->setPixmap(QPixmap(GetVendorLogo()));
+  logo_label->setPixmap(installer::renderPixmap(GetVendorLogo()));
 
   QLabel* subtitle_label = new QLabel("Select system language");
   subtitle_label->setObjectName("subtitle_label");
