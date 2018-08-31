@@ -33,14 +33,7 @@ def update_settings(settings_file, settings):
         sys.exit(1)
     shutil.copy(src_settings, settings_file)
 
-    parser = configparser.ConfigParser()
-    parser.read(settings_file)
-    for key, value in settings:
-        parser.set(SEC_NAME, key, value)
-    with open(settings_file, "w") as fh:
-        parser.write(fh)
-
-    parser = configparser.ConfigParser()
+    parser = configparser.RawConfigParser()
     parser.read(settings_file)
     for key, value in settings:
         parser.set(SEC_NAME, key, value)
@@ -74,6 +67,8 @@ def main():
             ("partition_boot_on_first_partition", "true"),
             ("partition_supported_fs", '"ext4;ext3;ext2;efi;linux-swap"'),
             ("partition_prefer_logical_partition", "false"),
+            ("partition_full_disk_small_legacy_policy", '"/boot:ext4:1Mib:300Mib;linux-swap:linux-swap:301Mib:linux-swap-end;/:ext4:100%"'),
+            ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1Mib:300Mib;linux-swap:linux-swap:301Mib:linux-swap-end;/:ext4:20%;/home:ext4:50%;:ntfs:100%"')
     )
 
     sw_settings = (
@@ -95,6 +90,8 @@ def main():
         ("partition_boot_on_first_partition", "true"),
         ("partition_supported_fs", '"ext4;ext3;ext2;efi;linux-swap"'),
         ("partition_prefer_logical_partition", "false"),
+        ("partition_full_disk_small_legacy_policy", '"/boot:ext4:1Mib:300Mib;linux-swap:linux-swap:301Mib:linux-swap-end;/:ext4:100%"'),
+        ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1Mib:300Mib;linux-swap:linux-swap:301Mib:linux-swap-end;/:ext4:20%;/home:ext4:50%;:ntfs:100%"')
     )
 
     professinal_settings = (
