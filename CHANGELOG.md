@@ -1,3 +1,19 @@
+<a name="2.3.7"></a>
+### 2.3.7 (2018-09-03)
+
+
+#### Bug Fixes
+
+*   not refresh gsettings schema ([78b3ef72](https://github.com/linuxdeepin/deepin-install-reborn/commit/78b3ef723ede586bde3668f778e42911ac944a06))
+*   oem folder error ([94af35a3](https://github.com/linuxdeepin/deepin-install-reborn/commit/94af35a32d4a43e9dbe2259ab47c9882f5aca289))
+* **hook:**  mount point invalid ([9e024af8](https://github.com/linuxdeepin/deepin-install-reborn/commit/9e024af869365cd5ce6bf7c720934e447a278e6e))
+
+#### Features
+
+*   update all version default settings ([9b9472a4](https://github.com/linuxdeepin/deepin-install-reborn/commit/9b9472a48b8696277725fca9d1cf25c46a0faddc))
+
+
+
 <a name="2.3.6"></a>
 ### 2.3.6 (2018-08-16)
 
