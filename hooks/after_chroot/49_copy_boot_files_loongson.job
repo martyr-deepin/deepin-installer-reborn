@@ -19,12 +19,10 @@
 # Copy boot folder to loongson system.
 
 if ! is_loongson; then
-  return 0
+    return 0
 fi
 
 TARGET=/target/boot
-
-rm -rf ${TARGET}/* || error "Failed to remove boot"
 
 # Remove overlay filesystem item.
 sed -i "/overlay/d" /target/etc/fstab
@@ -33,35 +31,38 @@ rootuuidline=$(grep -r "UUID" /target/etc/fstab | grep "/ ")
 rootuuid=${rootuuidline%%/*}
 
 # Copy boot folder and follow symbolic link.
-if [ -d /cdrom/casper/boot ]; then
-  cp -rvP /cdrom/casper/boot/* /target/boot/ && \
-    cp -rvP /cdrom/casper/boot /target/boot/boot || \
-    error "Failed to copy boot/"
-elif [ -d /lib/live/mount/medium/live/boot ]; then
-  cp -rvP /lib/live/mount/medium/live/boot/* /target/boot/ && \
-    cp -rvP /lib/live/mount/medium/live/boot /target/boot/boot || \
-    error "Failed to copy boot/"
+if [ -d /lib/live/mount/medium/live/boot ]; then
+    cp -rvP /lib/live/mount/medium/live/boot/* /target/boot/ || error "Failed to copy boot/"
+    cd /target/boot/ && ln -sf . boot && cd -
 else
-  error "Not boot folder found!"
+    error "Not boot folder found!"
 fi
 
 [ -f $TARGET/grub.cfg ] && [ -f $TARGET/boot.cfg ] && echo "boot files copied!"
 
-mkdir -p /target/lib/modules || true
 if [ -d /lib/live/mount/medium/live/modules ]; then
-        cp -r /lib/live/mount/medium/live/modules/* /target/lib/modules/ || error "Failed to copy kernel modules"
+	mkdir -p /target/lib/modules || true
+    cp -r /lib/live/mount/medium/live/modules/* /target/lib/modules/ || error "Failed to copy kernel modules"
 fi
+
+kernel_name=$(ls /target/boot/ |grep vmlinu|grep $(uname -r))
+initrd_name=$(ls /target/boot/ |grep initrd|grep $(uname -r))
 
 # modify boot.cfg & grub.cfg set boot.cfg args root=UUID=xxx
 #sed -i "s/\(args.*\)/\1 root=$rootuuid/g" /target/boot/boot.cfg
-sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" /target/boot/boot.cfg
-sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" /target/boot/boot/boot.cfg
-sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" /target/boot/grub.cfg
-sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" /target/boot/boot/grub.cfg
+sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/boot.cfg
+sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/grub.cfg
+
+if grep -q boot /target/etc/fstab ;then
+    sed -i "s|wd0/boot|wd0|g" /target/boot/boot.cfg
+fi
+
+#update initrd for plymoush ssd
+chroot /target /usr/sbin/update-initramfs -u -t
 
 # fix boot.cfg
-if grep -wqs $TARGET /proc/mounts ; then
-  sed -e 's@boot/@@g' -i $TARGET/boot.cfg
-fi
+#if grep -wqs $TARGET /proc/mounts ; then
+#  sed -e 's@boot/@@g' -i $TARGET/boot.cfg
+#fi
 
 return 0
