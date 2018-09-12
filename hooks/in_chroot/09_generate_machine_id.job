@@ -17,20 +17,18 @@
 #
 
 # try to fix systemd machine-id config at first boot
-
+# No need to save machine ID, regenerate.
 generate_machine_id() {
-  oldMachineID="/deepinhost/var/cache/machine-id"
-  if [ -f "${oldMachineID}" ]; then
-    install -v -m644 $oldMachineID /etc/
-  else
-    systemd-machine-id-setup
-  fi
+    if [ -f "/etc/machine-id" ];then
+        rm /etc/machine-id
+    fi
 
-  chmod 644 /etc/machine-id
+    systemd-machine-id-setup
+    chmod 644 /etc/machine-id
 }
 
 if [ x$(installer_get "system_info_setup_after_reboot") != "xtrue" ]; then
-  generate_machine_id
+    generate_machine_id
 fi
 
 return 0
