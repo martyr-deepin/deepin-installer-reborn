@@ -1,3 +1,18 @@
+<a name="2.3.8"></a>
+### 2.3.8 (2018-09-14)
+
+
+#### Features
+
+*   update mips inchroot script ([3146c66e](https://github.com/linuxdeepin/deepin-install-reborn/commit/3146c66eff592cfc16cc6b5f9718faa387ea5cc8))
+
+#### Bug Fixes
+
+*   not regenerate new machine id ([090626ab](https://github.com/linuxdeepin/deepin-install-reborn/commit/090626ab4fd66092b660801cb4e90fa6fdee997b))
+*   lost partition label ([949dce15](https://github.com/linuxdeepin/deepin-install-reborn/commit/949dce15bb76c5755b99b66db7a3e186a508fdd0))
+
+
+
 <a name="2.3.7"></a>
 ### 2.3.7 (2018-09-03)
 
