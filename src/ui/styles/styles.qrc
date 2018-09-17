@@ -33,5 +33,6 @@
         <file>table_combo_box.css</file>
         <file>title_label.css</file>
         <file>user_agreement_frame.css</file>
+        <file>full_encrypt_frame.css</file>
     </qresource>
 </RCC>

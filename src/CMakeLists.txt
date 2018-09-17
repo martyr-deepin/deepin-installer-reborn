@@ -259,6 +259,8 @@ set(UI_FILES
     ui/frames/inner/edit_partition_frame.h
     ui/frames/inner/full_disk_frame.cpp
     ui/frames/inner/full_disk_frame.h
+    ui/frames/inner/full_disk_encrypt_frame.h
+    ui/frames/inner/full_disk_encrypt_frame.cpp
     ui/frames/inner/install_progress_slide_frame.cpp
     ui/frames/inner/install_progress_slide_frame.h
     ui/frames/inner/new_partition_frame.cpp

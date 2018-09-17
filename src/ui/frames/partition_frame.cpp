@@ -42,6 +42,7 @@
 #include "ui/frames/inner/prepare_install_frame.h"
 #include "ui/frames/inner/select_bootloader_frame.h"
 #include "ui/frames/inner/simple_partition_frame.h"
+#include "ui/frames/inner/full_disk_encrypt_frame.h"
 #include "ui/models/partition_model.h"
 #include "ui/widgets/comment_label.h"
 #include "ui/widgets/nav_button.h"
@@ -100,8 +101,14 @@ void PartitionFrame::initConnections() {
           this, &PartitionFrame::onSimpleFrameButtonToggled);
   connect(advanced_frame_button_, &QPushButton::toggled,
           this, &PartitionFrame::onAdvancedFrameButtonToggled);
-  connect(next_button_, &QPushButton::clicked,
-          this, &PartitionFrame::onNextButtonClicked);
+  connect(next_button_, &QPushButton::clicked, this, [=] {
+      if (partition_stacked_layout_->currentWidget() == full_disk_partition_frame_) {
+          showEncryptFrame();
+      }
+      else {
+          onNextButtonClicked();
+      }
+  });
 
   // Show main frame when device is refreshed.
   connect(partition_model_, &PartitionModel::deviceRefreshed,
@@ -183,6 +190,12 @@ void PartitionFrame::initConnections() {
   // simple-partition frame.
   connect(simple_partition_frame_, &SimplePartitionFrame::requestNewTable,
           this, &PartitionFrame::showPartitionTableWarningFrame);
+
+  connect(full_disk_encrypt_frame_, &Full_Disk_Encrypt_frame::cancel,
+          this, &PartitionFrame::showMainFrame);
+
+  connect(full_disk_encrypt_frame_, &Full_Disk_Encrypt_frame::finished,
+          this, &PartitionFrame::onPrepareInstallFrameFinished);
 }
 
 void PartitionFrame::initUI() {
@@ -200,6 +213,8 @@ void PartitionFrame::initUI() {
   select_bootloader_frame_ = new SelectBootloaderFrame(this);
   simple_partition_frame_ =
       new SimplePartitionFrame(simple_partition_delegate_, this);
+
+  full_disk_encrypt_frame_ = new Full_Disk_Encrypt_frame(this);
 
   title_label_ = new TitleLabel(tr("Select Installation Location"));
   comment_label_ = new CommentLabel(
@@ -320,6 +335,7 @@ void PartitionFrame::initUI() {
   main_layout_->addWidget(partition_table_warning_frame_);
   main_layout_->addWidget(prepare_install_frame_);
   main_layout_->addWidget(select_bootloader_frame_);
+  main_layout_->addWidget(full_disk_encrypt_frame_);
 
   this->setLayout(main_layout_);
   this->setContentsMargins(0, 0, 0, 0);
@@ -397,38 +413,39 @@ void PartitionFrame::onManualPartDone(bool ok, const DeviceList& devices) {
 }
 
 void PartitionFrame::onPrepareInstallFrameFinished() {
-  // First, update boot flag.
-  bool found_boot;
-  if (this->isSimplePartitionMode()) {
-    found_boot = simple_partition_delegate_->setBootFlag();
-  } else if (this->isFullDiskPartitionMode()) {
-    found_boot = full_disk_delegate_->setBootFlag();
-  } else {
-    found_boot = advanced_delegate_->setBootFlag();
-  }
+    // First, update boot flag.
+    bool found_boot;
+    if (this->isSimplePartitionMode()) {
+        found_boot = simple_partition_delegate_->setBootFlag();
+    }
+    else {
+        found_boot = advanced_delegate_->setBootFlag();
+    }
 
-  if (!found_boot) {
-    qCritical() << "No boot partition found, we shall never reach here!";
-    return;
-  }
+    if (!found_boot && !isFullDiskPartitionMode()) {
+        qCritical() << "No boot partition found, we shall never reach here!";
+        return;
+    }
 
-  // Get operation list.
-  OperationList operations;
-  if (this->isSimplePartitionMode()) {
-    operations = simple_partition_delegate_->operations();
-  } else if (this->isFullDiskPartitionMode()) {
-    operations = full_disk_delegate_->operations();
-  } else {
-    operations = advanced_delegate_->operations();
-  }
+    // Get operation list.
+    OperationList operations;
+    if (this->isSimplePartitionMode()) {
+        operations = simple_partition_delegate_->operations();
+    } else if (this->isFullDiskPartitionMode()) {
+        operations = full_disk_delegate_->operations();
+    } else {
+        operations = advanced_delegate_->operations();
+    }
 
-  if (operations.isEmpty()) {
-    qCritical() << "Operation list is empty";
-    return;
-  } else {
-    partition_model_->manualPart(operations);
-    emit this->finished();
-  }
+    // full disk encrypt operations is empty.
+    if (operations.isEmpty() && !isFullDiskPartitionMode()) {
+        qCritical() << "Operation list is empty";
+        return;
+    }
+    else {
+        partition_model_->manualPart(operations);
+        emit finished();
+    }
 }
 
 void PartitionFrame::showEditPartitionFrame(const Partition& partition) {
@@ -485,7 +502,14 @@ void PartitionFrame::showPartitionTableWarningFrame(
 }
 
 void PartitionFrame::showSelectBootloaderFrame() {
-  main_layout_->setCurrentWidget(select_bootloader_frame_);
+    main_layout_->setCurrentWidget(select_bootloader_frame_);
+}
+
+void PartitionFrame::showEncryptFrame()
+{
+    if (full_disk_partition_frame_->validate()) {
+        main_layout_->setCurrentWidget(full_disk_encrypt_frame_);
+    }
 }
 
 }  // namespace installer

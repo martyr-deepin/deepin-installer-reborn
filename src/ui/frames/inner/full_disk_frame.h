@@ -32,39 +32,39 @@ class FullDiskDelegate;
 
 class FullDiskFrame : public QFrame {
     Q_OBJECT
- public:
-  explicit FullDiskFrame(FullDiskDelegate* delegate,
-                                  QWidget* parent = nullptr);
-  ~FullDiskFrame();
+public:
+    explicit FullDiskFrame(FullDiskDelegate* delegate,
+                           QWidget* parent = nullptr);
+    ~FullDiskFrame();
 
-  bool validate() const;
+    bool validate() const;
 
- protected:
-  void changeEvent(QEvent* event) override;
+protected:
+    void changeEvent(QEvent* event) override;
 
- private:
-  void initConnections();
-  void initUI();
+private:
+    void initConnections();
+    void initUI();
 
-  // Repaint partition list.
-  void repaintDevices();
+    // Repaint partition list.
+    void repaintDevices();
 
-  // Show install_tip at bottom of |button|.
-  void showInstallTip(QAbstractButton* button);
+    // Show install_tip at bottom of |button|.
+    void showInstallTip(QAbstractButton* button);
 
-  // Show install_tip at bottom of |button|.
-//  void showInstallTip(QAbstractButton* button);
+    // Show install_tip at bottom of |button|.
+    //  void showInstallTip(QAbstractButton* button);
 
-  FullDiskDelegate* delegate_ = nullptr;
-  QButtonGroup* button_group_ = nullptr;
-  QFrame* install_tip_ = nullptr;
-  QLabel* tip_label_ = nullptr;
-  QGridLayout* grid_layout_ = nullptr;
-  QFrame* grid_wrapper_ = nullptr;
+    FullDiskDelegate* m_delegate = nullptr;
+    QButtonGroup* m_button_group = nullptr;
+    QFrame* m_install_tip = nullptr;
+    QLabel* m_tip_label = nullptr;
+    QGridLayout* m_grid_layout = nullptr;
+    QFrame* m_grid_wrapper = nullptr;
 
- public slots:
-  void onDeviceRefreshed();
-  void onPartitionButtonToggled(QAbstractButton* button, bool checked);
+public slots:
+    void onDeviceRefreshed();
+    void onPartitionButtonToggled(QAbstractButton* button, bool checked);
 };
 
 }  // namespace installer

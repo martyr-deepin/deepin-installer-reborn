@@ -373,9 +373,14 @@ void AddConfigFile() {
   }
 }
 
-void WriteFullDiskCryptPassword(const QString &password)
+void WriteFullDiskEncryptPassword(const QString &password)
 {
     AppendToConfigFile("DI_FULL_DISK_CRYPT_PASSWORD", password);
+}
+
+void WriteFullDiskDeivce(const QString &deviceName)
+{
+    AppendToConfigFile("DI_FULL_DISK_DEVICE", deviceName);
 }
 
 }  // namespace installer

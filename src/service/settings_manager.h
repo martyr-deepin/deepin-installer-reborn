@@ -95,6 +95,7 @@ void WriteLocale(const QString& locale);
 void WritePassword(const QString& password);
 void WriteTimezone(const QString& timezone, bool is_local_time);
 void WriteUsername(const QString& username);
+void WriteFullDiskDeivce(const QString &deviceName);
 void WriteFullDiskEncryptPassword(const QString &password);
 
 // Write disk info.

@@ -22,12 +22,14 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QScrollArea>
+#include <QCheckBox>
 
 #include "base/file_util.h"
 #include "ui/delegates/full_disk_delegate.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/widgets/simple_disk_button.h"
 #include "ui/utils/widget_util.h"
+#include "service/settings_manager.h"
 
 namespace installer {
 
@@ -41,8 +43,9 @@ const int kWindowWidth = 960;
 }  // namespace
 
 FullDiskFrame::FullDiskFrame(FullDiskDelegate* delegate, QWidget* parent)
-    : QFrame(parent),
-      delegate_(delegate) {
+    : QFrame(parent)
+    , m_delegate(delegate)
+{
   this->setObjectName("simple_disk_frame");
 
   this->initUI();
@@ -54,12 +57,12 @@ FullDiskFrame::~FullDiskFrame() {
 }
 
 bool FullDiskFrame::validate() const {
-  return (button_group_->checkedButton() != nullptr);
+    return (m_button_group->checkedButton() != nullptr);
 }
 
 void FullDiskFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
-    tip_label_->setText(tr("Install here"));
+    m_tip_label->setText(tr("Install here"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -67,54 +70,54 @@ void FullDiskFrame::changeEvent(QEvent* event) {
 
 void FullDiskFrame::initConnections() {
   // Repaint layout only when real device list is updated.
-  connect(delegate_, &FullDiskDelegate::deviceRefreshed,
+  connect(m_delegate, &FullDiskDelegate::deviceRefreshed,
           this, &FullDiskFrame::onDeviceRefreshed);
-  connect(button_group_,
+  connect(m_button_group,
           static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>
           (&QButtonGroup::buttonToggled),
           this, &FullDiskFrame::onPartitionButtonToggled);
 }
 
 void FullDiskFrame::initUI() {
-  button_group_ = new QButtonGroup(this);
+  m_button_group = new QButtonGroup(this);
 
   QLabel* tip_icon = new QLabel();
   tip_icon->setPixmap(installer::renderPixmap(":/images/install_icon.svg"));
-  tip_label_ = new QLabel(tr("Install here"));
-  tip_label_->setObjectName("tip_label");
-  tip_label_->setFixedHeight(18);
+  m_tip_label = new QLabel(tr("Install here"));
+  m_tip_label->setObjectName("tip_label");
+  m_tip_label->setFixedHeight(18);
 
   QHBoxLayout* tip_layout = new QHBoxLayout();
   tip_layout->setContentsMargins(0, 0, 0, 0);
   tip_layout->setSpacing(0);
   tip_layout->addStretch();
   tip_layout->addWidget(tip_icon, 0, Qt::AlignVCenter);
-  tip_layout->addWidget(tip_label_, 0, Qt::AlignVCenter);
+  tip_layout->addWidget(m_tip_label, 0, Qt::AlignVCenter);
   tip_layout->addStretch();
 
-  install_tip_ = new QFrame();
-  install_tip_->setObjectName("install_tip");
-  install_tip_->setContentsMargins(0, 0, 0, 0);
+  m_install_tip = new QFrame();
+  m_install_tip->setObjectName("install_tip");
+  m_install_tip->setContentsMargins(0, 0, 0, 0);
   // Same width as SimplePartitionButton.
-  install_tip_->setFixedWidth(220);
-  install_tip_->setLayout(tip_layout);
-  install_tip_->hide();
+  m_install_tip->setFixedWidth(220);
+  m_install_tip->setLayout(tip_layout);
+  m_install_tip->hide();
 
-  grid_layout_ = new QGridLayout();
-  grid_layout_->setSpacing(0);
-  grid_layout_->setContentsMargins(0, 0, 0, 0);
-  grid_layout_->setHorizontalSpacing(20);
-  grid_layout_->setVerticalSpacing(20);
-  grid_layout_->setColumnStretch(kDiskColumns, 1);
+  m_grid_layout = new QGridLayout();
+  m_grid_layout->setSpacing(0);
+  m_grid_layout->setContentsMargins(0, 0, 0, 0);
+  m_grid_layout->setHorizontalSpacing(20);
+  m_grid_layout->setVerticalSpacing(20);
+  m_grid_layout->setColumnStretch(kDiskColumns, 1);
 
-  grid_wrapper_ = new QFrame();
-  grid_wrapper_->setObjectName("grid_wrapper");
-  grid_wrapper_->setLayout(grid_layout_);
-  install_tip_->setParent(grid_wrapper_);
+  m_grid_wrapper = new QFrame();
+  m_grid_wrapper->setObjectName("grid_wrapper");
+  m_grid_wrapper->setLayout(m_grid_layout);
+  m_install_tip->setParent(m_grid_wrapper);
 
   QScrollArea* scroll_area = new QScrollArea();
   scroll_area->setObjectName("scroll_area");
-  scroll_area->setWidget(grid_wrapper_);
+  scroll_area->setWidget(m_grid_wrapper);
   scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setWidgetResizable(true);
@@ -137,19 +140,19 @@ void FullDiskFrame::initUI() {
 
 void FullDiskFrame::repaintDevices() {
   // Clear grid layout.
-  ClearLayout(grid_layout_);
+  ClearLayout(m_grid_layout);
 
   // Clear button group.
-  for (QAbstractButton* button : button_group_->buttons()) {
-    button_group_->removeButton(button);
+  for (QAbstractButton* button : m_button_group->buttons()) {
+    m_button_group->removeButton(button);
   }
 
   // Hide tooltip frame
-  install_tip_->hide();
+  m_install_tip->hide();
 
   // Draw partitions.
   int row = 0, column = 0;
-  for (const Device& device : delegate_->virtual_devices()) {
+  for (const Device& device : m_delegate->virtual_devices()) {
     bool partition_busy = false;
     for (const Partition& partition : device.partitions) {
       if (partition.busy) {
@@ -163,8 +166,8 @@ void FullDiskFrame::repaintDevices() {
     }
     SimpleDiskButton* button = new SimpleDiskButton(device);
 
-    button_group_->addButton(button);
-    grid_layout_->addWidget(button, row, column, Qt::AlignHCenter);
+    m_button_group->addButton(button);
+    m_grid_layout->addWidget(button, row, column, Qt::AlignHCenter);
 
     column += 1;
     // Add rows.
@@ -179,18 +182,18 @@ void FullDiskFrame::repaintDevices() {
   QLabel* place_holder_label = new QLabel(this);
   place_holder_label->setObjectName("place_holder_label");
   place_holder_label->setFixedSize(kWindowWidth, 30);
-  grid_layout_->addWidget(place_holder_label, row, 0,
+  m_grid_layout->addWidget(place_holder_label, row, 0,
                           1, kDiskColumns, Qt::AlignHCenter);
 
   // Resize grid_wrapper explicitly.
-  grid_wrapper_->adjustSize();
+  m_grid_wrapper->adjustSize();
 }
 
 void FullDiskFrame::showInstallTip(QAbstractButton* button) {
   // Move install_tip to bottom of button
   const QPoint pos = button->pos();
-  install_tip_->move(pos.x(), pos.y() - 10);
-  install_tip_->show();
+  m_install_tip->move(pos.x(), pos.y() - 10);
+  m_install_tip->show();
 }
 
 void FullDiskFrame::onDeviceRefreshed() {
@@ -210,7 +213,7 @@ void FullDiskFrame::onPartitionButtonToggled(QAbstractButton* button,
     part_button->setSelected(false);
   } else {
     // Hide tooltip.
-    install_tip_->hide();
+    m_install_tip->hide();
 
     const QString path = part_button->device().path;
     qDebug() << "selected device path:" << path;
@@ -220,12 +223,14 @@ void FullDiskFrame::onPartitionButtonToggled(QAbstractButton* button,
     this->showInstallTip(part_button);
 
     // Reset simple operations.
-    delegate_->resetOperations();
+    m_delegate->resetOperations();
 
-    PartitionTableType table = IsEfiEnabled() ?
-                               PartitionTableType::GPT :
-                               PartitionTableType::MsDos;
-    delegate_->formatWholeDevice(path, table);
+    WriteFullDiskDeivce(path);
+
+//    PartitionTableType table = IsEfiEnabled() ?
+//                               PartitionTableType::GPT :
+//                               PartitionTableType::MsDos;
+//    m_delegate->formatWholeDevice(path, table);
   }
 }
 
