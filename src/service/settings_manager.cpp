@@ -373,4 +373,9 @@ void AddConfigFile() {
   }
 }
 
+void WriteFullDiskCryptPassword(const QString &password)
+{
+    AppendToConfigFile("DI_FULL_DISK_CRYPT_PASSWORD", password);
+}
+
 }  // namespace installer
