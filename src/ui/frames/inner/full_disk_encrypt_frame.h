@@ -22,6 +22,8 @@ public:
 
     bool isEncrypt() const;
 
+    void setDevice(const Device &device);
+
 signals:
     void cancel();
     void finished();
@@ -38,6 +40,9 @@ private:
     QVBoxLayout *m_layout;
     TitleLabel *m_frameLbl;
     QLabel *m_frameSubLbl;
+    QLabel *m_devicePathLbl;
+    QLabel *m_deviceModelLbl;
+    QLabel *m_deviceSizeLbl;
     QCheckBox *m_encryptCheck;
     QLabel *m_encryptLbl;
     QLabel *m_encryptCheckLbl;

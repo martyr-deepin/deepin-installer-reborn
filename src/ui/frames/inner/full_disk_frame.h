@@ -29,7 +29,7 @@ class QCheckBox;
 namespace installer {
 
 class FullDiskDelegate;
-
+class Device;
 
 class FullDiskFrame : public QFrame {
     Q_OBJECT
@@ -40,6 +40,9 @@ public:
 
     bool validate() const;
     bool isEncrypt() const;
+
+signals:
+    void currentDeviceChanged(const Device &device);
 
 protected:
     void changeEvent(QEvent* event) override;

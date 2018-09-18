@@ -30,6 +30,7 @@
 #include "ui/widgets/simple_disk_button.h"
 #include "ui/utils/widget_util.h"
 #include "service/settings_manager.h"
+#include "partman/device.h"
 
 namespace installer {
 
@@ -227,6 +228,8 @@ void FullDiskFrame::onPartitionButtonToggled(QAbstractButton* button,
     // Hide tooltip.
     m_install_tip->hide();
 
+    emit currentDeviceChanged(part_button->device());
+
     const QString path = part_button->device().path;
     qDebug() << "selected device path:" << path;
     part_button->setSelected(true);
@@ -238,6 +241,7 @@ void FullDiskFrame::onPartitionButtonToggled(QAbstractButton* button,
     m_delegate->resetOperations();
 
     WriteFullDiskDeivce(path);
+
 
 //    PartitionTableType table = IsEfiEnabled() ?
 //                               PartitionTableType::GPT :

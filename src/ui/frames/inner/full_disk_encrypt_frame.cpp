@@ -9,6 +9,7 @@
 #include "../../widgets/title_label.h"
 #include "../../../service/settings_manager.h"
 #include "../../widgets/system_info_tip.h"
+#include "ui/delegates/partition_util.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -25,6 +26,9 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
     , m_layout(new QVBoxLayout(this))
     , m_frameLbl(new TitleLabel(""))
     , m_frameSubLbl(new QLabel)
+    , m_devicePathLbl(new QLabel)
+    , m_deviceModelLbl(new QLabel)
+    , m_deviceSizeLbl(new QLabel)
     , m_encryptCheck(new QCheckBox)
     , m_encryptLbl(new QLabel)
     , m_encryptCheckLbl(new QLabel)
@@ -56,18 +60,25 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
     diskLbl->setPixmap(installer::renderPixmap(":/images/driver_128.svg"));
     m_layout->addWidget(diskLbl, 0, Qt::AlignHCenter);
 
+    QVBoxLayout *diskInfoLayout = new QVBoxLayout;
+    diskInfoLayout->setMargin(0);
+    diskInfoLayout->setSpacing(0);
+    diskInfoLayout->addWidget(m_devicePathLbl, 0, Qt::AlignHCenter);
+    diskInfoLayout->addSpacing(6);
+    diskInfoLayout->addWidget(m_deviceModelLbl, 0, Qt::AlignHCenter);
+    diskInfoLayout->addSpacing(6);
+    diskInfoLayout->addWidget(m_deviceSizeLbl, 0, Qt::AlignHCenter);
+
+    m_layout->addLayout(diskInfoLayout);
+
     // add round progress bar
-//    RoundedProgressBar *usageBar = new RoundedProgressBar();
-//    usageBar->setFixedSize(kProgressBarWidth, 8);
-//    QHBoxLayout *diskLayout = new QHBoxLayout;
-//    diskLayout->setMargin(0);
-//    diskLayout->setSpacing(0);
-//    QLabel *diskPoint = new QLabel;
-//    QLabel *diskSize = new QLabel;
-//    diskLayout->addWidget(diskPoint, 0, Qt::AlignLeft);
-//    diskLayout->addWidget(diskSize, 0, Qt::AlignRight);
-//    m_layout->addLayout(diskLayout);
-//    m_layout->addWidget(usageBar, 0, Qt::AlignHCenter);
+    RoundedProgressBar* spacingBar = new RoundedProgressBar;
+    spacingBar->setFixedHeight(2);
+    spacingBar->setFixedWidth(500);
+
+    m_layout->addSpacing(10);
+    m_layout->addWidget(spacingBar, 0, Qt::AlignHCenter);
+    m_layout->addSpacing(10);
 
     // add encrypt checkbox
     m_encryptCheck->setFixedWidth(m_encryptEdit->width());
@@ -107,6 +118,13 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
 bool Full_Disk_Encrypt_frame::isEncrypt() const
 {
     return m_encryptCheck->isChecked();
+}
+
+void Full_Disk_Encrypt_frame::setDevice(const Device &device)
+{
+    m_devicePathLbl->setText(device.path);
+    m_deviceModelLbl->setText(device.model);
+    m_deviceSizeLbl->setText(QString("%1 GB").arg(ToGigByte(device.getByteLength())));
 }
 
 void Full_Disk_Encrypt_frame::changeEvent(QEvent *event)

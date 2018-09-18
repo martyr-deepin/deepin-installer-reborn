@@ -201,6 +201,9 @@ void PartitionFrame::initConnections() {
 
       emit finished();
   });
+
+  connect(full_disk_partition_frame_, &FullDiskFrame::currentDeviceChanged,
+          full_disk_encrypt_frame_, &Full_Disk_Encrypt_frame::setDevice);
 }
 
 void PartitionFrame::initUI() {
