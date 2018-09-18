@@ -1,3 +1,36 @@
 #FullDiskEncryptFrame QLabel {
     color: white;
 }
+
+#check_box {
+  color: white;
+}
+
+#check_box::indicator {
+  width: 16px;
+  height: 16px;
+}
+
+#check_box::indicator:unchecked {
+  image: url(":/images/checkbox_unchecked.svg");
+}
+
+#check_box::indicator:unchecked:hover {
+  image: url(":/images/checkbox_unchecked_hover.svg");
+}
+
+#check_box::indicator:unchecked:pressed {
+  image: url(":/images/checkbox_unchecked_pressed.svg");
+}
+
+#check_box::indicator:checked {
+  image: url(":/images/checkbox_checked.svg");
+}
+
+#check_box::indicator:checked:hover {
+  image: url(":/images/checkbox_checked_hover.svg");
+}
+
+#check_box::indicator:checked:pressed {
+  image: url(":/images/checkbox_checked_pressed.svg");
+}

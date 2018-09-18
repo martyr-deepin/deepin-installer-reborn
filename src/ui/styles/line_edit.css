@@ -16,3 +16,14 @@ QLineEdit {
 QLineEdit:focus {
   border: 1px solid #2ca7f8;
 }
+
+QLineEdit:disabled {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding-left: 36px;
+    background-color: rgba(255, 255, 255, 0.1);
+    outline: none;
+    font-size: 12px;
+    line-height: 1.25;
+    color: #dadada;
+}

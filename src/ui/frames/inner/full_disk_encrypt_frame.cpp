@@ -39,6 +39,7 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
 
     m_errTip->hide();
 
+    m_encryptCheck->setObjectName("check_box");
     m_encryptCheck->setCheckable(true);
     m_encryptCheck->setChecked(true);
 
@@ -69,9 +70,15 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
 //    m_layout->addWidget(usageBar, 0, Qt::AlignHCenter);
 
     // add encrypt checkbox
+    m_encryptCheck->setFixedWidth(m_encryptEdit->width());
     m_layout->addWidget(m_encryptCheck, 0, Qt::AlignHCenter);
+    m_layout->addSpacing(10);
 
     // add encrypt input
+    m_encryptLbl->setFixedWidth(m_encryptEdit->width());
+    m_encryptCheckLbl->setFixedWidth(m_encryptEdit->width());
+    m_encryptLbl->setAlignment(Qt::AlignLeft);
+    m_encryptCheckLbl->setAlignment(Qt::AlignLeft);
     m_layout->addWidget(m_encryptLbl, 0, Qt::AlignHCenter);
     m_layout->addWidget(m_encryptEdit, 0, Qt::AlignHCenter);
     m_layout->addSpacing(10);
@@ -83,10 +90,6 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
     // add buttons
     m_layout->addWidget(m_cancelBtn, 0, Qt::AlignHCenter);
     m_layout->addWidget(m_nextBtn, 0, Qt::AlignHCenter);
-
-    QHBoxLayout *mainLayout = new QHBoxLayout;
-    mainLayout->setMargin(0);
-    mainLayout->setSpacing(0);
 
     setLayout(m_layout);
 

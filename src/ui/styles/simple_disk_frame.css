@@ -28,6 +28,10 @@ QScrollArea, QFrame#grid_wrapper {
   text-align: center;
 }
 
+#check_box {
+  color: white;
+}
+
 #check_box::indicator {
   width: 16px;
   height: 16px;
