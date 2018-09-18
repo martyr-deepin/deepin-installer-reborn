@@ -113,11 +113,7 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
     onEncryptUpdated(true);
 
     setStyleSheet(ReadFile(":/styles/full_encrypt_frame.css"));
-}
-
-bool Full_Disk_Encrypt_frame::isEncrypt() const
-{
-    return m_encryptCheck->isChecked();
+    updateText();
 }
 
 void Full_Disk_Encrypt_frame::setDevice(const Device &device)
@@ -130,13 +126,7 @@ void Full_Disk_Encrypt_frame::setDevice(const Device &device)
 void Full_Disk_Encrypt_frame::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange) {
-        m_frameLbl->setText(tr("Full Disk Encrypt"));
-        m_frameSubLbl->setText(tr(""));
-        m_encryptCheck->setText(tr("Encrypt This Disk"));
-        m_encryptLbl->setText(tr("Encrypt Password"));
-        m_encryptCheckLbl->setText(tr("Repeat Encrypt Password"));
-        m_cancelBtn->setText(tr("Cancel"));
-        m_nextBtn->setText(tr("Next"));
+        updateText();
     }
 
     return QWidget::changeEvent(event);
@@ -167,4 +157,15 @@ void Full_Disk_Encrypt_frame::onEncryptUpdated(bool checked)
     m_encryptEdit->setEnabled(checked);
     m_encryptLbl->setEnabled(checked);
     m_encryptRepeatEdit->setEnabled(checked);
+}
+
+void Full_Disk_Encrypt_frame::updateText()
+{
+    m_frameLbl->setText(tr("Full Disk Encrypt"));
+    m_frameSubLbl->setText(tr(""));
+    m_encryptCheck->setText(tr("Encrypt This Disk"));
+    m_encryptLbl->setText(tr("Encrypt Password"));
+    m_encryptCheckLbl->setText(tr("Repeat Encrypt Password"));
+    m_cancelBtn->setText(tr("Cancel"));
+    m_nextBtn->setText(tr("Next"));
 }

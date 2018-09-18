@@ -98,6 +98,7 @@ void FullDiskFrame::initUI() {
   m_encryptCheck->setObjectName("check_box");
   m_encryptCheck->setCheckable(true);
   m_encryptCheck->setChecked(false);
+  m_encryptCheck->setText(tr("Encrypt Full Disk"));
 
   QHBoxLayout* tip_layout = new QHBoxLayout();
   tip_layout->setContentsMargins(0, 0, 0, 0);

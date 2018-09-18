@@ -20,8 +20,6 @@ class Full_Disk_Encrypt_frame : public QWidget
 public:
     explicit Full_Disk_Encrypt_frame(QWidget *parent = nullptr);
 
-    bool isEncrypt() const;
-
     void setDevice(const Device &device);
 
 signals:
@@ -34,6 +32,7 @@ protected:
 private:
     void onNextBtnClicked();
     void onEncryptUpdated(bool checked);
+    void updateText();
 
 private:
     Device *m_device;

@@ -195,10 +195,7 @@ void PartitionFrame::initConnections() {
           this, &PartitionFrame::showMainFrame);
 
   connect(full_disk_encrypt_frame_, &Full_Disk_Encrypt_frame::finished, this, [=] {
-      if (full_disk_encrypt_frame_->isEncrypt()) {
-          autoPart();
-      }
-
+      autoPart();
       emit finished();
   });
 
@@ -520,6 +517,7 @@ void PartitionFrame::showEncryptFrame()
             main_layout_->setCurrentWidget(full_disk_encrypt_frame_);
         }
         else {
+            autoPart();
             onPrepareInstallFrameFinished();
         }
     }
