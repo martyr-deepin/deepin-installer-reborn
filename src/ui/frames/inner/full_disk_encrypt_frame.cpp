@@ -101,6 +101,11 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
     setStyleSheet(ReadFile(":/styles/full_encrypt_frame.css"));
 }
 
+bool Full_Disk_Encrypt_frame::isEncrypt() const
+{
+    return m_encryptCheck->isChecked();
+}
+
 void Full_Disk_Encrypt_frame::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange) {

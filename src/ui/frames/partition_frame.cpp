@@ -194,8 +194,13 @@ void PartitionFrame::initConnections() {
   connect(full_disk_encrypt_frame_, &Full_Disk_Encrypt_frame::cancel,
           this, &PartitionFrame::showMainFrame);
 
-  connect(full_disk_encrypt_frame_, &Full_Disk_Encrypt_frame::finished,
-          this, &PartitionFrame::onPrepareInstallFrameFinished);
+  connect(full_disk_encrypt_frame_, &Full_Disk_Encrypt_frame::finished, this, [=] {
+      if (full_disk_encrypt_frame_->isEncrypt()) {
+          autoPart();
+      }
+
+      emit finished();
+  });
 }
 
 void PartitionFrame::initUI() {
@@ -508,7 +513,12 @@ void PartitionFrame::showSelectBootloaderFrame() {
 void PartitionFrame::showEncryptFrame()
 {
     if (full_disk_partition_frame_->validate()) {
-        main_layout_->setCurrentWidget(full_disk_encrypt_frame_);
+        if (full_disk_partition_frame_->isEncrypt()) {
+            main_layout_->setCurrentWidget(full_disk_encrypt_frame_);
+        }
+        else {
+            onPrepareInstallFrameFinished();
+        }
     }
 }
 

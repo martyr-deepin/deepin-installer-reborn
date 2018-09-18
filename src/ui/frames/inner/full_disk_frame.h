@@ -24,6 +24,7 @@ class QButtonGroup;
 class QGridLayout;
 class QLabel;
 class QShowEvent;
+class QCheckBox;
 
 namespace installer {
 
@@ -38,6 +39,7 @@ public:
     ~FullDiskFrame();
 
     bool validate() const;
+    bool isEncrypt() const;
 
 protected:
     void changeEvent(QEvent* event) override;
@@ -61,6 +63,7 @@ private:
     QLabel* m_tip_label = nullptr;
     QGridLayout* m_grid_layout = nullptr;
     QFrame* m_grid_wrapper = nullptr;
+    QCheckBox* m_encryptCheck = nullptr;
 
 public slots:
     void onDeviceRefreshed();

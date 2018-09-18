@@ -20,6 +20,8 @@ class Full_Disk_Encrypt_frame : public QWidget
 public:
     explicit Full_Disk_Encrypt_frame(QWidget *parent = nullptr);
 
+    bool isEncrypt() const;
+
 signals:
     void cancel();
     void finished();

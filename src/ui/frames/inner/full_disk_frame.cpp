@@ -60,9 +60,15 @@ bool FullDiskFrame::validate() const {
     return (m_button_group->checkedButton() != nullptr);
 }
 
+bool FullDiskFrame::isEncrypt() const
+{
+    return m_encryptCheck->isChecked();
+}
+
 void FullDiskFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     m_tip_label->setText(tr("Install here"));
+    m_encryptCheck->setText(tr("Encrypt Full Disk"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -86,6 +92,11 @@ void FullDiskFrame::initUI() {
   m_tip_label = new QLabel(tr("Install here"));
   m_tip_label->setObjectName("tip_label");
   m_tip_label->setFixedHeight(18);
+
+  m_encryptCheck = new QCheckBox;
+  m_encryptCheck->setObjectName("check_box");
+  m_encryptCheck->setCheckable(true);
+  m_encryptCheck->setChecked(false);
 
   QHBoxLayout* tip_layout = new QHBoxLayout();
   tip_layout->setContentsMargins(0, 0, 0, 0);
@@ -127,7 +138,8 @@ void FullDiskFrame::initUI() {
   main_layout->setSpacing(0);
   main_layout->addWidget(scroll_area, Qt::AlignHCenter);
   main_layout->addStretch();
-  main_layout->addSpacing(10);
+  main_layout->addWidget(m_encryptCheck, 0, Qt::AlignHCenter);
+  main_layout->addSpacing(20);
 
   this->setLayout(main_layout);
   this->setContentsMargins(0, 0, 0, 0);
