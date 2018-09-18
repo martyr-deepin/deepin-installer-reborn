@@ -42,7 +42,7 @@ check_efi_mode(){
   fi
 }
 
-chech_use_crpyt(){
+chech_use_crypt(){
   DI_CRYPT_PASSWD=$(installer_get DI_CRYPT_PASSWD)
   if [ -n "$DI_CRYPT_PASSWD" ]; then
     declare -gr CRYPT=true
@@ -57,26 +57,26 @@ flush_message(){
 
 # Format partition at $1 with filesystem $2
 format_part(){
-  local part_mp="$1" part_fs="$2"
+  local part_path="$1" part_fs="$2"
 
   yes |\
   case "$part_fs" in
     fat32)
-      mkfs.vfat -F32 "$part_mp"
+      mkfs.vfat -F32 "$part_path"
       ;;
     fat16)
-      mkfs.vfat -F16 "$part_mp"
+      mkfs.vfat -F16 "$part_path"
       ;;
     ntfs)
-      mkfs.ntfs --fast "$part_mp"
+      mkfs.ntfs --fast "$part_path"
       ;;
     linux-swap)
-      mkswap "$part_mp"
+      mkswap "$part_path"
       ;;
     *)
-      mkfs -t "$part_fs" "$part_mp"
+      mkfs -t "$part_fs" "$part_path"
       ;;
-  esac || error "Failed to create $part_fs at $part_mp"
+  esac || error "Failed to create $part_fs at $part_path"
 }
 
 # Read partition policy from settings.
@@ -299,7 +299,7 @@ main(){
   echo "Target device: $DEVICE"
 
   check_device_size
-  chech_use_crpyt
+  chech_use_crypt
   check_efi_mode
 
   # Partitioning policy.
