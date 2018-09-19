@@ -260,37 +260,32 @@ void PartitionFrame::initUI() {
   partition_stacked_layout_->setContentsMargins(0, 0, 0, 0);
   partition_stacked_layout_->setSpacing(0);
 
+  simple_frame_button_->setObjectName(kLeftBtn);
+  advanced_frame_button_->setObjectName(kMidBtn);
+  full_disk_frame_button_->setObjectName(kRightBtn);
+
   if (GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
       simple_frame_button_->hide();
       simple_frame_button_->setChecked(false);
       simple_partition_frame_->hide();
-  } else {
-      partition_stacked_layout_->addWidget(simple_partition_frame_);
+      advanced_frame_button_->setObjectName(kLeftBtn);
+      advanced_frame_button_->setChecked(true);
+  }
+  else {
+      simple_frame_button_->setChecked(true);
+  }
+
+  if (GetSettingsBool(kPartitionSkipFullDiskPartitionPage)) {
+      full_disk_frame_button_->hide();
+      full_disk_frame_button_->setChecked(false);
+      advanced_frame_button_->setObjectName(kRightBtn);
+      full_disk_partition_frame_->hide();
   }
 
   if (GetSettingsBool(kPartitionSkipFullDiskPartitionPage) &&
           GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
       advanced_frame_button_->setObjectName(kSoloBtn);
-  } else {
-      simple_frame_button_->setObjectName(kLeftBtn);
-      advanced_frame_button_->setObjectName(kMidBtn);
-      full_disk_frame_button_->setObjectName(kRightBtn);
-  }
-  partition_stacked_layout_->addWidget(advanced_partition_frame_);
-
-  if (GetSettingsBool(kPartitionSkipFullDiskPartitionPage)) {
-      full_disk_frame_button_->hide();
-      full_disk_frame_button_->setChecked(false);
-      simple_frame_button_->setObjectName(kLeftBtn);
-      advanced_frame_button_->setObjectName(kRightBtn);
-      simple_frame_button_->setChecked(true);
-      full_disk_partition_frame_->hide();
-  } else {
-      simple_frame_button_->setObjectName(kLeftBtn);
-      advanced_frame_button_->setObjectName(kMidBtn);
-      full_disk_frame_button_->setObjectName(kRightBtn);
-      simple_frame_button_->setChecked(true);
-      partition_stacked_layout_->addWidget(full_disk_partition_frame_);
+      advanced_frame_button_->setChecked(true);
   }
 
   QHBoxLayout* partition_stacked_wrapper_layout = new QHBoxLayout();
