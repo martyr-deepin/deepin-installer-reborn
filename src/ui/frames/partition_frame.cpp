@@ -260,6 +260,10 @@ void PartitionFrame::initUI() {
   partition_stacked_layout_->setContentsMargins(0, 0, 0, 0);
   partition_stacked_layout_->setSpacing(0);
 
+  partition_stacked_layout_->addWidget(simple_partition_frame_);
+  partition_stacked_layout_->addWidget(advanced_partition_frame_);
+  partition_stacked_layout_->addWidget(full_disk_partition_frame_);
+
   simple_frame_button_->setObjectName(kLeftBtn);
   advanced_frame_button_->setObjectName(kMidBtn);
   full_disk_frame_button_->setObjectName(kRightBtn);
