@@ -69,7 +69,7 @@ bool FullDiskFrame::isEncrypt() const
 void FullDiskFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     m_tip_label->setText(tr("Install here"));
-    m_encryptCheck->setText(tr("Encrypt Full Disk"));
+    m_encryptCheck->setText(tr("Encrypt This Disk"));
   } else {
     QFrame::changeEvent(event);
   }
@@ -83,6 +83,7 @@ void FullDiskFrame::initConnections() {
           static_cast<void(QButtonGroup::*)(QAbstractButton*, bool)>
           (&QButtonGroup::buttonToggled),
           this, &FullDiskFrame::onPartitionButtonToggled);
+  connect(m_encryptCheck, &QCheckBox::clicked, this, &FullDiskFrame::cryptoStateChanged);
 }
 
 void FullDiskFrame::initUI() {

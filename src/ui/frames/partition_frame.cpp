@@ -201,6 +201,9 @@ void PartitionFrame::initConnections() {
 
   connect(full_disk_partition_frame_, &FullDiskFrame::currentDeviceChanged,
           full_disk_encrypt_frame_, &Full_Disk_Encrypt_frame::setDevice);
+
+  connect(full_disk_partition_frame_, &FullDiskFrame::cryptoStateChanged,
+          this, &PartitionFrame::onFullDiskCryptoButtonClicked);
 }
 
 void PartitionFrame::initUI() {
@@ -399,6 +402,11 @@ void PartitionFrame::onNextButtonClicked() {
 
   prepare_install_frame_->updateDescription(descriptions);
   main_layout_->setCurrentWidget(prepare_install_frame_);
+}
+
+void PartitionFrame::onFullDiskCryptoButtonClicked(bool encrypto)
+{
+    next_button_->setText(encrypto ? tr("Next") : tr("Start installation"));
 }
 
 void PartitionFrame::onManualPartDone(bool ok, const DeviceList& devices) {

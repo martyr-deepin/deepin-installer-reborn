@@ -42,7 +42,8 @@ public:
     bool isEncrypt() const;
 
 signals:
-    void currentDeviceChanged(const Device &device);
+    void currentDeviceChanged(const Device &device) const;
+    void cryptoStateChanged(bool crypto) const;
 
 protected:
     void changeEvent(QEvent* event) override;

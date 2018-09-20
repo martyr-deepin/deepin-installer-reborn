@@ -157,15 +157,17 @@ void Full_Disk_Encrypt_frame::onEncryptUpdated(bool checked)
     m_encryptEdit->setEnabled(checked);
     m_encryptLbl->setEnabled(checked);
     m_encryptRepeatEdit->setEnabled(checked);
+
+    m_cancelBtn->setVisible(checked);
 }
 
 void Full_Disk_Encrypt_frame::updateText()
 {
-    m_frameLbl->setText(tr("Full Disk Encrypt"));
-    m_frameSubLbl->setText(tr(""));
+    m_frameLbl->setText(tr("Full Disk Encryption"));
+    m_frameSubLbl->setText(tr("Please make sure important data were made a backup, then select the disk to install"));
     m_encryptCheck->setText(tr("Encrypt This Disk"));
-    m_encryptLbl->setText(tr("Encrypt Password"));
-    m_encryptCheckLbl->setText(tr("Repeat Encrypt Password"));
+    m_encryptLbl->setText(tr("Password"));
+    m_encryptCheckLbl->setText(tr("Repeat Password"));
     m_cancelBtn->setText(tr("Cancel"));
-    m_nextBtn->setText(tr("Next"));
+    m_nextBtn->setText(tr("Start Installation"));
 }

@@ -117,6 +117,7 @@ class PartitionFrame : public QFrame {
   void onSimpleFrameButtonToggled();
   void onAdvancedFrameButtonToggled();
   void onNextButtonClicked();
+  void onFullDiskCryptoButtonClicked(bool encrypto);
 
   // Write partitioning settings to conf file and emit manualPartDone() signal.
   void onManualPartDone(bool ok, const DeviceList& devices);
