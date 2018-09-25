@@ -137,7 +137,7 @@ void Full_Disk_Encrypt_frame::onNextBtnClicked()
     if (m_encryptCheck->isChecked()) {
         // check password
         if (m_encryptEdit->text() != m_encryptRepeatEdit->text()) {
-            m_errTip->setText(tr("两次密码不一致"));
+            m_errTip->setText(tr(""));
             m_errTip->showBottom(m_encryptRepeatEdit);
             return;
         }

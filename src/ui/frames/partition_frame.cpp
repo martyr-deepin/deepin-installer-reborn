@@ -443,14 +443,16 @@ void PartitionFrame::onPrepareInstallFrameFinished() {
     OperationList operations;
     if (this->isSimplePartitionMode()) {
         operations = simple_partition_delegate_->operations();
-    } else if (this->isFullDiskPartitionMode()) {
-        operations = full_disk_delegate_->operations();
-    } else {
+    }
+    else {
         operations = advanced_delegate_->operations();
     }
 
     // full disk encrypt operations is empty.
-    if (operations.isEmpty() && !isFullDiskPartitionMode()) {
+    if (isFullDiskPartitionMode()) {
+        emit finished();
+    }
+    else if (operations.isEmpty()) {
         qCritical() << "Operation list is empty";
         return;
     }
