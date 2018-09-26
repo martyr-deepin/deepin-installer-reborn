@@ -183,7 +183,7 @@ create_part(){
   fi
 
   # Check root partition size
-  if [ "$part_mp" = '/' ] &&\
+  if $LARGE && [ "$part_mp" = '/' ] &&\
   [[ "$(installer_get partition_full_disk_large_root_part_range)" =~ ^([0-9]+):([0-9]+)$ ]]; then
     local root_min=$((BASH_REMATCH[1] * 1024)) root_max=$((BASH_REMATCH[2] * 1024))
     part_size=$((part_size < root_min ? root_min : part_size))
@@ -264,18 +264,15 @@ create_part(){
   case "$part_mp" in
     /boot)
       # Set boot flag.
-      ! $EFI && parted -s "$DEVICE" set "$PART_NUM" boot on || \
-        error "Failed to set boot flag on $part_path"
+      $EFI || parted -s "$DEVICE" set "$PART_NUM" boot on
       ;;
     /)
       installer_set "DI_ROOT_PARTITION" "$part_path"
       # Set boot flag if /boot is not used in legacy mode.
-      if ! $EFI && ! $LVM && ! [[ "$PART_POLICY" =~ "/boot:" ]]; then
-        parted -s "$DEVICE" set "$PART_NUM" boot on || \
-          error "Failed to set boot flag on $part_path"
-      fi
+      ($EFI || $LVM || [[ "$PART_POLICY" =~ "/boot:" ]]) || \
+        parted -s "$DEVICE" set "$PART_NUM" boot on
       ;;
-  esac
+  esac || error "Failed to set boot flag on $part_path"
 
   flush_message
 }
