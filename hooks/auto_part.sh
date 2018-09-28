@@ -20,9 +20,10 @@
 # Partition policy is defined in settings.ini.
 
 declare -i DEVICE_SIZE AVL_SIZE PART_NUM=0 LVM_NUM=0 LAST_END=1
-declare DEVICE PART_POLICY MP_LIST PART_TYPE=primary LARGE=false EFI=false CRYPT=false LVM=false
+declare DEVICE PART_POLICY MP_LIST VG_NAME="vg0" PART_TYPE="primary" \
+        LARGE="false" EFI="false" CRYPT="false" LVM="false"
 
-# Check device capacity of $1 is larger than required device size or not.
+# Check device capacity of $DEVICE.
 check_device_size(){
   local minimum_disk_size=$(installer_get partition_minimum_disk_space_required)
   local large_disk_threshold=$(installer_get partition_full_disk_large_disk_threshold)
@@ -46,83 +47,71 @@ chech_use_crypt(){
   DI_CRYPT_PASSWD=$(installer_get DI_CRYPT_PASSWD)
   if [ -n "$DI_CRYPT_PASSWD" ]; then
     declare -gr CRYPT=true
-    installer_set DI_CRYPT_PASSWD 'NULL'
+    installer_set DI_CRYPT_PASSWD "NULL"
   fi
 }
 
-# Flush kernel message
+# Flush kernel message.
 flush_message(){
   udevadm settle --timeout=5
 }
 
-# Format partition at $1 with filesystem $2
+# Format partition at $1 with filesystem $2.
 format_part(){
   local part_path="$1" part_fs="$2"
 
   yes |\
   case "$part_fs" in
     fat32)
-      mkfs.vfat -F32 "$part_path"
-      ;;
+      mkfs.vfat -F32 "$part_path";;
     fat16)
-      mkfs.vfat -F16 "$part_path"
-      ;;
+      mkfs.vfat -F16 "$part_path";;
     ntfs)
-      mkfs.ntfs --fast "$part_path"
-      ;;
+      mkfs.ntfs --fast "$part_path";;
     linux-swap)
-      mkswap "$part_path"
-      ;;
+      mkswap "$part_path";;
     *)
-      mkfs -t "$part_fs" "$part_path"
-      ;;
-  esac || error "Failed to create $part_fs at $part_path"
+      mkfs -t "$part_fs" "$part_path";;
+  esac || error "Failed to create $part_fs filesystem on $part_path!"
 }
 
 # Read partition policy from settings.
 get_part_policy(){
-  local _policy_name="partition_full_disk"
+  local policy_name="partition_full_disk"
 
-  if $LARGE; then
-    _policy_name+="_large"
-  else
-    _policy_name+="_small"
-  fi
+  {
+    $LARGE && policy_name+="_large"
+  } || policy_name+="_small"
 
-  if $EFI; then
-    _policy_name+="_uefi"
-  else
-    _policy_name+="_legacy"
-  fi
+  {
+    $EFI && policy_name+="_uefi"
+  } || policy_name+="_legacy"
 
-  if $CRYPT; then
-    _policy_name+="_crypt"
-  fi
+  $CRYPT && policy_name+="_crypt"
 
-  _policy_name+="_policy"
-  declare -gr PART_POLICY="$(installer_get $_policy_name)"
+  policy_name+="_policy"
+  declare -gr PART_POLICY=$(installer_get $policy_name)
 }
 
 get_max_capacity_device(){
   local name size max_device max_size=0
   while read name size; do
-    if ((max_size <= size)); then
+    if ((size >= max_size)); then
       max_size="$size"
-      max_device="/edv/$name"
+      max_device="/dev/$name"
     fi
-  done <<< "$(lsblk -ndb -o NAME,SIZE 2>/dev/null)"
+  done <<< "$(lsblk -ndb -o NAME,SIZE)"
   DEVICE="$max_device"
 }
 
 # Create new partition table.
 new_part_table(){
-  local _part_table=msdos
-  if $EFI; then
-    _part_table=gpt
-  fi
+  {
+    $EFI && local part_table="gpt"
+  } || local part_table="msdos"
 
-  parted -s "$DEVICE" mktable "$_part_table" || \
-    error "Failed to create $_part_table partition on $DEVICE"
+  parted -s "$DEVICE" mktable "$part_table" ||\
+    error "Failed to create $part_table partition on $DEVICE!"
 }
 
 umount_devices(){
@@ -142,16 +131,17 @@ create_part(){
   echo "============PART_NUM: $PART_NUM============"
 
   # Create extended partition.
-  if ! ( $EFI || $LVM ) && [ "$PART_NUM" = 4 ]; then
-    echo "Create extended partition!"
-    parted -s "$DEVICE" mkpart extended "${LAST_END}Mib" 100%
+  if ((PART_NUM == 4)) && ! ($EFI || $LVM); then
+    echo "Create extended partition..."
+    parted -s "$DEVICE" mkpart extended "${LAST_END}Mib" 100% ||\
+      error "Failed to create extended partition on $DEVICE!"
     let PART_NUM++
     echo "============PART_NUM: $PART_NUM============"
-    PART_TYPE=logical
+    PART_TYPE="logical"
   fi
 
   # Get partition info.
-  [[ "$part" =~ ^(.*):(.*):(.*):(.*)$ ]] || error "bad partition info!"
+  [[ "$part" =~ ^(.*):(.*):(.*):(.*)$ ]] || error "Bad partition info!"
   part_mp="${BASH_REMATCH[1]}"
   part_fs="${BASH_REMATCH[2]}"
   part_size="${BASH_REMATCH[4]}"
@@ -166,7 +156,7 @@ create_part(){
     fi
     AVL_SIZE=$((DEVICE_SIZE - 1 - part_start))
   else
-    [[ "$(vgs -ovg_free --readonly --units m vg0)" =~ ([0-9]+) ]] &&\
+    [[ "$(vgs -ovg_free --readonly --units m $VG_NAME)" =~ ([0-9]+) ]] &&\
       AVL_SIZE="${BASH_REMATCH[1]}"
   fi
 
@@ -182,7 +172,7 @@ create_part(){
     fi
   fi
 
-  # Check root partition size
+  # Check root partition size.
   if $LARGE && [ "$part_mp" = '/' ] &&\
   [[ "$(installer_get partition_full_disk_large_root_part_range)" =~ ^([0-9]+):([0-9]+)$ ]]; then
     local root_min=$((BASH_REMATCH[1] * 1024)) root_max=$((BASH_REMATCH[2] * 1024))
@@ -192,7 +182,7 @@ create_part(){
 
   echo "part: $part_mp, $part_fs, $part_start, $part_size"
 
-  # Create new partition
+  # Create new partition.
   if ! $LVM; then
     case "$part_fs" in
       efi)
@@ -211,12 +201,13 @@ create_part(){
       fi
       LAST_END="$part_end"
     else
-      error "Failed to create new partition $part_mp"
+      error "Failed to create partition $part_mp!"
     fi
   else
     let LVM_NUM++
-    lvcreate -nlv$LVM_NUM -L$part_size vg0
-    part_path="/dev/vg0/lv$LVM_NUM"
+    lvcreate -n"lv$LVM_NUM" -L"$part_size" "$VG_NAME" ||\
+      error "Failed to create logical volume lv$LVM_NUM on $VG_NAME!"
+    part_path="/dev/$VG_NAME/lv$LVM_NUM"
   fi
 
   flush_message
@@ -224,37 +215,41 @@ create_part(){
   # Create filesystem.
   case "$part_fs" in
     efi)
-      format_part "$part_path" fat32
+      {
+        format_part "$part_path" fat32 &&\
+        # Set esp flag.
+        parted -s "$DEVICE" set "$PART_NUM" esp on
+      } || error "Failed to create ESP($part_path) on $DEVICE!"
 
       # No need to append EFI partition to mount point list.
       # MP_LIST="${MP_LIST+$MP_LIST;}$part_path=$part_mp"
-
-      installer_set "DI_BOOTLOADER" "$part_path"
-
-      # Add boot flag
-      parted -s "$DEVICE" set "$PART_NUM" esp on || \
-        error "Failed to set esp flag on $part_path"
+      installer_set DI_BOOTLOADER "$part_path"
       ;;
     crypto_luks)
       mapper_name="$part_mp"
       part_mp="/dev/mapper/$mapper_name"
+
       installer_set DI_CRYPT_ROOT "true"
       installer_set DI_CRYPT_PARTITION "$part_path"
       installer_set DI_CRYPT_TARGET "$mapper_name"
+
       {
-        echo -n "$DI_CRYPT_PASSWD" | cryptsetup -v luksFormat "$part_path"
+        echo -n "$DI_CRYPT_PASSWD" | cryptsetup -v luksFormat "$part_path" &&\
         echo -n "$DI_CRYPT_PASSWD" | cryptsetup open "$part_path" "$mapper_name"
-        unset DI_CRYPT_PASSWD
-      } || error "Failed to create luks partition!"
-      pvcreate "$part_mp" -ffy
-      vgcreate vg0 "$part_mp"
-      declare -gr LVM=true
+      } || error "Failed to create luks partition($part_path)!"
+
+      unset DI_CRYPT_PASSWD
+
+      {
+        pvcreate "$part_mp" -ffy &&\
+        vgcreate "$VG_NAME" "$part_mp"
+      } || error "Failed to create volume group: $VG_NAME!"
+      declare -gr LVM="true"
       ;;
     *)
-      format_part "$part_path" "$part_fs"
-      if [ -n "$part_mp" ]; then
-        MP_LIST="${MP_LIST+$MP_LIST;}$part_path=$part_mp"
-      fi
+      format_part "$part_path" "$part_fs" ||\
+        error "Failed to create $part_fs filesystem on $part_path!"
+      [ -n "$part_mp" ] && MP_LIST="${MP_LIST+$MP_LIST;}$part_path=$part_mp"
       ;;
   esac
 
@@ -263,23 +258,23 @@ create_part(){
   # Set boot flag.
   case "$part_mp" in
     /boot)
-      # Set boot flag.
+      # Set boot flag in legacy mode.
       $EFI || parted -s "$DEVICE" set "$PART_NUM" boot on
       ;;
     /)
       installer_set "DI_ROOT_PARTITION" "$part_path"
       # Set boot flag if /boot is not used in legacy mode.
-      ($EFI || $LVM || [[ "$PART_POLICY" =~ "/boot:" ]]) || \
+      ($EFI || $LVM || [[ "$PART_POLICY" =~ "/boot:" ]]) ||\
         parted -s "$DEVICE" set "$PART_NUM" boot on
       ;;
-  esac || error "Failed to set boot flag on $part_path"
+  esac || error "Failed to set boot flag on $part_path!"
 
   flush_message
 }
 
 main(){
   # Based on the following process:
-  #  * Umount devices
+  #  * Umount devices.
   #  * Get boot mode.
   #  * Get partitioning policy.
   #  * Create new partition table.
@@ -288,7 +283,7 @@ main(){
 
   umount_devices
 
-  DEVICE="$(installer_get DI_FULLDISK_DEVICE)"
+  DEVICE=$(installer_get DI_FULLDISK_DEVICE)
   if [ "$DEVICE" = auto_max ]; then
     get_max_capacity_device
   fi
@@ -313,7 +308,7 @@ main(){
   installer_set DI_MOUNTPOINTS "$MP_LIST"
   installer_set DI_ROOT_DISK "$DEVICE"
 
-  # Write boot method
+  # Write boot method.
   if $EFI; then
     installer_set DI_UEFI "true"
   else
@@ -324,10 +319,10 @@ main(){
 
 . ./basic_utils.sh
 
-DI_CUSTOM_PARTITION_SCRIPT=$(installer_get "DI_CUSTOM_PARTITION_SCRIPT")
-if [ -f "${DI_CUSTOM_PARTITION_SCRIPT}" ]; then
-  echo "call custom partition script" ${DI_CUSTOM_PARTITION_SCRIPT}
-  bash ${DI_CUSTOM_PARTITION_SCRIPT}
+DI_CUSTOM_PARTITION_SCRIPT=$(installer_get DI_CUSTOM_PARTITION_SCRIPT)
+if [ -f "$DI_CUSTOM_PARTITION_SCRIPT" ]; then
+  echo "Call custom partition script($DI_CUSTOM_PARTITION_SCRIPT)..."
+  bash "$DI_CUSTOM_PARTITION_SCRIPT"
 else
   main
 fi
