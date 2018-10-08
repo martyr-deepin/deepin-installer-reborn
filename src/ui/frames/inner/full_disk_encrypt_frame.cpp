@@ -174,6 +174,6 @@ void Full_Disk_Encrypt_frame::updateText()
     m_encryptCheck->setText(tr("Encrypt This Disk"));
     m_encryptLbl->setText(tr("Password"));
     m_encryptCheckLbl->setText(tr("Repeat Password"));
-    m_cancelBtn->setText(tr("Cancel"));
+    m_cancelBtn->setText(tr("Previous"));
     m_nextBtn->setText(tr("Start Installation"));
 }

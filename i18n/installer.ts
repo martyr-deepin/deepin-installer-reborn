@@ -880,7 +880,7 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
-        <source>Cancel</source>
+        <source>Previous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
