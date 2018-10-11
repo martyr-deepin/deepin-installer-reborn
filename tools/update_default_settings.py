@@ -67,9 +67,9 @@ def main():
             ("partition_supported_fs", '"ext4;ext3;ext2;efi;linux-swap"'),
             ("partition_prefer_logical_partition", "false"),
             ("partition_full_disk_small_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:100%"'),
-            ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:20%;/home:ext4:50%;:ntfs:100%"'),
+            ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:75%;:ntfs:100%"'),
             ("partition_full_disk_small_legacy_label", '"Boot;Swap;Root"'),
-            ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;Home;_dde_data"')
+            ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;_dde_data"')
     )
 
     sw_settings = (
@@ -91,9 +91,9 @@ def main():
         ("partition_supported_fs", '"ext4;ext3;ext2;efi;linux-swap"'),
         ("partition_prefer_logical_partition", "false"),
         ("partition_full_disk_small_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:100%"'),
-        ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:20%;/home:ext4:50%;:ntfs:100%"'),
+        ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:75%;:ntfs:100%"'),
         ("partition_full_disk_small_legacy_label", '"Boot;Swap;Root"'),
-        ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;Home;_dde_data"')
+        ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;_dde_data"')
     )
 
     professinal_settings = (
