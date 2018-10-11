@@ -1,4 +1,14 @@
 <a name=""></a>
+##  2.3.8.2 (2018-10-11)
+
+
+#### Features
+
+*   don't skip simple partition and update partition list ([f5d7c343](https://github.com/linuxdeepin/deepin-install-reborn/commit/f5d7c34334a292ea91faf816f55fba811d0b08d1))
+
+
+
+<a name=""></a>
 ##  2.3.8.1 (2018-09-27)
 
 

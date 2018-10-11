@@ -59,7 +59,6 @@ def main():
             ("system_info_default_keyboard_layout", '"us"'),
             ("timezone_default", '"Asia/Shanghai"'),
             ("timezone_use_regdomain", "false"),
-            ("partition_skip_simple_partition_page", "true"),
             ("partition_enable_simple_disk_page", "true"),
             ("partition_enable_swap_file", "false"),
             ("partition_formatted_mount_points", '"/;/tmp;/var"'),
@@ -68,9 +67,9 @@ def main():
             ("partition_supported_fs", '"ext4;ext3;ext2;efi;linux-swap"'),
             ("partition_prefer_logical_partition", "false"),
             ("partition_full_disk_small_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:100%"'),
-            ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:20%;/home:ext4:50%;:ntfs:100%"'),
+            ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:75%;:ntfs:100%"'),
             ("partition_full_disk_small_legacy_label", '"Boot;Swap;Root"'),
-            ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;Home;_dde_data"')
+            ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;_dde_data"')
     )
 
     sw_settings = (
@@ -84,7 +83,6 @@ def main():
         ("timezone_use_regdomain", "false"),
         ("partition_enable_swap_file", "false"),
         ("partition_swap_partition_size", "8192"),
-        ("partition_skip_simple_partition_page", "true"),
         ("partition_enable_simple_disk_page", "true"),
         ("partition_enable_swap_file", "false"),
         ("partition_formatted_mount_points", '"/;/tmp;/var"'),
@@ -93,9 +91,9 @@ def main():
         ("partition_supported_fs", '"ext4;ext3;ext2;efi;linux-swap"'),
         ("partition_prefer_logical_partition", "false"),
         ("partition_full_disk_small_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:100%"'),
-        ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:20%;/home:ext4:50%;:ntfs:100%"'),
+        ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1Mib:800Mib;linux-swap:linux-swap:801Mib:linux-swap-end;/:ext4:75%;:ntfs:100%"'),
         ("partition_full_disk_small_legacy_label", '"Boot;Swap;Root"'),
-        ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;Home;_dde_data"')
+        ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;_dde_data"')
     )
 
     professinal_settings = (
