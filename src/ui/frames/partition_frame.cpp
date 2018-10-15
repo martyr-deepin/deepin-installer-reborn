@@ -276,7 +276,8 @@ void PartitionFrame::initUI() {
       simple_frame_button_->setChecked(false);
       simple_partition_frame_->hide();
       advanced_frame_button_->setObjectName(kLeftBtn);
-      advanced_frame_button_->setChecked(true);
+      full_disk_frame_button_->setChecked(true);
+      partition_stacked_layout_->setCurrentWidget(full_disk_partition_frame_);
   }
   else {
       simple_frame_button_->setChecked(true);
@@ -293,6 +294,7 @@ void PartitionFrame::initUI() {
           GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
       advanced_frame_button_->setObjectName(kSoloBtn);
       advanced_frame_button_->setChecked(true);
+      partition_stacked_layout_->setCurrentWidget(advanced_partition_frame_);
   }
 
   QHBoxLayout* partition_stacked_wrapper_layout = new QHBoxLayout();
@@ -522,7 +524,7 @@ void PartitionFrame::showSelectBootloaderFrame() {
 void PartitionFrame::showEncryptFrame()
 {
     if (full_disk_partition_frame_->validate()) {
-        if (full_disk_partition_frame_->isEncrypt()) {
+        if (!GetSettingsBool(KPartitionSkipFullCryptPage) && full_disk_partition_frame_->isEncrypt()) {
             main_layout_->setCurrentWidget(full_disk_encrypt_frame_);
         }
         else {

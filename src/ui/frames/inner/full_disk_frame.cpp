@@ -25,12 +25,13 @@
 #include <QCheckBox>
 
 #include "base/file_util.h"
+#include "partman/device.h"
+#include "service/settings_manager.h"
+#include "service/settings_name.h"
 #include "ui/delegates/full_disk_delegate.h"
 #include "ui/delegates/partition_util.h"
-#include "ui/widgets/simple_disk_button.h"
 #include "ui/utils/widget_util.h"
-#include "service/settings_manager.h"
-#include "partman/device.h"
+#include "ui/widgets/simple_disk_button.h"
 
 namespace installer {
 
@@ -143,6 +144,8 @@ void FullDiskFrame::initUI() {
   main_layout->addStretch();
   main_layout->addWidget(m_encryptCheck, 0, Qt::AlignHCenter);
   main_layout->addSpacing(20);
+
+  m_encryptCheck->setVisible(!GetSettingsBool(KPartitionSkipFullCryptPage));
 
   this->setLayout(main_layout);
   this->setContentsMargins(0, 0, 0, 0);

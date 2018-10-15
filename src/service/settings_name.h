@@ -124,6 +124,9 @@ const char kPartitionFullDiskLargeUEFIPolicy[] =
 const char kPartitionFullDiskLargeRootPartRange[] =
     "partition_full_disk_large_root_part_range";
 
+const char KPartitionSkipFullCryptPage[] =
+    "partition_skip_partition_crypt_page";
+
 const char kPartitionFullDiskSmallLegacyLabel[] =
     "partition_full_disk_small_legacy_label";
 const char kPartitionFullDiskSmallUEFILabel[] =

@@ -23,6 +23,7 @@ if ! is_loongson; then
 fi
 
 TARGET=/target/boot
+boot_path=
 
 # Remove overlay filesystem item.
 sed -i "/overlay/d" /target/etc/fstab
@@ -30,35 +31,91 @@ sed -i "/overlay/d" /target/etc/fstab
 rootuuidline=$(grep -r "UUID" /target/etc/fstab | grep "/ ")
 rootuuid=${rootuuidline%%/*}
 
-# Copy boot folder and follow symbolic link.
-if [ -d /lib/live/mount/medium/live/boot ]; then
-    cp -rvP /lib/live/mount/medium/live/boot/* /target/boot/ || error "Failed to copy boot/"
-    cd /target/boot/ && ln -sf . boot && cd -
+DI_LOOP_ROOT_FILE=$(installer_get "DI_LOOP_ROOT_FILE")
+echo "ctx ---------  DI_LOOP_ROOT_FILE=$DI_LOOP_ROOT_FILE"
+
+# Default, at the same moment, both of boot.cfg and grub.cfg exist.
+if [ -f $TARGET/boot.cfg ];then
+    boot_path=$TARGET
+    elif [ -f $TARGET/boot/boot.cfg ];then
+    boot_path=$TARGET/boot
+fi
+
+if [ ! $boot_path ];then
+    # Copy boot folder and follow symbolic link.
+    if [ -d /lib/live/mount/medium/live/boot ]; then
+        cp -rvP /lib/live/mount/medium/live/boot/* /target/boot/ || error "Failed to copy boot/"
+        cd /target/boot/ && ln -sf . boot && cd -
+    else
+        error "Not boot folder found!"
+    fi
+
+    [ -f $TARGET/grub.cfg ] && [ -f $TARGET/boot.cfg ] && echo "boot files copied!"
+
+    if [ -d /lib/live/mount/medium/live/modules ]; then
+        mkdir -p /target/lib/modules || true
+        cp -r /lib/live/mount/medium/live/modules/* /target/lib/modules/ || error "Failed to copy kernel modules"
+    fi
+
+    kernel_name=$(ls /target/boot/ |grep vmlinu|grep $(uname -r))
+    initrd_name=$(ls /target/boot/ |grep initrd|grep $(uname -r))
+
+    # modify boot.cfg & grub.cfg set boot.cfg args root=UUID=boot_path
+    sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/boot.cfg
+    sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/grub.cfg
+
+    if grep -q boot /target/etc/fstab ;then
+        sed -i "s|wd0/boot|wd0|g" /target/boot/boot.cfg
+    fi
 else
-    error "Not boot folder found!"
+    uuid=$(echo $rootuuid |cut -c 6-)
+    echo "ctx uuid=$uuid"
+    discid=$(sudo blkid |grep -i $uuid| awk '{print $1}'|cut -d '/' -f 3 |cut -d ':' -f 1)
+
+    kernel_name=$(ls /lib/live/mount/medium/live/boot/ |grep vmlinu|grep $(uname -r))-$discid
+    initrd_name=$(ls /lib/live/mount/medium/live/boot/ |grep initrd|grep $(uname -r))-$discid
+
+    if [ -d /lib/live/mount/medium/live/boot ]; then
+        for file in $(ls /lib/live/mount/medium/live/boot |grep $(uname -r));do
+            cp -rvP /lib/live/mount/medium/live/boot/$file $boot_path/$file-$discid
+        done
+
+        cd $boot_path && ln -sf . boot && cd -
+    fi
+
+    if [ -d /lib/live/mount/medium/live/modules ]; then
+        mkdir -p /target/lib/modules || true
+        cp -r /lib/live/mount/medium/live/modules/* /target/lib/modules/ || error "Failed to copy kernel modules"
+    fi
+
+    echo "
+title Deepin 15.5 Professional mips64el for Loongson 3A3000
+    initrd /dev/fs/ext2@wd0/boot/$initrd_name
+    kernel /dev/fs/ext2@wd0/boot/$kernel_name
+    args console=tty loglevel=0 quiet splash locales=zh_CN.UTF-8 root=$rootuuid
+
+title Deepin Recovery
+    initrd /dev/fs/ext2@wd0/boot/deepin/$initrd_name
+    kernel /dev/fs/ext2@wd0/boot/deepin/$kernel_name
+    args boot=live loglevel=0 components splash toram locales=zh_CN.UTF-8 acpi_backlight=vendor live-media-path=recovery live-media=$rootuuid " >> $boot_path/boot.cfg
+
+    echo "
+menuentry 'Deepin 15.5 Professional mips64el for Loongson 3A3000'{
+linux \${prefix}/$kernel_name console=tty loglevel=0 quiet splash locales=zh_CN.UTF-8  root=$rootuuid
+initrd \${prefix}/$initrd_name
+boot
+}
+
+menuentry 'Deepin Recovery'{
+linux \${prefix}/deepin/$kernel_name console=tty loglevel=0  splash toram locales=zh_CN.UTF-8 boot=live components acpi_backlight=vendor live-media-path=recovery
+initrd \${prefix}/deepin/$initrd_name
+boot
+    }" >>  $boot_path/grub.cfg
+
+    if [ "$boot_path" = "$TARGET" ];then
+        sed -i "s|wd0/boot|wd0|g" $boot_path/boot.cfg
+    fi
 fi
-
-[ -f $TARGET/grub.cfg ] && [ -f $TARGET/boot.cfg ] && echo "boot files copied!"
-
-if [ -d /lib/live/mount/medium/live/modules ]; then
-	mkdir -p /target/lib/modules || true
-    cp -r /lib/live/mount/medium/live/modules/* /target/lib/modules/ || error "Failed to copy kernel modules"
-fi
-
-kernel_name=$(ls /target/boot/ |grep vmlinu|grep $(uname -r))
-initrd_name=$(ls /target/boot/ |grep initrd|grep $(uname -r))
-
-# modify boot.cfg & grub.cfg set boot.cfg args root=UUID=xxx
-#sed -i "s/\(args.*\)/\1 root=$rootuuid/g" /target/boot/boot.cfg
-sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/boot.cfg
-sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/grub.cfg
-
-if grep -q boot /target/etc/fstab ;then
-    sed -i "s|wd0/boot|wd0|g" /target/boot/boot.cfg
-fi
-
-#update initrd for plymoush ssd
-chroot /target /usr/sbin/update-initramfs -u -t
 
 # fix boot.cfg
 #if grep -wqs $TARGET /proc/mounts ; then
