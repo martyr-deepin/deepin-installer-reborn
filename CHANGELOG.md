@@ -1,3 +1,25 @@
+<a name=""></a>
+##  2.3.8.2 (2018-10-11)
+
+
+#### Features
+
+*   don't skip simple partition and update partition list ([f5d7c343](https://github.com/linuxdeepin/deepin-install-reborn/commit/f5d7c34334a292ea91faf816f55fba811d0b08d1))
+
+
+
+<a name=""></a>
+##  2.3.8.1 (2018-09-27)
+
+
+#### Bug Fixes
+
+*   mission partition frame pages ([936174fe](https://github.com/linuxdeepin/deepin-install-reborn/commit/936174fe43fabcd78b84e152d429cc320f1ed8f0))
+*   partition mode button style error ([26e8d01b](https://github.com/linuxdeepin/deepin-install-reborn/commit/26e8d01b7b8f7f472ef534c3697b33de902ae1bc))
+*   boot partition too small ([0d9e9e6f](https://github.com/linuxdeepin/deepin-install-reborn/commit/0d9e9e6f63889e24bfaef9b57bc4342e8b5d2e80))
+
+
+
 <a name="2.3.8"></a>
 ### 2.3.8 (2018-09-14)
 
