@@ -1,4 +1,35 @@
 <a name=""></a>
+##  2.4.0 (2018-10-16)
+
+
+#### Features
+
+*   update partition for sw ([d79a3f7a](https://github.com/linuxdeepin/deepin-install-reborn/commit/d79a3f7a2d864150f2e7b18a5d60b8d53daa1805))
+*   remove skip simple partition ([581ef91f](https://github.com/linuxdeepin/deepin-install-reborn/commit/581ef91f1419b9f932556aa7312a839c04af8590))
+*   update tr ([73b6d61f](https://github.com/linuxdeepin/deepin-install-reborn/commit/73b6d61f5bad3213b241418e79b803bf8591d41e))
+*   add nomodeset kernel parameters when livecd have nomodeset ([6d11c345](https://github.com/linuxdeepin/deepin-install-reborn/commit/6d11c345018ee6eca9457b9fe90152eaebd78e51))
+*   update full encrypt style ([f748f3ce](https://github.com/linuxdeepin/deepin-install-reborn/commit/f748f3ce0bc9db547ebe4742d579d5225257b622))
+*   update checkbox style ([28de116c](https://github.com/linuxdeepin/deepin-install-reborn/commit/28de116cd0d42209d9c52f4dbed2d43d8028761a))
+*   set full disk device and set crypt password ([059c96bd](https://github.com/linuxdeepin/deepin-install-reborn/commit/059c96bde6cbc2eb61d3d207558caa9f348388ab))
+*   add encrypt frame ([4e3c388e](https://github.com/linuxdeepin/deepin-install-reborn/commit/4e3c388e3ca3a8675711133a28fde11b012b22f8))
+*   support full disk encrypt ([37e09d80](https://github.com/linuxdeepin/deepin-install-reborn/commit/37e09d806488937a40945ef7aebaa9919a8e5a2c))
+*   add GRUB_GFXPAYLOAD_LINUX=text ([bedfc930](https://github.com/linuxdeepin/deepin-install-reborn/commit/bedfc9305f2a50c2cb7ceb4dfee5165afd2ccd33))
+*   support HiDPI ([f2e73872](https://github.com/linuxdeepin/deepin-install-reborn/commit/f2e7387297bd744198db22f7ebccb7965a77e8c6))
+
+#### Bug Fixes
+
+*   check empty password ([d02e86b5](https://github.com/linuxdeepin/deepin-install-reborn/commit/d02e86b55bef2b752baee1996f14a14e8304e3ea))
+*   set boot flag, check root partition size ([f73ff4dd](https://github.com/linuxdeepin/deepin-install-reborn/commit/f73ff4dde64c9df945c914ce3a61a453e22569ff))
+*   boot partition too small ([4659715b](https://github.com/linuxdeepin/deepin-install-reborn/commit/4659715bee27cc9a38fd4e8e4a5373d48c438e27))
+*   mission partition frame pages ([83d980eb](https://github.com/linuxdeepin/deepin-install-reborn/commit/83d980ebf375365e5d1fdb422209b784047ac21d))
+*   partition mode button style error ([74b11719](https://github.com/linuxdeepin/deepin-install-reborn/commit/74b11719429c009e59a55f16d3d214783618d852))
+*   remove not require function ([a228f432](https://github.com/linuxdeepin/deepin-install-reborn/commit/a228f432f12271846b11028b38cc4cdfe0b472d6))
+*   remove unused package for libwireshark ([c3eb9c91](https://github.com/linuxdeepin/deepin-install-reborn/commit/c3eb9c91dc2f87a89fc74b0e6d774840d6d0d383))
+*   not run auto part script ([3c5cf439](https://github.com/linuxdeepin/deepin-install-reborn/commit/3c5cf439ba2fbef2c8cdbdf3b6218413429ec70c))
+
+
+
+<a name=""></a>
 ##  2.3.8.2 (2018-10-11)
 
 
