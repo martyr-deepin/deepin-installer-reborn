@@ -1,3 +1,13 @@
+<a name="2.4.1"></a>
+### 2.4.1 (2018-10-17)
+
+
+#### Bug Fixes
+
+*   missing QEvent header file ([68e60b99](https://github.com/linuxdeepin/deepin-install-reborn/commit/68e60b99dca7492b3f1bc7fba6ac52b2b582f9e9))
+
+
+
 <a name=""></a>
 ##  2.4.0 (2018-10-16)
 
