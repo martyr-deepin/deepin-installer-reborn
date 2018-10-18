@@ -100,7 +100,7 @@ get_max_capacity_device(){
       max_size="$size"
       max_device="/dev/$name"
     fi
-  done <<< "$(lsblk -ndb -o NAME,SIZE)"
+  done < <(lsblk -ndb -o NAME,SIZE)
   DEVICE="$max_device"
 }
 
