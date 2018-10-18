@@ -1,4 +1,14 @@
 <a name=""></a>
+##  2.3.8.4 (2018-10-18)
+
+
+#### Bug Fixes
+
+*   empty partition page ([b0a09c35](https://github.com/linuxdeepin/deepin-install-reborn/commit/b0a09c35f869d25ccc73baa51955d1a10027f2c0))
+
+
+
+<a name=""></a>
 ##  2.3.8.3 (2018-10-18)
 
 

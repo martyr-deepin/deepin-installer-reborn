@@ -253,7 +253,8 @@ void PartitionFrame::initUI() {
       simple_frame_button_->setChecked(false);
       simple_partition_frame_->hide();
       advanced_frame_button_->setObjectName(kLeftBtn);
-      advanced_frame_button_->setChecked(true);
+      full_disk_frame_button_->setChecked(true);
+      partition_stacked_layout_->setCurrentWidget(full_disk_partition_frame_);
   }
   else {
       simple_frame_button_->setChecked(true);
@@ -270,6 +271,7 @@ void PartitionFrame::initUI() {
           GetSettingsBool(kPartitionSkipSimplePartitionPage)) {
       advanced_frame_button_->setObjectName(kSoloBtn);
       advanced_frame_button_->setChecked(true);
+      partition_stacked_layout_->setCurrentWidget(advanced_partition_frame_);
   }
 
   QHBoxLayout* partition_stacked_wrapper_layout = new QHBoxLayout();
