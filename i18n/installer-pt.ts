@@ -210,12 +210,12 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="72"/>
         <source>Encrypt This Disk</source>
-        <translation type="unfinished"/>
+        <translation>Encriptar este Disco</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="102"/>
         <source>Encrypt Full Disk</source>
-        <translation type="unfinished"/>
+        <translation>Encriptar o Disco Inteiro</translation>
     </message>
 </context>
 <context>
@@ -844,7 +844,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="141"/>
         <source>Please input password</source>
-        <translation type="unfinished"/>
+        <translation>Por favor insira uma palavra-passe</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="146"/>
@@ -854,7 +854,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="172"/>
         <source>Full Disk Encryption</source>
-        <translation type="unfinished"/>
+        <translation>Encriptação do Disco Inteiro</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="173"/>
@@ -864,7 +864,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="174"/>
         <source>Encrypt This Disk</source>
-        <translation type="unfinished"/>
+        <translation>Encriptar este Disco</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="175"/>
@@ -874,17 +874,17 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="176"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"/>
+        <translation>Reintroduza a Palavra-passe</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
         <source>Previous</source>
-        <translation type="unfinished"/>
+        <translation>Voltar</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
         <source>Start Installation</source>
-        <translation type="unfinished"/>
+        <translation>Iniciar instalação</translation>
     </message>
 </context>
 <context>

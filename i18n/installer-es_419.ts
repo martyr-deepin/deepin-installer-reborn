@@ -210,12 +210,12 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="72"/>
         <source>Encrypt This Disk</source>
-        <translation type="unfinished"/>
+        <translation>Encriptar este disco</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="102"/>
         <source>Encrypt Full Disk</source>
-        <translation type="unfinished"/>
+        <translation>Encriptar todo el disco</translation>
     </message>
 </context>
 <context>
@@ -844,7 +844,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="141"/>
         <source>Please input password</source>
-        <translation type="unfinished"/>
+        <translation>Por favor introduzca la contraseña</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="146"/>
@@ -864,7 +864,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="174"/>
         <source>Encrypt This Disk</source>
-        <translation type="unfinished"/>
+        <translation>Encriptar este disco</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="175"/>
@@ -874,17 +874,17 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="176"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"/>
+        <translation>Repetir contraseña</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
         <source>Previous</source>
-        <translation type="unfinished"/>
+        <translation>Anterior</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
         <source>Start Installation</source>
-        <translation type="unfinished"/>
+        <translation>Iniciar instalación</translation>
     </message>
 </context>
 <context>
@@ -983,12 +983,12 @@
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="100"/>
         <source>End User License Agreement</source>
-        <translation type="unfinished"/>
+        <translation>Acuerdo de licencia de usuario final</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="116"/>
         <source>Accept</source>
-        <translation type="unfinished"/>
+        <translation>Aceptar</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="117"/>

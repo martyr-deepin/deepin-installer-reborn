@@ -3,13 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Luís Lima <geral@liqensoft.com>, 2017
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-21 10:31+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-02-06 02:09+0000\n"
 "Last-Translator: Luís Lima <geral@liqensoft.com>, 2017\n"
 "Language-Team: Portuguese (https://www.transifex.com/linuxdeepin/teams/3976/pt/)\n"
 "MIME-Version: 1.0\n"
