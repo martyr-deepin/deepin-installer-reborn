@@ -1,3 +1,17 @@
+<a name="2.4.2"></a>
+### 2.4.2 (2018-10-25)
+
+
+#### Features
+
+*   generate grub theme ([cc765f56](https://github.com/linuxdeepin/deepin-install-reborn/commit/cc765f56b74b40d23d0862ac6c636ba6bedbb210))
+
+#### Bug Fixes
+
+*   empty partition page ([a0b1aea8](https://github.com/linuxdeepin/deepin-install-reborn/commit/a0b1aea8d34af243c39d66e26330715da718c626))
+
+
+
 <a name="2.4.1"></a>
 ### 2.4.1 (2018-10-17)
 
