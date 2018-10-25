@@ -236,4 +236,8 @@ EOF
 #  rm -f $IGNORE_UEFI
 #fi
 
+# update grub theme
+/usr/lib/deepin-api/adjust-grub-theme -lang zh_CN.UTF-8
+
+# update grub config
 /usr/sbin/update-grub
