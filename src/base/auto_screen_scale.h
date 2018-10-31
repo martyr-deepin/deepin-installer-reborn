@@ -43,6 +43,6 @@ void AutoScreenScale()
 
     qDebug() << "scale factor: " << QString::number(scaleRatio);
 
-    setenv("QT_SCALE_FACTOR", const_cast<char *>(QString::number(1.25).toStdString().c_str()), 1);
+    setenv("QT_SCALE_FACTOR", const_cast<char *>(QString::number(scaleRatio).toStdString().c_str()), 1);
 }
 } // namespace Utils

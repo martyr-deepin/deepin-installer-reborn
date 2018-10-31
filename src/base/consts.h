@@ -18,9 +18,11 @@
 #ifndef INSTALLER_CONSTS_H
 #define INSTALLER_CONSTS_H
 
+#define VERSION "@VERSION@"
+
 namespace installer {
 
-const char kAppVersion[] = "2.2.17";
+const char kAppVersion[] = VERSION;
 
 // Default locale used in program.
 const char kDefaultLang[] = "en_US.UTF-8";

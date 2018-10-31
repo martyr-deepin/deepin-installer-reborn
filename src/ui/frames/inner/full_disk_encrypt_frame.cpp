@@ -113,6 +113,9 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
 
     onEncryptUpdated(true);
 
+    m_encryptEdit->setEchoMode(QLineEdit::Password);
+    m_encryptRepeatEdit->setEchoMode(QLineEdit::Password);
+
     setStyleSheet(ReadFile(":/styles/full_encrypt_frame.css"));
     updateText();
 }

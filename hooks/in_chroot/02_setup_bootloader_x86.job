@@ -195,23 +195,6 @@ case ${BOOT} in
     ;;
 esac
 
-# Generate theme background.
-readonly GRUB_SRC_BG=/boot/grub/themes/deepin/background_source
-readonly GRUB_DST_BG=/boot/grub/themes/deepin/background.png
-if [ -f "${GRUB_SRC_BG}" ]; then
-  if which image-worsener >/dev/null; then
-    image-worsener -w ${DI_CUR_RESOLUTION%x*} -h ${DI_CUR_RESOLUTION##*x} \
-      ${GRUB_SRC_BG} ${GRUB_DST_BG}
-  elif which convert >/dev/null; then
-    convert "${GRUB_SRC_BG}" -scale ${DI_CUR_RESOLUTION} "${GRUB_DST_BG}"
-  else
-      warn "Please install imagemaic or image-worsener to blur image"
-  fi
-else
-  warn "${GRUB_SRC_BG} not found"
-fi
-
-
 if [[ $(cat /proc/cmdline) =~ \ nomodeset(\ |$) ]];
 then
     nomodeset="nomodeset"
