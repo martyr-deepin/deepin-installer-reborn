@@ -1,3 +1,15 @@
+<a name="2.4.3"></a>
+### 2.4.3 (2018-11-01)
+
+
+#### Features
+
+*   update resources ([e08df674](https://github.com/linuxdeepin/deepin-install-reborn/commit/e08df674329749d37136b43cac771338c4c1555a))
+*   add user license ([7a45588a](https://github.com/linuxdeepin/deepin-install-reborn/commit/7a45588aed4d8738feec972e577cdafd337f2597))
+*   update some config ([5c779f56](https://github.com/linuxdeepin/deepin-install-reborn/commit/5c779f56a717d86b4822a2aaec630f4a36388ae5))
+
+
+
 <a name="2.4.2"></a>
 ### 2.4.2 (2018-10-25)
 
