@@ -9,6 +9,9 @@
         <file>partition_new_hover.svg</file>
         <file>partition_new_normal.svg</file>
         <file>partition_new_press.svg</file>
+        <file>close_normal.svg</file>
+        <file>close_hover.svg</file>
+        <file>close_press.svg</file>
         <file>mode.png</file>
         <file>driver_windows_32.svg</file>
         <file>decrease.png</file>

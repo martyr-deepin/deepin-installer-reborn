@@ -12,13 +12,13 @@
   background-repeat: no-repeat;
   background-position: center center;
 
-  background-image: url(:/images/close_button_normal.png);
+  background-image: url(:/images/close_normal.svg);
 }
 
 #close_button:hover {
-  background-image: url(:/images/close_button_hover.png);
+  background-image: url(:/images/close_hover.svg);
 }
 
 #close_button:pressed {
-  background-image: url(:/images/close_button_press.png);
+  background-image: url(:/images/close_press.svg);
 }

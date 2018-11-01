@@ -12,13 +12,17 @@ else
 use_systemd = off
 endif
 
+VERSION ?= $(shell dpkg-parsechangelog -ldebian/changelog -SVersion | awk -F'-' '{print $$1}')
+
 %:
 	dh $@  --parallel --with systemd
 
 override_dh_auto_configure:
-	dh_auto_configure -- -DCMAKE_BUILD_TYPE=Release \
+	dh_auto_configure -- \
+		 -DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DUSE_SYSTEMD=$(use_systemd)
+		-DUSE_SYSTEMD=$(use_systemd) \
+		-DVERSION=$(VERSION)
 
 override_dh_systemd_start:
 	dh_systemd_start --no-start

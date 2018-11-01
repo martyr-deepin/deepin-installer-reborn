@@ -26,7 +26,7 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
   # -fsanitize=memory, Enable detecting uninitited memory sanitizer.
   #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=memory "
   #    "-fsanitize-memory-track-origins -fPIC -pie -fno-omit-frame-pointer")
-  
+
 #  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wimplicit-fallthrough=1")
 
   # Enable Qt builtin debug mode
@@ -57,6 +57,11 @@ endif()
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(INSTALLER_SHARE_DIR ${CMAKE_INSTALL_PREFIX}/share/deepin-installer)
+
+# Install settings
+if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX /usr)
+endif ()
 
 # Defines path to resource directories
 if (CMAKE_BUILD_TYPE MATCHES Debug)
@@ -105,6 +110,7 @@ add_subdirectory(third_party/simpleini)
 add_subdirectory(third_party/timezones)
 add_subdirectory(third_party/zlib_wrapper)
 
+configure_file(base/consts.h base/consts.h @ONLY)
 
 set(BASE_FILES
     base/command.cpp
@@ -649,7 +655,7 @@ target_link_libraries(deepin-installer-xrandr-switchy
 # test reboot system
 add_executable(reboot-system
                app/reboot_system.cpp
-               
+
                ${BASE_FILES}
                service/power_manager.cpp
                service/power_manager.h
@@ -659,7 +665,7 @@ target_link_libraries(reboot-system ${QtCore_LIBS})
 # Combobox test
 add_executable(combobox-test
                ui/tests/combobox_test.cpp
-               
+
                ${BASE_FILES}
                ui/delegates/table_combo_box_delegate.cpp
                ui/delegates/table_combo_box_delegate.h
@@ -678,16 +684,16 @@ target_link_libraries(combobox-test ${Qt_LIBS})
 # locale manager test
 add_executable(locale-manager-test
                service/timezone_manager_test.cpp
-               
+
                ${BASE_FILES}
-               
+
                service/backend/wifi_inspect_worker.cpp
                service/backend/wifi_inspect_worker.h
                service/backend/geoip_request_worker.cpp
                service/backend/geoip_request_worker.h
                service/timezone_manager.cpp
                service/timezone_manager.h
-               
+
                ${SYSINFO_FILES}
                )
 target_link_libraries(locale-manager-test ${Qt_LIBS})
@@ -750,7 +756,7 @@ add_executable(timezone-frame-test
                ui/tests/timezone_frame_test/timezone_frame_test.cpp
 
                ${BASE_FILES}
-               
+
                service/settings_manager.cpp
                service/settings_manager.h
                service/settings_name.h
@@ -760,12 +766,12 @@ add_executable(timezone-frame-test
                service/backend/geoip_request_worker.h
                service/backend/wifi_inspect_worker.cpp
                service/backend/wifi_inspect_worker.h
-               
+
                partman/os_prober.cpp
                partman/os_prober.h
                partman/structs.cpp
                partman/structs.h
-               
+
                sysinfo/machine.cpp
                sysinfo/machine.h
                sysinfo/timezone.cpp

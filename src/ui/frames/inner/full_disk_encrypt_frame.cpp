@@ -144,6 +144,7 @@ void Full_Disk_Encrypt_frame::onNextBtnClicked()
         if (m_encryptEdit->text().isEmpty()) {
             m_errTip->setText(tr("Please input password"));
             m_errTip->showBottom(m_encryptEdit);
+            return;
         }
 
         if (m_encryptEdit->text() != m_encryptRepeatEdit->text()) {

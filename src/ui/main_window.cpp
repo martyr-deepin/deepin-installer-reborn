@@ -267,7 +267,7 @@ void MainWindow::initUI() {
   close_button_->setObjectName("close_button");
   close_button_->setFlat(true);
   close_button_->setFocusPolicy(Qt::TabFocus);
-  close_button_->setFixedSize(12, 12);
+  close_button_->setFixedSize(40, 40);
   close_button_->setStyleSheet(ReadFile(":/styles/close_button.css"));
   QHBoxLayout* close_layout = new QHBoxLayout();
   close_layout->setContentsMargins(0, 0, 0, 0);
@@ -275,7 +275,6 @@ void MainWindow::initUI() {
   close_layout->addStretch();
   close_layout->addWidget(close_button_);
   QFrame* close_button_wrapper = new QFrame();
-  close_button_wrapper->setFixedHeight(16);
   // Add 4px at top and right margin.
   close_button_wrapper->setContentsMargins(0, 4, 4, 0);
   close_button_wrapper->setLayout(close_layout);

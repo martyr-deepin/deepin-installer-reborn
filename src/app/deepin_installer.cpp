@@ -46,6 +46,10 @@ int main(int argc, char* argv[]) {
   app.setOrganizationDomain(installer::kOrganizationDomain);
   app.setWindowIcon(QIcon(":/images/deepin_installer.svg"));
 
+  QFont font(app.font());
+  font.setFamily("Noto Sans CJK SC Regular");
+  app.setFont(font);
+
   // Parse argument list.
   installer::InstallerArgsParser args_parser;
   // Returns false if failed to parse arguments.
