@@ -129,9 +129,7 @@ private:
   VirtualMachineFrame* virtual_machine_frame_ = nullptr;
   MultiHeadManager* multi_head_manager_ = nullptr;
 
-#ifdef PROFESSIONAL
   UserAgreementFrame *user_agreement_frame = nullptr;
-#endif
 
   // To store frame pages, page_name => page_id.
   QHash<PageId, int> pages_;

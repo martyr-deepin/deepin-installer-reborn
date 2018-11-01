@@ -48,10 +48,7 @@
 #include "ui/frames/system_info_frame.h"
 #include "ui/frames/timezone_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
-
-#ifdef PROFESSIONAL
 #include "ui/frames/user_agreement_frame.h"
-#endif
 
 #include "ui/utils/widget_util.h"
 #include "ui/widgets/page_indicator.h"
@@ -189,10 +186,8 @@ void MainWindow::initConnections() {
   connect(virtual_machine_frame_, &VirtualMachineFrame::finished,
           this, &MainWindow::goNextPage);
 
-#ifdef PROFESSIONAL
   connect(user_agreement_frame, &UserAgreementFrame::finished, this, &MainWindow::goNextPage);
   connect(user_agreement_frame, &UserAgreementFrame::cancel, this, &MainWindow::onCloseButtonClicked);
-#endif
 
   // Notify InstallProgressFrame that partition job has finished.
   connect(partition_frame_, &PartitionFrame::autoPartDone,
@@ -224,11 +219,9 @@ void MainWindow::initPages() {
   pages_.insert(PageId::SelectLanguageId,
                 stacked_layout_->addWidget(select_language_frame_));
 
-#ifdef PROFESSIONAL
   user_agreement_frame = new UserAgreementFrame(this);
   pages_.insert(PageId::UserAgreementId,
                 stacked_layout_->addWidget(user_agreement_frame));
-#endif
 
   disk_space_insufficient_frame_ = new DiskSpaceInsufficientFrame(this);
   pages_.insert(PageId::DiskSpaceInsufficientId,
@@ -446,8 +439,6 @@ void MainWindow::goNextPage() {
 
     case PageId::SelectLanguageId: {
         // Displays the first page.
-
-#ifdef PROFESSIONAL
         if (!GetSettingsBool(kSystemInfoSetupAfterReboot)) {
             page_indicator_->goNextPage();
             setCurrentPage(PageId::UserAgreementId);
@@ -457,10 +448,6 @@ void MainWindow::goNextPage() {
             prev_page_ = current_page_;
             current_page_ = PageId::UserAgreementId;
         }
-#else
-        prev_page_ = current_page_;
-        current_page_ = PageId::UserAgreementId;
-#endif
     }
 
     case PageId::UserAgreementId: {
