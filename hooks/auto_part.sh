@@ -20,7 +20,7 @@
 # Partition policy is defined in settings.ini.
 
 declare -i DEVICE_SIZE AVL_SIZE PART_NUM=0 LVM_NUM=0 LAST_END=1
-declare DEVICE PART_POLICY MP_LIST VG_NAME="vg0" PART_TYPE="primary" \
+declare DEVICE PART_POLICY PART_LABEL MP_LIST VG_NAME="vg0" PART_TYPE="primary" \
         LARGE="false" EFI="false" CRYPT="false" LVM="false"
 
 # Check device capacity of $DEVICE.
@@ -58,20 +58,22 @@ flush_message(){
 
 # Format partition at $1 with filesystem $2.
 format_part(){
-  local part_path="$1" part_fs="$2"
+  local part_path="$1" part_fs="$2" part_label="$3"
 
   yes |\
   case "$part_fs" in
     fat32)
-      mkfs.vfat -F32 "$part_path";;
+      mkfs.vfat -F32 -n "$part_label" "$part_path";;
+    efi)
+      mkfs.vfat -F32 -n "$part_label" "$part_path";;
     fat16)
-      mkfs.vfat -F16 "$part_path";;
+      mkfs.vfat -F16 -n "$part_label" "$part_path";;
     ntfs)
-      mkfs.ntfs --fast "$part_path";;
+      mkfs.ntfs --fast -L "$part_label" "$part_path";;
     linux-swap)
       mkswap "$part_path";;
     *)
-      mkfs -t "$part_fs" "$part_path";;
+      mkfs -t "$part_fs" -L "$part_label" "$part_path";;
   esac || error "Failed to create $part_fs filesystem on $part_path!"
 }
 
@@ -89,8 +91,15 @@ get_part_policy(){
 
   $CRYPT && policy_name+="_crypt"
 
+# get partition label
+  local policy_name_label=${policy_name}
+
+# get partition policy
   policy_name+="_policy"
   declare -gr PART_POLICY=$(installer_get $policy_name)
+
+  policy_name_label+="_label"
+  declare -gr PART_LABEL=$(installer_get $policy_name_label)
 }
 
 get_max_capacity_device(){
@@ -125,6 +134,7 @@ umount_devices(){
 # Create partition.
 create_part(){
   local part="$1"
+  local label="$2"
   local swap_size part_path part_mp part_fs _part_fs part_start part_end mapper_name
 
   let PART_NUM++
@@ -216,7 +226,7 @@ create_part(){
   case "$part_fs" in
     efi)
       {
-        format_part "$part_path" fat32 &&\
+        format_part "$part_path" fat32 "$label" &&\
         # Set esp flag.
         parted -s "$DEVICE" set "$PART_NUM" esp on
       } || error "Failed to create ESP($part_path) on $DEVICE!"
@@ -247,7 +257,7 @@ create_part(){
       declare -gr LVM="true"
       ;;
     *)
-      format_part "$part_path" "$part_fs" ||\
+      format_part "$part_path" "$part_fs" "$label" ||\
         error "Failed to create $part_fs filesystem on $part_path!"
       [ -n "$part_mp" ] && MP_LIST="${MP_LIST+$MP_LIST;}$part_path=$part_mp"
       ;;
@@ -301,8 +311,11 @@ main(){
 
   new_part_table "$DEVICE"
 
-  for part in ${PART_POLICY//;/ }; do
-    create_part "$part"
+  local part_policy_array=(${PART_POLICY//;/ })
+  local part_label_array=(${PART_LABEL//;/ })
+
+  for i in "${!part_policy_array[@]}"; do
+    create_part ${part_policy_array[$i]} ${part_label_array[$i]}
   done
 
   installer_set DI_MOUNTPOINTS "$MP_LIST"
