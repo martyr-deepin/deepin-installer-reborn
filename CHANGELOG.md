@@ -1,3 +1,13 @@
+<a name="2.4.4"></a>
+### 2.4.4 (2018-11-02)
+
+
+#### Bug Fixes
+
+*   not set partition volume label ([e20f4499](https://github.com/linuxdeepin/deepin-install-reborn/commit/e20f4499135ffa9312bab6d21413a0870221ade1))
+
+
+
 <a name="2.4.3"></a>
 ### 2.4.3 (2018-11-01)
 
