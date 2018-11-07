@@ -29,6 +29,7 @@
 namespace installer {
 
 namespace {
+const int kWindowWidth = 960;
 
 const int kBtnSize = 24;
 
@@ -98,7 +99,7 @@ void AdvancedPartitionButton::initUI() {
   path_frame->setObjectName("path_frame");
   path_frame->setContentsMargins(0, 0, 0, 0);
   path_frame->setLayout(path_layout);
-  path_frame->setFixedWidth(220);
+  path_frame->setFixedWidth(kWindowWidth - 455); // 455 is remaining space
 
   // partition space usage
   QLabel* usage_label = new QLabel();
@@ -155,7 +156,6 @@ void AdvancedPartitionButton::initUI() {
   layout->addStretch();
   layout->addWidget(usage_label);
   layout->addWidget(usage_bar);
-  layout->addStretch();
   layout->addWidget(mount_point_label);
   layout->addStretch();
   layout->addWidget(tip_label);
