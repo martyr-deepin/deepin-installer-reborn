@@ -13,7 +13,7 @@ if (NOT CMAKE_BUILD_TYPE)
 endif()
 
 if (CMAKE_BUILD_TYPE MATCHES Debug)
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -Werror -Wextra")
+#   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -Werror -Wextra")
   # -fno-rtti, Disable real-time type information
   # -fno-exceptions Disable exceptions
   # -fsanitize=address Enable memory sanitize plugin

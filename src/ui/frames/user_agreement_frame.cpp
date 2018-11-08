@@ -60,6 +60,12 @@ void UserAgreementFrame::initUI()
     m_sourceScrollArea->setContentsMargins(0, 0, 0, 0);
     m_sourceScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     m_sourceScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    m_sourceScrollArea->setContextMenuPolicy(Qt::NoContextMenu);
+    m_sourceScrollArea->verticalScrollBar()->setContextMenuPolicy(
+        Qt::NoContextMenu);
+    m_sourceScrollArea->horizontalScrollBar()->setContextMenuPolicy(
+        Qt::NoContextMenu);
+
     m_sourceScrollArea->setFixedWidth(468);
 
     m_accept = new NavButton(this);
