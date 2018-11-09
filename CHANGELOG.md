@@ -1,3 +1,18 @@
+<a name="2.4.5"></a>
+### 2.4.5 (2018-11-09)
+
+
+#### Features
+
+*   set grub theme language ([45d9941b](https://github.com/linuxdeepin/deepin-install-reborn/commit/45d9941b3a083f88b4df9264b9529c66ee9ecbfc))
+
+#### Bug Fixes
+
+*   remove useless grub config ([1f767b68](https://github.com/linuxdeepin/deepin-install-reborn/commit/1f767b68298232bf6ec70cb1c23ee46c80ca2387))
+* **partition:**  partition name is not complete ([596f5f39](https://github.com/linuxdeepin/deepin-install-reborn/commit/596f5f3953fb055052c8493220d2a6fd14434e26))
+
+
+
 <a name="2.4.4"></a>
 ### 2.4.4 (2018-11-02)
 
