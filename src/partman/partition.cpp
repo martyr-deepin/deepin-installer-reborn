@@ -134,22 +134,22 @@ qint64 Partition::getSectorLength() const {
 }
 
 QDebug& operator<<(QDebug& debug, const Partition& partition) {
-  debug << "Partition: {"
-        << "path:" << partition.path
-        << "number:" << partition.partition_number
-        << "fs:" << partition.fs
-        << "type:" << partition.type
-        << "status:" << partition.status
-        << "os:" << partition.os
-        << "busy:" << partition.busy
-        << "label:" << partition.label
-        << "name:" << partition.name
-        << "mount point:" << partition.mount_point
-        << "start:" << partition.start_sector
-        << "end:" << partition.end_sector
-        << "sector size:" << partition.sector_size
-        << "flags:" << partition.flags
-        << "}";
+  debug << "Partition: {" << endl
+        << "    path:" << partition.path << endl
+        << "    number:" << partition.partition_number << endl
+        << "    fs:" << partition.fs << endl
+        << "    type:" << partition.type << endl
+        << "    status:" << partition.status << endl
+        << "    os:" << partition.os << endl
+        << "    busy:" << partition.busy << endl
+        << "    label:" << partition.label << endl
+        << "    name:" << partition.name << endl
+        << "    mount point:" << partition.mount_point << endl
+        << "    start:" << partition.start_sector << endl
+        << "    end:" << partition.end_sector << endl
+        << "    sector size:" << partition.sector_size << endl
+        << "    flags:" << partition.flags << endl
+        << "}" << endl;
   return debug;
 }
 

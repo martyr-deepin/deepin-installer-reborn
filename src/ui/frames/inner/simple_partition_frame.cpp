@@ -60,27 +60,30 @@ SimplePartitionFrame::SimplePartitionFrame(SimplePartitionDelegate* delegate,
 bool SimplePartitionFrame::validate() {
   switch (delegate_->validate()) {
     case SimpleValidateState::Ok: {
-      msg_label_->clear();
-      return true;
+        qDebug() << "all ok!";
+        msg_label_->clear();
+        return true;
     }
     case SimpleValidateState::MaxPrimPartErr: {
-      msg_label_->setText(
-          tr("Unable to create new partition, please "
-             "select one of the existing partitions!"));
-      break;
+        qDebug() << "partition size error!";
+        msg_label_->setText(
+            tr("Unable to create new partition, please "
+               "select one of the existing partitions!"));
+        break;
     }
     case SimpleValidateState::RootMissing: {
-      msg_label_->setText(
-          tr("Please select one of the partitions to install!"));
-      break;
+        qDebug() << "not have root partition!";
+        msg_label_->setText(
+            tr("Please select one of the partitions to install!"));
+        break;
     }
     case SimpleValidateState::RootTooSmall: {
-      const int root_required =
-          GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
-      msg_label_->setText(
-          tr("At least %1 GB is required for root partition")
-              .arg(root_required));
-      break;
+        qDebug() << "root partition is too small!";
+        const int root_required =
+            GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
+        msg_label_->setText(tr("At least %1 GB is required for root partition")
+                                .arg(root_required));
+        break;
     }
   }
 

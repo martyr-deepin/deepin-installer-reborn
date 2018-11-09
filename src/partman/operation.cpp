@@ -407,12 +407,11 @@ void Operation::substitute(PartitionList& partitions) const {
 }
 
 QDebug& operator<<(QDebug& debug, const Operation& operation) {
-  debug << "Operation: {"
-        << "type:" << operation.type
-        << "orig_partition:" << operation.orig_partition
-        << "new_partition:" << operation.new_partition
-        << "}";
-  return debug;
+    debug << "Operation: {" << endl
+    << "    type: " << operation.type << endl
+    << "    opri_partion: " << operation.orig_partition << endl
+    << "    new_partition: " << operation.new_partition << endl;
+    return debug;
 }
 
 void MergeOperations(OperationList& operations, const Operation& operation) {
