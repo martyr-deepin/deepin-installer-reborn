@@ -219,9 +219,10 @@ EOF
 #  rm -f $IGNORE_UEFI
 #fi
 
+
 # update grub theme
 LOCALE=$(installer_get "DI_LOCALE")
-/usr/lib/deepin-api/adjust-grub-theme $(LOCALE).UTF8
+/usr/lib/deepin-api/adjust-grub-theme -lang ${LOCALE}.UTF8
 
 # update grub config
 /usr/sbin/update-grub
