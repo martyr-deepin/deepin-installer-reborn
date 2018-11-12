@@ -23,6 +23,7 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <QCheckBox>
+#include <QApplication>
 
 #include "base/file_util.h"
 #include "partman/device.h"
@@ -44,6 +45,12 @@ const int kWindowWidth = 960;
 
 }  // namespace
 
+#if 0
+QT_TRANSLATE_NOOP("FullDiskFrame", "Install here")
+QT_TRANSLATE_NOOP("FullDiskFrame", "Encrypt Full Disk")
+QT_TRANSLATE_NOOP("FullDiskFrame", "Please select a disk to start installation")
+#endif
+
 FullDiskFrame::FullDiskFrame(FullDiskDelegate* delegate, QWidget* parent)
     : QFrame(parent)
     , m_delegate(delegate)
@@ -59,6 +66,19 @@ FullDiskFrame::~FullDiskFrame() {
 }
 
 bool FullDiskFrame::validate() const {
+    bool isSelect = false;
+    for (QAbstractButton* button : m_button_group->buttons()) {
+        if (button->isChecked()) {
+            isSelect = true;
+            break;
+        }
+    }
+
+    if (!isSelect) {
+        m_errorTip->show();
+        return false;
+    }
+
     return (m_button_group->checkedButton() != nullptr);
 }
 
@@ -68,12 +88,14 @@ bool FullDiskFrame::isEncrypt() const
 }
 
 void FullDiskFrame::changeEvent(QEvent* event) {
-  if (event->type() == QEvent::LanguageChange) {
-    m_tip_label->setText(tr("Install here"));
-    m_encryptCheck->setText(tr("Encrypt This Disk"));
-  } else {
-    QFrame::changeEvent(event);
-  }
+    if (event->type() == QEvent::LanguageChange) {
+        for (auto it = m_trList.begin(); it != m_trList.end(); ++it) {
+            it->first(qApp->translate("FullDiskFrame", it->second.toUtf8()));
+        }
+    }
+    else {
+        QFrame::changeEvent(event);
+    }
 }
 
 void FullDiskFrame::initConnections() {
@@ -95,12 +117,18 @@ void FullDiskFrame::initUI() {
   m_tip_label = new QLabel(tr("Install here"));
   m_tip_label->setObjectName("tip_label");
   m_tip_label->setFixedHeight(18);
+  addTransLate(m_trList, std::bind(&QLabel::setText, m_tip_label, std::placeholders::_1), QString("Installer here"));
 
   m_encryptCheck = new QCheckBox;
   m_encryptCheck->setObjectName("check_box");
   m_encryptCheck->setCheckable(true);
   m_encryptCheck->setChecked(false);
-  m_encryptCheck->setText(tr("Encrypt Full Disk"));
+  addTransLate(m_trList, std::bind(&QCheckBox::setText, m_encryptCheck, std::placeholders::_1), QString("Encrypt Full Disk"));
+
+  m_errorTip = new QLabel;
+  m_errorTip->setObjectName("msg_label");
+  m_errorTip->hide();
+  addTransLate(m_trList, std::bind(&QLabel::setText, m_errorTip, std::placeholders::_1), QString("Please select a disk to start installation"));
 
   QHBoxLayout* tip_layout = new QHBoxLayout();
   tip_layout->setContentsMargins(0, 0, 0, 0);
@@ -140,10 +168,11 @@ void FullDiskFrame::initUI() {
   QVBoxLayout* main_layout = new QVBoxLayout();
   main_layout->setContentsMargins(0, 0, 0, 0);
   main_layout->setSpacing(0);
-  main_layout->addWidget(scroll_area, Qt::AlignHCenter);
+  main_layout->addWidget(scroll_area, 0, Qt::AlignHCenter);
   main_layout->addStretch();
   main_layout->addWidget(m_encryptCheck, 0, Qt::AlignHCenter);
   main_layout->addSpacing(20);
+  main_layout->addWidget(m_errorTip, 0, Qt::AlignHCenter);
 
   m_encryptCheck->setVisible(!GetSettingsBool(KPartitionSkipFullCryptPage));
 
@@ -225,6 +254,8 @@ void FullDiskFrame::onPartitionButtonToggled(QAbstractButton* button,
     qCritical() << "no disk button is selected";
     return;
   }
+
+  m_errorTip->hide();
 
   if (!checked) {
     // Deselect previous button.

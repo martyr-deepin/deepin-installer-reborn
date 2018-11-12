@@ -19,6 +19,8 @@
 #define INSTALLER_UI_UTILS_WIDGET_UTIL_H
 
 #include <QWidget>
+#include <functional>
+
 class QComboBox;
 class QMenu;
 class QLayout;
@@ -52,6 +54,10 @@ void WidgetTreeWalk(QWidget* root);
 
 const QPixmap renderPixmap(const QString &path);
 
+template <typename T>
+void addTransLate(T &t, std::function<void (QString)> function, const QString &tr) {
+    t.push_back(std::pair<std::function<void (QString)>, QString>(function, tr));
+}
 }  // namespace installer
 
 #endif  // INSTALLER_UI_UTILS_WIDGET_UTIL_H

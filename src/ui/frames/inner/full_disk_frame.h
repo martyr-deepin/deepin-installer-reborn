@@ -19,6 +19,7 @@
 #define DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_FRAME_H
 
 #include <QFrame>
+#include <functional>
 class QAbstractButton;
 class QButtonGroup;
 class QGridLayout;
@@ -35,14 +36,14 @@ class FullDiskFrame : public QFrame {
     Q_OBJECT
 public:
     explicit FullDiskFrame(FullDiskDelegate* delegate,
-                           QWidget* parent = nullptr);
+                           QWidget*          parent = nullptr);
     ~FullDiskFrame();
 
     bool validate() const;
     bool isEncrypt() const;
 
 signals:
-    void currentDeviceChanged(const Device &device) const;
+    void currentDeviceChanged(const Device& device) const;
     void cryptoStateChanged(bool crypto) const;
 
 protected:
@@ -61,13 +62,15 @@ private:
     // Show install_tip at bottom of |button|.
     //  void showInstallTip(QAbstractButton* button);
 
-    FullDiskDelegate* m_delegate = nullptr;
-    QButtonGroup* m_button_group = nullptr;
-    QFrame* m_install_tip = nullptr;
-    QLabel* m_tip_label = nullptr;
-    QGridLayout* m_grid_layout = nullptr;
-    QFrame* m_grid_wrapper = nullptr;
-    QCheckBox* m_encryptCheck = nullptr;
+    FullDiskDelegate* m_delegate     = nullptr;
+    QButtonGroup*     m_button_group = nullptr;
+    QFrame*           m_install_tip  = nullptr;
+    QLabel*           m_tip_label    = nullptr;
+    QGridLayout*      m_grid_layout  = nullptr;
+    QFrame*           m_grid_wrapper = nullptr;
+    QCheckBox*        m_encryptCheck = nullptr;
+    QLabel*           m_errorTip     = nullptr;
+    std::list<std::pair<std::function<void (QString)>, QString>> m_trList;
 
 public slots:
     void onDeviceRefreshed();
