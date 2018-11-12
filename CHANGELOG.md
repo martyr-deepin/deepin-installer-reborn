@@ -1,3 +1,15 @@
+<a name="2.4.7"></a>
+### 2.4.7 (2018-11-12)
+
+
+#### Bug Fixes
+
+*   debug crash ([542ece20](https://github.com/linuxdeepin/deepin-install-reborn/commit/542ece207e369e51e4aecaca424bcdfd9ae0a75c))
+*   wrong locale variable ([aa0dbace](https://github.com/linuxdeepin/deepin-install-reborn/commit/aa0dbaceb88ff3267a37fd76d90879912a425ac0))
+* **FullDisk:**  without choose hard disk that can next step ([be52be30](https://github.com/linuxdeepin/deepin-install-reborn/commit/be52be30917a38266d138e8f36ad03c0d6476071))
+
+
+
 <a name="2.4.6"></a>
 ### 2.4.6 (2018-11-09)
 
