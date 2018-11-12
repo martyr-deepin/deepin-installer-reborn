@@ -404,7 +404,6 @@ void AdvancedPartitionFrame::showErrorMessage(AdvancedValidateState state) {
 
 void AdvancedPartitionFrame::showErrorMessages() {
   for (AdvancedValidateState state: validate_states_) {
-      qDebug() << "advancd error: " << state;
       this->showErrorMessage(state);
   }
 
@@ -469,10 +468,6 @@ void AdvancedPartitionFrame::updateValidateStates() {
         this->showErrorMessage(state);
       }
     }
-  }
-
-  for (auto it = new_states.constBegin(); it != new_states.constEnd(); ++it) {
-      qDebug() << "advance partition error: " << (*it);
   }
 
   // Update state list.

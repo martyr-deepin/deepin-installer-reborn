@@ -36,7 +36,4 @@ enum class AdvancedValidateState {
 typedef QList <AdvancedValidateState> AdvancedValidateStates;
 
 }  // namespace installer
-
-QDebug operator<<(QDebug debug, const installer::AdvancedValidateState &state);
-
 #endif  // INSTALLER_UI_DELEGATES_ADVANCED_VALIDATE_STATE_H
