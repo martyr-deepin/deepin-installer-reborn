@@ -209,7 +209,6 @@ GRUB_DISTRIBUTOR="\`/usr/bin/lsb_release -d -s 2>/dev/null || echo Deepin\`"
 GRUB_THEME="/boot/grub/themes/deepin/theme.txt"
 GRUB_TIMEOUT=5
 GRUB_GFXMODE=${DI_CUR_RESOLUTION}
-GRUB_GFXPAYLOAD_LINUX=text
 EOF
 
 # Remove partman/ignore_uefi if that file is created by installer.
