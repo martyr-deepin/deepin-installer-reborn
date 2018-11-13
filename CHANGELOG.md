@@ -1,3 +1,15 @@
+<a name="2.4.9"></a>
+### 2.4.9 (2018-11-13)
+
+
+#### Bug Fixes
+
+*   not load default translator ([b8cd2528](https://github.com/linuxdeepin/deepin-install-reborn/commit/b8cd252812e80820e38e093bb5c9987d3a513bc1))
+*   not load translator ([e8fda02c](https://github.com/linuxdeepin/deepin-install-reborn/commit/e8fda02ce6535e04214660c0d6d1b4ae3e3167e1))
+* **FullDisk:**  not set width ([7192f7d5](https://github.com/linuxdeepin/deepin-install-reborn/commit/7192f7d56ca5d045ac03851e94f162cc7044160b))
+
+
+
 <a name="2.4.8"></a>
 ### 2.4.8 (2018-11-12)
 
