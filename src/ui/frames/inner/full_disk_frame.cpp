@@ -90,7 +90,7 @@ bool FullDiskFrame::isEncrypt() const
 void FullDiskFrame::changeEvent(QEvent* event) {
     if (event->type() == QEvent::LanguageChange) {
         for (auto it = m_trList.begin(); it != m_trList.end(); ++it) {
-            it->first(qApp->translate("FullDiskFrame", it->second.toUtf8()));
+            it->first(qApp->translate("installer::FullDiskFrame", it->second.toUtf8()));
         }
     }
     else {
@@ -117,7 +117,7 @@ void FullDiskFrame::initUI() {
   m_tip_label = new QLabel(tr("Install here"));
   m_tip_label->setObjectName("tip_label");
   m_tip_label->setFixedHeight(18);
-  addTransLate(m_trList, std::bind(&QLabel::setText, m_tip_label, std::placeholders::_1), QString("Installer here"));
+  addTransLate(m_trList, std::bind(&QLabel::setText, m_tip_label, std::placeholders::_1), QString("Install here"));
 
   m_encryptCheck = new QCheckBox;
   m_encryptCheck->setObjectName("check_box");
