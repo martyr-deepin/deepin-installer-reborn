@@ -47,33 +47,33 @@ bool AdvancedPartitionDelegate::canAddLogical(
                 << partition.device_path;
     return false;
   }
-  const Device& device = virtual_devices_.at(index);
+  const Device::Ptr device = virtual_devices_.at(index);
 
   // If partition table is empty, always returns false.
   // Thus, at least one primary partition shall be created.
-  if (device.table == PartitionTableType::Empty) {
+  if (device->table == PartitionTableType::Empty) {
     return false;
   }
 
   // Ignores gpt table.
-  if (device.table != PartitionTableType::MsDos) {
+  if (device->table != PartitionTableType::MsDos) {
     return false;
   }
 
   bool logical_ok = true;
-  const int ext_index = ExtendedPartitionIndex(device.partitions);
+  const int ext_index = ExtendedPartitionIndex(device->partitions);
   if (ext_index == -1) {
     // No extended partition found, so check a new primary partition is
     // available or not.
-    if (GetPrimaryPartitions(device.partitions).length() >= device.max_prims) {
+    if (GetPrimaryPartitions(device->partitions).length() >= device->max_prims) {
       logical_ok = false;
     }
   } else {
     // Check whether there is primary partition between |partition| and
     // extended partition.
-    const Partition ext_partition = device.partitions.at(ext_index);
+    const Partition ext_partition = device->partitions.at(ext_index);
     const PartitionList prim_partitions = GetPrimaryPartitions(
-        device.partitions);
+        device->partitions);
     if (partition.end_sector < ext_partition.start_sector) {
       for (const Partition& prim_partition : prim_partitions) {
         if (prim_partition.end_sector > partition.start_sector &&
@@ -101,20 +101,20 @@ bool AdvancedPartitionDelegate::canAddPrimary(
                 << partition.device_path;
     return false;
   }
-  const Device& device = virtual_devices_.at(index);
+  const Device::Ptr device = virtual_devices_.at(index);
 
   // If partition table is empty, always returns true.
-  if (device.table == PartitionTableType::Empty) {
+  if (device->table == PartitionTableType::Empty) {
     return true;
   }
 
-  const PartitionList prim_partitions = GetPrimaryPartitions(device.partitions);
+  const PartitionList prim_partitions = GetPrimaryPartitions(device->partitions);
   const PartitionList logical_partitions =
-      GetLogicalPartitions(device.partitions);
+      GetLogicalPartitions(device->partitions);
 
   // Check primary type
   bool primary_ok = true;
-  if (prim_partitions.length() >= device.max_prims) {
+  if (prim_partitions.length() >= device->max_prims) {
     primary_ok = false;
   } else {
     // Check whether |partition| is between two logical partitions.
@@ -196,7 +196,7 @@ Partition AdvancedPartitionDelegate::getRealPartition(
     return Partition();
   }
 
-  for (const Partition& partition : real_devices_.at(index).partitions) {
+  for (const Partition& partition : real_devices_.at(index)->partitions) {
     // Ignores extended partition.
     if (partition.type == PartitionType::Extended) {
       continue;
@@ -233,8 +233,8 @@ bool AdvancedPartitionDelegate::setBootFlag() {
   }
 
   // Check existing EFI partition.
-  for (const Device& device : virtual_devices_) {
-    for (const Partition& partition : device.partitions) {
+  for (const Device::Ptr device : virtual_devices_) {
+    for (const Partition& partition : device->partitions) {
       if (partition.fs == FsType::EFI) {
         return true;
       }
@@ -285,8 +285,8 @@ AdvancedValidateStates AdvancedPartitionDelegate::validate() const {
   const int efi_recommended = GetSettingsInt(kPartitionDefaultEFISpace);
   const int efi_minimum = GetSettingsInt(kPartitionEFIMinimumSpace);
 
-  for (const Device& device : virtual_devices_) {
-    for (const Partition& partition : device.partitions) {
+  for (const Device::Ptr device : virtual_devices_) {
+    for (const Partition& partition : device->partitions) {
       if (partition.mount_point == kMountPointRoot) {
         // Check / partition.
         found_root = true;
@@ -386,12 +386,12 @@ bool AdvancedPartitionDelegate::createPartition(const Partition& partition,
                 << partition.device_path;
     return false;
   }
-  Device& device = virtual_devices_[device_index];
+  Device::Ptr device = virtual_devices_[device_index];
 
-  if (device.table == PartitionTableType::Empty) {
+  if (device->table == PartitionTableType::Empty) {
     // Add NewPartTable operation.
-    Device new_device = device;
-    new_device.table = IsEfiEnabled() ?
+    Device::Ptr new_device(device.get());
+    new_device->table = IsEfiEnabled() ?
                        PartitionTableType::GPT :
                        PartitionTableType::MsDos;
     const Operation operation(new_device);
@@ -436,9 +436,9 @@ AdvancedPartitionDelegate::createLogicalPartition(const Partition& partition,
                 << partition.device_path;
     return false;
   }
-  const Device& device = virtual_devices_.at(device_index);
+  const Device::Ptr device = virtual_devices_.at(device_index);
 
-  const int ext_index = ExtendedPartitionIndex(device.partitions);
+  const int ext_index = ExtendedPartitionIndex(device->partitions);
   Partition ext_partition;
   if (ext_index == -1) {
     // No extended partition found, create one.
@@ -455,7 +455,7 @@ AdvancedPartitionDelegate::createLogicalPartition(const Partition& partition,
     ext_partition = operations_.last().new_partition;
   } else {
     // No need to add extended partition or enlarge it.
-    ext_partition = device.partitions.at(ext_index);
+    ext_partition = device->partitions.at(ext_index);
 
     // Enlarge extended partition if needed.
     if (ext_partition.start_sector > partition.start_sector ||
@@ -562,15 +562,15 @@ AdvancedPartitionDelegate::createPrimaryPartition(const Partition& partition,
                 << partition.device_path;
     return false;
   }
-  Device& device = virtual_devices_[device_index];
+  Device::Ptr device = virtual_devices_[device_index];
 
   const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
 
   // Shrink extended partition if needed.
-  const int ext_index = ExtendedPartitionIndex(device.partitions);
+  const int ext_index = ExtendedPartitionIndex(device->partitions);
   if (partition_type == PartitionType::Normal && ext_index > -1) {
-    const Partition ext_partition = device.partitions.at(ext_index);
-    const PartitionList logical_parts = GetLogicalPartitions(device.partitions);
+    const Partition ext_partition = device->partitions.at(ext_index);
+    const PartitionList logical_parts = GetLogicalPartitions(device->partitions);
     if (logical_parts.isEmpty()) {
       // Remove extended partition if no logical partitions.
       Partition unallocated_partition;
@@ -588,7 +588,7 @@ AdvancedPartitionDelegate::createPrimaryPartition(const Partition& partition,
       operations_.append(operation);
 
       // Remove extended partition from partition list explicitly.
-      device.partitions.removeAt(ext_index);
+      device->partitions.removeAt(ext_index);
 
     } else if (IsPartitionsJoint(ext_partition, partition)) {
       // Shrink extended partition to fit logical partitions.
@@ -717,8 +717,8 @@ void AdvancedPartitionDelegate::deletePartition(const Partition& partition) {
       return;
     }
 
-    Device& device = virtual_devices_[device_index];
-    PartitionList& partitions = device.partitions;
+    Device::Ptr device = virtual_devices_[device_index];
+    PartitionList& partitions = device->partitions;
 
     const int ext_index = ExtendedPartitionIndex(partitions);
     if (ext_index > -1) {
@@ -806,8 +806,8 @@ void AdvancedPartitionDelegate::onManualPartDone(const DeviceList& devices) {
   QString esp_path;
 
   // Check use-specified partitions with mount point.
-  for (const Device& device : devices) {
-    for (const Partition& partition : device.partitions) {
+  for (const Device::Ptr device : devices) {
+    for (const Partition& partition : device->partitions) {
       if (!partition.mount_point.isEmpty()) {
         // Add used partitions to mount_point list.
         const QString record(QString("%1=%2").arg(partition.path)
@@ -873,9 +873,9 @@ void AdvancedPartitionDelegate::refreshVisual() {
 
   virtual_devices_ = FilterInstallerDevice(real_devices_);
 
-  for (Device& device : virtual_devices_) {
+  for (Device::Ptr device : virtual_devices_) {
     PartitionList partitions;
-    for (const Partition& partition : device.partitions) {
+    for (const Partition& partition : device->partitions) {
       if (partition.type == PartitionType::Normal ||
           partition.type == PartitionType::Logical ||
           partition.type == PartitionType::Extended) {
@@ -887,23 +887,23 @@ void AdvancedPartitionDelegate::refreshVisual() {
         }
       }
     }
-    device.partitions = partitions;
+    device->partitions = partitions;
   }
 
-  for (Device& device : virtual_devices_) {
+  for (Device::Ptr device : virtual_devices_) {
     // Merge unallocated partitions.
-    MergeUnallocatedPartitions(device.partitions);
+    MergeUnallocatedPartitions(device->partitions);
 
     for (Operation& operation : operations_) {
       if ((operation.type == OperationType::NewPartTable &&
-          operation.device.path == device.path) ||
-          (operation.orig_partition.device_path == device.path)) {
+          operation.device->path == device->path) ||
+          (operation.orig_partition.device_path == device->path)) {
         operation.applyToVisual(device);
       }
     }
 
     // Merge unallocated partitions.
-    MergeUnallocatedPartitions(device.partitions);
+    MergeUnallocatedPartitions(device->partitions);
   }
 
   qDebug() << "devices:" << virtual_devices_;

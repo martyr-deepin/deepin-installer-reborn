@@ -118,8 +118,8 @@ void SimplePartitionFrame::appendOperations() {
   delegate_->resetOperations();
 
   bool found_efi = false;
-  for (const Device& device : delegate_->virtual_devices()) {
-    for (const Partition& partition : device.partitions) {
+  for (const Device::Ptr device : delegate_->virtual_devices()) {
+    for (const Partition& partition : device->partitions) {
       if (partition.fs == FsType::EFI) {
         found_efi = true;
       }
@@ -285,7 +285,7 @@ void SimplePartitionFrame::repaintDevices() {
 
   // Draw partitions.
   int row = 0, column = 0;
-  for (const Device& device : delegate_->virtual_devices()) {
+  for (const Device::Ptr device : delegate_->virtual_devices()) {
     DeviceModelLabel* device_model_label = new DeviceModelLabel();
     device_model_label->setText(GetDeviceModelCapAndPath(device));
     device_model_label->setFixedSize(kWindowWidth, 20);
@@ -295,7 +295,7 @@ void SimplePartitionFrame::repaintDevices() {
                             1, kDiskColumns, Qt::AlignLeft);
     row += 1;
 
-    for (const Partition& partition : device.partitions) {
+    for (const Partition& partition : device->partitions) {
       if ((partition.type == PartitionType::Extended) || partition.busy) {
         // Ignores extended partition or currently in-used partitions.
         continue;

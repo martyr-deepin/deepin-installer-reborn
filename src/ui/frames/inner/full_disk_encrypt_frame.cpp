@@ -120,11 +120,11 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
     updateText();
 }
 
-void Full_Disk_Encrypt_frame::setDevice(const Device &device)
+void Full_Disk_Encrypt_frame::setDevice(const Device::Ptr device)
 {
-    m_devicePathLbl->setText(device.path);
-    m_deviceModelLbl->setText(device.model);
-    m_deviceSizeLbl->setText(QString("%1 GB").arg(ToGigByte(device.getByteLength())));
+    m_devicePathLbl->setText(device->path);
+    m_deviceModelLbl->setText(device->model);
+    m_deviceSizeLbl->setText(QString("%1 GB").arg(ToGigByte(device->getByteLength())));
 }
 
 void Full_Disk_Encrypt_frame::changeEvent(QEvent *event)

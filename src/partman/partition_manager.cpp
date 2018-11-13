@@ -221,8 +221,8 @@ void PartitionManager::doManualPart(const OperationList& operations) {
   if (ok) {
     devices = ScanDevices(false);
     // Update mount point of real partitions.
-    for (Device& device : devices) {
-      for (Partition& partition : device.partitions) {
+    for (Device::Ptr device : devices) {
+      for (Partition& partition : device->partitions) {
         for (const Operation& operation : real_operations) {
           if (operation.new_partition.path == partition.path) {
             partition.mount_point = operation.new_partition.mount_point;
@@ -237,8 +237,8 @@ void PartitionManager::doManualPart(const OperationList& operations) {
 
 DeviceList ScanDevices(bool enable_os_prober) {
   // 1. List Devices
-  // 1.1. Retrieve metadata of each device.
-  // 2. List partitions of each device.
+  // 1.1. Retrieve metadata of each device->
+  // 2. List partitions of each device->
   // 3. Retrieve partition metadata.
 
   // Let libparted detect all devices and construct device list.
@@ -258,57 +258,57 @@ DeviceList ScanDevices(bool enable_os_prober) {
       lp_device != nullptr;
       lp_device = ped_device_get_next(lp_device)) {
     PedDiskType* disk_type = ped_disk_probe(lp_device);
-    Device device;
+    Device::Ptr device = std::make_shared<Device>();
     if (disk_type == nullptr) {
       // Current device has no partition table.
-      device.table = PartitionTableType::Empty;
+      device->table = PartitionTableType::Empty;
     } else {
       const QString disk_type_name(disk_type->name);
       if (disk_type_name == kPartitionTableGPT) {
-        device.table = PartitionTableType::GPT;
+        device->table = PartitionTableType::GPT;
       } else if (disk_type_name == kPartitionTableMsDos) {
-        device.table = PartitionTableType::MsDos;
+        device->table = PartitionTableType::MsDos;
       } else {
-        // Ignores other type of device.
+        // Ignores other type of device->
         qWarning() << "Ignores other type of device:" << lp_device->path
                    << disk_type->name;
         continue;
       }
     }
 
-    device.path = lp_device->path;
-    device.model = lp_device->model;
-    device.length = lp_device->length;
-    device.sector_size = lp_device->sector_size;
-    device.heads = lp_device->bios_geom.heads;
-    device.sectors = lp_device->bios_geom.sectors;
-    device.cylinders = lp_device->bios_geom.cylinders;
+    device->path = lp_device->path;
+    device->model = lp_device->model;
+    device->length = lp_device->length;
+    device->sector_size = lp_device->sector_size;
+    device->heads = lp_device->bios_geom.heads;
+    device->sectors = lp_device->bios_geom.sectors;
+    device->cylinders = lp_device->bios_geom.cylinders;
 
-    if (device.table == PartitionTableType::Empty) {
+    if (device->table == PartitionTableType::Empty) {
       Partition free_partition;
-      free_partition.device_path = device.path;
+      free_partition.device_path = device->path;
       free_partition.path = "";
       free_partition.partition_number = -1;
       free_partition.start_sector = 1;
-      free_partition.end_sector = device.length;
-      free_partition.sector_size = device.sector_size;
+      free_partition.end_sector = device->length;
+      free_partition.sector_size = device->sector_size;
       free_partition.type = PartitionType::Unallocated;
-      device.partitions.append(free_partition);
+      device->partitions.append(free_partition);
 
-    } else if (device.table == PartitionTableType::MsDos ||
-        device.table == PartitionTableType::GPT) {
+    } else if (device->table == PartitionTableType::MsDos ||
+        device->table == PartitionTableType::GPT) {
       PedDisk* lp_disk = nullptr;
       lp_disk = ped_disk_new(lp_device);
 
       if (lp_disk) {
-        device.max_prims = ped_disk_get_max_primary_partition_count(lp_disk);
+        device->max_prims = ped_disk_get_max_primary_partition_count(lp_disk);
 
-        // If partition table is known, scan partitions in this device.
-        device.partitions = ReadPartitions(lp_disk);
+        // If partition table is known, scan partitions in this device->
+        device->partitions = ReadPartitions(lp_disk);
         // Add additional info to partitions.
-        for (Partition& partition : device.partitions) {
-          partition.device_path = device.path;
-          partition.sector_size = device.sector_size;
+        for (Partition& partition : device->partitions) {
+          partition.device_path = device->path;
+          partition.sector_size = device->sector_size;
           if (!partition.path.isEmpty() &&
               partition.type != PartitionType::Unallocated) {
             // Read partition label and os.
@@ -333,7 +333,7 @@ DeviceList ScanDevices(bool enable_os_prober) {
         ped_disk_destroy(lp_disk);
 
       } else {
-        qCritical() << "Failed to get disk object:" << device.path;
+        qCritical() << "Failed to get disk object:" << device->path;
       }
     }
 

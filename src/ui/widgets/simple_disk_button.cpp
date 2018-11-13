@@ -38,7 +38,7 @@ const QString kDriverInstallIcon = ":/images/driver_install_128.svg";
 
 }  // namespace
 
-SimpleDiskButton::SimpleDiskButton(const Device& device, QWidget* parent)
+SimpleDiskButton::SimpleDiskButton(const Device::Ptr device, QWidget* parent)
   : PointerButton(parent),
     device_(device),
     selected_(false) {
@@ -61,15 +61,15 @@ void SimpleDiskButton::initUI() {
 
   QLabel* path_label = new QLabel();
   path_label->setObjectName("path_label");
-  path_label->setText(device_.path);
+  path_label->setText(device_->path);
 
   QLabel* model_label = new QLabel();
   model_label->setObjectName("model_label");
-  model_label->setText(device_.model);
+  model_label->setText(device_->model);
 
   QLabel* size_label = new QLabel();
   size_label->setObjectName("size_label");
-  size_label->setText(QString("%1 GB").arg(ToGigByte(device_.getByteLength())));
+  size_label->setText(QString("%1 GB").arg(ToGigByte(device_->getByteLength())));
 
   QVBoxLayout* layout = new QVBoxLayout();
   layout->setContentsMargins(0, 0, 0, 0);

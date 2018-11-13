@@ -78,12 +78,12 @@ void BootloaderListModel::onDeviceRefreshed(const DeviceList& devices) {
   QString root_device;
   QString first_device;
 
-  for (const Device& device : devices) {
+  for (const Device::Ptr device : devices) {
     if (first_device.isEmpty()) {
-      first_device = device.path;
+      first_device = device->path;
     }
 
-    for (const Partition& partition : device.partitions) {
+    for (const Partition& partition : device->partitions) {
       if (partition.mount_point == kMountPointRoot) {
         root_device = partition.device_path;
       } else if (partition.mount_point == kMountPointBoot) {
@@ -102,13 +102,13 @@ void BootloaderListModel::onDeviceRefreshed(const DeviceList& devices) {
     recommended_device = first_device;
   }
 
-  for (const Device& device : devices) {
+  for (const Device::Ptr device : devices) {
     // Set recommended flag to false.
-    const bool is_recommended = (device.path == recommended_device);
-    bootloader_list_.append({device.path,
+    const bool is_recommended = (device->path == recommended_device);
+    bootloader_list_.append({device->path,
                              GetDeviceModelAndCap(device),
                              is_recommended});
-    for (const Partition& partition : device.partitions) {
+    for (const Partition& partition : device->partitions) {
       // Filters primary and logical partitions.
       if ((partition.type == PartitionType::Normal ||
            partition.type == PartitionType::Logical) &&

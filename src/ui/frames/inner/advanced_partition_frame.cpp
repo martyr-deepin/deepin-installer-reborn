@@ -341,13 +341,13 @@ void AdvancedPartitionFrame::repaintDevices() {
   // Remove all widgets in partition layout.
   ClearLayout(partition_layout_);
 
-  for (const Device& device : delegate_->virtual_devices()) {
+  for (const Device::Ptr device : delegate_->virtual_devices()) {
     QLabel* model_label = new QLabel();
     model_label->setObjectName("model_label");
     model_label->setText(GetDeviceModelCapAndPath(device));
     model_label->setContentsMargins(15, 10, 0, 5);
     partition_layout_->addWidget(model_label, 0, Qt::AlignLeft);
-    for (const Partition& partition : device.partitions) {
+    for (const Partition& partition : device->partitions) {
       if ((partition.type == PartitionType::Extended) || partition.busy) {
         // Ignores extended partition and currently in-used partitions.
         continue;

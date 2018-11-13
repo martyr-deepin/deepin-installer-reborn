@@ -49,33 +49,33 @@ bool FullDiskDelegate::canAddLogical(const Partition& partition) const {
                 << partition.device_path;
     return false;
   }
-  const Device& device = virtual_devices_.at(index);
+  const Device::Ptr device = virtual_devices_.at(index);
 
   // If partition table is empty, always returns false.
   // Thus, at least one primary partition shall be created.
-  if (device.table == PartitionTableType::Empty) {
+  if (device->table == PartitionTableType::Empty) {
     return false;
   }
 
   // Ignores gpt table.
-  if (device.table != PartitionTableType::MsDos) {
+  if (device->table != PartitionTableType::MsDos) {
     return false;
   }
 
   bool logical_ok = true;
-  const int ext_index = ExtendedPartitionIndex(device.partitions);
+  const int ext_index = ExtendedPartitionIndex(device->partitions);
   if (ext_index == -1) {
     // No extended partition found, so check a new primary partition is
     // available or not.
-    if (GetPrimaryPartitions(device.partitions).length() >= device.max_prims) {
+    if (GetPrimaryPartitions(device->partitions).length() >= device->max_prims) {
       logical_ok = false;
     }
   } else {
     // Check whether there is primary partition between |partition| and
     // extended partition.
-    const Partition ext_partition = device.partitions.at(ext_index);
+    const Partition ext_partition = device->partitions.at(ext_index);
     const PartitionList prim_partitions = GetPrimaryPartitions(
-        device.partitions);
+        device->partitions);
     if (partition.end_sector < ext_partition.start_sector) {
       for (const Partition& prim_partition : prim_partitions) {
         if (prim_partition.end_sector > partition.start_sector &&
@@ -102,20 +102,20 @@ bool FullDiskDelegate::canAddPrimary(const Partition& partition) const {
                 << partition.device_path;
     return false;
   }
-  const Device& device = virtual_devices_.at(index);
+  const Device::Ptr device = virtual_devices_.at(index);
 
   // If partition table is empty, always returns true.
-  if (device.table == PartitionTableType::Empty) {
+  if (device->table == PartitionTableType::Empty) {
     return true;
   }
 
-  const PartitionList prim_partitions = GetPrimaryPartitions(device.partitions);
+  const PartitionList prim_partitions = GetPrimaryPartitions(device->partitions);
   const PartitionList logical_partitions =
-      GetLogicalPartitions(device.partitions);
+      GetLogicalPartitions(device->partitions);
 
   // Check primary type
   bool primary_ok = true;
-  if (prim_partitions.length() >= device.max_prims) {
+  if (prim_partitions.length() >= device->max_prims) {
     primary_ok = false;
   } else {
     // Check whether |partition| is between two logical partitions.
@@ -172,8 +172,8 @@ bool FullDiskDelegate::setBootFlag() {
   }
 
   // Check existing EFI partition.
-  for (const Device& device : virtual_devices_) {
-    for (const Partition& partition : device.partitions) {
+  for (const Device::Ptr device : virtual_devices_) {
+    for (const Partition& partition : device->partitions) {
       if (partition.fs == FsType::EFI) {
         return true;
       }
@@ -218,8 +218,8 @@ FullDiskValidateState FullDiskDelegate::validate() const {
                 << root_partition.device_path;
     return FullDiskValidateState::RootMissing;
   }
-  const Device& device = virtual_devices_.at(device_index);
-  if (device.table == PartitionTableType::Empty) {
+  const Device::Ptr device = virtual_devices_.at(device_index);
+  if (device->table == PartitionTableType::Empty) {
     return FullDiskValidateState::Ok;
   }
 
@@ -266,13 +266,13 @@ bool FullDiskDelegate::createPartition(const Partition& partition,
                 << partition.device_path;
     return false;
   }
-  Device& device = virtual_devices_[device_index];
+  Device::Ptr device = virtual_devices_[device_index];
 
-  if (device.table == PartitionTableType::Empty) {
+  if (device->table == PartitionTableType::Empty) {
     // Add NewPartTable operation.
-    Device new_device = device;
-    new_device.partitions.clear();
-    new_device.table = IsEfiEnabled() ?
+    Device::Ptr new_device(device.get());
+    new_device->partitions.clear();
+    new_device->table = IsEfiEnabled() ?
                        PartitionTableType::GPT :
                        PartitionTableType::MsDos;
     const Operation operation(new_device);
@@ -316,9 +316,9 @@ bool FullDiskDelegate::createLogicalPartition(const Partition& partition,
                 << partition.device_path;
     return false;
   }
-  const Device& device = virtual_devices_.at(device_index);
+  const Device::Ptr device = virtual_devices_.at(device_index);
 
-  const int ext_index = ExtendedPartitionIndex(device.partitions);
+  const int ext_index = ExtendedPartitionIndex(device->partitions);
   Partition ext_partition;
   if (ext_index == -1) {
     // TODO(xushaohua): Support extended partition in simple mode.
@@ -339,7 +339,7 @@ bool FullDiskDelegate::createLogicalPartition(const Partition& partition,
     ext_partition = operations_.last().new_partition;
   } else {
     // No need to add extended partition or enlarge it.
-    ext_partition = device.partitions.at(ext_index);
+    ext_partition = device->partitions.at(ext_index);
 
     // Enlarge extended partition if needed.
     if (ext_partition.start_sector > partition.start_sector ||
@@ -443,15 +443,15 @@ bool FullDiskDelegate::createPrimaryPartition(const Partition& partition,
                 << partition.device_path;
     return false;
   }
-  Device& device = virtual_devices_[device_index];
+  Device::Ptr device = virtual_devices_[device_index];
 
   const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
 
   // Shrink extended partition if needed.
-  const int ext_index = ExtendedPartitionIndex(device.partitions);
+  const int ext_index = ExtendedPartitionIndex(device->partitions);
   if (partition_type == PartitionType::Normal && ext_index > -1) {
-    const Partition ext_partition = device.partitions.at(ext_index);
-    const PartitionList logical_parts = GetLogicalPartitions(device.partitions);
+    const Partition ext_partition = device->partitions.at(ext_index);
+    const PartitionList logical_parts = GetLogicalPartitions(device->partitions);
     if (logical_parts.isEmpty()) {
       // Remove extended partition if no logical partitions.
       Partition unallocated_partition;
@@ -469,7 +469,7 @@ bool FullDiskDelegate::createPrimaryPartition(const Partition& partition,
       operations_.append(operation);
 
       // Remove extended partition from partition list explicitly.
-      device.partitions.removeAt(ext_index);
+      device->partitions.removeAt(ext_index);
 
     } else if (IsPartitionsJoint(ext_partition, partition)) {
       // Shrink extended partition to fit logical partitions.
@@ -503,11 +503,11 @@ bool FullDiskDelegate::createPrimaryPartition(const Partition& partition,
   int partition_number;
   // In simple mode, operations has never been applied to partition list.
   // So do it temporarily.
-  Device tmp_device = device;
+  Device::Ptr tmp_device(device.get());
   for (const Operation& operation : operations_) {
     if ((operation.type == OperationType::NewPartTable &&
-         operation.device.path == tmp_device.path) ||
-        (operation.orig_partition.device_path == tmp_device.path)) {
+         operation.device->path == tmp_device->path) ||
+        (operation.orig_partition.device_path == tmp_device->path)) {
       operation.applyToVisual(tmp_device);
     }
   }
@@ -622,24 +622,24 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
                 << device_path;
     return false;
   }
-  Device& device = virtual_devices_[device_index];
+  Device::Ptr device = virtual_devices_[device_index];
   qDebug() << "device selected to format:" << device;
 
   // Add NewPartTable operation.
-  Device new_device = device;
-  new_device.partitions.clear();
-  new_device.table = type;
+  Device::Ptr new_device = std::make_shared<Device>(*device);
+  new_device->partitions.clear();
+  new_device->table = type;
   const Operation operation(new_device);
   operations_.append(operation);
   // Update virtual device property at the same time.
   operation.applyToVisual(device);
 
-  if (device.partitions.length() == 0) {
+  if (device->partitions.length() == 0) {
     qCritical() << "partition is empty" << device;
     return false;
   }
 
-  Partition& unallocated = device.partitions.last();
+  Partition& unallocated = device->partitions.last();
 
   // Read policy
   QString part_policy;
@@ -647,7 +647,7 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
   const qint64 large_disk_threshold =
       GetSettingsInt(kPartitionFullDiskLargeDiskThreshold) * kGibiByte;
   if (type == PartitionTableType::GPT) {
-    if (device.length * device.sector_size < large_disk_threshold) {
+    if (device->length * device->sector_size < large_disk_threshold) {
       part_policy = GetSettingsString(kPartitionFullDiskSmallUEFIPolicy);
       part_labels = GetSettingsString(kPartitionFullDiskSmallUEFILabel);
     } else {
@@ -655,7 +655,7 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
       part_labels = GetSettingsString(kPartitionFullDiskLargeUEFILabel);
     }
   } else {
-    if (device.length * device.sector_size < large_disk_threshold) {
+    if (device->length * device->sector_size < large_disk_threshold) {
       part_policy = GetSettingsString(kPartitionFullDiskSmallLegacyPolicy);
       part_labels = GetSettingsString(kPartitionFullDiskSmallLegacyLabel);
     } else {
@@ -670,9 +670,9 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
       part_root_range_policy.split(":").at(1)
   };
   const uint swapSize { getSwapSize() };
-  qint64 deviceLength { device.length };
+  qint64 deviceLength { device->length };
   qint64 shift { 0 };
-  qint64 last_deviceLenght { device.length };
+  qint64 last_deviceLenght { device->length };
 
   const QStringList part_rules = part_policy.split(';');
   const QStringList labels = part_labels.split(";");
@@ -694,7 +694,7 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
       // both start_size and end_size need to recalculate shift
       if (rule_parts.size() == 3) {
           const QString &use_range { rule_parts.at(2) };
-          shift = (device.length - last_deviceLenght) * device.sector_size;
+          shift = (device->length - last_deviceLenght) * device->sector_size;
 
           start_size += shift;
           start_size += 1;
@@ -702,20 +702,20 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
 
           // Special handle, root has a range of processing
           if (mount_point == "/") {
-              const qint64 endSize = ParsePartitionSize(use_range, last_deviceLenght * device.sector_size);
+              const qint64 endSize = ParsePartitionSize(use_range, last_deviceLenght * device->sector_size);
               const uint end_size_use { static_cast<uint>((endSize / kKibiByte / kKibiByte / kKibiByte)) };
               if (end_size_use < root_range.first.toUInt()) {
-                  end_size += ParsePartitionSize(QString("%1Gib").arg(root_range.first), last_deviceLenght * device.sector_size);
+                  end_size += ParsePartitionSize(QString("%1Gib").arg(root_range.first), last_deviceLenght * device->sector_size);
               }
               else if (end_size_use > root_range.second.toUInt()) {
-                  end_size += ParsePartitionSize(QString("%1Gib").arg(root_range.second), last_deviceLenght * device.sector_size);
+                  end_size += ParsePartitionSize(QString("%1Gib").arg(root_range.second), last_deviceLenght * device->sector_size);
               }
               else {
-                  end_size += ParsePartitionSize(use_range, last_deviceLenght * device.sector_size);
+                  end_size += ParsePartitionSize(use_range, last_deviceLenght * device->sector_size);
               }
           }
           else {
-              end_size += ParsePartitionSize(use_range, last_deviceLenght * device.sector_size);
+              end_size += ParsePartitionSize(use_range, last_deviceLenght * device->sector_size);
           }
       }
 
@@ -725,11 +725,11 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
           const bool isSwapEnd = end == "linux-swap-end";
 
           if (isSwapEnd) {
-              shift += ParsePartitionSize(QString::number(swapSize) + "Gib", device.length * device.sector_size) +
-                      ParsePartitionSize(start, device.length * device.sector_size);
-              deviceLength -= shift / device.sector_size;
+              shift += ParsePartitionSize(QString::number(swapSize) + "Gib", device->length * device->sector_size) +
+                      ParsePartitionSize(start, device->length * device->sector_size);
+              deviceLength -= shift / device->sector_size;
               end = QString::number(swapSize) + "Gib";
-              end_size = ParsePartitionSize(start, device.length * device.sector_size);
+              end_size = ParsePartitionSize(start, device->length * device->sector_size);
           }
           else {
               start_size += shift;
@@ -740,8 +740,8 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
               mount_point = "";
           }
 
-          start_size += ParsePartitionSize(start, (isSwapEnd ? device.length : deviceLength) * device.sector_size);
-          end_size += ParsePartitionSize(end, (isSwapEnd ? device.length : deviceLength) * device.sector_size);
+          start_size += ParsePartitionSize(start, (isSwapEnd ? device->length : deviceLength) * device->sector_size);
+          end_size += ParsePartitionSize(end, (isSwapEnd ? device->length : deviceLength) * device->sector_size);
       }
 
       if (start_size == -1 || end_size == -1) {
@@ -749,7 +749,7 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
           return false;
       }
 
-      last_deviceLenght -= (end_size - start_size) / device.sector_size;
+      last_deviceLenght -= (end_size - start_size) / device->sector_size;
 
       qDebug() << QString("start size: %1, end size: %2, last_deviceLenght: %3, shift: %4")
                   .arg(start_size)
@@ -760,7 +760,7 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
       const qint64 sectors = (end_size - start_size) / unallocated.sector_size;
       bool ok = false;
 
-      if (rule_idx < device.max_prims || device.table == PartitionTableType::GPT) {
+      if (rule_idx < device->max_prims || device->table == PartitionTableType::GPT) {
           ok = createPrimaryPartition(unallocated,
                                       PartitionType::Normal,
                                       true,
@@ -784,13 +784,13 @@ bool FullDiskDelegate::formatWholeDevice(const QString& device_path,
       Operation& last_operation = operations_.last();
       last_operation.applyToVisual(device);
 
-      unallocated = device.partitions.last();
+      unallocated = device->partitions.last();
   }
 
   qDebug() << "operations for simple disk mode:" << operations_;
 
   // Update bootloader path.
-  this->setBootloaderPath(device.path);
+  this->setBootloaderPath(device->path);
 
   return true;
 }
@@ -811,8 +811,8 @@ void FullDiskDelegate::onManualPartDone(const DeviceList& devices) {
   QString esp_path;
 
   // Check use-specified partitions with mount point.
-  for (const Device& device : devices) {
-    for (const Partition& partition : device.partitions) {
+  for (const Device::Ptr device : devices) {
+    for (const Partition& partition : device->partitions) {
       if (!partition.mount_point.isEmpty()) {
         // Add in-used partitions to mount_point list.
         const QString record(QString("%1=%2").arg(partition.path)

@@ -40,7 +40,7 @@ QDebug& operator<<(QDebug& debug, const OperationType& op_type);
 class Operation {
  public:
   // Create a new operation, with type OperationType::NewPartTable.
-  explicit Operation(const Device& device);
+  explicit Operation(const Device::Ptr device);
 
   Operation(OperationType type,
             const Partition& orig_partition,
@@ -53,7 +53,7 @@ class Operation {
   // a device is changed, all the partitions in it will be cleared first.
   // And partition table is updated too.
   // Device path, sector size and other properties remains unchanged.
-  Device device;
+  Device::Ptr device;
 
   Partition orig_partition;
   Partition new_partition;
@@ -63,7 +63,7 @@ class Operation {
   bool applyToDisk();
 
   // Apply operation by updating device properties.
-  void applyToVisual(Device& device) const;
+  void applyToVisual(const Device::Ptr device) const;
 
   // Get description of this operation.
   QString description() const;
@@ -73,7 +73,7 @@ class Operation {
   void applyDeleteVisual(PartitionList& partitions) const;
 
   // Update partition table type and clear partition list.
-  void applyNewTableVisual(Device& device) const;
+  void applyNewTableVisual(const Device::Ptr device) const;
 
   void applyResizeVisual(PartitionList& partitions) const;
 

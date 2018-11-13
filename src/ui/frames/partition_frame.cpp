@@ -505,7 +505,7 @@ void PartitionFrame::showNewTableWarningFrame(const QString& device_path) {
     qCritical() << "Failed to find device at:" << device_path;
     return;
   }
-  const Device& device = devices.at(device_index);
+  const Device::Ptr device = devices.at(device_index);
   const QString device_info = GetDeviceModelCapAndPath(device);
 
   new_table_warning_frame_->setDevicePath(device_path, device_info);

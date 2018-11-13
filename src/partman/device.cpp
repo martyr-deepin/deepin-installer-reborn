@@ -34,6 +34,23 @@ Device::Device()
       table(PartitionTableType::Unknown) {
 }
 
+Device::Device(const Device &device)
+    : partitions(device.partitions)
+    , model(device.model)
+    , path(device.path)
+    , length(device.length)
+    , heads(device.heads)
+    , sectors(device.sectors)
+    , cylinders(device.cylinders)
+    , cylsize(device.cylsize)
+    , sector_size(device.sector_size)
+    , max_prims(device.max_prims)
+    , read_only(device.read_only)
+    , table(device.table)
+{
+
+}
+
 qint64 Device::getByteLength() const {
   if (length > 0) {
     return length * sector_size;
@@ -56,9 +73,14 @@ QDebug& operator<<(QDebug& debug, const Device& device) {
   return debug;
 }
 
+QDebug& operator<<(QDebug& debug, const Device::Ptr device) {
+    debug << device.get();
+    return debug;
+}
+
 int DeviceIndex(const DeviceList& devices, const QString& device_path) {
   for (int i = 0; i < devices.length(); ++i) {
-    if (devices.at(i).path == device_path) {
+    if (devices.at(i)->path == device_path) {
       return i;
     }
   }

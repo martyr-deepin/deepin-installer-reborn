@@ -20,6 +20,7 @@
 
 #include <QDebug>
 #include <QList>
+#include <memory>
 
 #include "partman/partition.h"
 
@@ -28,6 +29,9 @@ namespace installer {
 class Device {
  public:
   Device();
+  Device(const Device &device);
+
+  typedef std::shared_ptr<Device> Ptr;
 
   PartitionList partitions;
   QString model;
@@ -47,8 +51,9 @@ class Device {
   qint64 getByteLength() const;
 };
 QDebug& operator<<(QDebug& debug, const Device& device);
+QDebug& operator<<(QDebug& debug, const Device::Ptr device);
 
-typedef QList<Device> DeviceList;
+typedef QList<Device::Ptr> DeviceList;
 
 // Get index of device object with |device_path|. Returns -1 if not found.
 int DeviceIndex(const DeviceList& devices, const QString& device_path);

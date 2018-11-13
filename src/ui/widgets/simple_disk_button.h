@@ -28,9 +28,9 @@ namespace installer {
 class SimpleDiskButton : public PointerButton {
   Q_OBJECT
  public:
-  SimpleDiskButton(const Device& device, QWidget* parent = nullptr);
+  SimpleDiskButton(const Device::Ptr device, QWidget* parent = nullptr);
 
-  const Device& device() const { return device_; }
+  const Device::Ptr device() const { return device_; }
 
   // Get device button selection state.
   bool selected() const { return selected_; }
@@ -41,7 +41,7 @@ class SimpleDiskButton : public PointerButton {
  private:
   void initUI();
 
-  const Device& device_;
+  const Device::Ptr device_;
   QLabel* os_label_ = nullptr;
   bool selected_ = false;
 };

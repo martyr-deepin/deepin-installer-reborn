@@ -30,10 +30,10 @@ namespace installer {
 void AlignPartition(Partition& partition);
 
 // Calculate new logical partition number.
-int AllocLogicalPartitionNumber(const Device& device);
+int AllocLogicalPartitionNumber(const Device::Ptr device);
 
 // Calculate new primary partition number. Returns -1 on failed.
-int AllocPrimaryPartitionNumber(const Device& device);
+int AllocPrimaryPartitionNumber(const Device::Ptr device);
 
 // Filters installer device disk from |devices|.
 DeviceList FilterInstallerDevice(const DeviceList& devices);
@@ -42,10 +42,10 @@ DeviceList FilterInstallerDevice(const DeviceList& devices);
 FsType GetDefaultFsType();
 
 // Get device model name and capacity.
-QString GetDeviceModelAndCap(const Device& device);
+QString GetDeviceModelAndCap(const Device::Ptr device);
 
 // Get device model name, disk capacity and path.
-QString GetDeviceModelCapAndPath(const Device& device);
+QString GetDeviceModelCapAndPath(const Device::Ptr device);
 
 // Get device path which is mounted at /lib/live/mount/medium.
 // It might be a partition path or a real device path.

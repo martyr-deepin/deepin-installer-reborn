@@ -65,9 +65,9 @@ void AlignPartition(Partition& partition) {
   partition.end_sector = end_size * oneMebiByteSector - 1;
 }
 
-int AllocLogicalPartitionNumber(const Device& device) {
-  int num = device.max_prims;
-  for (const Partition& partition : device.partitions) {
+int AllocLogicalPartitionNumber(const Device::Ptr device) {
+  int num = device->max_prims;
+  for (const Partition& partition : device->partitions) {
     if (partition.partition_number >= num) {
       num = partition.partition_number;
     }
@@ -75,10 +75,10 @@ int AllocLogicalPartitionNumber(const Device& device) {
   return num + 1;
 }
 
-int AllocPrimaryPartitionNumber(const Device& device) {
-  for (int num = 1; num <= device.max_prims; num++) {
+int AllocPrimaryPartitionNumber(const Device::Ptr device) {
+  for (int num = 1; num <= device->max_prims; num++) {
     bool in_use = false;
-    for (const Partition& partition : device.partitions) {
+    for (const Partition& partition : device->partitions) {
       if (num == partition.partition_number) {
         in_use = true;
         break;
@@ -100,8 +100,8 @@ DeviceList FilterInstallerDevice(const DeviceList& devices) {
 
   DeviceList filtered_devices;
   const QString installer_device_path(GetInstallerDevicePath());
-  for (const Device& device : devices) {
-    if (!installer_device_path.startsWith(device.path)) {
+  for (const Device::Ptr device : devices) {
+    if (!installer_device_path.startsWith(device->path)) {
       filtered_devices.append(device);
     } else {
       qDebug() << "Filtered device:" << device;
@@ -116,15 +116,15 @@ FsType GetDefaultFsType() {
   return GetFsTypeByName(default_fs_name);
 }
 
-QString GetDeviceModelAndCap(const Device& device) {
-  const int gibi_size = ToGigByte(device.getByteLength());
-  return QString("%1 (%2G)").arg(device.model).arg(gibi_size);
+QString GetDeviceModelAndCap(const Device::Ptr device) {
+  const int gibi_size = ToGigByte(device->getByteLength());
+  return QString("%1 (%2G)").arg(device->model).arg(gibi_size);
 }
 
-QString GetDeviceModelCapAndPath(const Device& device) {
-  const int gibi_size = ToGigByte(device.getByteLength());
-  const QString name(QFileInfo(device.path).fileName());
-  return QString("%1 %2G(%3)").arg(device.model).arg(gibi_size).arg(name);
+QString GetDeviceModelCapAndPath(const Device::Ptr device) {
+  const int gibi_size = ToGigByte(device->getByteLength());
+  const QString name(QFileInfo(device->path).fileName());
+  return QString("%1 %2G(%3)").arg(device->model).arg(gibi_size).arg(name);
 }
 
 QString GetInstallerDevicePath() {
@@ -314,10 +314,10 @@ int GetPartitionUsageValue(const Partition& partition) {
 bool IgnoreUEFI(const DeviceList& devices) {
   // Check in UEFI mode or not.
   if (IsEfiEnabled()) {
-    for (const Device& device : devices) {
+    for (const Device::Ptr device : devices) {
       // Check partition table type.
-      if (device.table != PartitionTableType::GPT) {
-        for (const Partition& partition : device.partitions) {
+      if (device->table != PartitionTableType::GPT) {
+        for (const Partition& partition : device->partitions) {
           if (partition.os != OsType::Empty) {
             return true;
           }
@@ -374,7 +374,7 @@ bool IsPartitionTableMatch(const DeviceList& devices,
     qCritical() << "Failed to find device:" << device_path;
     return false;
   }
-  PartitionTableType table = devices.at(device_index).table;
+  PartitionTableType table = devices.at(device_index)->table;
   return IsPartitionTableMatch(table);
 }
 

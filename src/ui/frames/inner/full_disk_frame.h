@@ -18,6 +18,8 @@
 #ifndef DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_FRAME_H
 #define DEEPIN_INSTALLER_UI_FRAMES_INNER_FULL_DISK_FRAME_H
 
+#include "partman/device.h"
+
 #include <QFrame>
 #include <functional>
 class QAbstractButton;
@@ -30,7 +32,6 @@ class QCheckBox;
 namespace installer {
 
 class FullDiskDelegate;
-class Device;
 
 class FullDiskFrame : public QFrame {
     Q_OBJECT
@@ -43,7 +44,7 @@ public:
     bool isEncrypt() const;
 
 signals:
-    void currentDeviceChanged(const Device& device) const;
+    void currentDeviceChanged(const Device::Ptr device) const;
     void cryptoStateChanged(bool crypto) const;
 
 protected:

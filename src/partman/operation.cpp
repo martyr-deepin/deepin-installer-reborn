@@ -60,7 +60,7 @@ QDebug& operator<<(QDebug& debug, const OperationType& op_type) {
   return debug;
 }
 
-Operation::Operation(const Device& device)
+Operation::Operation(const Device::Ptr device)
     : type(OperationType::NewPartTable),
       device(device) {
 }
@@ -186,8 +186,8 @@ bool Operation::applyToDisk() {
     }
 
     case OperationType::NewPartTable: {
-      if (!CreatePartitionTable(device.path, device.table)) {
-        qCritical() << "CreatePartitionTable() failed:" << device;
+      if (!CreatePartitionTable(device->path, device->table)) {
+        qCritical() << "CreatePartitionTable() failed:" << device.get();
         return false;
       } else {
         return true;
@@ -211,8 +211,8 @@ bool Operation::applyToDisk() {
   }
 }
 
-void Operation::applyToVisual(Device& device) const {
-  PartitionList& partitions = device.partitions;
+void Operation::applyToVisual(const Device::Ptr device) const {
+  PartitionList& partitions = device->partitions;
   switch (type) {
     case OperationType::Create: {
       this->applyCreateVisual(partitions);
@@ -290,8 +290,8 @@ QString Operation::description() const {
     }
     case OperationType::NewPartTable: {
       desc = QObject::tr("Format %1 and create %2 new partition table")
-          .arg(device.path)
-          .arg(GetPartTableName(device.table));
+          .arg(device->path)
+          .arg(GetPartTableName(device->table));
       break;
     }
     case OperationType::Resize: {
@@ -368,24 +368,24 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
   MergeUnallocatedPartitions(partitions);
 }
 
-void Operation::applyNewTableVisual(Device& device) const {
-  device.table = this->device.table;
-  device.partitions.clear();
+void Operation::applyNewTableVisual(const Device::Ptr device) const {
+  device->table = this->device->table;
+  device->partitions.clear();
   Partition free_partition;
-  free_partition.device_path = device.path;
+  free_partition.device_path = device->path;
   free_partition.path = "";
   free_partition.partition_number = -1;
   free_partition.start_sector = 1;
-  free_partition.end_sector = device.length;
-  free_partition.sector_size = device.sector_size;
+  free_partition.end_sector = device->length;
+  free_partition.sector_size = device->sector_size;
   free_partition.type = PartitionType::Unallocated;
-  device.partitions.append(free_partition);
+  device->partitions.append(free_partition);
 
   // Update max primary partition number.
-  if (device.table == PartitionTableType::MsDos) {
-    device.max_prims = kMsDosPartitionNums;
-  } else if (device.table == PartitionTableType::GPT) {
-    device.max_prims = kGPTPartitionNums;
+  if (device->table == PartitionTableType::MsDos) {
+    device->max_prims = kMsDosPartitionNums;
+  } else if (device->table == PartitionTableType::GPT) {
+    device->max_prims = kGPTPartitionNums;
   }
 }
 

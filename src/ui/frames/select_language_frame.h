@@ -54,7 +54,7 @@ class SelectLanguageFrame : public QFrame {
   void changeEvent(QEvent* event) override;
 
   // Handles key press event of language_view_.
-  bool eventFilter(QObject* obj, QEvent* event);
+  bool eventFilter(QObject* obj, QEvent* event) Q_DECL_OVERRIDE;
 
  private:
   void initConnections();

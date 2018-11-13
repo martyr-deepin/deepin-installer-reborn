@@ -1,6 +1,8 @@
 #ifndef FULL_DISK_ENCRYPT_FRAME_H
 #define FULL_DISK_ENCRYPT_FRAME_H
 
+#include "partman/device.h"
+
 #include <QWidget>
 
 class QVBoxLayout;
@@ -8,7 +10,6 @@ class QLabel;
 class QCheckBox;
 
 namespace installer {
-class Device;
 class RoundedProgressBar;
 class NavButton;
 class LineEdit;
@@ -20,7 +21,7 @@ class Full_Disk_Encrypt_frame : public QWidget
 public:
     explicit Full_Disk_Encrypt_frame(QWidget *parent = nullptr);
 
-    void setDevice(const Device &device);
+    void setDevice(const Device::Ptr device);
 
 signals:
     void cancel();

@@ -205,16 +205,16 @@ void FullDiskFrame::repaintDevices() {
 
   // Draw partitions.
   int row = 0, column = 0;
-  for (const Device& device : m_delegate->virtual_devices()) {
+  for (const Device::Ptr device : m_delegate->virtual_devices()) {
     bool partition_busy = false;
-    for (const Partition& partition : device.partitions) {
+    for (const Partition& partition : device->partitions) {
       if (partition.busy) {
         partition_busy = true;
         break;
       }
     }
     if (partition_busy) {
-      qWarning() << "Partition on device is busy!" << device.path;
+      qWarning() << "Partition on device is busy!" << device->path;
       continue;
     }
     SimpleDiskButton* button = new SimpleDiskButton(device);
@@ -272,7 +272,7 @@ void FullDiskFrame::onPartitionButtonToggled(QAbstractButton* button,
 
     emit currentDeviceChanged(part_button->device());
 
-    const QString path = part_button->device().path;
+    const QString path = part_button->device()->path;
     qDebug() << "selected device path:" << path;
     part_button->setSelected(true);
 
