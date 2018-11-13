@@ -185,6 +185,10 @@ void FullDiskFrame::initUI() {
   policy.setVerticalStretch(100);
   this->setSizePolicy(policy);
   this->setStyleSheet(ReadFile(":/styles/simple_disk_frame.css"));
+
+  for (auto it = m_trList.begin(); it != m_trList.end(); ++it) {
+      it->first(qApp->translate("installer::FullDiskFrame", it->second.toUtf8()));
+  }
 }
 
 void FullDiskFrame::repaintDevices() {
