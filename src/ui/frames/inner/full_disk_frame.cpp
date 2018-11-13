@@ -154,6 +154,7 @@ void FullDiskFrame::initUI() {
   m_grid_layout->setColumnStretch(kDiskColumns, 1);
 
   m_grid_wrapper = new QFrame();
+  m_grid_wrapper->setFixedWidth(kWindowWidth);
   m_grid_wrapper->setObjectName("grid_wrapper");
   m_grid_wrapper->setLayout(m_grid_layout);
   m_install_tip->setParent(m_grid_wrapper);
@@ -164,6 +165,7 @@ void FullDiskFrame::initUI() {
   scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scroll_area->setWidgetResizable(true);
+  scroll_area->setFixedWidth(kWindowWidth);
 
   QVBoxLayout* main_layout = new QVBoxLayout();
   main_layout->setContentsMargins(0, 0, 0, 0);
