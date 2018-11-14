@@ -383,4 +383,8 @@ void WriteFullDiskDeivce(const QString &deviceName)
     AppendToConfigFile("DI_FULLDISK_DEVICE", deviceName);
 }
 
+void WriteSwapPartitionSize(const uint size) {
+    AppendToConfigFile("DI_SWAP_SIZE", size);
+}
+
 }  // namespace installer

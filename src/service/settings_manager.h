@@ -116,6 +116,9 @@ void WriteRequiringSwapFile(bool is_required);
 // Other settings will be updated later.
 void AddConfigFile();
 
+// Save swap size for FullDiskInstall
+void WriteSwapPartitionSize(const uint size);
+
 }  // namespace installer
 
 #endif  // INSTALLER_SETTINGS_MANAGER_H

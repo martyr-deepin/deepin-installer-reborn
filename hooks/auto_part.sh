@@ -172,9 +172,8 @@ create_part(){
 
   if [[ "$part_size" =~ %$ ]]; then
     part_size=$((AVL_SIZE * ${part_size%\%} / 100))
-  elif [ "$part_size" = swap-size ] && [[ "$(free -g)" =~ Mem:\ +([0-9]+) ]]; then
-    swap_size="${BASH_REMATCH[1]}"
-    let swap_size+=$(echo "sqrt($swap_size)"|bc)
+  elif [ "$part_size" = swap-size ]; then
+    swap_size=$(installer_get DI_SWAP_SIZE)
     if ((swap_size > 0)); then
       part_size=$((swap_size * 1024))
     else

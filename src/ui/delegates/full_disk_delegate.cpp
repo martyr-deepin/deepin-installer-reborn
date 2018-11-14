@@ -875,6 +875,10 @@ void FullDiskDelegate::setBootloaderPath(const QString& path) {
     bootloader_path_ = path;
 }
 
+void FullDiskDelegate::saveSwapSize() {
+    WriteSwapPartitionSize(getSwapSize());
+}
+
 uint FullDiskDelegate::getSwapSize()
 {
     // get system memory

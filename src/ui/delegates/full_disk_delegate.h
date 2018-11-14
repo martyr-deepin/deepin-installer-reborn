@@ -119,6 +119,9 @@ class FullDiskDelegate : public QObject {
   // Update bootloader settings to |path|.
   void setBootloaderPath(const QString& path);
 
+  // Update swap partition size
+  void saveSwapSize();
+
 private:
   // Get auto swap size
   uint getSwapSize();

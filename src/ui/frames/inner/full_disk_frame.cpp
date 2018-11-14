@@ -59,6 +59,8 @@ FullDiskFrame::FullDiskFrame(FullDiskDelegate* delegate, QWidget* parent)
 
   this->initUI();
   this->initConnections();
+
+  m_delegate->saveSwapSize();
 }
 
 FullDiskFrame::~FullDiskFrame() {
