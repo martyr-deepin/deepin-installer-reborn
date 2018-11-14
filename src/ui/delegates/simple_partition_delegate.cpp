@@ -155,6 +155,7 @@ bool SimplePartitionDelegate::setBootFlag() {
 
   // First check new EFI partition->
   for (Operation& operation : operations_) {
+    if (operation.type == OperationType::NewPartTable) continue; // 创建分区表不需要检查
     if (operation.new_partition->fs == FsType::EFI) {
       operation.new_partition->flags.append(PartitionFlag::Boot);
       operation.new_partition->flags.append(PartitionFlag::ESP);
@@ -174,6 +175,7 @@ bool SimplePartitionDelegate::setBootFlag() {
   // Check /boot partition->
   if (!found_boot) {
     for (Operation& operation : operations_) {
+      if (operation.type == OperationType::NewPartTable) continue; // skip for create table
       if (operation.new_partition->mount_point == kMountPointBoot) {
         operation.new_partition->flags.append(PartitionFlag::Boot);
         found_boot = true;
@@ -184,6 +186,7 @@ bool SimplePartitionDelegate::setBootFlag() {
   // At last, check / partition->
   if (!found_boot) {
     for (Operation& operation : operations_) {
+      if (operation.type == OperationType::NewPartTable) continue; // skip for create table
       if (operation.new_partition->mount_point == kMountPointRoot) {
         operation.new_partition->flags.append(PartitionFlag::Boot);
         found_boot = true;

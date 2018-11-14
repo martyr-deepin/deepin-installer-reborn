@@ -224,6 +224,7 @@ void PartitionManager::doManualPart(const OperationList& operations) {
     for (Device::Ptr device : devices) {
       for (Partition::Ptr partition : device->partitions) {
         for (const Operation& operation : real_operations) {
+          if (operation.type == OperationType::NewPartTable) continue; // skip for create table
           if (operation.new_partition->path == partition->path) {
             partition->mount_point = operation.new_partition->mount_point;
           }
