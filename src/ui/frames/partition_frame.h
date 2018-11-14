@@ -125,9 +125,9 @@ class PartitionFrame : public QFrame {
   // Notify delegate to do manual part.
   void onPrepareInstallFrameFinished();
 
-  void showEditPartitionFrame(const Partition& partition);
+  void showEditPartitionFrame(const Partition::Ptr partition);
   void showMainFrame();
-  void showNewPartitionFrame(const Partition& partition);
+  void showNewPartitionFrame(const Partition::Ptr partition);
   void showNewTableLoadingFrame();
   void showNewTableWarningFrame(const QString& device_path);
   void showPartitionNumberLimitationFrame();

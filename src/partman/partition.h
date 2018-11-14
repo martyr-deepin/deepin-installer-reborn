@@ -21,6 +21,7 @@
 #include <QDebug>
 #include <QList>
 #include <QStringList>
+#include <memory>
 
 #include "partman/fs.h"
 #include "partman/structs.h"
@@ -74,11 +75,14 @@ typedef QList<PartitionFlag> PartitionFlags;
 class Partition {
  public:
   Partition();
+  Partition(const Partition &partition);
   ~Partition();
+
+  typedef std::shared_ptr<Partition> Ptr;
 
   // Returns true if both this partition and the |other| one refer to
   // the same sector range.
-  bool operator==(const Partition& other) const;
+  bool operator==(const Partition::Ptr other) const;
 
   QString device_path;
   QString path;
@@ -123,8 +127,9 @@ class Partition {
   qint64 getSectorLength() const;
 };
 QDebug& operator<<(QDebug& debug, const Partition& partition);
+QDebug& operator<<(QDebug& debug, const Partition::Ptr partition);
 
-typedef QList<Partition> PartitionList;
+typedef QList<Partition::Ptr> PartitionList;
 
 // Get index of extended partition in |partitions|. Returns -1 if not found.
 int ExtendedPartitionIndex(const PartitionList& partitions);
@@ -136,10 +141,10 @@ PartitionList GetPrimaryPartitions(const PartitionList& partitions);
 PartitionList GetLogicalPartitions(const PartitionList& partitions);
 
 // Check whether two partitions are intersected.
-bool IsPartitionsJoint(const Partition& part1, const Partition& part2);
+bool IsPartitionsJoint(const Partition::Ptr part1, const Partition::Ptr part2);
 
 // Get index of |partition| in |partitions|. Returns -1 if not found.
-int PartitionIndex(const PartitionList& partitions, const Partition& partition);
+int PartitionIndex(const PartitionList& partitions, const Partition::Ptr partition);
 
 }  // namespace installer
 

@@ -29,22 +29,22 @@ class AdvancedPartitionButton : public PointerButton {
   Q_OBJECT
 
  public:
-  explicit AdvancedPartitionButton(const Partition& partition,
+  explicit AdvancedPartitionButton(const Partition::Ptr partition,
                                    QWidget* parent = nullptr);
 
   // Get partition struct binding to current button.
-  const Partition& partition() const;
+  const Partition::Ptr partition() const;
 
  signals:
   // Emitted when delete partition button is clicked.
-  void deletePartitionTriggered(const Partition& partition);
+  void deletePartitionTriggered(const Partition::Ptr partition);
 
   // Emitted when edit-partition button is clicked.
-  void editPartitionTriggered(const Partition& partition);
+  void editPartitionTriggered(const Partition::Ptr partition);
 
   // Emitted when edit-partition button is clicked and type of current
   // partition is Unallocated.
-  void newPartitionTriggered(const Partition& partition);
+  void newPartitionTriggered(const Partition::Ptr partition);
 
  public slots:
   void setEditable(bool editable);
@@ -53,7 +53,7 @@ class AdvancedPartitionButton : public PointerButton {
   void initConnections();
   void initUI();
 
-  const Partition& partition_;
+  const Partition::Ptr partition_;
 
   // Switch status between new-partition, edit-partition and delete-partition.
   PointerButton* control_button_ = nullptr;

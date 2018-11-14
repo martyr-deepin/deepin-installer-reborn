@@ -44,10 +44,10 @@ QString GetPedFsName(FsType fs) {
 }
 
 // Get ped file system type pointer which is used by |partition|.
-PedFileSystemType* GetPedFsType(const Partition& partition) {
-  if (partition.type != PartitionType::Extended) {
+PedFileSystemType* GetPedFsType(const Partition::Ptr partition) {
+  if (partition->type != PartitionType::Extended) {
     PedFileSystemType* fs_type = nullptr;
-    const QString fs_name = GetPedFsName(partition.fs);
+    const QString fs_name = GetPedFsName(partition->fs);
     fs_type = ped_file_system_type_get(fs_name.toLocal8Bit().constData());
     if (fs_type == NULL) {
       // Fallback to default filesystem type.
@@ -79,15 +79,15 @@ bool CommitUdevEvent(const QString& dev_path) {
   return QFileInfo::exists(dev_path);
 }
 
-bool CreatePartition(const Partition& partition) {
+bool CreatePartition(const Partition::Ptr partition) {
   qDebug() << "CreatePartition()" << partition;
   bool ok = false;
   PedDevice* lp_device = nullptr;
   PedDisk* lp_disk = nullptr;
-  if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
+  if (GetDeviceAndDisk(partition->device_path, lp_device, lp_disk)) {
     PedPartitionType type;
 
-    switch (partition.type) {
+    switch (partition->type) {
       case PartitionType::Normal: {
         type = PED_PARTITION_NORMAL;
         break;
@@ -110,13 +110,13 @@ bool CreatePartition(const Partition& partition) {
     PedPartition* lp_partition = ped_partition_new(lp_disk,
                                                    type,
                                                    fs_type,
-                                                   partition.start_sector,
-                                                   partition.end_sector);
+                                                   partition->start_sector,
+                                                   partition->end_sector);
     if (lp_partition) {
       PedConstraint* constraint = nullptr;
       PedGeometry* geom = ped_geometry_new(lp_device,
-                                           partition.start_sector,
-                                           partition.getSectorLength());
+                                           partition->start_sector,
+                                           partition->getSectorLength());
       if (geom) {
         constraint = ped_constraint_exact(geom);
       } else {
@@ -198,18 +198,18 @@ bool CreatePartitionTable(const QString& device_path,
   }
 }
 
-bool DeletePartition(const Partition& partition) {
+bool DeletePartition(const Partition::Ptr partition) {
   qDebug() << "DeletePartition()" << partition;
   bool ok = false;
   PedDevice* lp_device = nullptr;
   PedDisk* lp_disk = nullptr;
-  if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
+  if (GetDeviceAndDisk(partition->device_path, lp_device, lp_disk)) {
     PedPartition* lp_partition = nullptr;
-    if (partition.type == PartitionType::Extended) {
+    if (partition->type == PartitionType::Extended) {
       lp_partition = ped_disk_extended_partition(lp_disk);
     } else {
       lp_partition = ped_disk_get_partition_by_sector(lp_disk,
-                                                      partition.getSector());
+                                                      partition->getSector());
     }
     if (lp_partition) {
       ok = bool(ped_disk_delete_partition(lp_disk, lp_partition));
@@ -288,30 +288,30 @@ QString GetPartitionPath(PedPartition* lp_partition) {
   return path;
 }
 
-bool ResizeMovePartition(const Partition& partition) {
+bool ResizeMovePartition(const Partition::Ptr partition) {
   qDebug() << "ResizeMovePartition()" << partition;
   bool ok = false;
   PedDevice* lp_device = nullptr;
   PedDisk* lp_disk = nullptr;
-  if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
+  if (GetDeviceAndDisk(partition->device_path, lp_device, lp_disk)) {
     PedPartition* lp_partition = nullptr;
-    if (partition.type == PartitionType::Extended) {
+    if (partition->type == PartitionType::Extended) {
       lp_partition = ped_disk_extended_partition(lp_disk);
     } else {
       lp_partition = ped_disk_get_partition_by_sector(lp_disk,
-                                                      partition.getSector());
+                                                      partition->getSector());
     }
     if (lp_partition) {
-      PedGeometry* geom = ped_geometry_new(lp_device, partition.start_sector,
-                                           partition.getSectorLength());
+      PedGeometry* geom = ped_geometry_new(lp_device, partition->start_sector,
+                                           partition->getSectorLength());
       PedConstraint* constraint = nullptr;
       if (geom) {
         constraint = ped_constraint_exact(geom);
       }
       if (constraint) {
         ok = bool(ped_disk_set_partition_geom(lp_disk, lp_partition, constraint,
-                                              partition.start_sector,
-                                              partition.end_sector));
+                                              partition->start_sector,
+                                              partition->end_sector));
         if (ok) {
           ok = Commit(lp_disk);
         }
@@ -324,16 +324,16 @@ bool ResizeMovePartition(const Partition& partition) {
   return ok;
 }
 
-bool SetPartitionFlag(const Partition& partition,
+bool SetPartitionFlag(const Partition::Ptr partition,
                       PedPartitionFlag flag,
                       bool is_set) {
   qDebug() << "SetPartitionFlag()" << partition << flag << is_set;
   PedDevice* lp_device = nullptr;
   PedDisk* lp_disk = nullptr;
   bool ok = false;
-  if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
+  if (GetDeviceAndDisk(partition->device_path, lp_device, lp_disk)) {
     PedPartition* lp_partition =
-        ped_disk_get_partition_by_sector(lp_disk, partition.getSector());
+        ped_disk_get_partition_by_sector(lp_disk, partition->getSector());
     if (lp_partition) {
       ok = bool(ped_partition_set_flag(lp_partition, flag, is_set ? 1 : 0));
     }
@@ -347,8 +347,8 @@ bool SetPartitionFlag(const Partition& partition,
   return ok;
 }
 
-bool SetPartitionFlags(const Partition& partition) {
-  for (PartitionFlag flag : partition.flags) {
+bool SetPartitionFlags(const Partition::Ptr partition) {
+  for (PartitionFlag flag : partition->flags) {
     if (!SetPartitionFlag(partition,
                           static_cast<PedPartitionFlag>(flag),
                           true)) {
@@ -358,17 +358,17 @@ bool SetPartitionFlags(const Partition& partition) {
   return true;
 }
 
-bool SetPartitionType(const Partition& partition) {
+bool SetPartitionType(const Partition::Ptr partition) {
   qDebug() << "SetPartitionType:" << partition;
   PedDevice* lp_device = nullptr;
   PedDisk* lp_disk = nullptr;
   bool ok = false;
-  if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
-    const QString fs_name = GetPedFsName(partition.fs);
+  if (GetDeviceAndDisk(partition->device_path, lp_device, lp_disk)) {
+    const QString fs_name = GetPedFsName(partition->fs);
 
     PedFileSystemType* fs_type = GetPedFsType(partition);
     PedPartition* lp_partition =
-        ped_disk_get_partition_by_sector(lp_disk, partition.getSector());
+        ped_disk_get_partition_by_sector(lp_disk, partition->getSector());
 
     if (fs_type && lp_partition) {
       ok = bool(ped_partition_set_system(lp_partition, fs_type));
@@ -396,21 +396,21 @@ void SettleDevice(int timeout) {
   SpawnCmd("udevadm", {"settle", QString("--timeout=%1").arg(timeout)});
 }
 
-bool UpdatePartitionNumber(Partition& partition) {
+bool UpdatePartitionNumber(Partition::Ptr partition) {
   bool ok = false;
   PedDevice* lp_device = nullptr;
   PedDisk* lp_disk = nullptr;
-  if (GetDeviceAndDisk(partition.device_path, lp_device, lp_disk)) {
+  if (GetDeviceAndDisk(partition->device_path, lp_device, lp_disk)) {
     PedPartition* lp_partition = nullptr;
-    if (partition.type == PartitionType::Extended) {
+    if (partition->type == PartitionType::Extended) {
       lp_partition = ped_disk_extended_partition(lp_disk);
     } else {
       lp_partition = ped_disk_get_partition_by_sector(lp_disk,
-                                                      partition.getSector());
+                                                      partition->getSector());
     }
     if (lp_partition) {
-      partition.partition_number = lp_partition->num;
-      partition.path = GetPartitionPath(lp_partition);
+      partition->partition_number = lp_partition->num;
+      partition->path = GetPartitionPath(lp_partition);
       ok = true;
     } else {
       qCritical() << "UpdatePartitionNumber() lp_partition is nullptr";

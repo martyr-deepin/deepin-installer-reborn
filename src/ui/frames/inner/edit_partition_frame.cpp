@@ -66,20 +66,20 @@ EditPartitionFrame::EditPartitionFrame(AdvancedPartitionDelegate* delegate,
   this->initConnections();
 }
 
-void EditPartitionFrame::setPartition(const Partition& partition) {
+void EditPartitionFrame::setPartition(const Partition::Ptr partition) {
   // Update partition information.
   partition_ = partition;
-  os_label_->setPixmap(QPixmap(GetOsTypeLargeIcon(partition.os)));
+  os_label_->setPixmap(QPixmap(GetOsTypeLargeIcon(partition->os)));
   name_label_->setText(GetPartitionLabelAndPath(partition));
   usage_label_->setText(GetPartitionUsage(partition));
   usage_bar_->setValue(GetPartitionUsageValue(partition));
 
   // Update fs list.
   fs_model_->setShowEFI(!delegate_->isMBRPreferred());
-  fs_model_->setShowUnknown(partition.fs == FsType::Unknown);
+  fs_model_->setShowUnknown(partition->fs == FsType::Unknown);
 
   // Reset fs index.
-  int fs_index = fs_model_->index(partition.fs);
+  int fs_index = fs_model_->index(partition->fs);
   if (fs_index == -1) {
     // Get index of unused filesystem in filesystem list.
     fs_index = fs_model_->index(FsType::Empty);
@@ -88,29 +88,29 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
   fs_box_->setCurrentIndex(fs_index);
 
   // Reset mount point box. mount_point might be empty.
-  const int mp_index = mount_point_model_->index(partition.mount_point);
+  const int mp_index = mount_point_model_->index(partition->mount_point);
   mount_point_box_->setCurrentIndex(mp_index);
 
-  switch (partition_.status) {
+  switch (partition_->status) {
     case PartitionStatus::Format: {
       // Compare between real filesystem type and current one.
-      const Partition real_partition(delegate_->getRealPartition(partition_));
-      if (!real_partition.path.isEmpty()) {
-        // If filesystem changed, force format this partition.
-        format_check_box_->setEnabled(real_partition.fs == partition_.fs);
+      const Partition::Ptr real_partition = std::make_shared<Partition>(*(delegate_->getRealPartition(partition_)));
+      if (!real_partition->path.isEmpty()) {
+        // If filesystem changed, force format this partition->
+        format_check_box_->setEnabled(real_partition->fs == partition_->fs);
         format_check_box_->setChecked(true);
       }
       break;
     }
     case PartitionStatus::New: {
-      // Force format for new partition.
+      // Force format for new partition->
       this->forceFormat(true);
       break;
     }
     case PartitionStatus::Real: {
       // If mount point in ins formatted-mount-point list, format this partition
       // compulsively.
-      this->forceFormat(IsInFormattedMountPointList(partition.mount_point));
+      this->forceFormat(IsInFormattedMountPointList(partition->mount_point));
       break;
     }
     default: {
@@ -119,7 +119,7 @@ void EditPartitionFrame::setPartition(const Partition& partition) {
     }
   }
 
-  FsType fs_type = partition_.fs;
+  FsType fs_type = partition_->fs;
   // If it is linux-swap, empty or known, hide format box.
   bool invisible = (fs_type == FsType::LinuxSwap ||
       fs_type == FsType::Empty ||
@@ -151,7 +151,7 @@ void EditPartitionFrame::forceFormat(bool force) {
 
 void EditPartitionFrame::updateFormatBoxState() {
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
-  const Partition real_partition(delegate_->getRealPartition(partition_));
+  const Partition::Ptr real_partition = std::make_shared<Partition>(*(delegate_->getRealPartition(partition_)));
   const int mp_index = mount_point_box_->currentIndex();
   QString mount_point;
 
@@ -162,8 +162,8 @@ void EditPartitionFrame::updateFormatBoxState() {
 
   // Format this partition compulsively if its fs type changed.
   bool format = false;
-  if ((fs_type != FsType::Empty) && (!real_partition.path.isEmpty())) {
-    format = (fs_type != real_partition.fs);
+  if ((fs_type != FsType::Empty) && (!real_partition->path.isEmpty())) {
+    format = (fs_type != real_partition->fs);
   }
   // Format this partition if mount-point is in formatted-mount-point list.
   format |= IsInFormattedMountPointList(mount_point);
@@ -351,14 +351,14 @@ void EditPartitionFrame::onOkButtonClicked() {
     delegate_->formatPartition(partition_, fs_type, mount_point);
   } else {
     // If FormatOperation is reverted.
-    if (partition_.status == PartitionStatus::Format) {
+    if (partition_->status == PartitionStatus::Format) {
       delegate_->unFormatPartition(partition_);
       // Reset partition status.
-      partition_.status = PartitionStatus::Real;
+      partition_->status = PartitionStatus::Real;
     }
 
     // Create an OperationMountPoint object.
-    if (partition_.mount_point != mount_point) {
+    if (partition_->mount_point != mount_point) {
       delegate_->updateMountPoint(partition_, mount_point);
     }
   }

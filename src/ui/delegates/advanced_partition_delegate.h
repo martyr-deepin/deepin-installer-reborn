@@ -37,8 +37,8 @@ class AdvancedPartitionDelegate : public QObject {
 
   // Get alternative partition type. Used while creating a new partition.
   // |partition| is an unallocated partition.
-  bool canAddLogical(const Partition& partition) const;
-  bool canAddPrimary(const Partition& partition) const;
+  bool canAddLogical(const Partition::Ptr partition) const;
+  bool canAddPrimary(const Partition::Ptr partition) const;
 
   // Get all supported filesystems.
   FsTypeList getFsTypeList() const;
@@ -53,7 +53,7 @@ class AdvancedPartitionDelegate : public QObject {
   QStringList getOptDescriptions() const;
 
   // Get real partition on disk where |virtual_partition| is located.
-  Partition getRealPartition(const Partition& virtual_partition) const;
+  Partition::Ptr getRealPartition(const Partition::Ptr virtual_partition) const;
 
   // Returns true if current boot mode is mbr or any system is found on disks
   // with msdos partition table.
@@ -79,25 +79,25 @@ class AdvancedPartitionDelegate : public QObject {
   void deviceRefreshed(const DeviceList& devices);
 
  public slots:
-  bool createPartition(const Partition& partition,
+  bool createPartition(const Partition::Ptr partition,
                        PartitionType partition_type,
                        bool align_start,
                        FsType fs_type,
                        const QString& mount_point,
                        qint64 total_sectors);
-  bool createLogicalPartition(const Partition& partition,
+  bool createLogicalPartition(const Partition::Ptr partition,
                               bool align_start,
                               FsType fs_type,
                               const QString& mount_point,
                               qint64 total_sectors);
-  bool createPrimaryPartition(const Partition& partition,
+  bool createPrimaryPartition(const Partition::Ptr partition,
                               PartitionType partition_type,
                               bool align_start,
                               FsType fs_type,
                               const QString& mount_point,
                               qint64 total_sectors);
-  void deletePartition(const Partition& partition);
-  void formatPartition(const Partition& partition,
+  void deletePartition(const Partition::Ptr partition);
+  void formatPartition(const Partition::Ptr partition,
                        FsType fs_type,
                        const QString& mount_point);
 
@@ -116,9 +116,9 @@ class AdvancedPartitionDelegate : public QObject {
   // Set bootloader path to |path|.
   void setBootloaderPath(const QString& path);
 
-  bool unFormatPartition(const Partition& partition);
+  bool unFormatPartition(const Partition::Ptr partition);
 
-  void updateMountPoint(const Partition& partition, const QString& mount_point);
+  void updateMountPoint(const Partition::Ptr partition, const QString& mount_point);
 
  private:
   DeviceList real_devices_;

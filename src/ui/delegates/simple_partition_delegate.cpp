@@ -33,11 +33,11 @@ SimplePartitionDelegate::SimplePartitionDelegate(QObject* parent)
   this->setObjectName("simple_partition_delegate");
 }
 
-bool SimplePartitionDelegate::canAddLogical(const Partition& partition) const {
-  const int index = DeviceIndex(virtual_devices_, partition.device_path);
+bool SimplePartitionDelegate::canAddLogical(const Partition::Ptr partition) const {
+  const int index = DeviceIndex(virtual_devices_, partition->device_path);
   if (index == -1) {
     qCritical() << "getSupportedPartitionType() no device found at:"
-                << partition.device_path;
+                << partition->device_path;
     return false;
   }
   const Device::Ptr device = virtual_devices_.at(index);
@@ -63,21 +63,21 @@ bool SimplePartitionDelegate::canAddLogical(const Partition& partition) const {
     }
   } else {
     // Check whether there is primary partition between |partition| and
-    // extended partition.
-    const Partition ext_partition = device->partitions.at(ext_index);
+    // extended partition->
+    const Partition::Ptr ext_partition = device->partitions.at(ext_index);
     const PartitionList prim_partitions = GetPrimaryPartitions(
         device->partitions);
-    if (partition.end_sector < ext_partition.start_sector) {
-      for (const Partition& prim_partition : prim_partitions) {
-        if (prim_partition.end_sector > partition.start_sector &&
-            prim_partition.start_sector < ext_partition.start_sector) {
+    if (partition->end_sector < ext_partition->start_sector) {
+      for (const Partition::Ptr prim_partition : prim_partitions) {
+        if (prim_partition->end_sector > partition->start_sector &&
+            prim_partition->start_sector < ext_partition->start_sector) {
           logical_ok = false;
         }
       }
-    } else if (partition.start_sector > ext_partition.end_sector) {
-      for (const Partition& prim_partition : prim_partitions) {
-        if (prim_partition.end_sector < partition.start_sector &&
-            prim_partition.start_sector > ext_partition.end_sector) {
+    } else if (partition->start_sector > ext_partition->end_sector) {
+      for (const Partition::Ptr prim_partition : prim_partitions) {
+        if (prim_partition->end_sector < partition->start_sector &&
+            prim_partition->start_sector > ext_partition->end_sector) {
           logical_ok =false;
         }
       }
@@ -86,11 +86,11 @@ bool SimplePartitionDelegate::canAddLogical(const Partition& partition) const {
   return logical_ok;
 }
 
-bool SimplePartitionDelegate::canAddPrimary(const Partition& partition) const {
-  const int index = DeviceIndex(virtual_devices_, partition.device_path);
+bool SimplePartitionDelegate::canAddPrimary(const Partition::Ptr partition) const {
+  const int index = DeviceIndex(virtual_devices_, partition->device_path);
   if (index == -1) {
     qCritical() << "getSupportedPartitionType() no device found at:"
-                << partition.device_path;
+                << partition->device_path;
     return false;
   }
   const Device::Ptr device = virtual_devices_.at(index);
@@ -112,11 +112,11 @@ bool SimplePartitionDelegate::canAddPrimary(const Partition& partition) const {
     // Check whether |partition| is between two logical partitions.
     bool has_logical_before = false;
     bool has_logical_after = false;
-    for (const Partition& logical_partition : logical_partitions) {
-      if (logical_partition.start_sector < partition.start_sector) {
+    for (const Partition::Ptr logical_partition : logical_partitions) {
+      if (logical_partition->start_sector < partition->start_sector) {
         has_logical_before = true;
       }
-      if (logical_partition.end_sector > partition.end_sector) {
+      if (logical_partition->end_sector > partition->end_sector) {
         has_logical_after = true;
       }
     }
@@ -146,46 +146,46 @@ bool SimplePartitionDelegate::isPartitionTableMatch(
   return IsPartitionTableMatch(real_devices_, device_path);
 }
 
-void SimplePartitionDelegate::selectPartition(const Partition& partition) {
+void SimplePartitionDelegate::selectPartition(const Partition::Ptr partition) {
   selected_partition_ = partition;
 }
 
 bool SimplePartitionDelegate::setBootFlag() {
   bool found_boot = false;
 
-  // First check new EFI partition.
+  // First check new EFI partition->
   for (Operation& operation : operations_) {
-    if (operation.new_partition.fs == FsType::EFI) {
-      operation.new_partition.flags.append(PartitionFlag::Boot);
-      operation.new_partition.flags.append(PartitionFlag::ESP);
+    if (operation.new_partition->fs == FsType::EFI) {
+      operation.new_partition->flags.append(PartitionFlag::Boot);
+      operation.new_partition->flags.append(PartitionFlag::ESP);
       found_boot = true;
     }
   }
 
-  // Check existing EFI partition.
+  // Check existing EFI partition->
   for (const Device::Ptr device : virtual_devices_) {
-    for (const Partition& partition : device->partitions) {
-      if (partition.fs == FsType::EFI) {
+    for (const Partition::Ptr partition : device->partitions) {
+      if (partition->fs == FsType::EFI) {
         return true;
       }
     }
   }
 
-  // Check /boot partition.
+  // Check /boot partition->
   if (!found_boot) {
     for (Operation& operation : operations_) {
-      if (operation.new_partition.mount_point == kMountPointBoot) {
-        operation.new_partition.flags.append(PartitionFlag::Boot);
+      if (operation.new_partition->mount_point == kMountPointBoot) {
+        operation.new_partition->flags.append(PartitionFlag::Boot);
         found_boot = true;
       }
     }
   }
 
-  // At last, check / partition.
+  // At last, check / partition->
   if (!found_boot) {
     for (Operation& operation : operations_) {
-      if (operation.new_partition.mount_point == kMountPointRoot) {
-        operation.new_partition.flags.append(PartitionFlag::Boot);
+      if (operation.new_partition->mount_point == kMountPointRoot) {
+        operation.new_partition->flags.append(PartitionFlag::Boot);
         found_boot = true;
       }
     }
@@ -199,14 +199,14 @@ SimpleValidateState SimplePartitionDelegate::validate() const {
   // * Check / partition is set.
   // * Check / partition is large enough.
 
-  const Partition root_partition = selected_partition_;
+  const Partition::Ptr root_partition = selected_partition_;
 
   // Check partition table is empty or not.
   const int device_index = DeviceIndex(virtual_devices_,
-                                       root_partition.device_path);
+                                       root_partition->device_path);
   if (device_index == -1) {
     qCritical() << "validate() device index out of range:"
-                << root_partition.device_path;
+                << root_partition->device_path;
     return SimpleValidateState::RootMissing;
   }
   const Device::Ptr device = virtual_devices_.at(device_index);
@@ -214,14 +214,14 @@ SimpleValidateState SimplePartitionDelegate::validate() const {
     return SimpleValidateState::Ok;
   }
 
-  if (root_partition.device_path.isEmpty()) {
+  if (root_partition->device_path.isEmpty()) {
     return SimpleValidateState::RootMissing;
   }
 
    // If currently selected device reaches its maximum primary partitions and
   // root partition is a Freespace, it is impossible to created a new
-  // primary partition.
-  if ((root_partition.type == PartitionType::Unallocated) &&
+  // primary partition->
+  if ((root_partition->type == PartitionType::Unallocated) &&
       !this->canAddPrimary(root_partition) &&
       !this->canAddLogical(root_partition)) {
     return SimpleValidateState::MaxPrimPartErr;
@@ -229,7 +229,7 @@ SimpleValidateState SimplePartitionDelegate::validate() const {
 
   const int root_required = GetSettingsInt(kPartitionMinimumDiskSpaceRequired);
   const qint64 root_minimum_bytes = root_required * kGibiByte;
-  const qint64 root_real_bytes = root_partition.getByteLength() + kMebiByte;
+  const qint64 root_real_bytes = root_partition->getByteLength() + kMebiByte;
   if (root_real_bytes < root_minimum_bytes) {
     return SimpleValidateState::RootTooSmall;
   }
@@ -243,7 +243,7 @@ void SimplePartitionDelegate::resetOperations() {
   virtual_devices_ = real_devices_;
 }
 
-bool SimplePartitionDelegate::createPartition(const Partition& partition,
+bool SimplePartitionDelegate::createPartition(const Partition::Ptr partition,
                                               PartitionType partition_type,
                                               bool align_start,
                                               FsType fs_type,
@@ -251,10 +251,10 @@ bool SimplePartitionDelegate::createPartition(const Partition& partition,
                                               qint64 total_sectors) {
   // Policy:
   // * If partition table is empty, create a new one.
-  const int device_index = DeviceIndex(virtual_devices_, partition.device_path);
+  const int device_index = DeviceIndex(virtual_devices_, partition->device_path);
   if (device_index == -1) {
     qCritical() << "createPartition() device index out of range:"
-                << partition.device_path;
+                << partition->device_path;
     return false;
   }
   Device::Ptr device = virtual_devices_[device_index];
@@ -291,7 +291,7 @@ bool SimplePartitionDelegate::createPartition(const Partition& partition,
   }
 }
 
-bool SimplePartitionDelegate::createLogicalPartition(const Partition& partition,
+bool SimplePartitionDelegate::createLogicalPartition(const Partition::Ptr partition,
                                                      bool align_start,
                                                      FsType fs_type,
                                                      const QString& mount_point,
@@ -299,18 +299,18 @@ bool SimplePartitionDelegate::createLogicalPartition(const Partition& partition,
   // Policy:
   // * Create extended partition if not found;
   // * If new logical partition is not contained in or is intersected with
-  //   extended partition, enlarge extended partition.
+  //   extended partition, enlarge extended partition->
 
-  const int device_index = DeviceIndex(virtual_devices_, partition.device_path);
+  const int device_index = DeviceIndex(virtual_devices_, partition->device_path);
   if (device_index == -1) {
     qCritical() << "createLogicalPartition() device index out of range:"
-                << partition.device_path;
+                << partition->device_path;
     return false;
   }
   const Device::Ptr device = virtual_devices_.at(device_index);
 
   const int ext_index = ExtendedPartitionIndex(device->partitions);
-  Partition ext_partition;
+  Partition::Ptr ext_partition = std::make_shared<Partition>(Partition());
   if (ext_index == -1) {
     // TODO(xushaohua): Support extended partition in simple mode.
     qCritical() << "Cannot create extended partition in simple mode";
@@ -333,13 +333,13 @@ bool SimplePartitionDelegate::createLogicalPartition(const Partition& partition,
     ext_partition = device->partitions.at(ext_index);
 
     // Enlarge extended partition if needed.
-    if (ext_partition.start_sector > partition.start_sector ||
-        ext_partition.end_sector < partition.end_sector) {
-      Partition new_ext_partition(ext_partition);
-      new_ext_partition.start_sector = qMin(ext_partition.start_sector,
-                                            partition.start_sector);
-      new_ext_partition.end_sector = qMax(ext_partition.end_sector,
-                                          partition.end_sector);
+    if (ext_partition->start_sector > partition->start_sector ||
+        ext_partition->end_sector < partition->end_sector) {
+      Partition::Ptr new_ext_partition = std::make_shared<Partition>(*ext_partition);
+      new_ext_partition->start_sector = qMin(ext_partition->start_sector,
+                                            partition->start_sector);
+      new_ext_partition->end_sector = qMax(ext_partition->end_sector,
+                                          partition->end_sector);
 
       AlignPartition(new_ext_partition);
 
@@ -352,43 +352,43 @@ bool SimplePartitionDelegate::createLogicalPartition(const Partition& partition,
     }
   }
 
-  Partition new_partition;
-  new_partition.device_path = partition.device_path;
-  new_partition.path = partition.path;
-  new_partition.sector_size = partition.sector_size;
-  new_partition.status = PartitionStatus::New;
-  new_partition.type = PartitionType::Logical;
-  new_partition.fs = fs_type;
-  new_partition.mount_point = mount_point;
+  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  new_partition->device_path = partition->device_path;
+  new_partition->path = partition->path;
+  new_partition->sector_size = partition->sector_size;
+  new_partition->status = PartitionStatus::New;
+  new_partition->type = PartitionType::Logical;
+  new_partition->fs = fs_type;
+  new_partition->mount_point = mount_point;
   const int partition_number = AllocLogicalPartitionNumber(device);
   if (partition_number < 0) {
     qCritical() << "Failed to allocate logical part number!";
     return false;
   }
-  new_partition.changeNumber(partition_number);
+  new_partition->changeNumber(partition_number);
 
   // space is required for the Extended Boot Record.
   // Generally an additional track or MebiByte is required so for
-  // our purposes reserve a MebiByte in front of the partition.
-  const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
+  // our purposes reserve a MebiByte in front of the partition->
+  const qint64 oneMebiByteSector = 1 * kMebiByte / partition->sector_size;
   if (align_start) {
     // Align from start of |partition|.
     // Add space for Extended Boot Record.
-    const qint64 start_sector = qMax(partition.start_sector,
-                                     ext_partition.start_sector);
-    new_partition.start_sector = start_sector + oneMebiByteSector;
+    const qint64 start_sector = qMax(partition->start_sector,
+                                     ext_partition->start_sector);
+    new_partition->start_sector = start_sector + oneMebiByteSector;
 
-    const qint64 end_sector = qMin(partition.end_sector,
-                                   ext_partition.end_sector);
-    new_partition.end_sector = qMin(end_sector,
-                                    total_sectors + new_partition.start_sector - 1);
+    const qint64 end_sector = qMin(partition->end_sector,
+                                   ext_partition->end_sector);
+    new_partition->end_sector = qMin(end_sector,
+                                    total_sectors + new_partition->start_sector - 1);
   } else {
-    new_partition.end_sector = qMin(partition.end_sector,
-                                    ext_partition.end_sector);
-    const qint64 start_sector = qMax(partition.start_sector,
-                                     ext_partition.start_sector);
-    new_partition.start_sector = qMax(start_sector + oneMebiByteSector,
-                                      partition.end_sector - total_sectors + 1);
+    new_partition->end_sector = qMin(partition->end_sector,
+                                    ext_partition->end_sector);
+    const qint64 start_sector = qMax(partition->start_sector,
+                                     ext_partition->start_sector);
+    new_partition->start_sector = qMax(start_sector + oneMebiByteSector,
+                                      partition->end_sector - total_sectors + 1);
   }
 
   // Align to nearest MebiBytes.
@@ -396,10 +396,10 @@ bool SimplePartitionDelegate::createLogicalPartition(const Partition& partition,
 
   // Check partition sector range.
   // Also check whether partition size is less than 1MiB or not.
-  if (new_partition.start_sector < partition.start_sector ||
-      new_partition.start_sector >= partition.end_sector ||
-      new_partition.getByteLength() < kMebiByte ||
-      new_partition.end_sector > partition.end_sector) {
+  if (new_partition->start_sector < partition->start_sector ||
+      new_partition->start_sector >= partition->end_sector ||
+      new_partition->getByteLength() < kMebiByte ||
+      new_partition->end_sector > partition->end_sector) {
     qCritical() << "Invalid partition sector range";
     return false;
   }
@@ -410,7 +410,7 @@ bool SimplePartitionDelegate::createLogicalPartition(const Partition& partition,
   return true;
 }
 
-bool SimplePartitionDelegate::createPrimaryPartition(const Partition& partition,
+bool SimplePartitionDelegate::createPrimaryPartition(const Partition::Ptr partition,
                                                      PartitionType partition_type,
                                                      bool align_start,
                                                      FsType fs_type,
@@ -428,32 +428,32 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition& partition,
     return false;
   }
 
-  const int device_index = DeviceIndex(virtual_devices_, partition.device_path);
+  const int device_index = DeviceIndex(virtual_devices_, partition->device_path);
   if (device_index == -1) {
     qCritical() << "createPrimaryPartition() device index out of range:"
-                << partition.device_path;
+                << partition->device_path;
     return false;
   }
   Device::Ptr device = virtual_devices_[device_index];
 
-  const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
+  const qint64 oneMebiByteSector = 1 * kMebiByte / partition->sector_size;
 
   // Shrink extended partition if needed.
   const int ext_index = ExtendedPartitionIndex(device->partitions);
   if (partition_type == PartitionType::Normal && ext_index > -1) {
-    const Partition ext_partition = device->partitions.at(ext_index);
+    const Partition::Ptr ext_partition = device->partitions.at(ext_index);
     const PartitionList logical_parts = GetLogicalPartitions(device->partitions);
     if (logical_parts.isEmpty()) {
       // Remove extended partition if no logical partitions.
-      Partition unallocated_partition;
-      unallocated_partition.device_path = ext_partition.device_path;
+      Partition::Ptr unallocated_partition = std::make_shared<Partition>(Partition());
+      unallocated_partition->device_path = ext_partition->device_path;
       // Extended partition does not contain any sectors.
       // This new allocated partition will be merged to other unallocated
       // partitions.
-      unallocated_partition.start_sector = ext_partition.start_sector;
-      unallocated_partition.end_sector = ext_partition.end_sector;
-      unallocated_partition.sector_size = ext_partition.sector_size;
-      unallocated_partition.type = PartitionType::Unallocated;
+      unallocated_partition->start_sector = ext_partition->start_sector;
+      unallocated_partition->end_sector = ext_partition->end_sector;
+      unallocated_partition->sector_size = ext_partition->sector_size;
+      unallocated_partition->type = PartitionType::Unallocated;
       const Operation operation(OperationType::Delete,
                                 ext_partition,
                                 unallocated_partition);
@@ -464,10 +464,10 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition& partition,
 
     } else if (IsPartitionsJoint(ext_partition, partition)) {
       // Shrink extended partition to fit logical partitions.
-      Partition new_ext_part(ext_partition);
-      new_ext_part.start_sector = logical_parts.first().start_sector -
+      Partition::Ptr new_ext_part = std::make_shared<Partition>(*ext_partition);
+      new_ext_part->start_sector = logical_parts.first()->start_sector -
                                   oneMebiByteSector;
-      new_ext_part.end_sector = logical_parts.last().end_sector;
+      new_ext_part->end_sector = logical_parts.last()->end_sector;
 
       if (IsPartitionsJoint(new_ext_part, partition)) {
         qCritical() << "Failed to shrink extended partition!";
@@ -481,14 +481,14 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition& partition,
     }
   }
 
-  Partition new_partition;
-  new_partition.device_path = partition.device_path;
-  new_partition.path = partition.path;
-  new_partition.sector_size = partition.sector_size;
-  new_partition.status = PartitionStatus::New;
-  new_partition.type = partition_type;
-  new_partition.fs = fs_type;
-  new_partition.mount_point = mount_point;
+  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  new_partition->device_path = partition->device_path;
+  new_partition->path = partition->path;
+  new_partition->sector_size = partition->sector_size;
+  new_partition->status = PartitionStatus::New;
+  new_partition->type = partition_type;
+  new_partition->fs = fs_type;
+  new_partition->mount_point = mount_point;
 
   int partition_number;
   // In simple mode, operations has never been applied to partition list.
@@ -497,7 +497,7 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition& partition,
   for (const Operation& operation : operations_) {
     if ((operation.type == OperationType::NewPartTable &&
          operation.device->path == tmp_device->path) ||
-        (operation.orig_partition.device_path == tmp_device->path)) {
+        (operation.orig_partition->device_path == tmp_device->path)) {
       operation.applyToVisual(tmp_device);
     }
   }
@@ -507,29 +507,29 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition& partition,
     qCritical() << "Failed to allocate primary partition number!";
     return false;
   }
-  new_partition.changeNumber(partition_number);
+  new_partition->changeNumber(partition_number);
 
   // Check whether space is required for the Master Boot Record.
   // Generally an additional track or MebiByte is required so for
-  // our purposes reserve a MebiByte in front of the partition.
-  const bool need_mbr = (partition.start_sector <= oneMebiByteSector);
+  // our purposes reserve a MebiByte in front of the partition->
+  const bool need_mbr = (partition->start_sector <= oneMebiByteSector);
   if (align_start) {
     // Align from start of |partition|.
     if (need_mbr) {
-      new_partition.start_sector = oneMebiByteSector;
+      new_partition->start_sector = oneMebiByteSector;
     } else {
-      new_partition.start_sector = partition.start_sector;
+      new_partition->start_sector = partition->start_sector;
     }
-    new_partition.end_sector = qMin(partition.end_sector,
-                                    total_sectors + new_partition.start_sector - 1);
+    new_partition->end_sector = qMin(partition->end_sector,
+                                    total_sectors + new_partition->start_sector - 1);
   } else {
-    new_partition.end_sector = partition.end_sector;
+    new_partition->end_sector = partition->end_sector;
     if (need_mbr) {
-      new_partition.start_sector = qMax(oneMebiByteSector,
-                                        partition.end_sector - total_sectors + 1);
+      new_partition->start_sector = qMax(oneMebiByteSector,
+                                        partition->end_sector - total_sectors + 1);
     } else {
-      new_partition.start_sector = qMax(partition.start_sector,
-                                        partition.end_sector - total_sectors + 1);
+      new_partition->start_sector = qMax(partition->start_sector,
+                                        partition->end_sector - total_sectors + 1);
     }
   }
 
@@ -538,10 +538,10 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition& partition,
 
   // Check partition sector range.
   // Also check whether partition size is less than 1MiB or not.
-  if (new_partition.start_sector < partition.start_sector ||
-      new_partition.start_sector >= partition.end_sector ||
-      new_partition.getByteLength() < kMebiByte ||
-      new_partition.end_sector > partition.end_sector) {
+  if (new_partition->start_sector < partition->start_sector ||
+      new_partition->start_sector >= partition->end_sector ||
+      new_partition->getByteLength() < kMebiByte ||
+      new_partition->end_sector > partition->end_sector) {
     qCritical() << "Invalid partition sector range"
                 << ", new_partition:" << new_partition
                 << ", partition:" << partition;
@@ -554,19 +554,19 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition& partition,
   return true;
 }
 
-Partition SimplePartitionDelegate::deletePartition(const Partition& partition) {
-  Partition new_partition;
-  new_partition.sector_size = partition.sector_size;
-  new_partition.start_sector = partition.start_sector;
-  new_partition.end_sector = partition.end_sector;
-  new_partition.device_path = partition.device_path;
-  new_partition.type = PartitionType::Unallocated;
-  new_partition.freespace = new_partition.length;
-  new_partition.fs = FsType::Empty;
-  new_partition.status = PartitionStatus::Delete;
+Partition::Ptr SimplePartitionDelegate::deletePartition(const Partition::Ptr partition) {
+  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  new_partition->sector_size = partition->sector_size;
+  new_partition->start_sector = partition->start_sector;
+  new_partition->end_sector = partition->end_sector;
+  new_partition->device_path = partition->device_path;
+  new_partition->type = PartitionType::Unallocated;
+  new_partition->freespace = new_partition->length;
+  new_partition->fs = FsType::Empty;
+  new_partition->status = PartitionStatus::Delete;
 
   // No need to merge operations.
-  // No need to delete extended partition.
+  // No need to delete extended partition->
 
   Operation operation(OperationType::Delete, partition, new_partition);
   operations_.append(operation);
@@ -574,25 +574,25 @@ Partition SimplePartitionDelegate::deletePartition(const Partition& partition) {
   return new_partition;
 }
 
-void SimplePartitionDelegate::formatPartition(const Partition& partition,
+void SimplePartitionDelegate::formatPartition(const Partition::Ptr partition,
                                               FsType fs_type,
                                               const QString& mount_point) {
   qDebug() << "formatSimplePartition()" << partition << fs_type << mount_point;
 
-  Partition new_partition;
-  new_partition.sector_size = partition.sector_size;
-  new_partition.start_sector = partition.start_sector;
-  new_partition.end_sector = partition.end_sector;
-  new_partition.path = partition.path;
-  new_partition.device_path = partition.device_path;
-  new_partition.fs = fs_type;
-  new_partition.type = partition.type;
-  new_partition.mount_point = mount_point;
-  if (partition.status == PartitionStatus::Real) {
-    new_partition.status = PartitionStatus::Format;
-  } else if (partition.status == PartitionStatus::New ||
-             partition.status == PartitionStatus::Format) {
-    new_partition.status = partition.status;
+  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  new_partition->sector_size = partition->sector_size;
+  new_partition->start_sector = partition->start_sector;
+  new_partition->end_sector = partition->end_sector;
+  new_partition->path = partition->path;
+  new_partition->device_path = partition->device_path;
+  new_partition->fs = fs_type;
+  new_partition->type = partition->type;
+  new_partition->mount_point = mount_point;
+  if (partition->status == PartitionStatus::Real) {
+    new_partition->status = PartitionStatus::Format;
+  } else if (partition->status == PartitionStatus::New ||
+             partition->status == PartitionStatus::Format) {
+    new_partition->status = partition->status;
   }
 
   Operation operation(OperationType::Format,partition, new_partition);
@@ -632,11 +632,11 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
     return false;
   }
 
-  Partition& unallocated = device->partitions.last();
+  Partition::Ptr unallocated = device->partitions.last();
 
-  // Create /boot partition.
+  // Create /boot partition->
   const int boot_space = GetSettingsInt(kPartitionDefaultBootSpace);
-  const qint64 boot_sectors = boot_space * kMebiByte / unallocated.sector_size;
+  const qint64 boot_sectors = boot_space * kMebiByte / unallocated->sector_size;
   bool ok = createPrimaryPartition(unallocated,
                                    PartitionType::Normal,
                                    true,
@@ -651,9 +651,9 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
   boot_operation.applyToVisual(device);
 
   unallocated = device->partitions.last();
-  // Create swap partition.
+  // Create swap partition->
   const int swap_space = GetSettingsInt(kPartitionSwapPartitionSize);
-  const qint64 swap_sectors = swap_space * kMebiByte / unallocated.sector_size;
+  const qint64 swap_sectors = swap_space * kMebiByte / unallocated->sector_size;
   ok = createPrimaryPartition(unallocated,
                               PartitionType::Normal,
                               true,
@@ -709,39 +709,39 @@ void SimplePartitionDelegate::onManualPartDone(const DeviceList& devices) {
 
   // Check use-specified partitions with mount point.
   for (const Device::Ptr device : devices) {
-    for (const Partition& partition : device->partitions) {
-      if (!partition.mount_point.isEmpty()) {
+    for (const Partition::Ptr partition : device->partitions) {
+      if (!partition->mount_point.isEmpty()) {
         // Add in-used partitions to mount_point list.
-        const QString record(QString("%1=%2").arg(partition.path)
-                                 .arg( partition.mount_point));
+        const QString record(QString("%1=%2").arg(partition->path)
+                                 .arg( partition->mount_point));
         mount_points.append(record);
-        if (partition.mount_point == kMountPointRoot) {
-          root_disk = partition.device_path;
-          root_path = partition.path;
+        if (partition->mount_point == kMountPointRoot) {
+          root_disk = partition->device_path;
+          root_path = partition->path;
         }
       }
 
       // Check linux-swap.
-      if (partition.fs == FsType::LinuxSwap) {
+      if (partition->fs == FsType::LinuxSwap) {
         found_swap = true;
 
         // Add swap area to mount_point list.
         // NOTE(xushaohua): Multiple swap partitions may be set.
-        const QString record(QString("%1=swap").arg(partition.path));
+        const QString record(QString("%1=swap").arg(partition->path));
         mount_points.append(record);
-      } else if (partition.fs == FsType::EFI && esp_path.isEmpty()) {
-        // Only use the first EFI partition.
-        esp_path = partition.path;
+      } else if (partition->fs == FsType::EFI && esp_path.isEmpty()) {
+        // Only use the first EFI partition->
+        esp_path = partition->path;
       }
     }
   }
 
   if (!IsMBRPreferred(real_devices_)) {
-    // Enable EFI mode. First check newly created EFI partition. If not found,
-    // check existing EFI partition.
+    // Enable EFI mode. First check newly created EFI partition-> If not found,
+    // check existing EFI partition->
     WriteUEFI(true);
 
-    // There shall be only one EFI partition.
+    // There shall be only one EFI partition->
     if (esp_path.isEmpty()) {
       qCritical() << "esp path is empty!";
     }

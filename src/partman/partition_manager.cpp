@@ -59,18 +59,18 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
       lp_partition != nullptr;
       lp_partition = ped_disk_next_partition(lp_disk, lp_partition)) {
 
-    Partition partition;
+    Partition::Ptr partition = std::make_shared<Partition>(Partition());
     if (lp_partition->type == PED_PARTITION_NORMAL) {
-      partition.type = PartitionType::Normal;
+      partition->type = PartitionType::Normal;
     } else if (lp_partition->type == PED_PARTITION_EXTENDED) {
-      partition.type = PartitionType::Extended;
+      partition->type = PartitionType::Extended;
     } else if (lp_partition->type ==
         (PED_PARTITION_FREESPACE | PED_PARTITION_LOGICAL)) {
-      partition.type = PartitionType::Unallocated;
+      partition->type = PartitionType::Unallocated;
     } else if (lp_partition->type == PED_PARTITION_LOGICAL) {
-      partition.type = PartitionType::Logical;
+      partition->type = PartitionType::Logical;
     } else if (lp_partition->type == PED_PARTITION_FREESPACE) {
-      partition.type = PartitionType::Unallocated;
+      partition->type = PartitionType::Unallocated;
     } else {
       // Ignore other types
       continue;
@@ -78,42 +78,42 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
 
     // Get partition flags when it is active.
     if (ped_partition_is_active(lp_partition)) {
-      partition.flags = GetPartitionFlags(lp_partition);
+      partition->flags = GetPartitionFlags(lp_partition);
     }
 
     if (lp_partition->fs_type) {
-      partition.fs = GetFsTypeByName(lp_partition->fs_type->name);
+      partition->fs = GetFsTypeByName(lp_partition->fs_type->name);
       // If ESP/Boot flag is set on fat16/fat32 partition,
-      // it shall be an EFI partition.
-      if ((partition.fs == FsType::Fat32 || partition.fs == FsType::Fat16) &&
-          partition.flags.contains(PartitionFlag::ESP)) {
-        partition.fs = FsType::EFI;
+      // it shall be an EFI partition->
+      if ((partition->fs == FsType::Fat32 || partition->fs == FsType::Fat16) &&
+          partition->flags.contains(PartitionFlag::ESP)) {
+        partition->fs = FsType::EFI;
       }
     } else {
-      partition.fs = FsType::Unknown;
+      partition->fs = FsType::Unknown;
     }
-    partition.start_sector = lp_partition->geom.start;
-    partition.end_sector = lp_partition->geom.end;
+    partition->start_sector = lp_partition->geom.start;
+    partition->end_sector = lp_partition->geom.end;
 
-    partition.partition_number = lp_partition->num;
-    partition.path = GetPartitionPath(lp_partition);
+    partition->partition_number = lp_partition->num;
+    partition->path = GetPartitionPath(lp_partition);
 
     // Avoid reading additional filesystem information if there is no path.
-    if (!partition.path.isEmpty() &&
-        partition.type != PartitionType::Unallocated &&
-        partition.type != PartitionType::Extended) {
+    if (!partition->path.isEmpty() &&
+        partition->type != PartitionType::Unallocated &&
+        partition->type != PartitionType::Extended) {
 
       // Read label based on filesystem type
-      ReadUsage(partition.path, partition.fs, partition.freespace,
-                partition.length);
+      ReadUsage(partition->path, partition->fs, partition->freespace,
+                partition->length);
       // If LinuxSwap partition is not mount, it is totally free.
-      if (partition.fs == FsType::LinuxSwap && partition.length <= 0) {
-        partition.length = partition.getByteLength();
-        partition.freespace = partition.length;
+      if (partition->fs == FsType::LinuxSwap && partition->length <= 0) {
+        partition->length = partition->getByteLength();
+        partition->freespace = partition->length;
       }
 
       // Get partition name.
-      partition.name = ped_partition_get_name(lp_partition);
+      partition->name = ped_partition_get_name(lp_partition);
     }
     partitions.append(partition);
   }
@@ -222,10 +222,10 @@ void PartitionManager::doManualPart(const OperationList& operations) {
     devices = ScanDevices(false);
     // Update mount point of real partitions.
     for (Device::Ptr device : devices) {
-      for (Partition& partition : device->partitions) {
+      for (Partition::Ptr partition : device->partitions) {
         for (const Operation& operation : real_operations) {
-          if (operation.new_partition.path == partition.path) {
-            partition.mount_point = operation.new_partition.mount_point;
+          if (operation.new_partition->path == partition->path) {
+            partition->mount_point = operation.new_partition->mount_point;
           }
         }
       }
@@ -285,14 +285,14 @@ DeviceList ScanDevices(bool enable_os_prober) {
     device->cylinders = lp_device->bios_geom.cylinders;
 
     if (device->table == PartitionTableType::Empty) {
-      Partition free_partition;
-      free_partition.device_path = device->path;
-      free_partition.path = "";
-      free_partition.partition_number = -1;
-      free_partition.start_sector = 1;
-      free_partition.end_sector = device->length;
-      free_partition.sector_size = device->sector_size;
-      free_partition.type = PartitionType::Unallocated;
+      Partition::Ptr free_partition = std::make_shared<Partition>(Partition());
+      free_partition->device_path = device->path;
+      free_partition->path = "";
+      free_partition->partition_number = -1;
+      free_partition->start_sector = 1;
+      free_partition->end_sector = device->length;
+      free_partition->sector_size = device->sector_size;
+      free_partition->type = PartitionType::Unallocated;
       device->partitions.append(free_partition);
 
     } else if (device->table == PartitionTableType::MsDos ||
@@ -306,25 +306,25 @@ DeviceList ScanDevices(bool enable_os_prober) {
         // If partition table is known, scan partitions in this device->
         device->partitions = ReadPartitions(lp_disk);
         // Add additional info to partitions.
-        for (Partition& partition : device->partitions) {
-          partition.device_path = device->path;
-          partition.sector_size = device->sector_size;
-          if (!partition.path.isEmpty() &&
-              partition.type != PartitionType::Unallocated) {
+        for (Partition::Ptr partition : device->partitions) {
+          partition->device_path = device->path;
+          partition->sector_size = device->sector_size;
+          if (!partition->path.isEmpty() &&
+              partition->type != PartitionType::Unallocated) {
             // Read partition label and os.
             const QString empty_str;
-            partition.label = label_items.value(partition.path, empty_str);
+            partition->label = label_items.value(partition->path, empty_str);
             for (const OsProberItem& item : os_prober_items) {
-              if (item.path == partition.path) {
-                partition.os = item.type;
+              if (item.path == partition->path) {
+                partition->os = item.type;
                 break;
               }
             }
 
             // Mark busy flag of this partition when it is mounted in system.
             for (const MountItem& mount_item : mount_items) {
-              if (mount_item.path == partition.path) {
-                partition.busy = true;
+              if (mount_item.path == partition->path) {
+                partition->busy = true;
                 break;
               }
             }

@@ -43,7 +43,7 @@ class NewPartitionFrame : public QFrame {
                     QWidget* parent = nullptr);
 
   // Reset partition information at |partition_path|.
-  void setPartition(const Partition& partition);
+  void setPartition(const Partition::Ptr partition);
 
  signals:
   void finished();
@@ -78,7 +78,7 @@ class NewPartitionFrame : public QFrame {
   FsModel* fs_model_ = nullptr;
   MountPointModel* mount_point_model_ = nullptr;
   PartitionTypeModel* type_model_ = nullptr;
-  Partition partition_;
+  Partition::Ptr partition_;
 
   // To memorize slider value.
   qint64 last_slider_value_;

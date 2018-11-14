@@ -49,8 +49,8 @@ class AdvancedPartitionFrame : public QFrame {
   bool validate();
 
  signals:
-  void requestEditPartitionFrame(const Partition& partition);
-  void requestNewPartitionFrame(const Partition& partition);
+  void requestEditPartitionFrame(const Partition::Ptr partition);
+  void requestNewPartitionFrame(const Partition::Ptr partition);
 
   // Emitted when partition table not appropriate at |device_path|.
   void requestNewTable(const QString& device_path);
@@ -122,12 +122,12 @@ class AdvancedPartitionFrame : public QFrame {
   // Clear error message list and hide message container.
   void clearErrorMessages();
 
-  void onDeletePartitionTriggered(const Partition& partition);
+  void onDeletePartitionTriggered(const Partition::Ptr partition);
   void onDeviceRefreshed();
   void onEditButtonToggled(bool toggle);
 
   // Handles editPartitionTriggered() signal from advanced partition button.
-  void onEditPartitionTriggered(const Partition& partition);
+  void onEditPartitionTriggered(const Partition::Ptr partition);
 
   // Change alpha value of partition button when mouse enters error label.
   void onErrorLabelEntered();
@@ -136,7 +136,7 @@ class AdvancedPartitionFrame : public QFrame {
   void onErrorLabelLeaved();
 
   // Handles newPartitionTriggered() signal from advanced partition button.
-  void onNewPartitionTriggered(const Partition& partition);
+  void onNewPartitionTriggered(const Partition::Ptr partition);
 };
 
 }  // namespace installer

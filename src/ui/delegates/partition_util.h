@@ -27,7 +27,7 @@
 namespace installer {
 
 // Align partition to nearest mebibytes.
-void AlignPartition(Partition& partition);
+void AlignPartition(Partition::Ptr partition);
 
 // Calculate new logical partition number.
 int AllocLogicalPartitionNumber(const Device::Ptr device);
@@ -60,15 +60,15 @@ QString GetOsTypeIcon(OsType os_type);
 QString GetOsTypeLargeIcon(OsType os_type);
 
 // Get partition name based on |path|.
-QString GetPartitionLabel(const Partition& partition);
-QString GetPartitionLabelAndPath(const Partition& partition);
+QString GetPartitionLabel(const Partition::Ptr partition);
+QString GetPartitionLabelAndPath(const Partition::Ptr partition);
 QString GetPartitionName(const QString& path);
 
 // Get human readable partition usage.
-QString GetPartitionUsage(const Partition& partition);
+QString GetPartitionUsage(const Partition::Ptr partition);
 
 // Get partition usage percentage (0-100).
-int GetPartitionUsageValue(const Partition& partition);
+int GetPartitionUsageValue(const Partition::Ptr partition);
 
 // If target disk has msdos partition table, but system boots up in UEFI mode,
 // ignore this UEFI mode if any systems is found in that disk.

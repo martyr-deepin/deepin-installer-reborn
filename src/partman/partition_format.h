@@ -25,7 +25,7 @@
 namespace installer {
 
 // Format filesystem.
-bool Mkfs(const Partition& partition);
+bool Mkfs(const Partition::Ptr partition);
 
 }  // namespace installer
 

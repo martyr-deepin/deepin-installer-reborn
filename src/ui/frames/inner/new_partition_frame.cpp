@@ -60,7 +60,7 @@ NewPartitionFrame::NewPartitionFrame(AdvancedPartitionDelegate* delegate,
   this->initConnections();
 }
 
-void NewPartitionFrame::setPartition(const Partition& partition) {
+void NewPartitionFrame::setPartition(const Partition::Ptr partition) {
   // Update partition information.
   partition_ = partition;
   const bool primary_ok = delegate_->canAddPrimary(partition);
@@ -105,7 +105,7 @@ void NewPartitionFrame::setPartition(const Partition& partition) {
   mount_point_box_->setCurrentIndex(mount_point_index);
 
   // Set value range of size_slider_
-  last_slider_value_ = partition.getByteLength();
+  last_slider_value_ = partition->getByteLength();
   size_slider_->setMaximum(last_slider_value_);
   size_slider_->setValue(last_slider_value_);
   size_slider_->setMinimum(kMinimumPartitionSize);
@@ -249,7 +249,7 @@ void NewPartitionFrame::updateSlideSize() {
     // Its value will also be checked in AdvancedPartitionFrame.
     const qint64 default_size = GetSettingsInt(kPartitionDefaultEFISpace) *
                                 kMebiByte;
-    const qint64 real_size = qMin(default_size, partition_.getByteLength());
+    const qint64 real_size = qMin(default_size, partition_->getByteLength());
     size_slider_->setMinimum(real_size);
 
     // Block size_slider_ from emitting signals.
@@ -262,7 +262,7 @@ void NewPartitionFrame::updateSlideSize() {
     // Its value will also be checked in AdvancedPartitionFrame.
     const qint64 default_size = GetSettingsInt(kPartitionDefaultBootSpace) *
                                 kMebiByte;
-    const qint64 real_size = qMin(default_size, partition_.getByteLength());
+    const qint64 real_size = qMin(default_size, partition_->getByteLength());
     size_slider_->setMinimum(real_size);
     size_slider_->blockSignals(true);
     size_slider_->setValue(real_size);
@@ -296,7 +296,7 @@ void NewPartitionFrame::onCreateButtonClicked() {
     mount_point = mount_point_model_->getMountPoint(index);
   }
   // TODO(xushaohua): Calculate exact sectors
-  const qint64 total_sectors = size_slider_->value() / partition_.sector_size;
+  const qint64 total_sectors = size_slider_->value() / partition_->sector_size;
   delegate_->createPartition(partition_, partition_type, align_start, fs_type,
                              mount_point, total_sectors);
   delegate_->refreshVisual();

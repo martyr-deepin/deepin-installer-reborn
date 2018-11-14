@@ -83,11 +83,11 @@ void BootloaderListModel::onDeviceRefreshed(const DeviceList& devices) {
       first_device = device->path;
     }
 
-    for (const Partition& partition : device->partitions) {
-      if (partition.mount_point == kMountPointRoot) {
-        root_device = partition.device_path;
-      } else if (partition.mount_point == kMountPointBoot) {
-        boot_device = partition.device_path;
+    for (const Partition::Ptr partition : device->partitions) {
+      if (partition->mount_point == kMountPointRoot) {
+        root_device = partition->device_path;
+      } else if (partition->mount_point == kMountPointBoot) {
+        boot_device = partition->device_path;
       }
     }
   }
@@ -108,13 +108,13 @@ void BootloaderListModel::onDeviceRefreshed(const DeviceList& devices) {
     bootloader_list_.append({device->path,
                              GetDeviceModelAndCap(device),
                              is_recommended});
-    for (const Partition& partition : device->partitions) {
+    for (const Partition::Ptr partition : device->partitions) {
       // Filters primary and logical partitions.
-      if ((partition.type == PartitionType::Normal ||
-           partition.type == PartitionType::Logical) &&
-          !partition.path.isEmpty() && !partition.busy) {
+      if ((partition->type == PartitionType::Normal ||
+           partition->type == PartitionType::Logical) &&
+          !partition->path.isEmpty() && !partition->busy) {
         // TODO(xushaohua): It is better to filter fs type.
-        bootloader_list_.append({partition.path, "", false});
+        bootloader_list_.append({partition->path, "", false});
       }
     }
   }

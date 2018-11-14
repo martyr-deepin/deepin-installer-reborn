@@ -29,9 +29,9 @@ class SimplePartitionButton : public PointerButton {
   Q_OBJECT
 
  public:
-  SimplePartitionButton(const Partition& partition, QWidget* parent = nullptr);
+  SimplePartitionButton(const Partition::Ptr partition, QWidget* parent = nullptr);
 
-  const Partition& partition() const { return partition_; }
+  const Partition::Ptr partition() const { return partition_; }
 
   // Get partition button selection state.
   bool selected() const { return selected_; }
@@ -42,7 +42,7 @@ class SimplePartitionButton : public PointerButton {
  private:
   void initUI();
 
-  const Partition& partition_;
+  const Partition::Ptr partition_;
   QLabel* os_label_ = nullptr;
   bool selected_;
 };

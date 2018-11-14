@@ -43,8 +43,8 @@ class Operation {
   explicit Operation(const Device::Ptr device);
 
   Operation(OperationType type,
-            const Partition& orig_partition,
-            const Partition& new_partition);
+            const Partition::Ptr orig_partition,
+            const Partition::Ptr new_partition);
   ~Operation();
 
   OperationType type;
@@ -55,8 +55,8 @@ class Operation {
   // Device path, sector size and other properties remains unchanged.
   Device::Ptr device;
 
-  Partition orig_partition;
-  Partition new_partition;
+  Partition::Ptr orig_partition;
+  Partition::Ptr new_partition;
 
   // Apply changes to disk. Returns operation status.
   // Note that this method shall be called in the background thread.

@@ -469,7 +469,7 @@ void PartitionFrame::onPrepareInstallFrameFinished() {
     }
 }
 
-void PartitionFrame::showEditPartitionFrame(const Partition& partition) {
+void PartitionFrame::showEditPartitionFrame(const Partition::Ptr partition) {
   edit_partition_frame_->setPartition(partition);
   main_layout_->setCurrentWidget(edit_partition_frame_);
 }
@@ -479,7 +479,7 @@ void PartitionFrame::showMainFrame() {
 }
 
 void PartitionFrame::showNewPartitionFrame(
-    const Partition& partition) {
+    const Partition::Ptr partition) {
   new_partition_frame_->setPartition(partition);
   main_layout_->setCurrentWidget(new_partition_frame_);
 }

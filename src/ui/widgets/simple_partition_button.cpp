@@ -36,7 +36,7 @@ const int kOsIconHeight = 120;
 
 }  // namespace
 
-SimplePartitionButton::SimplePartitionButton(const Partition& partition,
+SimplePartitionButton::SimplePartitionButton(const Partition::Ptr partition,
                                              QWidget* parent)
     : PointerButton(parent),
       partition_(partition),
@@ -53,7 +53,7 @@ void SimplePartitionButton::setSelected(bool selected) {
     const QPixmap pixmap = std::move(installer::renderPixmap(":/images/driver_install_128.svg"));
     os_label_->setPixmap(pixmap);
   } else {
-    QPixmap pixmap(GetOsTypeLargeIcon(partition_.os));
+    QPixmap pixmap(GetOsTypeLargeIcon(partition_->os));
     os_label_->setPixmap(pixmap);
   }
 }
@@ -62,7 +62,7 @@ void SimplePartitionButton::initUI() {
   os_label_ = new QLabel();
   os_label_->setObjectName("fs_label");
   os_label_->setFixedSize(kOsIconWidth, kOsIconHeight);
-  os_label_->setPixmap(QPixmap(GetOsTypeLargeIcon(partition_.os)));
+  os_label_->setPixmap(QPixmap(GetOsTypeLargeIcon(partition_->os)));
 
   QLabel* path_label = new QLabel(GetPartitionLabelAndPath(partition_));
   path_label->setObjectName("path_label");

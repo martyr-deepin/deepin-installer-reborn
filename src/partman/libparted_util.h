@@ -32,13 +32,13 @@ bool Commit(PedDisk* lp_disk);
 bool CommitUdevEvent(const QString& dev_path);
 
 // Create a new partition defined in |partition|.
-bool CreatePartition(const Partition& partition);
+bool CreatePartition(const Partition::Ptr partition);
 
 // Create new partition |table| at |device_path|.
 bool CreatePartitionTable(const QString& device_path, PartitionTableType table);
 
 // Delete partition defined in |partition| from device.
-bool DeletePartition(const Partition& partition);
+bool DeletePartition(const Partition::Ptr partition);
 
 // Destroy libparted-device object.
 void DestroyDevice(PedDevice* lp_device);
@@ -62,17 +62,17 @@ QString GetPartitionPath(PedPartition* lp_partition);
 // Resize/Move partition specified with |partition|.
 // If |partition| is NormalPartition or LogicalPartition, remember to re-format
 // it.
-bool ResizeMovePartition(const Partition& partition);
+bool ResizeMovePartition(const Partition::Ptr partition);
 
 // Set/unset |flag| of |partition|.
-bool SetPartitionFlag(const Partition& partition,
+bool SetPartitionFlag(const Partition::Ptr partition,
                       PedPartitionFlag flag,
                       bool is_set);
 // Set/unset flags of |partition|
-bool SetPartitionFlags(const Partition& partition);
+bool SetPartitionFlags(const Partition::Ptr partition);
 
 // Update partition type defined in |partition|.
-bool SetPartitionType(const Partition& partition);
+bool SetPartitionType(const Partition::Ptr partition);
 
 // Refers: http://stackoverflow.com/questions/14127210/
 // After the kernel boots, `udevd` is used to create device nodes for
@@ -87,7 +87,7 @@ void SettleDevice(int timeout);
 // Update partition number and path based on start_sector and end_secotr in
 // |partition|.
 // This partition number and path is read from real device.
-bool UpdatePartitionNumber(Partition& partition);
+bool UpdatePartitionNumber(Partition::Ptr partition);
 
 }  // namespace installer
 

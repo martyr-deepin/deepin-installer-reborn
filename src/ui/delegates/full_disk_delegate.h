@@ -48,8 +48,8 @@ class FullDiskDelegate : public QObject {
 
   // Get alternative partition type. Used while creating a new partition.
   // |partition| is an unallocated partition.
-  bool canAddLogical(const Partition& partition) const;
-  bool canAddPrimary(const Partition& partition) const;
+  bool canAddLogical(const Partition::Ptr partition) const;
+  bool canAddPrimary(const Partition::Ptr partition) const;
 
   // Get human readable operation descriptions.
   QStringList getOptDescriptions() const;
@@ -68,7 +68,7 @@ class FullDiskDelegate : public QObject {
   // It may be separated into two partitions if needed.
   // Call validate() to check whether this |partition| is appropriate before
   // using it.
-  void selectPartition(const Partition& partition);
+  void selectPartition(const Partition::Ptr partition);
 
   // Set boot flag of root partition. Call this before operations() and after
   // validate().
@@ -82,25 +82,25 @@ class FullDiskDelegate : public QObject {
   void deviceRefreshed(const DeviceList& devices);
 
  public slots:
-  bool createPartition(const Partition& partition,
+  bool createPartition(const Partition::Ptr partition,
                        PartitionType partition_type,
                        bool align_start,
                        FsType fs_type,
                        const QString& mount_point,
                        qint64 total_sectors);
-  bool createLogicalPartition(const Partition& partition,
+  bool createLogicalPartition(const Partition::Ptr partition,
                               bool align_start,
                               FsType fs_type,
                               const QString& mount_point,
                               qint64 total_sectors);
-  bool createPrimaryPartition(const Partition& partition,
+  bool createPrimaryPartition(const Partition::Ptr partition,
                               PartitionType partition_type,
                               bool align_start,
                               FsType fs_type,
                               const QString& mount_point,
                               qint64 total_sectors);
-  Partition deletePartition(const Partition& partition);
-  void formatPartition(const Partition& partition,
+  Partition::Ptr deletePartition(const Partition::Ptr partition);
+  void formatPartition(const Partition::Ptr partition,
                        FsType fs_type,
                        const QString& mount_point);
 
@@ -128,7 +128,7 @@ private:
   DeviceList virtual_devices_;
   QString bootloader_path_;
   OperationList operations_;
-  Partition selected_partition_;
+  Partition::Ptr selected_partition_;
 };
 
 }  // namespace installer

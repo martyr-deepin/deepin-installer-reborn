@@ -207,8 +207,8 @@ void FullDiskFrame::repaintDevices() {
   int row = 0, column = 0;
   for (const Device::Ptr device : m_delegate->virtual_devices()) {
     bool partition_busy = false;
-    for (const Partition& partition : device->partitions) {
-      if (partition.busy) {
+    for (const Partition::Ptr partition : device->partitions) {
+      if (partition->busy) {
         partition_busy = true;
         break;
       }

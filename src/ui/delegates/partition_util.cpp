@@ -53,23 +53,23 @@ QString GetOsDescription(const QString& path) {
 
 }  // namespace
 
-void AlignPartition(Partition& partition) {
-  const qint64 oneMebiByteSector = 1 * kMebiByte / partition.sector_size;
+void AlignPartition(Partition::Ptr partition) {
+  const qint64 oneMebiByteSector = 1 * kMebiByte / partition->sector_size;
 
   // Align to nearest MebiBytes.
   const int start_size = static_cast<int>(
-      ceil(partition.start_sector * 1.0 / oneMebiByteSector));
+      ceil(partition->start_sector * 1.0 / oneMebiByteSector));
   const int end_size = static_cast<int>(
-      floor((partition.end_sector + 1) * 1.0 / oneMebiByteSector));
-  partition.start_sector = start_size * oneMebiByteSector;
-  partition.end_sector = end_size * oneMebiByteSector - 1;
+      floor((partition->end_sector + 1) * 1.0 / oneMebiByteSector));
+  partition->start_sector = start_size * oneMebiByteSector;
+  partition->end_sector = end_size * oneMebiByteSector - 1;
 }
 
 int AllocLogicalPartitionNumber(const Device::Ptr device) {
   int num = device->max_prims;
-  for (const Partition& partition : device->partitions) {
-    if (partition.partition_number >= num) {
-      num = partition.partition_number;
+  for (const Partition::Ptr partition : device->partitions) {
+    if (partition->partition_number >= num) {
+      num = partition->partition_number;
     }
   }
   return num + 1;
@@ -78,8 +78,8 @@ int AllocLogicalPartitionNumber(const Device::Ptr device) {
 int AllocPrimaryPartitionNumber(const Device::Ptr device) {
   for (int num = 1; num <= device->max_prims; num++) {
     bool in_use = false;
-    for (const Partition& partition : device->partitions) {
-      if (num == partition.partition_number) {
+    for (const Partition::Ptr partition : device->partitions) {
+      if (num == partition->partition_number) {
         in_use = true;
         break;
       }
@@ -209,30 +209,30 @@ QString GetOsTypeLargeIcon(OsType os_type) {
   }
 }
 
-QString GetPartitionLabel(const Partition& partition) {
-  switch (partition.type) {
+QString GetPartitionLabel(const Partition::Ptr partition) {
+  switch (partition->type) {
     case PartitionType::Unallocated: {
       return QObject::tr("Freespace");
     }
     case PartitionType::Normal:  // pass through
     case PartitionType::Logical: {
       // If partition is created, returns its path name only.
-      if (partition.status == PartitionStatus::New) {
-        return GetPartitionName(partition.path);
+      if (partition->status == PartitionStatus::New) {
+        return GetPartitionName(partition->path);
       }
 
-      const QString os_description = GetOsDescription(partition.path);
+      const QString os_description = GetOsDescription(partition->path);
       if (!os_description.isEmpty()) {
         return TrimText(os_description, kLabelMaxLen);
       }
       // Check partition label before partition name.
-      if (!partition.label.isEmpty()) {
-        return TrimText(partition.label, kLabelMaxLen);
+      if (!partition->label.isEmpty()) {
+        return TrimText(partition->label, kLabelMaxLen);
       }
-      if (!partition.name.isEmpty()) {
-        return TrimText(partition.name, kLabelMaxLen);
+      if (!partition->name.isEmpty()) {
+        return TrimText(partition->name, kLabelMaxLen);
       }
-      return GetPartitionName(partition.path);
+      return GetPartitionName(partition->path);
     }
     default: {
       return QString();
@@ -240,30 +240,30 @@ QString GetPartitionLabel(const Partition& partition) {
   }
 }
 
-QString GetPartitionLabelAndPath(const Partition& partition) {
-  switch (partition.type) {
+QString GetPartitionLabelAndPath(const Partition::Ptr partition) {
+  switch (partition->type) {
     case PartitionType::Unallocated: {
       return QObject::tr("Freespace");
     }
     case PartitionType::Normal:  // pass through
     case PartitionType::Logical: {
       // If partition is created, returns its path name only.
-      if (partition.status == PartitionStatus::New) {
-        return GetPartitionName(partition.path);
+      if (partition->status == PartitionStatus::New) {
+        return GetPartitionName(partition->path);
       }
 
-      const QString os_description = GetOsDescription(partition.path);
-      const QString name = GetPartitionName(partition.path);
+      const QString os_description = GetOsDescription(partition->path);
+      const QString name = GetPartitionName(partition->path);
       if (!os_description.isEmpty()) {
         const QString label = TrimText(os_description, kLabelMaxLen);
         return QString("%1(%2)").arg(label).arg(name);
       }
-      if (!partition.label.isEmpty()) {
-        const QString label = TrimText(partition.label, kLabelMaxLen);
+      if (!partition->label.isEmpty()) {
+        const QString label = TrimText(partition->label, kLabelMaxLen);
         return QString("%1(%2)").arg(label).arg(name);
       }
-      if (!partition.name.isEmpty()) {
-        const QString label = TrimText(partition.name, kLabelMaxLen);
+      if (!partition->name.isEmpty()) {
+        const QString label = TrimText(partition->name, kLabelMaxLen);
         return QString("%1(%2)").arg(label).arg(name);
       }
       return name;
@@ -278,13 +278,13 @@ QString GetPartitionName(const QString& path) {
   return QFileInfo(path).fileName();
 }
 
-QString GetPartitionUsage(const Partition& partition) {
+QString GetPartitionUsage(const Partition::Ptr partition) {
   qint64 total, used;
-  if ((partition.length > 0) && (partition.length >= partition.freespace)) {
-    total = partition.length;
-    used = total - partition.freespace;
+  if ((partition->length > 0) && (partition->length >= partition->freespace)) {
+    total = partition->length;
+    used = total - partition->freespace;
   } else {
-    total = partition.getByteLength();
+    total = partition->getByteLength();
     used = 0;
   }
 
@@ -295,13 +295,13 @@ QString GetPartitionUsage(const Partition& partition) {
   }
 }
 
-int GetPartitionUsageValue(const Partition& partition) {
+int GetPartitionUsageValue(const Partition::Ptr partition) {
   qint64 total, used;
-  if ((partition.length > 0) && (partition.length >= partition.freespace)) {
-    total = partition.length;
-    used = total - partition.freespace;
+  if ((partition->length > 0) && (partition->length >= partition->freespace)) {
+    total = partition->length;
+    used = total - partition->freespace;
   } else {
-    total = partition.getByteLength();
+    total = partition->getByteLength();
     used = 0;
   }
   if (total > 0 && used >= 0 && total >= used) {
@@ -317,8 +317,8 @@ bool IgnoreUEFI(const DeviceList& devices) {
     for (const Device::Ptr device : devices) {
       // Check partition table type.
       if (device->table != PartitionTableType::GPT) {
-        for (const Partition& partition : device->partitions) {
-          if (partition.os != OsType::Empty) {
+        for (const Partition::Ptr partition : device->partitions) {
+          if (partition->os != OsType::Empty) {
             return true;
           }
         }

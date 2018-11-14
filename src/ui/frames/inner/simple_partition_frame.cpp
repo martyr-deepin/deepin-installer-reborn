@@ -119,8 +119,8 @@ void SimplePartitionFrame::appendOperations() {
 
   bool found_efi = false;
   for (const Device::Ptr device : delegate_->virtual_devices()) {
-    for (const Partition& partition : device->partitions) {
-      if (partition.fs == FsType::EFI) {
+    for (const Partition::Ptr partition : device->partitions) {
+      if (partition->fs == FsType::EFI) {
         found_efi = true;
       }
     }
@@ -134,16 +134,16 @@ void SimplePartitionFrame::appendOperations() {
     return;
   }
 
-  Partition partition = button->partition();
+  Partition::Ptr partition = button->partition();
   if (!delegate_->isMBRPreferred() && !found_efi) {
-    if (partition.type == PartitionType::Normal) {
+    if (partition->type == PartitionType::Normal) {
       // Delete normal partition first.
       partition = delegate_->deletePartition(partition);
     }
 
-    // Create root partition and EFI partition.
+    // Create root partition and EFI partition
     const int efi_space = GetSettingsInt(kPartitionDefaultEFISpace);
-    const qint64 efi_sectors = efi_space * kMebiByte / partition.sector_size;
+    const qint64 efi_sectors = efi_space * kMebiByte / partition->sector_size;
     // Create EFI partition from start.
     delegate_->createPartition(partition,
                                PartitionType::Normal,
@@ -153,7 +153,7 @@ void SimplePartitionFrame::appendOperations() {
                                efi_sectors);
 
     // Create root partition from end.
-    const qint64 remaining_sectors = partition.getSectorLength() - efi_sectors;
+    const qint64 remaining_sectors = partition->getSectorLength() - efi_sectors;
     delegate_->createPartition(partition,
                                PartitionType::Normal,
                                false,
@@ -161,29 +161,29 @@ void SimplePartitionFrame::appendOperations() {
                                kMountPointRoot,
                                remaining_sectors);
   } else {
-    // Only create root partition.
-    if (partition.type == PartitionType::Unallocated) {
-      // First try to add primary partition, then logical partition.
+    // Only create root partition
+    if (partition->type == PartitionType::Unallocated) {
+      // First try to add primary partition, then logical partition->
       if (delegate_->canAddPrimary(partition)) {
         delegate_->createPartition(partition,
                                    PartitionType::Normal,
                                    false,
                                    GetDefaultFsType(),
                                    kMountPointRoot,
-                                   partition.getSectorLength());
+                                   partition->getSectorLength());
       } else if (delegate_->canAddLogical(partition)) {
         delegate_->createPartition(partition,
                                    PartitionType::Logical,
                                    false,
                                    GetDefaultFsType(),
                                    kMountPointRoot,
-                                   partition.getSectorLength());
+                                   partition->getSectorLength());
       }  else {
         // We shall never reach here.
-        qCritical() << "Reached maximum primary partitions:" << partition.path;
+        qCritical() << "Reached maximum primary partitions:" << partition->path;
       }
     } else {
-      // Format real partition.
+      // Format real partition->
       delegate_->formatPartition(button->partition(),
                                  GetDefaultFsType(),
                                  kMountPointRoot);
@@ -191,7 +191,7 @@ void SimplePartitionFrame::appendOperations() {
   }
 
   // Update simple bootloader path.
-  const QString bootloader_path = button->partition().device_path;
+  const QString bootloader_path = button->partition()->device_path;
   delegate_->setBootloaderPath(bootloader_path);
 }
 
@@ -295,22 +295,22 @@ void SimplePartitionFrame::repaintDevices() {
                             1, kDiskColumns, Qt::AlignLeft);
     row += 1;
 
-    for (const Partition& partition : device->partitions) {
-      if ((partition.type == PartitionType::Extended) || partition.busy) {
+    for (const Partition::Ptr partition : device->partitions) {
+      if ((partition->type == PartitionType::Extended) || partition->busy) {
         // Ignores extended partition or currently in-used partitions.
         continue;
       }
 
       // Filter unallocated partitions which are larger than 2MiB.
-      if (partition.type == PartitionType::Unallocated &&
-          partition.getByteLength() <= 2 * kMebiByte) {
+      if (partition->type == PartitionType::Unallocated &&
+          partition->getByteLength() <= 2 * kMebiByte) {
         continue;
       }
       SimplePartitionButton* button = new SimplePartitionButton(partition);
       button_group_->addButton(button);
       grid_layout_->addWidget(button, row, column, Qt::AlignHCenter);
-      // Select root partition.
-      if (partition.mount_point == kMountPointRoot) {
+      // Select root partition->
+      if (partition->mount_point == kMountPointRoot) {
         // Do not clear mount point by blocking emitting signals.
         button_group_->blockSignals(true);
         button->setChecked(true);
@@ -371,13 +371,13 @@ void SimplePartitionFrame::onPartitionButtonClicked() {
   }
 
   // Check partition table type.
-  const QString device_path = button->partition().device_path;
+  const QString device_path = button->partition()->device_path;
   if (!delegate_->isPartitionTableMatch(device_path)) {
     emit this->requestNewTable(device_path);
     return;
   }
 
-  // Update selected partition.
+  // Update selected partition->
   delegate_->selectPartition(button->partition());
 
   if (this->validate()) {
@@ -387,7 +387,7 @@ void SimplePartitionFrame::onPartitionButtonClicked() {
     this->showInstallTip(button);
 
     // If selected partitions contains windows system, show another message.
-    if (button->partition().os == OsType::Windows) {
+    if (button->partition()->os == OsType::Windows) {
       msg_label_->setText(tr("Windows will not boot if install deepin on "
                              "Windows disk, please confirm to continue"));
     }

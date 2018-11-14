@@ -43,7 +43,7 @@ class EditPartitionFrame : public QFrame {
                      QWidget* parent = nullptr);
 
   // Set partition information at |partition_path|.
-  void setPartition(const Partition& partition);
+  void setPartition(const Partition::Ptr partition);
 
  signals:
   void finished();
@@ -79,7 +79,7 @@ class EditPartitionFrame : public QFrame {
   AdvancedPartitionDelegate* delegate_ = nullptr;
   FsModel* fs_model_ = nullptr;
   MountPointModel* mount_point_model_ = nullptr;
-  Partition partition_;
+  Partition::Ptr partition_;
 
  private slots:
   // Hide mount_point_box_ when specific fs is selected

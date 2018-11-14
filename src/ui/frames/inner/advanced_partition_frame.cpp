@@ -230,42 +230,42 @@ AdvancedPartitionButton* AdvancedPartitionFrame::getAppropriateButtonForState(
       continue;
     }
 
-    const Partition& partition(part_button->partition());
+    const Partition::Ptr partition(part_button->partition());
 
     switch (state) {
       case AdvancedValidateState::BootFsInvalid:  // Fall through
       case AdvancedValidateState::BootPartNumberInvalid:  // Fall through
       case AdvancedValidateState::BootTooSmall: {
-        if (partition.mount_point == kMountPointBoot) {
+        if (partition->mount_point == kMountPointBoot) {
           return part_button;
         }
         break;
       }
       case AdvancedValidateState::EfiMissing: {
-        if ((partition.fs != FsType::LinuxSwap) &&
-            (partition.fs != FsType::EFI) &&
-            partition.mount_point.isEmpty() &&
-            partition.getByteLength() > efi_minimum) {
+        if ((partition->fs != FsType::LinuxSwap) &&
+            (partition->fs != FsType::EFI) &&
+            partition->mount_point.isEmpty() &&
+            partition->getByteLength() > efi_minimum) {
           return part_button;
         }
         break;
       }
       case AdvancedValidateState::EfiTooSmall: {
-        if (partition.fs == FsType::EFI) {
+        if (partition->fs == FsType::EFI) {
           return part_button;
         }
         break;
       }
       case AdvancedValidateState::RootMissing: {
         // First check freespace.
-        if (partition.type == PartitionType::Unallocated &&
-            partition.getByteLength() > root_required) {
+        if (partition->type == PartitionType::Unallocated &&
+            partition->getByteLength() > root_required) {
           return part_button;
         }
         break;
       }
       case AdvancedValidateState::RootTooSmall: {
-        if (partition.mount_point == kMountPointRoot) {
+        if (partition->mount_point == kMountPointRoot) {
           return part_button;
         }
         break;
@@ -284,22 +284,22 @@ AdvancedPartitionButton* AdvancedPartitionFrame::getAppropriateButtonForState(
       continue;
     }
 
-    const Partition& partition(part_button->partition());
+    const Partition::Ptr partition(part_button->partition());
 
     switch (state) {
       case AdvancedValidateState::BootFsInvalid:  // Fall through
       case AdvancedValidateState::BootPartNumberInvalid: {
-        if (partition.mount_point == kMountPointRoot) {
+        if (partition->mount_point == kMountPointRoot) {
           return part_button;
         }
         break;
       }
       case AdvancedValidateState::RootMissing: {
         // Then check non-empty partitions.
-        if ((partition.fs != FsType::LinuxSwap) &&
-            (partition.fs != FsType::EFI) &&
-            partition.mount_point.isEmpty() &&
-            partition.getByteLength() > root_required) {
+        if ((partition->fs != FsType::LinuxSwap) &&
+            (partition->fs != FsType::EFI) &&
+            partition->mount_point.isEmpty() &&
+            partition->getByteLength() > root_required) {
           return part_button;
         }
         break;
@@ -347,8 +347,8 @@ void AdvancedPartitionFrame::repaintDevices() {
     model_label->setText(GetDeviceModelCapAndPath(device));
     model_label->setContentsMargins(15, 10, 0, 5);
     partition_layout_->addWidget(model_label, 0, Qt::AlignLeft);
-    for (const Partition& partition : device->partitions) {
-      if ((partition.type == PartitionType::Extended) || partition.busy) {
+    for (const Partition::Ptr partition : device->partitions) {
+      if ((partition->type == PartitionType::Extended) || partition->busy) {
         // Ignores extended partition and currently in-used partitions.
         continue;
       }
@@ -535,7 +535,7 @@ void AdvancedPartitionFrame::clearErrorMessages() {
 }
 
 void AdvancedPartitionFrame::onDeletePartitionTriggered(
-    const Partition& partition) {
+    const Partition::Ptr partition) {
   delegate_->deletePartition(partition);
   delegate_->refreshVisual();
 }
@@ -553,8 +553,8 @@ void AdvancedPartitionFrame::onEditButtonToggled(bool toggle) {
 }
 
 void AdvancedPartitionFrame::onEditPartitionTriggered(
-    const Partition& partition) {
-  const QString device_path = partition.device_path;
+    const Partition::Ptr partition) {
+  const QString device_path = partition->device_path;
   // Check partition table type first.
   if (! delegate_->isPartitionTableMatch(device_path)) {
     emit this->requestNewTable(device_path);
@@ -587,8 +587,8 @@ void AdvancedPartitionFrame::onErrorLabelLeaved() {
 }
 
 void AdvancedPartitionFrame::onNewPartitionTriggered(
-    const Partition& partition) {
-  const QString device_path = partition.device_path;
+    const Partition::Ptr partition) {
+  const QString device_path = partition->device_path;
   if (! delegate_->isPartitionTableMatch(device_path)) {
     emit this->requestNewTable(device_path);
     return;

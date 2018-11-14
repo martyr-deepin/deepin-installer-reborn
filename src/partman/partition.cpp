@@ -95,16 +95,36 @@ Partition::Partition()
       flags() {
 }
 
+Partition::Partition(const Partition &partition)
+    : device_path(partition.device_path),
+      path(partition.path),
+      label(partition.label),
+      name(partition.name),
+      partition_number(partition.partition_number),
+      type(partition.type),
+      status(partition.status),
+      fs(partition.fs),
+      os(partition.os),
+      busy(partition.busy),
+      sector_size(partition.sector_size),
+      length(partition.length),
+      freespace(partition.freespace),
+      start_sector(partition.start_sector),
+      end_sector(partition.end_sector),
+      mount_point(partition.mount_point),
+      flags(partition.flags) {
+}
+
 Partition::~Partition() {
 
 }
 
-bool Partition::operator==(const Partition& other) const {
-  return (this->device_path == other.device_path &&
-          this->start_sector == other.start_sector &&
-          this->end_sector == other.end_sector &&
-          this->sector_size == other.sector_size &&
-          type == other.type);
+bool Partition::operator==(const Partition::Ptr other) const {
+  return (this->device_path == other->device_path &&
+          this->start_sector == other->start_sector &&
+          this->end_sector == other->end_sector &&
+          this->sector_size == other->sector_size &&
+          type == other->type);
 }
 
 void Partition::changeNumber(int partition_number) {
@@ -153,9 +173,14 @@ QDebug& operator<<(QDebug& debug, const Partition& partition) {
   return debug;
 }
 
+QDebug& operator<<(QDebug& debug, const Partition::Ptr partition) {
+    debug << partition.get();
+    return debug;
+}
+
 int ExtendedPartitionIndex(const PartitionList& partitions) {
   for (int i = 0; i < partitions.length(); ++i) {
-    if (partitions.at(i).type == PartitionType::Extended) {
+    if (partitions.at(i)->type == PartitionType::Extended) {
       return i;
     }
   }
@@ -164,9 +189,9 @@ int ExtendedPartitionIndex(const PartitionList& partitions) {
 
 PartitionList GetPrimaryPartitions(const PartitionList& partitions) {
   PartitionList result;
-  for (const Partition& partition : partitions) {
-    if (partition.type == PartitionType::Normal ||
-        partition.type == PartitionType::Extended) {
+  for (const Partition::Ptr partition : partitions) {
+    if (partition->type == PartitionType::Normal ||
+        partition->type == PartitionType::Extended) {
       result.append(partition);
     }
   }
@@ -175,28 +200,28 @@ PartitionList GetPrimaryPartitions(const PartitionList& partitions) {
 
 PartitionList GetLogicalPartitions(const PartitionList& partitions) {
   PartitionList result;
-  for (const Partition& partition : partitions) {
-    if (partition.type == PartitionType::Logical) {
+  for (const Partition::Ptr partition : partitions) {
+    if (partition->type == PartitionType::Logical) {
       result.append(partition);
     }
   }
   return result;
 }
 
-bool IsPartitionsJoint(const Partition& part1, const Partition& part2) {
-  return ((part1.start_sector <= part2.start_sector &&
-          part2.start_sector <= part1.end_sector) ||
-         (part1.start_sector <= part2.end_sector &&
-          part2.end_sector <= part1.end_sector));
+bool IsPartitionsJoint(const Partition::Ptr part1, const Partition::Ptr part2) {
+  return ((part1->start_sector <= part2->start_sector &&
+          part2->start_sector <= part1->end_sector) ||
+         (part1->start_sector <= part2->end_sector &&
+          part2->end_sector <= part1->end_sector));
 }
 
 int PartitionIndex(const PartitionList& partitions,
-                   const Partition& partition) {
+                   const Partition::Ptr partition) {
   for (int i = 0; i < partitions.length(); ++i) {
-    if (partition.type == partitions[i].type &&
-        partition.start_sector >= partitions[i].start_sector &&
-        partition.end_sector -1 <= partitions[i].end_sector) {
-        // partition.end_sector boundary problems here.
+    if (partition->type == partitions[i]->type &&
+        partition->start_sector >= partitions[i]->start_sector &&
+        partition->end_sector -1 <= partitions[i]->end_sector) {
+        // partition->end_sector boundary problems here->
       return i;
     }
   }

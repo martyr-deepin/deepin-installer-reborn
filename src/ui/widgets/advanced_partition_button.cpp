@@ -43,7 +43,7 @@ const char kCtlBtnStateHide[] = "hide";
 
 }  // namespace
 
-AdvancedPartitionButton::AdvancedPartitionButton(const Partition& partition,
+AdvancedPartitionButton::AdvancedPartitionButton(const Partition::Ptr partition,
                                                  QWidget* parent)
     : PointerButton(parent),
       partition_(partition),
@@ -54,7 +54,7 @@ AdvancedPartitionButton::AdvancedPartitionButton(const Partition& partition,
   this->initConnections();
 }
 
-const Partition& AdvancedPartitionButton::partition() const {
+const Partition::Ptr AdvancedPartitionButton::partition() const {
   return partition_;
 }
 
@@ -73,7 +73,7 @@ void AdvancedPartitionButton::initConnections() {
 void AdvancedPartitionButton::initUI() {
   QLabel* os_label = new QLabel();
   os_label->setObjectName("os_label");
-  os_label->setPixmap(installer::renderPixmap(GetOsTypeIcon(partition_.os)));
+  os_label->setPixmap(installer::renderPixmap(GetOsTypeIcon(partition_->os)));
 
   // partition label name
   QLabel* name_label = new QLabel();
@@ -83,8 +83,8 @@ void AdvancedPartitionButton::initUI() {
   // partition path
   QLabel* path_label = new QLabel();
   path_label->setObjectName("path_label");
-  if (partition_.type != PartitionType::Unallocated) {
-    const QString name = GetPartitionName(partition_.path);
+  if (partition_->type != PartitionType::Unallocated) {
+    const QString name = GetPartitionName(partition_->path);
     path_label->setText(QString("(%1)").arg(name));
   }
 
@@ -114,26 +114,26 @@ void AdvancedPartitionButton::initUI() {
   // mount point
   QLabel* mount_point_label = new QLabel();
   mount_point_label->setObjectName("mount_point_label");
-  mount_point_label->setText(partition_.mount_point);
+  mount_point_label->setText(partition_->mount_point);
   mount_point_label->setFixedWidth(64);
 
   // tip
   QLabel* tip_label = new QLabel();
   tip_label->setObjectName("tip_label");
   tip_label->setFixedWidth(112);
-  if (partition_.mount_point == kMountPointRoot) {
+  if (partition_->mount_point == kMountPointRoot) {
     tip_label->setText(tr("Install here"));
-  } else if (partition_.status == PartitionStatus::Format ||
-             partition_.status == PartitionStatus::New) {
+  } else if (partition_->status == PartitionStatus::Format ||
+             partition_->status == PartitionStatus::New) {
     tip_label->setText(tr("To be formatted"));
   }
 
   // filesystem name
   QLabel* fs_label = new QLabel();
   fs_label->setObjectName("fs_label");
-  if (partition_.type == PartitionType::Normal ||
-      partition_.type == PartitionType::Logical) {
-    fs_label->setText(GetFsTypeName(partition_.fs));
+  if (partition_->type == PartitionType::Normal ||
+      partition_->type == PartitionType::Logical) {
+    fs_label->setText(GetFsTypeName(partition_->fs));
   }
   fs_label->setFixedWidth(80);
 
@@ -178,17 +178,17 @@ void AdvancedPartitionButton::updateStatus() {
   control_status_ = ControlStatus::Hide;
 
   if (editable_) {
-    if (partition_.type == PartitionType::Normal ||
-        partition_.type == PartitionType::Logical) {
+    if (partition_->type == PartitionType::Normal ||
+        partition_->type == PartitionType::Logical) {
       control_status_ = ControlStatus::Delete;
       control_button_->setProperty(kCtlBtnState, kCtlBtnStateDelete);
     }
   } else if (this->isChecked()) {
-    if (partition_.type == PartitionType::Normal ||
-        partition_.type == PartitionType::Logical) {
+    if (partition_->type == PartitionType::Normal ||
+        partition_->type == PartitionType::Logical) {
       control_status_ = ControlStatus::Edit;
       control_button_->setProperty(kCtlBtnState, kCtlBtnStateEdit);
-    } else if (partition_.type == PartitionType::Unallocated) {
+    } else if (partition_->type == PartitionType::Unallocated) {
       control_status_ = ControlStatus::New;
       control_button_->setProperty(kCtlBtnState, kCtlBtnStateNew);
     }
