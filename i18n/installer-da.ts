@@ -151,7 +151,7 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Sørg venligst for at oprette en sikkerhedskopi af vigtige data, og vælg så den disk der skal installeres på</translation>
+        <translation>Sørg venligst for at oprette en sikkerhedskopi af vigtige data, og vælg herefter disken der skal installeres på</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="137"/>
@@ -203,7 +203,7 @@
     <name>installer::FullDiskFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="49"/>
-        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="117"/>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="119"/>
         <source>Install here</source>
         <translation>Installer her</translation>
     </message>
@@ -215,7 +215,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="51"/>
         <source>Please select a disk to start installation</source>
-        <translation type="unfinished"/>
+        <translation>Vælg venligst en disk for at starte installationen</translation>
     </message>
 </context>
 <context>
@@ -251,7 +251,7 @@
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Du kan opleve den udsøgte fornøjelse som deepin er, efter den tid det tager at drikke en kop kaffe</translation>
+        <translation>Du kan opleve deepin, efter den tid det tager at drikke en kop kaffe</translation>
     </message>
 </context>
 <context>
@@ -398,7 +398,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="229"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Sørg venligst for at oprette en sikkerhedskopi af vigtige data, og vælg så den disk der skal installeres på</translation>
+        <translation>Sørg venligst for at oprette en sikkerhedskopi af vigtige data, og vælg herefter disken der skal installeres på</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
@@ -530,47 +530,47 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/partman/operation.cpp" line="252"/>
+        <location filename="../src/partman/operation.cpp" line="253"/>
         <source>Create extended partition %1</source>
         <translation>Opret udvidet partition %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="256"/>
+        <location filename="../src/partman/operation.cpp" line="257"/>
         <source>Create new partition %1, type is %2</source>
         <translation>Opret udvidet partition %1, typen er %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="260"/>
+        <location filename="../src/partman/operation.cpp" line="261"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation>Opret udvidet partition %1 som %2 (monteringspunkt), typen er %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="269"/>
+        <location filename="../src/partman/operation.cpp" line="270"/>
         <source>Delete %1 partition</source>
         <translation>Slet %1 partition</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="274"/>
+        <location filename="../src/partman/operation.cpp" line="275"/>
         <source>Format %1 partition, type is %2</source>
         <translation>Formatér %1-partition, typen er %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="278"/>
+        <location filename="../src/partman/operation.cpp" line="279"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
         <translation>Formatér %1-partition som %2 (monteringspunkt), typen er %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="286"/>
+        <location filename="../src/partman/operation.cpp" line="287"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
         <translation>Brug %1-partition som %2 (monteringspunkt)</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="292"/>
+        <location filename="../src/partman/operation.cpp" line="293"/>
         <source>Format %1 and create %2 new partition table</source>
         <translation>Formatér %1 og opret %2 ny partitionstabel</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="298"/>
+        <location filename="../src/partman/operation.cpp" line="299"/>
         <source>Adjust the size of %1 partition</source>
         <translation>Juster størrelsen af %1-partition</translation>
     </message>
@@ -678,100 +678,100 @@
 <context>
     <name>installer::SystemInfoFormFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="65"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="125"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="139"/>
         <source>Create User Account</source>
         <translation>Opret brugerkonto</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="66"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="126"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="72"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
         <source>Input username and password</source>
         <translation>Indtast brugernavn og adgangskode</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="135"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="73"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="149"/>
         <source>Username</source>
         <translation>Brugernavn</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="68"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="74"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="154"/>
         <source>Computer name</source>
         <translation>Computernavn</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Password</source>
         <translation>Adgangskode</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="70"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="151"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="165"/>
         <source>Confirm password</source>
         <translation>Bekræft adgangskode</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="178"/>
         <source>Next</source>
         <translation>Næste</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="191"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="212"/>
         <source>This username already exists</source>
         <translation>Dette brugernavn findes allerede</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="195"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>The first letter must be in lowercase</source>
         <translation>Det første bogstav skal være med småt</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="200"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="222"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
         <translation>Brugernavn skal indeholde danske bogstaver (små bogstaver), tal eller specielle symboler (_-)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="206"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>Indtast venligst brugernavn på over %1 tegn og under %2 tegn</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="250"/>
         <source>Please input computer name</source>
         <translation>Indtast venligst computernavn</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="254"/>
         <source>Computer name is invalid</source>
         <translation>Computernavn er ugyldigt</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="233"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="258"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Computernavn findes allerede, indtast venligst et andet</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="238"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="263"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Indtast venligst computernavn på over %1 tegn og under %2 tegn</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="264"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="278"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="288"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="301"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Indtast venligst adgangskode på over %1 tegn og under %2 tegn</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="272"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="295"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Adgangskoden skal indeholde engelske bogstaver (forskel på store og små bogstaver), tal og specialtegn (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="292"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="325"/>
         <source>The two passwords don&apos;t match</source>
         <translation>De to adgangskoder er ikke ens</translation>
     </message>
@@ -859,7 +859,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Sørg venligst for at oprette en sikkerhedskopi af vigtige data, og vælg så den disk der skal installeres på</translation>
+        <translation>Sørg venligst for at oprette en sikkerhedskopi af vigtige data, og vælg herefter disken der skal installeres på</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="179"/>
@@ -981,19 +981,29 @@
 <context>
     <name>installer::UserAgreementFrame</name>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="131"/>
         <source>End User License Agreement</source>
-        <translation>Slutbruger licensaftale</translation>
+        <translation>Slutbrugerlicensaftale</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="122"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>Accept</source>
         <translation>Accepter</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="123"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="155"/>
         <source>Cancel</source>
         <translation>Annuller</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="164"/>
+        <source>View in Chinese</source>
+        <translation>Vis på kinesisk</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="170"/>
+        <source>View in English</source>
+        <translation>Vis på engelsk</translation>
     </message>
 </context>
 </TS>

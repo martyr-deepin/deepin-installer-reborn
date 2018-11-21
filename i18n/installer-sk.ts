@@ -203,7 +203,7 @@
     <name>installer::FullDiskFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="49"/>
-        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="117"/>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="119"/>
         <source>Install here</source>
         <translation>Tu nainštalovať</translation>
     </message>
@@ -215,7 +215,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="51"/>
         <source>Please select a disk to start installation</source>
-        <translation type="unfinished"/>
+        <translation>Prosím, vyberte disk pre štart inštalácie</translation>
     </message>
 </context>
 <context>
@@ -530,47 +530,47 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/partman/operation.cpp" line="252"/>
+        <location filename="../src/partman/operation.cpp" line="253"/>
         <source>Create extended partition %1</source>
         <translation>Vytvoriť rozšírený oddiel %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="256"/>
+        <location filename="../src/partman/operation.cpp" line="257"/>
         <source>Create new partition %1, type is %2</source>
         <translation>Vytvoriť nový oddiel %1, typ %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="260"/>
+        <location filename="../src/partman/operation.cpp" line="261"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation>Vytvoriť nový oddiel %1 ako %2 (prípojný bod), typ %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="269"/>
+        <location filename="../src/partman/operation.cpp" line="270"/>
         <source>Delete %1 partition</source>
         <translation>Odstrániť %1 oddiel</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="274"/>
+        <location filename="../src/partman/operation.cpp" line="275"/>
         <source>Format %1 partition, type is %2</source>
         <translation>Formátovať %1 oddiel, typ %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="278"/>
+        <location filename="../src/partman/operation.cpp" line="279"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
         <translation>Formátovať %1 oddiel ako %2 (prípojný bod), typ %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="286"/>
+        <location filename="../src/partman/operation.cpp" line="287"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
         <translation>Použiť %1 oddiel ako %2 (prípojný bod)</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="292"/>
+        <location filename="../src/partman/operation.cpp" line="293"/>
         <source>Format %1 and create %2 new partition table</source>
         <translation>Formátovať %1 a vytvoriť %2 novú tabuľku oddielu</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="298"/>
+        <location filename="../src/partman/operation.cpp" line="299"/>
         <source>Adjust the size of %1 partition</source>
         <translation>Nastaviť veľkosť %1 oddielu</translation>
     </message>
@@ -678,100 +678,100 @@
 <context>
     <name>installer::SystemInfoFormFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="65"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="125"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="139"/>
         <source>Create User Account</source>
         <translation>Vytvorenie konta používateľa</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="66"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="126"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="72"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
         <source>Input username and password</source>
         <translation>Zadajte meno používateľa a heslo</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="135"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="73"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="149"/>
         <source>Username</source>
         <translation>Meno používateľa</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="68"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="74"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="154"/>
         <source>Computer name</source>
         <translation>Názov počítača</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Password</source>
         <translation>Heslo</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="70"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="151"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="165"/>
         <source>Confirm password</source>
         <translation>Potvrdiť heslo</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="178"/>
         <source>Next</source>
         <translation>Ďalej</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="191"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="212"/>
         <source>This username already exists</source>
         <translation>Toto meno používateľa už existuje</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="195"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>The first letter must be in lowercase</source>
         <translation>Prvé písmeno musí byť malými písmenami</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="200"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="222"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
         <translation>Meno používateľa musí obsahovať anglické písmená (malé písmená), čísla alebo špeciálne symboly (_-)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="206"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>Zadajte prosím meno používateľa dlhšie ako %1 znakov a kratšie ako %2 znaky</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="250"/>
         <source>Please input computer name</source>
         <translation>Prosím vložte názov počítača</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="254"/>
         <source>Computer name is invalid</source>
         <translation>Názov počítača je neplatný</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="233"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="258"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Názov počítača už existuje, prosím zadajte iný</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="238"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="263"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Zadajte prosím názov počítača dlhší ako %1 znakov a kratší ako %2 znaky</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="264"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="278"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="288"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="301"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Prosím zadajte heslo dlhšie ako %1 znakov a kratšie ako %2 znaky</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="272"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="295"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Meno používateľa musí obsahovať anglické písmená (veľké a malé písmená), číslice alebo špeciálne znaky (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="292"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="325"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Tieto dve heslá sa nezhodujú</translation>
     </message>
@@ -981,19 +981,29 @@
 <context>
     <name>installer::UserAgreementFrame</name>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="131"/>
         <source>End User License Agreement</source>
         <translation>Licenčná zmluva s koncovým používateľom</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="122"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>Accept</source>
         <translation>Akceptovať</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="123"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="155"/>
         <source>Cancel</source>
         <translation>Zrušiť</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="164"/>
+        <source>View in Chinese</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="170"/>
+        <source>View in English</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

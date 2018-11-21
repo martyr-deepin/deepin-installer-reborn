@@ -203,19 +203,19 @@
     <name>installer::FullDiskFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="49"/>
-        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="117"/>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="119"/>
         <source>Install here</source>
         <translation>Встановити тут</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="50"/>
         <source>Encrypt Full Disk</source>
-        <translation type="unfinished"/>
+        <translation>Зашифрувати увесь диск</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="51"/>
         <source>Please select a disk to start installation</source>
-        <translation type="unfinished"/>
+        <translation>Будь ласка, виберіть диск, щоб розпочати встановлення</translation>
     </message>
 </context>
 <context>
@@ -530,47 +530,47 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/partman/operation.cpp" line="252"/>
+        <location filename="../src/partman/operation.cpp" line="253"/>
         <source>Create extended partition %1</source>
         <translation>Створити розширений розділ %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="256"/>
+        <location filename="../src/partman/operation.cpp" line="257"/>
         <source>Create new partition %1, type is %2</source>
         <translation>Створіть новий розділ %1, тип %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="260"/>
+        <location filename="../src/partman/operation.cpp" line="261"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation>Створіть новий розділ %1 як %2 (точка монтування), тип %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="269"/>
+        <location filename="../src/partman/operation.cpp" line="270"/>
         <source>Delete %1 partition</source>
         <translation>Видалити %1 розділ</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="274"/>
+        <location filename="../src/partman/operation.cpp" line="275"/>
         <source>Format %1 partition, type is %2</source>
         <translation>Форматувати %1 розділ, тип %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="278"/>
+        <location filename="../src/partman/operation.cpp" line="279"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
         <translation>Форматувати %1 розділ як %2 (точка монтування), тип %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="286"/>
+        <location filename="../src/partman/operation.cpp" line="287"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
         <translation>Використовуйте розділ %1 як %2 (точку монтування)</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="292"/>
+        <location filename="../src/partman/operation.cpp" line="293"/>
         <source>Format %1 and create %2 new partition table</source>
         <translation>Форматувати %1 і створити нову таблицю розділів %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="298"/>
+        <location filename="../src/partman/operation.cpp" line="299"/>
         <source>Adjust the size of %1 partition</source>
         <translation>Налаштуйте розмір розділу %1</translation>
     </message>
@@ -678,100 +678,100 @@
 <context>
     <name>installer::SystemInfoFormFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="65"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="125"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="139"/>
         <source>Create User Account</source>
         <translation>Створити обліковий запис користувача</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="66"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="126"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="72"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
         <source>Input username and password</source>
         <translation>Введіть ім&apos;я користувача та пароль</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="135"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="73"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="149"/>
         <source>Username</source>
         <translation>Ім&apos;я користувача</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="68"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="74"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="154"/>
         <source>Computer name</source>
         <translation>Ім&apos;я комп&apos;ютера</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="70"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="151"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="165"/>
         <source>Confirm password</source>
         <translation>Підтвердити пароль</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="178"/>
         <source>Next</source>
         <translation>Далі</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="191"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="212"/>
         <source>This username already exists</source>
         <translation>Це ім&apos;я користувача вже існує</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="195"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>The first letter must be in lowercase</source>
         <translation>Перша літера повинна бути в нижньому регістрі</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="200"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="222"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
         <translation>Ім&apos;я користувача повинно містити англійські літери (малі літери), цифри або спеціальні символи (_-)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="206"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>Будь ласка, введіть ім&apos;я користувача довше ніж %1 символів і менше, ніж %2 символів</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="250"/>
         <source>Please input computer name</source>
         <translation>Будь ласка, введіть ім&apos;я комп&apos;ютера</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="254"/>
         <source>Computer name is invalid</source>
         <translation>Ім&apos;я комп&apos;ютера недійсне</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="233"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="258"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Ім&apos;я комп&apos;ютера вже існує, будь ласка, введіть інше</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="238"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="263"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Будь ласка, введіть назву комп&apos;ютера довше ніж %1 символів і менше, ніж %2 символів</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="264"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="278"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="288"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="301"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Будь ласка, введіть пароль довше, ніж %1 символів і менше, ніж %2 символів</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="272"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="295"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Пароль повинен містити англійські літери (чутливі до регістру), цифри або спеціальні символи (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="292"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="325"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Ці два пароля не збігаються</translation>
     </message>
@@ -844,7 +844,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="145"/>
         <source>Please input password</source>
-        <translation type="unfinished"/>
+        <translation>Будь ласка, введіть пароль</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="151"/>
@@ -854,7 +854,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
         <source>Full Disk Encryption</source>
-        <translation type="unfinished"/>
+        <translation>Шифрування усього диска</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
@@ -864,7 +864,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="179"/>
         <source>Encrypt This Disk</source>
-        <translation type="unfinished"/>
+        <translation>Зашифрувати цей диск</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="180"/>
@@ -874,17 +874,17 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="181"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"/>
+        <translation>Повторіть пароль</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
         <source>Previous</source>
-        <translation type="unfinished"/>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
         <source>Start Installation</source>
-        <translation type="unfinished"/>
+        <translation>Розпочати встановлення</translation>
     </message>
 </context>
 <context>
@@ -981,19 +981,29 @@
 <context>
     <name>installer::UserAgreementFrame</name>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="131"/>
         <source>End User License Agreement</source>
-        <translation type="unfinished"/>
+        <translation>Ліцензійна угода із кінцевим користувачем</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="122"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>Accept</source>
-        <translation type="unfinished"/>
+        <translation>Прийняти</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="123"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="155"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="164"/>
+        <source>View in Chinese</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="170"/>
+        <source>View in English</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

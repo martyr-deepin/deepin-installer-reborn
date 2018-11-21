@@ -203,7 +203,7 @@
     <name>installer::FullDiskFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="49"/>
-        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="117"/>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="119"/>
         <source>Install here</source>
         <translation>安装到此</translation>
     </message>
@@ -530,47 +530,47 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/partman/operation.cpp" line="252"/>
+        <location filename="../src/partman/operation.cpp" line="253"/>
         <source>Create extended partition %1</source>
         <translation>新建扩展分区 %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="256"/>
+        <location filename="../src/partman/operation.cpp" line="257"/>
         <source>Create new partition %1, type is %2</source>
         <translation>新建%1分区，类型为%2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="260"/>
+        <location filename="../src/partman/operation.cpp" line="261"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation>新建%1分区作为%2（挂载点）， 类型为%3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="269"/>
+        <location filename="../src/partman/operation.cpp" line="270"/>
         <source>Delete %1 partition</source>
         <translation>删除%1分区</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="274"/>
+        <location filename="../src/partman/operation.cpp" line="275"/>
         <source>Format %1 partition, type is %2</source>
         <translation>格式化%1分区， 类型 为%2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="278"/>
+        <location filename="../src/partman/operation.cpp" line="279"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
         <translation>格式化%1分区作为%2（挂载点），类型为%3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="286"/>
+        <location filename="../src/partman/operation.cpp" line="287"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
         <translation>使用%1分区作为%2（挂载点）</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="292"/>
+        <location filename="../src/partman/operation.cpp" line="293"/>
         <source>Format %1 and create %2 new partition table</source>
         <translation>全盘格式化 %1 并创建新的 %2 格式的分区表</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="298"/>
+        <location filename="../src/partman/operation.cpp" line="299"/>
         <source>Adjust the size of %1 partition</source>
         <translation>调整分区%1的大小</translation>
     </message>
@@ -678,100 +678,100 @@
 <context>
     <name>installer::SystemInfoFormFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="65"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="125"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="139"/>
         <source>Create User Account</source>
         <translation>创建用户</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="66"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="126"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="72"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
         <source>Input username and password</source>
         <translation>请输入您要创建的用户名并设置密码</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="135"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="73"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="149"/>
         <source>Username</source>
         <translation>用户名</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="68"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="74"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="154"/>
         <source>Computer name</source>
         <translation>计算机名</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Password</source>
         <translation>密码</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="70"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="151"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="165"/>
         <source>Confirm password</source>
         <translation>重复密码</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="178"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="191"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="212"/>
         <source>This username already exists</source>
         <translation>这个用户名已存在</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="195"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>The first letter must be in lowercase</source>
         <translation>首字母必须为小写</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="200"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="222"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
         <translation>用户名必须包含英文（小写）、数字或特殊符号（_-）</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="206"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>请输入长度大于%1，小于%2位用户名</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="250"/>
         <source>Please input computer name</source>
         <translation>请输入计算机名</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="254"/>
         <source>Computer name is invalid</source>
         <translation>计算机名无效</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="233"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="258"/>
         <source>Computer name already exists, please input another one</source>
         <translation>计算机名被占用，请重新输入</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="238"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="263"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>请输入长度大于%1，小于%2位计算机名</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="264"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="278"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="288"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="301"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>请输入长度大于%1，小于%2位密码</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="272"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="295"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>密码必须包含英文（区分大小写）、数字或特殊符号（~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;）</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="292"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="325"/>
         <source>The two passwords don&apos;t match</source>
         <translation>两次输入的密码不一致</translation>
     </message>
@@ -981,19 +981,29 @@
 <context>
     <name>installer::UserAgreementFrame</name>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="131"/>
         <source>End User License Agreement</source>
         <translation>最终用户许可协议</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="122"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>Accept</source>
         <translation>同意</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="123"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="155"/>
         <source>Cancel</source>
         <translation>取消</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="164"/>
+        <source>View in Chinese</source>
+        <translation>显示中文</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="170"/>
+        <source>View in English</source>
+        <translation>显示英文</translation>
     </message>
 </context>
 </TS>

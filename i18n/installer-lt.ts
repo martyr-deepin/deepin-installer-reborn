@@ -18,7 +18,7 @@
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
         <source>Change boot loader</source>
-        <translation type="unfinished"/>
+        <translation>Keisti paleidyklę</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
@@ -36,22 +36,22 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="429"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>Rasta %1 klaida, norėdami tęsti, ištaisykite klaidą arba perjunkite į paprastą veikseną</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="433"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation type="unfinished"/>
+        <translation>Rastos %1 klaidos, norėdami tęsti, ištaisykite klaidas arba perjunkite į paprastą veikseną</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="439"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation type="unfinished"/>
+        <translation>Rasta %1 klaida, tęskite diegimą, kai ištaisysite klaidą</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="443"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation type="unfinished"/>
+        <translation>Rastos %1 klaidos, tęskite diegimą, kai ištaisysite klaidas</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="490"/>
@@ -81,12 +81,12 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="511"/>
         <source>Add a Root partition to continue</source>
-        <translation type="unfinished"/>
+        <translation>Norėdami tęsti, pridėkite šaknies skaidinį</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="516"/>
         <source>At least %1 GB is required for Root partition</source>
-        <translation type="unfinished"/>
+        <translation>Šaknies skaidiniui reikia bent %1 GB</translation>
     </message>
 </context>
 <context>
@@ -190,7 +190,7 @@
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="38"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="61"/>
         <source>Tuning system</source>
-        <translation type="unfinished"/>
+        <translation>Sistemos derinimas</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="40"/>
@@ -203,19 +203,19 @@
     <name>installer::FullDiskFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="49"/>
-        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="117"/>
+        <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="119"/>
         <source>Install here</source>
         <translation>Įdiegti čia</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="50"/>
         <source>Encrypt Full Disk</source>
-        <translation type="unfinished"/>
+        <translation>Šifruoti visą diską</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="51"/>
         <source>Please select a disk to start installation</source>
-        <translation type="unfinished"/>
+        <translation>Norėdami pradėti diegimą, pasirinkite diską</translation>
     </message>
 </context>
 <context>
@@ -293,7 +293,7 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="118"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="153"/>
         <source>Create a new partition and define the type and size</source>
-        <translation type="unfinished"/>
+        <translation>Sukurkite naują skaidinį ir apibrėžkite jo tipą ir dydį</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="119"/>
@@ -416,7 +416,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="245"/>
         <source>Full Disk</source>
-        <translation type="unfinished"/>
+        <translation>Viso disko</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
@@ -530,47 +530,47 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/partman/operation.cpp" line="252"/>
+        <location filename="../src/partman/operation.cpp" line="253"/>
         <source>Create extended partition %1</source>
         <translation>Sukurti išplėstinį skaidinį %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="256"/>
+        <location filename="../src/partman/operation.cpp" line="257"/>
         <source>Create new partition %1, type is %2</source>
         <translation>Sukurti naują skaidinį %1, kurio tipas yra %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="260"/>
+        <location filename="../src/partman/operation.cpp" line="261"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation type="unfinished"/>
+        <translation>Sukurti naują %1 skaidinį kaip %2 (prijungimo taškas), kurio tipas bus %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="269"/>
+        <location filename="../src/partman/operation.cpp" line="270"/>
         <source>Delete %1 partition</source>
         <translation>Ištrinti skaidinį %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="274"/>
+        <location filename="../src/partman/operation.cpp" line="275"/>
         <source>Format %1 partition, type is %2</source>
-        <translation type="unfinished"/>
+        <translation>Formatuoti %1 skaidinį, kurio tipas bus %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="278"/>
+        <location filename="../src/partman/operation.cpp" line="279"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation type="unfinished"/>
+        <translation>Formatuoti %1 skaidinį kaip %2 (prijungimo taškas), kurio tipas bus %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="286"/>
+        <location filename="../src/partman/operation.cpp" line="287"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
-        <translation type="unfinished"/>
+        <translation>Naudoti %1 skaidinį kaip %2 (prijungimo taškas)</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="292"/>
+        <location filename="../src/partman/operation.cpp" line="293"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation type="unfinished"/>
+        <translation>Formatuoti %1 ir sukurti naują %2 skaidinių lentelę</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="298"/>
+        <location filename="../src/partman/operation.cpp" line="299"/>
         <source>Adjust the size of %1 partition</source>
         <translation>Reguliuoti %1 skaidinio dydį</translation>
     </message>
@@ -598,7 +598,7 @@
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
         <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation type="unfinished"/>
+        <translation>Norint įdiegti deepin, reikia daugiau nei %1GB vietos diske, geresniam našumui yra rekomenduojama %2GB ir daugiau vietos</translation>
     </message>
 </context>
 <context>
@@ -678,100 +678,100 @@
 <context>
     <name>installer::SystemInfoFormFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="65"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="125"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="139"/>
         <source>Create User Account</source>
         <translation>Sukurkite naudotojo paskyrą</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="66"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="126"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="72"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
         <source>Input username and password</source>
         <translation>Įveskite naudotojo vardą ir slaptažodį</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="135"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="73"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="149"/>
         <source>Username</source>
         <translation>Naudotojo vardas</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="68"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="74"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="154"/>
         <source>Computer name</source>
         <translation>Kompiuterio vardas</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Password</source>
         <translation>Slaptažodis</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="70"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="151"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="165"/>
         <source>Confirm password</source>
         <translation>Patvirtinkite slaptažodį</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="178"/>
         <source>Next</source>
         <translation>Kitas</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="191"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="212"/>
         <source>This username already exists</source>
         <translation>Šis naudotojo vardas jau yra</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="195"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="216"/>
         <source>The first letter must be in lowercase</source>
         <translation>Pirma raidė turi būti mažoji</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="200"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="222"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
         <translation>Naudotojo varde privalo būti anglų kalbos raidės (mažosios), skaičiai ar specialūs simboliai (_-)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="206"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>Prašome įvesti naudotojo vardą ilgesnį nei %1 ir trumpesnį nei %2 simbolių</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="250"/>
         <source>Please input computer name</source>
         <translation>Prašome įvesti kompiuterio pavadinimą</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="254"/>
         <source>Computer name is invalid</source>
         <translation>Kompiuterio vardas netinkamas</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="233"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="258"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Kompiuterio pavadinimas jau yra, įveskite kitą</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="238"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="263"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Prašome įvesti kompiuterio pavadinimą ilgesnį nei %1 ir trumpesnį nei %2 simbolių</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="264"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="278"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="288"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="301"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Prašome įvesti slaptažodį ilgesnį nei %1 ir trumpesnį nei %2 simbolių</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="272"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="295"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Slaptažodyje privalo būti anglų kalbos raidės (skiriant jų dydį), skaičiai ar specialūs simboliai (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="292"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="325"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Šie du slaptažodžiai nesutampa</translation>
     </message>
@@ -809,7 +809,7 @@
         <location filename="../src/ui/frames/timezone_frame.cpp" line="130"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="168"/>
         <source>Mark your zone on the map</source>
-        <translation type="unfinished"/>
+        <translation>Pažymėkite žemėlapyje savo juostą</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="131"/>
@@ -844,7 +844,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="145"/>
         <source>Please input password</source>
-        <translation type="unfinished"/>
+        <translation>Įveskite slaptažodį</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="151"/>
@@ -854,7 +854,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
         <source>Full Disk Encryption</source>
-        <translation type="unfinished"/>
+        <translation>Viso disko šifravimas</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
@@ -864,7 +864,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="179"/>
         <source>Encrypt This Disk</source>
-        <translation type="unfinished"/>
+        <translation>Šifruoti šį diską</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="180"/>
@@ -874,17 +874,17 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="181"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"/>
+        <translation>Pakartokite slaptažodį</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
         <source>Previous</source>
-        <translation type="unfinished"/>
+        <translation>Ankstesnis</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
         <source>Start Installation</source>
-        <translation type="unfinished"/>
+        <translation>Pradėti įdiegimą</translation>
     </message>
 </context>
 <context>
@@ -907,19 +907,19 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="106"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation type="unfinished"/>
+        <translation>Nepavyko tiesiogiai įdiegti, nes aptikta EFI pagrindinės plokštės paleidyklė ir MBR diskas, norėdami tęsti, pasirinkite vieną iš žemiau esančių sprendimų.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="118"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
-        <translation type="unfinished"/>
+        <translation>Paleiskite kompiuterį iš naujo, užeikite į BIOS ir išjunkite UEFI</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="119"/>
         <source>Exit BIOS, and enter deepin to install</source>
-        <translation type="unfinished"/>
+        <translation>Išeikite iš BIOS ir norėdami įdiegti, užeikite į deepin</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
@@ -931,7 +931,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="128"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation type="unfinished"/>
+        <translation>Dar kartą patikrinkite ar pasidarėte visų duomenų atsarginę kopiją ir paleiskite kompiuterį iš naujo, norėdami įeiti į šią sąsają</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
@@ -969,31 +969,41 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="114"/>
         <source>Disable UEFI</source>
-        <translation type="unfinished"/>
+        <translation>Išjunkite UEFI</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="123"/>
         <source>Format the disk</source>
-        <translation type="unfinished"/>
+        <translation>Formatuokite diską</translation>
     </message>
 </context>
 <context>
     <name>installer::UserAgreementFrame</name>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="131"/>
         <source>End User License Agreement</source>
-        <translation type="unfinished"/>
+        <translation>Galutinio naudotojo licencijos sutikimas</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="122"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>Accept</source>
-        <translation type="unfinished"/>
+        <translation>Sutinku</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="123"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="155"/>
         <source>Cancel</source>
         <translation>Atsisakyti</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="164"/>
+        <source>View in Chinese</source>
+        <translation>Rodyti kinų kalba</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="170"/>
+        <source>View in English</source>
+        <translation>Rodyti anglų kalba</translation>
     </message>
 </context>
 </TS>

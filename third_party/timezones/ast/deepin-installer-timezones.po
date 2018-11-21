@@ -167,7 +167,7 @@ msgstr ""
 
 #: system-config-date-timezones.h:37
 msgid "Africa/Malabo"
-msgstr ""
+msgstr "África/Malabu"
 
 #: system-config-date-timezones.h:38
 msgid "Africa/Maputo"
@@ -191,7 +191,7 @@ msgstr ""
 
 #: system-config-date-timezones.h:43
 msgid "Africa/Nairobi"
-msgstr ""
+msgstr "África/Nairobi"
 
 #: system-config-date-timezones.h:44
 msgid "Africa/Ndjamena"
@@ -1619,7 +1619,7 @@ msgstr ""
 
 #: system-config-date-timezones.h:400
 msgid "Pacific/Guadalcanal"
-msgstr ""
+msgstr "Pacíficu/Guadalcanal"
 
 #: system-config-date-timezones.h:401
 msgid "Pacific/Guam"
