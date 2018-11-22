@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright (C) 2017 ~ 2018 Deepin Technology Co., Ltd.
 #
@@ -28,8 +28,13 @@ SWAP_FILE_PATH="/target${SWAP_FILE_PATH}"
 
 if [ x"${SWAP_FILE_REQUIRED}" = "xtrue" ]; then
   # A swap file is required.
-  dd if=/dev/zero of="${SWAP_FILE_PATH}" count="${SWAP_FILE_SIZE}" \
-    bs=1M || error "Failed to create swap file: ${SWAP_FILE_PATH}"
+  if [[ "$(df --output=fstype ${SWAP_FILE_PATH%/*})" =~ $'\n'(ext4|xfs)$ ]]
+  then
+    fallocate -l "${SWAP_FILE_SIZE}MiB" "${SWAP_FILE_PATH}"
+  else
+    dd if=/dev/zero of="${SWAP_FILE_PATH}" count="${SWAP_FILE_SIZE}" bs=1M
+  fi || error "Failed to create swap file: ${SWAP_FILE_PATH}"
+
   chmod 0600 "${SWAP_FILE_PATH}" || \
     warn "Failed to change permission of ${SWAP_FILE_PATH}"
   mkswap "${SWAP_FILE_PATH}" || error "mkswap ${SWAP_FILE_PATH} failed"
