@@ -30,6 +30,7 @@ QScrollArea, QFrame#grid_wrapper {
 
 #check_box {
   color: white;
+  background: transparent;
 }
 
 #check_box::indicator {

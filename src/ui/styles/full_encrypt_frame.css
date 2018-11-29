@@ -4,6 +4,7 @@
 
 #check_box {
   color: white;
+  background: transparent;
 }
 
 #check_box::indicator {
