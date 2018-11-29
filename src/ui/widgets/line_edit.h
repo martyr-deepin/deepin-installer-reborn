@@ -27,23 +27,25 @@ namespace installer {
 
 // Customized line edit used in form page.
 class LineEdit : public QLineEdit {
-  Q_OBJECT
+    Q_OBJECT
 
- public:
-  LineEdit(const QString& icon, QWidget* parent = nullptr);
+public:
+    LineEdit(const QString& icon, QWidget* parent = nullptr);
+    void setCapsLockVisible(bool visible);
 
- signals:
-  void gotFocus();
+signals:
+    void gotFocus();
 
- protected:
-  // Emit gotFocus() signal when line-edit get focus
-  void focusInEvent(QFocusEvent* event) override;
+protected:
+    // Emit gotFocus() signal when line-edit get focus
+    void focusInEvent(QFocusEvent* event) override;
 
-  // Reset image label position.
-  void resizeEvent(QResizeEvent* event) override;
+    // Reset image label position.
+    void resizeEvent(QResizeEvent* event) override;
 
- private:
-  QLabel* image_label_ = nullptr;
+private:
+    QLabel* image_label_  = nullptr;
+    QLabel* m_right_label = nullptr;
 };
 
 }  // namespace installer

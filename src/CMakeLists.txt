@@ -344,6 +344,8 @@ set(UI_FILES
     ui/utils/widget_util.h
     ui/utils/xutil.cpp
     ui/utils/xutil.h
+    ui/utils/keyboardmonitor.h
+    ui/utils/keyboardmonitor.cpp
 
     ui/views/frameless_list_view.cpp
     ui/views/frameless_list_view.h
@@ -472,6 +474,7 @@ set(LINK_LIBS
     qrencode
     qtermwidget5
     zlib_wrapper
+    Xi
     )
 
 
@@ -596,6 +599,8 @@ add_executable(deepin-installer-user-form
                ui/utils/widget_util.h
                ui/utils/xutil.cpp
                ui/utils/xutil.h
+               ui/utils/keyboardmonitor.h
+               ui/utils/keyboardmonitor.cpp
 
                ui/images/images.qrc
                ui/styles/styles.qrc
