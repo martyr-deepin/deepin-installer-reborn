@@ -58,7 +58,7 @@ if grep -q boot=casper /proc/cmdline; then
   UNUSED_PKGS+=("casper")
 fi
 if grep -q boot=live /proc/cmdline; then
-  UNUSED_PKGS+=("live-boot*" "live-config*")
+  UNUSED_PKGS+=("live-boot*" "live-config*" "busybox")
 fi
 
 # installer depends on btrfs, so remove btrfs-tools only if reboot-setup mode
