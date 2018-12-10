@@ -278,12 +278,15 @@ bool SystemInfoFormFrame::validatePassword(QString& msg)
 {
     const int min_len = GetSettingsInt(kSystemInfoPasswordMinLen);
     const int max_len = GetSettingsInt(kSystemInfoPasswordMaxLen);
+
+#ifndef QT_DEBUG
+    const bool strong_pwd_check = GetSettingsBool(kSystemInfoPasswordStrongCheck);
+#else
+    const bool strong_pwd_check = true;
+#endif // !QT_DEBUG
+
     const ValidatePasswordState state = ValidatePassword(
-        password_edit_->text(), min_len, max_len,
-        GetSettingsBool(kSystemInfoPasswordRequireNumber),
-        GetSettingsBool(kSystemInfoPasswordRequireLowerCase),
-        GetSettingsBool(kSystemInfoPasswordRequireUpperCase),
-        GetSettingsBool(kSystemInfoPasswordRequireSpecialChar));
+        password_edit_->text(), min_len, max_len, strong_pwd_check);
 
     switch (state) {
         case ValidatePasswordState::EmptyError: {
@@ -293,13 +296,9 @@ bool SystemInfoFormFrame::validatePassword(QString& msg)
                       .arg(max_len);
             return false;
         }
-        case ValidatePasswordState::NoLowerCharError:  // fall through
-        case ValidatePasswordState::NoUpperCharError:  // fall through
-        case ValidatePasswordState::NoNumberError:     // fall through
-        case ValidatePasswordState::NoSpecialCharError: {
+        case ValidatePasswordState::StrongError: {  // fall through
             msg = tr(
-                "The password must contain English letters (case-sensitive), "
-                "numbers or special symbols (~!@#$%^&*()[]{}\\|/?,.<>)");
+                "The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&*()[]{}\\|/?,.<>)");
             return false;
         }
         case ValidatePasswordState::TooShortError:  // fall through
@@ -357,6 +356,9 @@ void SystemInfoFormFrame::onNextButtonClicked()
     }
     else {
         tooltip_->hide();
+
+        // save config
+        WritePasswordStrong(GetSettingsBool(kSystemInfoPasswordStrongCheck));
         // Emit finished signal when all form inputs are ok.
         emit this->finished();
     }

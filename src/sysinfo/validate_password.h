@@ -31,6 +31,7 @@ enum class ValidatePasswordState {
   NoLowerCharError,  // No lower case characters in password.
   NoUpperCharError,  // No upper case characters in password.
   NoSpecialCharError,  // No special characters in password.
+  StrongError, // No strong check in password
 };
 
 // Validate password based on policy below:
@@ -40,13 +41,10 @@ enum class ValidatePasswordState {
 //   * require_lower_case: |password| shall contains lower case char;
 //   * require_upper_case: |password| shall contains upper case char;
 //   * require_special_char: |password| shall contains special char;
-ValidatePasswordState ValidatePassword(const QString& password,
-                                       int min_len,
-                                       int max_len,
-                                       bool require_number,
-                                       bool require_lower_case,
-                                       bool require_upper_case,
-                                       bool require_special_char);
+ValidatePasswordState ValidatePassword( const QString& password,
+                                        int min_len,
+                                        int max_len,
+                                        bool strong_pwd_check);
 
 }  // namespace installer
 

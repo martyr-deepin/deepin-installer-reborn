@@ -59,6 +59,7 @@ const char kSystemInfoPasswordRequireUpperCase[] =
     "system_info_password_require_upper_case";
 const char kSystemInfoPasswordRequireSpecialChar[] =
     "system_info_password_require_special_char";
+const char kSystemInfoPasswordStrongCheck[] = "system_info_password_strong_check";
 const char kSystemInfoDefaultAvator[] = "system_info_default_avatar";
 const char kSystemInfoDdeAvatarDir[] = "system_info_dde_avatar_dir";
 const char kSystemInfoDisableAvatorPage[] = "system_info_disable_avatar_page";

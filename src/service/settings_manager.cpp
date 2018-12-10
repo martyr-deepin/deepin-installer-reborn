@@ -378,6 +378,10 @@ void WriteFullDiskEncryptPassword(const QString &password)
     AppendToConfigFile("DI_CRYPT_PASSWD", password);
 }
 
+void WritePasswordStrong(bool strongPassword) {
+    AppendToConfigFile("DI_STRONG_PASSWORD", strongPassword);
+}
+
 void WriteFullDiskDeivce(const QString &deviceName)
 {
     AppendToConfigFile("DI_FULLDISK_DEVICE", deviceName);

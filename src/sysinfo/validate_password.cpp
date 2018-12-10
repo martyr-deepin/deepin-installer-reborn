@@ -36,12 +36,11 @@ bool ContainsChar(const QString& str, const QString& pattern) {
 ValidatePasswordState ValidatePassword(const QString& password,
                                        int min_len,
                                        int max_len,
-                                       bool require_number,
-                                       bool require_lower_case,
-                                       bool require_upper_case,
-                                       bool require_special_char) {
+                                       bool strong_pwd_check) {
   Q_ASSERT(min_len >= 0);
   Q_ASSERT(max_len > min_len);
+
+  uint success_num = 0;
 
   if (password.isEmpty() && min_len > 0) {
     return ValidatePasswordState::EmptyError;
@@ -53,23 +52,24 @@ ValidatePasswordState ValidatePassword(const QString& password,
     return ValidatePasswordState::TooLongError;
   }
 
-  if (require_number && (!ContainsChar(password, "1234567890"))) {
-    return ValidatePasswordState::NoNumberError;
+  if (ContainsChar(password, "1234567890")) {
+    ++success_num;
   }
 
-  if (require_lower_case &&
-      (!ContainsChar(password, "abcdefghijklmnopqrstuvwxyz"))) {
-    return ValidatePasswordState::NoLowerCharError;
+  if (ContainsChar(password, "abcdefghijklmnopqrstuvwxyz")) {
+    ++success_num;
   }
 
-  if (require_upper_case &&
-      (!ContainsChar(password, "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))) {
-    return ValidatePasswordState::NoUpperCharError;
+  if (ContainsChar(password, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")) {
+    ++success_num;
   }
 
-  if (require_special_char &&
-      (!ContainsChar(password, "~!@#$%^&*()[]{}\\|/?,.<>"))) {
-    return ValidatePasswordState::NoSpecialCharError;
+  if (ContainsChar(password, "~!@#$%^&*()[]{}\\|/?,.<>")) {
+    ++success_num;
+  }
+
+  if (strong_pwd_check && success_num < 2) {
+      return ValidatePasswordState::StrongError;
   }
 
   return ValidatePasswordState::Ok;

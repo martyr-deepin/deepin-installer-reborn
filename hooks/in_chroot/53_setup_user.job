@@ -105,6 +105,12 @@ ff02::2 ip6-allrouters
 EOF
 }
 
+DI_STRONG_PASSWORD=$(installer_get "DI_STRONG_PASSWORD")
+cat > /etc/deepin/dde-control-center.conf << EOF
+[Password]
+STRONG_PASSWORD=${DI_STRONG_PASSWORD}
+EOF
+
 if [ x$(installer_get "system_info_setup_after_reboot") != "xtrue" ]; then
   setup_username_password
 fi

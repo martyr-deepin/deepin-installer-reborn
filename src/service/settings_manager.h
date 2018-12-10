@@ -97,6 +97,7 @@ void WriteTimezone(const QString& timezone, bool is_local_time);
 void WriteUsername(const QString& username);
 void WriteFullDiskDeivce(const QString &deviceName);
 void WriteFullDiskEncryptPassword(const QString &password);
+void WritePasswordStrong(bool storePassword);
 
 // Write disk info.
 //  * |root_disk|, device path to install system into, like /dev/sda;
