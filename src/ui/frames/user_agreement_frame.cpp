@@ -12,6 +12,14 @@
 
 using namespace installer;
 
+#ifdef PROFESSIONAL
+    const QString zh_CN_license { ":/license/deepin-end-user-license-agreement_zh_CN.txt" };
+    const QString en_US_license { ":/license/deepin-end-user-license-agreement_en_US.txt" };
+#else
+    const QString zh_CN_license { ":/license/deepin-end-user-license-agreement_community_zh_CN.txt" };
+    const QString en_US_license { ":/license/deepin-end-user-license-agreement_community_en_US.txt" };
+#endif // PROFESSIONAL
+
 UserAgreementFrame::UserAgreementFrame(QWidget *parent)
     : QFrame(parent)
     , m_language(QLocale::Language::English)
@@ -131,22 +139,10 @@ void UserAgreementFrame::updateText()
     const QString &locale{ installer::ReadLocale() };
 
     if (locale == "zh_CN") {
-        m_sourceLbl->setText(installer::ReadFile(
-            QString(":/license/deepin-end-user-license-agreement_zh_CN.txt")
-                .arg(locale)));
+        m_sourceLbl->setText(installer::ReadFile(zh_CN_license));
     }
     else {
-        m_sourceLbl->setText(installer::ReadFile(
-            QString(":/license/deepin-end-user-license-agreement_en_US.txt")));
-    }
-
-    if (m_language == QLocale::Language::Chinese) {
-        m_toggleLbl->hide();
-    }
-    else {
-        m_toggleLbl->show();
-        m_type = Chinese;
-        toggleLicense();
+        m_sourceLbl->setText(installer::ReadFile(en_US_license));
     }
 
     m_accept->setText(tr("Accept"));
@@ -156,14 +152,12 @@ void UserAgreementFrame::updateText()
 void UserAgreementFrame::toggleLicense()
 {
     if (m_type == Chinese) {
-        m_sourceLbl->setText(installer::ReadFile(
-            QString(":/license/deepin-end-user-license-agreement_en_US.txt")));
+        m_sourceLbl->setText(installer::ReadFile(en_US_license));
         m_type = English;
         m_toggleLbl->setText(QString("<u>%1</u>").arg(tr("View in Chinese")));
     }
     else {
-        m_sourceLbl->setText(installer::ReadFile(
-            QString(":/license/deepin-end-user-license-agreement_zh_CN.txt")));
+        m_sourceLbl->setText(installer::ReadFile(zh_CN_license));
         m_type = Chinese;
         m_toggleLbl->setText(QString("<u>%1</u>").arg(tr("View in English")));
     }
