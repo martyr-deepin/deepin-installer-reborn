@@ -1,8 +1,8 @@
 #include "user_agreement_frame.h"
-#include "service/settings_manager.h"
 #include "base/file_util.h"
-#include "ui/widgets/nav_button.h"
+#include "service/settings_manager.h"
 #include "ui/frames/consts.h"
+#include "ui/widgets/nav_button.h"
 
 #include <QEvent>
 #include <QLabel>
@@ -14,6 +14,8 @@ using namespace installer;
 
 UserAgreementFrame::UserAgreementFrame(QWidget *parent)
     : QFrame(parent)
+    , m_language(QLocale::Language::English)
+    , m_type(Type::Chinese)
 {
     initUI();
     initConnect();
@@ -23,10 +25,22 @@ UserAgreementFrame::UserAgreementFrame(QWidget *parent)
 void UserAgreementFrame::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange) {
+        QLocale locale;
+        m_language = locale.language();
         updateText();
     }
 
     QFrame::changeEvent(event);
+}
+
+bool UserAgreementFrame::eventFilter(QObject *watched, QEvent *event)
+{
+    if (watched == m_toggleLbl) {
+        if (event->type() == QEvent::MouseButtonRelease) {
+            toggleLicense();
+        }
+    }
+    return QFrame::eventFilter(watched, event);
 }
 
 void UserAgreementFrame::initUI()
@@ -34,7 +48,7 @@ void UserAgreementFrame::initUI()
     m_logoLbl = new QLabel();
     m_logoLbl->setPixmap(QPixmap(installer::GetVendorLogo()));
 
-    m_subTitle  = new QLabel(this);
+    m_subTitle = new QLabel(this);
     m_subTitle->setObjectName("user_agreement_subtitle");
     m_sourceLbl = new QLabel(this);
     m_sourceLbl->setObjectName("user_agreement_sourceLbl");
@@ -56,7 +70,8 @@ void UserAgreementFrame::initUI()
     m_sourceScrollArea->setWidgetResizable(true);
     m_sourceScrollArea->setFocusPolicy(Qt::NoFocus);
     m_sourceScrollArea->setFrameStyle(QFrame::NoFrame);
-    m_sourceScrollArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    m_sourceScrollArea->setSizePolicy(QSizePolicy::Fixed,
+                                      QSizePolicy::Expanding);
     m_sourceScrollArea->setContentsMargins(0, 0, 0, 0);
     m_sourceScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     m_sourceScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -67,6 +82,9 @@ void UserAgreementFrame::initUI()
         Qt::NoContextMenu);
 
     m_sourceScrollArea->setFixedWidth(468);
+
+    m_toggleLbl = new QLabel;
+    m_toggleLbl->installEventFilter(this);
 
     m_accept = new NavButton(this);
     m_cancel = new NavButton(this);
@@ -83,8 +101,10 @@ void UserAgreementFrame::initUI()
     mainLayout->addSpacing(20);
     mainLayout->addWidget(m_sourceScrollArea, 0, Qt::AlignHCenter);
     mainLayout->addSpacing(20);
-    mainLayout->addWidget(m_accept, 0 , Qt::AlignHCenter);
-    mainLayout->addWidget(m_cancel, 0 , Qt::AlignHCenter);
+    mainLayout->addWidget(m_toggleLbl, 0, Qt::AlignHCenter);
+    mainLayout->addSpacing(20);
+    mainLayout->addWidget(m_accept, 0, Qt::AlignHCenter);
+    mainLayout->addWidget(m_cancel, 0, Qt::AlignHCenter);
 
     setLayout(mainLayout);
     setStyleSheet(installer::ReadFile(":/styles/user_agreement_frame.css"));
@@ -94,31 +114,57 @@ void UserAgreementFrame::initConnect()
 {
     connect(m_accept, &NavButton::clicked, this, &UserAgreementFrame::finished);
     connect(m_cancel, &NavButton::clicked, this, &UserAgreementFrame::cancel);
-    connect(m_sourceScrollArea->verticalScrollBar(), &QScrollBar::valueChanged, this, [=] (int value) {
-        if (!m_accept->isEnabled() && value == m_sourceScrollArea->verticalScrollBar()->maximum()) {
-            m_accept->setDisabled(false);
-        }
-    });
+    connect(
+        m_sourceScrollArea->verticalScrollBar(), &QScrollBar::valueChanged,
+        this, [=](int value) {
+            if (!m_accept->isEnabled() &&
+                value == m_sourceScrollArea->verticalScrollBar()->maximum()) {
+                m_accept->setDisabled(false);
+            }
+        });
 }
 
 void UserAgreementFrame::updateText()
 {
     m_subTitle->setText(tr("End User License Agreement"));
 
-    const QString &locale { installer::ReadLocale() };
+    const QString &locale{ installer::ReadLocale() };
 
     if (locale == "zh_CN") {
-        m_sourceLbl->setText(
-                    installer::ReadFile(
-                        QString(":/license/deepin-end-user-license-agreement_zh_CN.txt")
-                        .arg(locale)));
+        m_sourceLbl->setText(installer::ReadFile(
+            QString(":/license/deepin-end-user-license-agreement_zh_CN.txt")
+                .arg(locale)));
     }
     else {
-        m_sourceLbl->setText(
-                    installer::ReadFile(
-                        QString(":/license/deepin-end-user-license-agreement_en_US.txt")));
+        m_sourceLbl->setText(installer::ReadFile(
+            QString(":/license/deepin-end-user-license-agreement_en_US.txt")));
+    }
+
+    if (m_language == QLocale::Language::Chinese) {
+        m_toggleLbl->hide();
+    }
+    else {
+        m_toggleLbl->show();
+        m_type = Chinese;
+        toggleLicense();
     }
 
     m_accept->setText(tr("Accept"));
     m_cancel->setText(tr("Cancel"));
+}
+
+void UserAgreementFrame::toggleLicense()
+{
+    if (m_type == Chinese) {
+        m_sourceLbl->setText(installer::ReadFile(
+            QString(":/license/deepin-end-user-license-agreement_en_US.txt")));
+        m_type = English;
+        m_toggleLbl->setText(QString("<u>%1</u>").arg(tr("View in Chinese")));
+    }
+    else {
+        m_sourceLbl->setText(installer::ReadFile(
+            QString(":/license/deepin-end-user-license-agreement_zh_CN.txt")));
+        m_type = Chinese;
+        m_toggleLbl->setText(QString("<u>%1</u>").arg(tr("View in English")));
+    }
 }
