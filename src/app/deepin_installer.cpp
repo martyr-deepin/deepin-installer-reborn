@@ -85,6 +85,7 @@ int main(int argc, char* argv[]) {
   installer::MainWindow main_window;
   main_window.setEnableAutoInstall(args_parser.isAutoInstallSet());
   main_window.setLogFile(args_parser.getLogFile());
+
   // Notify background thread to scan device info.
   main_window.scanDevicesAndTimezone();
   main_window.fullscreen();
