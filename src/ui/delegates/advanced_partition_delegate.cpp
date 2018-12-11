@@ -799,39 +799,51 @@ void AdvancedPartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
 void AdvancedPartitionDelegate::onManualPartDone(const DeviceList& devices) {
   qDebug() << "AdvancedPartitionDelegate::onManualPartDone()" << devices;
 
-  QString root_disk;
-  QString root_path;
-  QStringList mount_points;
-  bool found_swap = false;
-  QString esp_path;
+    QString        root_disk;
+    QString        root_path;
+    QStringList    mount_points;
+    bool           found_swap = false;
+    QString        esp_path;
+    Device::Ptr    root_device;
+    Partition::Ptr efi_partition;
 
-  // Check use-specified partitions with mount point.
-  for (const Device::Ptr device : devices) {
-    for (const Partition::Ptr partition : device->partitions) {
-      if (!partition->mount_point.isEmpty()) {
-        // Add used partitions to mount_point list.
-        const QString record(QString("%1=%2").arg(partition->path)
-                                 .arg(partition->mount_point));
-        mount_points.append(record);
-        if (partition->mount_point == kMountPointRoot) {
-          root_disk = partition->device_path;
-          root_path = partition->path;
+    // Check use-specified partitions with mount point.
+    for (const Device::Ptr device : devices) {
+        for (const Partition::Ptr partition : device->partitions) {
+            if (!partition->mount_point.isEmpty()) {
+                // Add used partitions to mount_point list.
+                const QString record(QString("%1=%2").arg(partition->path).arg(partition->mount_point));
+                mount_points.append(record);
+                if (partition->mount_point == kMountPointRoot) {
+                    root_disk   = partition->device_path;
+                    root_path   = partition->path;
+                    root_device = device;
+                }
+            }
+
+            if (partition->fs == FsType::LinuxSwap) {
+                found_swap = true;
+
+                // Add swap area to mount_point list.
+                // NOTE(xushaohua): Multiple swap partitions may be set.
+                const QString record(QString("%1=swap").arg(partition->path));
+                mount_points.append(record);
+            }
+            else if (partition->fs == FsType::EFI && esp_path.isEmpty()) {
+                // NOTE(xushaohua): There shall be only one EFI partition->
+                esp_path = partition->path;
+            }
         }
-      }
-
-      if (partition->fs == FsType::LinuxSwap) {
-        found_swap = true;
-
-        // Add swap area to mount_point list.
-        // NOTE(xushaohua): Multiple swap partitions may be set.
-        const QString record(QString("%1=swap").arg(partition->path));
-        mount_points.append(record);
-      } else if (partition->fs == FsType::EFI && esp_path.isEmpty()) {
-        // NOTE(xushaohua): There shall be only one EFI partition->
-        esp_path = partition->path;
-      }
     }
-  }
+
+    // Find this device efi partition
+    for (Partition::Ptr partition : root_device->partitions) {
+        if (partition->fs == FsType::EFI && esp_path != partition->path) {
+            // NOTE(lxz): maybe we shoud check efi freespcae
+            esp_path = partition->path;
+            break;
+        }
+    }
 
   if (!IsMBRPreferred(real_devices_)) {
     // Enable EFI mode. First check newly created EFI partition-> If not found,
