@@ -74,6 +74,7 @@ MainWindow::MainWindow()
     page_indicator_->updatePages(GetVisiblePages());
 
   SetBrightness(GetSettingsInt(kScreenDefaultBrightness));
+    WriteDisplayPort(getenv("DISPLAY"));
 }
 
 void MainWindow::fullscreen() {

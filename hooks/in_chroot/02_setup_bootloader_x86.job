@@ -219,6 +219,9 @@ EOF
 #fi
 
 # update grub theme
+DISPLAY_PORT=$(installer_get "DI_DISPLAY_PORT")
+export XAUTHORITY=/var/run/lightdm/root/${DISPLAY_PORT}
+export DISPLAY=${DISPLAY_PORT}
 /usr/lib/deepin-daemon/grub2 -prepare-gfxmode-detect
 
 # update grub config

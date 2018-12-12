@@ -382,6 +382,10 @@ void WritePasswordStrong(bool strongPassword) {
     AppendToConfigFile("DI_STRONG_PASSWORD", strongPassword);
 }
 
+void WriteDisplayPort(const QString &display) {
+    AppendToConfigFile("DI_DISPLAY_PORT", display);
+}
+
 void WriteFullDiskDeivce(const QString &deviceName)
 {
     AppendToConfigFile("DI_FULLDISK_DEVICE", deviceName);

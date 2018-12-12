@@ -45,3 +45,10 @@ fi
 
 mkdir -p /target/run
 mount --bind /run /target/run || error "Failed to bind /run"
+
+# Mount /var/run
+mount --bind /var/run /target/var/run || error "Failed to bind /var/run"
+
+# Mount /tmp/.X11-unix/
+mkdir -p /target/tmp/.X11-unix
+mount --bind /tmp/.X11-unix/ /target/tmp/.X11-unix || error "Failed to bind /tmp/.X11-unix"
