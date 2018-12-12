@@ -9,21 +9,19 @@
 #include <QPushButton>
 #include <QScrollArea>
 #include <QScrollBar>
+#include <QScroller>
 
 using namespace installer;
 
 #ifdef PROFESSIONAL
-    const QString zh_CN_license { ":/license/deepin-end-user-license-agreement_zh_CN.txt" };
-    const QString en_US_license { ":/license/deepin-end-user-license-agreement_en_US.txt" };
+const QString zh_CN_license{ ":/license/deepin-end-user-license-agreement_zh_CN.txt" };
+const QString en_US_license{ ":/license/deepin-end-user-license-agreement_en_US.txt" };
 #else
-    const QString zh_CN_license { ":/license/deepin-end-user-license-agreement_community_zh_CN.txt" };
-    const QString en_US_license { ":/license/deepin-end-user-license-agreement_community_en_US.txt" };
-#endif // PROFESSIONAL
+const QString zh_CN_license{ ":/license/deepin-end-user-license-agreement_community_zh_CN.txt" };
+const QString en_US_license{ ":/license/deepin-end-user-license-agreement_community_en_US.txt" };
+#endif  // PROFESSIONAL
 
-UserAgreementFrame::UserAgreementFrame(QWidget *parent)
-    : QFrame(parent)
-    , m_language(QLocale::Language::English)
-    , m_type(Type::Chinese)
+UserAgreementFrame::UserAgreementFrame(QWidget *parent) : QFrame(parent), m_language(QLocale::Language::English), m_type(Type::Chinese)
 {
     initUI();
     initConnect();
@@ -78,16 +76,15 @@ void UserAgreementFrame::initUI()
     m_sourceScrollArea->setWidgetResizable(true);
     m_sourceScrollArea->setFocusPolicy(Qt::NoFocus);
     m_sourceScrollArea->setFrameStyle(QFrame::NoFrame);
-    m_sourceScrollArea->setSizePolicy(QSizePolicy::Fixed,
-                                      QSizePolicy::Expanding);
+    m_sourceScrollArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
     m_sourceScrollArea->setContentsMargins(0, 0, 0, 0);
     m_sourceScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     m_sourceScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     m_sourceScrollArea->setContextMenuPolicy(Qt::NoContextMenu);
-    m_sourceScrollArea->verticalScrollBar()->setContextMenuPolicy(
-        Qt::NoContextMenu);
-    m_sourceScrollArea->horizontalScrollBar()->setContextMenuPolicy(
-        Qt::NoContextMenu);
+    m_sourceScrollArea->verticalScrollBar()->setContextMenuPolicy(Qt::NoContextMenu);
+    m_sourceScrollArea->horizontalScrollBar()->setContextMenuPolicy(Qt::NoContextMenu);
+
+    QScroller::grabGesture(m_sourceScrollArea, QScroller::TouchGesture);
 
     m_sourceScrollArea->setFixedWidth(468);
 
@@ -122,14 +119,11 @@ void UserAgreementFrame::initConnect()
 {
     connect(m_accept, &NavButton::clicked, this, &UserAgreementFrame::finished);
     connect(m_cancel, &NavButton::clicked, this, &UserAgreementFrame::cancel);
-    connect(
-        m_sourceScrollArea->verticalScrollBar(), &QScrollBar::valueChanged,
-        this, [=](int value) {
-            if (!m_accept->isEnabled() &&
-                value == m_sourceScrollArea->verticalScrollBar()->maximum()) {
-                m_accept->setDisabled(false);
-            }
-        });
+    connect(m_sourceScrollArea->verticalScrollBar(), &QScrollBar::valueChanged, this, [=](int value) {
+        if (!m_accept->isEnabled() && value == m_sourceScrollArea->verticalScrollBar()->maximum()) {
+            m_accept->setDisabled(false);
+        }
+    });
 }
 
 void UserAgreementFrame::updateText()
@@ -143,6 +137,15 @@ void UserAgreementFrame::updateText()
     }
     else {
         m_sourceLbl->setText(installer::ReadFile(en_US_license));
+    }
+
+    if (m_language == QLocale::Language::Chinese) {
+        m_toggleLbl->hide();
+    }
+    else {
+        m_toggleLbl->show();
+        m_type = Chinese;
+        toggleLicense();
     }
 
     m_accept->setText(tr("Accept"));
