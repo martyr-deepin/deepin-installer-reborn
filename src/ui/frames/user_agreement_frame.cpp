@@ -133,14 +133,8 @@ void UserAgreementFrame::updateText()
     const QString &locale{ installer::ReadLocale() };
 
     if (locale == "zh_CN") {
-        m_sourceLbl->setText(installer::ReadFile(zh_CN_license));
-    }
-    else {
-        m_sourceLbl->setText(installer::ReadFile(en_US_license));
-    }
-
-    if (m_language == QLocale::Language::Chinese) {
         m_toggleLbl->hide();
+        m_sourceLbl->setText(installer::ReadFile(zh_CN_license));
     }
     else {
         m_toggleLbl->show();
