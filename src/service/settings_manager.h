@@ -99,6 +99,7 @@ void WriteFullDiskDeivce(const QString &deviceName);
 void WriteFullDiskEncryptPassword(const QString &password);
 void WritePasswordStrong(bool storePassword);
 void WriteDisplayPort(const QString &display);
+void WriteGrubPassword(const QString &password);
 
 // Write disk info.
 //  * |root_disk|, device path to install system into, like /dev/sda;

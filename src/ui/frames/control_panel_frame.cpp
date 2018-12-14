@@ -49,7 +49,12 @@ const int kSettingsPageId = 2;
 
 // Absolute path to settings file.
 // Same in service/settings_manager.cpp.
+
+#ifdef QT_DEBUG
+const char kInstallerConfigFile[] = "/tmp/deepin-installer.conf";
+#else
 const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
+#endif // QT_DEBUG
 
 }  // namespace
 

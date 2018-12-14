@@ -20,6 +20,10 @@
 #include <QEvent>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
+#include <QProcess>
+#include <QDebug>
 
 #include "base/file_util.h"
 #include "service/settings_manager.h"
@@ -75,6 +79,7 @@ void SystemInfoFormFrame::changeEvent(QEvent* event)
         password_edit_->setPlaceholderText(tr("Password"));
         password_check_edit_->setPlaceholderText(tr("Confirm password"));
         next_button_->setText(tr("Next"));
+        grub_password_check_->setText(tr("Use that password to edit boot menu"));
     }
     else {
         QFrame::changeEvent(event);
@@ -175,6 +180,11 @@ void SystemInfoFormFrame::initUI()
     tooltip_ = new SystemInfoTip(this);
     tooltip_->hide();
 
+    grub_password_check_ = new QCheckBox(tr("Use that password to edit boot menu"), this);
+    grub_password_check_->setCheckable(true);
+    grub_password_check_->setChecked(true);
+    grub_password_check_->setObjectName("GrubPasswordCheckBox");
+
     next_button_ = new NavButton(tr("Next"));
 
     QVBoxLayout* layout = new QVBoxLayout();
@@ -191,6 +201,8 @@ void SystemInfoFormFrame::initUI()
     layout->addWidget(password_edit_, 0, Qt::AlignCenter);
     layout->addWidget(password_check_edit_, 0, Qt::AlignCenter);
     layout->addStretch();
+    layout->addWidget(grub_password_check_, 0, Qt::AlignCenter);
+    layout->addSpacing(10);
     layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
     // username_edit_->setRightIcon(CAPS_LOCK_ICON);
@@ -359,6 +371,30 @@ void SystemInfoFormFrame::onNextButtonClicked()
 
         // save config
         WritePasswordStrong(GetSettingsBool(kSystemInfoPasswordStrongCheck));
+
+        if (grub_password_check_->isChecked()) {
+            QProcess process;
+            process.setProgram("grub-mkpasswd-pbkdf2");
+            process.start();
+            const QString password{ password_edit_->text() };
+            process.write(QString("%1\n%1\n").arg(password).toLatin1());
+            process.closeWriteChannel();
+            process.waitForFinished();
+
+            const QString& result = process.readAllStandardOutput();
+
+            QRegularExpression re("(?<=password is).*");
+            auto               match = re.match(result);
+
+            if (!match.isValid()) {
+                qWarning() << "not match grub password !!!!!!";
+            }
+
+            qDebug() << Q_FUNC_INFO << result << match.captured(0);
+
+            WriteGrubPassword(match.captured(0).replace(" ", ""));
+        }
+
         // Emit finished signal when all form inputs are ok.
         emit this->finished();
     }

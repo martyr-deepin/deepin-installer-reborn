@@ -44,7 +44,11 @@ QString g_oem_dir;
 const char kLocaleKey[] = "DI_LOCALE";
 
 // Absolute path to installer config file.
+#ifdef QT_DEBUG
+const char kInstallerConfigFile[] = "/tmp/deepin-installer.conf";
+#else
 const char kInstallerConfigFile[] = "/etc/deepin-installer.conf";
+#endif // QT_DEBUG
 
 // Absolute path to default installer settings
 const char kDefaultSettingsFile[] = RESOURCES_DIR "/default_settings.ini";
@@ -384,6 +388,10 @@ void WritePasswordStrong(bool strongPassword) {
 
 void WriteDisplayPort(const QString &display) {
     AppendToConfigFile("DI_DISPLAY_PORT", display);
+}
+
+void WriteGrubPassword(const QString &password) {
+    AppendToConfigFile("DI_GRUB_PASSWORD", password);
 }
 
 void WriteFullDiskDeivce(const QString &deviceName)

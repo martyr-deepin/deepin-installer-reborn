@@ -20,6 +20,7 @@
 
 #include <QFrame>
 #include <vector>
+#include <QCheckBox>
 
 namespace installer {
 
@@ -68,13 +69,15 @@ private:
 
     void updateCapsLockState(bool capslock);
 
-    TitleLabel*   title_label_    = nullptr;
-    CommentLabel* comment_label_  = nullptr;
-    AvatarButton* avatar_button_  = nullptr;
-    LineEdit*     username_edit_  = nullptr;
-    LineEdit*     hostname_edit_  = nullptr;
-    LineEdit*     password_edit_  = nullptr;
+    TitleLabel*   title_label_         = nullptr;
+    CommentLabel* comment_label_       = nullptr;
+    AvatarButton* avatar_button_       = nullptr;
+    LineEdit*     username_edit_       = nullptr;
+    LineEdit*     hostname_edit_       = nullptr;
+    LineEdit*     password_edit_       = nullptr;
     LineEdit*     password_check_edit_ = nullptr;
+    QCheckBox*    grub_password_check_ = nullptr;
+
     // Display tooltip error message.
     SystemInfoTip*         tooltip_     = nullptr;
     NavButton*             next_button_ = nullptr;
