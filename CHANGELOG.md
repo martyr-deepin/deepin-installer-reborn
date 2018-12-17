@@ -1,3 +1,25 @@
+<a name=""></a>
+##  2.5.0 (2018-12-17)
+
+
+#### Bug Fixes
+
+* **FullPartition:**  disable checkbox background ([d8c8058a](https://github.com/linuxdeepin/deepin-install-reborn/commit/d8c8058a938408bc49903c27fb412d572a44dce4))
+
+#### Features
+
+*   add grub edit password checkbox ([8ed5920f](https://github.com/linuxdeepin/deepin-install-reborn/commit/8ed5920fbbf1bb713b36942e449069b89a2279e5))
+*   bind mount chroot needed ([49d1d9a1](https://github.com/linuxdeepin/deepin-install-reborn/commit/49d1d9a1a36cd46bdcaf3284c9926ad68cba2e63))
+*   add touch scroll for user agreement frame ([57c147bb](https://github.com/linuxdeepin/deepin-install-reborn/commit/57c147bbe590358ab6b2e46e0f858c4d8a092680))
+*   add user license switch language ([dff465f1](https://github.com/linuxdeepin/deepin-install-reborn/commit/dff465f157c839a7d6caf6bd09142c86685fd0b5))
+*   give priority to the current device efi partition ([b5f664a7](https://github.com/linuxdeepin/deepin-install-reborn/commit/b5f664a70913e1f77d516c1da7e219e2c0abf8fb))
+*   add password strong check ([fc0e85b9](https://github.com/linuxdeepin/deepin-install-reborn/commit/fc0e85b995233432f30c0d378f350d96dc9a08e1))
+* **Grub:**  set edit password ([9570237c](https://github.com/linuxdeepin/deepin-install-reborn/commit/9570237cde6898971da8dba0eb76a34b386ae710))
+* **SystemInfo:**  add capslock icon ([7fe4c7db](https://github.com/linuxdeepin/deepin-install-reborn/commit/7fe4c7db3a7b7d862f0d6d44209aee4a7ac7e848))
+* **grub:**  set grub edit password ([4f15445c](https://github.com/linuxdeepin/deepin-install-reborn/commit/4f15445c01d38471c2249f6103eeb996c0ae4cc8))
+
+
+
 <a name="2.4.9"></a>
 ### 2.4.9 (2018-11-13)
 
