@@ -210,12 +210,12 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="50"/>
         <source>Encrypt Full Disk</source>
-        <translation type="unfinished"/>
+        <translation>Криптиране на цял диск</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="51"/>
         <source>Please select a disk to start installation</source>
-        <translation type="unfinished"/>
+        <translation>Моля, изберете диск, за да започнете инсталирането</translation>
     </message>
 </context>
 <context>
@@ -678,100 +678,106 @@
 <context>
     <name>installer::SystemInfoFormFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="139"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="144"/>
         <source>Create User Account</source>
         <translation>Създаване на потребителски акаунт</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="72"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
         <source>Input username and password</source>
         <translation>Въведете потребителско име и парола</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="73"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="149"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="154"/>
         <source>Username</source>
         <translation>Потребителско име</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="74"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="154"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="78"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Computer name</source>
         <translation>Име на компютъра</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="75"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="79"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="164"/>
         <source>Password</source>
         <translation>Парола</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="165"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="80"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="170"/>
         <source>Confirm password</source>
         <translation>Потвърждаване на паролата</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="178"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="81"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="188"/>
         <source>Next</source>
         <translation>Следващ</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="212"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="82"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="183"/>
+        <source>Use that password to edit boot menu</source>
+        <translation>Използвайте тази парола, за да редактирате boot менюто</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="224"/>
         <source>This username already exists</source>
         <translation>Това потребителско име вече съществува</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="216"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
         <source>The first letter must be in lowercase</source>
         <translation>Първата буква, трябва да е с малки букви</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="222"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="234"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
         <translation>Потребителското име трябва да е с английски букви (чувствителен регистър), числа или специални знаци (_-)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="240"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>Моля, въведете потребителско име, което е по- дълго от %1 знака и по- кратко от %2 знака</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="250"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="262"/>
         <source>Please input computer name</source>
         <translation>Моля, въведете име на компютъра</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="254"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="266"/>
         <source>Computer name is invalid</source>
         <translation>Името на компютъра не е валидно</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="258"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="270"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Името на компютъра вече съществува. Моля, въведете друго име.</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="263"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="275"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Моля, въведете име на компютъра, което е по- дълго от %1 знака и по- кратко от %2 знака</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="288"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="301"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="305"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Моля, въведете парола, което е по- дълга от %1 знака и по- кратка от %2 знака</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="295"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="312"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Паролата трябва да съдържа английски букви (чувствителен регистър), числа или специални знаци (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="325"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="342"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Двете пароли не съвпадат</translation>
     </message>
@@ -844,7 +850,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="145"/>
         <source>Please input password</source>
-        <translation type="unfinished"/>
+        <translation>Моля, въведете парола</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="151"/>
@@ -854,7 +860,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
         <source>Full Disk Encryption</source>
-        <translation type="unfinished"/>
+        <translation>Пълно криптиране на диска</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
@@ -864,7 +870,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="179"/>
         <source>Encrypt This Disk</source>
-        <translation type="unfinished"/>
+        <translation>Криптирай този диск</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="180"/>
@@ -874,17 +880,17 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="181"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"/>
+        <translation>Повторете паролата</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
         <source>Previous</source>
-        <translation type="unfinished"/>
+        <translation>Връщане</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
         <source>Start Installation</source>
-        <translation type="unfinished"/>
+        <translation>Започни инсталацията</translation>
     </message>
 </context>
 <context>
@@ -986,24 +992,24 @@
         <translation>Лицензионно споразумение с краен потребител</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="145"/>
         <source>Accept</source>
         <translation>Приемам</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="155"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="146"/>
         <source>Cancel</source>
         <translation>Отказ</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="164"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>View in Chinese</source>
-        <translation type="unfinished"/>
+        <translation>Преглед на китайски</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="170"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="159"/>
         <source>View in English</source>
-        <translation type="unfinished"/>
+        <translation>Преглед на английски</translation>
     </message>
 </context>
 </TS>

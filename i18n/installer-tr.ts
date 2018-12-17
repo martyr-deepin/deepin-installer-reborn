@@ -678,100 +678,106 @@
 <context>
     <name>installer::SystemInfoFormFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="71"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="139"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="144"/>
         <source>Create User Account</source>
         <translation>Kullanıcı Hesabı Oluştur</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="72"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="140"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
         <source>Input username and password</source>
         <translation>Kullanıcı adı ve parolayı yazın</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="73"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="149"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="154"/>
         <source>Username</source>
         <translation>Kullanıcı Adı</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="74"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="154"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="78"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Computer name</source>
         <translation>Bilgisayar Adı</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="75"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="79"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="164"/>
         <source>Password</source>
         <translation>Parola</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="165"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="80"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="170"/>
         <source>Confirm password</source>
         <translation>Parola Onayı</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="178"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="81"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="188"/>
         <source>Next</source>
         <translation>Sonraki</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="212"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="82"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="183"/>
+        <source>Use that password to edit boot menu</source>
+        <translation>Ön yükleme menüsünü düzenlemek için bu parolayı kullanın</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="224"/>
         <source>This username already exists</source>
         <translation>Bu kullanıcı adı zaten var</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="216"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
         <source>The first letter must be in lowercase</source>
         <translation>İlk harf küçük olmalıdır</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="222"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="234"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
         <translation>Kullanıcı adında, İngiliz alfabesi harfleri (küçük harfler), rakamlar ya da özel simgeler (_-) bulunmalıdır</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="240"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>Lütfen kullanıcı adını uzunluğu %1 ile %2 karakter arasında olacak şekilde yazın</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="250"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="262"/>
         <source>Please input computer name</source>
         <translation>Lütfen bilgisayar adını yazın</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="254"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="266"/>
         <source>Computer name is invalid</source>
         <translation>Bilgisayar adı geçersiz</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="258"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="270"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Bu bilgisayar adı zaten var. Lütfen başka bir ad yazın</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="263"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="275"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Lütfen bilgisayar adını uzunluğu %1 ile %2 karakter arasında olacak şekilde yazın</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="288"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="301"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="305"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Lütfen parolayı uzunluğu %1 ile %2 karakter arasında olacak şekilde yazın</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="295"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="312"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Parolada, İngiliz alfabesi harfleri (büyük-küçük harfe duyarlı), rakamlar ya da özel simgeler (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;) bulunmalıdır</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="325"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="342"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Parola ile onayı aynı değil</translation>
     </message>
@@ -986,22 +992,22 @@
         <translation>Son Kullanıcı Lisans Sözleşmesi</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="145"/>
         <source>Accept</source>
         <translation>Onayla</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="155"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="146"/>
         <source>Cancel</source>
         <translation>İptal</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="164"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>View in Chinese</source>
         <translation>Çince Görüntülensin</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="170"/>
+        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="159"/>
         <source>View in English</source>
         <translation>İngilizce Görüntülensin</translation>
     </message>
