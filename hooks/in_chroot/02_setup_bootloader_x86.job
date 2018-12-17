@@ -227,6 +227,19 @@ set superusers="root"
 password_pbkdf2 root ${GRUB_PASSWORD}
 EOF
 
+# 暂时没有其他办法，因为不加--unrestricted参数的话，引导系统将需要提供密码
+cat > /etc/grub.d/99_update_grub <<GRUB_EOF
+#!/bin/sh
+set -e
+cat > /tmp/.update-grub <<EOF
+#!/bin/sh
+sleep 5
+sed -i "s/\(menuentry '.*'\) -/\1 --unrestricted -/" /boot/grub/grub.cfg
+EOF
+chmod +x /tmp/.update-grub
+/tmp/.update-grub &
+GRUB_EOF
+
 chmod +x /etc/grub.d/01_users
 
 # update grub theme
