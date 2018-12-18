@@ -220,7 +220,7 @@ EOF
 
 # grub edit password
 GRUB_PASSWORD=$(installer_get "DI_GRUB_PASSWORD")
-cat > /etc/grub.d/01_users <<EOF
+cat > /etc/grub.d/01_grub_password <<EOF
 #!/bin/sh
 set -e
 cat < P_EOF
@@ -235,14 +235,15 @@ cat > /etc/grub.d/99_update_grub <<GRUB_EOF
 set -e
 cat > /tmp/.update-grub <<EOF
 #!/bin/sh
-sleep 5
+sleep 2
 sed -i "s/\(menuentry '.*'\) -/\1 --unrestricted -/" /boot/grub/grub.cfg
 EOF
 chmod +x /tmp/.update-grub
 /tmp/.update-grub &
 GRUB_EOF
 
-chmod +x /etc/grub.d/01_users
+chmod +x /etc/grub.d/01_grub_password
+chmod +x /etc/grub.d/99_update_grub
 
 # update grub theme
 DISPLAY_PORT=$(installer_get "DI_DISPLAY_PORT")
