@@ -223,8 +223,10 @@ GRUB_PASSWORD=$(installer_get "DI_GRUB_PASSWORD")
 cat > /etc/grub.d/01_users <<EOF
 #!/bin/sh
 set -e
+cat < P_EOF
 set superusers="root"
 password_pbkdf2 root ${GRUB_PASSWORD}
+P_EOF
 EOF
 
 # 暂时没有其他办法，因为不加--unrestricted参数的话，引导系统将需要提供密码
