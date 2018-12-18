@@ -220,10 +220,11 @@ EOF
 
 # grub edit password
 GRUB_PASSWORD=$(installer_get "DI_GRUB_PASSWORD")
+if [ -n "$GRUB_PASSWORD" ];then
 cat > /etc/grub.d/01_grub_password <<EOF
 #!/bin/sh
 set -e
-cat < P_EOF
+cat << P_EOF
 set superusers="root"
 password_pbkdf2 root ${GRUB_PASSWORD}
 P_EOF
@@ -244,6 +245,7 @@ GRUB_EOF
 
 chmod +x /etc/grub.d/01_grub_password
 chmod +x /etc/grub.d/99_update_grub
+fi
 
 # update grub theme
 DISPLAY_PORT=$(installer_get "DI_DISPLAY_PORT")

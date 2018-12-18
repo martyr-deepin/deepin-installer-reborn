@@ -182,7 +182,7 @@ void SystemInfoFormFrame::initUI()
 
     grub_password_check_ = new QCheckBox(tr("Use that password to edit boot menu"), this);
     grub_password_check_->setCheckable(true);
-    grub_password_check_->setChecked(true);
+    grub_password_check_->setChecked(false);
     grub_password_check_->setObjectName("GrubPasswordCheckBox");
 
     next_button_ = new NavButton(tr("Next"));
