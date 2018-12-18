@@ -1,3 +1,15 @@
+<a name="2.5.1"></a>
+### 2.5.1 (2018-12-18)
+
+
+#### Bug Fixes
+
+* **Grub:**
+  *  not exec grub script ([ca0738c9](https://github.com/linuxdeepin/deepin-install-reborn/commit/ca0738c9d4fb90122b47fcdbe95af3e173341ce7))
+  *  script error ([0999d8aa](https://github.com/linuxdeepin/deepin-install-reborn/commit/0999d8aa22aaf8285110fd673f28483c4458c825))
+
+
+
 <a name=""></a>
 ##  2.5.0 (2018-12-17)
 
