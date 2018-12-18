@@ -1,3 +1,13 @@
+<a name="2.5.2"></a>
+### 2.5.2 (2018-12-18)
+
+
+#### Bug Fixes
+
+*   check grub script ([39087e1d](https://github.com/linuxdeepin/deepin-install-reborn/commit/39087e1d91ecf783beee404f6df6b05573fe39da))
+
+
+
 <a name="2.5.1"></a>
 ### 2.5.1 (2018-12-18)
 
