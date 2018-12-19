@@ -38,7 +38,7 @@ bool FormatBtrfs(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatBtrfs() error:" << err;
+    qCritical() << "FormatBtrfs() error:" << err << output;
   }
   return ok;
 }
@@ -55,7 +55,7 @@ bool FormatExt2(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatExt2() err:" << err;
+    qCritical() << "FormatExt2() err:" << err << output;
   }
   return ok;
 }
@@ -72,7 +72,7 @@ bool FormatExt3(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatExt3() err:" << err;
+    qCritical() << "FormatExt3() err:" << err << output;
   }
   return ok;
 }
@@ -103,7 +103,7 @@ bool FormatExt4(const QString& path, const QString& label) {
   }
 
   if (!ok) {
-    qCritical() << "FormatExt4() err:" << err;
+    qCritical() << "FormatExt4() err:" << err << output;
   }
   return ok;
 }
@@ -120,7 +120,7 @@ bool FormatF2fs(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatF2fs() err:" << err;
+    qCritical() << "FormatF2fs() err:" << err << output;
   }
   return ok;
 }
@@ -138,7 +138,7 @@ bool FormatFat16(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatFat16() err:" << err;
+    qCritical() << "FormatFat16() err:" << err << output;
   }
   return ok;
 }
@@ -156,7 +156,7 @@ bool FormatFat32(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatFat32() err:" << err;
+    qCritical() << "FormatFat32() err:" << err << output;
   }
   return ok;
 }
@@ -173,7 +173,7 @@ bool FormatHfs(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatHfs() err:" << err;
+    qCritical() << "FormatHfs() err:" << err << output;
   }
   return ok;
 }
@@ -190,7 +190,7 @@ bool FormatHfsPlus(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatHfsPlus() err:" << err;
+    qCritical() << "FormatHfsPlus() err:" << err << output;
   }
   return ok;
 }
@@ -207,7 +207,7 @@ bool FormatJfs(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatJfs() err:" << err;
+    qCritical() << "FormatJfs() err:" << err << output;
   }
   return ok;
 }
@@ -224,7 +224,7 @@ bool FormatLinuxSwap(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatLinuxSwap() err:" << err;
+    qCritical() << "FormatLinuxSwap() err:" << err << output;
   }
   return ok;
 }
@@ -241,7 +241,7 @@ bool FormatNilfs2(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatNilfs2() err:" << err;
+    qCritical() << "FormatNilfs2() err:" << err << output;
   }
   return ok;
 }
@@ -259,7 +259,7 @@ bool FormatNTFS(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatNTFS() err:" << err;
+    qCritical() << "FormatNTFS() err:" << err << output;
   }
   return ok;
 }
@@ -280,7 +280,7 @@ bool FormatReiser4(const QString& path, const QString& label) {
                  output, err);
   }
   if (!ok) {
-    qCritical() << "FormatReiser4() err:" << err;
+    qCritical() << "FormatReiser4() err:" << err << output;
   }
   return ok;
 }
@@ -298,7 +298,7 @@ bool FormatReiserfs(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatReiserfs() err:" << err;
+    qCritical() << "FormatReiserfs() err:" << err << output;
   }
   return ok;
 }
@@ -315,7 +315,7 @@ bool FormatXfs(const QString& path, const QString& label) {
                   output, err);
   }
   if (!ok) {
-    qCritical() << "FormatXfs() err:" << err;
+    qCritical() << "FormatXfs() err:" << err << output;
   }
   return ok;
 }
