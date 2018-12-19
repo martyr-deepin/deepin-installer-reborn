@@ -220,13 +220,14 @@ EOF
 
 # grub edit password
 GRUB_PASSWORD=$(installer_get "DI_GRUB_PASSWORD")
+USERNAME=$(installer_get "DI_USERNAME")
 if [ -n "$GRUB_PASSWORD" ];then
 cat > /etc/grub.d/01_grub_password <<EOF
 #!/bin/sh
 set -e
 cat << P_EOF
-set superusers="root"
-password_pbkdf2 root ${GRUB_PASSWORD}
+set superusers="${USERNAME}"
+password_pbkdf2 ${USERNAME} ${GRUB_PASSWORD}
 P_EOF
 EOF
 

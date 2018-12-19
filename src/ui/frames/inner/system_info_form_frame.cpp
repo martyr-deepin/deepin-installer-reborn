@@ -390,8 +390,6 @@ void SystemInfoFormFrame::onNextButtonClicked()
                 qWarning() << "not match grub password !!!!!!";
             }
 
-            qDebug() << Q_FUNC_INFO << result << match.captured(0);
-
             WriteGrubPassword(match.captured(0).replace(" ", ""));
         }
 
