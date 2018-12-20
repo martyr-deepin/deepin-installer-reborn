@@ -289,6 +289,11 @@ bool SystemInfoFormFrame::validateHostname(QString& msg)
 
 bool SystemInfoFormFrame::validatePassword(QString& msg)
 {
+    if (password_edit_->text().toLower() == username_edit_->text().toLower()) {
+        msg = tr("The password should be different from the username");
+        return false;
+    }
+
     const int min_len = GetSettingsInt(kSystemInfoPasswordMinLen);
     const int max_len = GetSettingsInt(kSystemInfoPasswordMaxLen);
 
