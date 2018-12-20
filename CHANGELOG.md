@@ -1,3 +1,14 @@
+<a name="2.5.3"></a>
+### 2.5.3 (2018-12-20)
+
+
+#### Features
+
+*   add format error output ([1fb77c68](https://github.com/linuxdeepin/deepin-install-reborn/commit/1fb77c688b8d320ab5bb97bcef167d4339b155e4))
+*   update grub edit ([d50fd0e1](https://github.com/linuxdeepin/deepin-install-reborn/commit/d50fd0e1c613686b6cd18d42a18649cc4482050a))
+
+
+
 <a name="2.5.2"></a>
 ### 2.5.2 (2018-12-18)
 
