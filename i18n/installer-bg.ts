@@ -715,7 +715,7 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="81"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="188"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="189"/>
         <source>Next</source>
         <translation>Следващ</translation>
     </message>
@@ -726,58 +726,63 @@
         <translation>Използвайте тази парола, за да редактирате boot менюто</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="224"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>This username already exists</source>
         <translation>Това потребителско име вече съществува</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>The first letter must be in lowercase</source>
         <translation>Първата буква, трябва да е с малки букви</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="234"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="235"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
         <translation>Потребителското име трябва да е с английски букви (чувствителен регистър), числа или специални знаци (_-)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="240"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="241"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>Моля, въведете потребителско име, което е по- дълго от %1 знака и по- кратко от %2 знака</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="262"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="263"/>
         <source>Please input computer name</source>
         <translation>Моля, въведете име на компютъра</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="266"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="267"/>
         <source>Computer name is invalid</source>
         <translation>Името на компютъра не е валидно</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="270"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="271"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Името на компютъра вече съществува. Моля, въведете друго име.</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="275"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="276"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Моля, въведете име на компютъра, което е по- дълго от %1 знака и по- кратко от %2 знака</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="305"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
+        <source>The password should be different from the username</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="324"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Моля, въведете парола, което е по- дълга от %1 знака и по- кратка от %2 знака</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="312"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Паролата трябва да съдържа английски букви (чувствителен регистър), числа или специални знаци (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="342"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="348"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Двете пароли не съвпадат</translation>
     </message>

@@ -715,7 +715,7 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="81"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="188"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="189"/>
         <source>Next</source>
         <translation>Seuraava</translation>
     </message>
@@ -726,58 +726,63 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="224"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>This username already exists</source>
         <translation>Tämä käyttäjänimi on jo olemassa</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>The first letter must be in lowercase</source>
         <translation>Ensimmäisen kirjaimen on oltava pienaakkonen</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="234"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="235"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
         <translation>Käyttäjänimen on sisällettävä englantilaisia pienaakkosia, numeroita tai erikoismerkkejä (_-)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="240"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="241"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>Ole hyvä ja syötä käyttäjänimi, joka on pidempi kuin %1 merkkiä ja lyhyempi kuin %2 merkkiä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="262"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="263"/>
         <source>Please input computer name</source>
         <translation>Ole hyvä ja kirjoita laitteen nimi</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="266"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="267"/>
         <source>Computer name is invalid</source>
         <translation>Laitteen nimi ei kelpaa</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="270"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="271"/>
         <source>Computer name already exists, please input another one</source>
         <translation>Laitteen nimi on jo olemassa, ole hyvä ja syötä toinen</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="275"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="276"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Ole hyvä ja syötä laitteen nimi, joka on pidempi kuin %1 merkkiä ja lyhyempi kuin %2 merkkiä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="305"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
+        <source>The password should be different from the username</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="324"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Ole hyvä ja syötä salasana, joka on pidempi kuin %1 merkkiä ja lyhyempi kuin %2 merkkiä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="312"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Salasanan on sisällettävä englantilaisia merkkejä (merkkikokoriippuvainen), numeroita tai erikoismerkkejä (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="342"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="348"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Salasanat eivät täsmää</translation>
     </message>

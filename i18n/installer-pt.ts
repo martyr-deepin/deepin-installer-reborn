@@ -715,7 +715,7 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="81"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="188"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="189"/>
         <source>Next</source>
         <translation>Seguinte</translation>
     </message>
@@ -723,61 +723,66 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="82"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="183"/>
         <source>Use that password to edit boot menu</source>
-        <translation type="unfinished"/>
+        <translation>Utilizar essa senha para editar o menu de inicialização</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="224"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>This username already exists</source>
         <translation>Este nome de utilizador já existe</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="228"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>The first letter must be in lowercase</source>
         <translation>O primeiro caráter tem de ser minúsculo</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="234"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="235"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
         <translation>O nome de utilizador tem que conter caracteres alfa-numéricos (minúsculas), números ou os caracteres especiais(_-)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="240"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="241"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
         <translation>Por favor insira um nome de utilizador que seja maior que %1 e menor que %2 caracteres</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="262"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="263"/>
         <source>Please input computer name</source>
         <translation>Por favor insira o nome do computador</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="266"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="267"/>
         <source>Computer name is invalid</source>
         <translation>Nome de computador inválido</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="270"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="271"/>
         <source>Computer name already exists, please input another one</source>
         <translation>O nome do computador já existe, por favor insira outro</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="275"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="276"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
         <translation>Por favor insira um nome do computador que seja maior que %1 e menor que %2 caracteres</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="305"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
+        <source>The password should be different from the username</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="324"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Por favor insira uma palavra-passe que seja maior que %1 e menor que %2 caracteres</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="312"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>A palavra-passe tem que conter caracteres alfa-numéricos (maiúsculos/minúsculos), números ou caracteres especiais (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="342"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="348"/>
         <source>The two passwords don&apos;t match</source>
         <translation>As duas palavras-passe não coincidem</translation>
     </message>
