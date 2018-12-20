@@ -184,6 +184,7 @@ void SystemInfoFormFrame::initUI()
     grub_password_check_->setCheckable(true);
     grub_password_check_->setChecked(false);
     grub_password_check_->setObjectName("GrubPasswordCheckBox");
+    grub_password_check_->setVisible(GetSettingsBool(kSystemInfoEnableGrubEditPwd));
 
     next_button_ = new NavButton(tr("Next"));
 

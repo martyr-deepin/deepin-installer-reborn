@@ -89,7 +89,10 @@ void MainWindow::fullscreen() {
     qApp->installTranslator(translator);
   }
 
-  multi_head_manager_->updateWallpaper();
+#ifndef QT_DEBUG
+    multi_head_manager_->updateWallpaper();
+#endif // !QT_DEBUG
+
   ShowFullscreen(this);
   this->goNextPage();
 
