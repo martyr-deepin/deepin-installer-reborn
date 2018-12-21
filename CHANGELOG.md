@@ -1,4 +1,11 @@
-<a name="2.5.3"></a>
+<a name="2.5.4"></a>
+### 2.5.4 (2018-12-20)
+
+*  update sources.list
+*  rsync transifex  
+*  feat grub passwd 
+
+
 ### 2.5.3 (2018-12-20)
 
 
