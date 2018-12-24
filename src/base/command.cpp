@@ -80,16 +80,28 @@ bool SpawnCmd(const QString& cmd, const QStringList& args, QString& output) {
 
 bool SpawnCmd(const QString& cmd, const QStringList& args,
               QString& output, QString& err) {
-  QProcess process;
-  process.setProgram(cmd);
-  process.setArguments(args);
-  process.start();
-  // Wait for process to finish without timeout.
-  process.waitForFinished(-1);
-  output = process.readAllStandardOutput();
-  err = process.readAllStandardError();
-  return (process.exitStatus() == QProcess::NormalExit &&
-          process.exitCode() == 0);
+
+    uint loop_num = 0;
+    QProcess process;
+    process.setProgram(cmd);
+    process.setArguments(args);
+
+    // try 2
+    while (loop_num++ < 2) {
+        process.start();
+        // Wait for process to finish without timeout.
+        process.waitForFinished(-1);
+        output += process.readAllStandardOutput();
+        err += process.readAllStandardError();
+
+        if (process.exitStatus() == QProcess::NormalExit && process.exitCode() == 0) {
+            return true;
+        }
+        qDebug() << err;
+        qDebug() << "try again!!!!!";
+    }
+
+    return false;
 }
 
 }  // namespace installer
