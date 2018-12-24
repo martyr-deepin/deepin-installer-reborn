@@ -102,7 +102,7 @@ def main():
 
     professinal_settings = (
         ("timezone_use_local_time_regardless", "true"),
-        ("system_info_password_strong_check", "true"),
+        ("system_info_password_strong_check", "false"),
     )
 
     update_settings(arm_file, arm_settings)

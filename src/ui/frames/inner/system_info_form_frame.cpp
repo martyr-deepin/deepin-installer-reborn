@@ -289,19 +289,22 @@ bool SystemInfoFormFrame::validateHostname(QString& msg)
 
 bool SystemInfoFormFrame::validatePassword(QString& msg)
 {
-    if (password_edit_->text().toLower() == username_edit_->text().toLower()) {
-        msg = tr("The password should be different from the username");
-        return false;
-    }
-
-    const int min_len = GetSettingsInt(kSystemInfoPasswordMinLen);
-    const int max_len = GetSettingsInt(kSystemInfoPasswordMaxLen);
-
 #ifndef QT_DEBUG
     const bool strong_pwd_check = GetSettingsBool(kSystemInfoPasswordStrongCheck);
 #else
     const bool strong_pwd_check = true;
 #endif // !QT_DEBUG
+
+    int min_len = 2;
+    int max_len = 16;
+    if (strong_pwd_check) {
+        if (password_edit_->text().toLower() == username_edit_->text().toLower()) {
+            msg = tr("The password should be different from the username");
+            return false;
+        }
+        min_len = GetSettingsInt(kSystemInfoPasswordMinLen);
+        max_len = GetSettingsInt(kSystemInfoPasswordMaxLen);
+    }
 
     const ValidatePasswordState state = ValidatePassword(
         password_edit_->text(), min_len, max_len, strong_pwd_check);
