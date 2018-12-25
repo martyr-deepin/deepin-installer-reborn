@@ -1,3 +1,19 @@
+<a name="2.5.5"></a>
+### 2.5.5 (2018-12-25)
+
+
+#### Features
+
+*   wait 1s ([caf8b5cf](https://github.com/linuxdeepin/deepin-install-reborn/commit/caf8b5cf00e1d4128e638f17059d23d31d858a7c))
+*   disable strong password check ([cd36ab78](https://github.com/linuxdeepin/deepin-install-reborn/commit/cd36ab78587e051b1cb3ff1db611fd44b888ccd4))
+* **format:**  add two format attempts ([01c1a03c](https://github.com/linuxdeepin/deepin-install-reborn/commit/01c1a03ce4033e8be9961493781fa12f14867da8))
+
+#### Bug Fixes
+
+*   advanced partiton has failed data ([4c88e362](https://github.com/linuxdeepin/deepin-install-reborn/commit/4c88e3626b1bb388766cd49bb5ed0e03d340608a))
+
+
+
 <a name="2.5.4"></a>
 ### 2.5.4 (2018-12-20)
 
