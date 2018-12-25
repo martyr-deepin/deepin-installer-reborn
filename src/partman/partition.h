@@ -80,9 +80,7 @@ class Partition {
 
   typedef std::shared_ptr<Partition> Ptr;
 
-  // Returns true if both this partition and the |other| one refer to
-  // the same sector range.
-  bool operator==(const Partition::Ptr other) const;
+  bool isEqual(const Partition::Ptr other) const;
 
   QString device_path;
   QString path;

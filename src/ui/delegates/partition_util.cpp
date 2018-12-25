@@ -53,16 +53,15 @@ QString GetOsDescription(const QString& path) {
 
 }  // namespace
 
-void AlignPartition(Partition::Ptr partition) {
-  const qint64 oneMebiByteSector = 1 * kMebiByte / partition->sector_size;
+void AlignPartition(Partition::Ptr partition)
+{
+    const qint64 oneMebiByteSector = 1 * kMebiByte / partition->sector_size;
 
-  // Align to nearest MebiBytes.
-  const int start_size = static_cast<int>(
-      ceil(partition->start_sector * 1.0 / oneMebiByteSector));
-  const int end_size = static_cast<int>(
-      floor((partition->end_sector + 1) * 1.0 / oneMebiByteSector));
-  partition->start_sector = start_size * oneMebiByteSector;
-  partition->end_sector = end_size * oneMebiByteSector - 1;
+    // Align to nearest MebiBytes.
+    const int start_size    = static_cast<int>(ceil(partition->start_sector * 1.0 / oneMebiByteSector));
+    const int end_size      = static_cast<int>(floor((partition->end_sector + 1) * 1.0 / oneMebiByteSector));
+    partition->start_sector = start_size * oneMebiByteSector;
+    partition->end_sector   = end_size * oneMebiByteSector - 1;
 }
 
 int AllocLogicalPartitionNumber(const Device::Ptr device) {

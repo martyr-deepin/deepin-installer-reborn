@@ -119,7 +119,7 @@ Partition::~Partition() {
 
 }
 
-bool Partition::operator==(const Partition::Ptr other) const {
+bool Partition::isEqual(const Partition::Ptr other) const {
   return (this->device_path == other->device_path &&
           this->start_sector == other->start_sector &&
           this->end_sector == other->end_sector &&
@@ -217,15 +217,16 @@ bool IsPartitionsJoint(const Partition::Ptr part1, const Partition::Ptr part2) {
 
 int PartitionIndex(const PartitionList& partitions,
                    const Partition::Ptr partition) {
-  for (int i = 0; i < partitions.length(); ++i) {
-    if (partition->type == partitions[i]->type &&
-        partition->start_sector >= partitions[i]->start_sector &&
-        partition->end_sector -1 <= partitions[i]->end_sector) {
-        // partition->end_sector boundary problems here->
-      return i;
+
+    auto find_it = std::find_if(partitions.begin(), partitions.end(), [=] (const Partition::Ptr ptr) {
+        return partition->isEqual(ptr);
+    });
+
+    if (find_it == partitions.end()) {
+        return -1;
     }
-  }
-  return -1;
+
+    return find_it - partitions.begin();
 }
 
 }  // namespace installer
