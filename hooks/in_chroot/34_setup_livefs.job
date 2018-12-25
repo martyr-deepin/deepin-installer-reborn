@@ -22,7 +22,7 @@ reconfig_livefs(){
   REAL_PASSWORD=$(echo "${DI_PASSWORD}" | base64 -d)
   echo live-filesystem live/root_password password ${REAL_PASSWORD} | debconf-set-selections
   echo live-filesystem live/root_password_again password ${REAL_PASSWORD} | debconf-set-selections
-  [ -f /recovery/cryptauth ] && rm -f /recovery/cryptauth
+  [ -f /boot/recovery/cryptauth ] && rm -f /boot/recovery/cryptauth
   dpkg-reconfigure live-filesystem || true
 }
 
