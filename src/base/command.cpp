@@ -20,6 +20,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QProcess>
+#include <QThread>
 
 namespace installer {
 
@@ -99,6 +100,7 @@ bool SpawnCmd(const QString& cmd, const QStringList& args,
         }
         qDebug() << err;
         qDebug() << "try again!!!!!";
+        QThread::sleep(1);
     }
 
     return false;
