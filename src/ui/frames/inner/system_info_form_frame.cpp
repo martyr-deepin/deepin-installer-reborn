@@ -295,7 +295,7 @@ bool SystemInfoFormFrame::validatePassword(QString& msg)
     const bool strong_pwd_check = true;
 #endif // !QT_DEBUG
 
-    int min_len = 2;
+    int min_len = 1;
     int max_len = 16;
     if (strong_pwd_check) {
         if (password_edit_->text().toLower() == username_edit_->text().toLower()) {
