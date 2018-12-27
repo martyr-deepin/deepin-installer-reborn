@@ -928,6 +928,8 @@ void AdvancedPartitionDelegate::resetOperationMountPoint(
   qDebug() << "resetOperationMountPoint:" << mount_point;
   for (int index = operations_.length() - 1; index >= 0; --index) {
     Operation& operation = operations_[index];
+    if (operation.type == OperationType::NewPartTable) continue; //skip create new part table
+
     if (operation.new_partition->mount_point == mount_point) {
       if (operation.type == OperationType::MountPoint) {
         // TODO(xushaohua): move to operation.h

@@ -119,12 +119,15 @@ Partition::~Partition() {
 
 }
 
-bool Partition::isEqual(const Partition::Ptr other) const {
-  return (this->device_path == other->device_path &&
-          this->start_sector == other->start_sector &&
-          this->end_sector == other->end_sector &&
-          this->sector_size == other->sector_size &&
-          type == other->type);
+bool Partition::operator==(const Partition &other) const {
+  qDebug() << "===============";
+  qDebug() << this->device_path << this->start_sector << this->end_sector << this->path;
+  qDebug() << other.device_path << other.start_sector << other.end_sector << other.path;
+  return (this->device_path == other.device_path &&
+          this->start_sector == other.start_sector &&
+          this->end_sector == other.end_sector &&
+          this->sector_size == other.sector_size &&
+          type == other.type);
 }
 
 void Partition::changeNumber(int partition_number) {
@@ -219,7 +222,7 @@ int PartitionIndex(const PartitionList& partitions,
                    const Partition::Ptr partition) {
 
     auto find_it = std::find_if(partitions.begin(), partitions.end(), [=] (const Partition::Ptr ptr) {
-        return partition->isEqual(ptr);
+        return *partition.get() == *ptr.get();
     });
 
     if (find_it == partitions.end()) {

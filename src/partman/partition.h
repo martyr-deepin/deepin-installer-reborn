@@ -80,7 +80,7 @@ class Partition {
 
   typedef std::shared_ptr<Partition> Ptr;
 
-  bool isEqual(const Partition::Ptr other) const;
+  bool operator==(const Partition& other) const;
 
   QString device_path;
   QString path;
