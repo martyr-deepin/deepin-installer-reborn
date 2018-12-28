@@ -699,12 +699,14 @@ void AdvancedPartitionDelegate::deletePartition(const Partition::Ptr partition) 
       if (operation.type == OperationType::Create &&
           operation.new_partition == partition) {
         operations_.removeAt(index);
+        qDebug() << "abort operation: delete!";
         break;
       }
     }
   } else {
     Operation operation(OperationType::Delete, partition, new_partition);
     operations_.append(operation);
+    qDebug() << "add delete operation";
   }
 
   if (partition->type == PartitionType::Logical) {
@@ -907,11 +909,12 @@ void AdvancedPartitionDelegate::refreshVisual() {
     MergeUnallocatedPartitions(device->partitions);
 
     for (Operation& operation : operations_) {
-      if ((operation.type == OperationType::NewPartTable &&
-          operation.device->path == device->path) ||
-          (operation.orig_partition->device_path == device->path)) {
-        operation.applyToVisual(device);
-      }
+        if ((operation.type == OperationType::NewPartTable &&
+             operation.device->path == device->path) ||
+            (operation.type != OperationType::NewPartTable &&
+             operation.orig_partition->device_path == device->path)) {
+            operation.applyToVisual(device);
+        }
     }
 
     // Merge unallocated partitions.

@@ -297,6 +297,7 @@ void NewPartitionFrame::onCreateButtonClicked() {
   }
   // TODO(xushaohua): Calculate exact sectors
   const qint64 total_sectors = size_slider_->value() / partition_->sector_size;
+
   delegate_->createPartition(partition_, partition_type, align_start, fs_type,
                              mount_point, total_sectors);
   delegate_->refreshVisual();

@@ -32,6 +32,7 @@
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/timezone_map.h"
 #include "ui/widgets/title_label.h"
+#include "base/command.h"
 
 namespace installer {
 
@@ -48,6 +49,13 @@ bool HasWindowsPartition() {
       return true;
     }
   }
+
+  // check UEFI
+  QString output;
+  if (SpawnCmd("efibootmgr", {"|", "grep", "-i", "Windows"}, output)) {
+      return !output.isEmpty();
+  }
+
   return false;
 }
 
