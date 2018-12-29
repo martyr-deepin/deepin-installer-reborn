@@ -22,6 +22,7 @@
 
 #include "partman/libparted_util.h"
 #include "partman/partition_format.h"
+#include "ui/delegates/partition_util.h"
 
 namespace installer {
 
@@ -334,37 +335,41 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
     partitions[index] = new_partition;
   }
 
-  Partition::Ptr unallocated (new Partition);
-  unallocated->device_path = orig_partition->device_path;
-  unallocated->sector_size = orig_partition->sector_size;
-  unallocated->type = PartitionType::Unallocated;
   const qint64 twoMebiByteSector = 2 * kMebiByte / orig_partition->sector_size;
 
   // Gap between orig_partition.start <-> new_partition.start.
-  if (new_partition->start_sector - orig_partition->start_sector >
-      twoMebiByteSector) {
-    unallocated->start_sector = orig_partition->start_sector + 1;
-    unallocated->end_sector = new_partition->start_sector - 1;
-    partitions.insert(index, unallocated);
-    index += 1;
+  if (new_partition->start_sector - orig_partition->start_sector > twoMebiByteSector) {
+      Partition::Ptr unallocated(new Partition);
+      unallocated->device_path  = orig_partition->device_path;
+      unallocated->sector_size  = orig_partition->sector_size;
+      unallocated->type         = PartitionType::Unallocated;
+      unallocated->start_sector = orig_partition->start_sector + 1;
+      unallocated->end_sector   = new_partition->start_sector - 1;
+      partitions.insert(index, unallocated);
+      index += 1;
   }
 
   // Gap between new_partition.end <-> orig_partition.end
-  if (orig_partition->end_sector - new_partition->end_sector >
-      twoMebiByteSector) {
-    unallocated->start_sector = new_partition->end_sector + 1;
-    unallocated->end_sector = orig_partition->end_sector - 1;
-    if (index + 1 == partitions.length()) {
-      partitions.append(unallocated);
-    } else {
-      partitions.insert(index + 1, unallocated);
-    }
+  if (orig_partition->end_sector - new_partition->end_sector > twoMebiByteSector) {
+      Partition::Ptr unallocated(new Partition);
+      unallocated->device_path  = orig_partition->device_path;
+      unallocated->sector_size  = orig_partition->sector_size;
+      unallocated->type         = PartitionType::Unallocated;
+      unallocated->start_sector = new_partition->end_sector + 1;
+      unallocated->end_sector   = orig_partition->end_sector - 1;
+      if (index + 1 == partitions.length()) {
+          partitions.append(unallocated);
+      }
+      else {
+          partitions.insert(index + 1, unallocated);
+      }
   }
 
   MergeUnallocatedPartitions(partitions);
 }
 
 void Operation::applyDeleteVisual(PartitionList& partitions) const {
+  qDebug() << Q_FUNC_INFO << *orig_partition << *new_partition;
   this->substitute(partitions);
   MergeUnallocatedPartitions(partitions);
 }

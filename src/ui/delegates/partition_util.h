@@ -38,6 +38,9 @@ int AllocPrimaryPartitionNumber(const Device::Ptr device);
 // Filters installer device disk from |devices|.
 DeviceList FilterInstallerDevice(const DeviceList& devices);
 
+// Filters fragmentation partition from devices
+PartitionList FilterFragmentationPartition(PartitionList partitionList);
+
 // Get default filesystem from settings.
 FsType GetDefaultFsType();
 
@@ -103,6 +106,9 @@ int ToMebiByte(qint64 size);
 
 // Trim |text| length to |max_len|.
 QString TrimText(const QString& text, int max_len);
+
+// create empty partition
+Partition::Ptr createEmptyPartition(QString device_path, qint64 sector_size, qint64 start_sector, qint64 end_sector);
 
 /**
  * Parse partition size from string.

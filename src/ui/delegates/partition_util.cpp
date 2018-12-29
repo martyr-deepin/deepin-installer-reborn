@@ -129,6 +129,24 @@ DeviceList FilterInstallerDevice(const DeviceList& devices)
     return deviceList;
 }
 
+PartitionList FilterFragmentationPartition(PartitionList partitionList) {
+    PartitionList list;
+    for (const Partition::Ptr partition : partitionList) {
+        if (partition->type == PartitionType::Normal  ||
+            partition->type == PartitionType::Logical ||
+            partition->type == PartitionType::Extended) {
+            list.append(partition);
+        }
+        else if (partition->type == PartitionType::Unallocated) {
+            // Filter unallocated partitions which are larger than 2MiB.
+            if (partition->getByteLength() >= 2 * kMebiByte) {
+                list.append(partition);
+            }
+        }
+    }
+    return list;
+}
+
 FsType GetDefaultFsType() {
   const QString default_fs_name = GetSettingsString(kPartitionDefaultFs);
   return GetFsTypeByName(default_fs_name);
@@ -298,7 +316,7 @@ QString GetPartitionName(const QString& path) {
 
 QString GetPartitionUsage(const Partition::Ptr partition) {
   qint64 total, used;
-  if ((partition->length > 0) && (partition->length >= partition->freespace)) {
+  if (partition->type != PartitionType::Unallocated && (partition->length > 0) && (partition->length >= partition->freespace)) {
     total = partition->length;
     used = total - partition->freespace;
   } else {
@@ -315,7 +333,7 @@ QString GetPartitionUsage(const Partition::Ptr partition) {
 
 int GetPartitionUsageValue(const Partition::Ptr partition) {
   qint64 total, used;
-  if ((partition->length > 0) && (partition->length >= partition->freespace)) {
+  if (partition->type != PartitionType::Unallocated && (partition->length > 0) && (partition->length >= partition->freespace)) {
     total = partition->length;
     used = total - partition->freespace;
   } else {
@@ -394,6 +412,23 @@ bool IsPartitionTableMatch(const DeviceList& devices,
   }
   PartitionTableType table = devices.at(device_index)->table;
   return IsPartitionTableMatch(table);
+}
+
+Partition::Ptr createEmptyPartition(
+    QString device_path,
+    qint64 sector_size,
+    qint64 start_sector,
+    qint64 end_sector)
+{
+    Partition::Ptr partition(new Partition);
+    partition->device_path  = device_path;
+    partition->sector_size  = sector_size;
+    partition->start_sector = start_sector;
+    partition->end_sector   = end_sector;
+    partition->type         = PartitionType::Unallocated;
+    partition->fs           = FsType::Empty;
+    partition->status       = PartitionStatus::Real;
+    return partition;
 }
 
 bool IsSwapAreaNeeded() {

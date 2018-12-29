@@ -680,13 +680,13 @@ void AdvancedPartitionDelegate::deletePartition(const Partition::Ptr partition) 
   //  * Update partition number if needed.
 
   Partition::Ptr new_partition(new Partition(*partition));
-  new_partition->device_path = partition->device_path;
-  new_partition->sector_size = partition->sector_size;
+  new_partition->device_path  = partition->device_path;
+  new_partition->sector_size  = partition->sector_size;
   new_partition->start_sector = partition->start_sector;
-  new_partition->end_sector = partition->end_sector;
-  new_partition->type = PartitionType::Unallocated;
-  new_partition->fs = FsType::Empty;
-  new_partition->status = PartitionStatus::Delete;
+  new_partition->end_sector   = partition->end_sector;
+  new_partition->type         = PartitionType::Unallocated;
+  new_partition->fs           = FsType::Empty;
+  new_partition->status       = PartitionStatus::Delete;
 
   if (partition->status == PartitionStatus::New) {
     // If status of old partition is New, there shall be a CreateOperation
@@ -703,14 +703,27 @@ void AdvancedPartitionDelegate::deletePartition(const Partition::Ptr partition) 
             partition->status = PartitionStatus::Delete;
 
             qDebug() << "delete partition info: " << *partition.data();
+
+            const qint64 start_size = operation.orig_partition->start_sector;
+
             operations_.removeAt(index);
+
+            // 修改操作，把相邻分区的operation中的orig partition向前补齐
+            const qint64 end_size = partition->end_sector + 1;
+            for (auto it = operations_.begin(); it != operations_.end(); ++it) {
+                if (it->type == OperationType::Create &&
+                    partition->device_path == it->orig_partition->device_path &&
+                    it->orig_partition->start_sector == end_size) {
+                    it->orig_partition->start_sector = start_size;
+                }
+            }
             break;
         }
     }
   } else {
-    Operation operation(OperationType::Delete, partition, new_partition);
-    operations_.append(operation);
-    qDebug() << "add delete operation";
+      Operation operation(OperationType::Delete, partition, new_partition);
+      operations_.append(operation);
+      qDebug() << "add delete operation" << *new_partition.data();
   }
 
   if (partition->type == PartitionType::Logical) {
@@ -889,30 +902,10 @@ void AdvancedPartitionDelegate::refreshVisual() {
   // * Merge unallocated partition with next unallocated one;
   // * Ignore partitions with size less than 100Mib;
 
-  auto list = virtual_devices_;
   virtual_devices_ = FilterInstallerDevice(real_devices_);
 
-  for (Device::Ptr device : list) {
-      for (Device::Ptr dev : virtual_devices_) {
-          if (*device.data() == *dev.data()) {
-              PartitionList partitions;
-              for (const Partition::Ptr partition : device->partitions) {
-                  if (partition->type == PartitionType::Normal ||
-                      partition->type == PartitionType::Logical ||
-                      partition->type == PartitionType::Extended) {
-                      partitions.append(partition);
-                  }
-                  else if (partition->type == PartitionType::Unallocated) {
-                      // Filter unallocated partitions which are larger than 2MiB.
-                      if (partition->getByteLength() >= 2 * kMebiByte) {
-                          partitions.append(partition);
-                      }
-                  }
-                  qDebug() << partition->path << partition->type << partition->start_sector << partition->end_sector << "~~~~~";
-              }
-              dev->partitions = partitions;
-          }
-      }
+  for (Device::Ptr device : virtual_devices_) {
+      device->partitions = FilterFragmentationPartition(device->partitions);
   }
 
   for (Device::Ptr device : virtual_devices_) {
@@ -920,10 +913,8 @@ void AdvancedPartitionDelegate::refreshVisual() {
       MergeUnallocatedPartitions(device->partitions);
 
       for (Operation& operation : operations_) {
-          if ((operation.type == OperationType::NewPartTable &&
-               *operation.device.data() == *device.data()) ||
-              (operation.type != OperationType::NewPartTable &&
-               operation.orig_partition->device_path == device->path)) {
+          if ((operation.type == OperationType::NewPartTable && *operation.device.data() == *device.data()) ||
+              (operation.type != OperationType::NewPartTable && operation.orig_partition->device_path == device->path)) {
               operation.applyToVisual(device);
           }
       }
