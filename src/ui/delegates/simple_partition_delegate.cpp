@@ -264,7 +264,7 @@ bool SimplePartitionDelegate::createPartition(const Partition::Ptr partition,
 
   if (device->table == PartitionTableType::Empty) {
     // Add NewPartTable operation.
-    Device::Ptr new_device = std::make_shared<Device>(*device);
+    Device::Ptr new_device(new Device(*device));
     new_device->partitions.clear();
     new_device->table = IsEfiEnabled() ?
                        PartitionTableType::GPT :
@@ -313,7 +313,7 @@ bool SimplePartitionDelegate::createLogicalPartition(const Partition::Ptr partit
   const Device::Ptr device = virtual_devices_.at(device_index);
 
   const int ext_index = ExtendedPartitionIndex(device->partitions);
-  Partition::Ptr ext_partition = std::make_shared<Partition>(Partition());
+  Partition::Ptr ext_partition (new Partition);
   if (ext_index == -1) {
     // TODO(xushaohua): Support extended partition in simple mode.
     qCritical() << "Cannot create extended partition in simple mode";
@@ -338,7 +338,7 @@ bool SimplePartitionDelegate::createLogicalPartition(const Partition::Ptr partit
     // Enlarge extended partition if needed.
     if (ext_partition->start_sector > partition->start_sector ||
         ext_partition->end_sector < partition->end_sector) {
-      Partition::Ptr new_ext_partition = std::make_shared<Partition>(*ext_partition);
+      Partition::Ptr new_ext_partition(new Partition(*ext_partition));
       new_ext_partition->start_sector = qMin(ext_partition->start_sector,
                                             partition->start_sector);
       new_ext_partition->end_sector = qMax(ext_partition->end_sector,
@@ -355,7 +355,7 @@ bool SimplePartitionDelegate::createLogicalPartition(const Partition::Ptr partit
     }
   }
 
-  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  Partition::Ptr new_partition (new Partition);
   new_partition->device_path = partition->device_path;
   new_partition->path = partition->path;
   new_partition->sector_size = partition->sector_size;
@@ -448,7 +448,7 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition::Ptr partit
     const PartitionList logical_parts = GetLogicalPartitions(device->partitions);
     if (logical_parts.isEmpty()) {
       // Remove extended partition if no logical partitions.
-      Partition::Ptr unallocated_partition = std::make_shared<Partition>(Partition());
+      Partition::Ptr unallocated_partition (new Partition);
       unallocated_partition->device_path = ext_partition->device_path;
       // Extended partition does not contain any sectors.
       // This new allocated partition will be merged to other unallocated
@@ -467,7 +467,7 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition::Ptr partit
 
     } else if (IsPartitionsJoint(ext_partition, partition)) {
       // Shrink extended partition to fit logical partitions.
-      Partition::Ptr new_ext_part = std::make_shared<Partition>(*ext_partition);
+      Partition::Ptr new_ext_part(new Partition(*ext_partition));
       new_ext_part->start_sector = logical_parts.first()->start_sector -
                                   oneMebiByteSector;
       new_ext_part->end_sector = logical_parts.last()->end_sector;
@@ -484,7 +484,7 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition::Ptr partit
     }
   }
 
-  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  Partition::Ptr new_partition (new Partition);
   new_partition->device_path = partition->device_path;
   new_partition->path = partition->path;
   new_partition->sector_size = partition->sector_size;
@@ -496,7 +496,7 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition::Ptr partit
   int partition_number;
   // In simple mode, operations has never been applied to partition list.
   // So do it temporarily.
-  Device::Ptr tmp_device = std::make_shared<Device>(*device);
+  Device::Ptr tmp_device (new Device(*device));
   for (const Operation& operation : operations_) {
     if ((operation.type == OperationType::NewPartTable &&
          operation.device->path == tmp_device->path) ||
@@ -558,7 +558,7 @@ bool SimplePartitionDelegate::createPrimaryPartition(const Partition::Ptr partit
 }
 
 Partition::Ptr SimplePartitionDelegate::deletePartition(const Partition::Ptr partition) {
-  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  Partition::Ptr new_partition (new Partition);
   new_partition->sector_size = partition->sector_size;
   new_partition->start_sector = partition->start_sector;
   new_partition->end_sector = partition->end_sector;
@@ -582,7 +582,7 @@ void SimplePartitionDelegate::formatPartition(const Partition::Ptr partition,
                                               const QString& mount_point) {
   qDebug() << "formatSimplePartition()" << partition << fs_type << mount_point;
 
-  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  Partition::Ptr new_partition (new Partition);
   new_partition->sector_size = partition->sector_size;
   new_partition->start_sector = partition->start_sector;
   new_partition->end_sector = partition->end_sector;
@@ -622,7 +622,7 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
   qDebug() << "device selected to format:" << device;
 
   // Add NewPartTable operation.
-  Device::Ptr new_device= std::make_shared<Device>(*device);
+  Device::Ptr new_device(new Device(*device));
   new_device->partitions.clear();
   new_device->table = type;
   const Operation operation(new_device);

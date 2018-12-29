@@ -98,10 +98,10 @@ DeviceList FilterInstallerDevice(const DeviceList& devices)
 
     if (!GetSettingsBool(kPartitionHideInstallationDevice)) {
         for (auto device : devices) {
-            Device::Ptr   ptr = std::make_shared<Device>(*device);
+            Device::Ptr   ptr(new Device(*device));
             PartitionList list;
             for (auto partition : device->partitions) {
-                list << std::make_shared<Partition>(*partition);
+                list << QSharedPointer<Partition>(new Partition(*partition));
             }
             ptr->partitions = list;
             deviceList << ptr;
@@ -113,10 +113,10 @@ DeviceList FilterInstallerDevice(const DeviceList& devices)
     const QString installer_device_path(GetInstallerDevicePath());
     for (const Device::Ptr device : devices) {
         if (!installer_device_path.startsWith(device->path)) {
-            Device::Ptr   ptr = std::make_shared<Device>(*device);
+            Device::Ptr   ptr(new Device(*device));
             PartitionList list;
             for (auto partition : device->partitions) {
-                list << std::make_shared<Partition>(*partition);
+                list << QSharedPointer<Partition>(new Partition(*partition));
             }
             ptr->partitions = list;
             deviceList << ptr;

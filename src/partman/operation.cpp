@@ -70,8 +70,8 @@ Operation::Operation(OperationType type,
                      const Partition::Ptr orig_partition,
                      const Partition::Ptr new_partition)
     : type(type),
-      orig_partition(std::make_shared<Partition>(*orig_partition)),
-      new_partition(std::make_shared<Partition>(*new_partition)) {
+      orig_partition(new Partition(*orig_partition)),
+      new_partition(new Partition(*new_partition)) {
 }
 
 Operation::~Operation() {
@@ -188,7 +188,7 @@ bool Operation::applyToDisk() {
 
     case OperationType::NewPartTable: {
       if (!CreatePartitionTable(device->path, device->table)) {
-        qCritical() << "CreatePartitionTable() failed:" << device.get();
+        qCritical() << "CreatePartitionTable() failed:" << device.data();
         return false;
       } else {
         return true;
@@ -314,8 +314,8 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
   //   new_partition
 
   qDebug() << "applyCreateVisual(), partitions:" << partitions
-           << "orig partition:" << orig_partition
-           << ", new_partition:" << new_partition;
+           << "orig partition:" << *orig_partition.data()
+           << ", new_partition:" << *new_partition.data();
   int index = PartitionIndex(partitions, orig_partition);
   // FIXME(xushaohua): index == -1
   if (index == -1) {
@@ -334,7 +334,7 @@ void Operation::applyCreateVisual(PartitionList& partitions) const {
     partitions[index] = new_partition;
   }
 
-  Partition::Ptr unallocated = std::make_shared<Partition>(Partition());
+  Partition::Ptr unallocated (new Partition);
   unallocated->device_path = orig_partition->device_path;
   unallocated->sector_size = orig_partition->sector_size;
   unallocated->type = PartitionType::Unallocated;
@@ -372,7 +372,7 @@ void Operation::applyDeleteVisual(PartitionList& partitions) const {
 void Operation::applyNewTableVisual(const Device::Ptr device) const {
   device->table = this->device->table;
   device->partitions.clear();
-  Partition::Ptr free_partition = std::make_shared<Partition>(Partition());
+  Partition::Ptr free_partition (new Partition);
   free_partition->device_path = device->path;
   free_partition->path = "";
   free_partition->partition_number = -1;

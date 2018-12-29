@@ -94,7 +94,7 @@ void EditPartitionFrame::setPartition(const Partition::Ptr partition) {
   switch (partition_->status) {
     case PartitionStatus::Format: {
       // Compare between real filesystem type and current one.
-      const Partition::Ptr real_partition = std::make_shared<Partition>(*(delegate_->getRealPartition(partition_)));
+      const Partition::Ptr real_partition(new Partition(*(delegate_->getRealPartition(partition_))));
       if (!real_partition->path.isEmpty()) {
         // If filesystem changed, force format this partition->
         format_check_box_->setEnabled(real_partition->fs == partition_->fs);
@@ -151,7 +151,7 @@ void EditPartitionFrame::forceFormat(bool force) {
 
 void EditPartitionFrame::updateFormatBoxState() {
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
-  const Partition::Ptr real_partition = std::make_shared<Partition>(*(delegate_->getRealPartition(partition_)));
+  const Partition::Ptr real_partition(new Partition(*(delegate_->getRealPartition(partition_))));
   const int mp_index = mount_point_box_->currentIndex();
   QString mount_point;
 

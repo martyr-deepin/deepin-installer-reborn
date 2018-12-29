@@ -23,8 +23,8 @@ namespace installer {
 namespace {
 
 TEST(Partition, IsPartitionsJoint) {
-  Partition::Ptr part1 = std::make_shared<Partition>(Partition());
-  Partition::Ptr part2 = std::make_shared<Partition>(Partition());
+  Partition::Ptr part1 (new Partition);
+  Partition::Ptr part2 (new Partition);
 
   part1->start_sector = 1024;
   part1->end_sector = 3000;

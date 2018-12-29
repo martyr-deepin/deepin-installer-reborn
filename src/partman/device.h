@@ -20,7 +20,7 @@
 
 #include <QDebug>
 #include <QList>
-#include <memory>
+#include <QSharedPointer>
 
 #include "partman/partition.h"
 
@@ -31,7 +31,7 @@ class Device {
   Device();
   Device(const Device &device);
 
-  typedef std::shared_ptr<Device> Ptr;
+  typedef QSharedPointer<Device> Ptr;
 
   PartitionList partitions;
   QString model;
@@ -49,6 +49,8 @@ class Device {
 
   // Returns size of device. Returns -1 if failed.
   qint64 getByteLength() const;
+
+  bool operator==(const Device &device);
 };
 QDebug& operator<<(QDebug& debug, const Device& device);
 QDebug& operator<<(QDebug& debug, const Device::Ptr device);

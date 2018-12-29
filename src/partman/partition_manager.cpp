@@ -59,7 +59,7 @@ PartitionList ReadPartitions(PedDisk* lp_disk) {
       lp_partition != nullptr;
       lp_partition = ped_disk_next_partition(lp_disk, lp_partition)) {
 
-    Partition::Ptr partition = std::make_shared<Partition>(Partition());
+    Partition::Ptr partition (new Partition);
     if (lp_partition->type == PED_PARTITION_NORMAL) {
       partition->type = PartitionType::Normal;
     } else if (lp_partition->type == PED_PARTITION_EXTENDED) {
@@ -259,7 +259,7 @@ DeviceList ScanDevices(bool enable_os_prober) {
       lp_device != nullptr;
       lp_device = ped_device_get_next(lp_device)) {
     PedDiskType* disk_type = ped_disk_probe(lp_device);
-    Device::Ptr device = std::make_shared<Device>();
+    Device::Ptr device(new Device);
     if (disk_type == nullptr) {
       // Current device has no partition table.
       device->table = PartitionTableType::Empty;
@@ -286,7 +286,7 @@ DeviceList ScanDevices(bool enable_os_prober) {
     device->cylinders = lp_device->bios_geom.cylinders;
 
     if (device->table == PartitionTableType::Empty) {
-      Partition::Ptr free_partition = std::make_shared<Partition>(Partition());
+      Partition::Ptr free_partition(new Partition);
       free_partition->device_path = device->path;
       free_partition->path = "";
       free_partition->partition_number = -1;

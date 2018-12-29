@@ -25,7 +25,7 @@ namespace {
 TEST(Operation, MergeUnallocatedPartitions) {
   PartitionList partitions;
   {
-    Partition::Ptr partition = std::make_shared<Partition>(Partition());
+    Partition::Ptr partition(new Partition);
     partition->type = PartitionType::Unallocated;
     partition->start_sector = 63;
     partition->end_sector = 1000;
@@ -33,7 +33,7 @@ TEST(Operation, MergeUnallocatedPartitions) {
   }
 
   {
-    Partition::Ptr partition = std::make_shared<Partition>(Partition());
+    Partition::Ptr partition(new Partition);
     partition->type = PartitionType::Unallocated;
     partition->start_sector = 1001;
     partition->end_sector = 2000;
@@ -41,7 +41,7 @@ TEST(Operation, MergeUnallocatedPartitions) {
   }
 
   {
-    Partition::Ptr partition = std::make_shared<Partition>(Partition());
+    Partition::Ptr partition(new Partition);
     partition->type = PartitionType::Normal;
     partition->start_sector = 2001;
     partition->end_sector = 3000;
@@ -49,7 +49,7 @@ TEST(Operation, MergeUnallocatedPartitions) {
   }
 
   {
-    Partition::Ptr partition = std::make_shared<Partition>(Partition());
+    Partition::Ptr partition(new Partition);
     partition->type = PartitionType::Unallocated;
     partition->start_sector = 3001;
     partition->end_sector = 4000;
@@ -57,7 +57,7 @@ TEST(Operation, MergeUnallocatedPartitions) {
   }
 
   {
-    Partition::Ptr partition = std::make_shared<Partition>(Partition());
+    Partition::Ptr partition(new Partition);
     partition->type = PartitionType::Unallocated;
     partition->start_sector = 4001;
     partition->end_sector = 5000;

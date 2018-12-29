@@ -74,7 +74,7 @@ QDebug& operator<<(QDebug& debug, const Device& device) {
 }
 
 QDebug& operator<<(QDebug& debug, const Device::Ptr device) {
-    debug << device.get();
+    debug << device.data();
     return debug;
 }
 
@@ -85,6 +85,10 @@ int DeviceIndex(const DeviceList& devices, const QString& device_path) {
     }
   }
   return -1;
+}
+
+bool Device::operator==(const Device &device) {
+    return path == device.path;
 }
 
 }  // namespace installer

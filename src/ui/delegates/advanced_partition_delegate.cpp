@@ -390,7 +390,7 @@ bool AdvancedPartitionDelegate::createPartition(const Partition::Ptr partition,
 
   if (device->table == PartitionTableType::Empty) {
     // Add NewPartTable operation.
-    Device::Ptr new_device(device.get());
+    Device::Ptr new_device(new Device(*device));
     new_device->table = IsEfiEnabled() ?
                        PartitionTableType::GPT :
                        PartitionTableType::MsDos;
@@ -439,7 +439,7 @@ AdvancedPartitionDelegate::createLogicalPartition(const Partition::Ptr partition
   const Device::Ptr device = virtual_devices_.at(device_index);
 
   const int ext_index = ExtendedPartitionIndex(device->partitions);
-  Partition::Ptr ext_partition = std::make_shared<Partition>(Partition());
+  Partition::Ptr ext_partition (new Partition);
   if (ext_index == -1) {
     // No extended partition found, create one.
     if (!createPrimaryPartition(partition,
@@ -460,7 +460,7 @@ AdvancedPartitionDelegate::createLogicalPartition(const Partition::Ptr partition
     // Enlarge extended partition if needed.
     if (ext_partition->start_sector > partition->start_sector ||
         ext_partition->end_sector < partition->end_sector) {
-      Partition::Ptr new_ext_partition = std::make_shared<Partition>(*ext_partition);
+      Partition::Ptr new_ext_partition(new Partition(*ext_partition));
       new_ext_partition->start_sector = qMin(ext_partition->start_sector,
                                             partition->start_sector);
       new_ext_partition->end_sector = qMax(ext_partition->end_sector,
@@ -477,7 +477,7 @@ AdvancedPartitionDelegate::createLogicalPartition(const Partition::Ptr partition
     }
   }
 
-  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  Partition::Ptr new_partition (new Partition);
   new_partition->device_path = partition->device_path;
   new_partition->path = partition->path;
   new_partition->sector_size = partition->sector_size;
@@ -573,7 +573,7 @@ AdvancedPartitionDelegate::createPrimaryPartition(const Partition::Ptr partition
     const PartitionList logical_parts = GetLogicalPartitions(device->partitions);
     if (logical_parts.isEmpty()) {
       // Remove extended partition if no logical partitions.
-      Partition::Ptr unallocated_partition = std::make_shared<Partition>(Partition());
+      Partition::Ptr unallocated_partition (new Partition);
       unallocated_partition->device_path = ext_partition->device_path;
       // Extended partition does not contain any sectors.
       // This new allocated partition will be merged to other unallocated
@@ -592,7 +592,7 @@ AdvancedPartitionDelegate::createPrimaryPartition(const Partition::Ptr partition
 
     } else if (IsPartitionsJoint(ext_partition, partition)) {
       // Shrink extended partition to fit logical partitions.
-      Partition::Ptr new_ext_part = std::make_shared<Partition>(*ext_partition);
+      Partition::Ptr new_ext_part(new Partition(*ext_partition));
       new_ext_part->start_sector = logical_parts.first()->start_sector -
                                   oneMebiByteSector;
       new_ext_part->end_sector = logical_parts.last()->end_sector;
@@ -609,7 +609,7 @@ AdvancedPartitionDelegate::createPrimaryPartition(const Partition::Ptr partition
     }
   }
 
-  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  Partition::Ptr new_partition (new Partition);
   new_partition->device_path = partition->device_path;
   new_partition->path = partition->path;
   new_partition->sector_size = partition->sector_size;
@@ -679,7 +679,7 @@ void AdvancedPartitionDelegate::deletePartition(const Partition::Ptr partition) 
   //  * Remove extended partition if no logical partitions found.
   //  * Update partition number if needed.
 
-  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  Partition::Ptr new_partition(new Partition(*partition));
   new_partition->device_path = partition->device_path;
   new_partition->sector_size = partition->sector_size;
   new_partition->start_sector = partition->start_sector;
@@ -695,13 +695,17 @@ void AdvancedPartitionDelegate::deletePartition(const Partition::Ptr partition) 
 
     // TODO(xushaohua): Move to operation.h
     for (int index = operations_.length() - 1; index >= 0; --index) {
-      const Operation& operation = operations_.at(index);
-      if (operation.type == OperationType::Create &&
-          operation.new_partition == partition) {
-        operations_.removeAt(index);
-        qDebug() << "abort operation: delete!";
-        break;
-      }
+        const Operation& operation = operations_.at(index);
+        if (operation.type == OperationType::Create &&
+            *operation.new_partition.data() == *partition.data()) {
+            partition->type   = PartitionType::Unallocated;
+            partition->fs     = FsType::Empty;
+            partition->status = PartitionStatus::Delete;
+
+            qDebug() << "delete partition info: " << *partition.data();
+            operations_.removeAt(index);
+            break;
+        }
     }
   } else {
     Operation operation(OperationType::Delete, partition, new_partition);
@@ -731,7 +735,7 @@ void AdvancedPartitionDelegate::deletePartition(const Partition::Ptr partition) 
       if ((logical_parts.length() == 1 && logical_parts.at(0) == partition) ||
           (logical_parts.length() == 0)) {
         const Partition::Ptr ext_partition = partitions.at(ext_index);
-        Partition::Ptr unallocated_partition = std::make_shared<Partition>(Partition());
+        Partition::Ptr unallocated_partition (new Partition);
         unallocated_partition->device_path = ext_partition->device_path;
         // Extended partition does not contain any sectors.
         // This new allocated partition will be merged to other unallocated
@@ -774,7 +778,7 @@ void AdvancedPartitionDelegate::formatPartition(const Partition::Ptr partition,
     }
   }
 
-  Partition::Ptr new_partition = std::make_shared<Partition>(Partition());
+  Partition::Ptr new_partition (new Partition);
   new_partition->sector_size = partition->sector_size;
   new_partition->start_sector = partition->start_sector;
   new_partition->end_sector = partition->end_sector;
@@ -885,40 +889,47 @@ void AdvancedPartitionDelegate::refreshVisual() {
   // * Merge unallocated partition with next unallocated one;
   // * Ignore partitions with size less than 100Mib;
 
+  auto list = virtual_devices_;
   virtual_devices_ = FilterInstallerDevice(real_devices_);
 
-  for (Device::Ptr device : virtual_devices_) {
-    PartitionList partitions;
-    for (const Partition::Ptr partition : device->partitions) {
-      if (partition->type == PartitionType::Normal ||
-          partition->type == PartitionType::Logical ||
-          partition->type == PartitionType::Extended) {
-        partitions.append(partition);
-      } else if (partition->type == PartitionType::Unallocated) {
-        // Filter unallocated partitions which are larger than 2MiB.
-        if (partition->getByteLength() >= 2 * kMebiByte) {
-          partitions.append(partition);
-        }
+  for (Device::Ptr device : list) {
+      for (Device::Ptr dev : virtual_devices_) {
+          if (*device.data() == *dev.data()) {
+              PartitionList partitions;
+              for (const Partition::Ptr partition : device->partitions) {
+                  if (partition->type == PartitionType::Normal ||
+                      partition->type == PartitionType::Logical ||
+                      partition->type == PartitionType::Extended) {
+                      partitions.append(partition);
+                  }
+                  else if (partition->type == PartitionType::Unallocated) {
+                      // Filter unallocated partitions which are larger than 2MiB.
+                      if (partition->getByteLength() >= 2 * kMebiByte) {
+                          partitions.append(partition);
+                      }
+                  }
+                  qDebug() << partition->path << partition->type << partition->start_sector << partition->end_sector << "~~~~~";
+              }
+              dev->partitions = partitions;
+          }
       }
-    }
-    device->partitions = partitions;
   }
 
   for (Device::Ptr device : virtual_devices_) {
-    // Merge unallocated partitions.
-    MergeUnallocatedPartitions(device->partitions);
+      // Merge unallocated partitions.
+      MergeUnallocatedPartitions(device->partitions);
 
-    for (Operation& operation : operations_) {
-        if ((operation.type == OperationType::NewPartTable &&
-             operation.device->path == device->path) ||
-            (operation.type != OperationType::NewPartTable &&
-             operation.orig_partition->device_path == device->path)) {
-            operation.applyToVisual(device);
-        }
-    }
+      for (Operation& operation : operations_) {
+          if ((operation.type == OperationType::NewPartTable &&
+               *operation.device.data() == *device.data()) ||
+              (operation.type != OperationType::NewPartTable &&
+               operation.orig_partition->device_path == device->path)) {
+              operation.applyToVisual(device);
+          }
+      }
 
-    // Merge unallocated partitions.
-    MergeUnallocatedPartitions(device->partitions);
+      // Merge unallocated partitions.
+      MergeUnallocatedPartitions(device->partitions);
   }
 
   qDebug() << "devices:" << virtual_devices_;
@@ -983,7 +994,7 @@ void AdvancedPartitionDelegate::updateMountPoint(const Partition::Ptr partition,
 
   if (!mount_point.isEmpty()) {
     // Append MountPointOperation only if |mount_point| is not empty.
-    Partition::Ptr new_partition = std::make_shared<Partition>(*partition);
+    Partition::Ptr new_partition(new Partition(*partition));
     new_partition->mount_point = mount_point;
     // No need to update partition status.
     Operation operation(OperationType::MountPoint, partition, new_partition);

@@ -21,7 +21,7 @@
 #include <QDebug>
 #include <QList>
 #include <QStringList>
-#include <memory>
+#include <QSharedPointer>
 
 #include "partman/fs.h"
 #include "partman/structs.h"
@@ -78,7 +78,7 @@ class Partition {
   Partition(const Partition &partition);
   ~Partition();
 
-  typedef std::shared_ptr<Partition> Ptr;
+  typedef QSharedPointer<Partition> Ptr;
 
   bool operator==(const Partition& other) const;
 

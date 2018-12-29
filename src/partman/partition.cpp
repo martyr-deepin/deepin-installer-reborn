@@ -177,7 +177,7 @@ QDebug& operator<<(QDebug& debug, const Partition& partition) {
 }
 
 QDebug& operator<<(QDebug& debug, const Partition::Ptr partition) {
-    debug << partition.get();
+    debug << partition.data();
     return debug;
 }
 
@@ -220,10 +220,12 @@ bool IsPartitionsJoint(const Partition::Ptr part1, const Partition::Ptr part2) {
 
 int PartitionIndex(const PartitionList& partitions,
                    const Partition::Ptr partition) {
-
-    auto find_it = std::find_if(partitions.begin(), partitions.end(), [=] (const Partition::Ptr ptr) {
-        return *partition.get() == *ptr.get();
-    });
+    auto find_it = std::find_if(
+        partitions.begin(), partitions.end(), [=](const Partition::Ptr ptr) {
+            return (partition->start_sector >= ptr->start_sector &&
+                    partition->end_sector <= ptr->end_sector &&
+                    partition->type == ptr->type);
+        });
 
     if (find_it == partitions.end()) {
         return -1;
