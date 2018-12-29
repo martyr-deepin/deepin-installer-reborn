@@ -1,3 +1,14 @@
+<a name="2.5.8"></a>
+### 2.5.8 (2018-12-29)
+
+
+#### Bug Fixes
+
+*   UEFI cannot scan other system ([b6e49967](https://github.com/linuxdeepin/deepin-install-reborn/commit/b6e49967dd05d98e941e6c1b2630c2dc07cb17b3))
+* **Partition:**  advanced partition not check create part tab ([5cf0111a](https://github.com/linuxdeepin/deepin-install-reborn/commit/5cf0111a41fd570523212ad776c47484095e809f))
+
+
+
 <a name="2.5.7"></a>
 ### 2.5.7 (2018-12-25)
 
