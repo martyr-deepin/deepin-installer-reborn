@@ -1,3 +1,13 @@
+<a name="2.5.9"></a>
+### 2.5.9 (2019-01-03)
+
+
+#### Bug Fixes
+
+*   device partitions info error ([514387ec](https://github.com/linuxdeepin/deepin-install-reborn/commit/514387ec463e734076e4824b3fedbc1bfb5e8b4c))
+
+
+
 <a name="2.5.8"></a>
 ### 2.5.8 (2018-12-29)
 
