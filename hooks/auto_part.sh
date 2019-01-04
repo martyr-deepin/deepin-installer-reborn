@@ -170,6 +170,8 @@ create_part(){
       AVL_SIZE="${BASH_REMATCH[1]}"
   fi
 
+  echo "Avaiable size: $AVL_SIZE"
+
   if [[ "$part_size" =~ %$ ]]; then
     part_size=$((AVL_SIZE * ${part_size%\%} / 100))
   elif [ "$part_size" = swap-size ]; then
@@ -181,12 +183,17 @@ create_part(){
     fi
   fi
 
+  echo "Calculated partition size: $part_size"
+
   # Check root partition size.
   if $LARGE && [ "$part_mp" = '/' ] &&\
   [[ "$(installer_get partition_full_disk_large_root_part_range)" =~ ^([0-9]+):([0-9]+)$ ]]; then
     local root_min=$((BASH_REMATCH[1] * 1024)) root_max=$((BASH_REMATCH[2] * 1024))
+
+    echo "Arrange root partition size based on the restriction rules, root_min: $root_min root_max: $root_max"
+
     part_size=$((part_size < root_min ? root_min : part_size))
-    part_size=$((part_size > root_min ? root_max : part_size))
+    part_size=$((part_size > root_max ? root_max : part_size))
   fi
 
   echo "part: $part_mp, $part_fs, $part_start, $part_size"
@@ -297,11 +304,14 @@ main(){
     get_max_capacity_device
   fi
   [ -b "$DEVICE" ] || error "Device not found!"
+
   echo "Target device: $DEVICE"
 
   check_device_size
   chech_use_crypt
   check_efi_mode
+
+  echo "Device size: $DEVICE_SIZE"
 
   # Partitioning policy.
   get_part_policy
