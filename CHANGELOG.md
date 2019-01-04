@@ -1,3 +1,13 @@
+<a name="2.5.10"></a>
+### 2.5.10 (2019-01-04)
+
+
+#### Bug Fixes
+
+*   full disk installation always fail ([6804e612](https://github.com/linuxdeepin/deepin-install-reborn/commit/6804e6127306a8fba90132050b891bd831dc7dca))
+
+
+
 <a name="2.5.9"></a>
 ### 2.5.9 (2019-01-03)
 
