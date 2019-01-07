@@ -221,9 +221,9 @@ create_part(){
     fi
   else
     let LVM_NUM++
-    lvcreate -n"lv$LVM_NUM" -L"$part_size" "$VG_NAME" ||\
-      error "Failed to create logical volume lv$LVM_NUM on $VG_NAME!"
-    part_path="/dev/$VG_NAME/lv$LVM_NUM"
+    lvcreate -n"${label:-LVM_NUM}" -L"$part_size" "$VG_NAME" ||\
+    error "Failed to create logical volume ${label:-LVM_NUM} on $VG_NAME!"
+    part_path="/dev/$VG_NAME/${label:-LVM_NUM}"
   fi
 
   flush_message
