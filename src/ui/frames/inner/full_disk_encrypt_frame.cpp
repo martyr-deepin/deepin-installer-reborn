@@ -47,6 +47,7 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
     m_encryptCheck->setObjectName("check_box");
     m_encryptCheck->setCheckable(true);
     m_encryptCheck->setChecked(true);
+    m_encryptCheck->setFocusPolicy(Qt::NoFocus);
 
     setObjectName("FullDiskEncryptFrame");
 

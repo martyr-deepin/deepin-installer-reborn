@@ -125,6 +125,7 @@ void FullDiskFrame::initUI() {
   m_encryptCheck->setObjectName("check_box");
   m_encryptCheck->setCheckable(true);
   m_encryptCheck->setChecked(false);
+  m_encryptCheck->setFocusPolicy(Qt::NoFocus);
   addTransLate(m_trList, std::bind(&QCheckBox::setText, m_encryptCheck, std::placeholders::_1), QString("Encrypt Full Disk"));
 
   m_errorTip = new QLabel;
