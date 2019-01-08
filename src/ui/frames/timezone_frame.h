@@ -89,7 +89,6 @@ class TimezoneFrame : public QFrame {
     Language,  // Timezone is setup based on current selected language.
   };
   TimezoneSource timezone_source_;
-  bool is_local_time_;
 
  private slots:
   void onNextButtonClicked();

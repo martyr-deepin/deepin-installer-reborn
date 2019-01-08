@@ -93,7 +93,7 @@ void WriteKeyboard(const QString& model,
                    const QString& variant);
 void WriteLocale(const QString& locale);
 void WritePassword(const QString& password);
-void WriteTimezone(const QString& timezone, bool is_local_time);
+void WriteTimezone(const QString& timezone);
 void WriteUsername(const QString& username);
 void WriteFullDiskDeivce(const QString &deviceName);
 void WriteFullDiskEncryptPassword(const QString &password);

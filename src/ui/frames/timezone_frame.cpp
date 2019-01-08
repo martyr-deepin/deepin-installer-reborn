@@ -32,7 +32,6 @@
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/timezone_map.h"
 #include "ui/widgets/title_label.h"
-#include "base/command.h"
 
 namespace installer {
 
@@ -41,24 +40,6 @@ namespace {
 // Set timezone to UTC when local-time is used.
 const char kDefaultTimezone[] = "Etc/UTC";
 
-// Check if any Windows partition is found on disk.
-bool HasWindowsPartition() {
-  const OsProberItems os_items = GetOsProberItems();
-  for (const OsProberItem& item : os_items) {
-    if (item.type == OsType::Windows) {
-      return true;
-    }
-  }
-
-  // check UEFI
-  QString output;
-  if (SpawnCmd("efibootmgr", {"|", "grep", "-i", "Windows"}, output)) {
-      return !output.isEmpty();
-  }
-
-  return false;
-}
-
 }  // namespace
 
 TimezoneFrame::TimezoneFrame(QWidget* parent)
@@ -66,8 +47,7 @@ TimezoneFrame::TimezoneFrame(QWidget* parent)
       timezone_(),
       alias_map_(GetTimezoneAliasMap()),
       timezone_manager_(new TimezoneManager(this)),
-      timezone_source_(TimezoneSource::NotSet),
-      is_local_time_(false) {
+      timezone_source_(TimezoneSource::NotSet) {
   this->setObjectName("system_info_timezone_frame");
 
   this->initUI();
@@ -76,21 +56,10 @@ TimezoneFrame::TimezoneFrame(QWidget* parent)
 
 void TimezoneFrame::readConf() {
   // Policy:
-  //  * Call `os-prober` if both "partition_enable_os_prober" and
-  //    "system_info_use_windows_time" are enabled.
-  //  * If no windows partition found, then:
   //    * Read default timezone from settings.
   //    * Scan wifi spot.
   //    * Send http request to get geo ip.
   //    * Or wait for user to choose timezone on map.
-
-  if (GetSettingsBool(kPartitionEnableOsProber) &&
-      GetSettingsBool(kTimezoneUseWindowsTime) &&
-      HasWindowsPartition()) {
-    // If local time is used, set timezone to Etc/UTC.
-    timezone_ = kDefaultTimezone;
-    is_local_time_ = true;
-  }
 
   // Read timezone from settings.
   timezone_ = GetSettingsString(kTimezoneDefault);
@@ -129,7 +98,7 @@ void TimezoneFrame::writeConf() {
     qWarning() << "Invalid timezone:" << timezone_;
     timezone_ = kDefaultTimezone;
   }
-  WriteTimezone(timezone_, is_local_time_);
+  WriteTimezone(timezone_);
 }
 
 void TimezoneFrame::changeEvent(QEvent* event) {

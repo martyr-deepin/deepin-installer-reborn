@@ -325,10 +325,9 @@ void WritePassword(const QString& password) {
   AppendToConfigFile("DI_PASSWORD", encoded_password);
 }
 
-void WriteTimezone(const QString& timezone, bool is_local_time) {
+void WriteTimezone(const QString& timezone) {
   QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
   settings.setValue("DI_TIMEZONE", timezone);
-  settings.setValue("DI_IS_LOCAL_TIME", is_local_time);
 }
 
 void WriteUsername(const QString& username) {
