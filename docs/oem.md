@@ -100,13 +100,15 @@ slide 目录的结果应该与 resources/slide 目录相同.
  `system_info_password_require_lower_case`,
  `system_info_password_require_upper_case` 以及
  `system_info_password_require_special_char` 用于设定密码策略.
+ `system_info_password_strong_check` (bool) 控制是否启用密码强度检查，控制中心将会保持同样的配置。
+ 最少8个字符和最大16个字符，至少包含大小写英文、数字和符号的任意两种组合。
  `system_info_use_windows_time` 当开启了这个选项时, 如果硬盘上已经有 windows
  分区了, 就 不在使用UTC时间, 而使用本地时间. 这个选项用于解决windows系统时间相差
  8小时的问题.
 * 自定义保留的用户名. 被保留的用户名, 在 `resources/reserved_usernames` 中定义,
- 也可以创建 `oem/reserved_usernames` 来自定义要保留的用户名. 被保留的用户名, 
+ 也可以创建 `oem/reserved_usernames` 来自定义要保留的用户名. 被保留的用户名,
  指的是系统中已经存在或者极可能会被某些包创建的用户名.
- 
+
 ## 桌面环境相关的
 * `dde_dock_app_list` 在dock中显示哪些应用图标.
 * `dde_launcher_app_list` 在launcher中显示的哪些应用图标.
