@@ -396,13 +396,11 @@ void PartitionFrame::onNextButtonClicked() {
   QStringList descriptions;
   if (this->isSimplePartitionMode()) {
     descriptions = simple_partition_delegate_->getOptDescriptions();
-    qDebug() << simple_partition_delegate_->operations();
   }
   else if (this->isFullDiskPartitionMode()) {
       descriptions = full_disk_delegate_->getOptDescriptions();
   } else {
     descriptions = advanced_delegate_->getOptDescriptions();
-    qDebug() << advanced_delegate_->operations();
   }
 
   qDebug() << "descriptions: " << descriptions;

@@ -207,7 +207,7 @@ void PartitionManager::doAutoPart(const QString& script_path) {
 }
 
 void PartitionManager::doManualPart(const OperationList& operations) {
-  qDebug() << "operations:" << operations;
+  qDebug() << Q_FUNC_INFO << "\n" << "operations:" << operations;
   bool ok = true;
   // Copy operation list, as partition path will be updated in applyToDisk().
   OperationList real_operations(operations);
@@ -215,7 +215,7 @@ void PartitionManager::doManualPart(const OperationList& operations) {
     Operation& operation = real_operations[i];
     ok = operation.applyToDisk();
   }
-  qDebug() << "real operations:" << real_operations;
+  qDebug() << Q_FUNC_INFO << "\n" << "real operations:" << real_operations;
 
   DeviceList devices;
   if (ok) {

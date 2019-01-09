@@ -416,7 +416,8 @@ QDebug& operator<<(QDebug& debug, const Operation& operation) {
     debug << "Operation: {" << endl
     << "    type: " << operation.type << endl
     << "    opri_partion: " << operation.orig_partition << endl
-    << "    new_partition: " << operation.new_partition << endl;
+    << "    new_partition: " << operation.new_partition << endl
+    << "}";
     return debug;
 }
 
