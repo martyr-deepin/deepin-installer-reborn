@@ -30,16 +30,27 @@ QString ReadOsProberOutput() {
   if (QFile::exists(cache_path)) {
     return ReadFile(cache_path);
   } else {
-    // Create ignore_uefi file to make os-prober scan windows systems
-    // in UEFI mode.
+    // run os-prober once before ignore_uefi is created, so windows
+    // in the efi partition can be found.
+    QString output;
+    if (!SpawnCmd("os-prober", {}, output)) {
+      output.clear();
+    }
+
     const QString partman_flag = "/var/lib/partman/ignore_uefi";
     if (!CreateParentDirs(partman_flag)) {
       qWarning() << "Failed to create parent folder of: " << partman_flag;
     }
     WriteTextFile(partman_flag, "deepin-installer");
 
-    QString output;
-    if (SpawnCmd("os-prober", {}, output)) {
+    // run os-prober again after ignore_uefi created, so windows installed
+    // in legacy mode will be found.
+    QString second_time_output;
+    if (SpawnCmd("os-prober", {}, second_time_output)) {
+      output.append(second_time_output);
+    }
+
+    if (!output.isEmpty()) {
       WriteTextFile(cache_path, output);
       return output;
     } else {
@@ -93,7 +104,22 @@ OsProberItems GetOsProberItems() {
       const QString path = (index == -1) ? dev_path : dev_path.left(index);
 
       const OsProberItem prober_item = {path, description, distro_name, type};
-      result.append(prober_item);
+
+      // Uniquify, since ReadOsProberOutput() contains duplicated entries.
+      bool exists = false;
+      for (const OsProberItem &item : result) {
+        // TODO(hualet): overload the == operator.
+        if (item.path == path \
+            && item.type == type \
+            && item.distro_name == distro_name \
+            && item.description == description)
+        {
+          exists = true;
+        }
+      }
+      if (!exists) {
+        result.append(prober_item);
+      }
     }
   }
 

@@ -16,20 +16,71 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+# Find windows OS agagin before chrooting, but after partitioning because
+# windows may be wiped by the user by intention.
+
 PARTITION_ENABLE_OS_PROBER=$(installer_get "partition_enable_os_prober")
 TIMEZONE_USE_WINDOWS_TIME=$(installer_get "timezone_use_windows_time")
 
-has_windows_partitions() {
+# the whole point is we want to scan windows OSes without considering its
+# installed in UEFI mode or not.
+try_os_prober() {
+    IGNORE_UEFI=/var/lib/partman/ignore_uefi
+
+    local windows_exists="false"
+    local file_exists="false"
+    local file_contents=""
+    # save context
+    if [ -f $IGNORE_UEFI ]; then
+        file_exists="true"
+        file_contents=$(cat $IGNORE_UEFI)
+    fi
+
+    # try
     if /usr/bin/os-prober | grep -qi windows; then
-        return 0
-    elif /bin/efibootmgr | grep -qi windows; then
+        windows_exists="true"
+    fi
+
+    # revert context
+    if [ x"${file_exists}" = "xtrue" ]; then
+        rm -f $IGNORE_UEFI
+    else
+        mkdir -p "$(dirname $IGNORE_UEFI)"
+        echo "$file_contents" > $IGNORE_UEFI
+    fi
+
+    # and try again
+    if /usr/bin/os-prober | grep -qi windows; then
+        windows_exists="true"
+    fi
+
+    # restore context
+    if [ x"${file_exists}" = "xtrue" ]; then
+        echo "$file_contents" > $IGNORE_UEFI
+    else
+        rm -f $IGNORE_UEFI
+    fi
+
+    if [ x"${windows_exists}" = "xtrue" ]; then
         return 0
     fi
 
     return 1
 }
 
-if [ x"${PARTITION_ENABLE_OS_PROBER}" = "xtrue" -a x"${TIMEZONE_USE_WINDOWS_TIME}" = "xtrue" ] && has_windows_partitions; then
+has_windows_partitions() {
+    if try_os_prober; then
+        return 0
+    fi
+
+    if /bin/efibootmgr | grep -qi windows; then
+        return 0
+    fi
+
+    return 1
+}
+
+if [ x"${PARTITION_ENABLE_OS_PROBER}" = "xtrue" ] && [ x"${TIMEZONE_USE_WINDOWS_TIME}" = "xtrue" ] && has_windows_partitions; then
     installer_set "DI_IS_LOCAL_TIME" "true"
 else
     installer_set "DI_IS_LOCAL_TIME" "false"
