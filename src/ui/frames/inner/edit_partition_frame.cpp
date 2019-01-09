@@ -91,41 +91,7 @@ void EditPartitionFrame::setPartition(const Partition::Ptr partition) {
   const int mp_index = mount_point_model_->index(partition->mount_point);
   mount_point_box_->setCurrentIndex(mp_index);
 
-  switch (partition_->status) {
-    case PartitionStatus::Format: {
-      // Compare between real filesystem type and current one.
-      const Partition::Ptr real_partition(new Partition(*(delegate_->getRealPartition(partition_))));
-      if (!real_partition->path.isEmpty()) {
-        // If filesystem changed, force format this partition->
-        format_check_box_->setEnabled(real_partition->fs == partition_->fs);
-        format_check_box_->setChecked(true);
-      }
-      break;
-    }
-    case PartitionStatus::New: {
-      // Force format for new partition->
-      this->forceFormat(true);
-      break;
-    }
-    case PartitionStatus::Real: {
-      // If mount point in ins formatted-mount-point list, format this partition
-      // compulsively.
-      this->forceFormat(IsInFormattedMountPointList(partition->mount_point));
-      break;
-    }
-    default: {
-      this->forceFormat(false);
-      break;
-    }
-  }
-
-  FsType fs_type = partition_->fs;
-  // If it is linux-swap, empty or known, hide format box.
-  bool invisible = (fs_type == FsType::LinuxSwap ||
-      fs_type == FsType::Empty ||
-      fs_type == FsType::Unknown);
-  format_label_->setVisible(!invisible);
-  format_check_box_->setVisible(!invisible);
+  updateFormatBoxState();
 }
 
 void EditPartitionFrame::changeEvent(QEvent* event) {
@@ -151,6 +117,7 @@ void EditPartitionFrame::forceFormat(bool force) {
 
 void EditPartitionFrame::updateFormatBoxState() {
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
+  const Partition::Ptr real_partition(new Partition(*(delegate_->getRealPartition(partition_))));
   const int mp_index = mount_point_box_->currentIndex();
   QString mount_point;
 
@@ -159,37 +126,20 @@ void EditPartitionFrame::updateFormatBoxState() {
     mount_point = mount_point_model_->getMountPoint(mp_index);
   }
 
-  // Format this partition compulsively if its fs type changed.
-  bool format = false;
+  // If current partition type is PartitionType::Unallocated,
+  // real_partition is nullptr, need format.
+  // But if status is PartitionStatus::New, will always format
+  bool format = (real_partition.isNull() || partition_->status == PartitionStatus::New);
 
-  switch (partition_->status) {
-    case PartitionStatus::Format: {
-      // Compare between real filesystem type and current one.
-      const Partition::Ptr real_partition(new Partition(*(delegate_->getRealPartition(partition_))));
-      if (!real_partition->path.isEmpty()) {
-        // If filesystem changed, force format this partition
-        format = true;
-      }
-      break;
-    }
-    case PartitionStatus::New: {
-      // Force format for new partition
-      format = true;
-      break;
-    }
-    case PartitionStatus::Real: {
-      // If mount point in ins formatted-mount-point list, format this partition
-      // compulsively.
-      format = IsInFormattedMountPointList(partition_->mount_point);
-      break;
-    }
-    default: {
-      format = false;
-      break;
-    }
+
+  // NOTE: maybe need check partition->path.isEmpty()
+  if (!format) {
+      // Format this partition compulsively if its fs type changed.
+      format = (fs_type != real_partition->fs);
   }
 
   // Format this partition if mount-point is in formatted-mount-point list.
+  format |= IsInFormattedMountPointList(mount_point);
   this->forceFormat(format);
 
   // If it is linux-swap, empty or known, hide format box.
