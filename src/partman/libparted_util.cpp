@@ -26,6 +26,21 @@ namespace installer {
 
 namespace {
 
+void PrintPedConstraintInfo(PedConstraint *constraint)
+{
+  qDebug() << "constraint: {" << "\n"
+  << "    start_align: " <<  constraint->start_align->offset << "\n"
+  << "    end_align: " <<  constraint->end_align->offset << "\n"
+  << "    start_range: {" << "\n"
+  << "        " << constraint->start_range->start << "\n"
+  << "        " << constraint->start_range->end << "\n"
+  << "    }" << "\n"
+  << "    end_range: {" << "\n"
+  << "        " << constraint->end_range->start << "\n"
+  << "        " << constraint->end_range->end << "\n"
+  << "    }";
+}
+
 // Get |fs| name used in libparted.
 QString GetPedFsName(FsType fs) {
   QString fs_name;
@@ -118,12 +133,15 @@ bool CreatePartition(const Partition::Ptr partition) {
                                            partition->start_sector,
                                            partition->getSectorLength());
       if (geom) {
-        constraint = ped_constraint_exact(geom);
+        // Create a relatively loose constraint,
+        // leaving other things to libparted.
+        constraint = ped_constraint_new_from_max(geom);
       } else {
         qCritical() << "CreatePartition() geom is nullptr";
       }
       if (constraint) {
         // TODO(xushaohua): Change constraint.min_size.
+        // PrintPedConstraintInfo(constraint);
         ok = bool(ped_disk_add_partition(lp_disk, lp_partition, constraint));
         if (ok) {
           ok = Commit(lp_disk);
