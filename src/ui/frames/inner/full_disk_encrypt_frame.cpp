@@ -10,6 +10,7 @@
 #include "../../../service/settings_manager.h"
 #include "../../widgets/system_info_tip.h"
 #include "ui/delegates/partition_util.h"
+#include "ui/utils/keyboardmonitor.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -106,11 +107,14 @@ Full_Disk_Encrypt_frame::Full_Disk_Encrypt_frame(QWidget *parent)
 
     setLayout(m_layout);
 
+    m_editList << m_encryptEdit << m_encryptRepeatEdit;
+
     connect(m_cancelBtn, &NavButton::clicked, this, &Full_Disk_Encrypt_frame::cancel);
     connect(m_nextBtn, &NavButton::clicked, this, &Full_Disk_Encrypt_frame::onNextBtnClicked);
     connect(m_encryptCheck, &QCheckBox::clicked, this, &Full_Disk_Encrypt_frame::onEncryptUpdated);
     connect(m_encryptEdit, &LineEdit::textChanged, m_errTip, &SystemInfoTip::hide);
     connect(m_encryptRepeatEdit, &LineEdit::textChanged, m_errTip, &SystemInfoTip::hide);
+    connect(KeyboardMonitor::instance(), &KeyboardMonitor::capslockStatusChanged, this, &Full_Disk_Encrypt_frame::updateEditCapsLockState);
 
     onEncryptUpdated(true);
 
@@ -182,4 +186,10 @@ void Full_Disk_Encrypt_frame::updateText()
     m_encryptCheckLbl->setText(tr("Repeat Password"));
     m_cancelBtn->setText(tr("Previous"));
     m_nextBtn->setText(tr("Start Installation"));
+}
+
+void Full_Disk_Encrypt_frame::updateEditCapsLockState(bool on) {
+    for (LineEdit *edit : m_editList) {
+        edit->setCapsLockVisible(on && edit->hasFocus());
+    }
 }

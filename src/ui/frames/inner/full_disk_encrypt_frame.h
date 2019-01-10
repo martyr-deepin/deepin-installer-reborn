@@ -34,6 +34,7 @@ private:
     void onNextBtnClicked();
     void onEncryptUpdated(bool checked);
     void updateText();
+    void updateEditCapsLockState(bool on);
 
 private:
     Device *m_device;
@@ -51,6 +52,7 @@ private:
     NavButton *m_cancelBtn;
     NavButton *m_nextBtn;
     SystemInfoTip *m_errTip;
+    QList<LineEdit*> m_editList;
 };
 }
 
