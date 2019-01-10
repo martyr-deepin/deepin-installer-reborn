@@ -11,7 +11,8 @@ void AutoScreenScale()
     Display *display = XOpenDisplay(NULL);
 
     XRRScreenResources *resources = XRRGetScreenResources(display, DefaultRootWindow(display));
-    double scaleRatio = 1.0;
+    // NOTE(lxz): Screens that require 4x scale may not be encountered
+    double scaleRatio = 4.0;
 
     for (int i = 0; i < resources->noutput; i++)
     {
@@ -23,19 +24,19 @@ void AutoScreenScale()
         if (crtInfo == nullptr)
             continue;
 
-        scaleRatio = (double)crtInfo->width / (double)outputInfo->mm_width / (1366.0 / 310.0);
+        scaleRatio = static_cast<double>(crtInfo->width) / static_cast<double>(outputInfo->mm_width) / (1366.0 / 310.0);
 
-        if (scaleRatio > 1 + 2.0 / 3.0)
-        {
-            scaleRatio = 2;
+        // When you have multiple screens,
+        // if one of the resolutions is very large,
+        // it will cause the copy mode to display abnormally.
+        if (scaleRatio > 1 + 2.0 / 3.0) {
+            scaleRatio = std::min(2.0, scaleRatio);
         }
-        else if (scaleRatio > 1 + 1.0 / 3.0)
-        {
-            scaleRatio = 1.5;
+        else if (scaleRatio > 1 + 1.0 / 3.0) {
+            scaleRatio = std::min(1.5, scaleRatio);
         }
-        else
-        {
-            scaleRatio = 1;
+        else {
+            scaleRatio = 1.0;
         }
     }
 
