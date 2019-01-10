@@ -251,7 +251,7 @@
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Anda boleh mengalami keseronokan menggunakan deepin selepas menikmati secawan kopi</translation>
+        <translation>Anda boleh merasai keseronokan menggunakan deepin selepas menikmati secawan kopi</translation>
     </message>
 </context>
 <context>
@@ -260,7 +260,7 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="61"/>
         <source>Successfully Installed</source>
-        <translation>Berjaya dipasang</translation>
+        <translation>Pemasangan Berjaya</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="43"/>
@@ -278,7 +278,7 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="47"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="71"/>
         <source>Experience now</source>
-        <translation>Alamilah sekarang</translation>
+        <translation>Rasailah sekarang</translation>
     </message>
 </context>
 <context>
@@ -582,7 +582,7 @@
     <message>
         <location filename="../src/ui/delegates/partition_util.cpp" line="172"/>
         <source>Swap partition</source>
-        <translation>Silih sekatan</translation>
+        <translation>Sekatan silih</translation>
     </message>
     <message>
         <location filename="../src/ui/delegates/partition_util.cpp" line="174"/>
@@ -723,7 +723,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="82"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="183"/>
         <source>Use that password to edit boot menu</source>
-        <translation type="unfinished"/>
+        <translation>Guna kata laluan tersebut untuk menyunting menu but</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
@@ -768,7 +768,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
         <source>The password should be different from the username</source>
-        <translation type="unfinished"/>
+        <translation>Kata laluan seharusnya tidak sama dengan nama pengguna</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>
@@ -799,7 +799,7 @@
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="91"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="144"/>
         <source>Test area</source>
-        <translation>Kawasan ujian</translation>
+        <translation>Ruang ujian</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="92"/>
@@ -1009,12 +1009,12 @@
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>View in Chinese</source>
-        <translation type="unfinished"/>
+        <translation>Papar dalam Bahasa Cina</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="159"/>
         <source>View in English</source>
-        <translation type="unfinished"/>
+        <translation>Papar dalam Bahasa Inggeris</translation>
     </message>
 </context>
 </TS>

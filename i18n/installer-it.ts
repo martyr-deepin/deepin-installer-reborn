@@ -768,7 +768,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
         <source>The password should be different from the username</source>
-        <translation type="unfinished"/>
+        <translation>La password deve essere differente rispetto l&apos;Username utilizzata</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>

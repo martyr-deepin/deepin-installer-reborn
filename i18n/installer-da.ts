@@ -723,7 +723,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="82"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="183"/>
         <source>Use that password to edit boot menu</source>
-        <translation type="unfinished"/>
+        <translation>Brug adgangskoden til at redigere bootmenuen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
@@ -768,7 +768,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
         <source>The password should be different from the username</source>
-        <translation type="unfinished"/>
+        <translation>Adgangskoden skal ikke være det samme som brugernavnet</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>

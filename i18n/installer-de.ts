@@ -18,7 +18,7 @@
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
         <source>Change boot loader</source>
-        <translation>Ändere Bootloader</translation>
+        <translation>Bootloader ändern</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
@@ -46,22 +46,22 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="439"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation>%1 Fehler gefunden, Installation wird nach Behebung fortgesetzt</translation>
+        <translation>%1 Fehler gefunden. Die Installation wird nach der Behebung des Fehlers fortgesetzt,</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="443"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation>%1 Fehler gefunden, Installation wird nach Behebung fortgesetzt</translation>
+        <translation>%1 Fehler gefunden. Die Installation wird nach der Behebung des Fehlers fortgesetzt,</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="490"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>Das Partition-Dateisystem des /boot Verzeichnisses kann nur %1 sein</translation>
+        <translation>Der Dateisystemtyp der Partition, auf der sich das Verzeichnis /boot befindet, kann nur %1 sein.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="494"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation>Die Partition des /boot Verzeichnisses sollte die erste Partition des Laufwerks sein</translation>
+        <translation>Die Partition, auf der sich das Verzeichnis /boot befindet, sollte die erste Partition des Laufwerks sein</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
@@ -71,7 +71,7 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="503"/>
         <source>Add an EFI partition to continue</source>
-        <translation>Füge eine EFI-Partition zum Fortfahren hinzu</translation>
+        <translation>Fügen Sie eine EFI partition hinzu um fortzufahren</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="507"/>
@@ -399,7 +399,7 @@ Wir wünschen viel Spaß!</translation>
         <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="229"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Bitte vergewissern Sie sich, dass Sie Ihre Daten ausreichend gesichert haben, bevor Sie ein Laufwerk zu Installation auswählen.</translation>
+        <translation>Bitte vergewissern Sie sich, dass Sie Ihre Daten ausreichend gesichert haben, bevor Sie ein Laufwerk zur Installation auswählen.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
@@ -461,7 +461,7 @@ Wir wünschen viel Spaß!</translation>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="81"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
-        <translation>Neue logische Partitionen können nur in der Nähe von bestehenden logischen Partitionen erstellt werden</translation>
+        <translation>Neue logische Partitionen können nur neben bestehenden logischen Partitionen erstellt werden</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
@@ -724,7 +724,7 @@ Wir wünschen viel Spaß!</translation>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="82"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="183"/>
         <source>Use that password to edit boot menu</source>
-        <translation type="unfinished"/>
+        <translation>Benutzen Sie das Passwort, um das Bootmenü zu verändern</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
@@ -769,7 +769,7 @@ Wir wünschen viel Spaß!</translation>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
         <source>The password should be different from the username</source>
-        <translation type="unfinished"/>
+        <translation>Das Passwort sollte nicht dem Benutzernamen entsprechen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>
@@ -937,13 +937,13 @@ Wir wünschen viel Spaß!</translation>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation>Bitte erstellen Sie ein Sicherung Ihrer Daten um Datenverlust zu vermeiden</translation>
+        <translation>Bitte erstellen Sie ein Sicherung Ihrer Daten, um Datenverlust zu vermeiden.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="128"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation>Bitte stellen Sie sicher dass alle Daten gesichert wurden und starten Sie dem Rechner nach Abschluss der Sicherung neu, um die Benutzeroberfläche des Installers neu aufzurufen.</translation>
+        <translation>Bitte stellen Sie sicher, dass alle Daten gesichert wurden und starten Sie dem Rechner nach Abschluss der Sicherung neu, um die Benutzeroberfläche des Installationsprogramms neu aufzurufen.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
@@ -957,13 +957,13 @@ Wir wünschen viel Spaß!</translation>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation>Stellen Sie sicher dass alle Daten gesichert wurden und fahren Sie dann fort</translation>
+        <translation>Stellen Sie sicher, dass alle Daten gesichert wurden und fahren Sie anschließend fort</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
         <source>Continue installation will format your disk</source>
-        <translation>Fortfahren der Installation wird Ihre Festplatte löschen</translation>
+        <translation>Das Fortsetzen der Installation wird Ihre Festplatte löschen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="75"/>
@@ -1010,12 +1010,12 @@ Wir wünschen viel Spaß!</translation>
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>View in Chinese</source>
-        <translation type="unfinished"/>
+        <translation>In Chinesisch ansehen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="159"/>
         <source>View in English</source>
-        <translation type="unfinished"/>
+        <translation>In Englisch ansehen</translation>
     </message>
 </context>
 </TS>

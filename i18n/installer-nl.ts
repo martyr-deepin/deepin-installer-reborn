@@ -768,7 +768,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
         <source>The password should be different from the username</source>
-        <translation type="unfinished"/>
+        <translation>Het wachtwoord mag niet hetzelfde zijn als de gebruikersnaam</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>

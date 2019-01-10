@@ -61,7 +61,7 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="494"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
-        <translation type="unfinished"/>
+        <translation>Partisi dari direktori /boot harus menjadi partisi pertama di hard disk</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
@@ -109,7 +109,7 @@
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="60"/>
         <source>Relevant operations you made in the installation process will not take effect, abort or continue installation?</source>
-        <translation type="unfinished"/>
+        <translation>Operasi relevan yang telah anda buat saat prosess installasi tidak akan berpengaruh, batal atau lanjut installasi?</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="43"/>
@@ -196,7 +196,7 @@
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="63"/>
         <source>Applying changes to your system, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Terapkan perubahan ke sistem anda, mohon tunggu...</translation>
     </message>
 </context>
 <context>
@@ -210,12 +210,12 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="50"/>
         <source>Encrypt Full Disk</source>
-        <translation type="unfinished"/>
+        <translation>Disk enkripsi penuh</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="51"/>
         <source>Please select a disk to start installation</source>
-        <translation type="unfinished"/>
+        <translation>Mohon pilih sebuah disk untuk mulai installasi</translation>
     </message>
 </context>
 <context>
@@ -230,7 +230,7 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="97"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation type="unfinished"/>
+        <translation>Maaf atas ketidak nyamanan, anda dapat foto atau pindai kode QR untuk kirim log kesalahan, sehingga kami dapat lebih baik lagi dalam menyelesaikan masalah.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="79"/>
@@ -251,7 +251,7 @@
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation type="unfinished"/>
+        <translation>Anda dapat mengalami pengalaman kesenangan luar biasa dari deepin setelah menghabiskan waktu hanya dengan secangkir kopi</translation>
     </message>
 </context>
 <context>
@@ -266,19 +266,19 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="43"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="63"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation type="unfinished"/>
+        <translation>Muat ulang dan nikmati pengalaman baru dengan deepin, semoga anda menyukainya!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="70"/>
         <source>Please remove the installation media before reboot</source>
-        <translation type="unfinished"/>
+        <translation>Mohon ambil media installasi sebelum muat ulang</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="47"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="71"/>
         <source>Experience now</source>
-        <translation type="unfinished"/>
+        <translation>Alami sekarang</translation>
     </message>
 </context>
 <context>
@@ -293,7 +293,7 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="118"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="153"/>
         <source>Create a new partition and define the type and size</source>
-        <translation type="unfinished"/>
+        <translation>Buat sebuah partisi baru dan definisikan tipe dan ukuran</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="119"/>
@@ -365,13 +365,13 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="76"/>
         <source>Full Disk Format Warning</source>
-        <translation type="unfinished"/>
+        <translation>Peringatan Format Penuh Disk</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="94"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Lanjut dengan installasi akan memformat semua disk, mohon untuk buat cadangan data anda untuk menghindari kehilangan data</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
@@ -416,7 +416,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="245"/>
         <source>Full Disk</source>
-        <translation type="unfinished"/>
+        <translation>Disk Penuh</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
@@ -460,12 +460,12 @@
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="81"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
-        <translation type="unfinished"/>
+        <translation>Partisi logis baru hanya bisa dibuat dekat partisi logis yang sudah ada</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
         <source>You need to delete a primary partition to create the new partition</source>
-        <translation type="unfinished"/>
+        <translation>Anda perlu untuk menghapus partisi primer untuk buat partisi baru</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
@@ -506,13 +506,13 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="86"/>
         <source>Please make a backup of important data and confirm the following operations</source>
-        <translation type="unfinished"/>
+        <translation>Mohon untuk membuat cadangan data  penting anda dan konfirmasi operasi berikutnya</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Operasi berikut ini akan dieksekusi, mohon konfirmasi dan lanjut untuk menghindari kehilangan data</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
@@ -542,7 +542,7 @@
     <message>
         <location filename="../src/partman/operation.cpp" line="261"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation type="unfinished"/>
+        <translation>Buat partisi baru %1 sebagai %2 (mountpoint), jenis %3</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="270"/>
@@ -557,22 +557,22 @@
     <message>
         <location filename="../src/partman/operation.cpp" line="279"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation type="unfinished"/>
+        <translation>Gunakan partisi %1 sebagai %2 (mountpoint), jenis %3</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="287"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
-        <translation type="unfinished"/>
+        <translation>Gunakan partisi %1 sebagai %2 (mountpoint)</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="293"/>
         <source>Format %1 and create %2 new partition table</source>
-        <translation type="unfinished"/>
+        <translation>Format %1 dan buat %2 tabel partisi baru</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="299"/>
         <source>Adjust the size of %1 partition</source>
-        <translation type="unfinished"/>
+        <translation>Sesuaikan ukuran dari %1 partisi</translation>
     </message>
     <message>
         <location filename="../src/ui/delegates/partition_util.cpp" line="159"/>
@@ -598,7 +598,7 @@
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
         <source>It needs more than %1GB disk space to install deepin, for better performance, %2GB and more space is recommended</source>
-        <translation type="unfinished"/>
+        <translation>Membutuhkan ruang disk lebih dari %1GB untuk install deepin, untuk kinerja yang lebih baik, %2GB dan ruang lebih sangat dianjurkan</translation>
     </message>
 </context>
 <context>
@@ -613,7 +613,7 @@
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="44"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="67"/>
         <source>If you do not understand the detailed settings, please select default settings</source>
-        <translation type="unfinished"/>
+        <translation>Jika anda tidak mengerti pengaturan lebih lanjut, mohon pilih pengaturan baku</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="46"/>
@@ -636,7 +636,7 @@
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="70"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation type="unfinished"/>
+        <translation>Tidak dapat buat partisi baru, mohon pilih satu dari partisi yang sudah ada!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="77"/>
@@ -657,7 +657,7 @@
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="391"/>
         <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
-        <translation type="unfinished"/>
+        <translation>Windows tidak dapat boot jika deepin di install di disk Windows, mohon konfirmasi untuk lanjut</translation>
     </message>
 </context>
 <context>
@@ -723,7 +723,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="82"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="183"/>
         <source>Use that password to edit boot menu</source>
-        <translation type="unfinished"/>
+        <translation>Gunakan kata sandi untuk sunting menu edit</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
@@ -738,12 +738,12 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="235"/>
         <source>Username must contain English letters (lowercase), numbers or special symbols (_-)</source>
-        <translation type="unfinished"/>
+        <translation>Nama pengguna harus mengandung huruf Inggris (huruf kecil), angka-angka atau simbol-simbol istimewa (_-)</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="241"/>
         <source>Please input username longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Mohon masukan nama pengguna lebih dari %1 karakter dan lebih pendek dari %2 karakter </translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="263"/>
@@ -758,28 +758,28 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="271"/>
         <source>Computer name already exists, please input another one</source>
-        <translation type="unfinished"/>
+        <translation>Nama komputer sudah ada, mohon masukan yang lainnya</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="276"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Mohon masukan nama komputer lebih dari %1 karakter dan lebih pendek dari %2 karakter </translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
         <source>The password should be different from the username</source>
-        <translation type="unfinished"/>
+        <translation>Kata sandi harus berbeda dari nama pengguna</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="324"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
-        <translation type="unfinished"/>
+        <translation>Mohon masukan nama kata sandi lebih dari %1 karakter dan lebih pendek dari %2 karakter </translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation type="unfinished"/>
+        <translation>Kata sandi harus mengandung huruf Inggris (hal sensitif), angka-angka atau simbol-simbol istimewa (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="348"/>
@@ -835,13 +835,13 @@
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="58"/>
         <source>Friendly Reminder</source>
-        <translation type="unfinished"/>
+        <translation>Pengingat ramah</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="60"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation type="unfinished"/>
+        <translation>Sistem mendeteksi bahwa anda menggunakan sebuah mesin virtual, yang akan berpengaruh terhadap kinerja dan pengalaman operasi, untuk kinerja yang halus, dianjurkan untuk install deepin di lingkungan mesin-nyata</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="46"/>
@@ -855,7 +855,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="145"/>
         <source>Please input password</source>
-        <translation type="unfinished"/>
+        <translation>Mohon masukan kata sandi</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="151"/>
@@ -865,7 +865,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
         <source>Full Disk Encryption</source>
-        <translation type="unfinished"/>
+        <translation>Enkripsi Disk Penuh</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
@@ -875,7 +875,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="179"/>
         <source>Encrypt This Disk</source>
-        <translation type="unfinished"/>
+        <translation>Enkripsi Disk Ini</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="180"/>
@@ -885,17 +885,17 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="181"/>
         <source>Repeat Password</source>
-        <translation type="unfinished"/>
+        <translation>Ulangi Kata Sandi</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
         <source>Previous</source>
-        <translation type="unfinished"/>
+        <translation>Sebelum</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
         <source>Start Installation</source>
-        <translation type="unfinished"/>
+        <translation>Mulai installasi</translation>
     </message>
 </context>
 <context>
@@ -918,13 +918,13 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="106"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation type="unfinished"/>
+        <translation>Tidak dapat install langsung disebabkan oleh loader muat ulang motherboard EFI dan disk terdeteksi MBR, mohon pilih salah satu solusi dibawah ini untuk lanjut.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="118"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
-        <translation type="unfinished"/>
+        <translation>Muat ulang, masuk BIOS, dan nonaktifkan UEFI</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="62"/>
@@ -936,13 +936,13 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
         <source>Please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Mohon membuat semua data cadangan anda untuk menghindari kehilangan data </translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="128"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation type="unfinished"/>
+        <translation>Mohon untuk memeriksa dua kali untuk memastikan data telah dicadangkan, dan muat ulang untuk masuk ke antar muka ini</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
@@ -956,7 +956,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation type="unfinished"/>
+        <translation>Mohon yakinkan semua data telah dicadangkan, lalu lanjut</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
@@ -968,7 +968,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="75"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
         <source>Reboot</source>
-        <translation type="unfinished"/>
+        <translation>Muat ulang</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="77"/>
@@ -994,12 +994,12 @@
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="131"/>
         <source>End User License Agreement</source>
-        <translation type="unfinished"/>
+        <translation>Perjanjian Lisensi Pengguna Akhir</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="145"/>
         <source>Accept</source>
-        <translation type="unfinished"/>
+        <translation>Terima</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="146"/>
@@ -1009,12 +1009,12 @@
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>View in Chinese</source>
-        <translation type="unfinished"/>
+        <translation>Lihat dalam bahasa China</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="159"/>
         <source>View in English</source>
-        <translation type="unfinished"/>
+        <translation>Lihat dalam bahasa Inggris</translation>
     </message>
 </context>
 </TS>

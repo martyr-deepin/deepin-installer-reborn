@@ -215,7 +215,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="51"/>
         <source>Please select a disk to start installation</source>
-        <translation type="unfinished"/>
+        <translation>Prosimy wybrać dysk, aby rozpocząć instalację</translation>
     </message>
 </context>
 <context>
@@ -723,7 +723,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="82"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="183"/>
         <source>Use that password to edit boot menu</source>
-        <translation type="unfinished"/>
+        <translation>Użyj tego hasła, aby edytować menu startowe</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
@@ -768,7 +768,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
         <source>The password should be different from the username</source>
-        <translation type="unfinished"/>
+        <translation>Hasło musi być inne niż nazwa użytkownika</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>
@@ -1009,12 +1009,12 @@
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>View in Chinese</source>
-        <translation type="unfinished"/>
+        <translation>Zobacz w języku chińskim</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="159"/>
         <source>View in English</source>
-        <translation type="unfinished"/>
+        <translation>Zobacz w języku angielskim</translation>
     </message>
 </context>
 </TS>
