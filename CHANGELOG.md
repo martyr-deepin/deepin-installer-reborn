@@ -1,3 +1,27 @@
+<a name=""></a>
+##  2.6.0 (2019-01-10)
+
+
+#### Features
+
+*   update sw and loongson full disk config file ([e14bbac1](https://github.com/linuxdeepin/deepin-install-reborn/commit/e14bbac117d29811e4f2a51e36a35b814e1b85ac))
+* **FullDisk:**  full disk encrypt support uppercase prompts ([dd687fb1](https://github.com/linuxdeepin/deepin-install-reborn/commit/dd687fb10cefe90927694cbeb478d5444175c619))
+
+#### Bug Fixes
+
+*   can't display all ([763acf26](https://github.com/linuxdeepin/deepin-install-reborn/commit/763acf2601654204c7b3f206316b4e2a007bbfbc))
+*   windows may not be detected ([d449f62b](https://github.com/linuxdeepin/deepin-install-reborn/commit/d449f62bdd14040b2a4e7dbaa5a5917dee4d0a5b))
+*   paritioning failed on simple mode with UEFI ([baf065cf](https://github.com/linuxdeepin/deepin-install-reborn/commit/baf065cff1927e4750b82b4c4d8789909bcf1597))
+*   time standard may wrongly set to local time ([75f5ee33](https://github.com/linuxdeepin/deepin-install-reborn/commit/75f5ee33517e011f136bf23c5de315f525320c18))
+* **Advanced:**  not check new table operation ([dec1bab3](https://github.com/linuxdeepin/deepin-install-reborn/commit/dec1bab36efe864c9f3a8877c528d6644d55b2b1))
+* **Edit:**  null pointer exception ([e250d29b](https://github.com/linuxdeepin/deepin-install-reborn/commit/e250d29b178a840da2707789e0990af9903ed2e5))
+* **FullDisk:**
+  *  disable QCheckBox focus ([5e5858d0](https://github.com/linuxdeepin/deepin-install-reborn/commit/5e5858d0dfa6c3a0482c46215157aadb4db0d3eb))
+  *  not set disk label for crypt mode ([7af20973](https://github.com/linuxdeepin/deepin-install-reborn/commit/7af209734e05632400e3472c5e619e6f17cc37f0))
+  *  policy not updated ([ab298756](https://github.com/linuxdeepin/deepin-install-reborn/commit/ab2987567d0448fe17deea46b344ca3f8b159e37))
+
+
+
 <a name="2.5.10"></a>
 ### 2.5.10 (2019-01-04)
 
