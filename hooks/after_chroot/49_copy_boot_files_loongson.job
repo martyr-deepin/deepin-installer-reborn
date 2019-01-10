@@ -37,10 +37,11 @@ echo "ctx ---------  DI_LOOP_ROOT_FILE=$DI_LOOP_ROOT_FILE"
 # Default, at the same moment, both of boot.cfg and grub.cfg exist.
 if [ -f $TARGET/boot.cfg ];then
 	boot_path=$TARGET
-elif [ -f $TARGET/boot/boot.cfg ];then
+elif [ -f $TARGET/boot/boot.cfg ];then 
 	boot_path=$TARGET/boot
 fi
 
+#sda1已格式化
 if [ ! $boot_path ];then
 	# Copy boot folder and follow symbolic link.
 	if [ -d /lib/live/mount/medium/live/boot ]; then
@@ -67,6 +68,16 @@ if [ ! $boot_path ];then
     if grep -q boot /target/etc/fstab ;then
         sed -i "s|wd0/boot|wd0|g" /target/boot/boot.cfg
     fi
+
+    if [ -d $TARGET/EFI ];then
+        cd $TARGET/EFI/BOOT 
+        ln -sf ../../grub.cfg grub.cfg 
+        ln -sf ../../$kernel_name $kernel_name 
+        ln -sf ../../$initrd_name $initrd_name
+        ln -sf ../../deepin deepin
+        cd -
+    fi
+#存在多个系统
 else
     uuid=$(echo $rootuuid |cut -c 6-)
     echo "ctx uuid=$uuid"
@@ -78,6 +89,7 @@ else
     if [ -d /lib/live/mount/medium/live/boot ]; then
         for file in $(ls /lib/live/mount/medium/live/boot |grep $(uname -r));do
     	    cp -rvP /lib/live/mount/medium/live/boot/$file $boot_path/$file-$discid
+            cp -rvf /lib/live/mount/medium/live/boot/deepin/$file $boot_path/deepin/$file-$discid
         done
 
     	cd $boot_path && ln -sf . boot && cd -
@@ -111,9 +123,18 @@ linux \${prefix}/deepin/$kernel_name console=tty loglevel=0  splash toram locale
 initrd \${prefix}/deepin/$initrd_name
 boot
 }" >>  $boot_path/grub.cfg
-
+    
     if [ "$boot_path" = "$TARGET" ];then
         sed -i "s|wd0/boot|wd0|g" $boot_path/boot.cfg
+    fi
+
+    if [ -d $boot_path/EFI ];then
+        cd $boot_path/EFI/BOOT
+        ln -sf ../../grub.cfg grub.cfg 
+        ln -sf ../../$kernel_name $kernel_name 
+        ln -sf ../../$initrd_name $initrd_name
+        ln -sf ../../deepin deepin
+        cd -
     fi
 fi
 
