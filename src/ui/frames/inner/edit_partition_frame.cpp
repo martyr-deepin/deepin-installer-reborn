@@ -117,7 +117,7 @@ void EditPartitionFrame::forceFormat(bool force) {
 
 void EditPartitionFrame::updateFormatBoxState() {
   const FsType fs_type = fs_model_->getFs(fs_box_->currentIndex());
-  const Partition::Ptr real_partition(new Partition(*(delegate_->getRealPartition(partition_))));
+  const Partition::Ptr real_partition(delegate_->getRealPartition(partition_));
   const int mp_index = mount_point_box_->currentIndex();
   QString mount_point;
 
