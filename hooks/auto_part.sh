@@ -131,6 +131,27 @@ umount_devices(){
   [ -d /target ] && umount -R /target
 }
 
+set_acl_for_dde_data(){
+  # _dde_data is special that intend to be used as pure data storage,
+  # All users in group sudo have all permissions.
+  local RULES="g:sudo:rwx"
+  local MP="/dde_data"
+
+  PARTITION="$1"
+
+  mkdir "$MP"
+  mount "$PARTITION" "$MP"
+
+  # Set the rules,
+  setfacl -m "$RULES" "$MP"
+  # And also set the rules as default rules so that the subdirectories created
+  # will inherit the rules.
+  setfacl -d -m "$RULES" "$MP"
+
+  umount -l "$MP"
+  rm -fr "$MP"
+}
+
 # Create partition.
 create_part(){
   local part="$1"
@@ -266,6 +287,8 @@ create_part(){
       format_part "$part_path" "$part_fs" "$label" ||\
         error "Failed to create $part_fs filesystem on $part_path!"
       [ -n "$part_mp" ] && MP_LIST="${MP_LIST+$MP_LIST;}$part_path=$part_mp"
+      [ "$part_fs" = "ext4" ] && [ "$label" = "_dde_data" ] &&\
+        set_acl_for_dde_data "$part_path"
       ;;
   esac
 
