@@ -1,3 +1,20 @@
+<a name="2.6.1"></a>
+### 2.6.1 (2019-01-11)
+
+
+#### Features
+
+*   use ext4&acl to replace ntfs as data storage ([19af31af](https://github.com/linuxdeepin/deepin-install-reborn/commit/19af31af92e2777af610381a07a3a01e7b6a6b51))
+*   update hook for loongson ([7bccd5e4](https://github.com/linuxdeepin/deepin-install-reborn/commit/7bccd5e468b0d5284daece2970882d5608e1c7b3))
+* **Simple:**  give priority to the current device efi partition ([2c32b936](https://github.com/linuxdeepin/deepin-install-reborn/commit/2c32b9366000678c0cb5390d74a16eba0f6e78b7))
+
+#### Bug Fixes
+
+*   scale ratio always 4x on vmware ([6074cb46](https://github.com/linuxdeepin/deepin-install-reborn/commit/6074cb461faaf7a7af36980f50b4b47da0d47784))
+* **Edit:**  crash on editing parition details ([cfb485c4](https://github.com/linuxdeepin/deepin-install-reborn/commit/cfb485c4808f8c5f6bfb2ac9a041fb19ea7bfddd))
+
+
+
 <a name=""></a>
 ##  2.6.0 (2019-01-10)
 
