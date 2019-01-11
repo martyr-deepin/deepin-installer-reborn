@@ -11,8 +11,8 @@ void AutoScreenScale()
     Display *display = XOpenDisplay(NULL);
 
     XRRScreenResources *resources = XRRGetScreenResources(display, DefaultRootWindow(display));
-    // NOTE(lxz): Screens that require 4x scale may not be encountered
-    double scaleRatio = 4.0;
+    double scaleRatio = 1.0;
+    std::list<double> scaleRatioList;
 
     for (int i = 0; i < resources->noutput; i++)
     {
@@ -30,20 +30,24 @@ void AutoScreenScale()
         // if one of the resolutions is very large,
         // it will cause the copy mode to display abnormally.
         if (scaleRatio > 1 + 2.0 / 3.0) {
-            scaleRatio = std::min(2.0, scaleRatio);
+            scaleRatioList.push_back(2.0);
         }
         else if (scaleRatio > 1 + 1.0 / 3.0) {
-            scaleRatio = std::min(1.5, scaleRatio);
+            scaleRatioList.push_back(1.5);
         }
         else {
-            scaleRatio = 1.0;
+            scaleRatioList.push_back(1.0);
         }
     }
 
     XRRFreeScreenResources(resources);
 
-    qDebug() << "scale factor: " << QString::number(scaleRatio);
+    if (!scaleRatioList.empty()) {
+        scaleRatioList.sort();
+        scaleRatio = *scaleRatioList.begin();
+    }
 
-    setenv("QT_SCALE_FACTOR", const_cast<char *>(QString::number(scaleRatio).toStdString().c_str()), 1);
+    qDebug() << "scale factor: " << QString::number(scaleRatio);
+    qputenv("QT_SCALE_FACTOR", QString::number(scaleRatio).toUtf8());
 }
 } // namespace Utils
