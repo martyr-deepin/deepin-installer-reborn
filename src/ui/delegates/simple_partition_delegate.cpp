@@ -712,6 +712,7 @@ void SimplePartitionDelegate::onManualPartDone(const DeviceList& devices) {
   QStringList mount_points;
   bool found_swap = false;
   QString esp_path;
+  Device::Ptr root_device;
 
   // Check use-specified partitions with mount point.
   for (const Device::Ptr device : devices) {
@@ -724,6 +725,7 @@ void SimplePartitionDelegate::onManualPartDone(const DeviceList& devices) {
         if (partition->mount_point == kMountPointRoot) {
           root_disk = partition->device_path;
           root_path = partition->path;
+          root_device = device;
         }
       }
 
@@ -740,6 +742,14 @@ void SimplePartitionDelegate::onManualPartDone(const DeviceList& devices) {
         esp_path = partition->path;
       }
     }
+  }
+
+  // Find esp partition on this device
+  for (Partition::Ptr partition : root_device->partitions) {
+      if (partition->fs == FsType::EFI && esp_path != partition->path) {
+          esp_path = partition->path;
+          break;
+      }
   }
 
   if (!IsMBRPreferred(real_devices_)) {
