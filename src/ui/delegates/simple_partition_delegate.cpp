@@ -153,17 +153,18 @@ void SimplePartitionDelegate::selectPartition(const Partition::Ptr partition) {
 bool SimplePartitionDelegate::setBootFlag() {
   bool found_boot = false;
 
-  // First check new EFI partition->
+  // First check new EFI partition
   for (Operation& operation : operations_) {
-    if (operation.type == OperationType::NewPartTable) continue; // 创建分区表不需要检查
-    if (operation.new_partition->fs == FsType::EFI) {
-      operation.new_partition->flags.append(PartitionFlag::Boot);
-      operation.new_partition->flags.append(PartitionFlag::ESP);
-      found_boot = true;
-    }
+      if (operation.type == OperationType::Create || operation.type == OperationType::MountPoint) {
+          if (operation.new_partition->fs == FsType::EFI) {
+              operation.new_partition->flags.append(PartitionFlag::Boot);
+              operation.new_partition->flags.append(PartitionFlag::ESP);
+              found_boot = true;
+          }
+      }
   }
 
-  // Check existing EFI partition->
+  // Check existing EFI partition
   for (const Device::Ptr device : virtual_devices_) {
     for (const Partition::Ptr partition : device->partitions) {
       if (partition->fs == FsType::EFI) {
@@ -172,26 +173,28 @@ bool SimplePartitionDelegate::setBootFlag() {
     }
   }
 
-  // Check /boot partition->
+  // Check /boot partition
   if (!found_boot) {
-    for (Operation& operation : operations_) {
-      if (operation.type == OperationType::NewPartTable) continue; // skip for create table
-      if (operation.new_partition->mount_point == kMountPointBoot) {
-        operation.new_partition->flags.append(PartitionFlag::Boot);
-        found_boot = true;
+      for (Operation& operation : operations_) {
+          if (operation.type == OperationType::Create || operation.type == OperationType::MountPoint) {
+              if (operation.new_partition->mount_point == kMountPointBoot) {
+                  operation.new_partition->flags.append(PartitionFlag::Boot);
+                  found_boot = true;
+              }
+          }
       }
-    }
   }
 
-  // At last, check / partition->
+  // At last, check / partition
   if (!found_boot) {
-    for (Operation& operation : operations_) {
-      if (operation.type == OperationType::NewPartTable) continue; // skip for create table
-      if (operation.new_partition->mount_point == kMountPointRoot) {
-        operation.new_partition->flags.append(PartitionFlag::Boot);
-        found_boot = true;
+      for (Operation& operation : operations_) {
+          if (operation.type == OperationType::Create || operation.type == OperationType::MountPoint) {
+              if (operation.new_partition->mount_point == kMountPointRoot) {
+                  operation.new_partition->flags.append(PartitionFlag::Boot);
+                  found_boot = true;
+              }
+          }
       }
-    }
   }
   return found_boot;
 }
