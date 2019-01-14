@@ -1,3 +1,13 @@
+<a name="2.6.2"></a>
+### 2.6.2 (2019-01-14)
+
+
+#### Bug Fixes
+
+*   missing format operation check ([d44a5697](https://github.com/linuxdeepin/deepin-install-reborn/commit/d44a5697a27266a0eaac864bdb50e76132994f4c))
+
+
+
 <a name="2.6.1"></a>
 ### 2.6.1 (2019-01-11)
 
