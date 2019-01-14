@@ -223,7 +223,7 @@ bool AdvancedPartitionDelegate::isPartitionTableMatch(
 bool AdvancedPartitionDelegate::setBootFlag() {
   bool found_boot = false;
 
-  // First check new EFI partition->
+  // First check new EFI partition
   for (Operation& operation : operations_) {
       if (operation.type == OperationType::Create || operation.type == OperationType::MountPoint) {
           if (operation.new_partition->fs == FsType::EFI) {
@@ -234,7 +234,7 @@ bool AdvancedPartitionDelegate::setBootFlag() {
       }
   }
 
-  // Check existing EFI partition->
+  // Check existing EFI partition
   for (const Device::Ptr device : virtual_devices_) {
     for (const Partition::Ptr partition : device->partitions) {
       if (partition->fs == FsType::EFI) {
@@ -243,10 +243,12 @@ bool AdvancedPartitionDelegate::setBootFlag() {
     }
   }
 
-  // Check /boot partition->
+  // Check /boot partition
   if (!found_boot) {
       for (Operation& operation : operations_) {
-          if (operation.type == OperationType::Create || operation.type == OperationType::MountPoint) {
+          if (operation.type == OperationType::Create ||
+              operation.type == OperationType::MountPoint ||
+              operation.type == OperationType::Format) {
               if (operation.new_partition->mount_point == kMountPointBoot) {
                   operation.new_partition->flags.append(PartitionFlag::Boot);
                   found_boot = true;
@@ -255,10 +257,12 @@ bool AdvancedPartitionDelegate::setBootFlag() {
       }
   }
 
-  // At last, check / partition->
+  // At last, check / partition
   if (!found_boot) {
       for (Operation& operation : operations_) {
-          if (operation.type == OperationType::Create || operation.type == OperationType::MountPoint) {
+          if (operation.type == OperationType::Create ||
+              operation.type == OperationType::MountPoint ||
+              operation.type == OperationType::Format) {
               if (operation.new_partition->mount_point == kMountPointRoot) {
                   operation.new_partition->flags.append(PartitionFlag::Boot);
                   found_boot = true;

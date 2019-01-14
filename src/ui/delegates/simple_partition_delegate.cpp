@@ -186,9 +186,12 @@ bool SimplePartitionDelegate::setBootFlag() {
   }
 
   // At last, check / partition
+  // Maybe origin partition is ext4, operation.type = Format
   if (!found_boot) {
       for (Operation& operation : operations_) {
-          if (operation.type == OperationType::Create || operation.type == OperationType::MountPoint) {
+          if (operation.type == OperationType::Create ||
+              operation.type == OperationType::MountPoint ||
+              operation.type == OperationType::Format) {
               if (operation.new_partition->mount_point == kMountPointRoot) {
                   operation.new_partition->flags.append(PartitionFlag::Boot);
                   found_boot = true;
