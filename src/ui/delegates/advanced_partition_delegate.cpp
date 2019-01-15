@@ -690,6 +690,7 @@ void AdvancedPartitionDelegate::deletePartition(const Partition::Ptr partition) 
   //  * Update partition number if needed.
 
   Partition::Ptr new_partition(new Partition(*partition));
+  new_partition->partition_number = -1;
   new_partition->device_path  = partition->device_path;
   new_partition->sector_size  = partition->sector_size;
   new_partition->start_sector = partition->start_sector;
