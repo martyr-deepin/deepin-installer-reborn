@@ -1,3 +1,14 @@
+<a name="2.6.3"></a>
+### 2.6.3 (2019-01-25)
+
+
+#### Bug Fixes
+
+*   failure when losing symbols ([6f1655d3](https://github.com/linuxdeepin/deepin-install-reborn/commit/6f1655d35b323ce3bc61ccaa0f280b6a6e300397))
+* **Advance:**  partition starting number is not 1 ([431d4682](https://github.com/linuxdeepin/deepin-install-reborn/commit/431d4682a0dcbe6de2fe30fc3484aee974f7438e))
+
+
+
 <a name="2.6.2"></a>
 ### 2.6.2 (2019-01-14)
 
