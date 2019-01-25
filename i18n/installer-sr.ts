@@ -151,7 +151,7 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="135"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="198"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Молимо уверите се да је направљена резерва важних података, затим одаберите диск за инсталацију</translation>
+        <translation>Молимо уверите се да је направљена резерва важних података, затим изаберите диск за инсталацију</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="137"/>
@@ -215,7 +215,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="51"/>
         <source>Please select a disk to start installation</source>
-        <translation>Молимо одаберите диск да започнете инсталацију</translation>
+        <translation>Молимо изаберите диск да започнете инсталацију</translation>
     </message>
 </context>
 <context>
@@ -392,13 +392,13 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="84"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="227"/>
         <source>Select Installation Location</source>
-        <translation>Одабери локацију инсталације</translation>
+        <translation>Изабери локацију инсталације</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="229"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Молимо уверите се да је направљена резерва важних података, затим одаберите диск за инсталацију</translation>
+        <translation>Молимо уверите се да је направљена резерва важних података, затим изаберите диск за инсталацију</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
@@ -607,13 +607,13 @@
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="65"/>
         <source>Select location for boot loader</source>
-        <translation>Одабери локацију за покретач</translation>
+        <translation>Изабери локацију за покретач</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="44"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="67"/>
         <source>If you do not understand the detailed settings, please select default settings</source>
-        <translation>Ако не разумете детаљна подешавања, одаберите подразумевана подешавања</translation>
+        <translation>Ако не разумете детаљна подешавања, изаберите подразумевана подешавања</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="46"/>
@@ -636,12 +636,12 @@
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="70"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation>Не можете направити нову партицију, молимо одаберите једну од постојећих партиција!</translation>
+        <translation>Не можете направити нову партицију, молимо изаберите једну од постојећих партиција!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="77"/>
         <source>Please select one of the partitions to install!</source>
-        <translation>Молимо одаберите једну од партиција за инсталацију!</translation>
+        <translation>Молимо изаберите једну од партиција за инсталацију!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="84"/>
@@ -672,7 +672,7 @@
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="93"/>
         <source>Select an avatar for your account</source>
-        <translation>Одабери слику за свој налог</translation>
+        <translation>Изабери слику за свој налог</translation>
     </message>
 </context>
 <context>
@@ -793,7 +793,7 @@
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="90"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="109"/>
         <source>Select keyboard layout</source>
-        <translation>Одабери распоред тастатуре</translation>
+        <translation>Изабери распоред тастатуре</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="91"/>
@@ -814,7 +814,7 @@
         <location filename="../src/ui/frames/timezone_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="167"/>
         <source>Select Time Zone</source>
-        <translation>Одабери временску зону</translation>
+        <translation>Изабери временску зону</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/timezone_frame.cpp" line="130"/>
@@ -870,7 +870,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Молимо уверите се да је направљена резерва важних података, затим одаберите диск за инсталацију</translation>
+        <translation>Молимо уверите се да је направљена резерва важних података, затим изаберите диск за инсталацију</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="179"/>

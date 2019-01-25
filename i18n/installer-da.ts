@@ -210,7 +210,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="50"/>
         <source>Encrypt Full Disk</source>
-        <translation>Kryptér fuld disk</translation>
+        <translation>Kryptér hele disken</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="51"/>
@@ -266,7 +266,7 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="43"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="63"/>
         <source>Reboot to enjoy the new experience with deepin, hope you like it!</source>
-        <translation>Genstart for at nyde den nye oplevelse med deepin, håber du kan lide det!</translation>
+        <translation>Genstart for at nyde den nye oplevelse med deepin - håber du kan lide det!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="46"/>
@@ -365,7 +365,7 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="76"/>
         <source>Full Disk Format Warning</source>
-        <translation>Advarsel om formating af fuld disk</translation>
+        <translation>Advarsel om formating af hele disken</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
@@ -416,7 +416,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="245"/>
         <source>Full Disk</source>
-        <translation>Fuld disk</translation>
+        <translation>Hele disken</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
@@ -577,7 +577,7 @@
     <message>
         <location filename="../src/ui/delegates/partition_util.cpp" line="159"/>
         <source>Do not use this partition</source>
-        <translation>Brug ikke denne partition</translation>
+        <translation>Brug ikke partitionen</translation>
     </message>
     <message>
         <location filename="../src/ui/delegates/partition_util.cpp" line="172"/>
@@ -728,7 +728,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>This username already exists</source>
-        <translation>Dette brugernavn findes allerede</translation>
+        <translation>Brugernavnet findes allerede</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
@@ -865,7 +865,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
         <source>Full Disk Encryption</source>
-        <translation>Kryptering af fuld disk</translation>
+        <translation>Kryptering af hele disken</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
@@ -942,7 +942,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="128"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation>Dobbelttjek venligst at der blev oprettet en sikkerhedskopi af alle dataene, og genstart for at komme ind i denne brugerflade</translation>
+        <translation>Dobbelttjek venligst at der blev oprettet en sikkerhedskopi af alle dataene, og genstart for at komme ind i brugerfladen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>

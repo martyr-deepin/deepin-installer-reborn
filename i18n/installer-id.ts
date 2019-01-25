@@ -980,7 +980,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="114"/>
         <source>Disable UEFI</source>
-        <translation>Matikan UEFI</translation>
+        <translation>Nonaktifkan UEFI</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>

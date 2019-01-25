@@ -46,12 +46,12 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="439"/>
         <source>%1 error found, continue to install after fixed</source>
-        <translation>发现％1错误，修复后即可继续安装</translation>
+        <translation>发现%1错误，修复后即可继续安装</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="443"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation>发现％1错误，修复后即可继续安装</translation>
+        <translation>发现%1错误，修复后即可继续安装</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="490"/>
