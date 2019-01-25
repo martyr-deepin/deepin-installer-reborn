@@ -44,13 +44,11 @@ execute_process(COMMAND uname -m
                 OUTPUT_VARIABLE INSTALLER_BUILD_ARCH)
 message("build arch: ${INSTALLER_BUILD_ARCH}")
 
-if (${INSTALLER_BUILD_ARCH} MATCHES "x86")
-  set(IS_PROFESSIONAL FALSE)
-  if (EXISTS "/etc/deepin-version")
-    file(STRINGS "/etc/deepin-version" IS_PROFESSIONAL REGEX "Type *= *Professional")
-    if(IS_PROFESSIONAL)
-        add_definitions("-DPROFESSIONAL")
-    endif()
+set(IS_PROFESSIONAL FALSE)
+if (EXISTS "/etc/deepin-version")
+  file(STRINGS "/etc/deepin-version" IS_PROFESSIONAL REGEX "Type *= *Professional")
+  if(IS_PROFESSIONAL)
+      add_definitions("-DPROFESSIONAL")
   endif()
 endif()
 
