@@ -30,6 +30,7 @@
 #include <QFileInfoList>
 #include <QHash>
 #include <QSettings>
+#include <random>
 
 #include "base/consts.h"
 #include "service/settings_name.h"
@@ -204,13 +205,16 @@ QString GetDefaultAvatar() {
   }
 
   // Pick a random avatar.
-  const int num = static_cast<int>(time(NULL));
   const QStringList avatars = GetAvatars();
   if (avatars.isEmpty()) {
     return "";
   }
-  const int index = num % avatars.length();
-  return avatars.at(index);
+
+  std::random_device r;
+  std::default_random_engine e1(r());
+  std::uniform_int_distribution<int> uniform_dist(0, avatars.size());
+
+  return avatars.at(uniform_dist(e1));
 }
 
 QString GetOemHooksDir() {
