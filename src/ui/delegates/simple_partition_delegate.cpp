@@ -208,6 +208,10 @@ SimpleValidateState SimplePartitionDelegate::validate() const {
   // * Check / partition is set.
   // * Check / partition is large enough.
 
+  if (selected_partition_.isNull()) {
+      return SimpleValidateState::RootMissing;
+  }
+
   const Partition::Ptr root_partition = selected_partition_;
 
   // Check partition table is empty or not.
