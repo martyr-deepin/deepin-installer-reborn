@@ -72,6 +72,13 @@ format_part(){
       mkfs.ntfs --fast -L "$part_label" "$part_path";;
     linux-swap)
       mkswap "$part_path";;
+    ext4)
+      if is_loongson || is_sw; then
+        mkfs.ext4 -O ^64bit -F -L "$part_label" "$part_path"
+      else
+        mkfs.ext4 -L "$part_label" "$part_path"
+      fi
+    ;;
     *)
       mkfs -t "$part_fs" -L "$part_label" "$part_path";;
   esac || error "Failed to create $part_fs filesystem on $part_path!"
