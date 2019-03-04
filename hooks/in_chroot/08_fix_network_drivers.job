@@ -82,6 +82,17 @@ fix_lenovo_y700() {
   fi
 }
 
+fix_lenovo_r720() {
+  if is_productname_exists "80WW"; then
+    if is_pci_exists "168c:0042"; then
+      msg "fix lenovo r720"
+
+      # Add ideapad to blacklist of kernel module.
+      echo "blacklist ideapad_laptop" | tee -a /etc/modprobe.d/ideapad.conf
+    fi
+  fi
+}
+
 # Fix wireless of X450JB
 fix_asus_x450jb() {
   if is_productname_exists "X450JB"; then
@@ -242,6 +253,7 @@ fix_productname_x550vc || true
 fix_productname_n551zu || true
 fix_xiaomi_notebook_133 || true
 fix_lenovo_y700 || true
+fix_lenovo_r720 || true
 fix_asus_x450jb || true
 fix_asus_x450jn || true
 fix_asus_x450jf || true
