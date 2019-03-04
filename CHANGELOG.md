@@ -1,3 +1,18 @@
+<a name="2.6.5"></a>
+### 2.6.5 (2019-03-04)
+
+
+#### Features
+
+*   exclude no need files for professional ([21488371](https://github.com/linuxdeepin/deepin-install-reborn/commit/2148837116f90251eb3a26410e396c4f4beaff0a))
+
+#### Bug Fixes
+
+* **FullDisk:**  cannot start loongson and sw when use full disk install ([fb0ee0d1](https://github.com/linuxdeepin/deepin-install-reborn/commit/fb0ee0d10831c20ce08f184a89ecb112ecf9366d))
+* **Partition:**  missing check root partition ([a0cf1aab](https://github.com/linuxdeepin/deepin-install-reborn/commit/a0cf1aab3a100572a526d01f541a5cd8d7b81c4f))
+
+
+
 <a name="2.6.4"></a>
 ### 2.6.4 (2019-01-30)
 
