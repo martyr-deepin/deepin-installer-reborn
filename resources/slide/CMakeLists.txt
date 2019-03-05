@@ -30,6 +30,7 @@ elseif(${INSTALLER_BUILD_ARCH} MATCHES "sw")
       DESTINATION  ${CMAKE_INSTALL_PREFIX}/share/deepin-installer/resources/slide
       PATTERN "default/02-deepin-app-store.png" EXCLUDE
       PATTERN "default/10-deepin-remote-assistance.png" EXCLUDE
+      PATTERN "default/12-deepin-dock.png" EXCLUDE
       PATTERN "default/17-skype.png" EXCLUDE
       PATTERN "default/18-spotify.png" EXCLUDE
       PATTERN "zh_CN/02-deepin-app-store.png" EXCLUDE
