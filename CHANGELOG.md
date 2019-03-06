@@ -1,3 +1,13 @@
+<a name="2.6.6"></a>
+### 2.6.6 (2019-03-06)
+
+
+#### Bug Fixes
+
+*   the actual partition size is incorrect ([cacbc46f](https://github.com/linuxdeepin/deepin-install-reborn/commit/cacbc46fe9ef699ebe6f526302ecf5bb36829e46))
+
+
+
 <a name="2.6.5"></a>
 ### 2.6.5 (2019-03-04)
 
