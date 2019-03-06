@@ -56,7 +56,7 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="490"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
-        <translation>A partição com o diretório /boot só pode ser a %1</translation>
+        <translation>O tipo de sistema de ficheiros da partição do diretório /boot só pode ser %1</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="494"/>

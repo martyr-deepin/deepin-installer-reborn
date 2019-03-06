@@ -18,7 +18,7 @@
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
         <source>Change boot loader</source>
-        <translation>Modifier le chargeur d’amorçage </translation>
+        <translation>Emplacement du chargeur d’amorçage </translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
@@ -51,7 +51,7 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="443"/>
         <source>%1 errors found, continue to install after fixed</source>
-        <translation>%1 erreurs trouvées, l&apos;installation continuera aprèsle réglage de celles-ci</translation>
+        <translation>%1 erreurs trouvées, l&apos;installation continuera après le réglage de celles-ci</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="490"/>
@@ -1009,12 +1009,12 @@
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
         <source>View in Chinese</source>
-        <translation>Vue en chinois</translation>
+        <translation>Version chinoise</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/user_agreement_frame.cpp" line="159"/>
         <source>View in English</source>
-        <translation>Vue en anglais</translation>
+        <translation>Version anglaise</translation>
     </message>
 </context>
 </TS>

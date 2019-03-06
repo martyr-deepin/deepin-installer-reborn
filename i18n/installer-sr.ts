@@ -109,7 +109,7 @@
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="60"/>
         <source>Relevant operations you made in the installation process will not take effect, abort or continue installation?</source>
-        <translation>Важне поставке које сте направили у процесу инсталације неће ступити на снагу, прекините или наставите инсталацију?</translation>
+        <translation>Важне поставке које сте направили у процесу инсталације неће ступити на снагу. Прекините или наставите инсталацију?</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="43"/>
@@ -230,7 +230,7 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="97"/>
         <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>Жао нам је због непријатности, можете сликати или скенирати QR код да пошаљете белешке грешка како бисмо могли боље решити проблем.</translation>
+        <translation>Жао нам је због непријатности. Можете сликати или скенирати QR код да пошаљете записник грешка како бисмо могли боље решити проблем.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="79"/>
@@ -371,7 +371,7 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="94"/>
         <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Наставак инсталације ће форматирати цео диск, направите резерву свих ваших података како бисте избегли губитак истих</translation>
+        <translation>Наставак инсталације ће форматирати цео диск. Направите резерву свих ваших података како бисте избегли губитак истих.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
@@ -512,7 +512,7 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="67"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="94"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
-        <translation>Следеће операције ће бити извршене, молимо Вас да их потврдите пре наставка како би избегли губитак података</translation>
+        <translation>Следеће операције ће бити извршене, молимо Вас да их потврдите пре наставка како бисте избегли губитак података</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
@@ -779,7 +779,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
-        <translation>Лозинка може садржати само слова енглеског алфабета (осетљива на велика/мала слова), бројеве или специјалне симболе (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
+        <translation>Лозинка може садржати само слова енглеског алфабета (осетљива на величину слова), бројеве или специјалне симболе (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="348"/>
@@ -841,7 +841,7 @@
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="60"/>
         <source>System has detected that you are using a virtual machine, which will affect the system performance and operation experience, for a smooth experience, it is recommended to install deepin in real-machine environment</source>
-        <translation>Систем је препознао да користите виртуелну машину што ће утицати на перформансе и доживљај при раду. За најбоље искуство препоручљиво је инсталирати Дипин на прави рачунар</translation>
+        <translation>Систем је препознао да користите виртуелну машину што ће утицати на перформансе и доживљај при раду. За најбоље искуство препоручљиво је инсталирати Дипин на прави рачунар.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="46"/>
