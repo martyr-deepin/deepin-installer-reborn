@@ -135,10 +135,17 @@ bool CreatePartition(const Partition::Ptr partition) {
       if (geom) {
         // Create a relatively loose constraint,
         // leaving other things to libparted.
-        constraint = ped_constraint_new_from_max(geom);
+        constraint = ped_constraint_exact(geom);
       } else {
         qCritical() << "CreatePartition() geom is nullptr";
       }
+
+      if (!constraint) {
+        // try again for ped_constraint_new_from_max when ped_constraint_exact failed.
+        constraint = ped_constraint_new_from_max(geom);
+        qWarning() << "ped_constraint_exact failed";
+      }
+
       if (constraint) {
         // TODO(xushaohua): Change constraint.min_size.
         // PrintPedConstraintInfo(constraint);
