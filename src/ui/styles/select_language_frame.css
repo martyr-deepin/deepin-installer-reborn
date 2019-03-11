@@ -5,3 +5,42 @@ QLabel#subtitle2_label {
   color: #ffffff;
   font-size: 14pt;
 }
+
+QLabel#LicenseLabel {
+    color: #0366d6;
+    text-decoration: underline;
+}
+
+QCheckBox {
+  color: white;
+  background: transparent;
+}
+
+QCheckBox::indicator {
+  width: 16px;
+  height: 16px;
+}
+
+QCheckBox::indicator:unchecked {
+  image: url(":/images/checkbox_unchecked.svg");
+}
+
+QCheckBox::indicator:unchecked:hover {
+  image: url(":/images/checkbox_unchecked_hover.svg");
+}
+
+QCheckBox::indicator:unchecked:pressed {
+  image: url(":/images/checkbox_unchecked_pressed.svg");
+}
+
+QCheckBox::indicator:checked {
+  image: url(":/images/checkbox_checked.svg");
+}
+
+QCheckBox::indicator:checked:hover {
+  image: url(":/images/checkbox_checked_hover.svg");
+}
+
+QCheckBox::indicator:checked:pressed {
+  image: url(":/images/checkbox_checked_pressed.svg");
+}

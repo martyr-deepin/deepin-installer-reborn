@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ui/frames/select_language_frame.h"
+#include "ui/frames/inner/select_language_frame.h"
 
 #include <QApplication>
 #include <QDebug>
@@ -23,6 +23,7 @@
 #include <QLabel>
 #include <QTranslator>
 #include <QVBoxLayout>
+#include <QCheckBox>
 
 #include "base/file_util.h"
 #include "service/settings_manager.h"
@@ -63,24 +64,34 @@ void SelectLanguageFrame::writeConf() {
 }
 
 void SelectLanguageFrame::changeEvent(QEvent* event) {
-  if (event->type() == QEvent::LanguageChange) {
-    next_button_->setText(tr("Next"));
-  } else {
-    QFrame::changeEvent(event);
-  }
+    if (event->type() == QEvent::LanguageChange) {
+        return updateTs();
+    }
+    else {
+        QFrame::changeEvent(event);
+    }
 }
 
 bool SelectLanguageFrame::eventFilter(QObject* obj, QEvent* event) {
-  if (event->type() == QEvent::KeyPress) {
-    QKeyEvent* key_event = static_cast<QKeyEvent*>(event);
-    if (key_event->key() == Qt::Key_Return ||
-        key_event->key() == Qt::Key_Enter) {
-      // Simulate button click event.
-      next_button_->click();
-      return true;
+    if (event->type() == QEvent::KeyPress && next_button_->isEnabled()) {
+        QKeyEvent* key_event = static_cast<QKeyEvent*>(event);
+        if (key_event->key() == Qt::Key_Return || key_event->key() == Qt::Key_Enter) {
+            // Simulate button click event.
+            next_button_->click();
+            return true;
+        }
     }
-  }
-  return QObject::eventFilter(obj, event);
+
+    if (obj == license_label_) {
+        switch (event->type()) {
+            case QEvent::MouseButtonRelease: emit requestShowUserLicense(); break;
+            case QEvent::Enter: setCursor(QCursor(Qt::PointingHandCursor)); break;
+            case QEvent::Leave: setCursor(QCursor(Qt::ArrowCursor)); break;
+            default: break;
+        }
+    }
+
+    return QObject::eventFilter(obj, event);
 }
 
 void SelectLanguageFrame::initConnections() {
@@ -89,6 +100,8 @@ void SelectLanguageFrame::initConnections() {
           this, &SelectLanguageFrame::onLanguageListSelected);
   connect(next_button_, &QPushButton::clicked,
           this, &SelectLanguageFrame::finished);
+  connect(accept_license_, &QCheckBox::clicked, this,
+          &SelectLanguageFrame::onAccpetLicenseChanged);
 }
 
 void SelectLanguageFrame::initUI() {
@@ -108,6 +121,23 @@ void SelectLanguageFrame::initUI() {
   language_model_ = new LanguageListModel(language_view_);
   language_view_->setModel(language_model_);
 
+  accept_license_ = new QCheckBox;
+  accept_license_->setCheckable(true);
+  accept_license_->setChecked(false);
+  accept_license_->setFocusPolicy(Qt::NoFocus);
+
+  license_label_ = new QLabel;
+  license_label_->setObjectName("LicenseLabel");
+  license_label_->installEventFilter(this);
+
+  QHBoxLayout *license_layout = new QHBoxLayout;
+  license_layout->setMargin(0);
+  license_layout->setSpacing(5);
+  license_layout->addStretch();
+  license_layout->addWidget(accept_license_);
+  license_layout->addWidget(license_label_);
+  license_layout->addStretch();
+
   next_button_ = new NavButton(tr("Next"));
   next_button_->setEnabled(false);
 
@@ -121,11 +151,15 @@ void SelectLanguageFrame::initUI() {
   layout->addSpacing(20);
   layout->addWidget(language_view_, 0, Qt::AlignHCenter);
   layout->addSpacing(20);
+  layout->addLayout(license_layout);
+  layout->addSpacing(20);
   layout->addWidget(next_button_, 0, Qt::AlignCenter);
 
   this->setLayout(layout);
   this->setContentsMargins(0, 0, 0, 0);
   this->setStyleSheet(ReadFile(":/styles/select_language_frame.css"));
+
+  updateTs();
 }
 
 void SelectLanguageFrame::updateTranslator(const QString& locale) {
@@ -143,19 +177,30 @@ void SelectLanguageFrame::updateTranslator(const QString& locale) {
   }
 }
 
-void SelectLanguageFrame::onLanguageListSelected(const QModelIndex& current,
-                                                 const QModelIndex& previous) {
-  Q_UNUSED(previous);
-  if (current.isValid()) {
-    next_button_->setEnabled(true);
+void SelectLanguageFrame::updateTs() {
+  next_button_->setText(tr("Next"));
+  accept_license_->setText(tr("I have read and agree to"));
+  license_label_->setText(tr("<Deepin Software End User License Agreement>"));
+}
 
-    // Update locale on-the-fly.
-    const LanguageItem language_item = language_model_->languageItemAt(current);
-    this->updateTranslator(language_item.locale);
-    lang_ = language_item;
-    this->writeConf();
-    emit this->timezoneUpdated(language_item.timezone);
-  }
+void SelectLanguageFrame::onLanguageListSelected(const QModelIndex& current,
+                                                 const QModelIndex& previous)
+{
+    // FIXME: I don't know why the model will send currentChanged signal.
+    if (previous.isValid() && current.isValid()) {
+        // Update locale on-the-fly.
+        const LanguageItem language_item = language_model_->languageItemAt(current);
+        this->updateTranslator(language_item.locale);
+        lang_ = language_item;
+        this->writeConf();
+        emit this->timezoneUpdated(language_item.timezone);
+        lang_selectd = true;
+        onAccpetLicenseChanged(accept_license_->isChecked());
+    }
+}
+
+void SelectLanguageFrame::onAccpetLicenseChanged(bool enable) {
+    next_button_->setEnabled(enable && lang_selectd);
 }
 
 }  // namespace installer

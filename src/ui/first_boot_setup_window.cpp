@@ -36,7 +36,7 @@
 #include "ui/utils/widget_util.h"
 #include "ui/xrandr/multi_head_manager.h"
 
-#include "ui/frames/user_agreement_frame.h"
+#include "ui/frames/language_frame.h"
 
 namespace installer {
 
@@ -72,10 +72,8 @@ void FirstBootSetupWindow::resizeEvent(QResizeEvent *event) {
 }
 
 void FirstBootSetupWindow::initConnections() {
-    connect(user_agreement_frame, &UserAgreementFrame::finished,
-            this, &FirstBootSetupWindow::onUserAgreementFinished);
-    connect(user_agreement_frame, &UserAgreementFrame::cancel,
-            this, &installer::ShutdownSystem);
+    connect(language_frame_, &LanguageFrame::finished, this,
+            &FirstBootSetupWindow::onLanguageSelected);
     connect(system_info_frame_, &SystemInfoFrame::finished,
             this, &FirstBootSetupWindow::onSystemInfoFinished);
     connect(timezone_frame_, &TimezoneFrame::finished,
@@ -91,7 +89,7 @@ void FirstBootSetupWindow::initConnections() {
 
 void FirstBootSetupWindow::initUI() {
   background_label_ = new QLabel(this);
-  user_agreement_frame = new UserAgreementFrame(this);
+  language_frame_ = new LanguageFrame(this);
   system_info_frame_ = new SystemInfoFrame(this);
   timezone_frame_ = new TimezoneFrame(this);
   loading_frame_ = new FirstBootLoadingFrame(this);
@@ -99,7 +97,7 @@ void FirstBootSetupWindow::initUI() {
   stacked_layout_ = new QStackedLayout(this);
   stacked_layout_->setContentsMargins(0, 0, 0, 0);
   stacked_layout_->setSpacing(0);
-  stacked_layout_->addWidget(user_agreement_frame);
+  stacked_layout_->addWidget(language_frame_);
   stacked_layout_->addWidget(system_info_frame_);
   stacked_layout_->addWidget(timezone_frame_);
   stacked_layout_->addWidget(loading_frame_);
@@ -156,7 +154,7 @@ void FirstBootSetupWindow::onPrimaryScreenChanged(const QRect& geometry) {
   this->setFixedSize(geometry.size());
 }
 
-void FirstBootSetupWindow::onUserAgreementFinished()
+void FirstBootSetupWindow::onLanguageSelected()
 {
     stacked_layout_->setCurrentWidget(system_info_frame_);
 }

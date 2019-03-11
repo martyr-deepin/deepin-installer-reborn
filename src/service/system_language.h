@@ -24,10 +24,29 @@
 namespace installer {
 
 struct LanguageItem {
+    LanguageItem() {}
+    LanguageItem(const LanguageItem& item)
+        : name(item.name)
+        , locale(item.locale)
+        , local_name(item.local_name)
+        , timezone(item.timezone)
+    {
+    }
+
   QString name;  // English name.
   QString locale;  // Language name, like en_US.
   QString local_name;  // Localized name.
   QString timezone;  // Default timezone, might be empty.
+
+  LanguageItem& operator=(const LanguageItem &item) {
+      if (this != &item) {
+          name       = item.name;
+          locale     = item.locale;
+          local_name = item.local_name;
+          timezone   = item.timezone;
+      }
+    return *this;
+  }
 };
 
 typedef QList<LanguageItem> LanguageList;

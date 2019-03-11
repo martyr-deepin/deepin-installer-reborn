@@ -283,6 +283,8 @@ set(UI_FILES
     ui/frames/inner/prepare_install_frame.h
     ui/frames/inner/select_bootloader_frame.cpp
     ui/frames/inner/select_bootloader_frame.h
+    ui/frames/inner/select_language_frame.cpp
+    ui/frames/inner/select_language_frame.h
     ui/frames/inner/simple_partition_frame.cpp
     ui/frames/inner/simple_partition_frame.h
     ui/frames/inner/system_info_avatar_frame.cpp
@@ -291,10 +293,10 @@ set(UI_FILES
     ui/frames/inner/system_info_form_frame.h
     ui/frames/inner/system_info_keyboard_frame.cpp
     ui/frames/inner/system_info_keyboard_frame.h
+    ui/frames/inner/user_agreement_frame.h
+    ui/frames/inner/user_agreement_frame.cpp
     ui/frames/timezone_frame.cpp
     ui/frames/timezone_frame.h
-    ui/frames/user_agreement_frame.h
-    ui/frames/user_agreement_frame.cpp
 
     ui/frames/confirm_quit_frame.cpp
     ui/frames/confirm_quit_frame.h
@@ -314,8 +316,8 @@ set(UI_FILES
     ui/frames/partition_frame.h
     ui/frames/privilege_error_frame.cpp
     ui/frames/privilege_error_frame.h
-    ui/frames/select_language_frame.cpp
-    ui/frames/select_language_frame.h
+    ui/frames/language_frame.h
+    ui/frames/language_frame.cpp
     ui/frames/system_info_frame.cpp
     ui/frames/system_info_frame.h
     ui/frames/virtual_machine_frame.cpp

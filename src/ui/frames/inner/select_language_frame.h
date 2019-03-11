@@ -18,11 +18,14 @@
 #ifndef INSTALLER_UI_FRAMES_SELECT_LANGUAGE_FRAME_H
 #define INSTALLER_UI_FRAMES_SELECT_LANGUAGE_FRAME_H
 
+#include "service/system_language.h"
+
 #include <QFrame>
 #include <QModelIndex>
-class QTranslator;
 
-#include "service/system_language.h"
+class QTranslator;
+class QCheckBox;
+class QLabel;
 
 namespace installer {
 
@@ -49,6 +52,9 @@ class SelectLanguageFrame : public QFrame {
   // Emitted when new language item is selected.
   void timezoneUpdated(const QString& timezone);
 
+  // show UserLicense
+  void requestShowUserLicense() const;
+
  protected:
   // Update text of next_button_
   void changeEvent(QEvent* event) override;
@@ -56,25 +62,24 @@ class SelectLanguageFrame : public QFrame {
   // Handles key press event of language_view_.
   bool eventFilter(QObject* obj, QEvent* event) Q_DECL_OVERRIDE;
 
- private:
-  void initConnections();
-  void initUI();
-  void updateTranslator(const QString& locale);
+private:
+    void initConnections();
+    void initUI();
+    void updateTranslator(const QString& locale);
+    void updateTs();
+    void onLanguageListSelected(const QModelIndex& current, const QModelIndex& previous);
+    void onAccpetLicenseChanged(bool enable);
 
-  // Current selected language.
-  LanguageItem lang_;
-
-  QTranslator* current_translator_ = nullptr;
-
-  FramelessListView* language_view_ = nullptr;
-  LanguageListModel* language_model_ = nullptr;
-
-  NavButton* next_button_ = nullptr;
-
- private slots:
-  void onLanguageListSelected(const QModelIndex& current,
-                              const QModelIndex& previous);
-};
+private:
+    bool               lang_selectd        = false;
+    QTranslator*       current_translator_ = nullptr;
+    FramelessListView* language_view_      = nullptr;
+    LanguageListModel* language_model_     = nullptr;
+    QCheckBox*         accept_license_     = nullptr;
+    QLabel*            license_label_      = nullptr;
+    NavButton*         next_button_        = nullptr;
+    LanguageItem       lang_;  // Current selected language.
+  };
 
 }  // namespace installer
 

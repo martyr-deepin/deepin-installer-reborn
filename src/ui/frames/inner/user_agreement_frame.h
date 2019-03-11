@@ -23,13 +23,8 @@ public:
     };
 
 signals:
-    // Emitted when back button is clicked.
-    void finished();
-
     // Emitted when cancel
-    void cancel();
-
-public slots:
+    void back();
 
 protected:
     // Update text of next_button_
@@ -47,8 +42,7 @@ private:
     QLabel *m_subTitle;
     QLabel *m_sourceLbl;
     QLabel *m_toggleLbl;
-    NavButton *m_accept;
-    NavButton *m_cancel;
+    NavButton *m_back;
     QScrollArea *m_sourceScrollArea;
     QLocale::Language m_language;
     Type m_type;
