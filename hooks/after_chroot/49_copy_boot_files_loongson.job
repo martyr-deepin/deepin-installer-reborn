@@ -28,8 +28,14 @@ boot_path=
 # Remove overlay filesystem item.
 sed -i "/overlay/d" /target/etc/fstab
 
-rootuuidline=$(grep -r "UUID" /target/etc/fstab | grep "/ ")
-rootuuid=${rootuuidline%%/*}
+DI_ROOT_PARTITION=$(cat /target/etc/deepin-installer.conf | \
+  grep "^DI_ROOT_PARTITION=" | awk -F'=' '{print $2}')
+rootuuid=UUID$(blkid -s UUID -o value ${DI_ROOT_PARTITION})
+
+DI_CRYPT_ROOT=$(installer_get "DI_CRYPT_ROOT")
+if [ x${DI_CRYPT_ROOT} = xtrue ]; then
+    splash="splash"
+fi
 
 DI_LOOP_ROOT_FILE=$(installer_get "DI_LOOP_ROOT_FILE")
 echo "ctx ---------  DI_LOOP_ROOT_FILE=$DI_LOOP_ROOT_FILE"
@@ -37,7 +43,7 @@ echo "ctx ---------  DI_LOOP_ROOT_FILE=$DI_LOOP_ROOT_FILE"
 # Default, at the same moment, both of boot.cfg and grub.cfg exist.
 if [ -f $TARGET/boot.cfg ];then
 	boot_path=$TARGET
-elif [ -f $TARGET/boot/boot.cfg ];then 
+elif [ -f $TARGET/boot/boot.cfg ];then
 	boot_path=$TARGET/boot
 fi
 
@@ -70,9 +76,9 @@ if [ ! $boot_path ];then
     fi
 
     if [ -d $TARGET/EFI ];then
-        cd $TARGET/EFI/BOOT 
-        ln -sf ../../grub.cfg grub.cfg 
-        ln -sf ../../$kernel_name $kernel_name 
+        cd $TARGET/EFI/BOOT
+        ln -sf ../../grub.cfg grub.cfg
+        ln -sf ../../$kernel_name $kernel_name
         ln -sf ../../$initrd_name $initrd_name
         ln -sf ../../deepin deepin
         cd -
@@ -104,34 +110,34 @@ else
 title Deepin 15.5 Professional mips64el for Loongson 3A3000
     initrd /dev/fs/ext2@wd0/boot/$initrd_name
     kernel /dev/fs/ext2@wd0/boot/$kernel_name
-    args console=tty loglevel=0 quiet splash locales=zh_CN.UTF-8 root=$rootuuid
+    args console=tty loglevel=0 quiet $splash locales=zh_CN.UTF-8 root=$rootuuid
 
 title Deepin Recovery
     initrd /dev/fs/ext2@wd0/boot/deepin/$initrd_name
     kernel /dev/fs/ext2@wd0/boot/deepin/$kernel_name
-    args boot=live loglevel=0 components splash toram locales=zh_CN.UTF-8 acpi_backlight=vendor live-media-path=recovery live-media=$rootuuid " >> $boot_path/boot.cfg
+    args boot=live loglevel=0 components $splash toram locales=zh_CN.UTF-8 acpi_backlight=vendor live-media-path=recovery live-media=$rootuuid " >> $boot_path/boot.cfg
 
     echo "
 menuentry 'Deepin 15.5 Professional mips64el for Loongson 3A3000'{
-linux \${prefix}/$kernel_name console=tty loglevel=0 quiet splash locales=zh_CN.UTF-8  root=$rootuuid
+linux \${prefix}/$kernel_name console=tty loglevel=0 quiet $splash locales=zh_CN.UTF-8  root=$rootuuid
 initrd \${prefix}/$initrd_name
 boot
 }
 
 menuentry 'Deepin Recovery'{
-linux \${prefix}/deepin/$kernel_name console=tty loglevel=0  splash toram locales=zh_CN.UTF-8 boot=live components acpi_backlight=vendor live-media-path=recovery
+linux \${prefix}/deepin/$kernel_name console=tty loglevel=0  $splash toram locales=zh_CN.UTF-8 boot=live components acpi_backlight=vendor live-media-path=recovery
 initrd \${prefix}/deepin/$initrd_name
 boot
 }" >>  $boot_path/grub.cfg
-    
+
     if [ "$boot_path" = "$TARGET" ];then
         sed -i "s|wd0/boot|wd0|g" $boot_path/boot.cfg
     fi
 
     if [ -d $boot_path/EFI ];then
         cd $boot_path/EFI/BOOT
-        ln -sf ../../grub.cfg grub.cfg 
-        ln -sf ../../$kernel_name $kernel_name 
+        ln -sf ../../grub.cfg grub.cfg
+        ln -sf ../../$kernel_name $kernel_name
         ln -sf ../../$initrd_name $initrd_name
         ln -sf ../../deepin deepin
         cd -
@@ -142,5 +148,7 @@ fi
 #if grep -wqs $TARGET /proc/mounts ; then
 #  sed -e 's@boot/@@g' -i $TARGET/boot.cfg
 #fi
+
+chroot /target /usr/sbin/update-initramfs -u -k all
 
 return 0
