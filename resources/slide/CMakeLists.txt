@@ -35,6 +35,7 @@ elseif(${INSTALLER_BUILD_ARCH} MATCHES "sw")
       PATTERN "default/18-spotify.png" EXCLUDE
       PATTERN "zh_CN/02-deepin-app-store.png" EXCLUDE
       PATTERN "zh_CN/10-deepin-remote-assistance.png" EXCLUDE
+      PATTERN "zh_CN/12-deepin-dock.png" EXCLUDE
       PATTERN "zh_CN/16-wps-youdao-dict.png" EXCLUDE
       PATTERN "zh_CN/17-tencent-qq.png" EXCLUDE
       PATTERN "zh_CN/18-netease-cloud-music.png" EXCLUDE
