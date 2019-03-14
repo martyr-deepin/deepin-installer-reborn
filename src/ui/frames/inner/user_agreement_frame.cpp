@@ -67,7 +67,7 @@ void UserAgreementFrame::initUI()
     sourceLayout->setSpacing(0);
     sourceLayout->addWidget(m_sourceLbl, 0, Qt::AlignTop | Qt::AlignHCenter);
     sourceLayout->addStretch();
-    sourceLayout->setContentsMargins(10, 10, 5, 10);
+    sourceLayout->setContentsMargins(10, 10, 5, 0);
     sourceWidget->setLayout(sourceLayout);
 
     m_sourceScrollArea = new QScrollArea(this);
@@ -91,10 +91,7 @@ void UserAgreementFrame::initUI()
     m_toggleLbl = new QLabel;
     m_toggleLbl->installEventFilter(this);
 
-    m_accept = new NavButton(this);
-    m_cancel = new NavButton(this);
-
-    m_accept->setDisabled(true);
+    m_back = new NavButton(this);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -108,8 +105,7 @@ void UserAgreementFrame::initUI()
     mainLayout->addSpacing(20);
     mainLayout->addWidget(m_toggleLbl, 0, Qt::AlignHCenter);
     mainLayout->addSpacing(20);
-    mainLayout->addWidget(m_accept, 0, Qt::AlignHCenter);
-    mainLayout->addWidget(m_cancel, 0, Qt::AlignHCenter);
+    mainLayout->addWidget(m_back, 0, Qt::AlignHCenter);
 
     setLayout(mainLayout);
     setStyleSheet(installer::ReadFile(":/styles/user_agreement_frame.css"));
@@ -117,13 +113,7 @@ void UserAgreementFrame::initUI()
 
 void UserAgreementFrame::initConnect()
 {
-    connect(m_accept, &NavButton::clicked, this, &UserAgreementFrame::finished);
-    connect(m_cancel, &NavButton::clicked, this, &UserAgreementFrame::cancel);
-    connect(m_sourceScrollArea->verticalScrollBar(), &QScrollBar::valueChanged, this, [=](int value) {
-        if (!m_accept->isEnabled() && value == m_sourceScrollArea->verticalScrollBar()->maximum()) {
-            m_accept->setDisabled(false);
-        }
-    });
+    connect(m_back, &NavButton::clicked, this, &UserAgreementFrame::back);
 }
 
 void UserAgreementFrame::updateText()
@@ -142,8 +132,7 @@ void UserAgreementFrame::updateText()
         toggleLicense();
     }
 
-    m_accept->setText(tr("Accept"));
-    m_cancel->setText(tr("Cancel"));
+    m_back->setText(tr("Back"));
 }
 
 void UserAgreementFrame::toggleLicense()

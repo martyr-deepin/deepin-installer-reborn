@@ -41,11 +41,10 @@ class PageIndicator;
 class PartitionFrame;
 class PartitionTableWarningFrame;
 class PrivilegeErrorFrame;
-class SelectLanguageFrame;
+class LanguageFrame;
 class SystemInfoFrame;
 class TimezoneFrame;
 class VirtualMachineFrame;
-class UserAgreementFrame;
 
 // MainWindow is a fullscreen window of deepin-installer.
 // All of ui frames are placed in MainWindow.
@@ -123,13 +122,11 @@ private:
   InstallSuccessFrame* install_success_frame_ = nullptr;
   PartitionFrame* partition_frame_ = nullptr;
   PrivilegeErrorFrame* privilege_error_frame_ = nullptr;
-  SelectLanguageFrame* select_language_frame_ = nullptr;
+  LanguageFrame* select_language_frame_ = nullptr;
   SystemInfoFrame* system_info_frame_ = nullptr;
   TimezoneFrame* timezone_frame_ = nullptr;
   VirtualMachineFrame* virtual_machine_frame_ = nullptr;
   MultiHeadManager* multi_head_manager_ = nullptr;
-
-  UserAgreementFrame *user_agreement_frame = nullptr;
 
   // To store frame pages, page_name => page_id.
   QHash<PageId, int> pages_;

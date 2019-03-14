@@ -44,11 +44,10 @@
 #include "ui/frames/install_success_frame.h"
 #include "ui/frames/partition_frame.h"
 #include "ui/frames/privilege_error_frame.h"
-#include "ui/frames/select_language_frame.h"
+#include "ui/frames/language_frame.h"
 #include "ui/frames/system_info_frame.h"
 #include "ui/frames/timezone_frame.h"
 #include "ui/frames/virtual_machine_frame.h"
-#include "ui/frames/user_agreement_frame.h"
 
 #include "ui/utils/widget_util.h"
 #include "ui/widgets/page_indicator.h"
@@ -177,21 +176,18 @@ void MainWindow::initConnections() {
   connect(privilege_error_frame_, &PrivilegeErrorFrame::finished,
           this, &MainWindow::goNextPage);
 
-  connect(select_language_frame_, &SelectLanguageFrame::finished,
+  connect(select_language_frame_, &LanguageFrame::finished,
           this, &MainWindow::goNextPage);
   connect(system_info_frame_, &SystemInfoFrame::finished,
           this, &MainWindow::goNextPage);
 
-  connect(select_language_frame_, &SelectLanguageFrame::timezoneUpdated,
+  connect(select_language_frame_, &LanguageFrame::timezoneUpdated,
           timezone_frame_, &TimezoneFrame::updateTimezoneBasedOnLanguage);
   connect(timezone_frame_, &TimezoneFrame::finished,
           this, &MainWindow::goNextPage);
 
   connect(virtual_machine_frame_, &VirtualMachineFrame::finished,
           this, &MainWindow::goNextPage);
-
-  connect(user_agreement_frame, &UserAgreementFrame::finished, this, &MainWindow::goNextPage);
-  connect(user_agreement_frame, &UserAgreementFrame::cancel, this, &MainWindow::onCloseButtonClicked);
 
   // Notify InstallProgressFrame that partition job has finished.
   connect(partition_frame_, &PartitionFrame::autoPartDone,
@@ -219,13 +215,9 @@ void MainWindow::initPages() {
   pages_.insert(PageId::ConfirmQuitId,
                stacked_layout_->addWidget(confirm_quit_frame_));
 
-  select_language_frame_ = new SelectLanguageFrame(this);
+  select_language_frame_ = new LanguageFrame(this);
   pages_.insert(PageId::SelectLanguageId,
                 stacked_layout_->addWidget(select_language_frame_));
-
-  user_agreement_frame = new UserAgreementFrame(this);
-  pages_.insert(PageId::UserAgreementId,
-                stacked_layout_->addWidget(user_agreement_frame));
 
   disk_space_insufficient_frame_ = new DiskSpaceInsufficientFrame(this);
   pages_.insert(PageId::DiskSpaceInsufficientId,
@@ -441,19 +433,6 @@ void MainWindow::goNextPage() {
     }
 
     case PageId::SelectLanguageId: {
-        // Displays the first page.
-        if (!GetSettingsBool(kSystemInfoSetupAfterReboot)) {
-            page_indicator_->goNextPage();
-            setCurrentPage(PageId::UserAgreementId);
-            break;
-        }
-        else {
-            prev_page_ = current_page_;
-            current_page_ = PageId::UserAgreementId;
-        }
-    }
-
-    case PageId::UserAgreementId: {
         // Check whether to show DiskSpaceInsufficientPage.
         if (!GetSettingsBool(kSkipDiskSpaceInsufficientPage) &&
                 IsDiskSpaceInsufficient()) {

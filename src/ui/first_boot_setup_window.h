@@ -33,7 +33,7 @@ class FirstBootHookWorker;
 class MultiHeadManager;
 class SystemInfoFrame;
 class TimezoneFrame;
-class UserAgreementFrame;
+class LanguageFrame;
 
 // Main window of deepin_installer_first_boot.
 class FirstBootSetupWindow : public QFrame {
@@ -56,27 +56,27 @@ class FirstBootSetupWindow : public QFrame {
   void registerShortcut();
   void updateBackground();
 
-  QLabel* background_label_ = nullptr;
-  SystemInfoFrame* system_info_frame_ = nullptr;
-  TimezoneFrame* timezone_frame_ = nullptr;
-  FirstBootLoadingFrame* loading_frame_ = nullptr;
-  UserAgreementFrame* user_agreement_frame = nullptr;
-  QStackedLayout* stacked_layout_ = nullptr;
+  QLabel*                background_label_    = nullptr;
+  SystemInfoFrame*       system_info_frame_   = nullptr;
+  TimezoneFrame*         timezone_frame_      = nullptr;
+  FirstBootLoadingFrame* loading_frame_       = nullptr;
+  LanguageFrame*         language_frame_      = nullptr;
+  QStackedLayout*        stacked_layout_      = nullptr;
 
-  QThread* hook_worker_thread_ = nullptr;
-  FirstBootHookWorker* hook_worker_ = nullptr;
+  QThread*             hook_worker_thread_ = nullptr;
+  FirstBootHookWorker* hook_worker_        = nullptr;
 
   // Shortcut used to switch mirror modes.
-  GlobalShortcut* monitor_mode_shortcut_ = nullptr;
-  MultiHeadManager* multi_head_manager_ = nullptr;
+  GlobalShortcut*   monitor_mode_shortcut_ = nullptr;
+  MultiHeadManager* multi_head_manager_    = nullptr;
 
- private slots:
+  private slots:
   // Handles result of hook worker.
   void onHookFinished(bool ok);
 
   void onPrimaryScreenChanged(const QRect& geometry);
 
-  void onUserAgreementFinished();
+  void onLanguageSelected();
   void onSystemInfoFinished();
 
   // Run "first_boot_setup.sh" after system_info_frame_ is finished.
