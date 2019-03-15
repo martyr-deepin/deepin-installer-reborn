@@ -896,7 +896,11 @@ uint FullDiskDelegate::getSwapSize()
 
     qDebug() << "system memory is: " << total_bytes << by;
 
-    return qRound(sqrt(by)) + qRound(by);
+    uint size = qRound(sqrt(by) + qRound(by));
+
+    // Limit swap to 16G
+    // see: https://tower.im/teams/9487/todos/232339/
+    return std::min(static_cast<uint>(16), size);
 }
 
 }  // namespace installer
