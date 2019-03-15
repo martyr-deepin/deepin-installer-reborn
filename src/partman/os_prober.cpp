@@ -30,6 +30,11 @@ QString ReadOsProberOutput() {
   if (QFile::exists(cache_path)) {
     return ReadFile(cache_path);
   } else {
+    if (!SpawnCmd("which", QStringList() << "os-prober")) {
+      // os-prober not exist
+      return QString();
+    }
+
     // run os-prober once before ignore_uefi is created, so windows
     // in the efi partition can be found.
     QString output;
