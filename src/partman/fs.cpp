@@ -19,6 +19,28 @@
 
 #include "partman/structs.h"
 
+static const QMap<installer::FsType, QString> FS_TYPE_MAP{
+    { installer::FsType::Empty, "" },
+    { installer::FsType::Btrfs, "btrfs" },
+    { installer::FsType::EFI, "efi" },
+    { installer::FsType::Ext2, "ext2" },
+    { installer::FsType::Ext3, "ext3" },
+    { installer::FsType::Ext4, "ext4" },
+    { installer::FsType::F2fs, "f2fs" },
+    { installer::FsType::Fat16, "fat16" },
+    { installer::FsType::Fat32, "fat32" },
+    { installer::FsType::Hfs, "hfs" },
+    { installer::FsType::HfsPlus, "hfsplus" },
+    { installer::FsType::Jfs, "jfs" },
+    { installer::FsType::NTFS, "ntfs" },
+    { installer::FsType::Nilfs2, "nilfs2" },
+    { installer::FsType::LVM2PV, "lvm2 pv" },
+    { installer::FsType::Reiser4, "reiser4" },
+    { installer::FsType::Reiserfs, "reiserfs" },
+    { installer::FsType::Unknown, "unknown" },
+    { installer::FsType::Xfs, "xfs" }
+};
+
 namespace installer {
 
 namespace {
@@ -34,55 +56,23 @@ QDebug& operator<<(QDebug& debug, const FsType& fs_type) {
 }
 
 FsType GetFsTypeByName(const QString& name) {
-  const QString lower = name.toLower();
-  if (lower.isEmpty()) return FsType::Empty;
-  if (lower == kFsUnused) return FsType::Empty;
-  if (lower == "btrfs") return FsType::Btrfs;
-  if (lower == "efi") return FsType::EFI;
-  if (lower == "ext2") return FsType::Ext2;
-  if (lower == "ext3") return FsType::Ext3;
-  if (lower == "ext4") return FsType::Ext4;
-  if (lower == "f2fs") return FsType::F2fs;
-  if (lower == "fat16") return FsType::Fat16;
-  if (lower == "fat32") return FsType::Fat32;
-  if (lower == "hfs") return FsType::Hfs;
-  if (lower == "hfs+") return FsType::HfsPlus;
-  if (lower == "jfs") return FsType::Jfs;
-  if (lower.startsWith("linux-swap")) return FsType::LinuxSwap;
-  if (lower == "lvm2pv") return FsType::LVM2PV;
-  if (lower == "nilfs2") return FsType::Nilfs2;
-  if (lower == "ntfs") return FsType::NTFS;
-  if (lower == "others") return FsType::Others;
-  if (lower == "reiser4") return FsType::Reiser4;
-  if (lower == "reiserfs") return FsType::Reiserfs;
-  if (lower == "xfs") return FsType::Xfs;
-  return FsType::Unknown;
+    const QString lower = name.toLower();
+
+    if (lower.isEmpty() || lower == kFsUnused) return FsType::Empty;
+    if (lower.startsWith("linux-swap")) return FsType::LinuxSwap;
+
+    return FS_TYPE_MAP.key(lower, FsType::Unknown);
 }
 
 QString GetFsTypeName(FsType fs_type) {
-  switch (fs_type) {
-    case FsType::Empty: { return ""; }
-    case FsType::Btrfs: { return "btrfs"; }
-    case FsType::EFI: { return "efi"; }
-    case FsType::Ext2: { return "ext2"; }
-    case FsType::Ext3: { return "ext3"; }
-    case FsType::Ext4: { return "ext4"; }
-    case FsType::F2fs: { return "f2fs"; }
-    case FsType::Fat16: { return "fat16"; }
-    case FsType::Fat32: { return "fat32"; }
-    case FsType::Hfs: { return "hfs"; }
-    case FsType::HfsPlus: { return "hfsplus"; }
-    case FsType::Jfs: { return "jfs"; }
-    case FsType::LinuxSwap: { return "linux-swap"; }
-    case FsType::NTFS: { return "ntfs"; }
-    case FsType::Nilfs2: { return "nilfs2"; }
-    case FsType::LVM2PV: { return "lvm2 pv"; }
-    case FsType::Reiser4: { return "reiser4"; }
-    case FsType::Reiserfs: { return "reiserfs"; }
-    case FsType::Unknown: { return "unknown"; }
-    case FsType::Xfs: { return "xfs"; }
-    default: { return ""; }
-  }
+    switch (fs_type) {
+        case FsType::LinuxSwap: {
+            return "linux-swap";
+        }
+        default: {
+            return FS_TYPE_MAP.value(fs_type);
+        }
+    }
 }
 
 }  // namespace installer
