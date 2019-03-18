@@ -118,6 +118,7 @@ void SelectLanguageFrame::initUI() {
   subtitle2_label->setAlignment(Qt::AlignHCenter);
 
   language_view_ = new FramelessListView();
+  language_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   language_model_ = new LanguageListModel(language_view_);
   language_view_->setModel(language_model_);
 
