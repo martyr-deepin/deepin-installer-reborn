@@ -20,6 +20,7 @@
 #include "service/settings_manager.h"
 #include "service/settings_name.h"
 #include "ui/delegates/partition_util.h"
+#include "base/command.h"
 
 namespace installer {
 
@@ -27,6 +28,27 @@ namespace {
 
 // "unused" mount point.
 const char kMountPointUnused[] = "unused";
+
+const QMap<FsType, QString> FsFormatCmdMap{
+    { FsType::Btrfs, QString("mkfs.btrfs") },
+    { FsType::EFI, QString("mkfs.vfat") },
+    { FsType::Ext2, QString("mkfs.ext2") },
+    { FsType::Ext3, QString("mkfs.ext3") },
+    { FsType::Ext4, QString("mkfs.ext4") },
+    { FsType::F2fs, QString("mkfs.f2fs") },
+    { FsType::Fat16, QString("mkfs.fat") },
+    { FsType::Fat32, QString("mkfs.fat") },
+    { FsType::Hfs, QString("/usr/bin/hformat") },
+    { FsType::HfsPlus, QString("/usr/bin/hpfsck") },
+    { FsType::Jfs, QString("mkfs.jfs") },
+    { FsType::LinuxSwap, QString("mkswap") },
+    { FsType::LVM2PV, QString("lvm") },
+    { FsType::Nilfs2, QString("mkfs.nilfs2") },
+    { FsType::NTFS, QString("mkfs.ntfs") },
+    { FsType::Reiser4, QString("mkfs.reiser4") },
+    { FsType::Reiserfs, QString("mkfs.reiserfs") },
+    { FsType::Xfs, QString("mkfs.xfs") }
+};
 
 }  // namespace
 
@@ -143,6 +165,12 @@ FsTypeList AdvancedPartitionDelegate::getFsTypeList() const {
     Q_ASSERT(!name.isEmpty());
     const QStringList fs_names = name.split(';');
     for (const QString& fs_name : fs_names) {
+      // check fs can be used
+      const QString cmd = FsFormatCmdMap[GetFsTypeByName(fs_name)];
+      if (cmd.isEmpty()) continue;
+
+      if (!SpawnCmd("which", QStringList() << cmd)) continue;
+
       FsType type = GetFsTypeByName(fs_name);
       fs_types.append(type);
     }
