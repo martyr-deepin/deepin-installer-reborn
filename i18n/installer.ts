@@ -627,19 +627,19 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="141"/>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="181"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="142"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="182"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="182"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="183"/>
         <source>I have read and agree to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="183"/>
-        <source>&lt;Deepin Software End User License Agreement&gt;</source>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="184"/>
+        <source>Deepin Software End User License Agreement</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
