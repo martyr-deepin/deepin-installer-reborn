@@ -32,8 +32,7 @@ DI_ROOT_PARTITION=$(cat /target/etc/deepin-installer.conf | \
   grep "^DI_ROOT_PARTITION=" | awk -F'=' '{print $2}')
 rootuuid=UUID$(blkid -s UUID -o value ${DI_ROOT_PARTITION})
 
-DI_CRYPT_ROOT=$(installer_get "DI_CRYPT_ROOT")
-if [ x${DI_CRYPT_ROOT} = xtrue ]; then
+if [ x$(installer_get "DI_CRYPT_ROOT") != xtrue ]; then
     splash="splash"
 fi
 
