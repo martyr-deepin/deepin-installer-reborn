@@ -5,6 +5,7 @@
 # 
 # Translators:
 # Luís Lima <geral@liqensoft.com>, 2017
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-21 10:31+0800\n"
 "PO-Revision-Date: 2017-02-06 02:09+0000\n"
-"Last-Translator: Luís Lima <geral@liqensoft.com>, 2017\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>, 2019\n"
 "Language-Team: Portuguese (https://www.transifex.com/linuxdeepin/teams/3976/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -643,15 +644,15 @@ msgstr "América / Nome"
 
 #: system-config-date-timezones.h:156
 msgid "America/Noronha"
-msgstr "América / Noronha"
+msgstr "America/Noronha"
 
 #: system-config-date-timezones.h:157
 msgid "America/North_Dakota/Beulah"
-msgstr "América / Dakota_ Norte / Beulah"
+msgstr "America/North_Dakota/Beulah"
 
 #: system-config-date-timezones.h:158
 msgid "America/North_Dakota/Center"
-msgstr "América / Dakota_ Norte / Centro"
+msgstr "América/Dakota_Norte/Centro"
 
 #: system-config-date-timezones.h:159
 msgid "America/North_Dakota/New_Salem"
@@ -659,7 +660,7 @@ msgstr "América / Dakota_ Norte / New_Salem"
 
 #: system-config-date-timezones.h:160
 msgid "America/Ojinaga"
-msgstr "América / Ojinaga"
+msgstr "América/Ojinaga"
 
 #: system-config-date-timezones.h:161
 msgid "America/Panama"
@@ -707,7 +708,7 @@ msgstr "América / Rankin_Inlet"
 
 #: system-config-date-timezones.h:172
 msgid "America/Recife"
-msgstr "América / Recife"
+msgstr "América/Recife"
 
 #: system-config-date-timezones.h:173
 msgid "America/Regina"
@@ -727,7 +728,7 @@ msgstr "América / Santarem"
 
 #: system-config-date-timezones.h:177
 msgid "America/Santiago"
-msgstr "América / Santiago"
+msgstr "América/Santiago"
 
 #: system-config-date-timezones.h:178
 msgid "America/Santo_Domingo"
@@ -735,7 +736,7 @@ msgstr "América / Santo_Domingo"
 
 #: system-config-date-timezones.h:179
 msgid "America/Sao_Paulo"
-msgstr "America / Sao_Paulo"
+msgstr "América/São_Paulo"
 
 #: system-config-date-timezones.h:180
 msgid "America/Scoresbysund"
@@ -763,7 +764,7 @@ msgstr "América / St_Lucia"
 
 #: system-config-date-timezones.h:186
 msgid "America/St_Thomas"
-msgstr "América / St_Thomas"
+msgstr "América/St_Thomas"
 
 #: system-config-date-timezones.h:187
 msgid "America/St_Vincent"
@@ -771,7 +772,7 @@ msgstr "América / St_Vincent"
 
 #: system-config-date-timezones.h:188
 msgid "America/Swift_Current"
-msgstr "América / Swift_Current"
+msgstr "América/Swift_Current"
 
 #: system-config-date-timezones.h:189
 msgid "America/Tegucigalpa"
@@ -1283,7 +1284,7 @@ msgstr "Austrália/Sydney"
 
 #: system-config-date-timezones.h:316
 msgid "Europe/Amsterdam"
-msgstr "Europa/Amsterdam"
+msgstr "Europa/Amsterdão"
 
 #: system-config-date-timezones.h:317
 msgid "Europe/Andorra"
@@ -1291,7 +1292,7 @@ msgstr "Europa/Andorra"
 
 #: system-config-date-timezones.h:318
 msgid "Europe/Astrakhan"
-msgstr "Europa/Astracã"
+msgstr "Europa/Astrakhan"
 
 #: system-config-date-timezones.h:319
 msgid "Europe/Athens"
@@ -1303,7 +1304,7 @@ msgstr "Europa/Belgrado"
 
 #: system-config-date-timezones.h:321
 msgid "Europe/Berlin"
-msgstr "Europe/Berlin"
+msgstr "Europa/Berlin"
 
 #: system-config-date-timezones.h:322
 msgid "Europe/Bratislava"
@@ -1323,7 +1324,7 @@ msgstr "Europa/Budapeste"
 
 #: system-config-date-timezones.h:326
 msgid "Europe/Busingen"
-msgstr "Europa/Büsingen"
+msgstr "Europa/Busingen"
 
 #: system-config-date-timezones.h:327
 msgid "Europe/Chisinau"
@@ -1351,7 +1352,7 @@ msgstr "Europa/Helsínquia"
 
 #: system-config-date-timezones.h:333
 msgid "Europe/Isle_of_Man"
-msgstr "Europa/Isle_of_Man"
+msgstr "Europa/Ilha_de_Man"
 
 #: system-config-date-timezones.h:334
 msgid "Europe/Istanbul"
@@ -1407,11 +1408,11 @@ msgstr "Europa/Minsk"
 
 #: system-config-date-timezones.h:347
 msgid "Europe/Monaco"
-msgstr "Europa/Monaco"
+msgstr "Europa/Mónaco"
 
 #: system-config-date-timezones.h:348
 msgid "Europe/Moscow"
-msgstr "Europa/Moscou"
+msgstr "Europa/Moscovo"
 
 #: system-config-date-timezones.h:349
 msgid "Europe/Oslo"
@@ -1435,7 +1436,7 @@ msgstr "Europa/Riga"
 
 #: system-config-date-timezones.h:354
 msgid "Europe/Rome"
-msgstr "Europe/Rome"
+msgstr "Europa/Roma"
 
 #: system-config-date-timezones.h:355
 msgid "Europe/Samara"
@@ -1475,7 +1476,7 @@ msgstr "Europa/Tallinn"
 
 #: system-config-date-timezones.h:364
 msgid "Europe/Tirane"
-msgstr "Europa/Tirane"
+msgstr "Europa/Tirana"
 
 #: system-config-date-timezones.h:365
 msgid "Europe/Ulyanovsk"
@@ -1503,7 +1504,7 @@ msgstr "Europa/Vilnius"
 
 #: system-config-date-timezones.h:371
 msgid "Europe/Volgograd"
-msgstr "Europa/Volgograd"
+msgstr "Europa/Volgogrado"
 
 #: system-config-date-timezones.h:372
 msgid "Europe/Warsaw"

@@ -4,7 +4,7 @@
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="125"/>
         <source>Install here</source>
-        <translation>Asennetaan tänne</translation>
+        <translation>Asenna tähän</translation>
     </message>
     <message>
         <location filename="../src/ui/widgets/advanced_partition_button.cpp" line="128"/>
@@ -103,7 +103,7 @@
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="39"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="58"/>
         <source>Abort Installation</source>
-        <translation>Keskeytä Asennus</translation>
+        <translation>Keskeytä asennus</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="41"/>
@@ -130,7 +130,7 @@
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="58"/>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="72"/>
         <source>Insufficient Disk Space</source>
-        <translation>Riittämätön Levytila</translation>
+        <translation>Riittämätön levytila</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="60"/>
@@ -142,44 +142,44 @@
 <context>
     <name>installer::EditPartitionFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="133"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="196"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="99"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="169"/>
         <source>Edit Disk</source>
-        <translation>Muokkaa Levyä</translation>
+        <translation>Muokkaa levyä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="135"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="198"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="101"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="171"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Ole hyvä ja tee varmuuskopio tärkeistä tiedoista, ja sitten valitse levy jolle asentaa</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="137"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="231"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="103"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="204"/>
         <source>Filesystem</source>
         <translation>Tiedostojärjestelmä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="138"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="233"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="104"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="206"/>
         <source>Mount point</source>
         <translation>Liitoskohta</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="139"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="235"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="105"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="208"/>
         <source>Format the partition</source>
         <translation>Alusta osio</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="140"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="278"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="251"/>
         <source>Cancel</source>
         <translation>Peruuta</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="141"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="279"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="252"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -224,7 +224,7 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="75"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="95"/>
         <source>Installation Failed</source>
-        <translation>Asennus Epäonnistui</translation>
+        <translation>Asennus epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="77"/>
@@ -260,7 +260,7 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="61"/>
         <source>Successfully Installed</source>
-        <translation>Onnistuneesti Asennettu</translation>
+        <translation>Asennettu onnistuneesti</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="43"/>
@@ -278,7 +278,7 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="47"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="71"/>
         <source>Experience now</source>
-        <translation>Koe Deepin nyt</translation>
+        <translation>Koe nyt</translation>
     </message>
 </context>
 <context>
@@ -287,7 +287,7 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="116"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="151"/>
         <source>New Partition</source>
-        <translation>Uusi Osio</translation>
+        <translation>Uusi osio</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="118"/>
@@ -365,7 +365,7 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="76"/>
         <source>Full Disk Format Warning</source>
-        <translation>Koko Levyn Alustamisen Varoitus</translation>
+        <translation>Koko levyn alustamisen varoitus</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
@@ -392,7 +392,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="84"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="227"/>
         <source>Select Installation Location</source>
-        <translation>Valitse Asennuksen Sijainti</translation>
+        <translation>Valitse asennuspaikka</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
@@ -421,12 +421,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="308"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="416"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
         <source>Start installation</source>
         <translation>Aloita asennus</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="416"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
         <source>Next</source>
         <translation>Seuraava</translation>
     </message>
@@ -486,12 +486,12 @@
         <location filename="../src/ui/models/partition_type_model.cpp" line="41"/>
         <location filename="../src/ui/models/partition_type_model.cpp" line="47"/>
         <source>Logical Partition</source>
-        <translation>Looginen Osio</translation>
+        <translation>Looginen osio</translation>
     </message>
     <message>
         <location filename="../src/ui/models/partition_type_model.cpp" line="45"/>
         <source>Primary Partition</source>
-        <translation>Ensisijainen Osio</translation>
+        <translation>Ensisijainen osio</translation>
     </message>
 </context>
 <context>
@@ -500,7 +500,7 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="62"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="84"/>
         <source>Prepare for Installation</source>
-        <translation>Valmistaudutaan Asennukseen</translation>
+        <translation>Valmistaudu asennukseen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
@@ -530,70 +530,70 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/partman/operation.cpp" line="253"/>
+        <location filename="../src/partman/operation.cpp" line="254"/>
         <source>Create extended partition %1</source>
         <translation>Luo laajennettu osio %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="257"/>
+        <location filename="../src/partman/operation.cpp" line="258"/>
         <source>Create new partition %1, type is %2</source>
         <translation>Luo uusi osio %1 tyypiksi %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="261"/>
+        <location filename="../src/partman/operation.cpp" line="262"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation>Luo osio %1 liitoskohdaksi %2 ja tyypiksi %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="270"/>
+        <location filename="../src/partman/operation.cpp" line="271"/>
         <source>Delete %1 partition</source>
         <translation>Poista osio %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="275"/>
+        <location filename="../src/partman/operation.cpp" line="276"/>
         <source>Format %1 partition, type is %2</source>
         <translation>Alusta osio %1 tyypiksi %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="279"/>
+        <location filename="../src/partman/operation.cpp" line="280"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
         <translation>Alusta osio %1 liitoskohdaksi %2 ja tyypiksi %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="287"/>
+        <location filename="../src/partman/operation.cpp" line="288"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
         <translation>Käytä osiota %1 liitoskohtana %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="293"/>
+        <location filename="../src/partman/operation.cpp" line="294"/>
         <source>Format %1 and create %2 new partition table</source>
         <translation>Alusta %1 ja luo uusi %2 osiotaulu</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="299"/>
+        <location filename="../src/partman/operation.cpp" line="300"/>
         <source>Adjust the size of %1 partition</source>
         <translation>Säädä osion %1 kokoa</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="159"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="195"/>
         <source>Do not use this partition</source>
         <translation>Älä käytä tätä osiota</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="172"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="208"/>
         <source>Swap partition</source>
         <translation>Swap-osio</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="174"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="210"/>
         <source>Unknown</source>
         <translation>Tuntematon</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="215"/>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="246"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="251"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="282"/>
         <source>Freespace</source>
-        <translation>Vapaa tila</translation>
+        <translation>Tallennustilaa</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
@@ -625,10 +625,20 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/select_language_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/select_language_frame.cpp" line="111"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="142"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="182"/>
         <source>Next</source>
         <translation>Seuraava</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="183"/>
+        <source>I have read and agree to</source>
+        <translation>Olen lukenut ja hyväksynyt</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="184"/>
+        <source>Deepin Software End User License Agreement</source>
+        <translation>Deepin ohjelmiston loppukäyttäjän lisenssisopimus</translation>
     </message>
 </context>
 <context>
@@ -681,7 +691,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="75"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="144"/>
         <source>Create User Account</source>
-        <translation>Luo Käyttäjätili</translation>
+        <translation>Luo käyttäjätili</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
@@ -766,23 +776,23 @@
         <translation>Ole hyvä ja syötä laitteen nimi, joka on pidempi kuin %1 merkkiä ja lyhyempi kuin %2 merkkiä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="302"/>
         <source>The password should be different from the username</source>
         <translation>Salasanan pitäisi olla eri kuin käyttäjänimi</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="324"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="314"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="327"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Ole hyvä ja syötä salasana, joka on pidempi kuin %1 merkkiä ja lyhyempi kuin %2 merkkiä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="321"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Salasanan on sisällettävä englantilaisia merkkejä (merkkikokoriippuvainen), numeroita tai erikoismerkkejä (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="348"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="351"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Salasanat eivät täsmää</translation>
     </message>
@@ -811,20 +821,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="129"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="167"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
         <source>Select Time Zone</source>
-        <translation>Valitse Aikavyöhyke</translation>
+        <translation>Valitse aikavyöhyke</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="130"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="168"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="145"/>
         <source>Mark your zone on the map</source>
         <translation>Merkitse vyöhykkeesi kartalla</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="131"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="170"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="108"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="147"/>
         <source>Next</source>
         <translation>Seuraava</translation>
     </message>
@@ -835,7 +845,7 @@
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="58"/>
         <source>Friendly Reminder</source>
-        <translation>Ystävällinen Muistutus</translation>
+        <translation>Ystävällinen muistutus</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="42"/>
@@ -853,47 +863,47 @@
 <context>
     <name>installer::Full_Disk_Encrypt_frame</name>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="150"/>
         <source>Please input password</source>
         <translation>Anna salasana</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="151"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="156"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Salasanat eivät täsmää</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
         <source>Full Disk Encryption</source>
         <translation>Koko levyn salaus</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Ole hyvä ja tee varmuuskopio tärkeistä tiedoista, ja sitten valitse levy jolle asentaa</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="179"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="184"/>
         <source>Encrypt This Disk</source>
         <translation>Salaa tämä levy</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="180"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="185"/>
         <source>Password</source>
         <translation>Salasana</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="181"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="186"/>
         <source>Repeat Password</source>
         <translation>Toista salasana</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="187"/>
         <source>Previous</source>
         <translation>Edellinen</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="188"/>
         <source>Start Installation</source>
         <translation>Aloita asennus</translation>
     </message>
@@ -992,27 +1002,22 @@
 <context>
     <name>installer::UserAgreementFrame</name>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="131"/>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="121"/>
         <source>End User License Agreement</source>
         <translation>Loppukäyttäjän lisenssisopimus</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="145"/>
-        <source>Accept</source>
-        <translation>Hyväksy</translation>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="135"/>
+        <source>Back</source>
+        <translation>Takaisin</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="146"/>
-        <source>Cancel</source>
-        <translation>Peruuta</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="143"/>
         <source>View in Chinese</source>
         <translation>Näytä kiinaksi</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="159"/>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="148"/>
         <source>View in English</source>
         <translation>Näytä englanniksi</translation>
     </message>
