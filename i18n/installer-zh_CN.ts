@@ -142,44 +142,44 @@
 <context>
     <name>installer::EditPartitionFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="133"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="196"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="99"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="169"/>
         <source>Edit Disk</source>
         <translation>磁盘编辑</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="135"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="198"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="101"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="171"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>请确定您已备份好重要数据，然后选择要安装的磁盘</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="137"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="231"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="103"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="204"/>
         <source>Filesystem</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="138"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="233"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="104"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="206"/>
         <source>Mount point</source>
         <translation>挂载点</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="139"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="235"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="105"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="208"/>
         <source>Format the partition</source>
         <translation>格式化该分区</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="140"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="278"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="251"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="141"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="279"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="252"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
@@ -421,12 +421,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="308"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="416"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
         <source>Start installation</source>
         <translation>开始安装</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="416"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
@@ -530,68 +530,68 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/partman/operation.cpp" line="253"/>
+        <location filename="../src/partman/operation.cpp" line="254"/>
         <source>Create extended partition %1</source>
         <translation>新建扩展分区 %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="257"/>
+        <location filename="../src/partman/operation.cpp" line="258"/>
         <source>Create new partition %1, type is %2</source>
         <translation>新建%1分区，类型为%2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="261"/>
+        <location filename="../src/partman/operation.cpp" line="262"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation>新建%1分区作为%2（挂载点）， 类型为%3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="270"/>
+        <location filename="../src/partman/operation.cpp" line="271"/>
         <source>Delete %1 partition</source>
         <translation>删除%1分区</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="275"/>
+        <location filename="../src/partman/operation.cpp" line="276"/>
         <source>Format %1 partition, type is %2</source>
         <translation>格式化%1分区， 类型 为%2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="279"/>
+        <location filename="../src/partman/operation.cpp" line="280"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
         <translation>格式化%1分区作为%2（挂载点），类型为%3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="287"/>
+        <location filename="../src/partman/operation.cpp" line="288"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
         <translation>使用%1分区作为%2（挂载点）</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="293"/>
+        <location filename="../src/partman/operation.cpp" line="294"/>
         <source>Format %1 and create %2 new partition table</source>
         <translation>全盘格式化 %1 并创建新的 %2 格式的分区表</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="299"/>
+        <location filename="../src/partman/operation.cpp" line="300"/>
         <source>Adjust the size of %1 partition</source>
         <translation>调整分区%1的大小</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="159"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="195"/>
         <source>Do not use this partition</source>
         <translation>不使用此分区</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="172"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="208"/>
         <source>Swap partition</source>
         <translation>交换分区</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="174"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="210"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="215"/>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="246"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="251"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="282"/>
         <source>Freespace</source>
         <translation>可用空间</translation>
     </message>
@@ -625,10 +625,20 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/select_language_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/select_language_frame.cpp" line="111"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="142"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="182"/>
         <source>Next</source>
         <translation>下一步</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="183"/>
+        <source>I have read and agree to</source>
+        <translation>我已阅读并同意</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="184"/>
+        <source>Deepin Software End User License Agreement</source>
+        <translation>《深度操作系统最终用户许可协议》</translation>
     </message>
 </context>
 <context>
@@ -766,23 +776,23 @@
         <translation>请输入长度大于%1，小于%2位计算机名</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="302"/>
         <source>The password should be different from the username</source>
         <translation>用户密码不能与用户名相同</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="324"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="314"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="327"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>请输入长度大于%1，小于%2位密码</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="321"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>密码必须包含英文（区分大小写）、数字或特殊符号（~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;）</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="348"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="351"/>
         <source>The two passwords don&apos;t match</source>
         <translation>两次输入的密码不一致</translation>
     </message>
@@ -811,20 +821,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="129"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="167"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
         <source>Select Time Zone</source>
         <translation>选择时区</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="130"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="168"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="145"/>
         <source>Mark your zone on the map</source>
         <translation>请在地图上标注您所在的区域</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="131"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="170"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="108"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="147"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
@@ -853,47 +863,47 @@
 <context>
     <name>installer::Full_Disk_Encrypt_frame</name>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="150"/>
         <source>Please input password</source>
         <translation>请输入密码</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="151"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="156"/>
         <source>The two passwords don&apos;t match</source>
         <translation>两次输入的密码不一致</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
         <source>Full Disk Encryption</source>
         <translation>全盘加密</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>请确定您已备份好重要数据，然后选择要安装的磁盘</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="179"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="184"/>
         <source>Encrypt This Disk</source>
         <translation>加密该磁盘</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="180"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="185"/>
         <source>Password</source>
         <translation>密码</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="181"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="186"/>
         <source>Repeat Password</source>
         <translation>重复密码</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="187"/>
         <source>Previous</source>
         <translation>上一步</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="188"/>
         <source>Start Installation</source>
         <translation>开始安装</translation>
     </message>
@@ -992,27 +1002,22 @@
 <context>
     <name>installer::UserAgreementFrame</name>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="131"/>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="121"/>
         <source>End User License Agreement</source>
         <translation>最终用户许可协议</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="145"/>
-        <source>Accept</source>
-        <translation>同意</translation>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="135"/>
+        <source>Back</source>
+        <translation>返回</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="146"/>
-        <source>Cancel</source>
-        <translation>取消</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="143"/>
         <source>View in Chinese</source>
         <translation>显示中文</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="159"/>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="148"/>
         <source>View in English</source>
         <translation>显示英文</translation>
     </message>

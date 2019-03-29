@@ -142,44 +142,44 @@
 <context>
     <name>installer::EditPartitionFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="133"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="196"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="99"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="169"/>
         <source>Edit Disk</source>
         <translation>Редактировать Диск</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="135"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="198"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="101"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="171"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Пожалуйста, убедитесь, что важные данные были сохранены, затем выберите диск для установки</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="137"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="231"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="103"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="204"/>
         <source>Filesystem</source>
         <translation>Файловая система</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="138"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="233"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="104"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="206"/>
         <source>Mount point</source>
         <translation>Точка монтирования</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="139"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="235"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="105"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="208"/>
         <source>Format the partition</source>
         <translation>Форматировать раздел</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="140"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="278"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="251"/>
         <source>Cancel</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="141"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="279"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="252"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
@@ -421,12 +421,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="308"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="416"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
         <source>Start installation</source>
         <translation>Начало установки</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="416"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
         <source>Next</source>
         <translation>Далее</translation>
     </message>
@@ -530,68 +530,68 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/partman/operation.cpp" line="253"/>
+        <location filename="../src/partman/operation.cpp" line="254"/>
         <source>Create extended partition %1</source>
         <translation>Создать расширенный раздел %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="257"/>
+        <location filename="../src/partman/operation.cpp" line="258"/>
         <source>Create new partition %1, type is %2</source>
         <translation>Создать новый раздел %1, тип %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="261"/>
+        <location filename="../src/partman/operation.cpp" line="262"/>
         <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
         <translation>Создать новый раздел %1 как %2 (точка монтирования), тип %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="270"/>
+        <location filename="../src/partman/operation.cpp" line="271"/>
         <source>Delete %1 partition</source>
         <translation>Удалить %1 раздел</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="275"/>
+        <location filename="../src/partman/operation.cpp" line="276"/>
         <source>Format %1 partition, type is %2</source>
         <translation>Форматировать %1 раздел, тип %2</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="279"/>
+        <location filename="../src/partman/operation.cpp" line="280"/>
         <source>Format %1 partition as %2 (mountpoint), type is %3</source>
         <translation>Форматировать %1 раздел как %2 (точка монтирования), тип %3</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="287"/>
+        <location filename="../src/partman/operation.cpp" line="288"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
         <translation>Использовать %1 раздел как %2 (точка монтирования)</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="293"/>
+        <location filename="../src/partman/operation.cpp" line="294"/>
         <source>Format %1 and create %2 new partition table</source>
         <translation>Форматировать %1 и создать %2 новую таблицу разделов</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="299"/>
+        <location filename="../src/partman/operation.cpp" line="300"/>
         <source>Adjust the size of %1 partition</source>
         <translation>Установить размер %1 раздела</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="159"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="195"/>
         <source>Do not use this partition</source>
         <translation>Не использовать этот раздел</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="172"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="208"/>
         <source>Swap partition</source>
         <translation>Своп раздел</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="174"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="210"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="215"/>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="246"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="251"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="282"/>
         <source>Freespace</source>
         <translation>Свободное место</translation>
     </message>
@@ -625,10 +625,20 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/select_language_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/select_language_frame.cpp" line="111"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="142"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="182"/>
         <source>Next</source>
         <translation>Далее</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="183"/>
+        <source>I have read and agree to</source>
+        <translation>Я прочитал и согласен с</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="184"/>
+        <source>Deepin Software End User License Agreement</source>
+        <translation>Лицензионное Соглашение с Конечным Пользователем</translation>
     </message>
 </context>
 <context>
@@ -766,23 +776,23 @@
         <translation>Пожалуйста введите имя компьютера длиннее чем %1 символов и короче чем %2 символов</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="293"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="302"/>
         <source>The password should be different from the username</source>
         <translation>Пароль должен отличаться от имени пользователя</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="311"/>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="324"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="314"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="327"/>
         <source>Please input password longer than %1 characters and shorter than %2 characters</source>
         <translation>Пожалуйста введите пароль длиннее чем %1 символов и короче чем %2 символов</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="318"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="321"/>
         <source>The password must contain English letters (case-sensitive), numbers or special symbols (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</source>
         <translation>Пароль должен содержать Английские буквы (с учетом регистра), цифры или специальные символы (~!@#$%^&amp;*()[]{}\|/?,.&lt;&gt;)</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="348"/>
+        <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="351"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Пара паролей не совпадает</translation>
     </message>
@@ -811,20 +821,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="129"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="167"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
         <source>Select Time Zone</source>
         <translation>Выберите Часовой Пояс</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="130"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="168"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="145"/>
         <source>Mark your zone on the map</source>
         <translation>Отметьте ваш часовой пояс на карте</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="131"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="170"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="108"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="147"/>
         <source>Next</source>
         <translation>Далее</translation>
     </message>
@@ -853,47 +863,47 @@
 <context>
     <name>installer::Full_Disk_Encrypt_frame</name>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="150"/>
         <source>Please input password</source>
         <translation>Пожалуйста, введите пароль</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="151"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="156"/>
         <source>The two passwords don&apos;t match</source>
         <translation>Пара паролей не совпадает</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="177"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
         <source>Full Disk Encryption</source>
         <translation>Полное шифрование диска</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="178"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
         <source>Please make sure important data were made a backup, then select the disk to install</source>
         <translation>Пожалуйста, убедитесь, что важные данные были сохранены, затем выберите диск для установки</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="179"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="184"/>
         <source>Encrypt This Disk</source>
         <translation>Зашифровать этот диск</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="180"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="185"/>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="181"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="186"/>
         <source>Repeat Password</source>
         <translation>Повторите Пароль</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="187"/>
         <source>Previous</source>
         <translation>Предыдущий</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
+        <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="188"/>
         <source>Start Installation</source>
         <translation>Начать Установку</translation>
     </message>
@@ -992,27 +1002,22 @@
 <context>
     <name>installer::UserAgreementFrame</name>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="131"/>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="121"/>
         <source>End User License Agreement</source>
         <translation>Лицензионное Соглашение с Конечным Пользователем</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="145"/>
-        <source>Accept</source>
-        <translation>Принять</translation>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="135"/>
+        <source>Back</source>
+        <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="146"/>
-        <source>Cancel</source>
-        <translation>Отменить</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="154"/>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="143"/>
         <source>View in Chinese</source>
         <translation>Просмотр на Китайском</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/user_agreement_frame.cpp" line="159"/>
+        <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="148"/>
         <source>View in English</source>
         <translation>Просмотр на Английском</translation>
     </message>
