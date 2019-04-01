@@ -67,11 +67,10 @@ private:
     void initUI();
     void updateTranslator(const QString& locale);
     void updateTs();
-    void onLanguageListSelected(const QModelIndex& current, const QModelIndex& previous);
+    void onLanguageListSelected(const QModelIndex& current);
     void onAccpetLicenseChanged(bool enable);
 
 private:
-    bool               lang_selectd        = false;
     QTranslator*       current_translator_ = nullptr;
     FramelessListView* language_view_      = nullptr;
     LanguageListModel* language_model_     = nullptr;

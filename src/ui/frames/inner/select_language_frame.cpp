@@ -56,6 +56,7 @@ void SelectLanguageFrame::readConf() {
   if (index.isValid()) {
     lang_ = language_model_->languageItemAt(index);
     language_view_->setCurrentIndex(index);
+    emit language_view_->clicked(index);
   }
 }
 
@@ -95,9 +96,8 @@ bool SelectLanguageFrame::eventFilter(QObject* obj, QEvent* event) {
 }
 
 void SelectLanguageFrame::initConnections() {
-  connect(language_view_->selectionModel(),
-          &QItemSelectionModel::currentChanged,
-          this, &SelectLanguageFrame::onLanguageListSelected);
+  connect(language_view_, &QListView::clicked, this,
+          &SelectLanguageFrame::onLanguageListSelected);
   connect(next_button_, &QPushButton::clicked,
           this, &SelectLanguageFrame::finished);
   connect(accept_license_, &QCheckBox::clicked, this,
@@ -184,24 +184,21 @@ void SelectLanguageFrame::updateTs() {
   license_label_->setText(tr("Deepin Software End User License Agreement"));
 }
 
-void SelectLanguageFrame::onLanguageListSelected(const QModelIndex& current,
-                                                 const QModelIndex& previous)
+void SelectLanguageFrame::onLanguageListSelected(const QModelIndex& current)
 {
-    // FIXME: I don't know why the model will send currentChanged signal.
-    if (previous.isValid() && current.isValid()) {
+    if (current.isValid()) {
         // Update locale on-the-fly.
         const LanguageItem language_item = language_model_->languageItemAt(current);
         this->updateTranslator(language_item.locale);
         lang_ = language_item;
         this->writeConf();
         emit this->timezoneUpdated(language_item.timezone);
-        lang_selectd = true;
         onAccpetLicenseChanged(accept_license_->isChecked());
     }
 }
 
 void SelectLanguageFrame::onAccpetLicenseChanged(bool enable) {
-    next_button_->setEnabled(enable && lang_selectd);
+    next_button_->setEnabled(enable && !lang_.name.isEmpty());
 }
 
 }  // namespace installer
