@@ -76,7 +76,7 @@ if [ -f ${SRCPATH}/grub.cfg ]; then
     ${SRCPATH}/grub.cfg > /boot/grub/grub.cfg
 elif [ -f ${SRCPATH}/grub.cfg.head ]; then
   cat ${SRCPATH}/grub.cfg.head > /boot/grub/grub.cfg
-  
+
   for _KERVER in $(ls /lib/modules); do
     if [ -d /lib/modules/${_KERVER} ]; then
 	  sed -e "s|root=|root=UUID=$LOCALUUID|g" \
@@ -97,6 +97,10 @@ if cat /deepinhost/etc/deepin-installer.conf | grep DI_MOUNTPOINTS | \
     find .. -maxdepth 1 -type f -exec ln -s {} . \;
     ln -s ../grub .
     cd -
+fi
+
+if [ x$(installer_get "DI_CRYPT_ROOT") == xtrue ]; then
+    sed -i 's/splash//g' /boot/grub/grub.cfg
 fi
 
 return 0
