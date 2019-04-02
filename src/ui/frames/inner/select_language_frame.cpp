@@ -98,6 +98,16 @@ bool SelectLanguageFrame::eventFilter(QObject* obj, QEvent* event) {
 void SelectLanguageFrame::initConnections() {
   connect(language_view_, &QListView::clicked, this,
           &SelectLanguageFrame::onLanguageListSelected);
+  connect(
+      language_view_->selectionModel(), &QItemSelectionModel::currentChanged, this,
+      [=](const QModelIndex& current, const QModelIndex& previous) {
+          // Skip first signal
+          if (current == language_view_->model()->index(0, 0) && !previous.isValid()) {
+              return;
+          }
+          Q_UNUSED(previous);
+          emit language_view_->clicked(current);
+      });
   connect(next_button_, &QPushButton::clicked,
           this, &SelectLanguageFrame::finished);
   connect(accept_license_, &QCheckBox::clicked, this,
