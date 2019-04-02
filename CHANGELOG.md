@@ -1,3 +1,24 @@
+<a name="2.6.7"></a>
+### 2.6.7 (2019-04-02)
+
+
+#### Bug Fixes
+
+*   live-filesystem don't have password ([3c85aa6f](https://github.com/linuxdeepin/deepin-install-reborn/commit/3c85aa6f520b047378531f73767bb086768c1559))
+*   disable plymouth when use full disk encryption on the longxin ([f5ae51f6](https://github.com/linuxdeepin/deepin-install-reborn/commit/f5ae51f6a5d22bf5397d448e674208b5a73b3f5f))
+* **longxin:**  full crypt disk install failed ([39b7a2d0](https://github.com/linuxdeepin/deepin-install-reborn/commit/39b7a2d02a259c3bb733a9e3e860a988f8705d9a))
+* **os-prober:**  pre-operation check ([0fd24459](https://github.com/linuxdeepin/deepin-install-reborn/commit/0fd2445949c219badfffef4dbb3ee946c81d6345))
+
+#### Features
+
+*   show only support filesystem ([800ca813](https://github.com/linuxdeepin/deepin-install-reborn/commit/800ca813aa7dd9cd84c5521753e983a23a2b5498))
+*   update repo url ([f1e4c817](https://github.com/linuxdeepin/deepin-install-reborn/commit/f1e4c817cf3d03de0395ac14e88405ab4aa26f4e))
+*   enable language scrollbar ([4366152b](https://github.com/linuxdeepin/deepin-install-reborn/commit/4366152b7297655dd3c18348b75aac351ca15890))
+*   use new user license page ([41a641cb](https://github.com/linuxdeepin/deepin-install-reborn/commit/41a641cb6d20c10f012886ff4836a49631676235))
+* **fulldisk:**  limit swap to 16G ([d031bc6e](https://github.com/linuxdeepin/deepin-install-reborn/commit/d031bc6e09676ead7bdb14deff17e06263b9112b))
+
+
+
 <a name="2.6.6"></a>
 ### 2.6.6 (2019-03-06)
 
