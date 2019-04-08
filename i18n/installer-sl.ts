@@ -143,43 +143,43 @@
     <name>installer::EditPartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="99"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="169"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="168"/>
         <source>Edit Disk</source>
         <translation>Uredi disk</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="101"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="171"/>
-        <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Prosim, prepričajte se, da ste naredili varnostno kopijo pomembnih podatkov, potem pa izberite disk za namestitev</translation>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="170"/>
+        <source>Make sure you have backed up important data, then select the disk to install</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="103"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="204"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="102"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="202"/>
         <source>Filesystem</source>
         <translation>Podatkovni sistem</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="104"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="206"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="103"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="204"/>
         <source>Mount point</source>
         <translation>Namestitvena točka</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="105"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="208"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="104"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="206"/>
         <source>Format the partition</source>
         <translation>Formatirajte particijo</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="106"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="251"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="105"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="249"/>
         <source>Cancel</source>
         <translation>Prekliči</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="107"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="252"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="250"/>
         <source>OK</source>
         <translation>V redu</translation>
     </message>
@@ -222,19 +222,19 @@
     <name>installer::InstallFailedFrame</name>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="75"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="95"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="94"/>
         <source>Installation Failed</source>
         <translation>Namestitev neuspešna</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="77"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="97"/>
-        <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>Oprostite za nevšečnosti. Lahko slikate ali skenirate QR šifro ali pošljete dnevnik napak, da bomo lahko bolje rešili težavo.</translation>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="96"/>
+        <source>Sorry for the inconvenience, please photo or scan the QR code to send error log, so that the issue can be better solved.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="79"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="126"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="124"/>
         <source>Exit installation</source>
         <translation>Izhod iz namestitve</translation>
     </message>
@@ -363,25 +363,25 @@
     <name>installer::NewTableWarningFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="75"/>
         <source>Full Disk Format Warning</source>
         <translation>Opozorilo ob polnem formatiranju diska</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="94"/>
-        <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Če nadaljujete, bo namestitev formatirala celoten disk, zato se prepričajte, da ste naredili varnostne kopije podatkov</translation>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="93"/>
+        <source>Continuing installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="101"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="58"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="99"/>
         <source>Cancel</source>
         <translation>Prekliči</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="60"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="102"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="100"/>
         <source>Continue</source>
         <translation>Nadaljuj</translation>
     </message>
@@ -390,43 +390,43 @@
     <name>installer::PartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="84"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="227"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="226"/>
         <source>Select Installation Location</source>
         <translation>Izberi lokacijo namestitve</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="229"/>
-        <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Prosim, prepričajte se, da ste naredili varnostno kopijo pomembnih podatkov, potem pa izberite disk za namestitev</translation>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="228"/>
+        <source>Make sure you have backed up important data, then select the disk to install</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="237"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="235"/>
         <source>Simple</source>
         <translation>Preprosto</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="241"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="239"/>
         <source>Advanced</source>
         <translation>Napredno</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="245"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="243"/>
         <source>Full Disk</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="308"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="306"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="412"/>
         <source>Start installation</source>
         <translation>Začni namestitev</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="412"/>
         <source>Next</source>
         <translation>Naprej</translation>
     </message>
@@ -450,32 +450,32 @@
     <name>installer::PartitionNumberLimitationFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="41"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="78"/>
-        <source>You need to delete a primary partition to create a new primary partition</source>
-        <translation>Če hočete ustvariti novo primarno particijo, morate izbrisati trenutno primarno particijo</translation>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="75"/>
+        <source>You should delete a primary partition before creating a new one</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="62"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="81"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="43"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="77"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
         <translation>Nove logične particije lahko ustvarite samo poleg obstoječih logičnih particij</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
-        <source>You need to delete a primary partition to create the new partition</source>
-        <translation>Če hočete ustvariti novo particijo, morate izbrisati primarno particijo</translation>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="48"/>
+        <source>You should delete a primary partition before creating a new partition</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="55"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="73"/>
         <source>Cannot create new partitions</source>
         <translation>Ne morem ustvariti novih particij</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="64"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="83"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="61"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="79"/>
         <source>Back</source>
         <translation>Nazaj</translation>
     </message>
@@ -498,31 +498,31 @@
     <name>installer::PrepareInstallFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="62"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="84"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="83"/>
         <source>Prepare for Installation</source>
         <translation>Pripravite se za namestitev</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="86"/>
-        <source>Please make a backup of important data and confirm the following operations</source>
-        <translation>Prosim, naredite varnostne kopije pomembnih podatkov in potrdite naslednje operacije</translation>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="85"/>
+        <source>Make a backup of your important data and then continue</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="94"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="66"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="92"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
         <translation>Naslednje operacije se bodo izvedle, če se želite izogniti izgubi podatkov, potrdite in nadaljujte</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="68"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="105"/>
         <source>Back</source>
         <translation>Nazaj</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="70"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="108"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="106"/>
         <source>Continue</source>
         <translation>Nadaljuj</translation>
     </message>
@@ -535,29 +535,29 @@
         <translation>Ustvari razširjeno particijo %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="258"/>
-        <source>Create new partition %1, type is %2</source>
-        <translation>Ustvari novo particijo %1, tipa %2</translation>
-    </message>
-    <message>
-        <location filename="../src/partman/operation.cpp" line="262"/>
-        <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation>Ustvari novo particijo %1 kot %2 (mountpoint), tipa %3</translation>
-    </message>
-    <message>
         <location filename="../src/partman/operation.cpp" line="271"/>
         <source>Delete %1 partition</source>
         <translation>Izbriši particijo %1</translation>
     </message>
     <message>
+        <location filename="../src/partman/operation.cpp" line="258"/>
+        <source>Create new partition %1, type: %2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/partman/operation.cpp" line="262"/>
+        <source>Create new partition %1 as %2 (mountpoint), type: %3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
         <location filename="../src/partman/operation.cpp" line="276"/>
-        <source>Format %1 partition, type is %2</source>
-        <translation>Formatiraj particijo %1, tipa %2</translation>
+        <source>Format %1 partition, type: %2</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="280"/>
-        <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation>Formatiraj particijo %1 kot %2 (mountpoint), tipa %3</translation>
+        <source>Format %1 partition as %2 (mountpoint), type: %3</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="288"/>
@@ -625,18 +625,18 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="142"/>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="182"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="152"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="192"/>
         <source>Next</source>
         <translation>Naprej</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="183"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="193"/>
         <source>I have read and agree to</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="184"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="194"/>
         <source>Deepin Software End User License Agreement</source>
         <translation type="unfinished"/>
     </message>
@@ -696,8 +696,8 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
-        <source>Input username and password</source>
-        <translation>Vnesite uporabniško ime in geslo</translation>
+        <source>Fill in the username, computer name and your password</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
@@ -793,8 +793,8 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="351"/>
-        <source>The two passwords don&apos;t match</source>
-        <translation>Gesli se ne ujemata</translation>
+        <source>Passwords do not match</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -869,8 +869,8 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="156"/>
-        <source>The two passwords don&apos;t match</source>
-        <translation>Gesli se ne ujemata</translation>
+        <source>Passwords do not match</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
@@ -879,8 +879,8 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
-        <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Prosim, prepričajte se, da ste naredili varnostno kopijo pomembnih podatkov, potem pa izberite disk za namestitev</translation>
+        <source>Make sure you have backed up important data, then select the disk to install</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="184"/>
@@ -920,81 +920,93 @@
     <name>installer::PartitionTableWarningFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="95"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="94"/>
         <source>Warning</source>
         <translation>Opozorilo</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="55"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="105"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
         <translation>Neposredna namestitev ni možna zaradi programa za namestitev na matični plošči EFI in detektorja diskov MBR. Prosim, izberite eno od rešitev, da nadaljujete.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="118"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="117"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
         <translation>Ponovno zaženite napravo, podjite v BIOS in izključite UEFI</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="62"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="119"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="118"/>
         <source>Exit BIOS, and enter deepin to install</source>
         <translation>Zapustite BIOS in podjite v deepin, da začnete namestitev</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
+        <source>Make a backup of all your data to avoid data loss</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
+        <source>Please double check if you have backed up all data, then reboot to enter this interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
+        <source>Make sure you have backed up all data before proceeding</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="153"/>
+        <source>Continuing installation will format your disk</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="126"/>
         <source>Please make a backup of all your data to avoid data loss</source>
         <translation>Naredite varnostno kopijo vaših podatkov, da se izognete izgubi podatkov</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="128"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
         <translation>Prosim, dvakrat preverite, če ste naredili varnostne kopije vseh podatkov, in znova zaženite napravo, da boste lahko dostopali do vmesnika</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="76"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="148"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="170"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="147"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
         <source>Continue</source>
         <translation>Nadaljuj</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="151"/>
         <source>Please make sure all data were made a backup, then continue</source>
         <translation>Prosim, prepričajte se, da ste naredili varnostne kopije podatkov, nato nadaljujte</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
-        <source>Continue installation will format your disk</source>
-        <translation>Če nadaljujete z namestitvijo, bo vaš disk formatiran</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="75"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="168"/>
         <source>Reboot</source>
         <translation>Ponoven zagon</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="77"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="171"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="170"/>
         <source>Back</source>
         <translation>Nazaj</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="114"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
         <source>Disable UEFI</source>
         <translation>Izključite UEFI</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="123"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="122"/>
         <source>Format the disk</source>
         <translation>Formatiraj disk</translation>
     </message>

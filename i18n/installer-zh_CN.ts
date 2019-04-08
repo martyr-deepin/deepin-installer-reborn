@@ -143,43 +143,43 @@
     <name>installer::EditPartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="99"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="169"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="168"/>
         <source>Edit Disk</source>
         <translation>磁盘编辑</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="101"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="171"/>
-        <source>Please make sure important data were made a backup, then select the disk to install</source>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="170"/>
+        <source>Make sure you have backed up important data, then select the disk to install</source>
         <translation>请确定您已备份好重要数据，然后选择要安装的磁盘</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="103"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="204"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="102"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="202"/>
         <source>Filesystem</source>
         <translation>文件系统</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="104"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="206"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="103"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="204"/>
         <source>Mount point</source>
         <translation>挂载点</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="105"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="208"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="104"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="206"/>
         <source>Format the partition</source>
         <translation>格式化该分区</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="106"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="251"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="105"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="249"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="107"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="252"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="250"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
@@ -222,19 +222,19 @@
     <name>installer::InstallFailedFrame</name>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="75"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="95"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="94"/>
         <source>Installation Failed</source>
         <translation>安装失败</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="77"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="97"/>
-        <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
-        <translation>给您带来的不便表示歉意，您可以通过拍照或者扫描二维码的方式将下面错误日志反馈经给我们，以便我们能更好的解决您的问题</translation>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="96"/>
+        <source>Sorry for the inconvenience, please photo or scan the QR code to send error log, so that the issue can be better solved.</source>
+        <translation>给您带来的不便表示歉意，您可以通过拍照或者扫描二维码的方式将下面错误日志反馈经给我们，以便我们能更好的解决您的问题。</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="79"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="126"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="124"/>
         <source>Exit installation</source>
         <translation>退出安装</translation>
     </message>
@@ -363,25 +363,25 @@
     <name>installer::NewTableWarningFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="75"/>
         <source>Full Disk Format Warning</source>
         <translation>格式化整块硬盘警告</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="94"/>
-        <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="93"/>
+        <source>Continuing installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
         <translation>继续安装将格式化整个磁盘，请全盘备份您的数据，以免丢失数据</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="101"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="58"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="99"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="60"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="102"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="100"/>
         <source>Continue</source>
         <translation>继续</translation>
     </message>
@@ -390,43 +390,43 @@
     <name>installer::PartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="84"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="227"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="226"/>
         <source>Select Installation Location</source>
         <translation>选择安装位置</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="229"/>
-        <source>Please make sure important data were made a backup, then select the disk to install</source>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="228"/>
+        <source>Make sure you have backed up important data, then select the disk to install</source>
         <translation>请确定您已备份好重要数据，然后选择要安装的磁盘</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="237"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="235"/>
         <source>Simple</source>
         <translation>简单</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="241"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="239"/>
         <source>Advanced</source>
         <translation>高级</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="245"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="243"/>
         <source>Full Disk</source>
         <translation>全盘安装</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="308"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="306"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="412"/>
         <source>Start installation</source>
         <translation>开始安装</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="412"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
@@ -450,32 +450,32 @@
     <name>installer::PartitionNumberLimitationFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="41"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="78"/>
-        <source>You need to delete a primary partition to create a new primary partition</source>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="75"/>
+        <source>You should delete a primary partition before creating a new one</source>
         <translation>新的主分区需要您删除一个主分区以后才能建立</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="62"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="81"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="43"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="77"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
         <translation>新的逻辑分区只能在现有逻辑分区相邻的位置才能建立</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
-        <source>You need to delete a primary partition to create the new partition</source>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="48"/>
+        <source>You should delete a primary partition before creating a new partition</source>
         <translation>新的分区需要您删除一个主分区以后才能建立</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="55"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="73"/>
         <source>Cannot create new partitions</source>
         <translation>无法新建分区</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="64"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="83"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="61"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="79"/>
         <source>Back</source>
         <translation>返回</translation>
     </message>
@@ -498,31 +498,31 @@
     <name>installer::PrepareInstallFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="62"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="84"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="83"/>
         <source>Prepare for Installation</source>
         <translation>准备安装</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="86"/>
-        <source>Please make a backup of important data and confirm the following operations</source>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="85"/>
+        <source>Make a backup of your important data and then continue</source>
         <translation>请备份好重要数据，然后确认以下操作</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="94"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="66"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="92"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
         <translation>将要执行以下操作，请确认后继续，以免丢失数据</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="68"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="105"/>
         <source>Back</source>
         <translation>返回</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="70"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="108"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="106"/>
         <source>Continue</source>
         <translation>继续</translation>
     </message>
@@ -535,29 +535,29 @@
         <translation>新建扩展分区 %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="258"/>
-        <source>Create new partition %1, type is %2</source>
-        <translation>新建%1分区，类型为%2</translation>
-    </message>
-    <message>
-        <location filename="../src/partman/operation.cpp" line="262"/>
-        <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation>新建%1分区作为%2（挂载点）， 类型为%3</translation>
-    </message>
-    <message>
         <location filename="../src/partman/operation.cpp" line="271"/>
         <source>Delete %1 partition</source>
         <translation>删除%1分区</translation>
     </message>
     <message>
+        <location filename="../src/partman/operation.cpp" line="258"/>
+        <source>Create new partition %1, type: %2</source>
+        <translation>新建%1分区，类型为%2</translation>
+    </message>
+    <message>
+        <location filename="../src/partman/operation.cpp" line="262"/>
+        <source>Create new partition %1 as %2 (mountpoint), type: %3</source>
+        <translation>新建%1分区作为%2（挂载点）， 类型为%3</translation>
+    </message>
+    <message>
         <location filename="../src/partman/operation.cpp" line="276"/>
-        <source>Format %1 partition, type is %2</source>
-        <translation>格式化%1分区， 类型 为%2</translation>
+        <source>Format %1 partition, type: %2</source>
+        <translation>格式化%1分区， 类型为%2</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="280"/>
-        <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation>格式化%1分区作为%2（挂载点），类型为%3</translation>
+        <source>Format %1 partition as %2 (mountpoint), type: %3</source>
+        <translation>格式化%1分区作为%2（挂载点）, 类型为%3</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="288"/>
@@ -625,18 +625,18 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="142"/>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="182"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="152"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="192"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="183"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="193"/>
         <source>I have read and agree to</source>
         <translation>我已阅读并同意</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="184"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="194"/>
         <source>Deepin Software End User License Agreement</source>
         <translation>《深度操作系统最终用户许可协议》</translation>
     </message>
@@ -696,8 +696,8 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
-        <source>Input username and password</source>
-        <translation>请输入您要创建的用户名并设置密码</translation>
+        <source>Fill in the username, computer name and your password</source>
+        <translation>请输入用户名，计算机名并设置密码</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
@@ -793,7 +793,7 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="351"/>
-        <source>The two passwords don&apos;t match</source>
+        <source>Passwords do not match</source>
         <translation>两次输入的密码不一致</translation>
     </message>
 </context>
@@ -869,7 +869,7 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="156"/>
-        <source>The two passwords don&apos;t match</source>
+        <source>Passwords do not match</source>
         <translation>两次输入的密码不一致</translation>
     </message>
     <message>
@@ -879,7 +879,7 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
-        <source>Please make sure important data were made a backup, then select the disk to install</source>
+        <source>Make sure you have backed up important data, then select the disk to install</source>
         <translation>请确定您已备份好重要数据，然后选择要安装的磁盘</translation>
     </message>
     <message>
@@ -920,81 +920,93 @@
     <name>installer::PartitionTableWarningFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="95"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="94"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="55"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="105"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
         <translation>检测到您的主板引导为EFI，但磁盘格式为MBR，无法直接安装；若要继续完成安装，请在下列解决方案中选择一项进行操作。</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="118"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="117"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
         <translation>重启到BIOS设置，并关闭UEFI设置启动</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="62"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="119"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="118"/>
         <source>Exit BIOS, and enter deepin to install</source>
         <translation>退出BIOS，重新进入deepin安装</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
-        <source>Please make a backup of all your data to avoid data loss</source>
+        <source>Make a backup of all your data to avoid data loss</source>
         <translation>请全盘备份您的数据，以免丢失数据</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="128"/>
+        <source>Please double check if you have backed up all data, then reboot to enter this interface</source>
+        <translation>请再三检查您是否备份了数据，然后重启到此界面</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
+        <source>Make sure you have backed up all data before proceeding</source>
+        <translation>请确认您已备份好数据，然后继续安装</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="153"/>
+        <source>Continuing installation will format your disk</source>
+        <translation>继续安装会格式化您的磁盘</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="126"/>
+        <source>Please make a backup of all your data to avoid data loss</source>
+        <translation>请全盘备份您的数据，以免丢失数据</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
         <translation>请再三检查您是否备份了数据，然后重启到此界面</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="76"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="148"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="170"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="147"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
         <source>Continue</source>
         <translation>继续</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="151"/>
         <source>Please make sure all data were made a backup, then continue</source>
         <translation>请确认您已备份好数据，然后继续安装</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
-        <source>Continue installation will format your disk</source>
-        <translation>继续安装会格式化您的磁盘</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="75"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="168"/>
         <source>Reboot</source>
         <translation>重新启动</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="77"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="171"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="170"/>
         <source>Back</source>
         <translation>返回</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="114"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
         <source>Disable UEFI</source>
         <translation>关闭UEFI</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="123"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="122"/>
         <source>Format the disk</source>
         <translation>格式化整个磁盘</translation>
     </message>
