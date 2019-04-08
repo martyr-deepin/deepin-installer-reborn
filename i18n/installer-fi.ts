@@ -143,43 +143,43 @@
     <name>installer::EditPartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="99"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="169"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="168"/>
         <source>Edit Disk</source>
         <translation>Muokkaa levyä</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="101"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="171"/>
-        <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Ole hyvä ja tee varmuuskopio tärkeistä tiedoista, ja sitten valitse levy jolle asentaa</translation>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="170"/>
+        <source>Make sure you have backed up important data, then select the disk to install</source>
+        <translation>Varmista, että olet varmuuskopioinut tärkeät tiedot, ja valitse sitten levy jolle haluat asentaa</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="103"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="204"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="102"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="202"/>
         <source>Filesystem</source>
         <translation>Tiedostojärjestelmä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="104"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="206"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="103"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="204"/>
         <source>Mount point</source>
         <translation>Liitoskohta</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="105"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="208"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="104"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="206"/>
         <source>Format the partition</source>
         <translation>Alusta osio</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="106"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="251"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="105"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="249"/>
         <source>Cancel</source>
         <translation>Peruuta</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="107"/>
-        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="252"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="250"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
@@ -222,19 +222,19 @@
     <name>installer::InstallFailedFrame</name>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="75"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="95"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="94"/>
         <source>Installation Failed</source>
         <translation>Asennus epäonnistui</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="77"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="97"/>
-        <source>Sorry for the inconvenience, you can photo or scan the QR code to send error log, so we can better solve the issue.</source>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="96"/>
+        <source>Sorry for the inconvenience, please photo or scan the QR code to send error log, so that the issue can be better solved.</source>
         <translation>Pahoittelemme haittaa, voit lähettää tai skannata QR-koodin virhelokin lähettämiseksi, jotta voimme ratkaista ongelman paremmin.</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="79"/>
-        <location filename="../src/ui/frames/install_failed_frame.cpp" line="126"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
+        <location filename="../src/ui/frames/install_failed_frame.cpp" line="124"/>
         <source>Exit installation</source>
         <translation>Poistu asennuksesta</translation>
     </message>
@@ -363,25 +363,25 @@
     <name>installer::NewTableWarningFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="75"/>
         <source>Full Disk Format Warning</source>
         <translation>Koko levyn alustamisen varoitus</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="94"/>
-        <source>Continuing with installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Asennuksen jatkaminen alustaa koko levyn, ole hyvä ja tee varmuuskopio kaikista tiedoistasi välttääksesi niiden häviötä</translation>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="93"/>
+        <source>Continuing installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
+        <translation>Asennuksen jatkaminen alustaa koko levyn. Tee varmuuskopiot kaikista tiedoistasi tietojen häviämisen välttämiseksi</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="101"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="58"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="99"/>
         <source>Cancel</source>
         <translation>Peruuta</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="60"/>
-        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="102"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="59"/>
+        <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="100"/>
         <source>Continue</source>
         <translation>Jatka</translation>
     </message>
@@ -390,43 +390,43 @@
     <name>installer::PartitionFrame</name>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="84"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="227"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="226"/>
         <source>Select Installation Location</source>
         <translation>Valitse asennuspaikka</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="229"/>
-        <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Ole hyvä ja tee varmuuskopio tärkeistä tiedoista, ja sitten valitse levy jolle asentaa</translation>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="228"/>
+        <source>Make sure you have backed up important data, then select the disk to install</source>
+        <translation>Varmista, että olet varmuuskopioinut tärkeät tiedot, ja valitse sitten levy jolle haluat asentaa</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="237"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="235"/>
         <source>Simple</source>
         <translation>Yksinkertainen</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="241"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="239"/>
         <source>Advanced</source>
         <translation>Edistynyt</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="245"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="243"/>
         <source>Full Disk</source>
         <translation>Levy täynnä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="308"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="306"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="412"/>
         <source>Start installation</source>
         <translation>Aloita asennus</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="414"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="412"/>
         <source>Next</source>
         <translation>Seuraava</translation>
     </message>
@@ -450,32 +450,32 @@
     <name>installer::PartitionNumberLimitationFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="41"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="78"/>
-        <source>You need to delete a primary partition to create a new primary partition</source>
-        <translation>Sinun täytyy poistaa ensisijainen osio luodaksesi uuden ensisijaisen osion</translation>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="75"/>
+        <source>You should delete a primary partition before creating a new one</source>
+        <translation>Sinun tulee poistaa ensisijainen osio ennen kuin luot uuden</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="44"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="62"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="81"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="43"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="59"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="77"/>
         <source>New logical partitions can only be created near existing logical partitions</source>
         <translation>Uusia loogisia osioita voidaan luoda vain lähelle olemassa olevia loogisia osioita</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="49"/>
-        <source>You need to delete a primary partition to create the new partition</source>
-        <translation>Sinun täytyy poistaa ensisijainen osio luodaksesi uuden osion</translation>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="48"/>
+        <source>You should delete a primary partition before creating a new partition</source>
+        <translation>Sinun tulee poistaa ensisijainen osio ennen kuin luot uuden osion</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="55"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="73"/>
         <source>Cannot create new partitions</source>
         <translation>Uusia osioita ei voi luoda</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="64"/>
-        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="83"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="61"/>
+        <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="79"/>
         <source>Back</source>
         <translation>Takaisin</translation>
     </message>
@@ -498,31 +498,31 @@
     <name>installer::PrepareInstallFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="62"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="84"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="83"/>
         <source>Prepare for Installation</source>
         <translation>Valmistaudu asennukseen</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="86"/>
-        <source>Please make a backup of important data and confirm the following operations</source>
-        <translation>Ole hyvä ja tee varmuuskopio tärkeistä tiedoista, ja vahvista seuraavat toiminnot</translation>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="85"/>
+        <source>Make a backup of your important data and then continue</source>
+        <translation>Tee varmuuskopio tärkeistä tiedoista ja jatka sitten</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="94"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="66"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="92"/>
         <source>The following operations will be executed, please confirm and continue to avoid data loss</source>
         <translation>Seuraavat toiminnot toteutetaan, ole hyvä ja vahvista välttääksesi tietojen menettämistä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="68"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="105"/>
         <source>Back</source>
         <translation>Takaisin</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="70"/>
-        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="108"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="69"/>
+        <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="106"/>
         <source>Continue</source>
         <translation>Jatka</translation>
     </message>
@@ -535,34 +535,34 @@
         <translation>Luo laajennettu osio %1</translation>
     </message>
     <message>
-        <location filename="../src/partman/operation.cpp" line="258"/>
-        <source>Create new partition %1, type is %2</source>
-        <translation>Luo uusi osio %1 tyypiksi %2</translation>
-    </message>
-    <message>
-        <location filename="../src/partman/operation.cpp" line="262"/>
-        <source>Create new partition %1 as %2 (mountpoint), type is %3</source>
-        <translation>Luo osio %1 liitoskohdaksi %2 ja tyypiksi %3</translation>
-    </message>
-    <message>
         <location filename="../src/partman/operation.cpp" line="271"/>
         <source>Delete %1 partition</source>
         <translation>Poista osio %1</translation>
     </message>
     <message>
+        <location filename="../src/partman/operation.cpp" line="258"/>
+        <source>Create new partition %1, type: %2</source>
+        <translation>Luo uusi osio %1, kirjoita: %2</translation>
+    </message>
+    <message>
+        <location filename="../src/partman/operation.cpp" line="262"/>
+        <source>Create new partition %1 as %2 (mountpoint), type: %3</source>
+        <translation>Luo uusi %1 osio %2 (liitoskohta), kirjoita: %3</translation>
+    </message>
+    <message>
         <location filename="../src/partman/operation.cpp" line="276"/>
-        <source>Format %1 partition, type is %2</source>
-        <translation>Alusta osio %1 tyypiksi %2</translation>
+        <source>Format %1 partition, type: %2</source>
+        <translation>Alusta %1 osio, kirjoita: %2</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="280"/>
-        <source>Format %1 partition as %2 (mountpoint), type is %3</source>
-        <translation>Alusta osio %1 liitoskohdaksi %2 ja tyypiksi %3</translation>
+        <source>Format %1 partition as %2 (mountpoint), type: %3</source>
+        <translation>Alusta %1 osio %2 (kiinnityspiste), kirjoita: %3</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="288"/>
         <source>Use %1 partition as %2 (mountpoint)</source>
-        <translation>Käytä osiota %1 liitoskohtana %2</translation>
+        <translation>Käytä %1 osiota %2 (liitoskohtana)</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="294"/>
@@ -625,18 +625,18 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="142"/>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="182"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="152"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="192"/>
         <source>Next</source>
         <translation>Seuraava</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="183"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="193"/>
         <source>I have read and agree to</source>
         <translation>Olen lukenut ja hyväksynyt</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="184"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="194"/>
         <source>Deepin Software End User License Agreement</source>
         <translation>Deepin ohjelmiston loppukäyttäjän lisenssisopimus</translation>
     </message>
@@ -696,8 +696,8 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
-        <source>Input username and password</source>
-        <translation>Syötä käyttäjänimi ja salasana</translation>
+        <source>Fill in the username, computer name and your password</source>
+        <translation>Syötä käyttäjätunnus, tietokoneen nimi ja salasana</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
@@ -793,7 +793,7 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="351"/>
-        <source>The two passwords don&apos;t match</source>
+        <source>Passwords do not match</source>
         <translation>Salasanat eivät täsmää</translation>
     </message>
 </context>
@@ -845,7 +845,7 @@
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="58"/>
         <source>Friendly Reminder</source>
-        <translation>Ystävällinen muistutus</translation>
+        <translation>Muistutus</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="42"/>
@@ -869,7 +869,7 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="156"/>
-        <source>The two passwords don&apos;t match</source>
+        <source>Passwords do not match</source>
         <translation>Salasanat eivät täsmää</translation>
     </message>
     <message>
@@ -879,8 +879,8 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
-        <source>Please make sure important data were made a backup, then select the disk to install</source>
-        <translation>Ole hyvä ja tee varmuuskopio tärkeistä tiedoista, ja sitten valitse levy jolle asentaa</translation>
+        <source>Make sure you have backed up important data, then select the disk to install</source>
+        <translation>Varmista, että olet varmuuskopioinut tärkeät tiedot, ja valitse sitten levy jolle haluat asentaa</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="184"/>
@@ -920,81 +920,93 @@
     <name>installer::PartitionTableWarningFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="95"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="94"/>
         <source>Warning</source>
         <translation>Varoitus</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="55"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="105"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
         <translation>Suora asennus ei onnistu emolevyn EFI-käynnistyslataimen ja MBR-levyn havaitsemisen vuoksi, ole hyvä ja jatka valitsemalla jokin seuraavista ratkaisuista.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="118"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="117"/>
         <source>Reboot, enter BIOS, and disable UEFI</source>
         <translation>Käynnistä uudelleen, siirry BIOSiin ja poista käytöstä UEFI</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="62"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="119"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="118"/>
         <source>Exit BIOS, and enter deepin to install</source>
         <translation>Poistu BIOSista ja asenna Deepin</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
+        <source>Make a backup of all your data to avoid data loss</source>
+        <translation>Tee varmuuskopio kaikista tiedoistasi tietojen häviämisen välttämiseksi</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
+        <source>Please double check if you have backed up all data, then reboot to enter this interface</source>
+        <translation>Tarkista, että olet varmuuskopioinut kaikki tiedot, ja käynnistä sitten uudelleen, jotta pääset tähän käyttöliittymään</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
+        <source>Make sure you have backed up all data before proceeding</source>
+        <translation>Varmista, että olet varmuuskopioinut kaikki tiedot ennen kuin jatkat</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="153"/>
+        <source>Continuing installation will format your disk</source>
+        <translation>Asennuksen jatkaminen alustaa valitun levyn</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="126"/>
         <source>Please make a backup of all your data to avoid data loss</source>
         <translation>Ole hyvä ja tee varmuuskopio kaikista tiedoistasi välttääksesi niiden häviötä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="128"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
         <translation>Ole hyvä ja varmista että kaikista tiedoista on tehty varmuuskopio, ja käynnistä uudelleen päästäksesi tähän käyttöliittymään</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="76"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="148"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="170"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="75"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="147"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
         <source>Continue</source>
         <translation>Jatka</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="152"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="151"/>
         <source>Please make sure all data were made a backup, then continue</source>
         <translation>Ole hyvä ja tarkista että kaikista tiedoista on tehty varmuuskopio ja jatka sitten</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="154"/>
-        <source>Continue installation will format your disk</source>
-        <translation>Asennuksen jatkaminen alustaa valitun levyn</translation>
-    </message>
-    <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="75"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="169"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="168"/>
         <source>Reboot</source>
-        <translation>Käynnistä uudelleen</translation>
+        <translation>Käynnistä</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="77"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="171"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="76"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="170"/>
         <source>Back</source>
         <translation>Takaisin</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="114"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
         <source>Disable UEFI</source>
         <translation>Poista UEFI käytöstä</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="123"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="122"/>
         <source>Format the disk</source>
         <translation>Alusta levy</translation>
     </message>
