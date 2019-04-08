@@ -63,14 +63,13 @@ void PartitionTableWarningFrame::changeEvent(QEvent* event) {
     list_title2_->setText(QString("B.%1").arg(tr("Format the disk")));
     list_item2_->setText(
         QString("1.%1\n2.%2")
-            .arg(tr("Please make a backup of all your data to avoid data loss"))
-            .arg(tr("Please double check if all the data were made a backup, "
-                    "and reboot to enter this interface")));
+            .arg(tr("Make a backup of all your data to avoid data loss"))
+            .arg(tr("Please double check if you have backed up all data, "
+                    "then reboot to enter this interface")));
     list_title3_->setText(tr("Continue"));
     list_item3_->setText(
         QString("1.%1\n2.%2")
-            .arg(tr("Please make sure all data were made a backup, "
-                    "then continue"))
+            .arg(tr("Make sure you have backed up all data before proceeding"))
             .arg(tr("Continue installation will format your disk")));
     reject_button_->setText(tr("Reboot"));
     accept_button_->setText(tr("Continue"));

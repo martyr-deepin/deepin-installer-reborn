@@ -98,8 +98,7 @@ void EditPartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Edit Disk"));
     comment_label_->setText(
-        tr("Please make sure important data were made a backup, then "
-           "select the disk to install"));
+        tr("Make sure you have backed up important data, then select the disk to install"));
     fs_label_->setText(tr("Filesystem"));
     mount_point_label_->setText(tr("Mount point"));
     format_label_->setText(tr("Format the partition"));
@@ -168,8 +167,7 @@ void EditPartitionFrame::initConnections() {
 void EditPartitionFrame::initUI() {
   title_label_ = new TitleLabel(tr("Edit Disk"));
   comment_label_ = new CommentLabel(
-      tr("Please make sure important data were made a backup, then "
-         "select the disk to install"));
+      tr("Make sure you have backed up important data, then select the disk to install"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);

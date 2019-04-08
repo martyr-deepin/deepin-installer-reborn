@@ -61,8 +61,7 @@ void PrepareInstallFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Prepare for Installation"));
     comment_label_->setText(
-        tr("Please make a backup of important data and confirm "
-           "the following operations"));
+        tr("Make a backup of your important data and then continue"));
     subtitle_label_->setText(
         tr("The following operations will be executed, "
            "please confirm and continue to avoid data loss"));
@@ -83,8 +82,7 @@ void PrepareInstallFrame::initConnections() {
 void PrepareInstallFrame::initUI() {
   title_label_ = new TitleLabel(tr("Prepare for Installation"));
   comment_label_ = new CommentLabel(
-      tr("Please make a backup of important data and confirm "
-         "the following operations"));
+      tr("Make a backup of your important data and then continue"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);

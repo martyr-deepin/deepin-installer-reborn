@@ -74,8 +74,7 @@ void InstallFailedFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Installation Failed"));
     comment_label_->setText(
-        tr("Sorry for the inconvenience, you can photo or scan the QR code "
-           "to send error log, so we can better solve the issue."));
+        tr("Sorry for the inconvenience, please photo or scan the QR code to send error log, so that the issue can be better solved."));
     reboot_button_->setText(tr("Exit installation"));
   } else {
     QFrame::changeEvent(event);
@@ -94,8 +93,7 @@ void InstallFailedFrame::initUI() {
   status_label->setPixmap(installer::renderPixmap(":/images/fail.svg"));
   title_label_ = new TitleLabel(tr("Installation Failed"));
   comment_label_ = new CommentLabel(
-      tr("Sorry for the inconvenience, you can photo or scan the QR code "
-         "to send error log, so we can better solve the issue."));
+      tr("Sorry for the inconvenience, please photo or scan the QR code to send error log, so that the issue can be better solved."));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);

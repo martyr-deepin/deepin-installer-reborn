@@ -38,16 +38,14 @@ void
 PartitionNumberLimitationFrame::setHasExtendedPartition(bool has_ext_part) {
   if (has_ext_part) {
     comment1_label_->setText(
-        tr("You need to delete a primary partition to create "
-               "a new primary partition"));
+        tr("You should delete a primary partition before creating a new one"));
     comment2_label_->setText(
         tr("New logical partitions can only be created near "
            "existing logical partitions"));
     comment2_label_->show();
   } else {
     comment1_label_->setText(
-        tr("You need to delete a primary partition "
-           "to create the new partition"));
+        tr("You should delete a primary partition before creating a new partition"));
     comment2_label_->hide();
   }
 }
@@ -56,8 +54,7 @@ void PartitionNumberLimitationFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Cannot create new partitions"));
     comment1_label_->setText(
-        tr("You need to delete a primary partition to create "
-           "a new primary partition"));
+        tr("You should delete a primary partition before creating a new one"));
     comment2_label_->setText(
         tr("New logical partitions can only be created near "
            "existing logical partitions"));
@@ -75,8 +72,7 @@ void PartitionNumberLimitationFrame::initConnections() {
 void PartitionNumberLimitationFrame::initUI() {
   title_label_ = new TitleLabel(tr("Cannot create new partitions"));
   comment1_label_ = new CommentLabel(
-      tr("You need to delete a primary partition to create "
-         "a new primary partition"));
+      tr("You should delete a primary partition before creating a new one"));
   comment2_label_ = new CommentLabel(
       tr("New logical partitions can only be created near "
          "existing logical partitions"));

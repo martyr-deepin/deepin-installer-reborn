@@ -83,8 +83,7 @@ void PartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     title_label_->setText(tr("Select Installation Location"));
     comment_label_->setText(
-        tr("Please make sure important data were made a backup, "
-           "then select the disk to install"));
+        tr("Make sure you have backed up important data, then select the disk to install"));
     simple_frame_button_->setText(tr("Simple"));
     advanced_frame_button_->setText(tr("Advanced"));
     full_disk_frame_button_->setText(tr("Full Disk"));
@@ -226,8 +225,7 @@ void PartitionFrame::initUI() {
 
   title_label_ = new TitleLabel(tr("Select Installation Location"));
   comment_label_ = new CommentLabel(
-      tr("Please make sure important data were made a backup, "
-         "then select the disk to install"));
+      tr("Make sure you have backed up important data, then select the disk to install"));
   QHBoxLayout* comment_layout = new QHBoxLayout();
   comment_layout->setContentsMargins(0, 0, 0, 0);
   comment_layout->setSpacing(0);
