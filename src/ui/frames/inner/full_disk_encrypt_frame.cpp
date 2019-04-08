@@ -153,7 +153,7 @@ void Full_Disk_Encrypt_frame::onNextBtnClicked()
         }
 
         if (m_encryptEdit->text() != m_encryptRepeatEdit->text()) {
-            m_errTip->setText(tr("The two passwords don't match"));
+            m_errTip->setText(tr("Passwords do not match"));
             m_errTip->showBottom(m_encryptRepeatEdit);
             return;
         }

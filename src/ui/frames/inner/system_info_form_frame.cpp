@@ -73,7 +73,7 @@ void SystemInfoFormFrame::changeEvent(QEvent* event)
 {
     if (event->type() == QEvent::LanguageChange) {
         title_label_->setText(tr("Create User Account"));
-        comment_label_->setText(tr("Input username and password"));
+        comment_label_->setText(tr("Fill in the username, computer name and your password"));
         username_edit_->setPlaceholderText(tr("Username"));
         hostname_edit_->setPlaceholderText(tr("Computer name"));
         password_edit_->setPlaceholderText(tr("Password"));
@@ -142,7 +142,7 @@ void SystemInfoFormFrame::initConnections()
 void SystemInfoFormFrame::initUI()
 {
     title_label_   = new TitleLabel(tr("Create User Account"));
-    comment_label_ = new CommentLabel(tr("Input username and password"));
+    comment_label_ = new CommentLabel(tr("Fill in the username, computer name and your password"));
     QHBoxLayout* comment_layout = new QHBoxLayout();
     comment_layout->setContentsMargins(0, 0, 0, 0);
     comment_layout->setSpacing(0);
@@ -348,7 +348,7 @@ void SystemInfoFormFrame::updateCapsLockState(bool capsLock)
 bool SystemInfoFormFrame::validatePassword2(QString& msg)
 {
     if (password_edit_->text() != password_check_edit_->text()) {
-        msg = tr("The two passwords don't match");
+        msg = tr("Passwords do not match");
         return false;
     }
     else {

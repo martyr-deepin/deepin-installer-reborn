@@ -70,7 +70,7 @@ void PartitionTableWarningFrame::changeEvent(QEvent* event) {
     list_item3_->setText(
         QString("1.%1\n2.%2")
             .arg(tr("Make sure you have backed up all data before proceeding"))
-            .arg(tr("Continue installation will format your disk")));
+            .arg(tr("Continuing installation will format your disk")));
     reject_button_->setText(tr("Reboot"));
     accept_button_->setText(tr("Continue"));
     cancel_button_->setText(tr("Back"));
@@ -150,7 +150,7 @@ void PartitionTableWarningFrame::initUI() {
       QString("1.%1\n2.%2")
           .arg(tr("Please make sure all data were made a backup, "
                   "then continue"))
-          .arg(tr("Continue installation will format your disk")),
+          .arg(tr("Continuing installation will format your disk")),
       this);
   list_item3_->setObjectName("list_item3");
   list_item3_->setWordWrap(true);

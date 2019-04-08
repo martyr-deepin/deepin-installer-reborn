@@ -698,7 +698,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
-        <source>Input username and password</source>
+        <source>Fill in the username, computer name and your password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -795,7 +795,7 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="351"/>
-        <source>The two passwords don&apos;t match</source>
+        <source>Passwords do not match</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -871,7 +871,7 @@
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="156"/>
-        <source>The two passwords don&apos;t match</source>
+        <source>Passwords do not match</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -960,6 +960,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
+        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="153"/>
+        <source>Continuing installation will format your disk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="126"/>
         <source>Please make a backup of all your data to avoid data loss</source>
         <translation type="unfinished"></translation>
@@ -980,12 +986,6 @@
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="151"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
-        <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="153"/>
-        <source>Continue installation will format your disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
