@@ -68,7 +68,7 @@ elseif (${INSTALLER_BUILD_ARCH} MATCHES "aarch64")
           RENAME default_settings.ini
           )
 else()
-  message(FATAL_ERROR "Not supportted architecture: ${INSTALLER_BUILD_ARCH}")
+  message(FATAL_ERROR "Not supported architecture: ${INSTALLER_BUILD_ARCH}")
 endif ()
 
 add_subdirectory(slide)
