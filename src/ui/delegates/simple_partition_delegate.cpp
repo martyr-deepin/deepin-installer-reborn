@@ -253,7 +253,7 @@ SimpleValidateState SimplePartitionDelegate::validate() const {
 void SimplePartitionDelegate::resetOperations() {
   operations_.clear();
 
-  virtual_devices_ = real_devices_;
+  virtual_devices_ = copyByOrigDeviceList(real_devices_);
 }
 
 bool SimplePartitionDelegate::createPartition(const Partition::Ptr partition,
@@ -706,10 +706,10 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
 
 
 void SimplePartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
-  real_devices_ = devices;
-  operations_.clear();
-  virtual_devices_ = FilterInstallerDevice(real_devices_);
-  emit this->deviceRefreshed(virtual_devices_);
+    real_devices_ = devices;
+    operations_.clear();
+    virtual_devices_ = FilterInstallerDevice(real_devices_);
+    emit this->deviceRefreshed(virtual_devices_);
 }
 
 void SimplePartitionDelegate::onManualPartDone(const DeviceList& devices) {
@@ -793,6 +793,21 @@ void SimplePartitionDelegate::onManualPartDone(const DeviceList& devices) {
 
 void SimplePartitionDelegate::setBootloaderPath(const QString& path) {
   bootloader_path_ = path;
+}
+
+DeviceList SimplePartitionDelegate::copyByOrigDeviceList(DeviceList list) {
+    DeviceList device_list;
+    for (Device::Ptr device : list) {
+        Device::Ptr ptr(QSharedPointer<Device>(new Device(*device)));
+        PartitionList partition_list;
+        for (Partition::Ptr partition: device->partitions) {
+            partition_list << QSharedPointer<Partition>(new Partition(*partition));
+        }
+        device->partitions = partition_list;
+        device_list << ptr;
+    }
+
+    return device_list;
 }
 
 }  // namespace installer

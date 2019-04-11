@@ -122,6 +122,9 @@ class SimplePartitionDelegate : public QObject {
   // Update bootloader settings to |path|.
   void setBootloaderPath(const QString& path);
 
+private:
+    DeviceList copyByOrigDeviceList(DeviceList list);
+
  private:
   DeviceList real_devices_;
   DeviceList virtual_devices_;
