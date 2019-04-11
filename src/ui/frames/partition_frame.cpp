@@ -349,20 +349,20 @@ void PartitionFrame::initUI() {
 }
 
 bool PartitionFrame::isFullDiskPartitionMode() {
-  QWidget* current_widget = partition_stacked_layout_->currentWidget();
-  return current_widget == full_disk_partition_frame_;
+  return full_disk_frame_button_->isChecked();
 }
 
 bool PartitionFrame::isSimplePartitionMode() {
-  QWidget* current_widget = partition_stacked_layout_->currentWidget();
-  return current_widget == simple_partition_frame_;
+  return simple_frame_button_->isChecked();
 }
 
 void PartitionFrame::onFullDiskFrameButtonToggled() {
+  qDebug() << "on fulldisk button toggled";
   partition_stacked_layout_->setCurrentWidget(full_disk_partition_frame_);
 }
 
 void PartitionFrame::onSimpleFrameButtonToggled() {
+  qDebug() << "on simple button toggled";
   partition_stacked_layout_->setCurrentWidget(simple_partition_frame_);
 }
 

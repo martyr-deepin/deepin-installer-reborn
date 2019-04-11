@@ -253,7 +253,7 @@ SimpleValidateState SimplePartitionDelegate::validate() const {
 void SimplePartitionDelegate::resetOperations() {
   operations_.clear();
 
-  virtual_devices_ = real_devices_;
+  virtual_devices_ = FilterInstallerDevice(real_devices_);
 }
 
 bool SimplePartitionDelegate::createPartition(const Partition::Ptr partition,
@@ -706,10 +706,10 @@ bool SimplePartitionDelegate::formatWholeDevice(const QString& device_path,
 
 
 void SimplePartitionDelegate::onDeviceRefreshed(const DeviceList& devices) {
-  real_devices_ = devices;
-  operations_.clear();
-  virtual_devices_ = FilterInstallerDevice(real_devices_);
-  emit this->deviceRefreshed(virtual_devices_);
+    real_devices_ = devices;
+    operations_.clear();
+    virtual_devices_ = FilterInstallerDevice(real_devices_);
+    emit this->deviceRefreshed(virtual_devices_);
 }
 
 void SimplePartitionDelegate::onManualPartDone(const DeviceList& devices) {
