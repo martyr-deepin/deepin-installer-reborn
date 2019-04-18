@@ -35,10 +35,10 @@ const char kSlideFolder[] = RESOURCES_DIR "/slide";
 QString GetSlideDir(const QString& locale) {
   QDir installer_dir(kSlideFolder);
   Q_ASSERT(installer_dir.exists());
-  QDir oem_dir(GetOemDir());
+  QDir oem_slide_dir(GetOemDir().absoluteFilePath("slide"));
 
   // Check existence of folders one by one.
-  QFileInfo file_info(oem_dir.absoluteFilePath(locale));
+  QFileInfo file_info(oem_slide_dir.absoluteFilePath(locale));
   if (file_info.isDir() && file_info.exists()) {
     return file_info.absoluteFilePath();
   }
@@ -48,7 +48,7 @@ QString GetSlideDir(const QString& locale) {
     return file_info.absoluteFilePath();
   }
 
-  file_info.setFile(oem_dir.absoluteFilePath(kDefaultSlide));
+  file_info.setFile(oem_slide_dir.absoluteFilePath(kDefaultSlide));
   if (file_info.isDir() && file_info.exists()) {
     return file_info.absoluteFilePath();
   }
