@@ -1,3 +1,15 @@
+<a name="2.6.10"></a>
+### 2.6.10 (2019-04-22)
+
+
+#### Bug Fixes
+
+*   not remove user password for conf file ([7be9fbd6](https://github.com/linuxdeepin/deepin-install-reborn/commit/7be9fbd615f7a2b25e48b32cf89884097fc584ab))
+* **simple:**  install failed ([484c39be](https://github.com/linuxdeepin/deepin-install-reborn/commit/484c39be62b964efe5e597cea207fba664344439))
+* **slide:**   slide oem dir path error ([966e164e](https://github.com/linuxdeepin/deepin-install-reborn/commit/966e164e8b2fd744245dd0b99d366bd91ca2af3c))
+
+
+
 <a name="2.6.8"></a>
 ### 2.6.8 (2019-04-09)
 
