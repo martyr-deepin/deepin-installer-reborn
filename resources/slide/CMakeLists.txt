@@ -21,6 +21,7 @@ if (${INSTALLER_BUILD_ARCH} MATCHES "x86")
       PATTERN "zh_CN/10-deepin-remote-assistance.png" EXCLUDE
       PATTERN "zh_CN/20-wps.png" EXCLUDE
       PATTERN "zh_CN/21-youdao-dict.png" EXCLUDE
+      PATTERN "zh_CN/16-wps-youdao-dict.png" EXCLUDE
       PATTERN "CMakeLists.txt" EXCLUDE
     )
   endif()
