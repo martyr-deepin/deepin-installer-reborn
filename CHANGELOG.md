@@ -1,3 +1,13 @@
+<a name="2.6.11"></a>
+### 2.6.11 (2019-04-22)
+
+
+#### Bug Fixes
+
+* **loogson:**  missing UUID ([e6cff53d](https://github.com/linuxdeepin/deepin-install-reborn/commit/e6cff53d881b5c2dfdcff351582a91cd2c7be494))
+
+
+
 <a name="2.6.10"></a>
 ### 2.6.10 (2019-04-22)
 
