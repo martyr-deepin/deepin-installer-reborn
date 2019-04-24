@@ -1,3 +1,13 @@
+<a name=""></a>
+##  2.7.0 (2019-04-24)
+
+
+#### Bug Fixes
+
+* **avatar:**  array out of bound ([6cacf2a9](https://github.com/linuxdeepin/deepin-install-reborn/commit/6cacf2a9ed59d51f4b552d21f5d5ba8f2a07e0df))
+
+
+
 <a name="2.6.11"></a>
 ### 2.6.11 (2019-04-22)
 
