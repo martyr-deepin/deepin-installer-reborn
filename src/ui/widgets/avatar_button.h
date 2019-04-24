@@ -40,6 +40,7 @@ class AvatarButton : public FlatButton {
 
  private:
   QString icon_;
+  QPixmap m_iconPixmap;
 };
 
 }  // namespace installer

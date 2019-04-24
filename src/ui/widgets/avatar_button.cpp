@@ -33,8 +33,10 @@ const int kIconSize = 100;
 AvatarButton::AvatarButton(QWidget* parent) : AvatarButton("", parent) { }
 
 AvatarButton::AvatarButton(const QString& icon, QWidget* parent)
-    : FlatButton(parent),
-      icon_(icon) {
+    : FlatButton(parent)
+    , icon_(icon)
+    , m_iconPixmap(icon)
+{
   this->setObjectName("avatar_button");
 
   this->setFixedSize(kIconSize, kIconSize);
@@ -43,6 +45,7 @@ AvatarButton::AvatarButton(const QString& icon, QWidget* parent)
 
 void AvatarButton::updateIcon(const QString& icon) {
   icon_ = icon;
+  m_iconPixmap = QPixmap(icon);
   this->update();
 }
 
@@ -59,8 +62,7 @@ void AvatarButton::paintEvent(QPaintEvent* event) {
   painter.setRenderHint(QPainter::SmoothPixmapTransform);
   painter.setClipPath(path);
 
-  const QImage image(icon_);
-  painter.drawImage(ellipse_rect, image);
+  painter.drawPixmap(ellipse_rect, m_iconPixmap);
 
   painter.end();
 }
