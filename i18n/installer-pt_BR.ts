@@ -151,7 +151,7 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="101"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="170"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Certifique-se de ter feito backup dos dados importantes e selecione o disco a ser instalado</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="102"/>
@@ -230,7 +230,7 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, please photo or scan the QR code to send error log, so that the issue can be better solved.</source>
-        <translation type="unfinished"/>
+        <translation>Por favor, fotografe ou digitalize o código QR para enviar o log de erro, a fim de que o problema pode ser melhor resolvido.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
@@ -371,7 +371,7 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="93"/>
         <source>Continuing installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>A instalação irá formatar todo o disco. Faça um backup dos seus dados para evitar a perda deles</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="58"/>
@@ -398,7 +398,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="228"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Certifique-se de ter feito backup dos dados importantes e selecione o disco a ser instalado</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
@@ -453,7 +453,7 @@
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="75"/>
         <source>You should delete a primary partition before creating a new one</source>
-        <translation type="unfinished"/>
+        <translation>Você deve excluir uma partição primária antes de criar uma nova</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="43"/>
@@ -465,7 +465,7 @@
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="48"/>
         <source>You should delete a primary partition before creating a new partition</source>
-        <translation type="unfinished"/>
+        <translation>Você deve excluir uma partição primária antes de criar uma nova partição</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="55"/>
@@ -506,7 +506,7 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="85"/>
         <source>Make a backup of your important data and then continue</source>
-        <translation type="unfinished"/>
+        <translation>Faça um backup de seus dados importantes e continue</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="66"/>
@@ -542,22 +542,22 @@
     <message>
         <location filename="../src/partman/operation.cpp" line="258"/>
         <source>Create new partition %1, type: %2</source>
-        <translation type="unfinished"/>
+        <translation>Criar uma nova partição %1, tipo: %2</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="262"/>
         <source>Create new partition %1 as %2 (mountpoint), type: %3</source>
-        <translation type="unfinished"/>
+        <translation>Criar uma nova partição %1 como %2 (ponto de montagem), tipo: %3</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="276"/>
         <source>Format %1 partition, type: %2</source>
-        <translation type="unfinished"/>
+        <translation>Formatar %1 partição, tipo: %2</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="280"/>
         <source>Format %1 partition as %2 (mountpoint), type: %3</source>
-        <translation type="unfinished"/>
+        <translation>Formatar %1 partição como %2 (ponto de montagem), tipo: %3</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="288"/>
@@ -697,7 +697,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
         <source>Fill in the username, computer name and your password</source>
-        <translation type="unfinished"/>
+        <translation>Preencha seu nome de usuário, nome do computador e senha</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
@@ -794,7 +794,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="351"/>
         <source>Passwords do not match</source>
-        <translation type="unfinished"/>
+        <translation>Senhas não conferem</translation>
     </message>
 </context>
 <context>
@@ -870,7 +870,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="156"/>
         <source>Passwords do not match</source>
-        <translation type="unfinished"/>
+        <translation>Senhas não conferem</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
@@ -880,7 +880,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Certifique-se de ter feito backup dos dados importantes e selecione o disco a ser instalado</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="184"/>
@@ -945,23 +945,23 @@
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
         <source>Make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Faça um backup de todos os seus dados para não perdê-los</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
         <source>Please double check if you have backed up all data, then reboot to enter this interface</source>
-        <translation type="unfinished"/>
+        <translation>Verifique novamente se você fez o backup dos dados e em seguida reinicie para entrar nesta interface</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
         <source>Make sure you have backed up all data before proceeding</source>
-        <translation type="unfinished"/>
+        <translation>Certifique-se de ter feito backup dos dados antes de prosseguir</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="153"/>
         <source>Continuing installation will format your disk</source>
-        <translation type="unfinished"/>
+        <translation>Continuar a instalação formatará seu disco</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="126"/>
