@@ -24,6 +24,7 @@
 #include <QTranslator>
 #include <QVBoxLayout>
 #include <QCheckBox>
+#include <QScrollBar>
 
 #include "base/file_util.h"
 #include "service/settings_manager.h"
@@ -129,6 +130,9 @@ void SelectLanguageFrame::initUI() {
 
   language_view_ = new FramelessListView();
   language_view_->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  language_view_->setContextMenuPolicy(Qt::NoContextMenu);
+  language_view_->verticalScrollBar()->setContextMenuPolicy(Qt::NoContextMenu);
+  language_view_->horizontalScrollBar()->setContextMenuPolicy(Qt::NoContextMenu);
   language_model_ = new LanguageListModel(language_view_);
   language_view_->setModel(language_model_);
 
