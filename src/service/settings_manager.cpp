@@ -212,7 +212,7 @@ QString GetDefaultAvatar() {
 
   std::random_device r;
   std::default_random_engine e1(r());
-  std::uniform_int_distribution<int> uniform_dist(0, avatars.size());
+  std::uniform_int_distribution<int> uniform_dist(0, avatars.size() - 1);
 
   return avatars.at(uniform_dist(e1));
 }
