@@ -36,12 +36,12 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="429"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 virhe löytyi, ole hyvä ja korjaa se jatkaaksesi asennusta tai siirry yksinkertaiseen tilaan</translation>
+        <translation>%1 virhe löytyi, korjaa se jatkaaksesi asennusta tai siirry yksinkertaiseen tilaan</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="433"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
-        <translation>%1 virhettä löytyi, ole hyvä ja korjaa ne jatkaaksesi asennusta tai siirry yksinkertaiseen tilaan</translation>
+        <translation>%1 virhettä löytyi, korjaa ne jatkaaksesi asennusta tai siirry yksinkertaiseen tilaan</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="439"/>
@@ -196,7 +196,7 @@
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="40"/>
         <location filename="../src/ui/frames/first_boot_loading_frame.cpp" line="63"/>
         <source>Applying changes to your system, please wait...</source>
-        <translation>Muutoksia otetaan käyttöön järjestelmässä, ole hyvä ja odota...</translation>
+        <translation>Muutoksia otetaan käyttöön järjestelmässä, odota...</translation>
     </message>
 </context>
 <context>
@@ -676,7 +676,7 @@
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="92"/>
         <source>User Avatar</source>
-        <translation>Käyttäjätilin Avatar</translation>
+        <translation>Käyttäjätilin avatari</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="77"/>
@@ -709,7 +709,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="78"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="159"/>
         <source>Computer name</source>
-        <translation>Laitteen nimi</translation>
+        <translation>Tietokoneen nimi</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="79"/>
@@ -971,7 +971,7 @@
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="127"/>
         <source>Please double check if all the data were made a backup, and reboot to enter this interface</source>
-        <translation>Ole hyvä ja varmista että kaikista tiedoista on tehty varmuuskopio, ja käynnistä uudelleen päästäksesi tähän käyttöliittymään</translation>
+        <translation>Varmista, että kaikista tiedoista on tehty varmuuskopio ja käynnistä uudelleen päästäksesi tähän käyttöliittymään</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="69"/>
@@ -984,7 +984,7 @@
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="151"/>
         <source>Please make sure all data were made a backup, then continue</source>
-        <translation>Ole hyvä ja tarkista että kaikista tiedoista on tehty varmuuskopio ja jatka sitten</translation>
+        <translation>Tarkista, että kaikista tiedoista on tehty varmuuskopio ja jatka sitten</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="74"/>
@@ -1002,7 +1002,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="58"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="113"/>
         <source>Disable UEFI</source>
-        <translation>Poista UEFI käytöstä</translation>
+        <translation>Poista UEFI</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="63"/>
