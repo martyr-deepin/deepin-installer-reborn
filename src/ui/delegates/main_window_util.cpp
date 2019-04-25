@@ -65,9 +65,6 @@ int GetVisiblePages() {
     pages += 1;
   }
 
-  // For user end-license page
-  pages += 1;
-
   if (!GetSettingsBool(kSystemInfoSetupAfterReboot) || !GetSettingsBool(kSkipSystemInfoPage)) {
     pages += 1;
   }
