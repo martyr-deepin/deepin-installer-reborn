@@ -78,6 +78,10 @@ slide 目录的结果应该与 resources/slide 目录相同.
  自动满足, 否则可能无法正常安装.
 * 卸载deb包, 可以在 `package_uninstall_packages` 里面设置.
 
+## APT sources.list
+* 需要覆盖默认软件包源，可以覆盖`apt_source_deb`的值
+* 需要覆盖默认源码包源，可以覆盖`apt_source_deb_src`的值
+
 ## Grub
 * 设置 `grub_timeout` 可以设定grub菜单的超时.
 * `grub_block_windows_item` 可以用来屏蔽 windows 启动项.
