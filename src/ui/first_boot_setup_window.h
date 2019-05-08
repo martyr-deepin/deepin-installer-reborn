@@ -34,6 +34,7 @@ class MultiHeadManager;
 class SystemInfoFrame;
 class TimezoneFrame;
 class LanguageFrame;
+class NetworkFrame;
 
 // Main window of deepin_installer_first_boot.
 class FirstBootSetupWindow : public QFrame {
@@ -61,6 +62,7 @@ class FirstBootSetupWindow : public QFrame {
   TimezoneFrame*         timezone_frame_      = nullptr;
   FirstBootLoadingFrame* loading_frame_       = nullptr;
   LanguageFrame*         language_frame_      = nullptr;
+  NetworkFrame*          network_frame_       = nullptr;
   QStackedLayout*        stacked_layout_      = nullptr;
 
   QThread*             hook_worker_thread_ = nullptr;
@@ -78,6 +80,8 @@ class FirstBootSetupWindow : public QFrame {
 
   void onLanguageSelected();
   void onSystemInfoFinished();
+
+  void onNetworkFinished();
 
   // Run "first_boot_setup.sh" after system_info_frame_ is finished.
   void onTimezoneFinished();

@@ -37,6 +37,7 @@
 #include "ui/xrandr/multi_head_manager.h"
 
 #include "ui/frames/language_frame.h"
+#include "ui/frames/networkframe.h"
 
 namespace installer {
 
@@ -76,6 +77,8 @@ void FirstBootSetupWindow::initConnections() {
             &FirstBootSetupWindow::onLanguageSelected);
     connect(system_info_frame_, &SystemInfoFrame::finished,
             this, &FirstBootSetupWindow::onSystemInfoFinished);
+    connect(network_frame_, &NetworkFrame::requestNext,
+            this, &FirstBootSetupWindow::onNetworkFinished);
     connect(timezone_frame_, &TimezoneFrame::finished,
             this, &FirstBootSetupWindow::onTimezoneFinished);
     connect(hook_worker_, &FirstBootHookWorker::hookFinished,
@@ -91,6 +94,7 @@ void FirstBootSetupWindow::initUI() {
   background_label_ = new QLabel(this);
   language_frame_ = new LanguageFrame(this);
   system_info_frame_ = new SystemInfoFrame(this);
+  network_frame_ = new NetworkFrame(this);
   timezone_frame_ = new TimezoneFrame(this);
   loading_frame_ = new FirstBootLoadingFrame(this);
 
@@ -99,6 +103,7 @@ void FirstBootSetupWindow::initUI() {
   stacked_layout_->setSpacing(0);
   stacked_layout_->addWidget(language_frame_);
   stacked_layout_->addWidget(system_info_frame_);
+  stacked_layout_->addWidget(network_frame_);
   stacked_layout_->addWidget(timezone_frame_);
   stacked_layout_->addWidget(loading_frame_);
 
@@ -160,11 +165,21 @@ void FirstBootSetupWindow::onLanguageSelected()
 }
 
 void FirstBootSetupWindow::onSystemInfoFinished() {
-  if (GetSettingsBool(kSkipTimezonePage)) {
-    this->onTimezoneFinished();
+  if (GetSettingsBool(kSkipNetworkPage)) {
+    this->onNetworkFinished();
   } else {
-    stacked_layout_->setCurrentWidget(timezone_frame_);
+    stacked_layout_->setCurrentWidget(network_frame_);
   }
+}
+
+void FirstBootSetupWindow::onNetworkFinished()
+{
+    if (GetSettingsBool(kSkipTimezonePage)) {
+        return onTimezoneFinished();
+    }
+    else {
+        stacked_layout_->setCurrentWidget(timezone_frame_);
+    }
 }
 
 void FirstBootSetupWindow::onTimezoneFinished() {

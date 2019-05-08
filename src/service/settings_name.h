@@ -29,6 +29,7 @@ const char kSkipVirtualMachinePage[] = "skip_virtual_machine_page";
 const char kSkipSelectLanguagePage[] = "skip_select_language_page";
 const char kSkipSystemInfoPage[] = "skip_system_info_page";
 const char kSkipTimezonePage[] = "skip_timezone_page";
+const char kSkipNetworkPage[] = "skip_network_page";
 const char kSkipPartitionPage[] = "skip_partition_page";
 
 // System Language List
