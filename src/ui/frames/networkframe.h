@@ -20,15 +20,19 @@ signals:
 
 private:
     void saveConf();
+    void checkIPValidity();
+    void checkMaskValidity();
 
 private:
     LineEdit*                                    m_ipv4Edit;
     LineEdit*                                    m_maskEdit;
+    LineEdit*                                    m_gatewayEdit;
     LineEdit*                                    m_primaryDNSEdit;
     LineEdit*                                    m_secondDNSEdit;
     NavButton*                                   m_skipButton;
     NavButton*                                   m_saveButton;
     std::unique_ptr<QRegularExpressionValidator> m_validityCheck;
+    SystemInfoTip*                               m_errorTip;
 };
 }  // namespace installer
 
