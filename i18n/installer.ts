@@ -921,17 +921,42 @@
 <context>
     <name>installer::NetworkFrame</name>
     <message>
-        <location filename="../src/ui/frames/networkframe.cpp" line="65"/>
+        <location filename="../src/ui/frames/networkframe.cpp" line="69"/>
         <source>Skip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/networkframe.cpp" line="66"/>
+        <location filename="../src/ui/frames/networkframe.cpp" line="70"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/networkframe.cpp" line="197"/>
+        <location filename="../src/ui/frames/networkframe.cpp" line="128"/>
+        <source>IP Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="129"/>
+        <source>Netmask</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="130"/>
+        <source>Gateway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="131"/>
+        <source>Primary DNS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="132"/>
+        <source>Secondary DNS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="225"/>
         <source>Netmask error: illegal netmask, please have a check.</source>
         <translation type="unfinished"></translation>
     </message>
