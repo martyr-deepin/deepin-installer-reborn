@@ -108,6 +108,7 @@ slide 目录的结果应该与 resources/slide 目录相同.
 * 自定义保留的用户名. 被保留的用户名, 在 `resources/reserved_usernames` 中定义,
  也可以创建 `oem/reserved_usernames` 来自定义要保留的用户名. 被保留的用户名,
  指的是系统中已经存在或者极可能会被某些包创建的用户名.
+* `skip_network_page` 跳过静态网络配置界面
 
 ## 桌面环境相关的
 * `dde_dock_app_list` 在dock中显示哪些应用图标.
