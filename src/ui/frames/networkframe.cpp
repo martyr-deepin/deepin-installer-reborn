@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QLabel>
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
 #include <QSettings>
@@ -10,6 +11,8 @@
 #include <list>
 #include <utility>
 
+#include "service/settings_manager.h"
+#include "ui/utils/widget_util.h"
 #include "ui/widgets/line_edit.h"
 #include "ui/widgets/nav_button.h"
 #include "ui/widgets/system_info_tip.h"
@@ -83,18 +86,27 @@ NetworkFrame::NetworkFrame(QWidget *parent)
     layout->setMargin(0);
     layout->setSpacing(10);
 
+    QLabel *logo_label = new QLabel;
+    logo_label->setPixmap(installer::renderPixmap(GetVendorLogo()));
+
+    layout->addWidget(logo_label, 0, Qt::AlignHCenter);
+
+    m_subTitle = new QLabel("Configure Network");
+    layout->addWidget(m_subTitle, 0, Qt::AlignHCenter);
+
     layout->addStretch();
 
     for (auto it = editList.begin(); it != editList.end(); ++it) {
         layout->addWidget((*it), 0, Qt::AlignHCenter);
     }
 
-    layout->addSpacing(10);
+    layout->addStretch();
     layout->addWidget(m_skipButton, 0, Qt::AlignHCenter);
     layout->addWidget(m_saveButton, 0, Qt::AlignHCenter);
-    layout->addStretch();
 
     setLayout(layout);
+
+    setStyleSheet("QLabel{color: white;}");
 
     connect(m_saveButton, &NavButton::clicked, this, &NetworkFrame::saveConf);
     connect(m_ipv4Edit, &LineEdit::editingFinished, this, &NetworkFrame::checkIPValidity);
@@ -154,10 +166,11 @@ void NetworkFrame::saveConf()
         {
             stream << "[ipv4]" << endl;
             std::list<std::pair<QString, QString>> pairList{
-                std::pair<QString, QString>("address1", QString("%1/%2,%3;")
-                                                            .arg(m_ipv4Edit->text())
-                                                            .arg(coverMask(m_maskEdit->text()))
-                                                            .arg(m_gatewayEdit->text())),
+                std::pair<QString, QString>("address1",
+                                            QString("%1/%2,%3;")
+                                                .arg(m_ipv4Edit->text())
+                                                .arg(coverMask(m_maskEdit->text()))
+                                                .arg(m_gatewayEdit->text())),
                 std::pair<QString, QString>("dns", QString("%1;%2;")
                                                        .arg(m_primaryDNSEdit->text())
                                                        .arg(m_secondDNSEdit->text())),

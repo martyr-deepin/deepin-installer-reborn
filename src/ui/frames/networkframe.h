@@ -5,7 +5,7 @@
 #include <memory>
 
 class QRegularExpressionValidator;
-
+class QLabel;
 namespace installer {
 class LineEdit;
 class NavButton;
@@ -24,6 +24,7 @@ private:
     void checkMaskValidity();
 
 private:
+    QLabel*                                      m_subTitle;
     LineEdit*                                    m_ipv4Edit;
     LineEdit*                                    m_maskEdit;
     LineEdit*                                    m_gatewayEdit;
