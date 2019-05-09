@@ -109,6 +109,7 @@ NetworkFrame::NetworkFrame(QWidget *parent)
 
     setStyleSheet("QLabel{color: white;}");
 
+    connect(m_skipButton, &NavButton::clicked, this, &NetworkFrame::requestNext);
     connect(m_saveButton, &NavButton::clicked, this, &NetworkFrame::saveConf);
     connect(m_ipv4Edit, &LineEdit::editingFinished, this, &NetworkFrame::checkIPValidity);
     connect(m_gatewayEdit, &LineEdit::editingFinished, this,
