@@ -10,6 +10,7 @@
 #include <QVBoxLayout>
 #include <list>
 #include <utility>
+#include <QEvent>
 
 #include "service/settings_manager.h"
 #include "ui/utils/widget_util.h"
@@ -118,6 +119,19 @@ NetworkFrame::NetworkFrame(QWidget *parent)
             &NetworkFrame::checkIPValidity);
     connect(m_maskEdit, &LineEdit::editingFinished, this,
             &NetworkFrame::checkMaskValidity);
+}
+
+bool NetworkFrame::event(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange) {
+        m_ipv4Edit->setPlaceholderText(tr("IP Address"));
+        m_maskEdit->setPlaceholderText(tr("Netmask"));
+        m_gatewayEdit->setPlaceholderText(tr("Gateway"));
+        m_primaryDNSEdit->setPlaceholderText(tr("Primary DNS"));
+        m_secondDNSEdit->setPlaceholderText(tr("Secondary DNS"));
+    }
+
+    return QWidget::event(event);
 }
 
 void NetworkFrame::saveConf()

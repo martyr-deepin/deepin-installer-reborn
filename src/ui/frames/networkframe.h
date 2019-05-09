@@ -18,6 +18,9 @@ public:
 signals:
     void requestNext();
 
+protected:
+    bool event(QEvent *event) override;
+
 private:
     void saveConf();
     void checkIPValidity();
