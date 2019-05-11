@@ -67,8 +67,8 @@ EOF
       grep -q "^${DI_TIMEZONE}$"; then
     msg "${DI_TIMEZONE} is available"
   else
-    msg "Timezone is not available, Fall back to UTC"
-    DI_TIMEZONE="Etc/UTC"
+    msg "Timezone is not available, Fall back to Asia/Shanghai"
+    DI_TIMEZONE="Asia/Shanghai"
   fi
 
   msg "Set timezone to ${DI_TIMEZONE}"

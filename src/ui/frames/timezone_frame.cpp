@@ -37,8 +37,7 @@ namespace installer {
 
 namespace {
 
-// Set timezone to UTC when local-time is used.
-const char kDefaultTimezone[] = "Etc/UTC";
+const char kDefaultTimezone[] = "Asia/Shanghai";
 
 }  // namespace
 
