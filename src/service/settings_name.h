@@ -31,6 +31,7 @@ const char kSkipSystemInfoPage[] = "skip_system_info_page";
 const char kSkipTimezonePage[] = "skip_timezone_page";
 const char kSkipNetworkPage[] = "skip_network_page";
 const char kSkipPartitionPage[] = "skip_partition_page";
+const char kSkipControlPlatformPage[] = "skip_control_platform_page";
 
 // System Language List
 const char kSelectLanguageDefaultLocale[] = "select_language_default_locale";

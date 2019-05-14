@@ -324,6 +324,8 @@ set(UI_FILES
     ui/frames/virtual_machine_frame.h
     ui/frames/networkframe.h
     ui/frames/networkframe.cpp
+    ui/frames/control_platform_frame.h
+    ui/frames/control_platform_frame.cpp
 
     ui/models/bootloader_list_model.cpp
     ui/models/bootloader_list_model.h

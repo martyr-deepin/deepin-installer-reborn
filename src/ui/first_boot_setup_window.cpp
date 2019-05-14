@@ -38,6 +38,7 @@
 
 #include "ui/frames/language_frame.h"
 #include "ui/frames/networkframe.h"
+#include "ui/frames/control_platform_frame.h"
 
 namespace installer {
 
@@ -97,6 +98,7 @@ void FirstBootSetupWindow::initUI() {
   network_frame_ = new NetworkFrame(this);
   timezone_frame_ = new TimezoneFrame(this);
   loading_frame_ = new FirstBootLoadingFrame(this);
+  control_platform_frame_ = new ControlPlatformFrame(this);
 
   stacked_layout_ = new QStackedLayout(this);
   stacked_layout_->setContentsMargins(0, 0, 0, 0);
@@ -104,6 +106,7 @@ void FirstBootSetupWindow::initUI() {
   stacked_layout_->addWidget(language_frame_);
   stacked_layout_->addWidget(system_info_frame_);
   stacked_layout_->addWidget(network_frame_);
+  stacked_layout_->addWidget(control_platform_frame_);
   stacked_layout_->addWidget(timezone_frame_);
   stacked_layout_->addWidget(loading_frame_);
 
@@ -174,11 +177,21 @@ void FirstBootSetupWindow::onSystemInfoFinished() {
 
 void FirstBootSetupWindow::onNetworkFinished()
 {
+    if (GetSettingsBool(kSkipControlPlatformPage)) {
+        return onControlPlatformFinished();
+    }
+    else {
+        stacked_layout_->setCurrentWidget(control_platform_frame_);
+    }
+}
+
+void FirstBootSetupWindow::onControlPlatformFinished()
+{
     if (GetSettingsBool(kSkipTimezonePage)) {
         return onTimezoneFinished();
     }
     else {
-        stacked_layout_->setCurrentWidget(timezone_frame_);
+      stacked_layout_->setCurrentWidget(timezone_frame_);
     }
 }
 
