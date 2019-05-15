@@ -80,6 +80,8 @@ void FirstBootSetupWindow::initConnections() {
             this, &FirstBootSetupWindow::onSystemInfoFinished);
     connect(network_frame_, &NetworkFrame::requestNext,
             this, &FirstBootSetupWindow::onNetworkFinished);
+    connect(control_platform_frame_, &ControlPlatformFrame::requestFinished, this,
+            &FirstBootSetupWindow::onControlPlatformFinished);
     connect(timezone_frame_, &TimezoneFrame::finished,
             this, &FirstBootSetupWindow::onTimezoneFinished);
     connect(hook_worker_, &FirstBootHookWorker::hookFinished,

@@ -343,6 +343,8 @@ set(UI_FILES
     ui/models/partition_model.h
     ui/models/partition_type_model.cpp
     ui/models/partition_type_model.h
+    ui/models/control_platform_region_model.h
+    ui/models/control_platform_region_model.cpp
 
     ui/utils/widget_util.cpp
     ui/utils/widget_util.h
