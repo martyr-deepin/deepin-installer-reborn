@@ -92,7 +92,7 @@ NetworkFrame::NetworkFrame(QWidget *parent)
 
     layout->addWidget(logo_label, 0, Qt::AlignHCenter);
 
-    m_subTitle = new QLabel("Configure Network");
+    m_subTitle = new QLabel(tr("Configure Network"));
     layout->addWidget(m_subTitle, 0, Qt::AlignHCenter);
 
     layout->addStretch();

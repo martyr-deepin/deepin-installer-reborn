@@ -823,20 +823,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="105"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="143"/>
         <source>Select Time Zone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
         <source>Mark your zone on the map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="108"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="147"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="146"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
@@ -859,6 +859,31 @@
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="69"/>
         <source>Continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>installer::ControlPlatformFrame</name>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="23"/>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="83"/>
+        <source>Set Control Region</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="24"/>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="84"/>
+        <source>Set the region for Deepin EndPoint Management Platform</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="81"/>
+        <source>Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="82"/>
+        <source>Server Address</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -928,6 +953,11 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="70"/>
         <source>Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="95"/>
+        <source>Configure Network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

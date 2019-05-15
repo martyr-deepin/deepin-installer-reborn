@@ -1,8 +1,8 @@
 #ifndef CONTROLPLATFORMFRAME_H
 #define CONTROLPLATFORMFRAME_H
 
-#include <QWidget>
 #include <QUrl>
+#include <QWidget>
 
 #include "ui/models/control_platform_region_model.h"
 
@@ -13,6 +13,8 @@ class LineEdit;
 class NavButton;
 class ControlPlatformRegionModel;
 class TableComboBox;
+class TitleLabel;
+class CommentLabel;
 class ControlPlatformFrame : public QWidget {
     Q_OBJECT
 public:
@@ -30,6 +32,8 @@ private:
     void onRegionSelected();
 
 private:
+    TitleLabel*                 m_titleLbl;
+    CommentLabel*               m_subTitleLbl;
     LineEdit*                   m_serverLineEdit;
     TableComboBox*              m_regionBox;
     NavButton*                  m_nextButton;
