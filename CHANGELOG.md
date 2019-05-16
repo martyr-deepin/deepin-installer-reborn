@@ -1,3 +1,16 @@
+<a name="2.7.2"></a>
+### 2.7.2 (2019-05-16)
+
+
+#### Features
+
+*   add control platform title and subtitle ([e77126b0](https://github.com/linuxdeepin/deepin-install-reborn/commit/e77126b0a0a952b53e00741a3afad4d726737c04))
+*   add control platform page ([8d69e212](https://github.com/linuxdeepin/deepin-install-reborn/commit/8d69e212e9b220d00ba93bfb5d9387eb0c27db08))
+*   support oem customization of sources.list (#38) ([b5c38d5c](https://github.com/linuxdeepin/deepin-install-reborn/commit/b5c38d5c530bc546c658f37d528cab8f845eeea0))
+* **ControlPlatform:**  add base ui ([ee9745cc](https://github.com/linuxdeepin/deepin-install-reborn/commit/ee9745ccbe1616d9e540c5efc573bebe0ba1f382))
+
+
+
 <a name="2.7.1"></a>
 ### 2.7.1 (2019-05-15)
 
