@@ -986,6 +986,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="214"/>
+        <source>IP address error: illegal IP address, please have a check.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="225"/>
         <source>Netmask error: illegal netmask, please have a check.</source>
         <translation type="unfinished"></translation>

@@ -211,7 +211,7 @@ void NetworkFrame::checkIPValidity()
     LineEdit *edit = qobject_cast<LineEdit *>(sender());
 
     if (!checkip(edit->text())) {
-        m_errorTip->setText("IP address error: illegal IP address, please have a check.");
+        m_errorTip->setText(tr("IP address error: illegal IP address, please have a check."));
         m_errorTip->showBottom(edit);
     }
     else {
