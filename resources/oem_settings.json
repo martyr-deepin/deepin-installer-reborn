@@ -371,6 +371,20 @@
   },
 
   {
+    "title": "sources.list 软件包源",
+    "name": "apt_source_deb",
+    "description": "",
+    "type": "String"
+  },
+
+  {
+    "title": "sources.list 源码包源",
+    "name": "apt_source_deb_src",
+    "description": "",
+    "type": "String"
+  },
+
+  {
     "title": "Grub 启动菜单超时时间",
     "name": "grub_timeout",
     "description": "",
