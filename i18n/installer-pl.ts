@@ -151,7 +151,7 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="101"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="170"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Upewnij się, że utworzono kopię zapasową ważnych danych, a następnie wybierz dysk do zainstalowania</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="102"/>
@@ -230,7 +230,7 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="96"/>
         <source>Sorry for the inconvenience, please photo or scan the QR code to send error log, so that the issue can be better solved.</source>
-        <translation type="unfinished"/>
+        <translation>Przepraszamy za niedogodności, wyślij zdjęcie lub zeskanuj kod QR, aby wysłać dziennik błędów, aby można było lepiej rozwiązać problem.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="78"/>
@@ -371,7 +371,7 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="93"/>
         <source>Continuing installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Kontynuacja instalacji spowoduje sformatowanie całego dysku, wykonaj kopię zapasową wszystkich danych, aby uniknąć utraty danych</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="58"/>
@@ -398,7 +398,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="228"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Upewnij się, że utworzono kopię zapasową ważnych danych, a następnie wybierz dysk do zainstalowania</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
@@ -453,7 +453,7 @@
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="75"/>
         <source>You should delete a primary partition before creating a new one</source>
-        <translation type="unfinished"/>
+        <translation>Przed utworzeniem nowej partycji należy usunąć partycję podstawową</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="43"/>
@@ -465,7 +465,7 @@
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="48"/>
         <source>You should delete a primary partition before creating a new partition</source>
-        <translation type="unfinished"/>
+        <translation>Przed utworzeniem nowej partycji należy usunąć partycję podstawową</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_number_limitation_frame.cpp" line="55"/>
@@ -506,7 +506,7 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="85"/>
         <source>Make a backup of your important data and then continue</source>
-        <translation type="unfinished"/>
+        <translation>Utwórz kopię zapasową ważnych danych i kontynuuj</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="66"/>
@@ -542,22 +542,22 @@
     <message>
         <location filename="../src/partman/operation.cpp" line="258"/>
         <source>Create new partition %1, type: %2</source>
-        <translation type="unfinished"/>
+        <translation>Tworzenie nowej partycji %1, typu: %2</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="262"/>
         <source>Create new partition %1 as %2 (mountpoint), type: %3</source>
-        <translation type="unfinished"/>
+        <translation>Tworzenie nowej partycji %1 jako %2 (punkt montowania), typu: %3</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="276"/>
         <source>Format %1 partition, type: %2</source>
-        <translation type="unfinished"/>
+        <translation>Formatuj partycję %1, typ: %2</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="280"/>
         <source>Format %1 partition as %2 (mountpoint), type: %3</source>
-        <translation type="unfinished"/>
+        <translation>Sformatuj partycję %1 jako %2 (punkt montowania), typ: %3</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="288"/>
@@ -625,20 +625,20 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="152"/>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="192"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="156"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="196"/>
         <source>Next</source>
         <translation>Dalej</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="193"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="197"/>
         <source>I have read and agree to</source>
-        <translation type="unfinished"/>
+        <translation>Przeczytałem i zgadzam się</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="194"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="198"/>
         <source>Deepin Software End User License Agreement</source>
-        <translation type="unfinished"/>
+        <translation>Umowa licencyjna użytkownika końcowego oprogramowania Deepin</translation>
     </message>
 </context>
 <context>
@@ -697,7 +697,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
         <source>Fill in the username, computer name and your password</source>
-        <translation type="unfinished"/>
+        <translation>Wpisz nazwę użytkownika, nazwę komputera i hasło</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
@@ -794,7 +794,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="351"/>
         <source>Passwords do not match</source>
-        <translation type="unfinished"/>
+        <translation>Hasła nie pasują do siebie</translation>
     </message>
 </context>
 <context>
@@ -821,20 +821,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="105"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="143"/>
         <source>Select Time Zone</source>
         <translation>Wybierz strefę czasową</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
         <source>Mark your zone on the map</source>
         <translation>Oznacz swoją strefę na mapie</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="108"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="147"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="146"/>
         <source>Next</source>
         <translation>Dalej</translation>
     </message>
@@ -861,6 +861,31 @@
     </message>
 </context>
 <context>
+    <name>installer::ControlPlatformFrame</name>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="23"/>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="83"/>
+        <source>Set Control Region</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="24"/>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="84"/>
+        <source>Set the region for Deepin EndPoint Management Platform</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="81"/>
+        <source>Next</source>
+        <translation>Dalej</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="82"/>
+        <source>Server Address</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>installer::Full_Disk_Encrypt_frame</name>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="150"/>
@@ -870,7 +895,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="156"/>
         <source>Passwords do not match</source>
-        <translation type="unfinished"/>
+        <translation>Hasła nie pasują do siebie</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
@@ -880,7 +905,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation type="unfinished"/>
+        <translation>Upewnij się, że utworzono kopię zapasową ważnych danych, a następnie wybierz dysk do zainstalowania</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="184"/>
@@ -917,6 +942,59 @@
     </message>
 </context>
 <context>
+    <name>installer::NetworkFrame</name>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="69"/>
+        <source>Skip</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="70"/>
+        <source>Next</source>
+        <translation>Dalej</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="95"/>
+        <source>Configure Network</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="128"/>
+        <source>IP Address</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="129"/>
+        <source>Netmask</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="130"/>
+        <source>Gateway</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="131"/>
+        <source>Primary DNS</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="132"/>
+        <source>Secondary DNS</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="214"/>
+        <source>IP address error: illegal IP address, please have a check.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="225"/>
+        <source>Netmask error: illegal netmask, please have a check.</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>installer::PartitionTableWarningFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
@@ -945,23 +1023,23 @@
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
         <source>Make a backup of all your data to avoid data loss</source>
-        <translation type="unfinished"/>
+        <translation>Utwórz kopię zapasową wszystkich danych, aby uniknąć utraty danych</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
         <source>Please double check if you have backed up all data, then reboot to enter this interface</source>
-        <translation type="unfinished"/>
+        <translation>Sprawdź dokładnie, czy wykonałeś kopię zapasową wszystkich danych, a następnie uruchom ponownie komputer, aby wejść do tego interfejsu</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
         <source>Make sure you have backed up all data before proceeding</source>
-        <translation type="unfinished"/>
+        <translation>Przed kontynuowaniem upewnij się, że wykonałeś kopię zapasową wszystkich danych</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="153"/>
         <source>Continuing installation will format your disk</source>
-        <translation type="unfinished"/>
+        <translation>Kontynuacja instalacji spowoduje sformatowanie dysku</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="126"/>
