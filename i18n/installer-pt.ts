@@ -109,7 +109,7 @@
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="60"/>
         <source>Relevant operations you made in the installation process will not take effect, abort or continue installation?</source>
-        <translation>Operações relevantes efetivadas durante o processo de instalação não terão efeito, abortar ou continuar instalação?</translation>
+        <translation>Operações relevantes efetuadas durante o processo de instalação não terão efeito, abortar ou continuar instalação?</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="43"/>
@@ -151,7 +151,7 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="101"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="170"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation>Por favor tenha a certeza que efetou backup dos dados importantes, de seguida escolha o disco para instalação</translation>
+        <translation>Certifique-se que efetuou backup dos dados importantes, de seguida escolha o disco para instalação</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="102"/>
@@ -251,7 +251,7 @@
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Irá desfrutar de uma experiência incrivelmente agradável com o deepin. Veja como é fácil, pois esta instalação finalizar-se-á num ápice</translation>
+        <translation>Irá desfrutar de uma experiência incrivelmente agradável com o deepin de pois de mal ter tempo para ir tomar um café.</translation>
     </message>
 </context>
 <context>
@@ -272,7 +272,7 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="46"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="70"/>
         <source>Please remove the installation media before reboot</source>
-        <translation>Por favor remova o disco de instalação antes de reiniciar</translation>
+        <translation>Por favor remova o dispositivo de instalação antes de reiniciar</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="47"/>
@@ -371,7 +371,7 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="93"/>
         <source>Continuing installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>Se continuar a instalação irá formatar todo o seu disco, por favor guarde todos os seus dados para prevenir a sua perda</translation>
+        <translation>Continuar a instalação irá formatar o disco completo, por favor guarde todos os dados para prevenir a sua perda</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="58"/>
@@ -398,7 +398,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="228"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation>Por favor tenha a certeza que efetou backup dos dados importantes, de seguida escolha o disco para instalação</translation>
+        <translation>Certifique-se que efetuou backup dos dados importantes, de seguida escolha o disco para instalação</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
@@ -410,7 +410,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="239"/>
         <source>Advanced</source>
-        <translation>Anvançada</translation>
+        <translation>Avançado</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
@@ -506,7 +506,7 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="85"/>
         <source>Make a backup of your important data and then continue</source>
-        <translation>Por favor guarde os dados importantes e confirme as seguintes operações</translation>
+        <translation>Faça Backup dos dados importantes antes de continuar</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="66"/>
@@ -607,7 +607,7 @@
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="42"/>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="65"/>
         <source>Select location for boot loader</source>
-        <translation>Selecione a localização para o gestor de arranque</translation>
+        <translation>Selecione a localização do gestor de arranque</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/select_bootloader_frame.cpp" line="44"/>
@@ -625,18 +625,18 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="152"/>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="192"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="156"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="196"/>
         <source>Next</source>
         <translation>Seguinte</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="193"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="197"/>
         <source>I have read and agree to</source>
         <translation>Eu li e concordo</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="194"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="198"/>
         <source>Deepin Software End User License Agreement</source>
         <translation>Contrato de Licença do Utilizador Final do Software Deepin</translation>
     </message>
@@ -646,7 +646,7 @@
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="70"/>
         <source>Unable to create new partition, please select one of the existing partitions!</source>
-        <translation>Não é impossível crirar uma nova partição, por favor selecione uma existente!</translation>
+        <translation>Não é possível criar uma nova partição, por favor selecione uma existente!</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="77"/>
@@ -697,7 +697,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
         <source>Fill in the username, computer name and your password</source>
-        <translation type="unfinished"/>
+        <translation>Preencha o nome de utilizador, nome do computador e a sua palavra-passe</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
@@ -773,7 +773,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="276"/>
         <source>Please input computer name longer than %1 characters and shorter than %2 characters</source>
-        <translation>Por favor insira um nome do computador que seja maior que %1 e menor que %2 caracteres</translation>
+        <translation>Por favor insira um nome do computador que seja maior que %1 carateres e menor que %2 carateres</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="302"/>
@@ -794,7 +794,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="351"/>
         <source>Passwords do not match</source>
-        <translation>Palavra-passe não coencidente</translation>
+        <translation>Palavras-passe não coincidem</translation>
     </message>
 </context>
 <context>
@@ -809,7 +809,7 @@
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="91"/>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="144"/>
         <source>Test area</source>
-        <translation>Área de texto</translation>
+        <translation>Área de teste</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_keyboard_frame.cpp" line="92"/>
@@ -821,20 +821,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="105"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="143"/>
         <source>Select Time Zone</source>
         <translation>Selecione o Fuso Horário</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
         <source>Mark your zone on the map</source>
-        <translation>Marque a sua localização no mapa</translation>
+        <translation>Assinale a sua localização no mapa</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="108"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="147"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="146"/>
         <source>Next</source>
         <translation>Seguinte</translation>
     </message>
@@ -861,6 +861,31 @@
     </message>
 </context>
 <context>
+    <name>installer::ControlPlatformFrame</name>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="23"/>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="83"/>
+        <source>Set Control Region</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="24"/>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="84"/>
+        <source>Set the region for Deepin EndPoint Management Platform</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="81"/>
+        <source>Next</source>
+        <translation>Seguinte</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="82"/>
+        <source>Server Address</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>installer::Full_Disk_Encrypt_frame</name>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="150"/>
@@ -870,7 +895,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="156"/>
         <source>Passwords do not match</source>
-        <translation>Palavra-passe não coencidente</translation>
+        <translation>Palavras-passe não coincidem</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
@@ -880,7 +905,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation>Por favor tenha a certeza que efetou backup dos dados importantes, de seguida escolha o disco para instalação</translation>
+        <translation>Certifique-se que efetuou backup dos dados importantes, de seguida escolha o disco para instalação</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="184"/>
@@ -900,7 +925,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="187"/>
         <source>Previous</source>
-        <translation>Voltar</translation>
+        <translation>Anterior</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="188"/>
@@ -917,6 +942,59 @@
     </message>
 </context>
 <context>
+    <name>installer::NetworkFrame</name>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="69"/>
+        <source>Skip</source>
+        <translation>Saltar</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="70"/>
+        <source>Next</source>
+        <translation>Seguinte</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="95"/>
+        <source>Configure Network</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="128"/>
+        <source>IP Address</source>
+        <translation>Endereço IP</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="129"/>
+        <source>Netmask</source>
+        <translation>Netmask</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="130"/>
+        <source>Gateway</source>
+        <translation>Gateway</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="131"/>
+        <source>Primary DNS</source>
+        <translation>DNS primário</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="132"/>
+        <source>Secondary DNS</source>
+        <translation>DNS secundário</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="214"/>
+        <source>IP address error: illegal IP address, please have a check.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="225"/>
+        <source>Netmask error: illegal netmask, please have a check.</source>
+        <translation>Erro netmask: netmask incorreta, por favor verifique.</translation>
+    </message>
+</context>
+<context>
     <name>installer::PartitionTableWarningFrame</name>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="53"/>
@@ -928,7 +1006,7 @@
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="105"/>
         <source>Unable to install directly due to EFI motherboard boot loader and MBR disk detected, please select one of the solutions below to continue.</source>
-        <translation>É impossível instalar diretamente quando o gestor de arranque na motherboard está definido para EFI e é detetado um disco MBR, por favor selecione uma das soluções abaixo </translation>
+        <translation>É impossível instalar diretamente quando o gestor de arranque na motherboard está definido para EFI e é detetado um disco MBR, por favor selecione uma das soluções abaixo para continuar</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="61"/>
@@ -945,7 +1023,7 @@
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="66"/>
         <source>Make a backup of all your data to avoid data loss</source>
-        <translation>Por favor guarde todos os seus dados a fim de evitar a sua perda</translation>
+        <translation>Guarde todos os seus dados a fim de evitar a sua perda</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
@@ -955,7 +1033,7 @@
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>
         <source>Make sure you have backed up all data before proceeding</source>
-        <translation>Por favor tenha a certeza que guadou todos os seus dados, seguidamente continue</translation>
+        <translation>Certifique-se de que guardou todos os seus dados antes de continuar</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="73"/>
@@ -1026,12 +1104,12 @@
     <message>
         <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="143"/>
         <source>View in Chinese</source>
-        <translation>Visualizar em Chinês</translation>
+        <translation>Ver em Chinês</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/user_agreement_frame.cpp" line="148"/>
         <source>View in English</source>
-        <translation>Visualizar em Inglês</translation>
+        <translation>Ver em Inglês</translation>
     </message>
 </context>
 </TS>

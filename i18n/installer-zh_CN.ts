@@ -625,18 +625,18 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="152"/>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="192"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="156"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="196"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="193"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="197"/>
         <source>I have read and agree to</source>
         <translation>我已阅读并同意</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="194"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="198"/>
         <source>Deepin Software End User License Agreement</source>
         <translation>《深度操作系统最终用户许可协议》</translation>
     </message>
@@ -821,20 +821,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="105"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="143"/>
         <source>Select Time Zone</source>
         <translation>选择时区</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
         <source>Mark your zone on the map</source>
         <translation>请在地图上标注您所在的区域</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="108"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="147"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="146"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
@@ -858,6 +858,31 @@
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="69"/>
         <source>Continue</source>
         <translation>继续安装</translation>
+    </message>
+</context>
+<context>
+    <name>installer::ControlPlatformFrame</name>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="23"/>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="83"/>
+        <source>Set Control Region</source>
+        <translation>设置管控区域</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="24"/>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="84"/>
+        <source>Set the region for Deepin EndPoint Management Platform</source>
+        <translation>设置深度终端集中管控平台的管控区域</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="81"/>
+        <source>Next</source>
+        <translation>下一步</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="82"/>
+        <source>Server Address</source>
+        <translation>服务器地址</translation>
     </message>
 </context>
 <context>
@@ -914,6 +939,59 @@
         <location filename="../src/ui/models/mount_point_model.cpp" line="37"/>
         <source>Do not use</source>
         <translation>不使用</translation>
+    </message>
+</context>
+<context>
+    <name>installer::NetworkFrame</name>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="69"/>
+        <source>Skip</source>
+        <translation>跳过</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="70"/>
+        <source>Next</source>
+        <translation>下一步</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="95"/>
+        <source>Configure Network</source>
+        <translation>配置网络</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="128"/>
+        <source>IP Address</source>
+        <translation>IP 地址</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="129"/>
+        <source>Netmask</source>
+        <translation>子网掩码</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="130"/>
+        <source>Gateway</source>
+        <translation>网关</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="131"/>
+        <source>Primary DNS</source>
+        <translation>首选DNS</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="132"/>
+        <source>Secondary DNS</source>
+        <translation>备用DNS</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="214"/>
+        <source>IP address error: illegal IP address, please have a check.</source>
+        <translation>IP地址错误：IP地址非法，请检查您的输入。</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="225"/>
+        <source>Netmask error: illegal netmask, please have a check.</source>
+        <translation>子网掩码错误：子网掩码非法，请检查您的输入。</translation>
     </message>
 </context>
 <context>

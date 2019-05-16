@@ -625,18 +625,18 @@
 <context>
     <name>installer::SelectLanguageFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="152"/>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="192"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="156"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="196"/>
         <source>Next</source>
         <translation>تقدم</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="193"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="197"/>
         <source>I have read and agree to</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="194"/>
+        <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="198"/>
         <source>Deepin Software End User License Agreement</source>
         <translation type="unfinished"/>
     </message>
@@ -821,20 +821,20 @@
 <context>
     <name>installer::TimezoneFrame</name>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="105"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="143"/>
         <source>Select Time Zone</source>
         <translation>اختيار المنطقة الزمنية</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="145"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="106"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="144"/>
         <source>Mark your zone on the map</source>
         <translation>ضع علامة على منطقتك على الخريطة</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="108"/>
-        <location filename="../src/ui/frames/timezone_frame.cpp" line="147"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="107"/>
+        <location filename="../src/ui/frames/timezone_frame.cpp" line="146"/>
         <source>Next</source>
         <translation>التالي</translation>
     </message>
@@ -858,6 +858,31 @@
         <location filename="../src/ui/frames/virtual_machine_frame.cpp" line="69"/>
         <source>Continue</source>
         <translation>استمرار</translation>
+    </message>
+</context>
+<context>
+    <name>installer::ControlPlatformFrame</name>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="23"/>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="83"/>
+        <source>Set Control Region</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="24"/>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="84"/>
+        <source>Set the region for Deepin EndPoint Management Platform</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="81"/>
+        <source>Next</source>
+        <translation>التالي</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/control_platform_frame.cpp" line="82"/>
+        <source>Server Address</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -914,6 +939,59 @@
         <location filename="../src/ui/models/mount_point_model.cpp" line="37"/>
         <source>Do not use</source>
         <translation>لا تستخدم</translation>
+    </message>
+</context>
+<context>
+    <name>installer::NetworkFrame</name>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="69"/>
+        <source>Skip</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="70"/>
+        <source>Next</source>
+        <translation>التالي</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="95"/>
+        <source>Configure Network</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="128"/>
+        <source>IP Address</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="129"/>
+        <source>Netmask</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="130"/>
+        <source>Gateway</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="131"/>
+        <source>Primary DNS</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="132"/>
+        <source>Secondary DNS</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="214"/>
+        <source>IP address error: illegal IP address, please have a check.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/networkframe.cpp" line="225"/>
+        <source>Netmask error: illegal netmask, please have a check.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
