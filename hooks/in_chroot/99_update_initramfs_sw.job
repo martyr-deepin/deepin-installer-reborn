@@ -50,7 +50,7 @@ rm -rf /lib/modules/*
 mkdir -pv /lib/modules
 [ -d $SRCPATH/modules ] && cp -rf $SRCPATH/modules/* /lib/modules
 
-for _FILE in $(ls ${SRCPATH} | grep "^vmlinux"); do
+for _FILE in $(ls ${SRCPATH} | grep "^vmlinu"); do
   install -v -Dm755 ${SRCPATH}/${_FILE} /boot/${_FILE}
 done
 
@@ -90,13 +90,8 @@ fi
 if cat /deepinhost/etc/deepin-installer.conf | grep DI_MOUNTPOINTS | \
   grep -q -e "=/boot;" -e "=/boot$"; then
     msg "/boot split detected"
-    mkdir -p /boot/boot
-    #mv /boot/* /boot/boot/
-    # set links to /boot/boot
-    cd /boot/boot
-    find .. -maxdepth 1 -type f -exec ln -s {} . \;
-    ln -s ../grub .
-    cd -
+   cd /boot 
+   ln -sv . boot
 fi
 
 if [ x$(installer_get "DI_CRYPT_ROOT") == xtrue ]; then

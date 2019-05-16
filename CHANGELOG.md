@@ -1,3 +1,20 @@
+<a name="2.7.1"></a>
+### 2.7.1 (2019-05-15)
+
+
+#### Features
+
+*   save network config ([58e0cece](https://github.com/linuxdeepin/deepin-install-reborn/commit/58e0cece8666737bb18e9c8c6e02951b3ecd57b2))
+*   add network valid check ([8d4c54e9](https://github.com/linuxdeepin/deepin-install-reborn/commit/8d4c54e9b0ac332b112b82a93c373563d83cdb5c))
+*   add network settings page ([6823263b](https://github.com/linuxdeepin/deepin-install-reborn/commit/6823263b4856336776665233d77ba4c5ca9a287e))
+* **Network:**
+  *  add skip_network_page to default_settings.ini ([edecbaa1](https://github.com/linuxdeepin/deepin-install-reborn/commit/edecbaa1ca70322143f76aa8aa2658125fc4dc90))
+  *  add skip button to next page ([c00e1834](https://github.com/linuxdeepin/deepin-install-reborn/commit/c00e18345ce75abc8f359b54c170acb05dd3475a))
+  *  add edit placeholderText ([d260c78c](https://github.com/linuxdeepin/deepin-install-reborn/commit/d260c78cddd3241feabf1800f33b86d9fda597a8))
+* **network:**  add logo and subtitle ([99e849b6](https://github.com/linuxdeepin/deepin-install-reborn/commit/99e849b686de830bce6e7ddfa76f9819240ca4c8))
+
+
+
 <a name=""></a>
 ##  2.7.0 (2019-04-24)
 
