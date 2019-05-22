@@ -56,6 +56,7 @@ FirstBootSetupWindow::FirstBootSetupWindow(QWidget *parent)
   this->initConnections();
 
   // Read default settings.
+  language_frame_->readConf();
   system_info_frame_->readConf();
   timezone_frame_->readConf();
 }
