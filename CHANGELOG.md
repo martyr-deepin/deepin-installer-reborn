@@ -1,3 +1,13 @@
+<a name="2.7.3"></a>
+### 2.7.3 (2019-05-24)
+
+
+#### Bug Fixes
+
+*   No language configuration read after startup ([f2148d82](https://github.com/linuxdeepin/deepin-install-reborn/commit/f2148d8244842c3c7c516d3313ecf219328671d7))
+
+
+
 <a name="2.7.2"></a>
 ### 2.7.2 (2019-05-16)
 
