@@ -65,6 +65,10 @@ int main(int argc, char *argv[])
   translator.load(installer::GetLocalePath(locale));
   app.installTranslator(&translator);
 
+  QFont font(app.font());
+  font.setFamily(installer::GetUIDefaultFont());
+  app.setFont(font);
+
   installer::FirstBootSetupWindow window;
   window.fullscreen();
 
