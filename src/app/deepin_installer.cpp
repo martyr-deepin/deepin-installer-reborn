@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
   app.setWindowIcon(QIcon(":/images/deepin_installer.svg"));
 
   QFont font(app.font());
-  font.setFamily("Noto Sans CJK SC Regular");
+  font.setFamily(installer::GetUIDefaultFont());
   app.setFont(font);
 
   // Parse argument list.

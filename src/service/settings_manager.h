@@ -85,6 +85,9 @@ void WriteUEFI(bool is_efi);
 
 // Get current locale.
 QString ReadLocale();
+
+QString GetUIDefaultFont();
+
 void WriteAvatar(const QString& avatar);
 void WriteHostname(const QString& hostname);
 // Write keyboard model, layout and layout variant name.

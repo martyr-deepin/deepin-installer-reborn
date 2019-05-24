@@ -303,6 +303,12 @@ QString ReadLocale() {
   return (dot_index == -1) ? locale : locale.left(dot_index);
 }
 
+QString GetUIDefaultFont() {
+  // TODO: maybe make this a configurable value in the future? since other
+  // editions may have different fonts installed.
+  return "Noto Sans CJK SC Regular";
+}
+
 void WriteAvatar(const QString& avatar) {
   AppendToConfigFile("DI_AVATAR", avatar);
 }
