@@ -6,6 +6,16 @@
 为了方便, 可以将 oem 目录放在 /tmp 目录里. 它们的优先级从高到低依次是, /tmp/oem,
 /cdrom/oem, /lib/live/mount/medium/oem
 
+# 审核模式
+审核模式会在启用重启后配置阶段进入一次桌面，并在lightdm启动前通过root权限执
+行check_hooks/before_check/内的脚本，在lightdm关闭后执行check_hooks/after_check/的脚本，
+在登录进桌面后执行check_hooks/in_check/里的脚本。由于审核模式的操作比较特殊，无法和普通的hooks定制
+一起使用，在oem目录需要单独创建一个check_hooks的目录，内部结构为before_check、in_check和after_check三个目录。
+如果某个脚本执行失败，会在esp中创建SI_FAILED，全部执行完毕，lightdm_stop.sh会在esp创建SI_SUCCESS。(SI = System Integrity)，并设置下一次启动网络启动，由PE进行检查。
+* `DI_SI_USER` 定制审核模式的测试用户，默认为test。
+* `DI_SI_PASSWORD` 定制审核模式测试用户的密码，默认为test。
+* `DI_SI_GROUP` 定制审核模式测试用户的组，默认sudo。
+
 # 自定义功能
 安装器默认的配置信息集成到了程序里面, 在 `resources/default_settings.ini`,
 自定义的话, 需要创建 `oem/settings.ini` 文件, 然后对选项重新赋值即可.

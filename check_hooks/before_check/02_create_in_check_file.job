@@ -1,0 +1,10 @@
+mkdir -p /home/${DI_SI_USER}/.config/autostart/
+
+cat > /home/${DI_SI_USER}/.config/autostart/check_test.desktop << EOF
+[Desktop Entry]
+Exec=/deepin-installer/check_start.sh
+Name=check mode
+StartupNotify=false
+Terminal=false
+Type=Application
+EOF

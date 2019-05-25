@@ -1,0 +1,22 @@
+
+# User will delete when run check_hooks/lightdm_stop.sh
+if [ x$(installer_get "system_info_setup_after_reboot") == "xtrue" ]; then
+    if [ x$(installer_get "system_check_mode") == "xtrue" ]; then
+        local USERNAME = $(installer_get "DI_SI_USER")
+        local PASSWORD = $(installer_get "DI_SI_PASSWORD")
+        local GROUP = $(installer_get "DI_SI_GROUP")
+
+        if [ -z ${USERNAME} ];then
+            USERNAME=test
+            installer_set "DI_SI_USER" "test"
+        fi
+
+        if [ -z ${PASSWORD} ];then
+            PASSWORD=test
+            installer_set "DI_SI_PASSWORD" "test"
+        fi
+
+        useradd -m -G sudo ${GROUP} ${USERNAME}
+        echo ${USERNAME}:${PASSWORD}|chpasswd
+    fi
+fi

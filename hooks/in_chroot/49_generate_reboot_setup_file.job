@@ -20,6 +20,9 @@
 
 # If reboot-setup is enabled, backup lightdm.conf and modify it to execute
 # deepin-installer-first-boot.
+
+SYSTEM_CHECK_MODE=$(installer_get "system_check_mode")
+
 prepare_lightdm_deepin_installer_mode() {
   local CONF_FILE=/etc/lightdm/lightdm.conf
   local TEMP_CONF_FILE=/etc/lightdm/lightdm.conf.real
@@ -27,10 +30,24 @@ prepare_lightdm_deepin_installer_mode() {
     install -v -m644 "${CONF_FILE}" "${TEMP_CONF_FILE}"
   fi
 
-  cat > "${CONF_FILE}" <<EOF
+if [ x${SYSTEM_CHECK_MODE} != "xtrue" ]; then
+cat > "${CONF_FILE}" <<EOF
 [Seat:*]
 greeter-setup-script=/usr/bin/deepin-installer-first-boot
 EOF
+
+else
+
+# 进入审核模式
+cat > "${CONF_FILE}" <<EOF
+[Seat:*]
+autologin-user=${DI_SI_USER}
+user-session=deepin
+display-setup-script=/deepin-installer/lightdm-start.sh
+display-stopped-script=/deepin-installer/lightdm-stop.sh
+EOF
+
+fi
 }
 
 if [ x$(installer_get "system_info_setup_after_reboot") = "xtrue" ]; then

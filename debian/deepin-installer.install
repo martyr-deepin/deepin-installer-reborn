@@ -12,6 +12,7 @@ usr/bin/deepin-installer-unsquashfs
 usr/bin/deepin-installer-user-form
 usr/share/applications/deepin-installer.desktop
 usr/share/deepin-installer/hooks/*
+usr/share/deepin-installer/check_hooks/*
 usr/share/deepin-installer/i18n/*
 usr/share/deepin-installer/resources/*
 usr/share/deepin-installer/tools/*

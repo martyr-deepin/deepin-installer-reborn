@@ -408,5 +408,23 @@
     "name": "service_disabled_services",
     "description": "",
     "type": "StringArray"
+  },
+  {
+    "title": "启用审核模式",
+    "name": "system_check_mode",
+    "description": "在重启后配置前，进入一次桌面进行系统完整性检测",
+    "type": "Boolean"
+  },
+  {
+    "title": "审核模式的测试用户名",
+    "name": "DI_SI_USER",
+    "description": "设置审核模式下进行测试的用户名",
+    "type": "String"
+  },
+  {
+    "title": "审核模式的测试用户密码",
+    "name": "DI_SI_PASSWORD",
+    "description": "设置审核模式下进行测试的用户的密码",
+    "type": "String"
   }
 ]

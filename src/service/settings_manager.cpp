@@ -221,6 +221,10 @@ QString GetOemHooksDir() {
   return GetOemDir().absoluteFilePath("hooks");
 }
 
+QString GetOemCheckHooksDir() {
+    return GetOemDir().absoluteFilePath("check_hooks");
+}
+
 QString GetReservedUsernameFile() {
   const QString oem_file = GetOemDir().absoluteFilePath("reserved_usernames");
   if (QFile::exists(oem_file)) {

@@ -34,6 +34,7 @@ const char kAfterChrootDir[] = "after_chroot";
 
 const char kTargetHooksDir[] = "/tmp/installer";
 const char kChrootTargetHooksDir[] = "/target/tmp/installer";
+const char kChrootCheckModeHooksDir[] = "/target/deepin-installer";
 
 bool AddExecutable(const QString& path, bool recursive) {
   if (recursive) {
@@ -132,6 +133,23 @@ bool ChrootCopyHooks() {
   if (!CopyFolder(kTargetHooksDir, kChrootTargetHooksDir)) {
     qCritical() << "Failed to copy hooks to:" << kChrootTargetHooksDir;
     return false;
+  }
+
+  if (GetSettingsBool("system_check_mode")) {
+      // copy check mode hooks files
+      if (!CopyFolder(BUILTIN_CHECK_HOOKS_DIR, kChrootCheckModeHooksDir)) {
+          qCritical() << "Copy check mode hooks folder failed";
+          return false;
+      }
+
+      // copy check mode hooks files
+      const QString check_mode_oem_dir = GetOemCheckHooksDir();
+      if (QDir(check_mode_oem_dir).exists()) {
+          if (!CopyFolder(check_mode_oem_dir, kChrootCheckModeHooksDir)) {
+              qCritical() << "Copy oem check mode hooks folder failed";
+              return false;
+          }
+      }
   }
 
   // Add executable permissions

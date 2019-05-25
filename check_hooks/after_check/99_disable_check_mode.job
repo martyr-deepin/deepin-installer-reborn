@@ -1,0 +1,9 @@
+#!/bin/bash
+
+deepin-installer-settings set /etc/deepin-installer.conf system_check_mode false
+
+CONF_FILE=/etc/lightdm/lightdm.conf
+cat > "${CONF_FILE}" <<EOF
+[Seat:*]
+greeter-setup-script=/usr/bin/deepin-installer-first-boot
+EOF
