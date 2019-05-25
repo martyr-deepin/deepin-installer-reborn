@@ -59,6 +59,11 @@ FirstBootSetupWindow::FirstBootSetupWindow(QWidget *parent)
   language_frame_->readConf();
   system_info_frame_->readConf();
   timezone_frame_->readConf();
+
+    if (GetSettingsBool(kSkipSelectLanguagePageOnFirstBoot)) {
+        language_frame_->writeConf();
+        onLanguageSelected();
+    }
 }
 
 FirstBootSetupWindow::~FirstBootSetupWindow() {

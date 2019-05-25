@@ -124,6 +124,7 @@ slide 目录的结果应该与 resources/slide 目录相同.
  指的是系统中已经存在或者极可能会被某些包创建的用户名.
 * `skip_network_page` 跳过静态网络配置界面
 * `skip_control_platform_page` 跳过深度管控平台地区设置界面
+* `skip_select_language_page_on_first_boot` 跳过安装后配置的语言界面，会读取默认值
 
 ## 桌面环境相关的
 * `dde_dock_app_list` 在dock中显示哪些应用图标.

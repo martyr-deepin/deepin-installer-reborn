@@ -27,6 +27,7 @@ const char kSkipDiskSpaceInsufficientPage[] =
     "skip_disk_space_insufficient_page";
 const char kSkipVirtualMachinePage[] = "skip_virtual_machine_page";
 const char kSkipSelectLanguagePage[] = "skip_select_language_page";
+const char kSkipSelectLanguagePageOnFirstBoot[] = "skip_select_language_page_on_first_boot";
 const char kSkipSystemInfoPage[] = "skip_system_info_page";
 const char kSkipTimezonePage[] = "skip_timezone_page";
 const char kSkipNetworkPage[] = "skip_network_page";

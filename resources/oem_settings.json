@@ -426,5 +426,11 @@
     "name": "DI_SI_PASSWORD",
     "description": "设置审核模式下进行测试的用户的密码",
     "type": "String"
+  },
+  {
+    "title": "跳过系统后配置系统的语言界面",
+    "name": "skip_select_language_page_on_first_boot",
+    "description": "",
+    "type": "Boolean"
   }
 ]
