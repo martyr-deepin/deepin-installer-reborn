@@ -153,17 +153,27 @@ QStringList GetSettingsStringList(const QString& key) {
 }
 
 QVariant GetSettingsValue(const QString& key) {
-  QSettings settings(kInstallerConfigFile, QSettings::IniFormat);
-  if (settings.contains(key)) {
-    return settings.value(key);
-  }
+    QStringList list{
+        QString("%1/settings.ini").arg(kDebugOemDir),
+        QString("%1/settings.ini").arg(kUbuntuOemDir),
+        QString("%1/settings.ini").arg(kDeepinOemDir),
+        kInstallerConfigFile,
+        kDefaultSettingsFile,
+    };
 
-  // Read default settings
-  QSettings default_settings(kDefaultSettingsFile, QSettings::IniFormat);
-  if (!default_settings.contains(key)) {
+    for (const QString& f : list) {
+        QFile file(f);
+        if (file.exists() && file.open(QIODevice::Text | QIODevice::ReadOnly)) {
+            QSettings       settings(f, QSettings::IniFormat);
+            const QVariant& value = settings.value(key);
+            if (value.isValid()) {
+                return value;
+            }
+        }
+    }
+
     qWarning() << "getSettingsValue() Invalid key:" << key;
-  }
-  return default_settings.value(key);
+    return QVariant();
 }
 
 QString GetAutoPartFile() {
