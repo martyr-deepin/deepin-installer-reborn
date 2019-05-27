@@ -1,3 +1,18 @@
+<a name="2.7.4"></a>
+### 2.7.4 (2019-05-27)
+
+
+#### Features
+
+*   support skip language page on first boot ([80a4e108](https://github.com/linuxdeepin/deepin-install-reborn/commit/80a4e1082797bc3e969d3c8988dc7878678b29e1))
+*   add check system mode ([b240bd6b](https://github.com/linuxdeepin/deepin-install-reborn/commit/b240bd6b2268c9c6d3bc9121d4c1a32abf12c6df))
+
+#### Bug Fixes
+
+*   font in first boot setup pages seems strange ([a7910706](https://github.com/linuxdeepin/deepin-install-reborn/commit/a79107067dbdb60e76701cc5976d18fab971be8a))
+
+
+
 <a name="2.7.3"></a>
 ### 2.7.3 (2019-05-24)
 
