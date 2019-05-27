@@ -31,7 +31,7 @@
  如果需要自定义, 可以放到 `oem/vendor.png`.
 * 应用图标. `oem/icons/` 目录用于存放应用图标, 其目录结构应与
  `/usr/share/icons/hicolor` 相同.
-* GRUB引导画面背景. 可以把图片放到 `oem/grub.png`.
+* GRUB引导画面背景. 可以把图片放到 `oem/grub.jpg`.
 * 登录界面背景. 可以放到 `oem/lightdm.png`
 * plymouth 开机动画是一系统图片组成的, 放到 `oem/plymouth-theme/deepin-logo/`
  目录中. 可以参考 `plymouth-theme-deepin-logo` 这个deb包的结构.

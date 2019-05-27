@@ -51,11 +51,15 @@ if [ x"${GRUB_BLOCK_WINDOWS}" = "xtrue" ]; then
   GRUB_NEED_UPDATE=true
 fi
 
-OEM_GRUB_BACKGROUND="${OEM_DIR}/grub.png"
+# deepin-fallback need jpg file, and imagemagisk does not work for sw platform,
+# cannot conver png to jpg. So modify the requirements of oem.
+OEM_GRUB_BACKGROUND="${OEM_DIR}/grub.jpg"
 GRUB_BACKGROUND=/boot/grub/themes/deepin/background_source
+GRUB_BACKGROUND_FAILBACK=/boot/grub/themes/deepin-fallback/background.jpg
 if [ -f "${OEM_GRUB_BACKGROUND}" ]; then
   # Update background of boot menu by overwriting old background image.
   install -m644 -v "${OEM_GRUB_BACKGROUND}" "${GRUB_BACKGROUND}"
+  install -m644 -v "${OEM_GRUB_BACKGROUND}" "${GRUB_BACKGROUND_FAILBACK}"
 
   GRUB_NEED_UPDATE=true
 fi
