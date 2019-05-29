@@ -23,12 +23,17 @@ void AutoScreenScale()
         for (int i = 0; i < resources->noutput; i++)
         {
             XRROutputInfo *outputInfo = XRRGetOutputInfo(display, resources, resources->outputs[i]);
+            if (outputInfo == nullptr) {
+                continue;
+            }
+
             if (outputInfo->crtc == 0 || outputInfo->mm_width == 0)
                 continue;
 
             XRRCrtcInfo *crtInfo = XRRGetCrtcInfo(display, resources, outputInfo->crtc);
-            if (crtInfo == nullptr)
+            if (crtInfo == nullptr) {
                 continue;
+            }
 
             scaleRatio = static_cast<double>(crtInfo->width) / static_cast<double>(outputInfo->mm_width) / (1366.0 / 310.0);
 
