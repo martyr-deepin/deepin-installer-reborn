@@ -54,7 +54,6 @@ def main():
 
     loongson_settings = (
             ("skip_virtual_machine_page", "true"),
-            ("skip_select_language_page", "true"),
             ("skip_timezone_page", "true"),
             ("select_language_default_locale", "zh_CN"),
             ("system_info_disable_keyboard_page", "true"),
@@ -80,7 +79,6 @@ def main():
 
     sw_settings = (
         ("skip_virtual_machine_page", "true"),
-        ("skip_select_language_page", "true"),
         ("skip_timezone_page", "true"),
         ("select_language_default_locale", "zh_CN"),
         ("system_info_disable_keyboard_page", "true"),
