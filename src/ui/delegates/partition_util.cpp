@@ -42,13 +42,16 @@ const char kLiveMountPoint[] = "/lib/live/mount/medium";
 
 // Get distribution description at partition |path| if it contains an OS.
 QString GetOsDescription(const QString& path) {
-  const OsProberItems items = GetOsProberItems();
-  for (const OsProberItem& item : items) {
-    if (item.path == path) {
-      return item.description;
+    if (GetSettingsBool(kPartitionEnableOsProber)) {
+        const OsProberItems items = GetOsProberItems();
+        for (const OsProberItem& item : items) {
+            if (item.path == path) {
+                return item.description;
+            }
+        }
     }
-  }
-  return "";
+
+    return QString();
 }
 
 }  // namespace
