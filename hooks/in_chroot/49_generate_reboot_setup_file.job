@@ -22,6 +22,7 @@
 # deepin-installer-first-boot.
 
 SYSTEM_CHECK_MODE=$(installer_get "system_check_mode")
+DI_SI_USER=$(installer_get "DI_SI_USER")
 
 prepare_lightdm_deepin_installer_mode() {
   local CONF_FILE=/etc/lightdm/lightdm.conf
