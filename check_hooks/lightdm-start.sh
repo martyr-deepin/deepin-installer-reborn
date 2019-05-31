@@ -7,6 +7,7 @@
 
 if [ -d "/deepin-installer/before_check/" ];then
     for i in /deepin-installer/before_check/*; do
+        chmod +x $i
         $i
         if [ $? != 0 ]; then
             echo "Check Mode faild: $i" >> /var/log/deepin-installer.log
