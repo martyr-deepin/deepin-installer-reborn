@@ -1,3 +1,18 @@
+<a name="2.7.5"></a>
+### 2.7.5 (2019-05-31)
+
+
+#### Bug Fixes
+
+*   disable osprober on sw and longxin ([4f4df470](https://github.com/linuxdeepin/deepin-install-reborn/commit/4f4df470993fe790107d4204b00ddff0b6cd6bbc))
+* **autoScale:**  not check outputInfo nullptr (#59) ([882446be](https://github.com/linuxdeepin/deepin-install-reborn/commit/882446be2fa9d8c936422ee6b73c37d692cdd16b))
+* **checkMode:**  missing get DI_SI_USER value ([b66fc972](https://github.com/linuxdeepin/deepin-install-reborn/commit/b66fc9720a14039267a61e062bd11a5ab3d95c0b))
+* **oem:**
+  *  grub background invalid ([7fd332ff](https://github.com/linuxdeepin/deepin-install-reborn/commit/7fd332ff6255140af6c2c3a24679f9e177b3062d))
+  *  greeter invalid ([04a7ddee](https://github.com/linuxdeepin/deepin-install-reborn/commit/04a7ddee87f1751ce1130ead7cc550d2f16a5890))
+
+
+
 <a name="2.7.4"></a>
 ### 2.7.4 (2019-05-27)
 
