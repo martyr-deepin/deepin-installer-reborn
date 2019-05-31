@@ -1,3 +1,15 @@
+<a name="2.7.6"></a>
+### 2.7.6 (2019-05-31)
+
+
+#### Bug Fixes
+
+* **checkMode:**
+  *  missing DI_SI_USER ([f65b7db6](https://github.com/linuxdeepin/deepin-install-reborn/commit/f65b7db6782888c2406eecdc5ba50168adedfa74))
+  *  change file order ([d8533b0e](https://github.com/linuxdeepin/deepin-install-reborn/commit/d8533b0ef963c6e7621ce5184368f1cc3bdf5310))
+
+
+
 <a name="2.7.5"></a>
 ### 2.7.5 (2019-05-31)
 
