@@ -28,7 +28,7 @@ add_user_to_existed_group() {
 }
 
 # Setup username, password and hostname.
-setup_username_password() {
+setup_username_password_hostname() {
   local DI_HOSTNAME DI_PASSWORD DI_USERNAME REAL_PASSWORD PASSWORD_MIN_LEN
   DI_HOSTNAME=$(installer_get "DI_HOSTNAME")
   DI_PASSWORD=$(installer_get "DI_PASSWORD")
@@ -105,6 +105,20 @@ ff02::2 ip6-allrouters
 EOF
 }
 
+# Setup in in_chroot, used in first boot setup phrase, 
+# because X & X Clients crash without hostname set.
+# 
+# I'll just leave it without cleaning since it'll be override 
+# in real user setup(see code above).
+setup_first_boot_hostname() {
+  msg "Setup first boot temporary hostname"
+  echo "first-boot-hostname" | tee /etc/hostname
+  cat > /etc/hosts << EOF
+127.0.0.1	localhost
+127.0.1.1 first-boot-hostname
+EOF
+}
+
 DI_STRONG_PASSWORD=$(installer_get "DI_STRONG_PASSWORD")
 cat > /etc/deepin/dde-control-center.conf << EOF
 [Password]
@@ -112,5 +126,7 @@ STRONG_PASSWORD=${DI_STRONG_PASSWORD}
 EOF
 
 if [ x$(installer_get "system_info_setup_after_reboot") != "xtrue" ]; then
-  setup_username_password
+  setup_username_password_hostname
+else
+  setup_first_boot_hostname
 fi
