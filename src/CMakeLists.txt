@@ -328,6 +328,8 @@ set(UI_FILES
     ui/frames/networkframe.cpp
     ui/frames/control_platform_frame.h
     ui/frames/control_platform_frame.cpp
+    ui/frames/dynamic_disk_warning_frame.h
+    ui/frames/dynamic_disk_warning_frame.cpp
 
     ui/models/bootloader_list_model.cpp
     ui/models/bootloader_list_model.h

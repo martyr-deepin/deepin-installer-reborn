@@ -46,6 +46,7 @@ class SelectBootloaderFrame;
 class SimplePartitionDelegate;
 class SimplePartitionFrame;
 class Full_Disk_Encrypt_frame;
+class DynamicDiskWarningFrame;
 class TitleLabel;
 
 // Handles partition operations.
@@ -83,6 +84,8 @@ class PartitionFrame : public QFrame {
   bool isSimplePartitionMode();
   bool isFullDiskPartitionMode();
 
+  bool isRawDevice(const QList<Device::Ptr> list);
+
   AdvancedPartitionFrame* advanced_partition_frame_ = nullptr;
   EditPartitionFrame* edit_partition_frame_ = nullptr;
   FullDiskFrame* full_disk_partition_frame_ = nullptr;
@@ -96,6 +99,7 @@ class PartitionFrame : public QFrame {
   SelectBootloaderFrame* select_bootloader_frame_ = nullptr;
   SimplePartitionFrame* simple_partition_frame_ = nullptr;
   Full_Disk_Encrypt_frame* full_disk_encrypt_frame_ = nullptr;
+  DynamicDiskWarningFrame* dynamic_disk_warning_frame_ = nullptr;
 
   TitleLabel* title_label_ = nullptr;
   CommentLabel* comment_label_ = nullptr;
@@ -134,6 +138,8 @@ class PartitionFrame : public QFrame {
   void showPartitionTableWarningFrame(const QString& device_path);
   void showSelectBootloaderFrame();
   void showEncryptFrame();
+  void showDynamicDiskFrame();
+  void showPrepareInstallFrame();
 };
 
 }  // namespace installer

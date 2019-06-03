@@ -26,6 +26,7 @@ class QLabel;
 class QShowEvent;
 
 #include "partman/partition.h"
+#include "partman/device.h"
 
 namespace installer {
 
@@ -41,6 +42,8 @@ class SimplePartitionFrame : public QFrame {
 
   // Validate whether a root partition is selected and large enough.
   bool validate();
+
+  Device::Ptr selectedDevice() const;
 
  signals:
   // Emitted when partition table not appropriate at |device_path|.
@@ -83,7 +86,7 @@ class SimplePartitionFrame : public QFrame {
 
  private slots:
   void onDeviceRefreshed();
-  
+
   void onPartitionButtonClicked();
   // Di-select the unchecked button.
   void onPartitionButtonToggled(QAbstractButton* button, bool checked);

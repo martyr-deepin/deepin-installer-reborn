@@ -55,6 +55,8 @@ class AdvancedPartitionDelegate : public QObject {
   // Get real partition on disk where |virtual_partition| is located.
   Partition::Ptr getRealPartition(const Partition::Ptr virtual_partition) const;
 
+  QList<Device::Ptr> getAllUsedDevice() const;
+
   // Returns true if current boot mode is mbr or any system is found on disks
   // with msdos partition table.
   bool isMBRPreferred() const;

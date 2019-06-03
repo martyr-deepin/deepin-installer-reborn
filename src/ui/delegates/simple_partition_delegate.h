@@ -70,6 +70,8 @@ class SimplePartitionDelegate : public QObject {
   // using it.
   void selectPartition(const Partition::Ptr partition);
 
+  inline Partition::Ptr selectedPartition() const { return selected_partition_; }
+
   // Set boot flag of root partition. Call this before operations() and after
   // validate().
   // Returns false if no appropriate partition can be set as bootable.
