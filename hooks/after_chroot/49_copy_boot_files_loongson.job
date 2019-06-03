@@ -70,6 +70,11 @@ if [ ! $boot_path ];then
     sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/boot.cfg
     sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/grub.cfg
 
+    if [ x$(installer_get "DI_CRYPT_ROOT") == xtrue ];then
+        sed -i -e 's/splash//g' /target/boot/grub.cfg
+        sed -i -e 's/splash//g' /target/boot/boot.cfg
+    fi
+
     if grep -q boot /target/etc/fstab ;then
         sed -i "s|wd0/boot|wd0|g" /target/boot/boot.cfg
     fi
@@ -106,7 +111,7 @@ else
     fi
 
     echo "
-title Deepin 15.5 Professional mips64el for Loongson 3A3000
+title Deepin 15.5 SP3 Professional mips64el for Loongson 3A3000
     initrd /dev/fs/ext2@wd0/boot/$initrd_name
     kernel /dev/fs/ext2@wd0/boot/$kernel_name
     args console=tty loglevel=0 quiet $splash locales=zh_CN.UTF-8 root=$rootuuid
@@ -117,7 +122,7 @@ title Deepin Recovery
     args boot=live loglevel=0 components $splash toram locales=zh_CN.UTF-8 acpi_backlight=vendor live-media-path=recovery live-media=$rootuuid " >> $boot_path/boot.cfg
 
     echo "
-menuentry 'Deepin 15.5 Professional mips64el for Loongson 3A3000'{
+menuentry 'Deepin 15.5 SP3 Professional mips64el for Loongson 3A3000'{
 linux \${prefix}/$kernel_name console=tty loglevel=0 quiet $splash locales=zh_CN.UTF-8  root=$rootuuid
 initrd \${prefix}/$initrd_name
 boot
