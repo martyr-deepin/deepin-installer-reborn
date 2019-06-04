@@ -1,3 +1,18 @@
+<a name="2.7.7"></a>
+### 2.7.7 (2019-06-04)
+
+
+#### Bug Fixes
+
+*   first boot crash (#63) ([1f2e3972](https://github.com/linuxdeepin/deepin-install-reborn/commit/1f2e3972d7e21be6b0eb045eb3c445b9db18a140))
+* **longxin:**  full disk crypt cannot input password ([e635097d](https://github.com/linuxdeepin/deepin-install-reborn/commit/e635097d978b0f3ffd4a9117f9fd40015c312bf8))
+
+#### Features
+
+* **Disk:**  add dynamic disk warning page ([a87206a0](https://github.com/linuxdeepin/deepin-install-reborn/commit/a87206a093cf87302d5125ea6f7ec8a486531f90))
+
+
+
 <a name="2.7.6"></a>
 ### 2.7.6 (2019-05-31)
 
