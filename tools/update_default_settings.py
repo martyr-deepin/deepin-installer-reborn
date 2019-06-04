@@ -50,6 +50,7 @@ def main():
             ("skip_virtual_machine_page", "true"),
             ("apt_source_deb", '"deb [trusted=yes] http://packages.deepin.com/aarch64 camel main contrib non-free"'),
             ("apt_source_deb_src", '""'),
+            ("partition_skip_partition_crypt_page", "true")
     )
 
     loongson_settings = (
@@ -86,7 +87,7 @@ def main():
         ("timezone_default", '"Asia/Shanghai"'),
         ("timezone_use_regdomain", "false"),
         ("partition_skip_simple_partition_page", "true"),
-        ("partition_skip_partition_crypt_page", "false"),
+        ("partition_skip_partition_crypt_page", "true"),
         ("partition_enable_swap_file", "false"),
         ("partition_swap_partition_size", "8192"),
         ("partition_enable_simple_disk_page", "true"),
