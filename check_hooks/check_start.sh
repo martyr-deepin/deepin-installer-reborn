@@ -7,6 +7,7 @@ touch /tmp/in_check.file
 
 if [ -d "/deepin-installer/in_check/" ];then
     for i in /deepin-installer/in_check/*; do
+        chmod +x $i
         $i
         if [ $? != 0 ]; then
             echo ${DI_SI_PASSWORD}|sudo -S touch /boot/efi/SI_FAILED

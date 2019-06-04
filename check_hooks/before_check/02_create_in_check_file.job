@@ -1,3 +1,8 @@
+#!/bin/bash
+
+. "/deepin-installer/basic_utils.sh"
+. "/usr/share/deepin-installer/hooks/basic_utils.sh"
+
 mkdir -p /home/${DI_SI_USER}/.config/autostart/
 
 cat > /home/${DI_SI_USER}/.config/autostart/check_test.desktop << EOF

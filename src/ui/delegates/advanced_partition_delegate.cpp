@@ -239,6 +239,19 @@ Partition::Ptr AdvancedPartitionDelegate::getRealPartition(
   return Partition::Ptr();
 }
 
+QList<Device::Ptr> AdvancedPartitionDelegate::getAllUsedDevice() const
+{
+    QList<Device::Ptr> list;
+
+    for (const Operation& operation : operations_) {
+        if (operation.type != OperationType::NewPartTable) {
+            list << operation.device;
+        }
+    }
+
+    return list;
+}
+
 bool AdvancedPartitionDelegate::isMBRPreferred() const {
   return IsMBRPreferred(real_devices_);
 }

@@ -21,6 +21,8 @@
 #include <QEvent>
 #include <QHBoxLayout>
 #include <QStackedLayout>
+#include <QProcess>
+#include <QTextStream>
 
 #include "base/file_util.h"
 #include "service/settings_manager.h"
@@ -28,6 +30,7 @@
 #include "ui/delegates/advanced_partition_delegate.h"
 #include "ui/delegates/full_disk_delegate.h"
 #include "ui/delegates/simple_partition_delegate.h"
+#include "ui/frames/dynamic_disk_warning_frame.h"
 #include "ui/delegates/partition_util.h"
 #include "ui/frames/consts.h"
 #include "ui/frames/inner/advanced_partition_frame.h"
@@ -198,6 +201,12 @@ void PartitionFrame::initConnections() {
       emit finished();
   });
 
+  connect(dynamic_disk_warning_frame_, &DynamicDiskWarningFrame::requestCancel, this,
+          &PartitionFrame::showMainFrame);
+
+  connect(dynamic_disk_warning_frame_, &DynamicDiskWarningFrame::requestNext, this,
+          &PartitionFrame::showPrepareInstallFrame);
+
   connect(full_disk_partition_frame_, &FullDiskFrame::currentDeviceChanged,
           full_disk_encrypt_frame_, &Full_Disk_Encrypt_frame::setDevice);
 
@@ -222,6 +231,8 @@ void PartitionFrame::initUI() {
       new SimplePartitionFrame(simple_partition_delegate_, this);
 
   full_disk_encrypt_frame_ = new Full_Disk_Encrypt_frame(this);
+
+  dynamic_disk_warning_frame_ = new DynamicDiskWarningFrame(this);
 
   title_label_ = new TitleLabel(tr("Select Installation Location"));
   comment_label_ = new CommentLabel(
@@ -343,6 +354,7 @@ void PartitionFrame::initUI() {
   main_layout_->addWidget(prepare_install_frame_);
   main_layout_->addWidget(select_bootloader_frame_);
   main_layout_->addWidget(full_disk_encrypt_frame_);
+  main_layout_->addWidget(dynamic_disk_warning_frame_);
 
   this->setLayout(main_layout_);
   this->setContentsMargins(0, 0, 0, 0);
@@ -354,6 +366,36 @@ bool PartitionFrame::isFullDiskPartitionMode() {
 
 bool PartitionFrame::isSimplePartitionMode() {
   return simple_frame_button_->isChecked();
+}
+
+bool PartitionFrame::isRawDevice(const QList<Device::Ptr> list) {
+    for (const Device::Ptr device : list) {
+        QProcess process;
+        process.start("fdisk", QStringList() << "-l" << device->path);
+        process.waitForFinished();
+        const QString& result = process.readAllStandardOutput();
+
+        if (result.isEmpty()) {
+            continue;
+        }
+
+        QTextStream stream(result.toUtf8());
+        QString     line;
+        while (stream.readLineInto(&line)) {
+            const QStringList& args = line.simplified().split(" ");
+
+            if (args.length() < 2) {
+              continue;
+            }
+
+            // SFS(42h): https://en.wikipedia.org/wiki/Partition_type
+            if (args.last().contains("SFS") || args[args.length() - 2] == "42") {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 void PartitionFrame::onFullDiskFrameButtonToggled() {
@@ -391,20 +433,24 @@ void PartitionFrame::onNextButtonClicked() {
     }
   }
 
-  QStringList descriptions;
+  // check disk is raw
+  QList<Device::Ptr> device;
   if (this->isSimplePartitionMode()) {
-    descriptions = simple_partition_delegate_->getOptDescriptions();
+     device << simple_partition_frame_->selectedDevice();
+     dynamic_disk_warning_frame_->setWarningTip(tr("The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first."));
   }
-  else if (this->isFullDiskPartitionMode()) {
-      descriptions = full_disk_delegate_->getOptDescriptions();
-  } else {
-    descriptions = advanced_delegate_->getOptDescriptions();
+  else if (!this->isFullDiskPartitionMode()) {
+    device = advanced_partition_frame_->getAllUsedDevice();
+    dynamic_disk_warning_frame_->setWarningTip(tr("The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first."));
   }
 
-  qDebug() << "descriptions: " << descriptions;
+  if (!device.isEmpty() && isRawDevice(device)) {
+    dynamic_disk_warning_frame_->setDevice(device);
+    showDynamicDiskFrame();
+    return;
+  }
 
-  prepare_install_frame_->updateDescription(descriptions);
-  main_layout_->setCurrentWidget(prepare_install_frame_);
+    showPrepareInstallFrame();
 }
 
 void PartitionFrame::onFullDiskCryptoButtonClicked(bool encrypto)
@@ -533,6 +579,28 @@ void PartitionFrame::showEncryptFrame()
             onPrepareInstallFrameFinished();
         }
     }
+}
+
+void PartitionFrame::showDynamicDiskFrame() {
+  main_layout_->setCurrentWidget(dynamic_disk_warning_frame_);
+}
+
+void PartitionFrame::showPrepareInstallFrame()
+{
+    QStringList descriptions;
+    if (this->isSimplePartitionMode()) {
+      descriptions = simple_partition_delegate_->getOptDescriptions();
+    }
+    else if (this->isFullDiskPartitionMode()) {
+        descriptions = full_disk_delegate_->getOptDescriptions();
+    } else {
+      descriptions = advanced_delegate_->getOptDescriptions();
+    }
+
+    qDebug() << "descriptions: " << descriptions;
+
+    prepare_install_frame_->updateDescription(descriptions);
+    main_layout_->setCurrentWidget(prepare_install_frame_);
 }
 
 }  // namespace installer

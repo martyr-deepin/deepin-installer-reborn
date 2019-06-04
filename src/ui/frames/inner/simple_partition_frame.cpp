@@ -90,6 +90,23 @@ bool SimplePartitionFrame::validate() {
   return false;
 }
 
+Device::Ptr SimplePartitionFrame::selectedDevice() const
+{
+    Partition::Ptr partition = delegate_->selectedPartition();
+
+    Q_ASSERT(partition);
+
+    for (Device::Ptr device : delegate_->real_devices()) {
+        if (device->path == partition->device_path) {
+            return device;
+        }
+    }
+
+    Q_ASSERT(false);
+
+    return Device::Ptr();
+}
+
 void SimplePartitionFrame::changeEvent(QEvent* event) {
   if (event->type() == QEvent::LanguageChange) {
     tip_label_->setText(tr("Install here"));

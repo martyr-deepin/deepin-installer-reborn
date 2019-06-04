@@ -79,6 +79,11 @@ bool AdvancedPartitionFrame::validate() {
   }
 }
 
+QList<Device::Ptr> AdvancedPartitionFrame::getAllUsedDevice() const
+{
+    return delegate_->getAllUsedDevice();
+}
+
 void AdvancedPartitionFrame::setBootloaderPath(const QString& bootloader_path) {
   bootloader_button_->setText(bootloader_path);
 }

@@ -1,0 +1,12 @@
+QLabel#DiskInfoLabel {
+    color: white;
+}
+
+QLabel#WarningText {
+    color: white;
+    font-size: 32px;
+}
+
+QLabel#WarningTips {
+    color: white;
+}

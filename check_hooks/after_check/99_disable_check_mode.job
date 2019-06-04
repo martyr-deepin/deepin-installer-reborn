@@ -1,5 +1,8 @@
 #!/bin/bash
 
+. "/deepin-installer/basic_utils.sh"
+. "/usr/share/deepin-installer/hooks/basic_utils.sh"
+
 deepin-installer-settings set /etc/deepin-installer.conf system_check_mode false
 
 CONF_FILE=/etc/lightdm/lightdm.conf

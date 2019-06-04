@@ -48,6 +48,8 @@ class AdvancedPartitionFrame : public QFrame {
   // This method is called when next-button is clicked in PartitionFrame
   bool validate();
 
+  QList<Device::Ptr> getAllUsedDevice() const;
+
  signals:
   void requestEditPartitionFrame(const Partition::Ptr partition);
   void requestNewPartitionFrame(const Partition::Ptr partition);
