@@ -15,76 +15,76 @@
 <context>
     <name>installer::AdvancedPartitionFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="93"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="175"/>
         <source>Change boot loader</source>
         <translation>Змінити завантажувач</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="549"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="95"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="554"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="92"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="177"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="551"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="97"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="182"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="556"/>
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="429"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="434"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
         <translation>%1 виявлена помилка, виправити, продовжити встановлення або переключитися в простий режим</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="433"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="438"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
         <translation>%1 виявлені помилки, виправити, продовжити встановлення або переключитися в простий режим</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="439"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="444"/>
         <source>%1 error found, continue to install after fixed</source>
         <translation>%1 виявлено помилку, продовжити встановлення після виправлення</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="443"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="448"/>
         <source>%1 errors found, continue to install after fixed</source>
         <translation>%1 виявлені помилки, продовжити встановлення після виправлення</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="490"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
         <translation>Тип файлової системи розділу /boot-директорії може бути тільки %1 </translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="494"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
         <translation>Розділ /boot-директорії  повинен бути першим розділом на жорсткому диску</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>At least %1 MB is required for /boot partition</source>
         <translation>Необхідно принаймні %1 MB для розділу /boot</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="503"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
         <source>Add an EFI partition to continue</source>
         <translation>Додайте розділ EFI, щоб продовжити</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="507"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="512"/>
         <source>At least %1 MB is required for EFI partition</source>
         <translation>Для розділу EFI потрібно щонайменше %1 Мб</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="511"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="516"/>
         <source>Add a Root partition to continue</source>
         <translation>Додайте розділ Root для продовження</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="516"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="521"/>
         <source>At least %1 GB is required for Root partition</source>
         <translation>Необхідно принаймні %1 Гб для Root розділу</translation>
     </message>
@@ -389,44 +389,54 @@
 <context>
     <name>installer::PartitionFrame</name>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="84"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="226"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="237"/>
         <source>Select Installation Location</source>
         <translation>Виберіть місце встановлення</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="228"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="239"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
         <translation>Переконайтеся, що ви створили резервну копію важливих даних, потім виберіть диск для встановлення</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="235"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="246"/>
         <source>Simple</source>
         <translation>Простий</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="239"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="250"/>
         <source>Advanced</source>
         <translation>Розширений</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="243"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="92"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="254"/>
         <source>Full Disk</source>
         <translation>Диск заповнено</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="306"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="412"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="93"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="317"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>
         <source>Start installation</source>
         <translation>Почніть встановлення</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="412"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="440"/>
+        <source>The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="444"/>
+        <source>The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>
         <source>Next</source>
         <translation>Далі</translation>
     </message>
@@ -575,23 +585,23 @@
         <translation>Налаштуйте розмір розділу %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="195"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="198"/>
         <source>Do not use this partition</source>
         <translation>Не використовуйте цей розділ</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="208"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="211"/>
         <source>Swap partition</source>
         <translation>Swap розділ</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="210"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="213"/>
         <source>Unknown</source>
         <translation>Невідомий</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="251"/>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="282"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="254"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="285"/>
         <source>Freespace</source>
         <translation>Вільний простір</translation>
     </message>
@@ -659,13 +669,13 @@
         <translation>Для Root розділу потрібно принаймні %1 Гб</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="95"/>
-        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="214"/>
+        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="112"/>
+        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="231"/>
         <source>Install here</source>
         <translation>Встановити тут</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="391"/>
+        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="408"/>
         <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
         <translation>Windows не завантажиться, якщо встановити deepin на диску Windows, будь ласка, підтвердьте, щоб продовжити</translation>
     </message>
@@ -866,13 +876,13 @@
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="23"/>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="83"/>
         <source>Set Control Region</source>
-        <translation type="unfinished"/>
+        <translation>Встановіть Область Керування</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="24"/>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="84"/>
         <source>Set the region for Deepin EndPoint Management Platform</source>
-        <translation type="unfinished"/>
+        <translation>Встановіть регіон для платформи Керування Deepin EndPoint</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="81"/>
@@ -882,7 +892,25 @@
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="82"/>
         <source>Server Address</source>
-        <translation type="unfinished"/>
+        <translation>Адреса Серверу</translation>
+    </message>
+</context>
+<context>
+    <name>installer::DynamicDiskWarningFrame</name>
+    <message>
+        <location filename="../src/ui/frames/dynamic_disk_warning_frame.cpp" line="113"/>
+        <source>Warning</source>
+        <translation>УВАГА</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/dynamic_disk_warning_frame.cpp" line="114"/>
+        <source>Cancel</source>
+        <translation>Скасувати</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/dynamic_disk_warning_frame.cpp" line="115"/>
+        <source>Next</source>
+        <translation>Далі</translation>
     </message>
 </context>
 <context>
@@ -946,7 +974,7 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="69"/>
         <source>Skip</source>
-        <translation type="unfinished"/>
+        <translation>Пропустити</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="70"/>
@@ -956,42 +984,42 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="95"/>
         <source>Configure Network</source>
-        <translation type="unfinished"/>
+        <translation>Налаштувати Мережу</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="128"/>
         <source>IP Address</source>
-        <translation type="unfinished"/>
+        <translation>IP Адреса</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="129"/>
         <source>Netmask</source>
-        <translation type="unfinished"/>
+        <translation>Маска мережі</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="130"/>
         <source>Gateway</source>
-        <translation type="unfinished"/>
+        <translation>Шлюз</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="131"/>
         <source>Primary DNS</source>
-        <translation type="unfinished"/>
+        <translation>Основний DNS</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="132"/>
         <source>Secondary DNS</source>
-        <translation type="unfinished"/>
+        <translation>Вторинний DNS</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="214"/>
         <source>IP address error: illegal IP address, please have a check.</source>
-        <translation type="unfinished"/>
+        <translation>Помилка IP-адреси: незаконна IP-адреса, будь ласка, перевірте.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="225"/>
         <source>Netmask error: illegal netmask, please have a check.</source>
-        <translation type="unfinished"/>
+        <translation>Помилка мережної маски: незаконна маска мережі, будь ласка, перевірте.</translation>
     </message>
 </context>
 <context>

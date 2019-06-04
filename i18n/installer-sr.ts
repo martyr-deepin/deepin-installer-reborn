@@ -15,76 +15,76 @@
 <context>
     <name>installer::AdvancedPartitionFrame</name>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="88"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="170"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="93"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="175"/>
         <source>Change boot loader</source>
         <translation>Постави покретач</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="90"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="549"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="95"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="554"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="92"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="177"/>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="551"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="97"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="182"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="556"/>
         <source>Delete</source>
         <translation>Обриши</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="429"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="434"/>
         <source>%1 error found, fix to continue installation or switch to simple mode</source>
         <translation>%1 грешка пронађена, поправите да наставите инсталацију или пребаците на једноставан режим</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="433"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="438"/>
         <source>%1 errors found, fix to continue installation or switch to simple mode</source>
         <translation>%1 грешке/и пронађене/о, поправите да наставите инсталацију или пребаците на једноставан режим</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="439"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="444"/>
         <source>%1 error found, continue to install after fixed</source>
         <translation>%1 грешка пронађена, наставите инсталацију након исправке</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="443"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="448"/>
         <source>%1 errors found, continue to install after fixed</source>
         <translation>%1 грешке/и пронађене/о, наставите инсталацију након исправке</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="490"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="495"/>
         <source>The partition filesystem type of /boot directory can only be %1 </source>
         <translation>Систем датотека партиције /boot директоријума може бити само %1</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="494"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
         <source>The partition of /boot directory should be the first partition on hard disk</source>
         <translation>Партиција /boot директоријума треба бити прва партиција на диску</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="499"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="504"/>
         <source>At least %1 MB is required for /boot partition</source>
         <translation>Најмање %1 MB је потребно за /boot партицију</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="503"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="508"/>
         <source>Add an EFI partition to continue</source>
         <translation>Додај EFI партицију за наставак</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="507"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="512"/>
         <source>At least %1 MB is required for EFI partition</source>
         <translation>Најмање %1 MB је потребно за EFI партицију</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="511"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="516"/>
         <source>Add a Root partition to continue</source>
         <translation>Додај Root партицију за наставак</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="516"/>
+        <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="521"/>
         <source>At least %1 GB is required for Root partition</source>
         <translation>Најмање %1 MB је потребно за Root партицију</translation>
     </message>
@@ -109,7 +109,7 @@
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="60"/>
         <source>Relevant operations you made in the installation process will not take effect, abort or continue installation?</source>
-        <translation>Важне поставке које сте направили у процесу инсталације неће ступити на снагу. Прекините или наставите инсталацију?</translation>
+        <translation>Важне поставке које сте изабрали у процесу инсталације неће ступити на снагу. Прекините или наставите инсталацију?</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="43"/>
@@ -389,44 +389,54 @@
 <context>
     <name>installer::PartitionFrame</name>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="84"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="226"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="237"/>
         <source>Select Installation Location</source>
         <translation>Изабери локацију инсталације</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="86"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="228"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="239"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
         <translation>Уверите се да је направљена резерва важних података, затим изаберите диск за инсталацију</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="235"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="246"/>
         <source>Simple</source>
         <translation>Једноставно</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="88"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="239"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="91"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="250"/>
         <source>Advanced</source>
         <translation>Напредно</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="243"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="92"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="254"/>
         <source>Full Disk</source>
         <translation>Цео диск</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="306"/>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="412"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="93"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="317"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>
         <source>Start installation</source>
         <translation>Започни инсталацију</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/partition_frame.cpp" line="412"/>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="440"/>
+        <source>The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="444"/>
+        <source>The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>
         <source>Next</source>
         <translation>Следеће</translation>
     </message>
@@ -575,23 +585,23 @@
         <translation>Подеси величину %1 партиције</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="195"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="198"/>
         <source>Do not use this partition</source>
         <translation>Не користи ову партицију</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="208"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="211"/>
         <source>Swap partition</source>
         <translation>Партиција секундарне меморије</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="210"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="213"/>
         <source>Unknown</source>
         <translation>Непознато</translation>
     </message>
     <message>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="251"/>
-        <location filename="../src/ui/delegates/partition_util.cpp" line="282"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="254"/>
+        <location filename="../src/ui/delegates/partition_util.cpp" line="285"/>
         <source>Freespace</source>
         <translation>Слободан простор</translation>
     </message>
@@ -659,13 +669,13 @@
         <translation>Најмање %1 GB је потребно за root партицију</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="95"/>
-        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="214"/>
+        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="112"/>
+        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="231"/>
         <source>Install here</source>
         <translation>Инсталирај овде</translation>
     </message>
     <message>
-        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="391"/>
+        <location filename="../src/ui/frames/inner/simple_partition_frame.cpp" line="408"/>
         <source>Windows will not boot if install deepin on Windows disk, please confirm to continue</source>
         <translation> Windows се неће покренути ако инсталирате Дипин на Windows диск, потврдите да наставите</translation>
     </message>
@@ -866,13 +876,13 @@
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="23"/>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="83"/>
         <source>Set Control Region</source>
-        <translation type="unfinished"/>
+        <translation>Set Control Region</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="24"/>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="84"/>
         <source>Set the region for Deepin EndPoint Management Platform</source>
-        <translation type="unfinished"/>
+        <translation>Set the region for Deepin EndPoint Management Platform</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="81"/>
@@ -882,7 +892,25 @@
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="82"/>
         <source>Server Address</source>
-        <translation type="unfinished"/>
+        <translation>Адреса сервера</translation>
+    </message>
+</context>
+<context>
+    <name>installer::DynamicDiskWarningFrame</name>
+    <message>
+        <location filename="../src/ui/frames/dynamic_disk_warning_frame.cpp" line="113"/>
+        <source>Warning</source>
+        <translation>Упозорење</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/dynamic_disk_warning_frame.cpp" line="114"/>
+        <source>Cancel</source>
+        <translation>Откажи</translation>
+    </message>
+    <message>
+        <location filename="../src/ui/frames/dynamic_disk_warning_frame.cpp" line="115"/>
+        <source>Next</source>
+        <translation>Следеће</translation>
     </message>
 </context>
 <context>
@@ -956,7 +984,7 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="95"/>
         <source>Configure Network</source>
-        <translation type="unfinished"/>
+        <translation>Подеси мрежу</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="128"/>
@@ -986,7 +1014,7 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="214"/>
         <source>IP address error: illegal IP address, please have a check.</source>
-        <translation type="unfinished"/>
+        <translation>Грешка ИП адресе: илегална ИП адреса, молимо извршите проверу.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="225"/>
