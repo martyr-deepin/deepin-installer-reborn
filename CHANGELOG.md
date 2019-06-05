@@ -1,3 +1,13 @@
+<a name="2.7.8"></a>
+### 2.7.8 (2019-06-05)
+
+
+#### Bug Fixes
+
+* **partition:**  empty device object ([968c99ec](https://github.com/linuxdeepin/deepin-install-reborn/commit/968c99ecffd97fcc041a45e64d3b52d583993a90))
+
+
+
 <a name="2.7.7"></a>
 ### 2.7.7 (2019-06-04)
 
