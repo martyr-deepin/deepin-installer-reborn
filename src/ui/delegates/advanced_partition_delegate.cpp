@@ -245,7 +245,12 @@ QList<Device::Ptr> AdvancedPartitionDelegate::getAllUsedDevice() const
 
     for (const Operation& operation : operations_) {
         if (operation.type != OperationType::NewPartTable) {
-            list << operation.device;
+            for (const Device::Ptr device : real_devices_) {
+                if (device->path == operation.orig_partition->device_path) {
+                    list << device;
+                    break;
+                }
+            }
         }
     }
 
