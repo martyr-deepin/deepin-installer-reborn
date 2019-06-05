@@ -21,6 +21,7 @@
 #include <QDir>
 #include <QThread>
 #include <QTimer>
+#include <QDateTime>
 
 #include "base/file_util.h"
 #include "base/thread_util.h"
@@ -125,7 +126,7 @@ void HooksManager::runNextHook() {
 
     // Run next hook in current hooks pack.
     const QString hook = hooks_pack_->hooks.at(hooks_pack_->current_hook);
-    qDebug() << "run hook:" << GetFileName(hook);
+    qDebug() << QString("run hook: %1 at %2").arg(GetFileName(hook)).arg(QDateTime().toString("hh:ss:mm"));
     emit hook_worker_->runHook(hook);
   }
 }
