@@ -157,6 +157,9 @@ const char kInstallFailedErrMsgLen[] = "install_failed_err_msg_len";
 // Misc
 const char kScreenDefaultBrightness[] = "screen_default_brightness";
 
+// Statistics script runtime
+const char kEnableAnalysisScriptTime[] = "enable_analysis_script_time";
+
 }  // namespace installer
 
 #endif  // INSTALLER_SERVICE_SETTINGS_NAME_H

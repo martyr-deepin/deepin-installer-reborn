@@ -19,6 +19,8 @@
 #define INSTALLER_SERVICE_HOOKS_MANAGER_H
 
 #include <QObject>
+#include <utility>
+
 class QThread;
 class QTimer;
 
@@ -77,6 +79,11 @@ class HooksManager : public QObject {
 
   // This timer is used to read progress file each second.
   QTimer* unsquashfs_timer_ = nullptr;
+
+  // Recored the script run time
+  bool enableScriptAnalyze;
+  qlonglong lastRunTime;
+  QList<std::pair<QString, qlonglong>> scriptRunTimeList;
 
  private slots:
   void handleRunHooks();
