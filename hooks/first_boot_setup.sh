@@ -86,8 +86,8 @@ main() {
   setup_locale_timezone
   setup_livefs
 
-  # setup_username_password() will clear value of DI_PASSWORD
-  setup_username_password
+  # setup_username_password_hostname() will clear value of DI_PASSWORD
+  setup_username_password_hostname
   customize_user
 
   sync
