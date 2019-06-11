@@ -23,6 +23,10 @@
 # Folder path of hooks.
 HOOKS_DIR=/tmp/installer
 
+if [ ! -d ${HOOKS_DIR} ];then
+  HOOKS_DIR=/usr/share/deepin-installer/hooks
+fi
+
 . "${HOOKS_DIR}/basic_utils.sh"
 
 # Check arguments
