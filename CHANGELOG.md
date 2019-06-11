@@ -1,3 +1,15 @@
+<a name=""></a>
+##  2.7.11 (2019-06-11)
+
+
+#### Features
+
+* **endpoint:**
+  *  display ip and mac info ([d3581cb3](https://github.com/linuxdeepin/deepin-install-reborn/commit/d3581cb3462201abae10cda3059567ee102e9a39))
+  *  add server url for oem ([6cbee4c7](https://github.com/linuxdeepin/deepin-install-reborn/commit/6cbee4c72a9f65cd3732bcd95a0102a6d09fca69))
+
+
+
 <a name="2.7.10"></a>
 ### 2.7.10 (2019-06-11)
 
