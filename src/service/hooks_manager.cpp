@@ -21,11 +21,14 @@
 #include <QDir>
 #include <QThread>
 #include <QTimer>
+#include <QDateTime>
 
 #include "base/file_util.h"
 #include "base/thread_util.h"
 #include "service/backend/hooks_pack.h"
 #include "service/backend/hook_worker.h"
+#include "service/settings_name.h"
+#include "service/settings_manager.h"
 
 namespace installer {
 
@@ -57,7 +60,8 @@ HooksManager::HooksManager(QObject* parent)
     : QObject(parent),
       hook_worker_(new HookWorker()),
       hook_worker_thread_(new QThread(this)),
-      unsquashfs_timer_(new QTimer(this)) {
+      unsquashfs_timer_(new QTimer(this)),
+      lastRunTime(0) {
   this->setObjectName("hooks_manager");
 
   hook_worker_->moveToThread(hook_worker_thread_);
@@ -125,7 +129,14 @@ void HooksManager::runNextHook() {
 
     // Run next hook in current hooks pack.
     const QString hook = hooks_pack_->hooks.at(hooks_pack_->current_hook);
-    qDebug() << "run hook:" << GetFileName(hook);
+    const QString& hook_name { GetFileName(hook) };
+    QDateTime datetime = QDateTime::currentDateTime();
+    if (enableScriptAnalyze) {
+      const qlonglong runTime = datetime.toMSecsSinceEpoch() - lastRunTime;
+      scriptRunTimeList << std::pair<QString, qlonglong>(hook_name, runTime);
+      lastRunTime = datetime.toMSecsSinceEpoch();
+    }
+    qDebug() << QString("run hook: %1 at %2").arg(GetFileName(hook)).arg(datetime.toString("hh:mm:ss"));
     emit hook_worker_->runHook(hook);
   }
 }
@@ -162,6 +173,9 @@ void HooksManager::monitorProgressFiles() {
 }
 
 void HooksManager::handleRunHooks() {
+  enableScriptAnalyze = GetSettingsBool(kEnableAnalysisScriptTime);
+  lastRunTime = QDateTime::currentDateTime().toMSecsSinceEpoch();
+
   qDebug() << "handleRunHooks()";
   unsquashfs_timer_->setInterval(kReadUnsquashfsInterval);
 
@@ -210,6 +224,19 @@ void HooksManager::onHooksManagerFinished() {
   // Stop unsquashfs progress file monitor
   if (unsquashfs_timer_->isActive()) {
     unsquashfs_timer_->stop();
+  }
+
+  if (enableScriptAnalyze) {
+      qlonglong allTime { 0 };
+      for (const std::pair<QString, qlonglong> record : scriptRunTimeList) {
+          qDebug() << QString("run %1 used %2")
+                          .arg(record.first)
+                          .arg(QDateTime::fromMSecsSinceEpoch(record.second)
+                                   .toString("hh:mm:ss"));
+          allTime += record.second;
+      }
+      qDebug() << QString("All time is %1")
+                      .arg(QDateTime::fromMSecsSinceEpoch(allTime).toString("hh:mm:ss"));
   }
 }
 
