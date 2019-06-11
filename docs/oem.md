@@ -125,6 +125,8 @@ slide 目录的结果应该与 resources/slide 目录相同.
 * `skip_network_page` 跳过静态网络配置界面
 * `skip_control_platform_page` 跳过深度管控平台地区设置界面
 * `skip_select_language_page_on_first_boot` 跳过安装后配置的语言界面，会读取默认值
+* `end_point_control_server_url` 深度管控平台地区设置界面默认服务器地址
+* `end_point_control_lock_server` 设置深度管控平台地区设置界面默认服务器地址是否只读
 
 ## 桌面环境相关的
 * `dde_dock_app_list` 在dock中显示哪些应用图标.

@@ -432,5 +432,23 @@
     "name": "skip_select_language_page_on_first_boot",
     "description": "",
     "type": "Boolean"
+  },
+  {
+    "title": "启用深度管控平台",
+    "name": "skip_control_platform_page",
+    "description": "",
+    "type": "Boolean"
+  },
+  {
+    "title": "设置深度管控平台地区界面默认服务器地址",
+    "name": "end_point_control_server_url",
+    "description": "",
+    "type": "String"
+  },
+  {
+    "title": "设置深度管控平台地区界面默认服务器地址栏只读",
+    "name": "end_point_control_lock_server",
+    "description": "",
+    "type": "Boolean"
   }
 ]

@@ -15,6 +15,7 @@
 #include "ui/utils/widget_util.h"
 #include "ui/widgets/title_label.h"
 #include "ui/widgets/comment_label.h"
+#include "service/settings_name.h"
 
 using namespace installer;
 
@@ -48,6 +49,11 @@ ControlPlatformFrame::ControlPlatformFrame(QWidget* parent)
     layout->addWidget(m_regionBox, 0, Qt::AlignHCenter);
     layout->addStretch();
     layout->addWidget(m_nextButton, 0, Qt::AlignHCenter);
+
+    m_serverLineEdit->setText(GetSettingsString(kEndPointControlServerUrl));
+    m_serverLineEdit->setReadOnly(GetSettingsBool(kEndPointControlLockServer));
+
+    QTimer::singleShot(0, m_serverLineEdit, &LineEdit::editingFinished);
 
     m_nextButton->setEnabled(false);
 

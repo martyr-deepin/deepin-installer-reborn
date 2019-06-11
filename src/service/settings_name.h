@@ -160,6 +160,10 @@ const char kScreenDefaultBrightness[] = "screen_default_brightness";
 // Statistics script runtime
 const char kEnableAnalysisScriptTime[] = "enable_analysis_script_time";
 
+// End point control
+const char kEndPointControlServerUrl[] = "end_point_control_server_url";
+const char kEndPointControlLockServer[] = "end_point_control_lock_server";
+
 }  // namespace installer
 
 #endif  // INSTALLER_SERVICE_SETTINGS_NAME_H
