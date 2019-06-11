@@ -7,6 +7,10 @@
 #include <QVBoxLayout>
 #include <QtNetwork>
 #include <QLabel>
+#include <QHostInfo>
+#include <QHostAddress>
+#include <QNetworkInterface>
+#include <QDBusInterface>
 
 #include "ui/widgets/line_edit.h"
 #include "ui/widgets/nav_button.h"
@@ -27,7 +31,17 @@ ControlPlatformFrame::ControlPlatformFrame(QWidget* parent)
     , m_regionBox(new TableComboBox)
     , m_nextButton(new NavButton)
     , m_regionModel(new ControlPlatformRegionModel(this))
+    , m_macInfoLayout(new QVBoxLayout)
+    , m_ipInfoLayout(new QVBoxLayout)
 {
+    QDBusInterface* iface = new QDBusInterface(
+        "org.freedesktop.NetworkManager", "/org/freedesktop/NetworkManager",
+        "org.freedesktop.NetworkManager", QDBusConnection::systemBus(), this);
+
+    if (iface->isValid()) {
+        connect(iface, SIGNAL(StateChanged(uint)), this, SLOT(onNetworkStateChanged()));
+    }
+
     QVBoxLayout* layout = new QVBoxLayout;
     layout->setMargin(0);
     layout->setSpacing(10);
@@ -45,6 +59,19 @@ ControlPlatformFrame::ControlPlatformFrame(QWidget* parent)
     m_subTitleLbl->setObjectName("SubTitleLabel");
 
     layout->addStretch();
+
+    QHBoxLayout* ipInfo = new QHBoxLayout;
+    ipInfo->setMargin(0);
+    ipInfo->setSpacing(0);
+
+    ipInfo->addStretch();
+    ipInfo->addLayout(m_macInfoLayout);
+    ipInfo->addSpacing(30);
+    ipInfo->addLayout(m_ipInfoLayout);
+    ipInfo->addStretch();
+
+    layout->addLayout(ipInfo);
+    layout->addSpacing(20);
     layout->addWidget(m_serverLineEdit, 0, Qt::AlignHCenter);
     layout->addWidget(m_regionBox, 0, Qt::AlignHCenter);
     layout->addStretch();
@@ -79,6 +106,8 @@ ControlPlatformFrame::ControlPlatformFrame(QWidget* parent)
             &ControlPlatformFrame::onRegionSelected);
 
     setStyleSheet("QLabel{color: white;}");
+
+    onNetworkStateChanged();
 }
 
 bool ControlPlatformFrame::event(QEvent* event)
@@ -136,4 +165,39 @@ void ControlPlatformFrame::onNextClicked()
 void ControlPlatformFrame::onRegionSelected()
 {
     m_nextButton->setEnabled(true);
+}
+
+void ControlPlatformFrame::onNetworkStateChanged() {
+    auto deleteAllChild = [=](QLayout* layout) -> void {
+        QLayoutItem* child;
+        while ((child = layout->takeAt(0)) != 0) {
+            if (child->widget()) {
+                child->widget()->setParent(nullptr);
+            }
+
+            delete child;
+        }
+    };
+
+    deleteAllChild(m_macInfoLayout);
+    deleteAllChild(m_ipInfoLayout);
+
+    const QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces();
+
+    for (const QNetworkInterface& interface : interfaces) {
+        QList<QNetworkAddressEntry> entryList = interface.addressEntries();
+        for (const QNetworkAddressEntry& entry : entryList) {
+            const QHostAddress& address = entry.ip();
+            if (address == QHostAddress::LocalHost || address == QHostAddress::LocalHostIPv6 || address == QHostAddress::AnyIPv6) {
+                continue;
+            }
+            bool ok = false;
+            address.toIPv4Address(&ok);
+            if (!ok) {
+                continue;
+            }
+            m_macInfoLayout->addWidget(new QLabel(QString("mac: %1").arg(interface.hardwareAddress())));
+            m_ipInfoLayout->addWidget(new QLabel(QString("IP: %1").arg(address.toString())));
+        }
+    }
 }

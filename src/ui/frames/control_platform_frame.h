@@ -8,6 +8,7 @@
 
 class QComboBox;
 class QNetworkReply;
+class QVBoxLayout;
 namespace installer {
 class LineEdit;
 class NavButton;
@@ -31,6 +32,9 @@ private:
     void onNextClicked();
     void onRegionSelected();
 
+private slots:
+    void onNetworkStateChanged();
+
 private:
     TitleLabel*                 m_titleLbl;
     CommentLabel*               m_subTitleLbl;
@@ -40,6 +44,8 @@ private:
     ControlPlatformRegionModel* m_regionModel;
     QUrl                        m_serverUrl;
     QList<RegionInfo>           m_regionInfo;
+    QVBoxLayout*                m_macInfoLayout;
+    QVBoxLayout*                m_ipInfoLayout;
 };
 }  // namespace installer
 #endif  // !CONTROLPLATFORMFRAME_H

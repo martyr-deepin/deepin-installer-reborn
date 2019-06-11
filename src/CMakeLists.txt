@@ -86,6 +86,7 @@ find_package(Qt5X11Extras REQUIRED)
 find_package(Qt5Xml REQUIRED)
 find_package(Qt5LinguistTools)
 find_package(Qt5Svg REQUIRED)
+find_package(Qt5DBus REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -470,6 +471,7 @@ set(Qt_LIBS
     Qt5::X11Extras
     Qt5::Xml
     Qt5::Svg
+    Qt5::DBus
     )
 
 set(LINK_LIBS

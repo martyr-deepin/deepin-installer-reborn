@@ -11,6 +11,8 @@
 #include <list>
 #include <utility>
 #include <QEvent>
+#include <QNetworkInterface>
+#include <QProcess>
 
 #include "service/settings_manager.h"
 #include "ui/utils/widget_util.h"
@@ -162,6 +164,12 @@ void NetworkFrame::saveConf()
         QTextStream stream(&file);
 
         {
+            const auto interfaces = QNetworkInterface::allInterfaces();
+            QString macAddress;
+            if (!interfaces.isEmpty()) {
+                macAddress = interfaces.first().hardwareAddress();
+            }
+
             stream << "[connection]" << endl;
             std::list<std::pair<QString, QString>> pairList{
                 std::pair<QString, QString>("id", "connect1"),
@@ -171,6 +179,7 @@ void NetworkFrame::saveConf()
                 std::pair<QString, QString>("autoconnect-priority", "-999"),
                 std::pair<QString, QString>("permissions", ""),
                 std::pair<QString, QString>("timestamp", "1557294083"),
+                std::pair<QString, QString>("interface-name", macAddress)
             };
 
             for (std::pair<QString, QString> pair : pairList) {
@@ -202,6 +211,8 @@ void NetworkFrame::saveConf()
         stream.flush();
         file.close();
     }
+
+    QProcess::startDetached("systemctl", QStringList() << "restart" << "NetworkManager");
 
     emit requestNext();
 }
