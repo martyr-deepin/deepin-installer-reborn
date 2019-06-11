@@ -1,3 +1,18 @@
+<a name="2.7.9"></a>
+### 2.7.9 (2019-06-11)
+
+
+#### Features
+
+*   analyze the time of scripts ([5f998ad4](https://github.com/linuxdeepin/deepin-install-reborn/commit/5f998ad41a0a0d278bb65687e2befb20140bc752))
+*   add run hook script time ([b6e71731](https://github.com/linuxdeepin/deepin-install-reborn/commit/b6e717313c061fe08a88251fdcd1a7c94a0050de))
+
+#### Bug Fixes
+
+*   fix: first boot crash #63 (#72) ([985fa4d4](https://github.com/linuxdeepin/deepin-install-reborn/commit/985fa4d4a3337affe2333d5cfd4a8609524704cf))
+
+
+
 <a name="2.7.8"></a>
 ### 2.7.8 (2019-06-05)
 
