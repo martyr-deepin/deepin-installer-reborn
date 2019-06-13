@@ -70,12 +70,12 @@ def main():
             ("partition_boot_on_first_partition", "true"),
             ("partition_supported_fs", '"ext4;ext3;ext2;efi;linux-swap"'),
             ("partition_prefer_logical_partition", "false"),
-            ("partition_full_disk_small_legacy_policy", '"/boot:ext4:1:800;swap:linux-swap:801:swap-size;/:ext4::100%"'),
-            ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1:800;swap:linux-swap:801:swap-size;/:ext4::75%;:ext4::100%"'),
+            ("partition_full_disk_small_legacy_policy", '"/boot:ext4:1:1536;swap:linux-swap:1537:swap-size;/:ext4::100%"'),
+            ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1:1536;swap:linux-swap:1537:swap-size;/:ext4::75%;:ext4::100%"'),
             ("partition_full_disk_small_legacy_label", '"Boot;Swap;Root"'),
             ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;_dde_data"'),
-            ("apt_source_deb", '"deb [trusted=yes] http://packages.deepin.com/loongson raccoon main contrib non-free"'),
-            ("apt_source_deb_src", '"#deb-src [trusted=yes] http://packages.deepin.com/loongson raccoon main contrib non-free"'),
+            ("apt_source_deb", '"deb [trusted=yes] http://packages.deepin.com/loongson64 camel main contrib non-free"'),
+            ("apt_source_deb_src", '"#deb-src [trusted=yes] http://packages.deepin.com/loongson64 camel main contrib non-free"'),
     )
 
     sw_settings = (
@@ -97,8 +97,8 @@ def main():
         ("partition_boot_on_first_partition", "true"),
         ("partition_supported_fs", '"ext4;ext3;ext2;efi;linux-swap"'),
         ("partition_prefer_logical_partition", "false"),
-        ("partition_full_disk_small_legacy_policy", '"/boot:ext4:1:800;swap:linux-swap:801:swap-size;/:ext4::100%"'),
-        ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1:800;swap:linux-swap:801:swap-size;/:ext4::75%;:ext4::100%"'),
+        ("partition_full_disk_small_legacy_policy", '"/boot:ext4:1:3072;swap:linux-swap:3073:swap-size;/:ext4::100%"'),
+        ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1:3072;swap:linux-swap:3073:swap-size;/:ext4::75%;:ext4::100%"'),
         ("partition_full_disk_small_legacy_label", '"Boot;Swap;Root"'),
         ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;_dde_data"'),
         ("apt_source_deb", '"deb [trusted=yes] http://packages.deepin.com/sw421 camel main contrib non-free"'),
