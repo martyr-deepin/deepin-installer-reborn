@@ -48,8 +48,8 @@ def main():
 
     arm_settings = (
             ("skip_virtual_machine_page", "true"),
-            ("apt_source_deb", '"deb [trusted=yes] http://packages.deepin.com/aarch64 camel main contrib non-free"'),
-            ("apt_source_deb_src", '""'),
+            ("apt_source_deb", '"deb http://packages.deepin.com/deepin camel main contrib non-free"'),
+            ("apt_source_deb_src", '"#deb-src http://packages.deepin.com/deepin camel main contrib non-free"'),
             ("partition_skip_partition_crypt_page", "true")
     )
 
@@ -74,8 +74,8 @@ def main():
             ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1:1536;swap:linux-swap:1537:swap-size;/:ext4::75%;:ext4::100%"'),
             ("partition_full_disk_small_legacy_label", '"Boot;Swap;Root"'),
             ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;_dde_data"'),
-            ("apt_source_deb", '"deb [trusted=yes] http://packages.deepin.com/loongson64 camel main contrib non-free"'),
-            ("apt_source_deb_src", '"#deb-src [trusted=yes] http://packages.deepin.com/loongson64 camel main contrib non-free"'),
+            ("apt_source_deb", '"deb http://packages.deepin.com/deepin camel main contrib non-free"'),
+            ("apt_source_deb_src", '"#deb-src http://packages.deepin.com/deepin camel main contrib non-free"'),
     )
 
     sw_settings = (
@@ -101,15 +101,15 @@ def main():
         ("partition_full_disk_large_legacy_policy", '"/boot:ext4:1:3072;swap:linux-swap:3073:swap-size;/:ext4::75%;:ext4::100%"'),
         ("partition_full_disk_small_legacy_label", '"Boot;Swap;Root"'),
         ("partition_full_disk_large_legacy_label", '"Boot;Swap;Root;_dde_data"'),
-        ("apt_source_deb", '"deb [trusted=yes] http://packages.deepin.com/sw421 camel main contrib non-free"'),
+        ("apt_source_deb", '"deb http://packages.deepin.com/deepin camel main contrib non-free"'),
         ("apt_source_deb_src", '""'),
     )
 
     professinal_settings = (
         ("timezone_use_local_time_regardless", "true"),
         ("system_info_password_strong_check", "false"),
-        ("apt_source_deb", '"deb http://packages.deepin.com/enterprise camel main contrib non-free"'),
-        ("apt_source_deb_src", '"#deb-src http://packages.deepin.com/enterprise camel main contrib non-free"'),
+        ("apt_source_deb", '"deb http://packages.deepin.com/deepin camel main contrib non-free"'),
+        ("apt_source_deb_src", '"#deb-src http://packages.deepin.com/deepin camel main contrib non-free"'),
     )
 
     update_settings(arm_file, arm_settings)
