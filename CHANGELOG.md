@@ -1,3 +1,13 @@
+<a name="2.7.13"></a>
+### 2.7.13 (2019-06-13)
+
+
+#### Others
+
+*   update apt repository settings for all platform ([048efe51](https://github.com/linuxdeepin/deepin-install-reborn/commit/048efe51fedb95cb5016e8142b06c8a79490686d))
+
+
+
 <a name="2.7.12"></a>
 ### 2.7.12 (2019-06-13)
 
