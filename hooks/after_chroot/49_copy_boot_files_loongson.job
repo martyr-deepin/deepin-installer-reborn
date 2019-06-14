@@ -31,6 +31,10 @@ sed -i "/overlay/d" /target/etc/fstab
 DI_ROOT_PARTITION=$(cat /target/etc/deepin-installer.conf | \
   grep "^DI_ROOT_PARTITION=" | awk -F'=' '{print $2}')
 rootuuid=UUID=$(blkid -s UUID -o value ${DI_ROOT_PARTITION})
+bootuuid=$(cat /etc/fstab |grep "/boot" |awk '{print $1}')
+if [ "x$bootuuid" = "x" ];then
+	bootuuid=$rootuuid
+fi
 
 if [ x$(installer_get "DI_CRYPT_ROOT") != xtrue ]; then
     splash="splash"
@@ -67,8 +71,8 @@ if [ ! $boot_path ];then
     initrd_name=$(ls /target/boot/ |grep initrd|grep $(uname -r))
 
     # modify boot.cfg & grub.cfg set boot.cfg args root=UUID=boot_path
-    sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/boot.cfg
-    sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$rootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/grub.cfg
+    sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$bootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/boot.cfg
+    sed -i -e "s|root=|root=$rootuuid|g" -e "s|live-media=|live-media=$bootuuid|g" -e "s|kernel_name|$kernel_name|g" -e "s|initrd_name|$initrd_name|g" /target/boot/grub.cfg
 
     if [ x$(installer_get "DI_CRYPT_ROOT") == xtrue ];then
         sed -i -e 's/splash//g' /target/boot/grub.cfg
@@ -119,7 +123,7 @@ title Deepin 15.5 SP3 Professional mips64el for Loongson 3A3000
 title Deepin Recovery
     initrd /dev/fs/ext2@wd0/boot/deepin/$initrd_name
     kernel /dev/fs/ext2@wd0/boot/deepin/$kernel_name
-    args boot=live loglevel=0 components $splash toram locales=zh_CN.UTF-8 acpi_backlight=vendor live-media-path=recovery live-media=$rootuuid " >> $boot_path/boot.cfg
+    args boot=live loglevel=0 components $splash toram locales=zh_CN.UTF-8 acpi_backlight=vendor live-media-path=recovery " >> $boot_path/boot.cfg
 
     echo "
 menuentry 'Deepin 15.5 SP3 Professional mips64el for Loongson 3A3000'{
