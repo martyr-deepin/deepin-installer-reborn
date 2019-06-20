@@ -142,14 +142,6 @@ boot
         sed -i "s|wd0/boot|wd0|g" $boot_path/boot.cfg
     fi
 
-    if [ -d $boot_path/EFI ];then
-        cd $boot_path/EFI/BOOT
-        ln -sf ../../grub.cfg grub.cfg
-        ln -sf ../../$kernel_name $kernel_name
-        ln -sf ../../$initrd_name $initrd_name
-        ln -sf ../../deepin deepin
-        cd -
-    fi
 fi
 
 # fix boot.cfg
