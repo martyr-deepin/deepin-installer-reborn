@@ -62,7 +62,7 @@ def main():
             ("timezone_default", '"Asia/Shanghai"'),
             ("timezone_use_regdomain", "false"),
             ("partition_skip_simple_partition_page", "true"),
-            ("partition_skip_partition_crypt_page", "false"),
+            ("partition_skip_partition_crypt_page", "true"),
             ("partition_enable_simple_disk_page", "true"),
             ("partition_enable_swap_file", "false"),
             ("partition_formatted_mount_points", '"/;/tmp;/var"'),
