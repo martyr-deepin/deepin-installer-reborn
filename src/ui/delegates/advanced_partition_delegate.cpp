@@ -450,6 +450,11 @@ bool AdvancedPartitionDelegate::createPartition(const Partition::Ptr partition,
     new_device->table = IsEfiEnabled() ?
                        PartitionTableType::GPT :
                        PartitionTableType::MsDos;
+    //NOTE: GPT table need 33 sectors in the end.
+    if (new_device->table == PartitionTableType::GPT) {
+        partition->length -= 33;
+        partition->end_sector -= 33;
+    }
     const Operation operation(new_device);
     operations_.append(operation);
     // Update virtual device property at the same time.

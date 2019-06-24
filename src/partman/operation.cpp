@@ -382,7 +382,7 @@ void Operation::applyNewTableVisual(const Device::Ptr device) const {
   free_partition->path = "";
   free_partition->partition_number = -1;
   free_partition->start_sector = 1;
-  free_partition->end_sector = device->length;
+  free_partition->end_sector = device->length - (device->table == PartitionTableType::GPT ? 33 : 0);
   free_partition->sector_size = device->sector_size;
   free_partition->type = PartitionType::Unallocated;
   device->partitions.append(free_partition);
