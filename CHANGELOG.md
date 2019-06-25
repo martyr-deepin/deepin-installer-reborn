@@ -1,3 +1,16 @@
+<a name="2.7.14"></a>
+### 2.7.14 (2019-06-25)
+
+
+#### Others
+
+*   disable disk crypt for loongson ([0ea3c1c9](https://github.com/linuxdeepin/deepin-install-reborn/commit/0ea3c1c97ba6f99b14091acb8058342346343438))
+* **longxin:**  remove grub link file ([44652f07](https://github.com/linuxdeepin/deepin-install-reborn/commit/44652f073d199a757f02b3ec9832bf7120a21642))
+* **loongson:**  update 49_copy_boot_files.job ([197567f1](https://github.com/linuxdeepin/deepin-install-reborn/commit/197567f193be5cdc7bf2efab0d469070241e880c))
+* **partition:**  gpt table need 33 sectors in the end ([91c3ab52](https://github.com/linuxdeepin/deepin-install-reborn/commit/91c3ab528a4a76e6ba6693fc3d18c0c624247985))
+
+
+
 <a name="2.7.13"></a>
 ### 2.7.13 (2019-06-13)
 
