@@ -184,5 +184,21 @@
     "local_name": "አማርኛ(ኢትዮጵያ)",
     "locale": "am_ET",
     "timezone": "Africa/Addis_Ababa"
+  },
+  {
+    "name": "Lithuania(lt)",
+    "local_name": "lietuvių",
+    "locale": "lt_LT",
+    "timezone": ""
+  },{
+    "name": "Serbian",
+    "local_name": "српски",
+    "locale": "sr_RS",
+    "timezone": ""
+  },{
+    "name": "Catalan",
+    "local_name": "català",
+    "locale": "ca_ES",
+    "timezone": ""
   }
 ]
