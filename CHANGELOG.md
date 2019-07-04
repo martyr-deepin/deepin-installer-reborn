@@ -1,3 +1,14 @@
+<a name="2.7.15"></a>
+### 2.7.15 (2019-07-04)
+
+
+#### Others
+
+*   add language for lithuania serbian catalan ([5922b867](https://github.com/linuxdeepin/deepin-install-reborn/commit/5922b867aa2efcb1707c43cdbc65856513785c01))
+*   change report server url ([c3ac01b8](https://github.com/linuxdeepin/deepin-install-reborn/commit/c3ac01b8b7ae18c39c2e7d32cac2b6149b51791e))
+
+
+
 <a name="2.7.14"></a>
 ### 2.7.14 (2019-06-25)
 
