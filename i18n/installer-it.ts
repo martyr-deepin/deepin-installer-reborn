@@ -428,12 +428,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="440"/>
         <source>The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>Il disco di destinazione è dinamico, i tuoi dati potrebbero esser persi procedendo. Assicurati di fare un backup prima di procedere.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="444"/>
         <source>The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>Il disco di destinazione è dinamico e sarà formattato proseguendo. Assicurati di fare un backup prima di procedere.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>

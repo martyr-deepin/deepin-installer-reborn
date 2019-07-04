@@ -210,7 +210,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="50"/>
         <source>Encrypt Full Disk</source>
-        <translation>Descifrar este disco</translation>
+        <translation>Cifrar el disco</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="51"/>
@@ -989,27 +989,27 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="128"/>
         <source>IP Address</source>
-        <translation type="unfinished"/>
+        <translation>Dirección IP</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="129"/>
         <source>Netmask</source>
-        <translation type="unfinished"/>
+        <translation>Máscara de red</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="130"/>
         <source>Gateway</source>
-        <translation type="unfinished"/>
+        <translation>Puerta de enlace</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="131"/>
         <source>Primary DNS</source>
-        <translation type="unfinished"/>
+        <translation>DNS Primario</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="132"/>
         <source>Secondary DNS</source>
-        <translation type="unfinished"/>
+        <translation>DNS Secundario</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="214"/>

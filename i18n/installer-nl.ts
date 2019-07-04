@@ -428,12 +428,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="440"/>
         <source>The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>De doelschijf is dynamisch; hierdoor kunnen er gegevens verloren gaan. Maak een back-up voordat je doorgaat.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="444"/>
         <source>The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>De doelschijf is dynamisch; deze wordt geformatteerd. Maak een back-up voordat je doorgaat.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>

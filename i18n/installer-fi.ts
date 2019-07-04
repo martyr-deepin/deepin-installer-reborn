@@ -428,12 +428,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="440"/>
         <source>The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>Kohdelevy on dynaaminen ja tiedot saattavat kadota, jos jatkat. Tee varmuuskopio tärkeistä tiedostoista ensin.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="444"/>
         <source>The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>Kohdelevy on dynaaminen, joka alustetaan, jos jatkat. Tee varmuus kopio tärkeistä tiedostoista ensin.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>

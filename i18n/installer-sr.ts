@@ -428,12 +428,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="440"/>
         <source>The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>Одредишни диск је динамичан и ваши подаци могу бити изгубљени ако наставите. Молимо прво направите резерву важних датотека.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="444"/>
         <source>The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>Одредишни диск је динамичан и биће форматиран ако наставите. Молимо прво направите резерву важних датотека.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>
