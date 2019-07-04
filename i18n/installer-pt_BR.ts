@@ -24,7 +24,7 @@
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="95"/>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="554"/>
         <source>Done</source>
-        <translation>Feito</translation>
+        <translation>Concluído</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="97"/>
@@ -81,7 +81,7 @@
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="516"/>
         <source>Add a Root partition to continue</source>
-        <translation>Adicione um partição root para continuar</translation>
+        <translation>Adicione uma partição Root para continuar</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/advanced_partition_frame.cpp" line="521"/>
@@ -103,7 +103,7 @@
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="39"/>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="58"/>
         <source>Abort Installation</source>
-        <translation>Abortar a instalação</translation>
+        <translation>Abortar a Instalação</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/confirm_quit_frame.cpp" line="41"/>
@@ -130,7 +130,7 @@
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="58"/>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="72"/>
         <source>Insufficient Disk Space</source>
-        <translation>Espaço em disco insuficiente </translation>
+        <translation>Espaço Insuficiente em Disco</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="60"/>
@@ -145,7 +145,7 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="99"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="168"/>
         <source>Edit Disk</source>
-        <translation>Editar disco</translation>
+        <translation>Editar Disco</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="101"/>
@@ -157,7 +157,7 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="102"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="202"/>
         <source>Filesystem</source>
-        <translation>Sistema de arquivos</translation>
+        <translation>Sistema de Arquivos</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="103"/>
@@ -210,7 +210,7 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="50"/>
         <source>Encrypt Full Disk</source>
-        <translation>Criptografar o Disco Todo</translation>
+        <translation>Criptografar todo o Disco</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_frame.cpp" line="51"/>
@@ -224,7 +224,7 @@
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="75"/>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="94"/>
         <source>Installation Failed</source>
-        <translation>Instalação falhou</translation>
+        <translation>A Instalação Falhou</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_failed_frame.cpp" line="77"/>
@@ -260,7 +260,7 @@
         <location filename="../src/ui/frames/install_success_frame.cpp" line="41"/>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="61"/>
         <source>Successfully Installed</source>
-        <translation>Instalado com sucesso</translation>
+        <translation>Instalado com Sucesso</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/install_success_frame.cpp" line="43"/>
@@ -287,7 +287,7 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="116"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="151"/>
         <source>New Partition</source>
-        <translation>Nova partição</translation>
+        <translation>Nova Partição</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="118"/>
@@ -311,7 +311,7 @@
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="121"/>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="170"/>
         <source>Filesystem</source>
-        <translation>Sistema de arquivos</translation>
+        <translation>Sistema de Arquivos</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_partition_frame.cpp" line="122"/>
@@ -365,7 +365,7 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="55"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="75"/>
         <source>Full Disk Format Warning</source>
-        <translation>Aviso de formatação de disco completa</translation>
+        <translation>Aviso de Formatação de Todo o Disco</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
@@ -392,7 +392,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="87"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="237"/>
         <source>Select Installation Location</source>
-        <translation>Selecione o local da instalação</translation>
+        <translation>Selecione o Local de Instalação</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
@@ -416,7 +416,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="254"/>
         <source>Full Disk</source>
-        <translation>Disco Cheio</translation>
+        <translation>Disco Completo</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="93"/>
@@ -428,12 +428,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="440"/>
         <source>The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>O disco de destino é dinâmico e dados podem ser perdidos se você continuar. Faça um backup dos arquivos importantes primeiro.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="444"/>
         <source>The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>O disco de destino é dinâmico, que será formatado se continuar. Faça um backup dos arquivos importantes primeiro.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>
@@ -453,7 +453,7 @@
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="38"/>
         <location filename="../src/ui/frames/inner/partition_loading_frame.cpp" line="46"/>
         <source>Scanning disks, please wait...</source>
-        <translation>Verificando discos, por favor aguarde...</translation>
+        <translation>Verificando discos, aguarde...</translation>
     </message>
 </context>
 <context>
@@ -496,12 +496,12 @@
         <location filename="../src/ui/models/partition_type_model.cpp" line="41"/>
         <location filename="../src/ui/models/partition_type_model.cpp" line="47"/>
         <source>Logical Partition</source>
-        <translation>Partição lógica</translation>
+        <translation>Partição Lógica</translation>
     </message>
     <message>
         <location filename="../src/ui/models/partition_type_model.cpp" line="45"/>
         <source>Primary Partition</source>
-        <translation>Partição primária</translation>
+        <translation>Partição Primária</translation>
     </message>
 </context>
 <context>
@@ -516,7 +516,7 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="85"/>
         <source>Make a backup of your important data and then continue</source>
-        <translation>Faça um backup de seus dados importantes e continue</translation>
+        <translation>Faça um backup de seus dados e continue</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="66"/>
@@ -603,7 +603,7 @@
         <location filename="../src/ui/delegates/partition_util.cpp" line="254"/>
         <location filename="../src/ui/delegates/partition_util.cpp" line="285"/>
         <source>Freespace</source>
-        <translation>Espaço livre</translation>
+        <translation>Espaço Livre</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/disk_space_insufficient_frame.cpp" line="40"/>
@@ -643,7 +643,7 @@
     <message>
         <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="197"/>
         <source>I have read and agree to</source>
-        <translation>Li e concordo com</translation>
+        <translation>Eu li e concordo com</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="198"/>
@@ -686,13 +686,13 @@
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="92"/>
         <source>User Avatar</source>
-        <translation>Avatar do usuário</translation>
+        <translation>Avatar do Usuário</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="77"/>
         <location filename="../src/ui/frames/inner/system_info_avatar_frame.cpp" line="93"/>
         <source>Select an avatar for your account</source>
-        <translation>Selecione um avatar para sua conta</translation>
+        <translation>Selecione um avatar para a sua conta</translation>
     </message>
 </context>
 <context>
@@ -701,7 +701,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="75"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="144"/>
         <source>Create User Account</source>
-        <translation>Criar conta de usuário</translation>
+        <translation>Criar Conta de Usuário</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
@@ -748,12 +748,12 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="225"/>
         <source>This username already exists</source>
-        <translation>Nome de usuário já existe</translation>
+        <translation>O nome do usuário já existe</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="229"/>
         <source>The first letter must be in lowercase</source>
-        <translation>A primeira letra deve ser minúsculo</translation>
+        <translation>A primeira letra deve ser minúscula</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="235"/>
@@ -773,7 +773,7 @@
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="267"/>
         <source>Computer name is invalid</source>
-        <translation>Nome do computador inválido</translation>
+        <translation>O nome do computador é inválido</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="271"/>

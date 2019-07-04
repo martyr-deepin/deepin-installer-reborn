@@ -428,12 +428,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="440"/>
         <source>The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>Cílový disk je dynamický a při pokračování může dojít ke ztrátě dat. Nejdříve si prosím zálohujte důležité soubory.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="444"/>
         <source>The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>Cílový disk je dynamický, který bude při pokračování zformátován. Nejdříve si prosím zálohujte důležité soubory.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>
@@ -876,13 +876,13 @@
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="23"/>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="83"/>
         <source>Set Control Region</source>
-        <translation type="unfinished"/>
+        <translation>Nastavte oblast kontroly</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="24"/>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="84"/>
         <source>Set the region for Deepin EndPoint Management Platform</source>
-        <translation type="unfinished"/>
+        <translation>Nastavte oblast pro platformu pro správu Endepin EndPoint Management Platform</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="81"/>
@@ -994,12 +994,12 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="129"/>
         <source>Netmask</source>
-        <translation type="unfinished"/>
+        <translation>Maska sítě</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="130"/>
         <source>Gateway</source>
-        <translation type="unfinished"/>
+        <translation>Brána</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="131"/>
@@ -1014,12 +1014,12 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="214"/>
         <source>IP address error: illegal IP address, please have a check.</source>
-        <translation>Chyba adresy IP: nelegální adresa IP, prosím zkontrolujte.</translation>
+        <translation>Chyba adresy IP: nedovolená adresa IP, prosím zkontrolujte.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="225"/>
         <source>Netmask error: illegal netmask, please have a check.</source>
-        <translation type="unfinished"/>
+        <translation>Chyba masky sítě: nedovolená maska sítě, prosím zkontrolujte.</translation>
     </message>
 </context>
 <context>

@@ -151,7 +151,7 @@
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="101"/>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="170"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation>Assurez-vous d&apos;avoir sauvegardé les données importantes puis sélectionnez le disque où installer</translation>
+        <translation>Assurez-vous d&apos;avoir sauvegardé les données importantes puis sélectionner le disque où installer</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/edit_partition_frame.cpp" line="102"/>
@@ -371,7 +371,7 @@
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="57"/>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="93"/>
         <source>Continuing installation will format the whole disk, please make a backup of all your data to avoid data loss</source>
-        <translation>La poursuite de l&apos;installation va complètement formater le disque, assurez-vous d&apos;avoir sauvegardé toutes vos données pour éviter la perde de données</translation>
+        <translation>La poursuite de l’installation formatera l’ensemble du disque. Faites une sauvegarde de toutes vos données pour éviter toute perte de données.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/new_table_warning_frame.cpp" line="58"/>
@@ -398,7 +398,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="89"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="239"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation>Assurez-vous d&apos;avoir sauvegardé les données importantes puis sélectionnez le disque où installer</translation>
+        <translation>Assurez-vous d&apos;avoir sauvegardé les données importantes puis sélectionner le disque où installer</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="90"/>
@@ -416,7 +416,7 @@
         <location filename="../src/ui/frames/partition_frame.cpp" line="92"/>
         <location filename="../src/ui/frames/partition_frame.cpp" line="254"/>
         <source>Full Disk</source>
-        <translation>Disque Plein</translation>
+        <translation>Disque plein</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="93"/>
@@ -428,12 +428,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="440"/>
         <source>The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>Le disque cible est dynamique et vos données risquent d&apos;être perdues si vous continuez. Faites d&apos;abord une sauvegarde de vos fichiers importants.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="444"/>
         <source>The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>Le disque cible est dynamique et sera formaté si vous continuez. Faites d&apos;abord une sauvegarde de vos fichiers importants.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>
@@ -562,7 +562,7 @@
     <message>
         <location filename="../src/partman/operation.cpp" line="276"/>
         <source>Format %1 partition, type: %2</source>
-        <translation>Formater la partition %1, type %2</translation>
+        <translation>Formater la partition %1, type : %2</translation>
     </message>
     <message>
         <location filename="../src/partman/operation.cpp" line="280"/>
@@ -648,7 +648,7 @@
     <message>
         <location filename="../src/ui/frames/inner/select_language_frame.cpp" line="198"/>
         <source>Deepin Software End User License Agreement</source>
-        <translation> Contrat de licence de Deepin d&apos;utilisateur final </translation>
+        <translation> Contrat de licence d&apos;utilisateur final de Deepin</translation>
     </message>
 </context>
 <context>
@@ -707,7 +707,7 @@
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="76"/>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="145"/>
         <source>Fill in the username, computer name and your password</source>
-        <translation>Compléter le nom d&apos;utilisateur, le nom d&apos;ordinateur et votre mot de passe</translation>
+        <translation>Compléter le nom d&apos;utilisateur, le nom de l&apos;ordinateur et votre mot de passe</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/system_info_form_frame.cpp" line="77"/>
@@ -928,12 +928,12 @@
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="182"/>
         <source>Full Disk Encryption</source>
-        <translation>Encryptage Total de Disque</translation>
+        <translation>Chiffrement intégral du disque</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="183"/>
         <source>Make sure you have backed up important data, then select the disk to install</source>
-        <translation>Assurez-vous d&apos;avoir sauvegardé les données importantes puis sélectionnez le disque où installer</translation>
+        <translation>Assurez-vous d&apos;avoir sauvegardé les données importantes puis sélectionner le disque où installer</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/full_disk_encrypt_frame.cpp" line="184"/>
@@ -974,7 +974,7 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="69"/>
         <source>Skip</source>
-        <translation>Skip</translation>
+        <translation>Ignorer</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="70"/>
@@ -1014,12 +1014,12 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="214"/>
         <source>IP address error: illegal IP address, please have a check.</source>
-        <translation>Erreur d&apos;adresse IP: adresse IP illégale, veuillez vérifier.</translation>
+        <translation>Erreur d&apos;adresse IP : adresse IP illégale, veuillez vérifier.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="225"/>
         <source>Netmask error: illegal netmask, please have a check.</source>
-        <translation>Erreur de masque de réseau: masque de réseau illégal, veuillez vérifier.</translation>
+        <translation>Erreur de masque de réseau : masque de réseau illégal, veuillez vérifier.</translation>
     </message>
 </context>
 <context>
@@ -1056,7 +1056,7 @@
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="67"/>
         <source>Please double check if you have backed up all data, then reboot to enter this interface</source>
-        <translation>Assurez-vous d&apos;avoir sauvegardé vos données puis redémarrez pour revenir à cette interface</translation>
+        <translation>Assurez-vous d&apos;avoir sauvegardé vos données puis redémarrer pour revenir à cette interface</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/partition_table_warning_frame.cpp" line="72"/>

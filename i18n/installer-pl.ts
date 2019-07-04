@@ -882,7 +882,7 @@
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="24"/>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="84"/>
         <source>Set the region for Deepin EndPoint Management Platform</source>
-        <translation type="unfinished"/>
+        <translation>Set the region for Deepin EndPoint Management Platform</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="81"/>
@@ -989,27 +989,27 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="128"/>
         <source>IP Address</source>
-        <translation type="unfinished"/>
+        <translation>Adres IP</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="129"/>
         <source>Netmask</source>
-        <translation type="unfinished"/>
+        <translation>Maska sieci</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="130"/>
         <source>Gateway</source>
-        <translation type="unfinished"/>
+        <translation>Brama</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="131"/>
         <source>Primary DNS</source>
-        <translation type="unfinished"/>
+        <translation>Podstawowy DNS</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="132"/>
         <source>Secondary DNS</source>
-        <translation type="unfinished"/>
+        <translation>Drugi DNS</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="214"/>

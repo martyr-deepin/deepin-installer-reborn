@@ -251,7 +251,7 @@
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="129"/>
         <location filename="../src/ui/frames/install_progress_frame.cpp" line="154"/>
         <source>You can experience the incredible pleasure of deepin after the time for just a cup of coffee</source>
-        <translation>Irá desfrutar de uma experiência incrivelmente agradável com o deepin de pois de mal ter tempo para ir tomar um café.</translation>
+        <translation>Irá desfrutar de uma experiência incrivelmente agradável do deepin depois de mal ter tempo para ir tomar um café.</translation>
     </message>
 </context>
 <context>
@@ -428,12 +428,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="440"/>
         <source>The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>O disco de destino é dinâmico e os seus dados podem se perder se você continuar. Por favor, primeiro faça uma cópia de segurança dos seus ficheiros importantes.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="444"/>
         <source>The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>O disco de destino é dinâmico, que será formatado se continuar. Por favor, primeiro faça uma cópia de segurança dos seus ficheiros importantes.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>
@@ -516,7 +516,7 @@
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="64"/>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="85"/>
         <source>Make a backup of your important data and then continue</source>
-        <translation>Faça Backup dos dados importantes antes de continuar</translation>
+        <translation>Faça uma cópia de segurança dos dados importantes antes de continuar</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/inner/prepare_install_frame.cpp" line="66"/>
@@ -876,13 +876,13 @@
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="23"/>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="83"/>
         <source>Set Control Region</source>
-        <translation>Configurar região de controle</translation>
+        <translation>Definir região de controlo</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="24"/>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="84"/>
         <source>Set the region for Deepin EndPoint Management Platform</source>
-        <translation>Configure a região para o gerenciamento de plataforma do Deepin EndPoint</translation>
+        <translation>Definir a região para a gestão de plataforma do Deepin EndPoint</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="81"/>
@@ -1014,7 +1014,7 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="214"/>
         <source>IP address error: illegal IP address, please have a check.</source>
-        <translation>Erro de endereço ip: Endereço IP inválido, é favor verificá-lo</translation>
+        <translation>Erro de endereço IP: Endereço IP inválido, por favor verifique.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="225"/>

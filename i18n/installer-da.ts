@@ -892,7 +892,7 @@
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="82"/>
         <source>Server Address</source>
-        <translation type="unfinished"/>
+        <translation>Serveradresse</translation>
     </message>
 </context>
 <context>
@@ -974,7 +974,7 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="69"/>
         <source>Skip</source>
-        <translation type="unfinished"/>
+        <translation>Spring over</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="70"/>
@@ -984,32 +984,32 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="95"/>
         <source>Configure Network</source>
-        <translation type="unfinished"/>
+        <translation>Konfigurer netværk</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="128"/>
         <source>IP Address</source>
-        <translation type="unfinished"/>
+        <translation>IP-adresse</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="129"/>
         <source>Netmask</source>
-        <translation type="unfinished"/>
+        <translation>Netmaske</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="130"/>
         <source>Gateway</source>
-        <translation type="unfinished"/>
+        <translation>Gateway</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="131"/>
         <source>Primary DNS</source>
-        <translation type="unfinished"/>
+        <translation>Primær DNS</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="132"/>
         <source>Secondary DNS</source>
-        <translation type="unfinished"/>
+        <translation>Sekundær DNS</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="214"/>

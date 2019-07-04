@@ -6,6 +6,7 @@
 # Translators:
 # Matheus Campagnol <mate175@gmail.com>, 2017
 # Raphael Miquelis <raphaelmiquelis@gmail.com>, 2017
+# Alex, 2019
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-21 10:31+0800\n"
 "PO-Revision-Date: 2017-02-06 02:09+0000\n"
-"Last-Translator: Raphael Miquelis <raphaelmiquelis@gmail.com>, 2017\n"
+"Last-Translator: Alex, 2019\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/linuxdeepin/teams/3976/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -248,7 +249,7 @@ msgstr "América/Antígua"
 
 #: system-config-date-timezones.h:57
 msgid "America/Araguaina"
-msgstr "América/Araguina"
+msgstr "América/Araguaína"
 
 #: system-config-date-timezones.h:58
 msgid "America/Argentina/Buenos_Aires"
@@ -340,7 +341,7 @@ msgstr "América/Boa Vista"
 
 #: system-config-date-timezones.h:80
 msgid "America/Bogota"
-msgstr "América/Bogota"
+msgstr "América/Bogotá"
 
 #: system-config-date-timezones.h:81
 msgid "America/Boise"
@@ -356,7 +357,7 @@ msgstr "América/Campo Grande"
 
 #: system-config-date-timezones.h:84
 msgid "America/Cancun"
-msgstr "América/Cancun"
+msgstr "América/Cancún"
 
 #: system-config-date-timezones.h:85
 msgid "America/Caracas"
@@ -568,7 +569,7 @@ msgstr "América/Maceió"
 
 #: system-config-date-timezones.h:137
 msgid "America/Managua"
-msgstr "América/Managua"
+msgstr "América/Manágua"
 
 #: system-config-date-timezones.h:138
 msgid "America/Manaus"
@@ -620,7 +621,7 @@ msgstr "América/Monterrey"
 
 #: system-config-date-timezones.h:150
 msgid "America/Montevideo"
-msgstr "América/Montevideo"
+msgstr "América/Montevidéu"
 
 #: system-config-date-timezones.h:151
 msgid "America/Montserrat"
@@ -664,7 +665,7 @@ msgstr "América/Ojinaga"
 
 #: system-config-date-timezones.h:161
 msgid "America/Panama"
-msgstr "América/Panama"
+msgstr "América/Panamá"
 
 #: system-config-date-timezones.h:162
 msgid "America/Pangnirtung"
@@ -680,7 +681,7 @@ msgstr "América/Phoenix"
 
 #: system-config-date-timezones.h:165
 msgid "America/Port-au-Prince"
-msgstr "América/Porto_Príncipe"
+msgstr "América/Porto Príncipe"
 
 #: system-config-date-timezones.h:166
 msgid "America/Port_of_Spain"
@@ -724,7 +725,7 @@ msgstr "América/Rio Branco"
 
 #: system-config-date-timezones.h:176
 msgid "America/Santarem"
-msgstr "América/Santarem"
+msgstr "América/Santarém"
 
 #: system-config-date-timezones.h:177
 msgid "America/Santiago"
