@@ -428,12 +428,12 @@
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="440"/>
         <source>The target disk is dynamic, and your data may be lost if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>El disco de destino es dinámico, y sus datos pueden perderse si continúa. Por favor haga una copia de seguridad de sus archivos importantes primero.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="444"/>
         <source>The target disk is dynamic which will be formatted if proceeding. Please make a backup of your important files first.</source>
-        <translation type="unfinished"/>
+        <translation>El disco de destino es dinámico, se formateará si procede. Por favor haga una copia de seguridad de sus archivos importantes primero.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/partition_frame.cpp" line="458"/>
@@ -876,13 +876,13 @@
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="23"/>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="83"/>
         <source>Set Control Region</source>
-        <translation type="unfinished"/>
+        <translation>Establecer región de control</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="24"/>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="84"/>
         <source>Set the region for Deepin EndPoint Management Platform</source>
-        <translation type="unfinished"/>
+        <translation>Establezca la región para Deepin EndPoint Management Platform</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="81"/>
@@ -892,7 +892,7 @@
     <message>
         <location filename="../src/ui/frames/control_platform_frame.cpp" line="82"/>
         <source>Server Address</source>
-        <translation type="unfinished"/>
+        <translation>Dirección del servidor</translation>
     </message>
 </context>
 <context>
@@ -974,7 +974,7 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="69"/>
         <source>Skip</source>
-        <translation type="unfinished"/>
+        <translation>Omitir</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="70"/>
@@ -984,7 +984,7 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="95"/>
         <source>Configure Network</source>
-        <translation type="unfinished"/>
+        <translation>Configurar red</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="128"/>
@@ -1014,12 +1014,12 @@
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="214"/>
         <source>IP address error: illegal IP address, please have a check.</source>
-        <translation type="unfinished"/>
+        <translation>Error de dirección IP: dirección IP ilegal, por favor tenga un cheque.</translation>
     </message>
     <message>
         <location filename="../src/ui/frames/networkframe.cpp" line="225"/>
         <source>Netmask error: illegal netmask, please have a check.</source>
-        <translation type="unfinished"/>
+        <translation>Error de máscara de red: máscara de red ilegal, tenga un cheque.</translation>
     </message>
 </context>
 <context>
