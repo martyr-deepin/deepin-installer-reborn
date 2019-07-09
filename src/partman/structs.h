@@ -59,6 +59,7 @@ const char* GetPartTableName(PartitionTableType table_type);
 
 const char kPartitionTableGPT[] = "gpt";
 const char kPartitionTableMsDos[] = "msdos";
+const char kPartitionLoop[] = "loop";
 
 // Number of partitions supported by these partition tables.
 const int kGPTPartitionNums = 128;
