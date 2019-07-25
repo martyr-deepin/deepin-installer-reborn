@@ -154,65 +154,41 @@ void NetworkFrame::saveConf()
         return;
     }
 
-    QDir dir;
-    qDebug() << "mkdir NetworkManager dir: "
-             << dir.mkpath("/etc/NetworkManager/system-connections/");
-
-    QFile file("/etc/NetworkManager/system-connections/connect1");
-
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream stream(&file);
-
-        {
-            const auto interfaces = QNetworkInterface::allInterfaces();
-            QString macAddress;
-            if (!interfaces.isEmpty()) {
-                macAddress = interfaces.first().hardwareAddress();
-            }
-
-            stream << "[connection]" << endl;
-            std::list<std::pair<QString, QString>> pairList{
-                std::pair<QString, QString>("id", "connect1"),
-                std::pair<QString, QString>(
-                    "uuid", QUuid::createUuid().toString().remove("{").remove("}")),
-                std::pair<QString, QString>("type", "ethernet"),
-                std::pair<QString, QString>("autoconnect-priority", "-999"),
-                std::pair<QString, QString>("permissions", ""),
-                std::pair<QString, QString>("timestamp", "1557294083"),
-                std::pair<QString, QString>("interface-name", macAddress)
-            };
-
-            for (std::pair<QString, QString> pair : pairList) {
-                stream << pair.first << "=" << pair.second << endl;
-            }
+    const auto interfaces = QNetworkInterface::allInterfaces();
+    QNetworkInterface interface;
+    for (const QNetworkInterface i : interfaces) {
+        // FIXME: name == lo
+        if (i.name() != "lo") {
+            interface = i;
+            break;
         }
-
-        {
-            stream << "[ipv4]" << endl;
-            std::list<std::pair<QString, QString>> pairList{
-                std::pair<QString, QString>("address1",
-                                            QString("%1/%2,%3;")
-                                                .arg(m_ipv4Edit->text())
-                                                .arg(coverMask(m_maskEdit->text()))
-                                                .arg(m_gatewayEdit->text())),
-                std::pair<QString, QString>("dns", QString("%1;%2;")
-                                                       .arg(m_primaryDNSEdit->text())
-                                                       .arg(m_secondDNSEdit->text())),
-                std::pair<QString, QString>("dns-search", ""),
-                std::pair<QString, QString>("ignore-auto-dns", "true"),
-                std::pair<QString, QString>("method", "manual"),
-            };
-
-            for (std::pair<QString, QString> pair : pairList) {
-                stream << pair.first << "=" << pair.second << endl;
-            }
-        }
-
-        stream.flush();
-        file.close();
     }
 
-    QProcess::startDetached("systemctl", QStringList() << "restart" << "NetworkManager");
+    qDebug() << QProcess::execute("nmcli", QStringList() << "con"
+                                                         << "add"
+                                                         << "type"
+                                                         << "ethernet"
+                                                         << "con-name"
+                                                         << QString("\"%1-lab\"").arg(interface.name())
+                                                         << "ifname"
+                                                         << interface.name()
+                                                         << "ip4"
+                                                         << QString("%1/%2").arg(m_ipv4Edit->text()).arg(coverMask(m_maskEdit->text()))
+                                                         << "gw4"
+                                                         << m_gatewayEdit->text()
+                                                         );
+
+    qDebug() << QProcess::execute("nmcli", QStringList() << "con"
+                                                         << "mod"
+                                                         << QString("\"%1-lab\"").arg(interface.name())
+                                                         << "ipv4.dns"
+                                                         << QString("%1 %2").arg(m_primaryDNSEdit->text(), m_secondDNSEdit->text()));
+
+    qDebug() << QProcess::execute("nmcli", QStringList() << "con"
+                                                         << "up"
+                                                         << QString("\"%1-lab\"").arg(interface.name())
+                                                         << "ifname"
+                                                         << interface.name());
 
     emit requestNext();
 }
