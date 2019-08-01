@@ -28,9 +28,8 @@ ControlPlatformFrame::ControlPlatformFrame(QWidget* parent)
     , m_titleLbl(new TitleLabel(tr("Set Control Region")))
     , m_subTitleLbl(new CommentLabel(tr("Set the region for Deepin EndPoint Management Platform")))
     , m_serverLineEdit(new LineEdit(QString(":/images/hostname_12.svg")))
-    , m_regionBox(new TableComboBox)
     , m_nextButton(new NavButton)
-    , m_regionModel(new ControlPlatformRegionModel(this))
+    , m_regionInfo(nullptr)
     , m_macInfoLayout(new QVBoxLayout)
     , m_ipInfoLayout(new QVBoxLayout)
 {
@@ -46,8 +45,6 @@ ControlPlatformFrame::ControlPlatformFrame(QWidget* parent)
     layout->setMargin(0);
     layout->setSpacing(10);
 
-    m_regionBox->setModel(m_regionModel);
-
     QLabel *logo_label = new QLabel;
     logo_label->setPixmap(installer::renderPixmap(GetVendorLogo()));
 
@@ -59,6 +56,10 @@ ControlPlatformFrame::ControlPlatformFrame(QWidget* parent)
     m_subTitleLbl->setObjectName("SubTitleLabel");
 
     layout->addStretch();
+
+    m_regionBoxLayout = new QVBoxLayout;
+    m_regionBoxLayout->setMargin(0);
+    m_regionBoxLayout->setSpacing(10);
 
     QHBoxLayout* ipInfo = new QHBoxLayout;
     ipInfo->setMargin(0);
@@ -73,7 +74,7 @@ ControlPlatformFrame::ControlPlatformFrame(QWidget* parent)
     layout->addLayout(ipInfo);
     layout->addSpacing(20);
     layout->addWidget(m_serverLineEdit, 0, Qt::AlignHCenter);
-    layout->addWidget(m_regionBox, 0, Qt::AlignHCenter);
+    layout->addLayout(m_regionBoxLayout);
     layout->addStretch();
     layout->addWidget(m_nextButton, 0, Qt::AlignHCenter);
 
@@ -101,9 +102,6 @@ ControlPlatformFrame::ControlPlatformFrame(QWidget* parent)
 
     connect(m_nextButton, &NavButton::clicked, this,
             &ControlPlatformFrame::onNextClicked);
-    connect(m_regionBox,
-            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,
-            &ControlPlatformFrame::onRegionSelected);
 
     setStyleSheet("QLabel{color: white;}");
 
@@ -127,32 +125,63 @@ void ControlPlatformFrame::onNetworkFinished(QNetworkReply* reply)
     QTextCodec*   codec = QTextCodec::codecForName("utf8");
     const QString all   = codec->toUnicode(reply->readAll());
     reply->deleteLater();
+    m_regionInfoList.clear();
 
     QJsonArray array = QJsonDocument::fromJson(all.toUtf8()).array();
 
-    QList<RegionInfo> list;
-    for (const QJsonValue& value : array) {
-        RegionInfo info;
-        info.formJson(value.toObject());
-        list << info;
+    QList<RegionInfo::Ptr> regionList;
+    std::map<int, RegionInfo::Ptr> infos;
+    std::map<int, QList<RegionInfo::Ptr>> maps;
+    for (QJsonValue value : array) {
+        RegionInfo::Ptr info(new RegionInfo);
+        info->formJson(std::move(value.toObject()));
+        infos[info->Id] = info;
+        maps[info->parent_id] << info;
+        regionList << info;
     }
 
-    m_regionModel->setList(list);
+    if (infos.empty()) {
+        qWarning() << "Network Error! lise is empty!";
+        return;
+    }
+
+    QList<RegionInfo::Ptr> list;
+    for (std::pair<int, RegionInfo::Ptr> ptr : infos) {
+        for (auto it = maps.begin(); it != maps.end(); ++it) {
+            if (it->first == ptr.first) {
+                ptr.second->children = it->second;
+                list << it->second;
+                break;
+            }
+        }
+    }
+
+    for (RegionInfo::Ptr ptr : list) {
+        regionList.removeOne(ptr);
+    }
+
+    for (TableComboBox* box : m_tableComboBoxList) {
+        m_regionBoxLayout->removeWidget(box);
+        box->deleteLater();
+    }
+
+    m_tableComboBoxList.clear();
+
+    m_tableComboBoxList << createComboBox(regionList);
+    m_regionInfoList    << regionList;
 }
 
 void ControlPlatformFrame::onNextClicked()
 {
     // save config
-    RegionInfo info = m_regionModel->findInfoByIndex(m_regionBox->currentIndex());
-
     QFile file("/etc/dmcg/config.json");
     if (file.open(QIODevice::Text | QIODevice::WriteOnly)) {
         QJsonObject obj;
         obj["protocol"]    = m_serverUrl.scheme();
         obj["server_port"] = m_serverUrl.port();
         obj["server_host"] = m_serverUrl.host();
-        obj["area_id"]     = info.Id;
-        obj["Area"] = info.toJson();
+        obj["area_id"]     = m_regionInfo->Id;
+        obj["Area"] = m_regionInfo->toJson();
         QJsonDocument doc;
         doc.setObject(obj);
         file.write(doc.toJson());
@@ -164,6 +193,25 @@ void ControlPlatformFrame::onNextClicked()
 
 void ControlPlatformFrame::onRegionSelected()
 {
+    TableComboBox* box = qobject_cast<TableComboBox*>(sender());
+
+    int index = m_tableComboBoxList.indexOf(box);
+    auto list = m_tableComboBoxList;
+
+    for (int i = index + 1; i != list.size(); ++i) {
+        TableComboBox* b = list[i];
+        m_regionBoxLayout->removeWidget(b);
+        m_tableComboBoxList.removeOne(b);
+        b->deleteLater();
+    }
+
+    m_regionInfo = m_regionInfoList[index][box->currentIndex()];
+
+    if (!m_regionInfo->children.isEmpty()) {
+        m_tableComboBoxList << createComboBox(m_regionInfo->children);
+        m_regionInfoList    << m_regionInfo->children;
+    }
+
     m_nextButton->setEnabled(true);
 }
 
@@ -200,4 +248,19 @@ void ControlPlatformFrame::onNetworkStateChanged() {
             m_ipInfoLayout->addWidget(new QLabel(QString("IP: %1").arg(address.toString())));
         }
     }
+}
+
+TableComboBox* ControlPlatformFrame::createComboBox(const QList<RegionInfo::Ptr> &list)
+{
+    TableComboBox* box = new TableComboBox;
+    ControlPlatformRegionModel* model = new ControlPlatformRegionModel(box);
+    box->setModel(model);
+    model->setList(list);
+    m_regionBoxLayout->addWidget(box, 0, Qt::AlignHCenter);
+    connect(box,
+            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
+            this,
+            &ControlPlatformFrame::onRegionSelected);
+
+    return box;
 }

@@ -34,18 +34,20 @@ private:
 
 private slots:
     void onNetworkStateChanged();
+    TableComboBox* createComboBox(const QList<RegionInfo::Ptr>& list);
 
 private:
     TitleLabel*                 m_titleLbl;
     CommentLabel*               m_subTitleLbl;
     LineEdit*                   m_serverLineEdit;
-    TableComboBox*              m_regionBox;
     NavButton*                  m_nextButton;
-    ControlPlatformRegionModel* m_regionModel;
     QUrl                        m_serverUrl;
-    QList<RegionInfo>           m_regionInfo;
+    RegionInfo::Ptr             m_regionInfo;
     QVBoxLayout*                m_macInfoLayout;
     QVBoxLayout*                m_ipInfoLayout;
+    QVBoxLayout*                m_regionBoxLayout;
+    QList<QList<RegionInfo::Ptr>> m_regionInfoList;
+    QList<TableComboBox*>       m_tableComboBoxList;
 };
 }  // namespace installer
 #endif  // !CONTROLPLATFORMFRAME_H
