@@ -245,6 +245,20 @@ DeviceList ScanDevices(bool enable_os_prober) {
   // Let libparted detect all devices and construct device list.
   ped_device_probe_all();
 
+#ifdef QT_DEBUG
+  // NOTE(justforlxz): The loop device is not loaded by
+  // default and needs to be processed manually.
+  QDir dir("/dev/");
+  dir.setFilter(QDir::System);
+  QFileInfoList list = dir.entryInfoList();
+  for (const QFileInfo& info : list) {
+      if (info.filePath().startsWith("/dev/loop")) {
+          qDebug() << "load Loop device: " << info.filePath();
+          ped_device_get(info.filePath().toUtf8().data());
+      }
+  }
+#endif // !QT_DEBUG
+
   DeviceList devices;
   const LabelItems label_items = ParseLabelDir();
   const MountItemList mount_items = ParseMountItems();
@@ -269,6 +283,10 @@ DeviceList ScanDevices(bool enable_os_prober) {
         device->table = PartitionTableType::GPT;
       } else if (disk_type_name == kPartitionTableMsDos) {
         device->table = PartitionTableType::MsDos;
+      }
+      else if (disk_type_name == kPartitionLoop) {
+        device->table = PartitionTableType::Others;
+        qDebug() << "add device: " << disk_type_name << lp_device->path;
       } else {
         // Ignores other type of device->
         qWarning() << "Ignores other type of device:" << lp_device->path
@@ -297,7 +315,7 @@ DeviceList ScanDevices(bool enable_os_prober) {
       device->partitions.append(free_partition);
 
     } else if (device->table == PartitionTableType::MsDos ||
-        device->table == PartitionTableType::GPT) {
+        device->table == PartitionTableType::GPT || device->table == PartitionTableType::Others) {
       PedDisk* lp_disk = nullptr;
       lp_disk = ped_disk_new(lp_device);
 
