@@ -97,10 +97,15 @@ case ${BOOT} in
       grub-install --target=i386-efi --efi-directory=/boot/efi \
         --bootloader-id="${BOOTLOADER_ID}" --recheck || \
         error "grub-install failed with efi! ${BOOTLOADER_ID}"
-
+      # Assume that only the specified version of grub belongs to ubuntu,
+      # otherwise debian.
+      upstream_signed=debian
+      if dpkg -l | grep -i grub-efi-amd64-signed | grep 1.67+1.65+2.02~beta2; then
+        upstream_signed=ubuntu
+      fi
       # Copy signed grub efi file.
-      [ -d /boot/efi/EFI/ubuntu ] || mkdir -p /boot/efi/EFI/ubuntu
-      cp -vf /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/ubuntu/
+      [ -d /boot/efi/EFI/${upstream_signed} ] || mkdir -p /boot/efi/EFI/${upstream_signed}
+      cp -vf /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/${upstream_signed}/
       [ -d /boot/efi/EFI/boot ] || mkdir -p /boot/efi/EFI/boot
       cp -vf /boot/efi/EFI/${BOOTLOADER_ID}/grub* /boot/efi/EFI/boot/
       # Backup fallback efi first.
