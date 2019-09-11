@@ -43,7 +43,7 @@ check_efi_mode(){
   fi
 }
 
-chech_use_crypt(){
+check_use_crypt(){
   DI_CRYPT_PASSWD=$(installer_get DI_CRYPT_PASSWD)
   if [ -n "$DI_CRYPT_PASSWD" ]; then
     declare -gr CRYPT=true
@@ -338,7 +338,7 @@ main(){
   echo "Target device: $DEVICE"
 
   check_device_size
-  chech_use_crypt
+  check_use_crypt
   check_efi_mode
 
   echo "Device size: $DEVICE_SIZE"
